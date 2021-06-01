@@ -54,24 +54,13 @@ paths:
               properties:
                 catalog:
                   default: strict
-                  description: "Which catalog of bad words to use, we currently maintain two bad
-                    word catalogs: <br> <ul> <li>strict - the largest database
-                    of bad words which includes profanity, obscenity, sexual,
-                    rude, cuss, dirty, swear and objectionable words and
-                    phrases. This catalog is suitable for environments of all
-                    ages including educational or children's content</li>
-                    <li>obscene - like the strict catalog but does not include
-                    any mild profanities, idiomatic phrases or words which are
-                    considered formal terminology. This catalog is suitable for
-                    adult environments where certain types of bad words are
-                    considered OK</li> </ul>"
+                  description: "Which catalog of bad words to use, we currently maintain two bad word catalogs: <br> <ul> <li>strict - the largest database of bad words which includes profanity, obscenity, sexual, rude, cuss, dirty, swear and objectionable words and phrases. This catalog is suitable for environments of all ages including educational or children's content</li> <li>obscene - like the strict catalog but does not include any mild profanities, idiomatic phrases or words which are considered formal terminology. This catalog is suitable for adult environments where certain types of bad words are considered OK</li> </ul>"
                   type: string
                 censor-character:
                   description: The character to use to censor out the bad words found
                   type: string
                 content:
-                  description: The content to scan. This can be either a URL to load from, a file
-                    upload or an HTML content string
+                  description: The content to scan. This can be either a URL to load from, a file upload or an HTML content string
                   type: string
                 output-case:
                   description: The output case style
@@ -128,14 +117,11 @@ paths:
               properties:
                 include-8digit:
                   default: false
-                  description: Include 8-digit and higher BIN codes. Use this option if you want
-                    to download BINs with more than 6-digits
+                  description: Include 8-digit and higher BIN codes. Use this option if you want to download BINs with more than 6-digits
                   type: boolean
                 include-iso3:
                   default: false
-                  description: Include ISO 3-letter country codes and ISO 3-letter currency codes
-                    in the data. These will be added to columns 10 and 11
-                    respectively
+                  description: Include ISO 3-letter country codes and ISO 3-letter currency codes in the data. These will be added to columns 10 and 11 respectively
                   type: boolean
               type: object
       responses:
@@ -177,8 +163,7 @@ paths:
   /bin-lookup:
     post:
       deprecated: false
-      description: Perform a BIN (Bank Identification Number) or IIN (Issuer
-        Identification Number) lookup
+      description: Perform a BIN (Bank Identification Number) or IIN (Issuer Identification Number) lookup
       operationId: BINLookup
       requestBody:
         content:
@@ -186,13 +171,10 @@ paths:
             schema:
               properties:
                 bin-number:
-                  description: The BIN or IIN number. This is the first 6, 8 or 10 digits of a
-                    card number, use 8 (or more) digits for the highest level of
-                    accuracy
+                  description: The BIN or IIN number. This is the first 6, 8 or 10 digits of a card number, use 8 (or more) digits for the highest level of accuracy
                   type: string
                 customer-ip:
-                  description: Pass in the customers IP address and we will return some extra
-                    information about them
+                  description: Pass in the customers IP address and we will return some extra information about them
                   type: string
                 output-case:
                   description: The output case style
@@ -240,8 +222,7 @@ paths:
   /browser-bot:
     post:
       deprecated: false
-      description: Browser bot can extract content, interact with keyboard and mouse
-        events, and execute JavaScript on a website
+      description: Browser bot can extract content, interact with keyboard and mouse events, and execute JavaScript on a website
       operationId: BrowserBot
       requestBody:
         content:
@@ -250,25 +231,12 @@ paths:
               properties:
                 delay:
                   default: 3
-                  description: Delay in seconds to wait before capturing any page data, executing
-                    selectors or JavaScript
+                  description: Delay in seconds to wait before capturing any page data, executing selectors or JavaScript
                   format: int32
                   type: integer
                 exec:
                   default: "[]"
-                  description: "Execute JavaScript on the page, each array element should contain
-                    a valid JavaScript statement. If a statement returns any
-                    kind of value it will be returned in the 'exec-results'
-                    response. You can also use the following special user
-                    interaction functions: <br> <br> <div> sleep(seconds); Just
-                    wait/sleep for the specified number of seconds.
-                    <br>click('selector'); Click on the first element matching
-                    the given selector. <br>focus('selector'); Focus on the
-                    first element matching the given selector.
-                    <br>keys('characters'); Send the specified keyboard
-                    characters. Use click() or focus() first to send keys to a
-                    specific element. <br>enter(); Send the Enter key.
-                    <br>tab(); Send the Tab key. <br> </div>"
+                  description: "Execute JavaScript on the page, each array element should contain a valid JavaScript statement. If a statement returns any kind of value it will be returned in the 'exec-results' response. You can also use the following special user interaction functions: <br> <br> <div> sleep(seconds); Just wait/sleep for the specified number of seconds. <br>click('selector'); Click on the first element matching the given selector. <br>focus('selector'); Focus on the first element matching the given selector. <br>keys('characters'); Send the specified keyboard characters. Use click() or focus() first to send keys to a specific element. <br>enter(); Send the Enter key. <br>tab(); Send the Tab key. <br> </div>"
                   items:
                     type: string
                   type: array
@@ -282,14 +250,11 @@ paths:
                     - camel
                   type: string
                 selector:
-                  description: Extract content from the page DOM using this selector. Commonly
-                    known as a CSS selector, you can find a good reference <a
-                    href="https://www.w3schools.com/cssref/css_selectors.asp">here</a>
+                  description: Extract content from the page DOM using this selector. Commonly known as a CSS selector, you can find a good reference <a href="https://www.w3schools.com/cssref/css_selectors.asp">here</a>
                   type: string
                 timeout:
                   default: 30
-                  description: Timeout in seconds. Give up if still trying to load the page after
-                    this number of seconds
+                  description: Timeout in seconds. Give up if still trying to load the page after this number of seconds
                   format: int32
                   type: integer
                 url:
@@ -495,8 +460,7 @@ paths:
             schema:
               properties:
                 address:
-                  description: The full address, partial address or name of a place to try and
-                    locate. Comma separated address components are preferred.
+                  description: The full address, partial address or name of a place to try and locate. Comma separated address components are preferred.
                   type: string
                 city:
                   description: The city/town name to locate
@@ -509,20 +473,14 @@ paths:
                   type: string
                 fuzzy-search:
                   default: false
-                  description: If no matches are found for the given address, start performing a
-                    recursive fuzzy search until a geolocation is found. This
-                    option is recommended for processing user input or
-                    implementing auto-complete. We use a combination of
-                    approximate string matching and data cleansing to find
-                    possible location matches
+                  description: If no matches are found for the given address, start performing a recursive fuzzy search until a geolocation is found. This option is recommended for processing user input or implementing auto-complete. We use a combination of approximate string matching and data cleansing to find possible location matches
                   type: boolean
                 house-number:
                   description: The house/building number to locate
                   type: string
                 language-code:
                   default: en
-                  description: "The language to display results in, available languages are: <ul>
-                    <li>de, en, es, fr, it, pt, ru, zh</li> </ul>"
+                  description: "The language to display results in, available languages are: <ul> <li>de, en, es, fr, it, pt, ru, zh</li> </ul>"
                   type: string
                 output-case:
                   description: The output case style
@@ -577,8 +535,7 @@ paths:
   /geocode-reverse:
     post:
       deprecated: false
-      description: Convert a geographic coordinate (latitude and longitude) into a
-        real world address
+      description: Convert a geographic coordinate (latitude and longitude) into a real world address
       operationId: GeocodeReverse
       requestBody:
         content:
@@ -587,8 +544,7 @@ paths:
               properties:
                 language-code:
                   default: en
-                  description: "The language to display results in, available languages are: <ul>
-                    <li>de, en, es, fr, it, pt, ru</li> </ul>"
+                  description: "The language to display results in, available languages are: <ul> <li>de, en, es, fr, it, pt, ru</li> </ul>"
                   type: string
                 latitude:
                   description: The location latitude in decimal degrees format
@@ -603,10 +559,7 @@ paths:
                   type: string
                 zoom:
                   default: address
-                  description: "The zoom level to respond with: <br> <ul> <li>address - the most
-                    precise address available</li> <li>street - the street
-                    level</li> <li>city - the city level</li> <li>state - the
-                    state level</li> <li>country - the country level</li> </ul>"
+                  description: "The zoom level to respond with: <br> <ul> <li>address - the most precise address available</li> <li>street - the street level</li> <li>city - the city level</li> <li>state - the state level</li> <li>country - the country level</li> </ul>"
                   type: string
               required:
                 - latitude
@@ -650,8 +603,7 @@ paths:
   /hlr-lookup:
     post:
       deprecated: false
-      description: Connect to the global mobile cellular network and retrieve the
-        status of a mobile device
+      description: Connect to the global mobile cellular network and retrieve the status of a mobile device
       operationId: HLRLookup
       requestBody:
         content:
@@ -659,9 +611,7 @@ paths:
             schema:
               properties:
                 country-code:
-                  description: ISO 2-letter country code, assume numbers are based in this
-                    country. <br>If not set numbers are assumed to be in
-                    international format (with or without the leading + sign)
+                  description: ISO 2-letter country code, assume numbers are based in this country. <br>If not set numbers are assumed to be in international format (with or without the leading + sign)
                   type: string
                 number:
                   description: A phone number
@@ -712,8 +662,7 @@ paths:
   /host-reputation:
     post:
       deprecated: false
-      description: Check the reputation of an IP address, domain name or URL against a
-        comprehensive list of blacklists and blocklists
+      description: Check the reputation of an IP address, domain name or URL against a comprehensive list of blacklists and blocklists
       operationId: HostReputation
       requestBody:
         content:
@@ -721,8 +670,7 @@ paths:
             schema:
               properties:
                 host:
-                  description: An IP address, domain name, FQDN or URL. <br>If you supply a
-                    domain/URL it will be checked against the URI DNSBL lists
+                  description: An IP address, domain name, FQDN or URL. <br>If you supply a domain/URL it will be checked against the URI DNSBL lists
                   type: string
                 list-rating:
                   default: 3
@@ -783,20 +731,10 @@ paths:
             schema:
               properties:
                 content:
-                  description: The HTML content. This can be either a URL to load from, a file
-                    upload or an HTML content string
+                  description: The HTML content. This can be either a URL to load from, a file upload or an HTML content string
                   type: string
                 output-type:
-                  description: "The level of sanitization, possible values are: <br>
-                    <b>plain-text</b>: reduce the content to plain text only (no
-                    HTML tags at all) <br> <br> <b>simple-text</b>: allow only
-                    very basic text formatting tags like b, em, i, strong, u
-                    <br> <br> <b>basic-html</b>: allow advanced text formatting
-                    and hyper links <br> <br> <b>basic-html-with-images</b>:
-                    same as basic html but also allows image tags <br> <br>
-                    <b>advanced-html</b>: same as basic html with images but
-                    also allows many more common HTML tags like table, ul, dl,
-                    pre <br>"
+                  description: "The level of sanitization, possible values are: <br> <b>plain-text</b>: reduce the content to plain text only (no HTML tags at all) <br> <br> <b>simple-text</b>: allow only very basic text formatting tags like b, em, i, strong, u <br> <br> <b>basic-html</b>: allow advanced text formatting and hyper links <br> <br> <b>basic-html-with-images</b>: same as basic html but also allows image tags <br> <br> <b>advanced-html</b>: same as basic html with images but also allows many more common HTML tags like table, ul, dl, pre <br>"
                   type: string
               required:
                 - content
@@ -850,17 +788,14 @@ paths:
             schema:
               properties:
                 content:
-                  description: The HTML content. This can be either a URL to load from, a file
-                    upload or an HTML content string
+                  description: The HTML content. This can be either a URL to load from, a file upload or an HTML content string
                   type: string
                 css:
-                  description: "Inject custom CSS into the HTML. e.g. 'body { background-color:
-                    red;}'"
+                  description: "Inject custom CSS into the HTML. e.g. 'body { background-color: red;}'"
                   type: string
                 footer-font:
                   default: Courier
-                  description: "Set the footer font. Fonts available: Times, Courier, Helvetica,
-                    Arial"
+                  description: "Set the footer font. Fonts available: Times, Courier, Helvetica, Arial"
                   type: string
                 footer-font-size:
                   default: 11
@@ -880,8 +815,7 @@ paths:
                   description: Text to print to the center header of each page
                   type: string
                 footer-text-left:
-                  description: Text to print to the left-hand side footer of each page. e.g. 'My
-                    footer - Page {page_number} of {total_pages}'
+                  description: Text to print to the left-hand side footer of each page. e.g. 'My footer - Page {page_number} of {total_pages}'
                   type: string
                 footer-text-right:
                   description: Text to print to the right-hand side header of each page
@@ -900,8 +834,7 @@ paths:
                   type: boolean
                 header-font:
                   default: Courier
-                  description: "Set the header font. Fonts available: Times, Courier, Helvetica,
-                    Arial"
+                  description: "Set the header font. Fonts available: Times, Courier, Helvetica, Arial"
                   type: string
                 header-font-size:
                   default: 11
@@ -921,22 +854,18 @@ paths:
                   description: Text to print to the center header of each page
                   type: string
                 header-text-left:
-                  description: Text to print to the left-hand side header of each page. e.g. 'My
-                    header - Page {page_number} of {total_pages}'
+                  description: Text to print to the left-hand side header of each page. e.g. 'My header - Page {page_number} of {total_pages}'
                   type: string
                 header-text-right:
                   description: Text to print to the right-hand side header of each page
                   type: string
                 image-height:
-                  description: If rendering to an image format (PNG or JPG) use this image height
-                    (in pixels). The default is automatic which dynamically sets
-                    the image height based on the content
+                  description: If rendering to an image format (PNG or JPG) use this image height (in pixels). The default is automatic which dynamically sets the image height based on the content
                   format: int32
                   type: integer
                 image-width:
                   default: 1024
-                  description: If rendering to an image format (PNG or JPG) use this image width
-                    (in pixels)
+                  description: If rendering to an image format (PNG or JPG) use this image width (in pixels)
                   format: int32
                   type: integer
                 landscape:
@@ -974,9 +903,7 @@ paths:
                   type: boolean
                 media-queries:
                   default: false
-                  description: Activate all @media queries before rendering. This can be useful if
-                    you wan't to render the mobile version of a responsive
-                    website
+                  description: Activate all @media queries before rendering. This can be useful if you wan't to render the mobile version of a responsive website
                   type: boolean
                 page-height:
                   description: Set the PDF page height explicitly (in mm)
@@ -984,8 +911,7 @@ paths:
                   type: integer
                 page-size:
                   default: A4
-                  description: "Set the document page size, can be one of: A0 - A9, B0 - B10,
-                    Comm10E, DLE or Letter"
+                  description: "Set the document page size, can be one of: A0 - A9, B0 - B10, Comm10E, DLE or Letter"
                   type: string
                 page-width:
                   description: Set the PDF page width explicitly (in mm)
@@ -993,8 +919,7 @@ paths:
                   type: integer
                 render-delay:
                   default: 0
-                  description: Number of milliseconds to wait before rendering the page (can be
-                    useful for pages with animations etc)
+                  description: Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc)
                   format: int32
                   type: integer
                 title:
@@ -1002,8 +927,7 @@ paths:
                   type: string
                 zoom:
                   default: 1
-                  description: Set the zoom factor when rendering the page (2.0 for double size,
-                    0.5 for half size)
+                  description: Set the zoom factor when rendering the page (2.0 for double size, 0.5 for half size)
                   format: double
                   type: number
               required:
@@ -1065,9 +989,7 @@ paths:
                   format: int32
                   type: integer
                 image-url:
-                  description: The URL or Base64 encoded Data URL for the source image (you can
-                    also upload an image file directly in which case this field
-                    is ignored)
+                  description: The URL or Base64 encoded Data URL for the source image (you can also upload an image file directly in which case this field is ignored)
                   type: string
                 width:
                   description: The width to resize to (in px) while preserving aspect ratio
@@ -1130,14 +1052,11 @@ paths:
                   description: The output image format, can be either png or jpg
                   type: string
                 height:
-                  description: If set resize the resulting image to this height (in px) while
-                    preserving aspect ratio
+                  description: If set resize the resulting image to this height (in px) while preserving aspect ratio
                   format: int32
                   type: integer
                 image-url:
-                  description: The URL or Base64 encoded Data URL for the source image (you can
-                    also upload an image file directly in which case this field
-                    is ignored)
+                  description: The URL or Base64 encoded Data URL for the source image (you can also upload an image file directly in which case this field is ignored)
                   type: string
                 opacity:
                   default: 50
@@ -1146,18 +1065,13 @@ paths:
                   type: integer
                 position:
                   default: center
-                  description: "The position of the watermark image, possible values are:
-                    <br>center, top-left, top-center, top-right, bottom-left,
-                    bottom-center, bottom-right"
+                  description: "The position of the watermark image, possible values are: <br>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right"
                   type: string
                 watermark-url:
-                  description: The URL or Base64 encoded Data URL for the watermark image (you can
-                    also upload an image file directly in which case this field
-                    is ignored)
+                  description: The URL or Base64 encoded Data URL for the watermark image (you can also upload an image file directly in which case this field is ignored)
                   type: string
                 width:
-                  description: If set resize the resulting image to this width (in px) while
-                    preserving aspect ratio
+                  description: If set resize the resulting image to this width (in px) while preserving aspect ratio
                   format: int32
                   type: integer
               required:
@@ -1204,8 +1118,7 @@ paths:
   /ip-blocklist:
     post:
       deprecated: false
-      description: The IP Blocklist API will detect potentially malicious or dangerous
-        IP addresses
+      description: The IP Blocklist API will detect potentially malicious or dangerous IP addresses
       operationId: IPBlocklist
       requestBody:
         content:
@@ -1222,11 +1135,7 @@ paths:
                   type: string
                 vpn-lookup:
                   default: false
-                  description: 'Include public VPN provider IP addresses. <br> <b>NOTE</b>: For
-                    more advanced VPN detection including the ability to
-                    identify private and stealth VPNs use the <a
-                    href="https://www.neutrinoapi.com/api/ip-probe/">IP Probe
-                    API</a>'
+                  description: 'Include public VPN provider IP addresses. <br> <b>NOTE</b>: For more advanced VPN detection including the ability to identify private and stealth VPNs use the <a href="https://www.neutrinoapi.com/api/ip-probe/">IP Probe API</a>'
                   type: boolean
               required:
                 - ip
@@ -1282,10 +1191,7 @@ paths:
                   type: string
                 include-vpn:
                   default: false
-                  description: "Include public VPN provider IP addresses, this option is only
-                    available for Tier 3 or higher accounts. <br>
-                    <b>WARNING</b>: This option will add at least an additional
-                    8 million IP addresses to the download"
+                  description: "Include public VPN provider IP addresses, this option is only available for Tier 3 or higher accounts. <br> <b>WARNING</b>: This option will add at least an additional 8 million IP addresses to the download"
                   type: boolean
               type: object
       responses:
@@ -1327,8 +1233,7 @@ paths:
   /ip-info:
     post:
       deprecated: false
-      description: Get location information about an IP address and do reverse DNS
-        (PTR) lookups
+      description: Get location information about an IP address and do reverse DNS (PTR) lookups
       operationId: IPInfo
       requestBody:
         content:
@@ -1345,8 +1250,7 @@ paths:
                   type: string
                 reverse-lookup:
                   default: false
-                  description: Do a reverse DNS (PTR) lookup. This option can add extra delay to
-                    the request so only use it if you need it
+                  description: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it
                   type: boolean
               required:
                 - ip
@@ -1445,8 +1349,7 @@ paths:
   /phone-playback:
     post:
       deprecated: false
-      description: Make an automated call to any valid phone number and playback an
-        audio message
+      description: Make an automated call to any valid phone number and playback an audio message
       operationId: PhonePlayback
       requestBody:
         content:
@@ -1454,23 +1357,16 @@ paths:
             schema:
               properties:
                 audio-url:
-                  description: "A URL to a valid audio file. Accepted audio formats are: <ul>
-                    <li>MP3</li> <li>WAV</li> <li>OGG</li> </ul>You can use the
-                    following MP3 URL for testing:
-                    <br>https://www.neutrinoapi.com/test-files/test1.mp3"
+                  description: "A URL to a valid audio file. Accepted audio formats are: <ul> <li>MP3</li> <li>WAV</li> <li>OGG</li> </ul>You can use the following MP3 URL for testing: <br>https://www.neutrinoapi.com/test-files/test1.mp3"
                   type: string
                 limit:
                   default: 3
-                  description: Limit the total number of calls allowed to the supplied phone
-                    number, if the limit is reached error code 14 will be
-                    returned (0 means no limit)
+                  description: Limit the total number of calls allowed to the supplied phone number, if the limit is reached error code 14 will be returned (0 means no limit)
                   format: int32
                   type: integer
                 limit-ttl:
                   default: 1
-                  description: Set the TTL in number of days that the 'limit' option will remember
-                    a phone number (the default is 1 day and the maximum is 365
-                    days)
+                  description: Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
                   format: int32
                   type: integer
                 number:
@@ -1531,18 +1427,13 @@ paths:
             schema:
               properties:
                 country-code:
-                  description: ISO 2-letter country code, assume numbers are based in this
-                    country. If not set numbers are assumed to be in
-                    international format (with or without the leading + sign)
+                  description: ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign)
                   type: string
                 ip:
-                  description: Pass in a users IP address and we will assume numbers are based in
-                    the country of the IP address
+                  description: Pass in a users IP address and we will assume numbers are based in the country of the IP address
                   type: string
                 number:
-                  description: A phone number. This can be in international format (E.164) or
-                    local format. If passing local format you must also set
-                    either the 'country-code' OR 'ip' options as well
+                  description: A phone number. This can be in international format (E.164) or local format. If passing local format you must also set either the 'country-code' OR 'ip' options as well
                   type: string
                 output-case:
                   description: The output case style
@@ -1590,8 +1481,7 @@ paths:
   /phone-verify:
     post:
       deprecated: false
-      description: Make an automated call to any valid phone number and playback a
-        unique security code
+      description: Make an automated call to any valid phone number and playback a unique security code
       operationId: PhoneVerify
       requestBody:
         content:
@@ -1604,30 +1494,20 @@ paths:
                   format: int32
                   type: integer
                 country-code:
-                  description: ISO 2-letter country code, assume numbers are based in this
-                    country. <br>If not set numbers are assumed to be in
-                    international format (with or without the leading + sign)
+                  description: ISO 2-letter country code, assume numbers are based in this country. <br>If not set numbers are assumed to be in international format (with or without the leading + sign)
                   type: string
                 language-code:
                   default: en
-                  description: "The language to playback the verification code in, available
-                    languages are: <ul> <li>de - German</li> <li>en -
-                    English</li> <li>es - Spanish</li> <li>fr - French</li>
-                    <li>it - Italian</li> <li>pt - Portuguese</li> <li>ru -
-                    Russian</li> </ul>"
+                  description: "The language to playback the verification code in, available languages are: <ul> <li>de - German</li> <li>en - English</li> <li>es - Spanish</li> <li>fr - French</li> <li>it - Italian</li> <li>pt - Portuguese</li> <li>ru - Russian</li> </ul>"
                   type: string
                 limit:
                   default: 3
-                  description: Limit the total number of calls allowed to the supplied phone
-                    number, if the limit is reached error code 14 will be
-                    returned (0 means no limit)
+                  description: Limit the total number of calls allowed to the supplied phone number, if the limit is reached error code 14 will be returned (0 means no limit)
                   format: int32
                   type: integer
                 limit-ttl:
                   default: 1
-                  description: Set the TTL in number of days that the 'limit' option will remember
-                    a phone number (the default is 1 day and the maximum is 365
-                    days)
+                  description: Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
                   format: int32
                   type: integer
                 number:
@@ -1640,14 +1520,11 @@ paths:
                   type: string
                 playback-delay:
                   default: 800
-                  description: The delay in milliseconds between the playback of each security
-                    code
+                  description: The delay in milliseconds between the playback of each security code
                   format: int32
                   type: integer
                 security-code:
-                  description: Pass in your own security code. This is useful if you have
-                    implemented TOTP or similar 2FA methods. If not set then we
-                    will generate a secure random code
+                  description: Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code
                   format: int32
                   type: integer
               required:
@@ -1703,8 +1580,7 @@ paths:
                   description: The QR code background color
                   type: string
                 content:
-                  description: The content to encode into the QR code (e.g. a URL or a phone
-                    number)
+                  description: The content to encode into the QR code (e.g. a URL or a phone number)
                   type: string
                 fg-color:
                   default: "#000000"
@@ -1771,28 +1647,20 @@ paths:
             schema:
               properties:
                 country-code:
-                  description: ISO 2-letter country code, assume numbers are based in this
-                    country. <br>If not set numbers are assumed to be in
-                    international format (with or without the leading + sign)
+                  description: ISO 2-letter country code, assume numbers are based in this country. <br>If not set numbers are assumed to be in international format (with or without the leading + sign)
                   type: string
                 limit:
                   default: 0
-                  description: Limit the total number of SMS allowed to the supplied phone number,
-                    if the limit is reached error code 14 will be returned (the
-                    default is no limit)
+                  description: Limit the total number of SMS allowed to the supplied phone number, if the limit is reached error code 14 will be returned (the default is no limit)
                   format: int32
                   type: integer
                 limit-ttl:
                   default: 1
-                  description: Set the TTL in number of days that the 'limit' option will remember
-                    a phone number (the default is 1 day and the maximum is 365
-                    days)
+                  description: Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
                   format: int32
                   type: integer
                 message:
-                  description: The SMS message to send. Messages are truncated to a maximum of 150
-                    characters for ASCII content OR 70 characters for UTF
-                    content
+                  description: The SMS message to send. Messages are truncated to a maximum of 150 characters for ASCII content OR 70 characters for UTF content
                   type: string
                 number:
                   description: The phone number to send a message to
@@ -1853,34 +1721,24 @@ paths:
               properties:
                 code-length:
                   default: 5
-                  description: The number of digits to use in the security code (must be between 4
-                    and 12)
+                  description: The number of digits to use in the security code (must be between 4 and 12)
                   format: int32
                   type: integer
                 country-code:
-                  description: ISO 2-letter country code, assume numbers are based in this
-                    country. <br>If not set numbers are assumed to be in
-                    international format (with or without the leading + sign)
+                  description: ISO 2-letter country code, assume numbers are based in this country. <br>If not set numbers are assumed to be in international format (with or without the leading + sign)
                   type: string
                 language-code:
                   default: en
-                  description: "The language to send the verification code in, available languages
-                    are: <ul> <li>de - German</li> <li>en - English</li> <li>es
-                    - Spanish</li> <li>fr - French</li> <li>it - Italian</li>
-                    <li>pt - Portuguese</li> <li>ru - Russian</li> </ul>"
+                  description: "The language to send the verification code in, available languages are: <ul> <li>de - German</li> <li>en - English</li> <li>es - Spanish</li> <li>fr - French</li> <li>it - Italian</li> <li>pt - Portuguese</li> <li>ru - Russian</li> </ul>"
                   type: string
                 limit:
                   default: 0
-                  description: Limit the total number of SMS allowed to the supplied phone number,
-                    if the limit is reached error code 14 will be returned (the
-                    default is no limit)
+                  description: Limit the total number of SMS allowed to the supplied phone number, if the limit is reached error code 14 will be returned (the default is no limit)
                   format: int32
                   type: integer
                 limit-ttl:
                   default: 1
-                  description: Set the TTL in number of days that the 'limit' option will remember
-                    a phone number (the default is 1 day and the maximum is 365
-                    days)
+                  description: Set the TTL in number of days that the 'limit' option will remember a phone number (the default is 1 day and the maximum is 365 days)
                   format: int32
                   type: integer
                 number:
@@ -1892,9 +1750,7 @@ paths:
                     - camel
                   type: string
                 security-code:
-                  description: Pass in your own security code. This is useful if you have
-                    implemented TOTP or similar 2FA methods. If not set then we
-                    will generate a secure random code
+                  description: Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code
                   format: int32
                   type: integer
               required:
@@ -1947,10 +1803,7 @@ paths:
               properties:
                 fetch-content:
                   default: false
-                  description: If this URL responds with html, text, json or xml then return the
-                    response. This option is useful if you want to perform
-                    further processing on the URL content (e.g. with the HTML
-                    Extract or HTML Clean APIs)
+                  description: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)
                   type: boolean
                 ignore-certificate-errors:
                   default: false
@@ -1968,8 +1821,7 @@ paths:
                   type: integer
                 timeout:
                   default: 60
-                  description: Timeout in seconds. Give up if still trying to load the URL after
-                    this number of seconds
+                  description: Timeout in seconds. Give up if still trying to load the URL after this number of seconds
                   format: int32
                   type: integer
                 url:
@@ -2016,8 +1868,7 @@ paths:
   /user-agent-info:
     post:
       deprecated: false
-      description: Parse, validate and get detailed user-agent information from a user
-        agent string
+      description: Parse, validate and get detailed user-agent information from a user agent string
       operationId: UserAgentInfo
       requestBody:
         content:
@@ -2081,12 +1932,7 @@ paths:
             schema:
               properties:
                 limit-by:
-                  description: If set then enable additional brute-force protection by limiting
-                    the number of attempts by the supplied value. This can be
-                    set to any unique identifier you would like to limit by, for
-                    example a hash of the users email, phone number or IP
-                    address. Requests to this API will be ignored after
-                    approximately 10 failed verification attempts
+                  description: If set then enable additional brute-force protection by limiting the number of attempts by the supplied value. This can be set to any unique identifier you would like to limit by, for example a hash of the users email, phone number or IP address. Requests to this API will be ignored after approximately 10 failed verification attempts
                   type: string
                 output-case:
                   description: The output case style
@@ -2160,8 +2006,7 @@ components:
     APIError:
       properties:
         apiError:
-          description: API error code. If set and > 0 then an API error has occurred your
-            request could not be completed
+          description: API error code. If set and > 0 then an API error has occurred your request could not be completed
           format: int32
           type: integer
         apiErrorMsg:
@@ -2178,9 +2023,7 @@ components:
           description: The card brand (e.g. Visa or Mastercard)
           type: string
         cardCategory:
-          description: "The card category. There are many different card categories the
-            most common card categories are: CLASSIC, BUSINESS, CORPORATE,
-            PLATINUM, PREPAID"
+          description: "The card category. There are many different card categories the most common card categories are: CLASSIC, BUSINESS, CORPORATE, PLATINUM, PREPAID"
           type: string
         cardType:
           description: "The card type, will always be one of: DEBIT, CREDIT, CHARGE CARD"
@@ -2198,9 +2041,7 @@ components:
           description: ISO 4217 currency code associated with the country of the issuer
           type: string
         ipBlocklisted:
-          description: True if the customers IP is listed on one of our blocklists, see
-            the <a href="http://www.neutrinoapi.com/api/ip-blocklist/">IP
-            Blocklist API</a>
+          description: True if the customers IP is listed on one of our blocklists, see the <a href="http://www.neutrinoapi.com/api/ip-blocklist/">IP Blocklist API</a>
           type: boolean
         ipBlocklists:
           description: An array of strings indicating which blocklists this IP is listed on
@@ -2303,8 +2144,7 @@ components:
           description: The name of the DNSBL
           type: string
         listRating:
-          description: The list rating [1-3] with 1 being the best rating and 3 the lowest
-            rating
+          description: The list rating [1-3] with 1 being the best rating and 3 the lowest rating
           format: int32
           type: integer
         responseTime:
@@ -2330,23 +2170,18 @@ components:
     BrowserBotResponse:
       properties:
         content:
-          description: The complete raw, decompressed and decoded page content. Usually
-            will be either HTML, JSON or XML
+          description: The complete raw, decompressed and decoded page content. Usually will be either HTML, JSON or XML
           type: string
         elements:
-          description: Array containing all the elements matching the supplied selector.
-            <br>Each element object will contain the text content, HTML content
-            and all current element attributes
+          description: Array containing all the elements matching the supplied selector. <br>Each element object will contain the text content, HTML content and all current element attributes
           items:
             type: string
           type: array
         errorMessage:
-          description: Contains the error message if an error has occurred ('is-error'
-            will be true)
+          description: Contains the error message if an error has occurred ('is-error' will be true)
           type: string
         execResults:
-          description: If you executed any JavaScript this array holds the results as
-            objects
+          description: If you executed any JavaScript this array holds the results as objects
           items:
             type: string
           type: array
@@ -2361,8 +2196,7 @@ components:
           description: The HTTP status message the URL returned
           type: string
         isError:
-          description: True if an error has occurred loading the page. Check the
-            'error-message' field for details
+          description: True if an error has occurred loading the page. Check the 'error-message' field for details
           type: boolean
         isHttpOk:
           description: True if the HTTP status is OK (200)
@@ -2374,16 +2208,13 @@ components:
           description: True if the page is secured using TLS/SSL
           type: boolean
         isTimeout:
-          description: True if a timeout occurred while loading the page. You can set the
-            timeout with the request parameter 'timeout'
+          description: True if a timeout occurred while loading the page. You can set the timeout with the request parameter 'timeout'
           type: boolean
         languageCode:
-          description: The ISO 2-letter language code of the page. Extracted from either
-            the HTML document or via HTTP headers
+          description: The ISO 2-letter language code of the page. Extracted from either the HTML document or via HTTP headers
           type: string
         loadTime:
-          description: The number of seconds taken to load the page (from initial request
-            until DOM ready)
+          description: The number of seconds taken to load the page (from initial request until DOM ready)
           format: double
           type: number
         mimeType:
@@ -2467,23 +2298,19 @@ components:
           description: The email domain
           type: string
         domainError:
-          description: True if this address has a domain error (e.g. no valid mail server
-            records)
+          description: True if this address has a domain error (e.g. no valid mail server records)
           type: boolean
         email:
-          description: The email address. If you have used the fix-typos option then this
-            will be the fixed address
+          description: The email address. If you have used the fix-typos option then this will be the fixed address
           type: string
         isDisposable:
-          description: True if this address is a disposable, temporary or darknet related
-            email address
+          description: True if this address is a disposable, temporary or darknet related email address
           type: boolean
         isFreemail:
           description: True if this address is a free-mail address
           type: boolean
         isPersonal:
-          description: True if this address belongs to a person. False if this is a role
-            based address, e.g. admin@, help@, office@, etc.
+          description: True if this address belongs to a person. False if this is a role based address, e.g. admin@, help@, office@, etc.
           type: boolean
         provider:
           description: The email service provider domain
@@ -2516,33 +2343,25 @@ components:
           description: The email domain
           type: string
         domainError:
-          description: True if this address has a domain error (e.g. no valid mail server
-            records)
+          description: True if this address has a domain error (e.g. no valid mail server records)
           type: boolean
         email:
-          description: The email address. If you have used the fix-typos option then this
-            will be the fixed address
+          description: The email address. If you have used the fix-typos option then this will be the fixed address
           type: string
         isCatchAll:
-          description: True if this email domain has a catch-all policy (it will accept
-            mail for any username)
+          description: True if this email domain has a catch-all policy (it will accept mail for any username)
           type: boolean
         isDeferred:
-          description: True if the mail server responded with a temporary failure (either
-            a 4xx response code or unresponsive server). You can retry this
-            address later, we recommend waiting at least 15 minutes before
-            retrying
+          description: True if the mail server responded with a temporary failure (either a 4xx response code or unresponsive server). You can retry this address later, we recommend waiting at least 15 minutes before retrying
           type: boolean
         isDisposable:
-          description: True if this address is a disposable, temporary or darknet related
-            email address
+          description: True if this address is a disposable, temporary or darknet related email address
           type: boolean
         isFreemail:
           description: True if this address is a free-mail address
           type: boolean
         isPersonal:
-          description: True if this address is for a person. False if this is a role based
-            address, e.g. admin@, help@, office@, etc.
+          description: True if this address is for a person. False if this is a role based address, e.g. admin@, help@, office@, etc.
           type: boolean
         provider:
           description: The email service provider domain
@@ -2551,15 +2370,7 @@ components:
           description: The raw SMTP response message received during verification
           type: string
         smtpStatus:
-          description: "The SMTP verification status for the address: <br> <ul> <li>ok -
-            SMTP verification was successful, this is a real address that can
-            receive mail</li> <li>invalid - this is not a valid email address
-            (has either a domain or syntax error)</li> <li>absent - this address
-            is not registered with the email service provider</li>
-            <li>unresponsive - the mail server(s) for this address timed-out or
-            refused to open an SMTP connection</li> <li>unknown - sorry, we
-            could not reliably determine the real status of this address (this
-            address may or may not exist)</li> </ul>"
+          description: "The SMTP verification status for the address: <br> <ul> <li>ok - SMTP verification was successful, this is a real address that can receive mail</li> <li>invalid - this is not a valid email address (has either a domain or syntax error)</li> <li>absent - this address is not registered with the email service provider</li> <li>unresponsive - the mail server(s) for this address timed-out or refused to open an SMTP connection</li> <li>unknown - sorry, we could not reliably determine the real status of this address (this address may or may not exist)</li> </ul>"
           type: string
         syntaxError:
           description: True if this address has a syntax error
@@ -2571,9 +2382,7 @@ components:
           description: Is this a valid email address (syntax and domain is valid)
           type: boolean
         verified:
-          description: True if this address has passed SMTP verification. Check the
-            smtp-status and smtp-response fields for specific verification
-            details
+          description: True if this address has passed SMTP verification. Check the smtp-status and smtp-response fields for specific verification details
           type: boolean
       required:
         - valid
@@ -2617,8 +2426,7 @@ components:
         addressComponents:
           additionalProperties:
             type: string
-          description: The components which make up the address such as road, city, state,
-            etc
+          description: The components which make up the address such as road, city, state, etc
           type: object
         city:
           description: The city of the location
@@ -2643,27 +2451,12 @@ components:
           format: double
           type: number
         locationTags:
-          description: "Array of strings containing any location tags associated with the
-            address. Tags are additional pieces of metadata about a specific
-            location, there are thousands of different tags. Some examples of
-            tags: shop, office, cafe, bank, pub"
+          description: "Array of strings containing any location tags associated with the address. Tags are additional pieces of metadata about a specific location, there are thousands of different tags. Some examples of tags: shop, office, cafe, bank, pub"
           items:
             type: string
           type: array
         locationType:
-          description: "The detected location type ordered roughly from most to least
-            precise, possible values are: <br> <ul> <li>address - indicates a
-            precise street address</li> <li>street - accurate to the street
-            level but may not point to the exact location of the house/building
-            number</li> <li>city - accurate to the city level, this includes
-            villages, towns, suburbs, etc</li> <li>postal-code - indicates a
-            postal code area (no house or street information present)</li>
-            <li>railway - location is part of a rail network such as a station
-            or railway track</li> <li>natural - indicates a natural feature, for
-            example a mountain peak or a waterway</li> <li>island - location is
-            an island or archipelago</li> <li>administrative - indicates an
-            administrative boundary such as a country, state or province</li>
-            </ul>"
+          description: "The detected location type ordered roughly from most to least precise, possible values are: <br> <ul> <li>address - indicates a precise street address</li> <li>street - accurate to the street level but may not point to the exact location of the house/building number</li> <li>city - accurate to the city level, this includes villages, towns, suburbs, etc</li> <li>postal-code - indicates a postal code area (no house or street information present)</li> <li>railway - location is part of a rail network such as a station or railway track</li> <li>natural - indicates a natural feature, for example a mountain peak or a waterway</li> <li>island - location is an island or archipelago</li> <li>administrative - indicates an administrative boundary such as a country, state or province</li> </ul>"
           type: string
         longitude:
           description: The location longitude
@@ -2716,21 +2509,10 @@ components:
           description: The currently used network/carrier name
           type: string
         hlrStatus:
-          description: "The HLR lookup status, possible values are: <br> <ul> <li>ok - the
-            HLR lookup was successful and the device is connected</li>
-            <li>absent - the number was once registered but the device has been
-            switched off or out of network range for some time</li> <li>unknown
-            - the number is not known by the mobile network</li> <li>invalid -
-            the number is not a valid mobile MSISDN number</li> <li>fixed-line -
-            the number is a registered fixed-line not mobile</li> <li>voip - the
-            number has been detected as a VOIP line</li> <li>failed - the HLR
-            lookup has failed, we could not determine the real status of this
-            number</li> </ul>"
+          description: "The HLR lookup status, possible values are: <br> <ul> <li>ok - the HLR lookup was successful and the device is connected</li> <li>absent - the number was once registered but the device has been switched off or out of network range for some time</li> <li>unknown - the number is not known by the mobile network</li> <li>invalid - the number is not a valid mobile MSISDN number</li> <li>fixed-line - the number is a registered fixed-line not mobile</li> <li>voip - the number has been detected as a VOIP line</li> <li>failed - the HLR lookup has failed, we could not determine the real status of this number</li> </ul>"
           type: string
         hlrValid:
-          description: Was the HLR lookup successful. If true then this is a working and
-            registered cell-phone or mobile device (SMS and phone calls will be
-            delivered)
+          description: Was the HLR lookup successful. If true then this is a working and registered cell-phone or mobile device (SMS and phone calls will be delivered)
           type: boolean
         imsi:
           description: The mobile IMSI number (International Mobile Subscriber Identity)
@@ -2743,8 +2525,7 @@ components:
           description: The number represented in full international format
           type: string
         isMobile:
-          description: True if this is a mobile number (only true with 100% certainty, if
-            the number type is unknown this value will be false)
+          description: True if this is a mobile number (only true with 100% certainty, if the number type is unknown this value will be false)
           type: boolean
         isPorted:
           description: Has this number been ported to another network
@@ -2756,8 +2537,7 @@ components:
           description: The number represented in local dialing format
           type: string
         location:
-          description: The number location. Could be a city, region or country depending
-            on the type of number
+          description: The number location. Could be a city, region or country depending on the type of number
           type: string
         mcc:
           description: The mobile MCC number (Mobile Country Code)
@@ -2772,9 +2552,7 @@ components:
           description: The mobile MSIN number (Mobile Subscription Identification Number)
           type: string
         numberType:
-          description: "The number type, possible values are: <br> <ul> <li>mobile</li>
-            <li>fixed-line</li> <li>premium-rate</li> <li>toll-free</li>
-            <li>voip</li> <li>unknown</li> </ul>"
+          description: "The number type, possible values are: <br> <ul> <li>mobile</li> <li>fixed-line</li> <li>premium-rate</li> <li>toll-free</li> <li>voip</li> <li>unknown</li> </ul>"
           type: string
         numberValid:
           description: True if this a valid phone number
@@ -2783,12 +2561,10 @@ components:
           description: The origin network/carrier name
           type: string
         portedNetwork:
-          description: The ported to network/carrier name (only set if the number has been
-            ported)
+          description: The ported to network/carrier name (only set if the number has been ported)
           type: string
         roamingCountryCode:
-          description: If the number is currently roaming, the ISO 2-letter country code
-            of the roaming in country
+          description: If the number is currently roaming, the ISO 2-letter country code of the roaming in country
           type: string
       required:
         - numberValid
@@ -2844,8 +2620,7 @@ components:
     IPBlocklistResponse:
       properties:
         blocklists:
-          description: An array of strings indicating which blocklists this IP is listed
-            on (empty if not listed)
+          description: An array of strings indicating which blocklists this IP is listed on (empty if not listed)
           items:
             type: string
           type: array
@@ -2853,19 +2628,16 @@ components:
           description: The IP address
           type: string
         isBot:
-          description: IP is hosting a malicious bot or is part of a botnet. Includes
-            brute-force crackers
+          description: IP is hosting a malicious bot or is part of a botnet. Includes brute-force crackers
           type: boolean
         isDshield:
           description: IP has been flagged as an attack source on DShield (dshield.org)
           type: boolean
         isExploitBot:
-          description: IP is hosting an exploit finding bot or is running exploit scanning
-            software
+          description: IP is hosting an exploit finding bot or is running exploit scanning software
           type: boolean
         isHijacked:
-          description: IP is part of a hijacked netblock or a netblock controlled by a
-            criminal organization
+          description: IP is part of a hijacked netblock or a netblock controlled by a criminal organization
           type: boolean
         isListed:
           description: Is this IP on a blocklist
@@ -2874,12 +2646,10 @@ components:
           description: IP is involved in distributing or is running malware
           type: boolean
         isProxy:
-          description: IP has been detected as an anonymous web proxy or anonymous HTTP
-            proxy
+          description: IP has been detected as an anonymous web proxy or anonymous HTTP proxy
           type: boolean
         isSpamBot:
-          description: IP address is hosting a spam bot, comment spamming or any other
-            spamming type software
+          description: IP address is hosting a spam bot, comment spamming or any other spamming type software
           type: boolean
         isSpider:
           description: IP is running a hostile web spider / web crawler
@@ -2891,12 +2661,10 @@ components:
           description: IP is a Tor node or running a Tor related service
           type: boolean
         isVpn:
-          description: IP belongs to a public VPN provider (only set if the 'vpn-lookup'
-            option is enabled)
+          description: IP belongs to a public VPN provider (only set if the 'vpn-lookup' option is enabled)
           type: boolean
         lastSeen:
-          description: The last time this IP was seen on a blocklist (in Unix time or 0 if
-            not listed recently)
+          description: The last time this IP was seen on a blocklist (in Unix time or 0 if not listed recently)
           format: int32
           type: integer
         listCount:
@@ -2904,8 +2672,7 @@ components:
           format: int32
           type: integer
         sensors:
-          description: An array of objects containing details on which sensors were used
-            to detect this IP
+          description: An array of objects containing details on which sensors were used to detect this IP
           items:
             type: string
           type: array
@@ -2959,13 +2726,10 @@ components:
           description: The IP address
           type: string
         isBogon:
-          description: True if this is a bogon IP address such as a private network, local
-            network or reserved address
+          description: True if this is a bogon IP address such as a private network, local network or reserved address
           type: boolean
         isV4Mapped:
-          description: True if this is a <a
-            href="https://en.wikipedia.org/wiki/IPv6#IPv4-mapped_IPv6_addresses">IPv4
-            mapped IPv6 address</a>
+          description: True if this is a <a href="https://en.wikipedia.org/wiki/IPv6#IPv4-mapped_IPv6_addresses">IPv4 mapped IPv6 address</a>
           type: boolean
         isV6:
           description: True if this is a IPv6 address. False if IPv4
@@ -3012,8 +2776,7 @@ components:
     IPProbeResponse:
       properties:
         asAge:
-          description: The age of the autonomous system (AS) in number of years since
-            registration
+          description: The age of the autonomous system (AS) in number of years since registration
           format: int32
           type: integer
         asCidr:
@@ -3064,26 +2827,19 @@ components:
           description: The IP address
           type: string
         isBogon:
-          description: True if this is a bogon IP address such as a private network, local
-            network or reserved address
+          description: True if this is a bogon IP address such as a private network, local network or reserved address
           type: boolean
         isHosting:
-          description: True if this IP belongs to a hosting company. Note that this can
-            still be true even if the provider type is VPN/proxy, this occurs in
-            the case that the IP is detected as both types
+          description: True if this IP belongs to a hosting company. Note that this can still be true even if the provider type is VPN/proxy, this occurs in the case that the IP is detected as both types
           type: boolean
         isIsp:
-          description: True if this IP belongs to an internet service provider. Note that
-            this can still be true even if the provider type is VPN/proxy, this
-            occurs in the case that the IP is detected as both types
+          description: True if this IP belongs to an internet service provider. Note that this can still be true even if the provider type is VPN/proxy, this occurs in the case that the IP is detected as both types
           type: boolean
         isProxy:
           description: True if this IP ia a proxy
           type: boolean
         isV4Mapped:
-          description: True if this is a <a
-            href="https://en.wikipedia.org/wiki/IPv6#IPv4-mapped_IPv6_addresses">IPv4
-            mapped IPv6 address</a>
+          description: True if this is a <a href="https://en.wikipedia.org/wiki/IPv6#IPv4-mapped_IPv6_addresses">IPv4 mapped IPv6 address</a>
           type: boolean
         isV6:
           description: True if this is a IPv6 address. False if IPv4
@@ -3092,26 +2848,13 @@ components:
           description: True if this IP ia a VPN
           type: boolean
         providerDescription:
-          description: A description of the provider (usually extracted from the providers
-            website)
+          description: A description of the provider (usually extracted from the providers website)
           type: string
         providerDomain:
           description: The domain name of the provider
           type: string
         providerType:
-          description: "The detected provider type, possible values are: <br> <ul> <li>isp
-            - IP belongs to an internet service provider. This includes both
-            mobile, home and business internet providers</li> <li>hosting - IP
-            belongs to a hosting company. This includes website hosting, cloud
-            computing platforms and colocation facilities</li> <li>vpn - IP
-            belongs to a VPN provider</li> <li>proxy - IP belongs to a proxy
-            service. This includes HTTP/SOCKS proxies and browser based
-            proxies</li> <li>university - IP belongs to a
-            university/college/campus</li> <li>government - IP belongs to a
-            government department. This includes military facilities</li>
-            <li>commercial - IP belongs to a commercial entity such as a
-            corporate headquarters or company office</li> <li>unknown - could
-            not identify the provider type</li> </ul>"
+          description: "The detected provider type, possible values are: <br> <ul> <li>isp - IP belongs to an internet service provider. This includes both mobile, home and business internet providers</li> <li>hosting - IP belongs to a hosting company. This includes website hosting, cloud computing platforms and colocation facilities</li> <li>vpn - IP belongs to a VPN provider</li> <li>proxy - IP belongs to a proxy service. This includes HTTP/SOCKS proxies and browser based proxies</li> <li>university - IP belongs to a university/college/campus</li> <li>government - IP belongs to a government department. This includes military facilities</li> <li>commercial - IP belongs to a commercial entity such as a corporate headquarters or company office</li> <li>unknown - could not identify the provider type</li> </ul>"
           type: string
         providerWebsite:
           description: The website URL for the provider
@@ -3123,8 +2866,7 @@ components:
           description: True if this is a valid IPv4 or IPv6 address
           type: boolean
         vpnDomain:
-          description: The domain of the VPN provider (may be empty if the VPN domain is
-            not detectable)
+          description: The domain of the VPN provider (may be empty if the VPN domain is not detectable)
           type: string
       required:
         - valid
@@ -3167,8 +2909,7 @@ components:
         addressComponents:
           additionalProperties:
             type: string
-          description: The components which make up the address such as road, city, state,
-            etc
+          description: The components which make up the address such as road, city, state, etc
           type: object
         city:
           description: The city of the location
@@ -3190,27 +2931,12 @@ components:
           format: double
           type: number
         locationTags:
-          description: "Array of strings containing any location tags associated with the
-            address. Tags are additional pieces of metadata about a specific
-            location, there are thousands of different tags. Some examples of
-            tags: shop, office, cafe, bank, pub"
+          description: "Array of strings containing any location tags associated with the address. Tags are additional pieces of metadata about a specific location, there are thousands of different tags. Some examples of tags: shop, office, cafe, bank, pub"
           items:
             type: string
           type: array
         locationType:
-          description: "The detected location type ordered roughly from most to least
-            precise, possible values are: <br> <ul> <li>address - indicates a
-            precise street address</li> <li>street - accurate to the street
-            level but may not point to the exact location of the house/building
-            number</li> <li>city - accurate to the city level, this includes
-            villages, towns, suburbs, etc</li> <li>postal-code - indicates a
-            postal code area (no house or street information present)</li>
-            <li>railway - location is part of a rail network such as a station
-            or railway track</li> <li>natural - indicates a natural feature, for
-            example a mountain peak or a waterway</li> <li>island - location is
-            an island or archipelago</li> <li>administrative - indicates an
-            administrative boundary such as a country, state or province</li>
-            </ul>"
+          description: "The detected location type ordered roughly from most to least precise, possible values are: <br> <ul> <li>address - indicates a precise street address</li> <li>street - accurate to the street level but may not point to the exact location of the house/building number</li> <li>city - accurate to the city level, this includes villages, towns, suburbs, etc</li> <li>postal-code - indicates a postal code area (no house or street information present)</li> <li>railway - location is part of a rail network such as a station or railway track</li> <li>natural - indicates a natural feature, for example a mountain peak or a waterway</li> <li>island - location is an island or archipelago</li> <li>administrative - indicates an administrative boundary such as a country, state or province</li> </ul>"
           type: string
         longitude:
           description: The location longitude
@@ -3279,25 +3005,19 @@ components:
           description: The number represented in full international format (E.164)
           type: string
         isMobile:
-          description: True if this is a mobile number. If the number type is unknown this
-            value will be false
+          description: True if this is a mobile number. If the number type is unknown this value will be false
           type: boolean
         localNumber:
           description: The number represented in local dialing format
           type: string
         location:
-          description: The phone number location. Could be the city, region or country
-            depending on the type of number
+          description: The phone number location. Could be the city, region or country depending on the type of number
           type: string
         prefixNetwork:
-          description: The network/carrier who owns the prefix (this only works for some
-            countries, use HLR lookup for global network detection)
+          description: The network/carrier who owns the prefix (this only works for some countries, use HLR lookup for global network detection)
           type: string
         type:
-          description: "The number type based on the number prefix. <br>Possible values
-            are: <br> <ul> <li>mobile</li> <li>fixed-line</li>
-            <li>premium-rate</li> <li>toll-free</li> <li>voip</li> <li>unknown
-            (use HLR lookup)</li> </ul>"
+          description: "The number type based on the number prefix. <br>Possible values are: <br> <ul> <li>mobile</li> <li>fixed-line</li> <li>premium-rate</li> <li>toll-free</li> <li>voip</li> <li>unknown (use HLR lookup)</li> </ul>"
           type: string
         valid:
           description: Is this a valid phone number
@@ -3326,10 +3046,7 @@ components:
           description: True if this a valid phone number
           type: boolean
         securityCode:
-          description: The security code generated, you can save this code to perform your
-            own verification or you can use the <a
-            href="https://www.neutrinoapi.com/api/verify-security-code/">Verify
-            Security Code API</a>
+          description: The security code generated, you can save this code to perform your own verification or you can use the <a href="https://www.neutrinoapi.com/api/verify-security-code/">Verify Security Code API</a>
           type: string
       required:
         - numberValid
@@ -3356,10 +3073,7 @@ components:
           description: True if this a valid phone number
           type: boolean
         securityCode:
-          description: The security code generated, you can save this code to perform your
-            own verification or you can use the <a
-            href="https://www.neutrinoapi.com/api/verify-security-code/">Verify
-            Security Code API</a>
+          description: The security code generated, you can save this code to perform your own verification or you can use the <a href="https://www.neutrinoapi.com/api/verify-security-code/">Verify Security Code API</a>
           type: string
         sent:
           description: True if the SMS has been sent
@@ -3404,8 +3118,7 @@ components:
     URLInfoResponse:
       properties:
         content:
-          description: The actual content this URL responded with. Only set if the
-            'fetch-content' option was used
+          description: The actual content this URL responded with. Only set if the 'fetch-content' option was used
           type: string
         contentEncoding:
           description: The encoding format the URL uses
@@ -3424,8 +3137,7 @@ components:
           description: True if this URL responded with an HTTP redirect
           type: boolean
         httpStatus:
-          description: The HTTP status code this URL responded with. An HTTP status of 0
-            indicates a network level issue
+          description: The HTTP status code this URL responded with. An HTTP status of 0 indicates a network level issue
           format: int32
           type: integer
         httpStatusMessage:
@@ -3433,16 +3145,13 @@ components:
           format: int32
           type: integer
         isError:
-          description: True if an error occurred while loading the URL. This includes
-            network errors, TLS errors and timeouts
+          description: True if an error occurred while loading the URL. This includes network errors, TLS errors and timeouts
           type: boolean
         isTimeout:
-          description: True if a timeout occurred while loading the URL. You can set the
-            timeout with the request parameter 'timeout'
+          description: True if a timeout occurred while loading the URL. You can set the timeout with the request parameter 'timeout'
           type: boolean
         languageCode:
-          description: The ISO 2-letter language code of the page. Extracted from either
-            the HTML document or via HTTP headers
+          description: The ISO 2-letter language code of the page. Extracted from either the HTML document or via HTTP headers
           type: string
         loadTime:
           description: The time taken to load the URL content in seconds
@@ -3481,8 +3190,7 @@ components:
           description: The document title
           type: string
         url:
-          description: The fully qualified URL. This may be different to the URL requested
-            if http-redirect is true
+          description: The fully qualified URL. This may be different to the URL requested if http-redirect is true
           type: string
         urlPath:
           description: The URL path
@@ -3551,8 +3259,7 @@ components:
           description: The mobile device brand
           type: string
         mobileBrowser:
-          description: The mobile device browser name (this is usually the same as the
-            browser name)
+          description: The mobile device browser name (this is usually the same as the browser name)
           type: string
         mobileModel:
           description: The mobile device model
@@ -3566,12 +3273,10 @@ components:
           format: int32
           type: integer
         operatingSystem:
-          description: The full operating system name which may include the major version
-            number or code name
+          description: The full operating system name which may include the major version number or code name
           type: string
         operatingSystemFamily:
-          description: The operating system family name, this is the OS name without any
-            version information
+          description: The operating system family name, this is the OS name without any version information
           type: string
         operatingSystemVersion:
           description: The operating system version number (if detectable)
@@ -3580,11 +3285,7 @@ components:
           description: The producer or manufacturer of the user agent
           type: string
         type:
-          description: "The user agent type, possible values are: <br> <ul>
-            <li>desktop-browser</li> <li>mobile-browser</li>
-            <li>email-client</li> <li>feed-reader</li> <li>software-library</li>
-            <li>media-player (includes smart TVs)</li> <li>robot</li>
-            <li>unknown</li> </ul>"
+          description: "The user agent type, possible values are: <br> <ul> <li>desktop-browser</li> <li>mobile-browser</li> <li>email-client</li> <li>feed-reader</li> <li>software-library</li> <li>media-player (includes smart TVs)</li> <li>robot</li> <li>unknown</li> </ul>"
           type: string
         version:
           description: The browser software version

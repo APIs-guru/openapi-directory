@@ -4,19 +4,12 @@ servers:
 info:
   contact:
     x-twitter: amentumspace
-  description: >
-    Instantly access empirical models of atmospheric density
-    and  composition that are recommended by the Committee on Space Research
-    (COSPAR) for  satellite drag calculations. <br><br>
-
+  description: |
+    Instantly access empirical models of atmospheric density and  composition that are recommended by the Committee on Space Research (COSPAR) for  satellite drag calculations. <br><br>
     The APIs are rate limited to 10,000 calls per month. <br><br>
-
     Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to discuss commercial use. <br><br>
-
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
-
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
-
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
   title: Atmosphere API
   version: 1.0.1
@@ -33,22 +26,12 @@ info:
   x-providerName: amentum.space
   x-serviceName: atmosphere
 tags:
-  - description: >
-      The <a
-      href='https://ccmc.gsfc.nasa.gov/modelweb/atmos/nrlmsise00.html'>NRLMSISE-00</a>  model
-      was developed by the US Naval Research Laboratory.  It is based on mass
-      spectrometry and incoherent radar scatter data,  includes drag and
-      accelerometer data, and accounts for anomalous  oxygen at high altitudes.
-      It is recommended by the International  Committee on Space Resarch
-      (COSPAR) as the standard for atmospheric  composition. <br><br> The API
-      now automatically updates the Ap and F10.7 cm radio flux  indices unless
-      provided by the user.
+  - description: |
+      The <a href='https://ccmc.gsfc.nasa.gov/modelweb/atmos/nrlmsise00.html'>NRLMSISE-00</a>  model was developed by the US Naval Research Laboratory.  It is based on mass spectrometry and incoherent radar scatter data,  includes drag and accelerometer data, and accounts for anomalous  oxygen at high altitudes. It is recommended by the International  Committee on Space Resarch (COSPAR) as the standard for atmospheric  composition. <br><br> The API now automatically updates the Ap and F10.7 cm radio flux  indices unless provided by the user.
     name: nrlsmsie00
     x-displayName: NRLMSISE-00
-  - description: >
-      The <a href='https://sol.spacenvironment.net/jb2008/'>JB2008</a>
-      (Jacchia-Bowman) model is a newer model developed by  Space Environment
-      Technologies and the US Air Force Space Command.
+  - description: |
+      The <a href='https://sol.spacenvironment.net/jb2008/'>JB2008</a> (Jacchia-Bowman) model is a newer model developed by  Space Environment Technologies and the US Air Force Space Command.
        The model accounts for various phenomena related to EUV heating of 
        the thermosphere and uses the DST index as the driver of global 
        density changes. The model is complementary to the NRLMSISE00 model 
@@ -118,10 +101,8 @@ paths:
         - jb2008
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://atmosphere.amentum.space/jb2008?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://atmosphere.amentum.space/jb2008?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2" -H  "accept: application/json"
         - lang: Python
           source: |
             import json
@@ -311,10 +292,8 @@ paths:
         - nrlsmsie00
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://atmosphere.amentum.space/nrlmsise00?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://atmosphere.amentum.space/nrlmsise00?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2" -H  "accept: application/json"
         - lang: Python
           source: |
             import json
@@ -339,12 +318,8 @@ paths:
 components:
   parameters:
     AP:
-      description: >
-        (Optional) The Ap-index provides a daily average level for
-        geomagnetic activity F107, F107A, AP effects can be neglected below 80
-        km. If unspecified, the average of values in the 24 hours preceding the
-        date-time  are automatically calculated from data provided by GFZ German
-        Research Centre  for Geosciences.
+      description: |
+        (Optional) The Ap-index provides a daily average level for geomagnetic activity F107, F107A, AP effects can be neglected below 80 km. If unspecified, the average of values in the 24 hours preceding the date-time  are automatically calculated from data provided by GFZ German Research Centre  for Geosciences.
       in: query
       name: ap
       required: false
@@ -368,13 +343,8 @@ components:
         example: 21
         type: integer
     F107:
-      description: >
-        (Optional) Daily F10.7 cm radio flux for previous day (SFU). F107
-        and F107A values correspond to the 10.7 cm radio flux at the actual
-        distance of Earth from Sun rather than radio flux at 1 AU. F107, F107A,
-        AP effects can be neglected below 80 km. If unspecified, values provided
-        by the US National Oceanic and  Atmospheric Administration are retrieved
-        automatically.
+      description: |
+        (Optional) Daily F10.7 cm radio flux for previous day (SFU). F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1 AU. F107, F107A, AP effects can be neglected below 80 km. If unspecified, values provided by the US National Oceanic and  Atmospheric Administration are retrieved automatically.
       in: query
       name: f107
       required: false
@@ -382,13 +352,8 @@ components:
         example: 120
         type: number
     F107A:
-      description: >
-        (Optional) 81 day average of F10.7 flux (SFU) centered on the
-        specified day. F107 and F107A values correspond to the 10.7 cm radio
-        flux at the actual distance of Earth from Sun rather than radio flux at
-        1 AU. F107, F107A, AP effects can be neglected below 80 km. If
-        unspecified, values provided by the US National Oceanic and  Atmospheric
-        Administration are retrieved automatically.
+      description: |
+        (Optional) 81 day average of F10.7 flux (SFU) centered on the specified day. F107 and F107A values correspond to the 10.7 cm radio flux at the actual distance of Earth from Sun rather than radio flux at 1 AU. F107, F107A, AP effects can be neglected below 80 km. If unspecified, values provided by the US National Oceanic and  Atmospheric Administration are retrieved automatically.
       in: query
       name: f107a
       required: false

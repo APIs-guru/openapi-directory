@@ -3,116 +3,74 @@ openapi: 3.0.0
 servers:
   - url: /v1.33
 info:
-  description: >
-    The Engine API is an HTTP API served by Docker Engine. It is the
-    API the Docker client uses to communicate with the Engine, so everything the
-    Docker client can do can be done with the API.
-
+  description: |
+    The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.
 
     Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.
 
-
     # Errors
-
 
     The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:
 
-
     ```
-
     {
       "message": "page not found"
     }
-
     ```
-
 
     # Versioning
 
-
     The API is usually changed in each release of Docker, so API calls are versioned to ensure that clients don't break.
-
 
     For Docker Engine 17.09, the API version is 1.32. To lock to this version, you prefix the URL with `/v1.32`. For example, calling `/info` is the same as calling `/v1.32/info`.
 
-
     Engine releases in the near future should support this version of the API, so your client will continue to work even if it is talking to a newer Engine.
-
 
     In previous versions of Docker, it was possible to access the API without providing a version. This behaviour is now deprecated will be removed in a future version of Docker.
 
-
     The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break when talking to newer Docker daemons.
-
 
     This documentation is for version 1.33 of the API. Use this table to find documentation for previous versions of the API:
 
-
     Docker version  | API version | Changes
-
     ----------------|-------------|---------
-
     17.09.x | [1.31](https://docs.docker.com/engine/api/v1.32/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-32-api-changes)
-
     17.07.x | [1.31](https://docs.docker.com/engine/api/v1.31/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-31-api-changes)
-
     17.06.x | [1.30](https://docs.docker.com/engine/api/v1.30/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-30-api-changes)
-
     17.05.x | [1.29](https://docs.docker.com/engine/api/v1.29/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-29-api-changes)
-
     17.04.x | [1.28](https://docs.docker.com/engine/api/v1.28/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-28-api-changes)
-
     17.03.1 | [1.27](https://docs.docker.com/engine/api/v1.27/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-27-api-changes)
-
     1.13.1 & 17.03.0 | [1.26](https://docs.docker.com/engine/api/v1.26/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-26-api-changes)
-
     1.13.0 | [1.25](https://docs.docker.com/engine/api/v1.25/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-25-api-changes)
-
     1.12.x | [1.24](https://docs.docker.com/engine/api/v1.24/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-24-api-changes)
-
     1.11.x | [1.23](https://docs.docker.com/engine/api/v1.23/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-23-api-changes)
-
     1.10.x | [1.22](https://docs.docker.com/engine/api/v1.22/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-22-api-changes)
-
     1.9.x | [1.21](https://docs.docker.com/engine/api/v1.21/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-21-api-changes)
-
     1.8.x | [1.20](https://docs.docker.com/engine/api/v1.20/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-20-api-changes)
-
     1.7.x | [1.19](https://docs.docker.com/engine/api/v1.19/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-19-api-changes)
-
     1.6.x | [1.18](https://docs.docker.com/engine/api/v1.18/) | [API changes](https://docs.docker.com/engine/api/version-history/#v1-18-api-changes)
-
 
     # Authentication
 
-
     Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:
 
-
     ```
-
     {
       "username": "string",
       "password": "string",
       "email": "string",
       "serveraddress": "string"
     }
-
     ```
-
 
     The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.
 
-
     If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:
 
-
     ```
-
     {
       "identitytoken": "9cbaf023786cd7..."
     }
-
     ```
   title: Docker Engine API
   version: "1.33"
@@ -133,56 +91,42 @@ tags:
     x-displayName: Containers
   - name: Image
     x-displayName: Images
-  - description: >
-      Networks are user-defined networks that containers can be attached
-      to. See the [networking
-      documentation](https://docs.docker.com/engine/userguide/networking/) for
-      more information.
+  - description: |
+      Networks are user-defined networks that containers can be attached to. See the [networking documentation](https://docs.docker.com/engine/userguide/networking/) for more information.
     name: Network
     x-displayName: Networks
   - description: |
       Create and manage persistent storage that can be attached to containers.
     name: Volume
     x-displayName: Volumes
-  - description: >
-      Run new commands inside running containers. See the [command-line
-      reference](https://docs.docker.com/engine/reference/commandline/exec/) for
-      more information.
-
+  - description: |
+      Run new commands inside running containers. See the [command-line reference](https://docs.docker.com/engine/reference/commandline/exec/) for more information.
 
       To exec a command in a container, you first need to create an exec instance, then start it. These two API endpoints are wrapped up in a single command-line command, `docker exec`.
     name: Exec
     x-displayName: Exec
-  - description: >
-      Engines can be clustered together in a swarm. See [the swarm mode
-      documentation](https://docs.docker.com/engine/swarm/) for more
-      information.
+  - description: |
+      Engines can be clustered together in a swarm. See [the swarm mode documentation](https://docs.docker.com/engine/swarm/) for more information.
     name: Swarm
     x-displayName: Swarm
-  - description: >
-      Nodes are instances of the Engine participating in a swarm. Swarm
-      mode must be enabled for these endpoints to work.
+  - description: |
+      Nodes are instances of the Engine participating in a swarm. Swarm mode must be enabled for these endpoints to work.
     name: Node
     x-displayName: Nodes
-  - description: >
-      Services are the definitions of tasks to run on a swarm. Swarm mode
-      must be enabled for these endpoints to work.
+  - description: |
+      Services are the definitions of tasks to run on a swarm. Swarm mode must be enabled for these endpoints to work.
     name: Service
     x-displayName: Services
-  - description: >
-      A task is a container running on a swarm. It is the atomic
-      scheduling unit of swarm. Swarm mode must be enabled for these endpoints
-      to work.
+  - description: |
+      A task is a container running on a swarm. It is the atomic scheduling unit of swarm. Swarm mode must be enabled for these endpoints to work.
     name: Task
     x-displayName: Tasks
-  - description: >
-      Secrets are sensitive data that can be used by services. Swarm mode
-      must be enabled for these endpoints to work.
+  - description: |
+      Secrets are sensitive data that can be used by services. Swarm mode must be enabled for these endpoints to work.
     name: Secret
     x-displayName: Secrets
-  - description: >
-      Configs are application configurations that can be used by
-      services. Swarm mode must be enabled for these endpoints to work.
+  - description: |
+      Configs are application configurations that can be used by services. Swarm mode must be enabled for these endpoints to work.
     name: Config
     x-displayName: Configs
   - name: Plugin
@@ -222,8 +166,7 @@ paths:
         - System
   /auth:
     post:
-      description: Validate credentials for a registry and, if available, get an
-        identity token for accessing the registry without password.
+      description: Validate credentials for a registry and, if available, get an identity token for accessing the registry without password.
       operationId: SystemAuth
       requestBody:
         content:
@@ -243,8 +186,7 @@ paths:
               schema:
                 properties:
                   IdentityToken:
-                    description: An opaque token used to authenticate a user after a successful
-                      login
+                    description: An opaque token used to authenticate a user after a successful login
                     nullable: false
                     type: string
                   Status:
@@ -268,29 +210,23 @@ paths:
         - System
   /build:
     post:
-      description: >
+      description: |
         Build an image from a tar archive with a `Dockerfile` in it.
-
 
         The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive's root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).
 
-
         The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.
-
 
         The build is canceled if the client drops the connection by quitting or being killed.
       operationId: ImageBuild
       parameters:
-        - description: Path within the build context to the `Dockerfile`. This is ignored
-            if `remote` is specified and points to an external `Dockerfile`.
+        - description: Path within the build context to the `Dockerfile`. This is ignored if `remote` is specified and points to an external `Dockerfile`.
           in: query
           name: dockerfile
           schema:
             default: Dockerfile
             type: string
-        - description: A name and optional tag to apply to the image in the `name:tag`
-            format. If you omit the tag the default `latest` value is assumed.
-            You can provide several `t` parameters.
+        - description: A name and optional tag to apply to the image in the `name:tag` format. If you omit the tag the default `latest` value is assumed. You can provide several `t` parameters.
           in: query
           name: t
           schema:
@@ -300,14 +236,7 @@ paths:
           name: extrahosts
           schema:
             type: string
-        - description: A Git repository URI or HTTP/HTTPS context URI. If the URI points
-            to a single text file, the file’s contents are placed into a file
-            called `Dockerfile` and the image is built from that file. If the
-            URI points to a tarball, the file is downloaded by the daemon and
-            the contents therein used as the context for the build. If the URI
-            points to a tarball and the `dockerfile` parameter is also
-            specified, there must be a file with the corresponding path inside
-            the tarball.
+        - description: A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called `Dockerfile` and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the `dockerfile` parameter is also specified, there must be a file with the corresponding path inside the tarball.
           in: query
           name: remote
           schema:
@@ -376,38 +305,27 @@ paths:
           name: cpuquota
           schema:
             type: integer
-        - description: JSON map of string pairs for build-time variables. Users pass these
-            values at build-time. Docker uses the buildargs as the environment
-            context for commands run via the `Dockerfile` RUN instruction, or
-            for variable expansion in other `Dockerfile` instructions. This is
-            not meant for passing secret values. [Read more about the buildargs
-            instruction.](https://docs.docker.com/engine/reference/builder/#arg)
+        - description: JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the `Dockerfile` RUN instruction, or for variable expansion in other `Dockerfile` instructions. This is not meant for passing secret values. [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg)
           in: query
           name: buildargs
           schema:
             type: integer
-        - description: Size of `/dev/shm` in bytes. The size must be greater than 0. If
-            omitted the system uses 64MB.
+        - description: Size of `/dev/shm` in bytes. The size must be greater than 0. If omitted the system uses 64MB.
           in: query
           name: shmsize
           schema:
             type: integer
-        - description: Squash the resulting images layers into a single layer.
-            *(Experimental release only.)*
+        - description: Squash the resulting images layers into a single layer. *(Experimental release only.)*
           in: query
           name: squash
           schema:
             type: boolean
-        - description: Arbitrary key/value labels to set on the image, as a JSON map of
-            string pairs.
+        - description: Arbitrary key/value labels to set on the image, as a JSON map of string pairs.
           in: query
           name: labels
           schema:
             type: string
-        - description: "Sets the networking mode for the run commands during build.
-            Supported standard values are: `bridge`, `host`, `none`, and
-            `container:<name|id>`. Any other value is taken as a custom
-            network's name to which this container should connect to."
+        - description: "Sets the networking mode for the run commands during build. Supported standard values are: `bridge`, `host`, `none`, and `container:<name|id>`. Any other value is taken as a custom network's name to which this container should connect to."
           in: query
           name: networkmode
           schema:
@@ -419,16 +337,12 @@ paths:
             enum:
               - application/x-tar
             type: string
-        - description: >
-            This is a base64-encoded JSON object with auth configurations for
-            multiple registries that a build may refer to.
-
+        - description: |
+            This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.
 
             The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:
 
-
             ```
-
             {
               "docker.example.com": {
                 "username": "janedoe",
@@ -439,9 +353,7 @@ paths:
                 "password": "conta1n3rize14"
               }
             }
-
             ```
-
 
             Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a `https://` prefix and a `/v1/` suffix even though Docker will prefer to use the v2 registry API.
           in: header
@@ -454,8 +366,7 @@ paths:
             schema:
               format: binary
               type: string
-        description: "A tar archive compressed with one of the following algorithms:
-          identity (no compression), gzip, bzip2, xz."
+        description: "A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz."
       responses:
         "200":
           description: no error
@@ -522,8 +433,7 @@ paths:
           name: comment
           schema:
             type: string
-        - description: Author of the image (e.g., `John Hannibal Smith
-            <hannibal@a-team.com>`)
+        - description: Author of the image (e.g., `John Hannibal Smith <hannibal@a-team.com>`)
           in: query
           name: author
           schema:
@@ -575,17 +485,12 @@ paths:
     get:
       operationId: ConfigList
       parameters:
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the configs list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the configs list. Available filters:
 
             - `id=<config id>`
-
             - `label=<key> or label=<key>=value`
-
             - `name=<config name>`
-
             - `names=<config name>`
           in: query
           name: filters
@@ -763,8 +668,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The version number of the config object being updated. This is
-            required to avoid conflicting writes.
+        - description: The version number of the config object being updated. This is required to avoid conflicting writes.
           in: query
           name: version
           required: true
@@ -779,9 +683,7 @@ paths:
           text/plain:
             schema:
               $ref: "#/components/schemas/ConfigSpec"
-        description: The spec of the config to update. Currently, only the Labels field
-          can be updated. All other fields must remain unchanged from the
-          [ConfigInspect endpoint](#operation/ConfigInspect) response values.
+        description: The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [ConfigInspect endpoint](#operation/ConfigInspect) response values.
       responses:
         "200":
           description: no error
@@ -828,8 +730,7 @@ paths:
     post:
       operationId: ContainerCreate
       parameters:
-        - description: Assign the specified name to the container. Must match
-            `/?[a-zA-Z0-9_-]+`.
+        - description: Assign the specified name to the container. Must match `/?[a-zA-Z0-9_-]+`.
           in: query
           name: name
           schema:
@@ -850,8 +751,7 @@ paths:
                         EndpointsConfig:
                           additionalProperties:
                             $ref: "#/components/schemas/EndpointSettings"
-                          description: A mapping of network name to endpoint configuration for that
-                            network.
+                          description: A mapping of network name to endpoint configuration for that network.
                           type: object
                       type: object
                   type: object
@@ -986,8 +886,7 @@ paths:
                         EndpointsConfig:
                           additionalProperties:
                             $ref: "#/components/schemas/EndpointSettings"
-                          description: A mapping of network name to endpoint configuration for that
-                            network.
+                          description: A mapping of network name to endpoint configuration for that network.
                           type: object
                       type: object
                   type: object
@@ -1170,13 +1069,10 @@ paths:
         - Container
   /containers/json:
     get:
-      description: >
-        Returns a list of containers. For details on the format, see [the
-        inspect endpoint](#operation/ContainerInspect).
-
+      description: |
+        Returns a list of containers. For details on the format, see [the inspect endpoint](#operation/ContainerInspect).
 
         Note that it uses a different, smaller representation of a container than inspecting a single container. For example,
-
         the list of linked containers is not propagated .
       operationId: ContainerList
       parameters:
@@ -1186,8 +1082,7 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: Return this number of most recently created containers, including
-            non-running ones.
+        - description: Return this number of most recently created containers, including non-running ones.
           in: query
           name: limit
           schema:
@@ -1198,40 +1093,23 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: >
-            Filters to process on the container list, encoded as JSON (a
-            `map[string][]string`). For example, `{"status": ["paused"]}` will
-            only return paused containers. Available filters:
-
+        - description: |
+            Filters to process on the container list, encoded as JSON (a `map[string][]string`). For example, `{"status": ["paused"]}` will only return paused containers. Available filters:
 
             - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`)
-
             - `before`=(`<container id>` or `<container name>`)
-
             - `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-
             - `exited=<int>` containers with exit code of `<int>`
-
             - `health`=(`starting`|`healthy`|`unhealthy`|`none`)
-
             - `id=<ID>` a container's ID
-
             - `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only)
-
             - `is-task=`(`true`|`false`)
-
             - `label=key` or `label="key=value"` of a container label
-
             - `name=<name>` a container's name
-
             - `network`=(`<network id>` or `<network name>`)
-
             - `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-
             - `since`=(`<container id>` or `<container name>`)
-
             - `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`)
-
             - `volume`=(`<volume name>` or `<mount point destination>`)
           in: query
           name: filters
@@ -1391,15 +1269,11 @@ paths:
     post:
       operationId: ContainerPrune
       parameters:
-        - description: >
-            Filters to process on the prune list, encoded as JSON (a
-            `map[string][]string`).
-
+        - description: |
+            Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
 
             Available filters:
-
             - `until=<timestamp>` Prune containers created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time.
-
             - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune containers with (or without, in case `label!=...` is used) the specified labels.
           in: query
           name: filters
@@ -1490,8 +1364,7 @@ paths:
               examples:
                 response:
                   value:
-                    message: "You cannot remove a running container: c2ada9df5af8. Stop the
-                      container before attempting removal or force remove"
+                    message: "You cannot remove a running container: c2ada9df5af8. Stop the container before attempting removal or force remove"
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
             text/plain:
@@ -1538,9 +1411,7 @@ paths:
                   - $ref: "#/components/schemas/ErrorResponse"
                   - properties:
                       message:
-                        description: The error message. Either "must specify path parameter" (path
-                          cannot be empty) or "not a directory" (path was
-                          asserted to be a directory but exists as a file).
+                        description: The error message. Either "must specify path parameter" (path cannot be empty) or "not a directory" (path was asserted to be a directory but exists as a file).
                         nullable: false
                         type: string
                     type: object
@@ -1566,9 +1437,7 @@ paths:
       tags:
         - Container
     head:
-      description: A response header `X-Docker-Container-Path-Stat` is return
-        containing a base64 - encoded JSON object with some filesystem header
-        information about the path.
+      description: A response header `X-Docker-Container-Path-Stat` is return containing a base64 - encoded JSON object with some filesystem header information about the path.
       operationId: ContainerArchiveInfo
       parameters:
         - description: ID or name of the container
@@ -1599,9 +1468,7 @@ paths:
                   - $ref: "#/components/schemas/ErrorResponse"
                   - properties:
                       message:
-                        description: The error message. Either "must specify path parameter" (path
-                          cannot be empty) or "not a directory" (path was
-                          asserted to be a directory but exists as a file).
+                        description: The error message. Either "must specify path parameter" (path cannot be empty) or "not a directory" (path was asserted to be a directory but exists as a file).
                         nullable: false
                         type: string
                     type: object
@@ -1611,9 +1478,7 @@ paths:
                   - $ref: "#/components/schemas/ErrorResponse"
                   - properties:
                       message:
-                        description: The error message. Either "must specify path parameter" (path
-                          cannot be empty) or "not a directory" (path was
-                          asserted to be a directory but exists as a file).
+                        description: The error message. Either "must specify path parameter" (path cannot be empty) or "not a directory" (path was asserted to be a directory but exists as a file).
                         nullable: false
                         type: string
                     type: object
@@ -1644,8 +1509,7 @@ paths:
       tags:
         - Container
     put:
-      description: Upload a tar archive to be extracted to a path in the filesystem of
-        container id.
+      description: Upload a tar archive to be extracted to a path in the filesystem of container id.
       operationId: PutContainerArchive
       parameters:
         - description: ID or name of the container
@@ -1654,16 +1518,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Path to a directory in the container to extract the archive’s
-            contents into. "
+        - description: "Path to a directory in the container to extract the archive’s contents into. "
           in: query
           name: path
           required: true
           schema:
             type: string
-        - description: If “1”, “true”, or “True” then it will be an error if unpacking the
-            given content would cause an existing directory to be replaced with
-            a non-directory and vice versa.
+        - description: If “1”, “true”, or “True” then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa.
           in: query
           name: noOverwriteDirNonDir
           schema:
@@ -1676,8 +1537,7 @@ paths:
           application/x-tar:
             schema:
               type: string
-        description: "The input stream must be a tar archive compressed with one of the
-          following algorithms: identity (no compression), gzip, bzip2, xz."
+        description: "The input stream must be a tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz."
         required: true
       responses:
         "200":
@@ -1699,8 +1559,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Permission denied, the volume or container rootfs is marked as
-            read-only.
+          description: Permission denied, the volume or container rootfs is marked as read-only.
         "404":
           content:
             application/json:
@@ -1728,129 +1587,80 @@ paths:
         - Container
   "/containers/{id}/attach":
     post:
-      description: >
-        Attach to a container to read its output or send it input. You can
-        attach to the same container multiple times and you can reattach to
-        containers that have been detached.
-
+      description: |
+        Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.
 
         Either the `stream` or `logs` parameter must be `true` for this endpoint to do anything.
 
-
         See [the documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.
-
 
         ### Hijacking
 
-
         This endpoint hijacks the HTTP connection to transport `stdin`, `stdout`, and `stderr` on the same socket.
-
 
         This is the response from the daemon for an attach request:
 
-
         ```
-
         HTTP/1.1 200 OK
-
         Content-Type: application/vnd.docker.raw-stream
 
-
         [STREAM]
-
         ```
-
 
         After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.
 
-
         To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.
-
 
         For example, the client sends this request to upgrade the connection:
 
-
         ```
-
         POST /containers/16253994b7c4/attach?stream=1&stdout=1 HTTP/1.1
-
         Upgrade: tcp
-
         Connection: Upgrade
-
         ```
-
 
         The Docker daemon will respond with a `101 UPGRADED` response, and will similarly follow with the raw stream:
 
-
         ```
-
         HTTP/1.1 101 UPGRADED
-
         Content-Type: application/vnd.docker.raw-stream
-
         Connection: Upgrade
-
         Upgrade: tcp
 
-
         [STREAM]
-
         ```
-
 
         ### Stream format
 
-
         When the TTY setting is disabled in [`POST /containers/create`](#operation/ContainerCreate), the stream over the hijacked connected is multiplexed to separate out `stdout` and `stderr`. The stream consists of a series of frames, each containing a header and a payload.
-
 
         The header contains the information which the stream writes (`stdout` or `stderr`). It also contains the size of the associated frame encoded in the last four bytes (`uint32`).
 
-
         It is encoded on the first eight bytes like this:
 
-
         ```go
-
         header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4}
-
         ```
-
 
         `STREAM_TYPE` can be:
 
-
         - 0: `stdin` (is written on `stdout`)
-
         - 1: `stdout`
-
         - 2: `stderr`
-
 
         `SIZE1, SIZE2, SIZE3, SIZE4` are the four bytes of the `uint32` size encoded as big endian.
 
-
         Following the header is the payload, which is the specified number of bytes of `STREAM_TYPE`.
-
 
         The simplest way to implement this protocol is the following:
 
-
         1. Read 8 bytes.
-
         2. Choose `stdout` or `stderr` depending on the first byte.
-
         3. Extract the frame size from the last four bytes.
-
         4. Read the extracted size and output it on the correct output.
-
         5. Goto 1.
 
-
         ### Stream format when using a TTY
-
 
         When the TTY setting is enabled in [`POST /containers/create`](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client's `stdin`.
       operationId: ContainerAttach
@@ -1861,19 +1671,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Override the key sequence for detaching a container.Format is a
-            single character `[a-Z]` or `ctrl-<value>` where `<value>` is one
-            of: `a-z`, `@`, `^`, `[`, `,` or `_`."
+        - description: "Override the key sequence for detaching a container.Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`."
           in: query
           name: detachKeys
           schema:
             type: string
-        - description: >
+        - description: |
             Replay previous logs from the container.
 
-
             This is useful for attaching to a container that has started and you want to output everything since the container started.
-
 
             If `stream` is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output.
           in: query
@@ -1946,9 +1752,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Override the key sequence for detaching a container.Format is a
-            single character `[a-Z]` or `ctrl-<value>` where `<value>` is one
-            of: `a-z`, `@`, `^`, `[`, `,`, or `_`."
+        - description: "Override the key sequence for detaching a container.Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,`, or `_`."
           in: query
           name: detachKeys
           schema:
@@ -2024,17 +1828,12 @@ paths:
         - Container
   "/containers/{id}/changes":
     get:
-      description: >
-        Returns which files in a container's filesystem have been added,
-        deleted,
-
+      description: |
+        Returns which files in a container's filesystem have been added, deleted,
         or modified. The `Kind` of modification can be one of:
 
-
         - `0`: Modified
-
         - `1`: Added
-
         - `2`: Deleted
       operationId: ContainerChanges
       parameters:
@@ -2141,9 +1940,7 @@ paths:
                     type: string
                   type: array
                 DetachKeys:
-                  description: "Override the key sequence for detaching a container. Format is a
-                    single character `[a-Z]` or `ctrl-<value>` where `<value>`
-                    is one of: `a-z`, `@`, `^`, `[`, `,` or `_`."
+                  description: "Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`."
                   type: string
                 Env:
                   description: A list of environment variables in the form `["VAR=value", ...]`.
@@ -2158,9 +1955,7 @@ paths:
                   description: Allocate a pseudo-TTY.
                   type: boolean
                 User:
-                  description: "The user, and optionally, group to run the exec process inside the
-                    container. Format is one of: `user`, `user:group`, `uid`, or
-                    `uid:gid`."
+                  description: "The user, and optionally, group to run the exec process inside the container. Format is one of: `user`, `user:group`, `uid`, or `uid:gid`."
                   type: string
               type: object
         description: Exec configuration
@@ -2455,8 +2250,7 @@ paths:
                     format: int64
                     type: integer
                   SizeRw:
-                    description: The size of files that have been created or changed by this
-                      container.
+                    description: The size of files that have been created or changed by this container.
                     format: int64
                     type: integer
                   State:
@@ -2473,8 +2267,7 @@ paths:
                         description: The time when this container last exited.
                         type: string
                       OOMKilled:
-                        description: Whether this container has been killed because it ran out of
-                          memory.
+                        description: Whether this container has been killed because it ran out of memory.
                         type: boolean
                       Paused:
                         description: Whether this container is paused.
@@ -2486,21 +2279,15 @@ paths:
                         description: Whether this container is restarting.
                         type: boolean
                       Running:
-                        description: >
+                        description: |
                           Whether this container is running.
 
-
                           Note that a running container can be _paused_. The `Running` and `Paused`
-
                           booleans are not mutually exclusive:
 
-
                           When pausing a container (on Linux), the cgroups freezer is used to suspend
-
                           all processes in the container. Freezing the process requires the process to
-
                           be running. As a result, paused containers are both `Running` _and_ `Paused`.
-
 
                           Use the `Status` field instead to determine if a container's state is "running".
                         type: boolean
@@ -2508,9 +2295,8 @@ paths:
                         description: The time when this container was last started.
                         type: string
                       Status:
-                        description: >
-                          The status of the container. For example, `"running"` or
-                          `"exited"`.
+                        description: |
+                          The status of the container. For example, `"running"` or `"exited"`.
                         enum:
                           - created
                           - running
@@ -2544,8 +2330,7 @@ paths:
         - Container
   "/containers/{id}/kill":
     post:
-      description: Send a POSIX signal to a container, defaulting to killing to the
-        container.
+      description: Send a POSIX signal to a container, defaulting to killing to the container.
       operationId: ContainerKill
       parameters:
         - description: ID or name of the container
@@ -2554,8 +2339,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Signal to send to the container as an integer or string (e.g.
-            `SIGINT`)
+        - description: Signal to send to the container as an integer or string (e.g. `SIGINT`)
           in: query
           name: signal
           schema:
@@ -2591,9 +2375,8 @@ paths:
         - Container
   "/containers/{id}/logs":
     get:
-      description: >
+      description: |
         Get `stdout` and `stderr` logs from a container.
-
 
         Note: This endpoint works only for containers with the `json-file` or `journald` logging driver.
       operationId: ContainerLogs
@@ -2604,9 +2387,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: >
+        - description: |
             Return the logs as a stream.
-
 
             This will return a `101` HTTP response with a `Connection: upgrade` header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach).
           in: query
@@ -2638,8 +2420,7 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: Only return this number of log lines from the end of the logs.
-            Specify as an integer or `all` to output all log lines.
+        - description: Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
           in: query
           name: tail
           schema:
@@ -2693,9 +2474,8 @@ paths:
         - Container
   "/containers/{id}/pause":
     post:
-      description: >
+      description: |
         Use the cgroups freezer to suspend all processes in a container.
-
 
         Traditionally, when suspending a process the `SIGSTOP` signal is used, which is observable by the process being suspended. With the cgroups freezer the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed.
       operationId: ContainerPause
@@ -2789,8 +2569,7 @@ paths:
         - Container
   "/containers/{id}/resize":
     post:
-      description: Resize the TTY for a container. You must restart the container for
-        the resize to take effect.
+      description: Resize the TTY for a container. You must restart the container for the resize to take effect.
       operationId: ContainerResize
       parameters:
         - description: ID or name of the container
@@ -2885,9 +2664,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Override the key sequence for detaching a container. Format is a
-            single character `[a-Z]` or `ctrl-<value>` where `<value>` is one
-            of: `a-z`, `@`, `^`, `[`, `,` or `_`."
+        - description: "Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`."
           in: query
           name: detachKeys
           schema:
@@ -2950,8 +2727,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Stream the output. If false, the stats will be output once and then
-            it will disconnect.
+        - description: Stream the output. If false, the stats will be output once and then it will disconnect.
           in: query
           name: stream
           schema:
@@ -3130,8 +2906,7 @@ paths:
         - Container
   "/containers/{id}/top":
     get:
-      description: On Unix systems, this is done by running the `ps` command. This
-        endpoint is not supported on Windows.
+      description: On Unix systems, this is done by running the `ps` command. This endpoint is not supported on Windows.
       operationId: ContainerTop
       parameters:
         - description: ID or name of the container
@@ -3182,8 +2957,7 @@ paths:
               schema:
                 properties:
                   Processes:
-                    description: Each process running in the container, where each is process is an
-                      array of values corresponding to the titles
+                    description: Each process running in the container, where each is process is an array of values corresponding to the titles
                     items:
                       items:
                         type: string
@@ -3199,8 +2973,7 @@ paths:
               schema:
                 properties:
                   Processes:
-                    description: Each process running in the container, where each is process is an
-                      array of values corresponding to the titles
+                    description: Each process running in the container, where each is process is an array of values corresponding to the titles
                     items:
                       items:
                         type: string
@@ -3279,8 +3052,7 @@ paths:
         - Container
   "/containers/{id}/update":
     post:
-      description: Change various configuration options of a container without having
-        to recreate it.
+      description: Change various configuration options of a container without having to recreate it.
       operationId: ContainerUpdate
       parameters:
         - description: ID or name of the container
@@ -3358,8 +3130,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Wait until a container state reaches the given condition, either
-            'not-running' (default), 'next-exit', or 'removed'.
+        - description: Wait until a container state reaches the given condition, either 'not-running' (default), 'next-exit', or 'removed'.
           in: query
           name: condition
           schema:
@@ -3497,36 +3268,26 @@ paths:
         - Distribution
   /events:
     get:
-      description: >
+      description: |
         Stream real-time events from the server.
-
 
         Various objects within Docker report events when something happens to them.
 
-
         Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, and `update`
-
 
         Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, and `untag`
 
-
         Volumes report these events: `create`, `mount`, `unmount`, and `destroy`
-
 
         Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, and `remove`
 
-
         The Docker daemon reports these events: `reload`
-
 
         Services report these events: `create`, `update`, and `remove`
 
-
         Nodes report these events: `create`, `update`, and `remove`
 
-
         Secrets report these events: `create`, `update`, and `remove`
-
 
         Configs report these events: `create`, `update`, and `remove`
       operationId: SystemEvents
@@ -3541,37 +3302,22 @@ paths:
           name: until
           schema:
             type: string
-        - description: >
-            A JSON encoded value of filters (a `map[string][]string`) to
-            process on the event list. Available filters:
-
+        - description: |
+            A JSON encoded value of filters (a `map[string][]string`) to process on the event list. Available filters:
 
             - `config=<string>` config name or ID
-
             - `container=<string>` container name or ID
-
             - `daemon=<string>` daemon name or ID
-
             - `event=<string>` event type
-
             - `image=<string>` image name or ID
-
             - `label=<string>` image or container label
-
             - `network=<string>` network name or ID
-
             - `node=<string>` node ID
-
             - `plugin`=<string> plugin name or ID
-
             - `scope`＝<string> local or swarm
-
             - `secret=<string>` secret name or ID
-
             - `service=<string>` service name or ID
-
             - `type=<string>` object to filter by, one of `container`, `image`, `volume`, `network`, `daemon`, `plugin`, `node`, `service`, `secret` or `config`
-
             - `volume=<string>` volume name
           in: query
           name: filters
@@ -3712,9 +3458,7 @@ paths:
         - Exec
   "/exec/{id}/resize":
     post:
-      description: Resize the TTY session used by an exec instance. This endpoint only
-        works if `tty` was specified as part of creating and starting the exec
-        instance.
+      description: Resize the TTY session used by an exec instance. This endpoint only works if `tty` was specified as part of creating and starting the exec instance.
       operationId: ExecResize
       parameters:
         - description: Exec instance ID
@@ -3750,9 +3494,7 @@ paths:
         - Exec
   "/exec/{id}/start":
     post:
-      description: Starts a previously set up exec instance. If detach is true, this
-        endpoint returns immediately after starting the command. Otherwise, it
-        sets up an interactive session with the command.
+      description: Starts a previously set up exec instance. If detach is true, this endpoint returns immediately after starting the command. Otherwise, it sets up an interactive session with the command.
       operationId: ExecStart
       parameters:
         - description: Exec instance ID
@@ -3799,35 +3541,27 @@ paths:
       description: Create an image by either pulling it from a registry or importing it.
       operationId: ImageCreate
       parameters:
-        - description: Name of the image to pull. The name may include a tag or digest.
-            This parameter may only be used when pulling an image. The pull is
-            cancelled if the HTTP connection is closed.
+        - description: Name of the image to pull. The name may include a tag or digest. This parameter may only be used when pulling an image. The pull is cancelled if the HTTP connection is closed.
           in: query
           name: fromImage
           schema:
             type: string
-        - description: Source to import. The value may be a URL from which the image can
-            be retrieved or `-` to read the image from the request body. This
-            parameter may only be used when importing an image.
+        - description: Source to import. The value may be a URL from which the image can be retrieved or `-` to read the image from the request body. This parameter may only be used when importing an image.
           in: query
           name: fromSrc
           schema:
             type: string
-        - description: Repository name given to an image when it is imported. The repo may
-            include a tag. This parameter may only be used when importing an
-            image.
+        - description: Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image.
           in: query
           name: repo
           schema:
             type: string
-        - description: Tag or digest. If empty when pulling an image, this causes all tags
-            for the given image to be pulled.
+        - description: Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled.
           in: query
           name: tag
           schema:
             type: string
-        - description: A base64-encoded auth configuration. [See the authentication
-            section for details.](#section/Authentication)
+        - description: A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication)
           in: header
           name: X-Registry-Auth
           schema:
@@ -3840,8 +3574,7 @@ paths:
           text/plain:
             schema:
               type: string
-        description: Image content if the value `-` has been specified in fromSrc query
-          parameter
+        description: Image content if the value `-` has been specified in fromSrc query parameter
       responses:
         "200":
           description: no error
@@ -3862,13 +3595,10 @@ paths:
         - Image
   /images/get:
     get:
-      description: >
-        Get a tarball containing all images and metadata for several image
-        repositories.
-
+      description: |
+        Get a tarball containing all images and metadata for several image repositories.
 
         For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the 'repositories' file for this image ID.
-
 
         For details on the format, see [the export image endpoint](#operation/ImageGet).
       operationId: ImageGetAll
@@ -3901,31 +3631,22 @@ paths:
         - Image
   /images/json:
     get:
-      description: Returns a list of images on the server. Note that it uses a
-        different, smaller representation of an image than inspecting a single
-        image.
+      description: Returns a list of images on the server. Note that it uses a different, smaller representation of an image than inspecting a single image.
       operationId: ImageList
       parameters:
-        - description: Show all images. Only images from a final layer (no children) are
-            shown by default.
+        - description: Show all images. Only images from a final layer (no children) are shown by default.
           in: query
           name: all
           schema:
             default: false
             type: boolean
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the images list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the images list. Available filters:
 
             - `before`=(`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`)
-
             - `dangling=true`
-
             - `label=key` or `label="key=value"` of an image label
-
             - `reference`=(`<image-name>[:<tag>]`)
-
             - `since`=(`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`)
           in: query
           name: filters
@@ -3987,9 +3708,8 @@ paths:
         - Image
   /images/load:
     post:
-      description: >
+      description: |
         Load a set of images and tags into a repository.
-
 
         For details on the format, see [the export image endpoint](#operation/ImageGet).
       operationId: ImageLoad
@@ -4023,16 +3743,13 @@ paths:
     post:
       operationId: ImagePrune
       parameters:
-        - description: >
-            Filters to process on the prune list, encoded as JSON (a
-            `map[string][]string`). Available filters:
-
+        - description: |
+            Filters to process on the prune list, encoded as JSON (a `map[string][]string`). Available filters:
 
             - `dangling=<boolean>` When set to `true` (or `1`), prune only
                unused *and* untagged images. When set to `false`
                (or `0`), all unused images are pruned.
             - `until=<string>` Prune images created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time.
-
             - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune images with (or without, in case `label!=...` is used) the specified labels.
           in: query
           name: filters
@@ -4080,15 +3797,11 @@ paths:
           name: limit
           schema:
             type: integer
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the images list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the images list. Available filters:
 
             - `is-automated=(true|false)`
-
             - `is-official=(true|false)`
-
             - `stars=<number>` Matches images that has at least 'number' stars.
           in: query
           name: filters
@@ -4157,8 +3870,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Remove the image even if it is being used by stopped containers or
-            has other tags
+        - description: Remove the image even if it is being used by stopped containers or has other tags
           in: query
           name: force
           schema:
@@ -4208,40 +3920,29 @@ paths:
         - Image
   "/images/{name}/get":
     get:
-      description: >
+      description: |
         Get a tarball containing all images and metadata for a repository.
-
 
         If `name` is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned. If `name` is an image ID, similarly only that image (and its parents) are returned, but with the exclusion of the `repositories` file in the tarball, as there were no image names referenced.
 
-
         ### Image tarball format
-
 
         An image tarball contains one directory per image layer (named using its long ID), each containing these files:
 
-
         - `VERSION`: currently `1.0` - the file format version
-
         - `json`: detailed layer information, similar to `docker inspect layer_id`
-
         - `layer.tar`: A tarfile containing the filesystem changes in this layer
-
 
         The `layer.tar` file contains `aufs` style `.wh..wh.aufs` files and directories for storing attribute changes and deletions.
 
-
         If the tarball defines a repository, the tarball should also include a `repositories` file at the root that contains a list of repository and tag names mapped to layer IDs.
 
-
         ```json
-
         {
           "hello-world": {
             "latest": "565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1"
           }
         }
-
         ```
       operationId: ImageGet
       parameters:
@@ -4288,9 +3989,7 @@ paths:
                   value:
                     - Comment: ""
                       Created: 1398108230
-                      CreatedBy: "/bin/sh -c #(nop) ADD
-                        file:eb15dbd63394e063b805a3c32ca7bf0266ef64676d5a6fab48\
-                        01f2e81e2a5148 in /"
+                      CreatedBy: "/bin/sh -c #(nop) ADD file:eb15dbd63394e063b805a3c32ca7bf0266ef64676d5a6fab4801f2e81e2a5148 in /"
                       Id: 3db9c44f45209632d6050b35958829c3a2aa256d81b9a7be45b362ff85c54710
                       Size: 182964289
                       Tags:
@@ -4298,10 +3997,7 @@ paths:
                         - ubuntu:10.04
                     - Comment: ""
                       Created: 1398108222
-                      CreatedBy: "/bin/sh -c #(nop) MAINTAINER Tianon Gravi <admwiggin@gmail.com> -
-                        mkimage-debootstrap.sh -i
-                        iproute,iputils-ping,ubuntu-minimal -t lucid.tar.xz
-                        lucid http://archive.ubuntu.com/ubuntu/"
+                      CreatedBy: "/bin/sh -c #(nop) MAINTAINER Tianon Gravi <admwiggin@gmail.com> - mkimage-debootstrap.sh -i iproute,iputils-ping,ubuntu-minimal -t lucid.tar.xz lucid http://archive.ubuntu.com/ubuntu/"
                       Id: 6cfa4d1f33fb861d4d114f43b25abd0ac737509268065cdfd69d544a59c85ab8
                       Size: 0
                       Tags: []
@@ -4416,8 +4112,7 @@ paths:
                       Cmd:
                         - /bin/sh
                         - -c
-                        - "#(nop) LABEL com.example.vendor=Acme
-                          com.example.license=GPL com.example.version=1.0"
+                        - "#(nop) LABEL com.example.vendor=Acme com.example.license=GPL com.example.version=1.0"
                       Domainname: ""
                       Env:
                         - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -4481,12 +4176,10 @@ paths:
         - Image
   "/images/{name}/push":
     post:
-      description: >
+      description: |
         Push an image to a registry.
 
-
         If you wish to push an image on to a private registry, that image must already have a tag which references the registry. For example, `registry.example.com/myimage:latest`.
-
 
         The push is cancelled if the HTTP connection is closed.
       operationId: ImagePush
@@ -4502,8 +4195,7 @@ paths:
           name: tag
           schema:
             type: string
-        - description: A base64-encoded auth configuration. [See the authentication
-            section for details.](#section/Authentication)
+        - description: A base64-encoded auth configuration. [See the authentication section for details.](#section/Authentication)
           in: header
           name: X-Registry-Auth
           required: true
@@ -4617,31 +4309,21 @@ paths:
         - System
   /networks:
     get:
-      description: >
-        Returns a list of networks. For details on the format, see [the
-        network inspect endpoint](#operation/NetworkInspect).
-
+      description: |
+        Returns a list of networks. For details on the format, see [the network inspect endpoint](#operation/NetworkInspect).
 
         Note that it uses a different, smaller representation of a network than inspecting a single network. For example,
-
         the list of containers attached to the network is not propagated in API versions 1.28 and up.
       operationId: NetworkList
       parameters:
-        - description: >
-            JSON encoded value of the filters (a `map[string][]string`) to
-            process on the networks list. Available filters:
-
+        - description: |
+            JSON encoded value of the filters (a `map[string][]string`) to process on the networks list. Available filters:
 
             - `driver=<driver-name>` Matches a network's driver.
-
             - `id=<network-id>` Matches all or part of a network ID.
-
             - `label=<key>` or `label=<key>=<value>` of a network label.
-
             - `name=<network-name>` Matches all or part of a network name.
-
             - `scope=["swarm"|"global"|"local"]` Filters networks by scope (`swarm`, `global`, or `local`).
-
             - `type=["custom"|"builtin"]` Filters networks by type. The `custom` keyword returns all user-defined networks.
           in: query
           name: filters
@@ -4753,17 +4435,10 @@ paths:
                   com.docker.network.driver.mtu: "1500"
               properties:
                 Attachable:
-                  description: Globally scoped network is manually attachable by regular
-                    containers from workers in swarm mode.
+                  description: Globally scoped network is manually attachable by regular containers from workers in swarm mode.
                   type: boolean
                 CheckDuplicate:
-                  description: Check for networks with duplicate names. Since Network is primarily
-                    keyed based on a random ID and not on the name, and network
-                    name is strictly a user-friendly alias to the network which
-                    is uniquely identified using ID, there is no guaranteed way
-                    to check for duplicates. CheckDuplicate is there to provide
-                    a best effort checking of any networks which has the same
-                    name but it is not guaranteed to catch all name collisions.
+                  description: Check for networks with duplicate names. Since Network is primarily keyed based on a random ID and not on the name, and network name is strictly a user-friendly alias to the network which is uniquely identified using ID, there is no guaranteed way to check for duplicates. CheckDuplicate is there to provide a best effort checking of any networks which has the same name but it is not guaranteed to catch all name collisions.
                   type: boolean
                 Driver:
                   default: bridge
@@ -4775,8 +4450,7 @@ paths:
                 IPAM:
                   $ref: "#/components/schemas/IPAM"
                 Ingress:
-                  description: Ingress network is the network which provides the routing-mesh in
-                    swarm mode.
+                  description: Ingress network is the network which provides the routing-mesh in swarm mode.
                   type: boolean
                 Internal:
                   description: Restrict external access to the network.
@@ -4840,15 +4514,11 @@ paths:
     post:
       operationId: NetworkPrune
       parameters:
-        - description: >
-            Filters to process on the prune list, encoded as JSON (a
-            `map[string][]string`).
-
+        - description: |
+            Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
 
             Available filters:
-
             - `until=<timestamp>` Prune networks created before this timestamp. The `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time.
-
             - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune networks with (or without, in case `label!=...` is used) the specified labels.
           in: query
           name: filters
@@ -5082,21 +4752,14 @@ paths:
     get:
       operationId: NodeList
       parameters:
-        - description: >
-            Filters to process on the nodes list, encoded as JSON (a
-            `map[string][]string`).
-
+        - description: |
+            Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
 
             Available filters:
-
             - `id=<node id>`
-
             - `label=<engine label>`
-
             - `membership=`(`accepted`|`pending`)`
-
             - `name=<node name>`
-
             - `role=`(`manager`|`worker`)`
           in: query
           name: filters
@@ -5245,8 +4908,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The version number of the node object being updated. This is
-            required to avoid conflicting writes.
+        - description: The version number of the node object being updated. This is required to avoid conflicting writes.
           in: query
           name: version
           required: true
@@ -5308,13 +4970,10 @@ paths:
       description: Returns information about installed plugins.
       operationId: PluginList
       parameters:
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the plugin list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the plugin list. Available filters:
 
             - `capability=<capability name>`
-
             - `enable=<true>|<false>`
           in: query
           name: filters
@@ -5342,8 +5001,7 @@ paths:
     post:
       operationId: PluginCreate
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: query
           name: name
           required: true
@@ -5375,8 +5033,7 @@ paths:
     get:
       operationId: GetPluginPrivileges
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: query
           name: remote
           required: true
@@ -5401,8 +5058,7 @@ paths:
                     Value:
                       - /dev/cpu_dma_latency
                 items:
-                  description: Describes a permission the user has to accept upon installing the
-                    plugin.
+                  description: Describes a permission the user has to accept upon installing the plugin.
                   properties:
                     Description:
                       type: string
@@ -5430,8 +5086,7 @@ paths:
                     Value:
                       - /dev/cpu_dma_latency
                 items:
-                  description: Describes a permission the user has to accept upon installing the
-                    plugin.
+                  description: Describes a permission the user has to accept upon installing the plugin.
                   properties:
                     Description:
                       type: string
@@ -5458,15 +5113,12 @@ paths:
         - Plugin
   /plugins/pull:
     post:
-      description: >
-        Pulls and installs a plugin. After the plugin is installed, it can
-        be enabled using the [`POST /plugins/{name}/enable`
-        endpoint](#operation/PostPluginsEnable).
+      description: |
+        Pulls and installs a plugin. After the plugin is installed, it can be enabled using the [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable).
       operationId: PluginPull
       parameters:
-        - description: >
+        - description: |
             Remote reference for plugin to install.
-
 
             The `:latest` tag is optional, and is used as the default if omitted.
           in: query
@@ -5474,9 +5126,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: >
+        - description: |
             Local name for the pulled plugin.
-
 
             The `:latest` tag is optional, and is used as the default if omitted.
           in: query
@@ -5484,9 +5135,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: A base64-encoded auth configuration to use when pulling a plugin
-            from a registry. [See the authentication section for
-            details.](#section/Authentication)
+        - description: A base64-encoded auth configuration to use when pulling a plugin from a registry. [See the authentication section for details.](#section/Authentication)
           in: header
           name: X-Registry-Auth
           schema:
@@ -5509,15 +5158,13 @@ paths:
     delete:
       operationId: PluginDelete
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Disable the plugin before removing. This may result in issues if
-            the plugin is in use by a container.
+        - description: Disable the plugin before removing. This may result in issues if the plugin is in use by a container.
           in: query
           name: force
           schema:
@@ -5558,8 +5205,7 @@ paths:
     post:
       operationId: PluginDisable
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
@@ -5593,8 +5239,7 @@ paths:
     post:
       operationId: PluginEnable
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
@@ -5634,8 +5279,7 @@ paths:
     get:
       operationId: PluginInspect
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
@@ -5678,8 +5322,7 @@ paths:
         Push a plugin to the registry.
       operationId: PluginPush
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
@@ -5713,8 +5356,7 @@ paths:
     post:
       operationId: PluginSet
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
@@ -5757,16 +5399,14 @@ paths:
     post:
       operationId: PluginUpgrade
       parameters:
-        - description: The name of the plugin. The `:latest` tag is optional, and is the
-            default if omitted.
+        - description: The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: >
+        - description: |
             Remote reference to upgrade to.
-
 
             The `:latest` tag is optional, and is used as the default if omitted.
           in: query
@@ -5774,9 +5414,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A base64-encoded auth configuration to use when pulling a plugin
-            from a registry. [See the authentication section for
-            details.](#section/Authentication)
+        - description: A base64-encoded auth configuration to use when pulling a plugin from a registry. [See the authentication section for details.](#section/Authentication)
           in: header
           name: X-Registry-Auth
           schema:
@@ -5811,17 +5449,12 @@ paths:
     get:
       operationId: SecretList
       parameters:
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the secrets list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the secrets list. Available filters:
 
             - `id=<secret id>`
-
             - `label=<key> or label=<key>=value`
-
             - `name=<secret name>`
-
             - `names=<secret name>`
           in: query
           name: filters
@@ -6027,8 +5660,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The version number of the secret object being updated. This is
-            required to avoid conflicting writes.
+        - description: The version number of the secret object being updated. This is required to avoid conflicting writes.
           in: query
           name: version
           required: true
@@ -6043,9 +5675,7 @@ paths:
           text/plain:
             schema:
               $ref: "#/components/schemas/SecretSpec"
-        description: The spec of the secret to update. Currently, only the Labels field
-          can be updated. All other fields must remain unchanged from the
-          [SecretInspect endpoint](#operation/SecretInspect) response values.
+        description: The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values.
       responses:
         "200":
           description: no error
@@ -6092,17 +5722,12 @@ paths:
     get:
       operationId: ServiceList
       parameters:
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the services list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the services list. Available filters:
 
             - `id=<service id>`
-
             - `label=<service label>`
-
             - `mode=["replicated"|"global"]`
-
             - `name=<service name>`
           in: query
           name: filters
@@ -6147,9 +5772,7 @@ paths:
     post:
       operationId: ServiceCreate
       parameters:
-        - description: A base64-encoded auth configuration for pulling from private
-            registries. [See the authentication section for
-            details.](#section/Authentication)
+        - description: A base64-encoded auth configuration for pulling from private registries. [See the authentication section for details.](#section/Authentication)
           in: header
           name: X-Registry-Auth
           schema:
@@ -6238,8 +5861,7 @@ paths:
               schema:
                 example:
                   ID: ak7w3gjqoa3kuz8xcpnyy0pvl
-                  Warning: "unable to pin image doesnotexist:latest to digest: image
-                    library/doesnotexist:latest not found"
+                  Warning: "unable to pin image doesnotexist:latest to digest: image library/doesnotexist:latest not found"
                 properties:
                   ID:
                     description: The ID of the created service.
@@ -6382,9 +6004,8 @@ paths:
         - Service
   "/services/{id}/logs":
     get:
-      description: >
+      description: |
         Get `stdout` and `stderr` logs from a service.
-
 
         **Note**: This endpoint works only for services with the `json-file` or `journald` logging drivers.
       operationId: ServiceLogs
@@ -6401,9 +6022,8 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: >
+        - description: |
             Return the logs as a stream.
-
 
             This will return a `101` HTTP response with a `Connection: upgrade` header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach).
           in: query
@@ -6435,8 +6055,7 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: Only return this number of log lines from the end of the logs.
-            Specify as an integer or `all` to output all log lines.
+        - description: Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
           in: query
           name: tail
           schema:
@@ -6507,31 +6126,24 @@ paths:
           required: true
           schema:
             type: string
-        - description: The version number of the service object being updated. This is
-            required to avoid conflicting writes.
+        - description: The version number of the service object being updated. This is required to avoid conflicting writes.
           in: query
           name: version
           required: true
           schema:
             type: integer
-        - description: If the X-Registry-Auth header is not specified, this parameter
-            indicates where to find registry authorization credentials. The
-            valid values are `spec` and `previous-spec`.
+        - description: If the X-Registry-Auth header is not specified, this parameter indicates where to find registry authorization credentials. The valid values are `spec` and `previous-spec`.
           in: query
           name: registryAuthFrom
           schema:
             default: spec
             type: string
-        - description: Set to this parameter to `previous` to cause a server-side rollback
-            to the previous service spec. The supplied spec will be ignored in
-            this case.
+        - description: Set to this parameter to `previous` to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case.
           in: query
           name: rollback
           schema:
             type: string
-        - description: A base64-encoded auth configuration for pulling from private
-            registries. [See the authentication section for
-            details.](#section/Authentication)
+        - description: A base64-encoded auth configuration for pulling from private registries. [See the authentication section for details.](#section/Authentication)
           in: header
           name: X-Registry-Auth
           schema:
@@ -6612,47 +6224,30 @@ paths:
         - Service
   /session:
     post:
-      description: >
-        Start a new interactive session with a server. Session allows
-        server to call back to the client for advanced capabilities.
-
+      description: |
+        Start a new interactive session with a server. Session allows server to call back to the client for advanced capabilities.
 
         > **Note**: This endpoint is *experimental* and only available if the daemon is started with experimental
-
         > features enabled. The specifications for this endpoint may still change in a future version of the API.
-
 
         ### Hijacking
 
-
         This endpoint hijacks the HTTP connection to HTTP2 transport that allows the client to expose gPRC services on that connection.
-
 
         For example, the client sends this request to upgrade the connection:
 
-
         ```
-
         POST /session HTTP/1.1
-
         Upgrade: h2c
-
         Connection: Upgrade
-
         ```
-
 
         The Docker daemon will respond with a `101 UPGRADED` response follow with the raw stream:
 
-
         ```
-
         HTTP/1.1 101 UPGRADED
-
         Connection: Upgrade
-
         Upgrade: h2c
-
         ```
       operationId: Session
       responses:
@@ -6736,40 +6331,23 @@ paths:
                   Raft: {}
               properties:
                 AdvertiseAddr:
-                  description: Externally reachable address advertised to other nodes. This can
-                    either be an address/port combination in the form
-                    `192.168.1.1:4567`, or an interface followed by a port
-                    number, like `eth0:4567`. If the port number is omitted, the
-                    port number from the listen address is used. If
-                    `AdvertiseAddr` is not specified, it will be automatically
-                    detected when possible.
+                  description: Externally reachable address advertised to other nodes. This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the port number from the listen address is used. If `AdvertiseAddr` is not specified, it will be automatically detected when possible.
                   type: string
                 DataPathAddr:
-                  description: >
-                    Address or interface to use for data path traffic (format:
-                    `<ip|interface>`), for example,  `192.168.1.1`,
-
+                  description: |
+                    Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`,
                     or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr`
-
                     is used.
 
-
                     The `DataPathAddr` specifies the address that global scope network drivers will publish towards other
-
                     nodes in order to reach the containers running on this node. Using this parameter it is possible to
-
                     separate the container data traffic from the management traffic of the cluster.
                   type: string
                 ForceNewCluster:
                   description: Force creation of a new swarm.
                   type: boolean
                 ListenAddr:
-                  description: Listen address used for inter-manager communication, as well as
-                    determining the networking interface used for the VXLAN
-                    Tunnel Endpoint (VTEP). This can either be an address/port
-                    combination in the form `192.168.1.1:4567`, or an interface
-                    followed by a port number, like `eth0:4567`. If the port
-                    number is omitted, the default swarm listening port is used.
+                  description: Listen address used for inter-manager communication, as well as determining the networking interface used for the VXLAN Tunnel Endpoint (VTEP). This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the default swarm listening port is used.
                   type: string
                 Spec:
                   $ref: "#/components/schemas/SwarmSpec"
@@ -6789,40 +6367,23 @@ paths:
                   Raft: {}
               properties:
                 AdvertiseAddr:
-                  description: Externally reachable address advertised to other nodes. This can
-                    either be an address/port combination in the form
-                    `192.168.1.1:4567`, or an interface followed by a port
-                    number, like `eth0:4567`. If the port number is omitted, the
-                    port number from the listen address is used. If
-                    `AdvertiseAddr` is not specified, it will be automatically
-                    detected when possible.
+                  description: Externally reachable address advertised to other nodes. This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the port number from the listen address is used. If `AdvertiseAddr` is not specified, it will be automatically detected when possible.
                   type: string
                 DataPathAddr:
-                  description: >
-                    Address or interface to use for data path traffic (format:
-                    `<ip|interface>`), for example,  `192.168.1.1`,
-
+                  description: |
+                    Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`,
                     or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr`
-
                     is used.
 
-
                     The `DataPathAddr` specifies the address that global scope network drivers will publish towards other
-
                     nodes in order to reach the containers running on this node. Using this parameter it is possible to
-
                     separate the container data traffic from the management traffic of the cluster.
                   type: string
                 ForceNewCluster:
                   description: Force creation of a new swarm.
                   type: boolean
                 ListenAddr:
-                  description: Listen address used for inter-manager communication, as well as
-                    determining the networking interface used for the VXLAN
-                    Tunnel Endpoint (VTEP). This can either be an address/port
-                    combination in the form `192.168.1.1:4567`, or an interface
-                    followed by a port number, like `eth0:4567`. If the port
-                    number is omitted, the default swarm listening port is used.
+                  description: Listen address used for inter-manager communication, as well as determining the networking interface used for the VXLAN Tunnel Endpoint (VTEP). This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the default swarm listening port is used.
                   type: string
                 Spec:
                   $ref: "#/components/schemas/SwarmSpec"
@@ -6887,38 +6448,23 @@ paths:
                   - node1:2377
               properties:
                 AdvertiseAddr:
-                  description: Externally reachable address advertised to other nodes. This can
-                    either be an address/port combination in the form
-                    `192.168.1.1:4567`, or an interface followed by a port
-                    number, like `eth0:4567`. If the port number is omitted, the
-                    port number from the listen address is used. If
-                    `AdvertiseAddr` is not specified, it will be automatically
-                    detected when possible.
+                  description: Externally reachable address advertised to other nodes. This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the port number from the listen address is used. If `AdvertiseAddr` is not specified, it will be automatically detected when possible.
                   type: string
                 DataPathAddr:
-                  description: >
-                    Address or interface to use for data path traffic (format:
-                    `<ip|interface>`), for example,  `192.168.1.1`,
-
+                  description: |
+                    Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`,
                     or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr`
-
                     is used.
 
-
                     The `DataPathAddr` specifies the address that global scope network drivers will publish towards other
-
                     nodes in order to reach the containers running on this node. Using this parameter it is possible to
-
                     separate the container data traffic from the management traffic of the cluster.
                   type: string
                 JoinToken:
                   description: Secret token for joining this swarm.
                   type: string
                 ListenAddr:
-                  description: Listen address used for inter-manager communication if the node
-                    gets promoted to manager, as well as determining the
-                    networking interface used for the VXLAN Tunnel Endpoint
-                    (VTEP).
+                  description: Listen address used for inter-manager communication if the node gets promoted to manager, as well as determining the networking interface used for the VXLAN Tunnel Endpoint (VTEP).
                   type: string
                 RemoteAddrs:
                   description: Addresses of manager nodes already participating in the swarm.
@@ -6934,38 +6480,23 @@ paths:
                   - node1:2377
               properties:
                 AdvertiseAddr:
-                  description: Externally reachable address advertised to other nodes. This can
-                    either be an address/port combination in the form
-                    `192.168.1.1:4567`, or an interface followed by a port
-                    number, like `eth0:4567`. If the port number is omitted, the
-                    port number from the listen address is used. If
-                    `AdvertiseAddr` is not specified, it will be automatically
-                    detected when possible.
+                  description: Externally reachable address advertised to other nodes. This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the port number from the listen address is used. If `AdvertiseAddr` is not specified, it will be automatically detected when possible.
                   type: string
                 DataPathAddr:
-                  description: >
-                    Address or interface to use for data path traffic (format:
-                    `<ip|interface>`), for example,  `192.168.1.1`,
-
+                  description: |
+                    Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`,
                     or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr`
-
                     is used.
 
-
                     The `DataPathAddr` specifies the address that global scope network drivers will publish towards other
-
                     nodes in order to reach the containers running on this node. Using this parameter it is possible to
-
                     separate the container data traffic from the management traffic of the cluster.
                   type: string
                 JoinToken:
                   description: Secret token for joining this swarm.
                   type: string
                 ListenAddr:
-                  description: Listen address used for inter-manager communication if the node
-                    gets promoted to manager, as well as determining the
-                    networking interface used for the VXLAN Tunnel Endpoint
-                    (VTEP).
+                  description: Listen address used for inter-manager communication if the node gets promoted to manager, as well as determining the networking interface used for the VXLAN Tunnel Endpoint (VTEP).
                   type: string
                 RemoteAddrs:
                   description: Addresses of manager nodes already participating in the swarm.
@@ -7009,8 +6540,7 @@ paths:
     post:
       operationId: SwarmLeave
       parameters:
-        - description: Force leave swarm, even if this is the last manager or that it will
-            break the cluster.
+        - description: Force leave swarm, even if this is the last manager or that it will break the cluster.
           in: query
           name: force
           schema:
@@ -7123,8 +6653,7 @@ paths:
     post:
       operationId: SwarmUpdate
       parameters:
-        - description: The version number of the swarm object being updated. This is
-            required to avoid conflicting writes.
+        - description: The version number of the swarm object being updated. This is required to avoid conflicting writes.
           in: query
           name: version
           required: true
@@ -7374,21 +6903,14 @@ paths:
     get:
       operationId: TaskList
       parameters:
-        - description: >
-            A JSON encoded value of the filters (a `map[string][]string`) to
-            process on the tasks list. Available filters:
-
+        - description: |
+            A JSON encoded value of the filters (a `map[string][]string`) to process on the tasks list. Available filters:
 
             - `desired-state=(running | shutdown | accepted)`
-
             - `id=<task id>`
-
             - `label=key` or `label="key=value"`
-
             - `name=<task name>`
-
             - `node=<node id or name>`
-
             - `service=<service name>`
           in: query
           name: filters
@@ -7569,9 +7091,8 @@ paths:
         - Task
   "/tasks/{id}/logs":
     get:
-      description: >
+      description: |
         Get `stdout` and `stderr` logs from a task.
-
 
         **Note**: This endpoint works only for services with the `json-file` or `journald` logging drivers.
       operationId: TaskLogs
@@ -7588,9 +7109,8 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: >
+        - description: |
             Return the logs as a stream.
-
 
             This will return a `101` HTTP response with a `Connection: upgrade` header, then hijack the HTTP connection to send raw output. For more information about hijacking and the stream format, [see the documentation for the attach endpoint](#operation/ContainerAttach).
           in: query
@@ -7622,8 +7142,7 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: Only return this number of log lines from the end of the logs.
-            Specify as an integer or `all` to output all log lines.
+        - description: Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
           in: query
           name: tail
           schema:
@@ -7684,8 +7203,7 @@ paths:
       summary: Get task logs
   /version:
     get:
-      description: Returns the version of Docker that is running and various
-        information about the system that Docker is running on.
+      description: Returns the version of Docker that is running and various information about the system that Docker is running on.
       operationId: SystemVersion
       responses:
         "200":
@@ -7741,18 +7259,15 @@ paths:
     get:
       operationId: VolumeList
       parameters:
-        - description: >
+        - description: |
             JSON encoded value of the filters (a `map[string][]string`) to
-
             process on the volumes list. Available filters:
-
 
             - `dangling=<boolean>` When set to `true` (or `1`), returns all
                volumes that are not in use by a container. When set to `false`
                (or `0`), only volumes that are in use by one or more
                containers are returned.
             - `driver=<volume-driver-name>` Matches volumes based on their driver.
-
             - `label=<key>` or `label=<key>:<value>` Matches volumes based on
                the presence of a `label` alone or a `label` and a value.
             - `name=<volume-name>` Matches all or part of a volume name.
@@ -7832,8 +7347,7 @@ paths:
                 DriverOpts:
                   additionalProperties:
                     type: string
-                  description: A mapping of driver options and values. These options are passed
-                    directly to the driver and are driver specific.
+                  description: A mapping of driver options and values. These options are passed directly to the driver and are driver specific.
                   type: object
                 Labels:
                   additionalProperties:
@@ -7867,13 +7381,10 @@ paths:
     post:
       operationId: VolumePrune
       parameters:
-        - description: >
-            Filters to process on the prune list, encoded as JSON (a
-            `map[string][]string`).
-
+        - description: |
+            Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
 
             Available filters:
-
             - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune volumes with (or without, in case `label!=...` is used) the specified labels.
           in: query
           name: filters
@@ -8006,8 +7517,7 @@ components:
                 Value:
                   - /dev/cpu_dma_latency
             items:
-              description: Describes a permission accepted by the user upon installing the
-                plugin.
+              description: Describes a permission accepted by the user upon installing the plugin.
               properties:
                 Description:
                   type: string
@@ -8035,8 +7545,7 @@ components:
                 Value:
                   - /dev/cpu_dma_latency
             items:
-              description: Describes a permission accepted by the user upon installing the
-                plugin.
+              description: Describes a permission accepted by the user upon installing the plugin.
               properties:
                 Description:
                   type: string
@@ -8098,9 +7607,8 @@ components:
       nullable: true
       properties:
         CreatedAt:
-          description: >
+          description: |
             Date and time at which the swarm was initialised in
-
             [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
           example: 2016-08-18T10:44:24.496525531Z
           format: dateTime
@@ -8110,8 +7618,7 @@ components:
           example: abajmipo7b4xz5ip2nrla6b11
           type: string
         RootRotationInProgress:
-          description: Whether there is currently a root CA rotation in progress for the
-            swarm
+          description: Whether there is currently a root CA rotation in progress for the swarm
           example: false
           type: boolean
         Spec:
@@ -8119,9 +7626,8 @@ components:
         TLSInfo:
           $ref: "#/components/schemas/TLSInfo"
         UpdatedAt:
-          description: >
+          description: |
             Date and time at which the swarm was last updated in
-
             [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
           example: 2017-08-09T07:09:37.632105588Z
           format: dateTime
@@ -8163,10 +7669,8 @@ components:
     ConfigSpec:
       properties:
         Data:
-          description: >
-            Base64-url-safe-encoded ([RFC
-            4648](https://tools.ietf.org/html/rfc4648#section-3.2))
-
+          description: |
+            Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-3.2))
             config data.
           type: string
         Labels:
@@ -8208,10 +7712,8 @@ components:
           description: The domain name to use for the container.
           type: string
         Entrypoint:
-          description: >
-            The entry point for the container as a string or an array of
-            strings.
-
+          description: |
+            The entry point for the container as a string or an array of strings.
 
             If the array consists of exactly one empty string (`[""]`) then the entry point is reset to system default (i.e., the entry point used by docker when there is no `ENTRYPOINT` instruction in the `Dockerfile`).
           items:
@@ -8221,10 +7723,8 @@ components:
               type: array
             - type: string
         Env:
-          description: >
-            A list of environment variables to set inside the container in the
-            form `["VAR=value", ...]`. A variable without `=` is removed from
-            the environment, rather than to have an empty value.
+          description: |
+            A list of environment variables to set inside the container in the form `["VAR=value", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value.
           items:
             type: string
           type: array
@@ -8286,15 +7786,13 @@ components:
           type: integer
         Tty:
           default: false
-          description: Attach standard streams to a TTY, including `stdin` if it is not
-            closed.
+          description: Attach standard streams to a TTY, including `stdin` if it is not closed.
           type: boolean
         User:
           description: The user that commands are run as inside the container.
           type: string
         Volumes:
-          description: An object mapping mount point paths inside the container to empty
-            objects.
+          description: An object mapping mount point paths inside the container to empty objects.
           properties:
             additionalProperties:
               default: {}
@@ -8363,8 +7861,7 @@ components:
             format: int64
             type: integer
           SizeRw:
-            description: The size of files that have been created or changed by this
-              container
+            description: The size of files that have been created or changed by this container
             format: int64
             type: integer
           State:
@@ -8537,16 +8034,13 @@ components:
       properties:
         Mode:
           default: vip
-          description: The mode of resolution to use for internal load balancing between
-            tasks.
+          description: The mode of resolution to use for internal load balancing between tasks.
           enum:
             - vip
             - dnsrr
           type: string
         Ports:
-          description: List of exposed ports that this service is accessible on from the
-            outside. Ports can only be provided if `vip` resolution mode is
-            used.
+          description: List of exposed ports that this service is accessible on from the outside. Ports can only be provided if `vip` resolution mode is used.
           items:
             $ref: "#/components/schemas/EndpointPortConfig"
           type: array
@@ -8630,8 +8124,7 @@ components:
         - message
       type: object
     GenericResources:
-      description: User-defined resources can be either Integer resources (e.g,
-        `SSD=3`) or String resources (e.g, `GPU=UUID1`)
+      description: User-defined resources can be either Integer resources (e.g, `SSD=3`) or String resources (e.g, `GPU=UUID1`)
       example:
         - DiscreteResourceSpec:
             Kind: SSD
@@ -8680,17 +8173,13 @@ components:
       description: A test to perform to check that the container is healthy.
       properties:
         Interval:
-          description: The time to wait between checks in nanoseconds. It should be 0 or
-            at least 1000000 (1 ms). 0 means inherit.
+          description: The time to wait between checks in nanoseconds. It should be 0 or at least 1000000 (1 ms). 0 means inherit.
           type: integer
         Retries:
-          description: The number of consecutive failures needed to consider a container
-            as unhealthy. 0 means inherit.
+          description: The number of consecutive failures needed to consider a container as unhealthy. 0 means inherit.
           type: integer
         StartPeriod:
-          description: Start period for the container to initialize before starting
-            health-retries countdown in nanoseconds. It should be 0 or at least
-            1000000 (1 ms). 0 means inherit.
+          description: Start period for the container to initialize before starting health-retries countdown in nanoseconds. It should be 0 or at least 1000000 (1 ms). 0 means inherit.
           type: integer
         Test:
           description: |
@@ -8704,8 +8193,7 @@ components:
             type: string
           type: array
         Timeout:
-          description: The time to wait before considering the check to have hung. It
-            should be 0 or at least 1000000 (1 ms). 0 means inherit.
+          description: The time to wait before considering the check to have hung. It should be 0 or at least 1000000 (1 ms). 0 means inherit.
           type: integer
       type: object
     HostConfig:
@@ -8713,21 +8201,15 @@ components:
         - $ref: "#/components/schemas/Resources"
         - properties:
             AutoRemove:
-              description: Automatically remove the container when the container's process
-                exits. This has no effect if `RestartPolicy` is set.
+              description: Automatically remove the container when the container's process exits. This has no effect if `RestartPolicy` is set.
               type: boolean
             Binds:
-              description: >
-                A list of volume bindings for this container. Each volume binding
-                is a string in one of these forms:
-
+              description: |
+                A list of volume bindings for this container. Each volume binding is a string in one of these forms:
 
                 - `host-src:container-dest` to bind-mount a host path into the container. Both `host-src`, and `container-dest` must be an _absolute_ path.
-
                 - `host-src:container-dest:ro` to make the bind mount read-only inside the container. Both `host-src`, and `container-dest` must be an _absolute_ path.
-
                 - `volume-name:container-dest` to bind-mount a volume managed by a volume driver into the container. `container-dest` must be an _absolute_ path.
-
                 - `volume-name:container-dest:ro` to mount the volume read-only inside the container.  `container-dest` must be an _absolute_ path.
               items:
                 type: string
@@ -8772,9 +8254,8 @@ components:
                 type: string
               type: array
             ExtraHosts:
-              description: >
-                A list of hostnames/IP mappings to add to the container's
-                `/etc/hosts` file. Specified in the form `["hostname:IP"]`.
+              description: |
+                A list of hostnames/IP mappings to add to the container's `/etc/hosts` file. Specified in the form `["hostname:IP"]`.
               items:
                 type: string
               type: array
@@ -8784,23 +8265,16 @@ components:
                 type: string
               type: array
             IpcMode:
-              description: >
+              description: |
                 IPC sharing mode for the container. Possible values are:
 
-
                 - `"none"`: own private IPC namespace, with /dev/shm not mounted
-
                 - `"private"`: own private IPC namespace
-
                 - `"shareable"`: own private IPC namespace, with a possibility to share it with other containers
-
                 - `"container:<name|id>"`: join another (shareable) container's IPC namespace
-
                 - `"host"`: use the host system's IPC namespace
 
-
                 If not specified, daemon default is used, which can either be `"private"`
-
                 or `"shareable"`, depending on daemon version and configuration.
               type: string
             Isolation:
@@ -8811,8 +8285,7 @@ components:
                 - hyperv
               type: string
             Links:
-              description: A list of links for the container in the form
-                `container_name:alias`.
+              description: A list of links for the container in the form `container_name:alias`.
               items:
                 type: string
               type: array
@@ -8842,24 +8315,17 @@ components:
                 $ref: "#/components/schemas/Mount"
               type: array
             NetworkMode:
-              description: "Network mode to use for this container. Supported standard values
-                are: `bridge`, `host`, `none`, and `container:<name|id>`. Any
-                other value is taken as a custom network's name to which this
-                container should connect to."
+              description: "Network mode to use for this container. Supported standard values are: `bridge`, `host`, `none`, and `container:<name|id>`. Any other value is taken as a custom network's name to which this container should connect to."
               type: string
             OomScoreAdj:
-              description: An integer value containing the score given to the container in
-                order to tune OOM killer preferences.
+              description: An integer value containing the score given to the container in order to tune OOM killer preferences.
               example: 500
               type: integer
             PidMode:
-              description: >
-                Set the PID (Process) Namespace mode for the container. It can be
-                either:
-
+              description: |
+                Set the PID (Process) Namespace mode for the container. It can be either:
 
                 - `"container:<name|id>"`: joins another container's PID namespace
-
                 - `"host"`: use the host's PID namespace inside the container
               type: string
             PortBindings:
@@ -8872,15 +8338,13 @@ components:
                     description: The host port number, as a string
                     type: string
                 type: object
-              description: A map of exposed container ports and the host port they should map
-                to.
+              description: A map of exposed container ports and the host port they should map to.
               type: object
             Privileged:
               description: Gives the container full access to the host.
               type: boolean
             PublishAllPorts:
-              description: Allocates a random host port for all of a container's exposed
-                ports.
+              description: Allocates a random host port for all of a container's exposed ports.
               type: boolean
             ReadonlyRootfs:
               description: Mount the container's root filesystem as read only.
@@ -8891,8 +8355,7 @@ components:
               description: Runtime to use with this container.
               type: string
             SecurityOpt:
-              description: A list of string values to customize labels for MLS systems, such
-                as SELinux.
+              description: A list of string values to customize labels for MLS systems, such as SELinux.
               items:
                 type: string
               type: array
@@ -8903,38 +8366,32 @@ components:
             StorageOpt:
               additionalProperties:
                 type: string
-              description: >
-                Storage driver options for this container, in the form `{"size":
-                "120G"}`.
+              description: |
+                Storage driver options for this container, in the form `{"size": "120G"}`.
               type: object
             Sysctls:
               additionalProperties:
                 type: string
-              description: >
-                A list of kernel parameters (sysctls) to set in the container. For
-                example: `{"net.ipv4.ip_forward": "1"}`
+              description: |
+                A list of kernel parameters (sysctls) to set in the container. For example: `{"net.ipv4.ip_forward": "1"}`
               type: object
             Tmpfs:
               additionalProperties:
                 type: string
-              description: >
-                A map of container directories which should be replaced by tmpfs
-                mounts, and their corresponding mount options. For example: `{
-                "/run": "rw,noexec,nosuid,size=65536k" }`.
+              description: |
+                A map of container directories which should be replaced by tmpfs mounts, and their corresponding mount options. For example: `{ "/run": "rw,noexec,nosuid,size=65536k" }`.
               type: object
             UTSMode:
               description: UTS namespace to use for the container.
               type: string
             UsernsMode:
-              description: Sets the usernamespace mode for the container when usernamespace
-                remapping option is enabled.
+              description: Sets the usernamespace mode for the container when usernamespace remapping option is enabled.
               type: string
             VolumeDriver:
               description: Driver that this container uses to mount volumes.
               type: string
             VolumesFrom:
-              description: A list of volumes to inherit from another container, specified in
-                the form `<container name>[:<ro|rw>]`.
+              description: A list of volumes to inherit from another container, specified in the form `<container name>[:<ro|rw>]`.
               items:
                 type: string
               type: array
@@ -8943,9 +8400,7 @@ components:
     IPAM:
       properties:
         Config:
-          description: 'List of IPAM configuration options, specified as a map:
-            `{"Subnet": <CIDR>, "IPRange": <CIDR>, "Gateway": <IP address>,
-            "AuxAddress": <device_name:IP address>}`'
+          description: 'List of IPAM configuration options, specified as a map: `{"Subnet": <CIDR>, "IPRange": <CIDR>, "Gateway": <IP address>, "AuxAddress": <device_name:IP address>}`'
           items:
             additionalProperties:
               type: string
@@ -9140,41 +8595,30 @@ components:
           example: docker.io
           type: string
         Official:
-          description: >
-            Indicates whether this is an official registry (i.e., Docker Hub /
-            docker.io)
+          description: |
+            Indicates whether this is an official registry (i.e., Docker Hub / docker.io)
           example: true
           type: boolean
         Secure:
-          description: >
+          description: |
             Indicates if the the registry is part of the list of insecure
-
             registries.
 
-
             If `false`, the registry is insecure. Insecure registries accept
-
             un-encrypted (HTTP) and/or untrusted (HTTPS with certificates from
-
             unknown CAs) communication.
 
-
             > **Warning**: Insecure registries can be useful when running a local
-
             > registry. However, because its use creates security vulnerabilities
-
             > it should ONLY be enabled for testing purposes. For increased
-
             > security, users should add their CA to their system's list of
-
             > trusted CAs instead of enabling this option.
           example: true
           type: boolean
       type: object
     JoinTokens:
-      description: >
-        JoinTokens contains the tokens workers and managers need to join
-        the swarm.
+      description: |
+        JoinTokens contains the tokens workers and managers need to join the swarm.
       properties:
         Manager:
           description: |
@@ -9200,12 +8644,10 @@ components:
       example: active
       type: string
     ManagerStatus:
-      description: >
+      description: |
         ManagerStatus represents the status of a manager.
 
-
         It provides the current status of a node's manager component, if the node
-
         is a manager.
       nullable: true
       properties:
@@ -9227,8 +8669,7 @@ components:
           description: Optional configuration for the `bind` type.
           properties:
             Propagation:
-              description: A propagation mode with the value `[r]private`, `[r]shared`, or
-                `[r]slave`.
+              description: A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
               enum:
                 - private
                 - rprivate
@@ -9238,8 +8679,7 @@ components:
                 - rslave
           type: object
         Consistency:
-          description: "The consistency requirement for the mount: `default`,
-            `consistent`, `cached`, or `delegated`."
+          description: "The consistency requirement for the mount: `default`, `consistent`, `cached`, or `delegated`."
           type: string
         ReadOnly:
           description: Whether the mount should be read-only.
@@ -9262,14 +8702,11 @@ components:
               type: integer
           type: object
         Type:
-          description: >
+          description: |
             The mount type. Available types:
 
-
             - `bind` Mounts a file or directory from the host into the container. Must exist prior to creating the container.
-
             - `volume` Creates a volume with the given name and options (or uses a pre-existing volume with the same name and options). These are **not** removed when the container is removed.
-
             - `tmpfs` Create a tmpfs with the given options. The mount source cannot be specified for tmpfs.
           enum:
             - bind
@@ -9413,78 +8850,54 @@ components:
           example: docker0
           type: string
         EndpointID:
-          description: >
+          description: |
             EndpointID uniquely represents a service endpoint in a Sandbox.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: b88f5b905aabf2893f3cbc4ee42d1ea7980bbc0a92e2c8922b1e1795298afb0b
           type: string
         Gateway:
-          description: >
+          description: |
             Gateway address for the default "bridge" network.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 172.17.0.1
           type: string
         GlobalIPv6Address:
-          description: >
+          description: |
             Global IPv6 address for the default "bridge" network.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 2001:db8::5689
           type: string
         GlobalIPv6PrefixLen:
-          description: >
+          description: |
             Mask length of the global IPv6 address.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 64
           type: integer
@@ -9494,59 +8907,41 @@ components:
           example: false
           type: boolean
         IPAddress:
-          description: >
+          description: |
             IPv4 address for the default "bridge" network.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 172.17.0.4
           type: string
         IPPrefixLen:
-          description: >
+          description: |
             Mask length of the IPv4 address.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 16
           type: integer
         IPv6Gateway:
-          description: >
+          description: |
             IPv6 gateway address for this network.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 2001:db8:2::100
           type: string
@@ -9559,21 +8954,15 @@ components:
           example: "64"
           type: integer
         MacAddress:
-          description: >
+          description: |
             MAC address for the container on the default "bridge" network.
-
 
             <p><br /></p>
 
-
             > **Deprecated**: This field is only propagated when attached to the
-
             > default "bridge" network. Use the information from the "bridge"
-
             > network inside the `Networks` map instead, which contains the same
-
             > information. This field was deprecated in Docker 1.9 and is scheduled
-
             > to be removed in Docker 17.12.0
           example: 02:42:ac:11:00:04
           type: string
@@ -9609,9 +8998,8 @@ components:
     Node:
       properties:
         CreatedAt:
-          description: >
+          description: |
             Date and time at which the node was added to the swarm in
-
             [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
           example: 2016-08-18T10:44:24.496525531Z
           format: dateTime
@@ -9628,9 +9016,8 @@ components:
         Status:
           $ref: "#/components/schemas/NodeStatus"
         UpdatedAt:
-          description: >
+          description: |
             Date and time at which the node was last updated in
-
             [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
           example: 2017-08-09T07:09:37.632105588Z
           format: dateTime
@@ -9639,10 +9026,8 @@ components:
           $ref: "#/components/schemas/ObjectVersion"
       type: object
     NodeDescription:
-      description: >
-        NodeDescription encapsulates the properties of the Node as reported
-        by the
-
+      description: |
+        NodeDescription encapsulates the properties of the Node as reported by the
         agent.
       properties:
         Engine:
@@ -9716,20 +9101,13 @@ components:
           $ref: "#/components/schemas/NodeState"
       type: object
     ObjectVersion:
-      description: >
-        The version number of the object such as node, service, etc. This
-        is needed to avoid conflicting writes.
-
+      description: |
+        The version number of the object such as node, service, etc. This is needed to avoid conflicting writes.
         The client must send the version number along with the modified specification when updating these objects.
-
         This approach ensures safe concurrency and determinism in that the change on the object
-
         may not be applied if the version number has changed from the last read. In other words,
-
         if two update requests specify the same base version, only one of the requests can succeed.
-
         As a result, two separate update requests that happen at the same time will not
-
         unintentionally overwrite each other.
       properties:
         Index:
@@ -9758,9 +9136,8 @@ components:
           example: x86_64
           type: string
         OS:
-          description: >
-            OS represents the Operating System (for example, `linux` or
-            `windows`).
+          description: |
+            OS represents the Operating System (for example, `linux` or `windows`).
           example: linux
           type: string
       type: object
@@ -9938,8 +9315,7 @@ components:
             - Args
           type: object
         Enabled:
-          description: True if the plugin is running. False if the plugin is not running,
-            only installed.
+          description: True if the plugin is running. False if the plugin is not running, only installed.
           example: true
           nullable: false
           type: boolean
@@ -10193,17 +9569,12 @@ components:
         items:
           $ref: "#/components/schemas/PortBinding"
         type: array
-      description: >
-        PortMap describes the mapping of container ports to host ports,
-        using the
-
+      description: |
+        PortMap describes the mapping of container ports to host ports, using the
         container's port-number and protocol as key in the format `<port>/<protocol>`,
-
         for example, `80/udp`.
 
-
         If a container's port is mapped for both `tcp` and `udp`, two separate
-
         entries are added to the mapping table.
       example:
         2377/tcp: null
@@ -10269,44 +9640,27 @@ components:
       nullable: true
       properties:
         AllowNondistributableArtifactsCIDRs:
-          description: >
-            List of IP ranges to which nondistributable artifacts can be
-            pushed,
-
+          description: |
+            List of IP ranges to which nondistributable artifacts can be pushed,
             using the CIDR syntax [RFC 4632](https://tools.ietf.org/html/4632).
 
-
             Some images (for example, Windows base images) contain artifacts
-
             whose distribution is restricted by license. When these images are
-
             pushed to a registry, restricted artifacts are not included.
 
-
             This configuration override this behavior, and enables the daemon to
-
             push nondistributable artifacts to all registries whose resolved IP
-
             address is within the subnet described by the CIDR syntax.
 
-
             This option is useful when pushing images containing
-
             nondistributable artifacts to a registry on an air-gapped network so
-
             hosts on that network can pull the images without connecting to
-
             another server.
 
-
             > **Warning**: Nondistributable artifacts typically have restrictions
-
             > on how and where they can be distributed and shared. Only use this
-
             > feature to push artifacts to private registries and ensure that you
-
             > are in compliance with any terms that cover redistributing
-
             > nondistributable artifacts.
           example:
             - ::1/128
@@ -10315,42 +9669,26 @@ components:
             type: string
           type: array
         AllowNondistributableArtifactsHostnames:
-          description: >
-            List of registry hostnames to which nondistributable artifacts can
-            be
-
+          description: |
+            List of registry hostnames to which nondistributable artifacts can be
             pushed, using the format `<hostname>[:<port>]` or `<IP address>[:<port>]`.
 
-
             Some images (for example, Windows base images) contain artifacts
-
             whose distribution is restricted by license. When these images are
-
             pushed to a registry, restricted artifacts are not included.
 
-
             This configuration override this behavior for the specified
-
             registries.
 
-
             This option is useful when pushing images containing
-
             nondistributable artifacts to a registry on an air-gapped network so
-
             hosts on that network can pull the images without connecting to
-
             another server.
 
-
             > **Warning**: Nondistributable artifacts typically have restrictions
-
             > on how and where they can be distributed and shared. Only use this
-
             > feature to push artifacts to private registries and ensure that you
-
             > are in compliance with any terms that cover redistributing
-
             > nondistributable artifacts.
           example:
             - registry.internal.corp.example.com:3000
@@ -10385,47 +9723,29 @@ components:
               Secure: false
           type: object
         InsecureRegistryCIDRs:
-          description: >
+          description: |
             List of IP ranges of insecure registries, using the CIDR syntax
-
             ([RFC 4632](https://tools.ietf.org/html/4632)). Insecure registries
-
             accept un-encrypted (HTTP) and/or untrusted (HTTPS with certificates
-
             from unknown CAs) communication.
 
-
             By default, local registries (`127.0.0.0/8`) are configured as
-
             insecure. All other registries are secure. Communicating with an
-
             insecure registry is not possible if the daemon assumes that registry
-
             is secure.
 
-
             This configuration override this behavior, insecure communication with
-
             registries whose resolved IP address is within the subnet described by
-
             the CIDR syntax.
 
-
             Registries can also be marked insecure by hostname. Those registries
-
             are listed under `IndexConfigs` and have their `Secure` field set to
-
             `false`.
 
-
             > **Warning**: Using this option can be useful when running a local
-
             > registry, but introduces security vulnerabilities. This option
-
             > should therefore ONLY be used for testing purposes. For increased
-
             > security, users should add their CA to their system's list of trusted
-
             > CAs instead of enabling this option.
           example:
             - ::1/128
@@ -10445,8 +9765,7 @@ components:
           type: array
       type: object
     ResourceObject:
-      description: An object describing the resources which can be advertised by a
-        node and requested by a task
+      description: An object describing the resources which can be advertised by a node and requested by a task
       properties:
         GenericResources:
           $ref: "#/components/schemas/GenericResources"
@@ -10463,30 +9782,26 @@ components:
       description: A container's resources (cgroups config, ulimits, etc)
       properties:
         BlkioDeviceReadBps:
-          description: >
-            Limit read rate (bytes per second) from a device, in the form
-            `[{"Path": "device_path", "Rate": rate}]`.
+          description: |
+            Limit read rate (bytes per second) from a device, in the form `[{"Path": "device_path", "Rate": rate}]`.
           items:
             $ref: "#/components/schemas/ThrottleDevice"
           type: array
         BlkioDeviceReadIOps:
-          description: >
-            Limit read rate (IO per second) from a device, in the form
-            `[{"Path": "device_path", "Rate": rate}]`.
+          description: |
+            Limit read rate (IO per second) from a device, in the form `[{"Path": "device_path", "Rate": rate}]`.
           items:
             $ref: "#/components/schemas/ThrottleDevice"
           type: array
         BlkioDeviceWriteBps:
-          description: >
-            Limit write rate (bytes per second) to a device, in the form
-            `[{"Path": "device_path", "Rate": rate}]`.
+          description: |
+            Limit write rate (bytes per second) to a device, in the form `[{"Path": "device_path", "Rate": rate}]`.
           items:
             $ref: "#/components/schemas/ThrottleDevice"
           type: array
         BlkioDeviceWriteIOps:
-          description: >
-            Limit write rate (IO per second) to a device, in the form
-            `[{"Path": "device_path", "Rate": rate}]`.
+          description: |
+            Limit write rate (IO per second) to a device, in the form `[{"Path": "device_path", "Rate": rate}]`.
           items:
             $ref: "#/components/schemas/ThrottleDevice"
           type: array
@@ -10496,9 +9811,8 @@ components:
           minimum: 0
           type: integer
         BlkioWeightDevice:
-          description: >
-            Block IO weight (relative device weight) in the form `[{"Path":
-            "device_path", "Weight": weight}]`.
+          description: |
+            Block IO weight (relative device weight) in the form `[{"Path": "device_path", "Weight": weight}]`.
           items:
             properties:
               Path:
@@ -10509,23 +9823,18 @@ components:
             type: object
           type: array
         CgroupParent:
-          description: Path to `cgroups` under which the container's `cgroup` is created.
-            If the path is not absolute, the path is considered to be relative
-            to the `cgroups` path of the init process. Cgroups are created if
-            they do not already exist.
+          description: Path to `cgroups` under which the container's `cgroup` is created. If the path is not absolute, the path is considered to be relative to the `cgroups` path of the init process. Cgroups are created if they do not already exist.
           type: string
         CpuCount:
-          description: >
+          description: |
             The number of usable CPUs (Windows only).
-
 
             On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last.
           format: int64
           type: integer
         CpuPercent:
-          description: >
+          description: |
             The usable percentage of the available CPUs (Windows only).
-
 
             On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last.
           format: int64
@@ -10539,26 +9848,22 @@ components:
           format: int64
           type: integer
         CpuRealtimePeriod:
-          description: The length of a CPU real-time period in microseconds. Set to 0 to
-            allocate no time allocated to real-time tasks.
+          description: The length of a CPU real-time period in microseconds. Set to 0 to allocate no time allocated to real-time tasks.
           format: int64
           type: integer
         CpuRealtimeRuntime:
-          description: The length of a CPU real-time runtime in microseconds. Set to 0 to
-            allocate no time allocated to real-time tasks.
+          description: The length of a CPU real-time runtime in microseconds. Set to 0 to allocate no time allocated to real-time tasks.
           format: int64
           type: integer
         CpuShares:
-          description: An integer value representing this container's relative CPU weight
-            versus other containers.
+          description: An integer value representing this container's relative CPU weight versus other containers.
           type: integer
         CpusetCpus:
           description: CPUs in which to allow execution (e.g., `0-3`, `0,1`)
           example: 0-3
           type: string
         CpusetMems:
-          description: Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only
-            effective on NUMA systems.
+          description: Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.
           type: string
         DeviceCgroupRules:
           description: a list of cgroup rules to apply to the container
@@ -10576,8 +9881,7 @@ components:
           format: int64
           type: integer
         IOMaximumBandwidth:
-          description: Maximum IO in bytes per second for the container system drive
-            (Windows only)
+          description: Maximum IO in bytes per second for the container system drive (Windows only)
           format: int64
           type: integer
         IOMaximumIOps:
@@ -10597,13 +9901,11 @@ components:
           format: int64
           type: integer
         MemorySwap:
-          description: Total memory limit (memory + swap). Set as `-1` to enable unlimited
-            swap.
+          description: Total memory limit (memory + swap). Set as `-1` to enable unlimited swap.
           format: int64
           type: integer
         MemorySwappiness:
-          description: Tune a container's memory swappiness behavior. Accepts an integer
-            between 0 and 100.
+          description: Tune a container's memory swappiness behavior. Accepts an integer between 0 and 100.
           format: int64
           maximum: 100
           minimum: 0
@@ -10620,9 +9922,8 @@ components:
           format: int64
           type: integer
         Ulimits:
-          description: >
-            A list of resource limits to set in the container. For example:
-            `{"Name": "nofile", "Soft": 1024, "Hard": 2048}`"
+          description: |
+            A list of resource limits to set in the container. For example: `{"Name": "nofile", "Soft": 1024, "Hard": 2048}`"
           items:
             properties:
               Hard:
@@ -10638,25 +9939,19 @@ components:
           type: array
       type: object
     RestartPolicy:
-      description: >
-        The behavior to apply when the container exits. The default is not
-        to restart.
-
+      description: |
+        The behavior to apply when the container exits. The default is not to restart.
 
         An ever increasing delay (double the previous delay, starting at 100ms) is added before each restart to prevent flooding the server.
       properties:
         MaximumRetryCount:
-          description: If `on-failure` is used, the number of times to retry before giving
-            up
+          description: If `on-failure` is used, the number of times to retry before giving up
           type: integer
         Name:
-          description: >
+          description: |
             - Empty string means not to restart
-
             - `always` Always restart
-
             - `unless-stopped` Restart always except when the user has manually stopped the container
-
             - `on-failure` Restart only when the container exit code is non-zero
           enum:
             - ""
@@ -10666,26 +9961,19 @@ components:
           type: string
       type: object
     Runtime:
-      description: >
-        Runtime describes an [OCI
-        compliant](https://github.com/opencontainers/runtime-spec)
-
+      description: |
+        Runtime describes an [OCI compliant](https://github.com/opencontainers/runtime-spec)
         runtime.
 
-
         The runtime is invoked by the daemon via the `containerd` daemon. OCI
-
         runtimes act as an interface to the Linux kernel namespaces, cgroups,
-
         and SELinux.
       properties:
         path:
-          description: >
+          description: |
             Name and, optional, path, of the OCI executable binary.
 
-
             If the path is omitted, the daemon searches the host's `$PATH` for the
-
             binary and uses the first result.
           example: /usr/local/bin/my-oci-runtime
           type: string
@@ -10721,15 +10009,11 @@ components:
     SecretSpec:
       properties:
         Data:
-          description: >
-            Base64-url-safe-encoded ([RFC
-            4648](https://tools.ietf.org/html/rfc4648#section-3.2))
-
+          description: |
+            Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-3.2))
             data to store as secret.
 
-
             This field is only used to _create_ a secret, and is not returned by
-
             other endpoints.
           example: ""
           type: string
@@ -10899,34 +10183,27 @@ components:
               format: int64
               type: integer
             FailureAction:
-              description: Action to take if an rolled back task fails to run, or stops
-                running during the rollback.
+              description: Action to take if an rolled back task fails to run, or stops running during the rollback.
               enum:
                 - continue
                 - pause
               type: string
             MaxFailureRatio:
               default: 0
-              description: The fraction of tasks that may fail during a rollback before the
-                failure action is invoked, specified as a floating point number
-                between 0 and 1.
+              description: The fraction of tasks that may fail during a rollback before the failure action is invoked, specified as a floating point number between 0 and 1.
               type: number
             Monitor:
-              description: Amount of time to monitor each rolled back task for failures, in
-                nanoseconds.
+              description: Amount of time to monitor each rolled back task for failures, in nanoseconds.
               format: int64
               type: integer
             Order:
-              description: The order of operations when rolling back a task. Either the old
-                task is shut down before the new task is started, or the new
-                task is started before the old task is shut down.
+              description: The order of operations when rolling back a task. Either the old task is shut down before the new task is started, or the new task is started before the old task is shut down.
               enum:
                 - stop-first
                 - start-first
               type: string
             Parallelism:
-              description: Maximum number of tasks to be rolled back in one iteration (0 means
-                unlimited parallelism).
+              description: Maximum number of tasks to be rolled back in one iteration (0 means unlimited parallelism).
               format: int64
               type: integer
           type: object
@@ -10940,8 +10217,7 @@ components:
               format: int64
               type: integer
             FailureAction:
-              description: Action to take if an updated task fails to run, or stops running
-                during the update.
+              description: Action to take if an updated task fails to run, or stops running during the update.
               enum:
                 - continue
                 - pause
@@ -10949,33 +10225,26 @@ components:
               type: string
             MaxFailureRatio:
               default: 0
-              description: The fraction of tasks that may fail during an update before the
-                failure action is invoked, specified as a floating point number
-                between 0 and 1.
+              description: The fraction of tasks that may fail during an update before the failure action is invoked, specified as a floating point number between 0 and 1.
               type: number
             Monitor:
-              description: Amount of time to monitor each updated task for failures, in
-                nanoseconds.
+              description: Amount of time to monitor each updated task for failures, in nanoseconds.
               format: int64
               type: integer
             Order:
-              description: The order of operations when rolling out an updated task. Either
-                the old task is shut down before the new task is started, or the
-                new task is started before the old task is shut down.
+              description: The order of operations when rolling out an updated task. Either the old task is shut down before the new task is started, or the new task is started before the old task is shut down.
               enum:
                 - stop-first
                 - start-first
               type: string
             Parallelism:
-              description: Maximum number of tasks to be updated in one iteration (0 means
-                unlimited parallelism).
+              description: Maximum number of tasks to be updated in one iteration (0 means unlimited parallelism).
               format: int64
               type: integer
           type: object
     ServiceUpdateResponse:
       example:
-        Warning: "unable to pin image doesnotexist:latest to digest: image
-          library/doesnotexist:latest not found"
+        Warning: "unable to pin image doesnotexist:latest to digest: image library/doesnotexist:latest not found"
       properties:
         Warnings:
           description: Optional warning messages
@@ -11053,25 +10322,20 @@ components:
           nullable: true
           properties:
             ExternalCAs:
-              description: Configuration for forwarding signing requests to an external
-                certificate authority.
+              description: Configuration for forwarding signing requests to an external certificate authority.
               items:
                 properties:
                   CACert:
-                    description: The root CA certificate (in PEM format) this external CA uses to
-                      issue TLS certificates (assumed to be to the current swarm
-                      root CA certificate if not provided).
+                    description: The root CA certificate (in PEM format) this external CA uses to issue TLS certificates (assumed to be to the current swarm root CA certificate if not provided).
                     type: string
                   Options:
                     additionalProperties:
                       type: string
-                    description: An object with key/value pairs that are interpreted as
-                      protocol-specific options for the external CA driver.
+                    description: An object with key/value pairs that are interpreted as protocol-specific options for the external CA driver.
                     type: object
                   Protocol:
                     default: cfssl
-                    description: Protocol for communication with the external CA (currently only
-                      `cfssl` is supported).
+                    description: Protocol for communication with the external CA (currently only `cfssl` is supported).
                     enum:
                       - cfssl
                     type: string
@@ -11081,9 +10345,7 @@ components:
                 type: object
               type: array
             ForceRotate:
-              description: An integer whose purpose is to force swarm to generate a new
-                signing CA certificate and key, if none have been specified in
-                `SigningCACert` and `SigningCAKey`
+              description: An integer whose purpose is to force swarm to generate a new signing CA certificate and key, if none have been specified in `SigningCACert` and `SigningCAKey`
               format: uint64
               type: integer
             NodeCertExpiry:
@@ -11092,12 +10354,10 @@ components:
               format: int64
               type: integer
             SigningCACert:
-              description: The desired signing CA certificate for all swarm node TLS leaf
-                certificates, in PEM format.
+              description: The desired signing CA certificate for all swarm node TLS leaf certificates, in PEM format.
               type: string
             SigningCAKey:
-              description: The desired signing CA key for all swarm node TLS leaf
-                certificates, in PEM format.
+              description: The desired signing CA key for all swarm node TLS leaf certificates, in PEM format.
               type: string
           type: object
         Dispatcher:
@@ -11114,8 +10374,7 @@ components:
           description: Parameters related to encryption-at-rest.
           properties:
             AutoLockManagers:
-              description: If set, generate a key and use it to lock data stored on the
-                managers.
+              description: If set, generate a key and use it to lock data stored on the managers.
               example: false
               type: boolean
           type: object
@@ -11136,8 +10395,7 @@ components:
           nullable: true
           properties:
             TaskHistoryRetentionLimit:
-              description: The number of historic tasks to keep per instance or node. If
-                negative, never remove completed or failed tasks.
+              description: The number of historic tasks to keep per instance or node. If negative, never remove completed or failed tasks.
               example: 10
               format: int64
               type: integer
@@ -11146,20 +10404,15 @@ components:
           description: Raft configuration.
           properties:
             ElectionTick:
-              description: >
-                The number of ticks that a follower will wait for a message from
-                the leader before becoming a candidate and starting an election.
-                `ElectionTick` must be greater than `HeartbeatTick`.
-
+              description: |
+                The number of ticks that a follower will wait for a message from the leader before becoming a candidate and starting an election. `ElectionTick` must be greater than `HeartbeatTick`.
 
                 A tick currently defaults to one second, so these translate directly to seconds currently, but this is NOT guaranteed.
               example: 3
               type: integer
             HeartbeatTick:
-              description: >
-                The number of ticks between heartbeats. Every HeartbeatTick ticks,
-                the leader will send a heartbeat to the followers.
-
+              description: |
+                The number of ticks between heartbeats. Every HeartbeatTick ticks, the leader will send a heartbeat to the followers.
 
                 A tick currently defaults to one second, so these translate directly to seconds currently, but this is NOT guaranteed.
               example: 1
@@ -11169,8 +10422,7 @@ components:
               format: uint64
               type: integer
             LogEntriesForSlowFollowers:
-              description: The number of log entries to keep around to sync up slow followers
-                after a snapshot is created.
+              description: The number of log entries to keep around to sync up slow followers after a snapshot is created.
               example: 500
               format: uint64
               type: integer
@@ -11184,14 +10436,11 @@ components:
           description: Defaults for creating tasks in this cluster.
           properties:
             LogDriver:
-              description: >
+              description: |
                 The log driver to use for tasks created in the orchestrator if
-
                 unspecified by a service.
 
-
                 Updating this value only affects new tasks. Existing tasks continue
-
                 to use their previously configured log driver until recreated.
               properties:
                 Name:
@@ -11202,9 +10451,8 @@ components:
                 Options:
                   additionalProperties:
                     type: string
-                  description: >
+                  description: |
                     Driver-specific options for the selectd log driver, specified
-
                     as key/value pairs.
                   example:
                     max-file: "10"
@@ -11216,11 +10464,9 @@ components:
     SystemInfo:
       properties:
         Architecture:
-          description: >
+          description: |
             Hardware architecture of the host, as returned by the Go runtime
-
             (`GOARCH`).
-
 
             A full list of possible values can be found in the [Go documentation](https://golang.org/doc/install/source#environment).
           example: x86_64
@@ -11234,10 +10480,8 @@ components:
           example: true
           type: boolean
         CPUSet:
-          description: >
-            Indicates if CPUsets (cpuset.cpus, cpuset.mems) are supported by
-            the host.
-
+          description: |
+            Indicates if CPUsets (cpuset.cpus, cpuset.mems) are supported by the host.
 
             See [cpuset(7)](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt)
           example: true
@@ -11256,46 +10500,32 @@ components:
           example: cgroupfs
           type: string
         ClusterAdvertise:
-          description: >
+          description: |
             The network endpoint that the Engine advertises for the purpose of
-
             node discovery. ClusterAdvertise is a `host:port` combination on which
-
             the daemon is reachable by other hosts.
-
 
             <p><br /></p>
 
-
             > **Note**: This field is only propagated when using standalone Swarm
-
             > mode, and overlay networking using an external k/v store. Overlay
-
             > networks with Swarm mode enabled use the built-in raft store, and
-
             > this field will be empty.
           example: node5.corp.example.com:8000
           type: string
         ClusterStore:
-          description: >
+          description: |
             URL of the distributed storage backend.
 
 
-
             The storage backend is used for multihost networking (to store
-
             network and endpoint information) and by the node discovery mechanism.
-
 
             <p><br /></p>
 
-
             > **Note**: This field is only propagated when using standalone Swarm
-
             > mode, and overlay networking using an external k/v store. Overlay
-
             > networks with Swarm mode enabled use the built-in raft store, and
-
             > this field will be empty.
           example: consul://consul.corp.example.com:8600/some/path
           type: string
@@ -11321,26 +10551,21 @@ components:
           example: 10
           type: integer
         CpuCfsPeriod:
-          description: Indicates if CPU CFS(Completely Fair Scheduler) period is supported
-            by the host.
+          description: Indicates if CPU CFS(Completely Fair Scheduler) period is supported by the host.
           example: true
           type: boolean
         CpuCfsQuota:
-          description: Indicates if CPU CFS(Completely Fair Scheduler) quota is supported
-            by the host.
+          description: Indicates if CPU CFS(Completely Fair Scheduler) quota is supported by the host.
           example: true
           type: boolean
         Debug:
-          description: Indicates if the daemon is running in debug-mode / with debug-level
-            logging enabled.
+          description: Indicates if the daemon is running in debug-mode / with debug-level logging enabled.
           example: true
           type: boolean
         DefaultRuntime:
           default: runc
-          description: >
-            Name of the default OCI runtime that is used when starting
-            containers.
-
+          description: |
+            Name of the default OCI runtime that is used when starting containers.
 
             The default can be overridden per-container at create time.
           example: runc
@@ -11391,23 +10616,17 @@ components:
         GenericResources:
           $ref: "#/components/schemas/GenericResources"
         HttpProxy:
-          description: >
-            HTTP-proxy configured for the daemon. This value is obtained from
-            the
-
+          description: |
+            HTTP-proxy configured for the daemon. This value is obtained from the
             [`HTTP_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.
-
 
             Containers do not automatically inherit this configuration.
           example: http://user:pass@proxy.corp.example.com:8080
           type: string
         HttpsProxy:
-          description: >
-            HTTPS-proxy configured for the daemon. This value is obtained from
-            the
-
+          description: |
+            HTTPS-proxy configured for the daemon. This value is obtained from the
             [`HTTPS_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.
-
 
             Containers do not automatically inherit this configuration.
           example: https://user:pass@proxy.corp.example.com:4443
@@ -11435,19 +10654,16 @@ components:
           type: integer
         IndexServerAddress:
           default: https://index.docker.io/v1/
-          description: >
+          description: |
             Address / URL of the index server that is used for image search,
-
             and as a default for user authentication for Docker Hub and Docker Cloud.
           example: https://index.docker.io/v1/
           type: string
         InitBinary:
-          description: >
+          description: |
             Name and, optional, path of the the `docker-init` binary.
 
-
             If the path is omitted, the daemon searches the host's `$PATH` for the
-
             binary and uses the first result.
           example: docker-init
           type: string
@@ -11455,17 +10671,12 @@ components:
           $ref: "#/components/schemas/Commit"
         Isolation:
           default: default
-          description: >
-            Represents the isolation technology to use as a default for
-            containers.
-
+          description: |
+            Represents the isolation technology to use as a default for containers.
             The supported values are platform-specific.
 
-
             If no isolation value is specified on daemon start, on Windows client,
-
             the default is `hyperv`, and on Windows server, the default is `process`.
-
 
             This option is currently not used on other platforms.
           enum:
@@ -11478,33 +10689,24 @@ components:
           example: true
           type: boolean
         KernelVersion:
-          description: >
+          description: |
             Kernel version of the host.
 
-
             On Linux, this information obtained from `uname`. On Windows this
-
             information is queried from the <kbd>HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\</kbd>
-
             registry value, for example _"10.0 14393 (14393.1198.amd64fre.rs1_release_sec.170427-1353)"_.
           example: 4.9.38-moby
           type: string
         Labels:
-          description: >
+          description: |
             User-defined labels (key/value metadata) as set on the daemon.
-
 
             <p><br /></p>
 
-
             > **Note**: When part of a Swarm, nodes can both have _daemon_ labels,
-
             > set through the daemon configuration, and _node_ labels, set from a
-
             > manager node in the Swarm. Node labels are not included in this
-
             > field. Node labels can be retrieved using the `/nodes/(id)` endpoint
-
             > on a manager node in the Swarm.
           example:
             - storage=ssd
@@ -11526,9 +10728,8 @@ components:
             The logging driver to use as a default for new containers.
           type: string
         MemTotal:
-          description: >
-            Total amount of physical memory available on the host, in kilobytes
-            (kB).
+          description: |
+            Total amount of physical memory available on the host, in kilobytes (kB).
           example: 2095882240
           format: int64
           type: integer
@@ -11568,28 +10769,20 @@ components:
           example: node5.corp.example.com
           type: string
         NoProxy:
-          description: >
-            Comma-separated list of domain extensions for which no proxy should
-            be
-
+          description: |
+            Comma-separated list of domain extensions for which no proxy should be
             used. This value is obtained from the [`NO_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html)
-
             environment variable.
-
 
             Containers do not automatically inherit this configuration.
           example: "*.local, 169.254/16"
           type: string
         OSType:
-          description: >
-            Generic type of the operating system of the host, as returned by
-            the
-
+          description: |
+            Generic type of the operating system of the host, as returned by the
             Go runtime (`GOOS`).
 
-
             Currently returned values are "linux" and "windows". A full list of
-
             possible values can be found in the [Go documentation](https://golang.org/doc/install/source#environment).
           example: linux
           type: string
@@ -11597,10 +10790,8 @@ components:
           description: Indicates if OOM killer disable is supported on the host.
           type: boolean
         OperatingSystem:
-          description: >
-            Name of the host's operating system, for example: "Ubuntu 16.04.2
-            LTS"
-
+          description: |
+            Name of the host's operating system, for example: "Ubuntu 16.04.2 LTS"
             or "Windows Server 2016 Datacenter"
           example: Alpine Linux v3.5
           type: string
@@ -11616,24 +10807,16 @@ components:
           default:
             runc:
               path: docker-runc
-          description: >
-            List of [OCI
-            compliant](https://github.com/opencontainers/runtime-spec)
-
+          description: |
+            List of [OCI compliant](https://github.com/opencontainers/runtime-spec)
             runtimes configured on the daemon. Keys hold the "name" used to
-
             reference the runtime.
 
-
             The Docker daemon relies on an OCI compliant runtime (invoked via the
-
             `containerd` daemon) as its interface to the Linux kernel namespaces,
-
             cgroups, and SELinux.
 
-
             The default runtime is `runc`, and automatically configured. Additional
-
             runtimes can be configured by the user and will be listed here.
           example:
             custom:
@@ -11663,14 +10846,11 @@ components:
             type: string
           type: array
         ServerVersion:
-          description: >
+          description: |
             Version string of the daemon.
 
-
             > **Note**: the [standalone Swarm API](https://docs.docker.com/swarm/swarm-api/)
-
             > returns the Swarm version instead of the daemon  version, for example
-
             > `swarm/1.2.8`.
           example: 17.06.0-ce
           type: string
@@ -11681,17 +10861,13 @@ components:
         Swarm:
           $ref: "#/components/schemas/SwarmInfo"
         SystemStatus:
-          description: >
+          description: |
             Status information about this node (standalone Swarm API).
-
 
             <p><br /></p>
 
-
             > **Note**: The information returned in this field is only propagated
-
             > by the Swarm standalone API, and is empty (`null`) when using
-
             > built-in swarm mode.
           example:
             - - Role
@@ -11701,8 +10877,7 @@ components:
             - - Strategy
               - spread
             - - Filters
-              - health, port, containerslots, dependency, affinity, constraint,
-                whitelist
+              - health, port, containerslots, dependency, affinity, constraint, whitelist
             - - Nodes
               - "2"
             - - " swarm-agent-00"
@@ -11718,9 +10893,7 @@ components:
             - - "  └ Reserved Memory"
               - 0 B / 1.021 GiB
             - - "  └ Labels"
-              - "kernelversion=4.4.74-boot2docker, operatingsystem=Boot2Docker
-                17.06.0-ce (TCL 7.2); HEAD : 0672754 - Thu Jun 29 00:06:31 UTC
-                2017, ostype=linux, provider=virtualbox, storagedriver=aufs"
+              - "kernelversion=4.4.74-boot2docker, operatingsystem=Boot2Docker 17.06.0-ce (TCL 7.2); HEAD : 0672754 - Thu Jun 29 00:06:31 UTC 2017, ostype=linux, provider=virtualbox, storagedriver=aufs"
             - - "  └ UpdatedAt"
               - 2017-08-09T10:03:46Z
             - - "  └ ServerVersion"
@@ -11738,9 +10911,7 @@ components:
             - - "  └ Reserved Memory"
               - 0 B / 1.021 GiB
             - - "  └ Labels"
-              - "kernelversion=4.4.74-boot2docker, operatingsystem=Boot2Docker
-                17.06.0-ce (TCL 7.2); HEAD : 0672754 - Thu Jun 29 00:06:31 UTC
-                2017, ostype=linux, provider=virtualbox, storagedriver=aufs"
+              - "kernelversion=4.4.74-boot2docker, operatingsystem=Boot2Docker 17.06.0-ce (TCL 7.2); HEAD : 0672754 - Thu Jun 29 00:06:31 UTC 2017, ostype=linux, provider=virtualbox, storagedriver=aufs"
             - - "  └ UpdatedAt"
               - 2017-08-09T10:04:11Z
             - - "  └ ServerVersion"
@@ -11751,17 +10922,14 @@ components:
             type: array
           type: array
         SystemTime:
-          description: >
-            Current system-time in [RFC
-            3339](https://www.ietf.org/rfc/rfc3339.txt)
-
+          description: |
+            Current system-time in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt)
             format with nano-seconds.
           example: 2017-08-08T20:28:29.06202363Z
           type: string
       type: object
     TLSInfo:
-      description: Information about the issuer of leaf TLS certificates and the
-        trusted root CA certificate
+      description: Information about the issuer of leaf TLS certificates and the trusted root CA certificate
       example:
         CertIssuerPublicKey: MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmT9XIw9h1qoNclv9VeHmf/Vi6/uI2vFXdBveXTpcPjqx6i9wNazchk1XWV/dKTKvSh9xyGKmiIeRcE4OiMnJ1A==
         CertIssuerSubject: MBMxETAPBgNVBAMTCHN3YXJtLWNh
@@ -11784,8 +10952,7 @@ components:
           description: The base64-url-safe-encoded raw subject bytes of the issuer
           type: string
         TrustRoot:
-          description: The root CA certificate(s) that are used to validate leaf TLS
-            certificates
+          description: The root CA certificate(s) that are used to validate leaf TLS certificates
           type: string
       type: object
     Task:
@@ -11928,19 +11095,15 @@ components:
                 type: string
               type: array
             Configs:
-              description: Configs contains references to zero or more configs that will be
-                exposed to the service.
+              description: Configs contains references to zero or more configs that will be exposed to the service.
               items:
                 properties:
                   ConfigID:
-                    description: ConfigID represents the ID of the specific config that we're
-                      referencing.
+                    description: ConfigID represents the ID of the specific config that we're referencing.
                     type: string
                   ConfigName:
-                    description: >
-                      ConfigName is the name of the config that this references, but this
-                      is just provided for
-
+                    description: |
+                      ConfigName is the name of the config that this references, but this is just provided for
                       lookup/display purposes. The config in the reference will be identified by its ID.
                     type: string
                   File:
@@ -11963,8 +11126,7 @@ components:
                 type: object
               type: array
             DNSConfig:
-              description: Specification for DNS related configurations in resolver
-                configuration file (`resolv.conf`).
+              description: Specification for DNS related configurations in resolver configuration file (`resolv.conf`).
               properties:
                 Nameservers:
                   description: The IP addresses of the name servers.
@@ -11972,8 +11134,7 @@ components:
                     type: string
                   type: array
                 Options:
-                  description: A list of internal resolver variables to be modified (e.g.,
-                    `debug`, `ndots:3`, etc.).
+                  description: A list of internal resolver variables to be modified (e.g., `debug`, `ndots:3`, etc.).
                   items:
                     type: string
                   type: array
@@ -11999,8 +11160,7 @@ components:
             HealthCheck:
               $ref: "#/components/schemas/HealthConfig"
             Hostname:
-              description: The hostname to use for the container, as a valid RFC 1123
-                hostname.
+              description: The hostname to use for the container, as a valid RFC 1123 hostname.
               type: string
             Hosts:
               description: |
@@ -12022,8 +11182,7 @@ components:
               description: User-defined key/value data.
               type: object
             Mounts:
-              description: Specification for mounts to be added to containers created as part
-                of the service.
+              description: Specification for mounts to be added to containers created as part of the service.
               items:
                 $ref: "#/components/schemas/Mount"
               type: array
@@ -12037,36 +11196,25 @@ components:
                   description: CredentialSpec for managed service account (Windows only)
                   properties:
                     File:
-                      description: >
-                        Load credential spec from this file. The file is read by the
-                        daemon, and must be present in the
-
+                      description: |
+                        Load credential spec from this file. The file is read by the daemon, and must be present in the
                         `CredentialSpecs` subdirectory in the docker data directory, which defaults to
-
                         `C:\ProgramData\Docker\` on Windows.
-
 
                         For example, specifying `spec.json` loads `C:\ProgramData\Docker\CredentialSpecs\spec.json`.
 
-
                         <p><br /></p>
-
 
                         > **Note**: `CredentialSpec.File` and `CredentialSpec.Registry` are mutually exclusive.
                       type: string
                     Registry:
-                      description: >
-                        Load credential spec from this value in the Windows registry. The
-                        specified registry value must be
-
+                      description: |
+                        Load credential spec from this value in the Windows registry. The specified registry value must be
                         located in:
-
 
                         `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs`
 
-
                         <p><br /></p>
-
 
 
                         > **Note**: `CredentialSpec.File` and `CredentialSpec.Registry` are mutually exclusive.
@@ -12096,8 +11244,7 @@ components:
               description: Mount the container's root filesystem as read only.
               type: boolean
             Secrets:
-              description: Secrets contains references to zero or more secrets that will be
-                exposed to the service.
+              description: Secrets contains references to zero or more secrets that will be exposed to the service.
               items:
                 properties:
                   File:
@@ -12118,21 +11265,17 @@ components:
                         type: string
                     type: object
                   SecretID:
-                    description: SecretID represents the ID of the specific secret that we're
-                      referencing.
+                    description: SecretID represents the ID of the specific secret that we're referencing.
                     type: string
                   SecretName:
-                    description: >
-                      SecretName is the name of the secret that this references, but this
-                      is just provided for
-
+                    description: |
+                      SecretName is the name of the secret that this references, but this is just provided for
                       lookup/display purposes. The secret in the reference will be identified by its ID.
                     type: string
                 type: object
               type: array
             StopGracePeriod:
-              description: Amount of time to wait for the container to terminate before
-                forcefully killing it.
+              description: Amount of time to wait for the container to terminate before forcefully killing it.
               format: int64
               type: integer
             StopSignal:
@@ -12146,13 +11289,10 @@ components:
               type: string
           type: object
         ForceUpdate:
-          description: A counter that triggers an update even if no relevant parameters
-            have been changed.
+          description: A counter that triggers an update even if no relevant parameters have been changed.
           type: integer
         LogDriver:
-          description: Specifies the log driver to use for tasks created from this spec.
-            If not present, the default one for the swarm will be used, finally
-            falling back to the engine default if not specified.
+          description: Specifies the log driver to use for tasks created from this spec. If not present, the default one for the swarm will be used, finally falling back to the engine default if not specified.
           properties:
             Name:
               type: string
@@ -12184,21 +11324,16 @@ components:
                 type: string
               type: array
             Platforms:
-              description: >
+              description: |
                 Platforms stores all the platforms that the service's image can
-
                 run on. This field is used in the platform filter for scheduling.
-
                 If empty, then the platform filter is off, meaning there are no
-
                 scheduling restrictions.
               items:
                 $ref: "#/components/schemas/Platform"
               type: array
             Preferences:
-              description: Preferences provide a way to make the scheduler aware of factors
-                such as topology. They are provided in order from highest to
-                lowest precedence.
+              description: Preferences provide a way to make the scheduler aware of factors such as topology. They are provided in order from highest to lowest precedence.
               example:
                 - Spread:
                     SpreadDescriptor: node.labels.datacenter
@@ -12216,8 +11351,7 @@ components:
               type: array
           type: object
         PluginSpec:
-          description: Invalid when specified with `ContainerSpec`. *(Experimental release
-            only.)*
+          description: Invalid when specified with `ContainerSpec`. *(Experimental release only.)*
           properties:
             Disabled:
               description: Disable the plugin once scheduled.
@@ -12227,8 +11361,7 @@ components:
               type: string
             PluginPrivilege:
               items:
-                description: Describes a permission accepted by the user upon installing the
-                  plugin.
+                description: Describes a permission accepted by the user upon installing the plugin.
                 properties:
                   Description:
                     type: string
@@ -12245,8 +11378,7 @@ components:
               type: string
           type: object
         Resources:
-          description: Resource requirements which apply to each individual container
-            created as part of the service.
+          description: Resource requirements which apply to each individual container created as part of the service.
           properties:
             Limits:
               $ref: "#/components/schemas/ResourceObject"
@@ -12254,8 +11386,7 @@ components:
               $ref: "#/components/schemas/ResourceObject"
           type: object
         RestartPolicy:
-          description: Specification for the restart policy which applies to containers
-            created as part of this service.
+          description: Specification for the restart policy which applies to containers created as part of this service.
           properties:
             Condition:
               description: Condition for restart.
@@ -12270,14 +11401,12 @@ components:
               type: integer
             MaxAttempts:
               default: 0
-              description: Maximum attempts to restart a given container before giving up
-                (default value is 0, which is ignored).
+              description: Maximum attempts to restart a given container before giving up (default value is 0, which is ignored).
               format: int64
               type: integer
             Window:
               default: 0
-              description: Windows is the time window used to evaluate the restart policy
-                (default value is 0, which is unbounded).
+              description: Windows is the time window used to evaluate the restart policy (default value is 0, which is unbounded).
               format: int64
               type: integer
           type: object
@@ -12354,8 +11483,7 @@ components:
           type: object
         Scope:
           default: local
-          description: The level at which the volume exists. Either `global` for
-            cluster-wide, or `local` for machine level.
+          description: The level at which the volume exists. Either `global` for cluster-wide, or `local` for machine level.
           enum:
             - local
             - global
@@ -12387,14 +11515,10 @@ components:
               type: integer
             Size:
               default: -1
-              description: >
-                Amount of disk space used by the volume (in bytes). This
-                information
-
+              description: |
+                Amount of disk space used by the volume (in bytes). This information
                 is only available for volumes created with the `"local"` volume
-
                 driver. For volumes created with other volume drivers, this field
-
                 is set to `-1` ("not available")
               nullable: false
               type: integer

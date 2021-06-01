@@ -48,9 +48,7 @@ paths:
       tags:
         - Annotation Layers
     get:
-      description: Get a list of Annotation layers, use Rison or JSON query parameters
-        for filtering, sorting, pagination and for selecting specific columns
-        and metadata.
+      description: Get a list of Annotation layers, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -411,9 +409,7 @@ paths:
       tags:
         - Annotation Layers
     get:
-      description: Get a list of Annotation layers, use Rison or JSON query parameters
-        for filtering, sorting, pagination and for selecting specific columns
-        and metadata.
+      description: Get a list of Annotation layers, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
       parameters:
         - description: The annotation layer id for this annotation
           in: path
@@ -632,8 +628,7 @@ paths:
         - Annotation Layers
   /async_event/:
     get:
-      description: Reads off of the Redis events stream, using the user's JWT token
-        and optional query params for last event received.
+      description: Reads off of the Redis events stream, using the user's JWT token and optional query params for last event received.
       parameters:
         - description: Last ID received by the client
           in: query
@@ -679,15 +674,13 @@ paths:
         - AsyncEventsRestApi
   /cachekey/invalidate:
     post:
-      description: Takes a list of datasources, finds the associated cache records and
-        invalidates them and removes the database records
+      description: Takes a list of datasources, finds the associated cache records and invalidates them and removes the database records
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/CacheInvalidationRequestSchema"
-        description: A list of datasources uuid or the tuples of database and datasource
-          names
+        description: A list of datasources uuid or the tuples of database and datasource names
         required: true
       responses:
         "201":
@@ -735,9 +728,7 @@ paths:
       tags:
         - Charts
     get:
-      description: Get a list of charts, use Rison or JSON query parameters for
-        filtering, sorting, pagination and  for selecting specific columns and
-        metadata.
+      description: Get a list of charts, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -894,15 +885,13 @@ paths:
         - Charts
   /chart/data:
     post:
-      description: Takes a query context constructed in the client and returns payload
-        data response for the given query.
+      description: Takes a query context constructed in the client and returns payload data response for the given query.
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ChartDataQueryContextSchema"
-        description: A query context consists of a datasource from which to fetch data
-          and one or many query objects.
+        description: A query context consists of a datasource from which to fetch data and one or many query objects.
         required: true
       responses:
         "200":
@@ -929,8 +918,7 @@ paths:
         - Charts
   "/chart/data/{cache_key}":
     get:
-      description: Takes a query context cache key and returns payload data response
-        for the given query.
+      description: Takes a query context cache key and returns payload data response for the given query.
       parameters:
         - in: path
           name: cache_key
@@ -1370,9 +1358,7 @@ paths:
       tags:
         - CSS Templates
     get:
-      description: Get a list of CSS templates, use Rison or JSON query parameters for
-        filtering, sorting, pagination and for selecting specific columns and
-        metadata.
+      description: Get a list of CSS templates, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -1727,9 +1713,7 @@ paths:
       tags:
         - Dashboards
     get:
-      description: Get a list of dashboards, use Rison or JSON query parameters for
-        filtering, sorting, pagination and  for selecting specific columns and
-        metadata.
+      description: Get a list of dashboards, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -3492,8 +3476,7 @@ paths:
         - LogRestApi
   /menu/:
     get:
-      description: Get the menu data structure. Returns a forest like structure with
-        the menu the user has access to
+      description: Get the menu data structure. Returns a forest like structure with the menu the user has access to
       responses:
         "200":
           content:
@@ -3556,9 +3539,7 @@ paths:
         - OpenApi
   /query/:
     get:
-      description: Get a list of queries, use Rison or JSON query parameters for
-        filtering, sorting, pagination and  for selecting specific columns and
-        metadata.
+      description: Get a list of queries, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -3793,9 +3774,7 @@ paths:
       tags:
         - Report Schedules
     get:
-      description: Get a list of report schedules, use Rison or JSON query parameters
-        for filtering, sorting, pagination and for selecting specific columns
-        and metadata.
+      description: Get a list of report schedules, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -4123,9 +4102,7 @@ paths:
         - Report Schedules
   "/report/{pk}/log/":
     get:
-      description: Get a list of report schedule logs, use Rison or JSON query
-        parameters for filtering, sorting, pagination and for selecting specific
-        columns and metadata.
+      description: Get a list of report schedule logs, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
       parameters:
         - description: The report schedule id for these logs
           in: path
@@ -4254,9 +4231,7 @@ paths:
       tags:
         - Queries
     get:
-      description: Get a list of saved queries, use Rison or JSON query parameters for
-        filtering, sorting, pagination and for selecting specific columns and
-        metadata.
+      description: Get a list of saved queries, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
       parameters:
         - content:
             application/json:
@@ -4782,8 +4757,7 @@ components:
           nullable: true
           type: string
         descriptionColumns:
-          description: Columns to use as the description. If none are provided, all will
-            be shown.
+          description: Columns to use as the description. If none are provided, all will be shown.
           items:
             type: string
           type: array
@@ -4844,8 +4818,7 @@ components:
           nullable: true
           type: string
         value:
-          description: For formula annotations, this contains the formula. For other
-            types, this is the primary key of the source object.
+          description: For formula annotations, this contains the formula. For other types, this is the primary key of the source object.
         width:
           description: Width of annotation line
           format: float
@@ -5024,8 +4997,7 @@ components:
     CacheInvalidationRequestSchema:
       properties:
         datasource_uids:
-          description: "The uid of the dataset/datasource this new chart will use. A
-            complete datasource identification needs `datasouce_uid` "
+          description: "The uid of the dataset/datasource this new chart will use. A complete datasource identification needs `datasouce_uid` "
           items:
             type: string
           type: array
@@ -5093,24 +5065,19 @@ components:
           example: SQL
           type: string
         hasCustomLabel:
-          description: When false, the label will be automatically generated based on the
-            aggregate expression. When true, a custom label has to be specified.
+          description: When false, the label will be automatically generated based on the aggregate expression. When true, a custom label has to be specified.
           example: true
           type: boolean
         label:
-          description: Label for the metric. Is automatically generated unless
-            hasCustomLabel is true, in which case label must be defined.
+          description: Label for the metric. Is automatically generated unless hasCustomLabel is true, in which case label must be defined.
           example: Weighted observations
           type: string
         optionName:
-          description: Unique identifier. Can be any string value, as long as all metrics
-            have a unique identifier. If undefined, a random name will be
-            generated.
+          description: Unique identifier. Can be any string value, as long as all metrics have a unique identifier. If undefined, a random name will be generated.
           example: metric_aec60732-fac0-4b17-b736-93f1a5c93e30
           type: string
         sqlExpression:
-          description: The metric as defined by a SQL aggregate expression. Only required
-            for SQL expression type.
+          description: The metric as defined by a SQL aggregate expression. Only required for SQL expression type.
           example: SUM(weight * observations) / SUM(weight)
           type: string
       required:
@@ -5119,16 +5086,8 @@ components:
     ChartDataAggregateOptionsSchema:
       properties:
         aggregates:
-          description: >-
-            The keys are the name of the aggregate column to be created, and
-            the values specify the details of how to apply the aggregation. If
-            an operator requires additional options, these can be passed here to
-            be unpacked in the operator call. The following numpy operators are
-            supported: average, argmin, argmax, cumsum, cumprod, max, mean,
-            median, nansum, nanmin, nanmax, nanmean, nanmedian, min, percentile,
-            prod, product, std, sum, var. Any options required by the operator
-            can be passed to the `options` object.
-
+          description: |-
+            The keys are the name of the aggregate column to be created, and the values specify the details of how to apply the aggregation. If an operator requires additional options, these can be passed here to be unpacked in the operator call. The following numpy operators are supported: average, argmin, argmax, cumsum, cumprod, max, mean, median, nansum, nanmin, nanmax, nanmean, nanmedian, min, percentile, prod, product, std, sum, var. Any options required by the operator can be passed to the `options` object.
 
             In the example, a new column `first_quantile` is created based on values in the column `my_col` using the `percentile` operator with the `q=0.25` parameter.
           example:
@@ -5167,10 +5126,7 @@ components:
           nullable: true
           type: array
         metrics:
-          description: Aggregate expressions. Metrics can be passed as both references to
-            datasource metrics (strings), or ad-hoc metricswhich are defined
-            only within the query object. See `ChartDataAdhocMetricSchema` for
-            the structure of ad-hoc metrics.
+          description: Aggregate expressions. Metrics can be passed as both references to datasource metrics (strings), or ad-hoc metricswhich are defined only within the query object. See `ChartDataAdhocMetricSchema` for the structure of ad-hoc metrics.
           items: {}
           type: array
         percentiles:
@@ -5230,8 +5186,7 @@ components:
     ChartDataExtras:
       properties:
         druid_time_origin:
-          description: Starting point for time grain counting on legacy Druid datasources.
-            Used to change e.g. Monday/Sunday first-day-of-week.
+          description: Starting point for time grain counting on legacy Druid datasources. Used to change e.g. Monday/Sunday first-day-of-week.
           nullable: true
           type: string
         having:
@@ -5243,23 +5198,19 @@ components:
             $ref: "#/components/schemas/ChartDataFilter"
           type: array
         relative_end:
-          description: 'End time for relative time deltas. Default:
-            `config["DEFAULT_RELATIVE_START_TIME"]`'
+          description: 'End time for relative time deltas. Default: `config["DEFAULT_RELATIVE_START_TIME"]`'
           enum:
             - today
             - now
           type: string
         relative_start:
-          description: 'Start time for relative time deltas. Default:
-            `config["DEFAULT_RELATIVE_START_TIME"]`'
+          description: 'Start time for relative time deltas. Default: `config["DEFAULT_RELATIVE_START_TIME"]`'
           enum:
             - today
             - now
           type: string
         time_grain_sqla:
-          description: To what level of granularity should the temporal column be
-            aggregated. Supports [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) durations.
+          description: To what level of granularity should the temporal column be aggregated. Supports [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) durations.
           enum:
             - PT1S
             - PT1M
@@ -5282,8 +5233,7 @@ components:
           type: string
         time_range_endpoints:
           items:
-            description: A list with two values, stating if start/end should be
-              inclusive/exclusive.
+            description: A list with two values, stating if start/end should be inclusive/exclusive.
             enum:
               - unknown
               - inclusive
@@ -5318,8 +5268,7 @@ components:
           example: IN
           type: string
         val:
-          description: The value or values to compare against. Can be a string, integer,
-            decimal or list, depending on the operator.
+          description: The value or values to compare against. Can be a string, integer, decimal or list, depending on the operator.
           example:
             - China
             - France
@@ -5331,8 +5280,7 @@ components:
     ChartDataGeodeticParseOptionsSchema:
       properties:
         altitude:
-          description: Name of target column for decoded altitude. If omitted, altitude
-            information in geodetic string is ignored.
+          description: Name of target column for decoded altitude. If omitted, altitude information in geodetic string is ignored.
           type: string
         geodetic:
           description: Name of source column containing geodetic point strings
@@ -5383,16 +5331,8 @@ components:
     ChartDataPivotOptionsSchema:
       properties:
         aggregates:
-          description: >-
-            The keys are the name of the aggregate column to be created, and
-            the values specify the details of how to apply the aggregation. If
-            an operator requires additional options, these can be passed here to
-            be unpacked in the operator call. The following numpy operators are
-            supported: average, argmin, argmax, cumsum, cumprod, max, mean,
-            median, nansum, nanmin, nanmax, nanmean, nanmedian, min, percentile,
-            prod, product, std, sum, var. Any options required by the operator
-            can be passed to the `options` object.
-
+          description: |-
+            The keys are the name of the aggregate column to be created, and the values specify the details of how to apply the aggregation. If an operator requires additional options, these can be passed here to be unpacked in the operator call. The following numpy operators are supported: average, argmin, argmax, cumsum, cumprod, max, mean, median, nansum, nanmin, nanmax, nanmean, nanmedian, min, percentile, prod, product, std, sum, var. Any options required by the operator can be passed to the `options` object.
 
             In the example, a new column `first_quantile` is created based on values in the column `my_col` using the `percentile` operator with the `q=0.25` parameter.
           example:
@@ -5411,8 +5351,7 @@ components:
             type: string
           type: array
         drop_missing_columns:
-          description: "Do not include columns whose entries are all missing (default:
-            `true`)."
+          description: "Do not include columns whose entries are all missing (default: `true`)."
           type: boolean
         marginal_distribution_name:
           description: "Name of marginal distribution row/column. (default: `All`)"
@@ -5444,10 +5383,7 @@ components:
           example: aggregate
           type: string
         options:
-          description: Options specifying how to perform the operation. Please refer to
-            the respective post processing operation option schemas. For
-            example, `ChartDataPostProcessingOperationOptions` specifies the
-            required options for the pivot operation.
+          description: Options specifying how to perform the operation. Please refer to the respective post processing operation option schemas. For example, `ChartDataPostProcessingOperationOptions` specifies the required options for the pivot operation.
           example:
             aggregates:
               age_mean:
@@ -5475,18 +5411,14 @@ components:
           minimum: 0
           type: number
         monthly_seasonality:
-          description: Should monthly seasonality be applied. An integer value will
-            specify Fourier order of seasonality, `None` will automatically
-            detect seasonality.
+          description: Should monthly seasonality be applied. An integer value will specify Fourier order of seasonality, `None` will automatically detect seasonality.
           example: false
         periods:
           example: 7
           format: int32
           type: integer
         time_grain:
-          description: Time grain used to specify time period increments in prediction.
-            Supports [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) durations.
+          description: Time grain used to specify time period increments in prediction. Supports [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) durations.
           enum:
             - PT1S
             - PT1M
@@ -5507,14 +5439,10 @@ components:
           example: P1D
           type: string
         weekly_seasonality:
-          description: Should weekly seasonality be applied. An integer value will specify
-            Fourier order of seasonality, `None` will automatically detect
-            seasonality.
+          description: Should weekly seasonality be applied. An integer value will specify Fourier order of seasonality, `None` will automatically detect seasonality.
           example: false
         yearly_seasonality:
-          description: Should yearly seasonality be applied. An integer value will specify
-            Fourier order of seasonality, `None` will automatically detect
-            seasonality.
+          description: Should yearly seasonality be applied. An integer value will specify Fourier order of seasonality, `None` will automatically detect seasonality.
           example: false
       required:
         - confidence_interval
@@ -5526,8 +5454,7 @@ components:
         datasource:
           $ref: "#/components/schemas/ChartDataDatasource"
         force:
-          description: "Should the queries be forced to load from the source. Default:
-            `false`"
+          description: "Should the queries be forced to load from the source. Default: `false`"
           type: boolean
         queries:
           items:
@@ -5568,9 +5495,7 @@ components:
           nullable: true
           type: array
         druid_time_origin:
-          description: Starting point for time grain counting on legacy Druid datasources.
-            Used to change e.g. Monday/Sunday first-day-of-week. This field is
-            deprecated and should be passed to `extras` as `druid_time_origin`.
+          description: Starting point for time grain counting on legacy Druid datasources. Used to change e.g. Monday/Sunday first-day-of-week. This field is deprecated and should be passed to `extras` as `druid_time_origin`.
           nullable: true
           type: string
         extras:
@@ -5582,12 +5507,10 @@ components:
             $ref: "#/components/schemas/ChartDataFilter"
           type: array
         granularity:
-          description: Name of temporal column used for time filtering. For legacy Druid
-            datasources this defines the time grain.
+          description: Name of temporal column used for time filtering. For legacy Druid datasources this defines the time grain.
           type: string
         granularity_sqla:
-          description: Name of temporal column used for time filtering for SQL
-            datasources. This field is deprecated, use `granularity` instead.
+          description: Name of temporal column used for time filtering for SQL datasources. This field is deprecated, use `granularity` instead.
           type: string
         groupby:
           items:
@@ -5596,13 +5519,10 @@ components:
           nullable: true
           type: array
         having:
-          description: HAVING clause to be added to aggregate queries using AND operator.
-            This field is deprecated and should be passed to `extras`.
+          description: HAVING clause to be added to aggregate queries using AND operator. This field is deprecated and should be passed to `extras`.
           type: string
         having_filters:
-          description: HAVING filters to be added to legacy Druid datasource queries. This
-            field is deprecated and should be passed to `extras` as
-            `having_druid`.
+          description: HAVING filters to be added to legacy Druid datasource queries. This field is deprecated and should be passed to `extras` as `having_druid`.
           items:
             $ref: "#/components/schemas/ChartDataFilter"
           type: array
@@ -5610,18 +5530,14 @@ components:
           description: Is the `query_object` a timeseries.
           type: boolean
         metrics:
-          description: Aggregate expressions. Metrics can be passed as both references to
-            datasource metrics (strings), or ad-hoc metricswhich are defined
-            only within the query object. See `ChartDataAdhocMetricSchema` for
-            the structure of ad-hoc metrics.
+          description: Aggregate expressions. Metrics can be passed as both references to datasource metrics (strings), or ad-hoc metricswhich are defined only within the query object. See `ChartDataAdhocMetricSchema` for the structure of ad-hoc metrics.
           items: {}
           type: array
         order_desc:
           description: "Reverse order. Default: `false`"
           type: boolean
         orderby:
-          description: Expects a list of lists where the first element is the column name
-            which to sort by, and the second element is a boolean.
+          description: Expects a list of lists where the first element is the column name which to sort by, and the second element is a boolean.
           example:
             - - my_col_1
               - false
@@ -5632,8 +5548,7 @@ components:
             type: array
           type: array
         post_processing:
-          description: Post processing operations to be applied to the result set.
-            Operations are applied to the result set in sequential order.
+          description: Post processing operations to be applied to the result set. Operations are applied to the result set in sequential order.
           items:
             allOf:
               - $ref: "#/components/schemas/ChartDataPostProcessingOperation"
@@ -5650,44 +5565,27 @@ components:
           minimum: 0
           type: integer
         time_range:
-          description: >
-            A time rage, either expressed as a colon separated string `since :
-            until` or human readable freeform. Valid formats for `since` and
-            `until` are: 
-
+          description: |
+            A time rage, either expressed as a colon separated string `since : until` or human readable freeform. Valid formats for `since` and `until` are: 
             - ISO 8601
-
             - X days/years/hours/day/year/weeks
-
             - X days/years/hours/day/year/weeks ago
-
             - X days/years/hours/day/year/weeks from now
-
 
             Additionally, the following freeform can be used:
 
-
             - Last day
-
             - Last week
-
             - Last month
-
             - Last quarter
-
             - Last year
-
             - No filter
-
             - Last X seconds/minutes/hours/days/weeks/months/years
-
             - Next X seconds/minutes/hours/days/weeks/months/years
           example: Last week
           type: string
         time_shift:
-          description: A human-readable date/time string. Please refer to
-            [parsdatetime](https://github.com/bear/parsedatetime) documentation
-            for details on valid values.
+          description: A human-readable date/time string. Please refer to [parsdatetime](https://github.com/bear/parsedatetime) documentation for details on valid values.
           type: string
         timeseries_limit:
           description: "Maximum row count for timeseries queries. Default: `0`"
@@ -5704,8 +5602,7 @@ components:
           nullable: true
           type: object
         where:
-          description: WHERE clause to be added to queries using AND operator.This field
-            is deprecated and should be passed to `extras`.
+          description: WHERE clause to be added to queries using AND operator.This field is deprecated and should be passed to `extras`.
           type: string
       type: object
     ChartDataResponseResult:
@@ -5728,8 +5625,7 @@ components:
           nullable: true
           type: string
         cache_timeout:
-          description: "Cache timeout in following order: custom timeout, datasource
-            timeout, default config timeout."
+          description: "Cache timeout in following order: custom timeout, datasource timeout, default config timeout."
           format: int32
           nullable: true
           type: integer
@@ -5797,8 +5693,7 @@ components:
           example: false
           type: boolean
         min_periods:
-          description: The minimum amount of periods required for a row to be included in
-            the result set.
+          description: The minimum amount of periods required for a row to be included in the result set.
           example: 7
           format: int32
           type: integer
@@ -5832,11 +5727,7 @@ components:
           example: {}
           type: object
         win_type:
-          description: Type of window function. See [SciPy window
-            functions](https://docs.scipy.org/doc/scipy/reference/signal.windows.html#module-scipy.signal.windows)
-            for more details. Some window functions require passing additional
-            parameters to `rolling_type_options`. For instance, to use
-            `gaussian`, the parameter `std` needs to be provided.
+          description: Type of window function. See [SciPy window functions](https://docs.scipy.org/doc/scipy/reference/signal.windows.html#module-scipy.signal.windows) for more details. Some window functions require passing additional parameters to `rolling_type_options`. For instance, to use `gaussian`, the parameter `std` needs to be provided.
           enum:
             - boxcar
             - triang
@@ -5866,9 +5757,7 @@ components:
     ChartDataSelectOptionsSchema:
       properties:
         columns:
-          description: Columns which to select from the input data, in the desired order.
-            If columns are renamed, the original column name should be
-            referenced here.
+          description: Columns which to select from the input data, in the desired order. If columns are renamed, the original column name should be referenced here.
           example:
             - country
             - gender
@@ -5884,8 +5773,7 @@ components:
             type: string
           type: array
         rename:
-          description: "columns which to rename, mapping source column to target column.
-            For instance, `{'y': 'y2'}` will rename the column `y` to `y2`."
+          description: "columns which to rename, mapping source column to target column. For instance, `{'y': 'y2'}` will rename the column `y` to `y2`."
           example:
             - age: average_age
           items:
@@ -5895,16 +5783,8 @@ components:
     ChartDataSortOptionsSchema:
       properties:
         aggregates:
-          description: >-
-            The keys are the name of the aggregate column to be created, and
-            the values specify the details of how to apply the aggregation. If
-            an operator requires additional options, these can be passed here to
-            be unpacked in the operator call. The following numpy operators are
-            supported: average, argmin, argmax, cumsum, cumprod, max, mean,
-            median, nansum, nanmin, nanmax, nanmean, nanmedian, min, percentile,
-            prod, product, std, sum, var. Any options required by the operator
-            can be passed to the `options` object.
-
+          description: |-
+            The keys are the name of the aggregate column to be created, and the values specify the details of how to apply the aggregation. If an operator requires additional options, these can be passed here to be unpacked in the operator call. The following numpy operators are supported: average, argmin, argmax, cumsum, cumprod, max, mean, median, nansum, nanmin, nanmax, nanmean, nanmedian, min, percentile, prod, product, std, sum, var. Any options required by the operator can be passed to the `options` object.
 
             In the example, a new column `first_quantile` is created based on values in the column `my_col` using the `percentile` operator with the `q=0.25` parameter.
           example:
@@ -5915,8 +5795,7 @@ components:
                 q: 0.25
           type: object
         columns:
-          description: columns by by which to sort. The key specifies the column name,
-            value specifies if sorting in ascending order.
+          description: columns by by which to sort. The key specifies the column name, value specifies if sorting in ascending order.
           example:
             country: true
             gender: false
@@ -6050,8 +5929,7 @@ components:
     ChartRestApi.post:
       properties:
         cache_timeout:
-          description: Duration (in seconds) of the caching timeout for this chart. Note
-            this defaults to the datasource/table timeout if undefined.
+          description: Duration (in seconds) of the caching timeout for this chart. Note this defaults to the datasource/table timeout if undefined.
           format: int32
           nullable: true
           type: integer
@@ -6062,9 +5940,7 @@ components:
             type: integer
           type: array
         datasource_id:
-          description: The id of the dataset/datasource this new chart will use. A
-            complete datasource identification needs `datasouce_id` and
-            `datasource_type`.
+          description: The id of the dataset/datasource this new chart will use. A complete datasource identification needs `datasouce_id` and `datasource_type`.
           format: int32
           type: integer
         datasource_name:
@@ -6084,15 +5960,12 @@ components:
           type: string
         owners:
           items:
-            description: Owner are users ids allowed to delete or change this chart. If left
-              empty you will be one of the owners of the chart.
+            description: Owner are users ids allowed to delete or change this chart. If left empty you will be one of the owners of the chart.
             format: int32
             type: integer
           type: array
         params:
-          description: Parameters are generated dynamically when clicking the save or
-            overwrite button in the explore view. This JSON object for power
-            users who may want to alter specific parameters.
+          description: Parameters are generated dynamically when clicking the save or overwrite button in the explore view. This JSON object for power users who may want to alter specific parameters.
           nullable: true
           type: string
         slice_name:
@@ -6118,8 +5991,7 @@ components:
     ChartRestApi.put:
       properties:
         cache_timeout:
-          description: Duration (in seconds) of the caching timeout for this chart. Note
-            this defaults to the datasource/table timeout if undefined.
+          description: Duration (in seconds) of the caching timeout for this chart. Note this defaults to the datasource/table timeout if undefined.
           format: int32
           nullable: true
           type: integer
@@ -6130,9 +6002,7 @@ components:
             type: integer
           type: array
         datasource_id:
-          description: The id of the dataset/datasource this new chart will use. A
-            complete datasource identification needs `datasouce_id` and
-            `datasource_type`.
+          description: The id of the dataset/datasource this new chart will use. A complete datasource identification needs `datasouce_id` and `datasource_type`.
           format: int32
           nullable: true
           type: integer
@@ -6150,15 +6020,12 @@ components:
           type: string
         owners:
           items:
-            description: Owner are users ids allowed to delete or change this chart. If left
-              empty you will be one of the owners of the chart.
+            description: Owner are users ids allowed to delete or change this chart. If left empty you will be one of the owners of the chart.
             format: int32
             type: integer
           type: array
         params:
-          description: Parameters are generated dynamically when clicking the save or
-            overwrite button in the explore view. This JSON object for power
-            users who may want to alter specific parameters.
+          description: Parameters are generated dynamically when clicking the save or overwrite button in the explore view. This JSON object for power users who may want to alter specific parameters.
           nullable: true
           type: string
         slice_name:
@@ -6338,26 +6205,19 @@ components:
           nullable: true
           type: string
         json_metadata:
-          description: This JSON object is generated dynamically when clicking the save or
-            overwrite button in the dashboard view. It is exposed here for
-            reference and for power users who may want to alter  specific
-            parameters.
+          description: This JSON object is generated dynamically when clicking the save or overwrite button in the dashboard view. It is exposed here for reference and for power users who may want to alter  specific parameters.
           type: string
         owners:
           items:
-            description: Owner are users ids allowed to delete or change this dashboard. If
-              left empty you will be one of the owners of the dashboard.
+            description: Owner are users ids allowed to delete or change this dashboard. If left empty you will be one of the owners of the dashboard.
             format: int32
             type: integer
           type: array
         position_json:
-          description: This json object describes the positioning of the widgets in the
-            dashboard. It is dynamically generated when adjusting the widgets
-            size and positions by using drag & drop in the dashboard view
+          description: This json object describes the positioning of the widgets in the dashboard. It is dynamically generated when adjusting the widgets size and positions by using drag & drop in the dashboard view
           type: string
         published:
-          description: Determines whether or not this dashboard is visible in the list of
-            all dashboards.
+          description: Determines whether or not this dashboard is visible in the list of all dashboards.
           type: boolean
         slug:
           description: Unique identifying part for the web address of the dashboard.
@@ -6379,29 +6239,22 @@ components:
           nullable: true
           type: string
         json_metadata:
-          description: This JSON object is generated dynamically when clicking the save or
-            overwrite button in the dashboard view. It is exposed here for
-            reference and for power users who may want to alter  specific
-            parameters.
+          description: This JSON object is generated dynamically when clicking the save or overwrite button in the dashboard view. It is exposed here for reference and for power users who may want to alter  specific parameters.
           nullable: true
           type: string
         owners:
           items:
-            description: Owner are users ids allowed to delete or change this dashboard. If
-              left empty you will be one of the owners of the dashboard.
+            description: Owner are users ids allowed to delete or change this dashboard. If left empty you will be one of the owners of the dashboard.
             format: int32
             nullable: true
             type: integer
           type: array
         position_json:
-          description: This json object describes the positioning of the widgets in the
-            dashboard. It is dynamically generated when adjusting the widgets
-            size and positions by using drag & drop in the dashboard view
+          description: This json object describes the positioning of the widgets in the dashboard. It is dynamically generated when adjusting the widgets size and positions by using drag & drop in the dashboard view
           nullable: true
           type: string
         published:
-          description: Determines whether or not this dashboard is visible in the list of
-            all dashboards.
+          description: Determines whether or not this dashboard is visible in the list of all dashboards.
           nullable: true
           type: boolean
         slug:
@@ -6579,8 +6432,7 @@ components:
     DatabaseRestApi.post:
       properties:
         allow_csv_upload:
-          description: Allow to upload CSV file data into this databaseIf selected, please
-            set the schemas allowed for csv upload in Extra.
+          description: Allow to upload CSV file data into this databaseIf selected, please set the schemas allowed for csv upload in Extra.
           type: boolean
         allow_ctas:
           description: Allow CREATE TABLE AS option in SQL Lab
@@ -6589,25 +6441,16 @@ components:
           description: Allow CREATE VIEW AS option in SQL Lab
           type: boolean
         allow_dml:
-          description: Allow users to run non-SELECT statements (UPDATE, DELETE, CREATE,
-            ...) in SQL Lab
+          description: Allow users to run non-SELECT statements (UPDATE, DELETE, CREATE, ...) in SQL Lab
           type: boolean
         allow_multi_schema_metadata_fetch:
-          description: Allow SQL Lab to fetch a list of all tables and all views across
-            all database schemas. For large data warehouse with thousands of
-            tables, this can be expensive and put strain on the system.
+          description: Allow SQL Lab to fetch a list of all tables and all views across all database schemas. For large data warehouse with thousands of tables, this can be expensive and put strain on the system.
           type: boolean
         allow_run_async:
-          description: Operate the database in asynchronous mode, meaning  that the
-            queries are executed on remote workers as opposed to on the web
-            server itself. This assumes that you have a Celery worker setup as
-            well as a results backend. Refer to the installation docs for more
-            information.
+          description: Operate the database in asynchronous mode, meaning  that the queries are executed on remote workers as opposed to on the web server itself. This assumes that you have a Celery worker setup as well as a results backend. Refer to the installation docs for more information.
           type: boolean
         cache_timeout:
-          description: Duration (in seconds) of the caching timeout for charts of this
-            database. A timeout of 0 indicates that the cache never expires.
-            Note this defaults to the global timeout if undefined.
+          description: Duration (in seconds) of the caching timeout for charts of this database. A timeout of 0 indicates that the cache never expires. Note this defaults to the global timeout if undefined.
           format: int32
           nullable: true
           type: integer
@@ -6617,64 +6460,30 @@ components:
           minLength: 1
           type: string
         encrypted_extra:
-          description: <p>JSON string containing additional connection
-            configuration.<br>This is used to provide connection information for
-            systems like Hive, Presto, and BigQuery, which do not conform to the
-            username:password syntax normally used by SQLAlchemy.</p>
+          description: <p>JSON string containing additional connection configuration.<br>This is used to provide connection information for systems like Hive, Presto, and BigQuery, which do not conform to the username:password syntax normally used by SQLAlchemy.</p>
           nullable: true
           type: string
         expose_in_sqllab:
           description: Expose this database to SQLLab
           type: boolean
         extra:
-          description: "<p>JSON string containing extra configuration elements.<br>1. The
-            <code>engine_params</code> object gets unpacked into the <a
-            href=\"https://docs.sqlalchemy.org/en/latest/core/engines.html#sqla\
-            lchemy.create_engine\">sqlalchemy.create_engine</a> call, while the
-            <code>metadata_params</code> gets unpacked into the <a
-            href=\"https://docs.sqlalchemy.org/en/rel_1_0/core/metadata.html#sq\
-            lalchemy.schema.MetaData\">sqlalchemy.MetaData</a> call.<br>2. The
-            <code>metadata_cache_timeout</code> is a cache timeout setting in
-            seconds for metadata fetch of this database. Specify it as
-            <strong>\"metadata_cache_timeout\": {\"schema_cache_timeout\": 600,
-            \"table_cache_timeout\": 600}</strong>. If unset, cache will not be
-            enabled for the functionality. A timeout of 0 indicates that the
-            cache never expires.<br>3. The
-            <code>schemas_allowed_for_csv_upload</code> is a comma separated
-            list of schemas that CSVs are allowed to upload to. Specify it as
-            <strong>\"schemas_allowed_for_csv_upload\": [\"public\",
-            \"csv_upload\"]</strong>. If database flavor does not support schema
-            or any schema is allowed to be accessed, just leave the list
-            empty<br>4. the <code>version</code> field is a string specifying
-            the this db's version. This should be used with Presto DBs so that
-            the syntax is correct<br>5. The
-            <code>allows_virtual_table_explore</code> field is a boolean
-            specifying whether or not the Explore button in SQL Lab results is
-            shown.</p>"
+          description: "<p>JSON string containing extra configuration elements.<br>1. The <code>engine_params</code> object gets unpacked into the <a href=\"https://docs.sqlalchemy.org/en/latest/core/engines.html#sqlalchemy.create_engine\">sqlalchemy.create_engine</a> call, while the <code>metadata_params</code> gets unpacked into the <a href=\"https://docs.sqlalchemy.org/en/rel_1_0/core/metadata.html#sqlalchemy.schema.MetaData\">sqlalchemy.MetaData</a> call.<br>2. The <code>metadata_cache_timeout</code> is a cache timeout setting in seconds for metadata fetch of this database. Specify it as <strong>\"metadata_cache_timeout\": {\"schema_cache_timeout\": 600, \"table_cache_timeout\": 600}</strong>. If unset, cache will not be enabled for the functionality. A timeout of 0 indicates that the cache never expires.<br>3. The <code>schemas_allowed_for_csv_upload</code> is a comma separated list of schemas that CSVs are allowed to upload to. Specify it as <strong>\"schemas_allowed_for_csv_upload\": [\"public\", \"csv_upload\"]</strong>. If database flavor does not support schema or any schema is allowed to be accessed, just leave the list empty<br>4. the <code>version</code> field is a string specifying the this db's version. This should be used with Presto DBs so that the syntax is correct<br>5. The <code>allows_virtual_table_explore</code> field is a boolean specifying whether or not the Explore button in SQL Lab results is shown.</p>"
           type: string
         force_ctas_schema:
-          description: When allowing CREATE TABLE AS option in SQL Lab, this option forces
-            the table to be created in this schema
+          description: When allowing CREATE TABLE AS option in SQL Lab, this option forces the table to be created in this schema
           maxLength: 250
           minLength: 0
           nullable: true
           type: string
         impersonate_user:
-          description: If Presto, all the queries in SQL Lab are going to be executed as
-            the currently logged on user who must have permission to run
-            them.<br/>If Hive and hive.server2.enable.doAs is enabled, will run
-            the queries as service account, but impersonate the currently logged
-            on user via hive.server2.proxy.user property.
+          description: If Presto, all the queries in SQL Lab are going to be executed as the currently logged on user who must have permission to run them.<br/>If Hive and hive.server2.enable.doAs is enabled, will run the queries as service account, but impersonate the currently logged on user via hive.server2.proxy.user property.
           type: boolean
         server_cert:
-          description: <p>Optional CA_BUNDLE contents to validate HTTPS requests. Only
-            available on certain database engines.</p>
+          description: <p>Optional CA_BUNDLE contents to validate HTTPS requests. Only available on certain database engines.</p>
           nullable: true
           type: string
         sqlalchemy_uri:
-          description: <p>Refer to the <a
-            href="https://docs.sqlalchemy.org/en/rel_1_2/core/engines.html#database-urls">SqlAlchemy
-            docs</a> for more information on how to structure your URI.</p>
+          description: <p>Refer to the <a href="https://docs.sqlalchemy.org/en/rel_1_2/core/engines.html#database-urls">SqlAlchemy docs</a> for more information on how to structure your URI.</p>
           maxLength: 1024
           minLength: 1
           type: string
@@ -6685,8 +6494,7 @@ components:
     DatabaseRestApi.put:
       properties:
         allow_csv_upload:
-          description: Allow to upload CSV file data into this databaseIf selected, please
-            set the schemas allowed for csv upload in Extra.
+          description: Allow to upload CSV file data into this databaseIf selected, please set the schemas allowed for csv upload in Extra.
           type: boolean
         allow_ctas:
           description: Allow CREATE TABLE AS option in SQL Lab
@@ -6695,25 +6503,16 @@ components:
           description: Allow CREATE VIEW AS option in SQL Lab
           type: boolean
         allow_dml:
-          description: Allow users to run non-SELECT statements (UPDATE, DELETE, CREATE,
-            ...) in SQL Lab
+          description: Allow users to run non-SELECT statements (UPDATE, DELETE, CREATE, ...) in SQL Lab
           type: boolean
         allow_multi_schema_metadata_fetch:
-          description: Allow SQL Lab to fetch a list of all tables and all views across
-            all database schemas. For large data warehouse with thousands of
-            tables, this can be expensive and put strain on the system.
+          description: Allow SQL Lab to fetch a list of all tables and all views across all database schemas. For large data warehouse with thousands of tables, this can be expensive and put strain on the system.
           type: boolean
         allow_run_async:
-          description: Operate the database in asynchronous mode, meaning  that the
-            queries are executed on remote workers as opposed to on the web
-            server itself. This assumes that you have a Celery worker setup as
-            well as a results backend. Refer to the installation docs for more
-            information.
+          description: Operate the database in asynchronous mode, meaning  that the queries are executed on remote workers as opposed to on the web server itself. This assumes that you have a Celery worker setup as well as a results backend. Refer to the installation docs for more information.
           type: boolean
         cache_timeout:
-          description: Duration (in seconds) of the caching timeout for charts of this
-            database. A timeout of 0 indicates that the cache never expires.
-            Note this defaults to the global timeout if undefined.
+          description: Duration (in seconds) of the caching timeout for charts of this database. A timeout of 0 indicates that the cache never expires. Note this defaults to the global timeout if undefined.
           format: int32
           nullable: true
           type: integer
@@ -6724,64 +6523,30 @@ components:
           nullable: true
           type: string
         encrypted_extra:
-          description: <p>JSON string containing additional connection
-            configuration.<br>This is used to provide connection information for
-            systems like Hive, Presto, and BigQuery, which do not conform to the
-            username:password syntax normally used by SQLAlchemy.</p>
+          description: <p>JSON string containing additional connection configuration.<br>This is used to provide connection information for systems like Hive, Presto, and BigQuery, which do not conform to the username:password syntax normally used by SQLAlchemy.</p>
           nullable: true
           type: string
         expose_in_sqllab:
           description: Expose this database to SQLLab
           type: boolean
         extra:
-          description: "<p>JSON string containing extra configuration elements.<br>1. The
-            <code>engine_params</code> object gets unpacked into the <a
-            href=\"https://docs.sqlalchemy.org/en/latest/core/engines.html#sqla\
-            lchemy.create_engine\">sqlalchemy.create_engine</a> call, while the
-            <code>metadata_params</code> gets unpacked into the <a
-            href=\"https://docs.sqlalchemy.org/en/rel_1_0/core/metadata.html#sq\
-            lalchemy.schema.MetaData\">sqlalchemy.MetaData</a> call.<br>2. The
-            <code>metadata_cache_timeout</code> is a cache timeout setting in
-            seconds for metadata fetch of this database. Specify it as
-            <strong>\"metadata_cache_timeout\": {\"schema_cache_timeout\": 600,
-            \"table_cache_timeout\": 600}</strong>. If unset, cache will not be
-            enabled for the functionality. A timeout of 0 indicates that the
-            cache never expires.<br>3. The
-            <code>schemas_allowed_for_csv_upload</code> is a comma separated
-            list of schemas that CSVs are allowed to upload to. Specify it as
-            <strong>\"schemas_allowed_for_csv_upload\": [\"public\",
-            \"csv_upload\"]</strong>. If database flavor does not support schema
-            or any schema is allowed to be accessed, just leave the list
-            empty<br>4. the <code>version</code> field is a string specifying
-            the this db's version. This should be used with Presto DBs so that
-            the syntax is correct<br>5. The
-            <code>allows_virtual_table_explore</code> field is a boolean
-            specifying whether or not the Explore button in SQL Lab results is
-            shown.</p>"
+          description: "<p>JSON string containing extra configuration elements.<br>1. The <code>engine_params</code> object gets unpacked into the <a href=\"https://docs.sqlalchemy.org/en/latest/core/engines.html#sqlalchemy.create_engine\">sqlalchemy.create_engine</a> call, while the <code>metadata_params</code> gets unpacked into the <a href=\"https://docs.sqlalchemy.org/en/rel_1_0/core/metadata.html#sqlalchemy.schema.MetaData\">sqlalchemy.MetaData</a> call.<br>2. The <code>metadata_cache_timeout</code> is a cache timeout setting in seconds for metadata fetch of this database. Specify it as <strong>\"metadata_cache_timeout\": {\"schema_cache_timeout\": 600, \"table_cache_timeout\": 600}</strong>. If unset, cache will not be enabled for the functionality. A timeout of 0 indicates that the cache never expires.<br>3. The <code>schemas_allowed_for_csv_upload</code> is a comma separated list of schemas that CSVs are allowed to upload to. Specify it as <strong>\"schemas_allowed_for_csv_upload\": [\"public\", \"csv_upload\"]</strong>. If database flavor does not support schema or any schema is allowed to be accessed, just leave the list empty<br>4. the <code>version</code> field is a string specifying the this db's version. This should be used with Presto DBs so that the syntax is correct<br>5. The <code>allows_virtual_table_explore</code> field is a boolean specifying whether or not the Explore button in SQL Lab results is shown.</p>"
           type: string
         force_ctas_schema:
-          description: When allowing CREATE TABLE AS option in SQL Lab, this option forces
-            the table to be created in this schema
+          description: When allowing CREATE TABLE AS option in SQL Lab, this option forces the table to be created in this schema
           maxLength: 250
           minLength: 0
           nullable: true
           type: string
         impersonate_user:
-          description: If Presto, all the queries in SQL Lab are going to be executed as
-            the currently logged on user who must have permission to run
-            them.<br/>If Hive and hive.server2.enable.doAs is enabled, will run
-            the queries as service account, but impersonate the currently logged
-            on user via hive.server2.proxy.user property.
+          description: If Presto, all the queries in SQL Lab are going to be executed as the currently logged on user who must have permission to run them.<br/>If Hive and hive.server2.enable.doAs is enabled, will run the queries as service account, but impersonate the currently logged on user via hive.server2.proxy.user property.
           type: boolean
         server_cert:
-          description: <p>Optional CA_BUNDLE contents to validate HTTPS requests. Only
-            available on certain database engines.</p>
+          description: <p>Optional CA_BUNDLE contents to validate HTTPS requests. Only available on certain database engines.</p>
           nullable: true
           type: string
         sqlalchemy_uri:
-          description: <p>Refer to the <a
-            href="https://docs.sqlalchemy.org/en/rel_1_2/core/engines.html#database-urls">SqlAlchemy
-            docs</a> for more information on how to structure your URI.</p>
+          description: <p>Refer to the <a href="https://docs.sqlalchemy.org/en/rel_1_2/core/engines.html#database-urls">SqlAlchemy docs</a> for more information on how to structure your URI.</p>
           maxLength: 1024
           minLength: 0
           nullable: true
@@ -6796,54 +6561,21 @@ components:
           nullable: true
           type: string
         encrypted_extra:
-          description: <p>JSON string containing additional connection
-            configuration.<br>This is used to provide connection information for
-            systems like Hive, Presto, and BigQuery, which do not conform to the
-            username:password syntax normally used by SQLAlchemy.</p>
+          description: <p>JSON string containing additional connection configuration.<br>This is used to provide connection information for systems like Hive, Presto, and BigQuery, which do not conform to the username:password syntax normally used by SQLAlchemy.</p>
           nullable: true
           type: string
         extra:
-          description: "<p>JSON string containing extra configuration elements.<br>1. The
-            <code>engine_params</code> object gets unpacked into the <a
-            href=\"https://docs.sqlalchemy.org/en/latest/core/engines.html#sqla\
-            lchemy.create_engine\">sqlalchemy.create_engine</a> call, while the
-            <code>metadata_params</code> gets unpacked into the <a
-            href=\"https://docs.sqlalchemy.org/en/rel_1_0/core/metadata.html#sq\
-            lalchemy.schema.MetaData\">sqlalchemy.MetaData</a> call.<br>2. The
-            <code>metadata_cache_timeout</code> is a cache timeout setting in
-            seconds for metadata fetch of this database. Specify it as
-            <strong>\"metadata_cache_timeout\": {\"schema_cache_timeout\": 600,
-            \"table_cache_timeout\": 600}</strong>. If unset, cache will not be
-            enabled for the functionality. A timeout of 0 indicates that the
-            cache never expires.<br>3. The
-            <code>schemas_allowed_for_csv_upload</code> is a comma separated
-            list of schemas that CSVs are allowed to upload to. Specify it as
-            <strong>\"schemas_allowed_for_csv_upload\": [\"public\",
-            \"csv_upload\"]</strong>. If database flavor does not support schema
-            or any schema is allowed to be accessed, just leave the list
-            empty<br>4. the <code>version</code> field is a string specifying
-            the this db's version. This should be used with Presto DBs so that
-            the syntax is correct<br>5. The
-            <code>allows_virtual_table_explore</code> field is a boolean
-            specifying whether or not the Explore button in SQL Lab results is
-            shown.</p>"
+          description: "<p>JSON string containing extra configuration elements.<br>1. The <code>engine_params</code> object gets unpacked into the <a href=\"https://docs.sqlalchemy.org/en/latest/core/engines.html#sqlalchemy.create_engine\">sqlalchemy.create_engine</a> call, while the <code>metadata_params</code> gets unpacked into the <a href=\"https://docs.sqlalchemy.org/en/rel_1_0/core/metadata.html#sqlalchemy.schema.MetaData\">sqlalchemy.MetaData</a> call.<br>2. The <code>metadata_cache_timeout</code> is a cache timeout setting in seconds for metadata fetch of this database. Specify it as <strong>\"metadata_cache_timeout\": {\"schema_cache_timeout\": 600, \"table_cache_timeout\": 600}</strong>. If unset, cache will not be enabled for the functionality. A timeout of 0 indicates that the cache never expires.<br>3. The <code>schemas_allowed_for_csv_upload</code> is a comma separated list of schemas that CSVs are allowed to upload to. Specify it as <strong>\"schemas_allowed_for_csv_upload\": [\"public\", \"csv_upload\"]</strong>. If database flavor does not support schema or any schema is allowed to be accessed, just leave the list empty<br>4. the <code>version</code> field is a string specifying the this db's version. This should be used with Presto DBs so that the syntax is correct<br>5. The <code>allows_virtual_table_explore</code> field is a boolean specifying whether or not the Explore button in SQL Lab results is shown.</p>"
           type: string
         impersonate_user:
-          description: If Presto, all the queries in SQL Lab are going to be executed as
-            the currently logged on user who must have permission to run
-            them.<br/>If Hive and hive.server2.enable.doAs is enabled, will run
-            the queries as service account, but impersonate the currently logged
-            on user via hive.server2.proxy.user property.
+          description: If Presto, all the queries in SQL Lab are going to be executed as the currently logged on user who must have permission to run them.<br/>If Hive and hive.server2.enable.doAs is enabled, will run the queries as service account, but impersonate the currently logged on user via hive.server2.proxy.user property.
           type: boolean
         server_cert:
-          description: <p>Optional CA_BUNDLE contents to validate HTTPS requests. Only
-            available on certain database engines.</p>
+          description: <p>Optional CA_BUNDLE contents to validate HTTPS requests. Only available on certain database engines.</p>
           nullable: true
           type: string
         sqlalchemy_uri:
-          description: <p>Refer to the <a
-            href="https://docs.sqlalchemy.org/en/rel_1_2/core/engines.html#database-urls">SqlAlchemy
-            docs</a> for more information on how to structure your URI.</p>
+          description: <p>Refer to the <a href="https://docs.sqlalchemy.org/en/rel_1_2/core/engines.html#database-urls">SqlAlchemy docs</a> for more information on how to structure your URI.</p>
           maxLength: 1024
           minLength: 1
           type: string
@@ -8409,8 +8141,7 @@ components:
           nullable: true
           type: string
         crontab:
-          description: A CRON expression.[Crontab Guru](https://crontab.guru/) is a
-            helpful resource that can help you craft a CRON expression.
+          description: A CRON expression.[Crontab Guru](https://crontab.guru/) is a helpful resource that can help you craft a CRON expression.
           example: "*/5 * * * *"
           maxLength: 1000
           minLength: 1
@@ -8427,8 +8158,7 @@ components:
           nullable: true
           type: string
         grace_period:
-          description: Once an alert is triggered, how long, in seconds, before Superset
-            nags you again. (in seconds)
+          description: Once an alert is triggered, how long, in seconds, before Superset nags you again. (in seconds)
           example: 14400
           format: int32
           type: integer
@@ -8445,8 +8175,7 @@ components:
           type: string
         owners:
           items:
-            description: Owner are users ids allowed to delete or change this report. If
-              left empty you will be one of the owners of the report.
+            description: Owner are users ids allowed to delete or change this report. If left empty you will be one of the owners of the report.
             format: int32
             type: integer
           type: array
@@ -8455,9 +8184,7 @@ components:
             $ref: "#/components/schemas/ReportRecipient"
           type: array
         sql:
-          description: A SQL statement that defines whether the alert should get triggered
-            or not. The query is expected to return either NULL or a number
-            value.
+          description: A SQL statement that defines whether the alert should get triggered or not. The query is expected to return either NULL or a number value.
           example: SELECT value FROM time_series_table
           type: string
         type:
@@ -8469,20 +8196,16 @@ components:
         validator_config_json:
           $ref: "#/components/schemas/ValidatorConfigJSON"
         validator_type:
-          description: >-
-            Determines when to trigger alert based off value from alert query.
-            Alerts will be triggered with these validator types:
-
+          description: |-
+            Determines when to trigger alert based off value from alert query. Alerts will be triggered with these validator types:
             - Not Null - When the return value is Not NULL, Empty, or 0
-
             - Operator - When `sql_return_value comparison_operator threshold` is True e.g. `50 <= 75`<br>Supports the comparison operators <, <=, >, >=, ==, and !=
           enum:
             - not null
             - operator
           type: string
         working_timeout:
-          description: If an alert is staled at a working state, how long until it's state
-            is reseted to error
+          description: If an alert is staled at a working state, how long until it's state is reseted to error
           example: 3600
           format: int32
           type: integer
@@ -8503,8 +8226,7 @@ components:
           nullable: true
           type: string
         crontab:
-          description: A CRON expression.[Crontab Guru](https://crontab.guru/) is a
-            helpful resource that can help you craft a CRON expression.
+          description: A CRON expression.[Crontab Guru](https://crontab.guru/) is a helpful resource that can help you craft a CRON expression.
           maxLength: 1000
           minLength: 1
           type: string
@@ -8520,8 +8242,7 @@ components:
           nullable: true
           type: string
         grace_period:
-          description: Once an alert is triggered, how long, in seconds, before Superset
-            nags you again. (in seconds)
+          description: Once an alert is triggered, how long, in seconds, before Superset nags you again. (in seconds)
           example: 14400
           format: int32
           type: integer
@@ -8537,8 +8258,7 @@ components:
           type: string
         owners:
           items:
-            description: Owner are users ids allowed to delete or change this report. If
-              left empty you will be one of the owners of the report.
+            description: Owner are users ids allowed to delete or change this report. If left empty you will be one of the owners of the report.
             format: int32
             type: integer
           type: array
@@ -8547,9 +8267,7 @@ components:
             $ref: "#/components/schemas/ReportRecipient"
           type: array
         sql:
-          description: A SQL statement that defines whether the alert should get triggered
-            or not. The query is expected to return either NULL or a number
-            value.
+          description: A SQL statement that defines whether the alert should get triggered or not. The query is expected to return either NULL or a number value.
           example: SELECT value FROM time_series_table
           nullable: true
           type: string
@@ -8562,12 +8280,9 @@ components:
         validator_config_json:
           $ref: "#/components/schemas/ValidatorConfigJSON"
         validator_type:
-          description: >-
-            Determines when to trigger alert based off value from alert query.
-            Alerts will be triggered with these validator types:
-
+          description: |-
+            Determines when to trigger alert based off value from alert query. Alerts will be triggered with these validator types:
             - Not Null - When the return value is Not NULL, Empty, or 0
-
             - Operator - When `sql_return_value comparison_operator threshold` is True e.g. `50 <= 75`<br>Supports the comparison operators <, <=, >, >=, ==, and !=
           enum:
             - not null
@@ -8575,8 +8290,7 @@ components:
           nullable: true
           type: string
         working_timeout:
-          description: If an alert is staled at a working state, how long until it's state
-            is reseted to error
+          description: If an alert is staled at a working state, how long until it's state is reseted to error
           example: 3600
           format: int32
           nullable: true

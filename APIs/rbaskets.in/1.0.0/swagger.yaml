@@ -7,14 +7,11 @@ info:
   contact:
     name: darklynx
     url: https://github.com/darklynx
-  description: >
+  description: |
     RESTful API of [Request Baskets](https://rbaskets.in) service.
 
-
     Request Baskets is an open source project of a service to collect HTTP requests and inspect them via RESTful
-
     API or web UI.
-
 
     Check out the [project page](https://github.com/darklynx/request-baskets) for more detailed description.
   license:
@@ -71,8 +68,7 @@ paths:
           name: skip
           required: false
           type: integer
-        - description: Query string to filter result, only those basket names that match
-            the query will be included in response
+        - description: Query string to filter result, only those basket names that match the query will be included in response
           in: query
           name: q
           required: false
@@ -156,8 +152,7 @@ paths:
         "400":
           description: Bad Request. Failed to parse JSON into basket configuration object.
         "403":
-          description: Forbidden. Indicates that basket name conflicts with reserved
-            paths; e.g. `baskets`, `web`, etc.
+          description: Forbidden. Indicates that basket name conflicts with reserved paths; e.g. `baskets`, `web`, etc.
         "409":
           description: Conflict. Indicates that basket with such name already exists
         "422":
@@ -166,9 +161,8 @@ paths:
       tags:
         - baskets
     put:
-      description: >
+      description: |
         Updates configuration settings of this basket.
-
 
         Special configuration parameters for request forwarding:
           * `insecure_tls` controls certificate verification when forwarding requests. Setting this parameter to `true`
@@ -248,18 +242,14 @@ paths:
           name: skip
           required: false
           type: integer
-        - description: Query string to filter result, only requests that match the query
-            will be included in response
+        - description: Query string to filter result, only requests that match the query will be included in response
           in: query
           name: q
           required: false
           type: string
-        - description: >
-            Defines what is taken into account when filtering is applied:
-            `body` - search in content body of collected requests,
-
+        - description: |
+            Defines what is taken into account when filtering is applied: `body` - search in content body of collected requests,
             `query` - search among query parameters of collected requests, `headers` - search among request header values,
-
             `any` - search anywhere; default `any`
           enum:
             - any
@@ -288,12 +278,9 @@ paths:
         - requests
   "/api/baskets/{name}/responses/{method}":
     get:
-      description: >
-        Retrieves information about configured response of the basket.
-        Service will reply with this response to any
-
+      description: |
+        Retrieves information about configured response of the basket. Service will reply with this response to any
         HTTP request sent to the basket with appropriate HTTP method.
-
 
         If nothing is configured, the default response is HTTP 200 - OK with empty content.
       parameters:
@@ -332,12 +319,9 @@ paths:
       tags:
         - responses
     put:
-      description: >
-        Allows to configure HTTP response of this basket. The service will
-        reply with configured response to any HTTP
-
+      description: |
+        Allows to configure HTTP response of this basket. The service will reply with configured response to any HTTP
         request sent to the basket with appropriate HTTP method.
-
 
         If nothing is configured, the default response is HTTP 200 - OK with empty content.
       parameters:
@@ -385,8 +369,7 @@ paths:
         - responses
   /api/stats:
     get:
-      description: Get service statistics about baskets and collected HTTP requests.
-        Require master token.
+      description: Get service statistics about baskets and collected HTTP requests. Require master token.
       parameters:
         - description: Maximum number of basket names to return; default 5
           in: query
@@ -431,8 +414,7 @@ paths:
           name: skip
           required: false
           type: integer
-        - description: Query string to filter result, only those basket names that match
-            the query will be included in response
+        - description: Query string to filter result, only those basket names that match the query will be included in response
           in: query
           name: q
           required: false
@@ -519,8 +501,7 @@ paths:
         "400":
           description: Bad Request. Failed to parse JSON into basket configuration object.
         "403":
-          description: Forbidden. Indicates that basket name conflicts with reserved
-            paths; e.g. `baskets`, `web`, etc.
+          description: Forbidden. Indicates that basket name conflicts with reserved paths; e.g. `baskets`, `web`, etc.
         "409":
           description: Conflict. Indicates that basket with such name already exists
         "422":
@@ -530,9 +511,8 @@ paths:
         - baskets
     put:
       deprecated: true
-      description: >
+      description: |
         Updates configuration settings of this basket.
-
 
         Special configuration parameters for request forwarding:
           * `insecure_tls` controls certificate verification when forwarding requests. Setting this parameter to `true`
@@ -614,18 +594,14 @@ paths:
           name: skip
           required: false
           type: integer
-        - description: Query string to filter result, only requests that match the query
-            will be included in response
+        - description: Query string to filter result, only requests that match the query will be included in response
           in: query
           name: q
           required: false
           type: string
-        - description: >
-            Defines what is taken into account when filtering is applied:
-            `body` - search in content body of collected requests,
-
+        - description: |
+            Defines what is taken into account when filtering is applied: `body` - search in content body of collected requests,
             `query` - search among query parameters of collected requests, `headers` - search among request header values,
-
             `any` - search anywhere; default `any`
           enum:
             - any
@@ -655,12 +631,9 @@ paths:
   "/baskets/{name}/responses/{method}":
     get:
       deprecated: true
-      description: >
-        Retrieves information about configured response of the basket.
-        Service will reply with this response to any
-
+      description: |
+        Retrieves information about configured response of the basket. Service will reply with this response to any
         HTTP request sent to the basket with appropriate HTTP method.
-
 
         If nothing is configured, the default response is HTTP 200 - OK with empty content.
       parameters:
@@ -700,12 +673,9 @@ paths:
         - responses
     put:
       deprecated: true
-      description: >
-        Allows to configure HTTP response of this basket. The service will
-        reply with configured response to any HTTP
-
+      description: |
+        Allows to configure HTTP response of this basket. The service will reply with configured response to any HTTP
         request sent to the basket with appropriate HTTP method.
-
 
         If nothing is configured, the default response is HTTP 200 - OK with empty content.
       parameters:
@@ -755,12 +725,9 @@ definitions:
   BasketInfo:
     properties:
       last_request_date:
-        description: >
-          Date and time of last request processed through this basket in Unix
-          time ms.
-
+        description: |
+          Date and time of last request processed through this basket in Unix time ms.
           format (number of milliseconds elapsed since January 1, 1970 UTC).
-
 
           If no requests were collected by this basket `0` is returned.
         example: 1550106301288
@@ -809,28 +776,22 @@ definitions:
         example: 250
         type: integer
       expand_path:
-        description: If set to `true` the forward URL path will be expanded when
-          original HTTP request contains compound path.
+        description: If set to `true` the forward URL path will be expanded when original HTTP request contains compound path.
         example: true
         type: boolean
       forward_url:
-        description: URL to forward all incoming requests of the basket, `empty` value
-          disables forwarding
+        description: URL to forward all incoming requests of the basket, `empty` value disables forwarding
         example: https://myservice.example.com/events-collector
         type: string
       insecure_tls:
-        description: >
-          If set to `true` the certificate verification will be disabled if
-          forward URL indicates HTTPS scheme.
-
+        description: |
+          If set to `true` the certificate verification will be disabled if forward URL indicates HTTPS scheme.
           **Warning:** enabling this feature has known security implications.
         example: false
         type: boolean
       proxy_response:
-        description: >
-          If set to `true` this basket behaves as a full proxy: responses
-          from underlying service configured in `forward_url`
-
+        description: |
+          If set to `true` this basket behaves as a full proxy: responses from underlying service configured in `forward_url`
           are passed back to clients of original requests. The configuration of basket responses is ignored in this case.
         example: false
         type: boolean
@@ -862,8 +823,7 @@ definitions:
         example: 24
         type: integer
       date:
-        description: Date and time of request in Unix time ms. format (number of
-          milliseconds elapsed since January 1, 1970 UTC)
+        description: Date and time of request in Unix time ms. format (number of milliseconds elapsed since January 1, 1970 UTC)
         example: 1550300604712
         format: int64
         type: integer
@@ -885,8 +845,7 @@ definitions:
   Requests:
     properties:
       count:
-        description: Current number of collected requests hold by basket; not present if
-          query is applied
+        description: Current number of collected requests hold by basket; not present if query is applied
         example: 200
         type: integer
       has_more:
@@ -899,8 +858,7 @@ definitions:
           $ref: "#/definitions/Request"
         type: array
       total_count:
-        description: Total number of all requests passed through this basket; not
-          present if query is applied
+        description: Total number of all requests passed through this basket; not present if query is applied
         example: 3023
         type: integer
     required:
@@ -916,10 +874,8 @@ definitions:
       headers:
         $ref: "#/definitions/Headers"
       is_template:
-        description: >
-          If set to `true` the body is treated as [HTML
-          template](https://golang.org/pkg/html/template) that accepts
-
+        description: |
+          If set to `true` the body is treated as [HTML template](https://golang.org/pkg/html/template) that accepts
           input from request parameters.
         example: false
         type: boolean
@@ -931,8 +887,7 @@ definitions:
   ServiceStats:
     properties:
       avg_basket_size:
-        description: Average size of a basket in the system, empty baskets are not taken
-          into account
+        description: Average size of a basket in the system, empty baskets are not taken into account
         example: 217
         type: integer
       baskets_count:
@@ -944,8 +899,7 @@ definitions:
         example: 12
         type: integer
       max_basket_size:
-        description: Size of the biggest basket that processed the top most number of
-          HTTP requests
+        description: Size of the biggest basket that processed the top most number of HTTP requests
         example: 1027
         type: integer
       requests_count:

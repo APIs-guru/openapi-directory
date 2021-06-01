@@ -2,15 +2,11 @@ openapi: 3.0.0
 servers:
   - url: /api
 info:
-  description: >
-    An Orchestration Layer that takes ISL services and packages them in
-    a more targeted way for front-end applications.
-
+  description: |
+    An Orchestration Layer that takes ISL services and packages them in a more targeted way for front-end applications.
     This in turn makes client integration easier and reduces the complexity and size of front-end applications.
 
-
     Rocket is also customisable - allowing UI engineers to ‘remix’ the existing back-end services into something that
-
     best suits the application they are developing.
   title: Rocket Services
   version: 3.730.281-ref-1-39-0
@@ -24,8 +20,7 @@ info:
 paths:
   /account:
     get:
-      description: Get the details of an account along with the profiles and
-        entitlements under it.
+      description: Get the details of an account along with the profiles and entitlements under it.
       operationId: getAccount
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -85,14 +80,11 @@ paths:
       tags:
         - account
     patch:
-      description: >
+      description: |
         Update the details of an account.
 
-
         With the exception of the address, this supports partial updates, so you can send just the
-
         properties you wish to update.
-
 
         When the address is provided any properties which are omitted from the address will be cleared.
       operationId: updateAccount
@@ -553,18 +545,15 @@ paths:
     x-serviceId: billing
   "/account/billing/subscriptions/{id}":
     delete:
-      description: >
+      description: |
         Cancel a plan subscription.
 
-
         A cancelled subscription will continue to be valid until the subscription
-
         expiry date or next renewal date.
       operationId: cancelSubscription
       parameters:
-        - description: >
-            The identifier of the current active subscription membership of the
-            account.
+        - description: |
+            The identifier of the current active subscription membership of the account.
           in: path
           name: id
           required: true
@@ -623,18 +612,13 @@ paths:
       tags:
         - account
     put:
-      description: >
-        Renew a cancelled subscription or switch subscription to a
-        different plan.
-
+      description: |
+        Renew a cancelled subscription or switch subscription to a different plan.
 
         When renewing a cancelled subscription membership, hit this endpoint with
-
         the id of subscription to renew.
 
-
         To switch plans provide the id of the current active subscription membership
-
         of the account, and in the query specify the id of the plan to switch to.
       operationId: updateSubscription
       parameters:
@@ -706,9 +690,8 @@ paths:
     x-serviceId: billing
   /account/devices:
     get:
-      description: >
+      description: |
         Get all devices registered under this account.
-
 
         Also includes information around device registration and deregistration limits.
       operationId: getDevices
@@ -770,9 +753,8 @@ paths:
       tags:
         - account
     post:
-      description: >
+      description: |
         Register a playback device under an account.
-
 
         If a device with the same id already exists a `409` conflict will be returned.
       operationId: registerDevice
@@ -849,29 +831,20 @@ paths:
     x-serviceId: device
   /account/devices/authorization:
     post:
-      description: >
+      description: |
         Authorize a device from a generated device authorization code.
-
 
         This is the second step in the process of authorizing a device by pin code.
 
-
         Firstly the device must request a generated authorization code via the
-
         `/authorization/device/code` endpoint.
 
-
         This endpoint then authorizes the device associated with the code to sign in
-
         to a user account. Typically this endpoint will be called from a page
-
         presented in the web app under the account section.
 
-
         Once authorized, the device will then be able to sign in to that account
-
         via the `/authorization/device` endpoint, without needing to provide the 
-
         credentials of the user.
       operationId: authorizeDevice
       parameters:
@@ -1125,12 +1098,10 @@ paths:
     x-serviceId: device
   /account/entitlements:
     get:
-      description: >
+      description: |
         Get all entitlements under the account.
 
-
         This list is returned under the call to get account information so a call here is
-
         only required when wishing to refresh a local copy of entitlements.
       operationId: getEntitlements
       parameters:
@@ -1195,49 +1166,30 @@ paths:
     x-serviceId: entitlement
   "/account/items/{id}/videos":
     get:
-      description: >
-        Get the video files associated with an item given maximum
-        resolution, device type
-
+      description: |
+        Get the video files associated with an item given maximum resolution, device type
         and one or more delivery types.
 
-
         This endpoint accepts an Account Catalog token, however if when requesting
-
         playback files you receive an *403 status code with error code 1* then the file
-
         you're requesting is classification restricted. This means you should switch
-
         to target the `/account/items/{id}/videos-guarded` endpoint, passing it an Account
-
         Playback token. If not already obtained, this token can be requested via the
-
         `/itv/pinauthorization` endpoint with an account level pin.
 
-
         For convenience you may also access free / public files through this endpoint
-
         instead of the /items/{id}/videos endpoint, when authenticated.
-
 
         Returns an array of video file objects which each include a url to a video.
 
-
         The first entry in the array contains what is predicted to be the best match.
-
         The remainder of the entries, if any, may contain resolutions below what was
-
         requests. For example if you request HD-720 the response may also contain
-
         SD entries.
 
-
         If you specify multiple delivery types, then the response array will insert
-
         types in the order you specify them in the query. For example `stream,progressive`
-
         would return an array with 0 or more stream files followed by 0 or more progressive files.
-
 
         If no files are found a 404 is returned.
       operationId: getItemMediaFiles
@@ -1317,40 +1269,25 @@ paths:
     x-serviceId: media
   "/account/items/{id}/videos-guarded":
     get:
-      description: >
-        Get the video files associated with an item given maximum
-        resolution, device type
-
+      description: |
+        Get the video files associated with an item given maximum resolution, device type
         and one or more delivery types.
 
-
         This endpoint is identical to the `/account/items/{id}/videos` however it expects
-
         an Account Playback token. This token, and in association this endpoint, is specifically
-
         for use when playback files are classification restricted and require an account
-
         level pin to access them.
-
 
         Returns an array of video file objects which each include a url to a video.
 
-
         The first entry in the array contains what is predicted to be the best match.
-
         The remainder of the entries, if any, may contain resolutions below what was
-
         requests. For example if you request HD-720 the response may also contain
-
         SD entries.
 
-
         If you specify multiple delivery types, then the response array will insert
-
         types in the order you specify them in the query. For example `stream,progressive`
-
         would return an array with 0 or more stream files followed by 0 or more progressive files.
-
 
         If no files are found a 404 is returned.
       operationId: getItemMediaFilesGuarded
@@ -1430,21 +1367,15 @@ paths:
     x-serviceId: media
   /account/nonce:
     get:
-      description: >
+      description: |
         Generate a new account nonce.
 
-
         A nonce may be required to help sign a response from a third party
-
         service which will be passed back to these services.
 
-
         For example a Facebook single-sign-on request initiated by a client
-
         application may first get a nonce from here to include in the request.
-
         Facebook will then include the nonce in the auth token it issues. This
-
         token can be passed back to our services and the nonce checked for validity.
       operationId: generateNonce
       parameters:
@@ -1640,8 +1571,7 @@ paths:
     x-serviceId: itvAccount
   /account/profile:
     get:
-      description: Get the details of the active profile, including watched,
-        bookmarked and rated items.
+      description: Get the details of the active profile, including watched, bookmarked and rated items.
       operationId: getProfile
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -1703,8 +1633,7 @@ paths:
     x-serviceId: profile
   /account/profile/bookmarks:
     get:
-      description: Get the map of bookmarked item ids (itemId => creationDate) under
-        the active profile.
+      description: Get the map of bookmarked item ids (itemId => creationDate) under the active profile.
       operationId: getBookmarks
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -2050,63 +1979,40 @@ paths:
     x-serviceId: itvNightwatch
   /account/profile/continue-watching/list:
     get:
-      description: >
-        Returns a list of items which have been watched but not completed
-        under the active
-
+      description: |
+        Returns a list of items which have been watched but not completed under the active
         profile.
 
-
         Multiple episodes under the same show may be watched or in progress, however only a
-
         single item belonging to a particular show will be included in the returned list.
 
-
         The next episode to continue watching for a particular show will be the most recent
-
         incompletely watched episode, or the next episode following the most recently
-
         completely watched episode. Based on the specified `show_item_type` type, either the next
-
         episode, the season of the next episode, or the show will be included in the list.
       operationId: getContinueWatchingList
       parameters:
-        - description: >
-            The item type to be returned for continue watching items belonging
-            to a show.
-
+        - description: |
+            The item type to be returned for continue watching items belonging to a show.
 
             Multiple episodes under the same show may be watched or in progress, however only a
-
             single item belonging to a particular show will be included in the returned list.
 
-
             The next episode to continue watching for a particular show will be the most recent
-
             incompletely watched episode, or the next episode following the most recently
-
             completely watched episode. Based on the specified `show_item_type` type, either the next
-
             episode, the season of the next episode, or the show will be included in the list.
 
-
             If `episode` is specified, then only the next episode to continue watching for a
-
             show will be returned.
-
 
             If `season` is specified, then only the season of the next episode will be returned.
 
-
             If `show` is specified, then only the show of the next episode will be returned
 
-
             The recommended value of this parameter should reflect the desitination the
-
             user will be sent to when they select this item in the list. So if a user will
-
             be sent to the show detail page then this should be `show` and you can use
-
             the `include` parameter to get metadata about the episode or season if needed
           in: query
           name: show_item_type
@@ -2117,28 +2023,19 @@ paths:
               - season
               - show
             type: string
-        - description: >
-            Include one opr more ancestor/children for items belonging to a
-            show. Extra items
-
+        - description: |
+            Include one opr more ancestor/children for items belonging to a show. Extra items
             will be populated in the `listData` property of the list
-
 
             If no value is specified no dependencies are included.
 
-
             If `episode` is specified, then the next episode will be added for season/show
-
             items. Has no effect if `show_item_type` is set to `episode`.
 
-
             If `season` is specified, then the season of the next episode will be added for
-
             episode/show items. Has no effect if `show_item_type` is set to `season`.
 
-
             If `show` is specified, then the show of the next episode will be added for
-
             episode/season items. Has no effect if `show_item_type` is set to `show`.
           explode: false
           in: query
@@ -2237,29 +2134,22 @@ paths:
     x-serviceId: continueWatching
   "/account/profile/items/{itemId}/next":
     get:
-      description: >
+      description: |
         Returns the next item to play given a source item id.
-
 
         For an unwatched show it returns the first episode available to the account.
 
-
         For a watched show it returns the last incompletely watched episode by the profile,
-
         or the episode that immediately follows the last completely watched episode 
-
         or nothing.
 
-
         For an episode it always returns the immediately following episode, if available to
-
         the account, or nothing.
-
 
         If the response does not contain a `next` property then no item was found.
       operationId: getNextPlaybackItem
       parameters:
-        - description: >
+        - description: |
             The identifier of the source item to base the next to watch item off.
           in: path
           name: itemId
@@ -2271,17 +2161,13 @@ paths:
           name: max_rating
           schema:
             type: string
-        - description: >
+        - description: |
             If no value is specified no dependencies are expanded.
 
-
             If 'parent' is specified then only the direct parent will be expanded.
-
             For example if an `Episode` then the `Season` would be included.
 
-
             If 'ancestors' is specified then the full parent chain is expanded.
-
             For example if an `Episode` then both the `Season` and `Show` would be included.
           in: query
           name: expand
@@ -2352,8 +2238,7 @@ paths:
     x-serviceId: itvNightwatch
   /account/profile/ratings:
     get:
-      description: Get the map of rated item ids (itemId => rating out of 10) under
-        the active profile.
+      description: Get the map of rated item ids (itemId => rating out of 10) under the active profile.
       operationId: getRatings
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -2439,9 +2324,8 @@ paths:
             minimum: 1
             type: integer
         - $ref: "#/components/parameters/ListOrder"
-        - description: >
+        - description: |
             What to order by.
-
 
             Ordering by `date-modified` equates to ordering by the last rated date.
           in: query
@@ -2661,14 +2545,10 @@ paths:
     x-serviceId: userRating
   /account/profile/watched:
     delete:
-      description: >
-        Remove the watched status of items under the active profile.
-        Passing in
-
+      description: |
+        Remove the watched status of items under the active profile. Passing in
         specific `itemId`s to the `item_ids` query parameter will cause only these
-
         items to be removed. **If this list is missing all watched items will be
-
         removed**
       operationId: deleteWatched
       parameters:
@@ -2738,8 +2618,7 @@ paths:
       tags:
         - profile
     get:
-      description: Get the map of watched item ids (itemId => last playhead position)
-        under the active profile.
+      description: Get the map of watched item ids (itemId => last playhead position) under the active profile.
       operationId: getWatched
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -2823,10 +2702,8 @@ paths:
             maximum: 50
             minimum: 1
             type: integer
-        - description: >
-            Filter by whether an item has been fully watched (completed) or
-            not.
-
+        - description: |
+            Filter by whether an item has been fully watched (completed) or not.
 
             If `undefined` then both partially and fully watched items are returned.
           in: query
@@ -2834,9 +2711,8 @@ paths:
           schema:
             type: boolean
         - $ref: "#/components/parameters/ListOrder"
-        - description: >
+        - description: |
             What to order by.
-
 
             Ordering by `date-modified` equates to ordering by the last watched date.
           in: query
@@ -2976,13 +2852,10 @@ paths:
       tags:
         - profile
     put:
-      description: >
-        Record the watched playhead position of a video under the active
-        profile.
-
+      description: |
+        Record the watched playhead position of a video under the active profile.
 
         Can be used later to resume a video from where it was last watched.
-
 
         Creates one if it doesn't exist, overwrites one if it does.
       operationId: setItemWatchedStatus
@@ -3262,10 +3135,8 @@ paths:
       tags:
         - account
     patch:
-      description: >
-        Update the summary of a profile with a specific id under the active
-        account.
-
+      description: |
+        Update the summary of a profile with a specific id under the active account.
 
         This supports partial updates so you can send just the properties you wish to update.
       operationId: updateProfileWithId
@@ -3338,24 +3209,17 @@ paths:
     x-serviceId: profile
   /account/request-email-verification:
     post:
-      description: >
+      description: |
         Request that the email address tied to an account be verified.
 
-
         This will send a verification email to the email address of the primary profile containing
-
         a link which, once clicked, completes the verification process via the /verify-email endpoint.
 
-
         Note that when an account is created this email is sent automatically so there's no need
-
         to call this directly.
 
-
         If the user doesn't click the link before it expires then this endpoint can be called
-
         to request a new verification email. In the future it may also be used if we add support
-
         for changing an account email address.
       operationId: requestEmailVerification
       parameters:
@@ -3457,23 +3321,16 @@ paths:
       tags:
         - authorization
     post:
-      description: >
-        Request one or more `Account` level authorization tokens each with
-        a chosen scope.
-
+      description: |
+        Request one or more `Account` level authorization tokens each with a chosen scope.
 
         Tokens are used to access restricted service endpoints. These restricted endpoints
-
         will require a specific token type (e.g Account) with a specific scope (e.g. Catalog)
-
         before access is granted.
-
 
         For convenience, where a Profile level token with the same scope exists it will also be returned.
 
-
         Authorization with pin is not supported on this endpoint anymore. Use `/itv/pinauthorization`
-
         endpoint instead.
       operationId: getAccountToken
       parameters:
@@ -3543,30 +3400,20 @@ paths:
     x-serviceId: itvAuth
   /authorization/device:
     post:
-      description: >
-        Get Catalog tokens for an account using a device authorization
-        code.
-
+      description: |
+        Get Catalog tokens for an account using a device authorization code.
         Where a Profile level token of Catalog scope exists it will also be returned.
-
 
         This is the final step in the process of authorizing a device by pin code.
 
-
         Firstly the device must request a generated authorization code via the
-
         `/authorization/device/code` endpoint.
 
-
         The code is subsequently used to authorize the device to sign in to a given
-
         account via the `/account/devices/authorization` endpoint. Typically this
-
         will be from a page presented in the web app under the account section.
 
-
         Once authorized, this endpoint will allow the device to sign in without
-
         needing to provide the credentials of the user.
       operationId: getAccountTokenByCode
       parameters:
@@ -3636,30 +3483,20 @@ paths:
     x-serviceId: itvAuth
   /authorization/device/code:
     post:
-      description: >
+      description: |
         Get a generated device authorization code.
 
-
         This is the first step in the process of authorizing a device by pin code.
-
         The device will make a request to this endpoint providing a unique identifier
-
         for the device such as a serial number. This endpoint will then return a
-
         generated code which is tied to the given device.
 
-
         The code may subsequently be used to authorize the device to sign in to an
-
         account via the `/account/devices/authorization` endpoint. Typically this
-
         will be from a page presented in the web app under the account section.
 
-
         Once authorized, the device will then be able to sign in to that account
-
         via the `/authorization/device` endpoint, without needing to provide the 
-
         credentials of the user.
       operationId: generateDeviceAuthorizationCode
       parameters:
@@ -3714,15 +3551,11 @@ paths:
     x-serviceId: itvAuth
   /authorization/profile:
     post:
-      description: >
-        Request one or more `Profile` level authorization tokens each with
-        a chosen scope.
-
+      description: |
+        Request one or more `Profile` level authorization tokens each with a chosen scope.
 
         Tokens are used to access restricted service endpoints. These restriced endpoints
-
         will require a specific token type (e.g Profile) with a specific scope (e.g. Catalog)
-
         before access is granted.
       operationId: getProfileToken
       parameters:
@@ -3795,8 +3628,7 @@ paths:
     x-serviceId: itvAuth
   /authorization/refresh:
     post:
-      description: Refresh an account or profile level authorization token which is
-        marked as refreshable.
+      description: Refresh an account or profile level authorization token which is marked as refreshable.
       operationId: refreshToken
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -3862,8 +3694,7 @@ paths:
     x-serviceId: itvAuth
   /authorization/sso:
     post:
-      description: Exchange a third party single-sign-on token for our own
-        authorization tokens.
+      description: Exchange a third party single-sign-on token for our own authorization tokens.
       operationId: singleSignOn
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -3896,9 +3727,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ServiceError"
-          description: >
+          description: |
             Unauthorized.
-
 
             Error codes:
               - 6000: Unknown or default error code.
@@ -3929,8 +3759,7 @@ paths:
     x-serviceId: auth
   "/bt/plan/{token}":
     get:
-      description: Returns all the plans available for BT flow including additional
-        description data.
+      description: Returns all the plans available for BT flow including additional description data.
       operationId: getPlanByToken
       parameters:
         - description: The identifier of the user provided by BT in an initial URL.
@@ -3982,8 +3811,7 @@ paths:
     x-serviceId: itvBt
   /bt/plans:
     get:
-      description: Returns all the plans available for BT flow including additional
-        description data.
+      description: Returns all the plans available for BT flow including additional description data.
       operationId: getPlans
       parameters:
         - $ref: "#/components/parameters/Language"
@@ -4029,8 +3857,7 @@ paths:
     x-serviceId: itvBt
   /bt/token/assign:
     post:
-      description: Assigns an UserToken to a profile on the ITV side. Currently throws
-        an exception.
+      description: Assigns an UserToken to a profile on the ITV side. Currently throws an exception.
       operationId: assignToken
       parameters:
         - $ref: "#/components/parameters/Language"
@@ -4162,18 +3989,13 @@ paths:
     x-serviceId: itvSubscription
   /config:
     get:
-      description: >
-        Get the global configuration for an application. Should be called
-        during app statup.
-
+      description: |
+        Get the global configuration for an application. Should be called during app statup.
 
         This includes things like device and playback rules, classifications,
-
         sitemap and subscriptions.
 
-
         You have the option to select specific configuration objects using the 'include'
-
         parameter, or if unspecified, getting all configuration.
       operationId: getAppConfig
       parameters:
@@ -4304,12 +4126,9 @@ paths:
     x-serviceId: itvEe
   /ee/offers:
     post:
-      description: >
-        Returns eligible partner specific offers for the querying partner
-        for an EE MSISDN.
-
+      description: |
+        Returns eligible partner specific offers for the querying partner for an EE MSISDN.
         This call is supposed to be called after we have MSISDN accired.
-
         This call should be followed by POST /ee/msisdn.
       operationId: getEligibleOffers
       parameters:
@@ -4364,10 +4183,7 @@ paths:
     x-serviceId: eeOffers
   /ee/pin:
     post:
-      description: Validate PIN request created by calling POST /ee/pin This call is
-        to validate MSISDN entered by a user not comming through EE network.
-        This call should be called after PUT /ee/pin. This call should be
-        followed by POST /ee/offers.
+      description: Validate PIN request created by calling POST /ee/pin This call is to validate MSISDN entered by a user not comming through EE network. This call should be called after PUT /ee/pin. This call should be followed by POST /ee/offers.
       operationId: validatePinRequest
       parameters:
         - $ref: "#/components/parameters/FeatureFlags"
@@ -4419,11 +4235,9 @@ paths:
       tags:
         - ee
     put:
-      description: >
+      description: |
         Creates a PIN request that will send an SMS to the given msisdn.
-
         This call is to validate MSISDN entered by a user not comming through EE network.
-
         This call should be followed by POST ee/pin.
       operationId: createPinRequest
       parameters:
@@ -4478,8 +4292,7 @@ paths:
     x-serviceId: eeCredentials
   /ee/plans:
     get:
-      description: Returns all the plans available for EE flow including additional
-        description data.
+      description: Returns all the plans available for EE flow including additional description data.
       parameters:
         - $ref: "#/components/parameters/Language"
       responses:
@@ -4524,8 +4337,7 @@ paths:
     x-serviceId: itvEe
   "/ee/plans/{id}":
     get:
-      description: Returns the plan description for EE flow including additional
-        description data.
+      description: Returns the plan description for EE flow including additional description data.
       operationId: getPlan
       parameters:
         - description: The identifier of the plan received from ee/offers.
@@ -4577,8 +4389,7 @@ paths:
     x-serviceId: itvEe
   /ee/token/create:
     get:
-      description: Returns a token for later calls to EE API. TTL is one hour.
-        Recommended is FE refreshes this token before each call.
+      description: Returns a token for later calls to EE API. TTL is one hour. Recommended is FE refreshes this token before each call.
       operationId: createToken
       responses:
         "200":
@@ -4625,9 +4436,8 @@ paths:
       description: Returns the details of an item with the specified id.
       operationId: getItem
       parameters:
-        - description: >
+        - description: |
             The identifier of the item to load.
-
 
             The custom identifier of an item can be used here if the `use_custom_id` parameter is true.
           in: path
@@ -4640,34 +4450,23 @@ paths:
           name: max_rating
           schema:
             type: string
-        - description: >
+        - description: |
             If no value is specified no dependencies are expanded.
 
-
             If 'children' is specified then the list of any direct children will be expanded. For example
-
             seasons of a show or episodes of a season.
 
-
             If 'all' is specified then the parent chain will be expanded along with any child list at each level.
-
             For example if an episode is specified then its season will be expanded and that season's episode list.
-
             The season will have its show expanded and the show will have its season list expanded.
 
-
             The 'all' options is useful when you deep link into a show/season/episode for the first time as
-
             it provides full context for navigating around the show page. Subsequent navigation around
-
             children of the show should only need to request expand of children.
-
 
             If 'ancestors' is specified then only the parent chain is included.
 
-
             If 'parent' is specified then only the direct parent is included.
-
 
             If an expand is specified which is not relevant to the item type, it will be ignored.
           in: query
@@ -4679,19 +4478,13 @@ paths:
               - ancestors
               - parent
             type: string
-        - description: >
-            Given a provided show id, it can be useful to get the details of a
-            child season. This option
-
+        - description: |
+            Given a provided show id, it can be useful to get the details of a child season. This option
             provides a means to return the `first` or `latest` season of a show given the show id.
 
-
             The `expand` parameter also works here so for example you could land on a show page and request the
-
             latest season along with `expand=all`. This would then return the detail of the latest season with
-
             its list of child episode summaries, and also expand the detail of the show with its list of seasons summaries.
-
 
             Note the `id` parameter must be a show id for this parameter to work correctly.
           in: query
@@ -4753,15 +4546,12 @@ paths:
     x-serviceId: item
   "/items/{id}/children":
     get:
-      description: >
+      description: |
         Returns the List of child summary items under an item.
-
 
         If the item is a Season then the children will be episodes and ordered by episode number.
 
-
         If the item is a Show then the children will be Seasons and ordered by season number.
-
 
         Returns 404 if no children found.
       operationId: getItemChildrenList
@@ -4842,9 +4632,8 @@ paths:
     x-serviceId: itemChildList
   "/items/{id}/related":
     get:
-      description: >
+      description: |
         Returns the list of items related to the parent item.
-
 
         Note for now, due to the size of the list being unknown, only a single page will be returned.
       operationId: getItemRelatedList
@@ -4924,31 +4713,20 @@ paths:
     x-serviceId: itemRelatedList
   "/items/{id}/videos":
     get:
-      description: >
-        Get the free / public video files associated with an item given
-        maximum resolution,
-
+      description: |
+        Get the free / public video files associated with an item given maximum resolution,
         device type and one or more delivery types.
-
 
         Returns an array of video file objects which each include a url to a video.
 
-
         The first entry in the array contains what is predicted to be the best match.
-
         The remainder of the entries, if any, may contain resolutions below what was
-
         requests. For example if you request HD-720 the response may also contain
-
         SD entries.
 
-
         If you specify multiple delivery types, then the response array will insert
-
         types in the order you specify them in the query. For example `stream,progressive`
-
         would return an array with 0 or more stream files followed by 0 or more progressive files.
-
 
         If no files are found a 404 is returned.
       operationId: getPublicItemMediaFiles
@@ -5013,14 +4791,12 @@ paths:
     x-serviceId: media
   "/items/{itemId}/next":
     get:
-      description: >
-        Identical to GET /account/profile/items/{itemId}/next route but for
-        users
-
+      description: |
+        Identical to GET /account/profile/items/{itemId}/next route but for users
         that are not logged in i.e. this endpoint does not require authorisation
       operationId: getAnonNextPlaybackItem
       parameters:
-        - description: >
+        - description: |
             The identifier of the source item to base the next to watch item off.
           in: path
           name: itemId
@@ -5032,17 +4808,13 @@ paths:
           name: max_rating
           schema:
             type: string
-        - description: >
+        - description: |
             If no value is specified no dependencies are expanded.
 
-
             If 'parent' is specified then only the direct parent will be expanded.
-
             For example if an `Episode` then the `Season` would be included.
 
-
             If 'ancestors' is specified then the full parent chain is expanded.
-
             For example if an `Episode` then both the `Season` and `Show` would be included.
           in: query
           name: expand
@@ -5497,10 +5269,7 @@ paths:
     x-serviceId: itvSubscription
   "/itv/featureFlag/{feature}":
     get:
-      description: Gets info whether or not a feature is enabled or disabled using a
-        feature flag. Feature flags are set as a custom field within PM. It also
-        supports custom feature flag data if needed. Such data can be return as
-        well.
+      description: Gets info whether or not a feature is enabled or disabled using a feature flag. Feature flags are set as a custom field within PM. It also supports custom feature flag data if needed. Such data can be return as well.
       operationId: getFeatureFlag
       parameters:
         - description: The identifier of the feature to check for feature flag.
@@ -5701,17 +5470,13 @@ paths:
     x-serviceId: itvInfo
   /itv/page:
     get:
-      description: >
+      description: |
         Returns a page with the specified id.
-
 
         This is a cut down version for low memory devices.123
 
-
         If targeting the search page you must url encode the search term as a parameter
-
         using the `q` key. For example if your browser path looks like `/search?q=the`
-
         then what you pass to this endpoint would look like `/itv/page?path=/search%3Fq%3Dthe`.
       operationId: getItvPage
       parameters:
@@ -5721,8 +5486,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of items to load when prefetching and paging each list
-            in the page row.
+        - description: The number of items to load when prefetching and paging each list in the page row.
           in: query
           name: list_page_size
           schema:
@@ -5731,13 +5495,10 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
-            The number of items to load when prefetching a continuous scroll
-            list entry in a page.
-
+        - description: |
+            The number of items to load when prefetching a continuous scroll list entry in a page.
 
             By default any list page entry with template pattern `/^CS\d+$/` will
-
             be considered a continuous scroll list.
           in: query
           name: list_page_size_large
@@ -5756,35 +5517,23 @@ paths:
             maximum: 15
             minimum: 0
             type: integer
-        - description: >
-            Only relevant when loading item detail pages as these embed a
-            detailed item in the main page entry.
-
+        - description: |
+            Only relevant when loading item detail pages as these embed a detailed item in the main page entry.
 
             If no value is specified no item dependencies are expanded.
 
-
             If 'children' is specified then the list of any direct children will be expanded. For example
-
             seasons of a show or episodes of a season.
 
-
             If 'all' is specified then the parent chain will be expanded along with any child list at each level.
-
             For example if an episode is specified then its season will be expanded and that season's episode list.
-
             The season will have its show expanded and the show will have its season list expanded.
 
-
             The 'all' options is useful when you deep link into a show/season/episode for the first time as
-
             it provides full context for navigating around the show page. Subsequent navigation around
-
             children of the show should only need to request expand of children.
 
-
             If 'ancestors' is specified then only the parent chain is included
-
 
             If an expand is specified which is not relevant to the item type, it will be ignored.
           in: query
@@ -5795,33 +5544,21 @@ paths:
               - children
               - ancestors
             type: string
-        - description: >
-            Only relevant when loading show detail pages as these embed a
-            detailed item in the main page entry.
-
+        - description: |
+            Only relevant when loading show detail pages as these embed a detailed item in the main page entry.
 
             Since the introduction of the D1,2,3 templates this parameter is now somewhat redundant, or less
-
             likely to have any effect. While it may still be useful in some cases, most of the time the season
-
             selection will be dictated by the configuration of the rows scheduled on the show detail page.
-
             This parameter will only take effect if there are rows used to schedule episodes of a season, like
-
             D1,2,3, or if no rows have a value set for their `seasonOrder` custom field.
 
-
             Given a targeted show page, it can be useful to get the details of a child season. This option
-
             provides a means to return the `first` or `latest` season of a show embedded in the page.
 
-
             The `expand` parameter also works here so for example you could land on a show page and request the
-
             `item_detail_select_season=latest` along with `item_detail_expand=all`. This would then return the
-
             detail of the latest season with its list of child episode summaries, and also expand
-
             the detail of the show with its list of seasons summaries.
           in: query
           name: item_detail_select_season
@@ -5860,10 +5597,8 @@ paths:
                 $ref: "#/components/schemas/Page"
           description: The page requested.
         "301":
-          description: >
-            Returned if feature flag `cd` is set and item detail is requested
-            of an item that has
-
+          description: |
+            Returned if feature flag `cd` is set and item detail is requested of an item that has
             Custom Destination set to an External URL. The `Location` response header contains the URL.
         "400":
           content:
@@ -5970,8 +5705,7 @@ paths:
       description: Upgrades the plan for the current user.
       operationId: upgradePlan
       parameters:
-        - description: The identifier of the payment platform (stripe/itunes). Only Stripe
-            is supported
+        - description: The identifier of the payment platform (stripe/itunes). Only Stripe is supported
           in: path
           name: platform
           required: true
@@ -6239,12 +5973,10 @@ paths:
     x-serviceId: itvSubscription
   "/itv/purchase/{platform}":
     delete:
-      description: >
+      description: |
         Cancel a plan subscription.
 
-
         A cancelled subscription will continue to be valid until the subscription
-
         expiry date or next renewal date.
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
@@ -6300,8 +6032,7 @@ paths:
       tags:
         - itv
     get:
-      description: Returns the details of current subscription for specified payment
-        platform.
+      description: Returns the details of current subscription for specified payment platform.
       operationId: getCurrentSubscription
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
@@ -6354,8 +6085,7 @@ paths:
       tags:
         - itv
     post:
-      description: Confirms purchase and returns the details of purchased subscription
-        for specified payment platform.
+      description: Confirms purchase and returns the details of purchased subscription for specified payment platform.
       operationId: confirmPurchase
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
@@ -6417,8 +6147,7 @@ paths:
     x-serviceId: itvSubscription
   "/itv/purchase/{platform}/strong":
     post:
-      description: Confirms purchase and returns the details of purchased subscription
-        for specified payment platform.
+      description: Confirms purchase and returns the details of purchased subscription for specified payment platform.
       operationId: confirmPurchaseStrong
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
@@ -6480,8 +6209,7 @@ paths:
     x-serviceId: itvSubscription
   "/itv/purchase/{platform}/withoffer":
     post:
-      description: Confirms purchase and returns the details of purchased subscription
-        for specified payment platform.
+      description: Confirms purchase and returns the details of purchased subscription for specified payment platform.
       operationId: confirmPurchaseWithOffer
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
@@ -6552,8 +6280,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The identifier of the payment platform (stripe/itunes). Only stripe
-            is currently supported.
+        - description: The identifier of the payment platform (stripe/itunes). Only stripe is currently supported.
           in: path
           name: platform
           required: true
@@ -6585,8 +6312,7 @@ paths:
     x-serviceId: itvSubscription
   /itv/save-offer:
     get:
-      description: Checks the provided coupon id for a user. Only Stripe platform is
-        currently supported.
+      description: Checks the provided coupon id for a user. Only Stripe platform is currently supported.
       operationId: getSaveOffer
       parameters:
         - $ref: "#/components/parameters/Language"
@@ -6633,8 +6359,7 @@ paths:
       tags:
         - itv
     post:
-      description: Activates the discount for a user. Only Stripe platform is
-        currently supported.
+      description: Activates the discount for a user. Only Stripe platform is currently supported.
       operationId: activateSaveOffer
       parameters:
         - $ref: "#/components/parameters/Language"
@@ -6647,16 +6372,11 @@ paths:
         required: true
       responses:
         "204":
-          description: Authentication  passes, the user has an active subscription and the
-            coupon id is valid. The response body is the updated subscription
-            object.
+          description: Authentication  passes, the user has an active subscription and the coupon id is valid. The response body is the updated subscription object.
         "401":
-          description: Unauthorised. In the case of a token this can happen if the token
-            is missing, invalid, or if the token bearer does not match the user
-            in the path.
+          description: Unauthorised. In the case of a token this can happen if the token is missing, invalid, or if the token bearer does not match the user in the path.
         "404":
-          description: The customer could not be found.The customer does not have an
-            active subscription. The coupon could not be found.
+          description: The customer could not be found.The customer does not have an active subscription. The coupon could not be found.
         "406":
           description: Invalid Token/Customer Not Eligible for Offer.
       security:
@@ -6813,8 +6533,7 @@ paths:
       description: Change payment method details.
       operationId: updatePaymentIntentStrong
       parameters:
-        - description: The identifier of the payment platform (stripe only is currently
-            supported).
+        - description: The identifier of the payment platform (stripe only is currently supported).
           in: path
           name: platform
           required: true
@@ -6876,8 +6595,7 @@ paths:
       description: Change payment method details.
       operationId: updatePaymentMethodStrong
       parameters:
-        - description: The identifier of the payment platform (stripe only is currently
-            supported).
+        - description: The identifier of the payment platform (stripe only is currently supported).
           in: path
           name: platform
           required: true
@@ -6932,8 +6650,7 @@ paths:
     x-serviceId: itvSubscription
   "/itv/voucher/{planId}/{voucherId}":
     get:
-      description: Checks the provided coupon id for a user. Only Stripe platform is
-        currently supported.
+      description: Checks the provided coupon id for a user. Only Stripe platform is currently supported.
       operationId: getVoucherById
       parameters:
         - description: The identifier of the voucher.
@@ -7059,24 +6776,18 @@ paths:
       description: Returns an array of item lists with their first page of content resolved.
       operationId: getLists
       parameters:
-        - description: >
+        - description: |
             A comma delimited list of item list identifiers.
-
 
             These can be list ids e.g. `14354,65473,3234`
 
-
             Or more complex sort/filter queries using pipes e.g.
-
 
             `14354|max_rating=AUOFLC-E|order=asc|order_by=year-added,65473|page_size=30,3234`
 
-
             _Note the id must always come first for each encoded list query_
 
-
             List parameters may be provide without the `param=` prefix e.g. `14354|genre:action`
-
 
             Only the following options can be present.
               - `order`
@@ -7246,14 +6957,11 @@ paths:
     x-serviceId: list
   /page:
     get:
-      description: >
+      description: |
         Returns a page with the specified id.
 
-
         If targeting the search page you must url encode the search term as a parameter
-
         using the `q` key. For example if your browser path looks like `/search?q=the`
-
         then what you pass to this endpoint would look like `/page?path=/search%3Fq%3Dthe`.
       operationId: getPage
       parameters:
@@ -7263,8 +6971,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of items to load when prefetching and paging each list
-            in the page row.
+        - description: The number of items to load when prefetching and paging each list in the page row.
           in: query
           name: list_page_size
           schema:
@@ -7273,13 +6980,10 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
-        - description: >
-            The number of items to load when prefetching a continuous scroll
-            list entry in a page.
-
+        - description: |
+            The number of items to load when prefetching a continuous scroll list entry in a page.
 
             By default any list page entry with template pattern `/^CS\d+$/` will
-
             be considered a continuous scroll list.
           in: query
           name: list_page_size_large
@@ -7298,35 +7002,23 @@ paths:
             maximum: 15
             minimum: 0
             type: integer
-        - description: >
-            Only relevant when loading item detail pages as these embed a
-            detailed item in the main page entry.
-
+        - description: |
+            Only relevant when loading item detail pages as these embed a detailed item in the main page entry.
 
             If no value is specified no item dependencies are expanded.
 
-
             If 'children' is specified then the list of any direct children will be expanded. For example
-
             seasons of a show or episodes of a season.
 
-
             If 'all' is specified then the parent chain will be expanded along with any child list at each level.
-
             For example if an episode is specified then its season will be expanded and that season's episode list.
-
             The season will have its show expanded and the show will have its season list expanded.
 
-
             The 'all' options is useful when you deep link into a show/season/episode for the first time as
-
             it provides full context for navigating around the show page. Subsequent navigation around
-
             children of the show should only need to request expand of children.
 
-
             If 'ancestors' is specified then only the parent chain is included
-
 
             If an expand is specified which is not relevant to the item type, it will be ignored.
           in: query
@@ -7337,33 +7029,21 @@ paths:
               - children
               - ancestors
             type: string
-        - description: >
-            Only relevant when loading show detail pages as these embed a
-            detailed item in the main page entry.
-
+        - description: |
+            Only relevant when loading show detail pages as these embed a detailed item in the main page entry.
 
             Since the introduction of the D1,2,3 templates this parameter is now somewhat redundant, or less
-
             likely to have any effect. While it may still be useful in some cases, most of the time the season
-
             selection will be dictated by the configuration of the rows scheduled on the show detail page.
-
             This parameter will only take effect if there are rows used to schedule episodes of a season, like
-
             D1,2,3, or if no rows have a value set for their `seasonOrder` custom field.
 
-
             Given a targeted show page, it can be useful to get the details of a child season. This option
-
             provides a means to return the `first` or `latest` season of a show embedded in the page.
 
-
             The `expand` parameter also works here so for example you could land on a show page and request the
-
             `item_detail_select_season=latest` along with `item_detail_expand=all`. This would then return the
-
             detail of the latest season with its list of child episode summaries, and also expand
-
             the detail of the show with its list of seasons summaries.
           in: query
           name: item_detail_select_season
@@ -7402,10 +7082,8 @@ paths:
                 $ref: "#/components/schemas/Page"
           description: The page requested.
         "301":
-          description: >
-            Returned if feature flag `cd` is set and item detail is requested
-            of an item that has
-
+          description: |
+            Returned if feature flag `cd` is set and item detail is requested of an item that has
             Custom Destination set to an External URL. The `Location` response header contains the URL.
         "400":
           content:
@@ -7497,26 +7175,18 @@ paths:
     x-serviceId: subscription
   /register:
     post:
-      description: >
+      description: |
         Register a new user, creating them an account.
 
-
         Registration, when successful, will return an array of access tokens so the user is
-
         immediately signed in.
 
-
         It returns Catalog and Commerce scoped tokens for both Account and Profile.
-
         The Commerce ones are intended to allow the purchase of a subscription plan
-
         in the step after registration, without the user being prompted to enter
-
         their username and password again.
 
-
         An email will also be sent with a link they need to click to confirm their
-
         email address. This confirmation is done via the /verify-email endpoint.
       operationId: register
       parameters:
@@ -7586,22 +7256,16 @@ paths:
     x-serviceId: itvRegistration
   /request-password-reset:
     post:
-      description: >
+      description: |
         Request the password of an account's primary profile be reset.
-
 
         Should be called when a user has forgotten their password.
 
-
         This will send an email with a password reset link to the email address of the
-
         primary profile of an account.
 
-
         The link, once clicked, should take the user to the "reset-password" page of the
-
         website. Here they will enter their new password and submit to the /reset-password
-
         endpoint here, along with the password reset token provided in the original link.
       operationId: forgotPassword
       parameters:
@@ -7664,23 +7328,15 @@ paths:
     x-serviceId: itvPassword
   /reset-password:
     post:
-      description: >
-        When a user requests to reset their password via the
-        /request-password-reset endpoint, an
-
+      description: |
+        When a user requests to reset their password via the /request-password-reset endpoint, an
         email is sent to the email address of the primary profile of the account. This email contains a link
-
         with a reset token as query parameter. The link should take the user to the "reset-password"
-
         page of the website.
 
-
         From the reset-password page a user should enter the new password they wish to use. 
-
         It should then be submitted to this endpoint,
-
         along with the reset token from the email link. 
-
         The token should be provided in the body as resetToken property.
       operationId: resetPassword
       parameters:
@@ -7743,10 +7399,8 @@ paths:
     x-serviceId: itvPassword
   /samsung-preview:
     get:
-      description: >
-        Returns public preview for Samsung based on the page
-        '/samsung-preview' configured in PresentationManager.
-
+      description: |
+        Returns public preview for Samsung based on the page '/samsung-preview' configured in PresentationManager.
         There is a hard limit of max 40 items to be returned. It splits evenly items count into the page rows, remaining items are added into the first row.
       operationId: getPublicPreview
       responses:
@@ -7791,47 +7445,29 @@ paths:
     x-serviceId: itvSamsung
   /schedules:
     get:
-      description: >
-        Returns schedules for a defined set of channels over a requested
-        period.
-
+      description: |
+        Returns schedules for a defined set of channels over a requested period.
 
         Schedules are requested in hour blocks and returned grouped by the channel
-
         they belong to.
 
-
         For example, to load 12 hours of schedules for channels `4343` and `5234`,
-
         on 21/2/2017 starting from 08:00.
 
-
         ```
-
         channels=4343,5234
-
         date=2017-02-21
-
         hour=8
-
         duration=12
-
         ```
-
 
         Please remember that `date` and `hour` combined represent a normal datetime, 
-
         so they should be converted to UTC on the client - this will help to avoid 
-
         issues with EPG schedules near midnight.
 
-
         If a channel id is passed which doesn't exist then this endpoint will
-
         return an empty schedule list for it. If instead we returned 404,
-
         this would invalidate all other channel schedules in the same request
-
         which would be unfriendly for clients presenting these channel schedules.
       operationId: getSchedules
       parameters:
@@ -7845,10 +7481,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: >
-            The date to target in ISO format, e.g. `2017-05-23` (converted to
-            UTC - see main description).
-
+        - description: |
+            The date to target in ISO format, e.g. `2017-05-23` (converted to UTC - see main description).
 
             The base hour requested will belong to this date.
           in: query
@@ -7857,12 +7491,9 @@ paths:
           schema:
             format: date
             type: string
-        - description: >
-            The base hour in the day, defined by the `date` parameter, you wish
-            to load schedules for 
-
+        - description: |
+            The base hour in the day, defined by the `date` parameter, you wish to load schedules for 
             (converted to UTC - see main description).
-
 
             From 0 to 23, where 0 is midnight.
           in: query
@@ -7873,13 +7504,10 @@ paths:
             maximum: 23
             minimum: 0
             type: integer
-        - description: >
-            The number of hours of schedules to load from the base `hour`
-            parameter.
-
+        - description: |
+            The number of hours of schedules to load from the base `hour` parameter.
 
             This may be negative or positive depending on whether you want to load past or future schedules.
-
 
             Minimum value is -24, maximum is 24. A value of zero is invalid.
           in: query
@@ -7890,20 +7518,14 @@ paths:
             maximum: 24
             minimum: -24
             type: integer
-        - description: >
-            Flag indicating whether schedules should intersect or be contained
-            in the
-
+        - description: |
+            Flag indicating whether schedules should intersect or be contained in the
             provided interval.
 
-
             If set to `true`, the result will contain all schedules where either
-
             schedule start time or end time touches the provided interval.
 
-
             If set to `false`, only schedules fully contained in the given period
-
             will be returned.
           in: query
           name: intersect
@@ -7923,9 +7545,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/ItemScheduleList"
                 type: array
-          description: >
+          description: |
             An array of schedule lists for each channel requested.
-
 
             The order of the channels will match the order of channel ids passed during the request.
         "400":
@@ -7972,20 +7593,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: >
-            By default people, movies and tv (shows + programs) will be
-            included
-
+        - description: |
+            By default people, movies and tv (shows + programs) will be included
             in the search results.
 
-
             If the `cas` feature flag is set, "other" items (`customAsset`s) will
-
             also be included by default
 
-
             If you don't want all of these types you can specifiy the specific
-
             includes you care about.
           explode: false
           in: query
@@ -8000,22 +7615,15 @@ paths:
               type: string
             type: array
           style: form
-        - description: >
-            When this option is set, instead of all search result items being
-            returned
-
+        - description: |
+            When this option is set, instead of all search result items being returned
             in a single list, they will instead be returned under two lists. One for
-
             movies and another for tv (shows + programs).
 
-
             if the `cas` feature flag is set, a third `other` list will be
-
             included containing `customAsset` results
 
-
             Default is undefined meaning items will be returned in a single list.
-
 
             The array of `people` results will always be separate from items.
           in: query
@@ -8083,22 +7691,15 @@ paths:
     x-serviceId: search
   /verify-email:
     post:
-      description: >
-        When an account is created an email is sent to the email address of
-        the new account.
-
+      description: |
+        When an account is created an email is sent to the email address of the new account.
         This contains a link, which once clicked, verifies the email address of the account is correct.
 
-
         The link contains a token as a query parameter which should be passed as the authorization
-
         bearer token to this endpoint to complete email verification.
 
-
         The token has en expiry, so if the link is not clicked before it expires, the account holder
-
         may need to request a new verification email be sent. This can be done via the endpoint
-
         /account/request-email-verification.
       operationId: verifyEmail
       parameters:
@@ -8164,40 +7765,25 @@ components:
         default: web_browser
         type: string
     FeatureFlags:
-      description: >
-        The set of opt in feature flags which cause breaking changes to
-        responses.
-
+      description: |
+        The set of opt in feature flags which cause breaking changes to responses.
 
         While Rocket APIs look to avoid breaking changes under the active major version, the formats of responses
-
         may need to evolve over this time.
 
-
         These feature flags allow clients to select which response formats they expect and avoid breaking
-
         clients as these formats evolve under the current major version.
-
 
         ### Flags
 
-
         - `all` - Enable all flags. Useful for testing. _Don't use in production_.
-
         - `idp` - Dynamic item detail pages with schedulable rows.
-
         - `ldp` - Dynamic list detail pages with schedulable rows.
-
         - `hb` - Hubble formatted image urls.
-
         - `rpt` - Updated resume point threshold logic.
-
         - `cas` - "Custom Asset Search", inlcude `customAssets` in search results.
-
         - `lrl` - Do not pre-populate related list if more than `max_list_prefetch` down the page.
-
         - `cd` - Custom Destination support.
-
 
         See the `feature-flags.md` for available flag details.
       explode: false
@@ -8243,19 +7829,15 @@ components:
         show: 📺
         trailer: 🖥
     Language:
-      description: >
-        Language code for the preferred language to be returned in the
-        response.
-
+      description: |
+        Language code for the preferred language to be returned in the response.
 
         Parameter value is case-insensitive and should be
           - a valid 2 letter language code without region such as en, de
           - or with region such as en_us, en_au
 
         If undefined then defaults to 'en', unless the server has been configured
-
         with a custom default.
-
 
         See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
       in: query
@@ -8298,16 +7880,12 @@ components:
         type: array
       style: form
     MediaFileFormats:
-      description: >
-        The set of media file formats that the device supports, in the
-        order of preference.
-
+      description: |
+        The set of media file formats that the device supports, in the order of preference.
 
         When provided, Rocket API returns only media files in formats specified in this parameter. For each resolution, only the first media file of matching supported format is returned. Files of different resolutions may be of different supported media file formats.
 
-
         `external` value is reserved for project customizations where the real MIME type of the file on the specified URL is unknown at the time of ingestion.
-
 
         When not provided, Rocket API uses the legacy `User-Agent` header-based logic to find matching media files.
       explode: false
@@ -8400,21 +7978,18 @@ components:
         address:
           $ref: "#/components/schemas/Address"
         defaultPaymentInstrumentId:
-          description: >
-            The id of the payment instrument to use by default for account
-            transactions.
+          description: |
+            The id of the payment instrument to use by default for account transactions.
 
              **DEPRECATED** The property `defaultPaymentMethodId` is now preferred.
           type: string
           x-deprecated: Replaced with defaultPaymentMethodId
         defaultPaymentMethodId:
-          description: The id of the payment method to use by default for account
-            transactions.
+          description: The id of the payment method to use by default for account transactions.
           type: string
         emailVerified:
-          description: >
+          description: |
             Whether the email address has been verified.
-
 
             Users who receive an emailed verification url click the link to verify their email address.
           type: boolean
@@ -8439,17 +8014,12 @@ components:
           description: Whether the account has opted in or out of marketing material.
           type: boolean
         minRatingPlaybackGuard:
-          description: >
-            The classification rating defining the minimum rating level a user
-            should be
-
+          description: |
+            The classification rating defining the minimum rating level a user should be
             forced to enter the account pin code for playback. Anything at this rating
-
             level or above will require the pin for playback.
 
-
             e.g. AUOFLC-MA15+
-
 
             If you want to disable this guard pass an empty string or `null`.
           type: string
@@ -8470,9 +8040,8 @@ components:
             type: string
           type: array
         subscriptionCode:
-          description: >
+          description: |
             The active subscription code for an account.
-
 
             The value of this should be passed to any endpoints accepting a `sub` query parameter.
           type: string
@@ -8564,21 +8133,14 @@ components:
           - Catalog
       properties:
         cookieType:
-          description: >
-            If you specify a cookie type then a content filter cookie will be
-            returned
-
+          description: |
+            If you specify a cookie type then a content filter cookie will be returned
             along with the token(s). This is only intended for web based clients which
-
             need to pass the cookies to a server to render a page based on the user's
-
             content filters e.g subscription code.
 
-
             If type `Session` the cookie will be session based.
-
             If type `Persistent` the cookie will have a medium term lifespan.
-
             If undefined no cookies will be set.
           enum:
             - Session
@@ -8591,9 +8153,8 @@ components:
           description: The password associated with the account.
           type: string
         scopes:
-          description: >
+          description: |
             The scope(s) of the tokens required.
-
             For each scope listed an Account and Profile token of that scope will be returned
           items:
             enum:
@@ -8614,17 +8175,14 @@ components:
         address:
           $ref: "#/components/schemas/Address"
         defaultPaymentInstrumentId:
-          description: >
-            The id of the payment instrument to use by default for account
-            transactions.
-
+          description: |
+            The id of the payment instrument to use by default for account transactions.
 
             **DEPRECATED** The property `defaultPaymentMethodId` is now preferred.
           type: string
           x-deprecated: Replaced with defaultPaymentMethodId
         defaultPaymentMethodId:
-          description: The id of the payment method to use by default for account
-            transactions.
+          description: The id of the payment method to use by default for account transactions.
           type: string
         firstName:
           description: The first name of the account holder.
@@ -8633,17 +8191,12 @@ components:
           description: The last name of the account holder.
           type: string
         minRatingPlaybackGuard:
-          description: >
-            The classification rating defining the minimum rating level a user
-            should be
-
+          description: |
+            The classification rating defining the minimum rating level a user should be
             forced to enter the account pin code for playback. Anything at this rating
-
             level or above will require the pin for playback.
 
-
             e.g. AUOFLC-MA15+
-
 
             If you want to disable this guard pass an empty string or `null`.
           type: string
@@ -8660,21 +8213,16 @@ components:
       additionalProperties: false
       properties:
         makeDefault:
-          description: >
+          description: |
             Whether this payment method should become the account default when 
-
             making purchases.
 
-
             Note that if this is the first payment method of type Card being added to an
-
             account then it will become the default whether this property is true or false.
           type: boolean
         token:
-          description: >
-            The payment provider token representing a payment method, obtained
-            by
-
+          description: |
+            The payment provider token representing a payment method, obtained by
             submitting payment method details to your third party provider.
           type: string
         type:
@@ -8825,12 +8373,9 @@ components:
           format: int32
           type: integer
         chainPlaySqueezeback:
-          description: >
-            The number of seconds before the end of playback when the current
-            video
-
+          description: |
+            The number of seconds before the end of playback when the current video
             should be minimized and user options are presented within the video player.
-
 
             If set to 0 there will be no squeezeback.
           format: int32
@@ -8847,14 +8392,10 @@ components:
           format: int32
           type: integer
         viewEventPoints:
-          description: >
-            An array of percentage points in which to fire off plabyack view
-            events.
-
+          description: |
+            An array of percentage points in which to fire off plabyack view events.
             For example a value of 0.5 would indicate that an event should be
-
             fired when the user is half way through the video.
-
             Often known as quartiles when four equaly spread event points.
           items:
             maximum: 1
@@ -8933,8 +8474,7 @@ components:
             - none
           type: string
         intervalCount:
-          description: Given the `interval` this is how frequently it will run. e.g. every
-            2 weeks.
+          description: Given the `interval` this is how frequently it will run. e.g. every 2 weeks.
           format: int32
           type: integer
         longText:
@@ -8955,8 +8495,7 @@ components:
         termsAndConditionsStripe:
           type: string
         trialPeriodDays:
-          description: How many days a trial period runs for a plan. Only valid if
-            `hasTrialPeriod` is true.
+          description: How many days a trial period runs for a plan. Only valid if `hasTrialPeriod` is true.
           format: int32
           type: integer
       required:
@@ -9020,11 +8559,9 @@ components:
                 type: string
               type: object
             level:
-              description: >
+              description: |
                 The level of this classification when compared with its siblings.
-
                 A higher level means a greater restriction.
-
                 Each classification in a system should have a unique level.
               format: int32
               type: integer
@@ -9056,19 +8593,13 @@ components:
         itemInclusions:
           additionalProperties:
             $ref: "#/components/schemas/ContinueWatchingListDataExpansion"
-          description: >
-            Object where keys are itemIds for the items in the list and values
-            are objects
-
+          description: |
+            Object where keys are itemIds for the items in the list and values are objects
             containing additional items (either episode/season/show) that were requested
-
             in the "include" query option.
 
-
             For example if you request the ContinueWatching list with "season" items in
-
             the list, you can specify `include=episode` and then the specific next episode
-
             will be returned in this object.
           type: object
       type: object
@@ -9164,9 +8695,8 @@ components:
       additionalProperties: false
       properties:
         endDate:
-          description: >
+          description: |
             The end date of the current period.
-
 
             This is based on the value of `startDate` plus the number of days defined by  `periodDays`.
           format: date-time
@@ -9180,19 +8710,15 @@ components:
           format: int32
           type: integer
         remaining:
-          description: The remaining de/registrations that can be made in the current
-            period.
+          description: The remaining de/registrations that can be made in the current period.
           format: int32
           type: integer
         startDate:
-          description: >
+          description: |
             The start date of the current period.
 
-
             This is based on the earliest device de/registrations in the past N days, where
-
             N is defined by `periodDays`.
-
 
             If no device has been de/registered then start date will be from the current date.
           format: date-time
@@ -9376,8 +8902,7 @@ components:
             - none
           type: string
         intervalCount:
-          description: Given the `interval` this is how frequently it will run. e.g. every
-            2 weeks.
+          description: Given the `interval` this is how frequently it will run. e.g. every 2 weeks.
           format: int32
           type: integer
         longText:
@@ -9390,8 +8915,7 @@ components:
           description: The product of a plan.
           type: string
         trialPeriodDays:
-          description: How many days a trial period runs for a plan. Only valid if
-            `hasTrialPeriod` is true.
+          description: How many days a trial period runs for a plan. Only valid if `hasTrialPeriod` is true.
           format: int32
           type: integer
       required:
@@ -9461,9 +8985,7 @@ components:
           description: The pinReference.
           type: string
         trackingHeader:
-          description: Tracking header to be able to search logs for a specific user
-            requests. If not provided it will be generated. FE should store it
-            for later user.
+          description: Tracking header to be able to search logs for a specific user requests. If not provided it will be generated. FE should store it for later user.
           type: string
       required:
         - pinReference
@@ -9488,8 +9010,7 @@ components:
         - $ref: "#/components/schemas/OfferRights"
         - properties:
             activationDate:
-              description: The date of activation. If no date is defined the entitlement has
-                not be activated.
+              description: The date of activation. If no date is defined the entitlement has not be activated.
               format: date-time
               type: string
             classification:
@@ -9713,9 +9234,8 @@ components:
               format: date-time
               type: string
             genrePaths:
-              description: >
-                An array of genre paths mapping to the values within the `genres`
-                array from ItemSummary.
+              description: |
+                An array of genre paths mapping to the values within the `genres` array from ItemSummary.
               items:
                 type: string
               type: array
@@ -9838,10 +9358,8 @@ components:
         paging:
           $ref: "#/components/schemas/Pagination"
         parameter:
-          description: >-
-            If this list is parameterized, then this contains the parameter of
-            the list in the format `name:value`.
-
+          description: |-
+            If this list is parameterized, then this contains the parameter of the list in the format `name:value`.
             For example the Movies Genre list will take a parameter `genre` with a given value. e.g. `genre:action` or `genre:drama`.
           type: string
         path:
@@ -9934,8 +9452,7 @@ components:
       additionalProperties: true
       properties:
         blackout:
-          description: True if this schedule represents time when the channel is
-            completely off air.
+          description: True if this schedule represents time when the channel is completely off air.
           type: boolean
         channelId:
           description: The id of the channel item this schedule belongs to.
@@ -9999,8 +9516,7 @@ components:
           description: Advisory text about this item, related to the classification
           type: string
         availableEpisodeCount:
-          description: The number of available episodes in the season, if the item is a
-            season.
+          description: The number of available episodes in the season, if the item is a season.
           format: int32
           type: integer
         availableSeasonCount:
@@ -10074,8 +9590,7 @@ components:
             $ref: "#/components/schemas/Offer"
           type: array
         path:
-          description: The path to the detail page of this item. Can be used to load the
-            item detail page via the /page endpoint.
+          description: The path to the detail page of this item. Can be used to load the item detail page via the /page endpoint.
           type: string
         releaseYear:
           description: The year this item was released
@@ -10087,8 +9602,7 @@ components:
             type: string
           type: array
         seasonId:
-          description: The identifier of the season this item belongs to, if the item is
-            an episode.
+          description: The identifier of the season this item belongs to, if the item is an episode.
           type: string
         seasonNumber:
           description: The number of a season, if the item is a season.
@@ -10098,18 +9612,14 @@ components:
           description: A truncated description of the item
           type: string
         showId:
-          description: The identifier of the show this item belongs to, if the item is a
-            season or episode.
+          description: The identifier of the show this item belongs to, if the item is a season or episode.
           type: string
         showTitle:
           type: string
-          x-descritpion: The title of the show this item belongs to, if the item is a
-            season or episode.
+          x-descritpion: The title of the show this item belongs to, if the item is a season or episode.
         subtype:
-          description: >
-            Subtype of the item. Mainly used to identify different types when
-            `type`
-
+          description: |
+            Subtype of the item. Mainly used to identify different types when `type`
             is `customAsset`
           type: string
         tagline:
@@ -10146,8 +9656,7 @@ components:
             show: 📺
             trailer: 🖥
         watchPath:
-          description: The path to watch this item, if the item is a watchable type, e.g.
-            a `movie`, `program` and `episode`.
+          description: The path to watch this item, if the item is a watchable type, e.g. a `movie`, `program` and `episode`.
           type: string
       required:
         - id
@@ -10419,8 +9928,7 @@ components:
             - none
           type: string
         trialLength:
-          description: Given the `interval` this is how frequently it will run. e.g. every
-            2 weeks.
+          description: Given the `interval` this is how frequently it will run. e.g. every 2 weeks.
           format: int32
           type: integer
         type:
@@ -10511,21 +10019,14 @@ components:
       additionalProperties: false
       properties:
         cookieType:
-          description: >
-            If you specify a cookie type then a content filter cookie will be
-            returned
-
+          description: |
+            If you specify a cookie type then a content filter cookie will be returned
             along with the token(s). This is only intended for web based clients which
-
             need to pass the cookies to a server to render a page based on the user's
-
             content filters e.g subscription code.
 
-
             If type `Session` the cookie will be session based.
-
             If type `Persistent` the cookie will have a medium term lifespan.
-
             If undefined no cookies will be set.
           enum:
             - Session
@@ -10573,8 +10074,7 @@ components:
             - none
           type: string
         intervalCount:
-          description: Given the `interval` this is how frequently it will run. e.g. every
-            2 weeks.
+          description: Given the `interval` this is how frequently it will run. e.g. every 2 weeks.
           format: int32
           type: integer
         nickname:
@@ -10590,8 +10090,7 @@ components:
           description: The text to switch for.
           type: string
         trialPeriodDays:
-          description: How many days a trial period runs for a plan. Only valid if
-            `hasTrialPeriod` is true.
+          description: How many days a trial period runs for a plan. Only valid if `hasTrialPeriod` is true.
           format: int32
           type: integer
       required:
@@ -10723,8 +10222,7 @@ components:
       additionalProperties: false
       properties:
         couponId:
-          description: A coupon/voucher for a discount. Can be retrieved from GET
-            itv/voucher/{platform} endpoint
+          description: A coupon/voucher for a discount. Can be retrieved from GET itv/voucher/{platform} endpoint
           type: string
         paymentMethodFromToken:
           description: A paymentMethodFromToken.
@@ -11002,10 +10500,8 @@ components:
       x-emoji: 🌎
     ListData:
       additionalProperties: false
-      description: >
-        Extra data to accompany ItemList content. The (single) key in the
-        object is
-
+      description: |
+        Extra data to accompany ItemList content. The (single) key in the object is
         the list name and the data changes depending on the list
       properties:
         ContinueWatching:
@@ -11105,9 +10601,8 @@ components:
           minimum: 0
           type: integer
         featured:
-          description: >
+          description: |
             True if this is a featured menu item.
-
 
             Featured menu items may have a more prominent presentation than others in the navigation.
           type: boolean
@@ -11118,11 +10613,9 @@ components:
           description: The text label for this nav entry.
           type: string
         path:
-          description: >
+          description: |
             The path this nav entry links to.
-
             May be undefined if the nav entry is not clickable e.g. a nav heading.
-
             If the value begins with `http` then it's an external url.
           type: string
       required:
@@ -11156,41 +10649,27 @@ components:
       additionalProperties: false
       properties:
         firstWatchedDate:
-          description: >
-            Time when the item corresponding to the itemId passed in by the
-            client was
-
+          description: |
+            Time when the item corresponding to the itemId passed in by the client was
             first watched by the user. Will be `undefined` if the user has never
-
             watched the item.
 
-
             It can be used to identify the scenario where the user has never watched a
-
             show and we are suggesting they watch the first episode (i.e. it is
-
             missing in this scenario)
-
 
             **This will only be populated when a `showId` is passed in**
           format: date-time
           type: string
         lastWatchedDate:
-          description: >
-            Time when the item corresponding to the itemId passed in by the
-            client was
-
+          description: |
+            Time when the item corresponding to the itemId passed in by the client was
             last watched by the user. Will be `undefined` if the user has never
-
             watched the item.
 
-
             It can be used to identify the scenario where the user has never watched a
-
             show and we are suggesting they watch the first episode (i.e. it is
-
             missing in this scenario)
-
 
             **This will only be populated when a `showId` is passed in**
           format: date-time
@@ -11201,22 +10680,15 @@ components:
           description: The id of the item used to determine the next item to play.
           type: string
         suggestionType:
-          description: >
+          description: |
             Field indicating the type or reason behind the suggestion.
 
-
             Id Type   | Show Watched Status| Value            | Description
-
             ----------|--------------------|------------------|---------------------------------
-
             showId    | Unwatched          | StartWatching    |
-
             showId    | Completely watched | RestartWatching  |
-
             showId    | Partly watched     | ContinueWatching | Suggested episode partly watched
-
             showId    | Partly watched     | Sequential       | Suggested episode unwatched
-
             episodeId | Any                | Sequential       | Next episode in show
           enum:
             - StartWatching
@@ -11295,13 +10767,11 @@ components:
             - None
           type: string
         playPeriod:
-          description: The length of time in minutes which the rental will last once
-            played for the first time.
+          description: The length of time in minutes which the rental will last once played for the first time.
           format: int32
           type: integer
         rentalPeriod:
-          description: The length of time in minutes which the rental will last once
-            purchased.
+          description: The length of time in minutes which the rental will last once purchased.
           format: int32
           type: integer
         resolution:
@@ -11352,11 +10822,9 @@ components:
           type: object
     PageEntry:
       additionalProperties: false
-      description: >
+      description: |
         Represents an entry of a Page.
-
         Defines what specific piece of content should be presented e.g. an Item or ItemList.
-
         Also defines what visual template should be used to render that content.
       properties:
         customFields:
@@ -11380,8 +10848,7 @@ components:
         list:
           $ref: "#/components/schemas/ItemList"
         people:
-          description: If 'type' is 'PeopleEntry' then this is the array of people to
-            present.
+          description: If 'type' is 'PeopleEntry' then this is the array of people to present.
           items:
             $ref: "#/components/schemas/Person"
           type: array
@@ -11395,8 +10862,7 @@ components:
           description: The name of the Page Entry.
           type: string
         type:
-          description: The type of PageEntry. Used to help identify what type of content
-            will be presented.
+          description: The type of PageEntry. Used to help identify what type of content will be presented.
           enum:
             - ItemEntry
             - ItemDetailEntry
@@ -11446,26 +10912,19 @@ components:
           description: Unique identifier for the page.
           type: string
         isStatic:
-          description: >
-            True if this page is static and doesn't have any dynamic content to
-            load.
-
+          description: |
+            True if this page is static and doesn't have any dynamic content to load.
 
             Static pages don't need to go back to the page endpoint to load page content
-
             instead the page summary loaded with the sitemap should be enough to determine
-
             the page template type and render based on this.
           type: boolean
         isSystemPage:
-          description: >
+          description: |
             True if this page is a system page type.
 
-
             **DEPRECATED** This property doesn't have any real use in client applications
-
             anymore so shouldn't be used. It especially shouldn't be used to determine if
-
             a page is static or not. Use the `isStatic` property instead.
           type: boolean
           x-deprecated: Replaced with isStatic
@@ -11501,14 +10960,11 @@ components:
         options:
           $ref: "#/components/schemas/PaginationOptions"
         page:
-          description: >
+          description: |
             The current page number.
 
-
             A value of 0 indicates that the fist page has not yet been loaded. This is
-
             useful when wanting to return the paging metadata to indicate how to
-
             load in the first page.
           format: int32
           minimum: 0
@@ -11517,27 +10973,21 @@ components:
           description: Path to load previous page of data, or null if not available.
           type: string
         size:
-          description: >
+          description: |
             The current page size.
 
-
             A value of -1 indicates that the size has not yet been determined. This may
-
             arise when embedding secure list pagination info in a page which must be cached
-
             by a CDN. For example a Bookmarks list.
           format: int32
           minimum: -1
           type: integer
         total:
-          description: >
+          description: |
             The total number of pages available given the current page size.
 
-
             A value of -1 indicates that the total has not yet been determined. This may
-
             arise when embedding secure list pagination info in a page which must be cached
-
             by a CDN. For example a Bookmarks list.
           format: int32
           minimum: -1
@@ -11569,9 +11019,8 @@ components:
       additionalProperties: false
       properties:
         completed:
-          description: >
+          description: |
             Items filtered by whether they've been fully watched or not.
-
 
             Only available on the `/account/profile/watched/list` endpoint currently.
           type: boolean
@@ -11622,8 +11071,7 @@ components:
       additionalProperties: false
       properties:
         email:
-          description: The email address of the primary account profile to reset the
-            password for.
+          description: The email address of the primary account profile to reset the password for.
           type: string
       required:
         - email
@@ -11660,17 +11108,13 @@ components:
           description: The currency code of the wallet if the payment method is a wallet.
           type: string
         description:
-          description: >
+          description: |
             A short description of a payment method.
-
 
             If the payment method is of type `Wallet` this will be "My Wallet"
 
-
             For `Card` type payment methods the format of this description may differ
-
             depending on the payment gateway in use. In the case of Stripe, this will
-
             be in the format "Visa (**** 4242, exp 08/19)"
           type: string
         expiryMonth:
@@ -11727,8 +11171,7 @@ components:
             type: string
           type: array
         billingPeriodFrequency:
-          description: Given the `billingPeriodType` this is how frequently it will run.
-            e.g. every 2 weeks.
+          description: Given the `billingPeriodType` this is how frequently it will run. e.g. every 2 weeks.
           format: int32
           type: integer
         billingPeriodType:
@@ -11760,8 +11203,7 @@ components:
           description: True if a plan should be highlighted as featured, false if not.
           type: boolean
         isPrivate:
-          description: True if a plan should not be presented in the primary plan options,
-            false if not.
+          description: True if a plan should not be presented in the primary plan options, false if not.
           type: boolean
         price:
           description: The price of a plan. If a free plan then undefined.
@@ -11786,8 +11228,7 @@ components:
           description: The title of a plan.
           type: string
         trialPeriodDays:
-          description: How many days a trial period runs for a plan. Only valid if
-            `hasTrialPeriod` is true.
+          description: How many days a trial period runs for a plan. Only valid if `hasTrialPeriod` is true.
           format: int32
           type: integer
         type:
@@ -11847,13 +11288,10 @@ components:
       additionalProperties: false
       properties:
         languageCode:
-          description: >
+          description: |
             The code of the preferred language for the profile.
-
             Must be a valid ISO language code e.g. "en-US" and must match the code of
-
             one of the languages specified in the app config.
-
             See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
           type: string
         name:
@@ -11869,8 +11307,7 @@ components:
           type: boolean
         purchaseEnabled:
           default: true
-          description: Whether the profile can make purchases with the account payment
-            options.
+          description: Whether the profile can make purchases with the account payment options.
           type: boolean
         segments:
           description: The segments a profile should be placed under
@@ -11921,27 +11358,22 @@ components:
           description: The id of the profile.
           type: string
         isActive:
-          description: >
+          description: |
             Whether the profile is active or not.
-
 
             **DEPRECATED** - Always true. Inactive profiles are no longer returned.
           type: boolean
           x-deprecated: Inactive profiles are no longer returned
         languageCode:
-          description: >
+          description: |
             The code of the preferred language for the profile.
-
             Must be a valid ISO language code e.g. "en-US" and must match the code of
-
             one of the languages specified in the app config.
-
             See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
           type: string
         marketingEnabled:
-          description: >
+          description: |
             Whether the profile has opted in or out of marketing material.
-
 
             **DEPRECATED** - Marketing material is no longer tied to profiles, only account. See `Account.marketingEnabled`.
           type: boolean
@@ -11957,8 +11389,7 @@ components:
           description: Whether a pin is required to enter the profile.
           type: boolean
         purchaseEnabled:
-          description: Whether the profile can make purchases with the account payment
-            options.
+          description: Whether the profile can make purchases with the account payment options.
           type: boolean
         segments:
           description: The segments a profile has been placed under
@@ -11979,21 +11410,14 @@ components:
       additionalProperties: false
       properties:
         cookieType:
-          description: >
-            If you specify a cookie type then a content filter cookie will be
-            returned
-
+          description: |
+            If you specify a cookie type then a content filter cookie will be returned
             along with the token(s). This is only intended for web based clients which
-
             need to pass the cookies to a server to render a page based on the user's
-
             content filters e.g subscription code.
 
-
             If type `Session` the cookie will be session based.
-
             If type `Persistent` the cookie will have a medium term lifespan.
-
             If undefined no cookies will be set.
           enum:
             - Session
@@ -12028,13 +11452,10 @@ components:
           description: Sets the Hero row clip auto playback audio enabled
           type: boolean
         languageCode:
-          description: >
+          description: |
             The code of the preferred language for the profile.
-
             Must be a valid ISO language code e.g. "en-US" and must match the code of
-
             one of the languages specified in the app config.
-
             See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
           type: string
         name:
@@ -12048,8 +11469,7 @@ components:
             If no account pin is defined this has no impact.
           type: boolean
         purchaseEnabled:
-          description: Whether the profile can make purchases with the account payment
-            options.
+          description: Whether the profile can make purchases with the account payment options.
           type: boolean
         segments:
           description: The segments a profile should be placed under
@@ -12106,9 +11526,8 @@ components:
             Both `itemId` and `offerId` are required for item purchases.
           type: string
         paymentMethodId:
-          description: >
+          description: |
             The identifier of the payment method to use.
-
             If omitted, or if purchasing a plan, the default payment method will be used.
           type: string
         planId:
@@ -12123,13 +11542,10 @@ components:
         firstName:
           type: string
         languageCode:
-          description: >
+          description: |
             The code of the preferred language for the primary profile.
-
             Must be a valid ISO language code e.g. "en-US" and must match the code of
-
             one of the languages specified in the app config.
-
             See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
           type: string
         lastName:
@@ -12183,8 +11599,7 @@ components:
       additionalProperties: false
       properties:
         position:
-          description: Section position. If specified, sections are shown in ascending
-            position order.
+          description: Section position. If specified, sections are shown in ascending position order.
           format: int32
           type: integer
         tiles:
@@ -12229,8 +11644,7 @@ components:
           description: If "true", a "Play" icon is shown over the thumbnail image
           type: boolean
         position:
-          description: Section position. If specified, sections are shown in ascending
-            position order
+          description: Section position. If specified, sections are shown in ascending position order
           format: int32
           type: integer
         subtitle:
@@ -12278,8 +11692,7 @@ components:
       additionalProperties: false
       properties:
         code:
-          description: An optional code classifying the error. Should be taken in the
-            context of the http status code.
+          description: An optional code classifying the error. Should be taken in the context of the http status code.
           format: int32
           type: integer
         message:
@@ -12293,45 +11706,30 @@ components:
       additionalProperties: false
       properties:
         cookieType:
-          description: >
-            If you specify a cookie type then a content filter cookie will be
-            returned
-
+          description: |
+            If you specify a cookie type then a content filter cookie will be returned
             along with the token(s). This is only intended for web based clients which
-
             need to pass the cookies to a server to render a page based on the user's
-
             content filters e.g subscription code.
 
-
             If type `Session` the cookie will be session based.
-
             If type `Persistent` the cookie will have a medium term lifespan.
-
             If undefined no cookies will be set.
           enum:
             - Session
             - Persistent
           type: string
         linkAccounts:
-          description: >
-            When a user attempts to sign in using single-sign-on, we may find
-            an account created
-
+          description: |
+            When a user attempts to sign in using single-sign-on, we may find an account created
             previously through the manual sign up flow with the same email. If this is the
-
             case then an option to link the two accounts can be made available.
-
 
             If this flag is set to true then accounts will be linked automatically.
 
-
             If this flag is not set or set to false and an existing account is found 
-
             then an http 401 with subcode `6001` will be returned. Client apps can then present the
-
             option to link the accounts. If the user decides to accept, then the same call
-
             can be repeated with this flag set to true.
           type: boolean
         provider:
@@ -12340,9 +11738,8 @@ components:
             - Facebook
           type: string
         scopes:
-          description: >
+          description: |
             The scope(s) of the tokens required.
-
             For each scope listed an Account and Profile token of that scope will be returned.
           items:
             enum:
@@ -12353,8 +11750,7 @@ components:
             type: string
           type: array
         token:
-          description: A token from the third party single-sign-on provider e.g. an
-            identity token from Facebook.
+          description: A token from the third party single-sign-on provider e.g. an identity token from Facebook.
           type: string
       required:
         - provider
@@ -12367,19 +11763,14 @@ components:
           description: The unique subscription code.
           type: string
         endDate:
-          description: >
+          description: |
             The end date of a subscription.
 
-
             After this date the subscription will become expired. If this is a recurring
-
             subscription which has not been cancelled then the account holder will be
-
             automatically charged and a new subscription will be activated.
 
-
             Some subscriptions may not have an end date, in which case this
-
             property will not exist.
           format: date-time
           type: string
@@ -12450,12 +11841,10 @@ components:
           description: The name of the theme color.
           type: string
         opacity:
-          description: >
+          description: |
             The opacity of the theme color from 0 to 1.
 
-
             When omitted, no opacity level is to be applied to the color, or in other words we
-
             assume the color has an opacity of 1
           format: float
           maximum: 1
@@ -12473,21 +11862,14 @@ components:
       additionalProperties: false
       properties:
         cookieType:
-          description: >
-            If you specify a cookie type then a content filter cookie will be
-            returned
-
+          description: |
+            If you specify a cookie type then a content filter cookie will be returned
             along with the token(s). This is only intended for web based clients which
-
             need to pass the cookies to a server to render a page based on the user's
-
             content filters e.g subscription code.
 
-
             If type `Session` the cookie will be session based.
-
             If type `Persistent` the cookie will have a medium term lifespan.
-
             If undefined no cookies will be set.
           enum:
             - Session

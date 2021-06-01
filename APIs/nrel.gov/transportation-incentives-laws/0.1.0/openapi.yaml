@@ -4,8 +4,7 @@ servers:
 info:
   contact:
     x-twitter: NRELdev
-  description: Query our database of State and Federal Laws and Incentives for
-    Alternative Fuels
+  description: Query our database of State and Federal Laws and Incentives for Alternative Fuels
   title: Transportation Laws and Incentives
   version: 0.1.0
   x-apisguru-categories:
@@ -53,59 +52,31 @@ paths:
           schema:
             default: 10
             type: integer
-        - description: Return laws for the given Jurisdiction. Jurisdiction must be given
-            as a two character state code (eg, 'CO' for Colorado). A single
-            jurisdiction, or a comma-separate list of multiple jurisdiction, may
-            be given.  Use the code 'US' for federal laws and the code 'DC' for
-            Washington D.C.
+        - description: Return laws for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C.
           in: query
           name: jurisdiction
           required: false
           schema:
             type: string
-        - description: "Search by the technology type. A single type, or a comma-separate
-            list of multiple types, may be given. Values and what they stand for
-            are as follows: 'BIOD' for Biodiesel, 'ETH' for Ethanol, 'NG' for
-            Natural Gas, 'LPG' for Propane (LPG), 'HY' for Hydrogen Fuel Cells,
-            'EFFEC' for Fuel Economy / Efficiency, 'IR' for Idle Reduction,
-            'ELEC' for EVs, 'HEV' for HEVs, 'PHEV' for PHEVs, 'OTHER' for Other,
-            'AFTMKTCONV' for Aftermarket Conversions, and 'NEVS' for NEVs"
+        - description: "Search by the technology type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'BIOD' for Biodiesel, 'ETH' for Ethanol, 'NG' for Natural Gas, 'LPG' for Propane (LPG), 'HY' for Hydrogen Fuel Cells, 'EFFEC' for Fuel Economy / Efficiency, 'IR' for Idle Reduction, 'ELEC' for EVs, 'HEV' for HEVs, 'PHEV' for PHEVs, 'OTHER' for Other, 'AFTMKTCONV' for Aftermarket Conversions, and 'NEVS' for NEVs"
           in: query
           name: technology
           required: false
           schema:
             type: string
-        - description: "Search by the incentive type. A single type, or a comma-separate
-            list of multiple types, may be given. Values and what they stand for
-            are as follows: 'GNT' for Grants, 'TAX' for Tax Incentives, 'LOANS'
-            for Loans and Leases, 'RBATE' for Rebates, 'EXEM' for Exemptions,
-            and 'OTHER' for Other."
+        - description: "Search by the incentive type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'GNT' for Grants, 'TAX' for Tax Incentives, 'LOANS' for Loans and Leases, 'RBATE' for Rebates, 'EXEM' for Exemptions, and 'OTHER' for Other."
           in: query
           name: incentive_type
           required: false
           schema:
             type: string
-        - description: "Search by the regulation type. A single type, or a comma-separate
-            list of multiple types, may be given. Values and what they stand for
-            are as follows: 'REGIS' for Registration / Licensing, 'STD' for Fuel
-            Production / Quality, 'DREST' for Driving / Idling, 'REQ' for
-            Acquisition / Fuel Use, 'FUEL' for Fuel Taxes, 'RFS' for Renewable
-            Fuel Standard / Mandate, 'OTHER' for Other, 'AIRQEMISSIONS' for Air
-            Quality / Emissions, and 'CCEINIT' for Climate Change / Energy
-            Initiatives"
+        - description: "Search by the regulation type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'REGIS' for Registration / Licensing, 'STD' for Fuel Production / Quality, 'DREST' for Driving / Idling, 'REQ' for Acquisition / Fuel Use, 'FUEL' for Fuel Taxes, 'RFS' for Renewable Fuel Standard / Mandate, 'OTHER' for Other, 'AIRQEMISSIONS' for Air Quality / Emissions, and 'CCEINIT' for Climate Change / Energy Initiatives"
           in: query
           name: regulation_type
           required: false
           schema:
             type: string
-        - description: "Search by the user type. A single type, or a comma-separate list
-            of multiple types, may be given. Values and what they stand for are
-            as follows: 'FLEET' for Private Business, 'GOV' for Government
-            Entity, 'IND' for Personal Vehicle Owner or Driver, 'STATION' for
-            Alternative Fuel Infrastructure Operator, 'AFP' for Alternative Fuel
-            Producer, 'PURCH' for Alternative Fuel Purchaser, 'MAN' for
-            Alternative Fuel Vehicle (AFV) Manufacturer or Retrofitter, and
-            'OTHER' for Other"
+        - description: "Search by the user type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'FLEET' for Private Business, 'GOV' for Government Entity, 'IND' for Personal Vehicle Owner or Driver, 'STATION' for Alternative Fuel Infrastructure Operator, 'AFP' for Alternative Fuel Producer, 'PURCH' for Alternative Fuel Purchaser, 'MAN' for Alternative Fuel Vehicle (AFV) Manufacturer or Retrofitter, and 'OTHER' for Other"
           in: query
           name: user_type
           required: false
@@ -125,21 +96,14 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: The 'true' value returns only expired, repealed, or archived laws
-            and incentives. The default 'false' value returns only current laws
-            and incentives.
+        - description: The 'true' value returns only expired, repealed, or archived laws and incentives. The default 'false' value returns only current laws and incentives.
           in: query
           name: expired
           required: false
           schema:
             default: false
             type: boolean
-        - description: "Search by the law type. A single type, or a comma-separate list of
-            multiple types, may be given. Values are as follows: 'STATEINC' for
-            State Incentives, 'UPINC ' for Utility/Private Incentives, 'LAWREG'
-            for Laws and Regulations, 'INC' for Incentives, 'PROG' for Programs,
-            'LUP' for Last Updated, 'OVIEW' for Overview, and 'HILITE' for
-            Highlights"
+        - description: "Search by the law type. A single type, or a comma-separate list of multiple types, may be given. Values are as follows: 'STATEINC' for State Incentives, 'UPINC ' for Utility/Private Incentives, 'LAWREG' for Laws and Regulations, 'INC' for Incentives, 'PROG' for Programs, 'LUP' for Last Updated, 'OVIEW' for Overview, and 'HILITE' for Highlights"
           in: query
           name: law_type
           required: false
@@ -227,11 +191,7 @@ paths:
           schema:
             default: DEMO_KEY
             type: string
-        - description: Return the points of contact for the given Jurisdiction.
-            Jurisdiction must be given as a two character state code (eg, 'CO'
-            for Colorado). A single jurisdiction, or a comma-separate list of
-            multiple jurisdiction, may be given.  Use the code 'US' for federal
-            laws and the code 'DC' for Washington D.C.
+        - description: Return the points of contact for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C.
           in: query
           name: jurisdiction
           required: true
@@ -279,9 +239,7 @@ paths:
           schema:
             default: false
             type: boolean
-        - description: The 'true' value returns a record no matter its status (current,
-            expired, archived, or repealed). The default 'false' value returns
-            only current laws and incentives.
+        - description: The 'true' value returns a record no matter its status (current, expired, archived, or repealed). The default 'false' value returns only current laws and incentives.
           in: query
           name: expired
           required: false
@@ -358,18 +316,14 @@ components:
       description: This is a Law
       properties:
         agency:
-          description: The agency with primary responsibility for federal
-            incentives/regulations.
+          description: The agency with primary responsibility for federal incentives/regulations.
           type: string
         amended_date:
-          description: The date the incentive/law/regulation was updated through new
-            legislation or rulemaking.
+          description: The date the incentive/law/regulation was updated through new legislation or rulemaking.
           format: date-time
           type: string
         archived_date:
-          description: The date that an incentive/law/regulation is no longer relevant to
-            the database. This may include longstanding Executive Orders or laws
-            requiring legislative studies that have been completed.
+          description: The date that an incentive/law/regulation is no longer relevant to the database. This may include longstanding Executive Orders or laws requiring legislative studies that have been completed.
           format: date-time
           type: string
         categories:
@@ -378,14 +332,12 @@ components:
             $ref: "#/components/schemas/Category"
           type: array
         contacts:
-          description: The contacts for the given law, returned only if the parameter poc
-            is true
+          description: The contacts for the given law, returned only if the parameter poc is true
           items:
             $ref: "#/components/schemas/Poc"
           type: array
         enacted_date:
-          description: The date the enacting legislation (if applicable) was signed into
-            law.
+          description: The date the enacting legislation (if applicable) was signed into law.
           format: date-time
           type: string
         expired_date:
@@ -396,64 +348,46 @@ components:
           description: A unique identifier for this specific incentive/law/regulation.
           type: integer
         is_recent:
-          description: The true or false value used to distinguish between recent federal
-            executive actions (TRUE) and active incentives/laws/regulations
-            (FALSE).
+          description: The true or false value used to distinguish between recent federal executive actions (TRUE) and active incentives/laws/regulations (FALSE).
           type: boolean
         plaintext:
-          description: Description of the incentive/law/regulation, including applicable
-            legislative references, in <a
-            href="https://guides.github.com/features/mastering-markdown/">markdown
-            formatting</a>
+          description: Description of the incentive/law/regulation, including applicable legislative references, in <a href="https://guides.github.com/features/mastering-markdown/">markdown formatting</a>
           type: string
         recent_update_or_new:
-          description: An indicator if the last significant update was an update or the
-            laws creation.
+          description: An indicator if the last significant update was an update or the laws creation.
           type: string
         references:
-          description: The URL associated with any bill or legislative reference included
-            in the description.
+          description: The URL associated with any bill or legislative reference included in the description.
           items:
             $ref: "#/components/schemas/LawReference"
           type: array
         repealed_date:
-          description: The date legislation is enacted or a rulemaking is finalized to
-            repeal the incentive/law/regulation.
+          description: The date legislation is enacted or a rulemaking is finalized to repeal the incentive/law/regulation.
           format: date-time
           type: string
         seq_num:
-          description: The numerical value assigned to a description to show the order in
-            which it is displayed online within a jurisdiction (state).
+          description: The numerical value assigned to a description to show the order in which it is displayed online within a jurisdiction (state).
           type: integer
         significant_update_date:
           description: When the last significant update to the law was made.
           format: date-time
           type: string
         state:
-          description: The state in which the incentive/law/regulation was enacted and is
-            active.
+          description: The state in which the incentive/law/regulation was enacted and is active.
           type: string
         text:
-          description: Description of the incentive/law/regulation, including applicable
-            legislative references, html formated.
+          description: Description of the incentive/law/regulation, including applicable legislative references, html formated.
           type: string
         title:
           description: The brief title assigned to the incentive/law/regulation description.
           type: string
         topics:
-          description: "For local incentive/regulation descriptions, the category that the
-            incentive/regulation falls under, described below: Infrastructure
-            Requirements, Vehicle Purchase and Infrastructure Development
-            Incentives, Fuel Use Incentives, Parking Incentives, Technical
-            Assistance, Vehicle Acquisition Requirements, Promotion Initiatives,
-            Idle Reduction Requirements, Renewable Fuels Mandates and Standards"
+          description: "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards"
           items:
             $ref: "#/components/schemas/LawTopics"
           type: array
         type:
-          description: "The category that the incentive/law/regulation falls under,
-            described below: -State Incentives, -Laws and Regulations,
-            -Utility/Private Incentives"
+          description: "The category that the incentive/law/regulation falls under, described below: -State Incentives, -Laws and Regulations, -Utility/Private Incentives"
           type: string
         types:
           description: The types that apply to this law
@@ -472,8 +406,7 @@ components:
         - references
         - topics
     LawReference:
-      description: The URL associated with any bill or legislative reference included
-        in the description.
+      description: The URL associated with any bill or legislative reference included in the description.
       properties:
         description:
           description: The context of the reference
@@ -497,12 +430,7 @@ components:
         - inputs
         - result
     LawTopics:
-      description: "For local incentive/regulation descriptions, the category that the
-        incentive/regulation falls under, described below: Infrastructure
-        Requirements, Vehicle Purchase and Infrastructure Development
-        Incentives, Fuel Use Incentives, Parking Incentives, Technical
-        Assistance, Vehicle Acquisition Requirements, Promotion Initiatives,
-        Idle Reduction Requirements, Renewable Fuels Mandates and Standards"
+      description: "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards"
       properties:
         id:
           description: The database id of the law topic
@@ -518,9 +446,7 @@ components:
         - title
         - sort_order
     LawType:
-      description: "The category that the incentive/law/regulation falls under,
-        described below: -State Incentives, -Laws and Regulations,
-        -Utility/Private Incentives"
+      description: "The category that the incentive/law/regulation falls under, described below: -State Incentives, -Laws and Regulations, -Utility/Private Incentives"
       properties:
         code:
           description: The code used to identify the law type
@@ -554,8 +480,7 @@ components:
       description: The identifying metadata.
       properties:
         count:
-          description: If the request returns an array of results, this is the number of
-            results returned in the array
+          description: If the request returns an array of results, this is the number of results returned in the array
           type: integer
         version:
           description: This is the version of the api
@@ -577,8 +502,7 @@ components:
           description: The name of the contact
           type: string
         state:
-          description: The state in which the contact is based ('US' for Federal laws and
-            'DC' for the District of Columbia)
+          description: The state in which the contact is based ('US' for Federal laws and 'DC' for the District of Columbia)
           type: string
         telephone:
           description: The contacts phone number

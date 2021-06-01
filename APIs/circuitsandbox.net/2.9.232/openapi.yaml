@@ -3,9 +3,8 @@ servers:
   - url: https://circuitsandbox.net/rest/v2
 x-hasEquivalentPaths: true
 info:
-  description: >-
+  description: |-
     Circuit REST API to interact with the Circuit system.
-
 
     [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
   title: REST API Version 2
@@ -27,26 +26,19 @@ securityDefinitions:
 paths:
   /conversations:
     get:
-      description: >-
-        Gets a list of conversations and communities the authenticated user
-        participates in.
-
+      description: |-
+        Gets a list of conversations and communities the authenticated user participates in.
         OauthScopes: READ_CONVERSATIONS
       operationId: getConversations
       parameters:
-        - description: The modification time of the conversation in UTC format. During the
-            query the conversations before (<i>default</i>) or after this
-            timestamp are returned. In case no timestamp is specified the
-            current server time in UTC is used, i.e. the last 25 modified
-            conversations are returned
+        - description: The modification time of the conversation in UTC format. During the query the conversations before (<i>default</i>) or after this timestamp are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified conversations are returned
           in: query
           name: modTime
           required: false
           schema:
             format: date-time
             type: string
-        - description: The direction of the search based on the modification time. Valid
-            values are either BEFORE (default) or AFTER
+        - description: The direction of the search based on the modification time. Valid values are either BEFORE (default) or AFTER
           in: query
           name: direction
           required: false
@@ -57,8 +49,7 @@ paths:
               - AFTER
             maxLength: 2048
             type: string
-        - description: The maximum number of returned results (default 25). The maximum
-            allowed value is 100.
+        - description: The maximum number of returned results (default 25). The maximum allowed value is 100.
           in: query
           name: results
           required: false
@@ -83,13 +74,11 @@ paths:
                 type: array
           description: The matching conversations
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -135,8 +124,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -148,15 +136,12 @@ paths:
         - Conversations
   /conversations/community:
     get:
-      description: >-
-        Gets a list of communities. This endpoint can be used to explore
-        the communities the authenticated user could join.
-
+      description: |-
+        Gets a list of communities. This endpoint can be used to explore the communities the authenticated user could join.
         OauthScopes: READ_CONVERSATIONS
       operationId: getCommunityConversations
       parameters:
-        - description: Defines the type of sorting for the community conversations
-            (default is alphabetical)
+        - description: Defines the type of sorting for the community conversations (default is alphabetical)
           in: query
           name: sort
           required: false
@@ -179,17 +164,14 @@ paths:
               - DESCENDING
             maxLength: 2048
             type: string
-        - description: If set to false only conversations are returned where the user is
-            no member of, otherwise all community conversations are returned
+        - description: If set to false only conversations are returned where the user is no member of, otherwise all community conversations are returned
           in: query
           name: includeOwn
           required: false
           schema:
             default: false
             type: boolean
-        - description: The index of the conversation that is the first one that has to be
-            returned. E.g. if a request starts with startIndex 40 and results 20
-            the conversations 40 to 60 are returned
+        - description: The index of the conversation that is the first one that has to be returned. E.g. if a request starts with startIndex 40 and results 20 the conversations 40 to 60 are returned
           in: query
           name: startIndex
           required: false
@@ -199,8 +181,7 @@ paths:
             maximum: 255
             minimum: 0
             type: number
-        - description: The maximum number of returned results (default 25). The maximum
-            allowed value is 100.
+        - description: The maximum number of returned results (default 25). The maximum allowed value is 100.
           in: query
           name: results
           required: false
@@ -225,13 +206,11 @@ paths:
                 type: array
           description: The matching conversations
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul>a field
-            constraint is violated</ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul>a field constraint is violated</ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -242,11 +221,8 @@ paths:
       tags:
         - Conversations
     post:
-      description: >-
-        Creates a community. Communities are open conversations that anyone
-        in a Circuit domain (tenant) can join without having to be added by
-        another user.
-
+      description: |-
+        Creates a community. Communities are open conversations that anyone in a Circuit domain (tenant) can join without having to be added by another user.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createCommunityConversation
       requestBody:
@@ -259,17 +235,13 @@ paths:
                   maxLength: 2048
                   type: string
                 participants:
-                  description: list of participants that will be part of this conversation,
-                    specified by the Circuit user ID or the unique email
-                    address. At least one participant needs to be added
+                  description: list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added
                   items:
                     maxLength: 2048
                     type: string
                   type: array
                 topic:
-                  description: An optional topic of the conversation. If not set the Circuit
-                    client will render the names of the participants as topic of
-                    the conversation (the first 4 names will be used)
+                  description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
                   maxLength: 2048
                   type: string
               required:
@@ -284,19 +256,13 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: The conversation was created successfully and can be accessed via
-            the conversation ID
+          description: The conversation was created successfully and can be accessed via the conversation ID
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>a field constraint is
-            violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -331,9 +297,7 @@ paths:
                   maxLength: 2048
                   type: string
                 topic:
-                  description: An optional topic of the conversation. If not set the Circuit
-                    client will render the names of the participants as topic of
-                    the conversation (the first 4 names will be used)
+                  description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
                   maxLength: 2048
                   type: string
               type: object
@@ -348,14 +312,11 @@ paths:
                 $ref: "#/components/schemas/Conversation"
           description: Gets the updated conversation object with the new topic / description
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the conversation is not of type
-            COMMUNITY</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -368,12 +329,8 @@ paths:
         - Conversations
   "/conversations/community/{convId}/join":
     post:
-      description: >-
-        Adds the authenticated user to the given community (i.e., allows
-        the user to join this community). Contrary to the operation of adding a
-        new participant, this operation can only be performed by a user who is
-        not yet a member of the community.
-
+      description: |-
+        Adds the authenticated user to the given community (i.e., allows the user to join this community). Contrary to the operation of adding a new participant, this operation can only be performed by a user who is not yet a member of the community.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: joinCommunityConversation
       parameters:
@@ -395,17 +352,11 @@ paths:
                 $ref: "#/components/schemas/Conversation"
           description: Gets the conversation object to which the participants was added
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>the conversation does not
-            exist</li><li>the conversation is not of type COMMUNITY</li><li>a
-            field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -418,24 +369,19 @@ paths:
         - Conversations
   "/conversations/community/{convId}/participants":
     delete:
-      description: >-
-        Removes one or more participants from the given community. The last
-        participant of a community cannot be removed. This operation can only be
-        performed by a user who is already a member of the community.
-
+      description: |-
+        Removes one or more participants from the given community. The last participant of a community cannot be removed. This operation can only be performed by a user who is already a member of the community.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: removeParticipantCommunity
       parameters:
-        - description: The ID of the conversation from which the participant have to be
-            removed
+        - description: The ID of the conversation from which the participant have to be removed
           in: path
           name: convId
           required: true
           schema:
             maxLength: 2048
             type: string
-        - description: The IDs or the unique email addresses of the Circuit users that
-            have to be removed
+        - description: The IDs or the unique email addresses of the Circuit users that have to be removed
           explode: true
           in: query
           name: participants
@@ -454,20 +400,13 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: Gets the conversation object from which the participants were
-            removed.
+          description: Gets the conversation object from which the participants were removed.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul></li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>the conversation does not
-            exist</li><li>the conversation is not of type COMMUNITY</li><li>a
-            field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul></li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -479,11 +418,8 @@ paths:
       tags:
         - Conversations
     post:
-      description: >-
-        Adds one or more participants to the given community. This
-        operation can only be performed by a user who is already a member of the
-        community.
-
+      description: |-
+        Adds one or more participants to the given community. This operation can only be performed by a user who is already a member of the community.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: addParticipantCommunity
       parameters:
@@ -507,17 +443,11 @@ paths:
                 $ref: "#/components/schemas/Conversation"
           description: Gets the conversation object to which the participants were added.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>the conversation does not
-            exist</li><li>the conversation is not of type COMMUNITY</li><li>a
-            field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -530,17 +460,12 @@ paths:
         - Conversations
   /conversations/conversationdetails:
     get:
-      description: >-
-        Gets the conference details of the given conversations. Conference
-        details include the URL, which is used to join the conference through a
-        web or mobile application, as well as the dial-in phone numbers and
-        conference PIN, which are used to join the conference by phone.
-
+      description: |-
+        Gets the conference details of the given conversations. Conference details include the URL, which is used to join the conference through a web or mobile application, as well as the dial-in phone numbers and conference PIN, which are used to join the conference by phone.
         OauthScopes: READ_CONVERSATIONS
       operationId: getJoinDetailsMultiple
       parameters:
-        - description: An array of IDs of the conversations for which the join details
-            should be returned
+        - description: An array of IDs of the conversations for which the join details should be returned
           explode: true
           in: query
           name: convIds
@@ -565,13 +490,11 @@ paths:
                 type: array
           description: The join details.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -583,16 +506,12 @@ paths:
         - Conversations
   /conversations/direct:
     get:
-      description: >-
-        Checks if a 1-to-1 conversation between the authenticated user and
-        the user with the provided userId exists.
-
+      description: |-
+        Checks if a 1-to-1 conversation between the authenticated user and the user with the provided userId exists.
         OauthScopes: READ_CONVERSATIONS
       operationId: getDirectConversation
       parameters:
-        - description: The participant that will be part of this conversation together
-            with the creator, specified by the Circuit user ID or the unique
-            email address
+        - description: The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address
           in: query
           name: participant
           required: true
@@ -608,19 +527,13 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: The conversation was found and can be accessed via the conversation
-            ID
+          description: The conversation was found and can be accessed via the conversation ID
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            data format of the passed user does not match either a UUID (user
-            primary key)</li><li> or an valid email address</li><li>or the user
-            does not exist</li><li>or the user is the same who initiates the
-            request</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -631,12 +544,8 @@ paths:
       tags:
         - Conversations
     post:
-      description: >-
-        Creates a 1-to-1 conversation between the authenticated user and
-        the user with the provided userId. In case there is already an existing
-        1-to-1 conversation between these users, the endpoint returns the
-        existing conversation.
-
+      description: |-
+        Creates a 1-to-1 conversation between the authenticated user and the user with the provided userId. In case there is already an existing 1-to-1 conversation between these users, the endpoint returns the existing conversation.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createDirectConversation
       requestBody:
@@ -645,9 +554,7 @@ paths:
             schema:
               properties:
                 participant:
-                  description: The participant that will be part of this conversation together
-                    with the creator, specified by the Circuit user ID or the
-                    unique email address
+                  description: The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address
                   maxLength: 2048
                   type: string
               required:
@@ -663,14 +570,9 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: The conversation was created successfully and can be accessed via
-            the conversation ID
+          description: The conversation was created successfully and can be accessed via the conversation ID
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            data format of the passed user does not match either a UUID (user
-            primary key)</li><li> or an valid email address</li><li>or the user
-            does not exist</li><li>or the user is the same who initiates the
-            request</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>"
         "401":
           description: The authentication was not successful
         "409":
@@ -681,11 +583,9 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: A conversation already exists. The response contains this
-            conversation.
+          description: A conversation already exists. The response contains this conversation.
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -712,14 +612,11 @@ paths:
                 type: array
           description: A list of marked conversations or an empty response.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -731,10 +628,8 @@ paths:
         - Conversations
   /conversations/group:
     post:
-      description: >-
-        Creates a group conversation between three or more users. The
-        authenticated user is directly added to this conversation.
-
+      description: |-
+        Creates a group conversation between three or more users. The authenticated user is directly added to this conversation.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createGroupConversation
       requestBody:
@@ -743,17 +638,13 @@ paths:
             schema:
               properties:
                 participants:
-                  description: A list of participants that will be part of this conversation,
-                    specified by the Circuit user ID or the unique email
-                    address. At least one participant needs to be added
+                  description: A list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added
                   items:
                     maxLength: 2048
                     type: string
                   type: array
                 topic:
-                  description: An optional topic of the conversation. If not set the Circuit
-                    client will render the names of the participants as topic of
-                    the conversation (the first 4 names will be used)
+                  description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
                   maxLength: 2048
                   type: string
               required:
@@ -769,19 +660,13 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: The conversation was created successfully and can be accessed via
-            the conversation ID
+          description: The conversation was created successfully and can be accessed via the conversation ID
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>a field constraint is
-            violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -812,9 +697,7 @@ paths:
             schema:
               properties:
                 topic:
-                  description: An optional topic of the conversation. If not set the Circuit
-                    client will render the names of the participants as topic of
-                    the conversation (the first 4 names will be used)
+                  description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
                   maxLength: 2048
                   type: string
               type: object
@@ -829,14 +712,11 @@ paths:
                 $ref: "#/components/schemas/Conversation"
           description: Gets the updated conversation object with the new topic
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the conversation is not of type
-            GROUP</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -849,25 +729,19 @@ paths:
         - Conversations
   "/conversations/group/{convId}/participants":
     delete:
-      description: >-
-        Removes one or more participants from the given group conversation.
-        The last participant of a group conversation cannot be removed. This
-        operation can only be performed on behalf of a user who is already a
-        member of the conversation.
-
+      description: |-
+        Removes one or more participants from the given group conversation. The last participant of a group conversation cannot be removed. This operation can only be performed on behalf of a user who is already a member of the conversation.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: removeParticipantGroup
       parameters:
-        - description: The ID of the conversation from which the participant have to be
-            removed
+        - description: The ID of the conversation from which the participant have to be removed
           in: path
           name: convId
           required: true
           schema:
             maxLength: 2048
             type: string
-        - description: The IDs or the unique email addresses of the Circuit users that
-            have to be removed
+        - description: The IDs or the unique email addresses of the Circuit users that have to be removed
           explode: true
           in: query
           name: participants
@@ -886,20 +760,13 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: Gets the conversation object from which the participants were
-            removed.
+          description: Gets the conversation object from which the participants were removed.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>the conversation does not
-            exist</li><li>the conversation is not of type GROUP</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -911,11 +778,8 @@ paths:
       tags:
         - Conversations
     post:
-      description: >-
-        Adds one or more participants to the given group conversation. This
-        operation can only be performed by a user who is already a member of the
-        conversation.
-
+      description: |-
+        Adds one or more participants to the given group conversation. This operation can only be performed by a user who is already a member of the conversation.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: addParticipantGroup
       parameters:
@@ -939,17 +803,11 @@ paths:
                 $ref: "#/components/schemas/Conversation"
           description: Gets the conversation object to which the participants were added.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or an valid email address</li><li>or one or more of
-            the user do not exist</li><li>the conversation does not
-            exist</li><li>the conversation is not of type GROUP</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1006,8 +864,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1019,11 +876,8 @@ paths:
         - Conversations
   /conversations/messages/flag:
     get:
-      description: >-
-        Gets a list of all the messages the authenticated user has flagged.
-        This endpoint should be used carefully in case where the authenticated
-        user has a lot of flagged messages.
-
+      description: |-
+        Gets a list of all the messages the authenticated user has flagged. This endpoint should be used carefully in case where the authenticated user has a lot of flagged messages.
         OauthScopes: READ_CONVERSATIONS
       operationId: getFlagItemConv
       responses:
@@ -1038,8 +892,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1078,8 +931,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1145,18 +997,15 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Conversation"
-          description: Returns the conversation object that belongs to the invite token if
-            you are member of the conversation
+          description: Returns the conversation object that belongs to the invite token if you are member of the conversation
         "400":
           description: In case no invitation token was send
         "401":
           description: The authentication was not successful
         "404":
-          description: "If the token does not exist or you are not member of the
-            conversation "
+          description: "If the token does not exist or you are not member of the conversation "
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1168,11 +1017,8 @@ paths:
         - Conversations
   /conversations/search:
     get:
-      description: >-
-        Performs a search for conversation content. A maximum of 100
-        conversations is returned. If you hit this limit you should refine the
-        search term.
-
+      description: |-
+        Performs a search for conversation content. A maximum of 100 conversations is returned. If you hit this limit you should refine the search term.
         OauthScopes: READ_CONVERSATIONS
       operationId: searchConversations
       parameters:
@@ -1183,19 +1029,14 @@ paths:
           schema:
             maxLength: 2048
             type: string
-        - description: Optional parameter to specify if a deep or normal search is
-            executed. In a deep search all matching item IDs inside every
-            conversation are returned (up to a maximum of 100). For a normal
-            search only the conversation IDs are returned. Default is a normal
-            search (without item IDs).
+        - description: Optional parameter to specify if a deep or normal search is executed. In a deep search all matching item IDs inside every conversation are returned (up to a maximum of 100). For a normal search only the conversation IDs are returned. Default is a normal search (without item IDs).
           in: query
           name: includeItemIds
           required: false
           schema:
             default: false
             type: boolean
-        - description: The search scope,
-            FILES||PEOPLE||MEMBERS||MESSAGES||SENTBY||ALL||CONVERSATIONS||LABEL||FILTER
+        - description: The search scope, FILES||PEOPLE||MEMBERS||MESSAGES||SENTBY||ALL||CONVERSATIONS||LABEL||FILTER
           in: query
           name: scope
           required: false
@@ -1224,14 +1065,11 @@ paths:
                 $ref: "#/components/schemas/ConversationSearchResult"
           description: A list of conversations and items that match the term
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            user is no participant of the conversation</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1263,8 +1101,7 @@ paths:
         "403":
           description: Permission denied
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1300,14 +1137,11 @@ paths:
                 $ref: "#/components/schemas/Conversation"
           description: Gets the conversation object
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>a field constraint is
-            violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1335,15 +1169,11 @@ paths:
         "200":
           description: The conversation was successfully unmarked
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li><li>the
-            conversation was not marked before</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li><li>the conversation was not marked before</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1370,14 +1200,11 @@ paths:
         "200":
           description: The conversation was successfully archived
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1389,17 +1216,12 @@ paths:
         - Conversations
   "/conversations/{convId}/conversationdetails":
     get:
-      description: >-
-        Gets the conference details of the given conversation. Conference
-        details include the URL, which is used to join the conference through a
-        web or mobile application, as well as the dial-in phone numbers and
-        conference PIN, which are used to join the conference by phone.
-
+      description: |-
+        Gets the conference details of the given conversation. Conference details include the URL, which is used to join the conference through a web or mobile application, as well as the dial-in phone numbers and conference PIN, which are used to join the conference by phone.
         OauthScopes: READ_CONVERSATIONS
       operationId: getJoinDetails
       parameters:
-        - description: The ID of the conversation for which the join details should be
-            returned
+        - description: The ID of the conversation for which the join details should be returned
           in: path
           name: convId
           required: true
@@ -1417,13 +1239,11 @@ paths:
                 $ref: "#/components/schemas/ConversationDetails"
           description: The join details.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1435,11 +1255,8 @@ paths:
         - Conversations
   "/conversations/{convId}/favorite":
     delete:
-      description: >-
-        Removes a conversation from favorites. Favorites can be displayed
-        in a separate side tab inside of the Circuit client to have a better
-        overview of important conversations.
-
+      description: |-
+        Removes a conversation from favorites. Favorites can be displayed in a separate side tab inside of the Circuit client to have a better overview of important conversations.
         OauthScopes: WRITE_CONVERSATIONS
       operationId: deleteFavorite
       parameters:
@@ -1454,15 +1271,11 @@ paths:
         "200":
           description: The conversation was successfully unmarked
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li><li>the
-            conversation was not marked before</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li><li>the conversation was not marked before</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1473,11 +1286,8 @@ paths:
       tags:
         - Conversations
     post:
-      description: >-
-        Adds a conversation to the favorites. Favorites can be displayed in
-        a separate side tab inside of the Circuit client to have a better
-        overview of important conversations.
-
+      description: |-
+        Adds a conversation to the favorites. Favorites can be displayed in a separate side tab inside of the Circuit client to have a better overview of important conversations.
         OauthScopes: WRITE_CONVERSATIONS
       operationId: addFavorite
       parameters:
@@ -1492,14 +1302,11 @@ paths:
         "200":
           description: The conversation was successfully marked
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1523,18 +1330,14 @@ paths:
           schema:
             maxLength: 2048
             type: string
-        - description: The modification time of the item in UTC format. During the query
-            the items before (default) or after this timestamps are returned. In
-            case no timestamp is specified the current server time in UTC is
-            used, i.e. the last 25 modified items are returned
+        - description: The modification time of the item in UTC format. During the query the items before (default) or after this timestamps are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified items are returned
           in: query
           name: modTime
           required: false
           schema:
             format: date-time
             type: string
-        - description: The direction of the search based on the modification time. Valid
-            values are either BEFORE (default) or AFTER
+        - description: The direction of the search based on the modification time. Valid values are either BEFORE (default) or AFTER
           in: query
           name: direction
           required: false
@@ -1545,8 +1348,7 @@ paths:
               - AFTER
             maxLength: 2048
             type: string
-        - description: The maximum number of returned results (default 25). The maximum
-            allowed value is 100.
+        - description: The maximum number of returned results (default 25). The maximum allowed value is 100.
           in: query
           name: results
           required: false
@@ -1571,13 +1373,11 @@ paths:
                 type: array
           description: The matching conversation items
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1589,10 +1389,8 @@ paths:
         - Conversations
   "/conversations/{convId}/label":
     post:
-      description: >-
-        Adds a label to a conversation, you can search and organize your
-        conversations based on these labels
-
+      description: |-
+        Adds a label to a conversation, you can search and organize your conversations based on these labels
         OauthScopes: WRITE_CONVERSATIONS, ORGANIZE_CONVERSATIONS
       operationId: assignLabel
       parameters:
@@ -1627,14 +1425,11 @@ paths:
                 $ref: "#/components/schemas/Label"
           description: The label was successfully added
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field
-            constraint is violated</li><li>you reached the maximum of 250
-            labels</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>you reached the maximum of 250 labels</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1647,10 +1442,8 @@ paths:
         - Conversations
   "/conversations/{convId}/label/{labelId}":
     delete:
-      description: >-
-        Removes a label from a conversation, you can search and organize
-        your conversations based on these labels
-
+      description: |-
+        Removes a label from a conversation, you can search and organize your conversations based on these labels
         OauthScopes: WRITE_CONVERSATIONS
       operationId: unassignLabel
       parameters:
@@ -1679,14 +1472,11 @@ paths:
                 $ref: "#/components/schemas/Label"
           description: The label was successfully removed
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field
-            constraint is violated</li><li>the label was not assigned to the
-            conversation</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label was not assigned to the conversation</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1698,11 +1488,8 @@ paths:
         - Conversations
   "/conversations/{convId}/messages":
     post:
-      description: >-
-        Adds a message to the given conversation. This operation can be
-        only performed on behalf of a user who is already a member of the
-        conversation.
-
+      description: |-
+        Adds a message to the given conversation. This operation can be only performed on behalf of a user who is already a member of the conversation.
         OauthScopes: WRITE_CONVERSATIONS, CREATE_CONVERSATIONS_CONTENT
       operationId: addTextItem
       parameters:
@@ -1725,8 +1512,7 @@ paths:
                     type: string
                   type: array
                 content:
-                  description: The actual content of the item, is mandatory unless an attachment
-                    is added
+                  description: The actual content of the item, is mandatory unless an attachment is added
                   maxLength: 16384
                   type: string
                 formMetaData:
@@ -1749,14 +1535,11 @@ paths:
                 $ref: "#/components/schemas/ConversationItem"
           description: Gets the new text item object
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1796,14 +1579,11 @@ paths:
                 type: array
           description: Gets the list of flagged items
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>a field constraint is
-            violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1816,12 +1596,8 @@ paths:
         - Conversations
   "/conversations/{convId}/messages/{itemId}":
     delete:
-      description: >-
-        Marks a message in the given conversation as deleted. Deleted
-        messages are still part of the conversation, but their content is no
-        more visible. This operation can only be performed on behalf of the
-        message's creator.
-
+      description: |-
+        Marks a message in the given conversation as deleted. Deleted messages are still part of the conversation, but their content is no more visible. This operation can only be performed on behalf of the message's creator.
         OauthScopes: WRITE_CONVERSATIONS, DELETE_CONVERSATIONS_CONTENT
       operationId: deleteTextItem
       parameters:
@@ -1850,15 +1626,11 @@ paths:
                 $ref: "#/components/schemas/ConversationItem"
           description: Gets the deleted text item object
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the item does not
-            exist</li><li>the user is no participant of the
-            conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1870,10 +1642,8 @@ paths:
       tags:
         - Conversations
     post:
-      description: >-
-        Adds a message to the existing item. The added message will be a
-        child item of the message with the given itemId.
-
+      description: |-
+        Adds a message to the existing item. The added message will be a child item of the message with the given itemId.
         OauthScopes: WRITE_CONVERSATIONS
       operationId: addTextItemWithParent
       parameters:
@@ -1926,15 +1696,11 @@ paths:
                 $ref: "#/components/schemas/ConversationItem"
           description: Gets the new text item object
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the parent item does not
-            exist</li><li>the user is no participant of the
-            conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the parent item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -1945,10 +1711,8 @@ paths:
       tags:
         - Conversations
     put:
-      description: >-
-        Updates the content or subject of the existing message. Only the
-        creator of the message is allowed to perform this operation.
-
+      description: |-
+        Updates the content or subject of the existing message. Only the creator of the message is allowed to perform this operation.
         OauthScopes: WRITE_CONVERSATIONS, UPDATE_CONVERSATION_CONTENT
       operationId: updateTextItem
       parameters:
@@ -2001,14 +1765,11 @@ paths:
                 $ref: "#/components/schemas/ConversationItem"
           description: Gets the modified text item object
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the user is no participant of
-            the conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2021,10 +1782,8 @@ paths:
         - Conversations
   "/conversations/{convId}/messages/{itemId}/flag":
     delete:
-      description: >-
-        Removes the flag from a given message that is posted to the given
-        conversation.
-
+      description: |-
+        Removes the flag from a given message that is posted to the given conversation.
         OauthScopes: WRITE_CONVERSATIONS, ORGANIZE_CONVERSATIONS
       operationId: unFlagItem
       parameters:
@@ -2046,15 +1805,11 @@ paths:
         "200":
           description: The flagged state of item was successfully removed
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the item does not
-            exist</li><li>the user is no participant of the
-            conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2103,15 +1858,11 @@ paths:
         "200":
           description: The item was successful flagged
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the item does not
-            exist</li><li>the user is no participant of the
-            conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2147,15 +1898,11 @@ paths:
         "200":
           description: The item was successful unliked
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the item does not
-            exist</li><li>the user is no participant of the
-            conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2190,15 +1937,11 @@ paths:
         "200":
           description: The item was successful liked
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            conversation does not exist</li><li>the item does not
-            exist</li><li>the user is no participant of the
-            conversation</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2246,8 +1989,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2294,8 +2036,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2308,11 +2049,8 @@ paths:
         - Conversations
   "/conversations/{convId}/participants":
     get:
-      description: >-
-        Performs a search for participants. The max number of participants
-        is configurable. If more participants are available a search pointer is
-        returned for consecutive calls.
-
+      description: |-
+        Performs a search for participants. The max number of participants is configurable. If more participants are available a search pointer is returned for consecutive calls.
         OauthScopes: READ_CONVERSATIONS
       operationId: getParticipantsByConvId
       parameters:
@@ -2375,14 +2113,11 @@ paths:
                 type: array
           description: A list of conversations and items that match the term
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            user is no participant of the conversation</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2425,8 +2160,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2472,8 +2206,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2518,8 +2251,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2545,8 +2277,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2592,8 +2323,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2692,8 +2422,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2712,8 +2441,7 @@ paths:
         OauthScopes: READ_SPACE
       operationId: getDirectory
       parameters:
-        - description: sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or
-            CREATION_DATE
+        - description: sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or CREATION_DATE
           in: query
           name: sortBy
           required: true
@@ -2737,8 +2465,7 @@ paths:
               - DESCENDING
             maxLength: 2048
             type: string
-        - description: filter for spaces (JOINED, REQUESTED, OPEN, CLOSED or
-            NOT_JOINED_REQUESTED)
+        - description: filter for spaces (JOINED, REQUESTED, OPEN, CLOSED or NOT_JOINED_REQUESTED)
           in: query
           name: filter
           required: true
@@ -2760,8 +2487,7 @@ paths:
           schema:
             maxLength: 2048
             type: string
-        - description: page pointer, start with nothing and for next query use returned
-            pointer
+        - description: page pointer, start with nothing and for next query use returned pointer
           in: query
           name: pagePointer
           required: false
@@ -2791,8 +2517,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2818,13 +2543,11 @@ paths:
             type: string
       responses:
         "200":
-          description: Check performed successfully, returning true if found, false if not
-            found.
+          description: Check performed successfully, returning true if found, false if not found.
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2854,8 +2577,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2884,8 +2606,7 @@ paths:
               - AFTER
             maxLength: 2048
             type: string
-        - description: The timestamp according to which you want to retrieve the flagged
-            items
+        - description: The timestamp according to which you want to retrieve the flagged items
           in: query
           name: timestamp
           required: true
@@ -2922,8 +2643,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2963,8 +2683,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -2996,8 +2715,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3028,8 +2746,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3084,8 +2801,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3141,8 +2857,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3174,8 +2889,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3204,8 +2918,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3281,8 +2994,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3366,8 +3078,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3419,8 +3130,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3451,8 +3161,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3483,8 +3192,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3515,8 +3223,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3624,8 +3331,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3663,8 +3369,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3720,8 +3425,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3778,8 +3482,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3810,8 +3513,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3879,8 +3581,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3926,8 +3627,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -3953,8 +3653,7 @@ paths:
           schema:
             maxLength: 2048
             type: string
-        - description: sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or
-            CREATION_DATE
+        - description: sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or CREATION_DATE
           in: query
           name: sortBy
           required: true
@@ -4033,8 +3732,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4088,8 +3786,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4131,8 +3828,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4180,8 +3876,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4207,8 +3902,7 @@ paths:
           schema:
             maxLength: 2048
             type: string
-        - description: The query to search with. If searchpointer/hasMotre is returned,
-            refine query.
+        - description: The query to search with. If searchpointer/hasMotre is returned, refine query.
           in: query
           name: query
           required: true
@@ -4232,8 +3926,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4276,8 +3969,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4331,8 +4023,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4371,8 +4062,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4414,8 +4104,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4464,8 +4153,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4505,8 +4193,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4592,8 +4279,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4649,8 +4335,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4740,8 +4425,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4814,8 +4498,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4887,8 +4570,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -4970,8 +4652,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5041,8 +4722,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5089,8 +4769,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5136,8 +4815,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5168,8 +4846,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5198,8 +4875,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5221,8 +4897,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5278,9 +4953,7 @@ paths:
               - BOTH
             maxLength: 2048
             type: string
-        - description: The filter,
-            ALL||MISSED||DIALED||RECEIVED||DIVERTED||VOICEMAILS||UNHERAD_VOICEMAILS.
-            default = ALL
+        - description: The filter, ALL||MISSED||DIALED||RECEIVED||DIVERTED||VOICEMAILS||UNHERAD_VOICEMAILS. default = ALL
           in: query
           name: journalFilter
           required: false
@@ -5313,8 +4986,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5353,15 +5025,13 @@ paths:
                 type: array
           description: The users which match the search criteria
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: The search term did not much any results
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5373,10 +5043,8 @@ paths:
         - Users
   /users/labels:
     get:
-      description: >-
-        Returns all labels of the user that were defined either explicit or
-        implicit via assignment to conversations.
-
+      description: |-
+        Returns all labels of the user that were defined either explicit or implicit via assignment to conversations.
         OauthScopes: READ_USER_PROFILE, ORGANIZE_CONVERSATIONS
       operationId: getLabel
       responses:
@@ -5391,8 +5059,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5434,8 +5101,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5471,13 +5137,11 @@ paths:
                 $ref: "#/components/schemas/Label"
           description: The label was successfully removed
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field
-            constraint is violated</li><li>the label does not exist</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label does not exist</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5540,8 +5204,7 @@ paths:
         "404":
           description: No user was found
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5553,15 +5216,12 @@ paths:
         - Users
   /users/presence:
     get:
-      description: >-
-        Gets the presence status of the users whose IDs or email addresses
-        are given.
-
+      description: |-
+        Gets the presence status of the users whose IDs or email addresses are given.
         OauthScopes: READ_USER
       operationId: getPresence
       parameters:
-        - description: A list of unique user IDs or email addresses of the users you want
-            to query the presence state for
+        - description: A list of unique user IDs or email addresses of the users you want to query the presence state for
           explode: true
           in: query
           name: userIds
@@ -5586,17 +5246,13 @@ paths:
                 type: array
           description: The presence states
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            userIds passed as parameter are not provided in the correct
-            format</li><li> or a valid email address</li><li>a field constraint
-            is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or a valid email address</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: One or more of the users do not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5621,8 +5277,7 @@ paths:
                   description: Clear the DND of the user.
                   type: boolean
                 dndUntil:
-                  description: Timestamp until the DND state of the user is active. This field is
-                    mandatory when the state is set to DND.
+                  description: Timestamp until the DND state of the user is active. This field is mandatory when the state is set to DND.
                   format: date-time
                   type: string
                 state:
@@ -5630,8 +5285,7 @@ paths:
                   maxLength: 2048
                   type: string
                 statusMessage:
-                  description: An optional status message that is displayed instead of the
-                    location
+                  description: An optional status message that is displayed instead of the location
                   maxLength: 2048
                   type: string
               required:
@@ -5649,14 +5303,11 @@ paths:
                 $ref: "#/components/schemas/Presence"
           description: The presence states
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            presence state is DND and the data format of the passed dndUntil is
-            missing </li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the presence state is DND and the data format of the passed dndUntil is missing </li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5683,8 +5334,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5717,8 +5367,7 @@ paths:
                   maxLength: 128
                   type: string
                 locale:
-                  description: The new locale of the user. One of EN_US, DE_DE, EN_GB, ES_ES,
-                    FR_FR, IT_IT, RU_RU, ZH_HANS_CN.
+                  description: The new locale of the user. One of EN_US, DE_DE, EN_GB, ES_ES, FR_FR, IT_IT, RU_RU, ZH_HANS_CN.
                   enum:
                     - EN_US
                     - DE_DE
@@ -5745,14 +5394,11 @@ paths:
                 $ref: "#/components/schemas/User"
           description: The modified user object.
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            user does not exist</li><li>a field constraint is
-            violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the user does not exist</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5778,8 +5424,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5824,8 +5469,7 @@ paths:
         "404":
           description: "User not found or not a session guest. "
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5860,17 +5504,13 @@ paths:
                 $ref: "#/components/schemas/User"
           description: The operation was successful, the user profile is returned
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            data format of the passed user does not match either a UUID (user
-            primary key)</li><li> or an valid email address</li><li>or a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: The user does not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5882,10 +5522,8 @@ paths:
         - Users
   "/users/{id}/presence":
     get:
-      description: >-
-        Gets the presence status of the users whose ID or email address is
-        given.
-
+      description: |-
+        Gets the presence status of the users whose ID or email address is given.
         OauthScopes: READ_USER
       operationId: getUserPresence
       parameters:
@@ -5907,17 +5545,13 @@ paths:
                 $ref: "#/components/schemas/Presence"
           description: The presence state
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            data format of the passed user does not match either a UUID (user
-            primary key)</li><li> or a valid email address</li><li>or a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or a valid email address</li><li>or a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: The user does not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5939,8 +5573,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5968,8 +5601,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -5991,11 +5623,7 @@ paths:
             schema:
               properties:
                 filter:
-                  description: "A filter for WebHooks that checks for a list of configured events.
-                    This filter will use a regular expression to determine if it
-                    is interested in the events or not. The event itself is
-                    converted into a string of format AREA.EVENT. Examples:
-                    CONVERSATION.CREATE / USER.UPDATE"
+                  description: "A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE"
                   items:
                     enum:
                       - CONVERSATION.CREATE
@@ -6029,16 +5657,13 @@ paths:
                 $ref: "#/components/schemas/WebHook"
           description: The webHook was successfully registered
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an
-            invalid URL</li><li>an invalid event filter</li><li>an unsupported
-            event filter</li><li>a field constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "403":
           description: The maximum number of allowed webHook is reached
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6051,10 +5676,8 @@ paths:
         - Outgoing Webhooks
   "/webhooks/incoming/create/{conversationId}":
     post:
-      description: >-
-        Create a new webhook. Conversation must exist and creater has to be
-        participant.
-
+      description: |-
+        Create a new webhook. Conversation must exist and creater has to be participant.
         OauthScopes: WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createIncomingWebhook
       parameters:
@@ -6101,8 +5724,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6163,8 +5785,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6197,8 +5818,7 @@ paths:
         "404":
           description: Could not find webhook
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6235,8 +5855,7 @@ paths:
         "401":
           description: The authentication was not successful
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       summary: Post text item for conversation via webhook.
@@ -6244,10 +5863,8 @@ paths:
         - Incoming Webhooks
   /webhooks/presence:
     post:
-      description: >-
-        Registers a webHook that has a presence filter with the given URL
-        and userIds. There is a maximum number of userIds allowed
-
+      description: |-
+        Registers a webHook that has a presence filter with the given URL and userIds. There is a maximum number of userIds allowed
         OauthScopes: READ_USER
       operationId: addPresenceWebHook
       requestBody:
@@ -6281,17 +5898,13 @@ paths:
                 $ref: "#/components/schemas/WebHook"
           description: The webHook was successfully registered
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an
-            invalid URL</li><li>one or more invalid userIds</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "403":
-          description: The maximum number of allowed userIds is reached or the maximum
-            number of allowed webHook is reached
+          description: The maximum number of allowed userIds is reached or the maximum number of allowed webHook is reached
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6303,11 +5916,8 @@ paths:
         - Outgoing Webhooks
   "/webhooks/presence/{id}":
     put:
-      description: >-
-        Updates a registration of a webHook that has a presence filter. The
-        update can be performed either on the URL and/or the userIds. The new
-        userIds, if any, will override any existing userIds.
-
+      description: |-
+        Updates a registration of a webHook that has a presence filter. The update can be performed either on the URL and/or the userIds. The new userIds, if any, will override any existing userIds.
         OauthScopes: READ_USER
       operationId: updatePresenceWebHook
       parameters:
@@ -6345,10 +5955,7 @@ paths:
                 $ref: "#/components/schemas/WebHook"
           description: The webHook registration was successfully updated
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an
-            invalid URL</li><li>one or more invalid userIds</li><li>no input
-            parameter is provided</li><li>a field constraint is
-            violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "403":
@@ -6356,8 +5963,7 @@ paths:
         "404":
           description: The webHook does not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6385,16 +5991,13 @@ paths:
         "204":
           description: The operation was successful
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            data format of the given id does not match a UUID</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: The webHook does not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6429,16 +6032,13 @@ paths:
                 $ref: "#/components/schemas/WebHook"
           description: The registered webHook with the given ID
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the
-            data format of the given id does not match a UUID</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: The webHook does not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6468,11 +6068,7 @@ paths:
             schema:
               properties:
                 filter:
-                  description: "A filter for WebHooks that checks for a list of configured events.
-                    This filter will use a regular expression to determine if it
-                    is interested in the events or not. The event itself is
-                    converted into a string of format AREA.EVENT. Examples:
-                    CONVERSATION.CREATE / USER.UPDATE"
+                  description: "A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE"
                   items:
                     enum:
                       - CONVERSATION.CREATE
@@ -6502,17 +6098,13 @@ paths:
                 $ref: "#/components/schemas/WebHook"
           description: The webHook registration was successfully updated
         "400":
-          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an
-            invalid URL</li><li>an invalid event filter</li><li>an unsupported
-            event filter</li><li>no input parameter is provided</li><li>a field
-            constraint is violated</li></ul>"
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>"
         "401":
           description: The authentication was not successful
         "404":
           description: The webHook does not exist
         "500":
-          description: The server encountered an internal error and the operation could
-            not be completed.
+          description: The server encountered an internal error and the operation could not be completed.
         "503":
           description: The server is currently unable to receive requests.
       security:
@@ -6531,8 +6123,7 @@ components:
           schema:
             properties:
               participants:
-                description: The IDs or the unique email addresses of the Circuit users that
-                  should to be added.
+                description: The IDs or the unique email addresses of the Circuit users that should to be added.
                 items:
                   maxLength: 6500
                   type: string
@@ -6616,8 +6207,7 @@ components:
     BridgeNumber:
       properties:
         bridgeNumber:
-          description: The number that has to be called to join the real time session of a
-            conversation
+          description: The number that has to be called to join the real time session of a conversation
           type: string
         country:
           description: The country where the bridge is hosted
@@ -6632,8 +6222,7 @@ components:
           description: The name / identifier of the bridge
           type: string
         type:
-          description: Information of the billing for the call, i.e. if the caller has to
-            pay or not for the call
+          description: Information of the billing for the call, i.e. if the caller has to pay or not for the call
           type: string
     Conversation:
       properties:
@@ -6654,26 +6243,19 @@ components:
           description: The ID of the user who created the conversation
           type: string
         creatorTenantId:
-          description: The ID of the Circuit domain (tenant) where the creator of the
-            conversation belongs to
+          description: The ID of the Circuit domain (tenant) where the creator of the conversation belongs to
           type: string
         description:
-          description: The description of the conversation. This field is available only
-            for conversations with type COMMUNITY
+          description: The description of the conversation. This field is available only for conversations with type COMMUNITY
           type: string
         isGuestAccessDisabled:
           description: Indicates whether guest access to the conversation is disabled or not
           type: boolean
         isModerated:
-          description: Indicates whether the conversation is moderated or not. In a
-            moderated conversation only participants who have been assigned the
-            role of a moderator are allowed to add or remove participants into
-            the conversation
+          description: Indicates whether the conversation is moderated or not. In a moderated conversation only participants who have been assigned the role of a moderator are allowed to add or remove participants into the conversation
           type: boolean
         modificationTime:
-          description: UTC timestamp when the conversation was modified. A conversation is
-            modified when any of the conversation object fields change but not
-            when conversation items are added or edited
+          description: UTC timestamp when the conversation was modified. A conversation is modified when any of the conversation object fields change but not when conversation items are added or edited
           format: int64
           type: number
         participants:
@@ -6682,22 +6264,18 @@ components:
             type: string
           type: array
         topic:
-          description: The title of the conversation. Conversations of type DIRECT cannot
-            have a title
+          description: The title of the conversation. Conversations of type DIRECT cannot have a title
           type: string
         topicPlaceholder:
-          description: The title of the conversation. Conversations of type DIRECT cannot
-            have a title
+          description: The title of the conversation. Conversations of type DIRECT cannot have a title
           type: string
         type:
-          description: "The type of the conversation. It can be one of the following:
-            DIRECT, GROUP, COMMUNITY or LARGE"
+          description: "The type of the conversation. It can be one of the following: DIRECT, GROUP, COMMUNITY or LARGE"
           type: string
     ConversationDetails:
       properties:
         bridgeNumbers:
-          description: A list of bridge numbers which can be used to dial in to the real
-            time session via phone
+          description: A list of bridge numbers which can be used to dial in to the real time session via phone
           items:
             $ref: "#/components/schemas/BridgeNumber"
           type: array
@@ -6753,8 +6331,7 @@ components:
         text:
           $ref: "#/components/schemas/ConversationTextItem"
         type:
-          description: The type of the conversation item. It can be one of the following
-            TEXT, SYSTEM or RTC
+          description: The type of the conversation item. It can be one of the following TEXT, SYSTEM or RTC
           type: string
     ConversationParticipant:
       properties:
@@ -6785,8 +6362,7 @@ components:
     ConversationParticipantsList:
       properties:
         hasMore:
-          description: are more results available, then start another search with finer
-            query
+          description: are more results available, then start another search with finer query
           type: boolean
         participantList:
           description: list of participants
@@ -6809,9 +6385,7 @@ components:
           description: The ID of the conversation to which the matching items belong.
           type: string
         itemIds:
-          description: The conversation items which contain the search result. The list
-            maybe empty in case a hit was found for the conversation related
-            data like topic or participants.
+          description: The conversation items which contain the search result. The list maybe empty in case a hit was found for the conversation related data like topic or participants.
           items:
             type: string
           type: array
@@ -6821,8 +6395,7 @@ components:
           description: The content of the text item
           type: string
         contentType:
-          description: "The type of the text item. It can be one of the following: RICH
-            (with HTML content) or PLAIN (only text)"
+          description: "The type of the text item. It can be one of the following: RICH (with HTML content) or PLAIN (only text)"
           type: string
         formMetaData:
           description: The meta data form
@@ -6836,21 +6409,15 @@ components:
             type: string
           type: array
         parentId:
-          description: The ID of the parent item of the text item. This field is optional
-            and can be used for thread views
+          description: The ID of the parent item of the text item. This field is optional and can be used for thread views
           type: string
         preview:
           $ref: "#/components/schemas/Preview"
         state:
-          description: "The state of the text item. It can be one of the following:
-            CREATED (which denotes that it was not modified since its creation),
-            EDITED (which denotes that the creator of this item modified the
-            item) or DELETED (which denotes that the item itself exists but its
-            content was removed)"
+          description: "The state of the text item. It can be one of the following: CREATED (which denotes that it was not modified since its creation), EDITED (which denotes that the creator of this item modified the item) or DELETED (which denotes that the item itself exists but its content was removed)"
           type: string
         subject:
-          description: TThe subject of the text item. This field is optional and maybe
-            filled when creating the text item
+          description: TThe subject of the text item. This field is optional and maybe filled when creating the text item
           type: string
     ConversationsPage:
       properties:
@@ -6950,8 +6517,7 @@ components:
           description: missing documentation
           type: string
         text:
-          description: The text which will occur in the conversation. May contain formats
-            like *bold* or _italic_
+          description: The text which will occur in the conversation. May contain formats like *bold* or _italic_
           type: string
     Label:
       properties:
@@ -7202,8 +6768,7 @@ components:
     ParticipantsSearchResultLarge:
       properties:
         hasMore:
-          description: are more results available, then start another search with finer
-            query
+          description: are more results available, then start another search with finer query
           type: boolean
         participants:
           description: list of participants
@@ -7246,15 +6811,13 @@ components:
           format: float
           type: number
         mobile:
-          description: Identifies whether the presence state is based on the state
-            information of a mobile device or not
+          description: Identifies whether the presence state is based on the state information of a mobile device or not
           type: boolean
         poor:
           description: n/a
           type: boolean
         state:
-          description: "The presence state of the user. It can be one of the following:
-            AVAILABLE, OFFLINE, AWAY, BUSY, or DND (Do-Not-Disturb)"
+          description: "The presence state of the user. It can be one of the following: AVAILABLE, OFFLINE, AWAY, BUSY, or DND (Do-Not-Disturb)"
           type: string
         statusMessage:
           description: A free formed status message of the user
@@ -7383,8 +6946,7 @@ components:
           description: The space description.
           type: string
         largePictureBase64:
-          description: Base64 encoded image that can be set during the creation and the
-            update of a space.
+          description: Base64 encoded image that can be set during the creation and the update of a space.
           type: string
         largePictureContentType:
           description: The content type of the image.
@@ -7393,8 +6955,7 @@ components:
           description: The file id of the large version of the picture.
           type: string
         lastContentCreationTime:
-          description: Time stamp when the last content (topic / reply) was created within
-            this space.
+          description: Time stamp when the last content (topic / reply) was created within this space.
           format: int64
           type: number
         lastContentCreatorId:
@@ -7431,8 +6992,7 @@ components:
           description: The ID of the space owner.
           type: string
         smallPictureBase64:
-          description: Base64 encoded image that can be set during the creation and the
-            update of a space.
+          description: Base64 encoded image that can be set during the creation and the update of a space.
           type: string
         smallPictureContentType:
           description: The content type of the image.
@@ -7441,8 +7001,7 @@ components:
           description: The file id of the small version of the picture.
           type: string
         spaceId:
-          description: The unique space ID generated by the backend during the creation of
-            the space.
+          description: The unique space ID generated by the backend during the creation of the space.
           type: string
         status:
           description: The name of the status of the space.
@@ -7644,8 +7203,7 @@ components:
     SpaceSearchResultDetailedBack:
       properties:
         resList:
-          description: A list of v2restspacesearchresultdetailedback containing spaceId,
-            item ids and file ids
+          description: A list of v2restspacesearchresultdetailedback containing spaceId, item ids and file ids
           items:
             $ref: "#/components/schemas/SpaceSearchResultDetailed"
           type: array
@@ -7716,18 +7274,15 @@ components:
     SystemItem:
       properties:
         affectedParticipants:
-          description: List off affected participants (user ID of the Circuit user) in
-            case the item type PARTICIPANT_ADDED or PARTICIPANT_REMOVED
+          description: List off affected participants (user ID of the Circuit user) in case the item type PARTICIPANT_ADDED or PARTICIPANT_REMOVED
           items:
             type: string
           type: array
         newTopic:
-          description: Filled with the new topic of a conversation if the type of the item
-            is CONVERSATION_RENAMED.
+          description: Filled with the new topic of a conversation if the type of the item is CONVERSATION_RENAMED.
           type: string
         oldTopic:
-          description: Filled with the previous topic of a conversation if the type of the
-            item is CONVERSATION_RENAMED.
+          description: Filled with the previous topic of a conversation if the type of the item is CONVERSATION_RENAMED.
           type: string
         type:
           description: The type of the system item
@@ -7843,8 +7398,7 @@ components:
     WebHook:
       properties:
         creationTime:
-          description: The time when this WebHook was created. This does not necessary
-            mean the time when an manifest file was created.
+          description: The time when this WebHook was created. This does not necessary mean the time when an manifest file was created.
           format: int64
           type: number
         filter:
@@ -7853,27 +7407,21 @@ components:
             type: string
           type: array
         id:
-          description: The unique identifier for this webhook. Can be used later to
-            unregister the webhook.
+          description: The unique identifier for this webhook. Can be used later to unregister the webhook.
           type: string
         subscriptionIds:
-          description: The optional list of userids for which this webhook is subscribed,
-            i.e. presence events for the user are forwarded to the WebHook
-            callback URL.
+          description: The optional list of userids for which this webhook is subscribed, i.e. presence events for the user are forwarded to the WebHook callback URL.
           items:
             type: string
           type: array
         type:
-          description: The type of a WebHook. This can either be MANUAL or EXTENSION.
-            While manual WebHooks are only temporary and for development only
-            use, permanent ones (EXTENSION) will bemanaged by the system.
+          description: The type of a WebHook. This can either be MANUAL or EXTENSION. While manual WebHooks are only temporary and for development only use, permanent ones (EXTENSION) will bemanaged by the system.
           type: string
         url:
           description: The callback URL of this webhook.
           type: string
         userId:
-          description: The user ID for which this webhook is subscribed, i.e. events for
-            this user are forwarded to the WebHook callback URL.
+          description: The user ID for which this webhook is subscribed, i.e. events for this user are forwarded to the WebHook callback URL.
           type: string
   securitySchemes:
     oauth:
@@ -7904,8 +7452,7 @@ components:
             READ_CONVERSATIONS: allows to read conversations of the authenticated user
             READ_SPACE:
               $ref: "#/securityDefinitions/oauth/scopes/C4O365"
-            READ_USER: allows to read user information for all users that belong to the
-              tenant of the authenticated user
+            READ_USER: allows to read user information for all users that belong to the tenant of the authenticated user
             READ_USER_PROFILE: allows to read the user profile of the authenticated user
             SDK_USER_TO_USER:
               $ref: "#/securityDefinitions/oauth/scopes/C4O365"
@@ -7917,8 +7464,7 @@ components:
               $ref: "#/securityDefinitions/oauth/scopes/C4O365"
             USER_MANAGEMENT: allows to create, update and delete users
             USER_TO_USER: User2User
-            WRITE_CONVERSATIONS: allows to create and update conversations of the
-              authenticated user or to post messages
+            WRITE_CONVERSATIONS: allows to create and update conversations of the authenticated user or to post messages
             WRITE_SPACE:
               $ref: "#/securityDefinitions/oauth/scopes/C4O365"
             WRITE_USER_PROFILE: allows to update the user profile of the authenticated user

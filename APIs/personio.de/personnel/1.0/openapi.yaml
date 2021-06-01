@@ -4,8 +4,7 @@ servers:
 info:
   contact:
     x-twitter: PersonioHR
-  description: API for reading and writing personnel data incl. data about
-    attendances and absences
+  description: API for reading and writing personnel data incl. data about attendances and absences
   title: Personnel Data
   version: "1.0"
   x-apisguru-categories:
@@ -21,50 +20,37 @@ info:
 paths:
   /company/attendances:
     get:
-      description: This endpoint is responsible for fetching attendance data for the
-        company employees. It is possible to paginate results, filter by period,
-        the date and/or time it was updated, and/or specific employees. The
-        result will contain a list of attendance periods, structured as defined
-        here.
+      description: This endpoint is responsible for fetching attendance data for the company employees. It is possible to paginate results, filter by period, the date and/or time it was updated, and/or specific employees. The result will contain a list of attendance periods, structured as defined here.
       parameters:
-        - description: First day of the period to be queried. It is inclusive, so the day
-            specified as start_date will also be considered on the results
+        - description: First day of the period to be queried. It is inclusive, so the day specified as start_date will also be considered on the results
           in: query
           name: start_date
           required: true
           schema:
             format: date
             type: string
-        - description: Last day of the period to be queried. It is inclusive, so the day
-            specified as end_date will also be considered on the results.
+        - description: Last day of the period to be queried. It is inclusive, so the day specified as end_date will also be considered on the results.
           in: query
           name: end_date
           required: true
           schema:
             format: date
             type: string
-        - description: Datetime from when the queried periods have been updated. Same
-            format as updated_at. It is inclusive, so the day specified as
-            updated_from will also be considered on the results. Can be just the
-            date, or the date and the time, with or without the timezone.
+        - description: Datetime from when the queried periods have been updated. Same format as updated_at. It is inclusive, so the day specified as updated_from will also be considered on the results. Can be just the date, or the date and the time, with or without the timezone.
           in: query
           name: updated_from
           required: false
           schema:
             format: datetime
             type: string
-        - description: Datetime until when the queried periods have been updated. Same
-            format as updated_at. It is inclusive, so the day specified as
-            updated_to will also be considered on the results. Can be just the
-            date, or the date and the time, with or without the timezone.
+        - description: Datetime until when the queried periods have been updated. Same format as updated_at. It is inclusive, so the day specified as updated_to will also be considered on the results. Can be just the date, or the date and the time, with or without the timezone.
           in: query
           name: updated_to
           required: false
           schema:
             format: datetime
             type: string
-        - description: A list of Personio employee identifiers to filter the results. Only
-            those employees specified here will be returned.
+        - description: A list of Personio employee identifiers to filter the results. Only those employees specified here will be returned.
           explode: true
           in: query
           name: employees
@@ -73,8 +59,7 @@ paths:
             items:
               type: integer
             type: array
-        - description: Pagination attribute to limit how many attendances will be returned
-            per page
+        - description: Pagination attribute to limit how many attendances will be returned per page
           in: query
           name: limit
           required: false
@@ -82,9 +67,7 @@ paths:
             default: 200
             minimum: 1
             type: integer
-        - description: Pagination attribute to identify which page you are requesting, by
-            the form of telling an offset from the first record that would be
-            returned.
+        - description: Pagination attribute to identify which page you are requesting, by the form of telling an offset from the first record that would be returned.
           in: query
           name: offset
           required: false
@@ -132,11 +115,7 @@ paths:
                 $ref: "#/components/schemas/AttendancePeriodsResponse"
           description: ""
     post:
-      description: This endpoint is responsible for adding attendance data for the
-        company employees. It is possible to add attendances for one or many
-        employees at the same time. The payload sent on the request should be a
-        list of attendance periods, in the form of an array containing
-        attendance period objects.
+      description: This endpoint is responsible for adding attendance data for the company employees. It is possible to add attendances for one or many employees at the same time. The payload sent on the request should be a list of attendance periods, in the form of an array containing attendance period objects.
       requestBody:
         content:
           application/json:
@@ -196,8 +175,7 @@ paths:
           description: Invalid request
   "/company/attendances/{id}":
     delete:
-      description: This endpoint is responsible for deleting attendance data for the
-        company employees.
+      description: This endpoint is responsible for deleting attendance data for the company employees.
       parameters:
         - description: ID of the attendance period to delete
           in: path
@@ -233,10 +211,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Not found response
     patch:
-      description: This endpoint is responsible for updating attendance data for the
-        company employees. Attributes are not required and if not specified, the
-        current value will be used. It is not possible to change the employee
-        id.
+      description: This endpoint is responsible for updating attendance data for the company employees. Attributes are not required and if not specified, the current value will be used. It is not possible to change the employee id.
       parameters:
         - description: ID of the attendance period to update
           in: path
@@ -453,11 +428,8 @@ paths:
                 $ref: "#/components/schemas/EmployeesResponse"
           description: ""
     post:
-      description: >
-        Creates new employee. Status of the employee will be set to
-        `active` if `hire_date` provided is in past. Otherwise status will be
-        set to `onboarding`. This endpoint will respond with `id` of created
-        employee in case of success.
+      description: |
+        Creates new employee. Status of the employee will be set to `active` if `hire_date` provided is in past. Otherwise status will be set to `onboarding`. This endpoint will respond with `id` of created employee in case of success.
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -721,11 +693,9 @@ paths:
           description: OK
   /company/time-off-types:
     get:
-      description: Provides a list of available time-off types, for example 'Paid
-        vacation', 'Parental leave' or 'Home office'
+      description: Provides a list of available time-off types, for example 'Paid vacation', 'Parental leave' or 'Home office'
       parameters:
-        - description: Pagination attribute to limit how many records will be returned per
-            page
+        - description: Pagination attribute to limit how many records will be returned per page
           in: query
           name: limit
           required: false
@@ -733,9 +703,7 @@ paths:
             default: 200
             minimum: 1
             type: integer
-        - description: Pagination attribute to identify which page you are requesting, by
-            the form of telling an offset from the first record that would be
-            returned.
+        - description: Pagination attribute to identify which page you are requesting, by the form of telling an offset from the first record that would be returned.
           in: query
           name: offset
           required: false
@@ -772,47 +740,37 @@ paths:
           description: ""
   /company/time-offs:
     get:
-      description: This endpoint is responsible for fetching absence data for the
-        company employees. It is possible to paginate results, filter by period
-        and/or specific employees. The result will contain a list of absence
-        periods, structured as defined here.
+      description: This endpoint is responsible for fetching absence data for the company employees. It is possible to paginate results, filter by period and/or specific employees. The result will contain a list of absence periods, structured as defined here.
       parameters:
-        - description: First day of the period to be queried. It is inclusive, so the day
-            specified as start_date will also be considered on the results
+        - description: First day of the period to be queried. It is inclusive, so the day specified as start_date will also be considered on the results
           in: query
           name: start_date
           required: false
           schema:
             format: date
             type: string
-        - description: Last day of the period to be queried. It is inclusive, so the day
-            specified as end_date will also be considered on the results.
+        - description: Last day of the period to be queried. It is inclusive, so the day specified as end_date will also be considered on the results.
           in: query
           name: end_date
           required: false
           schema:
             format: date
             type: string
-        - description: Datetime from when the queried periods have been updated. It is
-            inclusive, so the day specified as updated_from will also be
-            considered on the results.
+        - description: Datetime from when the queried periods have been updated. It is inclusive, so the day specified as updated_from will also be considered on the results.
           in: query
           name: updated_from
           required: false
           schema:
             format: datetime
             type: string
-        - description: Datetime until when the queried periods have been updated. It is
-            inclusive, so the day specified as updated_to will also be
-            considered on the results.
+        - description: Datetime until when the queried periods have been updated. It is inclusive, so the day specified as updated_to will also be considered on the results.
           in: query
           name: updated_to
           required: false
           schema:
             format: datetime
             type: string
-        - description: A list of Personio employee identifiers to filter the results. Only
-            those employees specified here will be returned.
+        - description: A list of Personio employee identifiers to filter the results. Only those employees specified here will be returned.
           explode: true
           in: query
           name: employees
@@ -821,8 +779,7 @@ paths:
             items:
               type: integer
             type: array
-        - description: Pagination attribute to limit how many attendances will be returned
-            per page
+        - description: Pagination attribute to limit how many attendances will be returned per page
           in: query
           name: limit
           required: false
@@ -830,9 +787,7 @@ paths:
             default: 200
             minimum: 1
             type: integer
-        - description: Pagination attribute to identify which page you are requesting, by
-            the form of telling an offset from the first record that would be
-            returned.
+        - description: Pagination attribute to identify which page you are requesting, by the form of telling an offset from the first record that would be returned.
           in: query
           name: offset
           required: false
@@ -885,8 +840,7 @@ paths:
                 $ref: "#/components/schemas/AbsencePeriodsResponse"
           description: ""
     post:
-      description: This endpoint is responsible for adding absence data for the
-        company employees.
+      description: This endpoint is responsible for adding absence data for the company employees.
       requestBody:
         content:
           application/json:
@@ -983,8 +937,7 @@ paths:
           description: Validation error
   "/company/time-offs/{id}":
     delete:
-      description: This endpoint is responsible for deleting absence period data for
-        the company employees.
+      description: This endpoint is responsible for deleting absence period data for the company employees.
       parameters:
         - description: ID of the absence period to delete
           in: path

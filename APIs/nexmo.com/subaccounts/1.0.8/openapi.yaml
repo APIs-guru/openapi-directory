@@ -6,13 +6,9 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Subaccounts API enables you to create subaccounts under your
-    primary account. Subaccounts facilitate differential product configuration,
-    reporting, and billing. The Subaccounts API is released initially with
-    restricted availability. You can read more about the API in the [Subaccounts
-    documentation](/account/subaccounts/overview).
+  description: The Subaccounts API enables you to create subaccounts under your primary account. Subaccounts facilitate differential product configuration, reporting, and billing. The Subaccounts API is released initially with restricted availability. You can read more about the API in the [Subaccounts documentation](/account/subaccounts/overview).
   title: Subaccounts API
-  version: 1.0.7
+  version: 1.0.8
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/subaccounts.yml
@@ -20,18 +16,15 @@ info:
   x-providerName: nexmo.com
   x-serviceName: subaccounts
 tags:
-  - description: This section shows how you can create, retrieve and modify
-      subaccounts of a primary account.
+  - description: This section shows how you can create, retrieve and modify subaccounts of a primary account.
     name: Subaccount Management
-  - description: This section shows how you execute credit, balance and number
-      transfers, as well as viewing past transactions.
+  - description: This section shows how you execute credit, balance and number transfers, as well as viewing past transactions.
     name: Transfers
 paths:
   "/{api_key}/balance-transfers":
     get:
-      description: >
-        Retrieve a list of balance transfers that have taken place for a
-        primary account within a specified time period.
+      description: |
+        Retrieve a list of balance transfers that have taken place for a primary account within a specified time period.
       operationId: retrieveBalanceTransfers
       parameters:
         - description: ID of the primary account.
@@ -47,16 +40,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: End of the retrieval period. If absent then all transfers until now
-            is returned.
+        - description: End of the retrieval period. If absent then all transfers until now is returned.
           example: 2019-07-15T14:11:44Z
           in: query
           name: end_date
           required: false
           schema:
             type: string
-        - description: Subaccount to filter by. You may send this multiple times to filter
-            on multiple subaccounts
+        - description: Subaccount to filter by. You may send this multiple times to filter on multiple subaccounts
           in: query
           name: subaccount
           required: false
@@ -81,10 +72,8 @@ paths:
       tags:
         - Transfers
     post:
-      description: >
-        Transfer balance between a primary account and one of its
-        subaccounts. Note that balance_available_for_transfer = |account_balance
-        - credit_limit| of the source account.
+      description: |
+        Transfer balance between a primary account and one of its subaccounts. Note that balance_available_for_transfer = |account_balance - credit_limit| of the source account.
       operationId: transferBalance
       parameters:
         - description: ID of the primary account
@@ -121,9 +110,8 @@ paths:
         - Transfers
   "/{api_key}/credit-transfers":
     get:
-      description: >
-        Retrieve a list of credit transfers that have taken place for a
-        primary account within a specified time period.
+      description: |
+        Retrieve a list of credit transfers that have taken place for a primary account within a specified time period.
       operationId: retrieveCreditTransfers
       parameters:
         - description: ID of the primary account.
@@ -139,16 +127,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: End of the retrieval period. If absent then all transfers until now
-            is returned.
+        - description: End of the retrieval period. If absent then all transfers until now is returned.
           example: 2019-07-15T14:11:44Z
           in: query
           name: end_date
           required: false
           schema:
             type: string
-        - description: Subaccount to filter by. You may send this multiple times to filter
-            on multiple subaccounts
+        - description: Subaccount to filter by. You may send this multiple times to filter on multiple subaccounts
           in: query
           name: subaccount
           required: false
@@ -173,9 +159,8 @@ paths:
       tags:
         - Transfers
     post:
-      description: >
-        Transfer credit limit between a primary account and one of its
-        subaccounts.
+      description: |
+        Transfer credit limit between a primary account and one of its subaccounts.
       operationId: transferCredit
       parameters:
         - description: ID of the primary account
@@ -396,8 +381,7 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: "#/components/responses/AccountIdNotFoundError/content/application~1json/\
-                      schema"
+                  - $ref: "#/components/responses/AccountIdNotFoundError/content/application~1json/schema"
                   - $ref: "#/components/schemas/ShortcodeNotFound"
           description: Action is forbidden
         "409":
@@ -435,8 +419,7 @@ components:
               - detail
               - instance
             type: object
-      description: The account ID provided does not exist in our system or you do not
-        have access
+      description: The account ID provided does not exist in our system or you do not have access
     ForbiddenError:
       content:
         application/json:
@@ -473,8 +456,7 @@ components:
           schema:
             properties:
               detail:
-                example: Could not transfer number {number} from account {from} to {to} -
-                  ShortCode is already owned by requesting account
+                example: Could not transfer number {number} from account {from} to {to} - ShortCode is already owned by requesting account
                 type: string
               instance:
                 example: 158b8f199c45014ab7b08bfe9cc1c12c
@@ -557,9 +539,7 @@ components:
       description: Invalid Transfer
       properties:
         detail:
-          example: Failed to perform transfer number {number} from account {from} to {to}
-            - The relationship between these two accounts does not allow for
-            number transfer
+          example: Failed to perform transfer number {number} from account {from} to {to} - The relationship between these two accounts does not allow for number transfer
           type: string
         instance:
           example: 158b8f199c45014ab7b08bfe9cc1c12c
@@ -610,6 +590,7 @@ components:
       properties:
         name:
           example: Subaccount department A
+          maxLength: 80
           type: string
         secret:
           example: Password123
@@ -625,8 +606,7 @@ components:
       description: Shortcode Not Found
       properties:
         detail:
-          example: Could not transfer number {number} from account {from} to {to} -
-            ShortCode not found
+          example: Could not transfer number {number} from account {from} to {to} - ShortCode not found
           type: string
         instance:
           example: 158b8f199c45014ab7b08bfe9cc1c12c
@@ -658,8 +638,7 @@ components:
           example: bbe6222f
           type: string
         balance:
-          description: Balance of the subAccount. Value is null if balance is shared with
-            primary account.
+          description: Balance of the subAccount. Value is null if balance is shared with primary account.
           example: 100.25
           type: number
         created_at:
@@ -667,8 +646,7 @@ components:
           example: 2018-03-02T16:34:49Z
           type: string
         credit_limit:
-          description: Credit limit of the subAccount. Value is null if balance is shared
-            with primary account.
+          description: Credit limit of the subAccount. Value is null if balance is shared with primary account.
           example: -100.25
           type: number
         name:
@@ -806,8 +784,7 @@ components:
       description: Unprovisioned
       properties:
         detail:
-          example: Account acc6111f is not provisioned to access Subaccount Provisioning
-            API
+          example: Account acc6111f is not provisioned to access Subaccount Provisioning API
           type: string
         instance:
           example: 158b8f199c45014ab7b08bfe9cc1c12c
@@ -831,12 +808,10 @@ components:
 x-errors:
   internal-error:
     description: An error has occurred in the platform while processing this request
-    resolution: If the error persists, contact [Vonage
-      Support](https://support.vonage.co.uk/contactus).
+    resolution: If the error persists, contact [Vonage Support](https://support.vonage.co.uk/contactus).
   provisioning:
     description: Maximum number of sub-accounts reached
-    resolution: If you need more subaccounts, contact [Vonage
-      Support](https://support.vonage.co.uk/contactus).
+    resolution: If you need more subaccounts, contact [Vonage Support](https://support.vonage.co.uk/contactus).
   valid-transfers:
     description: Invalid transfer
     link:
@@ -848,6 +823,4 @@ x-errors:
     link:
       text: View API reference
       url: /api/subaccounts
-    resolution: See the `detail` (and, if present, the `invalid_parameters`) fields
-      for the exact reason this request was rejected and review the
-      documentation.
+    resolution: See the `detail` (and, if present, the `invalid_parameters`) fields for the exact reason this request was rejected and review the documentation.

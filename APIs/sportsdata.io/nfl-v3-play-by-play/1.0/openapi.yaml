@@ -29,8 +29,7 @@ paths:
     get:
       operationId: PlayByPlay
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -40,11 +39,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -52,8 +49,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -81,8 +77,7 @@ paths:
     get:
       operationId: PlayByPlayDelta
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -92,11 +87,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -104,8 +97,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -115,9 +107,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Only returns player statistics that have changed in the last X
-            minutes.  You specify how many minutes in time to go back.  Valid
-            entries are:<br>
+        - description: "Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:<br>
 
             \          <code>1</code> or <code>2</code>.
 
@@ -139,12 +129,10 @@ paths:
       summary: Play By Play Delta
   "/{format}/SimulatedPlayByPlay/{numberofplays}":
     get:
-      description: Gets simulated live play-by-play of NFL games, covering the
-        Conference Championship games on January 21, 2018.
+      description: Gets simulated live play-by-play of NFL games, covering the Conference Championship games on January 21, 2018.
       operationId: PlayByPlaySimulation
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -154,9 +142,7 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The number of plays to progress in this NFL live game simulation.
-            Example entries are <code>0</code>, <code>1</code>, <code>2</code>,
-            <code>3</code>, <code>150</code>, <code>200</code>, etc.
+        - description: The number of plays to progress in this NFL live game simulation. Example entries are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>150</code>, <code>200</code>, etc.
           in: path
           name: numberofplays
           required: true

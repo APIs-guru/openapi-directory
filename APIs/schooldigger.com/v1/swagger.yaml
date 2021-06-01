@@ -22,8 +22,7 @@ paths:
   /v1/districts:
     get:
       consumes: []
-      description: Search the SchoolDigger database for districts. You may use any
-        combination of criteria as query parameters.
+      description: Search the SchoolDigger database for districts. You may use any combination of criteria as query parameters.
       operationId: Districts_GetAllDistricts
       parameters:
         - description: Two character state (e.g. 'CA') - required
@@ -46,73 +45,53 @@ paths:
           name: zip
           required: false
           type: string
-        - description: Search for districts within (distanceMiles) of
-            (nearLatitude)/(nearLongitude) (e.g. 44.982560) (optional) (Pro,
-            Enterprise API levels only. Enterprise API level will flag districts
-            that include lat/long in its attendance boundary.)
+        - description: Search for districts within (distanceMiles) of (nearLatitude)/(nearLongitude) (e.g. 44.982560) (optional) (Pro, Enterprise API levels only. Enterprise API level will flag districts that include lat/long in its attendance boundary.)
           format: double
           in: query
           name: nearLatitude
           required: false
           type: number
-        - description: Search for districts within (distanceMiles) of
-            (nearLatitude)/(nearLongitude) (e.g. -124.289185) (optional) (Pro,
-            Enterprise API levels only. Enterprise API level will flag districts
-            that include lat/long in its attendance boundary.)
+        - description: Search for districts within (distanceMiles) of (nearLatitude)/(nearLongitude) (e.g. -124.289185) (optional) (Pro, Enterprise API levels only. Enterprise API level will flag districts that include lat/long in its attendance boundary.)
           format: double
           in: query
           name: nearLongitude
           required: false
           type: number
-        - description: "Full U.S. address: flag returned districts that include this
-            address in its attendance boundary. Example: '123 Main St. AnyTown
-            CA 90001' (optional) (Enterprise API level only)"
+        - description: "Full U.S. address: flag returned districts that include this address in its attendance boundary. Example: '123 Main St. AnyTown CA 90001' (optional) (Enterprise API level only)"
           in: query
           name: boundaryAddress
           required: false
           type: string
-        - description: Search for districts within (distanceMiles) of
-            (nearLatitude)/(nearLongitude) (Default 50 miles) (optional) (Pro,
-            Enterprise API levels only)
+        - description: Search for districts within (distanceMiles) of (nearLatitude)/(nearLongitude) (Default 50 miles) (optional) (Pro, Enterprise API levels only)
           format: int32
           in: query
           name: distanceMiles
           required: false
           type: integer
-        - description: Return only the districts that include given location
-            (nearLatitude/nearLongitude) or (boundaryAddress) in its attendance
-            boundary (Enterprise API level only)
+        - description: Return only the districts that include given location (nearLatitude/nearLongitude) or (boundaryAddress) in its attendance boundary (Enterprise API level only)
           in: query
           name: isInBoundaryOnly
           required: false
           type: boolean
-        - description: Search for districts within a 'box' defined by
-            (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE)
-            (optional)
+        - description: Search for districts within a 'box' defined by (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLatitudeNW
           required: false
           type: number
-        - description: Search for districts within a 'box' defined by
-            (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE)
-            (optional)
+        - description: Search for districts within a 'box' defined by (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLongitudeNW
           required: false
           type: number
-        - description: Search for districts within a 'box' defined by
-            (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE)
-            (optional)
+        - description: Search for districts within a 'box' defined by (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLatitudeSE
           required: false
           type: number
-        - description: Search for districts within a 'box' defined by
-            (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE)
-            (optional)
+        - description: Search for districts within a 'box' defined by (BoxLatitudeNW/BoxLongitudeNW) to (BoxLongitudeSE/BoxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLongitudeSE
@@ -124,22 +103,18 @@ paths:
           name: page
           required: false
           type: integer
-        - description: "Number of districts to retrieve on a page (50 max) (optional,
-            default: 10)"
+        - description: "Number of districts to retrieve on a page (50 max) (optional, default: 10)"
           format: int32
           in: query
           name: perPage
           required: false
           type: integer
-        - description: "Sort list. Values are: districtname, distance, rank. For
-            descending order, precede with '-' i.e. -districtname (optional,
-            default: districtname)"
+        - description: "Sort list. Values are: districtname, distance, rank. For descending order, precede with '-' i.e. -districtname (optional, default: districtname)"
           in: query
           name: sortBy
           required: false
           type: string
-        - description: "If sortBy is 'rank', this boolean determines if districts with no
-            rank are included in the result (optional, default: false)"
+        - description: "If sortBy is 'rank', this boolean determines if districts with no rank are included in the result (optional, default: false)"
           in: query
           name: includeUnrankedDistrictsInRankSort
           required: false
@@ -221,8 +196,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: "Number of districts to retrieve on a page (50 max) (optional,
-            default: 10)"
+        - description: "Number of districts to retrieve on a page (50 max) (optional, default: 10)"
           format: int32
           in: query
           name: perPage
@@ -277,8 +251,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: "Number of schools to retrieve on a page (50 max) (optional,
-            default: 10)"
+        - description: "Number of schools to retrieve on a page (50 max) (optional, default: 10)"
           format: int32
           in: query
           name: perPage
@@ -309,8 +282,7 @@ paths:
   /v1/schools:
     get:
       consumes: []
-      description: Search the SchoolDigger database for schools. You may use any
-        combination of criteria as query parameters.
+      description: Search the SchoolDigger database for schools. You may use any combination of criteria as query parameters.
       operationId: Schools_GetAllSchools
       parameters:
         - description: Two character state (e.g. 'CA') - required
@@ -323,21 +295,17 @@ paths:
           name: q
           required: false
           type: string
-        - description: For parameter 'q', only search school names instead of school and
-            city (optional)
+        - description: For parameter 'q', only search school names instead of school and city (optional)
           in: query
           name: qSearchSchoolNameOnly
           required: false
           type: boolean
-        - description: Search for schools within this district (7 digit district id)
-            (optional)
+        - description: Search for schools within this district (7 digit district id) (optional)
           in: query
           name: districtID
           required: false
           type: string
-        - description: "Search for schools at this level. Valid values: 'Elementary',
-            'Middle', 'High', 'Alt', 'Public', 'Private' (optional). 'Public'
-            returns all Elementary, Middle, High and Alternative schools"
+        - description: "Search for schools at this level. Valid values: 'Elementary', 'Middle', 'High', 'Alt', 'Public', 'Private' (optional). 'Public' returns all Elementary, Middle, High and Alternative schools"
           in: query
           name: level
           required: false
@@ -352,106 +320,78 @@ paths:
           name: zip
           required: false
           type: string
-        - description: True = return only magnet schools, False = return only non-magnet
-            schools (optional) (Pro, Enterprise API levels only)
+        - description: True = return only magnet schools, False = return only non-magnet schools (optional) (Pro, Enterprise API levels only)
           in: query
           name: isMagnet
           required: false
           type: boolean
-        - description: True = return only charter schools, False = return only non-charter
-            schools (optional) (Pro, Enterprise API levels only)
+        - description: True = return only charter schools, False = return only non-charter schools (optional) (Pro, Enterprise API levels only)
           in: query
           name: isCharter
           required: false
           type: boolean
-        - description: True = return only virtual schools, False = return only non-virtual
-            schools (optional) (Pro, Enterprise API levels only)
+        - description: True = return only virtual schools, False = return only non-virtual schools (optional) (Pro, Enterprise API levels only)
           in: query
           name: isVirtual
           required: false
           type: boolean
-        - description: True = return only Title I schools, False = return only non-Title I
-            schools (optional) (Pro, Enterprise API levels only)
+        - description: True = return only Title I schools, False = return only non-Title I schools (optional) (Pro, Enterprise API levels only)
           in: query
           name: isTitleI
           required: false
           type: boolean
-        - description: True = return only Title I school-wide schools, False = return only
-            non-Title I school-wide schools (optional) (Pro, Enterprise API
-            levels only)
+        - description: True = return only Title I school-wide schools, False = return only non-Title I school-wide schools (optional) (Pro, Enterprise API levels only)
           in: query
           name: isTitleISchoolwide
           required: false
           type: boolean
-        - description: Search for schools within (distanceMiles) of
-            (nearLatitude)/(nearLongitude) (e.g. 44.982560) (optional) (Pro,
-            Enterprise API levels only. Enterprise API level will flag schools
-            that include lat/long in its attendance boundary.)
+        - description: Search for schools within (distanceMiles) of (nearLatitude)/(nearLongitude) (e.g. 44.982560) (optional) (Pro, Enterprise API levels only. Enterprise API level will flag schools that include lat/long in its attendance boundary.)
           format: double
           in: query
           name: nearLatitude
           required: false
           type: number
-        - description: Search for schools within (distanceMiles) of
-            (nearLatitude)/(nearLongitude) (e.g. -124.289185) (optional) (Pro,
-            Enterprise API levels only. Enterprise API level will flag schools
-            that include lat/long in its attendance boundary.)
+        - description: Search for schools within (distanceMiles) of (nearLatitude)/(nearLongitude) (e.g. -124.289185) (optional) (Pro, Enterprise API levels only. Enterprise API level will flag schools that include lat/long in its attendance boundary.)
           format: double
           in: query
           name: nearLongitude
           required: false
           type: number
-        - description: "Full U.S. address: flag returned schools that include this address
-            in its attendance boundary. Example: '123 Main St. AnyTown CA 90001'
-            (optional) (Enterprise API level only) IMPORTANT NOTE: If you have
-            the lat/long of the address, use nearLatitude and nearLongitude
-            instead for much faster response times"
+        - description: "Full U.S. address: flag returned schools that include this address in its attendance boundary. Example: '123 Main St. AnyTown CA 90001' (optional) (Enterprise API level only) IMPORTANT NOTE: If you have the lat/long of the address, use nearLatitude and nearLongitude instead for much faster response times"
           in: query
           name: boundaryAddress
           required: false
           type: string
-        - description: Search for schools within (distanceMiles) of
-            (nearLatitude)/(nearLongitude) (Default 5 miles) (optional) (Pro,
-            Enterprise API levels only)
+        - description: Search for schools within (distanceMiles) of (nearLatitude)/(nearLongitude) (Default 5 miles) (optional) (Pro, Enterprise API levels only)
           format: int32
           in: query
           name: distanceMiles
           required: false
           type: integer
-        - description: Return only the schools that include given location
-            (nearLatitude/nearLongitude) or (boundaryAddress) in its attendance
-            boundary (Enterprise API level only)
+        - description: Return only the schools that include given location (nearLatitude/nearLongitude) or (boundaryAddress) in its attendance boundary (Enterprise API level only)
           in: query
           name: isInBoundaryOnly
           required: false
           type: boolean
-        - description: Search for schools within a 'box' defined by
-            (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE)
-            (optional)
+        - description: Search for schools within a 'box' defined by (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLatitudeNW
           required: false
           type: number
-        - description: Search for schools within a 'box' defined by
-            (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE)
-            (optional)
+        - description: Search for schools within a 'box' defined by (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLongitudeNW
           required: false
           type: number
-        - description: Search for schools within a 'box' defined by
-            (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE)
-            (optional)
+        - description: Search for schools within a 'box' defined by (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLatitudeSE
           required: false
           type: number
-        - description: Search for schools within a 'box' defined by
-            (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE)
-            (optional)
+        - description: Search for schools within a 'box' defined by (boxLatitudeNW/boxLongitudeNW) to (boxLongitudeSE/boxLatitudeSE) (optional)
           format: double
           in: query
           name: boxLongitudeSE
@@ -463,22 +403,18 @@ paths:
           name: page
           required: false
           type: integer
-        - description: "Number of schools to retrieve on a page (50 max) (optional,
-            default: 10)"
+        - description: "Number of schools to retrieve on a page (50 max) (optional, default: 10)"
           format: int32
           in: query
           name: perPage
           required: false
           type: integer
-        - description: "Sort list. Values are: schoolname, distance, rank. For descending
-            order, precede with '-' i.e. -schoolname (optional, default:
-            schoolname)"
+        - description: "Sort list. Values are: schoolname, distance, rank. For descending order, precede with '-' i.e. -schoolname (optional, default: schoolname)"
           in: query
           name: sortBy
           required: false
           type: string
-        - description: "If sortBy is 'rank', this boolean determines if schools with no
-            rank are included in the result (optional, default: false)"
+        - description: "If sortBy is 'rank', this boolean determines if schools with no rank are included in the result (optional, default: false)"
           in: query
           name: includeUnrankedSchoolsInRankSort
           required: false
@@ -546,10 +482,7 @@ definitions:
         readOnly: false
         type: boolean
       polylineCollection:
-        description: "Collection of one or more polylines that can be used to create the
-          boundary on a map. NOTE: this value is JSON encoded. Specifically,
-          backslashes will be returned escaped (two backslashes). Make sure to
-          decode the polyline before you use it"
+        description: "Collection of one or more polylines that can be used to create the boundary on a map. NOTE: this value is JSON encoded. Specifically, backslashes will be returned escaped (two backslashes). Make sure to decode the polyline before you use it"
         items:
           $ref: "#/definitions/APIPolyline"
         readOnly: false
@@ -596,13 +529,11 @@ definitions:
         readOnly: false
         type: string
       isWithinBoundary:
-        description: Indicates whether this district's boundary includes the specified
-          location from fromLatitude/fromLongitude
+        description: Indicates whether this district's boundary includes the specified location from fromLatitude/fromLongitude
         readOnly: false
         type: boolean
       lowGrade:
-        description: The low grade served by this district (PK = Prekindergarten, K =
-          Kindergarten)
+        description: The low grade served by this district (PK = Prekindergarten, K = Kindergarten)
         readOnly: false
         type: string
       numberAlternativeSchools:
@@ -635,8 +566,7 @@ definitions:
         readOnly: false
         type: array
       testScores:
-        description: Test scores (district and state) -- requires Pro or Enterprise
-          level API subscription
+        description: Test scores (district and state) -- requires Pro or Enterprise level API subscription
         items:
           $ref: "#/definitions/APITestScoreWrapper"
         readOnly: false
@@ -661,8 +591,7 @@ definitions:
         format: double
         type: number
       districtID:
-        description: SchoolDigger District ID Number (7 digits). Use
-          /districts/{districtID} to retrieve the entire district record
+        description: SchoolDigger District ID Number (7 digits). Use /districts/{districtID} to retrieve the entire district record
         readOnly: false
         type: string
       districtName:
@@ -675,8 +604,7 @@ definitions:
         readOnly: false
         type: array
       hasBoundary:
-        description: Indicates that an attendance boundary is available for this
-          district. (To retrieve, look up district with /districts/{id})
+        description: Indicates that an attendance boundary is available for this district. (To retrieve, look up district with /districts/{id})
         readOnly: false
         type: boolean
       highGrade:
@@ -684,19 +612,15 @@ definitions:
         readOnly: false
         type: string
       isWithinBoundary:
-        description: Indicates whether this district's boundary includes the specified
-          location from fromLatitude/fromLongitude
+        description: Indicates whether this district's boundary includes the specified location from fromLatitude/fromLongitude
         readOnly: false
         type: boolean
       locationIsWithinBoundary:
-        description: Indicates whether this school's boundary includes the specified
-          location from fromLatitude/fromLongitude or boundaryAddress
-          (Enterprise API level)
+        description: Indicates whether this school's boundary includes the specified location from fromLatitude/fromLongitude or boundaryAddress (Enterprise API level)
         readOnly: false
         type: boolean
       lowGrade:
-        description: The low grade served by this district (PK = Prekindergarten, K =
-          Kindergarten)
+        description: The low grade served by this district (PK = Prekindergarten, K = Kindergarten)
         readOnly: false
         type: string
       numberAlternativeSchools:
@@ -750,8 +674,7 @@ definitions:
         readOnly: false
         type: integer
       numberOfPages:
-        description: The total count of pages in your query list based on given per_page
-          value
+        description: The total count of pages in your query list based on given per_page value
         format: int32
         readOnly: false
         type: integer
@@ -768,8 +691,7 @@ definitions:
         readOnly: false
         type: integer
       numberOfPages:
-        description: The total count of pages in your query list based on given per_page
-          value
+        description: The total count of pages in your query list based on given per_page value
         format: int32
         readOnly: false
         type: integer
@@ -785,8 +707,7 @@ definitions:
         format: int32
         type: integer
       rankYearsAvailable:
-        description: The years for which SchoolDigger district rankings are available
-          for this state
+        description: The years for which SchoolDigger district rankings are available for this state
         items:
           format: int32
           type: integer
@@ -823,20 +744,17 @@ definitions:
         readOnly: false
         type: integer
       rankScore:
-        description: The rank score calculated by SchoolDigger (see
-          https://www.schooldigger.com/aboutranking.aspx)
+        description: The rank score calculated by SchoolDigger (see https://www.schooldigger.com/aboutranking.aspx)
         format: double
         readOnly: false
         type: number
       rankStars:
-        description: The number of stars SchoolDigger awarded in the ranking of the
-          district (0-5, 5 is best)
+        description: The number of stars SchoolDigger awarded in the ranking of the district (0-5, 5 is best)
         format: int32
         readOnly: false
         type: integer
       rankStatewidePercentage:
-        description: Percentile of this district's rank (e.g. this district performed
-          better than (x)% of this state's districts)
+        description: Percentile of this district's rank (e.g. this district performed better than (x)% of this state's districts)
         format: double
         readOnly: false
         type: number
@@ -849,79 +767,63 @@ definitions:
   APILEAYearlyDetail:
     properties:
       numberOfAids:
-        description: Number of full-time equivalent instructional aids employed by the
-          district
+        description: Number of full-time equivalent instructional aids employed by the district
         format: double
         type: number
       numberOfCoordsSupervisors:
-        description: Number of full-time equivalent instructional
-          coordinators/supervisors employed by the district
+        description: Number of full-time equivalent instructional coordinators/supervisors employed by the district
         format: double
         type: number
       numberOfEnglishLanguageLearnerStudents:
-        description: The number of English language learner (ELL) students served in
-          appropriate programs
+        description: The number of English language learner (ELL) students served in appropriate programs
         format: int32
         type: integer
       numberOfGuidanceElem:
-        description: Number of full-time equivalent elementary guidance counselors
-          employed by the district
+        description: Number of full-time equivalent elementary guidance counselors employed by the district
         format: double
         type: number
       numberOfGuidanceSecondary:
-        description: Number of full-time equivalent secondary guidance counselors
-          employed by the district
+        description: Number of full-time equivalent secondary guidance counselors employed by the district
         format: double
         type: number
       numberOfGuidanceTotal:
-        description: Total number of full-time equivalent guidance counselors employed
-          by the district
+        description: Total number of full-time equivalent guidance counselors employed by the district
         format: double
         type: number
       numberOfLEAAdministrators:
-        description: Number of full-time equivalent LEA administrators employed by the
-          district (LEA)
+        description: Number of full-time equivalent LEA administrators employed by the district (LEA)
         format: double
         type: number
       numberOfLEASupportStaff:
-        description: Number of full-time equivalent LEA administrative support staff
-          employed by the district (LEA)
+        description: Number of full-time equivalent LEA administrative support staff employed by the district (LEA)
         format: double
         type: number
       numberOfLibrarians:
-        description: Number of full-time equivalent librarians/media specialists
-          employed by the district
+        description: Number of full-time equivalent librarians/media specialists employed by the district
         format: double
         type: number
       numberOfLibraryStaff:
-        description: Number of full-time equivalent librarians/media support staff
-          employed by the district
+        description: Number of full-time equivalent librarians/media support staff employed by the district
         format: double
         type: number
       numberOfOtherSupportStaff:
-        description: Number of full-time equivalent all other support staff employed by
-          the district (LEA)
+        description: Number of full-time equivalent all other support staff employed by the district (LEA)
         format: double
         type: number
       numberOfSchoolAdminSupportStaff:
-        description: Number of full-time equivalent school administrative support staff
-          employed by the district (LEA)
+        description: Number of full-time equivalent school administrative support staff employed by the district (LEA)
         format: double
         type: number
       numberOfSchoolAdministrators:
-        description: Number of full-time equivalent school administrators employed by
-          the district (LEA)
+        description: Number of full-time equivalent school administrators employed by the district (LEA)
         format: double
         type: number
       numberOfSpecialEdStudents:
-        description: The number of students having a written Individualized Education
-          Program (IEP) under the Individuals With Disabilities Education Act
-          (IDEA)
+        description: The number of students having a written Individualized Education Program (IEP) under the Individuals With Disabilities Education Act (IDEA)
         format: int32
         type: integer
       numberOfStudentSupportStaff:
-        description: Number of full-time equivalent student support services staff
-          employed by the district (LEA)
+        description: Number of full-time equivalent student support services staff employed by the district (LEA)
         format: double
         type: number
       numberOfStudents:
@@ -933,23 +835,19 @@ definitions:
         format: double
         type: number
       numberOfTeachersElementary:
-        description: Number of full-time equivalent elementary teachers employed by the
-          district
+        description: Number of full-time equivalent elementary teachers employed by the district
         format: double
         type: number
       numberOfTeachersK:
-        description: Number of full-time equivalent kindergarten teachers employed by
-          the district
+        description: Number of full-time equivalent kindergarten teachers employed by the district
         format: double
         type: number
       numberOfTeachersPK:
-        description: Number of full-time equivalent pre-kindergarten teachers employed
-          by the district
+        description: Number of full-time equivalent pre-kindergarten teachers employed by the district
         format: double
         type: number
       numberOfTeachersSecondary:
-        description: Number of full-time equivalent secondary teachers employed by the
-          district
+        description: Number of full-time equivalent secondary teachers employed by the district
         format: double
         type: number
       year:
@@ -980,8 +878,7 @@ definitions:
         type: string
       latLong:
         $ref: "#/definitions/APILatLong"
-        description: Latitude/longitude of school address (Pro and Enterprise API levels
-          only)
+        description: Latitude/longitude of school address (Pro and Enterprise API levels only)
         readOnly: false
       state:
         type: string
@@ -1007,17 +904,13 @@ definitions:
         format: int32
         type: integer
       polylineOverlayEncodedPoints:
-        description: "Polyline for use with Google Maps or other mapping software. NOTE:
-          this value is JSON encoded. Specifically, backslashes will be returned
-          escaped (two backslashes). Make sure to decode the polyline before you
-          use it"
+        description: "Polyline for use with Google Maps or other mapping software. NOTE: this value is JSON encoded. Specifically, backslashes will be returned escaped (two backslashes). Make sure to decode the polyline before you use it"
         type: string
     type: object
   APIRankHistory:
     properties:
       averageStandardScore:
-        description: "The Average Standard score calculated by SchoolDigger (see:
-          https://www.schooldigger.com/aboutrankingmethodology.aspx)"
+        description: "The Average Standard score calculated by SchoolDigger (see: https://www.schooldigger.com/aboutrankingmethodology.aspx)"
         format: double
         type: number
       rank:
@@ -1035,14 +928,12 @@ definitions:
         readOnly: false
         type: integer
       rankStars:
-        description: The number of stars SchoolDigger awarded in the ranking of the
-          school (0-5, 5 is best)
+        description: The number of stars SchoolDigger awarded in the ranking of the school (0-5, 5 is best)
         format: int32
         readOnly: false
         type: integer
       rankStatewidePercentage:
-        description: Percentile of this school's rank (e.g. this school performed better
-          than (x)% of this state's elementary schools)
+        description: Percentile of this school's rank (e.g. this school performed better than (x)% of this state's elementary schools)
         format: double
         readOnly: false
         type: number
@@ -1102,8 +993,7 @@ definitions:
         readOnly: false
         type: string
       lowGrade:
-        description: The low grade served by this school (PK = Prekindergarten, K =
-          Kindergarten)
+        description: The low grade served by this school (PK = Prekindergarten, K = Kindergarten)
         readOnly: false
         type: string
       phone:
@@ -1138,8 +1028,7 @@ definitions:
         readOnly: false
         type: array
       rankMovement:
-        description: Returns the movement of rank for this school between current and
-          previous year
+        description: Returns the movement of rank for this school between current and previous year
         format: int32
         readOnly: false
         type: integer
@@ -1161,8 +1050,7 @@ definitions:
         readOnly: false
         type: string
       testScores:
-        description: Test scores (including district and state) -- requires Pro or
-          Enterprise level API subscription
+        description: Test scores (including district and state) -- requires Pro or Enterprise level API subscription
         items:
           $ref: "#/definitions/APITestScoreWrapper"
         readOnly: false
@@ -1177,8 +1065,7 @@ definitions:
         type: string
     type: object
   APISchool1:
-    description: "APISchool1: A summary of a school record. For the full school
-      record, call /schools/{id}"
+    description: "APISchool1: A summary of a school record. For the full school record, call /schools/{id}"
     properties:
       address:
         $ref: "#/definitions/APILocation"
@@ -1198,8 +1085,7 @@ definitions:
         description: District of school (public schools only)
         readOnly: false
       hasBoundary:
-        description: Indicates that an attendance boundary is available for this school.
-          (To retrieve, look up school with /schools/{id})
+        description: Indicates that an attendance boundary is available for this school. (To retrieve, look up school with /schools/{id})
         type: boolean
       highGrade:
         description: The high grade served by this school
@@ -1229,14 +1115,11 @@ definitions:
         readOnly: false
         type: string
       locationIsWithinBoundary:
-        description: Indicates whether this school's boundary includes the specified
-          location from fromLatitude/fromLongitude or boundaryAddress.
-          (Enterprise API level only)
+        description: Indicates whether this school's boundary includes the specified location from fromLatitude/fromLongitude or boundaryAddress. (Enterprise API level only)
         readOnly: false
         type: boolean
       lowGrade:
-        description: The low grade served by this school (PK = Prekindergarten, K =
-          Kindergarten)
+        description: The low grade served by this school (PK = Prekindergarten, K = Kindergarten)
         readOnly: false
         type: string
       phone:
@@ -1260,15 +1143,13 @@ definitions:
         description: Affiliation of the school (private schools only)
         type: string
       rankHistory:
-        description: SchoolDigger yearly rank history of the school. To retrieve all
-          years, call /schools/{id}.
+        description: SchoolDigger yearly rank history of the school. To retrieve all years, call /schools/{id}.
         items:
           $ref: "#/definitions/APIRankHistory"
         readOnly: false
         type: array
       rankMovement:
-        description: Returns the movement of rank for this school between current and
-          previous year
+        description: Returns the movement of rank for this school between current and previous year
         format: int32
         readOnly: false
         type: integer
@@ -1286,8 +1167,7 @@ definitions:
         readOnly: false
         type: array
       schoolid:
-        description: SchoolDigger School ID Number (12 digits). Use /schools/{schoolID}
-          to retrieve the full school record
+        description: SchoolDigger School ID Number (12 digits). Use /schools/{schoolID} to retrieve the full school record
         readOnly: false
         type: string
       url:
@@ -1302,8 +1182,7 @@ definitions:
   APISchoolList:
     properties:
       numberOfPages:
-        description: The total count of pages in your query list based on given per_page
-          value
+        description: The total count of pages in your query list based on given per_page value
         format: int32
         readOnly: false
         type: integer
@@ -1320,8 +1199,7 @@ definitions:
   APISchoolListRank:
     properties:
       numberOfPages:
-        description: The total count of pages this ranking list based on given per_page
-          value
+        description: The total count of pages this ranking list based on given per_page value
         format: int32
         readOnly: false
         type: integer
@@ -1339,8 +1217,7 @@ definitions:
         format: int32
         type: integer
       rankYearsAvailable:
-        description: The years for which SchoolDigger rankings are available for this
-          state and level
+        description: The years for which SchoolDigger rankings are available for this state and level
         items:
           format: int32
           type: integer
@@ -1489,57 +1366,38 @@ definitions:
         readOnly: false
         type: integer
       numberofAfricanAmericanStudents:
-        description: "NCES definition: A person having origins in any of the black
-          racial groups of
-          Africa.  (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: A person having origins in any of the black racial groups of Africa.  (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       numberofAsianStudents:
-        description: "NCES definition: A person having origins in any of the original
-          peoples of the Far East, Southeast Asia, or the Indian subcontinent,
-          including, for example, Cambodia, China, India, Japan, Korea,
-          Malaysia, Pakistan, the Philippine Islands, Thailand, and
-          Vietnam.  (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam.  (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       numberofHispanicStudents:
-        description: "NCES definition: A person of Cuban, Mexican, Puerto Rican, South
-          or Central American, or other Spanish culture or origin, regardless of
-          race. (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       numberofIndianStudents:
-        description: "NCES definition: A person having origins in any of the original
-          peoples of the Far East, Southeast Asia, or the Indian subcontinent,
-          including, for example, Cambodia, China, India, Japan, Korea,
-          Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam.
-          (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       numberofPacificIslanderStudents:
-        description: "NCES definition: A person having origins in any of the original
-          peoples of Hawaii, Guam, Samoa, or other Pacific Islands.
-          (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: A person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       numberofTwoOrMoreRaceStudents:
-        description: "NCES definition: Includes any combination of two or more races and
-          not Hispanic/Latino ethnicity.
-          (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: Includes any combination of two or more races and not Hispanic/Latino ethnicity. (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       numberofUnspecifiedRaceStudents:
         format: int32
         type: integer
       numberofWhiteStudents:
-        description: "NCES definition: A person having origins in any of the original
-          peoples of Europe, the Middle East, or North Africa.
-          (https://nces.ed.gov/statprog/2002/std1_5.asp)"
+        description: "NCES definition: A person having origins in any of the original peoples of Europe, the Middle East, or North Africa. (https://nces.ed.gov/statprog/2002/std1_5.asp)"
         format: int32
         type: integer
       percentFreeDiscLunch:
-        description: Percent of students receiving a free or discounted lunch in the
-          National School Lunch Program
+        description: Percent of students receiving a free or discounted lunch in the National School Lunch Program
         format: double
         readOnly: false
         type: number

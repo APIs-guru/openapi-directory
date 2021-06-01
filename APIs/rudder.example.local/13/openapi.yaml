@@ -7,26 +7,19 @@ info:
     email: dev@rudder.io
     name: Rudder developers
     url: https://www.rudder.io
-  description: >+
+  description: |+
     Download OpenAPI specification: [openapi.yml](openapi.yml)
-
 
     # Introduction
 
-
     Rudder exposes a REST API, enabling the user to interact with Rudder without using the webapp, for example in scripts or cronjobs.
-
 
     ## Versioning
 
-
     Each time the API is extended with new features (new functions, new parameters, new responses, ...), it will be assigned a new version number. This will allow you
-
     to keep your existing scripts (based on previous behavior). Versions will always be integers (no 2.1 or 3.3, just 2, 3, 4, ...) or `latest`.
 
-
     You can change the version of the API used by setting it either within the url or in a header:
-
 
     * the URL: each URL is prefixed by its version id, like `/api/version/function`.
 
@@ -49,13 +42,10 @@ info:
 
 
     In the future, we may declare some versions as deprecated, in order to remove them in a later version of Rudder, but we will never remove any versions without warning, or without a safe
-
     period of time to allow migration from previous versions.
 
 
-
     <h4>Existing versions</h4>
-
     <table>
       <thead>
         <tr>
@@ -99,9 +89,7 @@ info:
     </table>
 
 
-
     ## Response format
-
 
     All responses from the API are in the JSON format.
 
@@ -118,44 +106,31 @@ info:
 
     * __Success__ responses are sent with the 200 HTTP (Success) code
 
-
     * __Error__ responses are sent with a HTTP error code (mostly 5xx...)
-
 
 
     ## HTTP method
 
-
     Rudder's REST API is based on the usage of [HTTP methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). We use them to indicate what action will be done by the request. Currently, we use four of them:
-
 
 
     * **GET**: search or retrieve information (get rule details, get a group, ...)
 
-
     * **PUT**: add new objects (create a directive, clone a Rule, ...)
 
-
     * **DELETE**: remove objects (delete a node, delete a parameter, ...)
-
 
     * **POST**: update existing objects (update a directive, reload a group, ...)
 
 
-
     ## Parameters
-
 
     ### General parameters
 
-
     Some parameters are available for almost all API functions. They will be described in this section.
-
     They must be part of the query and can't be submitted in a JSON form.
 
-
     #### Available for all requests
-
 
     <table>
       <thead>
@@ -178,9 +153,7 @@ info:
     </table>
 
 
-
     #### Available for modification requests (PUT/POST/DELETE)
-
 
     <table>
       <thead>
@@ -219,15 +192,11 @@ info:
     </table>
 
 
-
     ### Passing parameters
-
 
     Parameters to the API can be sent:
 
-
     * As part of the URL for resource identification
-
 
     * As data for POST/PUT requests
 
@@ -237,7 +206,6 @@ info:
 
     #### As part of the URL for resource identification
 
-
     Parameters in URLs are used to indicate which resource you want to interact with. The function will not work if this resource is missing.
 
 
@@ -246,14 +214,10 @@ info:
 
     #### Sending data for POST/PUT requests
 
-
     ##### Directly in JSON format
 
-
     JSON format is the prefered way to interact with Rudder API for creating or updating resources.
-
     You'll also have to set the *Content-Type* header to **application/json** (without it the JSON content would be ignored).
-
     In a `curl` `POST` request, that header can be provided with the `-H` parameter:
 
         curl -X POST -H "Content-Type: application/json" ...
@@ -261,20 +225,15 @@ info:
 
     The supplied file must contain a valid JSON: strings need quotes, booleans and integers don't, etc.
 
-
     The (human readable) format is:
 
-
     ```json
-
     {
       "key1": "value1",
       "key2": false,
       "key3": 42
     }
-
     ```
-
 
 
     Here is an example with inlined data:
@@ -303,11 +262,8 @@ info:
 
     ##### Request parameters
 
-
     In some cases, when you have little, simple data to update, JSON can feel bloated. In such cases, you can use
-
     request parameters. You will need to pass one parameter for each data you want to change.
-
 
     Parameters follow the following schema:
 
@@ -316,7 +272,6 @@ info:
 
 
     You can pass parameters by two means:
-
 
     * As query parameters: At the end of your url, put a **?** then your first parameter and then a **&** before next parameters
 
@@ -372,10 +327,8 @@ tags:
     name: Settings
   - description: Internal components and administration
     name: System
-  - description: >-
-      **Requires that the `changes-validation` plugin is installed on the
-      server.**
-
+  - description: |-
+      **Requires that the `changes-validation` plugin is installed on the server.**
 
       Manage change requests.
     name: 🧩 Change requests
@@ -451,10 +404,8 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/changeRequests --data
-            "status=open"
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/changeRequests --data "status=open"
   /branding:
     get:
       description: Get all web interface customization parameters
@@ -494,9 +445,8 @@ paths:
         - 🧩 Branding
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/branding
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/branding
     post:
       description: change color, logo, label etc.
       operationId: updateBRandingConf
@@ -541,9 +491,8 @@ paths:
         - 🧩 Branding
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             update.json:
-
 
             {
             	"displayBar":true,
@@ -571,7 +520,6 @@ paths:
             	"displayMotd":true,
             	"motd":"Welcome, please sign in:"
             }
-
 
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/branding --header "Content-type: application/json" --data @update.json
 
@@ -614,9 +562,8 @@ paths:
         - 🧩 Branding
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/branding/reload
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/branding/reload
   "/changeRequests/{changeRequestId}":
     delete:
       description: Refuse a change request
@@ -660,8 +607,7 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request DELETE
-            https://rudder.example.com/rudder/api/latest/changeRequests/43'
+          source: 'curl --header "X-API-Token: yourToken" --request DELETE https://rudder.example.com/rudder/api/latest/changeRequests/43'
     get:
       description: Get a change request details
       operationId: changeRequestDetails
@@ -704,10 +650,8 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/changeRequests --data
-            "status=open"
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/changeRequests --data "status=open"
     post:
       description: Update a change request
       operationId: updateChangeRequest
@@ -763,10 +707,7 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/changeRequests/42  --data
-            "name=new Name of change request" -d "description=add a new
-            description"'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/changeRequests/42  --data "name=new Name of change request" -d "description=add a new description"'
   "/changeRequests/{changeRequestId}/accept":
     post:
       description: Accept a change request
@@ -824,9 +765,7 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/changeRequests --data
-            "status=open"'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/changeRequests --data "status=open"'
   /compliance:
     get:
       description: Get current global compliance of a Rudder server
@@ -906,9 +845,7 @@ paths:
         - Compliance
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/compliance?prettify=t\
-            rue'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/compliance?prettify=true'"
   /compliance/nodes:
     get:
       description: Get current compliance of all the nodes of a Rudder server
@@ -1006,16 +943,12 @@ paths:
         - Compliance
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             # To get the compliance information of a specific node
-
             curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/compliance/nodes?level=2'
 
-
             # To get the list of nodes wich have a compliance <100 for a given directive (c5881268-5612-48f2-8ef4-0ab8387fccd6) 
-
             curl -k -H "X-API-Token: yourToken" -X GET "https://rudder.example.com/rudder/api/latest/compliance/nodes?level=3" \
-
             | jq '[.data.nodes[] 
               | {
                   "nodeid":.id, 
@@ -1024,7 +957,6 @@ paths:
                 }
               ] 
             | map(select(.dirs | length != 0)) 
-
             | [.[] |
                 {"nodeid":.nodeid, "comp":.dirs[0].complianceDetails}
               ]'
@@ -1127,9 +1059,7 @@ paths:
         - Compliance
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/compliance/nodes/root?level=\
-            1'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/compliance/nodes/root?level=1'"
   /compliance/rules:
     get:
       description: Get current compliance of all the rules of a Rudder server
@@ -1227,9 +1157,7 @@ paths:
         - Compliance
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/compliance/rules?leve\
-            l=2'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/compliance/rules?level=2'"
   "/compliance/rules/{ruleId}":
     get:
       description: Get current compliance of a rule of a Rudder server
@@ -1328,9 +1256,7 @@ paths:
         - Compliance
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/compliance/rules?leve\
-            l=2'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/compliance/rules?level=2'"
   /createnodes:
     put:
       description: Create a new node
@@ -1382,9 +1308,8 @@ paths:
         - 🧩 Create Node
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             nodes.json:
-
 
             [
               {
@@ -1425,7 +1350,6 @@ paths:
                 }
               }
             ]
-
 
             curl --header "X-API-Token: yourToken" --request PUT https://rudder.example.com/rudder/api/latest/createnodes --header "Content-type: application/json" --data @nodes.json
 
@@ -1470,9 +1394,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            'https://rudder.example.com/rudder/api/latest/cve'
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/latest/cve'
   /cve/check:
     post:
       description: Trigger a CVE check
@@ -1514,9 +1437,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/cve/check'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/cve/check'
   /cve/check/config:
     get:
       description: Get CVE check config
@@ -1559,9 +1481,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            'https://rudder.example.com/rudder/api/latest/cve/check/config'
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/latest/cve/check/config'
     post:
       description: Update cve check config
       operationId: updateCVECheckConfiguration
@@ -1617,9 +1538,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            'https://rudder.example.com/rudder/api/latest/cve/check/config'
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/latest/cve/check/config'
   /cve/check/last:
     get:
       description: Get last CVE check result
@@ -1661,9 +1581,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            'https://rudder.example.com/rudder/api/latest/cve/check/last'
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/latest/cve/check/last'
   /cve/list:
     post:
       description: Get CVE details, from a list passed a paremeter
@@ -1718,9 +1637,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/cve/list'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/cve/list'
   /cve/update/:
     post:
       description: Update CVE database from remote source
@@ -1778,9 +1696,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/cve/update'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/cve/update'
   /cve/update/fs:
     post:
       description: Update CVE database from file system
@@ -1821,9 +1738,8 @@ paths:
         - 🧩 CVE
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/cve/update/FS'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/cve/update/FS'
   /datasources:
     get:
       description: Get the configuration of all present data sources
@@ -1865,8 +1781,7 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/datasources'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/datasources'"
     put:
       description: Create a new data source
       operationId: createDataSource
@@ -1913,13 +1828,10 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request PUT
-            https://rudder.example.com/rudder/api/latest/datasources --header
-            "Content-type: application/json" --data @datasources.json'
+          source: 'curl --header "X-API-Token: yourToken" --request PUT https://rudder.example.com/rudder/api/latest/datasources --header "Content-type: application/json" --data @datasources.json'
   /datasources/reload:
     post:
-      description: Update properties from all data source on all nodes. The call is
-        asynchronous.
+      description: Update properties from all data source on all nodes. The call is asynchronous.
       operationId: ReloadAllDatasourcesAllNodes
       responses:
         "200":
@@ -1933,8 +1845,7 @@ paths:
                       - ReloadAllDatasourcesAllNodes
                     type: string
                   data:
-                    example: Data for all nodes, for all configured data sources are going to be
-                      updated
+                    example: Data for all nodes, for all configured data sources are going to be updated
                     type: string
                   result:
                     description: Result of the request
@@ -1953,12 +1864,10 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/datasources/reload'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/datasources/reload'
   "/datasources/reload/{datasourceId}":
     post:
-      description: Update properties from all data source on all nodes. The call is
-        asynchronous.
+      description: Update properties from all data source on all nodes. The call is asynchronous.
       operationId: ReloadOneDatasourceAllNodes
       parameters:
         - $ref: "#/components/parameters/datasource-id"
@@ -1974,8 +1883,7 @@ paths:
                       - ReloadOneDatasourceAllNodes
                     type: string
                   data:
-                    example: Data for all nodes, for the 'test-data-source' data source are going to
-                      be updated
+                    example: Data for all nodes, for the 'test-data-source' data source are going to be updated
                     type: string
                   result:
                     description: Result of the request
@@ -1994,8 +1902,7 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/datasources/reload/datasourceId'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/datasources/reload/datasourceId'
   "/datasources/{datasourceId}":
     delete:
       description: Delete a data source configuration
@@ -2039,8 +1946,7 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request DELETE
-            https://rudder.example.com/rudder/api/latest/datasources/my-data-source'
+          source: 'curl --header "X-API-Token: yourToken" --request DELETE https://rudder.example.com/rudder/api/latest/datasources/my-data-source'
     get:
       description: Get the configuration of a data source
       operationId: getDataSource
@@ -2083,8 +1989,7 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/datasources/my-data-source'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/datasources/my-data-source'
     post:
       description: Update the configuration of a data source
       operationId: updateDataSource
@@ -2132,14 +2037,12 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: >-
+          source: |-
             cat disable-datasource-1.json.json
-
             {
               "description": "This data source is temporarly no more used and so disabled",
               "enabled": false
             }
-
 
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/datasources/my-data-source --header "Content-type: application/json" --data @disable-datasource-1.json.json
   /directives:
@@ -2183,11 +2086,9 @@ paths:
         - Directives
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/directives'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/directives'
     put:
-      description: Create a new directive from provided parameters. You can specify a
-        source directive to clone it.
+      description: Create a new directive from provided parameters. You can specify a source directive to clone it.
       operationId: createDirective
       requestBody:
         content:
@@ -2231,9 +2132,8 @@ paths:
         - Directives
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             directives.json:
-
 
             {
               "id": "cf2a6c72-18ae-4f82-a12c-0b887792db41",
@@ -2277,7 +2177,6 @@ paths:
               "system": false,
               "policyMode": "default"
             }
-
 
             curl --header "X-API-Token: yourToken" --request PUT https://rudder.example.com/rudder/api/latest/directives --header "Content-type: application/json" --data @directive.json
 
@@ -2324,8 +2223,7 @@ paths:
         - Directives
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request DELETE
-            https://rudder.example.com/rudder/api/latest/directives/17dadf50-6056-4c8b-a935-6b97d14b89a7'
+          source: 'curl --header "X-API-Token: yourToken" --request DELETE https://rudder.example.com/rudder/api/latest/directives/17dadf50-6056-4c8b-a935-6b97d14b89a7'
     get:
       description: Get all information about a given directive
       operationId: directiveDetails
@@ -2368,8 +2266,7 @@ paths:
         - Directives
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/directives/17dadf50-6056-4c8b-a935-6b97d14b89a7'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/directives/17dadf50-6056-4c8b-a935-6b97d14b89a7'
     post:
       description: Update directive information
       operationId: updateDirective
@@ -2418,9 +2315,8 @@ paths:
         - Directives
       x-code-samples:
         - lang: curl
-          source: >-
+          source: |-
             directive.json:
-
             {
               "longDescription": "Add a loooooooooooong description",
               "parameters": {
@@ -2451,7 +2347,6 @@ paths:
               },
               "priority": 5
             }
-
 
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/directives/cf2a6c72-18ae-4f82-a12c-0b887792db41 --header "Content-type: application/json" --data @directive.json
   "/directives/{directiveId}/check":
@@ -2503,9 +2398,7 @@ paths:
         - Directives
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/directives/17dadf50-6056-4c8b-a935-6b97d14b89a7/check  --data
-            "displayName=Name of new directive"'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/directives/17dadf50-6056-4c8b-a935-6b97d14b89a7/check  --data "displayName=Name of new directive"'
   /groups:
     get:
       description: List all groups
@@ -2547,8 +2440,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/groups'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/groups'
     put:
       description: Create a new group based in provided parameters
       operationId: createGroup
@@ -2594,9 +2486,8 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             groups.json:
-
             {
              "category": "c355f46e-11b0-4c7a-aedd-6a5f3b0303b6",
              "displayName": "Example group",
@@ -2611,7 +2502,6 @@ paths:
               "dynamic": true,
               "enabled": true
             }
-
 
             curl --header "X-API-Token: yourToken" --request PUT https://rudder.example.com/rudder/api/latest/groups --header "Content-Type: application/json" --data @group.json
 
@@ -2662,16 +2552,11 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request PUT
-            'https://rudder.example.com/rudder/api/latest/groups/categories'
-            --data "name=new category name" -d
-            "parent=4306143d-eabf-4478-b7b1-1616f4aa02b5" -d "description=A new
-            category created via API'
+          source: |
+            curl --header "X-API-Token: yourToken" --request PUT 'https://rudder.example.com/rudder/api/latest/groups/categories' --data "name=new category name" -d "parent=4306143d-eabf-4478-b7b1-1616f4aa02b5" -d "description=A new category created via API'
   "/groups/categories/{groupCategoryId}":
     delete:
-      description: Delete a group category. It must have no child groups and no
-        children categories.
+      description: Delete a group category. It must have no child groups and no children categories.
       operationId: DeleteGroupCategory
       parameters:
         - $ref: "#/components/parameters/group-category-id"
@@ -2712,9 +2597,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request DELETE
-            'https://rudder.example.com/rudder/api/latest/groups/categories/430\
-            6143d-eabf-4478-b7b1-1616f4aa02b5'"
+          source: "curl --header \"X-API-Token: yourToken\" --request DELETE 'https://rudder.example.com/rudder/api/latest/groups/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5'"
     get:
       description: Get detailed information about a group category
       operationId: GetGroupCategoryDetails
@@ -2757,9 +2640,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/groups/categories/430\
-            6143d-eabf-4478-b7b1-1616f4aa02b5'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/groups/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5'"
     post:
       description: Update detailed information about a group category
       operationId: UpdateGroupCategory
@@ -2808,10 +2689,8 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/groups/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5'
-            --data "name=new category name"
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/groups/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5' --data "name=new category name"
   /groups/tree:
     get:
       description: Get all available groups and their categories in a tree
@@ -2873,8 +2752,7 @@ paths:
                           id: 38dd2107-a73b-45fb-916d-e110312abb87
                           name: production groups
                           parent: GroupRoot
-                      description: This is the root category for the groups (both dynamic and static)
-                        and group categories
+                      description: This is the root category for the groups (both dynamic and static) and group categories
                       groups:
                         - description: ""
                           displayName: Test Clients
@@ -2919,8 +2797,7 @@ paths:
                       groupCategories:
                         description: Group tree
                         example:
-                          $ref: "#/paths/~1rules~1tree/get/responses/200/content/application~1json/schema\
-                            /properties/data/properties/ruleCategories/example"
+                          $ref: "#/paths/~1rules~1tree/get/responses/200/content/application~1json/schema/properties/data/properties/ruleCategories/example"
                         type: object
                     required:
                       - groupCategories
@@ -2942,9 +2819,8 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/groups/tree
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/groups/tree
   "/groups/{groupId}":
     delete:
       description: Update detailed information about a group
@@ -2988,9 +2864,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request DELETE
-            'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-\
-            4c8b-a935-6b97d14b89a7'"
+          source: "curl --header \"X-API-Token: yourToken\" --request DELETE 'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-4c8b-a935-6b97d14b89a7'"
     get:
       description: Get detailed information about a group
       operationId: groupDetails
@@ -3033,9 +2907,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-\
-            4c8b-a935-6b97d14b89a7'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-4c8b-a935-6b97d14b89a7'"
     post:
       description: Update detailed information about a group
       operationId: updateGroup
@@ -3084,9 +2956,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-\
-            4c8b-a935-6b97d14b89a7' --data \"displayName=New name of group\""
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-4c8b-a935-6b97d14b89a7' --data \"displayName=New name of group\""
   "/groups/{groupId}/reload":
     post:
       description: Recompute the content of a group
@@ -3130,9 +3000,7 @@ paths:
         - Groups
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-\
-            4c8b-a935-6b97d14b89a7/reload'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/groups/17dadf50-6056-4c8b-a935-6b97d14b89a7/reload'"
   /inventories/info:
     get:
       description: Provide information about the current state of the inventory processor
@@ -3179,8 +3047,7 @@ paths:
         - Inventories
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/'
   /inventories/upload:
     post:
       description: Upload an inventory to the web application
@@ -3209,8 +3076,7 @@ paths:
                       - uploadInventory
                     type: string
                   data:
-                    example: Inventory 'file.xml' for Node 'c1bab9fc-bcf6-4d59-a397-84c8e2fc06c0'
-                      added to processing queue.
+                    example: Inventory 'file.xml' for Node 'c1bab9fc-bcf6-4d59-a397-84c8e2fc06c0' added to processing queue.
                     type: string
                   result:
                     description: Result of the request
@@ -3229,9 +3095,7 @@ paths:
         - Inventories
       x-code-samples:
         - lang: curl
-          source: 'curl --request POST --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/inventories/upload -F
-            "file=@inventory-file" -F "signature=@signature-file"'
+          source: 'curl --request POST --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/inventories/upload -F "file=@inventory-file" -F "signature=@signature-file"'
   /inventories/watcher/restart:
     post:
       description: Restart the inventory watcher if necessary
@@ -3267,9 +3131,7 @@ paths:
         - Inventories
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/inventories/watcher/r\
-            estart'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/inventories/watcher/restart'"
   /inventories/watcher/start:
     post:
       description: Start the inventory watcher if necessary
@@ -3305,9 +3167,7 @@ paths:
         - Inventories
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/inventories/watcher/s\
-            tart'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/inventories/watcher/start'"
   /inventories/watcher/stop:
     post:
       description: Stop the inventory watcher if necessary
@@ -3343,9 +3203,7 @@ paths:
         - Inventories
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/inventories/watcher/s\
-            top'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/inventories/watcher/stop'"
   /nodes:
     get:
       description: Get information about the nodes managed by the target server
@@ -3394,74 +3252,47 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             # To get the Linux nodes with a hostname starting with "node1"
-
             curl --header "X-API-Token: yourToken" 'https://rudder.example.com/rudder/api/latest/nodes?where=\[\{"objectType":"node","attribute":"OS","comparator":"eq","value":"Linux"\},\{"objectType":"node","attribute":"nodeHostname","comparator":"regex","value":"node1.*"\}\]'
 
-
             # To get the list of nodes with their agent version
-
             curl -k -H "X-API-Token: yourToken" -X GET "https://rudder.example.com/rudder/api/latest/nodes?include=minimal,managementTechnology" | jq '.data.nodes[] | {"id": .id, "version": .managementTechnology[].version}'
 
-
             # To get information about the eth0 interface of a specific node
-
             curl -k -H "X-API-Token: yourToken" -H "Content-Type: application/json" -X GET 'https://rudder.example.com/rudder/api/latest/nodes/8b168194-c0b4-41ab-b2b5-9571a8906d59?include=networkInterfaces' | jq '.data.nodes[].networkInterfaces[] | select(.name == "eth0")'
-
             # It gives:
-
             #
-
             #{
-
             # "name": "eth0",
-
             # "type": "ethernet",
-
             # "status": "Up",
-
             # "macAddress": "52:54:00:49:45:ac",
-
             # "ipAddresses": [
-
             #   "fe80:0:0:0:5054:ff:fe49:45ac",
-
             #   "192.168.110.21"
-
             # ]
-
             #}
 
 
         - lang: python
-          source: >
+          source: |
             import json
-
             import requests
 
-
             # Get all nodes having a hostname starting with node1 and based on Linux and only display minimal information (id, hostname, status)
-
             url = "https://rudder.example.com/rudder/api/latest/nodes"
-
             linux = {"objectType": "node", "attribute": "OS",
                      "comparator": "eq", "value": "Linux"}
             node1 = {"objectType": "node", "attribute": "nodeHostname",
                      "comparator": "regex", "value": "node1.*"}
             where = [linux, node1]
-
             params = {"where": json.dumps(where), "include": "minimal"}
-
             headers = {"X-API-TOKEN": "yourToken"}
-
             requests.get(url, params=params, headers=headers, verify=False)
   /nodes/applyPolicy:
     post:
-      description: This API allows to trigger an agent run on all nodes. Response
-        contains a json stating if agent could be started on each node, but not
-        if the run went fine and do not display any output from it. You can see
-        the result of the run in Rudder web interface or in the each agent logs.
+      description: This API allows to trigger an agent run on all nodes. Response contains a json stating if agent could be started on each node, but not if the run went fine and do not display any output from it. You can see the result of the run in Rudder web interface or in the each agent logs.
       operationId: applyPolicyAllNodes
       responses:
         "200":
@@ -3509,9 +3340,7 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST --header
-            "Content-Type: application/json"
-            https://rudder.example.com/rudder/api/latest/nodes/applyPolicy'
+          source: 'curl --header "X-API-Token: yourToken" --request POST --header "Content-Type: application/json" https://rudder.example.com/rudder/api/latest/nodes/applyPolicy'
   /nodes/pending:
     get:
       description: Get information about the nodes pending acceptation
@@ -3560,19 +3389,14 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             # To get the list of pending nodes
-
             curl --header "X-API-Token: yourToken" 'https://rudder.example.com/rudder/api/latest/nodes/pending'
 
-
             # To get the pending Linux nodes with a hostname starting with "node1"
-
             curl --header "X-API-Token: yourToken" 'https://rudder.example.com/rudder/api/latest/nodes/pending?where=\[\{"objectType":"node","attribute":"OS","comparator":"eq","value":"Linux"\},\{"objectType":"node","attribute":"nodeHostname","comparator":"regex","value":"node1.*"\}\]'
 
-
             # To get the list of pending nodes with their agent version
-
             curl -k -H "X-API-Token: yourToken" -X GET "https://rudder.example.com/rudder/api/latest/nodes/pending?include=minimal,managementTechnology" | jq '.data.nodes[] | {"id": .id, "version": .managementTechnology[].version}'
 
 
@@ -3634,13 +3458,10 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/nodes/pending/17dadf50-6056-4c8b-a935-6b97d14b89a7
-            --data "status=accepted"'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/nodes/pending/17dadf50-6056-4c8b-a935-6b97d14b89a7 --data "status=accepted"'
   /nodes/status:
     get:
-      description: Get acceptation status (pending, accepted, deleted, unknown) of a
-        list of nodes
+      description: Get acceptation status (pending, accepted, deleted, unknown) of a list of nodes
       operationId: getNodesStatus
       parameters:
         - $ref: "#/components/parameters/node-ids"
@@ -3700,8 +3521,7 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/nodes/status?ids=17dadf50-6056-4c8b-a935-6b97d14b89a7,b9a71482-5030-4699-984d-b03d28bbbf36'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/nodes/status?ids=17dadf50-6056-4c8b-a935-6b97d14b89a7,b9a71482-5030-4699-984d-b03d28bbbf36'
   "/nodes/{nodeId}":
     delete:
       description: Remove a node from the Rudder server. It won't be managed anymore.
@@ -3747,9 +3567,8 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request DELETE
-            https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7
+          source: |
+            curl --header "X-API-Token: yourToken" --request DELETE https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7
     get:
       description: Get details about a given node
       operationId: nodeDetails
@@ -3794,8 +3613,7 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7\?include=full'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7\?include=full'
     post:
       description: Update node settings and properties
       operationId: updateNode
@@ -3844,41 +3662,29 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: >
+          source: |
             # Given the "data.json" JSON file with content:
-
             { "properties": [
               { "name": "env_type"    , "value": "production" },
               { "name": "shell"       , "value": "/bin/sh" },
               { "name": "utf-8 poetry", "value": "ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ" }
             ]
-
             , "policyMode" : "audit"
-
             }
-
             # Setting properties from "data.json" and policy mode to audit:
-
             curl --header "X-API-Token: yourToken" --request POST --header "Content-Type: application/json" https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7 --data @properties.json
 
-
             # Removing the key "utf-8 poetry" from the command line and updating the "env_type" one
-
             curl --header "X-API-Token: yourToken" --request POST --header "Content-Type: application/json" https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7 --data '{ "properties": [{ "name":"utf-8 poetry", "value":""}, {"name":"env_type", "value":"deprovisioned"}] }'
 
-
             # Removing the key "env_type" and changing "shell" and use default policy mode
-
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7 --data "properties=shell=/bin/false" -d "properties=env_type=" -d "policyMode=default"
 
-
             # Reset the key status to accept next inventory with its new key
-
             curl --header "X-API-Token: yourToken" --request POST -H "Content-Type: application/json" 'https://rudder.example.com/rudder/api/latest/nodes/root' -d '{"agentKey":{"status":"undefined"}}'
   "/nodes/{nodeId}/applyPolicy":
     post:
-      description: This API allows to trigger an agent run on the target node.
-        Response is a stream of the actual agent run on the node.
+      description: This API allows to trigger an agent run on the target node. Response is a stream of the actual agent run on the node.
       operationId: applyNode
       parameters:
         - $ref: "#/components/parameters/node-id"
@@ -3890,12 +3696,10 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7\?include=full'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7\?include=full'
   "/nodes/{nodeId}/fetchData":
     post:
-      description: Update properties from all data sources on one nodes. The call is
-        asynchronous.
+      description: Update properties from all data sources on one nodes. The call is asynchronous.
       operationId: ReloadAllDatasourcesOneNode
       parameters:
         - $ref: "#/components/parameters/node-id"
@@ -3911,8 +3715,7 @@ paths:
                       - ReloadAllDatasourcesOneNode
                     type: string
                   data:
-                    example: Data for node '4e3336f9-ace8-44d6-8d07-496ff1631b01', for all
-                      configured data sources, is going to be updated
+                    example: Data for node '4e3336f9-ace8-44d6-8d07-496ff1631b01', for all configured data sources, is going to be updated
                     type: string
                   result:
                     description: Result of the request
@@ -3931,12 +3734,10 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7/fetchData'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7/fetchData'
   "/nodes/{nodeId}/fetchData/{datasourceId}":
     post:
-      description: Update properties from a data source on one nodes. The call is
-        asynchronous.
+      description: Update properties from a data source on one nodes. The call is asynchronous.
       operationId: ReloadOneDatasourceOneNode
       parameters:
         - $ref: "#/components/parameters/node-id"
@@ -3953,8 +3754,7 @@ paths:
                       - ReloadOneDatasourceOneNode
                     type: string
                   data:
-                    example: Data for node '4e3336f9-ace8-44d6-8d07-496ff1631b01', for '
-                      test-data-source' data source, is going to be updated
+                    example: Data for node '4e3336f9-ace8-44d6-8d07-496ff1631b01', for ' test-data-source' data source, is going to be updated
                     type: string
                   result:
                     description: Result of the request
@@ -3973,12 +3773,10 @@ paths:
         - 🧩 Data sources
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/nodes/nodeId/fetchData/datasourceId'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/nodes/nodeId/fetchData/datasourceId'
   "/nodes/{nodeId}/inheritedProperties":
     get:
-      description: This API returns all node properties for a node, including group
-        inherited ones.
+      description: This API returns all node properties for a node, including group inherited ones.
       operationId: nodeInheritedProperties
       parameters:
         - $ref: "#/components/parameters/node-id"
@@ -4015,8 +3813,7 @@ paths:
         - Nodes
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7/inheritedProperties'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7/inheritedProperties'
   /parameters:
     get:
       description: Get the current value of all the global parameters
@@ -4059,8 +3856,7 @@ paths:
         - Parameters
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/parameters'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/parameters'
     put:
       description: Create a new global parameter
       operationId: createParameter
@@ -4113,10 +3909,7 @@ paths:
         - Parameters
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --header "Content-Type:
-            application/json" --request PUT
-            https://rudder.example.com/rudder/api/latest/parameters --data
-            @JSON-file-name'
+          source: 'curl --header "X-API-Token: yourToken" --header "Content-Type: application/json" --request PUT https://rudder.example.com/rudder/api/latest/parameters --data @JSON-file-name'
   "/parameters/{parameterId}":
     delete:
       description: Delete an existing parameter
@@ -4172,8 +3965,7 @@ paths:
                       - deleteParameter
                     type: string
                   errorDetails:
-                    example: "Could not delete Parameter rudder_file_edit_footer cause is: Could not
-                      find Parameter rudder_file_edit_footer."
+                    example: "Could not delete Parameter rudder_file_edit_footer cause is: Could not find Parameter rudder_file_edit_footer."
                     type: string
                   id:
                     description: Id of the parameter
@@ -4196,8 +3988,7 @@ paths:
         - Parameters
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request DELETE
-            https://rudder.example.com/rudder/api/latest/parameters/ParameterId'
+          source: 'curl --header "X-API-Token: yourToken" --request DELETE https://rudder.example.com/rudder/api/latest/parameters/ParameterId'
     get:
       description: Get the current value of a given parameter
       operationId: parameterDetails
@@ -4246,8 +4037,7 @@ paths:
         - Parameters
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/parameters/ParameterId'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/parameters/ParameterId'
     post:
       description: Update the properties of a parameter
       operationId: updateParameter
@@ -4296,9 +4086,7 @@ paths:
         - Parameters
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/parameters/ParameterId
-            --data "value=### Edited by Rudder ###"'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/parameters/ParameterId --data "value=### Edited by Rudder ###"'
   /regenerate/policies:
     post:
       description: Trigger a full policy generation
@@ -4340,9 +4128,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/system/regenerate/pol\
-            icies'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/system/regenerate/policies'"
   /reload/groups:
     post:
       description: Reload dynamic groups
@@ -4384,9 +4170,8 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/system/reload/groups'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/system/reload/groups'
   /reload/techniques:
     post:
       description: Reload techniques from local technique library
@@ -4428,9 +4213,8 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/system/reload/techniques'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/system/reload/techniques'
   /rules:
     get:
       description: List all rules
@@ -4472,13 +4256,10 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request GET
-            'https://rudder.example.com/rudder/api/latest/rules'
-
+          source: |
+            curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/latest/rules'
 
             # To get information about the target (included/excluded) groups of the rules
-
             curl -H "X-API-Token: yourToken" -X GET 'https://rudder.example.com/rudder/api/latest/rules' | jq '.data.rules[] | {"d": .displayName, "id":.id, "inc": .targets[].include?.or, "exc":.targets[].exclude?.or}'
     put:
       description: Create a new rule. You can specify a source rule to clone it.
@@ -4525,9 +4306,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request PUT
-            'https://rudder.example.com/rudder/api/latest/rules' --data
-            \"displayName=Name of New Rule\""
+          source: "curl --header \"X-API-Token: yourToken\" --request PUT 'https://rudder.example.com/rudder/api/latest/rules' --data \"displayName=Name of New Rule\""
   /rules/categories:
     put:
       description: Create a new rule category
@@ -4575,16 +4354,11 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request PUT
-            'https://rudder.example.com/rudder/api/latest/rules/categories'
-            --data "name=new category" -d
-            "parent=4306143d-eabf-4478-b7b1-1616f4aa02b5" -d "description=A new
-            category created via API"
+          source: |
+            curl --header "X-API-Token: yourToken" --request PUT 'https://rudder.example.com/rudder/api/latest/rules/categories' --data "name=new category" -d "parent=4306143d-eabf-4478-b7b1-1616f4aa02b5" -d "description=A new category created via API"
   "/rules/categories/{ruleCategoryId}":
     delete:
-      description: Delete a group category. It must have no child groups and no
-        children categories.
+      description: Delete a group category. It must have no child groups and no children categories.
       operationId: DeleteRuleCategory
       parameters:
         - $ref: "#/components/parameters/rule-category-id"
@@ -4625,9 +4399,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request DELETE
-            'https://rudder.example.com/rudder/api/latest/rules/categories/4306\
-            143d-eabf-4478-b7b1-1616f4aa02b5?prettify=true'"
+          source: "curl --header \"X-API-Token: yourToken\" --request DELETE 'https://rudder.example.com/rudder/api/latest/rules/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5?prettify=true'"
     get:
       description: Get detailed information about a rule category
       operationId: GetRuleCategoryDetails
@@ -4670,9 +4442,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/rules/categories/4306\
-            143d-eabf-4478-b7b1-1616f4aa02b5?prettify=true'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/rules/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5?prettify=true'"
     post:
       description: Update detailed information about a rule category
       operationId: UpdateRuleCategory
@@ -4721,10 +4491,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/rules/categories/4306\
-            143d-eabf-4478-b7b1-1616f4aa02b5?prettify=true' --data \"name=new
-            category name\""
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/rules/categories/4306143d-eabf-4478-b7b1-1616f4aa02b5?prettify=true' --data \"name=new category name\""
   /rules/tree:
     get:
       description: Get all available rules and their categories in a tree
@@ -4789,11 +4556,7 @@ paths:
                           displayName: Global configuration for all nodes
                           enabled: false
                           id: 32377fd7-02fd-43d0-aab7-28460a91347b
-                          longDescription: This Rule was created automatically when Rudder was installed.
-                            It can be used to target Directives to all nodes
-                            (including the Rudder root server itself), or
-                            deleted if you would rather create your own set of
-                            Rules (it will never be created again).
+                          longDescription: This Rule was created automatically when Rudder was installed. It can be used to target Directives to all nodes (including the Rudder root server itself), or deleted if you would rather create your own set of Rules (it will never be created again).
                           shortDescription: ""
                           system: false
                           targets:
@@ -4829,9 +4592,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/rules/tree?prettify=t\
-            rue'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/rules/tree?prettify=true'"
   "/rules/{ruleId}":
     delete:
       description: Delete a rule.
@@ -4875,9 +4636,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request DELETE
-            'https://rudder.example.com/rudder/api/latest/rules/176ad06b-ed02-4\
-            da3-8053-16225d217741'"
+          source: "curl --header \"X-API-Token: yourToken\" --request DELETE 'https://rudder.example.com/rudder/api/latest/rules/176ad06b-ed02-4da3-8053-16225d217741'"
     get:
       description: Get the details of a rule
       operationId: ruleDetails
@@ -4920,9 +4679,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/rules/06ba8940-ed6c-4\
-            102-ba46-93d640a64c36'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/rules/06ba8940-ed6c-4102-ba46-93d640a64c36'"
     post:
       description: Update the details of a rule
       operationId: updateRule
@@ -4971,9 +4728,7 @@ paths:
         - Rules
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/rules/17dadf50-6056-4\
-            c8b-a935-6b97d14b89a7' --data \"displayName=Name of rule\""
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/rules/17dadf50-6056-4c8b-a935-6b97d14b89a7' --data \"displayName=Name of rule\""
   "/scaleoutrelay/promote/{nodeId}":
     post:
       description: Promote a node to relay
@@ -5012,10 +4767,7 @@ paths:
         - 🧩 Scale out Relay
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST --header
-            \"Content-Type: application/json\"
-            https://rudder.example.com/rudder/api/latest/scaleoutrelay/promote/\
-            17dadf50-6056-4c8b-a935-6b97d14b89a7?prettify=true'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST --header \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/scaleoutrelay/promote/17dadf50-6056-4c8b-a935-6b97d14b89a7?prettify=true'"
   /settings:
     get:
       description: Get the current value of all the settings
@@ -5043,8 +4795,7 @@ paths:
                                 allowed_networks:
                                   description: List of allowed networks
                                   items:
-                                    description: Allowed network (`0.0.0.0/0` for no restriction `a.b.c.d/32` for
-                                      one IP)
+                                    description: Allowed network (`0.0.0.0/0` for no restriction `a.b.c.d/32` for one IP)
                                     example: 192.168.40.0/24
                                     format: CIDR network
                                     type: string
@@ -5103,8 +4854,7 @@ paths:
                             example: true
                             type: boolean
                           heartbeat_frequency:
-                            description: Send heartbeat every heartbeat_frequency runs (only on
-                              **changes-only** compliance mode)
+                            description: Send heartbeat every heartbeat_frequency runs (only on **changes-only** compliance mode)
                             example: 10
                             type: integer
                           log_all_reports:
@@ -5121,8 +4871,7 @@ paths:
                             type: integer
                           node_accept_duplicated_hostname:
                             default: false
-                            description: Allow acceptation of a pending node when another one with the same
-                              hostname is already accepted
+                            description: Allow acceptation of a pending node when another one with the same hostname is already accepted
                             example: false
                             type: boolean
                           node_onaccept_default_policyMode:
@@ -5148,11 +4897,7 @@ paths:
                             example: 7
                             type: integer
                           relay_server_synchronization_method:
-                            description: Method used to synchronize data between server and relays, either
-                              "classic" (agent protocol, default), "rsync" (use
-                              rsync to synchronize, that you'll need to be
-                              manually set up), or "disabled" (use third party
-                              system to transmit data)
+                            description: Method used to synchronize data between server and relays, either "classic" (agent protocol, default), "rsync" (use rsync to synchronize, that you'll need to be manually set up), or "disabled" (use third party system to transmit data)
                             enum:
                               - classic
                               - rsync
@@ -5160,17 +4905,11 @@ paths:
                             example: classic
                             type: string
                           relay_server_synchronize_policies:
-                            description: If **rsync** is set as a synchronization method, use rsync to
-                              synchronize policies between Rudder server and
-                              relays. If false, you'll have to synchronize
-                              policies yourself.
+                            description: If **rsync** is set as a synchronization method, use rsync to synchronize policies between Rudder server and relays. If false, you'll have to synchronize policies yourself.
                             example: true
                             type: boolean
                           relay_server_synchronize_shared_files:
-                            description: If **rsync** is set as a synchronization method, use rsync to
-                              synchronize shared files between Rudder server and
-                              relays. If false, you'll have to synchronize
-                              shared files yourself.
+                            description: If **rsync** is set as a synchronization method, use rsync to synchronize shared files between Rudder server and relays. If false, you'll have to synchronize shared files yourself.
                             type: boolean
                           reporting_mode:
                             description: Compliance reporting mode
@@ -5197,9 +4936,7 @@ paths:
                             type: boolean
                           rudder_compute_dyngroups_max_parallelism:
                             default: "1"
-                            description: Set the parallelism to compute dynamic group, as a number of thread
-                              (i.e. 4), or a multiplicative of the number of
-                              core (x0.5)
+                            description: Set the parallelism to compute dynamic group, as a number of thread (i.e. 4), or a multiplicative of the number of core (x0.5)
                             type: string
                           rudder_generation_compute_dyngroups:
                             default: true
@@ -5207,35 +4944,23 @@ paths:
                             type: boolean
                           rudder_generation_continue_on_error:
                             default: false
-                            description: Policy generation continues on error during NodeConfiguration
-                              evaluation
+                            description: Policy generation continues on error during NodeConfiguration evaluation
                             type: boolean
                           rudder_generation_delay:
                             default: 0 seconds
-                            description: Set a delay before starting policy generation, this will allow you
-                              to accumulate changes before they are deployed to
-                              Nodes, and can also lessen webapp resources needs.
-                              The value is a number followed by the time unit
-                              needed (seconds/s, minutes/m, hours/h ...), ie
-                              "5m" for 5 minutes
+                            description: Set a delay before starting policy generation, this will allow you to accumulate changes before they are deployed to Nodes, and can also lessen webapp resources needs. The value is a number followed by the time unit needed (seconds/s, minutes/m, hours/h ...), ie "5m" for 5 minutes
                             type: string
                           rudder_generation_js_timeout:
                             default: 30
-                            description: Policy generation JS evaluation of directive parameter timeout in
-                              seconds
+                            description: Policy generation JS evaluation of directive parameter timeout in seconds
                             type: integer
                           rudder_generation_max_parallelism:
                             default: x0.5
-                            description: Set the policy generation parallelism, either as an number of
-                              thread (i.e. 4), or a multiplicative of the number
-                              of core (x0.5)
+                            description: Set the policy generation parallelism, either as an number of thread (i.e. 4), or a multiplicative of the number of core (x0.5)
                             type: string
                           rudder_generation_policy:
                             default: all
-                            description: Should policy generation be triggered automatically after a change
-                              (value 'all'), or should we wait until a manual
-                              launch (through api or UI, value 'onlyManual') or
-                              even no policy generation at all (value "none")
+                            description: Should policy generation be triggered automatically after a change (value 'all'), or should we wait until a manual launch (through api or UI, value 'onlyManual') or even no policy generation at all (value "none")
                             type: string
                           rudder_report_protocol_default:
                             description: Default reporting protocol used
@@ -5279,8 +5004,7 @@ paths:
                             type: boolean
                           unexpected_unbound_var_values:
                             default: true
-                            description: Allows multiple reports for configuration based on a multivalued
-                              variable
+                            description: Allows multiple reports for configuration based on a multivalued variable
                             type: boolean
                     required:
                       - settings
@@ -5302,8 +5026,7 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/settings'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/settings'
   "/settings/allowed_networks/{nodeId}":
     get:
       description: Get the list of allowed networks for a policy server
@@ -5351,8 +5074,7 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/settings/allowed_networks/root'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/settings/allowed_networks/root'
     post:
       description: Set the list of allowed networks for a policy server
       operationId: setAllowedNetworks
@@ -5413,11 +5135,8 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --header  "Content-Type:
-            application/json" --request POST
-            https://rudder.example.com/rudder/api/latest/settings/allowed_networks/root
-            --data '{"allowed_networks": ["192.168.1.0/24", "192.168.2.0/24"]}'
+          source: |
+            curl --header "X-API-Token: yourToken" --header  "Content-Type: application/json" --request POST https://rudder.example.com/rudder/api/latest/settings/allowed_networks/root --data '{"allowed_networks": ["192.168.1.0/24", "192.168.2.0/24"]}'
   "/settings/allowed_networks/{nodeId}/diff":
     post:
       description: Add or delete allowed networks for a policy server
@@ -5432,14 +5151,12 @@ paths:
                 allowed_networks:
                   properties:
                     add:
-                      description: List of networks to add to existing allowed networks for that
-                        server
+                      description: List of networks to add to existing allowed networks for that server
                       example: '{ "add": ["162.168.2.0/24] }'
                       items: {}
                       type: array
                     delete:
-                      description: List of networks to remove from existing allowed networks for that
-                        server
+                      description: List of networks to remove from existing allowed networks for that server
                       example: '{ "delete": ["162.168.1.0/24"] }'
                       items: {}
                       type: array
@@ -5487,10 +5204,7 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            https://rudder.example.com/rudder/api/latest/settings/allowed_netwo\
-            rks/root --data '{\"allowed_networks\": { \"delete\":
-            [\"192.168.1.0/24\"], \"add\": [\"192.168.2.0/24\"] } }'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST https://rudder.example.com/rudder/api/latest/settings/allowed_networks/root --data '{\"allowed_networks\": { \"delete\": [\"192.168.1.0/24\"], \"add\": [\"192.168.2.0/24\"] } }'"
   "/settings/{settingId}":
     get:
       description: Get the current value of a specific setting
@@ -5540,8 +5254,7 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/settings/run_frequency'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/settings/run_frequency'
     post:
       description: Set the current value of a specific setting
       operationId: modifySetting
@@ -5601,9 +5314,7 @@ paths:
         - Settings
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/settings/global_policy_mode_overridable
-            --data "value=true"'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/settings/global_policy_mode_overridable --data "value=true"'
   "/system/archives/{archiveKind}":
     get:
       description: List configuration archives
@@ -5667,8 +5378,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/system/archives/full'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/system/archives/full'
     post:
       description: Create new archive of the given kind
       operationId: createArchive
@@ -5729,8 +5439,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/system/archives/full'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/system/archives/full'
   "/system/archives/{archiveKind}/restore/{archiveRestoreKind}":
     post:
       description: Restore an archive of the given kind for the given moment
@@ -5741,9 +5450,7 @@ paths:
           name: archiveRestoreKind
           required: true
           schema:
-            description: What archive to restore (latest archive, latest commit in
-              configuration repository, or archive with ID as given by
-              listArchive)
+            description: What archive to restore (latest archive, latest commit in configuration repository, or archive with ID as given by listArchive)
             enum:
               - latestArchive
               - latestCommit
@@ -5811,8 +5518,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request POST
-            https://rudder.example.com/rudder/api/latest/system/archives/full/restore/latestCommit'
+          source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/system/archives/full/restore/latestCommit'
   "/system/archives/{archiveKind}/zip/{commitId}":
     get:
       description: Get an archive of the given kind as a zip
@@ -5838,9 +5544,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/system/archives/full/zip/cad7d5f0729f06d22878b99869b8d43629e05a78
-            -o full-archive.zip'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/system/archives/full/zip/cad7d5f0729f06d22878b99869b8d43629e05a78 -o full-archive.zip'
   /system/healthcheck:
     get:
       description: Run and get the result of all checks
@@ -5877,9 +5581,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/system/healthcheck?pr\
-            ettify=true'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/system/healthcheck?prettify=true'"
   /system/info:
     get:
       description: Get information about the server version
@@ -5936,8 +5638,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/system/info'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/system/info'
   /system/maintenance/purgeSoftware:
     post:
       description: Start the software cleaning batch asynchronously.
@@ -5975,9 +5676,8 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request POST
-            'https://rudder.example.com/rudder/api/latest/system/maintenance/purgeSoftware?prettify=true'
+          source: |
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/system/maintenance/purgeSoftware?prettify=true'
   /system/reload:
     post:
       description: Reload both techniques and dynamic groups
@@ -6024,8 +5724,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/system/reload'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/system/reload'"
   /system/status:
     get:
       description: Get information about current server status
@@ -6066,8 +5765,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken"
-            https://rudder.example.com/rudder/api/latest/system/status'
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/system/status'
   /system/update/policies:
     post:
       description: Update configuration policies if needed
@@ -6109,9 +5807,7 @@ paths:
         - System
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/system/update/policie\
-            s'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/system/update/policies'"
   /techniques:
     get:
       description: List all technique with their versions
@@ -6151,8 +5847,7 @@ paths:
         - Techniques
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/techniques'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/techniques'
   "/techniques/{techniqueName}/directives":
     get:
       description: List all directives based on all version of a technique
@@ -6196,8 +5891,7 @@ paths:
         - Techniques
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/techniques/checkGenericFileContent/directives'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/techniques/checkGenericFileContent/directives'
   "/techniques/{techniqueName}/{techniqueVersion}/directives":
     get:
       description: List all directives based on a version of a technique
@@ -6242,8 +5936,7 @@ paths:
         - Techniques
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/techniques/checkGenericFileContent/6.0/directives'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/techniques/checkGenericFileContent/6.0/directives'
   /usermanagement:
     post:
       description: Add a new user
@@ -6270,8 +5963,7 @@ paths:
                       addedUser:
                         properties:
                           password:
-                            description: this password will be hashed for you if the `isPreHashed` is set on
-                              false
+                            description: this password will be hashed for you if the `isPreHashed` is set on false
                             example: passwdWillBeStoredHashed
                             type: string
                           role:
@@ -6304,9 +5996,8 @@ paths:
         - 🧩 User Management
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             add.json:
-
 
             {
             	"isPreHashed" : false,
@@ -6314,7 +6005,6 @@ paths:
               "password" : "passwdWillBeStoredHashed",
             	"role" : ["user"]
             }
-
 
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/usermanagement --header "Content-type: application/json" --data @add.json
 
@@ -6374,12 +6064,10 @@ paths:
         - 🧩 User Management
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/usermanagement/roles'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/usermanagement/roles'"
   "/usermanagement/update/{username}":
     post:
-      description: Rename, change password (pre-hashed or not) and change permission
-        of an user. If a parameter is empty, it will be ignored.
+      description: Rename, change password (pre-hashed or not) and change permission of an user. If a parameter is empty, it will be ignored.
       operationId: updateUser
       parameters:
         - $ref: "#/components/parameters/username"
@@ -6443,9 +6131,8 @@ paths:
         - 🧩 User Management
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             update.json:
-
 
             {
             	"isPreHashed" : false,
@@ -6453,7 +6140,6 @@ paths:
               "password"    : "Safer password",
             	"role"        : ["user", "deployer", "inventory"]
             }
-
 
             curl --header "X-API-Token: yourToken" --request PUT https://rudder.example.com/rudder/api/latest/usermanagement/Toto --header "Content-type: application/json" --data @update.json
 
@@ -6507,8 +6193,7 @@ paths:
         - 🧩 User Management
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request GET
-            'https://rudder.example.com/rudder/api/latest/usermanagement/users'"
+          source: "curl --header \"X-API-Token: yourToken\" --request GET 'https://rudder.example.com/rudder/api/latest/usermanagement/users'"
   /usermanagement/users/reload:
     get:
       description: Reload the users from the file system, in the configuration file
@@ -6554,9 +6239,7 @@ paths:
         - 🧩 User Management
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request POST
-            'https://rudder.example.com/rudder/api/latest/usermanagement/users/\
-            reload'"
+          source: "curl --header \"X-API-Token: yourToken\" --request POST 'https://rudder.example.com/rudder/api/latest/usermanagement/users/reload'"
   "/usermanagement/{username}":
     delete:
       description: Delete the user and his permissions
@@ -6605,8 +6288,7 @@ paths:
         - 🧩 User Management
       x-code-samples:
         - lang: curl
-          source: "curl --header \"X-API-Token: yourToken\" --request DELETE
-            'https://rudder.example.com/rudder/api/latest/usermanagement/Toto'"
+          source: "curl --header \"X-API-Token: yourToken\" --request DELETE 'https://rudder.example.com/rudder/api/latest/usermanagement/Toto'"
   /users:
     get:
       description: List all validated and unvalidated users
@@ -6643,8 +6325,7 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: 'curl --header "X-API-Token: yourToken" --request GET
-            https://rudder.example.com/rudder/api/latest/users'
+          source: 'curl --header "X-API-Token: yourToken" --request GET https://rudder.example.com/rudder/api/latest/users'
   /validatedUsers:
     post:
       description: Add and remove user from validated users
@@ -6694,14 +6375,12 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: >+
+          source: |+
             update.json:
-
 
             {
             	"validatedUsers": ["John Do", "Jane Doe"]
             }
-
 
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/validatedUsers --header "Content-type: application/json" --data @update.json
 
@@ -6743,9 +6422,8 @@ paths:
         - 🧩 Change requests
       x-code-samples:
         - lang: curl
-          source: >
-            curl --header "X-API-Token: yourToken" --request DELETE
-            https://rudder.example.com/rudder/api/latest/validatedUsers/John Do
+          source: |
+            curl --header "X-API-Token: yourToken" --request DELETE https://rudder.example.com/rudder/api/latest/validatedUsers/John Do
 components:
   parameters:
     archive-kind:
@@ -6771,8 +6449,7 @@ components:
         example: 37
         type: integer
     compliance-level:
-      description: Number of depth level of compliance objects to display (1:rules,
-        2:directives, 3:components, 4:nodes, 5:values, 6:reports)
+      description: Number of depth level of compliance objects to display (1:rules, 2:directives, 3:components, 4:nodes, 5:values, 6:reports)
       in: query
       name: level
       schema:
@@ -6815,18 +6492,10 @@ components:
         format: uuid
         type: string
     include:
-      description: >-
-        Level of information to include from the node inventory. Some base
-        levels are defined (**minimal**, **default**, **full**). You can add
-        fields you want to a base level by adding them to the list, possible
-        values are keys from json answer. If you don't provide a base level,
-        they will be added to `default` level, so if you only want os details,
-        use `minimal,os` as the value for this parameter.
-
+      description: |-
+        Level of information to include from the node inventory. Some base levels are defined (**minimal**, **default**, **full**). You can add fields you want to a base level by adding them to the list, possible values are keys from json answer. If you don't provide a base level, they will be added to `default` level, so if you only want os details, use `minimal,os` as the value for this parameter.
         * **minimal** includes: `id`, `hostname` and `status`
-
         * **default** includes **minimal** plus `architectureDescription`, `description`, `ipAddresses`, `lastRunDate`, `lastInventoryDate`, `machine`, `os`, `managementTechnology`, `policyServerId`, `properties` (be careful! Only node own properties, if you also need inherited properties, look at the dedicated `/nodes/{id}/inheritedProperties` endpoint), `policyMode `, `ram` and `timezone`
-
         * **full** includes: **default** plus `accounts`, `bios`, `controllers`, `environmentVariables`, `fileSystems`, `managementTechnologyDetails`, `memories`, `networkInterfaces`, `ports`, `processes`, `processors`, `slots`, `software`, `sound`, `storage`, `videos` and `virtualMachines`
       in: query
       name: include
@@ -6847,8 +6516,7 @@ components:
         example: and
         type: string
     node-delete-mode:
-      description: Deletion mode to use, either move to trash ('move', default) or
-        erase ('erase')
+      description: Deletion mode to use, either move to trash ('move', default) or erase ('erase')
       in: query
       name: mode
       required: false
@@ -6901,9 +6569,7 @@ components:
                 type: string
               select:
                 default: node
-                description: What kind of data we want to include. Here we can get policy
-                  servers/relay by setting `nodeAndPolicyServer`. Only used if
-                  `where` is defined.
+                description: What kind of data we want to include. Here we can get policy servers/relay by setting `nodeAndPolicyServer`. Only used if `where` is defined.
                 type: string
               where:
                 description: List of criteria
@@ -6928,14 +6594,11 @@ components:
                   type: object
                 type: array
             type: object
-      description: The criterion you want to find for your nodes. Replaces the
-        `where`, `composition` and `select` parameters in a single parameter.
+      description: The criterion you want to find for your nodes. Replaces the `where`, `composition` and `select` parameters in a single parameter.
       in: query
       name: query
     node-select:
-      description: What kind of data we want to include. Here we can get policy
-        servers/relay by setting `nodeAndPolicyServer`. Only used if `where` is
-        defined.
+      description: What kind of data we want to include. Here we can get policy servers/relay by setting `nodeAndPolicyServer`. Only used if `where` is defined.
       in: query
       name: select
       schema:
@@ -7043,11 +6706,9 @@ components:
       content:
         text/plain:
           schema:
-            example: >-
+            example: |-
               Start execution with config [20200218-112602-11ce4f64]
-
               Hostname        M| State         Technique                 Component                 Key                Message 192.168.210.5   E| compliant     Common                    ncf Initialization                           Configuration library initialization was correct 192.168.210.5   E| compliant     Common                    Update                                       Policy and configuration library are already up to date. No action required. [...]
-
               ## Summary ##################################################################### 90 components verified in 15 directives
                 => 62 components in Enforce mode
                     -> 48 compliant
@@ -7065,17 +6726,13 @@ components:
       description: Information about agent key or certificate
       properties:
         status:
-          description: Certification status of the security token (reset to `undefined` to
-            trust a new certificate). If `certified`, inventory signature check
-            will be enforced
+          description: Certification status of the security token (reset to `undefined` to trust a new certificate). If `certified`, inventory signature check will be enforced
           enum:
             - certified
             - undefined
           type: string
         value:
-          description: Certificate (or public key for <6.0 agents) used by the agent. Be
-            careful write a "\n" after header line and before footer line, JSON
-            does not keep formatting in string.
+          description: Certificate (or public key for <6.0 agents) used by the agent. Be careful write a "\n" after header line and before footer line, JSON does not keep formatting in string.
           example: |-
             -----BEGIN CERTIFICATE-----
             MIIFqDCC[...]3tALNn
@@ -7290,9 +6947,7 @@ components:
           type: array
         description:
           description: CVE Description
-          example: Buffer overflow in GNU Wget 1.20.1 and earlier allows remote attackers
-            to cause a denial-of-service (DoS) or may execute an arbitrary code
-            via unspecified vectors.
+          example: Buffer overflow in GNU Wget 1.20.1 and earlier allows remote attackers to cause a denial-of-service (DoS) or may execute an arbitrary code via unspecified vectors.
           format: date
           type: string
         id:
@@ -7330,8 +6985,7 @@ components:
           example: Test data source
           type: string
         runParameters:
-          description: Parameters to configure when the data source is fetched to update
-            node properties.
+          description: Parameters to configure when the data source is fetched to update node properties.
           properties:
             onGeneration:
               description: Trigger a fetch at the beginning of a policy generation
@@ -7363,12 +7017,10 @@ components:
               example: HTTP
               type: string
             parameters:
-              description: You can use Rudder variable expansion (`${rudder.node`,
-                `${node.properties...}`)
+              description: You can use Rudder variable expansion (`${rudder.node`, `${node.properties...}`)
               properties:
                 checkSsl:
-                  description: Check SSL certificate validity for https. Must be set to false for
-                    self-signed certificate
+                  description: Check SSL certificate validity for https. Must be set to false for self-signed certificate
                   example: true
                   type: boolean
                 headers:
@@ -7386,11 +7038,7 @@ components:
                     type: object
                   type: array
                 path:
-                  description: JSON path (as defined in [the
-                    specification](https://github.com/jayway/JsonPath/), without
-                    the leading `$.`) to find the interesting sub-json or
-                    string/number/boolean value in the answer. Let empty to use
-                    the whole answer as value.
+                  description: JSON path (as defined in [the specification](https://github.com/jayway/JsonPath/), without the leading `$.`) to find the interesting sub-json or string/number/boolean value in the answer. Let empty to use the whole answer as value.
                   type: string
                 requestMethod:
                   description: HTTP method to use to contact the URL.
@@ -7420,9 +7068,7 @@ components:
               type: object
           type: object
         updateTimeout:
-          description: Duration in seconds before aborting data source update. The main
-            goal is to prevent never ending requests. If a periodicity if
-            configured, you should set that timeout at a lower value.
+          description: Duration in seconds before aborting data source update. The main goal is to prevent never ending requests. If a periodicity if configured, you should set that timeout at a lower value.
           example: 30
           type: integer
       type: object
@@ -7650,9 +7296,7 @@ components:
           example: 91252ea2-feb2-412d-8599-c6945fee02c4
           type: string
         source:
-          description: The id of the directive the clone will be based onto. If this
-            parameter if provided,  the new directive will be a clone of this
-            source. Other value will override values from the source.
+          description: The id of the directive the clone will be based onto. If this parameter if provided,  the new directive will be a clone of this source. Other value will override values from the source.
           example: b9f6d98a-28bc-4d80-90f7-d2f14269e215
           format: uuid
           type: string
@@ -7692,8 +7336,7 @@ components:
           type: string
         dynamic:
           default: true
-          description: Should the group be dynamically refreshed (if not, it is a static
-            group)
+          description: Should the group be dynamically refreshed (if not, it is a static group)
           type: boolean
         enabled:
           default: true
@@ -7701,8 +7344,7 @@ components:
           type: boolean
         groupClass:
           items:
-            description: Conditions defined on nodes in the groups. There is one based on
-              the group id, and one based on the group name.
+            description: Conditions defined on nodes in the groups. There is one based on the group id, and one based on the group name.
             example: group_ubuntu
             format: condition
             type: string
@@ -7751,9 +7393,7 @@ components:
               type: string
             select:
               default: node
-              description: What kind of data we want to include. Here we can get policy
-                servers/relay by setting `nodeAndPolicyServer`. Only used if
-                `where` is defined.
+              description: What kind of data we want to include. Here we can get policy servers/relay by setting `nodeAndPolicyServer`. Only used if `where` is defined.
               type: string
             where:
               description: List of criteria
@@ -7840,8 +7480,7 @@ components:
           type: string
         dynamic:
           default: true
-          description: Should the group be dynamically refreshed (if not, it is a static
-            group)
+          description: Should the group be dynamically refreshed (if not, it is a static group)
           type: boolean
         enabled:
           default: true
@@ -7871,8 +7510,7 @@ components:
             type: object
           type: array
         query:
-          description: The criteria defining the group. If not provided, the group will be
-            empty.
+          description: The criteria defining the group. If not provided, the group will be empty.
           properties:
             composition:
               default: and
@@ -7884,9 +7522,7 @@ components:
               type: string
             select:
               default: node
-              description: What kind of data we want to include. Here we can get policy
-                servers/relay by setting `nodeAndPolicyServer`. Only used if
-                `where` is defined.
+              description: What kind of data we want to include. Here we can get policy servers/relay by setting `nodeAndPolicyServer`. Only used if `where` is defined.
               type: string
             where:
               description: List of criteria
@@ -7912,9 +7548,7 @@ components:
               type: array
           type: object
         source:
-          description: The id of the group the clone will be based onto. If this parameter
-            if provided,  the new group will be a clone of this source. Other
-            value will override values from the source.
+          description: The id of the group the clone will be based onto. If this parameter if provided,  the new group will be a clone of this source. Other value will override values from the source.
           example: b9f6d98a-28bc-4d80-90f7-d2f14269e215
           format: uuid
           type: string
@@ -7939,16 +7573,14 @@ components:
           type: string
         dynamic:
           default: true
-          description: Should the group be dynamically refreshed (if not, it is a static
-            group)
+          description: Should the group be dynamically refreshed (if not, it is a static group)
           type: boolean
         enabled:
           default: true
           description: Enable or disable the group
           type: boolean
         query:
-          description: The criteria defining the group. If not provided, the group will be
-            empty.
+          description: The criteria defining the group. If not provided, the group will be empty.
           properties:
             composition:
               default: and
@@ -7960,9 +7592,7 @@ components:
               type: string
             select:
               default: node
-              description: What kind of data we want to include. Here we can get policy
-                servers/relay by setting `nodeAndPolicyServer`. Only used if
-                `where` is defined.
+              description: What kind of data we want to include. Here we can get policy servers/relay by setting `nodeAndPolicyServer`. Only used if `where` is defined.
               type: string
             where:
               description: List of criteria
@@ -8031,9 +7661,7 @@ components:
           os:
             $ref: "#/components/schemas/os"
           policyMode:
-            description: The policy mode for the node. Can only be specified when
-              status=accepted. If not specified, the default (global) mode will
-              be used
+            description: The policy mode for the node. Can only be specified when status=accepted. If not specified, the default (global) mode will be used
             enum:
               - enforce
               - audit
@@ -8043,14 +7671,7 @@ components:
             example: root
             type: string
           properties:
-            description: Node properties in "key":"value" format, where "key" is a string,
-              and "value" is either a string, a json array, or a json object.
-              The following example shows you three example of &#58; &#173; a
-              json array on the example of "tags":[ "some", "tags" ] &#173; a
-              simple string on the example of "env":"prod" &#173; a complex json
-              object on the example of "vars":{ "var1":"value1", "var2":"value2"
-              } They are optional and can be used in any combination as long the
-              keys are unique within the properties object.
+            description: Node properties in "key":"value" format, where "key" is a string, and "value" is either a string, a json array, or a json object. The following example shows you three example of &#58; &#173; a json array on the example of "tags":[ "some", "tags" ] &#173; a simple string on the example of "env":"prod" &#173; a complex json object on the example of "vars":{ "var1":"value1", "var2":"value2" } They are optional and can be used in any combination as long the keys are unique within the properties object.
             properties:
               env:
                 example: prod
@@ -8073,8 +7694,7 @@ components:
                 type: object
             type: object
           state:
-            description: Node lifecycle state. Can only be specified when status=accepted.
-              If not specified, enable is used
+            description: Node lifecycle state. Can only be specified when status=accepted. If not specified, enable is used
             enum:
               - enable
               - ignored
@@ -8227,15 +7847,12 @@ components:
             type: string
           type: array
         lastInventoryDate:
-          description: 'Date and time of the latest generated inventory, if one is
-            available (node time). Up to API v11, format was: "YYYY-MM-dd
-            HH:mm"'
+          description: 'Date and time of the latest generated inventory, if one is available (node time). Up to API v11, format was: "YYYY-MM-dd HH:mm"'
           example: 2020-02-29T10:11:32Z
           format: date
           type: string
         lastRunDate:
-          description: 'Date and time of the latest run, if one is available (node time).
-            Up to API v11, format was: "YYYY-MM-dd HH:mm"'
+          description: 'Date and time of the latest run, if one is available (node time). Up to API v11, format was: "YYYY-MM-dd HH:mm"'
           example: 2020-02-29T14:48:28Z
           format: date
           type: string
@@ -8272,8 +7889,7 @@ components:
               capabilities:
                 description: List of agent capabilities
                 items:
-                  description: Special capacities of the agent, like parsing xml or yaml, support
-                    of advanced acl, etc.
+                  description: Special capacities of the agent, like parsing xml or yaml, support of advanced acl, etc.
                   example: xml
                   type: string
                 type: array
@@ -8282,8 +7898,7 @@ components:
                 example: Rudder
                 type: string
               nodeKind:
-                description: kind of node for the management engine, like `root`, `relay`,
-                  `node`, `root-component`
+                description: kind of node for the management engine, like `root`, `relay`, `node`, `root-component`
                 example: node
                 type: string
               rootComponents:
@@ -8309,8 +7924,7 @@ components:
               description: Certificates used by the agent
               items:
                 description: Certificate (or public key for <6.0 agents) used by the agent
-                example: -----BEGIN CERTIFICATE-----\nMIIFqDCC[...]3tALNn\n-----END
-                  CERTIFICATE-----
+                example: -----BEGIN CERTIFICATE-----\nMIIFqDCC[...]3tALNn\n-----END CERTIFICATE-----
                 format: PEM
                 type: string
               type: array
@@ -8441,8 +8055,7 @@ components:
             - kernelVersion
           type: object
         policyMode:
-          description: Rudder policy mode for the node (`default` follows the global
-            configuration)
+          description: Rudder policy mode for the node (`default` follows the global configuration)
           enum:
             - enforce
             - audit
@@ -8816,8 +8429,7 @@ components:
           items:
             properties:
               hierarchy:
-                description: A description of the inheritance hierarchy for that property, with
-                  most direct parent at head and oldest one at tail
+                description: A description of the inheritance hierarchy for that property, with most direct parent at head and oldest one at tail
                 items:
                   properties:
                     id:
@@ -8836,8 +8448,7 @@ components:
                       example: all centos7
                       type: string
                     value:
-                      description: a string representation of the value. If it was a json value, it
-                        will be escaped.
+                      description: a string representation of the value. If it was a json value, it will be escaped.
                       example: '{"array":[1,2],"object":{"parent":"value"},"string":"parent"}'
                       type: string
                   required:
@@ -8850,8 +8461,7 @@ components:
                 example: datacenter
                 type: string
               origval:
-                description: The original value (ie, before overriding and inheritance
-                  resolution) for that node
+                description: The original value (ie, before overriding and inheritance resolution) for that node
                 example: AMS2
                 format: string or JSON
               provider:
@@ -8862,8 +8472,7 @@ components:
                   - plugin name like datasources
                 type: string
               value:
-                description: Resolved (ie, with inheritance and overriding done) property value
-                  (can be a string or JSON object)
+                description: Resolved (ie, with inheritance and overriding done) property value (can be a string or JSON object)
                 example: AMS2
                 format: string or JSON
             required:
@@ -8880,8 +8489,7 @@ components:
         agentKey:
           $ref: "#/components/schemas/agent-key"
         policyMode:
-          description: In which mode the node will apply its configuration policy. Use
-            `default` to use the global mode.
+          description: In which mode the node will apply its configuration policy. Use `default` to use the global mode.
           enum:
             - audit
             - enforce
@@ -8905,9 +8513,7 @@ components:
             type: object
           type: array
         state:
-          description: The node life cycle state. See [dedicated
-            doc](https://docs.rudder.io/reference/current/usage/advanced_node_management.html#node-lifecycle)
-            for more information.
+          description: The node life cycle state. See [dedicated doc](https://docs.rudder.io/reference/current/usage/advanced_node_management.html#node-lifecycle) for more information.
           enum:
             - enabled
             - ignored
@@ -9012,8 +8618,7 @@ components:
           type: string
         longDescription:
           description: Rule documentation
-          example: This rules should be applied to all Linux nodes required basic
-            hardening
+          example: This rules should be applied to all Linux nodes required basic hardening
           type: string
         shortDescription:
           description: One line rule description
@@ -9084,8 +8689,7 @@ components:
     rule-new:
       properties:
         category:
-          description: The parent category id. If provided, the new rule will be in this
-            parent category
+          description: The parent category id. If provided, the new rule will be in this parent category
           example: 38e0c6ea-917f-47b8-82e0-e6a1d3dd62ca
           format: uuid
           type: string
@@ -9110,17 +8714,14 @@ components:
           type: string
         longDescription:
           description: Rule documentation
-          example: This rules should be applied to all Linux nodes required basic
-            hardening
+          example: This rules should be applied to all Linux nodes required basic hardening
           type: string
         shortDescription:
           description: One line rule description
           example: Baseline applying CIS guidelines
           type: string
         source:
-          description: The id of the rule the clone will be based onto. If this parameter
-            if provided, the new rule will be a clone of this source. Other
-            value will override values from the source.
+          description: The id of the rule the clone will be based onto. If this parameter if provided, the new rule will be a clone of this source. Other value will override values from the source.
           example: b9f6d98a-28bc-4d80-90f7-d2f14269e215
           format: uuid
           type: string
@@ -9218,8 +8819,7 @@ components:
           type: string
         longDescription:
           description: Rule documentation
-          example: This rules should be applied to all Linux nodes required basic
-            hardening
+          example: This rules should be applied to all Linux nodes required basic hardening
           type: string
         shortDescription:
           description: One line rule description
@@ -9281,15 +8881,13 @@ components:
     users:
       properties:
         isPreHahed:
-          description: If you want to provide hashed password set this propertie to `true`
-            otherwise we will hash the plain password and store the hash
+          description: If you want to provide hashed password set this propertie to `true` otherwise we will hash the plain password and store the hash
           enum:
             - false
             - true
           type: boolean
         password:
-          description: this password will be hashed for you if the `isPreHashed` is set on
-            false
+          description: this password will be hashed for you if the `isPreHashed` is set on false
           example: passwdWillBeStoredHashed
           type: string
         role:
@@ -9321,19 +8919,12 @@ components:
       type: object
   securitySchemes:
     API-Tokens:
-      description: >-
-        Authenticating against the API is mandatory for every request, as
-        sensitive information like inventories or configuration rules may get
-        exposed. It is done using a dedicated API Account, than can be created
-        in the web interface on the 'API Accounts' page located inside the
-        Administration part.
-
+      description: |-
+        Authenticating against the API is mandatory for every request, as sensitive information like inventories or configuration rules may get exposed. It is done using a dedicated API Account, than can be created in the web interface on the 'API Accounts' page located inside the Administration part.
 
         ![API Tokens settings](assets/APISettings.png "API Tokens settings")
 
-
         API Accounts are not linked to standard user accounts, and currently give full administrative privileges: they must be secured adequately. Once you have created an API account, you get a token that will be needed to authenticate every request. This token is the API equivalent of a password, and must be secured just like a password would be.
-
 
         On any call to the API, you will need to add a **X-API-Token** header to your request to authenticate:
 

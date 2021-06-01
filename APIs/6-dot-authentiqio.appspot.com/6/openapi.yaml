@@ -341,8 +341,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Unauthorized for this callback audience `aud-error` or JWT should
-            be self-signed `auth-error`
+          description: Unauthorized for this callback audience `aud-error` or JWT should be self-signed `auth-error`
         default:
           $ref: "#/components/responses/ErrorResponse"
       tags:

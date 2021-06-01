@@ -18,24 +18,17 @@ paths:
     get:
       operationId: Registry_ListProjects
       parameters:
-        - description: The maximum number of projects to return. The service may return
-            fewer than this value. If unspecified, at most 50 values will be
-            returned. The maximum is 1000; values above 1000 will be coerced to
-            1000.
+        - description: The maximum number of projects to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
           in: query
           name: page_size
           schema:
             type: string
-        - description: A page token, received from a previous `ListProjects` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListProjects` must match the call that
-            provided the page token.
+        - description: A page token, received from a previous `ListProjects` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListProjects` must match the call that provided the page token.
           in: query
           name: page_token
           schema:
             type: string
-        - description: An expression that can be used to filter the list. Filters use the
-            Common Expression Language and can refer to all message fields.
+        - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.
           in: query
           name: filter
           schema:
@@ -51,9 +44,7 @@ paths:
     post:
       operationId: Registry_CreateProject
       parameters:
-        - description: The ID to use for the project, which will become the final
-            component of the project's resource name. This value should be at
-            most 80 characters, and valid characters are /[a-z][0-9]-./.
+        - description: The ID to use for the project, which will become the final component of the project's resource name. This value should be at most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: project_id
           schema:
@@ -86,8 +77,7 @@ paths:
         "200":
           content: {}
           description: OK
-      summary: DeleteProject removes a specified project and all of the resources that
-        it owns.
+      summary: DeleteProject removes a specified project and all of the resources that it owns.
     get:
       operationId: Registry_GetProject
       parameters:
@@ -114,10 +104,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The list of fields to be updated. If omitted, all fields are
-            updated that are set in the request message (fields set to default
-            values are ignored). If a "*" is specified, all fields are updated,
-            including fields that are unspecified/default in the request.
+        - description: The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a "*" is specified, all fields are updated, including fields that are unspecified/default in the request.
           in: query
           name: update_mask
           schema:
@@ -146,23 +133,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of APIs to return. The service may return fewer
-            than this value. If unspecified, at most 50 values will be returned.
-            The maximum is 1000; values above 1000 will be coerced to 1000.
+        - description: The maximum number of APIs to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
           in: query
           name: page_size
           schema:
             type: string
-        - description: A page token, received from a previous `ListApis` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListApis` must match the call that provided
-            the page token.
+        - description: A page token, received from a previous `ListApis` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApis` must match the call that provided the page token.
           in: query
           name: page_token
           schema:
             type: string
-        - description: An expression that can be used to filter the list. Filters use the
-            Common Expression Language and can refer to all message fields.
+        - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.
           in: query
           name: filter
           schema:
@@ -184,9 +165,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID to use for the api, which will become the final component of
-            the api's resource name. This value should be at most 80 characters,
-            and valid characters are /[a-z][0-9]-./.
+        - description: The ID to use for the api, which will become the final component of the api's resource name. This value should be at most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: api_id
           schema:
@@ -264,10 +243,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The list of fields to be updated. If omitted, all fields are
-            updated that are set in the request message (fields set to default
-            values are ignored). If a "*" is specified, all fields are updated,
-            including fields that are unspecified/default in the request.
+        - description: The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a "*" is specified, all fields are updated, including fields that are unspecified/default in the request.
           in: query
           name: update_mask
           schema:
@@ -302,24 +278,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of versions to return. The service may return
-            fewer than this value. If unspecified, at most 50 values will be
-            returned. The maximum is 1000; values above 1000 will be coerced to
-            1000.
+        - description: The maximum number of versions to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
           in: query
           name: page_size
           schema:
             type: string
-        - description: A page token, received from a previous `ListApiVersions` call.
-            Provide this to retrieve the subsequent page. When paginating, all
-            other parameters provided to `ListApiVersions` must match the call
-            that provided the page token.
+        - description: A page token, received from a previous `ListApiVersions` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApiVersions` must match the call that provided the page token.
           in: query
           name: page_token
           schema:
             type: string
-        - description: An expression that can be used to filter the list. Filters use the
-            Common Expression Language and can refer to all message fields.
+        - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields.
           in: query
           name: filter
           schema:
@@ -347,9 +316,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID to use for the version, which will become the final
-            component of the version's resource name. This value should be at
-            most 80 characters, and valid characters are /[a-z][0-9]-./.
+        - description: The ID to use for the version, which will become the final component of the version's resource name. This value should be at most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: api_version_id
           schema:
@@ -394,8 +361,7 @@ paths:
         "200":
           content: {}
           description: OK
-      summary: DeleteApiVersion removes a specified version and all of the resources
-        that it owns.
+      summary: DeleteApiVersion removes a specified version and all of the resources that it owns.
     get:
       operationId: Registry_GetApiVersion
       parameters:
@@ -446,10 +412,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The list of fields to be updated. If omitted, all fields are
-            updated that are set in the request message (fields set to default
-            values are ignored). If a "*" is specified, all fields are updated,
-            including fields that are unspecified/default in the request.
+        - description: The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a "*" is specified, all fields are updated, including fields that are unspecified/default in the request.
           in: query
           name: update_mask
           schema:
@@ -490,24 +453,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of specs to return. The service may return fewer
-            than this value. If unspecified, at most 50 values will be returned.
-            The maximum is 1000; values above 1000 will be coerced to 1000.
+        - description: The maximum number of specs to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
           in: query
           name: page_size
           schema:
             type: string
-        - description: A page token, received from a previous `ListApiSpecs` call. Provide
-            this to retrieve the subsequent page. When paginating, all other
-            parameters provided to `ListApiSpecs` must match the call that
-            provided the page token.
+        - description: A page token, received from a previous `ListApiSpecs` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListApiSpecs` must match the call that provided the page token.
           in: query
           name: page_token
           schema:
             type: string
-        - description: An expression that can be used to filter the list. Filters use the
-            Common Expression Language and can refer to all message fields
-            except contents.
+        - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields except contents.
           in: query
           name: filter
           schema:
@@ -541,9 +497,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID to use for the spec, which will become the final component
-            of the spec's resource name. This value should be at most 80
-            characters, and valid characters are /[a-z][0-9]-./.
+        - description: The ID to use for the spec, which will become the final component of the spec's resource name. This value should be at most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: api_spec_id
           schema:
@@ -594,8 +548,7 @@ paths:
         "200":
           content: {}
           description: OK
-      summary: DeleteApiSpec removes a specified spec, all revisions, and all child
-        resources (e.g. artifacts).
+      summary: DeleteApiSpec removes a specified spec, all revisions, and all child resources (e.g. artifacts).
     get:
       operationId: Registry_GetApiSpec
       parameters:
@@ -658,16 +611,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: The list of fields to be updated. If omitted, all fields are
-            updated that are set in the request message (fields set to default
-            values are ignored). If a "*" is specified, all fields are updated,
-            including fields that are unspecified/default in the request.
+        - description: The list of fields to be updated. If omitted, all fields are updated that are set in the request message (fields set to default values are ignored). If a "*" is specified, all fields are updated, including fields that are unspecified/default in the request.
           in: query
           name: update_mask
           schema:
             type: string
-        - description: If set to true, and the spec is not found, a new spec will be
-            created. In this situation, `update_mask` is ignored.
+        - description: If set to true, and the spec is not found, a new spec will be created. In this situation, `update_mask` is ignored.
           in: query
           name: allow_missing
           schema:
@@ -786,8 +735,7 @@ paths:
           name: page_size
           schema:
             type: string
-        - description: The page token, received from a previous ListApiSpecRevisions call.
-            Provide this to retrieve the subsequent page.
+        - description: The page token, received from a previous ListApiSpecRevisions call. Provide this to retrieve the subsequent page.
           in: query
           name: page_token
           schema:
@@ -799,8 +747,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListApiSpecRevisionsResponse"
           description: OK
-      summary: ListApiSpecRevisions lists all revisions of a spec. Revisions are
-        returned in descending order of revision creation time.
+      summary: ListApiSpecRevisions lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
   "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:rollback":
     post:
       operationId: Registry_RollbackApiSpec
@@ -842,8 +789,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiSpec"
           description: OK
-      summary: RollbackApiSpec sets the current revision to a specified prior
-        revision. Note that this creates a new revision with a new revision ID.
+      summary: RollbackApiSpec sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.
   "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:tagRevision":
     post:
       operationId: Registry_TagApiSpecRevision
@@ -896,25 +842,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of artifacts to return. The service may return
-            fewer than this value. If unspecified, at most 50 values will be
-            returned. The maximum is 1000; values above 1000 will be coerced to
-            1000.
+        - description: The maximum number of artifacts to return. The service may return fewer than this value. If unspecified, at most 50 values will be returned. The maximum is 1000; values above 1000 will be coerced to 1000.
           in: query
           name: page_size
           schema:
             type: string
-        - description: A page token, received from a previous `ListArtifacts` call.
-            Provide this to retrieve the subsequent page. When paginating, all
-            other parameters provided to `ListArtifacts` must match the call
-            that provided the page token.
+        - description: A page token, received from a previous `ListArtifacts` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListArtifacts` must match the call that provided the page token.
           in: query
           name: page_token
           schema:
             type: string
-        - description: An expression that can be used to filter the list. Filters use the
-            Common Expression Language and can refer to all message fields
-            except contents.
+        - description: An expression that can be used to filter the list. Filters use the Common Expression Language and can refer to all message fields except contents.
           in: query
           name: filter
           schema:
@@ -936,9 +874,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID to use for the artifact, which will become the final
-            component of the artifact's resource name. This value should be at
-            most 80 characters, and valid characters are /[a-z][0-9]-./.
+        - description: The ID to use for the artifact, which will become the final component of the artifact's resource name. This value should be at most 80 characters, and valid characters are /[a-z][0-9]-./.
           in: query
           name: artifact_id
           schema:
@@ -1062,26 +998,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/Status"
           description: OK
-      summary: GetStatus returns the status of the service. GetStatus is for verifying
-        open source deployments only and is not included in hosted versions of
-        the API.
+      summary: GetStatus returns the status of the service. GetStatus is for verifying open source deployments only and is not included in hosted versions of the API.
 components:
   schemas:
     Api:
-      description: An Api is a top-level description of an API. Apis are produced by
-        producers and are commitments to provide services.
+      description: An Api is a top-level description of an API. Apis are produced by producers and are commitments to provide services.
       properties:
         annotations:
-          description: Annotations attach non-identifying metadata to resources.
-            Annotation keys and values are less restricted than those of labels,
-            but should be generally used for small values of broad interest.
-            Larger, topic- specific metadata should be stored in Artifacts.
+          description: Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.
           type: object
         availability:
-          description: 'A user-definable description of the availability of this service.
-            Format: free-form, but we expect single words that describe
-            availability, e.g. "NONE", "TESTING", "PREVIEW", "GENERAL",
-            "DEPRECATED", "SHUTDOWN".'
+          description: 'A user-definable description of the availability of this service. Format: free-form, but we expect single words that describe availability, e.g. "NONE", "TESTING", "PREVIEW", "GENERAL", "DEPRECATED", "SHUTDOWN".'
           type: string
         create_time:
           description: Creation timestamp.
@@ -1095,22 +1022,13 @@ components:
           description: Human-meaningful name.
           type: string
         labels:
-          description: Labels attach identifying metadata to resources. Identifying
-            metadata can be used to filter list operations. Label keys and
-            values can be no longer than 64 characters (Unicode codepoints), can
-            only contain lowercase letters, numeric characters, underscores and
-            dashes. International characters are allowed. No more than 64 user
-            labels can be associated with one resource (System labels are
-            excluded). See https://goo.gl/xmQnxf for more information and
-            examples of labels. System reserved label keys are prefixed with
-            "registry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "registry.googleapis.com/" and cannot be changed.
           type: object
         name:
           description: Resource name.
           type: string
         recommended_version:
-          description: "The recommended version of the API. Format:
-            apis/{api}/versions/{version}"
+          description: "The recommended version of the API. Format: apis/{api}/versions/{version}"
           type: string
         update_time:
           description: Last update timestamp.
@@ -1118,25 +1036,13 @@ components:
           readOnly: true
           type: string
     ApiSpec:
-      description: An ApiSpec describes a version of an API in a structured way.
-        ApiSpecs provide formal descriptions that consumers can use to use a
-        version. ApiSpec resources are intended to be fully-resolved
-        descriptions of an ApiVersion. When specs consist of multiple files,
-        these should be bundled together (e.g. in a zip archive) and stored as a
-        unit. Multiple specs can exist to provide representations in different
-        API description formats. Synchronization of these representations would
-        be provided by tooling and background services.
+      description: An ApiSpec describes a version of an API in a structured way. ApiSpecs provide formal descriptions that consumers can use to use a version. ApiSpec resources are intended to be fully-resolved descriptions of an ApiVersion. When specs consist of multiple files, these should be bundled together (e.g. in a zip archive) and stored as a unit. Multiple specs can exist to provide representations in different API description formats. Synchronization of these representations would be provided by tooling and background services.
       properties:
         annotations:
-          description: Annotations attach non-identifying metadata to resources.
-            Annotation keys and values are less restricted than those of labels,
-            but should be generally used for small values of broad interest.
-            Larger, topic- specific metadata should be stored in Artifacts.
+          description: Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.
           type: object
         contents:
-          description: The contents of the spec. Provided by API callers when specs are
-            created or updated. To access the contents of a spec, use
-            GetApiSpecContents.
+          description: The contents of the spec. Provided by API callers when specs are created or updated. To access the contents of a spec, use GetApiSpecContents.
           format: bytes
           type: string
         create_time:
@@ -1148,47 +1054,28 @@ components:
           description: A detailed description.
           type: string
         filename:
-          description: A possibly-hierarchical name used to refer to the spec from other
-            specs.
+          description: A possibly-hierarchical name used to refer to the spec from other specs.
           type: string
         hash:
           description: A SHA-256 hash of the spec's contents
           readOnly: true
           type: string
         labels:
-          description: Labels attach identifying metadata to resources. Identifying
-            metadata can be used to filter list operations. Label keys and
-            values can be no longer than 64 characters (Unicode codepoints), can
-            only contain lowercase letters, numeric characters, underscores and
-            dashes. International characters are allowed. No more than 64 user
-            labels can be associated with one resource (System labels are
-            excluded). See https://goo.gl/xmQnxf for more information and
-            examples of labels. System reserved label keys are prefixed with
-            "registry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "registry.googleapis.com/" and cannot be changed.
           type: object
         mime_type:
-          description: A style (format) descriptor for this spec that is specified as a
-            Media Type (https://en.wikipedia.org/wiki/Media_type). Possible
-            values include "application/vnd.apigee.proto",
-            "application/vnd.apigee.openapi", and
-            "application/vnd.apigee.graphql", with possible suffixes
-            representing compression types. These hypothetical names are defined
-            in the vendor tree defined in RFC6838
-            (https://tools.ietf.org/html/rfc6838) and are not final.
+          description: A style (format) descriptor for this spec that is specified as a Media Type (https://en.wikipedia.org/wiki/Media_type). Possible values include "application/vnd.apigee.proto", "application/vnd.apigee.openapi", and "application/vnd.apigee.graphql", with possible suffixes representing compression types. These hypothetical names are defined in the vendor tree defined in RFC6838 (https://tools.ietf.org/html/rfc6838) and are not final.
           type: string
         name:
           description: Resource name.
           type: string
         revision_create_time:
-          description: Revision creation timestamp; when the represented revision was
-            created.
+          description: Revision creation timestamp; when the represented revision was created.
           format: RFC3339
           readOnly: true
           type: string
         revision_id:
-          description: The revision ID of the spec. A new revision is committed whenever
-            the spec contents are changed. The format is an 8-character
-            hexadecimal string.
+          description: The revision ID of the spec. A new revision is committed whenever the spec contents are changed. The format is an 8-character hexadecimal string.
           readOnly: true
           type: string
         revision_tags:
@@ -1198,8 +1085,7 @@ components:
           readOnly: true
           type: array
         revision_update_time:
-          description: "Last update timestamp: when the represented revision was last
-            modified."
+          description: "Last update timestamp: when the represented revision was last modified."
           format: RFC3339
           readOnly: true
           type: string
@@ -1209,20 +1095,13 @@ components:
           readOnly: true
           type: integer
         source_uri:
-          description: The original source URI of the spec (if one exists). This is an
-            external location that can be used for reference purposes but which
-            may not be authoritative since this external resource may change
-            after the spec is retrieved.
+          description: The original source URI of the spec (if one exists). This is an external location that can be used for reference purposes but which may not be authoritative since this external resource may change after the spec is retrieved.
           type: string
     ApiVersion:
-      description: An ApiVersion describes a particular version of an API. ApiVersions
-        are what consumers actually use.
+      description: An ApiVersion describes a particular version of an API. ApiVersions are what consumers actually use.
       properties:
         annotations:
-          description: Annotations attach non-identifying metadata to resources.
-            Annotation keys and values are less restricted than those of labels,
-            but should be generally used for small values of broad interest.
-            Larger, topic- specific metadata should be stored in Artifacts.
+          description: Annotations attach non-identifying metadata to resources. Annotation keys and values are less restricted than those of labels, but should be generally used for small values of broad interest. Larger, topic- specific metadata should be stored in Artifacts.
           type: object
         create_time:
           description: Creation timestamp.
@@ -1236,24 +1115,13 @@ components:
           description: Human-meaningful name.
           type: string
         labels:
-          description: Labels attach identifying metadata to resources. Identifying
-            metadata can be used to filter list operations. Label keys and
-            values can be no longer than 64 characters (Unicode codepoints), can
-            only contain lowercase letters, numeric characters, underscores and
-            dashes. International characters are allowed. No more than 64 user
-            labels can be associated with one resource (System labels are
-            excluded). See https://goo.gl/xmQnxf for more information and
-            examples of labels. System reserved label keys are prefixed with
-            "registry.googleapis.com/" and cannot be changed.
+          description: Labels attach identifying metadata to resources. Identifying metadata can be used to filter list operations. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one resource (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "registry.googleapis.com/" and cannot be changed.
           type: object
         name:
           description: Resource name.
           type: string
         state:
-          description: 'A user-definable description of the lifecycle phase of this API
-            version. Format: free-form, but we expect single words that describe
-            API maturity, e.g. "CONCEPT", "DESIGN", "DEVELOPMENT", "STAGING",
-            "PRODUCTION", "DEPRECATED", "RETIRED".'
+          description: 'A user-definable description of the lifecycle phase of this API version. Format: free-form, but we expect single words that describe API maturity, e.g. "CONCEPT", "DESIGN", "DEVELOPMENT", "STAGING", "PRODUCTION", "DEPRECATED", "RETIRED".'
           type: string
         update_time:
           description: Last update timestamp.
@@ -1261,20 +1129,10 @@ components:
           readOnly: true
           type: string
     Artifact:
-      description: Artifacts of resources. Artifacts are unique (single-value) per
-        resource and are used to store metadata that is too large or numerous to
-        be stored directly on the resource. Since artifacts are stored
-        separately from parent resources, they should generally be used for
-        metadata that is needed infrequently, i.e. not for display in primary
-        views of the resource but perhaps displayed or downloaded upon request.
-        The ListArtifacts method allows artifacts to be quickly enumerated and
-        checked for presence without downloading their (potentially-large)
-        contents.
+      description: Artifacts of resources. Artifacts are unique (single-value) per resource and are used to store metadata that is too large or numerous to be stored directly on the resource. Since artifacts are stored separately from parent resources, they should generally be used for metadata that is needed infrequently, i.e. not for display in primary views of the resource but perhaps displayed or downloaded upon request. The ListArtifacts method allows artifacts to be quickly enumerated and checked for presence without downloading their (potentially-large) contents.
       properties:
         contents:
-          description: The contents of the artifact. Provided by API callers when
-            artifacts are created or replaced. To access the contents of an
-            artifact, use GetArtifactContents.
+          description: The contents of the artifact. Provided by API callers when artifacts are created or replaced. To access the contents of an artifact, use GetArtifactContents.
           format: bytes
           type: string
         create_time:
@@ -1287,10 +1145,7 @@ components:
           readOnly: true
           type: string
         mime_type:
-          description: A content type specifier for the artifact. Content type specifiers
-            are Media Types (https://en.wikipedia.org/wiki/Media_type) with a
-            possible "schema" parameter that specifies a schema for the stored
-            information.
+          description: A content type specifier for the artifact. Content type specifiers are Media Types (https://en.wikipedia.org/wiki/Media_type) with a possible "schema" parameter that specifies a schema for the stored information.
           type: string
         name:
           description: Resource name.
@@ -1314,8 +1169,7 @@ components:
             $ref: "#/components/schemas/ApiSpec"
           type: array
         next_page_token:
-          description: A token that can be sent as `page_token` to retrieve the next page.
-            If this field is omitted, there are no subsequent pages.
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
     ListApiSpecsResponse:
       description: Response message for ListApiSpecs.
@@ -1326,8 +1180,7 @@ components:
             $ref: "#/components/schemas/ApiSpec"
           type: array
         next_page_token:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
     ListApiVersionsResponse:
       description: Response message for ListApiVersions.
@@ -1338,8 +1191,7 @@ components:
             $ref: "#/components/schemas/ApiVersion"
           type: array
         next_page_token:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
     ListApisResponse:
       description: Response message for ListApis.
@@ -1350,8 +1202,7 @@ components:
             $ref: "#/components/schemas/Api"
           type: array
         next_page_token:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
     ListArtifactsResponse:
       description: Response message for ListArtifacts.
@@ -1362,15 +1213,13 @@ components:
             $ref: "#/components/schemas/Artifact"
           type: array
         next_page_token:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
     ListProjectsResponse:
       description: Response message for ListProjects.
       properties:
         next_page_token:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         projects:
           description: The projects from the specified publisher.
@@ -1378,11 +1227,7 @@ components:
             $ref: "#/components/schemas/Project"
           type: array
     Project:
-      description: "A Project is a top-level description of a collection of APIs.
-        Typically there would be one project for an entire organization. Note:
-        in a Google Cloud deployment, this resource and associated methods will
-        be omitted and its children will instead be associated with Google Cloud
-        projects."
+      description: "A Project is a top-level description of a collection of APIs. Typically there would be one project for an entire organization. Note: in a Google Cloud deployment, this resource and associated methods will be omitted and its children will instead be associated with Google Cloud projects."
       properties:
         create_time:
           description: Creation timestamp.
@@ -1410,12 +1255,10 @@ components:
           description: The spec being rolled back.
           type: string
         revision_id:
-          description: "The revision ID to roll back to. It must be a revision of the same
-            spec.   Example: c7cfa2a8"
+          description: "The revision ID to roll back to. It must be a revision of the same spec.   Example: c7cfa2a8"
           type: string
     Status:
-      description: Response message for GetStatus. GetStatus is not included in hosted
-        versions of the API.
+      description: Response message for GetStatus. GetStatus is not included in hosted versions of the API.
       properties:
         message:
           description: A string describing the status.
@@ -1427,6 +1270,5 @@ components:
           description: The name of the spec to be tagged, including the revision ID.
           type: string
         tag:
-          description: The tag to apply. The tag should be at most 40 characters, and
-            match `[a-z0-9-]+`.
+          description: The tag to apply. The tag should be at most 40 characters, and match `[a-z0-9-]+`.
           type: string

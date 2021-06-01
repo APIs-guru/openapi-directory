@@ -6,20 +6,7 @@ info:
   contact:
     url: https://www.signl4.com/feedback-we-love-hear-from-you/
     x-twitter: signl4me
-  description: "<p>Use our API for systems integration or to build your own use
-    cases. Sample scenarios include but are not limited to:</p><ul><li>2-way
-    integration: Triggering of Signls and updates in the third party systems
-    when alert state changes occur</li><li>Retrieving alarms for logging
-    purposes</li><li>Calendar integrations: Creation and management of on-call
-    duties</li><li>Punch users in and out based on external
-    calendars</li><li>etc.</li></ul><p>AUTHENTICATION<br>Using the API requires
-    an API key, which you can generate in the SIGNL4 portal under
-    'Developers'.<br>This key must then be specified in a special header in
-    every HTTP request.<br>This header is called <b
-    style='color:#F8B41F'>X-S4-Api-Key</b>.<br><br>The base URL of the API is <a
-    rel='noopener noreferrer' target='_blank'
-    href='https://connect.signl4.com/api/'>https://connect.signl4.com/api/</a>.\
-    <br>Copyright © Derdack GmbH<br></p>"
+  description: "<p>Use our API for systems integration or to build your own use cases. Sample scenarios include but are not limited to:</p><ul><li>2-way integration: Triggering of Signls and updates in the third party systems when alert state changes occur</li><li>Retrieving alarms for logging purposes</li><li>Calendar integrations: Creation and management of on-call duties</li><li>Punch users in and out based on external calendars</li><li>etc.</li></ul><p>AUTHENTICATION<br>Using the API requires an API key, which you can generate in the SIGNL4 portal under 'Developers'.<br>This key must then be specified in a special header in every HTTP request.<br>This header is called <b style='color:#F8B41F'>X-S4-Api-Key</b>.<br><br>The base URL of the API is <a rel='noopener noreferrer' target='_blank' href='https://connect.signl4.com/api/'>https://connect.signl4.com/api/</a>.<br>Copyright © Derdack GmbH<br></p>"
   license:
     name: Derdack GmbH
     url: https://www.signl4.com
@@ -38,36 +25,30 @@ security:
       - public_api_read
       - offline_access
 tags:
-  - description: Provide access to all informations about signls and the ability to
-      interact with them.
+  - description: Provide access to all informations about signls and the ability to interact with them.
     name: Alerts
   - description: Provides access to services and system categories in a SIGNL4 team.
     name: Categories
-  - description: Provide access to duty information and the ability to create,
-      delete and update them.
+  - description: Provide access to duty information and the ability to create, delete and update them.
     name: Duties
   - description: Provide access to all informations about events and their parameters.
     name: Events
   - description: Provides access to the prepaid balance and transactions
     name: Prepaid
-  - description: Provides access to apps that are available in SIGNL4 and e.g.
-      allows adding an app to a SIGNL4 team.
+  - description: Provides access to apps that are available in SIGNL4 and e.g. allows adding an app to a SIGNL4 team.
     name: Scripts
   - description: Provides management capabilities for a SIGNL4 subscription.
     name: Subscriptions
-  - description: Provides misc. operations, e.g. for managing settings or
-      preferences, of a team in a SIGNL4 subscription.
+  - description: Provides misc. operations, e.g. for managing settings or preferences, of a team in a SIGNL4 subscription.
     name: Teams
   - description: Provides management for team members in a SIGNL4 team.
     name: Users
-  - description: Provides management for outbound notifications (e.g. a Signl was
-      confirmed) via webhooks.
+  - description: Provides management for outbound notifications (e.g. a Signl was confirmed) via webhooks.
     name: Webhooks
 paths:
   /alerts:
     post:
-      description: Triggers a new alert for your team. All team members on duty will
-        receive alert notifications.
+      description: Triggers a new alert for your team. All team members on duty will receive alert notifications.
       requestBody:
         content:
           application/*+json:
@@ -137,8 +118,7 @@ paths:
         - Alerts
   /alerts/acknowledgeAll:
     post:
-      description: This method confirms all unhandled alerts your team currently has
-        by a specific user.
+      description: This method confirms all unhandled alerts your team currently has by a specific user.
       parameters:
         - description: User ID of the user to be used to acknowledge the alarms.
           in: query
@@ -377,11 +357,9 @@ paths:
   /alerts/paged:
     post:
       parameters:
-        - description: "Defines the limit of retrieved alert details per request. 1 to 100
-            are allowed per request.\r
+        - description: "Defines the limit of retrieved alert details per request. 1 to 100 are allowed per request.\r
 
-            \                Number of alerts could be less if
-            filtered but at least 1."
+            \                Number of alerts could be less if filtered but at least 1."
           in: query
           name: maxResults
           schema:
@@ -419,8 +397,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/OverviewAlertPagedResultsPublic"
-          description: Returns a paged result with found alerts and continuation token if
-            more alerts are in the database.
+          description: Returns a paged result with found alerts and continuation token if more alerts are in the database.
         "204":
           description: There were no alerts found for the specified filter.
         "400":
@@ -476,11 +453,9 @@ paths:
         - Alerts
   /alerts/report:
     get:
-      description: "Returns information about the occurred alert volume in different
-        time periods as well as information about the\r
+      description: "Returns information about the occurred alert volume in different time periods as well as information about the\r
 
-        response behaviour (amount of confirmed and unhandled alerts) of
-        your team members."
+        response behaviour (amount of confirmed and unhandled alerts) of your team members."
       parameters:
         - description: User ID of the user for whom you want a report.
           in: query
@@ -541,8 +516,7 @@ paths:
         - Alerts
   /alerts/undoAcknowledgeMultiple:
     post:
-      description: This method tries to undo the acknowledgement of multiple alerts
-        via a queue. The operation is handled in the background.
+      description: This method tries to undo the acknowledgement of multiple alerts via a queue. The operation is handled in the background.
       requestBody:
         content:
           application/*+json:
@@ -602,8 +576,7 @@ paths:
         - Alerts
   /alerts/undoCloseMultiple:
     post:
-      description: This method tries to undo multiple alert closes. The operation is
-        handled in the background.
+      description: This method tries to undo multiple alert closes. The operation is handled in the background.
       requestBody:
         content:
           application/*+json:
@@ -793,8 +766,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Alert can't be acknowledged because it is against the defined alert
-            lifecycle.
+          description: Alert can't be acknowledged because it is against the defined alert lifecycle.
         "500":
           content:
             application/json:
@@ -1040,22 +1012,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional parameter defining the wanted width of the picture that is
-            retrieved.
+        - description: Optional parameter defining the wanted width of the picture that is retrieved.
           in: query
           name: width
           schema:
             format: int32
             type: integer
-        - description: Optional parameter defining the wanted height of the picture that
-            is retrieved.
+        - description: Optional parameter defining the wanted height of the picture that is retrieved.
           in: query
           name: height
           schema:
             format: int32
             type: integer
-        - description: "Optional parameter defining whether it's wanted to scale the
-            retrieved image. Default is set to\r
+        - description: "Optional parameter defining whether it's wanted to scale the retrieved image. Default is set to\r
 
             true."
           in: query
@@ -1193,8 +1162,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Alert can't be closed because it is against the defined alert
-            lifecycle.
+          description: Alert can't be closed because it is against the defined alert lifecycle.
         "500":
           content:
             application/json:
@@ -1551,8 +1519,7 @@ paths:
           description: Internal general error occured.
       summary: "Gets the names of all alert category images.\r
 
-        You can get the image by going to
-        account.signl4.com/images/alerts/categoryImageName.svg"
+        You can get the image by going to account.signl4.com/images/alerts/categoryImageName.svg"
       tags:
         - Categories
   "/categories/{teamId}":
@@ -1765,8 +1732,7 @@ paths:
 
         \            \r
 
-        \    GET
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/metrics"
+        \    GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/metrics"
       parameters:
         - description: ID of the team the categories belongs to
           in: path
@@ -1850,9 +1816,7 @@ paths:
 
         \            \r
 
-        \    DELETE
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882\
-        d-ba69b5adb25e"
+        \    DELETE /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e"
       parameters:
         - description: ID of the team the category belongs to
           in: path
@@ -1927,9 +1891,7 @@ paths:
 
         \            \r
 
-        \    GET
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882\
-        d-ba69b5adb25e"
+        \    GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e"
       parameters:
         - description: ID of the team the category belongs to
           in: path
@@ -2012,9 +1974,7 @@ paths:
 
         \            \r
 
-        \    PUT
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882\
-        d-ba69b5adb25e\r
+        \    PUT /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e\r
 
         \    {\r
 
@@ -2146,9 +2106,7 @@ paths:
 
         \            \r
 
-        \    GET
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882\
-        d-ba69b5adb25e/metrics"
+        \    GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/metrics"
       parameters:
         - description: ID of the team the category belongs to
           in: path
@@ -2232,9 +2190,7 @@ paths:
 
         \            \r
 
-        \    GET
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882\
-        d-ba69b5adb25e/subscriptions\r
+        \    GET /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/subscriptions\r
 
         \    {\r
 
@@ -2317,9 +2273,7 @@ paths:
 
         \            \r
 
-        \    POST
-        /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882\
-        d-ba69b5adb25e/subscriptions\r
+        \    POST /categories/cbb70402-1359-477f-ac92-0171cf2b5ff7/c0054336-cd89-4abf-882d-ba69b5adb25e/subscriptions\r
 
         \    {\r
 
@@ -2421,14 +2375,11 @@ paths:
         - Categories
   /events/paged:
     post:
-      description: Get overview event paged. If there are more results, you also get a
-        continuation token which you can add to the event filter.
+      description: Get overview event paged. If there are more results, you also get a continuation token which you can add to the event filter.
       parameters:
-        - description: "Defines the limit of retrieved alert details per request. 1 to 100
-            are allowed per request.\r
+        - description: "Defines the limit of retrieved alert details per request. 1 to 100 are allowed per request.\r
 
-            \                 Number of alerts could be less if
-            filtered but at least 1."
+            \                 Number of alerts could be less if filtered but at least 1."
           in: query
           name: maxResults
           schema:
@@ -2461,8 +2412,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/OverviewEventPagedResultsPublic"
-          description: Returns paged result with found events and continuation token, if
-            database holds more events.
+          description: Returns paged result with found events and continuation token, if database holds more events.
         "204":
           description: No event could be found (with passed filter)
         "400":
@@ -2913,8 +2863,7 @@ paths:
       tags:
         - Scripts
     post:
-      description: Creates a new script instance of the script specified in the
-        request body.
+      description: Creates a new script instance of the script specified in the request body.
       requestBody:
         content:
           application/*+json:
@@ -3080,8 +3029,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: Required entities could not be found in the database or in memory.
-      summary: Returns all information about a given script instance which includes
-        its runtime status.
+      summary: Returns all information about a given script instance which includes its runtime status.
       tags:
         - Scripts
     put:
@@ -3157,8 +3105,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: An internal error has occurred during instance creation.
-      summary: Updates a given script instance, typically used for updating the
-        configuration of a script.
+      summary: Updates a given script instance, typically used for updating the configuration of a script.
       tags:
         - Scripts
   "/scripts/instances/{instanceId}/data":
@@ -3235,8 +3182,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: An internal error has occurred during instance creation.
-      summary: Updates custom data of a given script instance which includes its
-        display name.
+      summary: Updates custom data of a given script instance which includes its display name.
       tags:
         - Scripts
   "/scripts/instances/{instanceId}/disable":
@@ -3363,8 +3309,7 @@ paths:
         - Scripts
   /scripts/inventory:
     get:
-      description: Returns all available inventory scripts which can be added to a
-        SIGNL4 subscription.
+      description: Returns all available inventory scripts which can be added to a SIGNL4 subscription.
       responses:
         "200":
           content:
@@ -3408,8 +3353,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: An internal error orccurred while loading all inventory scripts.
-      summary: Returns all available inventory scripts which can be added to a SIGNL4
-        subscription.
+      summary: Returns all available inventory scripts which can be added to a SIGNL4 subscription.
       tags:
         - Scripts
   /scripts/inventory/parsed:
@@ -5120,8 +5064,7 @@ paths:
         "204":
           description: Request was canceled.
         "400":
-          description: Required parameters or authentifaction info could not be found in
-            the request/claims.
+          description: Required parameters or authentifaction info could not be found in the request/claims.
         "403":
           content:
             application/json:
@@ -5216,8 +5159,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required parameters or authentifaction info could not be found in
-            the request/claims.
+          description: Required parameters or authentifaction info could not be found in the request/claims.
         "403":
           content:
             application/json:
@@ -5369,8 +5311,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required parameters or authentifaction info could not be found in
-            the request/claims.
+          description: Required parameters or authentifaction info could not be found in the request/claims.
         "403":
           content:
             application/json:
@@ -5407,13 +5348,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: Server Error
-      summary: Removes a user or invitation from a team, and may delete the user if he
-        is not in any team.
+      summary: Removes a user or invitation from a team, and may delete the user if he is not in any team.
       tags:
         - TeamsMemberships
     put:
-      description: "Updates the user's team membership. You can move the user to
-        another team within the subscription\r
+      description: "Updates the user's team membership. You can move the user to another team within the subscription\r
 
         and/or change the user's role."
       parameters:
@@ -5429,10 +5368,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: User ID of user which you want to change role with. This must be
-            provided when using an api key. This user must have role
-            administrator (for setting administrator role) or team administrator
-            (for setting  rights.
+        - description: User ID of user which you want to change role with. This must be provided when using an api key. This user must have role administrator (for setting administrator role) or team administrator (for setting  rights.
           in: query
           name: requesterUserId
           schema:
@@ -5488,8 +5424,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required parameters or authentifaction info could not be found in
-            the request/claims.
+          description: Required parameters or authentifaction info could not be found in the request/claims.
         "403":
           content:
             application/json:
@@ -6030,8 +5965,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: Server Error
-      summary: Save multiple schedules. It is possible to override existing schedules
-        if you wish
+      summary: Save multiple schedules. It is possible to override existing schedules if you wish
       tags:
         - Duties
   "/teams/{teamId}/schedules/{dutyId}":
@@ -6257,8 +6191,7 @@ paths:
         - Teams
   /users:
     get:
-      description: "Returns a list of user objects with details such as their email
-        address and duty information. Only users who\r
+      description: "Returns a list of user objects with details such as their email address and duty information. Only users who\r
 
         are part of your team will be returned."
       responses:
@@ -6291,8 +6224,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required authentifaction info could not be found in the
-            request/claims.
+          description: Required authentifaction info could not be found in the request/claims.
         "403":
           description: You're not allowed to request the users with their information.
         "404":
@@ -6312,15 +6244,11 @@ paths:
         - Users
   "/users/{userId}":
     get:
-      description: Returns a user object with details such as his email address and
-        duty information.
+      description: Returns a user object with details such as his email address and duty information.
       parameters:
-        - description: "Identifier of the user to get. Use 'Me' to get information about
-            the currently logged in user. This is not possible with an api
-            key.\r
+        - description: "Identifier of the user to get. Use 'Me' to get information about the currently logged in user. This is not possible with an api key.\r
 
-            Can also be an email address of a user in the team or
-            the unique id of an according user object.”"
+            Can also be an email address of a user in the team or the unique id of an according user object.”"
           in: path
           name: userId
           required: true
@@ -6350,8 +6278,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required authentifaction info could not be found in the
-            request/claims.
+          description: Required authentifaction info could not be found in the request/claims.
         "403":
           description: You're not allowed to request that user's information.
         "404":
@@ -6530,12 +6457,9 @@ paths:
     get:
       description: Returns a object with duty information.
       parameters:
-        - description: "Identifier of the user to get. Use 'Me' to get information about
-            the currently logged in user. This is not possible with an api
-            key.\r
+        - description: "Identifier of the user to get. Use 'Me' to get information about the currently logged in user. This is not possible with an api key.\r
 
-            Can also be an email address of a user in the team or
-            the unique id of an according user object.”"
+            Can also be an email address of a user in the team or the unique id of an according user object.”"
           in: path
           name: userId
           required: true
@@ -6565,8 +6489,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required authentifaction info could not be found in the
-            request/claims.
+          description: Required authentifaction info could not be found in the request/claims.
         "403":
           description: You're not allowed to request that duty information.
         "404":
@@ -6677,8 +6600,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: "Either a passed parameter was either empty/null or the request's
-            multipart does not contain a\r
+          description: "Either a passed parameter was either empty/null or the request's multipart does not contain a\r
 
             file."
         "403":
@@ -6811,12 +6733,9 @@ paths:
     post:
       description: The specified user will be punched in to duty.
       parameters:
-        - description: "Identifier of the user to punch in. Use 'Me' to get information
-            about the currently logged in\r
+        - description: "Identifier of the user to punch in. Use 'Me' to get information about the currently logged in\r
 
-            user. This is not possible with an api key. Can also be
-            an email address of a user in the team or the unique id of an
-            according user object.”"
+            user. This is not possible with an api key. Can also be an email address of a user in the team or the unique id of an according user object.”"
           in: path
           name: userId
           required: true
@@ -6878,12 +6797,9 @@ paths:
     post:
       description: The specified user will be punched in to duty as a manager.
       parameters:
-        - description: "Identifier of the user to punch in. Use 'Me' to get information
-            about the currently logged in\r
+        - description: "Identifier of the user to punch in. Use 'Me' to get information about the currently logged in\r
 
-            user. This is not possible with an api key. Can also be
-            an email address of a user in the team or the unique id of an
-            according user object.”"
+            user. This is not possible with an api key. Can also be an email address of a user in the team or the unique id of an according user object.”"
           in: path
           name: userId
           required: true
@@ -6945,12 +6861,9 @@ paths:
     post:
       description: The specified user will be punched out from duty.
       parameters:
-        - description: "Identifier of the user to punch out. Use 'Me' to get information
-            about the currently logged in\r
+        - description: "Identifier of the user to punch out. Use 'Me' to get information about the currently logged in\r
 
-            user. This is not possible with an api key. Can also be
-            an email address of a user in the team or the unique id of an
-            according user object.”"
+            user. This is not possible with an api key. Can also be an email address of a user in the team or the unique id of an according user object.”"
           in: path
           name: userId
           required: true
@@ -6980,8 +6893,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Required authentifaction information could not be found in the
-            request/claims.
+          description: Required authentifaction information could not be found in the request/claims.
         "403":
           content:
             application/json:
@@ -6993,8 +6905,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: The requesting user tried to punch out someone else, which is not
-            allowed.
+          description: The requesting user tried to punch out someone else, which is not allowed.
         "404":
           content:
             application/json:
@@ -7018,8 +6929,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: "The desired user was not punched out because it would violate  the
-            minumum on-duty members setting\r
+          description: "The desired user was not punched out because it would violate  the minumum on-duty members setting\r
 
             from the team."
       summary: Punch User out
@@ -7124,8 +7034,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/WebhookInfo"
                 type: array
-          description: Request was successful and response body contains information about
-            all outbound webhooks in the subscription.
+          description: Request was successful and response body contains information about all outbound webhooks in the subscription.
         "404":
           content:
             application/json:
@@ -7154,8 +7063,7 @@ paths:
       tags:
         - Webhooks
     post:
-      description: Creates a new outbound webhook that will be notified when certain
-        events occur.
+      description: Creates a new outbound webhook that will be notified when certain events occur.
       requestBody:
         content:
           application/*+json:
@@ -7183,8 +7091,7 @@ paths:
             text/plain:
               schema:
                 type: string
-          description: Action was successful and response contains the id of the newly
-            created webhook.
+          description: Action was successful and response contains the id of the newly created webhook.
         "400":
           content:
             application/json:
@@ -7196,8 +7103,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
-          description: Either the webhook object or a necessary property was invalid or
-            empty.
+          description: Either the webhook object or a necessary property was invalid or empty.
         "500":
           content:
             application/json:
@@ -7287,8 +7193,7 @@ paths:
             text/plain:
               schema:
                 type: string
-          description: Request was successful and response body contains information about
-            the requested webhook.
+          description: Request was successful and response body contains information about the requested webhook.
         "400":
           content:
             application/json:
@@ -7364,8 +7269,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/WebhookInfo"
-          description: Update was successful and response body contains the updated
-            webhook details.
+          description: Update was successful and response body contains the updated webhook details.
         "400":
           content:
             application/json:
@@ -7426,8 +7330,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/WebhookInfo"
-          description: Disable was successful and response body contains the webhook
-            details.
+          description: Disable was successful and response body contains the webhook details.
         "400":
           content:
             application/json:

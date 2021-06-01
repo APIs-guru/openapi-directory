@@ -7,11 +7,8 @@ info:
     name: CodeWerkstatt OG
     url: https://obono.at
     x-twitter: obono_at
-  description: >
-    Provides a RESTful API for interacting with virtual cash registers
-    and creating receipts that are conform with the
-    Registrierkassensicherheitsverordnung (RKSV).
-
+  description: |
+    Provides a RESTful API for interacting with virtual cash registers and creating receipts that are conform with the Registrierkassensicherheitsverordnung (RKSV).
 
     You may find our [automatically generated clients](./clients) for various programming languages and environments helpful...
   license:
@@ -47,9 +44,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthResult"
-          description: The JWT `accessToken` to use for accessing secured resourced as
-            well as the `registrierkassenUuid` of the corresponding
-            "Registrierkasse".
+          description: The JWT `accessToken` to use for accessing secured resourced as well as the `registrierkassenUuid` of the corresponding "Registrierkasse".
       security:
         - basicAuth: []
       tags:
@@ -85,14 +80,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: Only return results that were saved before the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           schema:
             type: string
-        - description: Only return results that were saved after the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           schema:
@@ -104,8 +97,7 @@ paths:
             type: boolean
       responses:
         "200":
-          description: The exported data of a particular `Registrierkasse` in its CSV
-            representation.
+          description: The exported data of a particular `Registrierkasse` in its CSV representation.
       tags:
         - export
   "/export/dep131/registrierkassen/{registrierkasseUuid}/belege":
@@ -117,22 +109,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: Only return results that were saved before the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           schema:
             type: string
-        - description: Only return results that were saved after the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           schema:
             type: string
       responses:
         "200":
-          description: The exported data of a particular `Registrierkasse` in its DEP131 /
-            CSV representation.
+          description: The exported data of a particular `Registrierkasse` in its DEP131 / CSV representation.
       tags:
         - export
   "/export/dep7/registrierkassen/{registrierkasseUuid}/belege":
@@ -144,22 +133,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: Only return results that were saved before the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           schema:
             type: string
-        - description: Only return results that were saved after the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           schema:
             type: string
       responses:
         "200":
-          description: The exported data of a particular `Registrierkasse` in its DEP7
-            representation.
+          description: The exported data of a particular `Registrierkasse` in its DEP7 representation.
       tags:
         - export
   "/export/gobd/registrierkassen/{registrierkasseUuid}":
@@ -171,22 +157,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: Only return results that were saved before the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           schema:
             type: string
-        - description: Only return results that were saved after the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           schema:
             type: string
       responses:
         "200":
-          description: The exported data of a particular `Registrierkasse` in its GoBD
-            representation.
+          description: The exported data of a particular `Registrierkasse` in its GoBD representation.
       tags:
         - export
   "/export/html/belege/{belegUuid}":
@@ -290,22 +273,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: Only return results that were saved before the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           schema:
             type: string
-        - description: Only return results that were saved after the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           schema:
             type: string
       responses:
         "200":
-          description: The exported data of a particular `Registrierkasse` in its
-            Microsoft Excel representation.
+          description: The exported data of a particular `Registrierkasse` in its Microsoft Excel representation.
       tags:
         - export
   "/registrierkassen/{registrierkasseUuid}":
@@ -335,8 +315,7 @@ paths:
       description: Generates an `Abschlussbeleg`.
       operationId: createAbschluss
       parameters:
-        - description: The `_uuid` of the `Registrierkasse` to retrieve the `Beleg`
-            collection.
+        - description: The `_uuid` of the `Registrierkasse` to retrieve the `Beleg` collection.
           in: path
           name: registrierkasseUuid
           required: true
@@ -351,8 +330,7 @@ paths:
         required: true
       responses:
         "201":
-          description: The `Abschlussbeleg` has been created, signed and added to the
-            "Datenerfassungsprotokoll".
+          description: The `Abschlussbeleg` has been created, signed and added to the "Datenerfassungsprotokoll".
           headers:
             Location:
               description: The URL (`_href`) of the newly created `Beleg` resource.
@@ -366,8 +344,7 @@ paths:
       description: Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
       operationId: getBelege
       parameters:
-        - description: The `_uuid` of the `Registrierkasse` to retrieve the `Beleg`
-            collection.
+        - description: The `_uuid` of the `Registrierkasse` to retrieve the `Beleg` collection.
           in: path
           name: registrierkasseUuid
           required: true
@@ -404,14 +381,12 @@ paths:
           schema:
             default: 0
             type: integer
-        - description: Only return results that where saved before the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that where saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           schema:
             type: string
-        - description: Only return results that where saved after the specified date-time
-            string (i.e., anything that `Date.parse()` can parse).
+        - description: Only return results that where saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           schema:
@@ -440,8 +415,7 @@ paths:
       description: Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
       operationId: getBeleg
       parameters:
-        - description: The `_uuid` of the `Registrierkasse` that contains the requested
-            `Beleg`.
+        - description: The `_uuid` of the `Registrierkasse` that contains the requested `Beleg`.
           in: path
           name: registrierkasseUuid
           required: true
@@ -485,13 +459,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Belegdaten"
-        description: An object that contains all data for a particular `Beleg` and is
-          formatted according to RKSV "Signaturformat".
+        description: An object that contains all data for a particular `Beleg` and is formatted according to RKSV "Signaturformat".
         required: true
       responses:
         "201":
-          description: The `Beleg` has been signed and added to the
-            "Datenerfassungsprotokoll".
+          description: The `Beleg` has been signed and added to the "Datenerfassungsprotokoll".
           headers:
             Location:
               description: The URL (`_href`) of the newly created `Beleg` resource.
@@ -499,11 +471,9 @@ paths:
                 format: url
                 type: string
         "400":
-          description: The provided request payload is invalid i.e. not conform the the
-            JSON schema.
+          description: The provided request payload is invalid i.e. not conform the the JSON schema.
         "403":
-          description: Access token is either missing or invalid. Be sure to include the
-            Authorization HTTP header.
+          description: Access token is either missing or invalid. Be sure to include the Authorization HTTP header.
         "409":
           description: A `Beleg` with this particular `belegUuid` already exists.
         "415":
@@ -511,9 +481,7 @@ paths:
         "429":
           description: Request limit exceeded.
         "500":
-          description: The receipt could not be signed either because the HSM delivered
-            invalid data or the request signing request timed out (currently
-            after 10 seconds).
+          description: The receipt could not be signed either because the HSM delivered invalid data or the request signing request timed out (currently after 10 seconds).
       tags:
         - beleg
   "/registrierkassen/{registrierkasseUuid}/dep":
@@ -620,8 +588,7 @@ components:
           format: uuid
           type: string
         Signaturerstellungseinheit-UUID:
-          description: The `_uuid` of the `Signaturerstellungseinheit` that has signed
-            this `Beleg`.
+          description: The `_uuid` of the `Signaturerstellungseinheit` that has signed this `Beleg`.
           format: uuid
           type: string
         _href:
@@ -633,8 +600,7 @@ components:
           type: string
       type: object
     Belegdaten:
-      description: The `Beleg` to be signed by the "Signaturerstellungseinheit" and
-        stored in the "Datenerfassungsprotokoll".
+      description: The `Beleg` to be signed by the "Signaturerstellungseinheit" and stored in the "Datenerfassungsprotokoll".
       properties:
         Externer-Beleg-Belegkreis:
           type: string
@@ -809,13 +775,11 @@ components:
     Registrierkasse:
       properties:
         Benutzerschluessel:
-          description: The base64 encoded AES 256 key used for encrypting the
-            "Umsatzzaehler".
+          description: The base64 encoded AES 256 key used for encrypting the "Umsatzzaehler".
           format: base64
           type: string
         Kassen-ID:
-          description: The (RKSV) "Kassenidentifikationsnummer" of this particular
-            `Registrierkasse`.
+          description: The (RKSV) "Kassenidentifikationsnummer" of this particular `Registrierkasse`.
           type: string
         Signaturerstellungseinheit-UUID:
           description: The `_uuid` of the paired "Signaturerstellungseinheit".
@@ -830,9 +794,7 @@ components:
           type: string
       type: object
     SignierteBelegdaten:
-      description: The complete `Beleg` that has been signed by the
-        "Signaturerstellungseinheit" and stored in the
-        "Datenerfassungsprotokoll".
+      description: The complete `Beleg` that has been signed by the "Signaturerstellungseinheit" and stored in the "Datenerfassungsprotokoll".
       properties:
         Beleg-Datum-Uhrzeit:
           type: string

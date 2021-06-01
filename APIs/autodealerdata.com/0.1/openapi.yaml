@@ -1,44 +1,24 @@
 openapi: 3.0.2
 info:
-  description: >-
-    <div style="">This API provides access to our Automotive Data. Use
-    of this API is subject to our <a href="https://autodealerdata.com/tos">Terms
-    of Service</a></div>
-
+  description: |-
+    <div style="">This API provides access to our Automotive Data. Use of this API is subject to our <a href="https://autodealerdata.com/tos">Terms of Service</a></div>
     &nbsp;
-
     <h3 style="">For a quick start guide <a href="/APIQuickStart">click here</a></h3>
-
     &nbsp;
-
     <div> If you signed up through RapidAPI make your test calls <a href="https://rapidapi.com/competitive-intelligence-solutions-llc-competitive-intelligence-solutions-llc-default/api/cis-automotive">here</a></div>
-
     &nbsp;
-
     <div>The general workflow is to: <br/>&nbsp;<div><strong>1.</strong> Authenticate with your CIS Automotive API Keys to get a Json Web Token (JWT). Do not use RapidAPI keys.</div>
-
     <div><div><strong>2.</strong> Then use that token as an argument when calling other endpoints.</div>
-
     &nbsp;
-
     <div>Equivalent HTTP GET and POST methods are available for some endpoints. </div>
-
     &nbsp;
-
     <div>Endpoints may appear more than once on this page if they are associated with multiple tags. eg "Sales Data", "Premium", "Pro Plan or Greater" To see which endpoints are included in different
-
     plans look under the "X Plan or Greater" tags for the respective plan name.</div>
-
     &nbsp;
-
     <h3>If you signed up for our API through RapidAPI you can make your test calls <a href="https://rapidapi.com/competitive-intelligence-solutions-llc-competitive-intelligence-solutions-llc-default/api/cis-automotive">on their platform</a>. 
-
     Your RapidAPI credentials will not work on this page.</h3><h3> Do not use your RapidAPI keys on this page.</h3>
-
     <h3>If you signed up with us and have an account, you must first authenticate with your API Keys 
-
     and retrieve a Json Web Token (JWT) from the /getToken endpoint to access the other endpoints.</h3> 
-
 
     <h3>Your JWT is a required argument to all endpoints.</h3></div>
   title: CIS Automotive API
@@ -53,18 +33,12 @@ info:
 paths:
   /daysSupply:
     get:
-      description: >-
-        Average, median, standard deviation, population variance, and whole
-        region average of the 
-
+      description: |-
+        Average, median, standard deviation, population variance, and whole region average of the 
         days of supply left on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
-
         a dealer by dealer basis while the whole region average treats the entire region like a single dealership. 
-
         The average field may differ from the whole region average, especially when dealers are out of 
-
         a given model. 
-
 
         The available brand and region names can be retrieved from their respective endpoints.
       operationId: daysSupply_daysSupply_get
@@ -107,16 +81,11 @@ paths:
         - Pro Plan Or Greater
   /daysToSell:
     get:
-      description: >-
-        Average, median, standard deviation, population variance, and whole
-        region average of the 
-
+      description: |-
+        Average, median, standard deviation, population variance, and whole region average of the 
         number of days a vehicle spends on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
-
         a dealer by dealer basis while the whole region average treats the entire region like a single dealership. 
-
         The average field may differ from the whole region average.
-
 
         The available brand and region names can be retrieved from their respective endpoints.
       operationId: daysToSell_daysToSell_get
@@ -159,12 +128,10 @@ paths:
         - Pro Plan Or Greater
   /getBrands:
     get:
-      description: >-
+      description: |-
         Get vehicle brand names. 
 
-
         These names are used as arguments for other endpoints. The names are generally not case sensitive
-
         when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
       operationId: getBrandNames_getBrands_get
       parameters:
@@ -193,10 +160,8 @@ paths:
         - Standard Plan Or Greater
   /getDealers:
     get:
-      description: >-
-        Premium. Dealership information in a given zip code using the first
-        4 digits. Returns name, address, state, zipCode, and IDs.
-
+      description: |-
+        Premium. Dealership information in a given zip code using the first 4 digits. Returns name, address, state, zipCode, and IDs.
         For example a call with the zip code 92701 would return dealers with zip codes in the range [92700, 92709]
       operationId: getDealers_getDealers_get
       parameters:
@@ -232,11 +197,8 @@ paths:
         - Pro Plan Or Greater
   /getDealersByID:
     get:
-      description: >-
-        Premium. Dealership information using the internal ID. Returns
-        name, address, state, zipCode, and ID for a single dealer in the same
-        format as the /getDealers endpoint.
-
+      description: |-
+        Premium. Dealership information using the internal ID. Returns name, address, state, zipCode, and ID for a single dealer in the same format as the /getDealers endpoint.
         Dealer IDs are generally retrieved via the /getDealers or /getDealersByRegion endpoints.
       operationId: getDealers_getDealersByID_get
       parameters:
@@ -272,9 +234,7 @@ paths:
         - Pro Plan Or Greater
   /getDealersByRegion:
     get:
-      description: Premium. Dealership information in a given region. Returns name,
-        address, state, zipCode, and IDs. Results are paginated with up to 30
-        results per page.
+      description: Premium. Dealership information in a given region. Returns name, address, state, zipCode, and IDs. Results are paginated with up to 30 results per page.
       operationId: getDealers_getDealersByRegion_get
       parameters:
         - in: query
@@ -317,19 +277,13 @@ paths:
         - Pro Plan Or Greater
   /getInactiveModels:
     get:
-      description: >-
-        Get all model names including discontinued models. Because these
-        models are no longer built, or have very poor market performance
-
+      description: |-
+        Get all model names including discontinued models. Because these models are no longer built, or have very poor market performance
         they are not incuded in the normal getModels endpoint. Many users itterate through the model names with our new vehicle sales
-
         endpoints and waste some of their quota making self contradictory requests. This endpoint was created to aleviate the use case where
-
         someone requests information on new vehicle sales for a model that has not been sold new for a long, long, time. 
 
-
         These names are used as arguments for other endpoints. The names are generally not case sensitive
-
         when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
       operationId: getModelNamesAll_getInactiveModels_get
       parameters:
@@ -364,15 +318,11 @@ paths:
         - Standard Plan Or Greater
   /getModels:
     get:
-      description: >-
-        Get brand model names for currently active models. This endpoint
-        does not return model names that have been discontinued or have 
-
+      description: |-
+        Get brand model names for currently active models. This endpoint does not return model names that have been discontinued or have 
         sold less than 10 vehicles in the last month and a half.
 
-
         These names are used as arguments for other endpoints. The names are generally not case sensitive
-
         when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
       operationId: getModelNames_getModels_get
       parameters:
@@ -407,8 +357,7 @@ paths:
         - Standard Plan Or Greater
   /getRegionBrandMarketShare:
     get:
-      description: Market share of a given brand in a given region by number of
-        vehicles sold over the last 45 days.
+      description: Market share of a given brand in a given region by number of vehicles sold over the last 45 days.
       operationId: getRegionBrandMarketShare_getRegionBrandMarketShare_get
       parameters:
         - in: query
@@ -449,8 +398,7 @@ paths:
         - Ultra Plan Or Greater
   /getRegionMarketShare:
     get:
-      description: Market share of a all brands in a given region by number of
-        vehicles sold over the last 45 days.
+      description: Market share of a all brands in a given region by number of vehicles sold over the last 45 days.
       operationId: getRegionMarketShare_getRegionMarketShare_get
       parameters:
         - in: query
@@ -486,10 +434,8 @@ paths:
         - Ultra Plan Or Greater
   /getRegions:
     get:
-      description: >-
-        Get region names. These names are used as arguments for other
-        endpoints. The names are generally not case sensitive
-
+      description: |-
+        Get region names. These names are used as arguments for other endpoints. The names are generally not case sensitive
         when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
       operationId: getRegions_getRegions_get
       parameters:
@@ -518,8 +464,7 @@ paths:
         - Standard Plan Or Greater
   /getSubUserKeys:
     get:
-      description: Get a list of your issued SubUser API Keys. Includes active and
-        revoked keys.
+      description: Get a list of your issued SubUser API Keys. Includes active and revoked keys.
       operationId: getSubUserKeys_getSubUserKeys_get
       parameters:
         - in: query
@@ -552,23 +497,16 @@ paths:
         - Authentication
   /getToken:
     get:
-      description: >-
+      description: |-
         This is the first function you should call. 
 
-
         If you are accessing our API through a third party provider they will handle authenticating to our API for you 
-
         and you will not need call this function or retrieve a JSON Web Token. 
 
-
         All other functions require the JSON Web Token (JWT) from this function to 
-
         be incuded in their arguments. The value of the "token" field is the actual JWT and any other values in the returned JSON
-
         are metadata there for your convenience. Tokens are valid for a default of 24 hours (86400 seconds). If you try calling an
-
         API endpoint with a missing, invalid, or expired JWT it will return a HTTP 403 code. You would then need to call this end point
-
         to get a new token.
       operationId: makeToken_getToken_get
       parameters:
@@ -601,23 +539,16 @@ paths:
       tags:
         - Authentication
     post:
-      description: >-
+      description: |-
         This is the first function you should call. 
 
-
         If you are accessing our API through a third party provider they will handle authenticating to our API for you 
-
         and you will not need call this function or retrieve a JSON Web Token. 
 
-
         All other functions require the JSON Web Token (JWT) from this function to 
-
         be incuded in their arguments. The value of the "token" field is the actual JWT and any other values in the returned JSON
-
         are metadata there for your convenience. Tokens are valid for a default of 24 hours (86400 seconds). If you try calling an
-
         API endpoint with a missing, invalid, or expired JWT it will return a HTTP 403 code. You would then need to call this end point
-
         to get a new token.
       operationId: makeToken_getToken_post
       parameters:
@@ -651,11 +582,8 @@ paths:
         - Authentication
   /listPrice:
     get:
-      description: >-
-        Average, median, standard deviation, and population variance of the
-        ask price of new vehicles over the last 15 days for a given brand and
-        region.
-
+      description: |-
+        Average, median, standard deviation, and population variance of the ask price of new vehicles over the last 15 days for a given brand and region.
 
         The available brand and region names can be retrieved from their respective endpoints.
       operationId: getAvgListPrice_listPrice_get
@@ -698,12 +626,9 @@ paths:
         - Standard Plan Or Greater
   /listings:
     get:
-      description: >-
-        Returns a dealer's listings over the last 45 days by dealer ID. The
-        ID can be found by calling the /getDealers endpoint. 
-
+      description: |-
+        Returns a dealer's listings over the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint. 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
-
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
       operationId: getListingsByDealer_listings_get
       parameters:
@@ -752,11 +677,9 @@ paths:
         - Ultra Plan Or Greater
   /listingsByRegion:
     get:
-      description: >-
+      description: |-
         Returns a dealer's listings over up to the last 45 days by region. 
-
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
-
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
       operationId: getListingsByRegion_listingsByRegion_get
       parameters:
@@ -818,13 +741,9 @@ paths:
         - Ultra Plan Or Greater
   /listingsByRegionAndDate:
     get:
-      description: >-
-        Returns listings active in a region in the given date range
-        [startdate, endDate), or in other words dates that satisfy startDate <=
-        X < endDate. Maximum range is 45 days 
-
+      description: |-
+        Returns listings active in a region in the given date range [startdate, endDate), or in other words dates that satisfy startDate <= X < endDate. Maximum range is 45 days 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
-
         Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
       operationId: getListingsByRegionAndDate_listingsByRegionAndDate_get
       parameters:
@@ -893,19 +812,12 @@ paths:
         - Ultra Plan Or Greater
   /makeSubUserKey:
     post:
-      description: >-
-        This endpoint is only fully available to users with a paid plan.
-        Users on Basic or Trial plans may only create keys valid on the
-        "localhost" domain.
-
+      description: |-
+        This endpoint is only fully available to users with a paid plan. Users on Basic or Trial plans may only create keys valid on the "localhost" domain.
         This endpoint creates an API key that can be embedded in frontend applications such as web pages that allow your users to directly make API calls. 
-
         The "endpoints" value is an array of strings that name the allowed endpoints that may be called using the Sub User Key. Passing a "*" value in the array will allow
-
         all endpoints that require a JWT (JSON Web Token) to be called by the Sub User Key. The keys are valid for as long as your account is valid or you revoke the Sub User Key.
-
         All API calls made by the Sub User Keys are billed to your account. Additionally you should not call this endpoint or the /revokeSubUserKey endpoint at a combined rate 
-
         higher than once per second. 
       operationId: makeSubUserKey_makeSubUserKey_post
       parameters:
@@ -947,18 +859,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/HTTPValidationError"
           description: Validation Error
-      summary: Generate a Sub User Key that can be used by your users to make API
-        calls in frontend applications.
+      summary: Generate a Sub User Key that can be used by your users to make API calls in frontend applications.
       tags:
         - Authentication
   /modelYearDist:
     get:
-      description: >-
-        Market share of used vehicles over the last 45 days by model and
-        year. All values are relative to vehicles of the same model.
-
+      description: |-
+        Market share of used vehicles over the last 45 days by model and year. All values are relative to vehicles of the same model.
         For example: a percentOfMarket value of 25, year of 2017, and modelName of Camry means that 25% of used Camrys on the market 
-
         in the given region over the last 45 days were from the 2017 model year.
       operationId: getModelUsedDist_modelYearDist_get
       parameters:
@@ -1006,12 +914,10 @@ paths:
         - Standard Plan Or Greater
   /regionDailySales:
     get:
-      description: >-
-        Get regional sales by brand and day. Most recent data is typically
-        only 2 days old for this endpoint.
+      description: |-
+        Get regional sales by brand and day. Most recent data is typically only 2 days old for this endpoint.
             
         The Day field is in YYYY-MM-DD format. For example if you wanted sales data from April 5th of 2020 the day field would be '2020-04-05'
-
 
         Data availability depends on region and goes back up to 2016.
       operationId: getDealerSales_regionDailySales_get
@@ -1060,12 +966,10 @@ paths:
         - Ultra Plan Or Greater
   /regionSales:
     get:
-      description: >-
-        Premium. Get regional sales by brand and month, broken down by day.
-        Most recent data is typically only 2 days old for this endpoint.
+      description: |-
+        Premium. Get regional sales by brand and month, broken down by day. Most recent data is typically only 2 days old for this endpoint.
             
         The month field is in YYYY-MM-DD format. For example if you wanted sales data from April of 2020 the month field would be '2020-04-01'
-
 
         Data availability depends on region and goes back up to 2016.
       operationId: getDealerSales_regionSales_get
@@ -1115,8 +1019,7 @@ paths:
         - Ultra Plan Or Greater
   /revokeSubUserKey:
     put:
-      description: Revoke a SubUser API Key with the given UUID. This action can not
-        be undone.
+      description: Revoke a SubUser API Key with the given UUID. This action can not be undone.
       operationId: revokeSubUserKey_revokeSubUserKey_put
       parameters:
         - in: query
@@ -1155,11 +1058,8 @@ paths:
         - Authentication
   /salePrice:
     get:
-      description: >-
-        Average, median, standard deviation, and population variance of the
-        sale price of new vehicles over the last 15 days for a given brand and
-        region.
-
+      description: |-
+        Average, median, standard deviation, and population variance of the sale price of new vehicles over the last 15 days for a given brand and region.
 
         The available brand and region names can be retrieved from their respective endpoints.
       operationId: getAvgSalePrice_salePrice_get
@@ -1202,12 +1102,9 @@ paths:
         - Standard Plan Or Greater
   /salePriceHistogram:
     get:
-      description: >-
-        Histogram of the sale price of vehicles over the last 45 days for a
-        given model and region. 
-
+      description: |-
+        Histogram of the sale price of vehicles over the last 45 days for a given model and region. 
         Price buckets are grouped in units of $1000
-
         The available brand, model, and region names can be retrieved from their respective endpoints.
       operationId: getModelSaleBuckets_salePriceHistogram_get
       parameters:
@@ -1255,11 +1152,8 @@ paths:
         - Standard Plan Or Greater
   /similarSalePrice:
     get:
-      description: >-
-        Premium. Provides the average, stdDev, and count, of the sale price
-        and mileage of similar new and used vehicles in a given region based off
-        the provided VIN. 
-
+      description: |-
+        Premium. Provides the average, stdDev, and count, of the sale price and mileage of similar new and used vehicles in a given region based off the provided VIN. 
         Optionally restricts report to vehicles of the same model year and goes back up to 120 days.
       operationId: getMarket3_similarSalePrice_get
       parameters:
@@ -1317,17 +1211,13 @@ paths:
         - Standard Plan Or Greater
   /topModels:
     get:
-      description: >-
+      description: |-
         Sales ranking of different models by region over the last 45 days. 
-
         The <strong>percentOfTopSales</strong> value is the percent of the top seller the model represents. 
-
 
         For example: a value of 80% means that model sold 8 vehicles for every 10 of the top model sold.
 
-
         The other fields represent the model percent of X. The <strong>brandMarketShare</strong> field is that brand's market share of the region
-
         over the report's time interval.
       operationId: getTopModels_topModels_get
       parameters:
@@ -1363,16 +1253,11 @@ paths:
         - Standard Plan Or Greater
   /vehicleHistory:
     get:
-      description: >-
-        Premium. Provides a simple report detailing a vechicle's sales
-        history at dealerships. Data includes the name of the dealership, dates
-        it was for sale,
-
+      description: |-
+        Premium. Provides a simple report detailing a vechicle's sales history at dealerships. Data includes the name of the dealership, dates it was for sale,
         price, new/used condition, mileage, dealership state, and dealership zip code. Data availability goes back to early 2016. 
 
-
         If your use case involves checking if a vehicle has appeared on the open market on or after a given date see 
-
         the /vehicleSeen endpoint.
       operationId: getHistory2_vehicleHistory_get
       parameters:
@@ -1408,14 +1293,10 @@ paths:
         - Pro Plan Or Greater
   /vinDecode:
     get:
-      description: >-
-        Decodes the provided North American vin and provides recall
-        information if available. 
-
+      description: |-
+        Decodes the provided North American vin and provides recall information if available. 
         We require at least the first 12 out of 17 characters in the vin to attempt a decode. The vin is not case sensitive.
-
         If passEmpty (default False) is True we will also include the empty fields in the response json. 
-
         If includeRecall (default True) is True we will include recall data reported to the NHTSA. Set False for a faster response.
       operationId: vinDecode_vinDecode_get
       parameters:

@@ -7,19 +7,8 @@ info:
     email: david@spoonacular.com
     name: David Urbansky
     url: https://spoonacular.com/contact
-  description: >-
-    The spoonacular Nutrition, Recipe, and Food API allows you to
-    access over 380,000 recipes, thousands of ingredients, 80,000 food products,
-    and 100,000 menu items. Our food ontology and semantic recipe search engine
-    makes it possible to search for recipes using natural language queries, such
-    as "gluten free brownies without sugar" or "low fat vegan cupcakes." You can
-    automatically calculate the nutritional information for any recipe, analyze
-    recipe costs, visualize ingredient lists, find recipes for what's in your
-    fridge, find recipes based on special diets, nutritional requirements, or
-    favorite ingredients, classify recipes into types and cuisines, convert
-    ingredient amounts, or even compute an entire meal plan. With our powerful
-    API, you can create many kinds of food and especially nutrition apps.
-
+  description: |-
+    The spoonacular Nutrition, Recipe, and Food API allows you to access over 380,000 recipes, thousands of ingredients, 80,000 food products, and 100,000 menu items. Our food ontology and semantic recipe search engine makes it possible to search for recipes using natural language queries, such as "gluten free brownies without sugar" or "low fat vegan cupcakes." You can automatically calculate the nutritional information for any recipe, analyze recipe costs, visualize ingredient lists, find recipes for what's in your fridge, find recipes based on special diets, nutritional requirements, or favorite ingredients, classify recipes into types and cuisines, convert ingredient amounts, or even compute an entire meal plan. With our powerful API, you can create many kinds of food and especially nutrition apps.
 
     Special diets/dietary requirements currently available include: vegan, vegetarian, pescetarian, gluten free, grain free, dairy free, high protein, whole 30, low sodium, low carb, Paleo, ketogenic, FODMAP, and Primal.
   license:
@@ -115,9 +104,7 @@ paths:
   /food/converse:
     get:
       deprecated: false
-      description: This endpoint can be used to have a conversation about food with
-        the spoonacular chatbot. Use the "Get Conversation Suggests" endpoint to
-        show your user what he or she can say.
+      description: This endpoint can be used to have a conversation about food with the spoonacular chatbot. Use the "Get Conversation Suggests" endpoint to show your user what he or she can say.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Talk-to-Chatbot
@@ -132,9 +119,7 @@ paths:
             example: donut recipes
             type: string
           style: form
-        - description: An arbitrary globally unique id for your conversation. The
-            conversation can contain states so you should pass your context id
-            if you want the bot to be able to remember the conversation.
+        - description: An arbitrary globally unique id for your conversation. The conversation can contain states so you should pass your context id if you want the bot to be able to remember the conversation.
           explode: false
           in: query
           name: contextId
@@ -161,15 +146,13 @@ paths:
   /food/converse/suggest:
     get:
       deprecated: false
-      description: This endpoint returns suggestions for things the user can say or
-        ask the chatbot.
+      description: This endpoint returns suggestions for things the user can say or ask the chatbot.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Conversation-Suggests
       operationId: getConversationSuggests
       parameters:
-        - description: A (partial) query from the user. The endpoint will return if it
-            matches topics it can talk about.
+        - description: A (partial) query from the user. The endpoint will return if it matches topics it can talk about.
           explode: false
           in: query
           name: query
@@ -274,10 +257,7 @@ paths:
   /food/detect:
     post:
       deprecated: false
-      description: Take any text and find all mentions of food contained within it.
-        This task is also called Named Entity Recognition (NER). In this case,
-        the entities are foods. Either dishes, such as pizza or cheeseburger, or
-        ingredients, such as cucumber or almonds.
+      description: Take any text and find all mentions of food contained within it. This task is also called Named Entity Recognition (NER). In this case, the entities are foods. Either dishes, such as pizza or cheeseburger, or ingredients, such as cucumber or almonds.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Detect-Food-in-Text
@@ -289,11 +269,8 @@ paths:
             schema:
               properties:
                 text:
-                  description: The text in which food items, such as dish names and ingredients,
-                    should be detected in.
-                  example: I like to eat delicious tacos. The only thing better is a cheeseburger
-                    with cheddar. But then again, pizza with pepperoni,
-                    mushrooms, and tomatoes is so good too!
+                  description: The text in which food items, such as dish names and ingredients, should be detected in.
+                  example: I like to eat delicious tacos. The only thing better is a cheeseburger with cheddar. But then again, pizza with pepperoni, mushrooms, and tomatoes is so good too!
                   type: string
               required:
                 - text
@@ -317,9 +294,7 @@ paths:
   /food/images/analyze:
     get:
       deprecated: false
-      description: Analyze a food image. The API tries to classify the image, guess
-        the nutrition, and find a matching recipes. You can play around with
-        that endpoint!
+      description: Analyze a food image. The API tries to classify the image, guess the nutrition, and find a matching recipes. You can play around with that endpoint!
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Image-Analysis-by-URL
@@ -418,9 +393,7 @@ paths:
             example: false
             type: boolean
           style: form
-        - description: A comma-separated list of intolerances. All recipes returned must
-            not contain ingredients that are not suitable for people with the
-            intolerances entered. See a full list of supported intolerances.
+        - description: A comma-separated list of intolerances. All recipes returned must not contain ingredients that are not suitable for people with the intolerances entered. See a full list of supported intolerances.
           explode: false
           in: query
           name: intolerances
@@ -447,8 +420,7 @@ paths:
   /food/ingredients/glycemicLoad:
     post:
       deprecated: false
-      description: Retrieve the glycemic index for a list of ingredients and compute
-        the individual and total glycemic load.
+      description: Retrieve the glycemic index for a list of ingredients and compute the individual and total glycemic load.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Compute-Glycemic-Load
@@ -508,8 +480,7 @@ paths:
   /food/ingredients/search:
     get:
       deprecated: false
-      description: Search for simple whole foods (e.g. fruits, vegetables, nuts,
-        grains, meat, fish, dairy etc.).
+      description: Search for simple whole foods (e.g. fruits, vegetables, nuts, grains, meat, fish, dairy etc.).
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Ingredient-Search
@@ -533,8 +504,7 @@ paths:
             example: true
             type: boolean
           style: form
-        - description: The minimum percentage of protein the food must have (between 0 and
-            100).
+        - description: The minimum percentage of protein the food must have (between 0 and 100).
           explode: false
           in: query
           name: minProteinPercent
@@ -543,8 +513,7 @@ paths:
             example: 10
             type: number
           style: form
-        - description: The maximum percentage of protein the food can have (between 0 and
-            100).
+        - description: The maximum percentage of protein the food can have (between 0 and 100).
           explode: false
           in: query
           name: maxProteinPercent
@@ -571,8 +540,7 @@ paths:
             example: 90
             type: number
           style: form
-        - description: The minimum percentage of carbs the food must have (between 0 and
-            100).
+        - description: The minimum percentage of carbs the food must have (between 0 and 100).
           explode: false
           in: query
           name: minCarbsPercent
@@ -581,8 +549,7 @@ paths:
             example: 10
             type: number
           style: form
-        - description: The maximum percentage of carbs the food can have (between 0 and
-            100).
+        - description: The maximum percentage of carbs the food can have (between 0 and 100).
           explode: false
           in: query
           name: maxCarbsPercent
@@ -600,9 +567,7 @@ paths:
             example: false
             type: boolean
           style: form
-        - description: A comma-separated list of intolerances. All recipes returned must
-            not contain ingredients that are not suitable for people with the
-            intolerances entered. See a full list of supported intolerances.
+        - description: A comma-separated list of intolerances. All recipes returned must not contain ingredients that are not suitable for people with the intolerances entered. See a full list of supported intolerances.
           explode: false
           in: query
           name: intolerances
@@ -611,8 +576,7 @@ paths:
             example: egg
             type: string
           style: form
-        - description: The strategy to sort recipes by. See a full list of supported
-            sorting options.
+        - description: The strategy to sort recipes by. See a full list of supported sorting options.
           explode: false
           in: query
           name: sort
@@ -621,8 +585,7 @@ paths:
             example: calories
             type: string
           style: form
-        - description: The direction in which to sort. Must be either 'asc' (ascending) or
-            'desc' (descending).
+        - description: The direction in which to sort. Must be either 'asc' (ascending) or 'desc' (descending).
           explode: false
           in: query
           name: sortDirection
@@ -700,8 +663,7 @@ paths:
   "/food/ingredients/{id}/information":
     get:
       deprecated: false
-      description: Use an ingredient id to get all available information about an
-        ingredient, such as its image and supermarket aisle.
+      description: Use an ingredient id to get all available information about an ingredient, such as its image and supermarket aisle.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Ingredient-Information
@@ -785,8 +747,7 @@ paths:
   /food/jokes/random:
     get:
       deprecated: false
-      description: "Get a random joke that is related to food. Caution: this is an
-        endpoint for adults!"
+      description: "Get a random joke that is related to food. Caution: this is an endpoint for adults!"
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-a-Random-Food-Joke
@@ -810,8 +771,7 @@ paths:
   /food/menuItems/search:
     get:
       deprecated: false
-      description: Search over 115,000 menu items from over 800 fast food and chain
-        restaurants. For example, McDonald's Big Mac or Starbucks Mocha.
+      description: Search over 115,000 menu items from over 800 fast food and chain restaurants. For example, McDonald's Big Mac or Starbucks Mocha.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Search-Menu-Items
@@ -934,8 +894,7 @@ paths:
   /food/menuItems/suggest:
     get:
       deprecated: false
-      description: Generate suggestions for menu items based on a (partial) query. The
-        matches will be found by looking in the title only.
+      description: Generate suggestions for menu items based on a (partial) query. The matches will be found by looking in the title only.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Autocomplete-Menu-Item-Search
@@ -977,8 +936,7 @@ paths:
   "/food/menuItems/{id}":
     get:
       deprecated: false
-      description: Use a menu item id to get all available information about a menu
-        item, such as nutrition.
+      description: Use a menu item id to get all available information about a menu item, such as nutrition.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Menu-Item-Information
@@ -1053,15 +1011,13 @@ paths:
   /food/products/classify:
     post:
       deprecated: false
-      description: This endpoint allows you to match a packaged food to a basic
-        category, e.g. a specific brand of milk to the category milk.
+      description: This endpoint allows you to match a packaged food to a basic category, e.g. a specific brand of milk to the category milk.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Classify-Grocery-Product
       operationId: classifyGroceryProduct
       parameters:
-        - description: The display name of the returned category, supported is en_US (for
-            American English) and en_GB (for British English).
+        - description: The display name of the returned category, supported is en_US (for American English) and en_GB (for British English).
           explode: false
           in: query
           name: locale
@@ -1076,8 +1032,7 @@ paths:
             schema:
               properties:
                 locale:
-                  description: The display name of the returned category, supported is en_US (for
-                    American English) and en_GB (for British English).
+                  description: The display name of the returned category, supported is en_US (for American English) and en_GB (for British English).
                   example: en_US
                   type: string
               type: object
@@ -1106,8 +1061,7 @@ paths:
         url: https://spoonacular.com/food-api/docs#Classify-Grocery-Product-Bulk
       operationId: classifyGroceryProductBulk
       parameters:
-        - description: The display name of the returned category, supported is en_US (for
-            American English) and en_GB (for British English).
+        - description: The display name of the returned category, supported is en_US (for American English) and en_GB (for British English).
           explode: false
           in: query
           name: locale
@@ -1264,8 +1218,7 @@ paths:
   /food/products/suggest:
     get:
       deprecated: false
-      description: Generate suggestions for grocery products based on a (partial)
-        query. The matches will be found by looking in the title only.
+      description: Generate suggestions for grocery products based on a (partial) query. The matches will be found by looking in the title only.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Autocomplete-Product-Search
@@ -1346,8 +1299,7 @@ paths:
         url: https://spoonacular.com/food-api/docs#Get-Comparable-Products
       operationId: getComparableProducts
       parameters:
-        - description: The UPC of the product for which you want to find comparable
-            products.
+        - description: The UPC of the product for which you want to find comparable products.
           explode: false
           in: path
           name: upc
@@ -1374,8 +1326,7 @@ paths:
   "/food/products/{id}":
     get:
       deprecated: false
-      description: Use a product id to get full information about a product, such as
-        ingredients, nutrition, etc. The nutritional information is per serving.
+      description: Use a product id to get full information about a product, such as ingredients, nutrition, etc. The nutritional information is per serving.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Product-Information
@@ -1450,9 +1401,7 @@ paths:
   /food/search:
     get:
       deprecated: false
-      description: Search all food content with one call. That includes recipes,
-        grocery products, menu items, simple foods (ingredients), and food
-        videos.
+      description: Search all food content with one call. That includes recipes, grocery products, menu items, simple foods (ingredients), and food videos.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Search-All-Food
@@ -1503,18 +1452,13 @@ paths:
   /food/site/search:
     get:
       deprecated: false
-      description: Search spoonacular's site content. You'll be able to find
-        everything that you could also find using the search suggestions on
-        spoonacular.com. This is a suggest API so you can send partial strings
-        as queries.
+      description: Search spoonacular's site content. You'll be able to find everything that you could also find using the search suggestions on spoonacular.com. This is a suggest API so you can send partial strings as queries.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Search-Site-Content
       operationId: searchSiteContent
       parameters:
-        - description: The query to search for. You can also use partial queries such as
-            "spagh" to already find spaghetti recipes, articles, grocery
-            products, and other content.
+        - description: The query to search for. You can also use partial queries such as "spagh" to already find spaghetti recipes, articles, grocery products, and other content.
           explode: false
           in: query
           name: query
@@ -1589,8 +1533,7 @@ paths:
             example: main course
             type: string
           style: form
-        - description: The cuisine(s) of the recipes. One or more, comma separated. See a
-            full list of supported cuisines.
+        - description: The cuisine(s) of the recipes. One or more, comma separated. See a full list of supported cuisines.
           explode: false
           in: query
           name: cuisine
@@ -1599,8 +1542,7 @@ paths:
             example: italian
             type: string
           style: form
-        - description: The diet for which the recipes must be suitable. See a full list of
-            supported diets.
+        - description: The diet for which the recipes must be suitable. See a full list of supported diets.
           explode: false
           in: query
           name: diet
@@ -1609,8 +1551,7 @@ paths:
             example: vegetarian
             type: string
           style: form
-        - description: A comma-separated list of ingredients that the recipes should
-            contain.
+        - description: A comma-separated list of ingredients that the recipes should contain.
           explode: false
           in: query
           name: includeIngredients
@@ -1619,8 +1560,7 @@ paths:
             example: tomato,cheese
             type: string
           style: form
-        - description: A comma-separated list of ingredients or ingredient types that the
-            recipes must not contain.
+        - description: A comma-separated list of ingredients or ingredient types that the recipes must not contain.
           explode: false
           in: query
           name: excludeIngredients
@@ -1683,15 +1623,13 @@ paths:
   /food/wine/description:
     get:
       deprecated: false
-      description: Get a simple description of a certain wine, e.g. "malbec",
-        "riesling", or "merlot".
+      description: Get a simple description of a certain wine, e.g. "malbec", "riesling", or "merlot".
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Wine-Description
       operationId: getWineDescription
       parameters:
-        - description: The name of the wine that should be paired, e.g. "merlot",
-            "riesling", or "malbec".
+        - description: The name of the wine that should be paired, e.g. "merlot", "riesling", or "malbec".
           explode: false
           in: query
           name: wine
@@ -1724,8 +1662,7 @@ paths:
         url: https://spoonacular.com/food-api/docs#Get-Dish-Pairing-for-Wine
       operationId: getDishPairingForWine
       parameters:
-        - description: The type of wine that should be paired, e.g. "merlot", "riesling",
-            or "malbec".
+        - description: The type of wine that should be paired, e.g. "merlot", "riesling", or "malbec".
           explode: false
           in: query
           name: wine
@@ -1752,15 +1689,13 @@ paths:
   /food/wine/pairing:
     get:
       deprecated: false
-      description: Find a wine that goes well with a food. Food can be a dish name
-        ("steak"), an ingredient name ("salmon"), or a cuisine ("italian").
+      description: Find a wine that goes well with a food. Food can be a dish name ("steak"), an ingredient name ("salmon"), or a cuisine ("italian").
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Wine-Pairing
       operationId: getWinePairing
       parameters:
-        - description: The food to get a pairing for. This can be a dish ("steak"), an
-            ingredient ("salmon"), or a cuisine ("italian").
+        - description: The food to get a pairing for. This can be a dish ("steak"), an ingredient ("salmon"), or a cuisine ("italian").
           explode: false
           in: query
           name: food
@@ -1796,8 +1731,7 @@ paths:
   /food/wine/recommendation:
     get:
       deprecated: false
-      description: Get a specific wine recommendation (concrete product) for a given
-        wine type, e.g. "merlot".
+      description: Get a specific wine recommendation (concrete product) for a given wine type, e.g. "merlot".
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Wine-Recommendation
@@ -1821,8 +1755,7 @@ paths:
             example: 50
             type: number
           style: form
-        - description: The minimum rating of the recommended wine between 0 and 1. For
-            example, 0.8 equals 4 out of 5 stars.
+        - description: The minimum rating of the recommended wine between 0 and 1. For example, 0.8 equals 4 out of 5 stars.
           explode: false
           in: query
           name: minRating
@@ -1858,8 +1791,7 @@ paths:
   /mealplanner/generate:
     get:
       deprecated: false
-      description: Generate a meal plan with three meals per day (breakfast, lunch,
-        and dinner).
+      description: Generate a meal plan with three meals per day (breakfast, lunch, and dinner).
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Generate-Meal-Plan
@@ -1874,8 +1806,7 @@ paths:
             example: day
             type: string
           style: form
-        - description: What is the caloric target for one day? The meal plan generator
-            will try to get as close as possible to that goal.
+        - description: What is the caloric target for one day? The meal plan generator will try to get as close as possible to that goal.
           explode: false
           in: query
           name: targetCalories
@@ -1884,8 +1815,7 @@ paths:
             example: 2000
             type: number
           style: form
-        - description: Enter a diet that the meal plan has to adhere to. See a full list
-            of supported diets.
+        - description: Enter a diet that the meal plan has to adhere to. See a full list of supported diets.
           explode: false
           in: query
           name: diet
@@ -1894,8 +1824,7 @@ paths:
             example: vegetarian
             type: string
           style: form
-        - description: A comma-separated list of allergens or ingredients that must be
-            excluded.
+        - description: A comma-separated list of allergens or ingredients that must be excluded.
           explode: false
           in: query
           name: exclude
@@ -2306,8 +2235,7 @@ paths:
   "/mealplanner/{username}/shopping-list/{start-date}/{end-date}":
     post:
       deprecated: false
-      description: Generate the shopping list for a user from the meal planner in a
-        given time frame.
+      description: Generate the shopping list for a user from the meal planner in a given time frame.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Generate-Shopping-List
@@ -2488,9 +2416,7 @@ paths:
   "/mealplanner/{username}/week/{start-date}":
     get:
       deprecated: false
-      description: Retrieve a meal planned week for the given user. The username must
-        be a spoonacular user and the hash must the the user's hash that can be
-        found in his/her account.
+      description: Retrieve a meal planned week for the given user. The username must be a spoonacular user and the hash must the the user's hash that can be found in his/her account.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Meal-Plan-Week
@@ -2541,11 +2467,7 @@ paths:
   /recipes/analyzeInstructions:
     post:
       deprecated: false
-      description: This endpoint allows you to break down instructions into atomic
-        steps. Furthermore, each step will contain the ingredients and equipment
-        required. Additionally, all ingredients and equipment from the recipe's
-        instructions will be extracted independently of the step they're used
-        in.
+      description: This endpoint allows you to break down instructions into atomic steps. Furthermore, each step will contain the ingredients and equipment required. Additionally, all ingredients and equipment from the recipe's instructions will be extracted independently of the step they're used in.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Analyze-Recipe-Instructions
@@ -2558,8 +2480,7 @@ paths:
               properties:
                 instructions:
                   description: The instructions to be analyzed.
-                  example: Put the garlic in a pan and then add the onion. Add some salt and
-                    oregano.
+                  example: Put the garlic in a pan and then add the onion. Add some salt and oregano.
                   type: string
               required:
                 - instructions
@@ -2625,9 +2546,7 @@ paths:
   /recipes/complexSearch:
     get:
       deprecated: false
-      description: "Search through hundreds of thousands of recipes using advanced
-        filtering and ranking. NOTE: This method combines searching by query, by
-        ingredients, and by nutrients into one endpoint."
+      description: "Search through hundreds of thousands of recipes using advanced filtering and ranking. NOTE: This method combines searching by query, by ingredients, and by nutrients into one endpoint."
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Search-Recipes
@@ -2642,8 +2561,7 @@ paths:
             example: pasta
             type: string
           style: form
-        - description: The cuisine(s) of the recipes. One or more, comma separated (will
-            be interpreted as 'OR'). See a full list of supported cuisines.
+        - description: The cuisine(s) of the recipes. One or more, comma separated (will be interpreted as 'OR'). See a full list of supported cuisines.
           explode: false
           in: query
           name: cuisine
@@ -2652,9 +2570,7 @@ paths:
             example: italian
             type: string
           style: form
-        - description: The cuisine(s) the recipes must not match. One or more, comma
-            separated (will be interpreted as 'AND'). See a full list of
-            supported cuisines.
+        - description: The cuisine(s) the recipes must not match. One or more, comma separated (will be interpreted as 'AND'). See a full list of supported cuisines.
           explode: false
           in: query
           name: excludeCuisine
@@ -2663,8 +2579,7 @@ paths:
             example: greek
             type: string
           style: form
-        - description: The diet for which the recipes must be suitable. See a full list of
-            supported diets.
+        - description: The diet for which the recipes must be suitable. See a full list of supported diets.
           explode: false
           in: query
           name: diet
@@ -2673,9 +2588,7 @@ paths:
             example: vegetarian
             type: string
           style: form
-        - description: A comma-separated list of intolerances. All recipes returned must
-            not contain ingredients that are not suitable for people with the
-            intolerances entered. See a full list of supported intolerances.
+        - description: A comma-separated list of intolerances. All recipes returned must not contain ingredients that are not suitable for people with the intolerances entered. See a full list of supported intolerances.
           explode: false
           in: query
           name: intolerances
@@ -2684,8 +2597,7 @@ paths:
             example: gluten
             type: string
           style: form
-        - description: The equipment required. Multiple values will be interpreted as
-            'or'. For example, value could be "blender, frying pan, bowl".
+        - description: The equipment required. Multiple values will be interpreted as 'or'. For example, value could be "blender, frying pan, bowl".
           explode: false
           in: query
           name: equipment
@@ -2694,8 +2606,7 @@ paths:
             example: pan
             type: string
           style: form
-        - description: A comma-separated list of ingredients that should/must be used in
-            the recipes.
+        - description: A comma-separated list of ingredients that should/must be used in the recipes.
           explode: false
           in: query
           name: includeIngredients
@@ -2704,8 +2615,7 @@ paths:
             example: tomato,cheese
             type: string
           style: form
-        - description: A comma-separated list of ingredients or ingredient types that the
-            recipes must not contain.
+        - description: A comma-separated list of ingredients or ingredient types that the recipes must not contain.
           explode: false
           in: query
           name: excludeIngredients
@@ -2732,8 +2642,7 @@ paths:
             example: true
             type: boolean
           style: form
-        - description: Add information about the ingredients and whether they are used or
-            missing in relation to the query.
+        - description: Add information about the ingredients and whether they are used or missing in relation to the query.
           explode: false
           in: query
           name: fillIngredients
@@ -2751,8 +2660,7 @@ paths:
             example: false
             type: boolean
           style: form
-        - description: If set to true, you get nutritional information about each recipes
-            returned.
+        - description: If set to true, you get nutritional information about each recipes returned.
           explode: false
           in: query
           name: addRecipeNutrition
@@ -2797,8 +2705,7 @@ paths:
             example: Crock Pot
             type: string
           style: form
-        - description: The maximum time in minutes it should take to prepare and cook the
-            recipe.
+        - description: The maximum time in minutes it should take to prepare and cook the recipe.
           explode: false
           in: query
           name: maxReadyTime
@@ -2807,8 +2714,7 @@ paths:
             example: 20
             type: number
           style: form
-        - description: Whether to ignore typical pantry items, such as water, salt, flour,
-            etc.
+        - description: Whether to ignore typical pantry items, such as water, salt, flour, etc.
           explode: false
           in: query
           name: ignorePantry
@@ -2817,8 +2723,7 @@ paths:
             example: true
             type: boolean
           style: form
-        - description: The strategy to sort recipes by. See a full list of supported
-            sorting options.
+        - description: The strategy to sort recipes by. See a full list of supported sorting options.
           explode: false
           in: query
           name: sort
@@ -2827,8 +2732,7 @@ paths:
             example: calories
             type: string
           style: form
-        - description: The direction in which to sort. Must be either 'asc' (ascending) or
-            'desc' (descending).
+        - description: The direction in which to sort. Must be either 'asc' (ascending) or 'desc' (descending).
           explode: false
           in: query
           name: sortDirection
@@ -3503,8 +3407,7 @@ paths:
             example: 10
             type: number
           style: form
-        - description: Whether the recipes should have an open license that allows display
-            with proper attribution.
+        - description: Whether the recipes should have an open license that allows display with proper attribution.
           explode: false
           in: query
           name: limitLicense
@@ -3546,8 +3449,7 @@ paths:
             example: flour
             type: string
           style: form
-        - description: The amount from which you want to convert, e.g. the 2.5 in "2.5
-            cups of flour to grams".
+        - description: The amount from which you want to convert, e.g. the 2.5 in "2.5 cups of flour to grams".
           explode: false
           in: query
           name: sourceAmount
@@ -3556,9 +3458,7 @@ paths:
             example: 2.5
             type: number
           style: form
-        - description: The unit from which you want to convert, e.g. the grams in "2.5
-            cups of flour to grams". You can also use "piece", e.g. "3.4 oz
-            tomatoes to piece"
+        - description: The unit from which you want to convert, e.g. the grams in "2.5 cups of flour to grams". You can also use "piece", e.g. "3.4 oz tomatoes to piece"
           explode: false
           in: query
           name: sourceUnit
@@ -3567,9 +3467,7 @@ paths:
             example: cups
             type: string
           style: form
-        - description: The unit to which you want to convert, e.g. the grams in "2.5 cups
-            of flour to grams". You can also use "piece", e.g. "3.4 oz tomatoes
-            to piece"
+        - description: The unit to which you want to convert, e.g. the grams in "2.5 cups of flour to grams". You can also use "piece", e.g. "3.4 oz tomatoes to piece"
           explode: false
           in: query
           name: targetUnit
@@ -3608,8 +3506,7 @@ paths:
             schema:
               properties:
                 ingredientList:
-                  description: The ingredient list of the recipe, one ingredient per line
-                    (separate lines with \n).
+                  description: The ingredient list of the recipe, one ingredient per line (separate lines with \n).
                   example: 3 oz pork shoulder
                   type: string
                 title:
@@ -3639,8 +3536,7 @@ paths:
   /recipes/extract:
     get:
       deprecated: false
-      description: This endpoint lets you extract recipe data such as title,
-        ingredients, and instructions from any properly formatted Website.
+      description: This endpoint lets you extract recipe data such as title, ingredients, and instructions from any properly formatted Website.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Extract-Recipe-from-Website
@@ -3655,9 +3551,7 @@ paths:
             example: https://foodista.com/recipe/ZHK4KPB6/chocolate-crinkle-cookies
             type: string
           style: form
-        - description: If true, the extraction will be triggered whether we already know
-            the recipe or not. Use this only if information is missing as this
-            operation is slower.
+        - description: If true, the extraction will be triggered whether we already know the recipe or not. Use this only if information is missing as this operation is slower.
           explode: false
           in: query
           name: forceExtraction
@@ -3666,8 +3560,7 @@ paths:
             example: true
             type: boolean
           style: form
-        - description: If true, the recipe will be analyzed and classified resolving in
-            more data such as cuisines, dish types, and more.
+        - description: If true, the recipe will be analyzed and classified resolving in more data such as cuisines, dish types, and more.
           explode: false
           in: query
           name: analyze
@@ -3696,11 +3589,7 @@ paths:
       deprecated: false
       description: "
 
-        \            Ever wondered what recipes you can cook with the
-        ingredients you have in your fridge or pantry? This endpoint lets you
-        find recipes that either maximize the usage of ingredients you have at
-        hand (pre shopping) or minimize the ingredients that you don't currently
-        have (post shopping).
+        \            Ever wondered what recipes you can cook with the ingredients you have in your fridge or pantry? This endpoint lets you find recipes that either maximize the usage of ingredients you have at hand (pre shopping) or minimize the ingredients that you don't currently have (post shopping).
 
         \        "
       externalDocs:
@@ -3708,8 +3597,7 @@ paths:
         url: https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
       operationId: searchRecipesByIngredients
       parameters:
-        - description: A comma-separated list of ingredients that the recipes should
-            contain.
+        - description: A comma-separated list of ingredients that the recipes should contain.
           explode: false
           in: query
           name: ingredients
@@ -3718,8 +3606,7 @@ paths:
             example: apples,flour,sugar
             type: string
           style: form
-        - description: The maximum number of recipes to return (between 1 and 100).
-            Defaults to 10.
+        - description: The maximum number of recipes to return (between 1 and 100). Defaults to 10.
           explode: false
           in: query
           name: number
@@ -3728,8 +3615,7 @@ paths:
             example: 10
             type: number
           style: form
-        - description: Whether the recipes should have an open license that allows display
-            with proper attribution.
+        - description: Whether the recipes should have an open license that allows display with proper attribution.
           explode: false
           in: query
           name: limitLicense
@@ -3738,8 +3624,7 @@ paths:
             example: true
             type: boolean
           style: form
-        - description: Whether to maximize used ingredients (1) or minimize missing
-            ingredients (2) first.
+        - description: Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
           explode: false
           in: query
           name: ranking
@@ -3748,8 +3633,7 @@ paths:
             example: 1
             type: number
           style: form
-        - description: Whether to ignore typical pantry items, such as water, salt, flour,
-            etc.
+        - description: Whether to ignore typical pantry items, such as water, salt, flour, etc.
           explode: false
           in: query
           name: ignorePantry
@@ -3776,9 +3660,7 @@ paths:
   /recipes/findByNutrients:
     get:
       deprecated: false
-      description: Find a set of recipes that adhere to the given nutritional limits.
-        You may set limits for macronutrients (calories, protein, fat, and
-        carbohydrate) and/or many micronutrients.
+      description: Find a set of recipes that adhere to the given nutritional limits. You may set limits for macronutrients (calories, protein, fat, and carbohydrate) and/or many micronutrients.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Search-Recipes-by-Nutrients
@@ -4450,8 +4332,7 @@ paths:
             example: 10
             type: number
           style: form
-        - description: If true, every request will give you a random set of recipes within
-            the requested limits.
+        - description: If true, every request will give you a random set of recipes within the requested limits.
           explode: false
           in: query
           name: random
@@ -4460,8 +4341,7 @@ paths:
             example: false
             type: boolean
           style: form
-        - description: Whether the recipes should have an open license that allows display
-            with proper attribution.
+        - description: Whether the recipes should have an open license that allows display with proper attribution.
           explode: false
           in: query
           name: limitLicense
@@ -4521,9 +4401,7 @@ paths:
   /recipes/informationBulk:
     get:
       deprecated: false
-      description: Get information about multiple recipes at once. This is equivalent
-        to calling the Get Recipe Information endpoint multiple times, but
-        faster.
+      description: Get information about multiple recipes at once. This is equivalent to calling the Get Recipe Information endpoint multiple times, but faster.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Recipe-Information-Bulk
@@ -4538,9 +4416,7 @@ paths:
             example: 715538,716429
             type: string
           style: form
-        - description: Include nutrition data to the recipe information. Nutrition data is
-            per serving. If you want the nutrition data for the entire recipe,
-            just multiply by the number of servings.
+        - description: Include nutrition data to the recipe information. Nutrition data is per serving. If you want the nutrition data for the entire recipe, just multiply by the number of servings.
           explode: false
           in: query
           name: includeNutrition
@@ -4579,8 +4455,7 @@ paths:
             schema:
               properties:
                 includeNutrition:
-                  description: Whether nutrition data should be added to correctly parsed
-                    ingredients.
+                  description: Whether nutrition data should be added to correctly parsed ingredients.
                   example: true
                   type: boolean
                 ingredientList:
@@ -4680,16 +4555,13 @@ paths:
   /recipes/random:
     get:
       deprecated: false
-      description: Find random (popular) recipes. If you need to filter recipes by
-        diet, nutrition etc. you might want to consider using the complex recipe
-        search endpoint and set the sort request parameter to random.
+      description: Find random (popular) recipes. If you need to filter recipes by diet, nutrition etc. you might want to consider using the complex recipe search endpoint and set the sort request parameter to random.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Random-Recipes
       operationId: getRandomRecipes
       parameters:
-        - description: Whether the recipes should have an open license that allows display
-            with proper attribution.
+        - description: Whether the recipes should have an open license that allows display with proper attribution.
           explode: false
           in: query
           name: limitLicense
@@ -4698,8 +4570,7 @@ paths:
             example: true
             type: boolean
           style: form
-        - description: The tags (can be diets, meal types, cuisines, or intolerances) that
-            the recipe must have.
+        - description: The tags (can be diets, meal types, cuisines, or intolerances) that the recipe must have.
           explode: false
           in: query
           name: tags
@@ -4735,8 +4606,7 @@ paths:
   /recipes/visualizeEquipment:
     post:
       deprecated: false
-      description: Visualize the equipment used to make a recipe. You can play around
-        with that endpoint!
+      description: Visualize the equipment used to make a recipe. You can play around with that endpoint!
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Visualize-Equipment
@@ -4756,8 +4626,7 @@ paths:
                   example: Preheat oven. Cut cucumber with a knife and put in a blender.
                   type: string
                 showBacklink:
-                  description: Whether to show a backlink to spoonacular. If set false, this call
-                    counts against your quota.
+                  description: Whether to show a backlink to spoonacular. If set false, this call counts against your quota.
                   example: true
                   type: boolean
                 view:
@@ -4786,8 +4655,7 @@ paths:
   /recipes/visualizeIngredients:
     post:
       deprecated: false
-      description: Visualize ingredients of a recipe. You can play around with that
-        endpoint!
+      description: Visualize ingredients of a recipe. You can play around with that endpoint!
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Visualize-Ingredients
@@ -4815,8 +4683,7 @@ paths:
                   example: 2
                   type: number
                 showBacklink:
-                  description: Whether to show a backlink to spoonacular. If set false, this call
-                    counts against your quota.
+                  description: Whether to show a backlink to spoonacular. If set false, this call counts against your quota.
                   example: true
                   type: boolean
                 view:
@@ -4846,8 +4713,7 @@ paths:
   /recipes/visualizeNutrition:
     post:
       deprecated: false
-      description: Visualize a recipe's nutritional information as HTML including CSS.
-        You can play around with that endpoint!
+      description: Visualize a recipe's nutritional information as HTML including CSS. You can play around with that endpoint!
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Visualize-Recipe-Nutrition
@@ -4871,8 +4737,7 @@ paths:
                   example: 2
                   type: number
                 showBacklink:
-                  description: Whether to show a backlink to spoonacular. If set false, this call
-                    counts against your quota.
+                  description: Whether to show a backlink to spoonacular. If set false, this call counts against your quota.
                   example: true
                   type: boolean
               required:
@@ -4898,8 +4763,7 @@ paths:
   /recipes/visualizePriceEstimator:
     post:
       deprecated: false
-      description: Visualize the price breakdown of a recipe. You can play around with
-        that endpoint!
+      description: Visualize the price breakdown of a recipe. You can play around with that endpoint!
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Visualize-Price-Breakdown
@@ -4919,8 +4783,7 @@ paths:
                   example: 3 oz flour
                   type: string
                 mode:
-                  description: The mode in which the widget should be delivered. 1 = separate
-                    views (compact), 2 = all in one view (full).
+                  description: The mode in which the widget should be delivered. 1 = separate views (compact), 2 = all in one view (full).
                   example: 1
                   type: number
                 servings:
@@ -4928,8 +4791,7 @@ paths:
                   example: 2
                   type: number
                 showBacklink:
-                  description: Whether to show a backlink to spoonacular. If set false, this call
-                    counts against your quota.
+                  description: Whether to show a backlink to spoonacular. If set false, this call counts against your quota.
                   example: true
                   type: boolean
               required:
@@ -4988,19 +4850,15 @@ paths:
                   format: binary
                   type: string
                 ingredients:
-                  description: The ingredient list of the recipe, one ingredient per line
-                    (separate lines with \n).
+                  description: The ingredient list of the recipe, one ingredient per line (separate lines with \n).
                   example: 2 cups of green beans
                   type: string
                 instructions:
-                  description: The instructions to make the recipe. One step per line (separate
-                    lines with \n).
+                  description: The instructions to make the recipe. One step per line (separate lines with \n).
                   example: cook the beans
                   type: string
                 mask:
-                  description: The mask to put over the recipe image ("ellipseMask",
-                    "diamondMask", "starMask", "heartMask", "potMask",
-                    "fishMask").
+                  description: The mask to put over the recipe image ("ellipseMask", "diamondMask", "starMask", "heartMask", "potMask", "fishMask").
                   example: ellipseMask
                   type: string
                 readyInMinutes:
@@ -5048,8 +4906,7 @@ paths:
   /recipes/visualizeTaste:
     post:
       deprecated: false
-      description: Visualize a recipe's taste information as HTML including CSS. You
-        can play around with that endpoint!
+      description: Visualize a recipe's taste information as HTML including CSS. You can play around with that endpoint!
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Visualize-Recipe-Taste
@@ -5086,8 +4943,7 @@ paths:
   "/recipes/{id}/analyzedInstructions":
     get:
       deprecated: false
-      description: Get an analyzed breakdown of a recipe's instructions. Each step is
-        enriched with the ingredients and equipment required.
+      description: Get an analyzed breakdown of a recipe's instructions. Each step is enriched with the ingredients and equipment required.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Analyzed-Recipe-Instructions
@@ -5204,8 +5060,7 @@ paths:
   "/recipes/{id}/information":
     get:
       deprecated: false
-      description: Use a recipe id to get full information about a recipe, such as
-        ingredients, nutrition, diet and allergen information, etc.
+      description: Use a recipe id to get full information about a recipe, such as ingredients, nutrition, diet and allergen information, etc.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Recipe-Information
@@ -5220,9 +5075,7 @@ paths:
             example: 716429
             type: number
           style: simple
-        - description: Include nutrition data in the recipe information. Nutrition data is
-            per serving. If you want the nutrition data for the entire recipe,
-            just multiply by the number of servings.
+        - description: Include nutrition data in the recipe information. Nutrition data is per serving. If you want the nutrition data for the entire recipe, just multiply by the number of servings.
           explode: false
           in: query
           name: includeNutrition
@@ -5480,8 +5333,7 @@ paths:
         url: https://spoonacular.com/food-api/docs#Get-Similar-Recipes
       operationId: getSimilarRecipes
       parameters:
-        - description: The id of the source recipe for which similar recipes should be
-            found.
+        - description: The id of the source recipe for which similar recipes should be found.
           explode: false
           in: path
           name: id
@@ -5499,8 +5351,7 @@ paths:
             example: 1
             type: number
           style: form
-        - description: Whether the recipes should have an open license that allows display
-            with proper attribution.
+        - description: Whether the recipes should have an open license that allows display with proper attribution.
           explode: false
           in: query
           name: limitLicense
@@ -5527,8 +5378,7 @@ paths:
   "/recipes/{id}/summary":
     get:
       deprecated: false
-      description: Automatically generate a short description that summarizes key
-        information about the recipe.
+      description: Automatically generate a short description that summarizes key information about the recipe.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Summarize-Recipe
@@ -5561,8 +5411,7 @@ paths:
   "/recipes/{id}/tasteWidget":
     get:
       deprecated: false
-      description: Get a recipe's taste. The tastes supported are sweet, salty, sour,
-        bitter, savory, and fatty.
+      description: Get a recipe's taste. The tastes supported are sweet, salty, sour, bitter, savory, and fatty.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Visualize-Recipe-Taste-by-ID
@@ -5595,8 +5444,7 @@ paths:
   "/recipes/{id}/tasteWidget.json":
     get:
       deprecated: false
-      description: Get a recipe's taste. The tastes supported are sweet, salty, sour,
-        bitter, savory, and fatty.
+      description: Get a recipe's taste. The tastes supported are sweet, salty, sour, bitter, savory, and fatty.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Get-Recipe-Taste-by-ID
@@ -5629,8 +5477,7 @@ paths:
   /users/connect:
     post:
       deprecated: false
-      description: In order to call user-specific endpoints, you need to connect your
-        app's users to spoonacular users.
+      description: In order to call user-specific endpoints, you need to connect your app's users to spoonacular users.
       externalDocs:
         description: Read entire docs
         url: https://spoonacular.com/food-api/docs#Connect-User

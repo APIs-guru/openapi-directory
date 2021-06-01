@@ -23,8 +23,7 @@ produces:
   - application/json
 responses:
   "422":
-    description: An error was generated due to incorrect use of the API. See the
-      Message associated with this response for more information.
+    description: An error was generated due to incorrect use of the API. See the Message associated with this response for more information.
     schema:
       $ref: "#/definitions/StandardPostmarkResponse"
   "500":
@@ -34,8 +33,7 @@ paths:
     get:
       operationId: getBounces
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -78,9 +76,7 @@ paths:
           in: query
           name: type
           type: string
-        - description: Filter by emails that were deactivated by Postmark due to the
-            bounce. Set to true or false. If this isn't specified it will return
-            both active and inactive.
+        - description: Filter by emails that were deactivated by Postmark due to the bounce. Set to true or false. If this isn't specified it will return both active and inactive.
           in: query
           name: inactive
           type: boolean
@@ -123,8 +119,7 @@ paths:
     get:
       operationId: getSingleBounce
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -151,8 +146,7 @@ paths:
     put:
       operationId: activateBounce
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -178,8 +172,7 @@ paths:
   "/bounces/{bounceid}/dump":
     get:
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -206,8 +199,7 @@ paths:
     get:
       operationId: getDeliveryStats
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -228,8 +220,7 @@ paths:
     post:
       operationId: sendEmail
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -254,8 +245,7 @@ paths:
     post:
       operationId: sendEmailBatch
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -280,8 +270,7 @@ paths:
     post:
       operationId: sendEmailBatchWithTemplates
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -308,8 +297,7 @@ paths:
     post:
       operationId: sendEmailWithTemplate
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -336,8 +324,7 @@ paths:
     get:
       operationId: searchInboundMessages
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -374,8 +361,7 @@ paths:
           in: query
           name: tag
           type: string
-        - description: Filter by status (`blocked`, `processed`, `queued`, `failed`,
-            `scheduled`)
+        - description: Filter by status (`blocked`, `processed`, `queued`, `failed`, `scheduled`)
           enum:
             - blocked
             - processed
@@ -411,8 +397,7 @@ paths:
     put:
       operationId: bypassRulesForInboundMessage
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -438,8 +423,7 @@ paths:
     get:
       operationId: getInboundMessageDetails
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -465,8 +449,7 @@ paths:
     put:
       operationId: retryInboundMessageProcessing
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -492,8 +475,7 @@ paths:
     get:
       operationId: searchOutboundMessages
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -555,8 +537,7 @@ paths:
     get:
       operationId: searchClicksForOutboundMessages
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -596,20 +577,17 @@ paths:
           name: client_family
           required: false
           type: string
-        - description: Filter by full OS name and specific version, i.e. OS X 10.9
-            Mavericks, Windows 7
+        - description: Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7
           in: query
           name: os_name
           required: false
           type: string
-        - description: Filter by kind of OS used without specific version, i.e. OS X,
-            Windows
+        - description: Filter by kind of OS used without specific version, i.e. OS X, Windows
           in: query
           name: os_family
           required: false
           type: string
-        - description: Filter by company which produced the OS, i.e. Apple Computer, Inc.,
-            Microsoft Corporation
+        - description: Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation
           in: query
           name: os_company
           required: false
@@ -624,14 +602,12 @@ paths:
           name: country
           required: false
           type: string
-        - description: Filter by full name of region messages were opened in, i.e. Moscow,
-            New York
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: region
           required: false
           type: string
-        - description: Filter by full name of region messages were opened in, i.e. Moscow,
-            New York
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: city
           required: false
@@ -652,14 +628,12 @@ paths:
     get:
       operationId: getClicksForSingleOutboundMessage
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The ID of the Outbound Message for which click statistics should be
-            retrieved.
+        - description: The ID of the Outbound Message for which click statistics should be retrieved.
           in: path
           name: messageid
           required: true
@@ -695,8 +669,7 @@ paths:
     get:
       operationId: searchOpensForOutboundMessages
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -736,20 +709,17 @@ paths:
           name: client_family
           required: false
           type: string
-        - description: Filter by full OS name and specific version, i.e. OS X 10.9
-            Mavericks, Windows 7
+        - description: Filter by full OS name and specific version, i.e. OS X 10.9 Mavericks, Windows 7
           in: query
           name: os_name
           required: false
           type: string
-        - description: Filter by kind of OS used without specific version, i.e. OS X,
-            Windows
+        - description: Filter by kind of OS used without specific version, i.e. OS X, Windows
           in: query
           name: os_family
           required: false
           type: string
-        - description: Filter by company which produced the OS, i.e. Apple Computer, Inc.,
-            Microsoft Corporation
+        - description: Filter by company which produced the OS, i.e. Apple Computer, Inc., Microsoft Corporation
           in: query
           name: os_company
           required: false
@@ -764,14 +734,12 @@ paths:
           name: country
           required: false
           type: string
-        - description: Filter by full name of region messages were opened in, i.e. Moscow,
-            New York
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: region
           required: false
           type: string
-        - description: Filter by full name of region messages were opened in, i.e. Moscow,
-            New York
+        - description: Filter by full name of region messages were opened in, i.e. Moscow, New York
           in: query
           name: city
           required: false
@@ -792,14 +760,12 @@ paths:
     get:
       operationId: getOpensForSingleOutboundMessage
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The ID of the Outbound Message for which open statistics should be
-            retrieved.
+        - description: The ID of the Outbound Message for which open statistics should be retrieved.
           in: path
           name: messageid
           required: true
@@ -835,8 +801,7 @@ paths:
     get:
       operationId: getOutboundMessageDetails
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -862,8 +827,7 @@ paths:
     get:
       operationId: getOutboundMessageDump
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -889,8 +853,7 @@ paths:
     get:
       operationId: getCurrentServerConfiguration
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -910,8 +873,7 @@ paths:
     put:
       operationId: editCurrentServerConfiguration
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -937,8 +899,7 @@ paths:
     get:
       operationId: getOutboundOverviewStatistics
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -973,8 +934,7 @@ paths:
     get:
       operationId: getBounceCounts
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1031,8 +991,7 @@ paths:
     get:
       operationId: getOutboundClickCounts
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1067,8 +1026,7 @@ paths:
     get:
       operationId: getOutboundClickCountsByBrowserFamily
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1103,8 +1061,7 @@ paths:
     get:
       operationId: getOutboundClickCountsByLocation
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1139,8 +1096,7 @@ paths:
     get:
       operationId: getOutboundClickCountsByPlatform
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1175,8 +1131,7 @@ paths:
     get:
       operationId: getOutboundOpenCounts
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1225,8 +1180,7 @@ paths:
     get:
       operationId: getOutboundOpenCountsByEmailClient
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1273,8 +1227,7 @@ paths:
     get:
       operationId: getOutboundOpenCountsByPlatform
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1331,8 +1284,7 @@ paths:
     get:
       operationId: getSentCounts
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1367,8 +1319,7 @@ paths:
     get:
       operationId: getSpamComplaints
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1413,8 +1364,7 @@ paths:
     get:
       operationId: getTrackedEmailCounts
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1459,8 +1409,7 @@ paths:
     get:
       operationId: listTemplates
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1491,8 +1440,7 @@ paths:
         - Templates API
     post:
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1518,8 +1466,7 @@ paths:
     post:
       operationId: testTemplateContent
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1544,14 +1491,12 @@ paths:
     delete:
       operationId: deleteTemplate
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The 'TemplateID' or 'Alias' value for the Template you wish to
-            delete.
+        - description: The 'TemplateID' or 'Alias' value for the Template you wish to delete.
           in: path
           name: templateIdOrAlias
           required: true
@@ -1571,14 +1516,12 @@ paths:
     get:
       operationId: getSingleTemplate
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The 'TemplateID' or 'Alias' value for the Template you wish to
-            retrieve.
+        - description: The 'TemplateID' or 'Alias' value for the Template you wish to retrieve.
           in: path
           name: templateIdOrAlias
           required: true
@@ -1598,14 +1541,12 @@ paths:
     put:
       operationId: updateTemplate
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
           type: string
-        - description: The 'TemplateID' or 'Alias' value for the Template you wish to
-            update.
+        - description: The 'TemplateID' or 'Alias' value for the Template you wish to update.
           in: path
           name: templateIdOrAlias
           required: true
@@ -1631,8 +1572,7 @@ paths:
     get:
       operationId: listInboundRules
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1673,8 +1613,7 @@ paths:
     post:
       operationId: createInboundRule
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1703,8 +1642,7 @@ paths:
     delete:
       operationId: deleteInboundRule
       parameters:
-        - description: The token associated with the Server on which this request will
-            operate.
+        - description: The token associated with the Server on which this request will operate.
           in: header
           name: X-Postmark-Server-Token
           required: true
@@ -1759,8 +1697,7 @@ definitions:
   BounceDumpResponse:
     properties:
       Body:
-        description: Raw source of bounce. If no dump is available this will return an
-          empty string.
+        description: Raw source of bounce. If no dump is available this will return an empty string.
         type: string
   BounceInfoResponse:
     properties:
@@ -1815,9 +1752,7 @@ definitions:
     description: The contents required for creating a new template.
     properties:
       Alias:
-        description: The optional string identifier for referring to this Template
-          (numbers, letters, and '.', '-', '_' characters, starts with a
-          letter).
+        description: The optional string identifier for referring to this Template (numbers, letters, and '.', '-', '_' characters, starts with a letter).
         type: string
       HtmlBody:
         description: The HTML template definition for this Template.
@@ -1850,8 +1785,7 @@ definitions:
       BounceHookUrl:
         type: string
       ClickHookUrl:
-        description: Webhook url allowing real-time notification when tracked links are
-          clicked.
+        description: Webhook url allowing real-time notification when tracked links are clicked.
         type: string
       Color:
         enum:
@@ -1894,9 +1828,7 @@ definitions:
     description: The contents required for creating a new template.
     properties:
       Alias:
-        description: The optional string identifier for referring to this Template
-          (numbers, letters, and '.', '-', '_' characters, starts with a
-          letter).
+        description: The optional string identifier for referring to this Template (numbers, letters, and '.', '-', '_' characters, starts with a letter).
         type: string
       HtmlBody:
         description: The HTML template definition for this Template.
@@ -1953,8 +1885,7 @@ definitions:
         format: email
         type: string
       TrackLinks:
-        description: Replace links in content to enable "click tracking" stats. Default
-          is 'null', which uses the server's LinkTracking setting'.
+        description: Replace links in content to enable "click tracking" stats. Default is 'null', which uses the server's LinkTracking setting'.
         enum:
           - None
           - HtmlAndText
@@ -2333,8 +2264,7 @@ definitions:
   OutboundMessageDumpResponse:
     properties:
       Body:
-        description: Raw source of message. If no dump is available this will return an
-          empty string.
+        description: Raw source of message. If no dump is available this will return an empty string.
         type: string
   OutboundOverviewStatsResponse:
     description: ""
@@ -2393,16 +2323,13 @@ definitions:
       Attachments:
         $ref: "#/definitions/AttachmentCollection"
       Bcc:
-        description: Bcc recipient email address. Multiple addresses are comma
-          seperated. Max 50.
+        description: Bcc recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
       Cc:
-        description: Recipient email address. Multiple addresses are comma seperated.
-          Max 50.
+        description: Recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
       From:
-        description: The sender email address. Must have a registered and confirmed
-          Sender Signature.
+        description: The sender email address. Must have a registered and confirmed Sender Signature.
         type: string
       Headers:
         $ref: "#/definitions/HeaderCollection"
@@ -2410,26 +2337,22 @@ definitions:
         description: If no TextBody specified HTML email message
         type: string
       ReplyTo:
-        description: Reply To override email address. Defaults to the Reply To set in
-          the sender signature.
+        description: Reply To override email address. Defaults to the Reply To set in the sender signature.
         type: string
       Subject:
         description: Email Subject
         type: string
       Tag:
-        description: Email tag that allows you to categorize outgoing emails and get
-          detailed statistics.
+        description: Email tag that allows you to categorize outgoing emails and get detailed statistics.
         type: string
       TextBody:
         description: If no HtmlBody specified Plain text email message
         type: string
       To:
-        description: Recipient email address. Multiple addresses are comma seperated.
-          Max 50.
+        description: Recipient email address. Multiple addresses are comma seperated. Max 50.
         type: string
       TrackLinks:
-        description: Replace links in content to enable "click tracking" stats. Default
-          is 'null', which uses the server's LinkTracking setting'.
+        description: Replace links in content to enable "click tracking" stats. Default is 'null', which uses the server's LinkTracking setting'.
         enum:
           - None
           - HtmlAndText
@@ -2547,22 +2470,19 @@ definitions:
         description: The ID of the Server with which this template is associated.
         type: integer
       HtmlBody:
-        description: The content to use for the HtmlBody when this template is used to
-          send email.
+        description: The content to use for the HtmlBody when this template is used to send email.
         type: string
       Name:
         description: The display name for the template.
         type: string
       Subject:
-        description: The content to use for the Subject when this template is used to
-          send email.
+        description: The content to use for the Subject when this template is used to send email.
         type: string
       TemplateID:
         description: The ID associated with the template.
         type: integer
       TextBody:
-        description: The content to use for the TextBody when this template is used to
-          send email.
+        description: The content to use for the TextBody when this template is used to send email.
         type: string
   TemplateListingResponse:
     properties:

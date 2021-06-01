@@ -3,12 +3,9 @@ servers:
   - url: ","
 info:
   contact: {}
-  description: >-
-    Welcome to the official API of the brainbi platform. Using this API
-    you can freely integrate our analytics platform with any other solution. 
-
+  description: |-
+    Welcome to the official API of the brainbi platform. Using this API you can freely integrate our analytics platform with any other solution. 
     Please refer to the following documentation and in case of any issues, please contact us at service@brainbi.net.
-
 
     Please note: for this API you will use your email and password from the brainbi.net platform to gather a Bearer Token for any API calls (use Login and get token). Once you are finished with your calls, please do a logout to remove your token and keep your account safe (use logout).
   title: brainbi
@@ -30,8 +27,7 @@ tags:
 paths:
   /api/analyze/pricing:
     get:
-      description: "To update a product, please use the listed attributes listed
-        underneath. "
+      description: "To update a product, please use the listed attributes listed underneath. "
       operationId: "[beta]ScrapeProduct"
       parameters:
         - in: query
@@ -50,8 +46,7 @@ paths:
         - Products
   /api/customers:
     get:
-      description: This resource lists all cusomters that are currently saved in your
-        account.
+      description: This resource lists all cusomters that are currently saved in your account.
       operationId: customers
       parameters:
         - in: query
@@ -67,8 +62,7 @@ paths:
         - Customers
   /api/login:
     post:
-      description: Use this endpoint to make the initial call with your email and
-        password (same as on brainbi.net) and get your bearer token in response.
+      description: Use this endpoint to make the initial call with your email and password (same as on brainbi.net) and get your bearer token in response.
       operationId: loginAndGetBearerToken
       parameters:
         - description: The same email you use for our platform.
@@ -174,8 +168,7 @@ paths:
         - Products
   /api/register:
     post:
-      description: Use this endpoint to make the initial call with your email and
-        password (same as on brainbi.net) and get your bearer token in response.
+      description: Use this endpoint to make the initial call with your email and password (same as on brainbi.net) and get your bearer token in response.
       operationId: register
       parameters:
         - description: required
@@ -238,8 +231,7 @@ paths:
       summary: Register
   /api/register_woocommerce:
     post:
-      description: Use this endpoint to make the initial call with your email and
-        password (same as on brainbi.net) and get your bearer token in response.
+      description: Use this endpoint to make the initial call with your email and password (same as on brainbi.net) and get your bearer token in response.
       operationId: registerAndCreateStoreConnectionForWooCommerce
       parameters:
         - description: required
@@ -320,8 +312,7 @@ paths:
       summary: Register and Create Store Connection for WooCommerce
   /api/rule:
     get:
-      description: This resource lists all pricing rules that are currently saved in
-        you account.
+      description: This resource lists all pricing rules that are currently saved in you account.
       operationId: rules
       parameters:
         - in: query
@@ -353,8 +344,7 @@ paths:
         - Pricing Rules
   /api/rule/ruleData/1/latest:
     get:
-      description: This resource lists only the latest data point that wa saved for a
-        pricing rule.
+      description: This resource lists only the latest data point that wa saved for a pricing rule.
       operationId: ruleDataLatest
       parameters:
         - in: query
@@ -370,8 +360,7 @@ paths:
         - Pricing Rules
   /api/seo/ranking/latest:
     get:
-      description: This resource lists all pricing rules that are currently saved in
-        you account.
+      description: This resource lists all pricing rules that are currently saved in you account.
       operationId: seoLatestRankings
       parameters:
         - in: query

@@ -57,8 +57,7 @@ paths:
                     has_update: false
                     success: true
           description: successful response
-      summary: Clubhouse uses this to check for updates when app is not installed from
-        App Store (eg TestFlight)
+      summary: Clubhouse uses this to check for updates when app is not installed from App Store (eg TestFlight)
   /check_waitlist_status:
     post:
       responses:
@@ -109,15 +108,12 @@ paths:
                     success: true
                     user_profile:
                       name:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       photo_url:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       user_id: 1234
                       username:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
           description: success
       summary: Call phone number auth.
   /create_channel:
@@ -129,25 +125,20 @@ paths:
               openNoTopic:
                 value:
                   club_id:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   event_id:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   is_private: false
                   is_social_mode: false
                   topic:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   user_ids: []
               socialWithTopic:
                 value:
                   club_id:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   event_id:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   is_private: false
                   is_social_mode: true
                   topic: topic
@@ -161,8 +152,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: creates a channel
@@ -184,8 +174,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: follows a user
@@ -200,12 +189,10 @@ paths:
                   value:
                     count: 0
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     notifications: []
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: Returns a list of actionable notifications.
       summary: get actionable notifications (the bell again)
@@ -277,8 +264,7 @@ paths:
                             time_joined_as_speaker: 2021-01-20T00:00:00.000000+00:00
                             user_id: 1234
                         welcome_for_user_profile:
-                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                            les/value/email"
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     events: []
                     success: true
           description: list of channels
@@ -302,8 +288,7 @@ paths:
                 club:
                   value:
                     added_by_user_profile:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     club:
                       club_id: 123
                       description: Example
@@ -314,8 +299,7 @@ paths:
                       num_members: 123
                       photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<guid>_thumbnail_250x250
                     invite_link:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     is_admin: false
                     is_follower: false
                     is_member: false
@@ -359,11 +343,9 @@ paths:
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<guid>_thumbnail_250x250
                     count: 1
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: returns list of clubs with pagination
       summary: looks up clubs by topic.
@@ -382,8 +364,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: is fetched when you tap Create Room
@@ -415,11 +396,9 @@ paths:
                     count: 0
                     events: []
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: a list of events
       summary: the Upcoming for You page
@@ -452,24 +431,20 @@ paths:
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<guid>_thumbnail_250x250
                     count: 2
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: Bio
                         name: John Smith
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<uuid>_thumbnail_250x250
                         twitter:
-                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                            les/value/email"
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                         user_id: 12345
                         username: johnsmith
           description: returns list of users and clubs
-      summary: get a list of the users and clubs that this user is following. Returned
-        users have bios truncated to ~80 characters.
+      summary: get a list of the users and clubs that this user is following. Returned users have bios truncated to ~80 characters.
   /get_notifications:
     get:
       parameters:
@@ -493,12 +468,10 @@ paths:
                     count: 0
                     disabled: false
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     notifications: []
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: Returns a list of notifications.
       summary: get notifications (the bell icon)
@@ -563,8 +536,7 @@ paths:
                             - desc: Description
                               title: Rule
                       displayname:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       follows_me: false
                       has_verified_email: true
                       instagram: _junhoyeo
@@ -578,8 +550,7 @@ paths:
                       mutual_follows_count: 0
                       name: Junho Yeo
                       notification_type:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       num_followers: 103
                       num_following: 98
                       photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<guid>
@@ -589,8 +560,7 @@ paths:
                           id: 107
                           title: 🦄 Startups
                       twitter:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       user_id: 4075733
                       username: junhoyeo
           description: returns user profile info
@@ -678,8 +648,7 @@ paths:
                     count: 59
                     next: 2
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: Example bio
@@ -699,8 +668,7 @@ paths:
               noContacts:
                 value:
                   club_id:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   contacts: []
                   upload_contacts: true
             schema:
@@ -738,17 +706,14 @@ paths:
                         name: John Smith
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<uuid>_thumbnail_250x250
                         twitter:
-                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                            les/value/email"
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                         user_id: "1234"
                         username: johnsmith
           description: Returns a list of users. Bios truncated to 80 chars.
       summary: find similar users. (The Sparkles button on Clubhouse's profile page)
   /get_suggested_invites:
     post:
-      description: (also see
-        https://zerforschung.org/posts/clubhouse-telefonnummern-en/ for
-        @zerforschung's analysis of the privacy implications of this API)
+      description: (also see https://zerforschung.org/posts/clubhouse-telefonnummern-en/ for @zerforschung's analysis of the privacy implications of this API)
       requestBody:
         content:
           application/json:
@@ -756,8 +721,7 @@ paths:
               hasContact:
                 value:
                   club_id:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   contacts:
                     - phone_number: "+11234567890"
                   upload_contacts: false
@@ -788,8 +752,7 @@ paths:
               startingPrivateRoom:
                 value:
                   channel:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
             schema:
               type: object
       responses:
@@ -802,11 +765,9 @@ paths:
                     clubs: []
                     count: 0
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users: []
           description: Returns a list of actionable notifications.
@@ -863,11 +824,9 @@ paths:
                   value:
                     count: 1
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: John Example is an exemplary user object
@@ -913,8 +872,7 @@ paths:
                     success: false
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: your own account is waitlisted, or some other error occurred
       summary: wave to another user on the waitlist to give them access
@@ -927,8 +885,7 @@ paths:
               jsonObject:
                 value:
                   message:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   name: John Smith
                   phone_number: "+11234567890"
             schema:
@@ -940,8 +897,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: your own account doesn't have an invite either
       summary: invite a user to the app, using one of your invites
@@ -998,8 +954,7 @@ paths:
                     pubnub_heartbeat_interval: 29
                     pubnub_heartbeat_value: 60
                     pubnub_origin:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     pubnub_token: <pubnub_token>
                     rtm_token: <rtm_token>
                     success: true
@@ -1029,13 +984,11 @@ paths:
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<guid>_thumbnail_250x250
                         skintone: 3
                         time_joined_as_speaker:
-                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                            les/value/email"
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                         user_id: 1234
                         username: currentuser
                     welcome_for_user_profile:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
           description: stuff needed to actually join a channel
         "400":
           content:
@@ -1100,14 +1053,12 @@ paths:
                     actionable_notifications_count: 0
                     auth_token: <auth_token>
                     blocked_ids:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     email: null
                     feature_flags:
                       - ""
                     following_ids:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     has_unread_notifications: false
                     is_admin: false
                     notifications_enabled: false
@@ -1116,15 +1067,12 @@ paths:
                     success: true
                     user_profile:
                       name:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       photo_url:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       user_id: 1234
                       username:
-                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                          les/value/email"
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
           description: the response
         "403":
           content:
@@ -1240,11 +1188,9 @@ paths:
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<uuid>_thumbnail_250x250
                     count: 1
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: Returns a list of clubs.
       summary: search clubs.
@@ -1271,11 +1217,9 @@ paths:
                   value:
                     count: 1
                     next:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     previous:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: Bio!
@@ -1318,14 +1262,12 @@ paths:
                 success:
                   value:
                     error_message:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     is_blocked: false
                     success: true
                 throttled:
                   value:
-                    error_message: Our systems have detected high usage of this feature from your
-                      account. Please try again later.
+                    error_message: Our systems have detected high usage of this feature from your account. Please try again later.
                     success: false
           description: success
       summary: Starts phone number auth.
@@ -1338,8 +1280,7 @@ paths:
               onboardingSetting:
                 value:
                   apn_token:
-                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                      les/value/email"
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   enable_trending: -1
                   frequency: -1
                   is_sandbox: false
@@ -1354,8 +1295,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: updates notification during signup.
@@ -1378,8 +1318,7 @@ paths:
                 success:
                   value:
                     error_message:
-                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examp\
-                        les/value/email"
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: username successfully set
         "400":

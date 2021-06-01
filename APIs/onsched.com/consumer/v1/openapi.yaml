@@ -1,15 +1,12 @@
 openapi: 3.0.1
 info:
-  description: "Build secure and scalable custom apps for Online Booking. Our
-    flexible API provides many options for availability and booking.\r
+  description: "Build secure and scalable custom apps for Online Booking. Our flexible API provides many options for availability and booking.\r
 
     <br><br>\r
 
-    Take the API for a test drive. Just click on the Authorize button below
-    and authenticate. \r
+    Take the API for a test drive. Just click on the Authorize button below and authenticate. \r
 
-    You can access our demo company profile if you are not a customer, or
-    your own profile by using your assigned ClientId and Secret.\r
+    You can access our demo company profile if you are not a customer, or your own profile by using your assigned ClientId and Secret.\r
 
     <br><br>\r
 
@@ -19,22 +16,19 @@ info:
 
     <li>\r
 
-    The consumer interface provides all the endpoints required for
-    implementing consumer booking flows.\r
+    The consumer interface provides all the endpoints required for implementing consumer booking flows.\r
 
     </li>\r
 
     <li>\r
 
-    The setup interface provides endpoints for profile configuration and
-    setup.\r
+    The setup interface provides endpoints for profile configuration and setup.\r
 
     </li>\r
 
     </ul>\r
 
-    Toggle freely between the two interfaces using the swagger tool bar
-    option labelled 'Select a definition'.\r\n"
+    Toggle freely between the two interfaces using the swagger tool bar option labelled 'Select a definition'.\r\n"
   title: OnSched API
   version: v1
   x-apisguru-categories:
@@ -53,18 +47,13 @@ security:
 paths:
   /consumer/v1/appointments:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.<br /><br />\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.<br /><br />\r
 
-        Use the other query parameters to optionally filter the list by
-        using the query parameters. <br /><br />\r
+        Use the other query parameters to optionally filter the list by using the query parameters. <br /><br />\r
 
         This endpoint returns appoinments using paging. <br /><br />\r
 
-        See more information at <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nts Overview</a>"
+        See more information at <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointments Overview</a>"
       parameters:
         - description: The id of the business location. Leave blank for company wide search.
           in: query
@@ -171,144 +160,97 @@ paths:
       tags:
         - Appointments
     post:
-      description: "<p>This end point creates a new appointment in an Initial \"IN\"
-        status. The exception is if completeBooking parameter set.</p>\r
+      description: "<p>This end point creates a new appointment in an Initial \"IN\" status. The exception is if completeBooking parameter set.</p>\r
 
         <br />\r
 
-        <p>If you supply a valid customerId in the body, then the POST
-        will create either a booking or reservation using the customer
-        data.</p>\r
+        <p>If you supply a valid customerId in the body, then the POST will create either a booking or reservation using the customer data.</p>\r
 
         <br />\r
 
-        <p> A valid serviceId is required. Use GET consumer/v1/services
-        to retrieve a list of your services.</p>\r
+        <p> A valid serviceId is required. Use GET consumer/v1/services to retrieve a list of your services.</p>\r
 
         <br />\r
 
-        <p> A valid resourceId is required if your calendar is a
-        resource based calendar and you are booking single resource
-        appointments. </p>\r
+        <p> A valid resourceId is required if your calendar is a resource based calendar and you are booking single resource appointments. </p>\r
 
         <br />\r
 
-        <p> Use consumer/v1/resources to retrieve a list of your
-        resources or use a resourceId returned from the /availability endpoints.
-        </p>\r
+        <p> Use consumer/v1/resources to retrieve a list of your resources or use a resourceId returned from the /availability endpoints. </p>\r
 
         <br />\r
 
-        <p> The resourceIds parameter is required for multi-resource
-        appointments. Pass in comma separated valid resourceIds. This is beta
-        until we update the notifications.</p>\r
+        <p> The resourceIds parameter is required for multi-resource appointments. Pass in comma separated valid resourceIds. This is beta until we update the notifications.</p>\r
 
         <br />\r
 
-        <br />\r
-
-        <p> The customerIds parameter is required for multi-customer
-        appointments. Pass in comma separated valid customerIds. This is beta
-        until we update the notifications.</p>\r
+        <p> The customerIds parameter is required for multi-customer appointments. Pass in comma separated valid customerIds. This is beta until we update the notifications.</p>\r
 
         <br />\r
 
-        <br />\r
-
-        <p> The locationId is optional. If the locationId is not passed,
-        the system will default to the primary company location. </p>\r
+        <p> The locationId is optional. If the locationId is not passed, the system will default to the primary company location. </p>\r
 
         <br />\r
 
-        <br />\r
+        <p> ServiceId provided must be valid for the location being searched. A valid serviceId is one that is scoped to \r
 
-        <p> ServiceId provided must be valid for the location being
-        searched. A valid serviceId is one that is scoped to \r
-
-        \             Primary Company Location or is associated with
-        that business LocationId</p>\r
+        \             Primary Company Location or is associated with that business LocationId</p>\r
 
         <br />\r
 
-        <br />\r
-
-        <p> The customerId is optional. If supplied you can use the
-        completeBooking option and skip the PUT /book step. </p>\r
+        <p> The customerId is optional. If supplied you can use the completeBooking option and skip the PUT /book step. </p>\r
 
         <br />\r
 
-        <p> The email, name and phone fields are only used with the
-        completeBooking option. As with customerId you can\r
+        <p> The completeBooking option provides a mechanism for immediate booking with a POST. Applies if you have enough customer information\r
 
-        \             skip the PUT /book step. This endpoint completes
-        the booking, and sends notifications.</p>\r
+        \             to complete the booking. Either supply email and name or customerId with required information.\r
 
-        <br />\r
-
-        <p> A bookingWindowId is required if you are booking
-        appointments into a defined booking window on the service.</p>\r
+        \             Normally, completeBooking is for the BK or RS status, however IN is included to support payment flows.</p>\r
 
         <br />\r
 
-        <br />\r
+        <p> The email, name and phone fields are only used with the completeBooking option. As with customerId you can\r
 
-        <p> BookedBy is an optional parameter. If it is not supplied the
-        email address of the booked appointment is used or the ip address if no
-        email address is\r
-
-        \             used in the /appointment/book endpoint. Booked by
-        is used in the Appointment Audit trail which can be viewed in the Admin
-        Portal.</p>\r
+        \             skip the PUT /book step. This endpoint completes the booking, and sends notifications.</p>\r
 
         <br />\r
 
-        <br />\r
-
-        <p> Location is optional. This is a string representing the
-        location of the actual appointment, not to be confused with a Business
-        Location.</p>\r
+        <p> A bookingWindowId is required if you are booking appointments into a defined booking window on the service.</p>\r
 
         <br />\r
 
-        <br />\r
+        <p> BookedBy is an optional parameter. If it is not supplied the email address of the booked appointment is used or the ip address if no email address is\r
 
-        <p>Timezone name is optional. The Timezone name is in Iana
-        format e.g. America/New_York. This is the timezone where the appointment
-        was booked. Populating\r
-
-        \             this information can help later in situations
-        where appointments are booked before a Daylight Savings change.</p>\r
+        \             used in the /appointment/book endpoint. Booked by is used in the Appointment Audit trail which can be viewed in the Admin Portal.</p>\r
 
         <br />\r
 
-        <br />\r
-
-        <p>StartDateTime and EndDateTime are required. Use the ISO 8601
-        format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00</p>\r
+        <p> Location is optional. This is a string representing the location of the actual appointment, not to be confused with a Business Location.</p>\r
 
         <br />\r
 
-        <br />\r
+        <p>Timezone name is optional. The Timezone name is in Iana format e.g. America/New_York. This is the timezone where the appointment was booked. Populating\r
 
-        <p>TravelTimeMins and TravelAppointmentId are optional. These
-        are important if you factor in Travel Time for resources to move between
-        appointments.</p>\r
+        \             this information can help later in situations where appointments are booked before a Daylight Savings change.</p>\r
 
         <br />\r
 
+        <p>StartDateTime and EndDateTime are required. Use the ISO 8601 format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00</p>\r
+
         <br />\r
 
-        <p>This information is returned from the availability/times
-        endpoint. <br /><br />\r
+        <p>TravelTimeMins and TravelAppointmentId are optional. These are important if you factor in Travel Time for resources to move between appointments.</p>\r
 
-        \             See more information at <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nts Overview</a></p>\r
+        <br />\r
+
+        <p>This information is returned from the availability/times endpoint. <br /><br />\r
+
+        \             See more information at <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointments Overview</a></p>\r
 
         <br />"
       parameters:
-        - description: Status of BK or RS. Only applies if customerId or name and email
-            are supplied.
+        - description: Status of BK, RS or IN. Only applies if customerId or name and email are supplied.
           in: query
           name: completeBooking
           schema:
@@ -344,32 +286,25 @@ paths:
 
         \r
 
-        Appointment booking fields are different than Customer booking
-        fields. Appointment booking fields are\r
+        Appointment booking fields are different than Customer booking fields. Appointment booking fields are\r
 
-        stored with each appointment. They are used when the information
-        collected during the booking is specific\r
+        stored with each appointment. They are used when the information collected during the booking is specific\r
 
         to a particular visit.<br></br>\r
 
         \r
 
-        Use the field, and type to determine how to update field
-        values\r
+        Use the field, and type to determine how to update field values\r
 
         in PUT /consumer/v1/appointments/bookingfields.<br></br>\r
 
         \r
 
-        Booking Fields include any custom appointment fields you wish to
-        capture with the Booking and also\r
+        Booking Fields include any custom appointment fields you wish to capture with the Booking and also\r
 
-        miscellaneous appointment attributes including address
-        information.<br></br>\r
+        miscellaneous appointment attributes including address information.<br></br>\r
 
-        For more information see <a
-        href=\"https://onsched.readme.io/docs/custom-booking-fields\">Appointme\
-        nt booking fields</a>"
+        For more information see <a href=\"https://onsched.readme.io/docs/custom-booking-fields\">Appointment booking fields</a>"
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -389,29 +324,23 @@ paths:
         - Appointments
   /consumer/v1/appointments/customfields:
     get:
-      description: "This end point returns your Appointment custom field
-        definitions.<br /><br />\r
+      description: "This end point returns your Appointment custom field definitions.<br /><br />\r
 
         \r
 
-        Appointment custom fields are different than Customer custom
-        fields. Appointment custom fields are\r
+        Appointment custom fields are different than Customer custom fields. Appointment custom fields are\r
 
-        stored with each appointment. They are used when the information
-        collected during the booking is specific\r
+        stored with each appointment. They are used when the information collected during the booking is specific\r
 
         to a particular visit.<br /><br />\r
 
         \r
 
-        Use the field, and type to determine how to update field
-        values\r
+        Use the field, and type to determine how to update field values\r
 
         in PUT /consumer/v1/appointments/customfields <br /><br />\r
 
-        For more information see <a
-        href=\"https://onsched.readme.io/docs/custom-booking-fields\">Appointme\
-        nt booking fields</a>"
+        For more information see <a href=\"https://onsched.readme.io/docs/custom-booking-fields\">Appointment booking fields</a>"
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -431,20 +360,15 @@ paths:
         - Appointments
   "/consumer/v1/appointments/{id}":
     delete:
-      description: "This end point deletes a booking. Only appointments in a \"IN\"
-        initial status can be deleted.\r
+      description: "This end point deletes a booking. Only appointments in a \"IN\" initial status can be deleted.\r
 
         Past dated appointments cannot be cancelled.<br /><br />\r
 
         \r
 
-        A valid appointment id is required. You can use the
-        appointmentId returned from GET /consumer/v1/appointments. <br /><br
-        />\r
+        A valid appointment id is required. You can use the appointmentId returned from GET /consumer/v1/appointments. <br /><br />\r
 
-        For more information see <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nt Overview</a>"
+        For more information see <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointment Overview</a>"
       parameters:
         - description: Valid Appointment id for the location specified.
           in: path
@@ -464,14 +388,11 @@ paths:
       tags:
         - Appointments
     get:
-      description: "The result returned is a single appointment object. A valid id is
-        required to find the appointment. <br /><br />\r
+      description: "The result returned is a single appointment object. A valid id is required to find the appointment. <br /><br />\r
 
         \r
 
-        See more information at <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nts Overview</a>"
+        See more information at <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointments Overview</a>"
       parameters:
         - description: The id of the appointment object.
           in: path
@@ -492,32 +413,23 @@ paths:
         - Appointments
   "/consumer/v1/appointments/{id}/book":
     put:
-      description: "This end point completes a new booking. Only appointments in the
-        \"IN\" initial status can be booked.\r
+      description: "This end point completes a new booking. Only appointments in the \"IN\" initial status can be booked.\r
 
-        by saving all the relevant details of the booking. <br /><br
-        />\r
+        by saving all the relevant details of the booking. <br /><br />\r
 
         \r
 
-        A valid appointment id is required. Use the appointmentId
-        returned from POST /consumer/v1/appointments.  <br /><br />\r
+        A valid appointment id is required. Use the appointmentId returned from POST /consumer/v1/appointments.  <br /><br />\r
 
         \r
 
-        To update appointment custom field values, use the GET
-        /consumer/v1/appointments/customfields information.  <br /><br />\r
+        To update appointment custom field values, use the GET /consumer/v1/appointments/customfields information.  <br /><br />\r
 
-        to understand your definitions of custom fields and what key and
-        values to update. <br /><br />\r
+        to understand your definitions of custom fields and what key and values to update. <br /><br />\r
 
-        See more information at <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nts Overview</a> and \r
+        See more information at <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointments Overview</a> and \r
 
-        <a
-        href=\"https://onsched.readme.io/docs/custom-booking-fields\">Custom
-        Booking Fields</a>"
+        <a href=\"https://onsched.readme.io/docs/custom-booking-fields\">Custom Booking Fields</a>"
       parameters:
         - description: ""
           in: path
@@ -552,19 +464,15 @@ paths:
         - Appointments
   "/consumer/v1/appointments/{id}/cancel":
     put:
-      description: "This end point cancels a booking or reservation. Only appointments
-        in a \"BK\" booked, or \"RS\" reserved status can be cancelled.\r
+      description: "This end point cancels a booking or reservation. Only appointments in a \"BK\" booked, or \"RS\" reserved status can be cancelled.\r
 
         Past dated appointments cannot be cancelled. <br /><br />\r
 
         \r
 
-        A valid appointment id is required. Use the appointmentId
-        returned from POST /consumer/v1/appointments. <br /><br />\r
+        A valid appointment id is required. Use the appointmentId returned from POST /consumer/v1/appointments. <br /><br />\r
 
-        For more information see <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nt Overview</a>"
+        For more information see <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointment Overview</a>"
       parameters:
         - description: ""
           in: path
@@ -606,9 +514,7 @@ paths:
         - Appointments
   "/consumer/v1/appointments/{id}/noshow":
     put:
-      description: For more information see <a
-        href="https://onsched.readme.io/docs/appointments-overview">Appointment
-        Overview</a>
+      description: For more information see <a href="https://onsched.readme.io/docs/appointments-overview">Appointment Overview</a>
       parameters:
         - description: ""
           in: path
@@ -639,48 +545,37 @@ paths:
         - Appointments
   "/consumer/v1/appointments/{id}/reschedule":
     put:
-      description: "This end point reschedules a booking. Only appointments in a
-        \"BK\" booked status can be rescheduled.\r
+      description: "This end point reschedules a booking. Only appointments in a \"BK\" booked status can be rescheduled.\r
 
         Past dated appointments cannot be cancelled.<br /><br />\r
 
         \r
 
-        A valid appointment id is required. Use the appointmentId
-        returned from GET /consumer/v1/appointments.<br /><br />\r
+        A valid appointment id is required. Use the appointmentId returned from GET /consumer/v1/appointments.<br /><br />\r
 
         \r
 
-        StartDateTime and EndDateTime are required. Use the ISO 8601
-        format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00<br /><br
-        />\r
+        StartDateTime and EndDateTime are required. Use the ISO 8601 format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00<br /><br />\r
 
         \r
 
-        The serviceId is optional. If you want your users to change the
-        service on a reschedule, include the new serviceId. \r
+        The serviceId is optional. If you want your users to change the service on a reschedule, include the new serviceId. \r
 
-        The new serviceId's StartDateTime and EndDateTime must match
-        your service's duration.<br /><br />\r
+        The new serviceId's StartDateTime and EndDateTime must match your service's duration.<br /><br />\r
 
         \r
 
-        Use the GET /consumer/v1/availability/{id}/reschedule endpoint
-        to display a list of available times\r
+        Use the GET /consumer/v1/availability/{id}/reschedule endpoint to display a list of available times\r
 
-        for the end user to choose from to reschedule the original
-        appointment.<br /><br />\r
+        for the end user to choose from to reschedule the original appointment.<br /><br />\r
 
         \r
 
-        You cannot reschedule an appointment to a different location.
-        You can cancel and reschedule to a different location.\r
+        You cannot reschedule an appointment to a different location. You can cancel and reschedule to a different location.\r
 
         \r
 
-        For more information see <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nt Overview</a>"
+        For more information see <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointment Overview</a>"
       parameters:
         - description: appointment id
           in: path
@@ -715,50 +610,37 @@ paths:
         - Appointments
   "/consumer/v1/appointments/{id}/reserve":
     put:
-      description: "This end point completes a new reservation. Only appointments in
-        the \"IN\" initial status can be booked.\r
+      description: "This end point completes a new reservation. Only appointments in the \"IN\" initial status can be booked.\r
 
         by saving all the relevant details of the booking.<br /><br />\r
 
         \r
 
-        NOTE - appointment reservations are different than appointment
-        bookings. Reservations are a two step booking process.\r
+        NOTE - appointment reservations are different than appointment bookings. Reservations are a two step booking process.\r
 
-        An appointment is reserved but may not be completed as a booking
-        until other business conditions have been met. For example\r
+        An appointment is reserved but may not be completed as a booking until other business conditions have been met. For example\r
 
-        an appointment may be reserved that is not yet assigned to a
-        resource.<br /><br />\r
+        an appointment may be reserved that is not yet assigned to a resource.<br /><br />\r
 
         \r
 
-        NOTE 2 - this endpoint is new as of April 21, 2019. OnSched will
-        be adding a new Email template for appointment reservations expected by
-        the end of April.\r
+        NOTE 2 - this endpoint is new as of April 21, 2019. OnSched will be adding a new Email template for appointment reservations expected by the end of April.\r
 
-        This will allow you to notify your customer of a reservation
-        versus a booking and customize if required to indicate what conditions
-        will the reservation\r
+        This will allow you to notify your customer of a reservation versus a booking and customize if required to indicate what conditions will the reservation\r
 
         become a booking.<br /><br />\r
 
         \r
 
-        A valid appointment id is required. Use the appointmentId
-        returned from POST /consumer/v1/appointments.<br /><br />\r
+        A valid appointment id is required. Use the appointmentId returned from POST /consumer/v1/appointments.<br /><br />\r
 
         \r
 
-        To update appointment custom field values, use the GET
-        /consumer/v1/appointments/customfields information.\r
+        To update appointment custom field values, use the GET /consumer/v1/appointments/customfields information.\r
 
-        to understand your definitions of custom fields and what key and
-        values to update. <br /><br />\r
+        to understand your definitions of custom fields and what key and values to update. <br /><br />\r
 
-        See more information at <a
-        href=\"https://onsched.readme.io/docs/appointments-overview\">Appointme\
-        nts Overview</a><br /><br />"
+        See more information at <a href=\"https://onsched.readme.io/docs/appointments-overview\">Appointments Overview</a><br /><br />"
       parameters:
         - description: ""
           in: path
@@ -767,6 +649,11 @@ paths:
           schema:
             default: ""
             type: string
+        - description: ""
+          in: query
+          name: sendNotifications
+          schema:
+            type: boolean
       requestBody:
         content:
           application/*+json:
@@ -789,80 +676,59 @@ paths:
         - Appointments
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}":
     get:
-      description: "Choose your search criteria carefully. Availability is an
-        expensive call. If you search availability for all resources\r
+      description: "Choose your search criteria carefully. Availability is an expensive call. If you search availability for all resources\r
 
-        then you should only do so for a single date. If you decide to
-        search availability for multiple dates you should only do so\r
+        then you should only do so for a single date. If you decide to search availability for multiple dates you should only do so\r
 
-        for a specific resource by specifying the optional resourceId
-        parameter.<br /><br />\r
+        for a specific resource by specifying the optional resourceId parameter.<br /><br />\r
 
         \r
 
-        Start and End times are specified as military times e.g. 800 =
-        8:00am, 2230 = 10:30pm. \r
+        Start and End times are specified as military times e.g. 800 = 8:00am, 2230 = 10:30pm. \r
 
-        You will only see availability within the boundary of your
-        business start and end times.<br /><br />\r
+        You will only see availability within the boundary of your business start and end times.<br /><br />\r
 
         \r
 
         \r
 
-        dayAvailability will return day availablility for the number of
-        days requested from the start date.<br /><br />\r
+        dayAvailability will return day availablility for the number of days requested from the start date.<br /><br />\r
 
         \r
 
         \r
 
-        firstDayAvailable only works with day availability. If set to
-        true it will look for the first day available within the range
-        specified\r
+        firstDayAvailable only works with day availability. If set to true it will look for the first day available within the range specified\r
 
-        by the dayAvailability parameter. The two parameters together
-        can be a clever way to display availability for a week or month.\r
+        by the dayAvailability parameter. The two parameters together can be a clever way to display availability for a week or month.\r
 
-        Tip - pass in the beginning of the week or month, and available
-        times are displayed for the first available date if exists.<br /><br
-        />\r
+        Tip - pass in the beginning of the week or month, and available times are displayed for the first available date if exists.<br /><br />\r
 
         \r
 
-        You should only specify the duration parameter if you let your
-        customers choose the duration of the appointment. e.g. from a list.<br
-        /><br />\r
+        You should only specify the duration parameter if you let your customers choose the duration of the appointment. e.g. from a list.<br /><br />\r
 
         \r
 
         \r
 
-        The tz parameter allows you to select a suitable timezone for
-        the customer to book in. Your app should be timezone aware if you \r
+        The tz parameter allows you to select a suitable timezone for the customer to book in. Your app should be timezone aware if you \r
 
-        use this option. The requested timezone is specified as an
-        offset(plus or minus) from GMT time.<br /><br />\r
+        use this option. The requested timezone is specified as an offset(plus or minus) from GMT time.<br /><br />\r
 
         \r
 
-        Availabity can be complex. We provided an endpoint help you
-        troubleshoot:\r
+        Availabity can be complex. We provided an endpoint help you troubleshoot:\r
 
-        /consumer/v1/availability/{serviceId}/{startDate}/{endDate}/una\
-        vailable. \r
+        /consumer/v1/availability/{serviceId}/{startDate}/{endDate}/unavailable. \r
 
-        This endpoint will show you all the blocks for a given date
-        range. Available times are created from any unblocked time periods.<br
-        /><br />\r
+        This endpoint will show you all the blocks for a given date range. Available times are created from any unblocked time periods.<br /><br />\r
 
         \r
 
         \r
 
-        See more information at <a
-        href=\"https://onsched.readme.io/docs/availability-overview\">Availabil\
-        ity Overview</a>"
+        See more information at <a href=\"https://onsched.readme.io/docs/availability-overview\">Availability Overview</a>"
       parameters:
         - description: Service Id for availability search.
           in: path
@@ -871,8 +737,7 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Format YYYY-MM-DD. Start Date for availability search. Use format
-            YYYY-MM-DD
+        - description: Format YYYY-MM-DD. Start Date for availability search. Use format YYYY-MM-DD
           in: path
           name: startDate
           required: true
@@ -880,8 +745,7 @@ paths:
             default: ""
             format: date-time
             type: string
-        - description: Format YYYY-MM-DD. End Date for availability search. Use format
-            YYYY-MM-DD
+        - description: Format YYYY-MM-DD. End Date for availability search. Use format YYYY-MM-DD
           in: path
           name: endDate
           required: true
@@ -889,16 +753,14 @@ paths:
             default: ""
             format: date-time
             type: string
-        - description: Format Military Time.Start Time for availability search. Defaults
-            to Business Hours Start.
+        - description: Format Military Time.Start Time for availability search. Defaults to Business Hours Start.
           in: query
           name: startTime
           schema:
             format: int32
             nullable: true
             type: integer
-        - description: Format Military Time.End Time for availability search. Defaults to
-            Business Hours End.
+        - description: Format Military Time.End Time for availability search. Defaults to Business Hours End.
           in: query
           name: endTime
           schema:
@@ -954,8 +816,7 @@ paths:
             format: int32
             nullable: true
             type: integer
-        - description: Format YYYY-DD-YY. Start date for day availability. Defaults to
-            startDate.
+        - description: Format YYYY-DD-YY. Start date for day availability. Defaults to startDate.
           in: query
           name: dayAvailabilityStartDate
           schema:
@@ -973,8 +834,7 @@ paths:
           name: firstDayAvailable
           schema:
             type: boolean
-        - description: Try the full server based availability beta. Will be faster when
-            caching implmented.
+        - description: Try the full server based availability beta. Will be faster when caching implmented.
           in: query
           name: fullServerBasedAvailability
           schema:
@@ -991,13 +851,11 @@ paths:
         - Availability
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/days":
     get:
-      description: "This end point is used to show day level availability. For example
-        if the business is closed, or there is a public holiday.\r
+      description: "This end point is used to show day level availability. For example if the business is closed, or there is a public holiday.\r
 
         \r
 
-        Day level availability is a good way to restrict your choices of
-        dates in your app and improve usability."
+        Day level availability is a good way to restrict your choices of dates in your app and improve usability."
       parameters:
         - description: Service Id for availability search.
           in: path
@@ -1052,12 +910,9 @@ paths:
         - Availability
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/times":
     get:
-      description: "This end point is currently in beta. It is used for server based
-        availability from UnavailableTimes.\r
+      description: "This end point is currently in beta. It is used for server based availability from UnavailableTimes.\r
 
-        Use the
-        v1/consumer/availability{serviceId}/{startDate}/{endDate} endpoint
-        instead."
+        Use the v1/consumer/availability{serviceId}/{startDate}/{endDate} endpoint instead."
       parameters:
         - description: Service Id for availability search.
           in: path
@@ -1082,16 +937,14 @@ paths:
             default: ""
             format: date-time
             type: string
-        - description: Format Military Time. Start Time for availability search. Defaults
-            to Business Hours Start.
+        - description: Format Military Time. Start Time for availability search. Defaults to Business Hours Start.
           in: query
           name: startTime
           schema:
             format: int32
             nullable: true
             type: integer
-        - description: Format Military Time. End Time for availability search. Defaults to
-            Business Hours End.
+        - description: Format Military Time. End Time for availability search. Defaults to Business Hours End.
           in: query
           name: endTime
           schema:
@@ -1152,8 +1005,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Format YYYY-DD-YY. Start date for day availability. Defaults to
-            startDate.
+        - description: Format YYYY-DD-YY. Start date for day availability. Defaults to startDate.
           in: query
           name: dayAvailabilityStartDate
           schema:
@@ -1183,8 +1035,7 @@ paths:
         - Availability
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/unavailable":
     get:
-      description: This endpoint is used to show unavailable times and provides
-        information why the time is unavailable.
+      description: This endpoint is used to show unavailable times and provides information why the time is unavailable.
       parameters:
         - description: Service Id for availability search.
           in: path
@@ -1233,8 +1084,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Try the full server based availability beta. Will be faster when
-            caching implmented.
+        - description: Try the full server based availability beta. Will be faster when caching implmented.
           in: query
           name: fullServerBasedAvailability
           schema:
@@ -1251,12 +1101,9 @@ paths:
         - Availability
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/windows":
     get:
-      description: "This end point may be removed in the next release. It is used for
-        server based availability from UnavailableTimes.\r
+      description: "This end point may be removed in the next release. It is used for server based availability from UnavailableTimes.\r
 
-        Use the
-        v1/consumer/availability{serviceId}/{startDate}/{endDate} endpoint
-        instead."
+        Use the v1/consumer/availability{serviceId}/{startDate}/{endDate} endpoint instead."
       parameters:
         - description: Service Id for availability search.
           in: path
@@ -1347,12 +1194,9 @@ paths:
         - Availability
   /consumer/v1/customers:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -1406,17 +1250,13 @@ paths:
       tags:
         - Customers
     post:
-      description: "Use this endpoint to create a new customer. If not specified the
-        business location id defaults to the first location in the company.\r
+      description: "Use this endpoint to create a new customer. If not specified the business location id defaults to the first location in the company.\r
 
-        Email Address and a lastname are required for creating a new
-        customer.\r
+        Email Address and a lastname are required for creating a new customer.\r
 
         Type 0 = Person, Type 1 = Business\r
 
-        For type 0, the firstname and lastname fields are used. For type
-        1, the Name field is used and the name field is also used to populate
-        the lastname."
+        For type 0, the firstname and lastname fields are used. For type 1, the Name field is used and the name field is also used to populate the lastname."
       requestBody:
         content:
           application/*+json:
@@ -1447,28 +1287,23 @@ paths:
 
         \r
 
-        Customer booking fields are different than Appointment booking
-        fields. Customer booking fields are\r
+        Customer booking fields are different than Appointment booking fields. Customer booking fields are\r
 
-        stored with each customer. They are used when the information
-        collected during the booking is specific\r
+        stored with each customer. They are used when the information collected during the booking is specific\r
 
         to a particular visit.\r
 
         \r
 
-        Use the field, and type to determine how to update field
-        values\r
+        Use the field, and type to determine how to update field values\r
 
         in PUT /consumer/v1/appointments/{id}/book\r
 
         \r
 
-        Customer Booking Fields include any custom customer fields you
-        wish to capture with the Booking and also\r
+        Customer Booking Fields include any custom customer fields you wish to capture with the Booking and also\r
 
-        miscellaneous customer attributes including Company Name,
-        Customer Demographic information and Address information."
+        miscellaneous customer attributes including Company Name, Customer Demographic information and Address information."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -1488,8 +1323,7 @@ paths:
         - Customers
   /consumer/v1/customers/countries:
     get:
-      description: Returns a list of countries with the associated country code.
-        Country codes are based on the 2 character ANSI standard.
+      description: Returns a list of countries with the associated country code. Country codes are based on the 2 character ANSI standard.
       responses:
         "200":
           content:
@@ -1508,22 +1342,17 @@ paths:
 
         \r
 
-        Customer custom fields are different than Appointment custom
-        fields. Appointment custom fields are\r
+        Customer custom fields are different than Appointment custom fields. Appointment custom fields are\r
 
-        stored with each appointment. They are used when the information
-        collected during the booking is specific\r
+        stored with each appointment. They are used when the information collected during the booking is specific\r
 
-        to a particular visit, where as Customer custom fields are
-        stored with the customer profile. \r
+        to a particular visit, where as Customer custom fields are stored with the customer profile. \r
 
         \r
 
-        Use the key field, and type to determine how to update field
-        values\r
+        Use the key field, and type to determine how to update field values\r
 
-        in POST /consumer/v1/customers and PUT
-        /consumer/v1/customers/{id}"
+        in POST /consumer/v1/customers and PUT /consumer/v1/customers/{id}"
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -1531,8 +1360,7 @@ paths:
           schema:
             default: ""
             type: string
-        - description: A true/false indicator to filter on custom fields used for lead
-            questions.
+        - description: A true/false indicator to filter on custom fields used for lead questions.
           in: query
           name: leadQuestions
           schema:
@@ -1549,12 +1377,9 @@ paths:
         - Customers
   /consumer/v1/customers/plans:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -1592,13 +1417,9 @@ paths:
         - Customers
   "/consumer/v1/customers/plans/{id}":
     get:
-      description: "The result returned is a single customer object. An id is required
-        to find the customer. Find customer id's using either the GET
-        consumer/v1/customers end point,\r
+      description: "The result returned is a single customer object. An id is required to find the customer. Find customer id's using either the GET consumer/v1/customers end point,\r
 
-        or the GET consumer/v1/appointments end point. A customer object
-        is automatically created with the first booking if it doesn't already
-        exist."
+        or the GET consumer/v1/appointments end point. A customer object is automatically created with the first booking if it doesn't already exist."
       parameters:
         - description: The id of the customer plan object.
           in: path
@@ -1619,13 +1440,11 @@ paths:
         - Customers
   /consumer/v1/customers/states:
     get:
-      description: "Returns a list of states with the associated state code and
-        country. \r
+      description: "Returns a list of states with the associated state code and country. \r
 
         \r
 
-        Contact us if states for your countries of operation are not
-        currently loaded."
+        Contact us if states for your countries of operation are not currently loaded."
       parameters:
         - in: query
           name: country
@@ -1646,12 +1465,9 @@ paths:
         - Customers
   /consumer/v1/customers/subscriptions:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -1760,13 +1576,9 @@ paths:
       tags:
         - Customers
     get:
-      description: "The result returned is a single customer object. An id is required
-        to find the customer. Find customer id's using either the GET
-        consumer/v1/customers end point,\r
+      description: "The result returned is a single customer object. An id is required to find the customer. Find customer id's using either the GET consumer/v1/customers end point,\r
 
-        or the GET consumer/v1/appointments end point. A customer object
-        is automatically created with the first booking if it doesn't already
-        exist."
+        or the GET consumer/v1/appointments end point. A customer object is automatically created with the first booking if it doesn't already exist."
       parameters:
         - description: The id of the customer object.
           in: path
@@ -1786,9 +1598,7 @@ paths:
       tags:
         - Customers
     put:
-      description: "Use this endpoint to update customer information. If not specified
-        the business location id defaults to the first location in the
-        company.\r
+      description: "Use this endpoint to update customer information. If not specified the business location id defaults to the first location in the company.\r
 
         Blank fields are not changed"
       parameters:
@@ -1820,29 +1630,19 @@ paths:
         - Customers
   "/consumer/v1/customers/{id}/planlimits/{serviceId}/{resourceId}/{dateTimeTz}":
     get:
-      description: "The result returned is list of limit rules as defined by the
-        subscribed customer plan along with Booking Counts/Minutes\r
+      description: "The result returned is list of limit rules as defined by the subscribed customer plan along with Booking Counts/Minutes\r
 
-        The results indicate the remaining bookings count / minutes. Use
-        the results in your app to determine if the customer should continue
-        booking.\r
+        The results indicate the remaining bookings count / minutes. Use the results in your app to determine if the customer should continue booking.\r
 
-        You can enforce Limits in periods: Daily,Weekly,Monthly and for
-        maximum total limits. Maximum total limits is based on six months prior
-        to\r
+        You can enforce Limits in periods: Daily,Weekly,Monthly and for maximum total limits. Maximum total limits is based on six months prior to\r
 
-        the DateTimeTz and six months after the DateTimeTz. Daily,
-        Weekly and Monthly limits are based on the calculated period relative to
-        the\r
+        the DateTimeTz and six months after the DateTimeTz. Daily, Weekly and Monthly limits are based on the calculated period relative to the\r
 
-        subscription plan start. Daily,Weekly and Monthly limits can be
-        setup on a per interval basis e.g. to biweekly, or daily every 10
-        days.\r
+        subscription plan start. Daily,Weekly and Monthly limits can be setup on a per interval basis e.g. to biweekly, or daily every 10 days.\r
 
         See customer plans setup in the Portal for more information.\r
 
-        All parameters are required. If resourceId is not applicable for
-        a non-resource calendar, pass zero.\r
+        All parameters are required. If resourceId is not applicable for a non-resource calendar, pass zero.\r
 
         Format of the dateTimeTz field is 2018-10-30T10:00-5:00"
       parameters:
@@ -1887,8 +1687,7 @@ paths:
         - Customers
   "/consumer/v1/customers/{id}/subscriptions":
     get:
-      description: The result returned is a single customer subscription object. A
-        customer can only be subsribed to a single Customer Plan
+      description: The result returned is a single customer subscription object. A customer can only be subsribed to a single Customer Plan
       parameters:
         - description: The id of the customer object.
           in: path
@@ -1943,26 +1742,19 @@ paths:
         - Customers
   /consumer/v1/locations:
     get:
-      description: "Use this api end point if you have multiple business locations in
-        your company.\r
+      description: "Use this api end point if you have multiple business locations in your company.\r
 
-        The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+        The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list.\r
+        Use the other query parameters to optionally filter the results list.\r
 
         \r
 
-        To leverage the search by serviceId, setup locationService's see
-        endpoints in this controller.\r
+        To leverage the search by serviceId, setup locationService's see endpoints in this controller.\r
 
-        Location services allow you to exclude company scoped services
-        for locations that do not offer them.\r
+        Location services allow you to exclude company scoped services for locations that do not offer them.\r
 
-        You can explicitly define which services are offered or if none
-        are defined then all services are offererd"
+        You can explicitly define which services are offered or if none are defined then all services are offererd"
       parameters:
         - description: Location name(full or partial) to filter on
           in: query
@@ -2029,9 +1821,7 @@ paths:
         - Locations
   "/consumer/v1/locations/{id}":
     get:
-      description: The result returned is a single location object. An id is required
-        to find the location. Find location id's using the GET
-        consumer/v1/locations end point,
+      description: The result returned is a single location object. An id is required to find the location. Find location id's using the GET consumer/v1/locations end point,
       parameters:
         - description: The id of the business location object.
           in: path
@@ -2052,12 +1842,9 @@ paths:
         - Locations
   /consumer/v1/resources:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -2117,9 +1904,7 @@ paths:
         - Resources
   "/consumer/v1/resources/{id}":
     get:
-      description: "The result returned is a single resource object. An id is required
-        to find the resource. Find customer id's using either the GET
-        consumer/v1/resources end point,\r
+      description: "The result returned is a single resource object. An id is required to find the resource. Find customer id's using either the GET consumer/v1/resources end point,\r
 
         or the GET consumer/v1/appointments end point."
       parameters:
@@ -2142,16 +1927,11 @@ paths:
         - Resources
   "/consumer/v1/resources/{id}/services":
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list.\r
+        Use the other query parameters to optionally filter the results list.\r
 
-        Resource services are used to explicitly define the services
-        that can be booked for a resource. If no resource services are defined
-        then by\r
+        Resource services are used to explicitly define the services that can be booked for a resource. If no resource services are defined then by\r
 
         default all services can be booked for the resource."
       parameters:
@@ -2192,12 +1972,9 @@ paths:
         - Resources
   /consumer/v1/servicegroups:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -2229,8 +2006,7 @@ paths:
         - ServiceGroups
   "/consumer/v1/servicegroups/{id}":
     get:
-      description: "The result returned is a single serviceGroup object. An id is
-        required to find the serviceGroup. Find serviceGroup id's using \r
+      description: "The result returned is a single serviceGroup object. An id is required to find the serviceGroup. Find serviceGroup id's using \r
 
         the GET consumer/v1/servicegroups end point,"
       parameters:
@@ -2253,12 +2029,9 @@ paths:
         - ServiceGroups
   /consumer/v1/services:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -2322,9 +2095,7 @@ paths:
         - Services
   "/consumer/v1/services/{id}":
     get:
-      description: "The result returned is a single service object. An id is required
-        to find the service. Find service id's using either the GET
-        consumer/v1/service end point,\r
+      description: "The result returned is a single service object. An id is required to find the service. Find service id's using either the GET consumer/v1/service end point,\r
 
         or the GET consumer/v1/appointments end point."
       parameters:
@@ -2347,27 +2118,21 @@ paths:
         - Services
   "/consumer/v1/services/{id}/allocations":
     get:
-      description: "This endpoint is used primarily for event booking. When you create
-        service type events, you allocation specific occurrences of the event \r
+      description: "This endpoint is used primarily for event booking. When you create service type events, you allocation specific occurrences of the event \r
 
         against the service. \r
 
         \r
 
-        You can retrieve all allocations for a location by passing in
-        zero as the service id. Otherwise, to get allocations for a specific
-        service\r
+        You can retrieve all allocations for a location by passing in zero as the service id. Otherwise, to get allocations for a specific service\r
 
         pass in the service id.\r
 
         \r
 
-        The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+        The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the service to list allocations. Zero for all allocations.
           in: path
@@ -2432,12 +2197,9 @@ paths:
         - Services
   "/consumer/v1/services/{id}/resources":
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the service object.
           in: path
@@ -2446,8 +2208,7 @@ paths:
           schema:
             default: ""
             type: string
-        - description: The id of the business location. Defaults to primary business
-            location.
+        - description: The id of the business location. Defaults to primary business location.
           in: query
           name: locationId
           schema:
@@ -2477,12 +2238,9 @@ paths:
         - Services
   /consumer/v1/settings:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+      description: "The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        Use the other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -2642,8 +2400,6 @@ components:
             $ref: "#/components/schemas/BookingFieldItem"
           type: array
         customerId:
-          type: string
-        customerIds:
           type: string
         email:
           type: string

@@ -7,12 +7,8 @@ info:
     name: Fun Translations
     url: http://funtranslations.com/
     x-twitter: funtranslate
-  description: >
-    Funtranslations API gives access to the full set of translations
-    available at funtranslations.com so that you can integrate them in your
-    workflow or an app. [Click here to get details and
-    subscribe](http://funtranslations.com/api) . Here are the individual API
-    links:
+  description: |
+    Funtranslations API gives access to the full set of translations available at funtranslations.com so that you can integrate them in your workflow or an app. [Click here to get details and subscribe](http://funtranslations.com/api) . Here are the individual API links:
 
       ## Morse code API ##
       Morse code conversion API on the cloud. Translate to and from Morse Code.[Click here to subscribe](http://funtranslations.com/api/morse)
@@ -100,10 +96,7 @@ tags:
 paths:
   /translate/braille:
     get:
-      description: Translate from English to Braille. This is what you use if you have
-        a braille display. This API translates the English text into characters
-        that a braille display understands and you can feed the translated text
-        directly to the display.
+      description: Translate from English to Braille. This is what you use if you have a braille display. This API translates the English text into characters that a braille display understands and you can feed the translated text directly to the display.
       parameters:
         - description: Text to translate
           format: string
@@ -119,7 +112,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -149,9 +142,7 @@ paths:
         - Braille
   /translate/braille/dots:
     get:
-      description: Use this to see which dots are enabled for each Braille letters.
-        This is highly educational (to see which dots are enabled) and can
-        potentially drive a non braille display which works on individual dots.
+      description: Use this to see which dots are enabled for each Braille letters. This is highly educational (to see which dots are enabled) and can potentially drive a non braille display which works on individual dots.
       parameters:
         - description: Text to translate
           format: string
@@ -236,9 +227,7 @@ paths:
         - Braille
   /translate/braille/html:
     get:
-      description: Translate from English to Braille Image characters. This is
-        probably what you want to use if you are displaying braille in a
-        browser.
+      description: Translate from English to Braille Image characters. This is probably what you want to use if you are displaying braille in a browser.
       parameters:
         - description: Text to translate
           format: string
@@ -323,9 +312,7 @@ paths:
         - Braille
   /translate/braille/image:
     get:
-      description: Translate from English to Braille image characters. This is
-        probably what you want to use if you are displaying braille in a
-        browser.
+      description: Translate from English to Braille image characters. This is probably what you want to use if you are displaying braille in a browser.
       parameters:
         - description: Text to translate
           format: string
@@ -341,7 +328,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -511,7 +498,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -554,7 +541,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -597,7 +584,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -640,7 +627,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -769,7 +756,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -783,7 +770,7 @@ paths:
         "401":
           description: 401  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "error": {
                       "code": 401,
@@ -812,7 +799,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -898,7 +885,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -984,7 +971,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1027,7 +1014,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1156,7 +1143,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1211,7 +1198,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -1261,7 +1248,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -1307,7 +1294,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1350,7 +1337,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1393,7 +1380,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1436,7 +1423,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1479,7 +1466,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1522,7 +1509,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1565,7 +1552,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1608,7 +1595,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1694,7 +1681,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1737,7 +1724,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -1780,7 +1767,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1

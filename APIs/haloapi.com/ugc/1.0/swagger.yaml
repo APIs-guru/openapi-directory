@@ -6,8 +6,7 @@ basePath: /ugc
 info:
   contact:
     x-twitter: halo
-  description: API that provides Metadata about User-Generated Content (Maps and
-    Game Variants).
+  description: API that provides Metadata about User-Generated Content (Maps and Game Variants).
   title: UGC
   version: "1.0"
   x-apisguru-categories:
@@ -39,13 +38,10 @@ tags: []
 paths:
   "/h5/players/{player}/gamevariants":
     get:
-      description: >
+      description: |
         <p>Retrieves a list of Game Variants created by a Player.</p>
-
         <br />
-
         <h4>Changelog</h4>
-
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -53,7 +49,6 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-
         <div class="panel-body">
             <p><strong>August 5, 2016:</strong></p>
             <ul>
@@ -67,27 +62,19 @@ paths:
           name: player
           required: true
           type: string
-        - description: When specified, this indicates the starting index (0-based) for
-            which the list of results will begin at.
+        - description: When specified, this indicates the starting index (0-based) for which the list of results will begin at.
           in: query
           name: start
           type: number
-        - description: When specified, this indicates the maximum quantity of items the
-            caller would like returned in the response.
+        - description: When specified, this indicates the maximum quantity of items the caller would like returned in the response.
           in: query
           name: count
           type: number
-        - description: 'When specified, this indicates what field should be used to sort
-            the results as the primary sort order. When omitted, "modified"
-            (descending) is the assumed primary sort order. Allowed sort fields
-            are: name, description, accessibility, created, modified,
-            bookmarkCount.'
+        - description: 'When specified, this indicates what field should be used to sort the results as the primary sort order. When omitted, "modified" (descending) is the assumed primary sort order. Allowed sort fields are: name, description, accessibility, created, modified, bookmarkCount.'
           in: query
           name: sort
           type: number
-        - description: 'When specified, this indicates the ordering that will be applied.
-            When omitted, "desc" is assumed. Allowed order values are: asc,
-            desc.'
+        - description: 'When specified, this indicates the ordering that will be applied. When omitted, "desc" is assumed. Allowed order values are: asc, desc.'
           in: query
           name: order
           type: number
@@ -95,8 +82,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain a list of the Player-created Game
-            Variants.
+          description: The response body will contain a list of the Player-created Game Variants.
           examples:
             application/json:
               Count: int
@@ -142,13 +128,10 @@ paths:
       summary: Halo 5 - Player Game Variants
   "/h5/players/{player}/gamevariants/{variant}":
     get:
-      description: >
+      description: |
         <p>Retrieves Metadata about a Player-created Game Variant.</p>
-
         <br />
-
         <h4>Changelog</h4>
-
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -156,7 +139,6 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-
         <div class="panel-body">
             <p><strong>August 5, 2016:</strong></p>
             <ul>
@@ -179,8 +161,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Metadata for the Player-created
-            Game Variant.
+          description: The response body will contain the Metadata for the Player-created Game Variant.
           examples:
             application/json:
               AccessControl: int
@@ -214,20 +195,16 @@ paths:
         "400":
           description: Specified Gamertag is malformed or the Game Variant ID is malformed.
         "404":
-          description: The player does not exist or the Game Variant does not exist in the
-            provided Player's file share.
+          description: The player does not exist or the Game Variant does not exist in the provided Player's file share.
         "500":
           description: Internal Server Error
       summary: Halo 5 - Player Game Variant
   "/h5/players/{player}/mapvariants":
     get:
-      description: >
+      description: |
         <p>Retrieves a list Map Variants created by a Player.</p>
-
         <br />
-
         <h4>Changelog</h4>
-
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -235,7 +212,6 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-
         <div class="panel-body">
             <p><strong>August 5, 2016:</strong></p>
             <ul>
@@ -249,27 +225,19 @@ paths:
           name: player
           required: true
           type: string
-        - description: When specified, this indicates the starting index (0-based) for
-            which the list of results will begin at.
+        - description: When specified, this indicates the starting index (0-based) for which the list of results will begin at.
           in: query
           name: start
           type: number
-        - description: When specified, this indicates the maximum quantity of items the
-            caller would like returned in the response.
+        - description: When specified, this indicates the maximum quantity of items the caller would like returned in the response.
           in: query
           name: count
           type: number
-        - description: 'When specified, this indicates what field should be used to sort
-            the results as the primary sort order. When omitted, "modified"
-            (descending) is the assumed primary sort order. Allowed sort fields
-            are: name, description, accessibility, created, modified,
-            bookmarkCount.'
+        - description: 'When specified, this indicates what field should be used to sort the results as the primary sort order. When omitted, "modified" (descending) is the assumed primary sort order. Allowed sort fields are: name, description, accessibility, created, modified, bookmarkCount.'
           in: query
           name: sort
           type: number
-        - description: 'When specified, this indicates the ordering that will be applied.
-            When omitted, "desc" is assumed. Allowed order values are: asc,
-            desc.'
+        - description: 'When specified, this indicates the ordering that will be applied. When omitted, "desc" is assumed. Allowed order values are: asc, desc.'
           in: query
           name: order
           type: number
@@ -277,8 +245,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain a list of the Player-created Map
-            Variants.
+          description: The response body will contain a list of the Player-created Map Variants.
           examples:
             application/json:
               Count: int
@@ -318,13 +285,10 @@ paths:
       summary: Halo 5 - Player Map Variants
   "/h5/players/{player}/mapvariants/{variant}":
     get:
-      description: >
+      description: |
         <p>Retrieves Metadata about a Player-created Map Variant.</p>
-
         <br />
-
         <h4>Changelog</h4>
-
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -332,7 +296,6 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
-
         <div class="panel-body">
             <p><strong>August 5, 2016:</strong></p>
             <ul>
@@ -355,8 +318,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: The response body will contain the Metadata for the Player-created
-            Map Variant.
+          description: The response body will contain the Metadata for the Player-created Map Variant.
           examples:
             application/json:
               Count: int
@@ -390,8 +352,7 @@ paths:
         "400":
           description: Specified Gamertag is malformed or the Map Variant ID is malformed.
         "404":
-          description: The Player does not exist or the Map Variant does not exist in the
-            provided Player's file share.
+          description: The Player does not exist or the Map Variant does not exist in the provided Player's file share.
         "500":
           description: Internal Server Error
       summary: Halo 5 - Player Map Variant

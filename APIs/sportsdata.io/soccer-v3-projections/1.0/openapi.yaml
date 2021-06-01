@@ -28,8 +28,7 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -60,8 +59,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByCompetitionWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -71,10 +69,7 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be
-            the CompetitionId or the Competition Key. Possible values include:
-            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
-            etc."
+        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
           in: path
           name: competition
           required: true
@@ -102,8 +97,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -135,8 +129,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -176,8 +169,7 @@ paths:
     get:
       operationId: UpcomingDfsSlatesByCompetition
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true

@@ -164,26 +164,17 @@ paths:
         - v1
   "/v1/shoppers/{shopperId}":
     delete:
-      description: <strong>Notes:</strong><ul><li>Shopper deletion is not supported in
-        OTE</li><li>**shopperId** is **not the same** as
-        **customerId**.  **shopperId** is a number of max length 10 digits
-        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>Shopper deletion is not supported in OTE</li><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: delete
       parameters:
-        - description: "The ID of the shopper to delete. Must agree with the shopper id on
-            the token or header, if present. *Note*: **shopperId** is **not the
-            same** as **customerId**.  **shopperId** is a number of max length
-            10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4
-            (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)"
+        - description: "The ID of the shopper to delete. Must agree with the shopper id on the token or header, if present. *Note*: **shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)"
           in: path
           name: shopperId
           required: true
           schema:
             maxLength: 10
             type: string
-        - description: The client IP of the user who originated the request leading to
-            this call.
+        - description: The client IP of the user who originated the request leading to this call.
           in: query
           name: auditClientIp
           required: true
@@ -340,10 +331,7 @@ paths:
       tags:
         - v1
     get:
-      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as
-        **customerId**.  **shopperId** is a number of max length 10 digits
-        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: get
       parameters:
         - description: Shopper whose details are to be retrieved
@@ -494,10 +482,7 @@ paths:
       tags:
         - v1
     post:
-      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as
-        **customerId**.  **shopperId** is a number of max length 10 digits
-        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: update
       parameters:
         - description: The ID of the Shopper to update
@@ -669,11 +654,7 @@ paths:
         - v1
   "/v1/shoppers/{shopperId}/factors/password":
     put:
-      description: <strong>Notes:</strong><ul><li>Password set is only supported by
-        API Resellers setting subaccount passwords.</li><li>**shopperId** is
-        **not the same** as **customerId**.  **shopperId** is a number of max
-        length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4
-        (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>Password set is only supported by API Resellers setting subaccount passwords.</li><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: changePassword
       parameters:
         - description: Shopper whose password will be set
@@ -719,22 +700,17 @@ paths:
         - v1
   "/v1/shoppers/{shopperId}/status":
     get:
-      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as
-        **customerId**. **shopperId** is a number of max length 10 digits (*ex:*
-        1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as **customerId**. **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: getStatus
       parameters:
-        - description: The ID of the shopper to retrieve. Must agree with the shopper id
-            on the token or header, if present
+        - description: The ID of the shopper to retrieve. Must agree with the shopper id on the token or header, if present
           in: path
           name: shopperId
           required: true
           schema:
             maxLength: 10
             type: string
-        - description: The client IP of the user who originated the request leading to
-            this call.
+        - description: The client IP of the user who originated the request leading to this call.
           in: query
           name: auditClientIp
           required: true
@@ -893,8 +869,7 @@ components:
     Error:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         fields:
@@ -910,30 +885,23 @@ components:
     ErrorField:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         message:
-          description: Human-readable, English description of the problem with the
-            contents of the field
+          description: Human-readable, English description of the problem with the contents of the field
           type: string
         path:
-          description: >-
+          description: |-
             <ul>
-
             <li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>
-
             <strong style='margin-left: 12px;'>OR</strong>
-
             <li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>
-
             </ul>
           format: json-path
           type: string
         pathRelated:
-          description: JSONPath referring to a field containing an error, which is
-            referenced by `path`
+          description: JSONPath referring to a field containing an error, which is referenced by `path`
           format: json-path
           type: string
       required:
@@ -942,8 +910,7 @@ components:
     ErrorLimit:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         fields:
@@ -964,8 +931,7 @@ components:
     PasswordError:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           enum:
             - PW_BLACK_LIST
             - PW_TOO_SHORT
@@ -991,9 +957,7 @@ components:
     Shopper:
       properties:
         customerId:
-          description: Identifier for the Customer record associated with this Shopper
-            record. This is an alternate identifier that some systems use to
-            identify an individual shopper record
+          description: Identifier for the Customer record associated with this Shopper record. This is an alternate identifier that some systems use to identify an individual shopper record
           type: string
         email:
           format: email
@@ -1019,9 +983,7 @@ components:
     ShopperId:
       properties:
         customerId:
-          description: Identifier for the Customer record associated with this Shopper
-            record. This is an alternate identifier that some systems use to
-            identify an individual shopper record
+          description: Identifier for the Customer record associated with this Shopper record. This is an alternate identifier that some systems use to identify an individual shopper record
           type: string
         shopperId:
           type: string
@@ -1030,11 +992,7 @@ components:
     ShopperStatus:
       properties:
         billingState:
-          description: "Indicates the billing state of the Shopper.<br />ABANDONED: The
-            shopper has not been billed in at least 10 years and has no active
-            subscriptions.<br />INACTIVE: The shopper has been billed within the
-            last 10 years but has no active subscriptions.<br />ACTIVE: The
-            shopper has at least one active subscription."
+          description: "Indicates the billing state of the Shopper.<br />ABANDONED: The shopper has not been billed in at least 10 years and has no active subscriptions.<br />INACTIVE: The shopper has been billed within the last 10 years but has no active subscriptions.<br />ACTIVE: The shopper has at least one active subscription."
           enum:
             - ABANDONED
             - INACTIVE

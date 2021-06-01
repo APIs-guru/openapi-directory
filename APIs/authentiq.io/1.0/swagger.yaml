@@ -8,9 +8,8 @@ info:
     email: hello@authentiq.com
     name: Team Authentiq
     url: https://www.authentiq.com/
-  description: >
+  description: |
     Authentiq Connect OAuth 2.0 and OpenID Connect API reference.
-
     Learn about [Authentiq ID](https://www.authentiq.com/) or check out the [Authentiq Connect](https://developers.authentiq.com) developer documentation.
   termsOfService: https://www.authentiq.com/terms
   title: Authentiq Connect API
@@ -117,16 +116,12 @@ responses:
 paths:
   /authorize:
     get:
-      description: >
+      description: |
         Start a session with Authentiq Connect to authenticate a user.
 
-
         ```
-
         GET https://connect.authentiq.io/authorize?client_id=<your-client-id>&response_type=code+id_token&scope=openid+email&redirect_uri=<your-redirect-uri>&state=0123456789
-
         ```
-
 
         This endpoint also supports the POST method.
       externalDocs:
@@ -134,95 +129,71 @@ paths:
         url: http://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint
       operationId: authorize
       parameters:
-        - description: >
-            A client ID obtained from the
-            [Dashboard](https://dashboard.authentiq.com/).
+        - description: |
+            A client ID obtained from the [Dashboard](https://dashboard.authentiq.com/).
           in: query
           name: client_id
           required: true
           type: string
-        - description: >
-            The OIDC response type to use for this authentication flow. Valid
-            choices are `code`, `id_token`, `token`, `token id_token`, `code
-            id_token` `code token` and `code token id_token`, but a client can
-            be configured with a more restricted set.
+        - description: |
+            The OIDC response type to use for this authentication flow. Valid choices are `code`, `id_token`, `token`, `token id_token`, `code id_token` `code token` and `code token id_token`, but a client can be configured with a more restricted set.
           in: query
           name: response_type
           required: true
           type: string
-        - description: >
-            The space-separated identity claims to request from the end-user.
-            Always include `openid` as a scope for compatibility with OIDC.
+        - description: |
+            The space-separated identity claims to request from the end-user. Always include `openid` as a scope for compatibility with OIDC.
           in: query
           name: scope
           required: true
           type: string
-        - description: >
-            The location to redirect to after (un)successful authentication.
-            See OIDC for the parameters passed in the query string
-            (`response_mode=query`) or as fragments (`response_mode=fragment`).
-            Unless the client is in test-mode this must be one of the registered
-            redirect URLs.
+        - description: |
+            The location to redirect to after (un)successful authentication. See OIDC for the parameters passed in the query string (`response_mode=query`) or as fragments (`response_mode=fragment`). Unless the client is in test-mode this must be one of the registered redirect URLs.
           in: query
           name: redirect_uri
           required: true
           type: string
-        - description: >
-            An opaque string that will be passed back to the redirect URL and
-            therefore can be used to communicate client side state and prevent
-            CSRF attacks.
+        - description: |
+            An opaque string that will be passed back to the redirect URL and therefore can be used to communicate client side state and prevent CSRF attacks.
           in: query
           name: state
           required: true
           type: string
-        - description: >
-            Whether to append parameters to the redirect URL in the query
-            string (`query`) or as fragments (`fragment`). This option usually
-            has a sensible default for each of the response types.
+        - description: |
+            Whether to append parameters to the redirect URL in the query string (`query`) or as fragments (`fragment`). This option usually has a sensible default for each of the response types.
           in: query
           name: response_mode
           required: false
           type: string
-        - description: >
-            An nonce provided by the client (and opaque to Authentiq Connect)
-            that will be included in any ID Token generated for this session.
-            Clients should use the nonce to mitigate replay attacks.
+        - description: |
+            An nonce provided by the client (and opaque to Authentiq Connect) that will be included in any ID Token generated for this session. Clients should use the nonce to mitigate replay attacks.
           in: query
           name: nonce
           required: false
           type: string
         - default: page
-          description: >
-            The authentication display mode, which can be one of `page`,
-            `popup` or `modal`. Defaults to `page`.
+          description: |
+            The authentication display mode, which can be one of `page`, `popup` or `modal`. Defaults to `page`.
           in: query
           name: display
           required: false
           type: string
         - default: login
-          description: >
-            Space-delimited, case sensitive list of ASCII string values that
-            specifies whether the Authorization Server prompts the End-User for
-            reauthentication and consent. The supported values are: `none`,
-            `login`, `consent`. If `consent` the end-user is asked to
-            (re)confirm what claims they share. Use `none` to check for an
-            active session.
+          description: |
+            Space-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.
           in: query
           name: prompt
           required: false
           type: string
         - default: 0
-          description: >
-            Specifies the allowable elapsed time in seconds since the last time
-            the end-user was actively authenticated.
+          description: |
+            Specifies the allowable elapsed time in seconds since the last time the end-user was actively authenticated.
           in: query
           name: max_age
           required: false
           type: integer
-        - description: >
-            Specifies the preferred language to use on the authorization page,
-            as a space-separated list of BCP47 language tags. Ignored at the
-            moment.
+        - description: |
+            Specifies the preferred language to use on the authorization page, as a space-separated list of BCP47 language tags. Ignored at the moment.
           in: query
           name: ui_locales
           required: false
@@ -266,9 +237,8 @@ paths:
       consumes:
         - application/json
         - multipart/form-data
-      description: >
+      description: |
         Register a new client with this Authentiq Connect provider.
-
 
         This endpoint is compatible with [OIDC's Client Registration](http://openid.net/specs/openid-connect-registration-1_0.html) extension.
       externalDocs:
@@ -373,9 +343,8 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: >
+      description: |
         Exchange en authorization code for an ID Token or Access Token.
-
 
         This endpoint supports both `client_secret_basic` (default) and `client_secret_basic` authentication methods, as specified by the client's `token_endpoint_auth_method`.
       externalDocs:
@@ -408,16 +377,14 @@ paths:
           name: grant_type
           required: true
           type: string
-        - description: >
-            The authorization code previously obtained from the Authentication
-            endpoint.
+        - description: |
+            The authorization code previously obtained from the Authentication endpoint.
           in: formData
           name: code
           required: true
           type: string
-        - description: >
-            The redirect URL that was used previously with the Authentication
-            endpoint.
+        - description: |
+            The redirect URL that was used previously with the Authentication endpoint.
           in: formData
           name: redirect_uri
           required: true
@@ -436,10 +403,8 @@ paths:
         - Authentication
   /userinfo:
     get:
-      description: >
-        Use this endpoint to retrieve a user's profile in case you are
-        unable to parse an ID Token or you've not already obtained enough
-        details from the ID Token via the Token Endpoint.
+      description: |
+        Use this endpoint to retrieve a user's profile in case you are unable to parse an ID Token or you've not already obtained enough details from the ID Token via the Token Endpoint.
       externalDocs:
         description: OIDC UserInfo Endpoint
         url: http://openid.net/specs/openid-connect-core-1_0.html#UserInfo
@@ -475,10 +440,8 @@ paths:
         - Authentication
   "/{client_id}/iframe":
     get:
-      description: >
-        An OpenID Connect Session Management iframe to facilitate e.g.
-        single sign-on or remote logouts.
-
+      description: |
+        An OpenID Connect Session Management iframe to facilitate e.g. single sign-on or remote logouts.
 
         The iframe implements the OIDC postMessage-based [change notification protocol](http://openid.net/specs/openid-connect-session-1_0.html#ChangeNotification) via which a client can receive notifications about session state changes.
       externalDocs:

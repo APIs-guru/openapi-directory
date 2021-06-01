@@ -2,19 +2,15 @@ openapi: 3.0.0
 servers:
   - url: https://api.shorten.rest
 info:
-  description: >-
+  description: |-
     ## Introduction
-
 
 
     The Shorten.rest API allows you to programmatically create short URLs (an &apos;alias&apos;) for longer URL (a &apos;destination&apos;).
 
-
     Each alias you create can be used to redirect the end user (person clicking on the link) to one or more destination URLs
 
-
     A default destination is always set and specific destinations can be set to redirect the end user to preferred destinations based on the user&apos;s geographical location (country) and device Operating System.
-
 
     In order to use the Shorten.Rest URL Shortening API you can choose to bind your own branded domain, sub-domain or to use our default domain - Short.FYI 
 
@@ -33,9 +29,7 @@ info:
 
      | OS  | Country  | Destination |
     | :------------: |:---------------:| -----|
-
     | iOS      |  | YourDestination.com/ios |
-
     |       | US        |   YourDestination.com/usa | 
 
      Shorten.rest will choose the YourDestination.com/ios url as the most suitable destination.
@@ -91,9 +85,7 @@ tags:
 paths:
   /aliases:
     delete:
-      description: Deletes a single alias by providing alias and domain. If no domain
-        is provided the API will search for the matching alias within the
-        Short.fyi domain
+      description: Deletes a single alias by providing alias and domain. If no domain is provided the API will search for the matching alias within the Short.fyi domain
       operationId: DeleteAlias
       parameters:
         - description: domain which alias belongs to (string without `http/https` or `/`)
@@ -120,8 +112,7 @@ paths:
       tags:
         - Alias
     get:
-      description: Get detailed information for a single alias by providing its alias
-        and domain name
+      description: Get detailed information for a single alias by providing its alias and domain name
       operationId: GetAlias
       parameters:
         - description: domain which alias belongs to (string without `http/https` or `/`)
@@ -152,16 +143,13 @@ paths:
       tags:
         - Alias
     post:
-      description: >-
-        This POST method creates a new alias under a specified domain. If
-        no domain is specified in the request the alias will be attached to the
-        default domain Short.fyi 
+      description: |-
+        This POST method creates a new alias under a specified domain. If no domain is specified in the request the alias will be attached to the default domain Short.fyi 
 
          **NOTE:** You can override the domain level Meta Tags and Tracking Snippets by specifying them for each URL. Any variables you add to a specific URL will always override domain level settings.
       operationId: CreateAlias
       parameters:
-        - description: domain which alias will belong to (string without `http/https` or
-            `/`)
+        - description: domain which alias will belong to (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
@@ -197,11 +185,8 @@ paths:
       tags:
         - Alias
     put:
-      description: >-
-        Update a single short URL by providing its alias and domain as a
-        parameter, and the data you wish to update in the body of the request.
-        If no domain is provided you will receive the alias found attached to
-        the Short.fyi domain (if it exists and is linked to your account!)
+      description: |-
+        Update a single short URL by providing its alias and domain as a parameter, and the data you wish to update in the body of the request. If no domain is provided you will receive the alias found attached to the Short.fyi domain (if it exists and is linked to your account!)
 
          ### NOTE: 
 
@@ -244,17 +229,15 @@ paths:
         - Alias
   /aliases/all:
     get:
-      description: >-
-        Obtain a list of all alias names associated with your account and
-        given domain. Result array is in descending order by creation date. 
+      description: |-
+        Obtain a list of all alias names associated with your account and given domain. Result array is in descending order by creation date. 
 
          If no domain is specified you will receive a list of all the alias names you have created using the Short.fyi domain. 
 
          If there are more results than the limit for the request the response will return you a value in lastId property you can specify it in the continueFrom query parameter to get the next batch of records.
       operationId: GetAliases
       parameters:
-        - description: The domain name to get the aliases for (string without `http/https`
-            or `/`)
+        - description: The domain name to get the aliases for (string without `http/https` or `/`)
           example: your.domain.com
           in: query
           name: domainName
@@ -262,8 +245,7 @@ paths:
           schema:
             default: short.fyi
             type: string
-        - description: An ID returned by a previous query to continue aliases retrieval
-            (see lastId in response)
+        - description: An ID returned by a previous query to continue aliases retrieval (see lastId in response)
           example: "1588788835614657618"
           in: query
           name: continueFrom
@@ -293,15 +275,13 @@ paths:
         - Alias
   /clicks:
     get:
-      description: >-
-        Retrieve the raw click data for your account. Clicks are retrieved
-        by creation date in descending order. 
+      description: |-
+        Retrieve the raw click data for your account. Clicks are retrieved by creation date in descending order. 
 
          If there are more results than the limit for the request the response will return you a value in lastId property you can specify it in the continueFrom query parameter to get the next batch of records.
       operationId: GetClicks
       parameters:
-        - description: An ID returned by a previous query to continue clicks retrieval
-            (see lastId in response)
+        - description: An ID returned by a previous query to continue clicks retrieval (see lastId in response)
           example: "1588788835614657618"
           in: query
           name: continueFrom
@@ -416,8 +396,7 @@ components:
     DestinationModel:
       properties:
         country:
-          description: ISO alpha-2 [country
-            code](//en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+          description: ISO alpha-2 [country code](//en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
           type: string
         os:
           description: Please check the [supported OS list](#tag/OperatingSystems)

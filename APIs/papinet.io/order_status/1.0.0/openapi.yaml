@@ -35,15 +35,13 @@ paths:
               - Cancelled
               - Completed
             type: string
-        - description: The number of items to skip before starting to collect the result
-            set.
+        - description: The number of items to skip before starting to collect the result set.
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: The maximum number of items to return. If the value exceeds the
-            maximum, then the maximum value will be used.
+        - description: The maximum number of items to return. If the value exceeds the maximum, then the maximum value will be used.
           in: query
           name: limit
           required: false
@@ -59,8 +57,7 @@ paths:
       summary: List `orders`
   "/orders/{orderId}":
     get:
-      description: Gets the details of a specific `order`, including a paginated list
-        of all its lines.
+      description: Gets the details of a specific `order`, including a paginated list of all its lines.
       parameters:
         - description: UUID of the `order` to get
           in: path

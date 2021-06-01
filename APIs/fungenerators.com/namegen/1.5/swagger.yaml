@@ -7,10 +7,8 @@ info:
   contact:
     name: Fun Generators
     url: http://fungenerators.com/
-  description: >
-    Fungenerators name generation API generates random names relevant
-    to the given category. Lots of categories are supported with many variations
-    supported. [Click here to subscribe](http://fungenerators.com/api/namegen/)
+  description: |
+    Fungenerators name generation API generates random names relevant to the given category. Lots of categories are supported with many variations supported. [Click here to subscribe](http://fungenerators.com/api/namegen/)
   termsOfService: https://fungenerators.com/terms
   title: Name Generation API
   version: "1.5"
@@ -142,8 +140,7 @@ paths:
           name: start
           required: false
           type: integer
-        - description: limit. Controls pagination limit. Relevant only if suggestion is
-            supported
+        - description: limit. Controls pagination limit. Relevant only if suggestion is supported
           format: integer
           in: query
           name: limit

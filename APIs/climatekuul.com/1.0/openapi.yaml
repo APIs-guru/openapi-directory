@@ -83,12 +83,12 @@ paths:
                   description: Contact last name
                   example: xyz
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - carbonOffset
               type: object
         required: false
@@ -117,17 +117,17 @@ paths:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
                 paymentID:
                   description: "Payment ID "
                   example: 34567878
                   format: int32
                   type: integer
+                transaction_id:
+                  description: transaction_id
+                  example: 608a6de161cf4d38dc9092a3
+                  type: string
               required:
-                - id
+                - transaction_id
                 - confirmPayment
                 - paymentID
               type: object
@@ -157,12 +157,12 @@ paths:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmPlanting
               type: object
         required: false
@@ -191,12 +191,12 @@ paths:
                   description: Confirm Payment Of Transaction (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmTransaction
               type: object
         required: false
@@ -263,8 +263,7 @@ paths:
                   format: double
                   type: number
                 travel_class:
-                  description: Travel class can be 'First Class', 'Economy', 'Business' or
-                    'Premium Economy'
+                  description: Travel class can be 'First Class', 'Economy', 'Business' or 'Premium Economy'
                   example: Economy
                   type: string
                 travel_mode:
@@ -320,12 +319,12 @@ paths:
                   description: Contact last name
                   example: xyz
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - carbonOffset
               type: object
         required: false
@@ -354,17 +353,17 @@ paths:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
                 paymentID:
                   description: Payment Id
                   example: 34567878
                   format: int32
                   type: integer
+                transaction_id:
+                  description: transaction_id
+                  example: 608a6de161cf4d38dc9092a3
+                  type: string
               required:
-                - id
+                - transaction_id
                 - confirmPayment
                 - paymentID
               type: object
@@ -394,12 +393,12 @@ paths:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmPlanting
               type: object
         required: false
@@ -428,12 +427,12 @@ paths:
                   description: Confirm Payment Of Transaction (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmTransaction
               type: object
         required: false
@@ -514,7 +513,7 @@ paths:
                   example: BRU
                   type: string
                 destination_latitude:
-                  description: valid latitudeof destination
+                  description: valid latitude of destination
                   example: 50.870752
                   format: double
                   type: number
@@ -523,6 +522,10 @@ paths:
                   example: 4.66949
                   format: double
                   type: number
+                origin_airport_code:
+                  description: valid airport code of origin
+                  example: KHI
+                  type: string
                 origin_latitude:
                   description: valid latitude of origin
                   example: 23.372628
@@ -548,7 +551,6 @@ paths:
                 - origin_longitude
                 - destination_latitude
                 - destination_longitude
-                - destination_airport_code
                 - volumetric_weight
                 - apiKey_l1
                 - apiKey_l2
@@ -591,12 +593,12 @@ paths:
                   description: Contact last name
                   example: xyz
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 6082a326c4ec1d9be7a5da06
                   type: string
               required:
-                - id
+                - transaction_id
                 - carbonOffset
               type: object
         required: false
@@ -625,17 +627,17 @@ paths:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
                 paymentID:
                   description: Payment ID
                   example: 34567878
                   format: int32
                   type: integer
+                transaction_id:
+                  description: transaction_id
+                  example: 608a6de161cf4d38dc9092a3
+                  type: string
               required:
-                - id
+                - transaction_id
                 - confirmPayment
                 - paymentID
               type: object
@@ -665,12 +667,12 @@ paths:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmPlanting
               type: object
         required: false
@@ -699,12 +701,12 @@ paths:
                   description: Confirm Payment Of Transaction (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmTransaction
               type: object
         required: false
@@ -807,24 +809,21 @@ paths:
                   format: int32
                   type: integer
                 vehicle_make:
-                  description: "vehicle make (like: Honda, Toyota, Smart)"
+                  description: "vehicle make (like: Honda, Toyota, Smart), Required only when vehicle_type is 'personal car' "
                   example: Honda
                   type: string
                 vehicle_type:
-                  description: Vehicle type can be 'personal car', 'light truck' or 'heavy-duty
-                    truck'
+                  description: Vehicle type can be 'personal car', 'light truck' or 'heavy-duty truck'
                   example: personal car
                   type: string
                 vehicle_year:
-                  description: "vehicle year (like: 2010, 2015, 2019)"
+                  description: "vehicle year (like: 2010, 2015, 2019), Required only when vehicle_type is 'personal car' "
                   example: 2010
                   format: int32
                   type: integer
               required:
                 - travel_distance
                 - vehicle_type
-                - vehicle_year
-                - vehicle_make
                 - trip_start
                 - trip_end
                 - apiKey_l1
@@ -868,12 +867,12 @@ paths:
                   description: Contact last name
                   example: xyz
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - carbonOffset
               type: object
         required: false
@@ -902,17 +901,17 @@ paths:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
                 paymentID:
                   description: Payment Id
                   example: 34567878
                   format: int32
                   type: integer
+                transaction_id:
+                  description: transaction_id
+                  example: 608a6de161cf4d38dc9092a3
+                  type: string
               required:
-                - id
+                - transaction_id
                 - confirmPayment
                 - paymentID
               type: object
@@ -942,12 +941,12 @@ paths:
                   description: Confirms Planting (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmPlanting
               type: object
         required: false
@@ -976,12 +975,12 @@ paths:
                   description: Confirm Payment Of Transaction (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmTransaction
               type: object
         required: false
@@ -1040,8 +1039,7 @@ paths:
                   format: double
                   type: number
                 vehicle_type:
-                  description: "Vehicle type (like: private car, motorcycle,cargo
-                    van,zero-emission)"
+                  description: "Vehicle type (like: private car, motorcycle,cargo van,zero-emission)"
                   example: PRIVATE CAR
                   type: string
               required:
@@ -1092,12 +1090,12 @@ paths:
                   description: Contact last name
                   example: xyz
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - carbonOffset
               type: object
         required: false
@@ -1126,17 +1124,17 @@ paths:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
                 paymentID:
                   description: Payment ID
                   example: 34567878
                   format: int32
                   type: integer
+                transaction_id:
+                  description: transaction_id
+                  example: 608a6de161cf4d38dc9092a3
+                  type: string
               required:
-                - id
+                - transaction_id
                 - confirmPayment
                 - paymentID
               type: object
@@ -1166,12 +1164,12 @@ paths:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmPlanting
               type: object
         required: false
@@ -1200,12 +1198,12 @@ paths:
                   description: Confirm Payment Of Transaction (Value = y/n)
                   example: y
                   type: string
-                id:
-                  description: Id
+                transaction_id:
+                  description: transaction_id
                   example: 608a6de161cf4d38dc9092a3
                   type: string
               required:
-                - id
+                - transaction_id
                 - confirmTransaction
               type: object
         required: false

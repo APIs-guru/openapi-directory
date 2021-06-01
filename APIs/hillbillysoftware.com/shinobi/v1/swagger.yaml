@@ -851,8 +851,7 @@ paths:
             items:
               $ref: "#/definitions/imdbID"
             type: array
-      summary: Gets list of avaiable IMDB ids from Movies and TV Show databases, you
-        can use those to query other end points that need ID's
+      summary: Gets list of avaiable IMDB ids from Movies and TV Show databases, you can use those to query other end points that need ID's
       tags:
         - Miscellaneous (Conversion & other Utilities)
   "/Images/ByID/{AccessToken}/{imdbID}":
@@ -946,8 +945,7 @@ paths:
             items:
               $ref: "#/definitions/Magnets"
             type: array
-      summary: Gets available magnet hashes on passed date (yyyy-mm-dd).  Feature not
-        available on free plan, please donate to be able to use this feature.
+      summary: Gets available magnet hashes on passed date (yyyy-mm-dd).  Feature not available on free plan, please donate to be able to use this feature.
       tags:
         - Magnets (Magnet hashes of Movies & Television Shows)
   "/Magnets/ByIMDB/{AccessToken}/{imdbID}":
@@ -977,8 +975,7 @@ paths:
             items:
               $ref: "#/definitions/Magnets"
             type: array
-      summary: Returns list of magnet hashes for passed IMDBID.  Feature not available
-        on free plan, please donate to be able to use this feature.
+      summary: Returns list of magnet hashes for passed IMDBID.  Feature not available on free plan, please donate to be able to use this feature.
       tags:
         - Magnets (Magnet hashes of Movies & Television Shows)
   "/Magnets/Search/{AccessToken}/{Query}":
@@ -1008,8 +1005,7 @@ paths:
             items:
               $ref: "#/definitions/Magnets"
             type: array
-      summary: Try and find magnet links for queried movie.  Feature not available on
-        free plan, please donate to be able to use this feature
+      summary: Try and find magnet links for queried movie.  Feature not available on free plan, please donate to be able to use this feature
       tags:
         - Magnets (Magnet hashes of Movies & Television Shows)
   "/Magnets/TVShow/{AccessToken}/{TVShow}":
@@ -1039,8 +1035,7 @@ paths:
             items:
               $ref: "#/definitions/Magnets"
             type: array
-      summary: Returns results based on query, Feature not available on free plan,
-        please donate to be able to use this feature.
+      summary: Returns results based on query, Feature not available on free plan, please donate to be able to use this feature.
       tags:
         - Magnets (Magnet hashes of Movies & Television Shows)
   "/Movie/ByID/{accesstoken}/{imdbID}":
@@ -1299,8 +1294,7 @@ paths:
             items:
               $ref: "#/definitions/BandInfoExtended"
             type: array
-      summary: Provides extended information, which includes all known albums and
-        music videos of artist / band
+      summary: Provides extended information, which includes all known albums and music videos of artist / band
       tags:
         - Music (Artists ,Bands, Tracks, AlbumArt, CoverArt, & Videos)
   "/Music/Artist/{AccessToken}/{Name}":
@@ -1508,8 +1502,7 @@ paths:
           description: Ratings
           schema:
             $ref: "#/definitions/RatingItem"
-      summary: Returns ratings from various resources(IMDB,Rotten Tomatoes,
-        metaCritics, TVMaze etc) of passed IMDBid
+      summary: Returns ratings from various resources(IMDB,Rotten Tomatoes, metaCritics, TVMaze etc) of passed IMDBid
       tags:
         - Ratings  (Movie & Television Show Ratings)
   "/Rating/ByName/{AccessToken}/{Name}":
@@ -2178,8 +2171,7 @@ definitions:
       TrailerSize:
         type: string
       TrailerType:
-        description: Returns Trailer type (trailer, teaser, channel, episode,credits,
-          clip etc)
+        description: Returns Trailer type (trailer, teaser, channel, episode,credits, clip etc)
         type: string
       YouTubeEmbeddedCode:
         type: string

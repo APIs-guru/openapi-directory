@@ -26,9 +26,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
-        The post Deed endpoint creates a new deed based on the JSON
-        provided.
+      description: |-
+        The post Deed endpoint creates a new deed based on the JSON provided.
          The reponse will return a URL that can retrieve the created deed. 
          > REQUIRED: Land Registry system requests Conveyancer to confirm that the Borrowers identity has been established in accordance with Section 111 of the Network Access Agreement.
       operationId: addDeed
@@ -42,24 +41,20 @@ paths:
         - text/plain
       responses:
         "201":
-          description: >
-            URL to the GET endpoint for the deed is returned on successful
-            creation.
+          description: |
+            URL to the GET endpoint for the deed is returned on successful creation.
           schema:
             type: string
         "400":
-          description: >
-            Bad Request due to invalid schema. Response will include 1 or more
-            schema errors
+          description: |
+            Bad Request due to invalid schema. Response will include 1 or more schema errors
           schema:
             $ref: "#/definitions/Error"
       summary: Deed
   "/deed/{deed_reference}":
     get:
-      description: >
-        The Deed endpoint returns details of a specific deed based on the
-        unique deed reference.
-
+      description: |
+        The Deed endpoint returns details of a specific deed based on the unique deed reference.
         The response includes the Title Number, Property information, Borrower(s) information and deed information.
       parameters:
         - description: Unique reference of the deed.
@@ -138,9 +133,7 @@ definitions:
         pattern: ^e-MD([0-9]{5}|([0-9]{3,4}[A-Z]{1}))$
         type: string
       property_address:
-        description: The address of property that the deed relates. This should be
-          supplied in a comma separated format e.g. 30 wakefield rd, plymouth,
-          PL6 3WA
+        description: The address of property that the deed relates. This should be supplied in a comma separated format e.g. 30 wakefield rd, plymouth, PL6 3WA
         pattern: ^(?!\s*$).+
         type: string
       title_number:
@@ -178,8 +171,7 @@ definitions:
   Operative_Deed:
     properties:
       deed:
-        description: Unique deed, consisting of property, borrower and charge
-          information as well as clauses for the deed.
+        description: Unique deed, consisting of property, borrower and charge information as well as clauses for the deed.
         properties:
           additional_provisions:
             $ref: "#/definitions/AdditionalProvisions"
@@ -196,14 +188,10 @@ definitions:
           lender:
             $ref: "#/definitions/Lender"
           md_ref:
-            description: Land Registry assigned number for a Mortgage Deed (MD). If you wish
-              to use an existing MD reference please prefix it with e- to comply
-              with our system (eg e-MD12345)
+            description: Land Registry assigned number for a Mortgage Deed (MD). If you wish to use an existing MD reference please prefix it with e- to comply with our system (eg e-MD12345)
             type: string
           property_address:
-            description: The address of property that the deed relates. This should be
-              supplied in a comma separated format e.g. 30 wakefield rd,
-              plymouth, PL6 3WA
+            description: The address of property that the deed relates. This should be supplied in a comma separated format e.g. 30 wakefield rd, plymouth, PL6 3WA
             type: string
           title_number:
             description: Unique Land Registry identifier for the registered estate.

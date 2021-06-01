@@ -30,8 +30,7 @@ paths:
       description: Memberships (Active)
       operationId: MembershipsActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -56,8 +55,7 @@ paths:
       description: Areas (Countries)
       operationId: AreasCountries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -82,8 +80,7 @@ paths:
       description: Box Scores by Date
       operationId: BoxScore
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -93,8 +90,7 @@ paths:
               - xml
               - json
             type: string
-        - description: "Unique GameId for the desired box scores. Examples:
-            <code>100000091</code>"
+        - description: "Unique GameId for the desired box scores. Examples: <code>100000091</code>"
           in: path
           name: gameid
           required: true
@@ -115,8 +111,7 @@ paths:
       description: Box Scores by Date
       operationId: BoxScoresByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -149,8 +144,7 @@ paths:
       description: Competition Fixtures (League Details)
       operationId: CompetitionFixturesLeagueDetails
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -160,8 +154,7 @@ paths:
               - xml
               - json
             type: string
-        - description: "A CS:GO competition/league unique CompetitionId. Possible values
-            include: <code>100000009</code>, etc."
+        - description: "A CS:GO competition/league unique CompetitionId. Possible values include: <code>100000009</code>, etc."
           in: path
           name: competitionid
           required: true
@@ -180,8 +173,7 @@ paths:
       description: Competitions (Leagues)
       operationId: CompetitionsLeagues
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -206,8 +198,7 @@ paths:
       description: Games by Date
       operationId: GamesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -240,8 +231,7 @@ paths:
       description: Memberships (Historical)
       operationId: MembershipsHistorical
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -266,8 +256,7 @@ paths:
       description: Memberships by Team (Historical)
       operationId: MembershipsByTeamHistorical
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -300,8 +289,7 @@ paths:
       description: Memberships by Team (Active)
       operationId: MembershipsByTeamActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -334,8 +322,7 @@ paths:
       description: Player
       operationId: Player
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -366,8 +353,7 @@ paths:
       description: Players
       operationId: Players
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -392,8 +378,7 @@ paths:
       description: Players by Team
       operationId: PlayersByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -426,8 +411,7 @@ paths:
       description: Schedule
       operationId: Schedule
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -437,10 +421,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the
-            Competitions and Competition Details endpoints. 
-
+        - description: |-
+            Unique FantasyData Round ID. RoundIDs can be found in the Competitions and Competition Details endpoints. 
             Examples: <code>100000138</code>, <code>1000001412</code>, etc
           in: path
           name: roundid
@@ -462,8 +444,7 @@ paths:
       description: Season Teams
       operationId: SeasonTeams
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -473,10 +454,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
-            Unique FantasyData Season ID. SeasonIDs can be found in the
-            Competitions and Competition Details endpoints. 
-
+        - description: |-
+            Unique FantasyData Season ID. SeasonIDs can be found in the Competitions and Competition Details endpoints. 
             Examples: <code>100000023</code>, <code>100000024</code>, etc
           in: path
           name: seasonid
@@ -498,8 +477,7 @@ paths:
       description: Schedule
       operationId: Standings
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -509,10 +487,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the
-            Competitions and Competition Details endpoints. 
-
+        - description: |-
+            Unique FantasyData Round ID. RoundIDs can be found in the Competitions and Competition Details endpoints. 
             Example: <code>100000138</code>, etc
           in: path
           name: roundid
@@ -534,8 +510,7 @@ paths:
       description: Teams
       operationId: Teams
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -560,8 +535,7 @@ paths:
       description: Venues
       operationId: Venues
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true

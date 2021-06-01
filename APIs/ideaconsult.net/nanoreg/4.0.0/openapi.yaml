@@ -104,8 +104,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Search parameter, InChI key(s) of the substance component(s), comma
-            delimited
+        - description: Search parameter, InChI key(s) of the substance component(s), comma delimited
           example: YUYCVXFAYWRXLS-UHFFFAOYSA-N
           explode: true
           in: query
@@ -114,8 +113,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Search parameter, chemical structure or substance identifier(s),
-            comma delimited
+        - description: Search parameter, chemical structure or substance identifier(s), comma delimited
           explode: true
           in: query
           name: id
@@ -212,8 +210,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Base64 encoded mol file; if included, will be used instead of the
-            'search' parameter
+        - description: Base64 encoded mol file; if included, will be used instead of the 'search' parameter
           explode: true
           in: query
           name: b64search
@@ -292,8 +289,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Base64 encoded mol file; if included, will be used instead of the
-            'search' parameter
+        - description: Base64 encoded mol file; if included, will be used instead of the 'search' parameter
           explode: true
           in: query
           name: b64search
@@ -329,8 +325,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Restrict the search within the set of structures with assigned
-            substances
+        - description: Restrict the search within the set of structures with assigned substances
           explode: true
           in: query
           name: filterBySubstance
@@ -338,8 +333,7 @@ paths:
           schema:
             type: boolean
           style: form
-        - description: If the structure is used in the specified bundle URI, the selection
-            tag will be returned
+        - description: If the structure is used in the specified bundle URI, the selection tag will be returned
           explode: true
           in: query
           name: bundle_uri
@@ -410,8 +404,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Base64 encoded mol file; if included, will be used instead of the
-            'search' parameter
+        - description: Base64 encoded mol file; if included, will be used instead of the 'search' parameter
           explode: true
           in: query
           name: b64search
@@ -439,8 +432,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Restrict the search within the set of structures with assigned
-            substances
+        - description: Restrict the search within the set of structures with assigned substances
           explode: true
           in: query
           name: filterBySubstance
@@ -448,8 +440,7 @@ paths:
           schema:
             type: boolean
           style: form
-        - description: If the structure is used in the specified bundle URI, the selection
-            tag will be returned
+        - description: If the structure is used in the specified bundle URI, the selection tag will be returned
           explode: true
           in: query
           name: bundle_uri
@@ -587,9 +578,7 @@ paths:
               - facet
             type: string
           style: form
-        - description: If type=related finds all substances containing this compound; if
-            typ =reference - finds all substances with this compound as
-            reference structure
+        - description: If type=related finds all substances containing this compound; if typ =reference - finds all substances with this compound as reference structure
           explode: true
           in: query
           name: compound_uri
@@ -837,8 +826,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Property URI https://data.enanomapper.net/property/{UUID} , see
-            Property service
+        - description: Property URI https://data.enanomapper.net/property/{UUID} , see Property service
           explode: true
           in: query
           name: property_uri
@@ -929,8 +917,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Property URI https://data.enanomapper.net/property/{UUID} , see
-            Property service
+        - description: Property URI https://data.enanomapper.net/property/{UUID} , see Property service
           explode: true
           in: query
           name: property_uri
@@ -946,8 +933,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: If true will group by topcategory,endpointcategory,interpretation
-            result
+        - description: If true will group by topcategory,endpointcategory,interpretation result
           explode: true
           in: query
           name: result
@@ -989,8 +975,7 @@ paths:
   /select:
     description: Apache Solr powered search for Nanosafety data
     get:
-      description: GET is simpler to use, but imposes restrictions on the complexity
-        and the lenght of the parameters.
+      description: GET is simpler to use, but imposes restrictions on the complexity and the lenght of the parameters.
       operationId: solrquery_get
       parameters:
         - description: The query
@@ -1065,8 +1050,7 @@ paths:
       tags:
         - Search
     post:
-      description: POST is more complex to use, but also allows for much for complex
-        and lengthy queries.
+      description: POST is more complex to use, but also allows for much for complex and lengthy queries.
       operationId: solrquery_post
       parameters:
         - description: Response format
@@ -1143,7 +1127,7 @@ components:
       content:
         application/json:
           schema:
-            example: >
+            example: |
               {
                 "params": {
                   "fl": [

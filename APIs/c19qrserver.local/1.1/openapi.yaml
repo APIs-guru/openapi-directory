@@ -68,15 +68,8 @@ paths:
         - Authentication
   /requestPasswordReset:
     post:
-      description: >
-        The admin should run this on behalf of a user who forgot their
-        password.  The API will generate a password reset code which the admin
-        should then provide to the user. The user can use their client to reset
-        their password. Normally the password reset code is mailed to the user,
-        but I didn't want to do this in this case because I didn't want
-        to  introduce the complicated dependency of having an SMTP server just
-        for this purpose. Doing it this way makes it easy for people to adopt
-        this  API.
+      description: |
+        The admin should run this on behalf of a user who forgot their password.  The API will generate a password reset code which the admin should then provide to the user. The user can use their client to reset their password. Normally the password reset code is mailed to the user, but I didn't want to do this in this case because I didn't want to  introduce the complicated dependency of having an SMTP server just for this purpose. Doing it this way makes it easy for people to adopt this  API.
       requestBody:
         $ref: "#/components/requestBodies/requestPasswordResetPayload"
       responses:
@@ -231,12 +224,8 @@ paths:
         - Team Members
   "/user/{userId}":
     delete:
-      description: >
-        To preserve referential integrity in the database, the user
-        account  will not be deleted from the database. Rather, the password
-        will be set to the empty string, effectively preventing that user from
-        logging in. Furthermore, all active sessions for that user will be
-        deleted, as will any password reset tokens. 
+      description: |
+        To preserve referential integrity in the database, the user account  will not be deleted from the database. Rather, the password will be set to the empty string, effectively preventing that user from logging in. Furthermore, all active sessions for that user will be deleted, as will any password reset tokens. 
       parameters:
         - description: The ID of the user record to be deleted.
           in: path
@@ -296,10 +285,8 @@ paths:
         - Team Members
   /verifyPasswordChange:
     post:
-      description: >
-        Another endpoint will generate a password reset code for you. You
-        should  use the client app to submit the reset code along with the new
-        password to change your password.
+      description: |
+        Another endpoint will generate a password reset code for you. You should  use the client app to submit the reset code along with the new password to change your password.
       requestBody:
         $ref: "#/components/requestBodies/passwordResetPayload"
       responses:
@@ -342,10 +329,8 @@ components:
           schema:
             properties:
               admin:
-                description: >
-                  If the user has admin privileges then the user will be able to
-                  create password reset requests on behalf of other users, and
-                  will also be able to view and edit  the data of other users.
+                description: |
+                  If the user has admin privileges then the user will be able to create password reset requests on behalf of other users, and will also be able to view and edit  the data of other users.
                 example: true
                 type: boolean
               email:
@@ -485,8 +470,7 @@ components:
           example: Firstname Lastname
           type: string
         read_only:
-          description: True if this user has permissions to write to the database. False
-            otherwise
+          description: True if this user has permissions to write to the database. False otherwise
           example: false
           type: boolean
         token:
@@ -550,10 +534,8 @@ components:
       description: A team member user record
       properties:
         admin:
-          description: >
-            If the user has admin privileges then the user will be able to
-            create password reset requests on behalf of other users, and will
-            also be able to view and edit  the data of other users.
+          description: |
+            If the user has admin privileges then the user will be able to create password reset requests on behalf of other users, and will also be able to view and edit  the data of other users.
           example: true
           type: boolean
         email:

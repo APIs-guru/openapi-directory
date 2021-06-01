@@ -4,9 +4,8 @@ schemes:
   - http
 host: api.fungenerators.com
 info:
-  description: >
-    Below is the documentation for the API calls. You can try them out
-    right here. 
+  description: |
+    Below is the documentation for the API calls. You can try them out right here. 
   title: Fun Generators API
   version: "1.5"
   x-apisguru-categories:
@@ -77,8 +76,7 @@ paths:
       tags:
         - Trivia
     get:
-      description: Get a Trivia entry for a given id. Retrieves a trivia question and
-        answer based on the id.
+      description: Get a Trivia entry for a given id. Retrieves a trivia question and answer based on the id.
       parameters:
         - description: ID of the trivia to fetch
           format: string
@@ -94,7 +92,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -195,7 +193,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "success": {
                       "total": 1
@@ -244,7 +242,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1
@@ -277,8 +275,7 @@ paths:
         - Trivia
   /trivia/search:
     get:
-      description: Search for random trivia which has the text in the query, for a
-        given category(optional).
+      description: Search for random trivia which has the text in the query, for a given category(optional).
       parameters:
         - description: Text to search for in the trivia
           format: string
@@ -300,7 +297,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": 1

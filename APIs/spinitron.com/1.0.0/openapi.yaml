@@ -4,42 +4,31 @@ servers:
 info:
   contact:
     x-twitter: Spinitron
-  description: >
+  description: |
     ## Notes
-
 
     **Tutorial demo** using this API is at [https://spinitron.com/v2-api-demo/](https://spinitron.com/v2-api-demo/). For web integration using iframes and/or JavaScript instead of an API, see [https://spinitron.github.io/v2-web-integration/](https://spinitron.github.io/v2-web-integration/).
 
-
     **Your API key** is found in the Spinitron web app. Log in to Spinitron and go to *Automation & API* in the *Admin* menu.
 
-
     **Authenticate** by presenting your API key using either HTTP Bearer Authorization
-
     (preferred)
 
         curl -H 'Authorization: Bearer YOURAPIKEY' 'https://spinitron.com/api/spins'
 
     or in the query parameter `access-token` (less secure owing to webserver
-
     log files)
 
         curl 'https://spinitron.com/api/spins?access-token=YOURAPIKEY'
 
     **Limit** per page of results is 20 by default and miximally 200.
 
-
     **Try it out** below works to
-
     generate example cURL requests but not to get responses from Spinitron. We
-
     do not accept queries sent from web browsers. Copy-paste the cURL commands
-
     and run them from your computer.
 
-
     **Cache** the data you get from the API if you are using it in web or mobile integration. It's not ok to query the API on *every* page request you serve. The [demo](https://spinitron.com/v2-api-demo/) shows how easy it can be to implement a file cache.
-
 
     An extension to this API with access to all stations for partner applications is available. Contact us.
   title: Spinitron v2 API
@@ -135,17 +124,14 @@ paths:
         - Persona
   /playlists:
     get:
-      description: >
+      description: |
         Get Playlists optionally filtered by a datetime range.
-
         Only past Playlists will be returned (with allowed tolerance equals 1 hour in future).
-
 
         Ordered chronologically from newest to oldest.
       parameters:
-        - description: >
-            The datetime starting from items must be returned. Maximum 1 hour
-            in future.
+        - description: |
+            The datetime starting from items must be returned. Maximum 1 hour in future.
           in: query
           name: start
           schema:
@@ -201,9 +187,8 @@ paths:
         - Playlist
   "/playlists/{id}":
     get:
-      description: >
+      description: |
         The response object represents the playlist specified by {id}.
-
 
         Status 404 is returned if a playlist with {id} does not exist or if it does but starts in the future (with allowed tolerance equals 1 hour in future).
       parameters:
@@ -238,59 +223,38 @@ paths:
         - Playlist
   /shows:
     get:
-      description: >
-        **Terminology**: Spinitron defines a *show* as a radio program. A
-        show can have one or more *schedules*,
-
+      description: |
+        **Terminology**: Spinitron defines a *show* as a radio program. A show can have one or more *schedules*,
         each of which may specify either an *occurence* or a *repetition*, which represents a set of occurences.
-
         Thus scheduled shows have occurences that, for example, may be displayed in a calendar.
-
 
         In the response, `items` is an array of objects representing occurences of scheduled shows.
 
-
         You may optionally filter `items` to a datetime *range* by including in the request {start} and/or {end}
-
         parameters, both of which must be no more than one hour in the past. An occurence starting at {end} is
-
         included in the reponse.
 
-
         `itmes` can include occurences that begin *or* end within the filter range. A show that goes on air before
-
         {start} appears in `items` if it ends *after* but not *at* {start}. An occurence starting at or before {end}
-
         is included.
 
-
         If the request omits the {start} parameter, the server sets its value to the current time so that the filter
-
         range's start is always defined. If the request specifies {end} then the requested range is *bounded*,
-
         otherwise it is *unbounded*.
 
-
         For a bounded request, `items` includes *every* occurence of all shows occuring in the range. The only
-
         difference between objects in `items` representing a given show will be the `start` field value.
 
-
         For an unbounded request, `items` includes *only one* occurence per show, specifically, the
-
         next occurrence after {start} of all shows occuring after {start}.
 
-
         Use an unbounded request to get a straight list all shows. Use a bounded request to get a calendar/agenda
-
         of shows expanded into occurrences by thir shedules and repetitions.
-
 
         Objects in `items` are ordered first by `datetime` and then by `id`.
       parameters:
-        - description: >
-            The datetime starting from items must be returned. Maximum 1 hour
-            in past.
+        - description: |
+            The datetime starting from items must be returned. Maximum 1 hour in past.
           in: query
           name: start
           schema:
@@ -339,19 +303,15 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: >
-            Invalid datetimes in filter: either too old or {end} is less than
-            {start}.
-      summary: Returns scheduled shows optionally filtered by {start} and/or {end}
-        datetimes
+          description: |
+            Invalid datetimes in filter: either too old or {end} is less than {start}.
+      summary: Returns scheduled shows optionally filtered by {start} and/or {end} datetimes
       tags:
         - Show
   "/shows/{id}":
     get:
-      description: >
-        The response object represents the next occurence of the show
-        specified by {id}.
-
+      description: |
+        The response object represents the next occurence of the show specified by {id}.
 
         Status 404 is returned if a show with {id} does not exist or if it does but all its scheduled occurences elapsed in the past.
       parameters:
@@ -386,9 +346,8 @@ paths:
         - Show
   /spins:
     get:
-      description: >
-        Get Spins optionally filtered by a datetime range. Only past Spins
-        will be returned.
+      description: |
+        Get Spins optionally filtered by a datetime range. Only past Spins will be returned.
       parameters:
         - description: |
             The datetime starting from items must be returned.
@@ -465,10 +424,8 @@ paths:
                 label:
                   type: string
                 live:
-                  description: >
-                    Only when automation params are configured with the "Pass through"
-                    mode.
-
+                  description: |
+                    Only when automation params are configured with the "Pass through" mode.
                     Enables "live assist" mode. Default mode is "full automation".
                   type: boolean
                 release:
@@ -623,8 +580,7 @@ components:
           type: integer
       type: object
     Persona:
-      description: The `Persona` object describes a radio DJ/host. One person can have
-        multiple personas
+      description: The `Persona` object describes a radio DJ/host. One person can have multiple personas
       properties:
         _links:
           properties:
@@ -637,8 +593,7 @@ components:
           type: object
         bio:
           description: HTML-formatted biography
-          example: <p>Besides DJ'ing industrial and experimental music since 1991, Deftly
-            has performed in industrial ...
+          example: <p>Besides DJ'ing industrial and experimental music since 1991, Deftly has performed in industrial ...
           type: string
         email:
           description: DJ/host's email address
@@ -681,8 +636,7 @@ components:
               $ref: "#/components/schemas/Link"
           type: object
         automation:
-          description: Was the playlist created playlists created by a radio station
-            automation system?
+          description: Was the playlist created playlists created by a radio station automation system?
           example: false
           type: boolean
         category:
@@ -691,8 +645,7 @@ components:
           type: string
         description:
           description: HTML-formatted description of the playlist or program/show
-          example: It is a <em>cross-­cultural musical journey united in voices and
-            rhythms</em>.
+          example: It is a <em>cross-­cultural musical journey united in voices and rhythms</em>.
           type: string
         duration:
           description: Duration in seconds
@@ -711,8 +664,7 @@ components:
           description: Title of this episode of the program/show
           type: string
         hide_dj:
-          description: Should the client application hide information about the playlist's
-            DJ/host?
+          description: Should the client application hide information about the playlist's DJ/host?
           example: false
           type: boolean
         id:
@@ -752,9 +704,7 @@ components:
           type: string
       type: object
     Show:
-      description: A `Show` object describes one occurrence of a radio program. A
-        result set may contain multiple occurrences of the same show with
-        difference `start` and `end` values.
+      description: A `Show` object describes one occurrence of a radio program. A result set may contain multiple occurrences of the same show with difference `start` and `end` values.
       properties:
         _links:
           properties:
@@ -773,11 +723,7 @@ components:
           type: string
         description:
           description: HTML-formatted description of the playlist or program/show
-          example: <p>Since 2001, <strong>The High Voltage Circumcision</strong> show has
-            delivered a full spectrum barrage of dark hard and experimental
-            music from industrial to noise to idm to ebm to bizarre to audio
-            collage often with a side of live guests, social consciousness,
-            interviews, twisted humor, studio experiments and left turns.</p>
+          example: <p>Since 2001, <strong>The High Voltage Circumcision</strong> show has delivered a full spectrum barrage of dark hard and experimental music from industrial to noise to idm to ebm to bizarre to audio collage often with a side of live guests, social consciousness, interviews, twisted humor, studio experiments and left turns.</p>
           type: string
         duration:
           description: Duration in seconds
@@ -789,8 +735,7 @@ components:
           format: date-time
           type: string
         hide_dj:
-          description: Should the client application hide information about the show's
-            DJs/hosts?
+          description: Should the client application hide information about the show's DJs/hosts?
           example: false
           type: boolean
         id:
@@ -909,8 +854,7 @@ components:
           type: boolean
         note:
           description: HTML-formatted DJ annotation of the spin, can include images etc.
-          example: B-side of the <strong>original</strong> 7" vinyl in the station's
-            collection.
+          example: B-side of the <strong>original</strong> 7" vinyl in the station's collection.
           type: string
         performers:
           description: For classical music, featured performing artists, e.g. soloists
@@ -955,8 +899,7 @@ components:
           example: false
           type: boolean
         work:
-          description: For classical music, the main compositional work the track (see
-            `song` field) belongs to
+          description: For classical music, the main compositional work the track (see `song` field) belongs to
           example: The Marriage of Figaro
           type: string
       type: object

@@ -4,22 +4,15 @@ servers:
 info:
   contact:
     x-twitter: amentumspace
-  description: >
+  description: |
     
     The World Magnetic Model calculates the intensity and direction of the Earth's magnetic field on a specific date-time, geodetic altitude, latitude, and longitude. It is relied upon throughout the world for navigation, mineral exploration, atmospheric and space science, and is installed on billions of devices.  <br><br>
-
     A comprehensive description of the World Magnetic Model, including its  limitations, can be found <a href='https://www.ngdc.noaa.gov/geomag/WMM/'>here</a>.  <br><br>
-
     We provide a RESTful API to access the out-of-cycle  World Magnetic Model (WMM2015v2) valid for years 2015.0 - 2020.0 and WMM2020 valid for years 2020.0 - 2025.0<br><br>
-
     The APIs are rate limited to 10,000 calls per month. <br><br>
-
     Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to discuss commercial use. <br><br>
-
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
-
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
-
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
   title: Geomag API
   version: 1.2.0
@@ -66,10 +59,8 @@ paths:
                     value: 58421.87109375
                 properties:
                   declination:
-                    description: >
-                      The angle in the horizontal plane between magnetic north and true
-                      north. Declination is positive when magnetic north is east
-                      of true north.
+                    description: |
+                      The angle in the horizontal plane between magnetic north and true north. Declination is positive when magnetic north is east of true north.
                     properties:
                       units:
                         type: string
@@ -77,11 +68,8 @@ paths:
                         type: number
                     type: object
                   grid_variation:
-                    description: >
-                      Referenced to grid north, referenced to 0 deg meridian of a polar
-                      stereographic projection.  Only defined for latitudes
-                      greater than 55 degrees and less than -55 degrees (arctic
-                      and antarctic).
+                    description: |
+                      Referenced to grid north, referenced to 0 deg meridian of a polar stereographic projection.  Only defined for latitudes greater than 55 degrees and less than -55 degrees (arctic and antarctic).
                     properties:
                       units:
                         type: string
@@ -89,10 +77,8 @@ paths:
                         type: number
                     type: object
                   inclination:
-                    description: >
-                      Also known as 'dip', is the angle made between the horizontal plane
-                      and the magnetic field vector at some position. Positive
-                      inclination corresponds to a downward pointing 
+                    description: |
+                      Also known as 'dip', is the angle made between the horizontal plane and the magnetic field vector at some position. Positive inclination corresponds to a downward pointing 
                     properties:
                       units:
                         type: string
@@ -110,24 +96,18 @@ paths:
                     type: object
                 type: object
           description: Successful magnetic field intensity calculation
-      summary: >
-        Calculate magnetic declination, inclination, total field intensity, and
-        grid variation
+      summary: |
+        Calculate magnetic declination, inclination, total field intensity, and grid variation
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://globalmagnet.amentum.space/wmm/magnetic_field?altitude=10&latitude=80&longitude=100&year=2020.5"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://globalmagnet.amentum.space/wmm/magnetic_field?altitude=10&latitude=80&longitude=100&year=2020.5" -H  "accept: application/json"
         - lang: Python
-          source: >
+          source: |
             import json
-
             import requests
 
-
             hostname = "https://globalmagnet.amentum.space/wmm/magnetic_field"
-
 
             payload = dict(
                 altitude = 10, # [km]
@@ -135,7 +115,6 @@ paths:
                 latitude = 80, 
                 year = 2020.5 # decimal year, half-way through 2020
             )
-
 
             try: 
               response = requests.get(hostname, params=payload)
@@ -182,8 +161,7 @@ components:
         example: 100
         type: number
     Year:
-      description: Year as a decimal in the range 2015-2025 (2017.5 would be half way
-        through 2017).
+      description: Year as a decimal in the range 2015-2025 (2017.5 would be half way through 2017).
       in: query
       name: year
       required: true

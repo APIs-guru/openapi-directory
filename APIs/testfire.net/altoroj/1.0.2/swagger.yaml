@@ -145,8 +145,7 @@ paths:
           name: Authorization
           required: true
           type: string
-        - description: Details of a new user including first name, last name, desired
-            username and a password
+        - description: Details of a new user including first name, last name, desired username and a password
           in: body
           name: body
           required: true
@@ -177,8 +176,7 @@ paths:
           name: Authorization
           required: true
           type: string
-        - description: Information about the user password to be changed including id and
-            new password
+        - description: Information about the user password to be changed including id and new password
           in: body
           name: body
           required: true
@@ -204,8 +202,7 @@ paths:
       description: Submit feedback for the bank
       operationId: sendFeedback
       parameters:
-        - description: Feedback details including name, email the subject and complete
-            message
+        - description: Feedback details including name, email the subject and complete message
           in: body
           name: body
           required: true
@@ -272,9 +269,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: After a successful login a token is returned. This is a Bearer
-        token. To authenticate with it use the Authorization header and set
-        value to Bearer empty space and the token value.
+      description: After a successful login a token is returned. This is a Bearer token. To authenticate with it use the Authorization header and set value to Bearer empty space and the token value.
       operationId: login
       parameters:
         - description: Username and password combination to allow users to log-in

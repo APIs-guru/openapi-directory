@@ -4,8 +4,7 @@ info:
     email: softwareengineering@parliament.uk
     name: UK Parliament
     url: https://www.parliament.uk
-  description: Data around written questions and answers, as well as written
-    ministerial statements.
+  description: Data around written questions and answers, as well as written ministerial statements.
   title: Written Questions Service API
   version: v1
   x-apisguru-categories:
@@ -20,23 +19,19 @@ paths:
   /api/dailyreports/dailyreports:
     get:
       parameters:
-        - description: Daily report with report date on or after the date specified. Date
-            format yyyy-mm-dd
+        - description: Daily report with report date on or after the date specified. Date format yyyy-mm-dd
           in: query
           name: dateFrom
           schema:
-            description: Daily report with report date on or after the date specified. Date
-              format yyyy-mm-dd
+            description: Daily report with report date on or after the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Daily report with report date on or before the date specified. Date
-            format yyyy-mm-dd
+        - description: Daily report with report date on or before the date specified. Date format yyyy-mm-dd
           in: query
           name: dateTo
           schema:
-            description: Daily report with report date on or before the date specified. Date
-              format yyyy-mm-dd
+            description: Daily report with report date on or before the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
@@ -116,23 +111,19 @@ paths:
             minimum: 1
             nullable: true
             type: integer
-        - description: Written questions tabled on or after the date specified. Date
-            format yyyy-mm-dd
+        - description: Written questions tabled on or after the date specified. Date format yyyy-mm-dd
           in: query
           name: tabledWhenFrom
           schema:
-            description: Written questions tabled on or after the date specified. Date
-              format yyyy-mm-dd
+            description: Written questions tabled on or after the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Written questions tabled on or before the date specified. Date
-            format yyyy-mm-dd
+        - description: Written questions tabled on or before the date specified. Date format yyyy-mm-dd
           in: query
           name: tabledWhenTo
           schema:
-            description: Written questions tabled on or before the date specified. Date
-              format yyyy-mm-dd
+            description: Written questions tabled on or before the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
@@ -141,23 +132,19 @@ paths:
           name: answered
           schema:
             $ref: "#/components/schemas/Answered"
-        - description: Written questions answered on or after the date specified. Date
-            format yyyy-mm-dd
+        - description: Written questions answered on or after the date specified. Date format yyyy-mm-dd
           in: query
           name: answeredWhenFrom
           schema:
-            description: Written questions answered on or after the date specified. Date
-              format yyyy-mm-dd
+            description: Written questions answered on or after the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Written questions answered on or before the date specified. Date
-            format yyyy-mm-dd
+        - description: Written questions answered on or before the date specified. Date format yyyy-mm-dd
           in: query
           name: answeredWhenTo
           schema:
-            description: Written questions answered on or before the date specified. Date
-              format yyyy-mm-dd
+            description: Written questions answered on or before the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
@@ -178,33 +165,27 @@ paths:
           schema:
             description: Expand the details of Members in the results
             type: boolean
-        - description: Written questions corrected on or after the date specified. Date
-            format yyyy-mm-dd
+        - description: Written questions corrected on or after the date specified. Date format yyyy-mm-dd
           in: query
           name: correctedWhenFrom
           schema:
-            description: Written questions corrected on or after the date specified. Date
-              format yyyy-mm-dd
+            description: Written questions corrected on or after the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Written questions corrected on or before the date specified. Date
-            format yyyy-mm-dd
+        - description: Written questions corrected on or before the date specified. Date format yyyy-mm-dd
           in: query
           name: correctedWhenTo
           schema:
-            description: Written questions corrected on or before the date specified. Date
-              format yyyy-mm-dd
+            description: Written questions corrected on or before the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Written questions / statements containing the search term
-            specified, searches item content
+        - description: Written questions / statements containing the search term specified, searches item content
           in: query
           name: searchTerm
           schema:
-            description: Written questions / statements containing the search term
-              specified, searches item content
+            description: Written questions / statements containing the search term specified, searches item content
             nullable: true
             type: string
         - description: Written questions / statements with the uin specified
@@ -214,25 +195,21 @@ paths:
             description: Written questions / statements with the uin specified
             nullable: true
             type: string
-        - description: Written questions / statements relating to the answering bodies
-            with the IDs specified
+        - description: Written questions / statements relating to the answering bodies with the IDs specified
           in: query
           name: answeringBodies
           schema:
-            description: Written questions / statements relating to the answering bodies
-              with the IDs specified
+            description: Written questions / statements relating to the answering bodies with the IDs specified
             items:
               format: int32
               type: integer
             nullable: true
             type: array
-        - description: Written questions / statements relating to the members with the IDs
-            specified
+        - description: Written questions / statements relating to the members with the IDs specified
           in: query
           name: members
           schema:
-            description: Written questions / statements relating to the members with the IDs
-              specified
+            description: Written questions / statements relating to the members with the IDs specified
             items:
               format: int32
               type: integer
@@ -416,33 +393,27 @@ paths:
   /api/writtenstatements/statements:
     get:
       parameters:
-        - description: Written statements made on or after the date specified. Date format
-            yyyy-mm-dd
+        - description: Written statements made on or after the date specified. Date format yyyy-mm-dd
           in: query
           name: madeWhenFrom
           schema:
-            description: Written statements made on or after the date specified. Date format
-              yyyy-mm-dd
+            description: Written statements made on or after the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Written statements made on or before the date specified. Date
-            format yyyy-mm-dd
+        - description: Written statements made on or before the date specified. Date format yyyy-mm-dd
           in: query
           name: madeWhenTo
           schema:
-            description: Written statements made on or before the date specified. Date
-              format yyyy-mm-dd
+            description: Written statements made on or before the date specified. Date format yyyy-mm-dd
             format: date-time
             nullable: true
             type: string
-        - description: Written questions / statements containing the search term
-            specified, searches item content
+        - description: Written questions / statements containing the search term specified, searches item content
           in: query
           name: searchTerm
           schema:
-            description: Written questions / statements containing the search term
-              specified, searches item content
+            description: Written questions / statements containing the search term specified, searches item content
             nullable: true
             type: string
         - description: Written questions / statements with the uin specified
@@ -452,25 +423,21 @@ paths:
             description: Written questions / statements with the uin specified
             nullable: true
             type: string
-        - description: Written questions / statements relating to the answering bodies
-            with the IDs specified
+        - description: Written questions / statements relating to the answering bodies with the IDs specified
           in: query
           name: answeringBodies
           schema:
-            description: Written questions / statements relating to the answering bodies
-              with the IDs specified
+            description: Written questions / statements relating to the answering bodies with the IDs specified
             items:
               format: int32
               type: integer
             nullable: true
             type: array
-        - description: Written questions / statements relating to the members with the IDs
-            specified
+        - description: Written questions / statements relating to the members with the IDs specified
           in: query
           name: members
           schema:
-            description: Written questions / statements relating to the members with the IDs
-              specified
+            description: Written questions / statements relating to the members with the IDs specified
             items:
               format: int32
               type: integer

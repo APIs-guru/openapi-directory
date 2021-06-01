@@ -4,10 +4,8 @@ servers:
   - url: /
 info:
   contact: {}
-  description: >-
-    API of the Patch application on
-    [cloud.redhat.com](cloud.redhat.com)
-
+  description: |-
+    API of the Patch application on [cloud.redhat.com](cloud.redhat.com)
 
     Syntax of the `filter[name]` query parameters is described in  [Filters documentation](https://github.com/RedHatInsights/patchman-engine/wiki/API-custom-filters)
   license:
@@ -188,6 +186,11 @@ paths:
         - description: Filter
           in: query
           name: filter[id]
+          schema:
+            type: string
+        - description: Filter
+          in: query
+          name: filter[insights_id]
           schema:
             type: string
         - description: Filter
@@ -698,6 +701,11 @@ paths:
         - description: Find matching text
           in: query
           name: search
+          schema:
+            type: string
+        - description: Filter
+          in: query
+          name: filter[insights_id]
           schema:
             type: string
         - description: Filter
@@ -1307,6 +1315,8 @@ components:
           type: string
         id:
           type: string
+        insights_id:
+          type: string
         last_evaluation:
           type: string
         last_upload:
@@ -1354,6 +1364,8 @@ components:
         culled_timestamp:
           type: string
         display_name:
+          type: string
+        insights_id:
           type: string
         last_evaluation:
           type: string

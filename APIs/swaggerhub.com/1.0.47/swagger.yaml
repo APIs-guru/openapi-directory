@@ -7,14 +7,11 @@ info:
     email: info@swaggerhub.com
     name: SwaggerHub
     url: https://swaggerhub.com
-  description: >
+  description: |
     # Introduction
-
     This is the registry API for SwaggerHub. It allows you to access, manage, and update your APIs and Domains in SwaggerHub bypassing the Web application.
 
-
     # Authentication
-
     Use your personal API Key: you can find it by visiting the [API Key page](https://app.swaggerhub.com/settings/apiKey).
   title: SwaggerHub Registry API
   version: 1.0.47
@@ -31,8 +28,7 @@ produces:
   - application/json
 securityDefinitions:
   TokenSecured:
-    description: Specify your SwaggerHub API key found in
-      https://app.swaggerhub.com/settings/apiKey.
+    description: Specify your SwaggerHub API key found in https://app.swaggerhub.com/settings/apiKey.
     in: header
     name: Authorization
     type: apiKey
@@ -112,13 +108,10 @@ parameters:
     type: string
   state:
     default: ALL
-    description: >
+    description: |
       Matches against published state of the spec:
-
       * UNPUBLISHED - spec is a draft, a work in progress
-
       * PUBLISHED - spec is a stable version ready for consuming from client applications
-
       * ANY - either PUBLISHED or UNPUBLISHED
     enum:
       - ALL
@@ -223,17 +216,14 @@ paths:
             $ref: "#/definitions/ApisJson"
       security:
         - TokenSecured: []
-      summary: Retrieves an APIs.json listing for all API versions for this owner and
-        API
+      summary: Retrieves an APIs.json listing for all API versions for this owner and API
       tags:
         - APIs
     post:
       consumes:
         - application/json
         - application/yaml
-      description: Saves the provided Swagger definition; the owner must match the
-        token owner. The version will be extracted from the Swagger definition
-        itself.
+      description: Saves the provided Swagger definition; the owner must match the token owner. The version will be extracted from the Swagger definition itself.
       operationId: saveDefinition
       parameters:
         - $ref: "#/parameters/apiOwner"
@@ -362,8 +352,7 @@ paths:
         "404":
           description: The specified API was not found
         "409":
-          description: The API version is published and cannot be deleted or it is the
-            only version of this API
+          description: The API version is published and cannot be deleted or it is the only version of this API
       security:
         - TokenSecured: []
       summary: Deletes a particular version of the specified API
@@ -394,9 +383,8 @@ paths:
         - APIs
   "/apis/{owner}/{api}/{version}/.comment":
     get:
-      description: >
-        Returns all the comments and replies added by collaborators in the
-        specified API version.
+      description: |
+        Returns all the comments and replies added by collaborators in the specified API version.
       operationId: getApiComments
       parameters:
         - $ref: "#/parameters/apiOwner"
@@ -440,8 +428,7 @@ paths:
           description: The specified API was not found
       security:
         - TokenSecured: []
-      summary: Retrieves the Swagger definition for the specified API and version in
-        JSON format
+      summary: Retrieves the Swagger definition for the specified API and version in JSON format
       tags:
         - APIs
   "/apis/{owner}/{api}/{version}/swagger.yaml":
@@ -464,8 +451,7 @@ paths:
           description: The specified API was not found
       security:
         - TokenSecured: []
-      summary: Retrieves the Swagger definition for the specified API and version in
-        YAML format
+      summary: Retrieves the Swagger definition for the specified API and version in YAML format
       tags:
         - APIs
   /domains:
@@ -557,8 +543,7 @@ paths:
             $ref: "#/definitions/ApisJson"
       security:
         - TokenSecured: []
-      summary: Retrieves an APIs.json listing for all domain versions for this owner
-        and domain
+      summary: Retrieves an APIs.json listing for all domain versions for this owner and domain
       tags:
         - Domains
     post:
@@ -629,8 +614,7 @@ paths:
         "404":
           description: The specified domain was not found
         "409":
-          description: The domain version is published and can not be deleted or it is the
-            only version of this API
+          description: The domain version is published and can not be deleted or it is the only version of this API
         "424":
           description: Cannot delete because there are some dependencies for domain
           schema:
@@ -664,9 +648,8 @@ paths:
         - Domains
   "/domains/{owner}/{domain}/{version}/.comment":
     get:
-      description: >
-        Returns all the comments and replies added by collaborators in the
-        specified domain version.
+      description: |
+        Returns all the comments and replies added by collaborators in the specified domain version.
       operationId: getDomainComments
       parameters:
         - $ref: "#/parameters/domainOwner"
@@ -709,8 +692,7 @@ paths:
           description: The specified domain was not found
       security:
         - TokenSecured: []
-      summary: Retrieves the definition for the specified domain and version in JSON
-        format
+      summary: Retrieves the definition for the specified domain and version in JSON format
       tags:
         - Domains
   "/domains/{owner}/{domain}/{version}/domain.yaml":
@@ -732,8 +714,7 @@ paths:
           description: The specified domain was not found
       security:
         - TokenSecured: []
-      summary: Retrieves the definition for the specified domain and version in YAML
-        format
+      summary: Retrieves the definition for the specified domain and version in YAML format
       tags:
         - Domains
   /specs:
@@ -756,13 +737,10 @@ paths:
           required: false
           type: string
         - default: ANY
-          description: >
+          description: |
             The visibility of a spec in SwaggerHub:
-
             * PUBLIC - can be viewed by anyone
-
             * PRIVATE - can only be viewed by you or your Org and those that you are collaborating with or have shared it with
-
             * ANY - either PUBLIC or PRIVATE
           enum:
             - PUBLIC
@@ -790,8 +768,7 @@ paths:
             $ref: "#/definitions/ApisJson"
       security:
         - TokenSecured: []
-      summary: Retrieves a list of currently defined APIs and Domains in APIs.json
-        format
+      summary: Retrieves a list of currently defined APIs and Domains in APIs.json format
       tags:
         - APIs
         - Domains
@@ -871,9 +848,8 @@ definitions:
       - $ref: "#/definitions/Comment"
       - properties:
           position:
-            description: >
-              The line number (zero-based) the comment is associated with. For
-              example, if the comment is on line 7 in the editor, `position`=6.
+            description: |
+              The line number (zero-based) the comment is associated with. For example, if the comment is on line 7 in the editor, `position`=6.
             format: int32
             type: integer
           replies:
@@ -1013,9 +989,8 @@ definitions:
     description: The user who added a comment
     properties:
       active:
-        description: >
-          `true` means an existing user, `false` means the user is inactive
-          (for example, deleted)
+        description: |
+          `true` means an existing user, `false` means the user is inactive (for example, deleted)
         type: boolean
       id:
         description: User name

@@ -6,8 +6,7 @@ basePath: /ec
 info:
   contact:
     x-twitter: EVEMarketer
-  description: EVEMarketer Marketstat API is almost compatible with EVE-Central's
-    Marketstat API.
+  description: EVEMarketer Marketstat API is almost compatible with EVE-Central's Marketstat API.
   title: EVEMarketer Marketstat API
   version: 1.0.1
   x-apisguru-categories:
@@ -26,10 +25,8 @@ paths:
   /marketstat:
     get:
       parameters:
-        - description: >
-            TypeID. Multiple TypeIDs can be specified in the following format
-            (up to 200 TypeIDs per request):
-
+        - description: |
+            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
             typeid=34&typeid=35 or typeid=34,35
           in: query
           items:
@@ -61,8 +58,7 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch
-                seconds.
+              description: The time at which the current rate limit window resets in UTC epoch seconds.
               type: integer
           schema:
             $ref: "#/definitions/ExecAPI"
@@ -77,10 +73,8 @@ paths:
       consumes:
         - multipart/form-data
       parameters:
-        - description: >
-            TypeID. Multiple TypeIDs can be specified in the following format
-            (up to 200 TypeIDs per request):
-
+        - description: |
+            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
             typeid=34&typeid=35 or typeid=34,35
           in: formData
           items:
@@ -112,8 +106,7 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch
-                seconds.
+              description: The time at which the current rate limit window resets in UTC epoch seconds.
               type: integer
           schema:
             $ref: "#/definitions/ExecAPI"
@@ -129,10 +122,8 @@ paths:
       consumes:
         - multipart/form-data
       parameters:
-        - description: >
-            TypeID. Multiple TypeIDs can be specified in the following format
-            (up to 200 TypeIDs per request):
-
+        - description: |
+            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
             typeid=34&typeid=35 or typeid=34,35
           in: formData
           items:
@@ -164,8 +155,7 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch
-                seconds.
+              description: The time at which the current rate limit window resets in UTC epoch seconds.
               type: integer
           schema:
             items:
@@ -180,10 +170,8 @@ paths:
         - marketstat
     post:
       parameters:
-        - description: >
-            TypeID. Multiple TypeIDs can be specified in the following format
-            (up to 200 TypeIDs per request):
-
+        - description: |
+            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
             typeid=34&typeid=35 or typeid=34,35
           in: query
           items:
@@ -215,8 +203,7 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch
-                seconds.
+              description: The time at which the current rate limit window resets in UTC epoch seconds.
               type: integer
           schema:
             items:

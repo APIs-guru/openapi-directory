@@ -26,29 +26,19 @@ tags:
 paths:
   /search:
     get:
-      description: >-
-        Performs a search through the full Debian Code Search corpus,
-        blocking until all results are available (might take a few seconds
-        depending on the search query).
-
+      description: |-
+        Performs a search through the full Debian Code Search corpus, blocking until all results are available (might take a few seconds depending on the search query).
 
         Search results are ordered by their ranking (best results come first).
       operationId: search
       parameters:
-        - description: The search query, for example `who knows...` (literal) or `who
-            knows\.\.\.` (regular expression). See
-            https://codesearch.debian.net/faq for more details about which
-            keywords are supported. The regular expression flavor is RE2, see
-            https://github.com/google/re2/blob/master/doc/syntax.txt
+        - description: The search query, for example `who knows...` (literal) or `who knows\.\.\.` (regular expression). See https://codesearch.debian.net/faq for more details about which keywords are supported. The regular expression flavor is RE2, see https://github.com/google/re2/blob/master/doc/syntax.txt
           in: query
           name: query
           required: true
           schema:
             type: string
-        - description: Whether the query is to be interpreted as a literal (`literal`)
-            instead of as an RE2 regular expression (`regexp`). Literal searches
-            are faster and do not require escaping special characters, regular
-            expression searches are more powerful.
+        - description: Whether the query is to be interpreted as a literal (`literal`) instead of as an RE2 regular expression (`regexp`). Literal searches are faster and do not require escaping special characters, regular expression searches are more powerful.
           in: query
           name: match_mode
           schema:
@@ -68,9 +58,7 @@ paths:
           description: All search results
         "403":
           content: {}
-          description: The x-dcs-apikey header was either not set at all, or contained an
-            invalid (no longer valid?) API key. Please see
-            https://codesearch.debian.net/apikeys/ for obtaining a key.
+          description: The x-dcs-apikey header was either not set at all, or contained an invalid (no longer valid?) API key. Please see https://codesearch.debian.net/apikeys/ for obtaining a key.
       security:
         - api_key: []
       summary: Searches through source code
@@ -78,26 +66,16 @@ paths:
         - search
   /searchperpackage:
     get:
-      description: "The search results are currently sorted arbitrarily, but we intend
-        to sort them by ranking eventually:
-        https://github.com/Debian/dcs/blob/51338e934eb7ee18d00c5c18531c0790a83c\
-        b698/cmd/dcs-web/querymanager.go#L719"
+      description: "The search results are currently sorted arbitrarily, but we intend to sort them by ranking eventually: https://github.com/Debian/dcs/blob/51338e934eb7ee18d00c5c18531c0790a83cb698/cmd/dcs-web/querymanager.go#L719"
       operationId: searchperpackage
       parameters:
-        - description: The search query, for example `who knows...` (literal) or `who
-            knows\.\.\.` (regular expression). See
-            https://codesearch.debian.net/faq for more details about which
-            keywords are supported. The regular expression flavor is RE2, see
-            https://github.com/google/re2/blob/master/doc/syntax.txt
+        - description: The search query, for example `who knows...` (literal) or `who knows\.\.\.` (regular expression). See https://codesearch.debian.net/faq for more details about which keywords are supported. The regular expression flavor is RE2, see https://github.com/google/re2/blob/master/doc/syntax.txt
           in: query
           name: query
           required: true
           schema:
             type: string
-        - description: Whether the query is to be interpreted as a literal (`literal`)
-            instead of as an RE2 regular expression (`regexp`). Literal searches
-            are faster and do not require escaping special characters, regular
-            expression searches are more powerful.
+        - description: Whether the query is to be interpreted as a literal (`literal`) instead of as an RE2 regular expression (`regexp`). Literal searches are faster and do not require escaping special characters, regular expression searches are more powerful.
           in: query
           name: match_mode
           schema:
@@ -117,9 +95,7 @@ paths:
           description: All search results
         "403":
           content: {}
-          description: The x-dcs-apikey header was either not set at all, or contained an
-            invalid (no longer valid?) API key. Please see
-            https://codesearch.debian.net/apikeys/ for obtaining a key.
+          description: The x-dcs-apikey header was either not set at all, or contained an invalid (no longer valid?) API key. Please see https://codesearch.debian.net/apikeys/ for obtaining a key.
       security:
         - api_key: []
       summary: Like /search, but aggregates per package
@@ -128,10 +104,7 @@ paths:
 components:
   parameters:
     matchModeParam:
-      description: Whether the query is to be interpreted as a literal (`literal`)
-        instead of as an RE2 regular expression (`regexp`). Literal searches are
-        faster and do not require escaping special characters, regular
-        expression searches are more powerful.
+      description: Whether the query is to be interpreted as a literal (`literal`) instead of as an RE2 regular expression (`regexp`). Literal searches are faster and do not require escaping special characters, regular expression searches are more powerful.
       in: query
       name: match_mode
       schema:
@@ -141,11 +114,7 @@ components:
           - regexp
         type: string
     queryParam:
-      description: The search query, for example `who knows...` (literal) or `who
-        knows\.\.\.` (regular expression). See https://codesearch.debian.net/faq
-        for more details about which keywords are supported. The regular
-        expression flavor is RE2, see
-        https://github.com/google/re2/blob/master/doc/syntax.txt
+      description: The search query, for example `who knows...` (literal) or `who knows\.\.\.` (regular expression). See https://codesearch.debian.net/faq for more details about which keywords are supported. The regular expression flavor is RE2, see https://github.com/google/re2/blob/master/doc/syntax.txt
       in: query
       name: query
       required: true
@@ -155,8 +124,7 @@ components:
     PackageSearchResult:
       properties:
         package:
-          description: The Debian source package for which up to 2 search results have
-            been aggregated in `results`.
+          description: The Debian source package for which up to 2 search results have been aggregated in `results`.
           example: i3-wm_4.18-1
           type: string
         results:
@@ -168,10 +136,7 @@ components:
         - results
       type: object
     SearchResult:
-      description: A search result matching the specified query. You can use
-        sources.debian.org to view the file contents. See
-        https://github.com/Debian/dcs/blob/master/cmd/dcs-web/show/show.go for
-        how to construct a sources.debian.org URL from a search result.
+      description: A search result matching the specified query. You can use sources.debian.org to view the file contents. See https://github.com/Debian/dcs/blob/master/cmd/dcs-web/show/show.go for how to construct a sources.debian.org URL from a search result.
       properties:
         context:
           description: The full line containing the search result.
@@ -199,13 +164,11 @@ components:
           format: uint32
           type: integer
         package:
-          description: The Debian source package containing this search result, including
-            the full Debian version number.
+          description: The Debian source package containing this search result, including the full Debian version number.
           example: i3-wm_4.18-1
           type: string
         path:
-          description: Path to the file containing the this search result, starting with
-            `package`.
+          description: Path to the file containing the this search result, starting with `package`.
           example: i3bar/src/xcb.c
           type: string
       required:

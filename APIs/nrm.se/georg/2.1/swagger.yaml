@@ -135,8 +135,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: Upload csv file with minimum two columns (Id, SourceLocality).
-        Return search results in json
+      description: Upload csv file with minimum two columns (Id, SourceLocality). Return search results in json
       operationId: uploadFile
       parameters:
         - in: body

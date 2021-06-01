@@ -39,7 +39,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "chapters": [
                         {
@@ -64,8 +64,7 @@ paths:
                 $ref: "#/components/schemas/ChapterSchema"
           description: "Success: Everything worked as expected."
         "400":
-          description: "Bad Request: The request was unacceptable due to wrong
-            parameter(s)."
+          description: "Bad Request: The request was unacceptable due to wrong parameter(s)."
         "401":
           description: "Unauthorized: Invalid access_token used."
         "402":
@@ -122,15 +121,13 @@ paths:
                 $ref: "#/components/schemas/ChapterSchema"
           description: "Success: Everything worked as expected."
         "400":
-          description: "Bad Request: The request was unacceptable due to wrong
-            parameter(s)."
+          description: "Bad Request: The request was unacceptable due to wrong parameter(s)."
         "401":
           description: "Unauthorized: Invalid access_token used."
         "402":
           description: Request Failed.
         "404":
-          description: "Not Found: The chapter number you are looking for could not be
-            found."
+          description: "Not Found: The chapter number you are looking for could not be found."
         "500":
           description: "Server Error: Something went wrong on our end."
       summary: Get a specific chapter from the Bhagavad Gita.
@@ -170,7 +167,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "verses": [
                         {
@@ -195,15 +192,13 @@ paths:
                 $ref: "#/components/schemas/VerseSchema"
           description: "Success: Everything worked as expected."
         "400":
-          description: "Bad Request: The request was unacceptable due to wrong
-            parameter(s)."
+          description: "Bad Request: The request was unacceptable due to wrong parameter(s)."
         "401":
           description: "Unauthorized: Invalid access_token used."
         "402":
           description: Request Failed.
         "404":
-          description: "Not Found: The chapter number you are looking for could not be
-            found."
+          description: "Not Found: The chapter number you are looking for could not be found."
         "500":
           description: "Server Error: Something went wrong on our end."
       summary: Get all the Verses from a Chapter.
@@ -254,7 +249,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "chapter_number": 1,
                       "meaning": "Dhritarashtra said: O Sanjay, after gathering on the holy field of Kurukshetra, and desiring to fight, what did my sons and the sons of Pandu do?",
@@ -267,15 +262,13 @@ paths:
                 $ref: "#/components/schemas/VerseSchema"
           description: "Success: Everything worked as expected."
         "400":
-          description: "Bad Request: The request was unacceptable due to wrong
-            parameter(s)."
+          description: "Bad Request: The request was unacceptable due to wrong parameter(s)."
         "401":
           description: "Unauthorized: Invalid access_token used."
         "402":
           description: Request Failed.
         "404":
-          description: "Not Found: The chapter/verse number you are looking for could not
-            be found."
+          description: "Not Found: The chapter/verse number you are looking for could not be found."
         "500":
           description: "Server Error: Something went wrong on our end."
       summary: Get a particular verse from a chapter.
@@ -304,7 +297,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "verses": [
                         {
@@ -329,8 +322,7 @@ paths:
                 $ref: "#/components/schemas/VerseSchema"
           description: "Success: Everything worked as expected."
         "400":
-          description: "Bad Request: The request was unacceptable due to wrong
-            parameter(s)."
+          description: "Bad Request: The request was unacceptable due to wrong parameter(s)."
         "401":
           description: "Unauthorized: Inavlid access_token used."
         "402":
@@ -382,8 +374,7 @@ paths:
                     }
           description: "Success: Everything worked as expected."
         "400":
-          description: "Bad Request: The request was unacceptable due to wrong
-            parameter(s)."
+          description: "Bad Request: The request was unacceptable due to wrong parameter(s)."
         "401":
           description: "Unauthorized: Invalid access_token used."
         "402":

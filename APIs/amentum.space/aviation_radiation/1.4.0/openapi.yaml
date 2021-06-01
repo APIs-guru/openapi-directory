@@ -4,35 +4,13 @@ servers:
 info:
   contact:
     x-twitter: amentumspace
-  description: >
-    Our atmosphere protects us from a hostile space radiation
-    environment comprising high energy particles of solar and intergalactic
-    origin. Solar radiation is significant during unpredictable and short lived
-    solar flares and coronal mass ejections (CMEs); however, galactic cosmic
-    radiation (GCR) is omnipresent. The GCR intensity varies with latitude,
-    longitude, and time due to effects of solar activity on the interplanetary
-    magnetic field, as well as the Earth's magnetic field. Space radiation
-    collides with gases in the atmosphere, leading to a complex shower of high
-    energy radiation, the intensity and composition of which varies spatially
-    and temporally. Excessive exposure to radiation can damage DNA and lead to
-    long-term health effects such as an increased risk of cancer.  <br><br>
-    Resulting radiation levels at commercial aircraft altitudes are greater than
-    at sea level due. Aircrew are classified as radiation workers in some
-    countries; however, planning to limit their exposure, and monitoring, is
-    generally lacking. Both real-time measurements and predictive models of
-    radiation in the atmosphere are important to mitigate the radiation risk
-    crew. <br><br>
-
+  description: |
+    Our atmosphere protects us from a hostile space radiation environment comprising high energy particles of solar and intergalactic origin. Solar radiation is significant during unpredictable and short lived solar flares and coronal mass ejections (CMEs); however, galactic cosmic radiation (GCR) is omnipresent. The GCR intensity varies with latitude, longitude, and time due to effects of solar activity on the interplanetary magnetic field, as well as the Earth's magnetic field. Space radiation collides with gases in the atmosphere, leading to a complex shower of high energy radiation, the intensity and composition of which varies spatially and temporally. Excessive exposure to radiation can damage DNA and lead to long-term health effects such as an increased risk of cancer.  <br><br> Resulting radiation levels at commercial aircraft altitudes are greater than at sea level due. Aircrew are classified as radiation workers in some countries; however, planning to limit their exposure, and monitoring, is generally lacking. Both real-time measurements and predictive models of radiation in the atmosphere are important to mitigate the radiation risk crew. <br><br>
     We host a RESTful API to models of cosmic ray induced ionising radiation in the atmosphere. The PARMA or CARI7 endpoints can be used to  calculate Effective Dose or Ambient Dose Equivalent at a point.  The APIs are rate limited to 10,000 calls per month. <br><br>
-
     The Route Dose API calculates the same quantities along a great circle route between two airports using CARI7. The API is rate limited to 100 calls per month. <br><br>
-
     Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to discuss commercial use. <br><br>
-
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
-
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
-
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.
   title: Aviation Radiation API
   version: 1.4.0
@@ -50,62 +28,27 @@ info:
   x-providerName: amentum.space
   x-serviceName: aviation_radiation
 tags:
-  - description: >
-      Developed by the US Federal Aviation Administration's  Civil
-      Aerospace Medical Institute, CARI7 calculates cosmic  ray doses in the
-      atmosphere. See <a
-      href="https://academic.oup.com/rpd/article/175/4/419/2884614">here</a> for
-      a complete description of  CARI-7. The original source code and Terms and
-      Conditions can be found <a
-      href="https://www.faa.gov/data_research/research/med_humanfacs/aeromedical/radiobiology/cari7/">here</a><br><br>
-      <br><br> Note: The dose is considered a monthly average. It accounts for
-      for heliocentric potential modulation only, minor geomagnetic storm and
-      forbush decreases are ignored.
+  - description: |
+      Developed by the US Federal Aviation Administration's  Civil Aerospace Medical Institute, CARI7 calculates cosmic  ray doses in the atmosphere. See <a href="https://academic.oup.com/rpd/article/175/4/419/2884614">here</a> for a complete description of  CARI-7. The original source code and Terms and Conditions can be found <a href="https://www.faa.gov/data_research/research/med_humanfacs/aeromedical/radiobiology/cari7/">here</a><br><br> <br><br> Note: The dose is considered a monthly average. It accounts for for heliocentric potential modulation only, minor geomagnetic storm and forbush decreases are ignored.
     name: cari7
     x-displayName: CARI7 API
-  - description: >
-      The Route Dose API estimates radiation doses along a flight route
-      between two airports with known ICAO or IATA codes or coordinates as
-      latitude/longitude. Waypoints are calculated assuming a great
-      circle  route, a constant altitude (in kilometers) and a user-defined
-      flight duration (in hours).  Dose rates are calculated at each waypoint
-      using CARI-7.  The dose rate profile is integrated along the route to
-      obtain the total dose for the flight. <br><br> Note: Dose is considered a
-      monthly average accounting for heliocentric potential (HP) modulation
-      only, minor geomagnetic storm and forbush decrease corrections are
-      ignored. The calculation relies on HP data from the US Federal Aviation
-      Administration that is released monthly. Doses can be calculated on the
-      current date and short-range forecasting  of several weeks is supported
-      (the exact forecast horizon is dependent on release date of FAA data).
+  - description: |
+      The Route Dose API estimates radiation doses along a flight route between two airports with known ICAO or IATA codes or coordinates as latitude/longitude. Waypoints are calculated assuming a great circle  route, a constant altitude (in kilometers) and a user-defined flight duration (in hours).  Dose rates are calculated at each waypoint using CARI-7.  The dose rate profile is integrated along the route to obtain the total dose for the flight. <br><br> Note: Dose is considered a monthly average accounting for heliocentric potential (HP) modulation only, minor geomagnetic storm and forbush decrease corrections are ignored. The calculation relies on HP data from the US Federal Aviation Administration that is released monthly. Doses can be calculated on the current date and short-range forecasting  of several weeks is supported (the exact forecast horizon is dependent on release date of FAA data).
     name: icaro
     x-displayName: Route Dose API
-  - description: >
-      The PARMA model was developed by the Japan Atomic Energy Agency
-      (JAEA) and estimates fluxes of neutrons, protons, ions, muons, electrons,
-      positrons, and photons on a given date, latitude, longitude, and altitude.
-      A comprehensive description of PARMA can be found in the publications <a
-      href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160390">here</a>
-      and <a
-      href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144679">here</a>.<br><br>
-      <br><br> Note: accounts for heliocentric potential modulation only, minor
-      geomagnetic storm and forbush decreases are ignored.
+  - description: |
+      The PARMA model was developed by the Japan Atomic Energy Agency (JAEA) and estimates fluxes of neutrons, protons, ions, muons, electrons, positrons, and photons on a given date, latitude, longitude, and altitude. A comprehensive description of PARMA can be found in the publications <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160390">here</a> and <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144679">here</a>.<br><br> <br><br> Note: accounts for heliocentric potential modulation only, minor geomagnetic storm and forbush decreases are ignored.
     name: parma
     x-displayName: PARMA API
 paths:
   /cari7/ambient_dose:
     get:
-      description: >
-        The ambient dose equivalent, H*(10), is an operational quantity
-        that simulates the  human body by measuring the dose equivalent at a
-        depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It
-        is a measurable quantity that is  used to calibrate area monitors
-        (radiation detectors) for mixed radiation fields. 
-
+      description: |
+        The ambient dose equivalent, H*(10), is an operational quantity that simulates the  human body by measuring the dose equivalent at a depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It is a measurable quantity that is  used to calibrate area monitors (radiation detectors) for mixed radiation fields. 
         Use this endpoint if you are comparing model predictions to measurements.
       operationId: app.api_cari7.endpoints.CARI7.ambient_dose
       parameters:
-        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the
-            upper limit of the stratosphere).
+        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the upper limit of the stratosphere).
           in: query
           name: altitude
           required: true
@@ -154,9 +97,8 @@ paths:
           schema:
             example: 3
             type: integer
-        - description: >
-            The particle type as a string. Specifying 'total' returns the dose
-            for all particle types.
+        - description: |
+            The particle type as a string. Specifying 'total' returns the dose for all particle types.
           in: query
           name: particle
           required: true
@@ -221,17 +163,14 @@ paths:
                     type: object
                 type: object
           description: Successful dose calculation
-      summary: >
-        The ambient dose equivalent rate calculated for a single particle type,
-        or accumulated over all particle types.
+      summary: |
+        The ambient dose equivalent rate calculated for a single particle type, or accumulated over all particle types.
       tags:
         - cari7
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/cari7/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/cari7/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total" -H  "accept: application/json"
         - lang: Python
           source: |
             import requests
@@ -263,18 +202,15 @@ paths:
             print(f"Dose rate is {dose_rate_val} {units}")
   /cari7/effective_dose:
     get:
-      description: >
-        Effective Dose is a radiation protection quantity defined by the
-        International Commission on
+      description: |
+        Effective Dose is a radiation protection quantity defined by the International Commission on
          Radiological Protection (ICRP) and represents the stochastic health
          risk to the human body at low levels of radiation.
         It accounts for the different sensitivities of organs to ionising radiation, as well as the different effectiveness of various types of radiation.
-
         Use this endpoint if you need to estimate radiation exposures of personnel.
       operationId: app.api_cari7.endpoints.CARI7.effective_dose
       parameters:
-        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the
-            upper limit of the stratosphere).
+        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the upper limit of the stratosphere).
           in: query
           name: altitude
           required: true
@@ -323,9 +259,8 @@ paths:
           schema:
             example: 3
             type: integer
-        - description: >
-            The particle type as a string. Specifying 'total' returns the dose
-            for all particle types.
+        - description: |
+            The particle type as a string. Specifying 'total' returns the dose for all particle types.
           in: query
           name: particle
           required: true
@@ -390,17 +325,14 @@ paths:
                     type: object
                 type: object
           description: Successful dose calculation
-      summary: >
-        The effective dose rate calculated for a single particle type, or
-        accumulated over all particle types.
+      summary: |
+        The effective dose rate calculated for a single particle type, or accumulated over all particle types.
       tags:
         - cari7
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/cari7/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/cari7/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total" -H  "accept: application/json"
         - lang: Python
           source: |
             import requests
@@ -432,29 +364,20 @@ paths:
             print(f"Dose rate is {dose_rate_val} {units}")
   /parma/ambient_dose:
     get:
-      description: >
-        The ambient dose equivalent, H*(10), is an operational quantity
-        that simulates the  human body by measuring the dose equivalent at a
-        depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It
-        is a measurable quantity that is  used to calibrate area monitors
-        (radiation detectors) for mixed radiation fields. 
-
+      description: |
+        The ambient dose equivalent, H*(10), is an operational quantity that simulates the  human body by measuring the dose equivalent at a depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It is a measurable quantity that is  used to calibrate area monitors (radiation detectors) for mixed radiation fields. 
         Use this endpoint if you are comparing model predictions to measurements.
       operationId: app.api_parma.endpoints.PARMA.ambient_dose
       parameters:
-        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the
-            upper limit of the stratosphere).
+        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the upper limit of the stratosphere).
           in: query
           name: altitude
           required: false
           schema:
             example: 11
             type: number
-        - description: >
-            Atmospheric depth from the top of the atmosphere (in units of
-            g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2.
-            WARNING: you can specify either altitude OR atmospheric depth, not
-            both.
+        - description: |
+            Atmospheric depth from the top of the atmosphere (in units of g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2. WARNING: you can specify either altitude OR atmospheric depth, not both.
           in: query
           name: atmospheric_depth
           required: false
@@ -496,9 +419,8 @@ paths:
           schema:
             example: 1
             type: integer
-        - description: >
-            The particle type as a string. Specifying 'total', only used for
-            the dose calculation, returns the dose for all particle types.
+        - description: |
+            The particle type as a string. Specifying 'total', only used for the dose calculation, returns the dose for all particle types.
           in: query
           name: particle
           required: true
@@ -534,17 +456,14 @@ paths:
                     type: object
                 type: object
           description: Successful dose read operation
-      summary: >
-        The ambient dose equivalent rate calculated for a single particle type,
-        or accumulated over all particle types.
+      summary: |
+        The ambient dose equivalent rate calculated for a single particle type, or accumulated over all particle types.
       tags:
         - parma
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/parma/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton"  -H  "accept:
-            application/json"
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/parma/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton"  -H  "accept: application/json"
         - lang: Python
           source: |
             import requests
@@ -575,27 +494,19 @@ paths:
             print(f"Dose rate is {dose_rate_val} {units}")
   /parma/differential_intensity:
     get:
-      description: >
-        The differential intensity of a particle is a directional quantity
-        that describes the number of particles per unit area, per unit solid
-        angle, per unit energy, and per unit time. The API leverages the
-        functionality of PARMA to calculate differential intensity distributions
-        with energies in units of MeV and Intensity in units of /cm2/sr/MeV/s.
+      description: |
+        The differential intensity of a particle is a directional quantity that describes the number of particles per unit area, per unit solid angle, per unit energy, and per unit time. The API leverages the functionality of PARMA to calculate differential intensity distributions with energies in units of MeV and Intensity in units of /cm2/sr/MeV/s.
       operationId: app.api_parma.endpoints.PARMA.differential_intensity
       parameters:
-        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the
-            upper limit of the stratosphere).
+        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the upper limit of the stratosphere).
           in: query
           name: altitude
           required: false
           schema:
             example: 11
             type: number
-        - description: >
-            Atmospheric depth from the top of the atmosphere (in units of
-            g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2.
-            WARNING: you can specify either altitude OR atmospheric depth, not
-            both.
+        - description: |
+            Atmospheric depth from the top of the atmosphere (in units of g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2. WARNING: you can specify either altitude OR atmospheric depth, not both.
           in: query
           name: atmospheric_depth
           required: false
@@ -637,9 +548,8 @@ paths:
           schema:
             example: 1
             type: integer
-        - description: >
-            The particle type as a string. Specifying 'total', only used for
-            the dose calculation, returns the dose for all particle types.
+        - description: |
+            The particle type as a string. Specifying 'total', only used for the dose calculation, returns the dose for all particle types.
           in: query
           name: particle
           required: true
@@ -861,14 +771,11 @@ paths:
         - parma
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/parma/differential_intensity?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton&angle=1.0"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/parma/differential_intensity?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton&angle=1.0" -H  "accept: application/json"
         - lang: Python
-          source: >
+          source: |
             import requests
-
 
             parameters = {
                 "altitude" : 11, # km 
@@ -881,12 +788,9 @@ paths:
                 "angle" : 1.0
             }
 
-
             url = "https://cosmicrays.amentum.space/parma/differential_intensity"
 
-
             # make the call and handle errors
-
             try:
                 response = requests.get(url, params=parameters) 
                 response.raise_for_status()
@@ -896,44 +800,29 @@ paths:
                 print("Request error", e)
 
             # retrieve and return the flux
-
             json_payload = response.json()
 
-
             kes = json_payload["energies"]["data"] # MeV
-
             flux = json_payload["intensities"]["data"] # /cm2/s/sr/MeV
 
-
             print(f"Kinetic energies: {kes} MeV")
-
             print(f"Intensities: {flux} /cm2/s/sr/MeV")
   /parma/effective_dose:
     get:
-      description: >
-        Effective dose is a radiation protection quantity defined by the
-        International Commission on Radiological Protection (ICRP) and
-        represents the stochastic health risk to the human body at low levels of
-        radiation. It accounts for the different sensitivities of organs to
-        ionising radiation, as well as the different effectiveness of various
-        types of radiation.
-
+      description: |
+        Effective dose is a radiation protection quantity defined by the International Commission on Radiological Protection (ICRP) and represents the stochastic health risk to the human body at low levels of radiation. It accounts for the different sensitivities of organs to ionising radiation, as well as the different effectiveness of various types of radiation.
         Use this endpoint if you need to estimate radiation exposures of personnel.
       operationId: app.api_parma.endpoints.PARMA.effective_dose
       parameters:
-        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the
-            upper limit of the stratosphere).
+        - description: Altitude (in km). The minimum is 0 m, the maximum is 47 km (the upper limit of the stratosphere).
           in: query
           name: altitude
           required: false
           schema:
             example: 11
             type: number
-        - description: >
-            Atmospheric depth from the top of the atmosphere (in units of
-            g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2.
-            WARNING: you can specify either altitude OR atmospheric depth, not
-            both.
+        - description: |
+            Atmospheric depth from the top of the atmosphere (in units of g/cm2). The minimum is 0.913 g/cm2, the maximum is 1032.66 g/cm2. WARNING: you can specify either altitude OR atmospheric depth, not both.
           in: query
           name: atmospheric_depth
           required: false
@@ -975,9 +864,8 @@ paths:
           schema:
             example: 1
             type: integer
-        - description: >
-            The particle type as a string. Specifying 'total', only used for
-            the dose calculation, returns the dose for all particle types.
+        - description: |
+            The particle type as a string. Specifying 'total', only used for the dose calculation, returns the dose for all particle types.
           in: query
           name: particle
           required: true
@@ -1013,17 +901,14 @@ paths:
                     type: object
                 type: object
           description: Successful dose read operation
-      summary: >
-        The effective dose rate calculated for a single particle type, or
-        accumulated over all particle types.
+      summary: |
+        The effective dose rate calculated for a single particle type, or accumulated over all particle types.
       tags:
         - parma
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/parma/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=total"
-            -H  "accept: application/json" 
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/parma/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=total" -H  "accept: application/json" 
         - lang: Python
           source: |
             import requests
@@ -1054,28 +939,18 @@ paths:
             print(f"Dose rate is {dose_rate_val} {units}")
   /route/ambient_dose:
     get:
-      description: >
-        The ambient dose equivalent, H*(10), is an operational quantity
-        that simulates the  human body by measuring the dose equivalent at a
-        depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It
-        is a measurable quantity that is  used to calibrate area monitors
-        (radiation detectors) for mixed radiation fields.  <br> <br> Use this
-        endpoint if you are comparing model predictions to measurements. <br>
-        <br> Note: the airport codes or coordinates (depending on which was
-        specified), and the date in DD/MM/YYYY format, are echoed in the json
-        response as strings.
+      description: |
+        The ambient dose equivalent, H*(10), is an operational quantity that simulates the  human body by measuring the dose equivalent at a depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It is a measurable quantity that is  used to calibrate area monitors (radiation detectors) for mixed radiation fields.  <br> <br> Use this endpoint if you are comparing model predictions to measurements. <br> <br> Note: the airport codes or coordinates (depending on which was specified), and the date in DD/MM/YYYY format, are echoed in the json response as strings.
       operationId: app.api_icaro.endpoints.ICARO.ambient_dose
       parameters:
-        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal
-            degrees) of the origin airport.
+        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal degrees) of the origin airport.
           in: query
           name: origin
           required: true
           schema:
             example: YSSY
             type: string
-        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal
-            degrees) of the destination airport.
+        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal degrees) of the destination airport.
           in: query
           name: destination
           required: true
@@ -1089,8 +964,7 @@ paths:
           schema:
             example: 10.1
             type: number
-        - description: The flight duration in hours. The minimum is 0, the maximum is 20
-            hrs.
+        - description: The flight duration in hours. The minimum is 0, the maximum is 20 hrs.
           in: query
           name: duration
           required: true
@@ -1146,20 +1020,17 @@ paths:
                     type: object
                 type: object
           description: Successful dose calculation
-      summary: >
+      summary: |
         Calculates the ambient equivalent dose along a great circle flight route.
       tags:
         - icaro
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/route/ambient_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/route/ambient_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21" -H  "accept: application/json"
         - lang: Python
-          source: >
+          source: |
             import requests
-
 
             params = {
               "origin" : "YSSY", # can be ICAO or iATA codes
@@ -1170,7 +1041,6 @@ paths:
               "month" : 5,
               "day" : 21
             }
-
 
             try:
               response = requests.get("https://cosmicrays.amentum.space/route/ambient_dose",
@@ -1184,24 +1054,21 @@ paths:
               print(f"Total Ambient Dose was {dose:.2f} uSv")
   /route/effective_dose:
     get:
-      description: >
-        Effective Dose is a radiation protection quantity defined by the
-        International Commission on
+      description: |
+        Effective Dose is a radiation protection quantity defined by the International Commission on
          Radiological Protection (ICRP) and represents the stochastic health
          risk to the human body at low levels of radiation.
         It accounts for the different sensitivities of organs to ionising radiation, as well as the different effectiveness of various types of radiation. <br> <br> Use this endpoint if you need to estimate radiation exposures of personnel. <br> <br> Note: the airport codes or coordinates (depending on which was specified), and the date in DD/MM/YYYY format, are echoed in the json response as strings.
       operationId: app.api_icaro.endpoints.ICARO.effective_dose
       parameters:
-        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal
-            degrees) of the origin airport.
+        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal degrees) of the origin airport.
           in: query
           name: origin
           required: true
           schema:
             example: YSSY
             type: string
-        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal
-            degrees) of the destination airport.
+        - description: The ICAO code or IATA code or latitude,longitude pair (in decimal degrees) of the destination airport.
           in: query
           name: destination
           required: true
@@ -1215,8 +1082,7 @@ paths:
           schema:
             example: 10.1
             type: number
-        - description: The flight duration in hours. The minimum is 0, the maximum is 20
-            hrs.
+        - description: The flight duration in hours. The minimum is 0, the maximum is 20 hrs.
           in: query
           name: duration
           required: true
@@ -1278,14 +1144,11 @@ paths:
         - icaro
       x-codeSamples:
         - lang: Shell
-          source: >
-            curl -X GET
-            "https://cosmicrays.amentum.space/route/effective_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21"
-            -H  "accept: application/json"
+          source: |
+            curl -X GET "https://cosmicrays.amentum.space/route/effective_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21" -H  "accept: application/json"
         - lang: Python
-          source: >
+          source: |
             import requests
-
 
             params = {
               "origin" : "YSSY", # can be ICAO or iATA codes
@@ -1296,7 +1159,6 @@ paths:
               "month" : 5,
               "day" : 21
             } 
-
             try:
               response = requests.get("https://cosmicrays.amentum.space/route/effective_dose",
                 params=params)

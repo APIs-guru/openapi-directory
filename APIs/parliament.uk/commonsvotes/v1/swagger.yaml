@@ -79,24 +79,19 @@ paths:
           name: queryParameters.includeWhenMemberWasTeller
           required: false
           type: boolean
-        - description: Divisions where division date in one or after date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.startDate
           required: false
           type: string
-        - description: Divisions where division date in one or before date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.endDate
           required: false
           type: string
-        - description: Division Number - as specified by the House, unique within a
-            session. This is different to the division id which uniquely
-            identifies a division in this system and is passed to the GET
-            division endpoint
+        - description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
           format: int32
           in: query
           name: queryParameters.divisionNumber
@@ -158,24 +153,19 @@ paths:
           name: queryParameters.includeWhenMemberWasTeller
           required: false
           type: boolean
-        - description: Divisions where division date in one or after date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.startDate
           required: false
           type: string
-        - description: Divisions where division date in one or before date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.endDate
           required: false
           type: string
-        - description: Division Number - as specified by the House, unique within a
-            session. This is different to the division id which uniquely
-            identifies a division in this system and is passed to the GET
-            division endpoint
+        - description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
           format: int32
           in: query
           name: queryParameters.divisionNumber
@@ -235,24 +225,19 @@ paths:
           name: queryParameters.includeWhenMemberWasTeller
           required: false
           type: boolean
-        - description: Divisions where division date in one or after date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.startDate
           required: false
           type: string
-        - description: Divisions where division date in one or before date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.endDate
           required: false
           type: string
-        - description: Division Number - as specified by the House, unique within a
-            session. This is different to the division id which uniquely
-            identifies a division in this system and is passed to the GET
-            division endpoint
+        - description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
           format: int32
           in: query
           name: queryParameters.divisionNumber
@@ -300,24 +285,19 @@ paths:
           name: queryParameters.includeWhenMemberWasTeller
           required: false
           type: boolean
-        - description: Divisions where division date in one or after date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.startDate
           required: false
           type: string
-        - description: Divisions where division date in one or before date provided. Date
-            format is yyyy-MM-dd
+        - description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
           format: date-time
           in: query
           name: queryParameters.endDate
           required: false
           type: string
-        - description: Division Number - as specified by the House, unique within a
-            session. This is different to the division id which uniquely
-            identifies a division in this system and is passed to the GET
-            division endpoint
+        - description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
           format: int32
           in: query
           name: queryParameters.divisionNumber
@@ -371,15 +351,11 @@ definitions:
   MemberSearchQueryParameters:
     properties:
       DivisionNumber:
-        description: Division Number - as specified by the House, unique within a
-          session. This is different to the division id which uniquely
-          identifies a division in this system and is passed to the GET division
-          endpoint
+        description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
         format: int32
         type: integer
       EndDate:
-        description: Divisions where division date in one or before date provided. Date
-          format is yyyy-MM-dd
+        description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
         format: date-time
         type: string
       IncludeWhenMemberWasTeller:
@@ -399,8 +375,7 @@ definitions:
         format: int32
         type: integer
       StartDate:
-        description: Divisions where division date in one or after date provided. Date
-          format is yyyy-MM-dd
+        description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
         format: date-time
         type: string
       Take:
@@ -498,15 +473,11 @@ definitions:
   QueryParameters:
     properties:
       DivisionNumber:
-        description: Division Number - as specified by the House, unique within a
-          session. This is different to the division id which uniquely
-          identifies a division in this system and is passed to the GET division
-          endpoint
+        description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
         format: int32
         type: integer
       EndDate:
-        description: Divisions where division date in one or before date provided. Date
-          format is yyyy-MM-dd
+        description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
         format: date-time
         type: string
       IncludeWhenMemberWasTeller:
@@ -520,8 +491,7 @@ definitions:
         description: Divisions containing search term within title or number
         type: string
       StartDate:
-        description: Divisions where division date in one or after date provided. Date
-          format is yyyy-MM-dd
+        description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
         format: date-time
         type: string
     type: object
@@ -550,15 +520,11 @@ definitions:
   SearchQueryParameters:
     properties:
       DivisionNumber:
-        description: Division Number - as specified by the House, unique within a
-          session. This is different to the division id which uniquely
-          identifies a division in this system and is passed to the GET division
-          endpoint
+        description: Division Number - as specified by the House, unique within a session. This is different to the division id which uniquely identifies a division in this system and is passed to the GET division endpoint
         format: int32
         type: integer
       EndDate:
-        description: Divisions where division date in one or before date provided. Date
-          format is yyyy-MM-dd
+        description: Divisions where division date in one or before date provided. Date format is yyyy-MM-dd
         format: date-time
         type: string
       IncludeWhenMemberWasTeller:
@@ -576,8 +542,7 @@ definitions:
         format: int32
         type: integer
       StartDate:
-        description: Divisions where division date in one or after date provided. Date
-          format is yyyy-MM-dd
+        description: Divisions where division date in one or after date provided. Date format is yyyy-MM-dd
         format: date-time
         type: string
       Take:

@@ -4,112 +4,67 @@ servers:
   - url: https://mobilesdk.telematicssdk.com
 info:
   contact: {}
-  description: >-
+  description: |-
     # Introduction
-
     We have prepared a set of APIs for quick start to integrate telematics SDK that powers mobile telematics inside 3rd party mobile applications.
 
-
     * [CONTACT US](https://telematicssdk.com)
-
     * [SANDBOX](https://userdatahub.com)
-
     * [DEV.PORTAL](https://docs.telematicssdk.com)
-
     * [DEMO APP](https://raxeltelematics.com/telematics-app)
 
 
-
     # Overview
-
     Datamotion provides telematics infrastructure for mobile applications. 
-
 
     Telematics SDK turns any smartphone into telematics data gathering device to collect Location, driving and behavior data. API services unlocks power of your mobile application
 
-
     There are 3 groups of methods:
-
     * 1 - user management
-
     * 2 - statistics for mobile app
-
     * 3 - statistics for back-end(s)
 
-
     in certain cases you will need SNS or any other notification services. read more [here](https://docs.telematicssdk.com/platform-features/sns)
-
     # Possible architecture
 
-
     There are three common schemes that are used by our clients. These schemes can be combined
-
     * Collect, Process, Store (required: 1&2)
-
     * Collect, Process (required: 1& sns)
-
     * Collect (required 1&sns)
 
 
-
     ## Collect, Process, Store
-
     ![Collect, Process, Store](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/Architecture+-+Collection%2C+processing%2C+storage)
 
-
     ## Collect, Process
-
     ![Collect, Process](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/Architecture+-+Collection+and+processing)
 
-
     ## Collect
-
     ![Collect](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/Architecture+-+Collection+only)
 
-
     ***
-
     ![Telematic sdk](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Github/transportation_small.png)
 
-
     # Common use-cases:
-
     * Safe and efficient driving
-
     * Usage-based insurance
-
     * Safe driving assessment
-
     * Driver assessment
-
     * Trip log
-
     * Geo-analysis
-
     * Accident monitoring
-
     * Driving engagements
-
     * Location based services
-
     * Realtime Tracking
-
     and beyond
 
-
     # How to start
-
     * Register a [SANDBOX ACCOUNT](https://userdatahub.com)
-
     * Get [CREDENTIALS](https://docs.userdatahub.com/sandbox/credentials) 
-
     * Follow the guide from [DEVELOPER POERTAL](https://docs.telematicssdk.com)
 
-
     # Authentication
-
     To create a user on datamotion platform, you require to use InstanceID and InstanceKEY. You can get it in Datahub -> management -> user-service credentials
-
 
     Once you create a user, you will get Device token, JWT token and refresh token. then, you will use it for APIs
   title: Quick start - Telematics SDK
@@ -124,46 +79,34 @@ info:
       version: 2.x
   x-providerName: telematicssdk.com
 tags:
-  - description: >-
+  - description: |-
       # Introduction
-
       if you build an integration when all statistics data coming from your own server, only "Create telematics SDK user" required.
-
 
       Refresh JWT and Login method are required if you are going to use our APIs to get data and services and use it in mobile app
 
-
       # Scheme
-
       ![user-service integration](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/user+service+integration.png)
     name: 1. User management (Required)
-  - description: >-
+  - description: |-
       # Introduction
-
       These API services designed to use it inside a mobile applications to get statistics data and services directly from telematics platform and show it in the app
 
-
       # Scheme
-
       ![API statistics](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/API+statistics+integration.png)
     name: 2. For mobile app (Optional)
   - name: 2.1. User statistics (Optional)
   - name: 2.2. User trips (Optional)
   - name: 2.3. User eco scoring (Optional)
   - name: 2.4. User safe scoring (Optional)
-  - description: >-
+  - description: |-
       # Introduction
-
       The methods are required to have an admin authentication.
 
-
       # How to get admin credentials
-
       Please create admin credentials in [Datahub](https://userdatahub.com) and use method v1/Auth/Login (1. User management)
 
-
       # Scheme
-
       ![Admin statistics integration](https://website-cliparts-datamotion.s3.us-east-2.amazonaws.com/Dev.portal/admin+statistics+integration.png)
     name: 3. For back-end (Optional)
   - name: Consolidated statistics
@@ -213,11 +156,9 @@ paths:
                         Distance: 2.215
                         DrivingTips: "Why you have rating 40 on this trip:\r
 
-                          - Rapid Acceleration - 2.73
-                          m/ss, time 13:37:07, speed 43 km/h\r
+                          - Rapid Acceleration - 2.73 m/ss, time 13:37:07, speed 43 km/h\r
 
-                          - Harsh Braking - -3.76
-                          m/ss, time 13:39:48, speed 54 km/h"
+                          - Harsh Braking - -3.76 m/ss, time 13:39:48, speed 54 km/h"
                         Duration: 5.9
                         EcoScore: 91
                         EcoScoreBrakes: 100
@@ -2377,11 +2318,9 @@ paths:
                           DrivingTips:
                             example: "Why you have rating 40 on this trip:\r
 
-                              - Rapid Acceleration
-                              - 2.73 m/ss, time 13:37:07, speed 43 km/h\r
+                              - Rapid Acceleration - 2.73 m/ss, time 13:37:07, speed 43 km/h\r
 
-                              - Harsh Braking -
-                              -3.76 m/ss, time 13:39:48, speed 54 km/h"
+                              - Harsh Braking - -3.76 m/ss, time 13:39:48, speed 54 km/h"
                             type: string
                           Duration:
                             example: 5.9
@@ -2569,8 +2508,7 @@ paths:
                 type: string
             Expect-CT:
               schema:
-                example: max-age=604800,
-                  report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
                 type: string
             NEL:
               schema:
@@ -2865,15 +2803,11 @@ paths:
         - Consolidated safe scoring
   /statistics/v1/Scorings/individual/:
     get:
-      description: >-
-        Safe driving score API. This API is a part of Telematics API that
-        we provide to our clients.
-
+      description: |-
+        Safe driving score API. This API is a part of Telematics API that we provide to our clients.
 
         Rating description presents the universal approach, developed by our company on the basis of many years of experience; most of the input variables presented in this document could be adopted depending on the needs of the company and the focus on the specific characteristics of clients' driving style.
-
         Since 2019 we have moved to the 3rd Generation of the scoring model which allows distinguishing a context of events and add penalty points in accordance with a level of risk generated by an event
-
 
         [More details](https://docs.telematicssdk.com)
       operationId: userSafeScoringAccumulatedValueV1/scorings/individual
