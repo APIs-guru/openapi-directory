@@ -70,7 +70,67 @@ tags:
     name: WiM (Wechselprozesse im Messwesen Strom - Status API)
   - description: Helper services and endpoints for smarthome and home automation systems.
     name: SmartHome
+  - description: Alternative access to OpenMeter Data.
+    name: OpenMETER
 paths:
+  /alternative/openmeter/activities:
+    get:
+      description: >
+        Provides a list of available meterrs in the OpenMETER project (
+        https://www.openmeter.de/ ) which grants access for analytics as data
+        discovery.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ommeters"
+                type: array
+          description: Success
+      summary: Public shared smart meters installed in Germany and available for
+        subservices and exploration.
+      tags:
+        - OpenMETER
+  /alternative/openmeter/meters:
+    get:
+      description: >
+        Provides a list of available meterrs in the OpenMETER project (
+        https://www.openmeter.de/ ) which grants access for analytics as data
+        discovery.
+      operationId: omMeters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ommeters"
+                type: array
+          description: Success
+      summary: Public shared smart meters installed in Germany and available for
+        subservices and exploration.
+      tags:
+        - OpenMETER
+  /alternative/openmeter/readings:
+    get:
+      description: >
+        Provides a list of available meterrs in the OpenMETER project (
+        https://www.openmeter.de/ ) which grants access for analytics as data
+        discovery.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ommeters"
+                type: array
+          description: Success
+      summary: Public shared smart meters installed in Germany and available for
+        subservices and exploration.
+      tags:
+        - OpenMETER
   /gsi/bestHour:
     get:
       description: >
@@ -559,6 +619,42 @@ paths:
       summary: Register (new Stromkonto)
       tags:
         - Stromkonto (Ledger)
+  /tariff/components:
+    get:
+      description: >
+        Provides insides into the different cost components of energy for a
+        private household.
+
+        Sample Request: https://api.corrently.io/v2.0/tariff/components?email=demo%40corrently.io&zip=69168&kwha=3300
+      operationId: tariffcomponents
+      parameters:
+        - description: Zipcode (Postzleitzahl) of a city in Germany.
+          in: query
+          name: zipcode
+          schema:
+            type: string
+        - description: Valid email address to assign request to (pre offer generation).
+            Ensure GDPR (DSGVO) at any time
+          in: query
+          name: email
+          schema:
+            type: string
+        - description: Total amount of energy in kilo-watt-hours per year. (sample 2100)
+          in: query
+          name: kwha
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/componentsh0"
+                type: object
+          description: Success
+      summary: Energy Tariff price components
+      tags:
+        - Tariff (Price API)
   /tariff/slph0:
     get:
       description: >
@@ -734,5 +830,65 @@ components:
         value:
           description: Amount covered by transaction
           example: 1337
+          type: integer
+      type: object
+    componentsh0:
+      properties:
+        components:
+          description: Sub components of this price
+          items:
+            $ref: "#/components/schemas/componentsh0"
+          type: array
+        describtion:
+          description: What is this price component about
+          example: Grundgebühr
+          type: string
+        mutlityplier:
+          description: Frequency/dependency of component
+          example: month
+          type: string
+        per:
+          description: Single unit price multiyplier is based on
+          example: 0.012
+          format: double
+          type: number
+        sum:
+          description: Total sum in Euro for this price component.
+          example: 22.12
+          format: double
+          type: number
+      type: object
+    ommeters:
+      properties:
+        currentScalingFactor:
+          description: Factor imposed on metered current by a transducer
+          type: integer
+        loadProfileType:
+          description: Metering load profile type associated with the meter
+          type: string
+        location:
+          description: Basic address information for geo coding
+          type: string
+        manufacturerId:
+          description: DLMS manufacturerId
+          type: string
+        measurementType:
+          description: Physical quantity being measured by the meter
+          type: string
+        meta:
+          description: Statistical metadata for this household
+          type: string
+        meterId:
+          description: identifier to be used in other methods like readings or activities.
+          example: gAAAAABgsYVSfcCjJZV5w2wGBTzOXCihY7dMaDyypwcbJzAELvxeCDaXiy65H2QwtY-7usSOfoqEIomTJjQb1yyIXZfFnTY2pmLgIu_DVw1rjppFte56yWBD5Fgrmbh2KyOkMNUr8zxO
+          type: string
+        scalingFactor:
+          description: Factor imposed on metered current AND voltage by a transducer
+          type: integer
+        type:
+          description: Device type of the meter
+          type: string
+        voltageScalingFactor:
+          description: Factor imposed on metered voltage by a transducer
           type: integer
       type: object
