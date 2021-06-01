@@ -7430,6 +7430,12 @@ paths:
                 - $ref: '#/components/schemas/TagSpecification'
                 - xml:
                     name: item
+        - name: ClientToken
+          in: query
+          required: false
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -49368,6 +49374,12 @@ components:
             - xml:
                 name: networkInterface
               description: Information about the network interface.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: clientToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
       description: Contains the output of CreateNetworkInterface.
     InstanceIpv6Address:
       type: object
@@ -62535,6 +62547,10 @@ components:
             - xml:
                 name: TagSpecification
               description: The tags to apply to the new network interface.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
       description: Contains the parameters for CreateNetworkInterface.
     NetworkInterface:
       type: object

@@ -570,7 +570,7 @@ paths:
         - name: Attributes
           in: query
           required: true
-          description: 'For a list of attributes, see <a href="https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html">SetPlatformApplicationAttributes</a> '
+          description: 'For a list of attributes, see <a href="https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html">SetPlatformApplicationAttributes</a>.'
           schema:
             type: object
             additionalProperties:
@@ -786,6 +786,173 @@ paths:
             type: string
             enum:
               - '2010-03-31'
+  /#Action=CreateSMSSandboxPhoneNumber:
+    get:
+      x-aws-operation-name: CreateSMSSandboxPhoneNumber
+      operationId: GET_CreateSMSSandboxPhoneNumber
+      description: '<p>Adds a destination phone number to an AWS account in the SMS sandbox and sends a one-time password (OTP) to that phone number.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateSMSSandboxPhoneNumberResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: OptedOutException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OptedOutException'
+        '484':
+          description: UserErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserErrorException'
+        '485':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters:
+        - name: PhoneNumber
+          in: query
+          required: true
+          description: 'The destination phone number to verify. On verification, Amazon SNS adds this phone number to the list of verified phone numbers that you can send SMS messages to.'
+          schema:
+            type: string
+            pattern: '^(\+[0-9]{8,}|[0-9]{0,9})$'
+            maxLength: 20
+        - name: LanguageCode
+          in: query
+          required: false
+          description: The language to use for sending the OTP. The default value is <code>en-US</code>.
+          schema:
+            type: string
+            enum:
+              - en-US
+              - en-GB
+              - es-419
+              - es-ES
+              - de-DE
+              - fr-CA
+              - fr-FR
+              - it-IT
+              - ja-JP
+              - pt-BR
+              - kr-KR
+              - zh-CN
+              - zh-TW
+            description: Supported language code for sending OTP message
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateSMSSandboxPhoneNumber
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateSMSSandboxPhoneNumber
+      operationId: POST_CreateSMSSandboxPhoneNumber
+      description: '<p>Adds a destination phone number to an AWS account in the SMS sandbox and sends a one-time password (OTP) to that phone number.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateSMSSandboxPhoneNumberResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: OptedOutException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OptedOutException'
+        '484':
+          description: UserErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserErrorException'
+        '485':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateSMSSandboxPhoneNumberInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateSMSSandboxPhoneNumber
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
   /#Action=CreateTopic:
     get:
       x-aws-operation-name: CreateTopic
@@ -862,7 +1029,7 @@ paths:
         - name: Attributes
           in: query
           required: false
-          description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>CreateTopic</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>FifoTopic</code> – Set to true to create a FIFO topic.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attributes apply only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO topic is created.</p> </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics. </p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
+          description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>CreateTopic</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>FifoTopic</code> – Set to true to create a FIFO topic.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attributes apply only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO topic is created.</p> </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.</p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
           schema:
             type: object
             additionalProperties:
@@ -1175,6 +1342,152 @@ paths:
             type: string
             enum:
               - DeletePlatformApplication
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+  /#Action=DeleteSMSSandboxPhoneNumber:
+    get:
+      x-aws-operation-name: DeleteSMSSandboxPhoneNumber
+      operationId: GET_DeleteSMSSandboxPhoneNumber
+      description: '<p>Deletes an AWS account''s verified or pending phone number from the SMS sandbox.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteSMSSandboxPhoneNumberResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: UserErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserErrorException'
+        '485':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters:
+        - name: PhoneNumber
+          in: query
+          required: true
+          description: The destination phone number to delete.
+          schema:
+            type: string
+            pattern: '^(\+[0-9]{8,}|[0-9]{0,9})$'
+            maxLength: 20
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteSMSSandboxPhoneNumber
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteSMSSandboxPhoneNumber
+      operationId: POST_DeleteSMSSandboxPhoneNumber
+      description: '<p>Deletes an AWS account''s verified or pending phone number from the SMS sandbox.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteSMSSandboxPhoneNumberResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: UserErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserErrorException'
+        '485':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteSMSSandboxPhoneNumberInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteSMSSandboxPhoneNumber
         - name: Version
           in: query
           required: true
@@ -1692,6 +2005,108 @@ paths:
             type: string
             enum:
               - '2010-03-31'
+  /#Action=GetSMSSandboxAccountStatus:
+    get:
+      x-aws-operation-name: GetSMSSandboxAccountStatus
+      operationId: GET_GetSMSSandboxAccountStatus
+      description: '<p>Retrieves the SMS sandbox status for the calling AWS account in the target AWS Region.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetSMSSandboxAccountStatusResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetSMSSandboxAccountStatus
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetSMSSandboxAccountStatus
+      operationId: POST_GetSMSSandboxAccountStatus
+      description: '<p>Retrieves the SMS sandbox status for the calling AWS account in the target AWS Region.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetSMSSandboxAccountStatusResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetSMSSandboxAccountStatusInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetSMSSandboxAccountStatus
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
   /#Action=GetSubscriptionAttributes:
     get:
       x-aws-operation-name: GetSubscriptionAttributes
@@ -2076,6 +2491,158 @@ paths:
             type: string
             enum:
               - '2010-03-31'
+  /#Action=ListOriginationNumbers:
+    get:
+      x-aws-operation-name: ListOriginationNumbers
+      operationId: GET_ListOriginationNumbers
+      description: 'Lists the calling AWS account''s dedicated origination numbers and their metadata. For more information about origination numbers, see <a href="https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html">Origination numbers</a> in the <i>Amazon SNS Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListOriginationNumbersResult'
+        '480':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '482':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+        '483':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ValidationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: Token that the previous <code>ListOriginationNumbers</code> request returns.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of origination numbers to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 30
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ListOriginationNumbers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ListOriginationNumbers
+      operationId: POST_ListOriginationNumbers
+      description: 'Lists the calling AWS account''s dedicated origination numbers and their metadata. For more information about origination numbers, see <a href="https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html">Origination numbers</a> in the <i>Amazon SNS Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListOriginationNumbersResult'
+        '480':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '482':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+        '483':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ValidationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListOriginationNumbersRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ListOriginationNumbers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
   /#Action=ListPhoneNumbersOptedOut:
     get:
       x-aws-operation-name: ListPhoneNumbersOptedOut
@@ -2303,6 +2870,158 @@ paths:
             type: string
             enum:
               - ListPlatformApplications
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+  /#Action=ListSMSSandboxPhoneNumbers:
+    get:
+      x-aws-operation-name: ListSMSSandboxPhoneNumbers
+      operationId: GET_ListSMSSandboxPhoneNumbers
+      description: '<p>Lists the calling AWS account''s current verified and pending destination phone numbers in the SMS sandbox.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListSMSSandboxPhoneNumbersResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: Token that the previous <code>ListSMSSandboxPhoneNumbersInput</code> request returns.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of phone numbers to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ListSMSSandboxPhoneNumbers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ListSMSSandboxPhoneNumbers
+      operationId: POST_ListSMSSandboxPhoneNumbers
+      description: '<p>Lists the calling AWS account''s current verified and pending destination phone numbers in the SMS sandbox.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListSMSSandboxPhoneNumbersResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListSMSSandboxPhoneNumbersInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ListSMSSandboxPhoneNumbers
         - name: Version
           in: query
           required: true
@@ -3878,7 +4597,7 @@ paths:
         - name: AttributeName
           in: query
           required: true
-          description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics. </p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
+          description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.</p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
           schema:
             type: string
         - name: AttributeValue
@@ -4604,6 +5323,162 @@ paths:
             type: string
             enum:
               - '2010-03-31'
+  /#Action=VerifySMSSandboxPhoneNumber:
+    get:
+      x-aws-operation-name: VerifySMSSandboxPhoneNumber
+      operationId: GET_VerifySMSSandboxPhoneNumber
+      description: '<p>Verifies a destination phone number with a one-time password (OTP) for the calling AWS account.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/VerifySMSSandboxPhoneNumberResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: VerificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/VerificationException'
+        '485':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters:
+        - name: PhoneNumber
+          in: query
+          required: true
+          description: The destination phone number to verify.
+          schema:
+            type: string
+            pattern: '^(\+[0-9]{8,}|[0-9]{0,9})$'
+            maxLength: 20
+        - name: OneTimePassword
+          in: query
+          required: true
+          description: The OTP sent to the destination number from the <code>CreateSMSSandBoxPhoneNumber</code> call.
+          schema:
+            type: string
+            pattern: '^[0-9]+$'
+            description: String of Origination/Destination address including phone numbers and email addresses
+            minLength: 5
+            maxLength: 8
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifySMSSandboxPhoneNumber
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: VerifySMSSandboxPhoneNumber
+      operationId: POST_VerifySMSSandboxPhoneNumber
+      description: '<p>Verifies a destination phone number with a one-time password (OTP) for the calling AWS account.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/VerifySMSSandboxPhoneNumberResult'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InternalErrorException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: InvalidParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: VerificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/VerificationException'
+        '485':
+          description: ThrottledException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/VerifySMSSandboxPhoneNumberInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifySMSSandboxPhoneNumber
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-03-31'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -4701,6 +5576,11 @@ components:
             - $ref: '#/components/schemas/String'
             - description: EndpointArn returned from CreateEndpoint action.
       description: Response from CreateEndpoint action.
+    CreateSMSSandboxPhoneNumberResult:
+      type: object
+      properties: {}
+    OptedOutException: {}
+    UserErrorException: {}
     CreateTopicResponse:
       type: object
       properties:
@@ -4732,6 +5612,10 @@ components:
     StaleTagException: {}
     TagPolicyException: {}
     ConcurrentAccessException: {}
+    DeleteSMSSandboxPhoneNumberResult:
+      type: object
+      properties: {}
+    ResourceNotFoundException: {}
     GetEndpointAttributesResponse:
       type: object
       properties:
@@ -4756,6 +5640,15 @@ components:
             - $ref: '#/components/schemas/MapStringToString'
             - description: The SMS attribute names and their values.
       description: The response from the <code>GetSMSAttributes</code> request.
+    GetSMSSandboxAccountStatusResult:
+      type: object
+      required:
+        - IsInSandbox
+      properties:
+        IsInSandbox:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: Indicates whether the calling account is in the SMS sandbox.
     GetSubscriptionAttributesResponse:
       type: object
       properties:
@@ -4770,7 +5663,7 @@ components:
         Attributes:
           allOf:
             - $ref: '#/components/schemas/TopicAttributesMap'
-            - description: '<p>A map of the topic''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The JSON serialization of the topic''s delivery policy.</p> </li> <li> <p> <code>DisplayName</code> – The human-readable name used in the <code>From</code> field for notifications to <code>email</code> and <code>email-json</code> endpoints.</p> </li> <li> <p> <code>Owner</code> – The AWS account ID of the topic''s owner.</p> </li> <li> <p> <code>Policy</code> – The JSON serialization of the topic''s access control policy.</p> </li> <li> <p> <code>SubscriptionsConfirmed</code> – The number of confirmed subscriptions for the topic.</p> </li> <li> <p> <code>SubscriptionsDeleted</code> – The number of deleted subscriptions for the topic.</p> </li> <li> <p> <code>SubscriptionsPending</code> – The number of subscriptions pending confirmation for the topic.</p> </li> <li> <p> <code>TopicArn</code> – The topic''s ARN.</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the effective delivery policy, taking system defaults into account.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>.</p> </li> </ul> <p>The following attributes apply only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO topic is created.</p> </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics. </p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
+            - description: '<p>A map of the topic''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The JSON serialization of the topic''s delivery policy.</p> </li> <li> <p> <code>DisplayName</code> – The human-readable name used in the <code>From</code> field for notifications to <code>email</code> and <code>email-json</code> endpoints.</p> </li> <li> <p> <code>Owner</code> – The AWS account ID of the topic''s owner.</p> </li> <li> <p> <code>Policy</code> – The JSON serialization of the topic''s access control policy.</p> </li> <li> <p> <code>SubscriptionsConfirmed</code> – The number of confirmed subscriptions for the topic.</p> </li> <li> <p> <code>SubscriptionsDeleted</code> – The number of deleted subscriptions for the topic.</p> </li> <li> <p> <code>SubscriptionsPending</code> – The number of subscriptions pending confirmation for the topic.</p> </li> <li> <p> <code>TopicArn</code> – The topic''s ARN.</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the effective delivery policy, taking system defaults into account.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>.</p> </li> </ul> <p>The following attributes apply only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO topic is created.</p> </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.</p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
       description: Response for GetTopicAttributes action.
     ListEndpointsByPlatformApplicationResponse:
       type: object
@@ -4784,6 +5677,18 @@ components:
             - $ref: '#/components/schemas/String'
             - description: NextToken string is returned when calling ListEndpointsByPlatformApplication action if additional records are available after the first page results.
       description: Response for ListEndpointsByPlatformApplication action.
+    ListOriginationNumbersResult:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: A <code>NextToken</code> string is returned when you call the <code>ListOriginationNumbers</code> operation if additional pages of records are available.
+        PhoneNumbers:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberInformationList'
+            - description: A list of the calling account's verified and pending origination numbers.
+    ValidationException: {}
     ListPhoneNumbersOptedOutResponse:
       type: object
       properties:
@@ -4808,6 +5713,19 @@ components:
             - $ref: '#/components/schemas/String'
             - description: NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
       description: Response for ListPlatformApplications action.
+    ListSMSSandboxPhoneNumbersResult:
+      type: object
+      required:
+        - PhoneNumbers
+      properties:
+        PhoneNumbers:
+          allOf:
+            - $ref: '#/components/schemas/SMSSandboxPhoneNumberList'
+            - description: A list of the calling account's pending and verified phone numbers.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A <code>NextToken</code> string is returned when you call the <code>ListSMSSandboxPhoneNumbersInput</code> operation if additional pages of records are available.
     ListSubscriptionsResponse:
       type: object
       properties:
@@ -4839,7 +5757,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags associated with the specified topic.
-    ResourceNotFoundException: {}
     ListTopicsResponse:
       type: object
       properties:
@@ -4917,6 +5834,11 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    VerifySMSSandboxPhoneNumberResult:
+      type: object
+      properties: {}
+      description: The destination phone number's verification status.
+    VerificationException: {}
     ActionsList:
       type: array
       items:
@@ -5024,7 +5946,7 @@ components:
         Attributes:
           allOf:
             - $ref: '#/components/schemas/MapStringToString'
-            - description: 'For a list of attributes, see <a href="https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html">SetPlatformApplicationAttributes</a> '
+            - description: 'For a list of attributes, see <a href="https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html">SetPlatformApplicationAttributes</a>.'
       description: Input for CreatePlatformApplication action.
     CreatePlatformEndpointInput:
       type: object
@@ -5050,6 +5972,41 @@ components:
             - $ref: '#/components/schemas/MapStringToString'
             - description: 'For a list of attributes, see <a href="https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html">SetEndpointAttributes</a>.'
       description: Input for CreatePlatformEndpoint action.
+    PhoneNumberString:
+      type: string
+      pattern: '^(\+[0-9]{8,}|[0-9]{0,9})$'
+      maxLength: 20
+    LanguageCodeString:
+      type: string
+      enum:
+        - en-US
+        - en-GB
+        - es-419
+        - es-ES
+        - de-DE
+        - fr-CA
+        - fr-FR
+        - it-IT
+        - ja-JP
+        - pt-BR
+        - kr-KR
+        - zh-CN
+        - zh-TW
+      description: Supported language code for sending OTP message
+    CreateSMSSandboxPhoneNumberInput:
+      type: object
+      required:
+        - PhoneNumber
+      title: CreateSMSSandboxPhoneNumberInput
+      properties:
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberString'
+            - description: 'The destination phone number to verify. On verification, Amazon SNS adds this phone number to the list of verified phone numbers that you can send SMS messages to.'
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCodeString'
+            - description: The language to use for sending the OTP. The default value is <code>en-US</code>.
     topicName:
       type: string
     TopicAttributesMap:
@@ -5073,7 +6030,7 @@ components:
         Attributes:
           allOf:
             - $ref: '#/components/schemas/TopicAttributesMap'
-            - description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>CreateTopic</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>FifoTopic</code> – Set to true to create a FIFO topic.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attributes apply only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO topic is created.</p> </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics. </p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
+            - description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>CreateTopic</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>FifoTopic</code> – Set to true to create a FIFO topic.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attributes apply only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO topic is created.</p> </li> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.</p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -5101,6 +6058,16 @@ components:
             - $ref: '#/components/schemas/String'
             - description: PlatformApplicationArn of platform application object to delete.
       description: Input for DeletePlatformApplication action.
+    DeleteSMSSandboxPhoneNumberInput:
+      type: object
+      required:
+        - PhoneNumber
+      title: DeleteSMSSandboxPhoneNumberInput
+      properties:
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberString'
+            - description: The destination phone number to delete.
     DeleteTopicInput:
       type: object
       required:
@@ -5158,6 +6125,10 @@ components:
             - $ref: '#/components/schemas/ListString'
             - description: '<p>A list of the individual attribute names, such as <code>MonthlySpendLimit</code>, for which you want values.</p> <p>For all attribute names, see <a href="https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html">SetSMSAttributes</a>.</p> <p>If you don''t use this parameter, Amazon SNS returns all SMS attributes.</p>'
       description: The input for the <code>GetSMSAttributes</code> request.
+    GetSMSSandboxAccountStatusInput:
+      type: object
+      title: GetSMSSandboxAccountStatusInput
+      properties: {}
     GetSubscriptionAttributesInput:
       type: object
       required:
@@ -5184,6 +6155,11 @@ components:
             - $ref: '#/components/schemas/topicARN'
             - description: The ARN of the topic whose properties you want to get.
       description: Input for GetTopicAttributes action.
+    Iso2CountryCode:
+      type: string
+      pattern: '^[A-Za-z]{2}$'
+      description: 'The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. For example, GB or US.'
+      maxLength: 2
     ListEndpointsByPlatformApplicationInput:
       type: object
       required:
@@ -5219,6 +6195,29 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PlatformApplication'
+    nextToken:
+      type: string
+    MaxItemsListOriginationNumbers:
+      type: integer
+      minimum: 1
+      maximum: 30
+    ListOriginationNumbersRequest:
+      type: object
+      title: ListOriginationNumbersRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: Token that the previous <code>ListOriginationNumbers</code> request returns.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxItemsListOriginationNumbers'
+            - description: The maximum number of origination numbers to return.
+    PhoneNumberInformationList:
+      type: array
+      description: List of customer owned phone numbers.
+      items:
+        $ref: '#/components/schemas/PhoneNumberInformation'
     string:
       type: string
     ListPhoneNumbersOptedOutInput:
@@ -5243,8 +6242,26 @@ components:
             - $ref: '#/components/schemas/String'
             - description: NextToken string is used when calling ListPlatformApplications action to retrieve additional records that are available after the first page results.
       description: Input for ListPlatformApplications action.
-    nextToken:
-      type: string
+    MaxItems:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSMSSandboxPhoneNumbersInput:
+      type: object
+      title: ListSMSSandboxPhoneNumbersInput
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: Token that the previous <code>ListSMSSandboxPhoneNumbersInput</code> request returns.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxItems'
+            - description: The maximum number of phone numbers to return.
+    SMSSandboxPhoneNumberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SMSSandboxPhoneNumber'
     ListSubscriptionsByTopicInput:
       type: object
       required:
@@ -5299,6 +6316,24 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/MessageAttributeValue'
+    NumberCapability:
+      type: string
+      enum:
+        - SMS
+        - MMS
+        - VOICE
+      description: Enum listing out all supported number capabilities.
+    NumberCapabilityList:
+      type: array
+      description: 'List of number capability (SMS,MMS,Voice).'
+      items:
+        $ref: '#/components/schemas/NumberCapability'
+    OTPCode:
+      type: string
+      pattern: '^[0-9]+$'
+      description: String of Origination/Destination address including phone numbers and email addresses
+      minLength: 5
+      maxLength: 8
     OptInPhoneNumberInput:
       type: object
       required:
@@ -5310,6 +6345,44 @@ components:
             - $ref: '#/components/schemas/PhoneNumber'
             - description: The phone number to opt in. Use E.164 format.
       description: Input for the OptInPhoneNumber action.
+    Timestamp:
+      type: string
+      format: date-time
+    RouteType:
+      type: string
+      enum:
+        - Transactional
+        - Promotional
+        - Premium
+      description: 'Enum listing out all supported route types. The following enum values are supported. 1. Transactional : Non-marketing traffic 2. Promotional : Marketing 3. Premium : Premium routes for OTP delivery to the carriers'
+    PhoneNumberInformation:
+      type: object
+      properties:
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the phone number was created.
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The phone number.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the phone number.
+        Iso2CountryCode:
+          allOf:
+            - $ref: '#/components/schemas/Iso2CountryCode'
+            - description: 'The two-character code for the country or region, in ISO 3166-1 alpha-2 format.'
+        RouteType:
+          allOf:
+            - $ref: '#/components/schemas/RouteType'
+            - description: The list of supported routes.
+        NumberCapabilities:
+          allOf:
+            - $ref: '#/components/schemas/NumberCapabilityList'
+            - description: The capabilities of each phone number.
+      description: A list of phone numbers and their metadata.
     message:
       type: string
     subject:
@@ -5377,6 +6450,24 @@ components:
             - $ref: '#/components/schemas/label'
             - description: The unique label of the statement you want to remove.
       description: Input for RemovePermission action.
+    SMSSandboxPhoneNumberVerificationStatus:
+      type: string
+      enum:
+        - Pending
+        - Verified
+      description: 'Enum listing out all supported destination phone number verification statuses. The following enum values are supported. 1. PENDING : The destination phone number is pending verification. 2. VERIFIED : The destination phone number is verified.'
+    SMSSandboxPhoneNumber:
+      type: object
+      properties:
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberString'
+            - description: The destination phone number.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SMSSandboxPhoneNumberVerificationStatus'
+            - description: The destination phone number's verification status.
+      description: '<p>A verified or pending destination phone number in the SMS sandbox.</p> <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for you to try Amazon SNS features without risking your reputation as an SMS sender. While your account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send SMS messages only to verified destination phone numbers. For more information, including how to move out of the sandbox to send messages without restrictions, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
     SetEndpointAttributesInput:
       type: object
       required:
@@ -5456,7 +6547,7 @@ components:
         AttributeName:
           allOf:
             - $ref: '#/components/schemas/attributeName'
-            - description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics. </p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
+            - description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p> <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>:</p> <ul> <li> <p> <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.</p> <ul> <li> <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. </p> </li> <li> <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p> <p>(Optional) To override the generated value, you can specify a value for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action.</p> </li> </ul> </li> </ul>'
         AttributeValue:
           allOf:
             - $ref: '#/components/schemas/attributeValue'
@@ -5577,5 +6668,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The list of tag keys to remove from the specified topic.
+    VerifySMSSandboxPhoneNumberInput:
+      type: object
+      required:
+        - PhoneNumber
+        - OneTimePassword
+      title: VerifySMSSandboxPhoneNumberInput
+      properties:
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberString'
+            - description: The destination phone number to verify.
+        OneTimePassword:
+          allOf:
+            - $ref: '#/components/schemas/OTPCode'
+            - description: The OTP sent to the destination number from the <code>CreateSMSSandBoxPhoneNumber</code> call.
 security:
   - hmac: []

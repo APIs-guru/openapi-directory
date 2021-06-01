@@ -2893,6 +2893,358 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/AppServerPrivateKey'
                         - description: The new Sidewalk application server private key.
+  /log-levels:
+    get:
+      operationId: GetLogLevelsByResourceTypes
+      description: 'Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLogLevelsByResourceTypesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: ResetAllResourceLogLevels
+      description: Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetAllResourceLogLevelsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+    post:
+      operationId: UpdateLogLevelsByResourceTypes
+      description: 'Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLogLevelsByResourceTypesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                DefaultLogLevel:
+                  description: The log level for a log message.
+                  type: string
+                  enum:
+                    - INFO
+                    - ERROR
+                    - DISABLED
+                WirelessDeviceLogOptions:
+                  description: The list of wireless device log options.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/WirelessDeviceLogOption'
+                WirelessGatewayLogOptions:
+                  description: The list of wireless gateway log options.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/WirelessGatewayLogOption'
+  '/log-levels/{ResourceIdentifier}#resourceType':
+    get:
+      operationId: GetResourceLogLevel
+      description: 'Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceLogLevelResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceIdentifier
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+            maxLength: 256
+        - name: resourceType
+          in: query
+          required: true
+          description: 'The type of the resource, currently support WirelessDevice and WirelessGateway.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutResourceLogLevel
+      description: 'Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourceLogLevelResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceIdentifier
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+            maxLength: 256
+        - name: resourceType
+          in: query
+          required: true
+          description: 'The type of the resource, currently support WirelessDevice and WirelessGateway.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - LogLevel
+              properties:
+                LogLevel:
+                  description: The log level for a log message.
+                  type: string
+                  enum:
+                    - INFO
+                    - ERROR
+                    - DISABLED
+    delete:
+      operationId: ResetResourceLogLevel
+      description: 'Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetResourceLogLevelResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceIdentifier
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+            maxLength: 256
+        - name: resourceType
+          in: query
+          required: true
+          description: 'The type of the resource, currently support WirelessDevice and WirelessGateway.'
+          schema:
+            type: string
   /service-endpoint:
     get:
       operationId: GetServiceEndpoint
@@ -4022,6 +4374,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoRaWANDeviceProfile'
             - description: Information about the device profile.
+    GetLogLevelsByResourceTypesResponse:
+      type: object
+      properties:
+        DefaultLogLevel:
+          $ref: '#/components/schemas/LogLevel'
+        WirelessGatewayLogOptions:
+          $ref: '#/components/schemas/WirelessGatewayLogOptionList'
+        WirelessDeviceLogOptions:
+          $ref: '#/components/schemas/WirelessDeviceLogOptionList'
     GetPartnerAccountResponse:
       type: object
       properties:
@@ -4033,6 +4394,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountLinked'
             - description: Whether the partner account is linked to the AWS account.
+    GetResourceLogLevelResponse:
+      type: object
+      properties:
+        LogLevel:
+          $ref: '#/components/schemas/LogLevel'
     GetServiceEndpointResponse:
       type: object
       properties:
@@ -4319,6 +4685,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/WirelessGatewayStatisticsList'
             - description: The ID of the wireless gateway.
+    PutResourceLogLevelResponse:
+      type: object
+      properties: {}
+    ResetAllResourceLogLevelsResponse:
+      type: object
+      properties: {}
+    ResetResourceLogLevelResponse:
+      type: object
+      properties: {}
     SendDataToWirelessDeviceResponse:
       type: object
       properties:
@@ -4365,6 +4740,37 @@ components:
     UpdateDestinationResponse:
       type: object
       properties: {}
+    UpdateLogLevelsByResourceTypesResponse:
+      type: object
+      properties: {}
+    WirelessDeviceLogOption:
+      type: object
+      required:
+        - Type
+        - LogLevel
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/WirelessDeviceType'
+            - description: The wireless device type.
+        LogLevel:
+          $ref: '#/components/schemas/LogLevel'
+        Events:
+          $ref: '#/components/schemas/WirelessDeviceEventLogOptionList'
+      description: The log option for wireless devices. Can be used to set log level for a specific type of wireless device.
+    WirelessGatewayLogOption:
+      type: object
+      required:
+        - Type
+        - LogLevel
+      properties:
+        Type:
+          $ref: '#/components/schemas/WirelessGatewayType'
+        LogLevel:
+          $ref: '#/components/schemas/LogLevel'
+        Events:
+          $ref: '#/components/schemas/WirelessGatewayEventLogOptionList'
+      description: The log option for wireless gateways. Can be used to set log level for a specific type of wireless gateway.
     UpdatePartnerAccountResponse:
       type: object
       properties: {}
@@ -5145,6 +5551,27 @@ components:
       type: object
       title: GetDeviceProfileRequest
       properties: {}
+    GetLogLevelsByResourceTypesRequest:
+      type: object
+      title: GetLogLevelsByResourceTypesRequest
+      properties: {}
+    LogLevel:
+      type: string
+      enum:
+        - INFO
+        - ERROR
+        - DISABLED
+      description: The log level for a log message.
+    WirelessGatewayLogOptionList:
+      type: array
+      description: The list of wireless gateway log options.
+      items:
+        $ref: '#/components/schemas/WirelessGatewayLogOption'
+    WirelessDeviceLogOptionList:
+      type: array
+      description: The list of wireless device log options.
+      items:
+        $ref: '#/components/schemas/WirelessDeviceLogOption'
     GetPartnerAccountRequest:
       type: object
       title: GetPartnerAccountRequest
@@ -5165,6 +5592,16 @@ components:
             - $ref: '#/components/schemas/PartnerAccountArn'
             - description: The Amazon Resource Name of the resource.
       description: Information about a Sidewalk account.
+    ResourceIdentifier:
+      type: string
+      description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+      maxLength: 256
+    ResourceType:
+      type: string
+    GetResourceLogLevelRequest:
+      type: object
+      title: GetResourceLogLevelRequest
+      properties: {}
     WirelessGatewayServiceType:
       type: string
       enum:
@@ -5588,6 +6025,22 @@ components:
       type: string
       pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
       maxLength: 2048
+    PutResourceLogLevelRequest:
+      type: object
+      required:
+        - LogLevel
+      title: PutResourceLogLevelRequest
+      properties:
+        LogLevel:
+          $ref: '#/components/schemas/LogLevel'
+    ResetAllResourceLogLevelsRequest:
+      type: object
+      title: ResetAllResourceLogLevelsRequest
+      properties: {}
+    ResetResourceLogLevelRequest:
+      type: object
+      title: ResetResourceLogLevelRequest
+      properties: {}
     Result:
       type: string
       maxLength: 2048
@@ -5737,6 +6190,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
             - description: The ARN of the IAM Role that authorizes the destination.
+    UpdateLogLevelsByResourceTypesRequest:
+      type: object
+      title: UpdateLogLevelsByResourceTypesRequest
+      properties:
+        DefaultLogLevel:
+          $ref: '#/components/schemas/LogLevel'
+        WirelessDeviceLogOptions:
+          $ref: '#/components/schemas/WirelessDeviceLogOptionList'
+        WirelessGatewayLogOptions:
+          $ref: '#/components/schemas/WirelessGatewayLogOptionList'
     UpdatePartnerAccountRequest:
       type: object
       required:
@@ -5799,6 +6262,31 @@ components:
             - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
             - description: The Amazon Resource Name of the resource.
       description: UpdateWirelessGatewayTaskEntry object.
+    WirelessDeviceEvent:
+      type: string
+      enum:
+        - Join
+        - Rejoin
+        - Uplink_Data
+        - Downlink_Data
+        - Registration
+      description: 'The event for a log message, if the log message is tied to a wireless device.'
+    WirelessDeviceEventLogOption:
+      type: object
+      required:
+        - Event
+        - LogLevel
+      properties:
+        Event:
+          $ref: '#/components/schemas/WirelessDeviceEvent'
+        LogLevel:
+          $ref: '#/components/schemas/LogLevel'
+      description: 'The log option for a wireless device event. Can be used to set log level for a specific wireless device event. For a LoRaWAN device, the possible events for a log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk device, the possible events for a log message are: Registration, Downlink_Data, Uplink_Data.'
+    WirelessDeviceEventLogOptionList:
+      type: array
+      description: The list of wireless device event log options.
+      items:
+        $ref: '#/components/schemas/WirelessDeviceEventLogOption'
     WirelessDeviceStatistics:
       type: object
       properties:
@@ -5835,6 +6323,33 @@ components:
             - $ref: '#/components/schemas/SidewalkListDevice'
             - description: The Sidewalk account credentials.
       description: Information about a wireless device's operation.
+    WirelessGatewayEvent:
+      type: string
+      enum:
+        - CUPS_Request
+        - Certificate
+      description: 'The event for a log message, if the log message is tied to a wireless gateway.'
+    WirelessGatewayEventLogOption:
+      type: object
+      required:
+        - Event
+        - LogLevel
+      properties:
+        Event:
+          $ref: '#/components/schemas/WirelessGatewayEvent'
+        LogLevel:
+          $ref: '#/components/schemas/LogLevel'
+      description: 'The log option for a wireless gateway event. Can be used to set log level for a specific wireless gateway event. For a LoRaWAN gateway, the possible events for a log message are: CUPS_Request, Certificate.'
+    WirelessGatewayEventLogOptionList:
+      type: array
+      description: The list of wireless gateway event log options.
+      items:
+        $ref: '#/components/schemas/WirelessGatewayEventLogOption'
+    WirelessGatewayType:
+      type: string
+      enum:
+        - LoRaWAN
+      description: The wireless gateway type.
     WirelessGatewayStatistics:
       type: object
       properties:
