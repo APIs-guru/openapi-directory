@@ -866,6 +866,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '495':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '496':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
       parameters:
         - name: AvailabilityZones
           in: query
@@ -933,13 +945,13 @@ paths:
             type: integer
         - name: MasterUsername
           in: query
-          required: true
+          required: false
           description: '<p>The name of the master user for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine. </p> </li> </ul>'
           schema:
             type: string
         - name: MasterUserPassword
           in: query
-          required: true
+          required: false
           description: '<p>The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p>Constraints: Must contain from 8 to 100 characters.</p>'
           schema:
             type: string
@@ -998,6 +1010,15 @@ paths:
           description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
           schema:
             type: boolean
+        - name: GlobalClusterIdentifier
+          in: query
+          required: false
+          description: The cluster identifier of the new global cluster.
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
         - name: Action
           in: query
           required: true
@@ -1121,6 +1142,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '495':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '496':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
       requestBody:
         content:
           text/xml:
@@ -2081,6 +2114,165 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=CreateGlobalCluster:
+    get:
+      x-aws-operation-name: CreateGlobalCluster
+      operationId: GET_CreateGlobalCluster
+      description: '<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p> <p/> <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateGlobalClusterResult'
+        '480':
+          description: GlobalClusterAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterAlreadyExistsFault'
+        '481':
+          description: GlobalClusterQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterQuotaExceededFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '483':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+      parameters:
+        - name: GlobalClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier of the new global cluster.
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
+        - name: SourceDBClusterIdentifier
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.
+          schema:
+            type: string
+        - name: Engine
+          in: query
+          required: false
+          description: The name of the database engine to be used for this cluster.
+          schema:
+            type: string
+        - name: EngineVersion
+          in: query
+          required: false
+          description: The engine version of the global cluster.
+          schema:
+            type: string
+        - name: DeletionProtection
+          in: query
+          required: false
+          description: 'The deletion protection setting for the new global cluster. The global cluster can''t be deleted when deletion protection is enabled. '
+          schema:
+            type: boolean
+        - name: DatabaseName
+          in: query
+          required: false
+          description: 'The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.'
+          schema:
+            type: string
+        - name: StorageEncrypted
+          in: query
+          required: false
+          description: 'The storage encryption setting for the new global cluster. '
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateGlobalCluster
+      operationId: POST_CreateGlobalCluster
+      description: '<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p> <p/> <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateGlobalClusterResult'
+        '480':
+          description: GlobalClusterAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterAlreadyExistsFault'
+        '481':
+          description: GlobalClusterQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterQuotaExceededFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '483':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateGlobalClusterMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=DeleteDBCluster:
     get:
       x-aws-operation-name: DeleteDBCluster
@@ -2737,6 +2929,105 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=DeleteGlobalCluster:
+    get:
+      x-aws-operation-name: DeleteGlobalCluster
+      operationId: GET_DeleteGlobalCluster
+      description: <p>Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+      parameters:
+        - name: GlobalClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier of the global cluster being deleted.
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteGlobalCluster
+      operationId: POST_DeleteGlobalCluster
+      description: <p>Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteGlobalClusterMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=DescribeCertificates:
     get:
       x-aws-operation-name: DescribeCertificates
@@ -3218,7 +3509,7 @@ paths:
         - name: SnapshotType
           in: query
           required: false
-          description: '<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.</p> </li> <li> <p> <code>manual</code> - Return all cluster snapshots that you have manually created for your AWS account.</p> </li> <li> <p> <code>shared</code> - Return all manual cluster snapshots that have been shared to your AWS account.</p> </li> <li> <p> <code>public</code> - Return all cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don''t specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the <code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don''t apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>public</code>.</p>'
+          description: '<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.</p> </li> <li> <p> <code>manual</code> - Return all cluster snapshots that you have manually created for your AWS account.</p> </li> <li> <p> <code>shared</code> - Return all manual cluster snapshots that have been shared to your AWS account.</p> </li> <li> <p> <code>public</code> - Return all cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don''t specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the<code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don''t apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>public</code>.</p>'
           schema:
             type: string
         - name: Filters
@@ -4269,6 +4560,128 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=DescribeGlobalClusters:
+    get:
+      x-aws-operation-name: DescribeGlobalClusters
+      operationId: GET_DescribeGlobalClusters
+      description: <p>Returns information about Amazon DocumentDB global clusters. This API supports pagination.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClustersMessage'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+      parameters:
+        - name: GlobalClusterIdentifier
+          in: query
+          required: false
+          description: 'The user-supplied cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn''t case-sensitive.'
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
+        - name: Filters
+          in: query
+          required: false
+          description: '<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters: <code>db-cluster-id</code> accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.</p>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. '
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeGlobalClusters
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeGlobalClusters
+      operationId: POST_DescribeGlobalClusters
+      description: <p>Returns information about Amazon DocumentDB global clusters. This API supports pagination.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClustersMessage'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeGlobalClustersMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeGlobalClusters
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=DescribeOrderableDBInstanceOptions:
     get:
       x-aws-operation-name: DescribeOrderableDBInstanceOptions
@@ -4915,7 +5328,7 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.
+          description: The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
           schema:
             type: string
         - name: DeletionProtection
@@ -5878,6 +6291,120 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=ModifyGlobalCluster:
+    get:
+      x-aws-operation-name: ModifyGlobalCluster
+      operationId: GET_ModifyGlobalCluster
+      description: '<p>Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+      parameters:
+        - name: GlobalClusterIdentifier
+          in: query
+          required: true
+          description: '<p>The identifier for the global cluster being modified. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global cluster.</p> </li> </ul>'
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
+        - name: NewGlobalClusterIdentifier
+          in: query
+          required: false
+          description: '<p>The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> <p>The first character must be a letter</p> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
+        - name: DeletionProtection
+          in: query
+          required: false
+          description: 'Indicates if the global cluster has deletion protection enabled. The global cluster can''t be deleted when deletion protection is enabled. '
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyGlobalCluster
+      operationId: POST_ModifyGlobalCluster
+      description: '<p>Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyGlobalClusterMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=RebootDBInstance:
     get:
       x-aws-operation-name: RebootDBInstance
@@ -5973,6 +6500,123 @@ paths:
             type: string
             enum:
               - RebootDBInstance
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=RemoveFromGlobalCluster:
+    get:
+      x-aws-operation-name: RemoveFromGlobalCluster
+      operationId: GET_RemoveFromGlobalCluster
+      description: <p>Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region. </p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RemoveFromGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+        '482':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+      parameters:
+        - name: GlobalClusterIdentifier
+          in: query
+          required: true
+          description: 'The cluster identifier to detach from the Amazon DocumentDB global cluster. '
+          schema:
+            type: string
+            pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+            minLength: 1
+            maxLength: 255
+        - name: DbClusterIdentifier
+          in: query
+          required: true
+          description: 'The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. '
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RemoveFromGlobalCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RemoveFromGlobalCluster
+      operationId: POST_RemoveFromGlobalCluster
+      description: <p>Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region. </p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RemoveFromGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+        '482':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/RemoveFromGlobalClusterMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RemoveFromGlobalCluster
         - name: Version
           in: query
           required: true
@@ -7308,6 +7952,8 @@ components:
     InvalidSubnet: {}
     DBClusterParameterGroupNotFoundFault: {}
     DBSubnetGroupDoesNotCoverEnoughAZs: {}
+    GlobalClusterNotFoundFault: {}
+    InvalidGlobalClusterStateFault: {}
     CreateDBClusterParameterGroupResult:
       type: object
       properties:
@@ -7348,6 +7994,13 @@ components:
     SNSNoAuthorizationFault: {}
     SNSTopicArnNotFoundFault: {}
     SubscriptionCategoryNotFoundFault: {}
+    CreateGlobalClusterResult:
+      type: object
+      properties:
+        GlobalCluster:
+          $ref: '#/components/schemas/GlobalCluster'
+    GlobalClusterAlreadyExistsFault: {}
+    GlobalClusterQuotaExceededFault: {}
     DeleteDBClusterResult:
       type: object
       properties:
@@ -7372,6 +8025,11 @@ components:
         EventSubscription:
           $ref: '#/components/schemas/EventSubscription'
     InvalidEventSubscriptionStateFault: {}
+    DeleteGlobalClusterResult:
+      type: object
+      properties:
+        GlobalCluster:
+          $ref: '#/components/schemas/GlobalCluster'
     CertificateMessage:
       type: object
       properties:
@@ -7525,6 +8183,17 @@ components:
             - $ref: '#/components/schemas/EventList'
             - description: 'Detailed information about one or more events. '
       description: Represents the output of <a>DescribeEvents</a>.
+    GlobalClustersMessage:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        GlobalClusters:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterList'
+            - description: <p/>
     OrderableDBInstanceOptionsMessage:
       type: object
       properties:
@@ -7647,11 +8316,21 @@ components:
       properties:
         EventSubscription:
           $ref: '#/components/schemas/EventSubscription'
+    ModifyGlobalClusterResult:
+      type: object
+      properties:
+        GlobalCluster:
+          $ref: '#/components/schemas/GlobalCluster'
     RebootDBInstanceResult:
       type: object
       properties:
         DBInstance:
           $ref: '#/components/schemas/DBInstance'
+    RemoveFromGlobalClusterResult:
+      type: object
+      properties:
+        GlobalCluster:
+          $ref: '#/components/schemas/GlobalCluster'
     RemoveSourceIdentifierFromSubscriptionResult:
       type: object
       properties:
@@ -8042,13 +8721,16 @@ components:
           - $ref: '#/components/schemas/String'
           - xml:
               name: VpcSecurityGroupId
+    GlobalClusterIdentifier:
+      type: string
+      pattern: '[A-Za-z][0-9A-Za-z-:._]*'
+      minLength: 1
+      maxLength: 255
     CreateDBClusterMessage:
       type: object
       required:
         - DBClusterIdentifier
         - Engine
-        - MasterUsername
-        - MasterUserPassword
       title: CreateDBClusterMessage
       properties:
         AvailabilityZones:
@@ -8127,6 +8809,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: The cluster identifier of the new global cluster.
       description: 'Represents the input to <a>CreateDBCluster</a>. '
     CreateDBClusterParameterGroupMessage:
       type: object
@@ -8228,6 +8914,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).'
+        ReplicationSourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Contains the identifier of the source cluster if this cluster is a secondary cluster.
+        ReadReplicaIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/ReadReplicaIdentifierList'
+            - description: Contains one or more identifiers of the secondary clusters that are associated with this cluster.
         DBClusterMembers:
           allOf:
             - $ref: '#/components/schemas/DBClusterMemberList'
@@ -8557,6 +9251,92 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: The tags to be assigned to the event subscription.
       description: Represents the input to <a>CreateEventSubscription</a>.
+    CreateGlobalClusterMessage:
+      type: object
+      required:
+        - GlobalClusterIdentifier
+      title: CreateGlobalClusterMessage
+      properties:
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: The cluster identifier of the new global cluster.
+        SourceDBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the database engine to be used for this cluster.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The engine version of the global cluster.
+        DeletionProtection:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'The deletion protection setting for the new global cluster. The global cluster can''t be deleted when deletion protection is enabled. '
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.'
+        StorageEncrypted:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'The storage encryption setting for the new global cluster. '
+      description: Represents the input to <a>CreateGlobalCluster</a>.
+    GlobalCluster:
+      type: object
+      properties:
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: 'Contains a user-supplied global cluster identifier. This identifier is the unique key that identifies a global cluster. '
+        GlobalClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. '
+        GlobalClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the global cluster.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the current state of this global cluster.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon DocumentDB database engine used by the global cluster. '
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates the database engine version.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The default database name within the new global cluster.
+        StorageEncrypted:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: The storage encryption setting for the global cluster.
+        DeletionProtection:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: The deletion protection setting for the new global cluster.
+        GlobalClusterMembers:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterMemberList'
+            - description: 'The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. '
+      description: A data type representing an Amazon DocumentDB global cluster.
+    ReadReplicaIdentifierList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: ReadReplicaIdentifier
     DBClusterMemberList:
       type: array
       items:
@@ -8919,6 +9699,17 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The name of the Amazon DocumentDB event notification subscription that you want to delete.
       description: Represents the input to <a>DeleteEventSubscription</a>.
+    DeleteGlobalClusterMessage:
+      type: object
+      required:
+        - GlobalClusterIdentifier
+      title: DeleteGlobalClusterMessage
+      properties:
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: The cluster identifier of the global cluster being deleted.
+      description: Represents the input to <a>DeleteGlobalCluster</a>.
     FilterList:
       type: array
       items:
@@ -9020,7 +9811,7 @@ components:
         SnapshotType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.</p> </li> <li> <p> <code>manual</code> - Return all cluster snapshots that you have manually created for your AWS account.</p> </li> <li> <p> <code>shared</code> - Return all manual cluster snapshots that have been shared to your AWS account.</p> </li> <li> <p> <code>public</code> - Return all cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don''t specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the <code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don''t apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>public</code>.</p>'
+            - description: '<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.</p> </li> <li> <p> <code>manual</code> - Return all cluster snapshots that you have manually created for your AWS account.</p> </li> <li> <p> <code>shared</code> - Return all manual cluster snapshots that have been shared to your AWS account.</p> </li> <li> <p> <code>public</code> - Return all cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don''t specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the<code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don''t apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>public</code>.</p>'
         Filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
@@ -9269,6 +10060,26 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
       description: Represents the input to <a>DescribeEvents</a>.
+    DescribeGlobalClustersMessage:
+      type: object
+      title: DescribeGlobalClustersMessage
+      properties:
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: 'The user-supplied cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn''t case-sensitive.'
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters: <code>db-cluster-id</code> accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
     DescribeOrderableDBInstanceOptionsMessage:
       type: object
       required:
@@ -9410,6 +10221,40 @@ components:
           - $ref: '#/components/schemas/String'
           - xml:
               name: Value
+    GlobalClusterMemberList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/GlobalClusterMember'
+          - xml:
+              name: GlobalClusterMember
+    GlobalClusterList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/GlobalCluster'
+          - xml:
+              name: GlobalClusterMember
+    ReadersArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    GlobalClusterMember:
+      type: object
+      properties:
+        DBClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+        Readers:
+          allOf:
+            - $ref: '#/components/schemas/ReadersArnList'
+            - description: The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.
+        IsWriter:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. '
+      description: 'A data structure with information about any primary and secondary clusters associated with an Amazon DocumentDB global clusters. '
     KeyList:
       type: array
       items:
@@ -9482,7 +10327,7 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.
+            - description: The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -9614,6 +10459,25 @@ components:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: ' A Boolean value; set to <code>true</code> to activate the subscription. '
       description: Represents the input to <a>ModifyEventSubscription</a>.
+    ModifyGlobalClusterMessage:
+      type: object
+      required:
+        - GlobalClusterIdentifier
+      title: ModifyGlobalClusterMessage
+      properties:
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: '<p>The identifier for the global cluster being modified. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global cluster.</p> </li> </ul>'
+        NewGlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: '<p>The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> <p>The first character must be a letter</p> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
+        DeletionProtection:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Indicates if the global cluster has deletion protection enabled. The global cluster can''t be deleted when deletion protection is enabled. '
+      description: Represents the input to <a>ModifyGlobalCluster</a>.
     OrderableDBInstanceOption:
       type: object
       properties:
@@ -9718,6 +10582,22 @@ components:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: '<p> When <code>true</code>, the reboot is conducted through a Multi-AZ failover. </p> <p>Constraint: You can''t specify <code>true</code> if the instance is not configured for Multi-AZ.</p>'
       description: Represents the input to <a>RebootDBInstance</a>.
+    RemoveFromGlobalClusterMessage:
+      type: object
+      required:
+        - GlobalClusterIdentifier
+        - DbClusterIdentifier
+      title: RemoveFromGlobalClusterMessage
+      properties:
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: 'The cluster identifier to detach from the Amazon DocumentDB global cluster. '
+        DbClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. '
+      description: Represents the input to <a>RemoveFromGlobalCluster</a>.
     RemoveSourceIdentifierFromSubscriptionMessage:
       type: object
       required:

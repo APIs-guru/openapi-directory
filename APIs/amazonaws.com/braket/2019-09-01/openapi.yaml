@@ -272,7 +272,7 @@ paths:
                   description: The parameters for the device to run the task on.
                   type: string
                   minLength: 1
-                  maxLength: 2048
+                  maxLength: 48000
                 outputS3Bucket:
                   description: The S3 bucket to store task result files in.
                   type: string
@@ -330,12 +330,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '483':
+          description: DeviceOfflineException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceOfflineException'
+        '484':
+          description: DeviceRetiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceRetiredException'
+        '485':
           description: InternalServiceException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceException'
-        '484':
+        '486':
           description: ValidationException
           content:
             application/json:
@@ -708,7 +720,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: pecify the keys for the tags to remove from the resource.
+          description: Specify the keys for the tags to remove from the resource.
           schema:
             type: array
             items:
@@ -840,6 +852,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the partner company for the device.
+    DeviceRetiredException: {}
     GetQuantumTaskResponse:
       type: object
       required:
@@ -1002,7 +1015,7 @@ components:
     CreateQuantumTaskRequestDeviceParametersString:
       type: string
       minLength: 1
-      maxLength: 2048
+      maxLength: 48000
     CreateQuantumTaskRequestOutputS3BucketString:
       type: string
       minLength: 3
@@ -1066,6 +1079,7 @@ components:
       enum:
         - ONLINE
         - OFFLINE
+        - RETIRED
     DeviceType:
       type: string
       enum:
