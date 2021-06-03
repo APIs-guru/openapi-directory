@@ -3,7 +3,7 @@ info:
   version: '2018-04-01'
   x-release: v4
   title: Amazon Route 53 Resolver
-  description: '<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or ELB load balancers. Resolver performs recursive lookups against public name servers for all other domain names.</p> <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p> <p> <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b> </p> <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers to easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc">How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p> <b>Conditionally forward queries from a VPC to resolvers on your network</b> </p> <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. To forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. If a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match (acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network">How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Like Amazon VPC, Resolver is regional. In each region where you have VPCs, you can choose whether to forward queries from your VPCs to your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>'
+  description: '<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or Elastic Load Balancing load balancers. Resolver performs recursive lookups against public name servers for all other domain names.</p> <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p> <p> <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b> </p> <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers to easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc">How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p> <b>Conditionally forward queries from a VPC to resolvers on your network</b> </p> <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. To forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. If a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match (acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network">How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Like Amazon VPC, Resolver is Regional. In each Region where you have VPCs, you can choose whether to forward queries from your VPCs to your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1383,7 +1383,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.DisassociateResolverQueryLogConfig:
     post:
       operationId: DisassociateResolverQueryLogConfig
-      description: '<p>Disassociates a VPC from a query logging configuration.</p> <note> <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:</p> <ul> <li> <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p> </li> <li> <p>You can stop sharing the configuration.</p> </li> </ul> </note>'
+      description: '<p>Disassociates a VPC from a query logging configuration.</p> <note> <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:</p> <ul> <li> <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p> </li> <li> <p>You can stop sharing the configuration.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -1509,7 +1509,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.GetFirewallConfig:
     post:
       operationId: GetFirewallConfig
-      description: 'Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+      description: 'Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). '
       responses:
         '200':
           description: Success
@@ -1743,7 +1743,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.GetFirewallRuleGroupPolicy:
     post:
       operationId: GetFirewallRuleGroupPolicy
-      description: 'Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). '
+      description: 'Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). '
       responses:
         '200':
           description: Success
@@ -3423,7 +3423,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.PutFirewallRuleGroupPolicy:
     post:
       operationId: PutFirewallRuleGroupPolicy
-      description: 'Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). '
+      description: 'Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). '
       responses:
         '200':
           description: Success
@@ -3750,7 +3750,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.UpdateFirewallConfig:
     post:
       operationId: UpdateFirewallConfig
-      description: 'Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+      description: 'Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). '
       responses:
         '200':
           description: Success
@@ -4288,7 +4288,7 @@ components:
         FirewallRuleGroupAssociation:
           allOf:
             - $ref: '#/components/schemas/FirewallRuleGroupAssociation'
-            - description: 'The association that you just created. The association has an Id that you can use to identify it in other requests, like update and delete.'
+            - description: 'The association that you just created. The association has an ID that you can use to identify it in other requests, like update and delete.'
     AssociateFirewallRuleGroupRequest:
       type: object
       required:
@@ -4302,7 +4302,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
         FirewallRuleGroupId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -4314,7 +4314,7 @@ components:
         Priority:
           allOf:
             - $ref: '#/components/schemas/Priority'
-            - description: '<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>'
+            - description: '<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You can change the priority setting for a rule group association after you create it.</p> <p>The allowed values for <code>Priority</code> are between 100 and 9900.</p>'
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -4425,7 +4425,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+            - description: 'A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -4455,7 +4455,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+            - description: 'A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
         FirewallRuleGroupId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -4471,11 +4471,11 @@ components:
         Action:
           allOf:
             - $ref: '#/components/schemas/Action'
-            - description: '<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request and send metrics and log to Cloud Watch.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule''s <code>BlockResponse</code>. </p> </li> </ul>'
+            - description: '<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request and send metrics and logs to Cloud Watch.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule''s <code>BlockResponse</code>. </p> </li> </ul>'
         BlockResponse:
           allOf:
             - $ref: '#/components/schemas/BlockResponse'
-            - description: '<p>The way that you want DNS Firewall to block the request, used with the rule aciton setting <code>BLOCK</code>. </p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that''s in the query doesn''t exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule''s <code>BlockOverride*</code> settings. </p> </li> </ul> <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>'
+            - description: '<p>The way that you want DNS Firewall to block the request, used with the rule action setting <code>BLOCK</code>. </p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that''s in the query doesn''t exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule''s <code>BlockOverride*</code> settings. </p> </li> </ul> <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>'
         BlockOverrideDomain:
           allOf:
             - $ref: '#/components/schemas/BlockOverrideDomain'
@@ -4509,7 +4509,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. '
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -4537,7 +4537,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -4576,7 +4576,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/ResolverQueryLogConfigName'
-            - description: The name that you want to give the query logging configuration
+            - description: The name that you want to give the query logging configuration.
         DestinationArn:
           allOf:
             - $ref: '#/components/schemas/DestinationArn'
@@ -4584,7 +4584,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4607,7 +4607,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -4623,7 +4623,7 @@ components:
         TargetIps:
           allOf:
             - $ref: '#/components/schemas/TargetList'
-            - description: <p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a comma.</p> <p> <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>
+            - description: <p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.</p> <p> <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>
         ResolverEndpointId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -4829,7 +4829,7 @@ components:
         FirewallConfig:
           allOf:
             - $ref: '#/components/schemas/FirewallConfig'
-            - description: 'Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+            - description: 'Configuration of the firewall behavior provided by DNS Firewall for a single VPC from AmazonVPC. '
     GetFirewallConfigRequest:
       type: object
       required:
@@ -4839,7 +4839,7 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+            - description: The ID of the VPC from Amazon VPC that the configuration is for.
     GetFirewallDomainListResponse:
       type: object
       properties:
@@ -4897,7 +4897,7 @@ components:
         FirewallRuleGroupPolicy:
           allOf:
             - $ref: '#/components/schemas/FirewallRuleGroupPolicy'
-            - description: 'The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). '
+            - description: 'The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). '
     GetFirewallRuleGroupPolicyRequest:
       type: object
       required:
@@ -5083,7 +5083,7 @@ components:
         DomainFileUrl:
           allOf:
             - $ref: '#/components/schemas/DomainListFileUrl'
-            - description: <p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (S3) that contains the list of domains to import.</p> <p>The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>
+            - description: <p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (Amazon S3) that contains the list of domains to import.</p> <p>The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>
     ListFirewallConfigsResponse:
       type: object
       properties:
@@ -5094,7 +5094,7 @@ components:
         FirewallConfigs:
           allOf:
             - $ref: '#/components/schemas/FirewallConfigList'
-            - description: 'The configurations for the firewall behavior provided by DNS Firewall for Amazon virtual private clouds (VPC). '
+            - description: 'The configurations for the firewall behavior provided by DNS Firewall for VPCs from Amazon Virtual Private Cloud (Amazon VPC). '
     ListFirewallConfigsRequest:
       type: object
       title: ListFirewallConfigsRequest
@@ -5117,7 +5117,7 @@ components:
         FirewallDomainLists:
           allOf:
             - $ref: '#/components/schemas/FirewallDomainListMetadataList'
-            - description: '<p>A list of the domain lists that you have defined. </p> <p>This might be a parital list of the domain lists that you''ve defined. For information, see <code>MaxResults</code>. </p>'
+            - description: '<p>A list of the domain lists that you have defined. </p> <p>This might be a partial list of the domain lists that you''ve defined. For information, see <code>MaxResults</code>. </p>'
     ListFirewallDomainListsRequest:
       type: object
       title: ListFirewallDomainListsRequest
@@ -5140,7 +5140,7 @@ components:
         Domains:
           allOf:
             - $ref: '#/components/schemas/FirewallDomains'
-            - description: '<p>A list of the domains in the firewall domain list. </p> <p>This might be a parital list of the domains that you''ve defined in the domain list. For information, see <code>MaxResults</code>. </p>'
+            - description: '<p>A list of the domains in the firewall domain list. </p> <p>This might be a partial list of the domains that you''ve defined in the domain list. For information, see <code>MaxResults</code>. </p>'
     ListFirewallDomainsRequest:
       type: object
       required:
@@ -5185,7 +5185,7 @@ components:
         Priority:
           allOf:
             - $ref: '#/components/schemas/Priority'
-            - description: 'The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. '
+            - description: 'The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. '
         Status:
           allOf:
             - $ref: '#/components/schemas/FirewallRuleGroupAssociationStatus'
@@ -5231,7 +5231,7 @@ components:
         FirewallRules:
           allOf:
             - $ref: '#/components/schemas/FirewallRules'
-            - description: '<p>A list of the rules that you have defined. </p> <p>This might be a parital list of the firewall rules that you''ve defined. For information, see <code>MaxResults</code>. </p>'
+            - description: '<p>A list of the rules that you have defined. </p> <p>This might be a partial list of the firewall rules that you''ve defined. For information, see <code>MaxResults</code>. </p>'
     ListFirewallRulesRequest:
       type: object
       required:
@@ -5639,7 +5639,7 @@ components:
         FirewallConfig:
           allOf:
             - $ref: '#/components/schemas/FirewallConfig'
-            - description: 'Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+            - description: 'Configuration of the firewall behavior provided by DNS Firewall for a single VPC. '
     UpdateFirewallConfigRequest:
       type: object
       required:
@@ -5650,7 +5650,7 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+            - description: The ID of the VPC that the configuration is for.
         FirewallFailOpen:
           allOf:
             - $ref: '#/components/schemas/FirewallFailOpenStatus'
@@ -5661,7 +5661,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The Id of the firewall domain list that DNS Firewall just updated.
+            - description: The ID of the firewall domain list that DNS Firewall just updated.
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -5764,7 +5764,7 @@ components:
         Priority:
           allOf:
             - $ref: '#/components/schemas/Priority'
-            - description: '<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>'
+            - description: '<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>'
         MutationProtection:
           allOf:
             - $ref: '#/components/schemas/MutationProtectionStatus'
@@ -5922,7 +5922,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. '
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
@@ -5931,7 +5931,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
             - description: 'The date and time that the association was last modified, in Unix time format and Coordinated Universal Time (UTC).'
-      description: 'An association between a firewall rul group and a VPC, which enables DNS filtering for the VPC. '
+      description: 'An association between a firewall rule group and a VPC, which enables DNS filtering for the VPC. '
     IpAddressUpdate:
       type: object
       properties:
@@ -5958,7 +5958,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.
         Arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -6116,7 +6116,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. '
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
@@ -6125,7 +6125,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
             - description: 'The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). '
-      description: '<p>High level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>'
+      description: '<p>High-level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>'
     FirewallRuleGroup:
       type: object
       properties:
@@ -6160,7 +6160,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. '
         ShareStatus:
           allOf:
             - $ref: '#/components/schemas/ShareStatus'
@@ -6288,7 +6288,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
@@ -6319,7 +6319,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and allows failed requests to be retried without the risk of executing the operation twice. '
+            - description: 'A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and allows failed requests to be retried without the risk of running the operation twice. '
         Arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -6359,7 +6359,7 @@ components:
         ShareStatus:
           allOf:
             - $ref: '#/components/schemas/ShareStatus'
-            - description: 'Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.'
+            - description: 'Whether the rule is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.'
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
@@ -6412,7 +6412,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The Id of the firewall configuration.
+            - description: The ID of the firewall configuration.
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -6425,7 +6425,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/FirewallFailOpenStatus'
             - description: '<p>Determines how DNS Firewall operates during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p> <ul> <li> <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall returns a failure error when it is unable to properly evaluate a query. </p> </li> <li> <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them. </p> </li> </ul> <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>'
-      description: 'Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+      description: 'Configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). '
     FirewallConfigList:
       type: array
       items:
@@ -6473,7 +6473,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. '
         ManagedOwnerName:
           allOf:
             - $ref: '#/components/schemas/ServicePrinciple'
@@ -6541,7 +6541,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/CreatorRequestId'
-            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. '
         ShareStatus:
           allOf:
             - $ref: '#/components/schemas/ShareStatus'
