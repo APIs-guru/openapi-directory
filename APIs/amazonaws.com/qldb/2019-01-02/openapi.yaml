@@ -157,7 +157,7 @@ paths:
         - name: streamId
           in: path
           required: true
-          description: The unique ID that QLDB assigns to each QLDB journal stream.
+          description: The UUID (represented in Base62-encoded text) of the QLDB journal stream to be canceled.
           schema:
             type: string
             pattern: '^[A-Za-z-0-9]+$'
@@ -173,7 +173,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeJournalKinesisStream
-      description: 'Returns detailed information about a given Amazon QLDB journal stream. The output includes the Amazon Resource Name (ARN), stream name, current status, creation time, and the parameters of your original stream creation request.'
+      description: '<p>Returns detailed information about a given Amazon QLDB journal stream. The output includes the Amazon Resource Name (ARN), stream name, current status, creation time, and the parameters of the original stream creation request.</p> <p>This action does not return any expired journal streams. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration">Expiration for terminal streams</a> in the <i>Amazon QLDB Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -212,7 +212,7 @@ paths:
         - name: streamId
           in: path
           required: true
-          description: The unique ID that QLDB assigns to each QLDB journal stream.
+          description: The UUID (represented in Base62-encoded text) of the QLDB journal stream to describe.
           schema:
             type: string
             pattern: '^[A-Za-z-0-9]+$'
@@ -221,7 +221,7 @@ paths:
   /ledgers:
     post:
       operationId: CreateLedger
-      description: Creates a new ledger in your AWS account.
+      description: Creates a new ledger in your AWS account in the current Region.
       responses:
         '200':
           description: Success
@@ -278,13 +278,13 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 PermissionsMode:
-                  description: '<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
+                  description: '<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have the <code>SendCommand</code> API permission for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to the <code>SendCommand</code> API permission for the ledger. For information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html">Getting started with the standard permissions mode</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
                   type: string
                   enum:
                     - ALLOW_ALL
                     - STANDARD
                 DeletionProtection:
-                  description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+                  description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -337,7 +337,7 @@ paths:
   '/ledgers/{name}':
     delete:
       operationId: DeleteLedger
-      description: '<p>Deletes a ledger and all of its contents. This action is irreversible.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+      description: '<p>Deletes a ledger and all of its contents. This action is irreversible.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
       responses:
         '200':
           description: Success
@@ -455,12 +455,12 @@ paths:
               type: object
               properties:
                 DeletionProtection:
-                  description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+                  description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
                   type: boolean
   '/ledgers/{name}/journal-s3-exports/{exportId}':
     get:
       operationId: DescribeJournalS3Export
-      description: '<p>Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters.</p> <p>This action does not return any expired export jobs. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export Job Expiration</a> in the <i>Amazon QLDB Developer Guide</i>.</p> <p>If the export job with the given <code>ExportId</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p> <p>If the ledger with the given <code>Name</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p>'
+      description: '<p>Returns information about a journal export job, including the ledger name, export ID, creation time, current status, and the parameters of the original export creation request.</p> <p>This action does not return any expired export jobs. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export job expiration</a> in the <i>Amazon QLDB Developer Guide</i>.</p> <p>If the export job with the given <code>ExportId</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p> <p>If the ledger with the given <code>Name</code> doesn''t exist, then throws <code>ResourceNotFoundException</code>.</p>'
       responses:
         '200':
           description: Success
@@ -487,7 +487,7 @@ paths:
         - name: exportId
           in: path
           required: true
-          description: The unique ID of the journal export job that you want to describe.
+          description: The UUID (represented in Base62-encoded text) of the journal export job to describe.
           schema:
             type: string
             pattern: '^[A-Za-z-0-9]+$'
@@ -547,11 +547,11 @@ paths:
                 - RoleArn
               properties:
                 InclusiveStartTime:
-                  description: '<p>The inclusive start date and time for the range of journal contents that you want to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
+                  description: '<p>The inclusive start date and time for the range of journal contents to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
                   type: string
                   format: date-time
                 ExclusiveEndTime:
-                  description: '<p>The exclusive end date and time for the range of journal contents that you want to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
+                  description: '<p>The exclusive end date and time for the range of journal contents to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
                   type: string
                   format: date-time
                 S3ExportConfiguration:
@@ -585,7 +585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListJournalS3ExportsForLedger
-      description: '<p>Returns an array of journal export job descriptions for a specified ledger.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code> multiple times.</p> <p>This action does not return any expired export jobs. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export Job Expiration</a> in the <i>Amazon QLDB Developer Guide</i>.</p>'
+      description: '<p>Returns an array of journal export job descriptions for a specified ledger.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code> multiple times.</p> <p>This action does not return any expired export jobs. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export job expiration</a> in the <i>Amazon QLDB Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -809,7 +809,7 @@ paths:
                         - $ref: '#/components/schemas/IonText'
                         - description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
                 DocumentId:
-                  description: The unique ID of the document to be verified.
+                  description: The UUID (represented in Base62-encoded text) of the document to be verified.
                   type: string
                   pattern: '^[A-Za-z-0-9]+$'
                   minLength: 22
@@ -833,7 +833,7 @@ paths:
   '/ledgers/{name}/journal-kinesis-streams':
     get:
       operationId: ListJournalKinesisStreamsForLedger
-      description: <p>Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The output of each stream descriptor includes the same details that are returned by <code>DescribeJournalKinesisStream</code>.</p> <p>This action returns a maximum of <code>MaxResults</code> items. It is paginated so that you can retrieve all the items by calling <code>ListJournalKinesisStreamsForLedger</code> multiple times.</p>
+      description: '<p>Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The output of each stream descriptor includes the same details that are returned by <code>DescribeJournalKinesisStream</code>.</p> <p>This action does not return any expired journal streams. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration">Expiration for terminal streams</a> in the <i>Amazon QLDB Developer Guide</i>.</p> <p>This action returns a maximum of <code>MaxResults</code> items. It is paginated so that you can retrieve all the items by calling <code>ListJournalKinesisStreamsForLedger</code> multiple times.</p>'
       responses:
         '200':
           description: Success
@@ -969,25 +969,25 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 InclusiveStartTime:
-                  description: '<p>The inclusive start date and time from which to start streaming journal data. This parameter must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, QLDB effectively defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
+                  description: '<p>The inclusive start date and time from which to start streaming journal data. This parameter must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p> <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, QLDB effectively defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
                   type: string
                   format: date-time
                 ExclusiveEndTime:
-                  description: '<p>The exclusive date and time that specifies when the stream ends. If you don''t define this parameter, the stream runs indefinitely until you cancel it.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p>'
+                  description: '<p>The exclusive date and time that specifies when the stream ends. If you don''t define this parameter, the stream runs indefinitely until you cancel it.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p>'
                   type: string
                   format: date-time
                 KinesisConfiguration:
-                  description: The configuration settings of the Amazon Kinesis Data Streams destination for your Amazon QLDB journal stream.
+                  description: The configuration settings of the Amazon Kinesis Data Streams destination for an Amazon QLDB journal stream.
                   type: object
                   properties:
                     StreamArn:
                       allOf:
                         - $ref: '#/components/schemas/Arn'
-                        - description: The Amazon Resource Name (ARN) of the Kinesis data stream resource.
+                        - description: The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
                     AggregationEnabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: 'Enables QLDB to publish multiple data records in a single Kinesis Data Streams record. To learn more, see <a href="https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html">KPL Key Concepts</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.'
+                        - description: '<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the number of records sent per API call.</p> <p> <i>This option is enabled by default.</i> Record aggregation has important implications for processing records and requires de-aggregation in your stream consumer. To learn more, see <a href="https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html">KPL Key Concepts</a> and <a href="https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html">Consumer De-aggregation</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
                 StreamName:
                   description: '<p>The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.</p> <p>Your stream name must be unique among other <i>active</i> streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming">Quotas in Amazon QLDB</a> in the <i>Amazon QLDB Developer Guide</i>.</p>'
                   type: string
@@ -997,7 +997,7 @@ paths:
   /journal-s3-exports:
     get:
       operationId: ListJournalS3Exports
-      description: '<p>Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple times.</p> <p>This action does not return any expired export jobs. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export Job Expiration</a> in the <i>Amazon QLDB Developer Guide</i>.</p>'
+      description: '<p>Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region.</p> <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple times.</p> <p>This action does not return any expired export jobs. For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export job expiration</a> in the <i>Amazon QLDB Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1070,7 +1070,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: '<p>The Amazon Resource Name (ARN) for which you want to list the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
+          description: '<p>The Amazon Resource Name (ARN) for which to list the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
           schema:
             type: string
             minLength: 20
@@ -1157,7 +1157,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: '<p>The Amazon Resource Name (ARN) from which you want to remove the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
+          description: '<p>The Amazon Resource Name (ARN) from which to remove the tags. For example:</p> <p> <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code> </p>'
           schema:
             type: string
             minLength: 20
@@ -1165,7 +1165,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: The list of tag keys that you want to remove.
+          description: The list of tag keys to remove.
           schema:
             type: array
             items:
@@ -1183,7 +1183,7 @@ paths:
   '/ledgers/{name}/permissions-mode':
     patch:
       operationId: UpdateLedgerPermissionsMode
-      description: Updates the permissions mode of a ledger.
+      description: '<p>Updates the permissions mode of a ledger.</p> <important> <p>Before you switch to the <code>STANDARD</code> permissions mode, you must first create all required IAM policies and table tags to avoid disruption to your users. To learn more, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/ledger-management.basics.html#ledger-mgmt.basics.update-permissions.migrating">Migrating to the standard permissions mode</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1223,7 +1223,7 @@ paths:
                 - PermissionsMode
               properties:
                 PermissionsMode:
-                  description: '<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
+                  description: '<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have the <code>SendCommand</code> API permission for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to the <code>SendCommand</code> API permission for the ledger. For information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html">Getting started with the standard permissions mode</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
                   type: string
                   enum:
                     - ALLOW_ALL
@@ -1294,7 +1294,7 @@ components:
         StreamId:
           allOf:
             - $ref: '#/components/schemas/UniqueId'
-            - description: The unique ID that QLDB assigns to each QLDB journal stream.
+            - description: The UUID (Base62-encoded text) of the canceled QLDB journal stream.
     InvalidParameterException: {}
     ResourceNotFoundException: {}
     ResourcePreconditionNotMetException: {}
@@ -1324,7 +1324,7 @@ components:
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
-            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
     TagValue:
       type: string
       minLength: 0
@@ -1374,7 +1374,7 @@ components:
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
-            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
     ExportJournalToS3Response:
       type: object
       required:
@@ -1383,7 +1383,7 @@ components:
         ExportId:
           allOf:
             - $ref: '#/components/schemas/UniqueId'
-            - description: '<p>The unique ID that QLDB assigns to each journal export job.</p> <p>To describe your export request and check the status of the job, you can use <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>'
+            - description: '<p>The UUID (represented in Base62-encoded text) that QLDB assigns to each journal export job.</p> <p>To describe your export request and check the status of the job, you can use <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>'
     S3Bucket:
       type: string
       pattern: '^[A-Za-z-0-9-_.]+$'
@@ -1405,7 +1405,7 @@ components:
         KmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: <p>The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key Management Service (AWS KMS). Amazon QLDB does not support asymmetric CMKs.</p> <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the <code>ObjectEncryptionType</code>.</p> <p> <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the <code>ObjectEncryptionType</code>.</p>
+            - description: <p>The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key Management Service (AWS KMS). Amazon S3 does not support asymmetric CMKs.</p> <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the <code>ObjectEncryptionType</code>.</p> <p> <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the <code>ObjectEncryptionType</code>.</p>
       description: The encryption settings that are used by a journal export job to write data in an Amazon Simple Storage Service (Amazon S3) bucket.
     GetBlockResponse:
       type: object
@@ -1509,7 +1509,7 @@ components:
         StreamId:
           allOf:
             - $ref: '#/components/schemas/UniqueId'
-            - description: The unique ID that QLDB assigns to each QLDB journal stream.
+            - description: The UUID (represented in Base62-encoded text) that QLDB assigns to each QLDB journal stream.
     Arn:
       type: string
       minLength: 20
@@ -1548,7 +1548,7 @@ components:
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
-            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
     UpdateLedgerPermissionsModeResponse:
       type: object
       properties:
@@ -1609,11 +1609,11 @@ components:
         PermissionsMode:
           allOf:
             - $ref: '#/components/schemas/PermissionsMode'
-            - description: '<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
+            - description: '<p>The permissions mode to assign to the ledger that you want to create. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have the <code>SendCommand</code> API permission for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to the <code>SendCommand</code> API permission for the ledger. For information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html">Getting started with the standard permissions mode</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
-            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
     LedgerState:
       type: string
       enum:
@@ -1665,7 +1665,7 @@ components:
         StreamId:
           allOf:
             - $ref: '#/components/schemas/UniqueId'
-            - description: The unique ID that QLDB assigns to each QLDB journal stream.
+            - description: The UUID (represented in Base62-encoded text) of the QLDB journal stream.
         Arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -1677,7 +1677,7 @@ components:
         KinesisConfiguration:
           allOf:
             - $ref: '#/components/schemas/KinesisConfiguration'
-            - description: The configuration settings of the Amazon Kinesis Data Streams destination for your QLDB journal stream.
+            - description: The configuration settings of the Amazon Kinesis Data Streams destination for a QLDB journal stream.
         ErrorCause:
           allOf:
             - $ref: '#/components/schemas/ErrorCause'
@@ -1686,7 +1686,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamName'
             - description: The user-defined name of the QLDB journal stream.
-      description: 'The information about an Amazon QLDB journal stream, including the Amazon Resource Name (ARN), stream name, creation time, current status, and the parameters of your original stream creation request.'
+      description: 'Information about an Amazon QLDB journal stream, including the Amazon Resource Name (ARN), stream name, creation time, current status, and the parameters of the original stream creation request.'
     DescribeJournalS3ExportRequest:
       type: object
       title: DescribeJournalS3ExportRequest
@@ -1710,7 +1710,7 @@ components:
         ExportId:
           allOf:
             - $ref: '#/components/schemas/UniqueId'
-            - description: The unique ID of the journal export job.
+            - description: The UUID (represented in Base62-encoded text) of the journal export job.
         ExportCreationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1733,7 +1733,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: '<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal export job to do the following:</p> <ul> <li> <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p> </li> <li> <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS KMS) for server-side encryption of your exported data.</p> </li> </ul>'
-      description: 'The information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters.'
+      description: 'Information about a journal export job, including the ledger name, export ID, creation time, current status, and the parameters of the original export creation request.'
     DescribeLedgerRequest:
       type: object
       title: DescribeLedgerRequest
@@ -1779,11 +1779,11 @@ components:
         InclusiveStartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: '<p>The inclusive start date and time for the range of journal contents that you want to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
+            - description: '<p>The inclusive start date and time for the range of journal contents to export.</p> <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p> <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
         ExclusiveEndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: '<p>The exclusive end date and time for the range of journal contents that you want to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
+            - description: '<p>The exclusive end date and time for the range of journal contents to export.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p> <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and time.</p>'
         S3ExportConfiguration:
           allOf:
             - $ref: '#/components/schemas/S3ExportConfiguration'
@@ -1815,11 +1815,11 @@ components:
         BlockAddress:
           allOf:
             - $ref: '#/components/schemas/ValueHolder'
-            - description: '<p>The location of the block that you want to request. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code> </p>'
+            - description: '<p>The location of the block that you want to request. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code>.</p>'
         DigestTipAddress:
           allOf:
             - $ref: '#/components/schemas/ValueHolder'
-            - description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code> </p>'
+            - description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code>.</p>'
     GetDigestRequest:
       type: object
       title: GetDigestRequest
@@ -1834,15 +1834,15 @@ components:
         BlockAddress:
           allOf:
             - $ref: '#/components/schemas/ValueHolder'
-            - description: '<p>The block location of the document revision to be verified. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code> </p>'
+            - description: '<p>The block location of the document revision to be verified. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}</code>.</p>'
         DocumentId:
           allOf:
             - $ref: '#/components/schemas/UniqueId'
-            - description: The unique ID of the document to be verified.
+            - description: The UUID (represented in Base62-encoded text) of the document to be verified.
         DigestTipAddress:
           allOf:
             - $ref: '#/components/schemas/ValueHolder'
-            - description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code> </p>'
+            - description: '<p>The latest block location covered by the digest for which to request a proof. An address is an Amazon Ion structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p> <p>For example: <code>{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}</code>.</p>'
     StreamStatus:
       type: string
       enum:
@@ -1859,12 +1859,12 @@ components:
         StreamArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the Kinesis data stream resource.
+            - description: The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
         AggregationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Enables QLDB to publish multiple data records in a single Kinesis Data Streams record. To learn more, see <a href="https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html">KPL Key Concepts</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.'
-      description: The configuration settings of the Amazon Kinesis Data Streams destination for your Amazon QLDB journal stream.
+            - description: '<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the number of records sent per API call.</p> <p> <i>This option is enabled by default.</i> Record aggregation has important implications for processing records and requires de-aggregation in your stream consumer. To learn more, see <a href="https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html">KPL Key Concepts</a> and <a href="https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html">Consumer De-aggregation</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
+      description: The configuration settings of the Amazon Kinesis Data Streams destination for an Amazon QLDB journal stream.
     StreamName:
       type: string
       pattern: '(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$'
@@ -1953,11 +1953,11 @@ components:
         InclusiveStartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: '<p>The inclusive start date and time from which to start streaming journal data. This parameter must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p> <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, QLDB effectively defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
+            - description: '<p>The inclusive start date and time from which to start streaming journal data. This parameter must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p> <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before <code>ExclusiveEndTime</code>.</p> <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger''s <code>CreationDateTime</code>, QLDB effectively defaults it to the ledger''s <code>CreationDateTime</code>.</p>'
         ExclusiveEndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: '<p>The exclusive date and time that specifies when the stream ends. If you don''t define this parameter, the stream runs indefinitely until you cancel it.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p>'
+            - description: '<p>The exclusive date and time that specifies when the stream ends. If you don''t define this parameter, the stream runs indefinitely until you cancel it.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p>'
         KinesisConfiguration:
           allOf:
             - $ref: '#/components/schemas/KinesisConfiguration'
@@ -1995,7 +1995,7 @@ components:
         PermissionsMode:
           allOf:
             - $ref: '#/components/schemas/PermissionsMode'
-            - description: '<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have <code>SendCommand</code> permissions for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to <code>SendCommand</code> API permissions for the ledger.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
+            - description: '<p>The permissions mode to assign to the ledger. This parameter can have one of the following values:</p> <ul> <li> <p> <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with API-level granularity for ledgers.</p> <p>This mode allows users who have the <code>SendCommand</code> API permission for this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in the specified ledger. This mode disregards any table-level or command-level IAM permissions policies that you create for the ledger.</p> </li> <li> <p> <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands.</p> <p>By default, this mode denies all user requests to run any PartiQL commands on any tables in this ledger. To allow PartiQL commands to run, you must create IAM permissions policies for specific table resources and PartiQL actions, in addition to the <code>SendCommand</code> API permission for the ledger. For information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html">Getting started with the standard permissions mode</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </li> </ul> <note> <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize the security of your ledger data.</p> </note>'
     UpdateLedgerRequest:
       type: object
       title: UpdateLedgerRequest
@@ -2003,6 +2003,6 @@ components:
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/DeletionProtection'
-            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB console disables deletion protection for you when you use it to delete a ledger.</p>'
+            - description: '<p>The flag that prevents a ledger from being deleted by any user. If not provided on ledger creation, this feature is enabled (<code>true</code>) by default.</p> <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>'
 security:
   - hmac: []

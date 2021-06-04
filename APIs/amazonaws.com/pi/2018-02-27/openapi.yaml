@@ -166,6 +166,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PerformanceInsightsv20180227.GetDimensionKeyDetails:
+    post:
+      operationId: GetDimensionKeyDetails
+      description: 'Get the attributes of the specified dimension group for a DB instance or data source. For example, if you specify a SQL ID, <code>GetDimensionKeyDetails</code> retrieves the full text of the dimension <code>db.sql.statement</code> associated with this ID. This operation is useful because <code>GetResourceMetrics</code> and <code>DescribeDimensionKeys</code> don''t support retrieval of large SQL statement text.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDimensionKeyDetailsResponse'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '482':
+          description: NotAuthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDimensionKeyDetailsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PerformanceInsightsv20180227.GetDimensionKeyDetails
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PerformanceInsightsv20180227.GetResourceMetrics:
     post:
       operationId: GetResourceMetrics
@@ -290,7 +341,7 @@ components:
             - description: The dimension keys that were requested.
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/NextToken'
             - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
     DescribeDimensionKeysRequest:
       type: object
@@ -309,7 +360,7 @@ components:
             - description: The AWS service for which Performance Insights will return metrics. The only valid value for <i>ServiceType</i> is <code>RDS</code>.
         Identifier:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/RequestString'
             - description: '<p>An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.</p> <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. For example, specify <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code> </p>'
         StartTime:
           allOf:
@@ -321,7 +372,7 @@ components:
             - description: '<p>The date and time specifying the end of the requested time series data. The value specified is <i>exclusive</i>, which means that data points less than (but not equal to) <code>EndTime</code> are returned.</p> <p>The value for <code>EndTime</code> must be later than the value for <code>StartTime</code>.</p>'
         Metric:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/RequestString'
             - description: '<p>The name of a Performance Insights metric to be measured.</p> <p>Valid values for <code>Metric</code> are:</p> <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of the number of active sessions for the database engine.</p> </li> <li> <p> <code>db.sampledload.avg</code> - the raw number of active sessions for the database engine.</p> </li> </ul> <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only. </p>'
         PeriodInSeconds:
           allOf:
@@ -345,11 +396,47 @@ components:
             - description: 'The maximum number of items to return in the response. If more items exist than the specified <code>MaxRecords</code> value, a pagination token is included in the response so that the remaining results can be retrieved. '
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/NextToken'
             - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
     InvalidArgumentException: {}
     InternalServiceError: {}
     NotAuthorizedException: {}
+    GetDimensionKeyDetailsResponse:
+      type: object
+      properties:
+        Dimensions:
+          allOf:
+            - $ref: '#/components/schemas/DimensionKeyDetailList'
+            - description: The details for the requested dimensions.
+    GetDimensionKeyDetailsRequest:
+      type: object
+      required:
+        - ServiceType
+        - Identifier
+        - Group
+        - GroupIdentifier
+      title: GetDimensionKeyDetailsRequest
+      properties:
+        ServiceType:
+          allOf:
+            - $ref: '#/components/schemas/ServiceType'
+            - description: The AWS service for which Performance Insights returns data. The only valid value is <code>RDS</code>.
+        Identifier:
+          allOf:
+            - $ref: '#/components/schemas/IdentifierString'
+            - description: 'The ID for a data source from which to gather dimension data. This ID must be immutable and unique within an AWS Region. When a DB instance is the data source, specify its <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>. '
+        Group:
+          allOf:
+            - $ref: '#/components/schemas/RequestString'
+            - description: The name of the dimension group. The only valid value is <code>db.sql</code>. Performance Insights searches the specified group for the dimension group ID.
+        GroupIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/RequestString'
+            - description: 'The ID of the dimension group from which to retrieve dimension details. For dimension group <code>db.sql</code>, the group ID is <code>db.sql.id</code>.'
+        RequestedDimensions:
+          allOf:
+            - $ref: '#/components/schemas/RequestedDimensionList'
+            - description: 'A list of dimensions to retrieve the detail data for within the given dimension group. For the dimension group <code>db.sql</code>, specify either the full dimension name <code>db.sql.statement</code> or the short dimension name <code>statement</code>. If you don''t specify this parameter, Performance Insights returns all dimension data within the specified dimension group.'
     GetResourceMetricsResponse:
       type: object
       properties:
@@ -371,7 +458,7 @@ components:
             - description: 'An array of metric results,, where each array element contains all of the data points for a particular dimension.'
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/NextToken'
             - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
     GetResourceMetricsRequest:
       type: object
@@ -389,7 +476,7 @@ components:
             - description: The AWS service for which Performance Insights returns metrics. The only valid value for <i>ServiceType</i> is <code>RDS</code>.
         Identifier:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/RequestString'
             - description: '<p>An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.</p> <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code>.</p>'
         MetricQueries:
           allOf:
@@ -413,7 +500,7 @@ components:
             - description: 'The maximum number of items to return in the response. If more items exist than the specified <code>MaxRecords</code> value, a pagination token is included in the response so that the remaining results can be retrieved. '
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/NextToken'
             - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
     ISOTimestamp:
       type: string
@@ -444,8 +531,11 @@ components:
       type: string
       enum:
         - RDS
-    String:
+    RequestString:
       type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 256
     Integer:
       type: integer
     DimensionGroup:
@@ -455,11 +545,11 @@ components:
       properties:
         Group:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/RequestString'
             - description: '<p>The name of the dimension group. Valid values are:</p> <ul> <li> <p> <code>db</code> - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB)</p> </li> <li> <p> <code>db.application</code> - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)</p> </li> <li> <p> <code>db.host</code> - The host name of the connected client (all engines)</p> </li> <li> <p> <code>db.session_type</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)</p> </li> <li> <p> <code>db.sql</code> - The SQL that is currently executing (all engines)</p> </li> <li> <p> <code>db.sql_tokenized</code> - The SQL digest (all engines)</p> </li> <li> <p> <code>db.wait_event</code> - The event for which the database backend is waiting (all engines)</p> </li> <li> <p> <code>db.wait_event_type</code> - The type of event for which the database backend is waiting (all engines)</p> </li> <li> <p> <code>db.user</code> - The user logged in to the database (all engines)</p> </li> </ul>'
         Dimensions:
           allOf:
-            - $ref: '#/components/schemas/StringList'
+            - $ref: '#/components/schemas/RequestStringList'
             - description: '<p>A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested, or are present in the response.</p> <p>Valid values for elements in the <code>Dimensions</code> array are:</p> <ul> <li> <p> <code>db.application.name</code> - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)</p> </li> <li> <p> <code>db.host.id</code> - The host ID of the connected client (all engines)</p> </li> <li> <p> <code>db.host.name</code> - The host name of the connected client (all engines)</p> </li> <li> <p> <code>db.name</code> - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB)</p> </li> <li> <p> <code>db.session_type.name</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)</p> </li> <li> <p> <code>db.sql.id</code> - The SQL ID generated by Performance Insights (all engines)</p> </li> <li> <p> <code>db.sql.db_id</code> - The SQL ID generated by the database (all engines)</p> </li> <li> <p> <code>db.sql.statement</code> - The SQL text that is being executed (all engines)</p> </li> <li> <p> <code>db.sql.tokenized_id</code> </p> </li> <li> <p> <code>db.sql_tokenized.id</code> - The SQL digest ID generated by Performance Insights (all engines)</p> </li> <li> <p> <code>db.sql_tokenized.db_id</code> - SQL digest ID generated by the database (all engines)</p> </li> <li> <p> <code>db.sql_tokenized.statement</code> - The SQL digest text (all engines)</p> </li> <li> <p> <code>db.user.id</code> - The ID of the user logged in to the database (all engines)</p> </li> <li> <p> <code>db.user.name</code> - The name of the user logged in to the database (all engines)</p> </li> <li> <p> <code>db.wait_event.name</code> - The event for which the backend is waiting (all engines)</p> </li> <li> <p> <code>db.wait_event.type</code> - The type of event for which the backend is waiting (all engines)</p> </li> <li> <p> <code>db.wait_event_type.name</code> - The name of the event type for which the backend is waiting (all engines)</p> </li> </ul>'
         Limit:
           allOf:
@@ -469,11 +559,16 @@ components:
     MetricQueryFilterMap:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/String'
+        $ref: '#/components/schemas/RequestString'
     MaxResults:
       type: integer
       minimum: 0
       maximum: 20
+    NextToken:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      maxLength: 8192
     ResponsePartitionKeyList:
       type: array
       items:
@@ -482,10 +577,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DimensionKeyDescription'
-    StringList:
+    DetailStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - PROCESSING
+        - UNAVAILABLE
+    RequestStringList:
       type: array
       items:
-        $ref: '#/components/schemas/String'
+        $ref: '#/components/schemas/RequestString'
       minItems: 1
       maxItems: 10
     Limit:
@@ -495,7 +596,7 @@ components:
     DimensionMap:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/String'
+        $ref: '#/components/schemas/RequestString'
     MetricValuesList:
       type: array
       items:
@@ -516,6 +617,42 @@ components:
             - $ref: '#/components/schemas/MetricValuesList'
             - description: 'If <code>PartitionBy</code> was specified, <code>PartitionKeys</code> contains the dimensions that were.'
       description: An array of descriptions and aggregated values for each dimension within a dimension group.
+    String:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 256
+    DimensionKeyDetail:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The value of the dimension detail data. For the <code>db.sql.statement</code> dimension, this value is either the full or truncated SQL query, depending on the return status.'
+        Dimension:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full name of the dimension. The full name includes the group name and key name. The only valid value is <code>db.sql.statement</code>. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DetailStatus'
+            - description: '<p>The status of the dimension detail data. Possible values include the following:</p> <ul> <li> <p> <code>AVAILABLE</code> - The dimension detail data is ready to be retrieved.</p> </li> <li> <p> <code>PROCESSING</code> - The dimension detail data isn''t ready to be retrieved because more processing time is required. If the requested detail data for <code>db.sql.statement</code> has the status <code>PROCESSING</code>, Performance Insights returns the truncated query.</p> </li> <li> <p> <code>UNAVAILABLE</code> - The dimension detail data could not be collected successfully.</p> </li> </ul>'
+      description: An object that describes the details for a specified dimension.
+    DimensionKeyDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionKeyDetail'
+    IdentifierString:
+      type: string
+      pattern: '^db-[a-zA-Z0-9-]*$'
+      minLength: 0
+      maxLength: 256
+    RequestedDimensionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RequestString'
+      minItems: 1
+      maxItems: 10
     MetricQueryList:
       type: array
       items:
@@ -559,7 +696,7 @@ components:
       properties:
         Metric:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/RequestString'
             - description: '<p>The name of a Performance Insights metric to be measured.</p> <p>Valid values for <code>Metric</code> are:</p> <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of the number of active sessions for the database engine.</p> </li> <li> <p> <code>db.sampledload.avg</code> - the raw number of active sessions for the database engine.</p> </li> </ul> <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only. </p>'
         GroupBy:
           allOf:
