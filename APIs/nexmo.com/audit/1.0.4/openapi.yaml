@@ -6,8 +6,11 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: |
-    The Vonage Audit API allows you to view details of changes to your account. More information is available at <https://developer.nexmo.com/audit/overview>.
+  description: >
+    The Vonage Audit API allows you to view details of changes to your
+    account. More information is available at
+    <https://developer.nexmo.com/audit/overview>.
+
     _Please note that the Audit API is currently in Beta_
   license:
     name: The MIT License (MIT)
@@ -25,8 +28,9 @@ info:
 paths:
   /events:
     get:
-      description: |
-        Get a series of audit events describing changes made to your Vonage API account over time.
+      description: >
+        Get a series of audit events describing changes made to your Vonage
+        API account over time.
       operationId: getEvents
       parameters:
         - description: Filter results by this event type.
@@ -44,7 +48,9 @@ paths:
           name: date_to
           schema:
             type: string
-        - description: Return only audit events where the JSON object contains this search text. Must be legal text for a JSON attribute value, that is quotes and braces must be escaped.
+        - description: Return only audit events where the JSON object contains this search
+            text. Must be legal text for a JSON attribute value, that is quotes
+            and braces must be escaped.
           in: query
           name: search_text
           schema:
@@ -164,11 +170,13 @@ components:
         _links:
           $ref: "#/components/schemas/EventLink"
         account_id:
-          description: The NEXMO_API_KEY of the Vonage API account that the audit event is associated with.
+          description: The NEXMO_API_KEY of the Vonage API account that the audit event is
+            associated with.
           example: abcd1234
           type: string
         context:
-          description: A valid JSON object with information detailing the context of the audit event.
+          description: A valid JSON object with information detailing the context of the
+            audit event.
           example:
             created:
               accountId: abcdef01
@@ -399,7 +407,8 @@ components:
           type: string
         message:
           description: A longer description of the error YYY
-          example: "Event with provided id: aaaaaaaa-bbbb-cccc-dddd-0123456789ab was not found"
+          example: "Event with provided id: aaaaaaaa-bbbb-cccc-dddd-0123456789ab was not
+            found"
           type: string
         status:
           description: The HTTP Status code of the error
@@ -414,7 +423,8 @@ components:
           type: string
         message:
           description: A longer description of the error
-          example: Full authentication is required. JWT was not found in "Authorization" HTTP header.
+          example: Full authentication is required. JWT was not found in "Authorization"
+            HTTP header.
           type: string
         status:
           description: The HTTP Status code of the error
@@ -422,7 +432,8 @@ components:
           type: integer
       type: object
     EventLink:
-      description: A link to this audit event object if you were to retrieve it individually.
+      description: A link to this audit event object if you were to retrieve it
+        individually.
       properties:
         self:
           properties:
