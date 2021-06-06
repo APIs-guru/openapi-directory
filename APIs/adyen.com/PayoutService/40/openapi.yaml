@@ -59,6 +59,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                confirmThirdParty-200:
+                  $ref: "#/components/examples/post-confirmThirdParty-confirmThirdParty-200"
               schema:
                 $ref: "#/components/schemas/ModifyResponse"
           description: OK - the request has succeeded.
@@ -118,6 +121,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                declineThirdParty-200:
+                  $ref: "#/components/examples/post-declineThirdParty-declineThirdParty-200"
               schema:
                 $ref: "#/components/schemas/ModifyResponse"
           description: OK - the request has succeeded.
@@ -232,6 +238,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                storeDetail-200:
+                  $ref: "#/components/examples/post-storeDetail-storeDetail-200"
               schema:
                 $ref: "#/components/schemas/StoreDetailResponse"
           description: OK - the request has succeeded.
@@ -412,12 +421,22 @@ components:
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9913140798220028"
+    post-confirmThirdParty-confirmThirdParty-200:
+      summary: Example response for request 'confirmThirdParty'
+      value:
+        pspReference: 991617894325358C
+        response: "[payout-confirm-received]"
     post-declineThirdParty-declineThirdParty:
       description: Cancel a previously submitted payout
       summary: Cancel a payout
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9913140798220028"
+    post-declineThirdParty-declineThirdParty-200:
+      summary: Example response for request 'declineThirdParty'
+      value:
+        pspReference: 991617894325360J
+        response: "[payout-decline-received]"
     post-payout-payout-b2c:
       description: Pay out to your sellers, customers, freelancers, etc
       summary: Instant card payout (B2C)
@@ -510,6 +529,12 @@ components:
           gender: MALE
           lastName: Test
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+    post-storeDetail-storeDetail-200:
+      summary: Example response for request 'storeDetail'
+      value:
+        pspReference: 991617894326362D
+        recurringDetailReference: "9916178936754752"
+        resultCode: Success
     post-storeDetailAndSubmitThirdParty-storeDetailAndSubmitThirdParty:
       description: Submit a payout and stores its details for subsequent payouts
       summary: Submit a payout and stores details
@@ -2678,7 +2703,10 @@ components:
             type: string
           description: |-
             Metadata consists of entries, each of which includes a key and a value.
-            Limitations: Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            Limits:
+            * Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            * Maximum 20 characters per key.
+            * Maximum 80 characters per value. 
           type: object
           x-addedInVersion: 17
         mpiData:
@@ -2771,7 +2799,7 @@ components:
         shopperStatement:
           description: |-
             The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
-             We recommend sending a maximum of 25 characters, otherwise banks might truncate the string.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -2943,6 +2971,12 @@ components:
         cardHolderInfo:
           description: "Information provided by the issuer to the cardholder. If this field is present, you need to display this information to the cardholder. "
           type: string
+        cavv:
+          description: The Cardholder Authentication Verification Value (CAVV) for the 3D Secure authentication session, as a Base64-encoded 20-byte array.
+          type: string
+        cavvAlgorithm:
+          description: The CAVV algorithm used.
+          type: string
         scaExemptionRequested:
           description: |-
             Shows the [exemption type](https://docs.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that Adyen requested for the payment.
@@ -3062,6 +3096,9 @@ components:
 
             Example: 58747
           type: string
+        authorisationMid:
+          description: Merchant ID known by the acquirer.
+          type: string
         authorisedAmountCurrency:
           description: The currency of the authorised amount, as a three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
           type: string
@@ -3090,6 +3127,9 @@ components:
             Example: TESTNL01
 
             > Only relevant for SEPA Direct Debit transactions.
+          type: string
+        coBrandedWith:
+          description: Includes the co-branded card information.
           type: string
         cvcResult:
           description: The result of CVC verification.
@@ -3127,6 +3167,15 @@ components:
           type: string
         "fraudCheck-[itemNr]-[FraudCheckname]":
           description: The fraud score due to a particular fraud check. The fraud check name is found in the key of the key-value pair.
+          type: string
+        fraudManualReview:
+          description: Indicates if the payment is sent to manual review.
+          type: string
+        fraudResultType:
+          description: The fraud result properties of the payment.
+          enum:
+            - GREEN
+            - FRAUD
           type: string
         fundingSource:
           description: |-
@@ -3175,17 +3224,26 @@ components:
             * Low Authrate Bin
             * Non-reloadable prepaid card
           type: string
+        isCardCommercial:
+          description: Indicates if the card is used for business purposes only.
+          type: string
         issuerCountry:
           description: |-
             The issuing country of the card based on the BIN list that Adyen maintains.
 
             Example: JP
           type: string
+        liabilityShift:
+          description: A Boolean value indicating whether a liability shift was offered for this payment.
+          type: string
         mcBankNetReferenceNumber:
           description: |-
             The `mcBankNetReferenceNumber`, is a minimum of six characters and a maximum of nine characters long.
 
             > Contact Support Team to enable this field.
+          type: string
+        merchantReference:
+          description: The reference provided for the transaction.
           type: string
         networkTxReference:
           description: |-
@@ -3207,6 +3265,9 @@ components:
           type: string
         paymentAccountReference:
           description: The Payment Account Reference (PAR) value links a network token with the underlying primary account number (PAN). The PAR value consists of 29 uppercase alphanumeric characters.
+          type: string
+        paymentMethod:
+          description: The payment method used in the transaction.
           type: string
         paymentMethodVariant:
           description: |-
@@ -3245,6 +3306,10 @@ components:
         receiptFreeText:
           description: Message to be displayed on the terminal.
           type: string
+        recurring.contractTypes:
+          description: The recurring contract types applicable to the transaction.
+          type: string
+          x-addedInVersion: 40
         recurring.firstPspReference:
           description: |-
             The `pspReference`, of the first recurring payment that created the recurring detail.
@@ -3542,7 +3607,7 @@ components:
           description: |-
             Your reference for the split, which you can use to link the split to other operations such as captures and refunds.
 
-            This is required if `type` is **MarketPlace**. For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports. If the reference is not provided, the split is reported as part of the aggregated [TransferBalance record type](https://docs.adyen.com/reporting/marketpay-payments-accounting-report) in Adyen for Platforms.
+            This is required if `type` is **MarketPlace** or **BalanceAccount**. For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports. If the reference is not provided, the split is reported as part of the aggregated [TransferBalance record type](https://docs.adyen.com/reporting/marketpay-payments-accounting-report) in Adyen for Platforms.
           type: string
         type:
           description: |-
@@ -4001,6 +4066,12 @@ components:
             The `sdkTransID` value as received from the 3D Secure 2 SDK.
             Only for `deviceChannel` set to **app**.
           type: string
+        sdkVersion:
+          description: |-
+            Version of the 3D Secure 2 mobile SDK. 
+            Only for `deviceChannel` set to **app**.
+          type: string
+          x-addedInVersion: 40
         threeDSCompInd:
           description: Completion indicator for the device fingerprinting.
           type: string

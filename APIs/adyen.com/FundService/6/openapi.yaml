@@ -577,6 +577,7 @@ components:
             >* `FundTransfer` - a transfer of funds from one account to another.
           items:
             enum:
+              - BalanceNotPaidOutTransfer
               - Chargeback
               - ChargebackCorrection
               - ChargebackCorrectionReceived
@@ -614,6 +615,8 @@ components:
               - PendingDebit
               - PendingFundTransfer
               - SecondChargeback
+              - SecondChargebackCorrection
+              - SecondChargebackCorrectionReceived
               - SecondChargebackReceived
             type: string
           type: array
@@ -958,9 +961,12 @@ components:
             - schedule
             - shareholder
             - shareholderCode
+            - shareholderCodeAndSignatoryCode
+            - shareholderCodeOrSignatoryCode
             - shareholderType
             - shopperInteraction
             - signatory
+            - signatoryCode
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
@@ -1229,6 +1235,7 @@ components:
             The status of the transaction.
             >Permitted values: `PendingCredit`, `CreditFailed`, `CreditClosed`, `CreditSuspended`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
           enum:
+            - BalanceNotPaidOutTransfer
             - Chargeback
             - ChargebackCorrection
             - ChargebackCorrectionReceived
@@ -1266,6 +1273,8 @@ components:
             - PendingDebit
             - PendingFundTransfer
             - SecondChargeback
+            - SecondChargebackCorrection
+            - SecondChargebackCorrectionReceived
             - SecondChargebackReceived
           type: string
         transferCode:

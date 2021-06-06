@@ -363,7 +363,7 @@ paths:
           description: Internal Server Error - the server could not process the request.
       summary: Delete bank accounts of an account holder.
       x-groupName: Verification
-      x-sortIndex: 3
+      x-sortIndex: 4
   /deleteShareholders:
     post:
       description: Deletes one or more shareholders from an account holder.
@@ -427,7 +427,68 @@ paths:
           description: Internal Server Error - the server could not process the request.
       summary: Delete shareholders of an existing account holder.
       x-groupName: Verification
-      x-sortIndex: 4
+      x-sortIndex: 6
+  /deleteSignatories:
+    post:
+      description: Deletes one or more signatories from an account holder.
+      operationId: post-deleteSignatories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteSignatoriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: OK - the request has succeeded.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Accepted - the request has been accepted for processing, but the processing has not been completed.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Delete signatories of an existing account holder.
+      x-groupName: Verification
+      x-sortIndex: 7
   /getAccountHolder:
     post:
       description: Retrieves the details of an account holder.
@@ -1788,6 +1849,7 @@ components:
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
             - MONTHLY
+            - MONTHLY_ON_15TH_AT_MIDNIGHT
             - WEEKLY
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
             - YEARLY
@@ -1867,6 +1929,19 @@ components:
       required:
         - accountHolderCode
         - shareholderCodes
+    DeleteSignatoriesRequest:
+      properties:
+        accountHolderCode:
+          description: The code of the account holder from which to delete the signatories.
+          type: string
+        signatoryCodes:
+          description: Array of codes of the signatories to be deleted.
+          items:
+            type: string
+          type: array
+      required:
+        - accountHolderCode
+        - signatoryCodes
     DocumentDetail:
       properties:
         accountHolderCode:
@@ -2044,9 +2119,12 @@ components:
             - schedule
             - shareholder
             - shareholderCode
+            - shareholderCodeAndSignatoryCode
+            - shareholderCodeOrSignatoryCode
             - shareholderType
             - shopperInteraction
             - signatory
+            - signatoryCode
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
@@ -2295,7 +2373,8 @@ components:
         status:
           description: |-
             The status of the check.
-            >Permitted Values: `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
+
+            Possible values: **AWAITING_DATA** , **DATA_PROVIDED**, **FAILED**, **INVALID_DATA**, **PASSED**, **PENDING**, **RETRY_LIMIT_REACHED**.
           enum:
             - AWAITING_DATA
             - DATA_PROVIDED
@@ -2311,9 +2390,34 @@ components:
           $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the execution of the check.
         type:
-          description: |-
-            The type of check.
-            >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`, `CARD_VERIFICATION`.
+          description: "The type of check.
+
+
+            Possible values:
+
+
+            \ * **BANK_ACCOUNT_VERIFICATION**: Used in v5 and earlier. Replaced by **PAYOUT_METHOD_VERIFICATION** in v6 and later.
+
+
+            \ * **COMPANY_VERIFICATION**
+
+
+            \  * **CARD_VERIFICATION**
+
+
+            * **IDENTITY_VERIFICATION**
+
+
+            * **PASSPORT_VERIFICATION**
+
+
+            * **PAYOUT_METHOD_VERIFICATION**: Used in v6 and later.
+
+
+            * **NONPROFIT_VERIFICATION**
+
+
+            \ "
           enum:
             - BANK_ACCOUNT_VERIFICATION
             - CARD_VERIFICATION
@@ -2358,14 +2462,14 @@ components:
       properties:
         accountHolder:
           $ref: "#/components/schemas/KYCCheckResult2"
-          description: The result(s) of the checks on the account holder.
+          description: The results of the checks on the account holder.
         bankAccounts:
-          description: The result(s) of the checks on the bank account(s).
+          description: The results of the checks on the bank accounts.
           items:
             $ref: "#/components/schemas/KYCBankAccountCheckResult"
           type: array
         shareholders:
-          description: The result(s) of the checks on the shareholder(s).
+          description: The results of the checks on the shareholders.
           items:
             $ref: "#/components/schemas/KYCShareholderCheckResult"
           type: array
@@ -2392,6 +2496,7 @@ components:
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
             - MONTHLY
+            - MONTHLY_ON_15TH_AT_MIDNIGHT
             - WEEKLY
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
             - YEARLY
@@ -2796,6 +2901,7 @@ components:
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
             - MONTHLY
+            - MONTHLY_ON_15TH_AT_MIDNIGHT
             - WEEKLY
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
             - YEARLY

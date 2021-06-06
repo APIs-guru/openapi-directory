@@ -143,6 +143,23 @@ paths:
 components:
   examples: {}
   schemas:
+    CollectInformation:
+      properties:
+        bankDetails:
+          description: Indicates whether [bank account details](https://docs.adyen.com/platforms/verification-checks/bank-account-check) must be collected. Defaults to **true**.
+          type: boolean
+        businessDetails:
+          description: Indicates whether [business details](https://docs.adyen.com/platforms/verification-checks/company-check) must be collected. Defaults to **true**.
+          type: boolean
+        individualDetails:
+          description: Indicates whether [individual details](https://docs.adyen.com/platforms/verification-checks/identity-check) must be collected. Defaults to **true**.
+          type: boolean
+        pciQuestionnaire:
+          description: Indicates whether answers to a PCI questionnaire must be collected. Defaults to **true**.
+          type: boolean
+        shareholderDetails:
+          description: Indicates whether [shareholder details](https://docs.adyen.com/platforms/verification-checks/identity-check) must be collected. Defaults to **true**.
+          type: boolean
     ErrorFieldType:
       properties:
         errorCode:
@@ -263,9 +280,12 @@ components:
             - schedule
             - shareholder
             - shareholderCode
+            - shareholderCodeAndSignatoryCode
+            - shareholderCodeOrSignatoryCode
             - shareholderType
             - shopperInteraction
             - signatory
+            - signatoryCode
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
@@ -302,6 +322,9 @@ components:
         accountHolderCode:
           description: The account holder code you provided when you created the account holder.
           type: string
+        collectInformation:
+          $ref: "#/components/schemas/CollectInformation"
+          description: Contains indicators whether the page should only collect information for specific [KYC checks](https://docs.adyen.com/platforms/verification-checks). By default, the page collects information for all KYC checks that apply to the [legal entity type](https://docs.adyen.com/platforms/account-holders-and-accounts#legal-entity-types).
         editMode:
           description: Indicates if editing checks is allowed even if all the checks have passed.
           type: boolean
@@ -319,6 +342,9 @@ components:
 
             For a list supported languages, refer to [Change the page language](https://docs.adyen.com/platforms/hosted-onboarding-page#change-page-language).
           type: string
+        showPages:
+          $ref: "#/components/schemas/ShowPages"
+          description: Contains indicators whether specific pages must be shown to the account holder. By default, all pages are shown.
       required:
         - accountHolderCode
     GetOnboardingUrlResponse:
@@ -395,6 +421,23 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+    ShowPages:
+      properties:
+        bankDetailsSummaryPage:
+          description: Indicates whether the page with bank account details must be shown. Defaults to **true**.
+          type: boolean
+        businessDetailsSummaryPage:
+          description: Indicates whether the page with the company's or organization's details must be shown. Defaults to **true**.
+          type: boolean
+        individualDetailsSummaryPage:
+          description: Indicates whether the page with the individual's details must be shown. Defaults to **true**.
+          type: boolean
+        shareholderDetailsSummaryPage:
+          description: Indicates whether the page with the shareholders' details must be shown. Defaults to **true**.
+          type: boolean
+        welcomePage:
+          description: Indicates whether the welcome page must be shown. Defaults to **true**.
+          type: boolean
   securitySchemes:
     ApiKeyAuth:
       in: header

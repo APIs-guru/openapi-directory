@@ -75,6 +75,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                authorise-recurringcontauth-200:
+                  $ref: "#/components/examples/post-authorise-authorise-recurringcontauth-200"
               schema:
                 $ref: "#/components/schemas/PaymentResult"
           description: OK - the request has succeeded.
@@ -253,7 +256,11 @@ paths:
       description: |-
         Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).
 
-        > Do not use this request for payments that involve (multiple) partial captures.
+        > Do not use this endpoint for payments that involve:
+        > * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
+        > * [Split data](https://docs.adyen.com/platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
+        >
+        > Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
 
         For more information, refer to [Cancel or refund](https://docs.adyen.com/online-payments/cancel-or-refund).
       operationId: post-cancelOrRefund
@@ -269,6 +276,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                cancelOrRefund-200:
+                  $ref: "#/components/examples/post-cancelOrRefund-cancelOrRefund-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -335,6 +345,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                capture-200:
+                  $ref: "#/components/examples/post-capture-capture-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -402,6 +415,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                refund-200:
+                  $ref: "#/components/examples/post-refund-refund-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -470,6 +486,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                voidpendingrefund-pspreference-200:
+                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-pspreference-200"
+                voidpendingrefund-tenderreference-200:
+                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-tenderreference-200"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -546,6 +567,9 @@ components:
         amount:
           currency: EUR
           value: 1500
+        browserInfo:
+          acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+          userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
         card:
           cvc: "737"
           expiryMonth: "03"
@@ -583,6 +607,16 @@ components:
         shopperIP: 61.294.12.12
         shopperInteraction: ContAuth
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+    post-authorise-authorise-recurringcontauth-200:
+      summary: Example response for request 'authorise-recurringcontauth'
+      value:
+        additionalData:
+          recurring.recurringDetailReference: "8316172010100170"
+          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+          recurringProcessingModel: CardOnFile
+        authCode: "065914"
+        pspReference: 852617895343904C
+        resultCode: Authorised
     post-authorise-authorise-recurringoneclick:
       summary: Authorise a one-click payment
       value:
@@ -638,6 +672,11 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YourModificationReference
+    post-cancelOrRefund-cancelOrRefund-200:
+      summary: Example response for request 'cancelOrRefund'
+      value:
+        pspReference: 851617892359708H
+        response: "[cancelOrRefund-received]"
     post-capture-capture:
       summary: Capture an authorised payment
       value:
@@ -647,6 +686,11 @@ components:
           value: 500
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YOUR_REFERENCE
+    post-capture-capture-200:
+      summary: Example response for request 'capture'
+      value:
+        pspReference: 861617892359057J
+        response: "[capture-received]"
     post-refund-refund:
       summary: Refund a captured payment
       value:
@@ -656,17 +700,32 @@ components:
           value: 500
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YOUR_REFERENCE
+    post-refund-refund-200:
+      summary: Example response for request 'refund'
+      value:
+        pspReference: 861617892360059B
+        response: "[refund-received]"
     post-voidPendingRefund-voidpendingrefund-pspreference:
       summary: Cancel a POS refund request with PSP reference before it has been completed
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9914748988390044"
+    post-voidPendingRefund-voidpendingrefund-pspreference-200:
+      summary: Example response for request 'voidpendingrefund-pspreference'
+      value:
+        pspReference: 861617892360062F
+        response: "[voidPendingRefund-received]"
     post-voidPendingRefund-voidpendingrefund-tenderreference:
       summary: Cancels a POS refund request with tender reference before it has been completed
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         tenderReference: 5Iw8001176969533005
         uniqueTerminalId: VX820-123456789
+    post-voidPendingRefund-voidpendingrefund-tenderreference-200:
+      summary: Example response for request 'voidpendingrefund-tenderreference'
+      value:
+        pspReference: 881617892360409G
+        response: "[voidPendingRefund-received]"
   schemas:
     AdditionalData3DSecure:
       properties:
@@ -2502,7 +2561,10 @@ components:
             type: string
           description: |-
             Metadata consists of entries, each of which includes a key and a value.
-            Limitations: Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            Limits:
+            * Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            * Maximum 20 characters per key.
+            * Maximum 80 characters per value. 
           type: object
           x-addedInVersion: 17
         mpiData:
@@ -2582,7 +2644,7 @@ components:
         shopperStatement:
           description: |-
             The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
-             We recommend sending a maximum of 25 characters, otherwise banks might truncate the string.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -2717,7 +2779,10 @@ components:
             type: string
           description: |-
             Metadata consists of entries, each of which includes a key and a value.
-            Limitations: Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            Limits:
+            * Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            * Maximum 20 characters per key.
+            * Maximum 80 characters per value. 
           type: object
           x-addedInVersion: 17
         orderReference:
@@ -2792,7 +2857,7 @@ components:
         shopperStatement:
           description: |-
             The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
-             We recommend sending a maximum of 25 characters, otherwise banks might truncate the string.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
@@ -2999,6 +3064,12 @@ components:
         cardHolderInfo:
           description: "Information provided by the issuer to the cardholder. If this field is present, you need to display this information to the cardholder. "
           type: string
+        cavv:
+          description: The Cardholder Authentication Verification Value (CAVV) for the 3D Secure authentication session, as a Base64-encoded 20-byte array.
+          type: string
+        cavvAlgorithm:
+          description: The CAVV algorithm used.
+          type: string
         scaExemptionRequested:
           description: |-
             Shows the [exemption type](https://docs.adyen.com/payments-fundamentals/psd2-sca-compliance-and-implementation-guide#specifypreferenceinyourapirequest) that Adyen requested for the payment.
@@ -3118,6 +3189,9 @@ components:
 
             Example: 58747
           type: string
+        authorisationMid:
+          description: Merchant ID known by the acquirer.
+          type: string
         authorisedAmountCurrency:
           description: The currency of the authorised amount, as a three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
           type: string
@@ -3146,6 +3220,9 @@ components:
             Example: TESTNL01
 
             > Only relevant for SEPA Direct Debit transactions.
+          type: string
+        coBrandedWith:
+          description: Includes the co-branded card information.
           type: string
         cvcResult:
           description: The result of CVC verification.
@@ -3183,6 +3260,15 @@ components:
           type: string
         "fraudCheck-[itemNr]-[FraudCheckname]":
           description: The fraud score due to a particular fraud check. The fraud check name is found in the key of the key-value pair.
+          type: string
+        fraudManualReview:
+          description: Indicates if the payment is sent to manual review.
+          type: string
+        fraudResultType:
+          description: The fraud result properties of the payment.
+          enum:
+            - GREEN
+            - FRAUD
           type: string
         fundingSource:
           description: |-
@@ -3231,17 +3317,26 @@ components:
             * Low Authrate Bin
             * Non-reloadable prepaid card
           type: string
+        isCardCommercial:
+          description: Indicates if the card is used for business purposes only.
+          type: string
         issuerCountry:
           description: |-
             The issuing country of the card based on the BIN list that Adyen maintains.
 
             Example: JP
           type: string
+        liabilityShift:
+          description: A Boolean value indicating whether a liability shift was offered for this payment.
+          type: string
         mcBankNetReferenceNumber:
           description: |-
             The `mcBankNetReferenceNumber`, is a minimum of six characters and a maximum of nine characters long.
 
             > Contact Support Team to enable this field.
+          type: string
+        merchantReference:
+          description: The reference provided for the transaction.
           type: string
         networkTxReference:
           description: |-
@@ -3263,6 +3358,9 @@ components:
           type: string
         paymentAccountReference:
           description: The Payment Account Reference (PAR) value links a network token with the underlying primary account number (PAN). The PAR value consists of 29 uppercase alphanumeric characters.
+          type: string
+        paymentMethod:
+          description: The payment method used in the transaction.
           type: string
         paymentMethodVariant:
           description: |-

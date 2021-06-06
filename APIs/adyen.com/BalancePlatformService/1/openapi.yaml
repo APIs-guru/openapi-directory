@@ -65,6 +65,8 @@ info:
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: "Issuing: Balance Platform API"
   version: "1"
+  x-logo:
+    url: https://adyen.com/.resources/adyen-website/themes/images/apple-icon-180x180.png
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/BalancePlatformService-v1.json
@@ -811,7 +813,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DocumentInfo"
+              $ref: "#/components/schemas/Document"
       responses:
         "200":
           content:
@@ -3147,6 +3149,16 @@ components:
         filename:
           description: The name of the file including the file extension.
           type: string
+        pageType:
+          description: >-
+            Specifies which side of the ID card is being uploaded.
+
+
+            - When `type` is **driversLicense**, set this to **front** or **back**.
+
+
+            - When omitted, we infer the page number based on the order of attachments.
+          type: string
     Authentication:
       properties:
         password:
@@ -3445,6 +3457,9 @@ components:
         - number
     CardConfiguration:
       properties:
+        activationUrl:
+          description: The activation URL of the card configuration profile.
+          type: string
         cardImageId:
           description: The Entity Reference of the card image.
           type: string
@@ -3552,7 +3567,14 @@ components:
       properties:
         attachment:
           $ref: "#/components/schemas/Attachment"
-          description: Contains the document.
+          description: This object will be deprecated soon. Use the `attachments` array
+            instead.
+        attachments:
+          description: Array that contains the document. The array supports multiple
+            attachments for uploading different sides or pages of one document.
+          items:
+            $ref: "#/components/schemas/Attachment"
+          type: array
         description:
           description: Your description of the document.
           type: string
@@ -3586,64 +3608,13 @@ components:
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
 
-            * For `type` **individual**, the values can be **drivingLicence**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
+            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
 
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
             - bankStatement
-            - drivingLicense
-            - identityCard
-            - passport
-            - proofOfAddress
-            - proofOfNationalIdNumber
-            - proofOfResidency
-            - registrationDocument
-            - ssn
-            - taxDocument
-          type: string
-    DocumentInfo:
-      properties:
-        attachment:
-          $ref: "#/components/schemas/Attachment"
-          description: Contains the document.
-        description:
-          description: Your description of the document.
-          type: string
-        expiryDate:
-          description: The expiry date of the document, in YYYY-MM-DD format.
-          type: string
-        issuerCountry:
-          description: The country where the document was issued, in the two-character
-            [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **US**.
-          type: string
-        issuerState:
-          description: The state or province where the document was issued.
-          type: string
-        number:
-          description: The number in the document.
-          type: string
-        owner:
-          $ref: "#/components/schemas/Entity"
-          description: Contains information about the resource that owns the document.
-        type:
-          description: >-
-            The type of document. The possible values depend on the legal
-            entity `type`.
-
-
-            * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
-
-
-            * For `type` **individual**, the values can be **drivingLicence**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
-
-
-            When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
-          enum:
-            - bankStatement
-            - drivingLicense
+            - driversLicense
             - identityCard
             - passport
             - proofOfAddress
@@ -3725,13 +3696,13 @@ components:
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
 
-            * For `type` **individual**, the values can be **drivingLicence**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
+            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
 
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
             - bankStatement
-            - drivingLicense
+            - driversLicense
             - identityCard
             - passport
             - proofOfAddress
@@ -4504,7 +4475,7 @@ components:
         merchantAccount:
           description: The merchant account that will be the source of funds. You can only
             use this if you are processing payments with Adyen. This can only be
-            used for sweeps of `type` **pull** and `schedule.type` **instant**.
+            used for sweeps of `type` **pull** and `schedule.type` **balance**.
           type: string
         schedule:
           $ref: "#/components/schemas/SweepSchedule"
@@ -4546,7 +4517,7 @@ components:
 
              * **push**: _Push funds out_ to a destination balance account or transfer instrument.
 
-             * **pull**: _Pull funds in_ from a source merchant account, balance account, or transfer instrument. 
+             * **pull**: _Pull funds in_ from a source merchant account or balance account. 
           enum:
             - pull
             - push
@@ -4573,10 +4544,10 @@ components:
             * **monthly**: Push out funds every 1st of the month at 07:00 AM CET.
 
 
-            * **instant**: Only for sweeps of `type` **pull** and with a `merchantAccount` source. Pull in funds instantly if the balance is less than or equal to the `triggerAmount`.
+            * **balance**: Only for sweeps of `type` **pull** and with a `merchantAccount` source. Pull in funds instantly if the balance is less than or equal to the `triggerAmount`.
           enum:
+            - balance
             - daily
-            - instant
             - monthly
             - weekly
           type: string
@@ -4956,6 +4927,8 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+source:
+  url: {}
 x-groups:
   - General
   - Account holders
