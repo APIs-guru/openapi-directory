@@ -144,7 +144,8 @@ paths:
           name: maxMembers
           schema:
             type: integer
-        - description: Required. The resource names of the contact groups to get.
+        - description: Required. The resource names of the contact groups to get. There is
+            a maximum of 200 resource names.
           explode: true
           in: query
           name: resourceNames
@@ -421,7 +422,7 @@ paths:
             To get information about a contact, specify the resource name that
             identifies the contact as returned by
             [`people.connections.list`](/people/api/rest/v1/people.connections/list).
-            You can include up to 200 resource names in one request.
+            There is a maximum of 200 resource names.
           explode: true
           in: query
           name: resourceNames

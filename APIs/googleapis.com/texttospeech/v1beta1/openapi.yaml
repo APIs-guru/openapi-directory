@@ -270,7 +270,7 @@ components:
           format: byte
           type: string
         timepoints:
-          description: A link between a position in the original request input and a corresponding time in the output audio. It's only supported via of SSML input.
+          description: A link between a position in the original request input and a corresponding time in the output audio. It's only supported via `` of SSML input.
           items:
             $ref: "#/components/schemas/Timepoint"
           type: array
@@ -279,7 +279,7 @@ components:
       description: This contains a mapping between a certain point in the input text and a corresponding time in the output audio.
       properties:
         markName:
-          description: Timepoint name as received from the client within tag.
+          description: Timepoint name as received from the client within `` tag.
           type: string
         timeSeconds:
           description: Time offset in seconds from the start of the synthesized audio.

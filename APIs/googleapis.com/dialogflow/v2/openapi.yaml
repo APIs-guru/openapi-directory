@@ -2464,6 +2464,9 @@ components:
     GoogleCloudDialogflowCxV3ConversationTurnUserInput:
       description: The input from the human user.
       properties:
+        enableSentimentAnalysis:
+          description: Whether sentiment analysis is enabled.
+          type: boolean
         injectedParameters:
           additionalProperties:
             description: Properties of the object.
@@ -3499,6 +3502,9 @@ components:
     GoogleCloudDialogflowCxV3beta1ConversationTurnUserInput:
       description: The input from the human user.
       properties:
+        enableSentimentAnalysis:
+          description: Whether sentiment analysis is enabled.
+          type: boolean
         injectedParameters:
           additionalProperties:
             description: Properties of the object.

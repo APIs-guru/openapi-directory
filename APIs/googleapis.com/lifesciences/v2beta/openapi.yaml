@@ -1203,6 +1203,11 @@ components:
         preemptible:
           description: If true, allocate a preemptible VM.
           type: boolean
+        reservation:
+          description: If specified, the VM will only be allocated inside the matching
+            reservation. It will fail if the VM parameters don't match the
+            reservation.
+          type: string
         serviceAccount:
           $ref: "#/components/schemas/ServiceAccount"
           description: The service account to install on the VM. This account does not
