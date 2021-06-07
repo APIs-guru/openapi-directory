@@ -8012,6 +8012,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.SendPipelineExecutionStepFailure:
+    post:
+      operationId: SendPipelineExecutionStepFailure
+      description: 'Notifies the pipeline that the execution of a callback step failed, along with a message describing why. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendPipelineExecutionStepFailureResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendPipelineExecutionStepFailureRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.SendPipelineExecutionStepFailure
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.SendPipelineExecutionStepSuccess:
+    post:
+      operationId: SendPipelineExecutionStepSuccess
+      description: 'Notifies the pipeline that the execution of a callback step succeeded and provides a list of the step''s output parameters. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendPipelineExecutionStepSuccessResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendPipelineExecutionStepSuccessRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.SendPipelineExecutionStepSuccess
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.StartMonitoringSchedule:
     post:
       operationId: StartMonitoringSchedule
@@ -9832,7 +9922,7 @@ components:
         OutputDataConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLOutputDataConfig'
-            - description: '<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.</p> <p>&lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;</p>'
+            - description: 'Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job. Format(s) supported: CSV.'
         ProblemType:
           allOf:
             - $ref: '#/components/schemas/ProblemType'
@@ -9848,7 +9938,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: <p>The ARN of the role that is used to access the data.</p> <p>&lt;para&gt;Specifies whether to automatically deploy the best &amp;ATP; model to an endpoint and the name of that endpoint if deployed automatically.&lt;/para&gt;</p>
+            - description: The ARN of the role that is used to access the data.
         GenerateCandidateDefinitionsOnly:
           allOf:
             - $ref: '#/components/schemas/GenerateCandidateDefinitionsOnly'
@@ -11817,7 +11907,7 @@ components:
         ModelPackageName:
           allOf:
             - $ref: '#/components/schemas/VersionedArnOrName'
-            - description: 'The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).'
+            - description: '<p>The name or Amazon Resource Name (ARN) of the model package to delete.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>'
     DeleteModelPackageGroupInput:
       type: object
       required:
@@ -13769,7 +13859,7 @@ components:
         ModelPackageName:
           allOf:
             - $ref: '#/components/schemas/VersionedArnOrName'
-            - description: The name of the model package to describe.
+            - description: '<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>'
     DescribeModelPackageGroupOutput:
       type: object
       required:
@@ -14162,6 +14252,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionDescription'
             - description: The description of the pipeline execution.
+        PipelineExperimentConfig:
+          $ref: '#/components/schemas/PipelineExperimentConfig'
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionFailureReason'
+            - description: 'If the execution failed, a message describing why.'
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -17659,6 +17755,56 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return.
+    SendPipelineExecutionStepFailureResponse:
+      type: object
+      properties:
+        PipelineExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionArn'
+            - description: The Amazon Resource Name (ARN) of the pipeline execution.
+    SendPipelineExecutionStepFailureRequest:
+      type: object
+      required:
+        - CallbackToken
+      title: SendPipelineExecutionStepFailureRequest
+      properties:
+        CallbackToken:
+          allOf:
+            - $ref: '#/components/schemas/CallbackToken'
+            - description: The pipeline generated token from the Amazon SQS queue.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: A message describing why the step failed.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.'
+    SendPipelineExecutionStepSuccessResponse:
+      type: object
+      properties:
+        PipelineExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionArn'
+            - description: The Amazon Resource Name (ARN) of the pipeline execution.
+    SendPipelineExecutionStepSuccessRequest:
+      type: object
+      required:
+        - CallbackToken
+      title: SendPipelineExecutionStepSuccessRequest
+      properties:
+        CallbackToken:
+          allOf:
+            - $ref: '#/components/schemas/CallbackToken'
+            - description: The pipeline generated token from the Amazon SQS queue.
+        OutputParameters:
+          allOf:
+            - $ref: '#/components/schemas/OutputParameterList'
+            - description: A list of the output parameters of the callback step.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.'
     StartMonitoringScheduleRequest:
       type: object
       required:
@@ -19706,11 +19852,11 @@ components:
         MaxRuntimePerTrainingJobInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxRuntimePerTrainingJobInSeconds'
-            - description: 'The maximum time, in seconds, a job is allowed to run.'
+            - description: 'The maximum time, in seconds, a training job is allowed to run as part of an AutoML job.'
         MaxAutoMLJobRuntimeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxAutoMLJobRuntimeInSeconds'
-            - description: 'The maximum time, in seconds, an AutoML job is allowed to wait for a trial to complete. It must be equal to or greater than <code>MaxRuntimePerTrainingJobInSeconds</code>.'
+            - description: 'The maximum runtime, in seconds, an AutoML job has to complete.'
       description: 'How long a job is allowed to run, or how many candidates a job is allowed to generate.'
     AutoMLSecurityConfig:
       type: object
@@ -20030,6 +20176,33 @@ components:
             - $ref: '#/components/schemas/PipelineExecutionArn'
             - description: The Amazon Resource Name (ARN) of the pipeline execution.
       description: Details on the cache hit of a pipeline execution step.
+    CallbackToken:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 10
+      maxLength: 10
+    OutputParameterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputParameter'
+      minItems: 0
+      maxItems: 50
+    CallbackStepMetadata:
+      type: object
+      properties:
+        CallbackToken:
+          allOf:
+            - $ref: '#/components/schemas/CallbackToken'
+            - description: The pipeline generated token from the Amazon SQS queue.
+        SqsQueueUrl:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the callback step.
+        OutputParameters:
+          allOf:
+            - $ref: '#/components/schemas/OutputParameterList'
+            - description: A list of the output parameters of the callback step.
+      description: Metadata about a callback step.
     ExplainabilityLocation:
       type: string
       minLength: 1
@@ -20975,7 +21148,7 @@ components:
         AutoGenerateEndpointName:
           allOf:
             - $ref: '#/components/schemas/AutoGenerateEndpointName'
-            - description: '<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click Autopilot model deployment; set to <code>False</code> otherwise. The default value is <code>True</code>.</p> <note> <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify the <code>EndpointName</code>; otherwise a 400 error is thrown.</p> </note>'
+            - description: '<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click Autopilot model deployment; set to <code>False</code> otherwise. The default value is <code>False</code>.</p> <note> <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify the <code>EndpointName</code>; otherwise a 400 error is thrown.</p> </note>'
         EndpointName:
           allOf:
             - $ref: '#/components/schemas/EndpointName'
@@ -23586,6 +23759,22 @@ components:
       pattern: .*
       minLength: 0
       maxLength: 3072
+    PipelineExperimentConfig:
+      type: object
+      properties:
+        ExperimentName:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentEntityName'
+            - description: The name of the experiment.
+        TrialName:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentEntityName'
+            - description: The name of the trial.
+      description: Specifies the names of the experiment and trial created by a pipeline.
+    PipelineExecutionFailureReason:
+      type: string
+      pattern: .*
+      maxLength: 1300
     PipelineStatus:
       type: string
       enum:
@@ -25437,7 +25626,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/KernelName'
-            - description: The name of the kernel.
+            - description: The name of the Jupyter kernel in the image. This value is case sensitive.
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/KernelDisplayName'
@@ -26853,6 +27042,21 @@ components:
             - $ref: '#/components/schemas/TargetPlatformAccelerator'
             - description: '<p>Specifies a target platform accelerator (optional).</p> <ul> <li> <p> <code>NVIDIA</code>: Nvidia graphics processing unit. It also requires <code>gpu-code</code>, <code>trt-ver</code>, <code>cuda-ver</code> compiler options</p> </li> <li> <p> <code>MALI</code>: ARM Mali graphics processor</p> </li> <li> <p> <code>INTEL_GRAPHICS</code>: Integrated Intel graphics</p> </li> </ul>'
       description: 'Contains information about a target platform that you want your model to run on, such as OS, architecture, and accelerators. It is an alternative of <code>TargetDevice</code>.'
+    OutputParameter:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The name of the output parameter.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String1024'
+            - description: The value of the output parameter.
+      description: An output parameter of a pipeline step.
     PipelineParameterName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$'
@@ -26968,6 +27172,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionDescription'
             - description: The description of the pipeline execution.
+        PipelineExperimentConfig:
+          $ref: '#/components/schemas/PipelineExperimentConfig'
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionFailureReason'
+            - description: 'If the execution failed, a message describing why.'
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -27025,6 +27235,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConditionStepMetadata'
             - description: 'If this is a Condition step metadata object, details on the condition.'
+        Callback:
+          $ref: '#/components/schemas/CallbackStepMetadata'
       description: Metadata for a step execution.
     PipelineExecutionStep:
       type: object
@@ -27056,7 +27268,7 @@ components:
         Metadata:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionStepMetadata'
-            - description: The metadata for the step execution.
+            - description: Metadata for the step execution.
       description: An execution of a step in a pipeline.
     TrainingJobStepMetadata:
       type: object
@@ -27556,7 +27768,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProductionVariantCoreDumpConfig'
             - description: Specifies configuration for a core dump from the model container when the process crashes.
-      description: 'Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. '
+      description: 'Identifies a model that you want to host and the resources chosen to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. '
     ProductionVariantSummary:
       type: object
       required:
@@ -28350,12 +28562,12 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/TagKey'
-            - description: The tag key.
+            - description: The tag key. Tag keys must be unique per resource.
         Value:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The tag value.
-      description: 'Describes a tag. '
+      description: '<p>A tag object that consists of a key and an optional value, used to manage metadata for Amazon SageMaker AWS resources.</p> <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. For more information on adding tags to Amazon SageMaker resources, see <a>AddTags</a>.</p> <p>For more information on adding metadata to your AWS resources with tagging, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>. For advice on best practices for managing AWS resources with tagging, see <a href="https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf">Tagging Best Practices: Implement an Effective AWS Resource Tagging Strategy</a>.</p>'
     TargetObjectiveMetricValue:
       type: number
       format: float

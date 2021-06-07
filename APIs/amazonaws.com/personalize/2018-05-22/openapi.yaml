@@ -4110,6 +4110,7 @@ components:
       description: The output configuration parameters of a dataset export job.
     KmsKeyArn:
       type: string
+      pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/.*'
     DataSource:
       type: object
       properties:
@@ -4169,6 +4170,7 @@ components:
         - UPDATE
     S3Location:
       type: string
+      pattern: '(s3|http|https)://.+'
       maxLength: 256
     Dataset:
       type: object
