@@ -54,7 +54,8 @@ paths:
         - $ref: "#/components/parameters/type"
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/api_secret"
-        - description: The numerical dialing prefix to look up pricing for. Examples include 44, 1 and so on.
+        - description: The numerical dialing prefix to look up pricing for. Examples
+            include 44, 1 and so on.
           in: query
           name: prefix
           required: true
@@ -87,7 +88,9 @@ paths:
         - $ref: "#/components/parameters/type"
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/api_secret"
-        - description: A two letter [country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). For example, `CA`.
+        - description: A two letter [country
+            code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). For
+            example, `CA`.
           in: query
           name: country
           required: true
@@ -128,7 +131,8 @@ components:
       schema:
         type: string
     type:
-      description: "The type of service you wish to retrieve data about: either `sms`, `sms-transit` or `voice`."
+      description: "The type of service you wish to retrieve data about: either `sms`,
+        `sms-transit` or `voice`."
       example: sms
       in: path
       name: type
@@ -165,7 +169,8 @@ components:
     NotFoundError:
       description: The page you requested was not found
     TooManyRequestsError:
-      description: You made too many requests. The API is rate limited to one request per second.
+      description: You made too many requests. The API is rate limited to one request
+        per second.
     UnauthorizedError:
       content:
         application/json:
@@ -198,7 +203,8 @@ components:
           example: Canada
           type: string
         currency:
-          description: The currency that your account is being billed in (by default `Euros—EUR`). Can change in the Dashboard to US Dollars—USD.
+          description: The currency that your account is being billed in (by default
+            `Euros—EUR`). Can change in the Dashboard to US Dollars—USD.
           example: EUR
           type: string
         defaultPrice:
@@ -222,7 +228,9 @@ components:
           example: EUR
           type: string
         mcc:
-          description: The [Mobile Country Code](https://en.wikipedia.org/wiki/Mobile_country_code) of the operator.
+          description: The [Mobile Country
+            Code](https://en.wikipedia.org/wiki/Mobile_country_code) of the
+            operator.
           example: "302"
           type: string
         mnc:
@@ -230,7 +238,8 @@ components:
           example: "530"
           type: string
         networkCode:
-          description: The Mobile Country Code and Mobile Network Code combined to give a unique reference for the operator.
+          description: The Mobile Country Code and Mobile Network Code combined to give a
+            unique reference for the operator.
           example: "302530"
           type: string
         networkName:
@@ -272,7 +281,8 @@ components:
           example: Canada
           type: string
         currency:
-          description: The currency that your account is being billed in (by default `Euros—EUR`). Can change in the Dashboard to US Dollars—USD.
+          description: The currency that your account is being billed in (by default
+            `Euros—EUR`). Can change in the Dashboard to US Dollars—USD.
           example: EUR
           type: string
         defaultPrice:

@@ -6,12 +6,16 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: |
-    The [Reports API](/reports/overview) enables you to request a report of activity for your Vonage account.
+  description: >
+    The [Reports API](/reports/overview) enables you to request a
+    report of activity for your Vonage account.
+
 
     Depending on your query pattern, you can choose from one of the two versions of the Reports API: asynchronous and synchronous. The asynchronous version is optimized for infrequent and large data queries (from several records to tens of millions). The synchronous version is optimized for frequent and periodic retrievals of small batches of data records (from one record to tens of thousand per query).
 
+
     Only synchronous version supports retrival of data records by message/record ID.
+
 
     Vonage recommends that you limit asynchronous queries to a maximum of 20 million records, by setting the start and end dates accordingly. On average, the asynchronous Reports API takes 5 - 10 minutes to generate 1 million records.
   license:
@@ -34,21 +38,30 @@ paths:
       operationId: list-reports
       parameters:
         - $ref: "#/components/parameters/account_id"
-        - description: A comma-separated list of report status values. Reports with any of the statuses specified are returned. The values in the comma-seperated list specified for `status` can be any of `PENDING`, `PROCESSING`, `SUCCESS`, `ABORTED`, `FAILED`, `TRUNCATED`.
+        - description: A comma-separated list of report status values. Reports with any of
+            the statuses specified are returned. The values in the
+            comma-seperated list specified for `status` can be any of `PENDING`,
+            `PROCESSING`, `SUCCESS`, `ABORTED`, `FAILED`, `TRUNCATED`.
           example: SUCCESS, FAILED
           in: query
           name: status
           required: true
           schema:
             type: string
-        - description: ISO-8601 extended time zone offset or ISO-8601 UTC zone offset formatted date from which the list of reports will be queried. Format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or `yyyy-mm-ddThh:mm:ss[.sss]Z`.
+        - description: ISO-8601 extended time zone offset or ISO-8601 UTC zone offset
+            formatted date from which the list of reports will be queried.
+            Format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or
+            `yyyy-mm-ddThh:mm:ss[.sss]Z`.
           example: 2019-06-28T00:00:00-00:00
           in: query
           name: date_from
           schema:
             format: date
             type: string
-        - description: ISO-8601 extended time zone offset or ISO-8601 UTC zone offset formatted date until which the list of reports will be queried. Format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or `yyyy-mm-ddThh:mm:ss[.sss]Z`.
+        - description: ISO-8601 extended time zone offset or ISO-8601 UTC zone offset
+            formatted date until which the list of reports will be queried.
+            Format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or
+            `yyyy-mm-ddThh:mm:ss[.sss]Z`.
           example: 2019-06-28T23:59:59-00:00
           in: query
           name: date_to
@@ -83,8 +96,11 @@ paths:
                 - $ref: "#/components/schemas/MESSAGES"
                 - $ref: "#/components/schemas/CONVERSATIONS"
                 - $ref: "#/components/schemas/ASR"
-        description: |
-          The parameters of the JSON body will be used to create and filter the report.<br> The value of the `product` field will define which product the report will be created for and which parameters are accepted.
+        description: >
+          The parameters of the JSON body will be used to create and filter
+          the report.<br> The value of the `product` field will define which
+          product the report will be created for and which parameters are
+          accepted.
       responses:
         "200":
           $ref: "#/components/responses/report_responses_create_report"
@@ -131,7 +147,10 @@ paths:
               - ASR
               - REPORTS-USAGE
             type: string
-        - description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+        - description: Direction of the communication, either `inbound` (received by our
+            services), or `outbound` (originated from our services). Required
+            for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`.
+            Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
           example: inbound
           in: query
           name: direction
@@ -140,8 +159,11 @@ paths:
               - inbound
               - outbound
             type: string
-        - description: |
-            The UUID of the message or call to be searched for. You can specify a comma-separated list of UUIDs. If UUIDs are not found they are listed in the response in the `ids_not_found` field.
+        - description: >
+            The UUID of the message or call to be searched for. You can specify
+            a comma-separated list of UUIDs. If UUIDs are not found they are
+            listed in the response in the `ids_not_found` field.
+
 
             If you specify `id`, you must not specify `status`, `date_start` or `date_end`.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
@@ -149,10 +171,14 @@ paths:
           name: id
           schema:
             type: string
-        - description: |
-            ISO-8601 extended time zone offset or ISO-8601 UTC zone offset formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when reports should begin. 
+        - description: >
+            ISO-8601 extended time zone offset or ISO-8601 UTC zone offset
+            formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or
+            `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when reports should begin. 
+
 
             It filters on the time the API call was received by Vonage and corresponds to the field `date_received` (`date_start` for Voice) in the report file. It is inclusive, i.e. the provided value is less than or equal to the value in the field `date_received` (`date_start` for Voice) in the CDR.
+
 
             If you provide this, you must provide `date_end` and must not provide `id`.
           example: 2017-12-01T00:00:00+0000
@@ -161,12 +187,15 @@ paths:
           schema:
             format: date
             type: string
-        - description: |
+        - description: >
             **Must be no more than 24 hours later than `date_start`**
+
 
             ISO-8601 extended time zone offset or ISO-8601 UTC zone offset formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when report should end.
 
+
             It is exclusive, i.e. the provided value is strictly greater than the value in the field `date_received` in the CDR.
+
 
             If you provide this, you must provide `date_start` and must not provide `id`.
           example: 2018-01-01T00:00:00+0000
@@ -175,7 +204,8 @@ paths:
           schema:
             format: date
             type: string
-        - description: Include the message contents in the records. Only applicable for use with products `SMS` and `MESSAGES`, where it is optional.
+        - description: Include the message contents in the records. Only applicable for
+            use with products `SMS` and `MESSAGES`, where it is optional.
           example: true
           in: query
           name: include_message
@@ -185,7 +215,8 @@ paths:
               - true
               - false
             type: boolean
-        - description: Indicates whether the SMS was split up into multiple parts (due to its length).
+        - description: Indicates whether the SMS was split up into multiple parts (due to
+            its length).
           example: false
           in: query
           name: show_concatenated
@@ -195,7 +226,8 @@ paths:
               - true
               - false
             type: boolean
-        - description: The event type to search for. Only used, and is required, when product is `CONVERSATIONS`.
+        - description: The event type to search for. Only used, and is required, when
+            product is `CONVERSATIONS`.
           example: ip-voice
           in: query
           name: type
@@ -272,7 +304,10 @@ paths:
                               example: product
                               type: string
                             reason:
-                              example: Could not resolve product name. Please use one of the following values [CONVERSATIONS, MESSAGES, NUMBER-INSIGHT, SMS, VERIFY-API, VERIFY-SDK, VOICE-CALL, WEBSOCKET-CALL, ASR]
+                              example: Could not resolve product name. Please use one of the following values
+                                [CONVERSATIONS, MESSAGES, NUMBER-INSIGHT, SMS,
+                                VERIFY-API, VERIFY-SDK, VOICE-CALL,
+                                WEBSOCKET-CALL, ASR]
                               type: string
                           type: object
                         type: array
@@ -282,7 +317,8 @@ paths:
                   - description: Invalid filter
                     properties:
                       detail:
-                        example: "When using message_id, the following parameters are not supported: [date_start, date_end]"
+                        example: "When using message_id, the following parameters are not supported:
+                          [date_start, date_end]"
                         type: string
                       instance:
                         $ref: "#/components/schemas/instance"
@@ -343,8 +379,12 @@ paths:
       summary: Get status of report
   "/v3/media/{file_id}":
     get:
-      description: |
-        Download a zipped archive of the rendered report. The file is available for download for 72 hours.<br> The zip file will be named `<PRODUCT>_<REPORT_ID>.zip`<br> The csv file in the zip archive will be named as `report_<PRODUCT>_<ACCOUNT_ID>_<DATE>.csv` the date will be formatted as `yyyyMMdd`.
+      description: >
+        Download a zipped archive of the rendered report. The file is
+        available for download for 72 hours.<br> The zip file will be named
+        `<PRODUCT>_<REPORT_ID>.zip`<br> The csv file in the zip archive will be
+        named as `report_<PRODUCT>_<ACCOUNT_ID>_<DATE>.csv` the date will be
+        formatted as `yyyyMMdd`.
       operationId: download-report
       parameters:
         - description: UUID of the file.
@@ -419,7 +459,8 @@ components:
           schema:
             properties:
               detail:
-                example: Report aaaaaaaa-bbbb-cccc-dddd-0123456789ab does not exist, or you do not have access.
+                example: Report aaaaaaaa-bbbb-cccc-dddd-0123456789ab does not exist, or you do
+                  not have access.
                 type: string
               instance:
                 example: f94b4e56604e07e5e5ad5a7228618f81
@@ -437,7 +478,8 @@ components:
           schema:
             properties:
               detail:
-                example: The job is already in a terminated state such as `SUCCESS`, `TRUNCATED`, `FAILED` or `ABORTED`.
+                example: The job is already in a terminated state such as `SUCCESS`,
+                  `TRUNCATED`, `FAILED` or `ABORTED`.
                 type: string
               instance:
                 example: f94b4e56604e07e5e5ad5a7228618f81
@@ -536,7 +578,11 @@ components:
                   - description: SMS (Outbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our
+                          services), or `outbound` (originated from our
+                          services). Required for products `SMS` and `MESSAGES`.
+                          Optional for `VOICE-CALL`. Invalid for
+                          `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -558,7 +604,8 @@ components:
                           $ref: "#/components/schemas/json_sms_outbound_with_body"
                         type: array
                       show_concatenated:
-                        description: Indicates whether the SMS was split up into multiple parts (due to its length).
+                        description: Indicates whether the SMS was split up into multiple parts (due to
+                          its length).
                         example: "false"
                         type: boolean
                     type: object
@@ -568,7 +615,11 @@ components:
                   - description: SMS (Inbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our
+                          services), or `outbound` (originated from our
+                          services). Required for products `SMS` and `MESSAGES`.
+                          Optional for `VOICE-CALL`. Invalid for
+                          `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -590,7 +641,8 @@ components:
                           $ref: "#/components/schemas/json_sms_inbound_with_body"
                         type: array
                       show_concatenated:
-                        description: Indicates whether the SMS was split up into multiple parts (due to its length).
+                        description: Indicates whether the SMS was split up into multiple parts (due to
+                          its length).
                         example: "false"
                         type: boolean
                     type: object
@@ -670,7 +722,11 @@ components:
                   - description: Messages (Outbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our
+                          services), or `outbound` (originated from our
+                          services). Required for products `SMS` and `MESSAGES`.
+                          Optional for `VOICE-CALL`. Invalid for
+                          `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -692,7 +748,8 @@ components:
                           $ref: "#/components/schemas/csv_messages_outbound"
                         type: array
                       show_concatenated:
-                        description: Indicates whether the SMS was split up into multiple parts (due to its length).
+                        description: Indicates whether the SMS was split up into multiple parts (due to
+                          its length).
                         example: "true"
                         type: boolean
                     type: object
@@ -702,7 +759,11 @@ components:
                   - description: Messages (Inbound)
                     properties:
                       direction:
-                        description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+                        description: Direction of the communication, either `inbound` (received by our
+                          services), or `outbound` (originated from our
+                          services). Required for products `SMS` and `MESSAGES`.
+                          Optional for `VOICE-CALL`. Invalid for
+                          `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
                         enum:
                           - inbound
                           - outbound
@@ -724,7 +785,8 @@ components:
                           $ref: "#/components/schemas/csv_messages_inbound"
                         type: array
                       show_concatenated:
-                        description: Indicates whether the SMS was split up into multiple parts (due to its length).
+                        description: Indicates whether the SMS was split up into multiple parts (due to
+                          its length).
                         example: "true"
                         type: boolean
                     type: object
@@ -901,7 +963,10 @@ components:
           type: object
       type: object
     account_id:
-      description: The account ID (API key) you wish to search for. This can differ from the API key in the authorization header because some accounts can request reports for other accounts, e.g. a primary account owner wants to create a report for one of its subaccounts.
+      description: The account ID (API key) you wish to search for. This can differ
+        from the API key in the authorization header because some accounts can
+        request reports for other accounts, e.g. a primary account owner wants
+        to create a report for one of its subaccounts.
       example: abcdef01
       type: string
     account_ref:
@@ -961,7 +1026,9 @@ components:
       format: date
       type: string
     callback_url:
-      description: URL to send a callback upon completion of the report. This POST callback contains the same information as the response to [Get status of report](/api/reports#get-report).
+      description: URL to send a callback upon completion of the report. This POST
+        callback contains the same information as the response to [Get status of
+        report](/api/reports#get-report).
       example: https://requestb.in/12345
       format: uri
       type: string
@@ -976,11 +1043,13 @@ components:
       example: "true"
       type: boolean
     conversation_id:
-      description: Search only for Voice calls attached to this particular Conversation. This should include the "CON-" prefix.
+      description: Search only for Voice calls attached to this particular
+        Conversation. This should include the "CON-" prefix.
       example: CON-abc123
       type: string
     conversation_type:
-      description: Type of conversation request. Only used, and is required, when product is `CONVERSATIONS`.
+      description: Type of conversation request. Only used, and is required, when
+        product is `CONVERSATIONS`.
       enum:
         - ip-voice
         - cs-custom-event
@@ -1387,8 +1456,13 @@ components:
       format: date
       type: string
     date_end:
-      description: |
-        ISO-8601 extended time zone offset or ISO-8601 UTC zone offset formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when report should end.  It is exclusive, i.e. the provided value is strictly greater than the value in the field `date_received` in the CDR. <br>If unspecified, defaults to the current time.
+      description: >
+        ISO-8601 extended time zone offset or ISO-8601 UTC zone offset
+        formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or
+        `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when report should end.  It is
+        exclusive, i.e. the provided value is strictly greater than the value in
+        the field `date_received` in the CDR. <br>If unspecified, defaults to
+        the current time.
       example: 2018-01-01T00:00:00+00:00
       format: date
       type: string
@@ -1398,13 +1472,23 @@ components:
       format: date
       type: string
     date_start:
-      description: |
-        ISO-8601 extended time zone offset or ISO-8601 UTC zone offset formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when reports  should begin. It filters on the time the API call was received by Vonage and corresponds to the field `date_received` (`date_start` for Voice) in the report file. It is inclusive, i.e. the provided value is less than or equal to the value in the field `date_received` (`date_start` for Voice) in the CDR.<br>If unspecified, defaults  to seven days ago.
+      description: >
+        ISO-8601 extended time zone offset or ISO-8601 UTC zone offset
+        formatted date (format `yyyy-mm-ddThh:mm:ss[.sss]±hh:mm` or
+        `yyyy-mm-ddThh:mm:ss[.sss]Z`) for when reports  should begin. It filters
+        on the time the API call was received by Vonage and corresponds to the
+        field `date_received` (`date_start` for Voice) in the report file. It is
+        inclusive, i.e. the provided value is less than or equal to the value in
+        the field `date_received` (`date_start` for Voice) in the CDR.<br>If
+        unspecified, defaults  to seven days ago.
       example: 2017-12-01T00:00:00+00:00
       format: date
       type: string
     direction:
-      description: Direction of the communication, either `inbound` (received by our services), or `outbound` (originated from our services). Required for products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
+      description: Direction of the communication, either `inbound` (received by our
+        services), or `outbound` (originated from our services). Required for
+        products `SMS` and `MESSAGES`. Optional for `VOICE-CALL`. Invalid for
+        `CONVERSATIONS`, `NUMBER-INSIGHT`, `VERIFY-API`.
       enum:
         - inbound
         - outbound
@@ -1444,7 +1528,8 @@ components:
       example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
       type: string
     ids_not_found:
-      description: If you request multiple records using a comma-separated list of UUIDs, then the UUIDs of any records not found are listed in this field.
+      description: If you request multiple records using a comma-separated list of
+        UUIDs, then the UUIDs of any records not found are listed in this field.
       example: 7b10a0c2-1a05-11eb-bad9-38f9d331649,7b1091b8-1a05-11eb-bad9-38f9d331493
       type: string
     include_message:
@@ -1472,7 +1557,8 @@ components:
       example: "0"
       type: string
     items_count:
-      description: The number of rows in the resulting file (when report has been completed).
+      description: The number of rows in the resulting file (when report has been
+        completed).
       type: integer
     json_sms_inbound:
       description: Inbound SMS
@@ -1574,7 +1660,8 @@ components:
       example: en-gb
       type: string
     message_body:
-      description: Body of the message sent. Only present if include_message parameter is set to true.
+      description: Body of the message sent. Only present if include_message parameter
+        is set to true.
       example: This is a text message
       type: string
     message_id:
@@ -1976,7 +2063,8 @@ components:
       type: string
     show_concatenated:
       default: false
-      description: Indicates whether the SMS was split up into multiple parts (due to its length).
+      description: Indicates whether the SMS was split up into multiple parts (due to
+        its length).
       example: "false"
       type: boolean
     sms_event_count:
@@ -2163,7 +2251,8 @@ components:
       type: http
 x-errors:
   invalid-abort-operation:
-    description: The job is already in a terminated state such as `SUCCESS`, `TRUNCATED`, `FAILED` or `ABORTED`.
+    description: The job is already in a terminated state such as `SUCCESS`,
+      `TRUNCATED`, `FAILED` or `ABORTED`.
     link:
       text: View API reference
       url: /api/reports#cancel-report

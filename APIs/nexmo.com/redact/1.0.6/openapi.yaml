@@ -6,7 +6,13 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The [Redact API](/redact/overview) helps organisations meet their privacy compliance obligations. It provides controlled, on-demand redaction of private information from transactional records in the long-term storage. Note, Redact API does not have the capability to redact the short-lived server logs that are retained for a few weeks. For SMS customers that need immediate redaction, Vonage suggests using [Advanced Auto-redact](/redact/overview#auto-redact-vs-redact-api).
+  description: The [Redact API](/redact/overview) helps organisations meet their
+    privacy compliance obligations. It provides controlled, on-demand redaction
+    of private information from transactional records in the long-term storage.
+    Note, Redact API does not have the capability to redact the short-lived
+    server logs that are retained for a few weeks. For SMS customers that need
+    immediate redaction, Vonage suggests using [Advanced
+    Auto-redact](/redact/overview#auto-redact-vs-redact-api).
   title: Redact API
   version: 1.0.6
   x-origin:
@@ -97,7 +103,8 @@ components:
       properties:
         detail:
           description: Additional information about the error
-          example: "Unexpected character ('\"' (code 34)): was expecting comma to separate Object entries"
+          example: "Unexpected character ('\"' (code 34)): was expecting comma to separate
+            Object entries"
           type: string
         instance:
           description: Internal Trace ID
@@ -272,8 +279,10 @@ x-errors:
       url: /api/redact#transaction
     resolution: Modify your request to provide a valid product
   premature-redaction:
-    description: There is a 1 hour time period before data can be redacted to allow for all data to propagate through the Vonage system
+    description: There is a 1 hour time period before data can be redacted to allow
+      for all data to propagate through the Vonage system
     resolution: Wait until the data becomes valid for redaction
   rate-limit:
     description: The request was rate limited
-    resolution: The Redact API supports 170 requests per second. Slow down your request rate
+    resolution: The Redact API supports 170 requests per second. Slow down your
+      request rate
