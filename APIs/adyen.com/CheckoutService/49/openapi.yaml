@@ -46,6 +46,94 @@ info:
   x-publicVersion: true
   x-serviceName: CheckoutService
 paths:
+  /cancels:
+    post:
+      description: |-
+        Cancels the authorisation on a payment that has not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures), and returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**TECHNICAL_CANCEL** webhook](https://docs.adyen.com/online-payments/cancel#cancellation-webhook).
+
+        If you want to cancel a payment using the [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference), use the [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/cancels) endpoint instead.
+
+        If you want to cancel a payment but are not sure whether it has been captured, use the [`/payments/{paymentPspReference}/reversals`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/reversals) endpoint instead.
+
+        For more information, refer to [Cancel](https://docs.adyen.com/online-payments/cancel).
+      operationId: post-cancels
+      parameters:
+        - $ref: "#/components/parameters/Idempotency-Key"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateStandalonePaymentCancelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandalonePaymentCancelResource"
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandalonePaymentCancelResource"
+          description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic-401:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic-422:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "500":
+          content:
+            application/json:
+              examples:
+                generic-500:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels an authorised payment.
+      x-groupName: Modifications
+      x-sortIndex: 3
   /orders:
     post:
       description: Creates an order to be used for partial payments. Make a POST `/orders` call before making a `/payments` call when processing payments with different payment methods.
@@ -1082,6 +1170,477 @@ paths:
       summary: Verifies payment result.
       x-groupName: Classic Checkout SDK
       x-sortIndex: 2
+  "/payments/{paymentPspReference}/amountUpdates":
+    post:
+      description: |-
+        Increases or decreases the authorised payment amount and returns a unique reference for this request. You get the outcome of the request asynchronosly, in an [**AUTHORISATION_ADJUSTMENT** webhook](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes).
+
+        You can only update authorised amounts that have not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures).
+
+        The amount you specify in the request is the updated amount, which is larger or smaller than the initial authorised amount.
+
+        For more information, refer to [Authorisation adjustment](https://docs.adyen.com/online-payments/adjust-authorisation#use-cases).
+      operationId: post-payments-paymentPspReference-amountUpdates
+      parameters:
+        - description: The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment.
+          in: path
+          name: paymentPspReference
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Idempotency-Key"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentAmountUpdateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentAmountUpdateResource"
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentAmountUpdateResource"
+          description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic-401:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic-422:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "500":
+          content:
+            application/json:
+              examples:
+                generic-500:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Increases or decreases the authorised amount.
+      x-groupName: Modifications
+      x-sortIndex: 6
+  "/payments/{paymentPspReference}/cancels":
+    post:
+      description: |-
+        Cancels the authorisation on a payment that has not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/paymentPspReference/captures), and returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**CANCELLATION** webhook](https://docs.adyen.com/online-payments/cancel#cancellation-webhook).
+
+        If you want to cancel a payment but don't have the [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference), use the [`/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cancels) endpoint instead.
+
+        If you want to cancel a payment but are not sure whether it has been captured, use the [`/payments/{paymentPspReference}/reversals`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/reversals) endpoint instead.
+
+        For more information, refer to [Cancel](https://docs.adyen.com/online-payments/cancel).
+      operationId: post-payments-paymentPspReference-cancels
+      parameters:
+        - description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to cancel. "
+          in: path
+          name: paymentPspReference
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Idempotency-Key"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentCancelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentCancelResource"
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentCancelResource"
+          description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic-401:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic-422:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "500":
+          content:
+            application/json:
+              examples:
+                generic-500:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels an authorised payment.
+      x-groupName: Modifications
+      x-sortIndex: 2
+  "/payments/{paymentPspReference}/captures":
+    post:
+      description: |-2
+         Captures an authorised payment and returns a unique reference for this request. You get the outcome of the request asynchronosly, in a [**CAPTURE** webhook](https://docs.adyen.com/online-payments/capture#capture-notification).
+
+        You can capture either the full authorised amount or a part of the authorised amount. By default, any unclaimed amount after a partial capture gets cancelled. This does not apply if you enabled multiple partial captures on your account and the payment method supports multiple partial captures. 
+
+        [Automatic capture](https://docs.adyen.com/online-payments/capture#automatic-capture) is the default setting for most payment methods. In these cases, you don't need to make capture requests. However, making capture requests for payments that are captured automatically does not result in double charges.
+
+        For more information, refer to [Capture](https://docs.adyen.com/online-payments/capture).
+      operationId: post-payments-paymentPspReference-captures
+      parameters:
+        - description: The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to capture.
+          in: path
+          name: paymentPspReference
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Idempotency-Key"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentCaptureRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentCaptureResource"
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentCaptureResource"
+          description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic-401:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic-422:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "500":
+          content:
+            application/json:
+              examples:
+                generic-500:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Captures an authorised payment.
+      x-groupName: Modifications
+      x-sortIndex: 1
+  "/payments/{paymentPspReference}/refunds":
+    post:
+      description: |-
+        Refunds a payment that has been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures), and returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**REFUND** webhook](https://docs.adyen.com/online-payments/refund#refund-webhook).
+
+        You can refund either the full captured amount or a part of the captured amount. You can also perform multiple partial refunds, as long as their sum doesn't exceed the captured amount.
+
+        > Some payment methods do not support partial refunds. To learn if a payment method supports partial refunds, refer to the payment method page such as [cards](https://docs.adyen.com/payment-methods/cards#supported-cards), [iDEAL](https://docs.adyen.com/payment-methods/ideal), or [Klarna](https://docs.adyen.com/payment-methods/klarna). 
+
+        If you want to refund a payment but are not sure whether it has been captured, use the [`/payments/{paymentPspReference}/reversals`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/reversals) endpoint instead.
+
+        For more information, refer to [Refund](https://docs.adyen.com/online-payments/refund).
+      operationId: post-payments-paymentPspReference-refunds
+      parameters:
+        - description: The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to refund.
+          in: path
+          name: paymentPspReference
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Idempotency-Key"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentRefundRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRefundResource"
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRefundResource"
+          description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic-401:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic-422:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "500":
+          content:
+            application/json:
+              examples:
+                generic-500:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Refunds a captured payment.
+      x-groupName: Modifications
+      x-sortIndex: 4
+  "/payments/{paymentPspReference}/reversals":
+    post:
+      description: |-
+        [Refunds](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/refunds) a payment if it has already been captured, and [cancels](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/cancels) a payment if it has not yet been captured. Returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**CANCEL_OR_REFUND** webhook](https://docs.adyen.com/online-payments/reverse#cancel-or-refund-webhook).
+
+        The reversed amount is always the full payment amount.
+        > Do not use this request for payments that involve multiple partial captures.
+
+        For more information, refer to [Reversal](https://docs.adyen.com/online-payments/reversal).
+      operationId: post-payments-paymentPspReference-reversals
+      parameters:
+        - description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment that you want to reverse. "
+          in: path
+          name: paymentPspReference
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Idempotency-Key"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentReversalRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentReversalResource"
+          description: OK - the request has succeeded.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentReversalResource"
+          description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "400":
+          content:
+            application/json:
+              examples:
+                generic-400:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic-401:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic-403:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic-422:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+          headers:
+            Idempotency-Key:
+              $ref: "#/components/headers/Idempotency-Key"
+        "500":
+          content:
+            application/json:
+              examples:
+                generic-500:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      summary: Cancels or refunds a payment.
+      x-groupName: Modifications
+      x-sortIndex: 5
 components:
   examples:
     generic-400:
@@ -5742,6 +6301,9 @@ components:
           type: string
           x-deprecatedInVersion: 49
           x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        shopperNotificationReference:
+          description: The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
+          type: string
         storedPaymentMethodId:
           description: This is the `recurringDetailReference` returned in the response when you created the token.
           type: string
@@ -6597,6 +7159,59 @@ components:
           $ref: "#/components/schemas/ShopperInput"
           description: Determines how to display the details fields.
           x-addedInVersion: 37
+    CreatePaymentAmountUpdateRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The updated amount. The `currency` must match the currency used in authorisation.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reason:
+          description: |-
+            The reason for the amount update. Possible values: 
+            * **DelayedCharge** 
+            * **NoShow**
+          enum:
+            - delayedCharge
+            - noShow
+          type: string
+        reference:
+          description: "Your reference for the amount update request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+        - amount
+        - reason
+    CreatePaymentCancelRequest:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the cancel request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+    CreatePaymentCaptureRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount that you want to capture. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the capture request. Maximum length: 80 characters."
+          type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+      required:
+        - merchantAccount
+        - amount
     CreatePaymentLinkRequest:
       properties:
         allowedPaymentMethods:
@@ -6720,6 +7335,44 @@ components:
         - amount
         - reference
         - merchantAccount
+    CreatePaymentRefundRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount that you want to refund. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the refund request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+        - amount
+    CreatePaymentReversalRequest:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the reversal request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+    CreateStandalonePaymentCancelRequest:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentReference:
+          description: The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment that you want to cancel.
+          type: string
+        reference:
+          description: "Your reference for the cancel request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+        - paymentReference
     DetailsRequest:
       properties:
         details:
@@ -7543,6 +8196,101 @@ components:
       required:
         - type
       title: PayU
+    PaymentAmountUpdateResource:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The updated amount.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentPspReference:
+          description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to update. "
+          type: string
+        pspReference:
+          description: Adyen's 16-character reference associated with the amount update request.
+          type: string
+        reason:
+          description: |-
+            The reason for the amount update. Possible values: 
+            * **DelayedCharge** 
+            * **NoShow**
+          enum:
+            - delayedCharge
+            - noShow
+          type: string
+        reference:
+          description: "Your reference for the amount update request. Maximum length: 80 characters."
+          type: string
+        status:
+          description: The status of your request. This will always have the value **received**.
+          enum:
+            - received
+          type: string
+      required:
+        - status
+        - merchantAccount
+        - amount
+        - pspReference
+        - paymentPspReference
+        - reason
+    PaymentCancelResource:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentPspReference:
+          description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to cancel. "
+          type: string
+        pspReference:
+          description: Adyen's 16-character reference associated with the cancel request.
+          type: string
+        reference:
+          description: Your reference for the cancel request.
+          type: string
+        status:
+          description: The status of your request. This will always have the value **received**.
+          enum:
+            - received
+          type: string
+      required:
+        - status
+        - merchantAccount
+        - paymentPspReference
+        - pspReference
+    PaymentCaptureResource:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The captured amount.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentPspReference:
+          description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to capture. "
+          type: string
+        pspReference:
+          description: Adyen's 16-character reference associated with the capture request.
+          type: string
+        reference:
+          description: Your reference for the capture request.
+          type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+        status:
+          description: The status of your request. This will always have the value **received**.
+          enum:
+            - received
+          type: string
+      required:
+        - status
+        - merchantAccount
+        - amount
+        - pspReference
+        - paymentPspReference
     PaymentCompletionDetails:
       properties:
         MD:
@@ -8051,6 +8799,34 @@ components:
             $ref: "#/components/schemas/StoredPaymentMethod"
           type: array
           x-addedInVersion: 49
+    PaymentRefundResource:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The refund amount.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentPspReference:
+          description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to refund. "
+          type: string
+        pspReference:
+          description: Adyen's 16-character reference associated with the refund request.
+          type: string
+        reference:
+          description: Your reference for the refund request.
+          type: string
+        status:
+          description: The status of your request. This will always have the value **received**.
+          enum:
+            - received
+          type: string
+      required:
+        - status
+        - merchantAccount
+        - amount
+        - pspReference
+        - paymentPspReference
     PaymentRequest:
       properties:
         accountInfo:
@@ -8548,6 +9324,30 @@ components:
           $ref: "#/components/schemas/ThreeDS2Result"
           description: Result of the 3D Secure 2 authentication.
           x-addedInVersion: 41
+    PaymentReversalResource:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentPspReference:
+          description: "The [`pspReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_pspReference) of the payment to reverse. "
+          type: string
+        pspReference:
+          description: Adyen's 16-character reference associated with the reversal request.
+          type: string
+        reference:
+          description: Your reference for the reversal request.
+          type: string
+        status:
+          description: The status of your request. This will always have the value **received**.
+          enum:
+            - received
+          type: string
+      required:
+        - status
+        - merchantAccount
+        - pspReference
+        - paymentPspReference
     PaymentSetupRequest:
       properties:
         additionalData:
@@ -9898,6 +10698,30 @@ components:
           type: integer
       required:
         - value
+    StandalonePaymentCancelResource:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentReference:
+          description: The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment to cancel.
+          type: string
+        pspReference:
+          description: Adyen's 16-character reference associated with the cancel request.
+          type: string
+        reference:
+          description: Your reference for the cancel request.
+          type: string
+        status:
+          description: The status of your request. This will always have the value **received**.
+          enum:
+            - received
+          type: string
+      required:
+        - status
+        - merchantAccount
+        - pspReference
+        - paymentReference
     StoredDetails:
       properties:
         bank:
@@ -10209,6 +11033,9 @@ components:
     UpiDetails:
       additionalProperties: false
       properties:
+        billingSequenceNumber:
+          description: The sequence number for the debit. For example, send **2** if this is the second debit for the subscription. The sequence number is included in the notification sent to the shopper.
+          type: string
         recurringDetailReference:
           deprecated: true
           description: This is the `recurringDetailReference` returned in the response when you created the token.
@@ -10223,8 +11050,8 @@ components:
           type: string
           x-addedInVersion: 49
         type:
-          default: upi
-          description: "**upi**"
+          default: upi_collect
+          description: "**upi_collect**"
           enum:
             - upi_collect
           type: string
@@ -10233,6 +11060,7 @@ components:
           type: string
       required:
         - type
+        - billingSequenceNumber
       title: UPI
     VippsDetails:
       additionalProperties: false
@@ -10339,6 +11167,7 @@ source:
 x-groups:
   - Payments
   - Payment links
+  - Modifications
   - Orders
   - Classic Checkout SDK
   - Utility

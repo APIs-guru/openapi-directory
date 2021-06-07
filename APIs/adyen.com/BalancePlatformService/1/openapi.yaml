@@ -3172,12 +3172,11 @@ components:
     Balance:
       properties:
         available:
-          description: The remaining amount that is available for spending.
+          description: The remaining amount available for spending.
           format: int64
           type: integer
         balance:
-          description: The total funds in the balance. This is the sum of the `reserved`
-            and the `available` amounts.
+          description: The total amount in the balance.
           format: int64
           type: integer
         currency:
@@ -3186,8 +3185,8 @@ components:
             of the balance.
           type: string
         reserved:
-          description: The amount that is already reserved for payments that have been
-            authorised, but have not been captured yet.
+          description: The amount reserved for payments that have been authorised, but
+            have not been captured yet.
           format: int64
           type: integer
       required:
@@ -3448,6 +3447,7 @@ components:
             The primary account number of the card.
 
             >By default the primary account number will be masked. Only for single use virtual cards the full primary account number is returned.
+          readOnly: true
           type: string
       required:
         - formFactor

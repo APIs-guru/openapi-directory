@@ -2106,6 +2106,9 @@ components:
             >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on when a document should be submitted in order to verify a shareholder.
           type: string
           x-addedInVersion: 2
+        signatoryCode:
+          description: The code of the signatory, to which the document applies
+          type: string
       required:
         - accountHolderCode
         - documentType
@@ -2489,49 +2492,38 @@ components:
           $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the execution of the check.
         type:
-          description: "The type of check.
-
+          description: |-
+            The type of check.
 
             Possible values:
 
+             * **BANK_ACCOUNT_VERIFICATION**: Used in v5 and earlier. Replaced by **PAYOUT_METHOD_VERIFICATION** in v6 and later.
 
-            \ * **BANK_ACCOUNT_VERIFICATION**: Used in v5 and earlier. Replaced by **PAYOUT_METHOD_VERIFICATION** in v6 and later.
+             * **COMPANY_VERIFICATION**
 
-
-            \ * **COMPANY_VERIFICATION**
-
-
-            \  * **CARD_VERIFICATION**
-
+              * **CARD_VERIFICATION**
 
             * **IDENTITY_VERIFICATION**
 
-
-            * **PASSPORT_VERIFICATION**
-
-
-            * **PAYOUT_METHOD_VERIFICATION**: Used in v6 and later.
-
+            * **LEGAL_ARRANGEMENT_VERIFICATION**
 
             * **NONPROFIT_VERIFICATION**
 
+             * **PASSPORT_VERIFICATION**
 
-            \ "
+            * **PAYOUT_METHOD_VERIFICATION**: Used in v6 and later.
+
+            * **PCI_VERIFICATION**
           enum:
             - BANK_ACCOUNT_VERIFICATION
             - CARD_VERIFICATION
             - COMPANY_VERIFICATION
-            - CRIMINAL_BACKGROUND_EXTENSIVE_VERIFICATION
-            - CRIMINAL_BACKGROUND_MEDIUM_VERIFICATION
             - IDENTITY_VERIFICATION
             - LEGAL_ARRANGEMENT_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
             - PAYOUT_METHOD_VERIFICATION
-            - PCI_SELF_ASSESSMENT_PRESENCE_VERIFICATION
             - PCI_VERIFICATION
-            - POLITICALLY_EXPOSED_IDENTIFICATION_VERIFICATION
-            - POLITICALLY_EXPOSED_VERIFICATION
           type: string
       required:
         - type
@@ -2557,6 +2549,16 @@ components:
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
+    KYCSignatoryCheckResult:
+      properties:
+        checks:
+          description: A list of the checks and their statuses.
+          items:
+            $ref: "#/components/schemas/KYCCheckStatusData"
+          type: array
+        signatoryCode:
+          description: The code of the signatory to which the check applies.
+          type: string
     KYCVerificationResult2:
       properties:
         accountHolder:
@@ -2571,6 +2573,11 @@ components:
           description: The results of the checks on the shareholders.
           items:
             $ref: "#/components/schemas/KYCShareholderCheckResult"
+          type: array
+        signatories:
+          description: The results of the checks on the signatories.
+          items:
+            $ref: "#/components/schemas/KYCSignatoryCheckResult"
           type: array
     PayoutScheduleResponse:
       properties:
