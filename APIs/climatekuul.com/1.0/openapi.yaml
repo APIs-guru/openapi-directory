@@ -16,200 +16,6 @@ info:
       version: "3.0"
   x-providerName: climatekuul.com
 paths:
-  /airtravelAtoMultileg:
-    post:
-      deprecated: false
-      operationId: airtravelAtoMultileg
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            example:
-              apiKey_l1: d95fead6-e8a6-4547-9fb9-7835101a3960
-              apiKey_l2: c60f8db5-7204-4427-960d-27400c38b166
-              leg1:
-                destination_airport_code: DXB
-                origin_airport_code: KHI
-                travel_class: Economy
-              leg2:
-                destination_airport_code: LHR
-                origin_airport_code: DXB
-                travel_class: Business
-              leg3:
-                destination_airport_code: KHI
-                origin_airport_code: FRA
-                travel_class: Premium Economy
-              legs_count: "2"
-              number_of_passengers: "2"
-              travel_mode: multileg
-            schema:
-              $ref: "#/components/schemas/airtravelAtoMultilegRequest"
-        description: ""
-        required: true
-      responses:
-        "200":
-          description: ""
-          headers: {}
-      servers:
-        - url: http://api.climatekuul.com:8000/footprint
-          variables: {}
-      summary: airtravelAtoMultileg
-      tags:
-        - AirtravelAtoMultileg
-  /airtravelAtoMultileg/confirmCarbonOffset:
-    patch:
-      deprecated: false
-      operationId: confirmCarbonOffset3
-      parameters: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding: {}
-            schema:
-              properties:
-                carbonOffset:
-                  description: Confirm Carbon Offset (Value = y/n)
-                  example: y
-                  type: string
-                contactEmail:
-                  description: Contact email
-                  example: example@example.com
-                  type: string
-                contactFirstName:
-                  description: Contact first name
-                  example: abc
-                  type: string
-                contactLastName:
-                  description: Contact last name
-                  example: xyz
-                  type: string
-                transaction_id:
-                  description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
-              required:
-                - transaction_id
-                - carbonOffset
-              type: object
-        required: false
-      responses:
-        "200":
-          description: ""
-          headers: {}
-      servers:
-        - url: http://api.climatekuul.com:8000/footprint
-          variables: {}
-      summary: confirmCarbonOffset
-      tags:
-        - AirtravelAtoMultileg
-  /airtravelAtoMultileg/confirmPayment:
-    patch:
-      deprecated: false
-      operationId: confirmPayment3
-      parameters: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding: {}
-            schema:
-              properties:
-                confirmPayment:
-                  description: Confirm Payment (Value = y/n)
-                  example: y
-                  type: string
-                paymentID:
-                  description: "Payment ID "
-                  example: 34567878
-                  format: int32
-                  type: integer
-                transaction_id:
-                  description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
-              required:
-                - transaction_id
-                - confirmPayment
-                - paymentID
-              type: object
-        required: false
-      responses:
-        "200":
-          description: ""
-          headers: {}
-      servers:
-        - url: http://api.climatekuul.com:8000/footprint
-          variables: {}
-      summary: confirmPayment
-      tags:
-        - AirtravelAtoMultileg
-  /airtravelAtoMultileg/confirmPlanting:
-    patch:
-      deprecated: false
-      operationId: confirmsPlanting3
-      parameters: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding: {}
-            schema:
-              properties:
-                confirmPlanting:
-                  description: Confirm Planting (Value = y/n)
-                  example: y
-                  type: string
-                transaction_id:
-                  description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
-              required:
-                - transaction_id
-                - confirmPlanting
-              type: object
-        required: false
-      responses:
-        "200":
-          description: ""
-          headers: {}
-      servers:
-        - url: http://api.climatekuul.com:8000/footprint
-          variables: {}
-      summary: confirmPlanting
-      tags:
-        - AirtravelAtoMultileg
-  /airtravelAtoMultileg/confirmTransaction:
-    patch:
-      deprecated: false
-      operationId: confirmPaymentOfTransaction3
-      parameters: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding: {}
-            schema:
-              properties:
-                confirmTransaction:
-                  description: Confirm Payment Of Transaction (Value = y/n)
-                  example: y
-                  type: string
-                transaction_id:
-                  description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
-                  type: string
-              required:
-                - transaction_id
-                - confirmTransaction
-              type: object
-        required: false
-      responses:
-        "200":
-          description: ""
-          headers: {}
-      servers:
-        - url: http://api.climatekuul.com:8000/footprint
-          variables: {}
-      summary: confirmTransaction
-      tags:
-        - AirtravelAtoMultileg
   /airtravelCoordinates:
     post:
       deprecated: false
@@ -321,7 +127,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a78ed201d88997746c91b5
                   type: string
               required:
                 - transaction_id
@@ -349,6 +155,14 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPayment:
                   description: Confirm Payment (Value = y/n)
                   example: y
@@ -360,12 +174,14 @@ paths:
                   type: integer
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a78ed201d88997746c91b5
                   type: string
               required:
                 - transaction_id
                 - confirmPayment
                 - paymentID
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -389,17 +205,27 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPlanting:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a78ed201d88997746c91b5
                   type: string
               required:
                 - transaction_id
                 - confirmPlanting
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -429,7 +255,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a78ed201d88997746c91b5
                   type: string
               required:
                 - transaction_id
@@ -446,10 +272,50 @@ paths:
       summary: confirmTransaction
       tags:
         - AirtravelCoordinates
-  /authenticate:
+  /airtravelMultileg:
     post:
       deprecated: false
-      operationId: authenticateUser
+      operationId: airtravelMultileg
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              apiKey_l1: d95fead6-e8a6-4547-9fb9-7835101a3960
+              apiKey_l2: c60f8db5-7204-4427-960d-27400c38b166
+              leg1:
+                destination_airport_code: DXB
+                origin_airport_code: KHI
+                travel_class: Economy
+              leg2:
+                destination_airport_code: LHR
+                origin_airport_code: DXB
+                travel_class: Business
+              leg3:
+                destination_airport_code: KHI
+                origin_airport_code: FRA
+                travel_class: Premium Economy
+              legs_count: "2"
+              number_of_passengers: "2"
+              travel_mode: multileg
+            schema:
+              $ref: "#/components/schemas/airtravelMultilegRequest"
+        description: ""
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      servers:
+        - url: http://api.climatekuul.com:8000/footprint
+          variables: {}
+      summary: airtravelMultileg
+      tags:
+        - airtravelMultileg
+  /airtravelMultileg/confirmCarbonOffset:
+    patch:
+      deprecated: false
+      operationId: confirmCarbonOffset3
       parameters: []
       requestBody:
         content:
@@ -457,18 +323,29 @@ paths:
             encoding: {}
             schema:
               properties:
-                email:
-                  description: User email
-                  example: abcd@gmail.com
+                carbonOffset:
+                  description: Confirm Carbon Offset (Value = y/n)
+                  example: y
                   type: string
-                password:
-                  description: User password
-                  example: 234
-                  format: int32
-                  type: integer
+                contactEmail:
+                  description: Contact email
+                  example: example@example.com
+                  type: string
+                contactFirstName:
+                  description: Contact first name
+                  example: abc
+                  type: string
+                contactLastName:
+                  description: Contact last name
+                  example: xyz
+                  type: string
+                transaction_id:
+                  description: transaction_id
+                  example: 60a75c0e94c8cb95a6d0e02e
+                  type: string
               required:
-                - email
-                - password
+                - transaction_id
+                - carbonOffset
               type: object
         required: false
       responses:
@@ -478,9 +355,137 @@ paths:
       servers:
         - url: http://api.climatekuul.com:8000/footprint
           variables: {}
-      summary: authenticateUser
+      summary: confirmCarbonOffset
       tags:
-        - Authenticate User
+        - airtravelMultileg
+  /airtravelMultileg/confirmPayment:
+    patch:
+      deprecated: false
+      operationId: confirmPayment3
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
+                confirmPayment:
+                  description: Confirm Payment (Value = y/n)
+                  example: y
+                  type: string
+                paymentID:
+                  description: Payment Id
+                  example: 34567878
+                  format: int32
+                  type: integer
+                transaction_id:
+                  description: transaction_id
+                  example: 60a75c0e94c8cb95a6d0e02e
+                  type: string
+              required:
+                - transaction_id
+                - confirmPayment
+                - paymentID
+                - apiKey_l1
+                - apiKey_l2
+              type: object
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      servers:
+        - url: http://api.climatekuul.com:8000/footprint
+          variables: {}
+      summary: confirmPayment
+      tags:
+        - airtravelMultileg
+  /airtravelMultileg/confirmPlanting:
+    patch:
+      deprecated: false
+      operationId: confirmsPlanting3
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
+                confirmPlanting:
+                  description: Confirm Planting (Value = y/n)
+                  example: y
+                  type: string
+                transaction_id:
+                  description: transaction_id
+                  example: 60a75c0e94c8cb95a6d0e02e
+                  type: string
+              required:
+                - transaction_id
+                - confirmPlanting
+                - apiKey_l1
+                - apiKey_l2
+              type: object
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      servers:
+        - url: http://api.climatekuul.com:8000/footprint
+          variables: {}
+      summary: confirmPlanting
+      tags:
+        - airtravelMultileg
+  /airtravelMultileg/confirmTransaction:
+    patch:
+      deprecated: false
+      operationId: confirmPaymentOfTransaction3
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              properties:
+                confirmTransaction:
+                  description: Confirm Payment Of Transaction (Value = y/n)
+                  example: y
+                  type: string
+                transaction_id:
+                  description: transaction_id
+                  example: 60a75c0e94c8cb95a6d0e02e
+                  type: string
+              required:
+                - transaction_id
+                - confirmTransaction
+              type: object
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      servers:
+        - url: http://api.climatekuul.com:8000/footprint
+          variables: {}
+      summary: confirmTransaction
+      tags:
+        - airtravelMultileg
   /ecommerceDelivery:
     post:
       deprecated: false
@@ -595,7 +600,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 6082a326c4ec1d9be7a5da06
+                  example: 60a766d401d88997746c91a0
                   type: string
               required:
                 - transaction_id
@@ -623,23 +628,33 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPayment:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
                 paymentID:
-                  description: Payment ID
+                  description: Payment Id
                   example: 34567878
                   format: int32
                   type: integer
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a766d401d88997746c91a0
                   type: string
               required:
                 - transaction_id
                 - confirmPayment
                 - paymentID
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -663,17 +678,27 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPlanting:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a766d401d88997746c91a0
                   type: string
               required:
                 - transaction_id
                 - confirmPlanting
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -703,7 +728,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a766d401d88997746c91a0
                   type: string
               required:
                 - transaction_id
@@ -869,7 +894,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7823401d88997746c91a7
                   type: string
               required:
                 - transaction_id
@@ -897,6 +922,14 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPayment:
                   description: Confirm Payment (Value = y/n)
                   example: y
@@ -908,12 +941,14 @@ paths:
                   type: integer
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7823401d88997746c91a7
                   type: string
               required:
                 - transaction_id
                 - confirmPayment
                 - paymentID
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -937,17 +972,27 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPlanting:
-                  description: Confirms Planting (Value = y/n)
+                  description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7823401d88997746c91a7
                   type: string
               required:
                 - transaction_id
                 - confirmPlanting
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -977,7 +1022,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7823401d88997746c91a7
                   type: string
               required:
                 - transaction_id
@@ -1092,7 +1137,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7875a01d88997746c91ae
                   type: string
               required:
                 - transaction_id
@@ -1120,23 +1165,33 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPayment:
                   description: Confirm Payment (Value = y/n)
                   example: y
                   type: string
                 paymentID:
-                  description: Payment ID
+                  description: Payment Id
                   example: 34567878
                   format: int32
                   type: integer
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7875a01d88997746c91ae
                   type: string
               required:
                 - transaction_id
                 - confirmPayment
                 - paymentID
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -1160,17 +1215,27 @@ paths:
             encoding: {}
             schema:
               properties:
+                apiKey_l1:
+                  description: "apikey_l1 (Like: d95fead6-e8a6-4247-9fb9-7835101a4560)"
+                  example: d95fead6-e8a6-4247-9fb9-7835101a4560
+                  type: string
+                apiKey_l2:
+                  description: "apikey_l2 (Like: c60f8db5-7904-4227-960d-27400c38b166)"
+                  example: c60f8db5-7904-4227-960d-27400c38b166
+                  type: string
                 confirmPlanting:
                   description: Confirm Planting (Value = y/n)
                   example: y
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7875a01d88997746c91ae
                   type: string
               required:
                 - transaction_id
                 - confirmPlanting
+                - apiKey_l1
+                - apiKey_l2
               type: object
         required: false
       responses:
@@ -1200,7 +1265,7 @@ paths:
                   type: string
                 transaction_id:
                   description: transaction_id
-                  example: 608a6de161cf4d38dc9092a3
+                  example: 60a7875a01d88997746c91ae
                   type: string
               required:
                 - transaction_id
@@ -1237,7 +1302,7 @@ components:
         - travel_class
       title: Leg1
       type: object
-    airtravelAtoMultilegRequest:
+    airtravelMultilegRequest:
       example:
         apiKey_l1: qNahlSrEaduQ
         apiKey_l2: eCqMeAfaDBWG
@@ -1294,5 +1359,5 @@ components:
         - contactFirstName
         - contactLastName
         - contactEmail
-      title: airtravelAtoMultilegRequest
+      title: airtravelMultilegRequest
       type: object

@@ -1372,12 +1372,39 @@ components:
               nullable: true
               type: boolean
             language:
+              default: en
               enum:
-                - es
-                - pt
-                - fr
-                - de
                 - en
+                - ar
+                - bg
+                - ca
+                - cmn
+                - cs
+                - da
+                - de
+                - el
+                - es
+                - fi
+                - fr
+                - hi
+                - hr
+                - hu
+                - it
+                - ja
+                - ko
+                - lt
+                - lv
+                - ms
+                - nl
+                - no
+                - pl
+                - pt
+                - ro
+                - ru
+                - sk
+                - sl
+                - sv
+                - tr
               example: en
               nullable: true
               type: string
@@ -1538,7 +1565,7 @@ components:
                 Enabling this option will filter for approx. 600 profanities, which cover most use cases. If a transcribed word matches a word on this list, then all the characters of that word will be replaced by asterisks except for the first and last character.
             language:
               description: |
-                You can provide a language parameter for transcribing audio in Spanish, Portuguese, French and German. Language parameter is provided as a [ISO 639-1 2-letter language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+                You can provide a language parameter for transcribing audio in Arabic, Bulgarian, Catalan, Croation, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Hungarian, Italian, Japanese, Korean, Lithuanian, Latvian, Malay, Mandarin, Norwegian, Polish, Portuguese, Romanian, Russian, Slovak, Slovenian, Spanish, Swedish and Turkish. Language parameter is provided as a [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), with the exception of Mandarin (cmn) which is supplied as an [ISO 639-3 language code](https://en.wikipedia.org/wiki/ISO_639-3).
 
                 Only 1 language can be selected per audio, i.e. no multiple languages in one transcription job. Additionally, the following parameters may **not** be used with non-English languages: `skip_punctuation`, `remove_disfluencies`, `filter_profanity`, `speaker_channels_count`, `custom_vocabulary_id`.
             metadata:

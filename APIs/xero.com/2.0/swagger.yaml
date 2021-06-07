@@ -32,7 +32,8 @@ produces:
 parameters:
   If-Modified-Since:
     default: 2009-11-12T00:00:00Z
-    description: A UTC timestamp (yyyy-mm-ddThh:mm:ss) . Only invoices created or modified since this timestamp will be returned e.g. 2009-11-12T00:00:00
+    description: A UTC timestamp (yyyy-mm-ddThh:mm:ss) . Only invoices created or
+      modified since this timestamp will be returned e.g. 2009-11-12T00:00:00
     format: date-time
     in: header
     name: If-Modified-Since
@@ -47,7 +48,8 @@ parameters:
     type: boolean
   offset:
     default: 0
-    description: Offset by a specified journal number. e.g. journals with a JournalNumber greater than the offset will be returned.
+    description: Offset by a specified journal number. e.g. journals with a
+      JournalNumber greater than the offset will be returned.
     in: query
     name: offset
     required: false
@@ -61,7 +63,8 @@ parameters:
     type: string
   page:
     default: 1
-    description: Page number e.g. page=1. Page size is 100. When using the page parameter full resource details will be returned (including line items).
+    description: Page number e.g. page=1. Page size is 100. When using the page
+      parameter full resource details will be returned (including line items).
     in: query
     name: page
     required: false
@@ -75,14 +78,19 @@ parameters:
     type: boolean
   summarizeErrors:
     default: false
-    description: If you plan to submit more than one entity per API call, we recommend that you append the summarizeErrors=false querystring to your API call. This ensures that every entity is returned back to you, each having their own status attribute.
+    description: If you plan to submit more than one entity per API call, we
+      recommend that you append the summarizeErrors=false querystring to your
+      API call. This ensures that every entity is returned back to you, each
+      having their own status attribute.
     in: query
     name: summarizeErrors
     required: false
     type: boolean
   unitdp:
     default: 4
-    description: Determines the decimal places accepted/returned on the UnitAmount. UnitAmount is 2 decimal places by default but can be increased to 4 decimal places by supplying the unitdp=4 parameter.
+    description: Determines the decimal places accepted/returned on the UnitAmount.
+      UnitAmount is 2 decimal places by default but can be increased to 4
+      decimal places by supplying the unitdp=4 parameter.
     in: query
     name: unitdp
     required: false
@@ -143,7 +151,9 @@ responses:
           type: string
         Message:
           description: The exception description
-          example: An error occurred in Xero. Check the API Status page for current service status. Contact the API support team at api@xero.com for more assistance.
+          example: An error occurred in Xero. Check the API Status page for current
+            service status. Contact the API support team at api@xero.com for
+            more assistance.
           type: string
         Type:
           description: The type of exception
@@ -1361,7 +1371,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           description: Attachment does not exist
         "500":
@@ -1416,7 +1428,8 @@ paths:
           $ref: "#/responses/BankTransactionsResponse"
         "500":
           $ref: "#/responses/500ErrorResponse"
-      summary: Retrieve any spend or receive money transactions (inc. prepayments and overpayments)
+      summary: Retrieve any spend or receive money transactions (inc. prepayments and
+        overpayments)
       tags:
         - BankTransactions
     post:
@@ -1543,7 +1556,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           $ref: "#/responses/404ErrorResponse"
         "500":
@@ -1658,7 +1673,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           $ref: "#/responses/404ErrorResponse"
         "500":
@@ -2055,7 +2072,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           $ref: "#/responses/404ErrorResponse"
         "500":
@@ -2265,7 +2284,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "400":
           $ref: "#/responses/400ErrorResponse"
         "404":
@@ -2711,7 +2732,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           $ref: "#/responses/404ErrorResponse"
         "500":
@@ -2930,22 +2953,28 @@ paths:
     get:
       parameters:
         - $ref: "#/parameters/page"
-        - description: Filter by the SourceTransactionID. Get all the linked transactions created from a particular ACCPAY invoice
+        - description: Filter by the SourceTransactionID. Get all the linked transactions
+            created from a particular ACCPAY invoice
           format: uuid
           in: query
           name: SourceTransactionID
           type: string
-        - description: Filter by the ContactID. Get all the linked transactions that have been assigned to a particular customer.
+        - description: Filter by the ContactID. Get all the linked transactions that have
+            been assigned to a particular customer.
           format: uuid
           in: query
           name: ContactID
           type: string
-        - description: Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
+        - description: Filter by the combination of ContactID and Status. Get all the
+            linked transactions that have been assigned to a particular customer
+            and have a particular status e.g. GET
+            /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
           format: uuid
           in: query
           name: Status
           type: string
-        - description: Filter by the TargetTransactionID. Get all the linked transactions allocated to a particular ACCREC invoice.
+        - description: Filter by the TargetTransactionID. Get all the linked transactions
+            allocated to a particular ACCREC invoice.
           format: uuid
           in: query
           name: TargetTransactionID
@@ -3151,7 +3180,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           description: Attachment does not exist
         "500":
@@ -3281,7 +3312,8 @@ paths:
       responses:
         "200":
           $ref: "#/responses/PaymentsResponse"
-      summary: Retrieve a collection of payments for invoices, credit notes, prepayments and overpayments
+      summary: Retrieve a collection of payments for invoices, credit notes,
+        prepayments and overpayments
       tags:
         - Payments
     post:
@@ -3532,7 +3564,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           description: Attachment does not exist
         "500":
@@ -3695,7 +3729,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           description: Attachment does not exist
         "500":
@@ -3807,7 +3843,9 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
+          description: Successful response. The response message will contain the raw file
+            content that was originally uploaded. The response won’t contain any
+            xml or json encoded information
         "404":
           description: Attachment does not exist
         "500":
@@ -3836,7 +3874,8 @@ paths:
           name: contactID
           required: true
           type: string
-        - description: Shows payments up to this date e.g. 2014-04-30. Defaults to end of the current month
+        - description: Shows payments up to this date e.g. 2014-04-30. Defaults to end of
+            the current month
           in: query
           name: date
           required: false
@@ -3867,7 +3906,8 @@ paths:
           name: contactID
           required: true
           type: string
-        - description: Shows payments up to this date e.g. 2014-04-30. Defaults to end of the current month
+        - description: Shows payments up to this date e.g. 2014-04-30. Defaults to end of
+            the current month
           in: query
           name: date
           required: false
@@ -4026,27 +4066,39 @@ paths:
           name: toDate
           required: false
           type: string
-        - description: If you specify the trackingCategoryID parameter then the Profit and Loss Report will show figures for each of the options in the category as separate columns. See the Profit and Loss Report in Xero to learn more about this behavior when filtering by a tracking category.
+        - description: If you specify the trackingCategoryID parameter then the Profit and
+            Loss Report will show figures for each of the options in the
+            category as separate columns. See the Profit and Loss Report in Xero
+            to learn more about this behavior when filtering by a tracking
+            category.
           in: query
           name: trackingCategoryID
           required: false
           type: string
-        - description: If you specify this parameter in addition to the trackingCategoryID then just one option will be returned (i.e. 1 column only)
+        - description: If you specify this parameter in addition to the trackingCategoryID
+            then just one option will be returned (i.e. 1 column only)
           in: query
           name: trackingOptionID
           required: false
           type: string
-        - description: If you specify a second trackingCategoryID parameter then the Profit and Loss Report will show figures for each combination of options from the two categories as separate columns. See the Profit and Loss Report in Xero to learn more about this behaviour when filtering by two tracking categories.
+        - description: If you specify a second trackingCategoryID parameter then the
+            Profit and Loss Report will show figures for each combination of
+            options from the two categories as separate columns. See the Profit
+            and Loss Report in Xero to learn more about this behaviour when
+            filtering by two tracking categories.
           in: query
           name: trackingCategoryID2
           required: false
           type: string
-        - description: If you specify this parameter in addition to a second trackingCategoryID then just one option will be returned combined with the option/s from the first tracking category
+        - description: If you specify this parameter in addition to a second
+            trackingCategoryID then just one option will be returned combined
+            with the option/s from the first tracking category
           in: query
           name: trackingOptionID2
           required: false
           type: string
-        - description: If you set this parameter to "true" then no custom report layouts will be applied to response
+        - description: If you set this parameter to "true" then no custom report layouts
+            will be applied to response
           in: query
           name: standardLayout
           required: false
@@ -4362,7 +4414,8 @@ definitions:
         example: AUD
         type: string
       Description:
-        description: Description of the Account. Valid for all types of accounts except bank accounts
+        description: Description of the Account. Valid for all types of accounts except
+          bank accounts
         example: A sales account
         maxLength: 4000
         type: string
@@ -4402,7 +4455,9 @@ definitions:
         example: ACTIVE
         type: string
       SystemAccount:
-        description: If this is a system account then this element is returned. Note that non-system accounts may have this element set as either “” or null.
+        description: If this is a system account then this element is returned. Note
+          that non-system accounts may have this element set as either “” or
+          null.
         enum:
           - DEBTORS
           - CREDITORS
@@ -4515,7 +4570,8 @@ definitions:
         format: float
         type: number
       Date:
-        description: The date the prepayment is applied YYYY-MM-DD (read-only). This will be the latter of the invoice date and the prepayment date.
+        description: The date the prepayment is applied YYYY-MM-DD (read-only). This
+          will be the latter of the invoice date and the prepayment date.
         format: date
         readOnly: true
         type: string
@@ -4559,7 +4615,8 @@ definitions:
         type: string
     type: object
   Balances:
-    description: The raw AccountsReceivable (sales invoices) and AccountsPayable (bills) outstanding and overdue amounts, not converted to base currency
+    description: The raw AccountsReceivable (sales invoices) and AccountsPayable
+      (bills) outstanding and overdue amounts, not converted to base currency
     items:
       properties:
         AccountsPayable:
@@ -4632,7 +4689,8 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency bank transaction. If no rate is specified, the XE.com day rate is used.
+        description: The currency rate for a multicurrency bank transaction. If no rate
+          is specified, the XE.com day rate is used.
         format: float
         type: number
       Date:
@@ -4649,7 +4707,8 @@ definitions:
         type: boolean
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -4658,19 +4717,24 @@ definitions:
       LineItems:
         $ref: "#/definitions/LineItems"
       OverpaymentID:
-        description: Xero generated unique identifier for an Overpayment. This will be returned on BankTransactions with a Type of SPEND-OVERPAYMENT or RECEIVE-OVERPAYMENT
+        description: Xero generated unique identifier for an Overpayment. This will be
+          returned on BankTransactions with a Type of SPEND-OVERPAYMENT or
+          RECEIVE-OVERPAYMENT
         example: 66fbdc01-e2e7-4ee3-ab10-2d5821d38fe4
         format: uuid
         readOnly: true
         type: string
       PrepaymentID:
-        description: Xero generated unique identifier for a Prepayment. This will be returned on BankTransactions with a Type of SPEND-PREPAYMENT or RECEIVE-PREPAYMENT
+        description: Xero generated unique identifier for a Prepayment. This will be
+          returned on BankTransactions with a Type of SPEND-PREPAYMENT or
+          RECEIVE-PREPAYMENT
         example: d2c63bbd-bc9e-4fb4-9d1c-e5d15749aaa2
         format: uuid
         readOnly: true
         type: string
       Reference:
-        description: Reference for the transaction. Only supported for SPEND and RECEIVE transactions
+        description: Reference for the transaction. Only supported for SPEND and RECEIVE
+          transactions
         example: ABC123
         type: string
       Status:
@@ -4686,7 +4750,8 @@ definitions:
         readOnly: true
         type: number
       Total:
-        description: Total of bank transaction tax inclusive (i.e. SubTotal + TotalTax). This will be ignored if it doesn’t equal the sum of the LineAmounts
+        description: Total of bank transaction tax inclusive (i.e. SubTotal + TotalTax).
+          This will be ignored if it doesn’t equal the sum of the LineAmounts
         format: float
         readOnly: true
         type: number
@@ -4714,7 +4779,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: URL link to a source document – shown as “Go to [appName]” in the Xero app
+        description: URL link to a source document – shown as “Go to [appName]” in the
+          Xero app
         example: https://yourapp.com/transactions/ABC123
         type: string
     required:
@@ -4742,7 +4808,8 @@ definitions:
         readOnly: true
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency bank transfer. If no rate is specified, the XE.com day rate is used.
+        description: The currency rate for a multicurrency bank transfer. If no rate is
+          specified, the XE.com day rate is used.
         format: float
         type: number
       Date:
@@ -4815,7 +4882,8 @@ definitions:
         readOnly: true
         type: string
       SortOrder:
-        description: Integer – ranked order of branding theme. The default branding theme has a value of 0
+        description: Integer – ranked order of branding theme. The default branding
+          theme has a value of 0
         readOnly: true
         type: integer
     readOnly: true
@@ -4823,7 +4891,8 @@ definitions:
   Contact:
     properties:
       AccountNumber:
-        description: A user defined account number. This can be updated via the API and the Xero UI.
+        description: A user defined account number. This can be updated via the API and
+          the Xero UI.
         example: AM123
         maxLength: 50
         type: string
@@ -4890,12 +4959,17 @@ definitions:
         readOnly: true
         type: boolean
       IsCustomer:
-        description: Boolean that describes if a contact has any AR invoices entered against them. Cannot be set via PUT or POST – it is automatically set when an accounts receivable invoice is generated against this contact.
+        description: Boolean that describes if a contact has any AR invoices entered
+          against them. Cannot be set via PUT or POST – it is automatically set
+          when an accounts receivable invoice is generated against this contact.
         example: true
         readOnly: true
         type: boolean
       IsSupplier:
-        description: Boolean that describes if a contact that has any AP invoices entered against them. Cannot be set via PUT or POST – it is automatically set when an accounts payable invoice is generated against this contact.
+        description: Boolean that describes if a contact that has any AP invoices
+          entered against them. Cannot be set via PUT or POST – it is
+          automatically set when an accounts payable invoice is generated
+          against this contact.
         example: true
         readOnly: true
         type: boolean
@@ -4930,7 +5004,10 @@ definitions:
         example: adamm
         type: string
       TaxNumber:
-        description: Tax number of contact – this is also known as the ABN (Australia), GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and global) in the Xero UI depending on which regionalized version of Xero you are using.
+        description: Tax number of contact – this is also known as the ABN (Australia),
+          GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and
+          global) in the Xero UI depending on which regionalized version of Xero
+          you are using.
         example: GB12345667
         maxLength: 50
         type: string
@@ -4984,7 +5061,8 @@ definitions:
         example: Aaron
         type: string
       IncludeInEmails:
-        description: Boolean to indicate whether contact should be included on emails with invoices etc.
+        description: Boolean to indicate whether contact should be included on emails
+          with invoices etc.
         example: true
         type: boolean
       LastName:
@@ -5043,7 +5121,9 @@ definitions:
         readOnly: true
         type: string
       CreditNoteNumber:
-        description: ACCRECCREDIT – Unique alpha numeric code identifying credit note (when missing will auto-generate from your Organisation Invoice Settings)
+        description: ACCRECCREDIT – Unique alpha numeric code identifying credit note
+          (when missing will auto-generate from your Organisation Invoice
+          Settings)
         example: CN-123
         type: string
       CurrencyCode:
@@ -5051,11 +5131,14 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used
+        description: The currency rate for a multicurrency invoice. If no rate is
+          specified, the XE.com day rate is used
         format: float
         type: number
       Date:
-        description: The date the credit note is issued YYYY-MM-DD. If the Date element is not specified then it will default to the current date based on the timezone setting of the organisation
+        description: The date the credit note is issued YYYY-MM-DD. If the Date element
+          is not specified then it will default to the current date based on the
+          timezone setting of the organisation
         format: date
         type: string
       FullyPaidOnDate:
@@ -5088,7 +5171,8 @@ definitions:
         readOnly: true
         type: number
       SentToContact:
-        description: boolean to indicate if a credit note has been sent to a contact via the Xero app (currently read only)
+        description: boolean to indicate if a credit note has been sent to a contact via
+          the Xero app (currently read only)
         readOnly: true
         type: boolean
       Status:
@@ -5145,11 +5229,15 @@ definitions:
         readOnly: true
         type: string
       CreditNoteNumber:
-        description: ACCRECCREDIT – Unique alpha numeric code identifying credit note (when missing will auto-generate from your Organisation Invoice Settings)
+        description: ACCRECCREDIT – Unique alpha numeric code identifying credit note
+          (when missing will auto-generate from your Organisation Invoice
+          Settings)
         example: CN-123
         type: string
       Date:
-        description: The date the credit note is issued YYYY-MM-DD. If the Date element is not specified then it will default to the current date based on the timezone setting of the organisation
+        description: The date the credit note is issued YYYY-MM-DD. If the Date element
+          is not specified then it will default to the current date based on the
+          timezone setting of the organisation
         format: date
         type: string
       Total:
@@ -5174,9 +5262,8 @@ definitions:
   Employee:
     properties:
       EmployeeID:
-        description: >-
+        description: |-
           The Xero identifier for an employee
-
           e.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9
         format: uuid
         readOnly: true
@@ -5184,7 +5271,8 @@ definitions:
       ExternalLink:
         allOf:
           - description: >-
-              Link to an external resource, for example, an employee record in an external system. You can specify the URL element.
+              Link to an external resource, for example, an employee record in an
+              external system. You can specify the URL element.
 
               The description of the link is auto-generated in the form “Go to <App name>”. <App name> refers to the Xero application name that is making the API call.
           - $ref: "#/definitions/ExternalLink"
@@ -5305,7 +5393,8 @@ definitions:
   Invoice:
     properties:
       AmountCredited:
-        description: Sum of all credit notes, over-payments and pre-payments applied to invoice
+        description: Sum of all credit notes, over-payments and pre-payments applied to
+          invoice
         format: float
         readOnly: true
         type: number
@@ -5338,7 +5427,8 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used.
+        description: The currency rate for a multicurrency invoice. If no rate is
+          specified, the XE.com day rate is used.
         format: float
         type: number
       Date:
@@ -5354,7 +5444,8 @@ definitions:
         format: date
         type: string
       FullyPaidOnDate:
-        description: The date the invoice was fully paid. Only returned on fully paid invoices
+        description: The date the invoice was fully paid. Only returned on fully paid
+          invoices
         format: date
         readOnly: true
         type: string
@@ -5368,19 +5459,17 @@ definitions:
         readOnly: true
         type: string
       InvoiceNumber:
-        description: >
+        description: |
           User defined alphanumeric code for identifying invoices. 
-
           - Unique for ACCREC but not for ACCPAY. 
-
           - For ACCREC it will auto-generate when left blank. 
-
           - For ACCPAY it displays as Reference in the UI.
         example: INV-123
         type: string
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -5410,7 +5499,8 @@ definitions:
         type: string
       SentToContact:
         default: false
-        description: Boolean to set whether the invoice in the Xero app should be marked as “sent”. This can be set only on invoices that have been approved
+        description: Boolean to set whether the invoice in the Xero app should be marked
+          as “sent”. This can be set only on invoices that have been approved
         type: boolean
       Status:
         default: DRAFT
@@ -5429,7 +5519,8 @@ definitions:
         readOnly: true
         type: number
       Total:
-        description: Total of Invoice tax inclusive (i.e. SubTotal + TotalTax). This will be ignored if it doesn’t equal the sum of the LineAmounts
+        description: Total of Invoice tax inclusive (i.e. SubTotal + TotalTax). This
+          will be ignored if it doesn’t equal the sum of the LineAmounts
         format: float
         readOnly: true
         type: number
@@ -5455,7 +5546,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: URL link to a source document – shown as “Go to [appName]” in the Xero app
+        description: URL link to a source document – shown as “Go to [appName]” in the
+          Xero app
         example: https://myapp.com/INV-123
         type: string
     required:
@@ -5475,13 +5567,10 @@ definitions:
         readOnly: true
         type: string
       InvoiceNumber:
-        description: >
+        description: |
           User defined alphanumeric code for identifying invoices. 
-
           - Unique for ACCREC but not for ACCPAY. 
-
           - For ACCREC it will auto-generate when left blank. 
-
           - For ACCPAY it displays as Reference in the UI.
         example: INV-123
         type: string
@@ -5507,17 +5596,27 @@ definitions:
         maxLength: 4000
         type: string
       InventoryAssetAccountCode:
-        description: The inventory asset account for the item. The account must be of type INVENTORY. The  COGSAccountCode in PurchaseDetails is also required to create a tracked item
+        description: The inventory asset account for the item. The account must be of
+          type INVENTORY. The  COGSAccountCode in PurchaseDetails is also
+          required to create a tracked item
         example: 630
         type: string
       IsPurchased:
-        description: Boolean value, defaults to true. When IsPurchased is true the item is available for purchase transactions in the Xero UI. If IsPurchased is updated to false then PurchaseDescription and PurchaseDetails values will be nulled.
+        description: Boolean value, defaults to true. When IsPurchased is true the item
+          is available for purchase transactions in the Xero UI. If IsPurchased
+          is updated to false then PurchaseDescription and PurchaseDetails
+          values will be nulled.
         type: boolean
       IsSold:
-        description: Boolean value, defaults to true. When IsSold is true the item will be available on sales transactions in the Xero UI. If IsSold is updated to false then Description and SalesDetails values will be nulled.
+        description: Boolean value, defaults to true. When IsSold is true the item will
+          be available on sales transactions in the Xero UI. If IsSold is
+          updated to false then Description and SalesDetails values will be
+          nulled.
         type: boolean
       IsTrackedAsInventory:
-        description: True for items that are tracked as inventory. An item will be tracked as inventory if the InventoryAssetAccountCode and COGSAccountCode are set.
+        description: True for items that are tracked as inventory. An item will be
+          tracked as inventory if the InventoryAssetAccountCode and
+          COGSAccountCode are set.
         readOnly: true
         type: boolean
       ItemID:
@@ -5545,7 +5644,8 @@ definitions:
       SalesDetails:
         $ref: "#/definitions/SalesDetails"
       TotalCostPool:
-        description: The value of the item on hand. Calculated using average cost accounting.
+        description: The value of the item on hand. Calculated using average cost
+          accounting.
         format: float
         readOnly: true
         type: number
@@ -5584,7 +5684,8 @@ definitions:
         format: uuid
         type: string
       SourceType:
-        description: The journal source type. The type of transaction that created the journal
+        description: The journal source type. The type of transaction that created the
+          journal
         enum:
           - ACCREC
           - ACCPAY
@@ -5630,11 +5731,13 @@ definitions:
         readOnly: true
         type: number
       TaxType:
-        description: Used as an override if the default Tax Code for the selected AccountCode is not correct.
+        description: Used as an override if the default Tax Code for the selected
+          AccountCode is not correct.
         example: NONE
         type: string
       Tracking:
-        description: Optional Tracking Category. Any JournalLine can have a maximum of 2 TrackingCategory elements.
+        description: Optional Tracking Category. Any JournalLine can have a maximum of 2
+          TrackingCategory elements.
         items:
           $ref: "#/definitions/TrackingCategory"
         type: array
@@ -5645,11 +5748,16 @@ definitions:
         example: 420
         type: string
       Description:
-        description: Description needs to be at least 1 char long. A line item with just a description (i.e no unit amount or quantity) can be created by specifying just a <Description> element that contains at least 1 character
+        description: Description needs to be at least 1 char long. A line item with just
+          a description (i.e no unit amount or quantity) can be created by
+          specifying just a <Description> element that contains at least 1
+          character
         example: Travel Expenses
         type: string
       DiscountRate:
-        description: Percentage discount being applied to a line item (only supported on ACCREC invoices – ACC PAY invoices and credit notes in Xero do not support discounts
+        description: Percentage discount being applied to a line item (only supported on
+          ACCREC invoices – ACC PAY invoices and credit notes in Xero do not
+          support discounts
         format: float
         type: number
       ItemCode:
@@ -5657,11 +5765,15 @@ definitions:
         example: 110
         type: string
       LineAmount:
-        description: The line amount reflects the discounted price if a DiscountRate has been used i.e LineAmount = Quantity * Unit Amount * ((100 – DiscountRate)/100)
+        description: The line amount reflects the discounted price if a DiscountRate has
+          been used i.e LineAmount = Quantity * Unit Amount * ((100 –
+          DiscountRate)/100)
         format: float
         type: number
       LineItemID:
-        description: The Xero generated identifier for a LineItem. If LineItemIDs are not included with line items in an update request then the line items are deleted and recreated.
+        description: The Xero generated identifier for a LineItem. If LineItemIDs are
+          not included with line items in an update request then the line items
+          are deleted and recreated.
         format: uuid
         readOnly: true
         type: string
@@ -5670,16 +5782,22 @@ definitions:
         format: float
         type: number
       TaxAmount:
-        description: The tax amount is auto calculated as a percentage of the line amount based on the tax rate. This value can be overriden if the calculated TaxAmount is not correct.
+        description: The tax amount is auto calculated as a percentage of the line
+          amount based on the tax rate. This value can be overriden if the
+          calculated TaxAmount is not correct.
         format: float
         type: number
       TaxType:
-        description: Used as an override if the default Tax Code for the selected <AccountCode> is not correct
+        description: Used as an override if the default Tax Code for the selected
+          <AccountCode> is not correct
         type: string
       Tracking:
         $ref: "#/definitions/Tracking"
       UnitAmount:
-        description: Lineitem unit amount. By default, unit amount will be rounded to two decimal places. You can opt in to use four decimal places by adding the querystring parameter unitdp=4 to your query. See the Rounding in Xero guide for more information.
+        description: Lineitem unit amount. By default, unit amount will be rounded to
+          two decimal places. You can opt in to use four decimal places by
+          adding the querystring parameter unitdp=4 to your query. See the
+          Rounding in Xero guide for more information.
         format: float
         type: number
     required:
@@ -5692,11 +5810,15 @@ definitions:
   LinkedTransaction:
     properties:
       ContactID:
-        description: Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
+        description: Filter by the combination of ContactID and Status. Get all the
+          linked transactions that have been assigned to a particular customer
+          and have a particular status e.g. GET
+          /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
         format: uuid
         type: string
       LinkedTransactionID:
-        description: The Xero identifier for an Linked Transaction e.g. /LinkedTransactions/297c2dc5-cc47-4afd-8ec8-74990b8761e9
+        description: The Xero identifier for an Linked Transaction e.g.
+          /LinkedTransactions/297c2dc5-cc47-4afd-8ec8-74990b8761e9
         format: uuid
         readOnly: true
         type: string
@@ -5705,15 +5827,21 @@ definitions:
         format: uuid
         type: string
       SourceTransactionID:
-        description: Filter by the SourceTransactionID. Get all the linked transactions created from a particular ACCPAY invoice
+        description: Filter by the SourceTransactionID. Get all the linked transactions
+          created from a particular ACCPAY invoice
         format: uuid
         type: string
       SourceTransactionTypeCode:
-        description: The Type of the source tranasction. This will be ACCPAY if the linked transaction was created from an invoice and SPEND if it was created from a bank transaction.
+        description: The Type of the source tranasction. This will be ACCPAY if the
+          linked transaction was created from an invoice and SPEND if it was
+          created from a bank transaction.
         readOnly: true
         type: string
       Status:
-        description: Filter by the combination of ContactID and Status. Get all the linked transactions that have been assigned to a particular customer and have a particular status e.g. GET /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
+        description: Filter by the combination of ContactID and Status. Get all the
+          linked transactions that have been assigned to a particular customer
+          and have a particular status e.g. GET
+          /LinkedTransactions?ContactID=4bb34b03-3378-4bb2-a0ed-6345abf3224e&Status=APPROVED.
         enum:
           - DRAFT
           - APPROVED
@@ -5722,11 +5850,14 @@ definitions:
           - VOIDED
         readOnly: true
       TargetLineItemID:
-        description: The line item identifier from the target transaction. It is possible to link multiple billable expenses to the same TargetLineItemID.
+        description: The line item identifier from the target transaction. It is
+          possible to link multiple billable expenses to the same
+          TargetLineItemID.
         format: uuid
         type: string
       TargetTransactionID:
-        description: Filter by the TargetTransactionID. Get all the linked transactions allocated to a particular ACCREC invoice
+        description: Filter by the TargetTransactionID. Get all the linked transactions
+          allocated to a particular ACCREC invoice
         format: uuid
         type: string
       Type:
@@ -5762,7 +5893,8 @@ definitions:
         type: array
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -5789,7 +5921,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: Url link to a source document – shown as “Go to [appName]” in the Xero app
+        description: Url link to a source document – shown as “Go to [appName]” in the
+          Xero app
         example: https://myaapp.com/journal/123
         type: string
     required:
@@ -5845,7 +5978,10 @@ definitions:
         format: date
         type: string
       ExternalLinks:
-        description: Organisation profile links for popular services such as Facebook, Twitter, GooglePlus and LinkedIn. You can also add link to your website here. Shown if Organisation settings  is updated in Xero. See ExternalLinks below
+        description: Organisation profile links for popular services such as Facebook,
+          Twitter, GooglePlus and LinkedIn. You can also add link to your
+          website here. Shown if Organisation settings  is updated in Xero. See
+          ExternalLinks below
         items:
           $ref: "#/definitions/ExternalLink"
         type: array
@@ -5885,7 +6021,8 @@ definitions:
           - TRUST
         type: string
       OrganisationStatus:
-        description: Will be set to ACTIVE if you can connect to organisation via the Xero API
+        description: Will be set to ACTIVE if you can connect to organisation via the
+          Xero API
         enum:
           - ACTIVE
         type: string
@@ -5906,7 +6043,8 @@ definitions:
           - description: Default payment terms for the organisation if set Terms below
           - $ref: "#/definitions/PaymentTerms"
       PaysTax:
-        description: Boolean to describe if organisation is registered with a local tax authority i.e. true, false
+        description: Boolean to describe if organisation is registered with a local tax
+          authority i.e. true, false
         type: boolean
       PeriodLockDate:
         description: Shown if set
@@ -5926,15 +6064,18 @@ definitions:
         example: CASH
         type: string
       SalesTaxPeriod:
-        description: The frequency with which tax returns are processed. See Sales Tax Period
+        description: The frequency with which tax returns are processed. See Sales Tax
+          Period
         example: MONTHLY
         type: string
       ShortCode:
-        description: A unique identifier for the organisation. Used for deep linking into Xero.
+        description: A unique identifier for the organisation. Used for deep linking
+          into Xero.
         example: "!YDrVg"
         type: string
       TaxNumber:
-        description: Shown if set. Displays in the Xero UI as Tax File Number (AU), GST Number (NZ), VAT Number (UK) and Tax ID Number (US & Global).
+        description: Shown if set. Displays in the Xero UI as Tax File Number (AU), GST
+          Number (NZ), VAT Number (UK) and Tax ID Number (US & Global).
         example: 53003086616
         type: string
       Timezone:
@@ -5969,7 +6110,8 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency overpayment. If no rate is specified, the XE.com day rate is used
+        description: The currency rate for a multicurrency overpayment. If no rate is
+          specified, the XE.com day rate is used
         format: float
         type: number
       Date:
@@ -5982,7 +6124,8 @@ definitions:
         type: boolean
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -6077,13 +6220,15 @@ definitions:
             type: string
         type: object
       Amount:
-        description: The amount of the payment. Must be less than or equal to the outstanding amount owing on the invoice
+        description: The amount of the payment. Must be less than or equal to the
+          outstanding amount owing on the invoice
         format: float
         type: number
       CreditNote:
         $ref: "#/definitions/CreditNoteSummary"
       CurrencyRate:
-        description: Exchange rate when payment is received. Only used for non base currency invoices and credit notes.
+        description: Exchange rate when payment is received. Only used for non base
+          currency invoices and credit notes.
         format: float
         type: number
       Date:
@@ -6093,7 +6238,9 @@ definitions:
       Invoice:
         $ref: "#/definitions/InvoiceSummary"
       IsReconciled:
-        description: An optional parameter for the payment. A boolean indicating whether you would like the payment to be created as reconciled when using PUT, or whether a payment has been reconciled when using GET
+        description: An optional parameter for the payment. A boolean indicating whether
+          you would like the payment to be created as reconciled when using PUT,
+          or whether a payment has been reconciled when using GET
         type: boolean
       Overpayment:
         $ref: "#/definitions/OverpaymentSummary"
@@ -6136,7 +6283,8 @@ definitions:
   PaymentSummary:
     properties:
       Amount:
-        description: The amount of the payment. Must be less than or equal to the outstanding amount owing on the invoice
+        description: The amount of the payment. Must be less than or equal to the
+          outstanding amount owing on the invoice
         format: float
         type: number
       Date:
@@ -6224,7 +6372,8 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency prepayment. If no rate is specified, the XE.com day rate is used
+        description: The currency rate for a multicurrency prepayment. If no rate is
+          specified, the XE.com day rate is used
         format: float
         type: number
       Date:
@@ -6237,7 +6386,8 @@ definitions:
         type: boolean
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -6318,19 +6468,24 @@ definitions:
   PurchaseDetails:
     properties:
       AccountCode:
-        description: Default account code to be used for purchase of non-tracked items. Not applicable to the purchase details of tracked items
+        description: Default account code to be used for purchase of non-tracked items.
+          Not applicable to the purchase details of tracked items
         example: 420
         type: string
       COGSAccountCode:
-        description: Cost of goods sold account. Only applicable to the purchase details of tracked items.
+        description: Cost of goods sold account. Only applicable to the purchase details
+          of tracked items.
         example: 420
         type: string
       TaxType:
-        description: Used as an override if the default Tax Code for the selected AccountCode is not correct.
+        description: Used as an override if the default Tax Code for the selected
+          AccountCode is not correct.
         example: NONE
         type: string
       UnitPrice:
-        description: Unit Price of the item. By default UnitPrice is rounded to two decimal places. You can use 4 decimal places by adding the unitdp=4 querystring parameter to your request.
+        description: Unit Price of the item. By default UnitPrice is rounded to two
+          decimal places. You can use 4 decimal places by adding the unitdp=4
+          querystring parameter to your request.
         format: float
         type: number
     type: object
@@ -6351,12 +6506,15 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: The currency rate for a multicurrency purchase order. As no rate can be specified, the XE.com day rate is used.
+        description: The currency rate for a multicurrency purchase order. As no rate
+          can be specified, the XE.com day rate is used.
         format: float
         readOnly: true
         type: number
       Date:
-        description: Date purchase order was issued – YYYY-MM-DD. If the Date element is not specified then it will default to the current date based on the timezone setting of the organisation
+        description: Date purchase order was issued – YYYY-MM-DD. If the Date element is
+          not specified then it will default to the current date based on the
+          timezone setting of the organisation
         format: date
         type: string
       DeliveryAddress:
@@ -6381,7 +6539,8 @@ definitions:
         type: boolean
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -6397,7 +6556,8 @@ definitions:
         readOnly: true
         type: string
       PurchaseOrderNumber:
-        description: Unique alpha numeric code identifying purchase order (when missing will auto-generate from your Organisation Invoice Settings)
+        description: Unique alpha numeric code identifying purchase order (when missing
+          will auto-generate from your Organisation Invoice Settings)
         example: PO-123
         type: string
       Reference:
@@ -6406,7 +6566,9 @@ definitions:
         type: string
       SentToContact:
         default: false
-        description: Boolean to set whether the purchase order should be marked as “sent”. This can be set only on purchase orders that have been approved or billed
+        description: Boolean to set whether the purchase order should be marked as
+          “sent”. This can be set only on purchase orders that have been
+          approved or billed
         type: boolean
       Status:
         description: Purchase Order Status Codes
@@ -6478,7 +6640,8 @@ definitions:
         type: boolean
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -6494,7 +6657,8 @@ definitions:
         readOnly: true
         type: string
       ReceiptNumber:
-        description: Xero generated sequence number for receipt in current claim for a given user
+        description: Xero generated sequence number for receipt in current claim for a
+          given user
         readOnly: true
         type: string
       Reference:
@@ -6530,7 +6694,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: URL link to a source document – shown as “Go to [appName]” in the Xero app
+        description: URL link to a source document – shown as “Go to [appName]” in the
+          Xero app
         example: https://myapp.com/receipt/123
         type: string
       User:
@@ -6559,7 +6724,8 @@ definitions:
         type: boolean
       LineAmountTypes:
         default: Exclusive
-        description: Line amounts are exclusive of tax by default if you don’t specify this element
+        description: Line amounts are exclusive of tax by default if you don’t specify
+          this element
         enum:
           - Inclusive
           - Exclusive
@@ -6725,11 +6891,14 @@ definitions:
         example: 200
         type: string
       TaxType:
-        description: Used as an override if the default Tax Code for the selected AccountCode is not correct .
+        description: Used as an override if the default Tax Code for the selected
+          AccountCode is not correct .
         example: NONE
         type: string
       UnitPrice:
-        description: Unit Price of the item. By default UnitPrice is rounded to two decimal places. You can use 4 decimal places by adding the unitdp=4 querystring parameter to your request.
+        description: Unit Price of the item. By default UnitPrice is rounded to two
+          decimal places. You can use 4 decimal places by adding the unitdp=4
+          querystring parameter to your request.
         format: float
         type: number
     type: object
@@ -6750,7 +6919,8 @@ definitions:
   Schedule:
     properties:
       DueDate:
-        description: Integer used with due date type e.g 20 (of following month), 31 (of current month)
+        description: Integer used with due date type e.g 20 (of following month), 31 (of
+          current month)
         type: integer
       DueDateType:
         description: Used with due date to describe when the invoice is due
@@ -6772,7 +6942,8 @@ definitions:
         description: Integer used with the unit e.g. 1 (every 1 week), 2 (every 2 months)
         type: integer
       StartDate:
-        description: Date the first invoice of the current version of the repeating schedule was generated (changes when repeating invoice is edited)
+        description: Date the first invoice of the current version of the repeating
+          schedule was generated (changes when repeating invoice is edited)
         format: date
         type: string
       Unit:
@@ -6950,7 +7121,8 @@ definitions:
   TrackingCategory:
     properties:
       Name:
-        description: The name of the tracking category e.g. Department, Region (max length = 100)
+        description: The name of the tracking category e.g. Department, Region (max
+          length = 100)
         example: Region
         maxLength: 100
         type: string
@@ -6965,7 +7137,8 @@ definitions:
           - ARCHIVED
         type: string
       TrackingCategoryID:
-        description: The Xero identifier for a tracking categorye.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9
+        description: The Xero identifier for a tracking categorye.g.
+          297c2dc5-cc47-4afd-8ec8-74990b8761e9
         format: uuid
         type: string
     type: object
@@ -6983,7 +7156,8 @@ definitions:
           - ARCHIVED
         type: string
       TrackingOptionID:
-        description: The Xero identifier for a tracking optione.g. ae777a87-5ef3-4fa0-a4f0-d10e1f13073a
+        description: The Xero identifier for a tracking optione.g.
+          ae777a87-5ef3-4fa0-a4f0-d10e1f13073a
         format: uuid
         type: string
     type: object

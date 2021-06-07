@@ -8,7 +8,12 @@ info:
     name: Xero Platform Team
     url: https://developer.xero.com
     x-twitter: XeroAPI
-  description: The Bank Feeds API is a closed API that is only available to financial institutions that have an established financial services partnership with Xero. If you're an existing financial services partner that wants access, contact your local Partner Manager. If you're a financial institution who wants to provide bank feeds to your business customers, contact us to become a financial services partner.
+  description: The Bank Feeds API is a closed API that is only available to
+    financial institutions that have an established financial services
+    partnership with Xero. If you're an existing financial services partner that
+    wants access, contact your local Partner Manager. If you're a financial
+    institution who wants to provide bank feeds to your business customers,
+    contact us to become a financial services partner.
   license:
     name: MIT
     url: https://github.com/XeroAPI/Xero-OpenAPI/blob/master/LICENSE
@@ -26,16 +31,24 @@ info:
 paths:
   /FeedConnections:
     get:
-      description: By passing in the appropriate options, you can search for available feed connections in the system.
+      description: By passing in the appropriate options, you can search for available
+        feed connections in the system.
       operationId: getFeedConnections
       parameters:
-        - description: Page number which specifies the set of records to retrieve. By default the number of the records per set is 10. Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?page=1 to get the second set of the records. When page value is not a number or a negative number, by default, the first set of records is returned.
+        - description: Page number which specifies the set of records to retrieve. By
+            default the number of the records per set is 10. Example -
+            https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?page=1 to get
+            the second set of the records. When page value is not a number or a
+            negative number, by default, the first set of records is returned.
           in: query
           name: page
           schema:
             example: 1
             type: integer
-        - description: Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize=100 to specify page size of 100.
+        - description: Page size which specifies how many records per page will be
+            returned (default 10). Example -
+            https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize=100
+            to specify page size of 100.
           in: query
           name: pageSize
           schema:
@@ -70,7 +83,8 @@ paths:
                   pageSize: 87654321
               schema:
                 $ref: "#/components/schemas/FeedConnections"
-          description: search results matching criteria returned with pagination and items array
+          description: search results matching criteria returned with pagination and items
+            array
         "400":
           description: validation error response
       security:
@@ -82,7 +96,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
     post:
-      description: By passing in the FeedConnections array object in the body, you can create one or more new feed connections
+      description: By passing in the FeedConnections array object in the body, you can
+        create one or more new feed connections
       operationId: createFeedConnections
       requestBody:
         content:
@@ -129,7 +144,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
     post:
-      description: By passing in FeedConnections array object in the body, you can delete a feed connection.
+      description: By passing in FeedConnections array object in the body, you can
+        delete a feed connection.
       operationId: deleteFeedConnections
       requestBody:
         content:
@@ -151,7 +167,9 @@ paths:
                     status: PENDING
                   - accountToken: "10000125"
                     error:
-                      detail: The AccountToken is connected to another Xero Bank Account associated with this bank. This Xero Bank Account belongs to a different Xero Organisation.
+                      detail: The AccountToken is connected to another Xero Bank Account associated
+                        with this bank. This Xero Bank Account belongs to a
+                        different Xero Organisation.
                       title: Feed connected in different organisation
                       type: feed-connected-in-different-organisation
                     status: REJECTED
@@ -168,7 +186,8 @@ paths:
         - BankFeeds
   "/FeedConnections/{id}":
     get:
-      description: By passing in a FeedConnection Id options, you can search for matching feed connections
+      description: By passing in a FeedConnection Id options, you can search for
+        matching feed connections
       operationId: getFeedConnection
       parameters:
         - description: Unique identifier for retrieving single object
@@ -216,7 +235,10 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize=100 to specify page size of 100.
+        - description: Page size which specifies how many records per page will be
+            returned (default 10). Example -
+            https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize=100 to
+            specify page size of 100.
           in: query
           name: pageSize
           required: false
@@ -362,7 +384,8 @@ paths:
           content:
             application/problem+json:
               example:
-                detail: For the request field 'StatementLine.ChequeNumber' exceeded the maximum length of 20.
+                detail: For the request field 'StatementLine.ChequeNumber' exceeded the maximum
+                  length of 20.
                 status: 400
                 title: Invalid Request
                 type: invalid-request
@@ -422,7 +445,8 @@ paths:
           content:
             application/problem+json:
               example:
-                detail: The request should be retried. If the error persists, a Xero support issue should be raised.
+                detail: The request should be retried. If the error persists, a Xero support
+                  issue should be raised.
                 status: 500
                 title: Intermittent Internal Xero Error
                 type: internal-error
@@ -494,7 +518,9 @@ components:
         type: string
   schemas:
     CountryCode:
-      description: ISO-3166 alpha-2 country code, e.g. US, AU This element is required only when the Application supports multi-region. Talk to your Partner Manager to confirm if this is the case.
+      description: ISO-3166 alpha-2 country code, e.g. US, AU This element is required
+        only when the Application supports multi-region. Talk to your Partner
+        Manager to confirm if this is the case.
       enum:
         - AD
         - AE
@@ -739,7 +765,9 @@ components:
       example: GB
       type: string
     CreditDebitIndicator:
-      description: If the statement balances are credit or debit, the CreditDebitIndicator should be specified from the perspective of the Customer.
+      description: If the statement balances are credit or debit, the
+        CreditDebitIndicator should be specified from the perspective of the
+        Customer.
       enum:
         - CREDIT
         - DEBIT
@@ -914,7 +942,8 @@ components:
       example: AUD
       type: string
     EndBalance:
-      description: The StartBalance plus all the Statement Line Amounts should be equal to the EndBalance Amount.
+      description: The StartBalance plus all the Statement Line Amounts should be
+        equal to the EndBalance Amount.
       properties:
         amount:
           example: "10.1340"
@@ -925,7 +954,9 @@ components:
           $ref: "#/components/schemas/CreditDebitIndicator"
       type: object
     Error:
-      description: On error, the API consumer will receive an HTTP response with a HTTP Status Code of 4xx or 5xx and a Content-Type of application/problem+json.
+      description: On error, the API consumer will receive an HTTP response with a
+        HTTP Status Code of 4xx or 5xx and a Content-Type of
+        application/problem+json.
       properties:
         detail:
           description: Human readable detailed error description.
@@ -972,27 +1003,36 @@ components:
         url: https://developer.xero.com/documentation/bank-feeds-api/feed-connections
       properties:
         accountId:
-          description: Xero identifier for a bank account in Xero. Must be included if AccountNumber is not specified.
+          description: Xero identifier for a bank account in Xero. Must be included if
+            AccountNumber is not specified.
           example: 079a88ea-276d-41fb-a1f1-366ef3e22921
           format: uuid
           type: string
         accountName:
-          description: The Account Name will be used for the creation of a new Xero Bank Account if a matching Xero Bank Account is not found.
+          description: The Account Name will be used for the creation of a new Xero Bank
+            Account if a matching Xero Bank Account is not found.
           example: Joe's Savings Account
           maximum: 30
           type: string
         accountNumber:
-          description: String(40) when AccountType is BANK String(4) when AccountType is CREDITCARD The Account Number is used to match the feed to a Xero Bank Account. The API will create a new Xero Bank Account if a match to an existing Xero Bank Account is not found. Only the last 4 digits must be supplied for Credit Card numbers. Must be included if AccountId is not specified.
+          description: String(40) when AccountType is BANK String(4) when AccountType is
+            CREDITCARD The Account Number is used to match the feed to a Xero
+            Bank Account. The API will create a new Xero Bank Account if a match
+            to an existing Xero Bank Account is not found. Only the last 4
+            digits must be supplied for Credit Card numbers. Must be included if
+            AccountId is not specified.
           example: "3809087654321500"
           maximum: 40
           type: string
         accountToken:
-          description: This account identifier is generated by the financial institute (FI). This must be unique for your financial institute.
+          description: This account identifier is generated by the financial institute
+            (FI). This must be unique for your financial institute.
           example: "10000123"
           maximum: 50
           type: string
         accountType:
-          description: High level bank account type - BANK CREDITCARD BANK encompasses all bank account types other than credit cards.
+          description: High level bank account type - BANK CREDITCARD BANK encompasses all
+            bank account types other than credit cards.
           enum:
             - BANK
             - CREDITCARD
@@ -1034,7 +1074,10 @@ components:
           example: 2
           type: integer
         page:
-          description: Page number which specifies the set of records to retrieve. Example - https://api.xero.com/bankfeeds.xro/1.0/Statements?page=2 to get the second set of the records. When page value is not a number or a negative number, by default, the first set of records is returned.
+          description: Page number which specifies the set of records to retrieve. Example
+            - https://api.xero.com/bankfeeds.xro/1.0/Statements?page=2 to get
+            the second set of the records. When page value is not a number or a
+            negative number, by default, the first set of records is returned.
           example: 1
           type: integer
         pageCount:
@@ -1042,7 +1085,10 @@ components:
           example: 1
           type: integer
         pageSize:
-          description: Page size which specifies how many records per page will be returned (default 50). Example - https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize=100 to specify page size of 100.
+          description: Page size which specifies how many records per page will be
+            returned (default 50). Example -
+            https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize=100 to
+            specify page size of 100.
           example: 10
           type: integer
       type: object
@@ -1072,7 +1118,9 @@ components:
             $ref: "#/components/schemas/Error"
           type: array
         feedConnectionId:
-          description: The Xero generated feed connection Id that identifies the Xero Bank Account Container into which the statement should be delivered. This is obtained by calling GET FeedConnections.
+          description: The Xero generated feed connection Id that identifies the Xero Bank
+            Account Container into which the statement should be delivered. This
+            is obtained by calling GET FeedConnections.
           example: 87cb0dc8-fa32-409c-b622-19f8de8dcc83
           format: uuid
           type: string
@@ -1084,7 +1132,8 @@ components:
         startBalance:
           $ref: "#/components/schemas/StartBalance"
         startDate:
-          description: Opening balance date (can be no older than one year from the current date) ISO-8601 YYYY-MM-DD
+          description: Opening balance date (can be no older than one year from the
+            current date) ISO-8601 YYYY-MM-DD
           example: 2018-07-27
           format: date
           type: string
@@ -1128,7 +1177,8 @@ components:
           maximum: 255
           type: string
         postedDate:
-          description: The date that the transaction was processed or cleared as seen in internet banking ISO-8601 YYYY-MM-DD
+          description: The date that the transaction was processed or cleared as seen in
+            internet banking ISO-8601 YYYY-MM-DD
           example: 2018-06-10
           format: date
           type: string
@@ -1138,7 +1188,8 @@ components:
           maximum: 255
           type: string
         transactionId:
-          description: Financial institute's internal transaction identifier. If provided this field is factored into duplicate detection.
+          description: Financial institute's internal transaction identifier. If provided
+            this field is factored into duplicate detection.
           example: transaction-id-2
           type: string
       type: object
@@ -1159,7 +1210,8 @@ components:
       type: object
   securitySchemes:
     OAuth2:
-      description: For more information visit https://developer.xero.com/documentation/oauth2/overview
+      description: For more information visit
+        https://developer.xero.com/documentation/oauth2/overview
       flows:
         authorizationCode:
           authorizationUrl: https://login.xero.com/identity/connect/authorize
@@ -1172,7 +1224,8 @@ components:
             accounting.reports.read: Grant read-only access to accounting reports
             accounting.settings: Grant read-write access to organisation and account settings
             accounting.settings.read: Grant read-only access to organisation and account settings
-            accounting.transactions: Grant read-write access to bank transactions, credit notes, invoices, repeating invoices
+            accounting.transactions: Grant read-write access to bank transactions, credit
+              notes, invoices, repeating invoices
             accounting.transactions.read: Grant read-only access to invoices
             assets assets.read: Grant read-only access to fixed assets
             bankfeeds: Grant read-write access to bankfeeds

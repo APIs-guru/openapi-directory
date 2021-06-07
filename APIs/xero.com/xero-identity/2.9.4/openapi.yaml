@@ -8,7 +8,8 @@ info:
     name: Xero Platform Team
     url: https://developer.xero.com
     x-twitter: XeroAPI
-  description: These endpoints are related to managing authentication tokens and identity for Xero API
+  description: These endpoints are related to managing authentication tokens and
+    identity for Xero API
   license:
     name: MIT
     url: https://github.com/XeroAPI/Xero-OpenAPI/blob/master/LICENSE
@@ -41,12 +42,17 @@ paths:
         "200":
           content:
             application/json:
-              example: '[ { "id": "7cb59f93-2964-421d-bb5e-a0f7a4572a44", "tenantId": "fe79f7dd-b6d4-4a92-ba7b-538af6289c58", "tenantName": "Demo Company (NZ)", "tenantType": "ORGANISATION", "createdDateUtc": "2019-12-07T18:46:19.5165400", "updatedDateUtc": "2019-12-07T18:46:19.5187840" } ]'
+              example: '[ { "id": "7cb59f93-2964-421d-bb5e-a0f7a4572a44", "tenantId":
+                "fe79f7dd-b6d4-4a92-ba7b-538af6289c58", "tenantName": "Demo
+                Company (NZ)", "tenantType": "ORGANISATION", "createdDateUtc":
+                "2019-12-07T18:46:19.5165400", "updatedDateUtc":
+                "2019-12-07T18:46:19.5187840" } ]'
               schema:
                 items:
                   $ref: "#/components/schemas/Connection"
                 type: array
-          description: Success - return response of type Connections array with 0 to n Connection
+          description: Success - return response of type Connections array with 0 to n
+            Connection
       security:
         - OAuth2: []
       summary: Retrieves the connections for this user
@@ -128,7 +134,9 @@ components:
           description: Xero tenant type (i.e. ORGANISATION, PRACTICE)
           type: string
         updatedDateUtc:
-          description: The date when the user most recently connected this tenant to your app. May differ to the created date if the user has disconnected and subsequently reconnected this tenant to your app.
+          description: The date when the user most recently connected this tenant to your
+            app. May differ to the created date if the user has disconnected and
+            subsequently reconnected this tenant to your app.
           format: date-time
           type: string
           x-is-datetime: true
@@ -168,7 +176,8 @@ components:
             accounting.reports.read: Grant read-only access to accounting reports
             accounting.settings: Grant read-write access to organisation and account settings
             accounting.settings.read: Grant read-only access to organisation and account settings
-            accounting.transactions: Grant read-write access to bank transactions, credit notes, invoices, repeating invoices
+            accounting.transactions: Grant read-write access to bank transactions, credit
+              notes, invoices, repeating invoices
             accounting.transactions.read: Grant read-only access to invoices
             assets assets.read: Grant read-only access to
             email: Grant read-only access to your email

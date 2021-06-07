@@ -906,7 +906,7 @@ paths:
         - Downloads
   "/v3/downloads/images/{id}":
     post:
-      description: |+
+      description: |
         Use this endpoint to generate download URLs and related data for images you are authorized to download.
 
         Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -963,6 +963,9 @@ paths:
 
         The `content-disposition` header must be parsed to get a usable filename.
 
+        ## Download URI expiration
+
+        Download URIs are _**only valid for 24 hours**_, starting from the moment they are returned from this call.
       parameters:
         - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
           in: header
@@ -1158,6 +1161,10 @@ paths:
         ```
 
         The `content-disposition` header must be parsed to get a usable filename.
+
+        ## Download URI expiration
+
+        Download URIs are _**only valid for 24 hours**_, starting from the moment they are returned from this call.
       parameters:
         - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
           in: header

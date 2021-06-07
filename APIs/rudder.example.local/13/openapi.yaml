@@ -216,7 +216,7 @@ info:
 
     ##### Directly in JSON format
 
-    JSON format is the prefered way to interact with Rudder API for creating or updating resources.
+    JSON format is the preferred way to interact with Rudder API for creating or updating resources.
     You'll also have to set the *Content-Type* header to **application/json** (without it the JSON content would be ignored).
     In a `curl` `POST` request, that header can be provided with the `-H` parameter:
 
@@ -307,6 +307,8 @@ externalDocs:
 security:
   - API-Tokens: []
 tags:
+  - description: Is alive check
+    name: Status
   - description: Access compliance data
     name: Compliance
   - description: Rules management
@@ -947,7 +949,7 @@ paths:
             # To get the compliance information of a specific node
             curl --header "X-API-Token: yourToken" --request GET 'https://rudder.example.com/rudder/api/compliance/nodes?level=2'
 
-            # To get the list of nodes wich have a compliance <100 for a given directive (c5881268-5612-48f2-8ef4-0ab8387fccd6) 
+            # To get the list of nodes which have a compliance <100 for a given directive (c5881268-5612-48f2-8ef4-0ab8387fccd6) 
             curl -k -H "X-API-Token: yourToken" -X GET "https://rudder.example.com/rudder/api/latest/compliance/nodes?level=3" \
             | jq '[.data.nodes[] 
               | {
@@ -2040,7 +2042,7 @@ paths:
           source: |-
             cat disable-datasource-1.json.json
             {
-              "description": "This data source is temporarly no more used and so disabled",
+              "description": "This data source is temporary no more used and so disabled",
               "enabled": false
             }
 
@@ -5315,6 +5317,27 @@ paths:
       x-code-samples:
         - lang: curl
           source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/settings/global_policy_mode_overridable --data "value=true"'
+  /status:
+    get:
+      description: |-
+        An unauthenticated API to check if Rudder web application is up and running. Be careful: this API does not follow other Rudder's API convention: 
+        - it is not versioned, so the path is just `/api/status`;
+        - it returns a plain text message.
+      operationId: none
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                example: OK\\n
+                type: string
+          description: OK status message
+      summary: Check if Rudder is alive
+      tags:
+        - Status
+      x-code-samples:
+        - lang: curl
+          source: curl --request GET https://rudder.example.com/rudder/api/status
   "/system/archives/{archiveKind}":
     get:
       description: List configuration archives
@@ -7902,7 +7925,7 @@ components:
                 example: node
                 type: string
               rootComponents:
-                description: Roles fullfilled by the agent
+                description: Roles fulfilled by the agent
                 items:
                   description: A role that node fulfills in management technology
                   example: rudder-db
@@ -8920,7 +8943,7 @@ components:
   securitySchemes:
     API-Tokens:
       description: |-
-        Authenticating against the API is mandatory for every request, as sensitive information like inventories or configuration rules may get exposed. It is done using a dedicated API Account, than can be created in the web interface on the 'API Accounts' page located inside the Administration part.
+        Apart for the status API, authenticating is mandatory for every request, as sensitive information like inventories or configuration rules may get exposed. It is done using a dedicated API Account, than can be created in the web interface on the 'API Accounts' page located inside the Administration part.
 
         ![API Tokens settings](assets/APISettings.png "API Tokens settings")
 

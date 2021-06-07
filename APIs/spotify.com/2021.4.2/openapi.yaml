@@ -6,7 +6,7 @@ info:
     name: sonallux
     url: https://github.com/sonallux/spotify-web-api
   title: Spotify Web API
-  version: 2021.5.20
+  version: 2021.6.4
   x-apisguru-categories:
     - media
   x-logo:
@@ -3193,7 +3193,10 @@ paths:
         url: https://developer.spotify.com/documentation/web-api/reference/#endpoint-follow-playlist
       operationId: endpoint-follow-playlist
       parameters:
-        - description: A valid user access token or your client credentials. Requires the `user-follow-modify` scope.
+        - description: |-
+            A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.  
+            Following a playlist publicly requires authorization of the `playlist-modify-public` scope; following a playlist privately requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).  
+            *Note that the scopes you provide relate only to whether the current user is following the playlist publicly or privately (i.e. showing others what they are following), not whether the playlist itself is public or private.*
           in: header
           name: Authorization
           required: true
@@ -3217,7 +3220,7 @@ paths:
             schema:
               properties:
                 public:
-                  description: Defaults to `true`. If `true` the playlist will be included in user's public playlists, if `false` it will remain private. To be able to follow playlists privately, the user must have granted the `playlist-modify-private` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+                  description: Defaults to `true`. If `true` the playlist will be included in user's public playlists, if `false` it will remain private.
                   type: boolean
               type: object
         required: false
@@ -3230,7 +3233,8 @@ paths:
           $ref: "#/components/responses/ErrorResponse"
       security:
         - spotify_auth:
-            - user-follow-modify
+            - playlist-modify-public
+            - playlist-modify-private
       summary: Follow a Playlist
       tags:
         - category-follow
@@ -6247,7 +6251,7 @@ components:
             $ref: "#/components/schemas/CopyrightObject"
           type: array
         description:
-          description: A description of the show.
+          description: A description of the show. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
           type: string
         episodes:
           description: A list of the show's episodes.
@@ -6289,6 +6293,9 @@ components:
           $ref: "#/components/schemas/ExternalUrlObject"
         href:
           description: A link to the Web API endpoint providing full details of the show.
+          type: string
+        html_description:
+          description: A description of the show. This field may contain HTML tags.
           type: string
         id:
           description: The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
@@ -6537,7 +6544,7 @@ components:
             $ref: "#/components/schemas/CopyrightObject"
           type: array
         description:
-          description: A description of the show.
+          description: A description of the show. HTML tags are stripped away from this field, use `html_description` field in case HTML tags are needed.
           type: string
         explicit:
           description: Whether or not the show has explicit content (true = yes it does; false = no it does not OR unknown).
@@ -6546,6 +6553,9 @@ components:
           $ref: "#/components/schemas/ExternalUrlObject"
         href:
           description: A link to the Web API endpoint providing full details of the show.
+          type: string
+        html_description:
+          description: A description of the show. This field may contain HTML tags.
           type: string
         id:
           description: The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.

@@ -1,11 +1,9 @@
 openapi: 3.0.0
 servers:
-  - url: https://hashlookup.circl.lu/
   - url: /
 info:
-  description: >-
+  description: |-
     ![](https://www.circl.lu/assets/images/circl-logo.png)
-
     [CIRCL hash lookup](https://hashlookup.circl.lu/) is a public API to lookup hash values against known database of files. NSRL RDS database is included. More database will be included in the future. The API is accessible via HTTP ReST API and the API is also [described as an OpenAPI](https://hashlookup.circl.lu/swagger.json). A [documentation is available with](https://gist.github.com/adulau/4191d44e30fc01df38f1d5fe605fa920) some sample queries. The API can be tested live in the interface below.
   license:
     name: CC-BY

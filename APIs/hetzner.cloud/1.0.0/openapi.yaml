@@ -6122,10 +6122,11 @@ paths:
                           example: false
                           type: boolean
                         status:
-                          description: Whether the Image can be used or if it's still being created
+                          description: Whether the Image can be used or if it's still being created or unavailable
                           enum:
                             - available
                             - creating
+                            - unavailable
                           type: string
                         type:
                           description: Type of the Image
@@ -6333,10 +6334,11 @@ paths:
                         example: false
                         type: boolean
                       status:
-                        description: Whether the Image can be used or if it's still being created
+                        description: Whether the Image can be used or if it's still being created or unavailable
                         enum:
                           - available
                           - creating
+                          - unavailable
                         type: string
                       type:
                         description: Type of the Image
@@ -6532,10 +6534,11 @@ paths:
                         example: false
                         type: boolean
                       status:
-                        description: Whether the Image can be used or if it's still being created
+                        description: Whether the Image can be used or if it's still being created or unavailable
                         enum:
                           - available
                           - creating
+                          - unavailable
                         type: string
                       type:
                         description: Type of the Image
@@ -15021,10 +15024,11 @@ paths:
                               example: false
                               type: boolean
                             status:
-                              description: Whether the Image can be used or if it's still being created
+                              description: Whether the Image can be used or if it's still being created or unavailable
                               enum:
                                 - available
                                 - creating
+                                - unavailable
                               type: string
                             type:
                               description: Type of the Image
@@ -16016,10 +16020,11 @@ paths:
                             example: false
                             type: boolean
                           status:
-                            description: Whether the Image can be used or if it's still being created
+                            description: Whether the Image can be used or if it's still being created or unavailable
                             enum:
                               - available
                               - creating
+                              - unavailable
                             type: string
                           type:
                             description: Type of the Image
@@ -16718,10 +16723,11 @@ paths:
                             example: false
                             type: boolean
                           status:
-                            description: Whether the Image can be used or if it's still being created
+                            description: Whether the Image can be used or if it's still being created or unavailable
                             enum:
                               - available
                               - creating
+                              - unavailable
                             type: string
                           type:
                             description: Type of the Image
@@ -17339,10 +17345,11 @@ paths:
                             example: false
                             type: boolean
                           status:
-                            description: Whether the Image can be used or if it's still being created
+                            description: Whether the Image can be used or if it's still being created or unavailable
                             enum:
                               - available
                               - creating
+                              - unavailable
                             type: string
                           type:
                             description: Type of the Image
@@ -18984,10 +18991,11 @@ paths:
                         example: false
                         type: boolean
                       status:
-                        description: Whether the Image can be used or if it's still being created
+                        description: Whether the Image can be used or if it's still being created or unavailable
                         enum:
                           - available
                           - creating
+                          - unavailable
                         type: string
                       type:
                         description: Type of the Image

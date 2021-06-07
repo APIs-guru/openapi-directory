@@ -9402,26 +9402,25 @@ definitions:
   Duration:
     description: "~"
     properties:
-      millis:
+      nano:
+        description: "~"
+        format: int32
+        type: integer
+      negative:
+        description: "~"
+        type: boolean
+      seconds:
         description: "~"
         format: int64
         type: integer
-      standardDays:
+      units:
         description: "~"
-        format: int64
-        type: integer
-      standardHours:
+        items:
+          $ref: "#/definitions/TemporalUnit"
+        type: array
+      zero:
         description: "~"
-        format: int64
-        type: integer
-      standardMinutes:
-        description: "~"
-        format: int64
-        type: integer
-      standardSeconds:
-        description: "~"
-        format: int64
-        type: integer
+        type: boolean
     type: object
   ErrorResponse:
     description: Error response containing error info
@@ -10039,6 +10038,9 @@ definitions:
           - TESLA
         type: string
       clientId:
+        description: "~"
+        type: string
+      email:
         description: "~"
         type: string
       expires:

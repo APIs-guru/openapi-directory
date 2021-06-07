@@ -1155,7 +1155,7 @@ paths:
               regCode: QX92TAG7
               webJourneyUrl:
                 url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                validUntil: 2021-06-01T11:48:52.9935941Z
+                validUntil: 2021-06-07T09:23:21.9362223Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.Registrations.AddRegistrationResponse"
         "400":
@@ -1519,6 +1519,8 @@ paths:
                     primaryScanId: fedcba89-dead-1278-bead-8901234abcde
                     status: 2
                     surname: Harper
+                idVerification:
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
                 isAgentLed: false
                 livenessMethod: 1
                 livenessStatus: 1
@@ -1866,6 +1868,8 @@ paths:
                   primaryScanId: fedcba89-dead-1278-bead-8901234abcde
                   status: 2
                   surname: Harper
+              idVerification:
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
               isAgentLed: false
               livenessMethod: 1
               livenessStatus: 1
@@ -2718,6 +2722,8 @@ paths:
                   primaryScanId: fedcba89-dead-1278-bead-8901234abcde
                   status: 2
                   surname: Harper
+              idVerification:
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
               isAgentLed: false
               livenessMethod: 1
               livenessStatus: 1
@@ -2879,7 +2885,7 @@ paths:
                 - forename: Edward
                   surname: Roberts
                   url: https://report.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                  validUntil: 2021-06-01T11:48:53.0148177Z
+                  validUntil: 2021-06-07T09:23:21.9628969Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2937,7 +2943,7 @@ paths:
                 - forename: Mike
                   surname: Jones
                   url: https://report.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                  validUntil: 2021-06-01T11:48:53.0159136Z
+                  validUntil: 2021-06-07T09:23:21.9640534Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2993,7 +2999,7 @@ paths:
               results:
                 - journeyUrl:
                     url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                    validUntil: 2021-06-01T11:48:53.0172369Z
+                    validUntil: 2021-06-07T09:23:21.9652406Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
         "400":
@@ -3049,7 +3055,7 @@ paths:
               results:
                 - journeyUrl:
                     url: https://verify.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                    validUntil: 2021-06-01T11:48:53.0184219Z
+                    validUntil: 2021-06-07T09:23:21.9662449Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
         "400":
@@ -4320,6 +4326,20 @@ definitions:
       - nfcCheck
       - nfcReadStatus
     type: object
+  Credas.Api.Models.Registrations.IdVerification:
+    properties:
+      checkStatus:
+        description: Unknown = 0, Pass = 1, Refer = 2, Fail = 3
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        format: int32
+        type: integer
+      hasBeenOverridden:
+        type: boolean
+    type: object
   Credas.Api.Models.Registrations.JourneyUrl:
     properties:
       url:
@@ -4461,6 +4481,8 @@ definitions:
           $ref: "#/definitions/Credas.Api.Models.Registrations.IdDocumentSummary"
         type: array
         uniqueItems: false
+      idVerification:
+        $ref: "#/definitions/Credas.Api.Models.Registrations.IdVerification"
       isAgentLed:
         type: boolean
       livenessMethod:

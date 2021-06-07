@@ -38,30 +38,25 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
           required: true
           schema:
-            description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
             type: string
         - description: start date of time period. format is <i>yyyy-mm-dd</i>
           in: query
           name: start
           required: true
           schema:
-            description: start date of time period. format is <i>yyyy-mm-dd</i>
             format: date-time
             type: string
         - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
           in: query
           name: end
           schema:
-            description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
             format: date-time
-            nullable: true
             type: string
         - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
 
@@ -89,30 +84,6 @@ paths:
           in: query
           name: interval
           schema:
-            description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
-
-              followed by a type string which must be one of the following values:\r
-
-              y=year,\r
-
-              m=month,\r
-
-              w=week,\r
-
-              d=day,\r
-
-              h=hour,\r
-
-              mi=minute\r
-
-              \r
-
-              For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
-
-              \r
-
-              If not specified the interval parameter default is 1 Day."
-            nullable: true
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -171,7 +142,6 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -228,14 +198,12 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
           required: true
           schema:
-            description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -294,7 +262,6 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -351,14 +318,12 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
           required: true
           schema:
-            description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -417,7 +382,6 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -484,30 +448,25 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: metals
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: start date of time period. format is <i>yyyy-mm-dd</i>
           in: query
           name: start
           required: true
           schema:
-            description: start date of time period. format is <i>yyyy-mm-dd</i>
             format: date-time
             type: string
         - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
           in: query
           name: end
           schema:
-            description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
             format: date-time
-            nullable: true
             type: string
         - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
 
@@ -535,44 +494,16 @@ paths:
           in: query
           name: interval
           schema:
-            description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
-
-              followed by a type string which must be one of the following values:\r
-
-              y=year,\r
-
-              m=month,\r
-
-              w=week,\r
-
-              d=day,\r
-
-              h=hour,\r
-
-              mi=minute\r
-
-              \r
-
-              For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
-
-              \r
-
-              If not specified the interval parameter default is 1 Day."
-            nullable: true
             type: string
         - description: if true use historical currency rates otherwise current currency rates. Defaults to true.
           in: query
           name: historicalfx
           schema:
-            description: if true use historical currency rates otherwise current currency rates. Defaults to true.
-            nullable: true
             type: boolean
         - description: comma separated list of conversion currencies, defaults to USD
           in: query
           name: currency
           schema:
-            description: comma separated list of conversion currencies, defaults to USD
-            nullable: true
             type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r
 
@@ -650,21 +581,17 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: metals
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: comma separated list of conversion currencies, defaults to USD
           in: query
           name: currency
           schema:
-            description: comma separated list of conversion currencies, defaults to USD
-            nullable: true
             type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r
 
@@ -742,7 +669,6 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -809,30 +735,25 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: metals
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: start date of time period. format is <i>yyyy-mm-dd</i>
           in: query
           name: start
           required: true
           schema:
-            description: start date of time period. format is <i>yyyy-mm-dd</i>
             format: date-time
             type: string
         - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
           in: query
           name: end
           schema:
-            description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
             format: date-time
-            nullable: true
             type: string
         - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
 
@@ -860,44 +781,16 @@ paths:
           in: query
           name: interval
           schema:
-            description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
-
-              followed by a type string which must be one of the following values:\r
-
-              y=year,\r
-
-              m=month,\r
-
-              w=week,\r
-
-              d=day,\r
-
-              h=hour,\r
-
-              mi=minute\r
-
-              \r
-
-              For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
-
-              \r
-
-              If not specified the interval parameter default is 1 Day."
-            nullable: true
             type: string
         - description: if true use historical currency rates otherwise current currency rates. Defaults to true.
           in: query
           name: historicalfx
           schema:
-            description: if true use historical currency rates otherwise current currency rates. Defaults to true.
-            nullable: true
             type: boolean
         - description: comma separated list of conversion currencies, defaults to USD
           in: query
           name: currency
           schema:
-            description: comma separated list of conversion currencies, defaults to USD
-            nullable: true
             type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r
 
@@ -975,21 +868,17 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: metals
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: comma separated list of conversion currencies, defaults to USD
           in: query
           name: currency
           schema:
-            description: comma separated list of conversion currencies, defaults to USD
-            nullable: true
             type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r
 
@@ -1067,21 +956,17 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: metals
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: comma separated list of conversion currencies, defaults to USD
           in: query
           name: currency
           schema:
-            description: comma separated list of conversion currencies, defaults to USD
-            nullable: true
             type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r
 
@@ -1113,9 +998,7 @@ paths:
           in: query
           name: years
           schema:
-            description: Number of years of history to return. Defaults to 10.
             format: int32
-            nullable: true
             type: integer
         - description: The requested API version
           in: path
@@ -1173,30 +1056,25 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: pairs
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: start date of time period. format is <i>yyyy-mm-dd</i>
           in: query
           name: start
           required: true
           schema:
-            description: start date of time period. format is <i>yyyy-mm-dd</i>
             format: date-time
             type: string
         - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
           in: query
           name: end
           schema:
-            description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
             format: date-time
-            nullable: true
             type: string
         - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
 
@@ -1224,30 +1102,6 @@ paths:
           in: query
           name: interval
           schema:
-            description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
-
-              followed by a type string which must be one of the following values:\r
-
-              y=year,\r
-
-              m=month,\r
-
-              w=week,\r
-
-              d=day,\r
-
-              h=hour,\r
-
-              mi=minute\r
-
-              \r
-
-              For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
-
-              \r
-
-              If not specified the interval parameter default is 1 Day."
-            nullable: true
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -1304,14 +1158,12 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: "comma separated list of metal pairs. For example: gold/silver,gold/platinum,silver/palladium"
           in: query
           name: pairs
           required: true
           schema:
-            description: "comma separated list of metal pairs. For example: gold/silver,gold/platinum,silver/palladium"
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -1368,21 +1220,17 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: comma separated list of metals
           in: query
           name: metals
           required: true
           schema:
-            description: comma separated list of metals
             type: string
         - description: comma separated list of conversion currencies, defaults to USD
           in: query
           name: currency
           schema:
-            description: comma separated list of conversion currencies, defaults to USD
-            nullable: true
             type: string
         - description: "unit of meaure, defaults to troy ounces. allowed values are:\r
 
@@ -1460,7 +1308,6 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
@@ -1517,7 +1364,6 @@ paths:
           name: token
           required: true
           schema:
-            description: auth token
             type: string
         - description: to override content negotiation specify a value of json or xml
           in: query

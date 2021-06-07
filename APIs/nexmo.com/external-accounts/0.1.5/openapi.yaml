@@ -6,10 +6,7 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The External Accounts API is used to manage accounts for Viber
-    Service Messages, Facebook Messenger and Whatsapp for use in the
-    [Messages](https://developer.nexmo.com/messages/overview) and
-    [Dispatch](https://developer.nexmo.com/dispatch/overview) APIs.
+  description: The External Accounts API is used to manage accounts for Viber Service Messages, Facebook Messenger and Whatsapp for use in the [Messages](https://developer.nexmo.com/messages/overview) and [Dispatch](https://developer.nexmo.com/dispatch/overview) APIs.
   title: External Accounts API
   version: 0.1.5
   x-label: Developer Preview
@@ -20,20 +17,15 @@ info:
   x-providerName: nexmo.com
   x-serviceName: external-accounts
 tags:
-  - description: Inbound messages to an external account which is linked to an
-      application will be delivered to the application's inbound URL.
+  - description: Inbound messages to an external account which is linked to an application will be delivered to the application's inbound URL.
     name: Application
-  - description: An external-account used as the `from` field in the Messages API
-      and Dispatch API
+  - description: An external-account used as the `from` field in the Messages API and Dispatch API
     name: Account
-  - description: Managing your [Facebook
-      Messenger](https://developer.nexmo.com/messages/concepts/facebook) account
+  - description: Managing your [Facebook Messenger](https://developer.nexmo.com/messages/concepts/facebook) account
     name: Facebook Messenger
-  - description: Managing your [Viber Service
-      Message](https://developer.nexmo.com/messages/concepts/viber) account
+  - description: Managing your [Viber Service Message](https://developer.nexmo.com/messages/concepts/viber) account
     name: Viber Service Message
-  - description: Managing your
-      [Whatsapp](https://developer.nexmo.com/messages/concepts/whatsapp) account
+  - description: Managing your [Whatsapp](https://developer.nexmo.com/messages/concepts/whatsapp) account
     name: Whatsapp
 paths:
   /:
@@ -138,22 +130,15 @@ paths:
             schema:
               properties:
                 access_token:
-                  description: >
-                    This is the Facebook Business Page token. You can obtain the token
-                    using one of the following methods:
-
+                  description: |
+                    This is the Facebook Business Page token. You can obtain the token using one of the following methods:
 
                     * Linking your Facebook Business Page to your account [with our Dashboard tool](https://dashboard.nexmo.com/messages/social-channels/facebook-connect) 
-
                     * Requesting a Page Access Token using the steps in the [Facebook token reference](https://developers.facebook.com/docs/pages/access-tokens/)
                   example: myAccessToken
                   type: string
                 applications:
-                  description: Contains a list of application IDs which are linked to the account.
-                    <ul> <li>There is just one application allowed per an
-                    account.</li> <li>The application type must be type
-                    "messages".</li> </ul> For more information see [Application
-                    API spec](https://developer.nexmo.com/api/application.v2)
+                  description: Contains a list of application IDs which are linked to the account. <ul> <li>There is just one application allowed per an account.</li> <li>The application type must be type "messages".</li> </ul> For more information see [Application API spec](https://developer.nexmo.com/api/application.v2)
                   example:
                     - optionalApplicationId
                   items:
@@ -162,10 +147,7 @@ paths:
                   minItems: 0
                   type: array
                 external_id:
-                  description: This is the unique identifier within the provider's domain. In this
-                    case it is the Page ID for your Facebook Page. Go to your
-                    Facebook Page, click "Settings", click "Messenger platform "
-                    scroll down to "Messenger link" to find your Page ID.
+                  description: This is the unique identifier within the provider's domain. In this case it is the Page ID for your Facebook Page. Go to your Facebook Page, click "Settings", click "Messenger platform " scroll down to "Messenger link" to find your Page ID.
                   example: "12345678"
                   type: string
                 name:
@@ -236,8 +218,7 @@ paths:
     delete:
       operationId: DeleteMessengerAccount
       parameters:
-        - description: External id of the account you want to delete. In this case it is
-            the Facebook Page ID.
+        - description: External id of the account you want to delete. In this case it is the Facebook Page ID.
           in: path
           name: external_id
           required: true
@@ -269,8 +250,7 @@ paths:
     get:
       operationId: GetMessengerAccount
       parameters:
-        - description: External id of the account you want to retrieve. In this case it is
-            the Facebook Page ID.
+        - description: External id of the account you want to retrieve. In this case it is the Facebook Page ID.
           in: path
           name: external_id
           required: true
@@ -300,8 +280,7 @@ paths:
     patch:
       operationId: UpdateMessengerAccount
       parameters:
-        - description: External id of the account you want to update. In this case it is
-            the Facebook Page ID.
+        - description: External id of the account you want to update. In this case it is the Facebook Page ID.
           in: path
           name: external_id
           required: true
@@ -350,8 +329,7 @@ paths:
                       type: string
                     type: array
                   external_id:
-                    description: The external identifier for this account. In this case it is the
-                      Facebook Page ID.
+                    description: The external identifier for this account. In this case it is the Facebook Page ID.
                     example: "12345678"
                     type: string
                   name:
@@ -379,8 +357,7 @@ paths:
                     type: string
                   instance:
                     example:
-                      $ref: "#/paths/~1messenger/post/responses/400/content/application~1json/schema/\
-                        properties/instance/example"
+                      $ref: "#/paths/~1messenger/post/responses/400/content/application~1json/schema/properties/instance/example"
                     type: string
                   invalid_params:
                     items:
@@ -425,8 +402,7 @@ paths:
     get:
       operationId: GetVSMAccount
       parameters:
-        - description: External id of the account you want to retrieve. In this case it
-            will be your Viber Service Message ID.
+        - description: External id of the account you want to retrieve. In this case it will be your Viber Service Message ID.
           in: path
           name: external_id
           required: true
@@ -457,8 +433,7 @@ paths:
     get:
       operationId: GetWAAccount
       parameters:
-        - description: External id of the account you want to retrieve. In this case it
-            will be the WhatsApp number.
+        - description: External id of the account you want to retrieve. In this case it will be the WhatsApp number.
           in: path
           name: external_id
           required: true
@@ -499,10 +474,7 @@ paths:
               - viber_service_msg
               - whatsapp
             type: string
-        - description: External id of the account you want to assign an application to.
-            This is channel dependent. For Facebook it will be your Facebook
-            Page ID, for Viber your Viber Service Message ID and for WhatsApp
-            your WhatsApp number.
+        - description: External id of the account you want to assign an application to. This is channel dependent. For Facebook it will be your Facebook Page ID, for Viber your Viber Service Message ID and for WhatsApp your WhatsApp number.
           in: path
           name: external_id
           required: true
@@ -514,17 +486,13 @@ paths:
             schema:
               properties:
                 application:
-                  description: There is just one application allowed per an account. The
-                    application type must be type "messages". For more
-                    information please see [Application API
-                    Spec](https://developer.nexmo.com/api/application.v2)
+                  description: There is just one application allowed per an account. The application type must be type "messages". For more information please see [Application API Spec](https://developer.nexmo.com/api/application.v2)
                   example: applicationId
                   type: string
               required:
                 - application
               type: object
-        description: Request body can contain any of the following. Please note, the
-          only one application can be linked to the account.
+        description: Request body can contain any of the following. Please note, the only one application can be linked to the account.
         required: true
       responses:
         "200":
@@ -545,8 +513,7 @@ paths:
               schema:
                 properties:
                   detail:
-                    description: The application does not exist or the application type is not
-                      "messages"
+                    description: The application does not exist or the application type is not "messages"
                     example: Cannot link application
                     type: string
                   title:
@@ -563,8 +530,7 @@ paths:
               schema:
                 properties:
                   detail:
-                    description: The account reached limit of maximum number of linked applications.
-                      (The only one application is allowed per an account)
+                    description: The account reached limit of maximum number of linked applications. (The only one application is allowed per an account)
                     example: Unable to link application
                     type: string
                   title:
@@ -698,8 +664,7 @@ components:
           example: name
           type: string
         provider:
-          description: The provider (will be one of `messenger, viber_service_msg,
-            whatsapp`).
+          description: The provider (will be one of `messenger, viber_service_msg, whatsapp`).
           enum:
             - messenger
             - viber_service_msg

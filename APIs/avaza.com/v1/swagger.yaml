@@ -1834,6 +1834,32 @@ paths:
       tags:
         - ScheduleSeries
   /api/Section:
+    delete:
+      consumes: []
+      operationId: Section_Delete
+      parameters:
+        - description: ""
+          format: int64
+          in: query
+          name: SectionID
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      security:
+        - oauth2:
+            - write_projects
+      summary: Delete a Section
+      tags:
+        - Section
     get:
       consumes: []
       operationId: Section_Get

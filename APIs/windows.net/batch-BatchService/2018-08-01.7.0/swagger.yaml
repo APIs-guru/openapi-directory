@@ -10059,15 +10059,11 @@ definitions:
         title: The Azure Guest OS Version currently installed on the virtual machines in the pool.
         type: string
       osFamily:
-        description: >-
+        description: |-
           Possible values are:
-
           2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1.
-
           3 - OS Family 3, equivalent to Windows Server 2012.
-
           4 - OS Family 4, equivalent to Windows Server 2012 R2.
-
           5 - OS Family 5, equivalent to Windows Server 2016. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).
         title: The Azure Guest OS family to be installed on the virtual machines in the pool.
         type: string
@@ -13407,7 +13403,7 @@ definitions:
         $ref: "#/definitions/ImageReference"
         title: A reference to the Azure Virtual Machines Marketplace image or the custom Virtual Machine image to use.
       licenseType:
-        description: >
+        description: |
           This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:
 
            Windows_Server - The on-premises license is for Windows Server.

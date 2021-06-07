@@ -6,11 +6,7 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Conversation API enables you to build conversation features
-    where communication can take place across multiple mediums including IP
-    Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the
-    conversations is maintained though each communication event taking place
-    within a conversation, no matter the medium.
+  description: The Conversation API enables you to build conversation features where communication can take place across multiple mediums including IP Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the conversations is maintained though each communication event taking place within a conversation, no matter the medium.
   title: Conversation API
   version: 1.0.1
   x-label: Beta
@@ -21,26 +17,18 @@ info:
   x-providerName: nexmo.com
   x-serviceName: conversation.v2
 tags:
-  - description: A conversation is a shared core component that Vonage APIs rely on.
-      Conversations happen over multiple mediums and and can have associated
-      Users through Memberships.
+  - description: A conversation is a shared core component that Vonage APIs rely on. Conversations happen over multiple mediums and and can have associated Users through Memberships.
     name: conversation
-  - description: Memberships connect users with conversations. Each membership has
-      one conversation and one user however a user can have many memberships to
-      conversations just as conversations can have many members.
+  - description: Memberships connect users with conversations. Each membership has one conversation and one user however a user can have many memberships to conversations just as conversations can have many members.
     name: member
-  - description: "Events are actions that occur within a conversation. Examples of
-      this includes: Text events from members, or invite events from users"
+  - description: "Events are actions that occur within a conversation. Examples of this includes: Text events from members, or invite events from users"
     name: event
 paths:
   /conversations:
     get:
-      description: >
-        Please note that not all data is available in the list endpoint.
-        Once 
-
+      description: |
+        Please note that not all data is available in the list endpoint. Once 
         you've identified the conversation you need to work with, use the 
-
         [GET /conversations/:id](#get-conversation) endpoint to fetch all of the conversation details
       operationId: get-conversations
       parameters:
@@ -304,9 +292,8 @@ components:
       schema:
         type: string
     cursor:
-      description: >
+      description: |
         The cursor to start returning results from.
-
 
         You are not expected to provide this manually, but to follow the url provided in `_links.next.href` in the response which contains a `cursor` value
       in: query
@@ -372,8 +359,7 @@ components:
           - desc
         type: string
     page_size:
-      description: The number of results returned per page.   The default value is
-        `10`. The maximum value is `100`.
+      description: The number of results returned per page.   The default value is `10`. The maximum value is `100`.
       in: query
       name: page_size
       required: false

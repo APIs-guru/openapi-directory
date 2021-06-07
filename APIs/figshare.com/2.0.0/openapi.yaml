@@ -872,6 +872,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "422":
+          description: Unprocessable Entity. Parameters missing or incorrect
         "500":
           description: Internal Server Error
       security:
@@ -5852,6 +5854,10 @@ components:
           description: Reason for embargo
           example: ""
           type: string
+        embargo_title:
+          description: Title for embargo
+          example: File(s) under embargo
+          type: string
         embargo_type:
           description: Embargo type
           example: ""
@@ -5885,6 +5891,10 @@ components:
         embargo_reason:
           description: Reason for setting embargo
           example: ""
+          type: string
+        embargo_title:
+          description: Title for embargo
+          example: File(s) under embargo
           type: string
         embargo_type:
           description: "Embargo can be enabled at the article or the file level. Possible values: article, file"
@@ -6224,6 +6234,8 @@ components:
           example: 2015-08-12T00:39:55
           nullable: true
           type: string
+        timeline:
+          $ref: "#/components/schemas/Timeline"
         title:
           description: Collection title
           example: Sample collection
@@ -6849,11 +6861,11 @@ components:
           example: 6c16e6e7d7587bd078e5117dda01d565
           type: string
         name:
-          description: File name including the extension
+          description: File name including the extension; can be omitted only for linked files.
           example: test.py
           type: string
         size:
-          description: File size in bytes
+          description: File size in bytes; can be omitted only for linked files.
           example: 70
           format: int64
           type: integer
@@ -7259,6 +7271,10 @@ components:
         embargo_reason:
           description: Reason for embargo
           example: not complete
+          type: string
+        embargo_title:
+          description: Title for embargo
+          example: File(s) under embargo
           type: string
         embargo_type:
           description: Article embargo

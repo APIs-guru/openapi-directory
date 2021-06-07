@@ -25,6 +25,8 @@ tags:
     name: Access Tokens
   - description: Address operations
     name: Addresses
+  - description: Authentication Provider operations
+    name: Authentication Providers
   - description: Billing operations
     name: Billing
   - description: Billing groups operations
@@ -393,6 +395,124 @@ paths:
       summary: Retrieve an address
       tags:
         - Addresses
+      x-latency-category: responsive
+  /authentication_providers:
+    get:
+      description: Returns a list of your SSO authentication providers.
+      operationId: findAuthenticationProviders
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/SortAuthenticationProvider"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetAllAuthenticationProviderResponse"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Resource not found
+      summary: List all SSO authentication providers
+      tags:
+        - Authentication Providers
+      x-latency-category: responsive
+    post:
+      description: Creates an authentication provider.
+      operationId: CreateAuthenticationProvider
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthenticationProviderCreate"
+        description: Parameters that can be defined during authentication provider creation
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/AuthenticationProviderResponse"
+        "422":
+          description: Bad request
+      summary: Creates an authentication provider
+      tags:
+        - Authentication Providers
+      x-latency-category: responsive
+  "/authentication_providers/{id}":
+    delete:
+      description: Deletes an existing authentication provider.
+      operationId: DeleteAuthenticationProvider
+      parameters:
+        - description: authentication provider ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/AuthenticationProviderResponse"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Resource not found
+        "422":
+          description: Bad request
+      summary: Deletes an authentication provider
+      tags:
+        - Authentication Providers
+      x-latency-category: responsive
+    get:
+      description: Retrieves the details of an existing authentication provider.
+      operationId: getAuthenticationProvider
+      parameters:
+        - description: authentication provider ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/AuthenticationProviderResponse"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Resource not found
+        "422":
+          description: Bad request
+      summary: Retrieve an authentication provider
+      tags:
+        - Authentication Providers
+      x-latency-category: responsive
+    patch:
+      description: Updates settings of an existing authentication provider.
+      operationId: updateAuthenticationProvider
+      parameters:
+        - description: Identifies the resource.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAuthenticationProviderRequest"
+        description: Parameters that can be updated in a authentication provider
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/AuthenticationProviderResponse"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Resource not found
+        "422":
+          description: Bad request
+      summary: Update a authentication provider
+      tags:
+        - Authentication Providers
       x-latency-category: responsive
   /available_phone_numbers:
     get:
@@ -5207,22 +5327,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/FilterBasicStatusLifecycle"
         - description: The SIM card identification UUID.
           in: query
           name: filter[sim_card_id]
           required: false
           schema:
-            type: string
-        - description: Filter by possible OTA updates statuses.
-          in: query
-          name: filter[status]
-          required: false
-          schema:
-            enum:
-              - in-progress
-              - completed
-              - failed
-            example: in-progress
             type: string
         - description: Filter by type.
           in: query
@@ -7342,6 +7452,49 @@ paths:
       tags:
         - Short Codes
       x-latency-category: responsive
+  /sim_card_group_actions:
+    get:
+      description: This API allows listing a paginated collection a SIM card group actions. It allows to explore a collection of existing asynchronous operation using specific filters.
+      operationId: SimCardGroupActionsGet
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/FilterSIMCardGroupId"
+        - $ref: "#/components/parameters/FilterBasicStatusLifecycle"
+        - description: Filter by action type.
+          in: query
+          name: filter[type]
+          required: false
+          schema:
+            enum:
+              - set_private_wireless_gateway
+              - remove_private_wireless_gateway
+            example: set_private_wireless_gateway
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/SimCardGroupActionCollectionResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List SIM card group actions
+      tags:
+        - SIM Card Groups
+      x-latency-category: responsive
+  "/sim_card_group_actions/{id}":
+    get:
+      description: This API allows fetching detailed information about a SIM card group action resource to make follow-ups in an existing asynchronous operation.
+      operationId: SimCardGroupActionGet
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SIMCardGroupActionResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Get SIM card group action detail
+      tags:
+        - SIM Card Groups
+      x-latency-category: responsive
   /sim_card_groups:
     get:
       description: Get all SIM card groups belonging to the user that match the given filters.
@@ -7432,6 +7585,50 @@ paths:
       tags:
         - SIM Card Groups
       x-latency-category: responsive
+  "/sim_card_groups/{id}/actions/remove_private_wireless_gateway":
+    post:
+      description: This action will asynchronously remove an existing Private Wireless Gateway definition from a SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic handled by Telnyx's default mobile network configuration.
+      operationId: RemoveSIMCardGroupPrivateWirelessGateway
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+      responses:
+        "202":
+          $ref: "#/components/responses/SIMCardGroupActionResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Asynchronous request to remove a Private Wireless Gateway definition from a SIM card group.
+      tags:
+        - SIM Card Groups
+      x-latency-category: background
+  "/sim_card_groups/{id}/actions/set_private_wireless_gateway":
+    post:
+      description: This action will asynchronously assign a provisioned Private Wireless Gateway to the SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic controlled by the associated Private Wireless Gateway. This operation will also imply that new SIM cards assigned to a group will inherit its network definitions. If it's moved to a different group that doesn't have a Private Wireless Gateway, it'll use Telnyx's default mobile network configuration.
+      operationId: SetSIMCardGroupPrivateWirelessGateway
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                private_wireless_gateway_id:
+                  description: The identification of the related Private Wireless Gateway resource.
+                  example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+                  format: uuid
+                  type: string
+              required:
+                - private_wireless_gateway_id
+              type: object
+        required: true
+      responses:
+        "202":
+          $ref: "#/components/responses/SIMCardGroupActionResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Asynchronous assignment request for Private Wireless Gateway in a SIM card group.
+      tags:
+        - SIM Card Groups
+      x-latency-category: background
   /sim_card_orders:
     get:
       description: Get all SIM card orders according to filters.
@@ -8980,6 +9177,18 @@ components:
       schema:
         default: "null"
         type: string
+    FilterBasicStatusLifecycle:
+      description: Filter by a specific status of the resource's lifecycle.
+      in: query
+      name: filter[status]
+      required: false
+      schema:
+        enum:
+          - in-progress
+          - completed
+          - failed
+        example: in-progress
+        type: string
     FilterByActivationStatus:
       description: Filter results by activation status
       in: query
@@ -9529,6 +9738,38 @@ components:
           - street_address
         example: street_address
         type: string
+    SortAuthenticationProvider:
+      description: |-
+        Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+        That is: <ul>
+          <li>
+            <code>name</code>: sorts the result by the
+            <code>name</code> field in ascending order.
+          </li>
+
+          <li>
+            <code>-name</code>: sorts the result by the
+            <code>name</code> field in descending order.
+          </li>
+        </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+      in: query
+      name: sort
+      required: false
+      schema:
+        default: -created_at
+        enum:
+          - name
+          - -name
+          - short_name
+          - -short_name
+          - active
+          - -active
+          - created_at
+          - -created_at
+          - updated_at
+          - -updated_at
+        example: name
+        type: string
     SortConnection:
       description: |-
         Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -9620,6 +9861,15 @@ components:
             properties:
               data:
                 $ref: "#/components/schemas/Address"
+            type: object
+      description: Successful response
+    AuthenticationProviderResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/AuthenticationProvider"
             type: object
       description: Successful response
     BulkCredentialResponse:
@@ -10002,6 +10252,19 @@ components:
               data:
                 items:
                   $ref: "#/components/schemas/Address"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
+    GetAllAuthenticationProviderResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/AuthenticationProvider"
                 type: array
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
@@ -11123,6 +11386,15 @@ components:
                 $ref: "#/components/schemas/PortoutDetails"
             type: object
       description: Expected portout response to a valid request
+    SIMCardGroupActionResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/SIMCardGroupAction"
+            type: object
+      description: Successful Response
     SIMCardNetworkPreferenceResponse:
       content:
         application/json:
@@ -11256,6 +11528,19 @@ components:
                     example: /porting_phone_numbers?filter[porting_order_id]=a700d03c-4062-4091-8189-1b75216cf7a2
                     type: string
                 type: object
+            type: object
+      description: Successful response
+    SimCardGroupActionCollectionResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/SIMCardGroupAction"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
             type: object
       description: Successful response
     SimpleSimCardResponse:
@@ -11582,6 +11867,90 @@ components:
           example: http://www.example.com/file
           type: string
       title: Audio
+      type: object
+    AuthenticationProvider:
+      properties:
+        active:
+          $ref: "#/components/schemas/active"
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          example: 2018-02-02T22:25:27.521Z
+          type: string
+        id:
+          description: Uniquely identifies the authentication provider.
+          example: 35146afd-df93-4963-b1e9-1a085e2ae874
+          format: uuid
+          type: string
+        name:
+          $ref: "#/components/schemas/name"
+        organization_id:
+          $ref: "#/components/schemas/organization_id"
+        record_type:
+          description: Identifies the type of the resource.
+          example: authentication_provider
+          type: string
+        settings:
+          description: The settings associated with the authentication provider.
+          properties:
+            assertion_consumer_service_url:
+              description: The Assertion Consumer Service URL for the service provider (Telnyx).
+              example: https://api.telnyx.com/sso/saml/auth/myorg
+              type: string
+            idp_cert_fingerprint:
+              description: The certificate fingerprint for the identity provider (IdP)
+              example: 13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7
+              type: string
+            idp_cert_fingerprint_algorithm:
+              default: sha1
+              description: The algorithm used to generate the identity provider's (IdP) certificate fingerprint
+              enum:
+                - sha1
+                - sha256
+                - sha384
+                - sha512
+              example: sha256
+              type: string
+            idp_entity_id:
+              description: The Entity ID for the identity provider (IdP).
+              example: https://myorg.myidp.com/saml/metadata
+              type: string
+            idp_sso_target_url:
+              description: The SSO target url for the identity provider (IdP).
+              example: https://myorg.myidp.com/trust/saml2/http-post/sso
+              type: string
+            name_identifier_format:
+              description: The name identifier format associated with the authentication provider. This must be the same for both the Identity Provider (IdP) and the service provider (Telnyx).
+              example: urn:oasis:names:tc:SAML:1.1:nameid-format
+              type: string
+            service_provider_entity_id:
+              description: The Entity ID for the service provider (Telnyx).
+              example: https://api.telnyx.com/sso/saml/metadata/myorg
+              type: string
+          type: object
+        short_name:
+          $ref: "#/components/schemas/short_name"
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          example: 2018-02-02T22:25:27.521Z
+          type: string
+      title: AuthenticationProvider
+      type: object
+    AuthenticationProviderCreate:
+      properties:
+        active:
+          $ref: "#/components/schemas/active"
+        name:
+          $ref: "#/components/schemas/name"
+        settings:
+          $ref: "#/components/schemas/settings"
+        settings_url:
+          $ref: "#/components/schemas/settings_url"
+        short_name:
+          $ref: "#/components/schemas/short_name"
+      required:
+        - name
+        - short_name
+        - settings
       type: object
     AvailablePhoneNumber:
       example:
@@ -24198,6 +24567,13 @@ components:
           description: A user friendly name for the SIM card group.
           example: My Test Group
           type: string
+        private_wireless_gateway_id:
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+          description: The identification of the related Private Wireless Gateway resource.
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          type: string
         record_type:
           description: Identifies the type of the resource.
           example: sim_card_group
@@ -24209,6 +24585,59 @@ components:
           readOnly: true
           type: string
       title: SIMCardGroup
+      type: object
+    SIMCardGroupAction:
+      description: This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
+      properties:
+        created_at:
+          description: ISO 8601 formatted date-time indicating when the resource was created.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+        id:
+          description: Identifies the resource.
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          readOnly: true
+          type: string
+        record_type:
+          example: sim_card_group_action
+          readOnly: true
+          type: string
+        settings:
+          description: A JSON object representation of the action params.
+          properties:
+            private_wireless_gateway_id:
+              description: The identification of the related Private Wireless Gateway resource.
+              example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+              format: uuid
+              type: string
+          type: object
+        sim_card_group_id:
+          description: The SIM card group identification.
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          type: string
+        status:
+          enum:
+            - in-progress
+            - completed
+            - failed
+          example: in-progress
+          type: string
+        type:
+          description: Represents the type of the operation requested.
+          enum:
+            - set_private_wireless_gateway
+            - remove_private_wireless_gateway
+          example: set_private_wireless_gateway
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date-time indicating when the resource was updated.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+      title: SIMCardGroupAction
       type: object
     SIMCardGroupCreate:
       properties:
@@ -25611,6 +26040,29 @@ components:
       required:
         - code
         - title
+    UpdateAuthenticationProviderRequest:
+      example:
+        active: true
+        name: Okta
+        settings:
+          idp_cert_fingerprint: 13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7
+          idp_cert_fingerprint_algorithm: sha1
+          idp_entity_id: https://myorg.myidp.com/saml/metadata
+          idp_sso_target_url: https://myorg.myidp.com/trust/saml2/http-post/sso
+        short_name: myorg
+      properties:
+        active:
+          $ref: "#/components/schemas/active"
+        name:
+          $ref: "#/components/schemas/name"
+        settings:
+          $ref: "#/components/schemas/settings"
+        settings_url:
+          $ref: "#/components/schemas/settings_url"
+        short_name:
+          $ref: "#/components/schemas/short_name"
+      title: Update Authentication Provider Request
+      type: object
     UpdateBillingGroup:
       example:
         name: string
@@ -27294,6 +27746,11 @@ components:
           type: string
       title: WhatsApp User
       type: object
+    active:
+      default: true
+      description: The active status of the authentication provider
+      example: true
+      type: boolean
     address_book:
       default: true
       description: Indicates whether or not the address should be considered part of your list of addresses that appear for regular use.
@@ -27442,9 +27899,18 @@ components:
       description: The locality of the address. For US addresses, this corresponds to the city of the address.
       example: Chicago
       type: string
+    name:
+      description: The name associated with the authentication provider.
+      example: Okta
+      type: string
     neighborhood:
       description: The neighborhood of the address. This field is not used for addresses in the US but is used for some international addresses.
       example: Ciudad de los deportes
+      type: string
+    organization_id:
+      description: The id from the Organization the authentication provider belongs to.
+      example: 24b4a4bb-c4df-46ad-bbcb-23fc741c5ad7
+      format: uuid
       type: string
     phone_number:
       description: The phone number associated with the address.
@@ -27453,6 +27919,44 @@ components:
     postal_code:
       description: The postal code of the address.
       example: "60654"
+      type: string
+    settings:
+      description: The settings associated with the authentication provider.
+      properties:
+        idp_cert_fingerprint:
+          description: The certificate fingerprint for the identity provider (IdP)
+          example: 13:38:C7:BB:C9:FF:4A:70:38:3A:E3:D9:5C:CD:DB:2E:50:1E:80:A7
+          type: string
+        idp_cert_fingerprint_algorithm:
+          default: sha1
+          description: The algorithm used to generate the identity provider's (IdP) certificate fingerprint
+          enum:
+            - sha1
+            - sha256
+            - sha384
+            - sha512
+          example: sha256
+          type: string
+        idp_entity_id:
+          description: The Entity ID for the identity provider (IdP).
+          example: https://myorg.myidp.com/saml/metadata
+          type: string
+        idp_sso_target_url:
+          description: The SSO target url for the identity provider (IdP).
+          example: https://myorg.myidp.com/trust/saml2/http-post/sso
+          type: string
+      required:
+        - idp_entity_id
+        - idp_sso_target_url
+        - idp_cert_fingerprint
+      type: object
+    settings_url:
+      description: The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+      example: https://myorg.myidp.com/saml/metadata
+      type: string
+    short_name:
+      description: The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+      example: myorg
       type: string
     street_address:
       description: The primary street address information about the address.

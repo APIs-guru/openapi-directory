@@ -1186,7 +1186,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConnectionRead"
+                $ref: "#/components/schemas/WebBackendConnectionRead"
           description: Successful operation
         "422":
           $ref: "#/components/responses/InvalidInput"
@@ -1207,7 +1207,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WbConnectionRead"
+                $ref: "#/components/schemas/WebBackendConnectionRead"
           description: Successful operation
         "404":
           description: Connection not found
@@ -1230,7 +1230,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WbConnectionReadList"
+                $ref: "#/components/schemas/WebBackendConnectionReadList"
           description: Successful operation
         "404":
           description: Workspace not found
@@ -1253,7 +1253,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConnectionRead"
+                $ref: "#/components/schemas/WebBackendConnectionRead"
           description: Successful operation
         "422":
           $ref: "#/components/responses/InvalidInput"
@@ -1582,6 +1582,14 @@ components:
         name:
           description: Optional name of the connection
           type: string
+        namespaceDefinition:
+          $ref: "#/components/schemas/NamespaceDefinitionType"
+        namespaceFormat:
+          default:
+            $ref: "#/components/schemas/ConnectionRead/properties/namespaceFormat/default"
+          description: Used when namespaceDefinition is 'customformat'. If blank then behaves like namespaceDefinition = 'destination'. If "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition = 'source'.
+          example: ${SOURCE_NAMESPACE}
+          type: string
         operationIds:
           items:
             $ref: "#/components/schemas/OperationId"
@@ -1619,6 +1627,13 @@ components:
         destinationId:
           $ref: "#/components/schemas/DestinationId"
         name:
+          type: string
+        namespaceDefinition:
+          $ref: "#/components/schemas/NamespaceDefinitionType"
+        namespaceFormat:
+          default: null
+          description: Used when namespaceDefinition is 'customformat'. If blank then behaves like namespaceDefinition = 'destination'. If "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition = 'source'.
+          example: ${SOURCE_NAMESPACE}
           type: string
         operationIds:
           items:
@@ -1692,6 +1707,14 @@ components:
       properties:
         connectionId:
           $ref: "#/components/schemas/ConnectionId"
+        namespaceDefinition:
+          $ref: "#/components/schemas/NamespaceDefinitionType"
+        namespaceFormat:
+          default:
+            $ref: "#/components/schemas/ConnectionRead/properties/namespaceFormat/default"
+          description: Used when namespaceDefinition is 'customformat'. If blank then behaves like namespaceDefinition = 'destination'. If "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition = 'source'.
+          example: ${SOURCE_NAMESPACE}
+          type: string
         operationIds:
           items:
             $ref: "#/components/schemas/OperationId"
@@ -2055,6 +2078,14 @@ components:
       required:
         - logType
       type: object
+    NamespaceDefinitionType:
+      default: source
+      description: Method used for computing final namespace in destination
+      enum:
+        - source
+        - destination
+        - customformat
+      type: string
     Notification:
       properties:
         notificationType:
@@ -2430,7 +2461,16 @@ components:
         - endedAt
         - succeeded
       type: object
-    WbConnectionRead:
+    WebBackendConnectionCreate:
+      allOf:
+        - $ref: "#/components/schemas/ConnectionCreate"
+        - properties:
+            withOperations:
+              items:
+                $ref: "#/components/schemas/OperationCreate"
+              type: array
+          type: object
+    WebBackendConnectionRead:
       properties:
         connectionId:
           $ref: "#/components/schemas/ConnectionId"
@@ -2448,6 +2488,14 @@ components:
           $ref: "#/components/schemas/JobStatus"
         name:
           type: string
+        namespaceDefinition:
+          $ref: "#/components/schemas/NamespaceDefinitionType"
+        namespaceFormat:
+          default:
+            $ref: "#/components/schemas/ConnectionRead/properties/namespaceFormat/default"
+          description: Used when namespaceDefinition is 'customformat'. If blank then behaves like namespaceDefinition = 'destination'. If "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition = 'source'.
+          example: ${SOURCE_NAMESPACE}
+          type: string
         operationIds:
           items:
             $ref: "#/components/schemas/OperationId"
@@ -2455,6 +2503,7 @@ components:
         operations:
           $ref: "#/components/schemas/OperationReadList"
         prefix:
+          description: Prefix that will be prepended to the name of each stream when it is written to the destination.
           type: string
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
@@ -2477,24 +2526,15 @@ components:
         - destination
         - isSyncing
       type: object
-    WbConnectionReadList:
+    WebBackendConnectionReadList:
       properties:
         connections:
           items:
-            $ref: "#/components/schemas/WbConnectionRead"
+            $ref: "#/components/schemas/WebBackendConnectionRead"
           type: array
       required:
         - connections
       type: object
-    WebBackendConnectionCreate:
-      allOf:
-        - $ref: "#/components/schemas/ConnectionCreate"
-        - properties:
-            withOperations:
-              items:
-                $ref: "#/components/schemas/OperationCreate"
-              type: array
-          type: object
     WebBackendConnectionRequestBody:
       properties:
         connectionId:

@@ -453,11 +453,11 @@ paths:
       tags:
         - Assets Covariance
       x-codegen-request-body-name: body
-  /assets/returns/arithmetic:
+  /assets/returns:
     post:
-      description: Computes the arithmetic returns of assets.
+      description: Computes the arithmetic returns of one or several asset(s).
       externalDocs:
-        url: https://docs.portfoliooptimizer.io/#arithmetic-returns
+        url: https://docs.portfoliooptimizer.io/#returns
       requestBody:
         content:
           application/json:
@@ -490,20 +490,22 @@ paths:
               examples:
                 Example:
                   value:
-                    assetsReturns:
-                      - - 1
-                      - - 0.5
-                        - 1
+                    assets:
+                      - assetReturns:
+                          - 1
+                      - assetReturns:
+                          - 0.5
+                          - 1
           description: OK
-      summary: Arithmetic Returns
+      summary: Returns
       tags:
         - Assets Returns
       x-codegen-request-body-name: body
   /assets/returns/average:
     post:
-      description: Computes the average returns of assets.
+      description: Computes the average return of one or several asset(s).
       externalDocs:
-        url: https://docs.portfoliooptimizer.io/#average-returns
+        url: https://docs.portfoliooptimizer.io/#average-return
       requestBody:
         content:
           application/json:
@@ -532,57 +534,11 @@ paths:
           content:
             application/json:
               example:
-                assetsReturns:
-                  - 0.025
-                  - 0
-          description: OK
-      summary: Average Returns
-      tags:
-        - Assets Returns
-      x-codegen-request-body-name: body
-  /assets/returns/logarithmic:
-    post:
-      description: Computes the logarithmic returns of assets.
-      externalDocs:
-        url: https://docs.portfoliooptimizer.io/#logarithmic-returns
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Example:
-                value:
-                  assets: 2
-                  assetsPrices:
-                    - - 1
-                      - 2
-                    - - 2
-                      - 3
-                      - 6
-            schema:
-              properties:
                 assets:
-                  type: integer
-                assetsPrices:
-                  items:
-                    items:
-                      type: number
-                    type: array
-                  type: array
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                Example:
-                  value:
-                    assetsReturns:
-                      - - 0.6931471805599453
-                      - - 0.4054651081081644
-                        - 0.6931471805599453
+                  - assetAverageReturn: 0.025
+                  - assetAverageReturn: 0
           description: OK
-      summary: Logarithmic Returns
+      summary: Average Return
       tags:
         - Assets Returns
       x-codegen-request-body-name: body
@@ -973,6 +929,58 @@ paths:
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
+  /portfolio/analysis/diversification-ratio:
+    post:
+      description: Computes the diversification ratio of one or several portfolio(s).
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#portfolio-diversification-ratio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From assets:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsWeights:
+                    - - 0.5
+                      - 0.5
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioDiversificationRatio: 1.2909944487358058
+          description: OK
+      summary: Portfolio Diversification Ratio
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
   /portfolio/analysis/drawdowns:
     post:
       description: Computes the drawdown function - also called the underwater equity curve -, as well as the worst 10 drawdowns of one or several portfolio(s).
@@ -1027,85 +1035,6 @@ paths:
                             drawdownStart: 1
           description: OK
       summary: Portfolio Drawdowns
-      tags:
-        - Portfolio Analysis
-      x-codegen-request-body-name: body
-  /portfolio/analysis/mean-variance:
-    post:
-      description: Computes the return and the volatility of one or several portfolio(s) [from assets returns and covariance matrix](https://docs.portfoliooptimizer.io/#portfolio-mean-variance-from-assets-returns-and-covariance-matrix) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-mean-variance-from-portfolio-values).
-      requestBody:
-        content:
-          application/json:
-            examples:
-              From assets returns and covariance matrix:
-                value:
-                  assets: 2
-                  assetsCovarianceMatrix:
-                    - - 0.0025
-                      - 0.0005
-                    - - 0.0005
-                      - 0.01
-                  assetsReturns:
-                    - 0.01
-                    - 0.05
-                  assetsWeights:
-                    - - 1
-                      - 0
-                    - - 0
-                      - 1
-              From portfolio values:
-                value:
-                  portfoliosValues:
-                    - - 100
-                      - 95
-                      - 100
-                      - 90
-                      - 85
-                      - 70
-            schema:
-              properties:
-                assets:
-                  type: integer
-                assetsCovarianceMatrix:
-                  items:
-                    items:
-                      type: number
-                    type: array
-                  type: array
-                assetsReturns:
-                  items:
-                    items:
-                      type: number
-                    type: array
-                  type: array
-                assetsWeights:
-                  items:
-                    items:
-                      type: number
-                    type: array
-                  type: array
-                portfoliosValues:
-                  items:
-                    items:
-                      type: number
-                    type: array
-                  type: array
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                Example:
-                  value:
-                    portfolios:
-                      - portfolioReturn: 0.01
-                        portfolioVolatility: 0.05
-                      - portfolioReturn: 0.05
-                        portfolioVolatility: 0.1
-          description: OK
-      summary: Portfolio Mean-Variance
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -1322,9 +1251,261 @@ paths:
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
+  /portfolio/analysis/return:
+    post:
+      description: Computes the rate of return of one or several portfolio(s) [from assets](https://docs.portfoliooptimizer.io/#portfolio-return-from-assets) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-return-from-portfolio-values).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From assets returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  assetsWeights:
+                    - - 1
+                      - 0
+                    - - 0
+                      - 1
+              From portfolio values:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                portfoliosValues:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioReturn: 0.01
+                      - portfolioReturn: 0.05
+          description: OK
+      summary: Portfolio Return
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/returns/average:
+    post:
+      description: Computes the average return of one or several portfolio(s) [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-average-return-from-portfolio-values).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From portfolio values:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
+            schema:
+              properties:
+                portfoliosValues:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioAverageReturn: 0.01
+          description: OK
+      summary: Portfolio Average Return
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/sharpe-ratio:
+    post:
+      description: Computes the Sharpe ratio of one or several portfolio(s) [from assets](https://docs.portfoliooptimizer.io/#portfolio-sharpe-ratio-from-assets) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-sharpe-ratio-from-portfolio-values).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From assets:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  assetsWeights:
+                    - - 1
+                      - 0
+                    - - 0
+                      - 1
+                  riskFreeRate: 0
+              From portfolio values:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
+                  riskFreeRate: 0
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    type: number
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                portfoliosValues:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                riskFreeRate:
+                  type: number
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioSharpeRatio: -0.8835333925060923
+          description: OK
+      summary: Portfolio Sharpe Ratio
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/volatility:
+    post:
+      description: Computes the volatility of one or several portfolio(s) [from assets](https://docs.portfoliooptimizer.io/#portfolio-volatility-from-assets) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-volatility-from-portfolio-values).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From assets covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsWeights:
+                    - - 1
+                      - 0
+                    - - 0
+                      - 1
+              From portfolio values:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                portfoliosValues:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioVolatility: 0.05
+                      - portfolioVolatility: 0.1
+          description: OK
+      summary: Portfolio Volatility
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
   /portfolio/construction/investable:
     post:
-      description: Computes an investable portfolio as close as possible to a desired portfolio.
+      description: Computes an investable portfolio as close as possible, in terms of assets weights, to a desired portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#investable-portfolio
       requestBody:
@@ -1436,6 +1617,91 @@ paths:
                       - 0.35
           description: OK
       summary: Investable Portfolio
+      tags:
+        - Portfolio Construction
+      x-codegen-request-body-name: body
+  /portfolio/construction/mimicking:
+    post:
+      description: Computes a portfolio as close as possible, in terms of portfolio returns, to a benchmark portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#mimicking-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.02
+                      - 0.03
+                    - - -0.01
+                      - -0.02
+                      - -0.03
+                  benchmarkReturns:
+                    - 0
+                    - 0
+                    - 0
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                benchmarkReturns:
+                  items:
+                    type: number
+                  type: array
+                constraints:
+                  properties:
+                    assetsGroups:
+                      items:
+                        items:
+                          type: number
+                        type: array
+                      type: array
+                    assetsGroupsMatrix:
+                      items:
+                        items:
+                          type: number
+                        type: array
+                      type: array
+                    maximumAssetsGroupsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.5
+                      - 0.5
+          description: OK
+      summary: Mimicking Portfolio
       tags:
         - Portfolio Construction
       x-codegen-request-body-name: body
@@ -2347,16 +2613,6 @@ paths:
               Example:
                 value:
                   assets: 3
-                  assetsInitialWeights:
-                    - - 1
-                      - 0
-                      - 0
-                    - - 0
-                      - 1
-                      - 0
-                    - - 0
-                      - 0
-                      - 1
                   assetsPrices:
                     - - 100
                       - 105
@@ -2367,17 +2623,27 @@ paths:
                     - - 0.5
                       - 0.51
                       - 0.49
+                  assetsWeights:
+                    - - 1
+                      - 0
+                      - 0
+                    - - 0
+                      - 1
+                      - 0
+                    - - 0
+                      - 0
+                      - 1
             schema:
               properties:
                 assets:
                   type: integer
-                assetsInitialWeights:
+                assetsPrices:
                   items:
                     items:
                       type: number
                     type: array
                   type: array
-                assetsPrices:
+                assetsWeights:
                   items:
                     items:
                       type: number

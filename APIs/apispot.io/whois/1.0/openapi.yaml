@@ -1,7 +1,7 @@
 openapi: 3.0.2
 servers:
-  - url: https://apispot.io/api
   - url: http://localhost:5000
+  - url: https://apispot.io/api
 info:
   description: Domain API (WHOIS, Check, Batch)
   title: Bulk WHOIS API
@@ -31,9 +31,7 @@ paths:
                 $ref: "#/components/schemas/ArrayOfBatch"
           description: OK
     post:
-      description: Create batch. Batch is then being processed until all provided
-        items have been completed. At any time it can be `get` to provide
-        current status with results optionally.
+      description: Create batch. Batch is then being processed until all provided items have been completed. At any time it can be `get` to provide current status with results optionally.
       operationId: createBatch
       requestBody:
         content:

@@ -37,6 +37,8 @@ tags:
   - name: smarttap
   - name: transitclass
   - name: transitobject
+  - name: valuablesclasses
+  - name: walletobjects
 paths:
   /walletobjects/v1/eventTicketClass:
     get:
@@ -3158,6 +3160,113 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - transitobject
+  /walletobjects/v1/valuablesclasses:
+    get:
+      description: Returns a list of all valuables classes for a given issuer ID.
+      operationId: walletobjects.valuablesclasses.list
+      parameters:
+        - description: The ID of the issuer authorized to list classes.
+          in: query
+          name: issuerId
+          schema:
+            type: string
+        - description: Identifies the max number of results returned by a list. All
+            results are returned if max_results isn't defined.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: Specify the type(s) of ValuablesClass that needs to be listed. If
+            none is specified, all the ValuablesClasses would be returned.
+          explode: true
+          in: query
+          name: requestedType
+          schema:
+            items:
+              enum:
+                - VALUABLE_TYPE_UNSPECIFIED
+                - VALUABLE_TYPE_GIFT_CARD
+                - VALUABLE_TYPE_LOYALTY
+                - VALUABLE_TYPE_OFFER
+                - VALUABLE_TYPE_EVENT_TICKET
+                - VALUABLE_TYPE_FLIGHT
+                - VALUABLE_TYPE_TRANSIT
+              type: string
+            type: array
+          style: form
+        - description: Used to get the next set of results if max_results is specified,
+            but more than max_results classes are available in a list. For
+            example, if you have a list of 200 classes and you call list with
+            max_results set to 20, list will return the first 20 classes and a
+            next_token. Call list again with max_results set to 20 and the token
+            set to next_token to get the next 20 classes.
+          in: query
+          name: token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListValuablesClassesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - valuablesclasses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /walletobjects/v1/valuablesclassescount:
+    get:
+      description: Returns a total number of valuables classes grouped by type for a
+        given issuer ID.
+      operationId: walletobjects.walletobjects.v1.getValuablesclassescount
+      parameters:
+        - description: The ID of the issuer authorized to list classes.
+          in: query
+          name: issuerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValuablesClassesCount"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - walletobjects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -5453,6 +5562,19 @@ components:
             group. If there is a group, the third row will always display the
             number of objects in the group. Eg: "3 passes"'
       type: object
+    ListValuablesClassesResponse:
+      description: Response containing the list of all valuable classes for an issuer
+        (optionally for given type(s)).
+      properties:
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+          description: Pagination of the response.
+        valuablesClasses:
+          description: Resources corresponding to the list request.
+          items:
+            $ref: "#/components/schemas/ValuablesClass"
+          type: array
+      type: object
     LocalizedString:
       properties:
         defaultValue:
@@ -7294,6 +7416,67 @@ components:
             `LinksModuleData` module can have different prefixes indicating the
             type of URI (a link to a web page, a link to a map, a telephone
             number, or an email address). URIs must have a scheme.
+          type: string
+      type: object
+    ValuablesClass:
+      description: Contains a single type of ValuablesClass.
+      properties:
+        eventTicketClass:
+          $ref: "#/components/schemas/EventTicketClass"
+          description: Event Ticket class as per
+            https://developers.google.com/pay/passes/rest/v1/eventticketclass#resource:-eventticketclass
+        flightClass:
+          $ref: "#/components/schemas/FlightClass"
+          description: Flight class as per
+            https://developers.google.com/pay/passes/rest/v1/flightclass#resource:-flightclass
+        giftCardClass:
+          $ref: "#/components/schemas/GiftCardClass"
+          description: Gift card class as per
+            https://developers.google.com/pay/passes/rest/v1/giftcardclass#resource:-giftcardclass
+        loyaltyClass:
+          $ref: "#/components/schemas/LoyaltyClass"
+          description: Loyalty class as per
+            https://developers.google.com/pay/passes/rest/v1/loyaltyclass#resource:-loyaltyclass
+        offerClass:
+          $ref: "#/components/schemas/OfferClass"
+          description: Offer class as per
+            https://developers.google.com/pay/passes/rest/v1/offerclass#resource:-offerclass
+        transitClass:
+          $ref: "#/components/schemas/TransitClass"
+          description: Transit Class as per
+            https://developers.google.com/pay/passes/rest/v1/transitclass#resource:-transitclass
+      type: object
+    ValuablesClassesCount:
+      description: Contains the count of ValuablesClasses belonging to an issuer
+        grouped by their Type.
+      properties:
+        totalSize:
+          description: The total number of valuable classes present for the issuer_id.
+          format: int64
+          type: string
+        typeCount:
+          description: The number of ValuablesClasses in each type for the issuer_id.
+          items:
+            $ref: "#/components/schemas/ValuablesClassesCountTypeCount"
+          type: array
+      type: object
+    ValuablesClassesCountTypeCount:
+      description: The type of valuable and the number of ValuablesClasses in that type.
+      properties:
+        count:
+          description: The total number of ValuablesClasses belonging to that type.
+          format: int64
+          type: string
+        valuableType:
+          description: The type of valuable.
+          enum:
+            - VALUABLE_TYPE_UNSPECIFIED
+            - VALUABLE_TYPE_GIFT_CARD
+            - VALUABLE_TYPE_LOYALTY
+            - VALUABLE_TYPE_OFFER
+            - VALUABLE_TYPE_EVENT_TICKET
+            - VALUABLE_TYPE_FLIGHT
+            - VALUABLE_TYPE_TRANSIT
           type: string
       type: object
   securitySchemes:

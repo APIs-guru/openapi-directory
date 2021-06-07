@@ -1,8 +1,8 @@
 openapi: 3.0.0
 servers:
-  - url: https://api.motaword.com/
-  - url: https://sandbox.motaword.com/
-  - url: http://localhost/
+  - url: https://api.motaword.com
+  - url: https://sandbox.motaword.com
+  - url: http://localhost
 info:
   description: Use MotaWord API to post and track your translation projects.
   title: MotaWord API
@@ -11,7 +11,7 @@ info:
     url: https://www.motaword.com/developer/register
   x-apisguru-categories:
     - text
-  x-cli-description: Use MotaWord CLI to interact with your MotaWord account in many ways.
+  x-cli-description: Use MotaWord CLI to interact with your MotaWord account in many ways to manage your translation and localization needs. Visit motaword.com/developer for details.
   x-cli-name: motaword
   x-logo:
     url: https://dentycj2qhk72.cloudfront.net/new/images/new_logo_horizontal.png
@@ -294,17 +294,219 @@ paths:
               schema:
                 properties:
                   results:
-                    $ref: "#/components/schemas/InstantTranslationResult"
+                    oneOf:
+                      - $ref: "#/components/schemas/InstantContentsTranslationResult"
+                      - $ref: "#/components/schemas/InstantFilesTranslationResult"
                 type: object
           description: Instant translation result. It may return a list of translated strings, or a list of translated files.
       summary: Instantly translate your content with your existing TM and MT resources.
       tags:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
+  /corporate:
+    get:
+      description: Get details of my corporate account
+      operationId: getCorporate
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorporateAccount"
+          description: Corporate account details
+      summary: Get details of my corporate account
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+  /corporate/permissions:
+    get:
+      description: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      operationId: getAvailableCorporatePermissions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionList"
+          description: List of permission strings
+      summary: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+  /corporate/user-groups:
+    get:
+      description: Get a list of user groups for my corporate account
+      operationId: getCorporateUserGroups
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroupList"
+          description: User group list
+      summary: Get a list of user groups for my corporate account
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+    post:
+      description: Create or update a corporate user group
+      operationId: saveCorporateUserGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserGroup"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroup"
+          description: User group list
+      summary: Create or update a corporate user group
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+  /corporate/users:
+    get:
+      description: Get a list of users for my corporate account
+      operationId: getCorporateUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserList"
+          description: User list
+      summary: Get a list of users for my corporate account
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+    post:
+      description: Create or update a corporate user
+      operationId: saveCorporateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdateContent"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Created or updated user
+      summary: Create or update a corporate user
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+  "/corporates/{corporateId}":
+    get:
+      description: Get details of this corporate account
+      operationId: getCorporateById
+      parameters:
+        - description: Corporate ID
+          in: path
+          name: corporateId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorporateAccount"
+          description: Corporate account details
+      summary: Get details of this corporate account
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+    x-internal: true
+  "/corporates/{corporateId}/permissions":
+    get:
+      description: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      operationId: getAvailableCorporatePermissionsById
+      parameters:
+        - description: Corporate ID
+          in: path
+          name: corporateId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionList"
+          description: List of permission strings
+      summary: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+    x-internal: true
+  "/corporates/{corporateId}/user-groups":
+    get:
+      description: Get a list of user groups for this corporate account
+      operationId: getCorporateUserGroupsById
+      parameters:
+        - description: Corporate ID
+          in: path
+          name: corporateId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroupList"
+          description: User group list
+      summary: Get a list of user groups for this corporate account
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+    post:
+      description: Create or update a corporate user group for this corporate account
+      operationId: saveCorporateUserGroupById
+      parameters:
+        - description: Corporate ID
+          in: path
+          name: corporateId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserGroup"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroup"
+          description: User group list
+      summary: Create or update a corporate user group for this corporate account
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+    x-internal: true
   "/corporates/{corporateId}/users":
     get:
-      description: Get a list of users for this corporate id
-      operationId: getCorporateUsers
+      description: Get a list of users for this corporate account
+      operationId: getCorporateUsersById
       parameters:
         - description: Corporate ID
           in: path
@@ -320,13 +522,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/UserList"
           description: User list
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: ProjectNotFound
-      summary: Get a list of users for this corporate id
+      summary: Get a list of users for this corporate account
       tags:
         - Corporate
       x-cli-cmd-group: corporates
@@ -446,6 +642,30 @@ paths:
       tags:
         - Document
       x-cli-cmd-group: documents
+  "/documents/{documentId}/regenerate_preview":
+    post:
+      description: Regenerate preview and return preview URL for given file
+      operationId: regeneratePreview
+      parameters:
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegeneratePreviewResponse"
+          description: RegeneratePreviewResponse
+      summary: Regenerate preview and return preview URL for given file
+      tags:
+        - Document
+      x-cli-cmd-group: documents
+    x-internal: true
   "/documents/{documentId}/similars":
     get:
       description: Find documents similar to this document. Optionally, include translation information.
@@ -690,6 +910,42 @@ paths:
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
+  /invitation/needs:
+    post:
+      description: Get vendor list for compiled invitation needs
+      operationId: getVendors
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                "needs[]":
+                  items:
+                    $ref: "#/components/schemas/FileNeedsVendor"
+                  type: array
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VendorInvitationList"
+          description: Invitation need grouped by vendor
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: FileTooLarge FileTooSmall NoFileUploaded
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedGlossaryFormat
+      summary: Get vendor list for compiled invitation needs
+      tags:
+        - Invitation
   /languages:
     get:
       description: Get a list of supported languages
@@ -868,8 +1124,8 @@ paths:
       x-cli-cmd-group: users
   "/pam/profiles/client/{clientId}":
     get:
-      description: Get the profile of a client for this client id
-      operationId: client
+      description: Get the Pam  profile of a client for this client ID
+      operationId: getClientProfileForPam
       parameters:
         - description: Client ID
           in: path
@@ -891,10 +1147,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ClientProfileNotFound
-      summary: Get the profile of a client for this client id
+      summary: Get the Pam profile of a client for this client ID
       tags:
-        - Client
-      x-cli-cmd-group: clients
+        - Pam
+      x-cli-cmd-group: pam
     x-internal: true
   /password:
     post:
@@ -962,6 +1218,20 @@ paths:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Update payment info
+      tags:
+        - User
+      x-cli-cmd-group: users
+  /permissions:
+    get:
+      operationId: getPermissions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionList"
+          description: List of permission strings
+      summary: Returns a list of permissions that this user is authorized for.
       tags:
         - User
       x-cli-cmd-group: users
@@ -4212,6 +4482,20 @@ paths:
       tags:
         - User
       x-cli-cmd-group: users
+  /user-groups:
+    get:
+      operationId: getUserGroups
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroupList"
+          description: List of user groups
+      summary: Returns a list of user groups that this user belongs to.
+      tags:
+        - User
+      x-cli-cmd-group: users
   /users:
     get:
       description: Get a list of platform users
@@ -4804,6 +5088,29 @@ paths:
         - User
       x-cli-cmd-group: users
     x-internal: true
+  "/{userId}/permissions":
+    get:
+      operationId: getUserPermissions
+      parameters:
+        - description: User ID
+          in: path
+          name: userId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionList"
+          description: List of permission strings
+      summary: Returns a list of permissions that this user is authorized for.
+      tags:
+        - User
+      x-cli-cmd-group: corporates
+    x-internal: true
   "/{userId}/profile-picture":
     post:
       operationId: uploadUserProfilePicture
@@ -5214,6 +5521,29 @@ paths:
         - User
       x-cli-cmd-group: users
     x-internal: true
+  "/{userId}/user-groups":
+    get:
+      operationId: getThisUserGroups
+      parameters:
+        - description: User ID
+          in: path
+          name: userId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroupList"
+          description: List of user groups
+      summary: Returns a list of user groups that this user belongs to.
+      tags:
+        - User
+      x-cli-cmd-group: users
+    x-internal: true
 components:
   schemas:
     Activity:
@@ -5454,6 +5784,11 @@ components:
           items:
             $ref: "#/components/schemas/ProofreaderWithLanguage"
           type: array
+        notes:
+          description: notes that is submited for this client and/or with her projects
+          items:
+            type: string
+          type: array
         nps:
           description: net promoter score info for this client
           properties:
@@ -5480,11 +5815,6 @@ components:
                   type: number
               type: object
           type: object
-        problems:
-          description: problems that is encountered with tthis client and/or with her projects
-          items:
-            type: string
-          type: array
         user_rank_in_project_count:
           description: rank of the user in all corporate users for project count. If the user is the most active user foor sending projects her rank is 1
           type: number
@@ -5688,6 +6018,26 @@ components:
             type: string
           type: array
       type: object
+    CorporateAccount:
+      properties:
+        billing:
+          $ref: "#/components/schemas/BillingAddress"
+        domain:
+          type: string
+        email:
+          type: string
+        id:
+          format: int64
+          type: integer
+        logo:
+          type: string
+        name:
+          type: string
+        web_site:
+          deprecated: true
+          description: Deprecated, use `domain`.
+          type: string
+      type: object
     CreditCard:
       properties:
         bin:
@@ -5701,6 +6051,8 @@ components:
         file_type:
           description: Extension of the file
           type: string
+        has_custom_package:
+          type: boolean
         id:
           format: int64
           type: integer
@@ -5714,6 +6066,9 @@ components:
           type: boolean
         scheme:
           type: object
+        search_score:
+          format: float
+          type: number
         source_language:
           type: string
         subject:
@@ -5853,6 +6208,21 @@ components:
           type: string
         name:
           description: Name of your file
+          type: string
+      type: object
+    FileNeedsVendor:
+      properties:
+        fileId:
+          format: int64
+          type: integer
+        projectId:
+          format: int64
+          type: integer
+        reason:
+          type: string
+        targetLanguage:
+          type: string
+        taskType:
           type: string
       type: object
     Formats:
@@ -6219,6 +6589,17 @@ components:
               $ref: "#/components/schemas/CreditCard"
           type: object
       type: object
+    Permission:
+      type: string
+    PermissionList:
+      properties:
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+        permissions:
+          items:
+            $ref: "#/components/schemas/Permission"
+          type: array
+      type: object
     PopularLanguagePairs:
       properties:
         pairs:
@@ -6295,6 +6676,8 @@ components:
         id:
           format: int64
           type: integer
+        is_api_project:
+          type: boolean
         is_manual:
           type: boolean
         links:
@@ -6330,6 +6713,8 @@ components:
           type: object
         role:
           $ref: "#/components/schemas/VendorProjectRole"
+        should_send_client_survey:
+          type: boolean
         source:
           $ref: "#/components/schemas/ProjectSource"
           descriptipon: The source platform where this project was first created. Current options are "api", "web".
@@ -6443,6 +6828,13 @@ components:
           type: string
         vendor_link:
           description: link to the vendor that can be only used in motaword admin application
+          type: string
+      type: object
+    RegeneratePreviewResponse:
+      properties:
+        link:
+          $ref: "#/components/schemas/Href"
+        source:
           type: string
       type: object
     ReportFilter:
@@ -6869,6 +7261,10 @@ components:
           deprecated: true
           description: \@deprecated. use `vendor` key
           type: string
+        user_groups:
+          items:
+            $ref: "#/components/schemas/UserGroup"
+          type: array
         vendor:
           properties:
             can_work_manual_files:
@@ -6899,6 +7295,30 @@ components:
           deprecated: true
           description: \@deprecated. use mailing or billing key. new key name is "zip".
           type: string
+      type: object
+    UserGroup:
+      properties:
+        corporate_id:
+          format: int64
+          type: integer
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    UserGroupList:
+      properties:
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+        user_groups:
+          items:
+            $ref: "#/components/schemas/UserGroup"
+          type: array
       type: object
     UserLinks:
       allOf:
@@ -6935,6 +7355,10 @@ components:
             first_name:
               description: Optional. User first name.
               type: string
+            id:
+              description: Optional. ID of the user being updated.
+              format: int64
+              type: integer
             last_name:
               description: Optional. User last name.
               type: string
@@ -6948,12 +7372,21 @@ components:
                   description: User sms notification setting
                   type: boolean
               type: object
+            notify:
+              description: Notify new user account creation with login information and MotaWord introduction.
+              type: boolean
             paypal_email:
               description: Optional. Vendor paypal e-mail
               type: string
             require_1099:
               description: Optional. Whether this vendor requires 1099 form in US for their earnings.
               type: boolean
+            user_groups:
+              description: A list of user group IDs
+              items:
+                format: int64
+                type: integer
+              type: array
           type: object
     UsersReport:
       properties:
@@ -6979,6 +7412,13 @@ components:
           description: total amount of USD that this user has earned in the platform so far.
           format: float
           type: number
+      type: object
+    VendorInvitationList:
+      properties:
+        vendors:
+          items:
+            $ref: "#/components/schemas/VendorWithNeeds"
+          type: array
       type: object
     VendorProjectPair:
       properties:
@@ -7036,6 +7476,16 @@ components:
           $ref: "#/components/schemas/VendorProjectStats"
         words:
           $ref: "#/components/schemas/VendorWordStats"
+      type: object
+    VendorWithNeeds:
+      properties:
+        matchedNeeds:
+          items:
+            $ref: "#/components/schemas/FileNeedsVendor"
+          type: array
+        userId:
+          format: int64
+          type: integer
       type: object
     VendorWordStats:
       properties:
@@ -7105,6 +7555,10 @@ x-cli-cmd-groups:
   glossaries:
     long: Manage glossaries
     short: Manage glossaries
+  pam:
+    long: Endpoints for PAM
+    short: Endpoints for PAM
+    x-internal: true
   project-documents:
     long: Manage project source documents
     parent: projects

@@ -36,7 +36,11 @@ paths:
   /best_podcasts:
     get:
       description: |
-        Get a list of curated best podcasts by genre. You can get the genre ids from `GET /genres` endpoint.
+        Get a list of curated best podcasts by genre,
+        which are curated by Listen Notes staffs based on various signals from the Internet, e.g.,
+        top charts on other podcast platforms, recommendations from mainstream media,
+        user activities on listennotes.com...
+        You can get the genre ids from `GET /genres` endpoint.
         This endpoint returns same data as https://www.listennotes.com/best-podcasts/
       operationId: getBestPodcasts
       parameters:
@@ -67,7 +71,11 @@ paths:
             type: integer
           style: form
         - description: |
-            Filter best podcasts by country/region. You can get the supported country codes from `GET /regions`.
+            Filter best podcasts by country/region.
+            Please note that podcasts that are "best" in a country/region may not be produced in that country/region.
+            For example, a podcast from the US may be very popular in Canada.
+            You can get the supported country codes (e.g., us, jp, gb...) from `GET /regions`.
+            If not specified, you'll get "best podcasts" in United States.
           explode: true
           in: query
           name: region
@@ -75,6 +83,32 @@ paths:
           schema:
             default: us
             example: us
+            type: string
+          style: form
+        - description: |
+            Filter best podcasts by the publisher's country/region.
+            This is to narrow down the results to include "best podcasts" produced in a specific country/region.
+            You can get the supported country codes (e.g., us, jp, gb...) from `GET /regions`.
+            If not specified, you'll get "best podcasts" produced in any country/region.
+            If you want to get a country/region's "best podcasts" that are also produced in that country/region,
+            then you need to specify both **region** and **publisher_region**,
+            e.g., `region=jp` and `publisher_region=jp`.
+          explode: true
+          in: query
+          name: publisher_region
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: |
+            Filter best podcasts by language.
+            You can get a list of supported languages (e.g., English, Chinese, Japanese...) from `GET /languages`.
+            If not specified, you'll get "best podcasts" in any language.
+          explode: true
+          in: query
+          name: language
+          required: false
+          schema:
             type: string
           style: form
         - description: Whether or not to exclude podcasts with explicit language. 1 is yes, and 0 is no.

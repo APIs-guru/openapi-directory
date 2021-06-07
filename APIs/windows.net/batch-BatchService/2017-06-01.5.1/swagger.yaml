@@ -8946,7 +8946,7 @@ definitions:
         description: nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.
         title: The elevation level of the auto user.
       scope:
-        description: >-
+        description: |-
           Values are:
 
            pool - specifies that the task runs as the common auto user account which is created on every node in a pool.
@@ -9082,7 +9082,7 @@ definitions:
         title: The algorithm with which the thumbprint is associated. This must be sha1.
         type: string
       visibility:
-        description: >-
+        description: |-
           Values are:
 
            starttask - The user account under which the start task is run.
@@ -9107,7 +9107,7 @@ definitions:
       - thumbprintAlgorithm
     title: A reference to a certificate to be installed on compute nodes in a pool.
   CertificateState:
-    description: >-
+    description: |-
       Values are:
 
        active - The certificate is available for use in pools.
@@ -9310,7 +9310,7 @@ definitions:
   CloudPool:
     properties:
       allocationState:
-        description: >-
+        description: |-
           Values are:
 
            steady - The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of dedicated nodes.
@@ -9428,7 +9428,7 @@ definitions:
         $ref: "#/definitions/StartTask"
         title: A task specified to run on each compute node as it joins the pool.
       state:
-        description: >-
+        description: |-
           Values are:
 
            active - The pool is available to run tasks subject to the availability of compute nodes.
@@ -9678,7 +9678,7 @@ definitions:
         title: The total number of currently running job tasks on the compute node. This includes Job Preparation, Job Release, and Job Manager tasks, but not the pool start task.
         type: integer
       schedulingState:
-        description: >-
+        description: |-
           Values are:
 
            enabled - Tasks can be scheduled on the node.
@@ -9698,7 +9698,7 @@ definitions:
         $ref: "#/definitions/StartTaskInformation"
         title: Runtime information about the execution of the start task on the compute node.
       state:
-        description: >-
+        description: |-
           Values are:
 
            idle - The node is not currently running a task.
@@ -9754,7 +9754,7 @@ definitions:
         type: string
     title: A compute node in the Batch service.
   ComputeNodeDeallocationOption:
-    description: >-
+    description: |-
       Values are:
 
        requeue - Terminate running tasks and requeue them. The tasks will run again when the job is enabled. Remove nodes as soon as tasks have been terminated.
@@ -9883,7 +9883,7 @@ definitions:
         type: array
     title: An error encountered by the Batch service when deleting a certificate.
   ElevationLevel:
-    description: >-
+    description: |-
       Values are:
 
        nonAdmin - The user is a standard user without elevated access.
@@ -9983,7 +9983,7 @@ definitions:
   ExitOptions:
     properties:
       dependencyAction:
-        description: >-
+        description: |-
           Values are:
 
            satisfy - Satisfy the task's dependencies.
@@ -9999,7 +9999,7 @@ definitions:
           modelAsString: false
           name: DependencyAction
       jobAction:
-        description: >-
+        description: |-
           Values are:
 
            none - Take no action.
@@ -10221,7 +10221,7 @@ definitions:
   JobDisableParameter:
     properties:
       disableTasks:
-        description: >-
+        description: |-
           Values are:
 
            requeue - Terminate running tasks and requeue them. The tasks will run again when the job is enabled.
@@ -10452,7 +10452,7 @@ definitions:
         title: The time at which the task started running.
         type: string
       state:
-        description: >-
+        description: |-
           Values are:
 
            running - the task is currently running (including retrying).
@@ -10540,7 +10540,7 @@ definitions:
         title: The time at which the task started running.
         type: string
       state:
-        description: >-
+        description: |-
           Values are:
 
            running - the task is currently running (including retrying).
@@ -10625,7 +10625,7 @@ definitions:
         title: The schedule according to which jobs will be created.
     title: The set of changes to be made to a job schedule.
   JobScheduleState:
-    description: >-
+    description: |-
       Values are:
 
        active - The job schedule is active and will create jobs as per its schedule.
@@ -10814,7 +10814,7 @@ definitions:
       - poolInfo
     title: Specifies details of the jobs to be created on a schedule.
   JobState:
-    description: >-
+    description: |-
       Values are:
 
        active - the job is available to have tasks scheduled.
@@ -11071,7 +11071,7 @@ definitions:
   NodeDisableSchedulingParameter:
     properties:
       nodeDisableSchedulingOption:
-        description: >-
+        description: |-
           Values are:
 
            requeue - Terminate running task processes and requeue the tasks. The tasks may run again on other compute nodes, or when task scheduling is re-enabled on this node. Enter offline state as soon as tasks have been terminated.
@@ -11118,7 +11118,7 @@ definitions:
   NodeRebootParameter:
     properties:
       nodeRebootOption:
-        description: >-
+        description: |-
           Values are:
 
            requeue - Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Restart the node as soon as tasks have been terminated.
@@ -11141,7 +11141,7 @@ definitions:
   NodeReimageParameter:
     properties:
       nodeReimageOption:
-        description: >-
+        description: |-
           Values are:
 
            requeue - Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Reimage the node as soon as tasks have been terminated.
@@ -11200,7 +11200,7 @@ definitions:
   OSDisk:
     properties:
       caching:
-        description: >-
+        description: |-
           Values are:
 
            none - The caching mode for the disk is not enabled.
@@ -11227,7 +11227,7 @@ definitions:
       - imageUris
     title: A reference to an OS disk image.
   OnAllTasksComplete:
-    description: >-
+    description: |-
       Values are:
 
        noAction - do nothing. The job remains active unless terminated or disabled by some other means.
@@ -11241,7 +11241,7 @@ definitions:
       modelAsString: false
       name: OnAllTasksComplete
   OnTaskFailure:
-    description: >-
+    description: |-
       A task is considered to have failed if has a failureInfo. A failureInfo is set if the task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the task, for example due to a resource file download error. Values are:
 
        noAction - do nothing.
@@ -11293,7 +11293,7 @@ definitions:
         title: A location in Azure blob storage to which files are uploaded.
     title: The destination to which a file should be uploaded.
   OutputFileUploadCondition:
-    description: >-
+    description: |-
       Values are:
 
        taskSuccess - Upload the file(s) only after the task process exits with an exit code of 0.
@@ -11912,7 +11912,7 @@ definitions:
         title: The time at which the start task started running.
         type: string
       state:
-        description: >-
+        description: |-
           Values are:
 
            running - The start task is currently running.
@@ -11979,7 +11979,7 @@ definitions:
         type: string
     title: Information about an Azure Batch subtask.
   SubtaskState:
-    description: >-
+    description: |-
       Values are:
 
        preparing - The task has been assigned to a compute node, but is waiting for a required Job Preparation task to complete on the node. If the Job Preparation task succeeds, the task will move to running. If the Job Preparation task fails, the task will be eligible to be assigned to a different node.
@@ -12097,7 +12097,7 @@ definitions:
         title: The URL of the task, if the task was successfully added.
         type: string
       status:
-        description: >-
+        description: |-
           Values are:
 
            success - Task was added successfully.
@@ -12240,7 +12240,7 @@ definitions:
       - retryCount
     title: Information about the execution of a task.
   TaskExecutionResult:
-    description: >-
+    description: |-
       Values are:
 
        success - The task ran successfully.
@@ -12317,7 +12317,7 @@ definitions:
         enum:
           - spread
           - pack
-        title: >-
+        title: |-
           How tasks are distributed across compute nodes in a pool. Values are:
 
            pack - As many tasks as possible (maxTasksPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool.
@@ -12330,7 +12330,7 @@ definitions:
       - nodeFillType
     title: Specifies how tasks should be distributed across compute nodes.
   TaskState:
-    description: >-
+    description: |-
       Values are:
 
        active - The task is queued and able to run, but is not currently assigned to a compute node. A task enters this state when it is created, when it is enabled after being disabled, or when it is awaiting a retry after a failed run.

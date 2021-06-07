@@ -62,16 +62,42 @@ paths:
         "200":
           description: The response body will contain the Metadata for the Player-created Game Variant.
           examples:
-            application/json:
-              Company:
-                Id: guid
-                Name: string
-              FirstModifiedUtc:
-                ISO8601Date: string
-              Gamertag: string
-              LastModifiedUtc:
-                ISO8601Date: string
-              ServiceTag: string
+            application/json: |
+              {
+                // Gamertag of the player. The casing of this field will match the official casing for
+                // the player's Gamertag and may differ than what was specified in the request.
+                "Gamertag": "string",
+
+                // The date when the player's appearance was last updated. The time component of this
+                // date is always set to "00:00:00". This is expressed as an ISO 8601 combined Date and
+                // Time.
+                "LastModifiedUtc": {
+
+                  "ISO8601Date": "string"
+                },
+
+                // The date when the player's appearance was first set. The time component of this date
+                // is always set to "00:00:00". This is expressed as an ISO 8601 combined Date and Time.
+                "FirstModifiedUtc": {
+
+                  "ISO8601Date": "string"
+                },
+
+                // Service Tag for the player.
+                "ServiceTag": "string",
+
+                // Company membership information for the player. If the player is not a member of a
+                // company, this will be null.
+                "Company": {
+
+                  // ID of the company. The company ID can be used to look up additional information
+                  // about the company via the Stats API.
+                  "Id": "guid",
+
+                  // Name of the company.
+                  "Name": "string"
+                }
+              }
         "404":
           description: Specified Player was not found.
         "500":

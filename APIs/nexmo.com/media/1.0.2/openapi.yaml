@@ -6,8 +6,7 @@ info:
     email: devrel@nexmo.com
     name: Nexmo DevRel
     url: https://developer.nexmo.com/
-  description: The Media API can be used to query, download and delete media items
-    such as audio files for use with other Nexmo APIs.
+  description: The Media API can be used to query, download and delete media items such as audio files for use with other Nexmo APIs.
   title: Media API
   version: 1.0.2
   x-label: BETA
@@ -20,8 +19,7 @@ info:
 paths:
   /:
     get:
-      description: Retrieve information about multiple media items with the ability to
-        search and paginate.
+      description: Retrieve information about multiple media items with the ability to search and paginate.
       operationId: list-and-search-media-items
       parameters:
         - description: The order of search results.
@@ -69,9 +67,7 @@ paths:
               schema:
                 properties:
                   _embedded:
-                    description: A collection of media items. See [retrieve a media
-                      item](#retrieve-a-media-item) for a description of the
-                      returned fields
+                    description: A collection of media items. See [retrieve a media item](#retrieve-a-media-item) for a description of the returned fields
                     properties:
                       media:
                         items:
@@ -153,8 +149,7 @@ paths:
                   example: This is a very important recording. Do not delete.
                   type: string
                 max_downloads_allowed:
-                  description: The maximum number of times the file may be downloaded. Unlimited
-                    when not provided.
+                  description: The maximum number of times the file may be downloaded. Unlimited when not provided.
                   example: 100
                   type: integer
                 metadata_primary:
@@ -191,10 +186,7 @@ components:
           example: abcd1234
           type: string
         etag:
-          description: "An identifier for the content. This will change if the content of
-            the file has been changed (i.e. if you upload a new version of the
-            file). For more information see Wikipedia: [HTTP
-            ETag](https://en.wikipedia.org/wiki/HTTP_ETag)"
+          description: "An identifier for the content. This will change if the content of the file has been changed (i.e. if you upload a new version of the file). For more information see Wikipedia: [HTTP ETag](https://en.wikipedia.org/wiki/HTTP_ETag)"
           example: aaaaaaaabbbbccccdddd0123456789ab
           type: string
         id:

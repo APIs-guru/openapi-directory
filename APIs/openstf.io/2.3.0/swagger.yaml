@@ -43,12 +43,10 @@ tags:
 paths:
   /devices:
     get:
-      description: The devices endpoint return list of all the STF devices including
-        Disconnected and Offline
+      description: The devices endpoint return list of all the STF devices including Disconnected and Offline
       operationId: getDevices
       parameters:
-        - description: Fields query parameter takes a comma seperated list of fields. Only
-            listed field will be return in response
+        - description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
           in: query
           name: fields
           required: false
@@ -77,8 +75,7 @@ paths:
           name: serial
           required: true
           type: string
-        - description: Fields query parameter takes a comma seperated list of fields. Only
-            listed field will be return in response
+        - description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
           in: query
           name: fields
           required: false
@@ -100,8 +97,7 @@ paths:
   /swagger.json: {}
   /user:
     get:
-      description: The User Profile endpoint returns information about current
-        authorized user
+      description: The User Profile endpoint returns information about current authorized user
       operationId: getUser
       responses:
         "200":
@@ -137,12 +133,10 @@ paths:
         - user
   /user/devices:
     get:
-      description: The User Devices endpoint returns device list owner by current
-        authorized user
+      description: The User Devices endpoint returns device list owner by current authorized user
       operationId: getUserDevices
       parameters:
-        - description: Fields query parameter takes a comma seperated list of fields. Only
-            listed field will be return in response
+        - description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
           in: query
           name: fields
           required: false
@@ -185,9 +179,7 @@ paths:
         - user
   "/user/devices/{serial}":
     delete:
-      description: The User Devices endpoint will request for device release from stf
-        server. It will return request accepted if device is being used by
-        current user
+      description: The User Devices endpoint will request for device release from stf server. It will return request accepted if device is being used by current user
       operationId: deleteUserDeviceBySerial
       parameters:
         - description: Device Serial
@@ -216,8 +208,7 @@ paths:
           name: serial
           required: true
           type: string
-        - description: Fields query parameter takes a comma seperated list of fields. Only
-            listed field will be return in response
+        - description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
           in: query
           name: fields
           required: false
@@ -238,8 +229,7 @@ paths:
         - user
   "/user/devices/{serial}/remoteConnect":
     delete:
-      description: The device connect endpoint will request stf server to disconnect
-        remotely
+      description: The device connect endpoint will request stf server to disconnect remotely
       operationId: remoteDisconnectUserDeviceBySerial
       parameters:
         - description: Device Serial
@@ -298,8 +288,7 @@ definitions:
         description: Device Serial
         type: string
       timeout:
-        description: Device timeout in ms. If device is kept idle for this period, it
-          will be automatically disconnected. Default is provider group timeout
+        description: Device timeout in ms. If device is kept idle for this period, it will be automatically disconnected. Default is provider group timeout
         type: integer
     required:
       - serial
