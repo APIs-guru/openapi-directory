@@ -24,12 +24,6 @@ info:
     Easily import the Vault API into your favorite API tool by using the buttons below.
 
 
-    [![Run our Vault API in Postman](https://app.apideck.com/images/postman-button.svg)](https://app.getpostman.com/run-collection/1311564-758bd122-d9e7-4e0c-9291-8d10da248af7)
-
-
-    [![Run our Vault API in Insomnia}](https://app.apideck.com/images/insomnia-button.svg)](https://insomnia.rest/run/?label=Apideck%20Vault%20API&uri=https%3A%2F%2Fspecs.apideck.com%2Fvault.yml)
-
-
     ## Why Apideck Vault
 
 
@@ -180,6 +174,8 @@ info:
 
     | **[Google Tag Manager](https://developers.apideck.com/connectors/google-tag-manager)**     | google-tag-manager | None       | ✅      |
 
+    | **[Group S](https://developers.apideck.com/connectors/group-s)**                           | group-s            | API Key    | ✅      |
+
     | **[HubSpot](https://developers.apideck.com/connectors/hubspot)**                           | hubspot            | OAuth2     | ✅      |
 
     | **[Intercom](https://developers.apideck.com/connectors/intercom)**                         | intercom           | OAuth2     | ✅      |
@@ -207,6 +203,8 @@ info:
     | **[Securex](https://developers.apideck.com/connectors/securex)**                           | securex            | OAuth2     | ✅      |
 
     | **[Segment](https://developers.apideck.com/connectors/segment)**                           | segment            | None       | ✅      |
+
+    | **[Sendgrid](https://developers.apideck.com/connectors/sendgrid)**                         | sendgrid           | API Key    | ✅      |
 
     | **[Shopify](https://developers.apideck.com/connectors/shopify)**                           | shopify            | OAuth2     | ✅      |
 
@@ -316,7 +314,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 1.1.0
+  version: 2.1.0
   x-logo:
     url: https://developers.apideck.com/icon.png
   x-origin:
@@ -334,7 +332,7 @@ tags:
   - description: ""
     name: Connections
   - description: ""
-    name: Proxy
+    name: Consumers
 paths:
   "/vault/authorize/{service_id}/{application_id}":
     get:
@@ -358,9 +356,14 @@ paths:
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/redirect_uri"
         - $ref: "#/components/parameters/scope"
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
       responses:
-        "200":
-          description: ok
+        "302":
+          description: redirect
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -413,6 +416,36 @@ paths:
       summary: Get all connections
       tags:
         - Connections
+    post:
+      description: Create a connection
+      operationId: connectionsCreate
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/service_id"
+        - $ref: "#/components/parameters/unified_api"
+      requestBody:
+        $ref: "#/components/requestBodies/CreateConnectionRequestBody"
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateConnection"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create connection
+      tags:
+        - Connections
   "/vault/connections/{unified_api}/{service_id}":
     delete:
       description: Deletes a connection
@@ -422,6 +455,16 @@ paths:
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/unified_api"
+        - in: path
+          name: unified_api
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: Resource deleted
@@ -450,6 +493,16 @@ paths:
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/unified_api"
+        - in: path
+          name: unified_api
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
       requestBody:
         $ref: "#/components/requestBodies/UpdateConnectionRequestBody"
       responses:
@@ -469,7 +522,48 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update a connection
+      summary: Update connection
+      tags:
+        - Connections
+    post:
+      description: |
+        Create an authorized connection
+      operationId: connectionsAdd
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/service_id"
+        - $ref: "#/components/parameters/unified_api"
+        - in: path
+          name: unified_api
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/CreateConnectionRequestBody"
+      responses:
+        "200":
+          $ref: "#/components/responses/CreateConnection"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create connection
       tags:
         - Connections
   "/vault/connections/{unified_api}/{service_id}/{resource}/config":
@@ -477,13 +571,23 @@ paths:
       description: >
         This endpoint returns custom settings and their defaults required
         by connection for a given resource.
-      operationId: connectionsOne
+      operationId: getConnectionSettings
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/unified_api"
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/resource"
+        - in: path
+          name: unified_api
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           $ref: "#/components/responses/GetConnection"
@@ -501,18 +605,28 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Connection Settings
+      summary: Get settings
       tags:
         - Connections
     patch:
       description: Update default values for a connection's resource settings
-      operationId: resourceSettingsUpdate
+      operationId: updateConnectionSettings
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/unified_api"
         - $ref: "#/components/parameters/resource"
+        - in: path
+          name: unified_api
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -537,18 +651,105 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update Connection
+      summary: Update settings
       tags:
         - Connections
+  /vault/consumers:
+    get:
+      description: >
+        This endpoint includes all application consumers, along with an
+        aggregated count of requests made.
+      operationId: consumersAll
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetConsumers"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get all consumers
+      tags:
+        - Consumers
+  "/vault/consumers/{consumer_id}":
+    get:
+      description: >
+        Consumer detail including their aggregated counts with the
+        connections they have authorized.
+      operationId: consumersOne
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/consumer_id"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetConsumer"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get consumer
+      tags:
+        - Consumers
+  "/vault/consumers/{consumer_id}/stats":
+    get:
+      description: |
+        Get consumer request counts within a given datetime range.
+      operationId: consumerRequestCounts
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/consumer_id"
+        - $ref: "#/components/parameters/start_datetime"
+        - $ref: "#/components/parameters/end_datetime"
+      responses:
+        "200":
+          $ref: "#/components/responses/ConsumerRequestCountsInDateRange"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Consumer request counts
+      tags:
+        - Consumers
   /vault/proxy:
     post:
+      deprecated: true
       description: >
-        Proxies a downstream API call to a connector and injects the
-        necessary credentials into a request stored in Vault. This allows you to
-        have an additional security layer and logging without needing to rely on
-        Unify for normalization.
-
-        **Note**: Vault will proxy all data to the downstream URL and method/verb in the headers.
+        **Note**: This endpoint is deprecated in favor of the [Proxy
+        API](https://docs.apideck.com/apis/proxy). Please use the new API as
+        documented at https://docs.apideck.com/apis/proxy
       operationId: proxyCall
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
@@ -570,19 +771,17 @@ paths:
                 date_updated: Thu, 30 Jul 2015 20:12:33 +0000
                 direction: outbound-api
                 error_code:
-                  $ref: "#/paths/~1vault~1proxy/post/requestBody/content/application~1json/schema\
-                    /example/price"
+                  $ref: "#/components/parameters/cursor/schema/default"
                 error_message:
-                  $ref: "#/paths/~1vault~1proxy/post/requestBody/content/application~1json/schema\
-                    /example/price"
+                  $ref: "#/components/parameters/cursor/schema/default"
                 from: "+15017122661"
                 messaging_service_sid: MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                 num_media: "0"
                 num_segments: "1"
-                price: null
+                price:
+                  $ref: "#/components/parameters/cursor/schema/default"
                 price_unit:
-                  $ref: "#/paths/~1vault~1proxy/post/requestBody/content/application~1json/schema\
-                    /example/price"
+                  $ref: "#/components/parameters/cursor/schema/default"
                 sid: SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                 status: sent
                 subresource_uris:
@@ -625,9 +824,14 @@ paths:
         - $ref: "#/components/parameters/application_id"
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/redirect_uri"
+        - in: path
+          name: service_id
+          required: true
+          schema:
+            type: string
       responses:
-        "200":
-          description: ok
+        "302":
+          description: redirect
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -709,6 +913,31 @@ components:
       name: configured
       schema:
         type: boolean
+    consumer_id:
+      description: ID of the consumer to return
+      example: test_user_id
+      in: path
+      name: consumer_id
+      required: true
+      schema:
+        type: string
+    cursor:
+      description: Cursor to start from. You can find cursors for next/previous pages
+        in the meta.cursors property of the response.
+      in: query
+      name: cursor
+      schema:
+        default: null
+        nullable: true
+        type: string
+    end_datetime:
+      description: Scopes results to requests that happened before datetime
+      example: 2021-05-30T12:00:00.000Z
+      in: query
+      name: end_datetime
+      required: true
+      schema:
+        type: string
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -716,6 +945,15 @@ components:
       required: true
       schema:
         type: string
+    limit:
+      description: Number of records to return
+      in: query
+      name: limit
+      schema:
+        default: 20
+        maximum: 200
+        minimum: 1
+        type: integer
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -726,7 +964,7 @@ components:
     redirect_uri:
       description: URL to redirect back to after authorization. When left empty the
         default configured redirect uri will be used.
-      example: https://yoursaasapp.com/integrations
+      example: http://example.com/integrations
       in: query
       name: redirect_uri
       required: true
@@ -760,8 +998,16 @@ components:
     service_id:
       description: Service ID of the resource to return
       example: pipedrive
-      in: path
+      in: query
       name: service_id
+      required: true
+      schema:
+        type: string
+    start_datetime:
+      description: Scopes results to requests that happened after datetime
+      example: 2021-05-01T12:00:00.000Z
+      in: query
+      name: start_datetime
       required: true
       schema:
         type: string
@@ -770,6 +1016,7 @@ components:
         the authorization server includes when redirecting the back to the
         application. This value must be used by the application to prevent CSRF
         attacks.
+      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb25zdW1lcl9pZCI6InRlc3RfdXNlcl9pZCIsInVuaWZpZWRfYXBpIjoiZGVmYXVsdCIsInNlcnZpY2VfaWQiOiJ0ZWFtbGVhZGVyIiwiYXBwbGljYXRpb25faWQiOiIxMTExIiwiaWF0IjoxNjIyMTI2Nzg3fQ.97_pn1UAXc7mctXBdr15czUNO1jjdQ9sJUOIE_Myzbk
       in: query
       name: state
       required: true
@@ -778,7 +1025,7 @@ components:
     unified_api:
       description: Unified API
       example: crm
-      in: path
+      in: query
       name: unified_api
       required: true
       schema:
@@ -832,11 +1079,18 @@ components:
       schema:
         type: string
   requestBodies:
+    CreateConnectionRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateConnectionRequestBody"
+      description: Fields to be persisted as Connection
+      required: true
     UpdateConnectionRequestBody:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateConnectionRequestBody"
+            $ref: "#/components/schemas/CreateConnectionRequestBody"
       description: Fields to be updated on the resource
       required: true
   responses:
@@ -846,6 +1100,18 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequest"
       description: Bad Request
+    ConsumerRequestCountsInDateRange:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConsumerRequestCountsInDateRangeResponse"
+      description: Consumers Request Counts within Date Range
+    CreateConnection:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateConnectionResponse"
+      description: Connection created
     CreateSession:
       content:
         application/json:
@@ -876,6 +1142,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetConnectionsResponse"
       description: All Connections
+    GetConsumer:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetConsumerResponse"
+      description: Consumer
+    GetConsumers:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetConsumersResponse"
+      description: All Consumers
     NoContent:
       content:
         application/json:
@@ -969,7 +1247,7 @@ components:
           type: string
         ref:
           description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#missingheaderserror
+          example: https://developers.apideck.com/errors#requestbodyvalidationerror
           type: string
         status_code:
           description: HTTP status code
@@ -977,7 +1255,7 @@ components:
           type: number
         typeName:
           description: The type of error returned
-          example: MissingHeadersError
+          example: RequestHeadersValidationError
           type: string
     Connection:
       properties:
@@ -999,6 +1277,7 @@ components:
           type: string
         authorize_url:
           example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
+          nullable: true
           type: string
         configurable_resources:
           example:
@@ -1017,6 +1296,31 @@ components:
                   properties:
                     id:
                       example: ProductInterest
+                      type: string
+                    options:
+                      items:
+                        anyOf:
+                          - $ref: "#/components/schemas/FormFieldOption"
+                            type: object
+                          - properties:
+                              id:
+                                example: "1234"
+                                type: string
+                              label:
+                                example: General Channel
+                                type: string
+                              options:
+                                items:
+                                  $ref: "#/components/schemas/FormFieldOption"
+                                type: array
+                            type: object
+                      type: array
+                    target:
+                      enum:
+                        - custom_fields
+                        - resource
+                      example: custom_fields
+                      readOnly: true
                       type: string
                     value:
                       anyOf:
@@ -1097,6 +1401,18 @@ components:
         name:
           example: Salesforce
           type: string
+        resource_schema_support:
+          example:
+            - leads
+          items:
+            type: string
+          type: array
+        resource_settings_support:
+          example:
+            - leads
+          items:
+            type: string
+          type: array
         revoke_url:
           example: https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>
           nullable: true
@@ -1108,7 +1424,6 @@ components:
           description: Connection settings. Values will persist to `form_fields` with
             corresponding id
           example:
-            <setting-key>: <setting-value>
             instance_url: https://eu28.salesforce.com
           nullable: true
           type: object
@@ -1147,6 +1462,70 @@ components:
         website:
           example: https://www.salesforce.com
           type: string
+      type: object
+    ConsumerRequestCountsInDateRangeResponse:
+      properties:
+        data:
+          properties:
+            aggregated_request_count:
+              example: 40
+              type: number
+            application_id:
+              example: "1111"
+              type: string
+            consumer_id:
+              example: test_user_id
+              type: string
+            end_datetime:
+              example: 2021-05-10T12:00:00.000Z
+              type: string
+            request_counts:
+              $ref: "#/components/schemas/RequestCountAllocation"
+            start_datetime:
+              example: 2021-05-01T12:00:00.000Z
+              type: string
+          type: object
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    CreateConnectionRequestBody:
+      additionalProperties: false
+      properties:
+        api_key:
+          $ref: "#/components/schemas/Connection/properties/api_key"
+        enabled:
+          $ref: "#/components/schemas/Connection/properties/enabled"
+        metadata:
+          $ref: "#/components/schemas/Connection/properties/metadata"
+        settings:
+          $ref: "#/components/schemas/Connection/properties/settings"
+      type: object
+    CreateConnectionResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Connection"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 201
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
       type: object
     CreateSessionResponse:
       properties:
@@ -1231,11 +1610,37 @@ components:
             - url
             - textarea
             - select
+            - filtered-select
             - multi-select
             - datetime
             - date
             - time
             - number
+      type: object
+    FormFieldOption:
+      properties:
+        label:
+          example: General Channel
+          type: string
+        value:
+          anyOf:
+            - example: general
+              type: string
+            - example: 123
+              type: integer
+            - example: 12.5
+              type: number
+            - example: true
+              type: boolean
+            - example:
+                - team
+                - general
+              items:
+                anyOf:
+                  - type: string
+                  - type: integer
+                  - type: number
+              type: array
       type: object
     GetConnectionResponse:
       properties:
@@ -1262,6 +1667,166 @@ components:
           items:
             $ref: "#/components/schemas/Connection"
           type: array
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetConsumerResponse:
+      properties:
+        data:
+          properties:
+            data:
+              properties:
+                aggregated_request_count:
+                  example: 101
+                  type: number
+                connections:
+                  items:
+                    properties:
+                      auth_type:
+                        enum:
+                          - oauth2
+                          - apiKey
+                          - basic
+                        nullable: true
+                        type: string
+                      created_at:
+                        example: 2020-09-19T12:18:37.071Z
+                        type: string
+                      enabled:
+                        example: true
+                        type: boolean
+                      icon:
+                        example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+                        type: string
+                      id:
+                        example: 1111+test_user_id
+                        readOnly: true
+                        type: string
+                      logo:
+                        example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+                        type: string
+                      name:
+                        example: Salesforce
+                        type: string
+                      service_id:
+                        example: teamleader
+                        type: string
+                      state:
+                        enum:
+                          - available
+                          - callable
+                          - added
+                          - configured
+                          - authorized
+                        example: authorized
+                        type: string
+                      unified_api:
+                        example: crm
+                        type: string
+                      updated_at:
+                        example: 2020-09-19T12:18:37.071Z
+                        type: string
+                    type: object
+                  type: array
+                consumer_id:
+                  example: test_consumer_id
+                  type: string
+                request_count_updated:
+                  example: 2021-05-07T12:55:42.242Z
+                  type: string
+                request_counts:
+                  $ref: "#/components/schemas/RequestCountAllocation"
+              type: object
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    GetConsumersResponse:
+      properties:
+        data:
+          items:
+            properties:
+              aggregated_request_count:
+                example: 101
+                type: number
+              consumer_id:
+                example: test_consumer_id
+                type: string
+              request_count_updated:
+                example: 2021-05-07T12:55:42.242Z
+                type: string
+              request_counts:
+                $ref: "#/components/schemas/RequestCountAllocation"
+            type: object
+          type: array
+        links:
+          description: Links to navigate to previous or next pages through the API
+          example:
+            current: https://unify.apideck.com/vault/consumers
+            next: https://unify.apideck.com/vault/consumers?cursor=em9oby1jcm06OnBhZ2U6OjM
+            previous: https://unify.apideck.com/vault/consumers?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
+          properties:
+            current:
+              description: Link to navigate to the current page through the API
+              example: https://unify.apideck.com/crm/companies
+              type: string
+            next:
+              description: Link to navigate to the previous page through the API
+              example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjM
+              nullable: true
+              type: string
+            previous:
+              description: Link to navigate to the previous page through the API
+              example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
+              nullable: true
+              type: string
+          type: object
+        meta:
+          description: Reponse metadata
+          properties:
+            cursors:
+              description: Cursors to navigate to previous or next pages through the API
+              properties:
+                current:
+                  description: Cursor to navigate to the current page of results through the API
+                  example: em9oby1jcm06OnBhZ2U6OjI=
+                  nullable: true
+                  type: string
+                next:
+                  description: Cursor to navigate to the next page of results through the API
+                  example: em9oby1jcm06OnBhZ2U6OjM=
+                  nullable: true
+                  type: string
+                previous:
+                  description: Cursor to navigate to the previous page of results through the API
+                  example: em9oby1jcm06OnBhZ2U6OjE=
+                  nullable: true
+                  type: string
+              type: object
+            items_on_page:
+              description: Number of items returned in the data property of the response
+              example: 50
+              type: integer
+          type: object
         status:
           description: HTTP Response Status
           example: OK
@@ -1362,6 +1927,18 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    RequestCountAllocation:
+      properties:
+        proxy:
+          example: 10
+          type: number
+        unify:
+          example: 100
+          type: number
+        vault:
+          example: 21
+          type: number
+      type: object
     Session:
       properties:
         session_uri:
@@ -1468,7 +2045,7 @@ components:
           type: number
         typeName:
           description: The type of error returned
-          example: MissingHeadersError
+          example: RequestHeadersValidationError
           type: string
     Unprocessable:
       properties:
@@ -1499,17 +2076,7 @@ components:
           example: InvalidStateError
           type: string
     UpdateConnectionRequestBody:
-      additionalProperties: false
-      properties:
-        api_key:
-          $ref: "#/components/schemas/Connection/properties/api_key"
-        enabled:
-          $ref: "#/components/schemas/Connection/properties/enabled"
-        metadata:
-          $ref: "#/components/schemas/Connection/properties/metadata"
-        settings:
-          $ref: "#/components/schemas/Connection/properties/settings"
-      type: object
+      $ref: "#/components/schemas/CreateConnectionRequestBody"
     UpdateConnectionResponse:
       properties:
         data:

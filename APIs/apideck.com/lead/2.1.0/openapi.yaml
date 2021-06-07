@@ -6,20 +6,11 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: >
+  description: >+
     Welcome to the Lead API.
 
 
     You can use this API to access all Lead API endpoints.
-
-
-    Easily import the Lead API into your favorite API tool by using the buttons below.
-
-
-    [![Run our Lead API in Postman](https://app.apideck.com/images/postman-button.svg)](https://app.getpostman.com/run-collection/1311564-00e7266b-a3d6-4f40-b172-baaa66a3ed6f)
-
-
-    [![Run our Lead API in Insomnia}](https://app.apideck.com/images/insomnia-button.svg)](https://insomnia.rest/run/?label=Apideck%20Lead%20API&uri=https%3A%2F%2Fspecs.apideck.com%2Flead.yml)
 
 
     ## Base URL
@@ -123,11 +114,11 @@ info:
 
     | --------------------------------------------------------------- | ----------------- | ---------- | ------------- | --------- |
 
-    | [ActiveCampaign](https://www.activecampaign.com/)               | &#9989;           | 3          | &#128284;     | &#128284; |
+    | [ActiveCampaign](https://www.activecampaign.com/)               | &#9989;           | 3          | &#9989;       | &#128284; |
 
     | [Close](https://close.com)                                      | &#9989;           | 1.0.0      | &#9989;       | &#9989;   |
 
-    | [Copper](https://www.copper.com/)                               | &#9989;           | 1.0.0      | &#128284;     | &#128284; |
+    | [Copper](https://www.copper.com/)                               | &#9989;           | 1.0.0      | &#9989;       | &#128284; |
 
     | [Freshsales](https://www.freshworks.com/freshsales-crm/)        | &#9989;           | 0.1.0      | &#9989;       | &#9989;   |
 
@@ -137,17 +128,17 @@ info:
 
     | [Microsoft Dynamics CRM](https://dynamics.microsoft.com/en-us/) | &#9989;           | 1          | &#128284;     | &#128284; |
 
-    | [Pipedrive](https://www.pipedrive.com/)                         | &#9989;           | 0.0.1      | &#128284;     | &#128284; |
+    | [Pipedrive](https://www.pipedrive.com/)                         | &#9989;           | 0.0.1      | &#9989;       | &#128284; |
 
     | [Salesflare](https://salesflare.com)                            | &#9989;           | 0.0.1      | &#128284;     | &#128284; |
 
     | [Salesforce](https://www.salesforce.com)                        | &#9989;           | v51.0      | &#9989;       | &#128284; |
 
-    | [Slack](https://slack.com/)                                     | &#128736;&#65039; | v2.0       | &#128284;     | &#128284; |
+    | [Slack](https://slack.com/)                                     | &#9989;           | v2.0       | &#128284;     | &#128284; |
 
-    | [Teamleader](https://www.teamleader.eu/)                        | &#9989;           | 2019-10-09 | &#128284;     | &#128284; |
+    | [Teamleader](https://www.teamleader.eu/)                        | &#9989;           | 2019-10-09 | &#9989;       | &#128284; |
 
-    | [Zendesk Sell](https://www.zendesk.com/sell/)                   | &#9989;           | 2.0        | &#128284;     | &#128284; |
+    | [Zendesk Sell](https://www.zendesk.com/sell/)                   | &#9989;           | 2.0        | &#9989;       | &#128284; |
 
     | [Zoho CRM](https://www.zoho.com/crm/)                           | &#9989;           | 2.0        | &#9989;       | &#128284; |
 
@@ -213,22 +204,28 @@ info:
     ### Error Types
 
 
-    #### MissingParamsError
+    #### RequestBodyValidationError
 
 
-    Request is missing parameters from either path of body. Missing required params are described in the error detail of response.
+    Request body is not valid for the current endpoint. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the specification.
 
 
-    #### MissingHeadersError
+    #### RequestParametersValidationError
 
 
-    Request was made missing one of the required headers. Missing headers are described in the error detail of response. Check the documentation for the request you are making. One or more of the following will be required: `x-apideck-app-id`, `x-apideck-consumer-id`, `x-apideck-service-id`
+    Request parameters are not valid for the current endpoint. Check the spelling and types of your parameters, and ensure you are not passing parameters that are outside of the specification.
 
 
-    #### SpecRequestValidationError
+    #### RequestHeadersValidationError
 
 
-    Input variables are not aligned with the open-api spec. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the the specification.
+    Request headers are not valid for the current endpoint. Check the spelling and types of your headers, and ensure you are not passing headers that are outside of the specification.
+
+
+    #### UnsupportedFiltersError
+
+
+    Filters in the request are valid, but not supported by the connector. Remove the unsupported filter(s) to get a successful response.
 
 
     #### InvalidCursorError
@@ -451,11 +448,12 @@ info:
 
 
     If you have problems or need help with your case, you can always reach out to our Support.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 1.1.0
+  version: 2.1.0
   x-logo:
     url: https://developers.apideck.com/icon.png
   x-origin:
@@ -1002,7 +1000,7 @@ components:
           type: string
         ref:
           description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#missingheaderserror
+          example: https://developers.apideck.com/errors#requestbodyvalidationerror
           type: string
         status_code:
           description: HTTP status code
@@ -1010,7 +1008,7 @@ components:
           type: number
         typeName:
           description: The type of error returned
-          example: MissingHeadersError
+          example: RequestHeadersValidationError
           type: string
     BankAccount:
       properties:
@@ -1070,6 +1068,7 @@ components:
         - email
       type: object
     Lead:
+      additionalProperties: false
       properties:
         addresses:
           items:
@@ -1408,7 +1407,7 @@ components:
           type: number
         typeName:
           description: The type of error returned
-          example: MissingHeadersError
+          example: RequestHeadersValidationError
           type: string
     UnifiedId:
       properties:

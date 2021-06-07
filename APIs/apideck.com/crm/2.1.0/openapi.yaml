@@ -6,20 +6,11 @@ info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: >
+  description: >+
     Welcome to the CRM API.
 
 
     You can use this API to access all CRM API endpoints.
-
-
-    Easily import the CRM API into your favorite API tool by using the buttons below.
-
-
-    [![Run our CRM API in Postman](https://app.apideck.com/images/postman-button.svg)](https://app.getpostman.com/run-collection/1311564-22eb0345-7fcb-4358-88bc-af234ffc8943)
-
-
-    [![Run our CRM API in Insomnia}](https://app.apideck.com/images/insomnia-button.svg)](https://insomnia.rest/run/?label=Apideck%20CRM%20API&uri=https%3A%2F%2Fspecs.apideck.com%2Fcrm.yml)
 
 
     ## Base URL
@@ -123,7 +114,7 @@ info:
 
     | --------------------------------------------------------------- | ----------------- | ---------- | ------------- | --------- |
 
-    | [ActiveCampaign](https://www.activecampaign.com/)               | &#9989;           | 3          | &#128284;     | &#128284; |
+    | [ActiveCampaign](https://www.activecampaign.com/)               | &#9989;           | 3          | &#9989;       | &#128284; |
 
     | [Auth0](https://auth0.com)                                      | &#128736;&#65039; | 2          | &#128284;     | &#128284; |
 
@@ -139,7 +130,7 @@ info:
 
     | [Mixmax](https://mixmax.com)                                    | &#128736;&#65039; | 0.1.0      | &#128284;     | &#128284; |
 
-    | [Pipedrive](https://www.pipedrive.com/)                         | &#9989;           | 0.0.1      | &#128284;     | &#128284; |
+    | [Pipedrive](https://www.pipedrive.com/)                         | &#9989;           | 0.0.1      | &#9989;       | &#128284; |
 
     | [Reply](https://reply.io)                                       | &#128736;&#65039; | 1.0        | &#128284;     | &#128284; |
 
@@ -147,9 +138,9 @@ info:
 
     | [Salesforce](https://www.salesforce.com)                        | &#9989;           | v51.0      | &#9989;       | &#128284; |
 
-    | [Teamleader](https://www.teamleader.eu/)                        | &#9989;           | 2019-10-09 | &#128284;     | &#128284; |
+    | [Teamleader](https://www.teamleader.eu/)                        | &#9989;           | 2019-10-09 | &#9989;       | &#128284; |
 
-    | [Zendesk Sell](https://www.zendesk.com/sell/)                   | &#9989;           | 2.0        | &#128284;     | &#128284; |
+    | [Zendesk Sell](https://www.zendesk.com/sell/)                   | &#9989;           | 2.0        | &#9989;       | &#128284; |
 
     | [Zoho CRM](https://www.zoho.com/crm/)                           | &#9989;           | 2.0        | &#9989;       | &#128284; |
 
@@ -215,22 +206,28 @@ info:
     ### Error Types
 
 
-    #### MissingParamsError
+    #### RequestBodyValidationError
 
 
-    Request is missing parameters from either path of body. Missing required params are described in the error detail of response.
+    Request body is not valid for the current endpoint. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the specification.
 
 
-    #### MissingHeadersError
+    #### RequestParametersValidationError
 
 
-    Request was made missing one of the required headers. Missing headers are described in the error detail of response. Check the documentation for the request you are making. One or more of the following will be required: `x-apideck-app-id`, `x-apideck-consumer-id`, `x-apideck-service-id`
+    Request parameters are not valid for the current endpoint. Check the spelling and types of your parameters, and ensure you are not passing parameters that are outside of the specification.
 
 
-    #### SpecRequestValidationError
+    #### RequestHeadersValidationError
 
 
-    Input variables are not aligned with the open-api spec. Check the spelling and types of your attributes, and ensure you are not passing data that is outside of the the specification.
+    Request headers are not valid for the current endpoint. Check the spelling and types of your headers, and ensure you are not passing headers that are outside of the specification.
+
+
+    #### UnsupportedFiltersError
+
+
+    Filters in the request are valid, but not supported by the connector. Remove the unsupported filter(s) to get a successful response.
 
 
     #### InvalidCursorError
@@ -453,11 +450,12 @@ info:
 
 
     If you have problems or need help with your case, you can always reach out to our Support.
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 1.1.0
+  version: 2.1.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -481,7 +479,175 @@ tags:
     name: Leads
   - description: ""
     name: Contacts
+  - description: ""
+    name: Pipelines
+  - description: ""
+    name: Notes
+  - description: ""
+    name: Users
+  - description: ""
+    name: Activities
 paths:
+  /crm/activities:
+    get:
+      description: List activities
+      operationId: activitiesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetActivitiesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List activities
+      tags:
+        - Activities
+      x-graphql-field-name: activities
+    post:
+      description: Create activity
+      operationId: activitiesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create activity
+      tags:
+        - Activities
+  "/crm/activities/{id}":
+    delete:
+      description: Delete activity
+      operationId: activitiesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete activity
+      tags:
+        - Activities
+    get:
+      description: Get activity
+      operationId: activitiesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get activity
+      tags:
+        - Activities
+    patch:
+      description: Update activity
+      operationId: activitiesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update activity
+      tags:
+        - Activities
   /crm/companies:
     get:
       description: List companies
@@ -493,6 +659,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/companiesFilter"
       responses:
         "200":
           $ref: "#/components/responses/GetCompanies"
@@ -814,6 +981,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/leadsFilter"
       responses:
         "200":
           $ref: "#/components/responses/GetLeads"
@@ -963,6 +1131,166 @@ paths:
       summary: Update lead
       tags:
         - Leads
+  /crm/notes:
+    get:
+      description: List notes
+      operationId: notesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetNotesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List notes
+      tags:
+        - Notes
+      x-graphql-field-name: notes
+    post:
+      description: Create note
+      operationId: notesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Note"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create note
+      tags:
+        - Notes
+  "/crm/notes/{id}":
+    delete:
+      description: Delete note
+      operationId: notesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete note
+      tags:
+        - Notes
+    get:
+      description: Get note
+      operationId: notesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get note
+      tags:
+        - Notes
+    patch:
+      description: Update note
+      operationId: notesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Note"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateNoteResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update note
+      tags:
+        - Notes
   /crm/opportunities:
     get:
       description: List opportunities
@@ -1124,6 +1452,324 @@ paths:
       summary: Update opportunity
       tags:
         - Opportunities
+  /crm/pipelines:
+    get:
+      description: List pipelines
+      operationId: pipelinesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPipelines"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List pipelines
+      tags:
+        - Pipelines
+      x-graphql-field-name: pipelines
+    post:
+      description: Create pipeline
+      operationId: pipelinesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pipeline"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatePipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create pipeline
+      tags:
+        - Pipelines
+  "/crm/pipelines/{id}":
+    delete:
+      description: Delete pipeline
+      operationId: pipelinesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeletePipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete pipeline
+      tags:
+        - Pipelines
+    get:
+      description: Get pipeline
+      operationId: pipelinesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get pipeline
+      tags:
+        - Pipelines
+    patch:
+      description: Update pipeline
+      operationId: pipelinesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pipeline"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdatePipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update pipeline
+      tags:
+        - Pipelines
+  /crm/users:
+    get:
+      description: List users
+      operationId: usersAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetUsers"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List users
+      tags:
+        - Users
+      x-graphql-field-name: users
+    post:
+      description: Create user
+      operationId: usersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create user
+      tags:
+        - Users
+  "/crm/users/{id}":
+    delete:
+      description: Delete user
+      operationId: usersDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete user
+      tags:
+        - Users
+    get:
+      description: Get user
+      operationId: usersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get user
+      tags:
+        - Users
+    patch:
+      description: Update user
+      operationId: usersUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update user
+      tags:
+        - Users
 components:
   parameters:
     applicationId:
@@ -1133,6 +1779,14 @@ components:
       required: true
       schema:
         type: string
+    companiesFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/CompaniesFilter"
+      style: deepObject
     consumerId:
       description: ID of the consumer which you want to get or push data from
       in: header
@@ -1164,6 +1818,14 @@ components:
       required: true
       schema:
         type: string
+    leadsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/LeadsFilter"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -1203,6 +1865,12 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequest"
       description: Bad Request
+    CreateActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateActivityResponse"
+      description: Activity
     CreateCompany:
       content:
         application/json:
@@ -1221,12 +1889,36 @@ components:
           schema:
             $ref: "#/components/schemas/CreateLeadResponse"
       description: Lead created
+    CreateNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateNoteResponse"
+      description: Note
     CreateOpportunity:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateOpportunityResponse"
       description: Opportunity
+    CreatePipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreatePipelineResponse"
+      description: Pipeline created
+    CreateUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateUserResponse"
+      description: User created
+    DeleteActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteActivityResponse"
+      description: Activity
     DeleteCompany:
       content:
         application/json:
@@ -1245,12 +1937,42 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteLeadResponse"
       description: Lead deleted
+    DeleteNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteNoteResponse"
+      description: Note
     DeleteOpportunity:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteOpportunityResponse"
       description: Opportunity deleted
+    DeletePipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeletePipelineResponse"
+      description: Pipeline deleted
+    DeleteUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteUserResponse"
+      description: User deleted
+    GetActivitiesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetActivitiesResponse"
+      description: Activities
+    GetActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetActivityResponse"
+      description: Activity
     GetCompanies:
       content:
         application/json:
@@ -1287,6 +2009,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetLeadsResponse"
       description: Leads
+    GetNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetNoteResponse"
+      description: Note
+    GetNotesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetNotesResponse"
+      description: Notes
     GetOpportunities:
       content:
         application/json:
@@ -1299,6 +2033,30 @@ components:
           schema:
             $ref: "#/components/schemas/GetOpportunityResponse"
       description: Opportunity
+    GetPipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPipelineResponse"
+      description: Pipeline
+    GetPipelines:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPipelinesResponse"
+      description: Pipelines
+    GetUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetUserResponse"
+      description: User
+    GetUsers:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetUsersResponse"
+      description: Users
     NotFound:
       content:
         application/json:
@@ -1335,6 +2093,12 @@ components:
           schema:
             $ref: "#/components/schemas/Unprocessable"
       description: Unprocessable
+    UpdateActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateActivityResponse"
+      description: Activity
     UpdateCompany:
       content:
         application/json:
@@ -1353,13 +2117,210 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateLeadResponse"
       description: Lead updated
+    UpdateNoteResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateNoteResponse"
+      description: Note
     UpdateOpportunity:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateOpportunityResponse"
       description: Opportunity updated
+    UpdatePipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdatePipelineResponse"
+      description: Pipeline updated
+    UpdateUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateUserResponse"
+      description: User updated
   schemas:
+    Activity:
+      additionalProperties: false
+      properties:
+        activity_date:
+          example: 2021-05-01
+          type: string
+        activity_datetime:
+          example: 2021-05-01T12:00:00.000Z
+          type: string
+        all_day_event:
+          example: false
+          type: boolean
+        archived:
+          example: false
+          type: boolean
+        asset_id:
+          example: "12345"
+          type: string
+        campaign_id:
+          example: "12345"
+          type: string
+        case_id:
+          example: "12345"
+          type: string
+        child:
+          example: false
+          type: boolean
+        company_id:
+          example: "12345"
+          type: string
+        contact_id:
+          example: "12345"
+          type: string
+        contract_id:
+          example: "12345"
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        custom_object_id:
+          example: "12345"
+          type: string
+        deleted:
+          example: false
+          type: boolean
+        description:
+          example: More info about the meeting
+          type: string
+        duration_seconds:
+          example: 1800
+          type: integer
+        end_date:
+          example: 2021-05-01
+          type: string
+        end_datetime:
+          example: 2021-05-01T12:30:00.000Z
+          type: string
+        event_sub_type:
+          example: true
+          type: string
+        group_event:
+          example: true
+          type: boolean
+        group_event_type:
+          example: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        lead_id:
+          example: "12345"
+          type: string
+        location:
+          example: Space
+          type: string
+        opportunity_id:
+          example: "12345"
+          type: string
+        owner_id:
+          example: "12345"
+          type: string
+        private:
+          example: true
+          type: boolean
+        product_id:
+          example: "12345"
+          type: string
+        recurrence_activity_id:
+          example: "12345"
+          type: string
+        recurrence_day_of_month:
+          example: 1
+          type: integer
+        recurrence_day_of_week_mask:
+          example: 1
+          type: integer
+        recurrence_end_date:
+          example: 2022-05-01
+          type: string
+        recurrence_end_date_only:
+          example: 2030-05-01T17:00:00.000Z
+          type: string
+        recurrence_instance:
+          example: 2nd
+          type: string
+        recurrence_interval:
+          example: 10
+          type: integer
+        recurrence_month_of_year:
+          example: June
+          type: string
+        recurrence_start_datetime:
+          example: 2021-05-01T12:00:00.000Z
+          type: string
+        recurrence_timezone:
+          example: Asia/Seoul
+          type: string
+        recurrence_type:
+          example: Meeting
+          type: string
+        recurrent:
+          example: false
+          type: boolean
+        reminder_datetime:
+          example: 2021-05-01T17:00:00.000Z
+          type: string
+        reminder_set:
+          example: false
+          type: boolean
+        show_as:
+          enum:
+            - free
+            - busy
+          example: busy
+          type: string
+        solution_id:
+          example: "12345"
+          type: string
+        start_datetime:
+          example: 2021-05-01T12:00:00.000Z
+          type: string
+        title:
+          example: Meeting
+          type: string
+        type:
+          enum:
+            - call
+            - meeting
+            - email
+            - send-letter
+            - send-quote
+            - other
+          example: meeting
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      required:
+        - activity_datetime
+        - duration_seconds
+        - type
+      type: object
     Address:
       properties:
         city:
@@ -1443,7 +2404,7 @@ components:
           type: string
         ref:
           description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#missingheaderserror
+          example: https://developers.apideck.com/errors#requestbodyvalidationerror
           type: string
         status_code:
           description: HTTP status code
@@ -1451,7 +2412,7 @@ components:
           type: number
         typeName:
           description: The type of error returned
-          example: MissingHeadersError
+          example: RequestHeadersValidationError
           type: string
     BankAccount:
       properties:
@@ -1464,7 +2425,19 @@ components:
           nullable: true
           type: string
       type: object
+    CompaniesFilter:
+      additionalProperties: false
+      example:
+        name: SpaceX
+      properties:
+        name:
+          description: Name of the company to filter on
+          example: SpaceX
+          type: string
+      type: object
+      x-graphql-type-name: CompaniesFilter
     Company:
+      additionalProperties: false
       properties:
         addresses:
           items:
@@ -1531,6 +2504,11 @@ components:
           items:
             $ref: "#/components/schemas/SocialLink"
           type: array
+        status:
+          example: Open
+          minLength: 1
+          nullable: true
+          type: string
         tags:
           $ref: "#/components/schemas/Tags"
         updated_at:
@@ -1555,6 +2533,7 @@ components:
         - name
       type: object
     Contact:
+      additionalProperties: false
       properties:
         addresses:
           items:
@@ -1565,6 +2544,10 @@ components:
           nullable: true
           type: string
         company_id:
+          example: "23456"
+          nullable: true
+          type: string
+        company_name:
           example: "23456"
           nullable: true
           type: string
@@ -1684,14 +2667,12 @@ components:
         - last_name
         - email
     ContactsFilter:
+      additionalProperties: false
       example:
+        email: elon@tesla.com
         first_name: Elon
         last_name: Musk
       properties:
-        company_name:
-          description: Company name of the contact to filter on
-          example: Tesla
-          type: string
         email:
           description: E-mail of the contact to filter on
           example: elon@tesla.com
@@ -1704,8 +2685,44 @@ components:
           description: Last name of the contact to filter on
           example: Musk
           type: string
+        name:
+          description: Name of the contact to filter on
+          example: Elon Musk
+          type: string
       type: object
       x-graphql-type-name: ContactsFilter
+    CreateActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateCompanyResponse:
       properties:
         data:
@@ -1802,6 +2819,38 @@ components:
         - operation
         - data
       type: object
+    CreateNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateOpportunityResponse:
       properties:
         data:
@@ -1813,6 +2862,70 @@ components:
         resource:
           description: Unified API resource name
           example: opportunities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreatePipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: users
           type: string
         service:
           description: Apideck ID of service provider
@@ -1856,6 +2969,38 @@ components:
               type: array
       required:
         - id
+      type: object
+    DeleteActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
       type: object
     DeleteCompanyResponse:
       properties:
@@ -1953,6 +3098,38 @@ components:
         - operation
         - data
       type: object
+    DeleteNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteOpportunityResponse:
       properties:
         data:
@@ -1964,6 +3141,70 @@ components:
         resource:
           description: Unified API resource name
           example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeletePipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeleteUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: users
           type: string
         service:
           description: Apideck ID of service provider
@@ -2008,6 +3249,78 @@ components:
       required:
         - email
       type: object
+    GetActivitiesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Activity"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: ActivityList
+    GetActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Activity"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: activity
     GetCompaniesResponse:
       properties:
         data:
@@ -2222,6 +3535,78 @@ components:
         - data
       type: object
       x-graphql-type-name: LeadList
+    GetNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Note"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: note
+    GetNotesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Note"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: NoteList
     GetOpportunitiesResponse:
       properties:
         data:
@@ -2293,7 +3678,150 @@ components:
         - operation
         - data
       type: object
+    GetPipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Pipeline"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetPipelinesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Pipeline"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: PipelinesList
+    GetUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/User"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetUsersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: users
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: UserList
     Lead:
+      additionalProperties: false
       properties:
         addresses:
           items:
@@ -2395,6 +3923,31 @@ components:
         - email
         - first_name
         - last_name
+    LeadsFilter:
+      additionalProperties: false
+      example:
+        email: elon@tesla.com
+        first_name: Elon
+        last_name: Musk
+      properties:
+        email:
+          description: E-mail of the lead to filter on
+          example: elon@tesla.com
+          type: string
+        first_name:
+          description: First name of the lead to filter on
+          example: Elon
+          type: string
+        last_name:
+          description: Last name of the lead to filter on
+          example: Musk
+          type: string
+        name:
+          description: Name of the lead to filter on
+          example: Elon Musk
+          type: string
+      type: object
+      x-graphql-type-name: LeadsFilter
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2499,17 +4052,67 @@ components:
           description: The type of error returned
           example: MappingError
           type: string
-    OpportunitiesFilter:
-      example:
-        name: Alex
+    Note:
+      additionalProperties: false
       properties:
-        name:
-          description: Name to filter on
-          example: Alex
+        content:
+          example: Office hours are 9AM-6PM
           type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        owner_id:
+          example: "12345"
+          type: string
+        title:
+          example: Meeting Notes
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    OpportunitiesFilter:
+      additionalProperties: false
+      example:
+        monetary_amount: 75000
+        status: Completed
+      properties:
+        monetary_amount:
+          description: Monetary amount to filter on
+          example: 75000
+          type: number
+        status:
+          description: Status to filter on
+          example: Completed
+          type: string
+        title:
+          description: Title of the opportunity to filter on
+          example: Tesla deal
+          type: string
+        win_probability:
+          description: Win probability to filter on
+          example: 50
+          type: number
       type: object
       x-graphql-type-name: OpportunitiesFilter
     Opportunity:
+      additionalProperties: false
       properties:
         close_date:
           example: 2020-10-30
@@ -2714,6 +4317,50 @@ components:
       required:
         - number
       type: object
+    Pipeline:
+      additionalProperties: false
+      properties:
+        archived:
+          example: false
+          type: boolean
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        currency:
+          example: USD
+          type: string
+        display_order:
+          example: 1
+          type: integer
+        id:
+          example: default
+          type: string
+        name:
+          example: Sales Pipeline
+          type: string
+        stages:
+          items:
+            properties:
+              display_order:
+                example: 1
+                type: integer
+              id:
+                example: contractsent
+                readOnly: true
+                type: string
+              name:
+                example: Contract Sent
+                type: string
+            type: object
+          type: array
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+      required:
+        - name
+      x-pii: []
     SocialLink:
       properties:
         id:
@@ -2794,7 +4441,7 @@ components:
           type: number
         typeName:
           description: The type of error returned
-          example: MissingHeadersError
+          example: RequestHeadersValidationError
           type: string
     UnifiedId:
       properties:
@@ -2833,6 +4480,38 @@ components:
           description: The type of error returned
           example: InvalidStateError
           type: string
+    UpdateActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateCompanyResponse:
       properties:
         data:
@@ -2929,6 +4608,38 @@ components:
         - operation
         - data
       type: object
+    UpdateNoteResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: notes
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateOpportunityResponse:
       properties:
         data:
@@ -2961,6 +4672,127 @@ components:
         - operation
         - data
       type: object
+    UpdatePipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    User:
+      properties:
+        created_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        email:
+          example: elon@musk.com
+          format: email
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        image:
+          example: https://logo.clearbit.com/spacex.com?s=128
+          nullable: true
+          type: string
+        language:
+          example: EN
+          nullable: true
+          type: string
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        parent_id:
+          example: "54321"
+          nullable: true
+          type: string
+        password:
+          example: supersecretpassword
+          type: string
+          writeOnly: true
+        status:
+          example: active
+          nullable: true
+          type: string
+        updated_at:
+          example: 2017-08-12T20:43:21.291Z
+          readOnly: true
+          type: string
+        username:
+          example: masterofcoin
+          nullable: true
+          type: string
+      required:
+        - email
+      x-pii:
+        - username
+        - first_name
+        - last_name
+        - email
     Website:
       properties:
         id:
