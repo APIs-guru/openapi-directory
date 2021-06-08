@@ -6077,7 +6077,7 @@ components:
             - description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
         PageSize:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/PageSizeMax100'
             - description: The maximum number of items to return with this call.
         PortfolioShareType:
           allOf:
@@ -6286,7 +6286,7 @@ components:
             - description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
         PageSize:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/PageSizeMax100'
             - description: The maximum number of items to return with this call.
     ListPortfoliosForProductOutput:
       type: object
@@ -6319,7 +6319,7 @@ components:
             - description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
         PageSize:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/PageSizeMax100'
             - description: The maximum number of items to return with this call.
     ListPrincipalsForPortfolioOutput:
       type: object
@@ -6787,7 +6787,7 @@ components:
             - description: 'The search filters. If no search filters are specified, the output includes all products to which the caller has access.'
         PageSize:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/PageSizeMax100'
             - description: The maximum number of items to return with this call.
         SortBy:
           allOf:
