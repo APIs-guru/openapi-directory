@@ -23,7 +23,7 @@ info:
     the [RFC 3339](https://tools.ietf.org/html/rfc3339) format.
   termsOfService: https://dev.to/terms
   title: DEV API (beta)
-  version: 0.9.6
+  version: 0.9.7
   x-apisguru-categories:
     - social
   x-logo:
@@ -36,8 +36,6 @@ info:
       version: "3.0"
   x-providerName: dev.to
 tags:
-  - description: Site-wide configuration set by admins (requires super admin authorization)
-    name: admin-configuration
   - description: Articles are all the posts users create on DEV
     name: articles
   - description: Users can leave comments to articles and podcasts episodes
@@ -65,85 +63,6 @@ tags:
   - description: User or organization profile images
     name: profile images
 paths:
-  /admin/config:
-    get:
-      description: |
-        This endpoint returns the "site config" as set by admin.
-      operationId: getConfig
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: All site-wide config
-      security:
-        - api_key: []
-        - oauth2: []
-      summary: Admin config
-      tags:
-        - admin-configuration
-      x-codeSamples:
-        - label: curl
-          lang: Shell
-          source: |
-            curl -H "api-key: API_KEY" https://dev.to/api/admin/config
-    put:
-      description: >
-        This endpoint allows admins to declare values or update values for
-        "site config".
-      operationId: upsertConfig
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SiteConfig"
-        description: Config up upsert
-      responses:
-        "201":
-          description: Newly updated config
-        "400":
-          content:
-            application/json:
-              examples:
-                error-bad-request:
-                  $ref: "#/components/examples/ErrorBadRequest"
-              schema:
-                $ref: "#/components/schemas/APIError"
-          description: BadRequest
-        "401":
-          content:
-            application/json:
-              examples:
-                error-unauthorized:
-                  $ref: "#/components/examples/ErrorUnauthorized"
-              schema:
-                $ref: "#/components/schemas/APIError"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              examples:
-                error-forbidden:
-                  $ref: "#/components/examples/ErrorForbidden"
-              schema:
-                $ref: "#/components/schemas/APIError"
-          description: Forbidden
-        "422":
-          content:
-            application/json:
-              examples:
-                error-unprocessable-entity:
-                  $ref: "#/components/examples/ErrorUnprocessableEntity"
-              schema:
-                $ref: "#/components/schemas/APIError"
-          description: Unprocessable Entity
-      security:
-        - api_key: []
-        - oauth2: []
-      summary: Update Site-wide Config
-      tags:
-        - admin-configuration
   /articles:
     get:
       description: |
@@ -3932,11 +3851,6 @@ components:
           nullable: true
           type: string
       type: object
-    SiteConfig:
-      properties:
-        site_config:
-          type: object
-      type: object
     Tag:
       properties:
         bg_color_hex:
@@ -4011,6 +3925,10 @@ components:
             events:
               description: An array of events identifiers
               items:
+                enum:
+                  - article_created
+                  - article_updated
+                  - article_destroyed
                 type: string
               type: array
             source:
