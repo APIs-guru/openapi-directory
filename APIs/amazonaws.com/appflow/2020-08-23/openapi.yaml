@@ -3833,13 +3833,16 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the Zendesk flow destination.
         idFieldNames:
           $ref: '#/components/schemas/IdFieldNameList'
         errorHandlingConfig:
           $ref: '#/components/schemas/ErrorHandlingConfig'
         writeOperationType:
           $ref: '#/components/schemas/WriteOperationType'
+      description: The properties that are applied when Zendesk is used as a destination.
     DestinationConnectorProperties:
       type: object
       properties:
@@ -3880,7 +3883,9 @@ components:
             - $ref: '#/components/schemas/CustomerProfilesDestinationProperties'
             - description: ' The properties required to query Amazon Connect Customer Profiles. '
         Zendesk:
-          $ref: '#/components/schemas/ZendeskDestinationProperties'
+          allOf:
+            - $ref: '#/components/schemas/ZendeskDestinationProperties'
+            - description: The properties required to query Zendesk.
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string
@@ -4233,6 +4238,7 @@ components:
         - MATH_OPERATION_FIELDS_ORDER
         - CONCAT_FORMAT
         - SUBFIELD_CATEGORY_MAP
+        - EXCLUDE_SOURCE_FIELDS_LIST
     Password:
       type: string
       pattern: .*
@@ -4514,6 +4520,7 @@ components:
         - Arithmetic
         - Filter
         - Map
+        - Map_all
         - Mask
         - Merge
         - Truncate

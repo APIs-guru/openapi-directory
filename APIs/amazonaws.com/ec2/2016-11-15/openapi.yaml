@@ -6858,7 +6858,7 @@ paths:
     get:
       x-aws-operation-name: CreateNatGateway
       operationId: GET_CreateNatGateway
-      description: 'Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+      description: '<p>Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway.</p> <p>With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet.</p> <p>With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -6867,6 +6867,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateNatGatewayResult'
       parameters:
+        - name: AllocationId
+          in: query
+          required: false
+          description: '[Public NAT gateways only] The allocation ID of an Elastic IP address to associate with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
+          schema:
+            type: string
         - name: ClientToken
           in: query
           required: false
@@ -6896,12 +6902,15 @@ paths:
                 - $ref: '#/components/schemas/TagSpecification'
                 - xml:
                     name: item
-        - name: AllocationId
+        - name: ConnectivityType
           in: query
-          required: true
-          description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
+          required: false
+          description: Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
           schema:
             type: string
+            enum:
+              - private
+              - public
         - name: Action
           in: query
           required: true
@@ -6927,7 +6936,7 @@ paths:
     post:
       x-aws-operation-name: CreateNatGateway
       operationId: POST_CreateNatGateway
-      description: 'Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+      description: '<p>Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway.</p> <p>With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet.</p> <p>With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -12788,7 +12797,7 @@ paths:
     get:
       x-aws-operation-name: DeleteNatGateway
       operationId: GET_DeleteNatGateway
-      description: 'Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.'
+      description: 'Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.'
       responses:
         '200':
           description: Success
@@ -12834,7 +12843,7 @@ paths:
     post:
       x-aws-operation-name: DeleteNatGateway
       operationId: POST_DeleteNatGateway
-      description: 'Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.'
+      description: 'Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.'
       responses:
         '200':
           description: Success
@@ -59909,6 +59918,11 @@ components:
           - $ref: '#/components/schemas/ConnectionNotification'
           - xml:
               name: item
+    ConnectivityType:
+      type: string
+      enum:
+        - private
+        - public
     ConversionIdStringList:
       type: array
       items:
@@ -62014,9 +62028,12 @@ components:
       type: object
       required:
         - SubnetId
-        - AllocationId
       title: CreateNatGatewayRequest
       properties:
+        AllocationId:
+          allOf:
+            - $ref: '#/components/schemas/AllocationId'
+            - description: '[Public NAT gateways only] The allocation ID of an Elastic IP address to associate with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -62035,10 +62052,10 @@ components:
             - xml:
                 name: TagSpecification
               description: The tags to assign to the NAT gateway.
-        AllocationId:
+        ConnectivityType:
           allOf:
-            - $ref: '#/components/schemas/AllocationId'
-            - description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
+            - $ref: '#/components/schemas/ConnectivityType'
+            - description: Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
     NatGateway:
       type: object
       properties:
@@ -62108,6 +62125,12 @@ components:
             - xml:
                 name: tagSet
               description: The tags for the NAT gateway.
+        ConnectivityType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectivityType'
+            - xml:
+                name: connectivityType
+              description: Indicates whether the NAT gateway supports public or private connectivity.
       description: Describes a NAT gateway.
     IcmpTypeCode:
       type: object
@@ -81316,7 +81339,7 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: allocationId
-              description: The allocation ID of the Elastic IP address that's associated with the NAT gateway.
+              description: '[Public NAT gateway only] The allocation ID of the Elastic IP address that''s associated with the NAT gateway.'
         NetworkInterfaceId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -81328,13 +81351,13 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: privateIp
-              description: The private IP address associated with the Elastic IP address.
+              description: The private IP address associated with the NAT gateway.
         PublicIp:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: publicIp
-              description: The Elastic IP address associated with the NAT gateway.
+              description: '[Public NAT gateway only] The Elastic IP address associated with the NAT gateway.'
       description: Describes the IP addresses and network interface associated with a NAT gateway.
     NetworkAclAssociationList:
       type: array

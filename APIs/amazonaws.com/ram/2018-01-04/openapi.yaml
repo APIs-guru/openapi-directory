@@ -393,7 +393,7 @@ paths:
                   description: The Amazon Resource Name (ARN) of the resource share.
                   type: string
                 permissionArn:
-                  description: The ARN of the AWS RAM permission to associate with the resource share.
+                  description: The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
                   type: string
                 replace:
                   description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
@@ -401,6 +401,9 @@ paths:
                 clientToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
+                permissionVersion:
+                  description: The version of the AWS RAM permissions to associate with the resource share.
+                  type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -777,6 +780,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
+        '487':
+          description: InvalidStateTransitionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateTransitionException'
       parameters: []
       requestBody:
         required: true
@@ -1127,7 +1136,7 @@ paths:
   /getresourceshareinvitations:
     post:
       operationId: GetResourceShareInvitations
-      description: Gets the invitations for resource sharing that you've received.
+      description: Gets the invitations that you have received for resource shares.
       responses:
         '200':
           description: Success
@@ -1299,7 +1308,7 @@ paths:
                 - resourceOwner
               properties:
                 resourceShareArns:
-                  description: The Amazon Resource Names (ARN) of the resource shares.
+                  description: The ARNs of the resource shares.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -1334,6 +1343,9 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 500
+                permissionArn:
+                  description: The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1489,7 +1501,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -1600,7 +1624,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/String'
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
                   type: string
                 resourceShareArns:
                   description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1676,7 +1700,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -1740,7 +1776,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-      parameters: []
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -1849,7 +1897,7 @@ paths:
                   description: The principal.
                   type: string
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
                   type: string
                 resourceArns:
                   description: The Amazon Resource Names (ARN) of the resources.
@@ -1895,36 +1943,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/MalformedArnException'
         '481':
+          description: ResourceShareLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceShareLimitExceededException'
+        '482':
           description: OperationNotPermittedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
-        '482':
+        '483':
           description: InvalidParameterException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
-        '483':
+        '484':
           description: MissingRequiredParameterException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MissingRequiredParameterException'
-        '484':
+        '485':
           description: ServerInternalException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerInternalException'
-        '485':
+        '486':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '486':
+        '487':
           description: UnknownResourceException
           content:
             application/json:
@@ -2064,30 +2118,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/MalformedArnException'
         '482':
+          description: UnknownResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownResourceException'
+        '483':
           description: TagLimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TagLimitExceededException'
-        '483':
+        '484':
           description: ResourceArnNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceArnNotFoundException'
-        '484':
+        '485':
           description: TagPolicyViolationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TagPolicyViolationException'
-        '485':
+        '486':
           description: ServerInternalException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerInternalException'
-        '486':
+        '487':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -2658,9 +2718,15 @@ components:
             - $ref: '#/components/schemas/ResourceShareAssociationList'
             - deprecated: true
               description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html"> ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
+        receiverArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
       description: Describes an invitation to join a resource share.
     Boolean:
       type: boolean
+    Integer:
+      type: integer
     AssociateResourceSharePermissionRequest:
       type: object
       required:
@@ -2675,7 +2741,7 @@ components:
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the AWS RAM permission to associate with the resource share.
+            - description: The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
         replace:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -2684,6 +2750,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        permissionVersion:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The version of the AWS RAM permissions to associate with the resource share.
     ResourceArnList:
       type: array
       items:
@@ -2856,8 +2926,6 @@ components:
       type: object
       title: EnableSharingWithAwsOrganizationRequest
       properties: {}
-    Integer:
-      type: integer
     GetPermissionRequest:
       type: object
       required:
@@ -2886,7 +2954,7 @@ components:
         defaultVersion:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: The identifier for the version of the permission that is set as the default version.
+            - description: Specifies whether the version of the permission is set to the default version for this permission.
         name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2907,6 +2975,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The date and time when the permission was last updated.
+        isResourceTypeDefault:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the version of the permission is set to the default version for this resource type.
       description: Information about an AWS RAM permission.
     MaxResults:
       type: integer
@@ -3043,7 +3115,7 @@ components:
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The Amazon Resource Names (ARN) of the resource shares.
+            - description: The ARNs of the resource shares.
         resourceShareStatus:
           allOf:
             - $ref: '#/components/schemas/ResourceShareStatus'
@@ -3068,6 +3140,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        permissionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
     ResourceShareList:
       type: array
       items:
@@ -3135,7 +3211,7 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
@@ -3203,7 +3279,7 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
+            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>'
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
@@ -3375,7 +3451,7 @@ components:
         defaultVersion:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: The identifier for the version of the permission that is set as the default version.
+            - description: Specifies whether the version of the permission is set to the default version for this permission.
         name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3396,6 +3472,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The date and time when the permission was last updated.
+        isResourceTypeDefault:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the version of the permission is set to the default version for this resource type.
       description: Information about a permission that is associated with a resource share.
     ServiceNameAndResourceType:
       type: object

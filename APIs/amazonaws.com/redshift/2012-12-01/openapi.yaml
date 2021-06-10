@@ -10838,6 +10838,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ClusterNotFoundFault'
         '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
           description: UnsupportedOperationFault
           content:
             text/xml:
@@ -10901,6 +10907,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ClusterNotFoundFault'
         '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
           description: UnsupportedOperationFault
           content:
             text/xml:

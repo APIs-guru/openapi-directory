@@ -3,7 +3,7 @@ info:
   version: '2019-01-25'
   x-release: v4
   title: AWS App Mesh
-  description: '<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and control microservices. App Mesh standardizes how your microservices communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.</p> <p>App Mesh gives you consistent visibility and network traffic controls for every microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS, Kubernetes on AWS, and Amazon EC2.</p> <note> <p>App Mesh supports microservice applications that use service discovery naming for their components. For more information about service discovery on Amazon ECS, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and <code>coredns</code> are supported. For more information, see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS for Services and Pods</a> in the Kubernetes documentation.</p> </note>'
+  description: '<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and control microservices. App Mesh standardizes how your microservices communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.</p> <p>App Mesh gives you consistent visibility and network traffic controls for every microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS, Kubernetes on Amazon Web Services, and Amazon EC2.</p> <note> <p>App Mesh supports microservice applications that use service discovery naming for their components. For more information about service discovery on Amazon ECS, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and <code>coredns</code> are supported. For more information, see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS for Services and Pods</a> in the Kubernetes documentation.</p> </note>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -232,6 +232,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/HttpGatewayRoute'
                         - description: An object that represents the specification of an HTTP gateway route.
+                    priority:
+                      allOf:
+                        - $ref: '#/components/schemas/GatewayRoutePriority'
+                        - description: The ordering of the gateway routes spec.
                 tags:
                   description: 'Optional metadata that you can apply to the gateway route to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
                   type: array
@@ -922,7 +926,7 @@ paths:
   '/v20190125/meshes/{meshName}/virtualNodes':
     put:
       operationId: CreateVirtualNode
-      description: '<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group''s Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note> <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information about App Mesh Envoy variables, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html">Envoy image</a> in the AWS App Mesh User Guide.</p>'
+      description: '<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group''s Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html">Envoy image</a> in the AWS App Mesh User Guide.</p>'
       responses:
         '200':
           description: Success
@@ -1807,6 +1811,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/HttpGatewayRoute'
                         - description: An object that represents the specification of an HTTP gateway route.
+                    priority:
+                      allOf:
+                        - $ref: '#/components/schemas/GatewayRoutePriority'
+                        - description: The ordering of the gateway routes spec.
   '/v20190125/meshes/{meshName}':
     delete:
       operationId: DeleteMesh
@@ -3704,6 +3712,10 @@ components:
             - $ref: '#/components/schemas/HttpGatewayRouteMatch'
             - description: An object that represents the criteria for determining a request match.
       description: An object that represents an HTTP gateway route.
+    GatewayRoutePriority:
+      type: integer
+      minimum: 0
+      maximum: 1000
     TagRef:
       type: object
       required:
@@ -3745,7 +3757,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/EgressFilterType'
-            - description: 'The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service mesh.'
+            - description: 'The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service mesh.'
       description: An object that represents the egress filter rules for a service mesh.
     CreateRouteOutput:
       type: object
@@ -3894,7 +3906,7 @@ components:
         awsCloudMap:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapServiceDiscovery'
-            - description: Specifies any AWS Cloud Map information for the virtual node.
+            - description: Specifies any Cloud Map information for the virtual node.
         dns:
           allOf:
             - $ref: '#/components/schemas/DnsServiceDiscovery'
@@ -4307,12 +4319,12 @@ components:
         key:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapInstanceAttributeKey'
-            - description: The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance that contains the specified key and value is returned.
+            - description: The name of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.
         value:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapInstanceAttributeValue'
-            - description: The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance that contains the specified key and value is returned.
-      description: <p>An object that represents the AWS Cloud Map attribute information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>
+            - description: The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.
+      description: <p>An object that represents the Cloud Map attribute information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>
     AwsCloudMapInstanceAttributes:
       type: array
       items:
@@ -4334,12 +4346,12 @@ components:
         namespaceName:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapName'
-            - description: The name of the AWS Cloud Map namespace to use.
+            - description: The name of the Cloud Map namespace to use.
         serviceName:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapName'
-            - description: The name of the AWS Cloud Map service to use.
-      description: <p>An object that represents the AWS Cloud Map service discovery information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>
+            - description: The name of the Cloud Map service to use.
+      description: <p>An object that represents the Cloud Map service discovery information for your virtual node.</p> <note> <p>Cloud Map is not available in the eu-south-1 Region.</p> </note>
     VirtualServiceBackend:
       type: object
       required:
@@ -4404,7 +4416,9 @@ components:
       type: object
       properties:
         file:
-          $ref: '#/components/schemas/ListenerTlsFileCertificate'
+          allOf:
+            - $ref: '#/components/schemas/ListenerTlsFileCertificate'
+            - description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">Transport Layer Security (TLS)</a>.'
         sds:
           allOf:
             - $ref: '#/components/schemas/ListenerTlsSdsCertificate'
@@ -4474,6 +4488,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpGatewayRoute'
             - description: An object that represents the specification of an HTTP gateway route.
+        priority:
+          allOf:
+            - $ref: '#/components/schemas/GatewayRoutePriority'
+            - description: The ordering of the gateway routes spec.
       description: An object that represents a gateway route specification. Specify one gateway route type.
     TagList:
       type: array
@@ -4945,6 +4963,11 @@ components:
             - $ref: '#/components/schemas/ServiceName'
             - description: The name of the virtual service.
       description: An object that represents a virtual service returned by a describe operation.
+    DefaultGatewayRouteRewrite:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
     DeleteGatewayRouteInput:
       type: object
       title: DeleteGatewayRouteInput
@@ -4967,7 +4990,7 @@ components:
       type: object
       title: DeleteVirtualNodeInput
       properties: {}
-      description: <zonbook></zonbook><xhtml></xhtml>
+      description: Deletes a virtual node input.
     DeleteVirtualRouterInput:
       type: object
       title: DeleteVirtualRouterInput
@@ -5011,6 +5034,11 @@ components:
       title: DescribeVirtualServiceInput
       properties: {}
       description: <zonbook></zonbook><xhtml></xhtml>
+    DnsResponseType:
+      type: string
+      enum:
+        - LOADBALANCER
+        - ENDPOINTS
     Hostname:
       type: string
     DnsServiceDiscovery:
@@ -5022,6 +5050,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Hostname'
             - description: 'Specifies the DNS service discovery hostname for the virtual node. '
+        responseType:
+          allOf:
+            - $ref: '#/components/schemas/DnsResponseType'
+            - description: Specifies the DNS response type for the virtual node.
       description: An object that represents the DNS service discovery information for your virtual node.
     DurationUnit:
       type: string
@@ -5048,6 +5080,10 @@ components:
       enum:
         - ALLOW_ALL
         - DROP_ALL
+    ExactHostName:
+      type: string
+      minLength: 1
+      maxLength: 253
     FilePath:
       type: string
       minLength: 1
@@ -5102,6 +5138,30 @@ components:
             - $ref: '#/components/schemas/GatewayRouteStatusCode'
             - description: The current status for the gateway route.
       description: An object that represents the current status of a gateway route.
+    SuffixHostname:
+      type: string
+      minLength: 1
+      maxLength: 253
+    GatewayRouteHostnameMatch:
+      type: object
+      properties:
+        exact:
+          allOf:
+            - $ref: '#/components/schemas/ExactHostName'
+            - description: The exact host name to match on.
+        suffix:
+          allOf:
+            - $ref: '#/components/schemas/SuffixHostname'
+            - description: The specified ending characters of the host name to match on.
+      description: An object representing the gateway route host name to match.
+    GatewayRouteHostnameRewrite:
+      type: object
+      properties:
+        defaultTargetHostname:
+          allOf:
+            - $ref: '#/components/schemas/DefaultGatewayRouteRewrite'
+            - description: The default target host name to write to.
+      description: An object representing the gateway route host name to rewrite.
     GatewayRouteRef:
       type: object
       required:
@@ -5192,6 +5252,10 @@ components:
       required:
         - target
       properties:
+        rewrite:
+          allOf:
+            - $ref: '#/components/schemas/GrpcGatewayRouteRewrite'
+            - description: The gateway route action to rewrite.
         target:
           allOf:
             - $ref: '#/components/schemas/GatewayRouteTarget'
@@ -5200,11 +5264,96 @@ components:
     GrpcGatewayRouteMatch:
       type: object
       properties:
+        hostname:
+          allOf:
+            - $ref: '#/components/schemas/GatewayRouteHostnameMatch'
+            - description: The gateway route host name to be matched on.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/GrpcGatewayRouteMetadataList'
+            - description: The gateway route metadata to be matched on.
         serviceName:
           allOf:
             - $ref: '#/components/schemas/ServiceName'
             - description: The fully qualified domain name for the service to match from the request.
       description: An object that represents the criteria for determining a request match.
+    GrpcGatewayRouteRewrite:
+      type: object
+      properties:
+        hostname:
+          allOf:
+            - $ref: '#/components/schemas/GatewayRouteHostnameRewrite'
+            - description: The host name of the gateway route to rewrite.
+      description: An object that represents the gateway route to rewrite.
+    GrpcGatewayRouteMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrpcGatewayRouteMetadata'
+      minItems: 1
+      maxItems: 10
+    GrpcMetadataMatchMethod:
+      type: object
+      properties:
+        exact:
+          allOf:
+            - $ref: '#/components/schemas/HeaderMatch'
+            - description: The exact method header to be matched on.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/HeaderMatch'
+            - description: The specified beginning characters of the method header to be matched on.
+        range:
+          $ref: '#/components/schemas/MatchRange'
+        regex:
+          allOf:
+            - $ref: '#/components/schemas/HeaderMatch'
+            - description: The regex used to match the method header.
+        suffix:
+          allOf:
+            - $ref: '#/components/schemas/HeaderMatch'
+            - description: The specified ending characters of the method header to match on.
+      description: An object representing the method header to be matched.
+    HeaderName:
+      type: string
+      minLength: 1
+      maxLength: 50
+    GrpcGatewayRouteMetadata:
+      type: object
+      required:
+        - name
+      properties:
+        invert:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.
+        match:
+          allOf:
+            - $ref: '#/components/schemas/GrpcMetadataMatchMethod'
+            - description: The criteria for determining a metadata match.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/HeaderName'
+            - description: A name for the gateway route metadata.
+      description: An object representing the metadata of the gateway route.
+    HeaderMatch:
+      type: string
+      minLength: 1
+      maxLength: 255
+    MatchRange:
+      type: object
+      required:
+        - end
+        - start
+      properties:
+        end:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The end of the range.
+        start:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The start of the range.
+      description: 'An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.'
     GrpcRetryPolicyEvents:
       type: array
       items:
@@ -5252,7 +5401,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TcpRetryPolicyEvents'
             - description: Specify a valid value. The event occurs before any processing of a request has started and is encountered when the upstream is temporarily or permanently unavailable.
-      description: 'An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.'
+      description: 'An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the <code>reset</code> policy, see the <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on">Envoy documentation</a>.'
     GrpcRetryPolicyEvent:
       type: string
       enum:
@@ -5339,10 +5488,6 @@ components:
             - $ref: '#/components/schemas/HeaderMatch'
             - description: The value sent by the client must end with the specified characters.
       description: An object that represents the match method. Specify one of the match values.
-    HeaderName:
-      type: string
-      minLength: 1
-      maxLength: 50
     GrpcRouteMetadata:
       type: object
       required:
@@ -5361,25 +5506,6 @@ components:
             - $ref: '#/components/schemas/HeaderName'
             - description: The name of the route.
       description: An object that represents the match metadata for the route.
-    HeaderMatch:
-      type: string
-      minLength: 1
-      maxLength: 255
-    MatchRange:
-      type: object
-      required:
-        - end
-        - start
-      properties:
-        end:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The end of the range.
-        start:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The start of the range.
-      description: 'An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.'
     HeaderMatchMethod:
       type: object
       properties:
@@ -5470,6 +5596,10 @@ components:
       required:
         - target
       properties:
+        rewrite:
+          allOf:
+            - $ref: '#/components/schemas/HttpGatewayRouteRewrite'
+            - description: The gateway route action to rewrite.
         target:
           allOf:
             - $ref: '#/components/schemas/GatewayRouteTarget'
@@ -5477,14 +5607,70 @@ components:
       description: An object that represents the action to take if a match is determined.
     HttpGatewayRouteMatch:
       type: object
-      required:
-        - prefix
       properties:
+        headers:
+          allOf:
+            - $ref: '#/components/schemas/HttpGatewayRouteHeaders'
+            - description: The client request headers to match on.
+        hostname:
+          allOf:
+            - $ref: '#/components/schemas/GatewayRouteHostnameMatch'
+            - description: The host name to match on.
+        method:
+          allOf:
+            - $ref: '#/components/schemas/HttpMethod'
+            - description: The method to match on.
+        path:
+          allOf:
+            - $ref: '#/components/schemas/HttpPathMatch'
+            - description: The path to match on.
         prefix:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Specifies the path to match requests with. This parameter must always start with <code>/</code>, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is <code>my-service.local</code> and you want the route to match requests to <code>my-service.local/metrics</code>, your prefix should be <code>/metrics</code>.'
+        queryParameters:
+          allOf:
+            - $ref: '#/components/schemas/HttpQueryParameters'
+            - description: The query parameter to match on.
       description: An object that represents the criteria for determining a request match.
+    HttpGatewayRouteRewrite:
+      type: object
+      properties:
+        hostname:
+          allOf:
+            - $ref: '#/components/schemas/GatewayRouteHostnameRewrite'
+            - description: The host name to rewrite.
+        path:
+          allOf:
+            - $ref: '#/components/schemas/HttpGatewayRoutePathRewrite'
+            - description: The path to rewrite.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/HttpGatewayRoutePrefixRewrite'
+            - description: The specified beginning characters to rewrite.
+      description: An object representing the gateway route to rewrite.
+    HttpGatewayRouteHeader:
+      type: object
+      required:
+        - name
+      properties:
+        invert:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.
+        match:
+          $ref: '#/components/schemas/HeaderMatchMethod'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/HeaderName'
+            - description: A name for the HTTP header in the gateway route that will be matched on.
+      description: An object that represents the HTTP header in the gateway route.
+    HttpGatewayRouteHeaders:
+      type: array
+      items:
+        $ref: '#/components/schemas/HttpGatewayRouteHeader'
+      minItems: 1
+      maxItems: 10
     HttpMethod:
       type: string
       enum:
@@ -5497,6 +5683,80 @@ components:
         - OPTIONS
         - TRACE
         - PATCH
+    HttpPathMatch:
+      type: object
+      properties:
+        exact:
+          allOf:
+            - $ref: '#/components/schemas/HttpPathExact'
+            - description: The exact path to match on.
+        regex:
+          allOf:
+            - $ref: '#/components/schemas/HttpPathRegex'
+            - description: The regex used to match the path.
+      description: An object representing the path to match in the request.
+    HttpQueryParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/HttpQueryParameter'
+      minItems: 1
+      maxItems: 10
+    HttpPathExact:
+      type: string
+      minLength: 1
+      maxLength: 255
+    HttpGatewayRoutePathRewrite:
+      type: object
+      properties:
+        exact:
+          allOf:
+            - $ref: '#/components/schemas/HttpPathExact'
+            - description: The exact path to rewrite.
+      description: An object that represents the path to rewrite.
+    HttpGatewayRoutePrefix:
+      type: string
+      minLength: 1
+      maxLength: 255
+    HttpGatewayRoutePrefixRewrite:
+      type: object
+      properties:
+        defaultPrefix:
+          allOf:
+            - $ref: '#/components/schemas/DefaultGatewayRouteRewrite'
+            - description: The default prefix used to replace the incoming route prefix when rewritten.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/HttpGatewayRoutePrefix'
+            - description: The value used to replace the incoming route prefix when rewritten.
+      description: An object representing the beginning characters of the route to rewrite.
+    HttpPathRegex:
+      type: string
+      minLength: 1
+      maxLength: 255
+    QueryParameterMatch:
+      type: object
+      properties:
+        exact:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The exact query parameter to match on.
+      description: An object representing the query parameter to match.
+    QueryParameterName:
+      type: string
+    HttpQueryParameter:
+      type: object
+      required:
+        - name
+      properties:
+        match:
+          allOf:
+            - $ref: '#/components/schemas/QueryParameterMatch'
+            - description: The query parameter to match on.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/QueryParameterName'
+            - description: A name for the query parameter that will be matched on.
+      description: An object that represents the query parameter in the request.
     HttpRetryPolicy:
       type: object
       required:
@@ -5519,7 +5779,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TcpRetryPolicyEvents'
             - description: Specify a valid value. The event occurs before any processing of a request has started and is encountered when the upstream is temporarily or permanently unavailable.
-      description: 'An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.'
+      description: 'An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the <code>reset</code> policy, see the <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on">Envoy documentation</a>.'
     HttpRetryPolicyEvent:
       type: string
       minLength: 1
@@ -5536,25 +5796,31 @@ components:
       description: An object that represents the action to take if a match is determined.
     HttpRouteMatch:
       type: object
-      required:
-        - prefix
       properties:
         headers:
           allOf:
             - $ref: '#/components/schemas/HttpRouteHeaders'
-            - description: An object that represents the client request headers to match on.
+            - description: The client request headers to match on.
         method:
           allOf:
             - $ref: '#/components/schemas/HttpMethod'
             - description: The client request method to match on. Specify only one.
+        path:
+          allOf:
+            - $ref: '#/components/schemas/HttpPathMatch'
+            - description: The client request path to match on.
         prefix:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Specifies the path to match requests with. This parameter must always start with <code>/</code>, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is <code>my-service.local</code> and you want the route to match requests to <code>my-service.local/metrics</code>, your prefix should be <code>/metrics</code>.'
+        queryParameters:
+          allOf:
+            - $ref: '#/components/schemas/HttpQueryParameters'
+            - description: The client request query parameters to match on.
         scheme:
           allOf:
             - $ref: '#/components/schemas/HttpScheme'
-            - description: The client request scheme to match on. Specify only one.
+            - description: The client request scheme to match on. Specify only one. Applicable only for HTTP2 routes.
       description: An object that represents the requirements for a route to match HTTP requests for a virtual router.
     HttpTimeout:
       type: object
@@ -5755,7 +6021,9 @@ components:
       type: object
       properties:
         grpc:
-          $ref: '#/components/schemas/GrpcTimeout'
+          allOf:
+            - $ref: '#/components/schemas/GrpcTimeout'
+            - description: 'An object that represents types of timeouts. '
         http:
           allOf:
             - $ref: '#/components/schemas/HttpTimeout'
@@ -5888,7 +6156,9 @@ components:
       type: object
       properties:
         file:
-          $ref: '#/components/schemas/TlsValidationContextFileTrust'
+          allOf:
+            - $ref: '#/components/schemas/TlsValidationContextFileTrust'
+            - description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
         sds:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextSdsTrust'
@@ -6113,7 +6383,7 @@ components:
         acm:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextAcmTrust'
-            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
+            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.
         file:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextFileTrust'
@@ -6132,7 +6402,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateAuthorityArns'
             - description: One or more ACM Amazon Resource Name (ARN)s.
-      description: An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.
     UntagResourceInput:
       type: object
       required:
@@ -6303,7 +6573,9 @@ components:
       type: object
       properties:
         file:
-          $ref: '#/components/schemas/VirtualGatewayListenerTlsFileCertificate'
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayListenerTlsFileCertificate'
+            - description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html"> Transport Layer Security (TLS) </a>.'
         sds:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayListenerTlsSdsCertificate'
@@ -6347,7 +6619,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewaySdsSecretName'
             - description: A reference to an object that represents the name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
-      description: 'An object that represents the virtual gateway''s listener''s Secret Discovery Service certificate.The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info. '
+      description: 'An object that represents the virtual gateway''s listener''s Secret Discovery Service certificate.The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh<a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info. '
     VirtualGatewayGrpcConnectionPool:
       type: object
       required:
@@ -6571,7 +6843,7 @@ components:
         acm:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayListenerTlsAcmCertificate'
-            - description: A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+            - description: A reference to an object that represents an Certificate Manager certificate.
         file:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayListenerTlsFileCertificate'
@@ -6610,14 +6882,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
-      description: An object that represents an AWS Certicate Manager (ACM) certificate.
+      description: An object that represents an Certificate Manager certificate.
     VirtualGatewaySdsSecretName:
       type: string
     VirtualGatewayListenerTlsValidationContextTrust:
       type: object
       properties:
         file:
-          $ref: '#/components/schemas/VirtualGatewayTlsValidationContextFileTrust'
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextFileTrust'
+            - description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
         sds:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextSdsTrust'
@@ -6655,7 +6929,7 @@ components:
         acm:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextAcmTrust'
-            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
+            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.
         file:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextFileTrust'
@@ -6674,7 +6948,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayCertificateAuthorityArns'
             - description: One or more ACM Amazon Resource Name (ARN)s.
-      description: An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.
     VirtualNodeGrpcConnectionPool:
       type: object
       required:

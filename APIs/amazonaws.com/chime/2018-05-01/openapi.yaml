@@ -1015,7 +1015,7 @@ paths:
   /phone-numbers#operation=batch-update:
     post:
       operationId: BatchUpdatePhoneNumber
-      description: '<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
+      description: '<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
       responses:
         '200':
           description: Success
@@ -1098,7 +1098,7 @@ paths:
   '/accounts/{accountId}/users':
     post:
       operationId: BatchUpdateUser
-      description: ' Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action. '
+      description: 'Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.'
       responses:
         '200':
           description: Success
@@ -3447,7 +3447,7 @@ paths:
   /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
-      description: 'Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the US, you must use the Amazon Chime SIP Media Application Dial-In product type.'
+      description: 'Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.'
       responses:
         '201':
           description: Success
@@ -5239,7 +5239,7 @@ paths:
             pattern: .*\S.*
     post:
       operationId: UpdateAccount
-      description: 'Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.'
+      description: 'Updates account details for the specified Amazon Chime account. Currently, only account name and default license updates are supported for this action.'
       responses:
         '200':
           description: Success
@@ -5310,6 +5310,14 @@ paths:
                   pattern: .*\S.*
                   minLength: 1
                   maxLength: 100
+                DefaultLicense:
+                  description: The default license applied when you add users to an Amazon Chime account.
+                  type: string
+                  enum:
+                    - Basic
+                    - Plus
+                    - Pro
+                    - ProTrial
   '/app-instances/{appInstanceArn}':
     delete:
       operationId: DeleteAppInstance
@@ -17244,7 +17252,7 @@ components:
         ErrorMessage:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The error message. '
+            - description: The error message.
       description: 'A list of failed member ARNs, error codes, and error messages.'
     BatchCreateChannelMembershipErrors:
       type: array
@@ -20120,6 +20128,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountName'
             - description: The new name for the specified Amazon Chime account.
+        DefaultLicense:
+          allOf:
+            - $ref: '#/components/schemas/License'
+            - description: The default license applied when you add users to an Amazon Chime account.
     UpdateAccountSettingsRequest:
       type: object
       required:

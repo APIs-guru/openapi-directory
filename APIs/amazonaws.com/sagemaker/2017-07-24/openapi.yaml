@@ -10142,6 +10142,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Creates tags for the specified fleet.
+        EnableIotRoleAlias:
+          allOf:
+            - $ref: '#/components/schemas/EnableIotRoleAlias'
+            - description: '<p>Whether to create an AWS IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}".</p> <p>For example, if your device fleet is called "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".</p>'
     CreateDomainResponse:
       type: object
       properties:
@@ -12982,6 +12986,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The signature document of files in the model artifact.
+        PresetDeploymentOutput:
+          allOf:
+            - $ref: '#/components/schemas/EdgePresetDeploymentOutput'
+            - description: The output of a SageMaker Edge Manager deployable resource.
     DescribeEdgePackagingJobRequest:
       type: object
       required:
@@ -18139,6 +18147,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EdgeOutputConfig'
             - description: Output configuration for storing sample data collected by the fleet.
+        EnableIotRoleAlias:
+          allOf:
+            - $ref: '#/components/schemas/EnableIotRoleAlias'
+            - description: '<p>Whether to create an AWS IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}".</p> <p>For example, if your device fleet is called "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".</p>'
     UpdateDevicesRequest:
       type: object
       required:
@@ -21341,7 +21353,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
             - description: 'The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account.'
+        PresetDeploymentType:
+          allOf:
+            - $ref: '#/components/schemas/EdgePresetDeploymentType'
+            - description: The deployment type SageMaker Edge Manager will create. Currently only supports AWS IoT Greengrass Version 2 components.
+        PresetDeploymentConfig:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The configuration used to create deployment artifacts. Specify configuration options with a JSON string. The available configuration options for each type are:</p> <ul> <li> <p> <code>ComponentName</code> (optional) - Name of the GreenGrass V2 component. If not specified, the default name generated consists of "SagemakerEdgeManager" and the name of your SageMaker Edge Manager packaging job.</p> </li> <li> <p> <code>ComponentDescription</code> (optional) - Description of the component.</p> </li> <li> <p> <code>ComponentVersion</code> (optional) - The version of the component.</p> <note> <p>AWS IoT Greengrass uses semantic versions for components. Semantic versions follow a<i> major.minor.patch</i> number system. For example, version 1.0.0 represents the first major release for a component. For more information, see the <a href="https://semver.org/">semantic version specification</a>.</p> </note> </li> <li> <p> <code>PlatformOS</code> (optional) - The name of the operating system for the platform. Supported platforms include Windows and Linux.</p> </li> <li> <p> <code>PlatformArchitecture</code> (optional) - The processor architecture for the platform. </p> <p>Supported architectures Windows include: Windows32_x86, Windows64_x64.</p> <p>Supported architectures for Linux include: Linux x86_64, Linux ARMV8.</p> </li> </ul>'
       description: The output configuration.
+    EnableIotRoleAlias:
+      type: boolean
     DomainName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}'
@@ -23376,6 +23398,28 @@ components:
         - FAILED
         - STOPPING
         - STOPPED
+    EdgePresetDeploymentOutput:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/EdgePresetDeploymentType'
+            - description: The deployment type created by SageMaker Edge Manager. Currently only supports AWS IoT Greengrass Version 2 components.
+        Artifact:
+          allOf:
+            - $ref: '#/components/schemas/EdgePresetDeploymentArtifact'
+            - description: The Amazon Resource Name (ARN) of the generated deployable resource.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EdgePresetDeploymentStatus'
+            - description: The status of the deployable resource.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Returns a message describing the status of the deployed resource.
+      description: The output of a SageMaker Edge Manager deployable resource.
     ProductionVariantSummaryList:
       type: array
       items:
@@ -24319,6 +24363,10 @@ components:
             - $ref: '#/components/schemas/EdgeVersion'
             - description: The version model.
       description: Summary of model on edge device.
+    EdgePresetDeploymentType:
+      type: string
+      enum:
+        - GreengrassV2Component
     EdgePackagingJobSummary:
       type: object
       required:
@@ -24363,6 +24411,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EdgePackagingJobSummary'
+    EdgePresetDeploymentArtifact:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    EdgePresetDeploymentStatus:
+      type: string
+      enum:
+        - COMPLETED
+        - FAILED
     MonitoringScheduleList:
       type: array
       items:
