@@ -104,52 +104,6 @@ info:
     ⚠️ `meta.cursors.previous`/`links.previous` is not available for all connectors.
 
 
-    ## Connectors
-
-
-    Supported connectors and endpoints
-
-
-    | Service ID                                                      | Status            | v*         | Custom fields | Webhooks  |
-
-    | --------------------------------------------------------------- | ----------------- | ---------- | ------------- | --------- |
-
-    | [ActiveCampaign](https://www.activecampaign.com/)               | &#9989;           | 3          | &#9989;       | &#128284; |
-
-    | [Close](https://close.com)                                      | &#9989;           | 1.0.0      | &#9989;       | &#9989;   |
-
-    | [Copper](https://www.copper.com/)                               | &#9989;           | 1.0.0      | &#9989;       | &#128284; |
-
-    | [Freshsales](https://www.freshworks.com/freshsales-crm/)        | &#9989;           | 0.1.0      | &#9989;       | &#9989;   |
-
-    | [HubSpot](https://www.hubspot.com/)                             | &#9989;           | 3.0.0      | &#128284;     | &#128284; |
-
-    | [Intercom](https://www.intercom.com/)                           | &#128736;&#65039; | 2          | &#128284;     | &#128284; |
-
-    | [Microsoft Dynamics CRM](https://dynamics.microsoft.com/en-us/) | &#9989;           | 1          | &#128284;     | &#128284; |
-
-    | [Pipedrive](https://www.pipedrive.com/)                         | &#9989;           | 0.0.1      | &#9989;       | &#128284; |
-
-    | [Salesflare](https://salesflare.com)                            | &#9989;           | 0.0.1      | &#128284;     | &#128284; |
-
-    | [Salesforce](https://www.salesforce.com)                        | &#9989;           | v51.0      | &#9989;       | &#128284; |
-
-    | [Slack](https://slack.com/)                                     | &#9989;           | v2.0       | &#128284;     | &#128284; |
-
-    | [Teamleader](https://www.teamleader.eu/)                        | &#9989;           | 2019-10-09 | &#9989;       | &#128284; |
-
-    | [Zendesk Sell](https://www.zendesk.com/sell/)                   | &#9989;           | 2.0        | &#9989;       | &#128284; |
-
-    | [Zoho CRM](https://www.zoho.com/crm/)                           | &#9989;           | 2.0        | &#9989;       | &#128284; |
-
-
-    | &#9989; <span style="font-size:0.75em">Available for implementation</span> | - <span style="font-size:0.75em">Not Supported</span>        | &#128736;&#65039; <span style="font-size:0.75em">In Development</span> |
-
-    | -------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------- |
-
-    | * <span style="font-size:0.75em">Latest supported API version</span>       | &#128284; <span style="font-size:0.75em">Coming Soon!</span> |                                                                        |
-
-
     ## SDKs and API Clients
 
 
@@ -226,6 +180,12 @@ info:
 
 
     Filters in the request are valid, but not supported by the connector. Remove the unsupported filter(s) to get a successful response.
+
+
+    #### UnsupportedSortFieldError
+
+
+    Sort field (`sort[by]`) in the request is valid, but not supported by the connector. Replace or remove the sort field to get a successful response.
 
 
     #### InvalidCursorError
@@ -453,7 +413,9 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 2.1.0
+  version: 2.4.0
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
     url: https://developers.apideck.com/icon.png
   x-origin:
@@ -462,6 +424,8 @@ info:
       version: "3.0"
   x-providerName: apideck.com
   x-serviceName: lead
+  x-tags:
+    - partner
 security:
   - apiKey: []
     applicationId: []
