@@ -8,7 +8,7 @@ info:
     media, as well as information about customers' accounts and the contributors
     that provide the media.
   title: Shutterstock API Explorer
-  version: 1.0.33
+  version: 1.1.2
   x-apisguru-categories:
     - media
   x-logo:
@@ -23,7 +23,7 @@ paths:
     get:
       description: This endpoint lists the descriptors that you can use in the audio
         regions in an audio render.
-      operationId: listDescriptors
+      operationId: listCustomDescriptors
       parameters:
         - description: Show descriptors with an average render speed that is greater than
             or equal to the specified value
@@ -39,6 +39,7 @@ paths:
           schema:
             type: string
         - description: Show descriptors with the specified band name (case-sensitive)
+          example: Documentary Underscore Heartfelt Band 1
           in: query
           name: band_name
           schema:
@@ -81,23 +82,23 @@ paths:
           name: instrument_id
           schema:
             type: string
-        - description: Show descriptors with a tempo that is less than or equal to the
-            specified number
-          example: "120"
-          in: query
-          name: tempo_to
-          schema:
-            type: number
         - description: Show descriptors whose tempo range includes the specified tempo in
             beats per minute
-          example: "90"
+          example: 90
           in: query
           name: tempo
           schema:
             type: number
+        - description: Show descriptors with a tempo that is less than or equal to the
+            specified number
+          example: 120
+          in: query
+          name: tempo_to
+          schema:
+            type: number
         - description: Show descriptors that have a tempo range that includes the
             specified tempo in beats per minute
-          example: "60"
+          example: 60
           in: query
           name: tempo_from
           schema:
@@ -214,7 +215,7 @@ paths:
       description: This endpoint lists the instruments that you can include in
         computer audio. If you specify more than one search parameter, the API
         uses an AND condition.
-      operationId: listInstruments
+      operationId: listCustomInstruments
       parameters:
         - description: Show instruments with the specified ID
           example: wood_blocks
@@ -305,7 +306,7 @@ paths:
               "tag": "Percussion"
             };
 
-            customMusicApi.listInstruments(queryParams)
+            customMusicApi.listCustomInstruments(queryParams)
               .then((data) => {
                 console.log(data);
               })
@@ -408,7 +409,7 @@ paths:
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
             -G \
             --data-urlencode "id=L2w7h9VNFlkzpllSUunSYayenKjN" \
-            --data-urlencode "id=BeHx3UNXzMBB4dGsC9aa6VxnpcWl"
+            --data-urlencode "id=BeHx3UNXzMBB4dGsC9aa6VxnpcWl" 
         - lang: javascript--nodejs
           source: |
             const sstk = require("shutterstock-api");
@@ -743,7 +744,7 @@ paths:
 
 
             customMusicApi.createAudioRenders(body)
-              .then(async ({ data }) => {
+              .then(async (data) => {
                 const { id } = data.audio_renders[0];
                 console.log(id);
               })
@@ -1017,7 +1018,7 @@ paths:
     get:
       description: This endpoint lists your collections of audio tracks and their
         basic attributes.
-      operationId: getSoundboxList
+      operationId: getTrackCollectionList
       parameters:
         - description: Page number
           example: "1"
@@ -1087,7 +1088,7 @@ paths:
     post:
       description: This endpoint creates one or more collections (soundboxes). To add
         tracks, use `POST /v2/audio/collections/{id}/items`.
-      operationId: createSoundbox
+      operationId: createTrackCollection
       requestBody:
         content:
           application/json:
@@ -1101,12 +1102,6 @@ paths:
         description: Collection metadata
         required: true
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CollectionCreateResponse"
-          description: No response was specified
         "201":
           content:
             application/json:
@@ -1115,8 +1110,8 @@ paths:
                   value:
                     id: "48433105"
               schema:
-                type: integer
-          description: Successfully created collection
+                $ref: "#/components/schemas/CollectionCreateResponse"
+          description: Successfully created audio collection
         "400":
           description: Bad Request
         "401":
@@ -1153,7 +1148,7 @@ paths:
               "name": "Best rock music"
             };
 
-            audioApi.createSoundbox(body)
+            audioApi.createTrackCollection(body)
               .catch((error) => {
                 console.error(error);
               });
@@ -1194,7 +1189,7 @@ paths:
   "/v2/audio/collections/{id}":
     delete:
       description: This endpoint deletes a collection.
-      operationId: deleteSoundbox
+      operationId: deleteTrackCollection
       parameters:
         - description: Collection ID
           example: "48433111"
@@ -1204,8 +1199,6 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully deleted collection
         "400":
@@ -1239,7 +1232,7 @@ paths:
 
             const collectionId = "48433107";
 
-            audioApi.deleteSoundbox(collectionId)
+            audioApi.deleteTrackCollection(collectionId)
               .catch((error) => {
                 console.error(error);
               });
@@ -1272,7 +1265,7 @@ paths:
       description: This endpoint gets more detailed information about a collection,
         including the number of items in it and when it was last updated. To get
         the tracks in collections, use `GET /v2/audio/collections/{id}/items`.
-      operationId: getSoundbox
+      operationId: getTrackCollection
       parameters:
         - description: Collection ID
           example: "48433107"
@@ -1311,7 +1304,7 @@ paths:
         - audio
     post:
       description: This endpoint sets a new name for a collection.
-      operationId: renameSoundbox
+      operationId: renameTrackCollection
       parameters:
         - description: Collection ID
           example: "48433107"
@@ -1333,8 +1326,6 @@ paths:
         description: Collection changes
         required: true
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully updated collection
         "400":
@@ -1380,7 +1371,7 @@ paths:
               "name": "Best rock music"
             };
 
-            audioApi.renameSoundbox(collectionId, body)
+            audioApi.renameTrackCollection(collectionId, body)
               .catch((error) => {
                 console.error(error);
               });
@@ -1421,7 +1412,7 @@ paths:
   "/v2/audio/collections/{id}/items":
     delete:
       description: This endpoint removes one or more tracks from a collection.
-      operationId: deleteSoundboxItems
+      operationId: deleteTrackCollectionItems
       parameters:
         - description: Collection ID
           example: "48433119"
@@ -1441,8 +1432,6 @@ paths:
               type: string
             type: array
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully removed collection items
         "400":
@@ -1485,7 +1474,7 @@ paths:
               ]
             };
 
-            audioApi.deleteSoundboxItems(collectionId, tracksToRemove)
+            audioApi.deleteTrackCollectionItems(collectionId, tracksToRemove)
               .catch((error) => {
                 console.error(error);
               });
@@ -1517,7 +1506,7 @@ paths:
     get:
       description: This endpoint lists the IDs of tracks in a collection and the date
         that each was added.
-      operationId: getSoundboxItems
+      operationId: getTrackCollectionItems
       parameters:
         - description: Collection ID
           example: "48433113"
@@ -1583,7 +1572,7 @@ paths:
         - audio
     post:
       description: This endpoint adds one or more tracks to a collection by track IDs.
-      operationId: addSoundboxItems
+      operationId: addTrackCollectionItems
       parameters:
         - description: Collection ID
           example: "48433115"
@@ -1607,8 +1596,6 @@ paths:
         description: List of items to add to collection
         required: true
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully added collection items
         "400":
@@ -1668,7 +1655,7 @@ paths:
               ]
             };
 
-            audioApi.addSoundboxItems(collectionId, body)
+            audioApi.addTrackCollectionItems(collectionId, body)
               .catch((error) => {
                 console.error(error);
               });
@@ -1716,7 +1703,7 @@ paths:
   /v2/audio/genres:
     get:
       description: This endpoint returns a list of all audio genres.
-      operationId: getGenres
+      operationId: listGenres
       responses:
         "200":
           content:
@@ -1725,7 +1712,9 @@ paths:
                 response:
                   value:
                     data:
-                      - Rock
+                      - Pop > Singer-Songwriter
+                      - Pop > Synth Pop
+                      - Production / Film Scores
               schema:
                 $ref: "#/components/schemas/GenreList"
           description: OK
@@ -1738,7 +1727,7 @@ paths:
   /v2/audio/instruments:
     get:
       description: This endpoint returns a list of all audio instruments.
-      operationId: getInstruments
+      operationId: listInstruments
       responses:
         "200":
           content:
@@ -1747,7 +1736,10 @@ paths:
                 response:
                   value:
                     data:
-                      - Electric Guitar
+                      - Orchestra
+                      - Organ
+                      - Oud
+                      - Pads
               schema:
                 $ref: "#/components/schemas/InstrumentList"
           description: OK
@@ -1762,13 +1754,64 @@ paths:
       description: This endpoint lists existing licenses. You can filter the results
         according to the track ID to see if you have an existing license for a
         specific track.
-      operationId: getAudioLicenseList
+      operationId: getTrackLicenseList
       parameters:
         - description: Show licenses for the specified track ID
           example: "1"
           in: query
           name: audio_id
           schema:
+            type: string
+        - description: Restrict results by license. Prepending a `-` sign will exclude
+            results by license
+          example: "48433107"
+          in: query
+          name: license
+          schema:
+            type: string
+        - description: Page number
+          in: query
+          name: page
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+        - description: Number of results per page
+          in: query
+          name: per_page
+          schema:
+            default: 20
+            maximum: 200
+            minimum: 0
+            type: integer
+        - description: Sort order
+          in: query
+          name: sort
+          schema:
+            default: newest
+            enum:
+              - newest
+              - oldest
+            type: string
+        - description: Filter licenses by username of licensee
+          example: aUniqueUsername
+          in: query
+          name: username
+          schema:
+            type: string
+        - description: Show licenses created on or after the specified date
+          example: 2021-03-29T13:25:13.521Z
+          in: query
+          name: start_date
+          schema:
+            format: date-time
+            type: string
+        - description: Show licenses created before the specified date
+          example: 2021-03-29T13:25:13.521Z
+          in: query
+          name: end_date
+          schema:
+            format: date-time
             type: string
       responses:
         "200":
@@ -1789,11 +1832,71 @@ paths:
       summary: List audio licenses
       tags:
         - audio
+      x-code-samples:
+        - lang: shell
+          source: |
+            curl -X GET https://api.shutterstock.com/v2/audio/licenses \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
+            -G \
+            --data-urlencode "start_date=2016-10-03T01:25:13.521Z" \
+            --data-urlencode "end_date=2016-10-04T13:25:13.521Z" \
+        - lang: javascript--nodejs
+          source: |
+            const sstk = require("shutterstock-api");
+
+            sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
+
+            const audioApi = new sstk.AudioApi();
+
+            const queryParams = {
+              "start_date": "2016-10-03T01:25:13.521Z",
+              "end_date": "2016-10-04T13:25:13.521Z"
+            };
+
+            audioApi.getTrackLicenseList(queryParams)
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+        - lang: php
+          source: >
+            $queryFields = [
+              "start_date" => "2016-10-03T01:25:13.521Z",
+              "end_date" => "2016-10-04T13:25:13.521Z"
+            ];
+
+
+            $options = [
+              CURLOPT_URL => "https://api.shutterstock.com/v2/audio/licenses" . http_build_query($queryFields),
+              CURLOPT_USERAGENT => "php/curl",
+              CURLOPT_HTTPHEADER => [
+                "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
+              ],
+              CURLOPT_RETURNTRANSFER => 1
+            ];
+
+
+            $handle = curl_init();
+
+            curl_setopt_array($handle, $options);
+
+            $response = curl_exec($handle);
+
+            curl_close($handle);
+
+
+            $decodedResponse = json_decode($response);
+
+            print_r($decodedResponse);
     post:
       description: This endpoint gets licenses for one or more tracks.
       operationId: licenseTrack
       parameters:
         - description: License type
+          example: audio_platform
           in: query
           name: license
           schema:
@@ -1805,6 +1908,7 @@ paths:
               - premier_music_comp
             type: string
         - description: The ID of the search that led to licensing this track
+          example: p5S6QwRikdFJTHXwsoiqTg
           in: query
           name: search_id
           schema:
@@ -1892,7 +1996,7 @@ paths:
             };
 
             audioApi.licenseTrack(body)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -1949,6 +2053,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                response:
+                  value:
+                    url: http://download2.dev.shutterstock.com/gatekeeper/abc/original.wav
               schema:
                 $ref: "#/components/schemas/Url"
           description: OK
@@ -2017,7 +2125,7 @@ paths:
   /v2/audio/moods:
     get:
       description: This endpoint returns a list of all audio moods.
-      operationId: getMoods
+      operationId: listMoods
       responses:
         "200":
           content:
@@ -2026,6 +2134,9 @@ paths:
                 response:
                   value:
                     data:
+                      - Action / Sports
+                      - Adventure / Discovery
+                      - Aerobics / Workout
                       - Aggressive
               schema:
                 $ref: "#/components/schemas/MoodList"
@@ -2042,7 +2153,7 @@ paths:
         search parameter, the API uses an AND condition. Array parameters can be
         specified multiple times; in this case, the API uses an AND or an OR
         condition with those values, depending on the parameter.
-      operationId: searchAudio
+      operationId: searchTracks
       parameters:
         - description: Show tracks with one of the specified artist names or IDs
           in: query
@@ -2061,30 +2172,35 @@ paths:
             type: integer
             uniqueItems: true
         - description: Show tracks with the specified beats per minute or faster
+          example: 80
           in: query
           name: bpm_from
           schema:
             type: integer
             uniqueItems: true
         - description: Show tracks with the specified beats per minute or slower
+          example: 120
           in: query
           name: bpm_to
           schema:
             type: integer
             uniqueItems: true
         - description: Show tracks with the specified duration in seconds
+          example: 180
           in: query
           name: duration
           schema:
             type: integer
             uniqueItems: true
         - description: Show tracks with the specified duration or longer in seconds
+          example: 30
           in: query
           name: duration_from
           schema:
             type: integer
             uniqueItems: true
         - description: Show tracks with the specified duration or shorter in seconds
+          example: 180
           in: query
           name: duration_to
           schema:
@@ -2104,6 +2220,7 @@ paths:
             type: array
             uniqueItems: false
         - description: Show instrumental music only
+          example: true
           in: query
           name: is_instrumental
           schema:
@@ -2161,6 +2278,7 @@ paths:
             type: string
             uniqueItems: true
         - description: Sort by
+          example: score
           in: query
           name: sort
           schema:
@@ -2185,6 +2303,7 @@ paths:
             type: string
             uniqueItems: true
         - description: Show tracks with the specified vocal description (male, female)
+          example: female
           in: query
           name: vocal_description
           schema:
@@ -2344,7 +2463,7 @@ paths:
               "moods": ["uplifting"]
             };
 
-            audioApi.searchAudio(queryParams)
+            audioApi.searchTracks(queryParams)
               .then((data) => {
                 console.log(data);
               })
@@ -2863,7 +2982,7 @@ paths:
             curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
             -H 'Content-Type: application/json' \
-            -d "{\"base64_image\":\"`base64 myImage.jpg`\"}"
+            -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}"
         - lang: javascript--nodejs
           source: |
             const sstk = require("shutterstock-api");
@@ -2970,7 +3089,7 @@ paths:
 
             -H 'Content-Type: application/json' \
 
-            -d "{\"base64_image\":\"`base64 myImage.jpg`\"}")
+            -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}")
 
 
             echo "The next step requires the jq program."
@@ -3206,7 +3325,7 @@ paths:
 
             -H 'Content-Type: application/json' \
 
-            -d "{\"base64_image\":\"`base64 myImage.jpg`\"}")
+            -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}")
 
 
             echo "The next step requires the jq program."
@@ -3434,7 +3553,7 @@ paths:
 
             -H 'Content-Type: application/json' \
 
-            -d "{\"base64_image\":\"`base64 myImage.jpg`\"}")
+            -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}")
 
 
             echo "The next step requires the jq program."
@@ -3550,6 +3669,7 @@ paths:
         endpoint lists the categories that editorial images can belong to, which
         are separate from the categories that other types of assets can belong
         to.
+      operationId: getEditorialCategories
       responses:
         "200":
           content:
@@ -3582,7 +3702,7 @@ paths:
       description: This endpoint lists the categories that editorial images can belong
         to, which are separate from the categories that other types of assets
         can belong to.
-      operationId: getEditorialImageCategories
+      operationId: listEditorialImageCategories
       responses:
         "200":
           content:
@@ -3616,12 +3736,14 @@ paths:
       operationId: getEditorialImageLicenseList
       parameters:
         - description: Show licenses for the specified editorial image ID
+          example: "12345678"
           in: query
           name: image_id
           schema:
             type: string
         - description: Show editorial images that are available with the specified license
             name
+          example: premier_editorial_all_digital
           in: query
           name: license
           schema:
@@ -3651,19 +3773,20 @@ paths:
               - oldest
             type: string
         - description: Filter licenses by username of licensee
+          example: aUniqueUsername
           in: query
           name: username
           schema:
             type: string
         - description: Show licenses created on or after the specified date
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: start_date
           schema:
             format: date-time
             type: string
         - description: Show licenses created before the specified date
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: end_date
           schema:
@@ -3733,13 +3856,11 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              default:
-                value:
-                  country: USA
-                  editorial:
-                    - editorial_id: 8594090h
-                      license: premier_editorial_comp
+            example:
+              country: USA
+              editorial:
+                - editorial_id: 8594090h
+                  license: premier_editorial_comp
             schema:
               $ref: "#/components/schemas/LicenseEditorialContentRequest"
         description: License editorial content
@@ -3815,7 +3936,7 @@ paths:
             };
 
             editorialApi.licenseEditorialImage(body)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -3863,7 +3984,7 @@ paths:
             print_r($decodedResponse);
   /v2/editorial/images/livefeeds:
     get:
-      operationId: getEditorialLivefeedImagesList
+      operationId: getEditorialImageLivefeedList
       parameters:
         - description: Returns only livefeeds that are available for distribution in a
             certain country
@@ -3980,7 +4101,7 @@ paths:
         - editorial_images
   "/v2/editorial/images/livefeeds/{id}/items":
     get:
-      operationId: getEditorialLivefeedImageItems
+      operationId: getEditorialImageLivefeedItems
       parameters:
         - description: Editorial livefeed ID; must be an URI encoded string
           example: 2018%2F10%2F15%2FWomen%20of%20the%20Year%20Lunch%20%26%20Awards%2C%20London
@@ -4079,6 +4200,7 @@ paths:
       operationId: searchEditorialImages
       parameters:
         - description: One or more search terms separated by spaces
+          example: The Academy Awards
           in: query
           name: query
           schema:
@@ -4116,12 +4238,14 @@ paths:
               type: string
             type: array
         - description: Show only editorial content generated on or after a specific date
+          example: 2020-05-29
           in: query
           name: date_start
           schema:
             format: date
             type: string
         - description: Show only editorial content generated on or before a specific date
+          example: 2021-05-29
           in: query
           name: date_end
           schema:
@@ -4137,6 +4261,7 @@ paths:
             type: integer
         - description: The cursor of the page with which to start fetching results; this
             cursor is returned from previous requests
+          example: eyJ2IjoxLCJzIjoxfQ==
           in: query
           name: cursor
           schema:
@@ -4318,7 +4443,7 @@ paths:
         - description: Show images images added, edited, or deleted after the specified
             date. Acceptable range is 1970-01-01T00:00:01 to
             2038-01-19T00:00:00.
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_start
           required: true
@@ -4328,7 +4453,7 @@ paths:
         - description: Show images images added, edited, or deleted before the specified
             date. Acceptable range is 1970-01-01T00:00:01 to
             2038-01-19T00:00:00.
-          example: 2020-02-04T14:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_end
           required: true
@@ -4560,7 +4685,7 @@ paths:
     get:
       description: This endpoint shows information about an editorial image, including
         a URL to a preview image and the sizes that it is available in.
-      operationId: getEditorialImageDetails
+      operationId: getEditorialImage
       parameters:
         - description: Editorial ID
           example: 9926131a
@@ -4736,7 +4861,7 @@ paths:
             };
 
             editorialApi.licenseEditorialImage(body)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -5233,7 +5358,7 @@ paths:
         - description: Show images images added, edited, or deleted after the specified
             date. Acceptable range is 1970-01-01T00:00:01 to
             2038-01-19T00:00:00.
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_start
           required: true
@@ -5243,7 +5368,7 @@ paths:
         - description: Show images images added, edited, or deleted before the specified
             date. Acceptable range is 1970-01-01T00:00:01 to
             2038-01-19T00:00:00.
-          example: 2020-02-04T14:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_end
           required: true
@@ -5469,7 +5594,7 @@ paths:
       description: This endpoint lists the categories that editorial videos can belong
         to, which are separate from the categories that other types of assets
         can belong to.
-      operationId: getEditorialCategories
+      operationId: listEditorialVideoCategories
       responses:
         "200":
           content:
@@ -5585,7 +5710,7 @@ paths:
             };
 
             editorialApi.licenseEditorialVideo(body)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -5639,9 +5764,10 @@ paths:
         an AND or an OR condition with those values, depending on the parameter.
         You can also filter search terms out in the `query` parameter by
         prefixing the term with NOT.
-      operationId: editorialVideosSearch
+      operationId: searchEditorialVideos
       parameters:
         - description: One or more search terms separated by spaces
+          example: The Academy Awards
           in: query
           name: query
           schema:
@@ -5680,6 +5806,7 @@ paths:
             type: array
         - description: Show only editorial video content generated on or after a specific
             date
+          example: 2020-05-29
           in: query
           name: date_start
           schema:
@@ -5687,12 +5814,14 @@ paths:
             type: string
         - description: Show only editorial video content generated on or before a specific
             date
+          example: 2021-05-29
           in: query
           name: date_end
           schema:
             format: date
             type: string
         - description: Show only editorial video content with specific resolution
+          example: 4k
           in: query
           name: resolution
           schema:
@@ -5703,6 +5832,7 @@ paths:
             type: string
         - description: Show only editorial video content generated with specific frames
             per second
+          example: 24
           in: query
           name: fps
           schema:
@@ -5717,6 +5847,7 @@ paths:
             type: integer
         - description: The cursor of the page with which to start fetching results; this
             cursor is returned from previous requests
+          example: eyJ2IjoxLCJzIjoxfQ==
           in: query
           name: cursor
           schema:
@@ -5842,7 +5973,7 @@ paths:
 
             const country = "USA";
 
-            editorialApi.editorialVideosSearch(country, queryParams)
+            editorialApi.searchEditorialVideos(country, queryParams)
               .then((data) => {
                 console.log(data);
               })
@@ -5885,7 +6016,7 @@ paths:
     get:
       description: This endpoint shows information about an editorial image, including
         a URL to a preview image and the sizes that it is available in.
-      operationId: editorialVideosDetails
+      operationId: getEditorialVideo
       parameters:
         - description: Editorial ID
           example: 9926131a
@@ -5989,7 +6120,6 @@ paths:
       description: Deprecated; use `GET /v2/editorial/images/{id}` instead to show
         information about an editorial image, including a URL to a preview image
         and the sizes that it is available in.
-      operationId: getEditorialImage
       parameters:
         - description: Editorial ID
           example: 9926131a
@@ -6216,7 +6346,7 @@ paths:
             curl -X POST 'https://api.shutterstock.com/v2/images' \
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
             -H 'Content-Type: application/json' \
-            -d "{\"base64_image\":\"`base64 myImage.jpg`\"}"
+            -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}"
         - lang: javascript--nodejs
           source: |
             const sstk = require("shutterstock-api");
@@ -6280,7 +6410,7 @@ paths:
     get:
       description: This endpoint lists the categories (Shutterstock-assigned genres)
         that images can belong to.
-      operationId: getImageCategories
+      operationId: listImageCategories
       parameters:
         - description: Language for the keywords and categories in the response
           example: es
@@ -6325,7 +6455,7 @@ paths:
     get:
       description: This endpoint lists your collections of images and their basic
         attributes.
-      operationId: getLightboxList
+      operationId: getImageCollectionList
       parameters:
         - description: Which sharing information to include in the response, such as a URL
             to the collection
@@ -6391,7 +6521,7 @@ paths:
       description: This endpoint creates one or more image collections (lightboxes).
         To add images to the collections, use `POST
         /v2/images/collections/{id}/items`.
-      operationId: createLightbox
+      operationId: createImageCollection
       requestBody:
         content:
           application/json:
@@ -6404,8 +6534,6 @@ paths:
         description: The names of the new collections
         required: true
       responses:
-        "200":
-          description: No response was specified
         "201":
           content:
             application/json:
@@ -6415,7 +6543,7 @@ paths:
                     id: "101202664"
               schema:
                 $ref: "#/components/schemas/CollectionCreateResponse"
-          description: Creation successful
+          description: Successfully created image collection
         "400":
           description: Bad Request
         "401":
@@ -6452,7 +6580,7 @@ paths:
               "name": "My collection"
             };
 
-            imagesApi.createLightbox(body)
+            imagesApi.createImageCollection(body)
               .catch((error) => {
                 console.error(error);
               });
@@ -6494,7 +6622,7 @@ paths:
     get:
       description: This endpoint lists featured collections of specific types and a
         name and cover image for each collection.
-      operationId: getFeaturedLightboxList
+      operationId: getFeaturedImageCollectionList
       parameters:
         - description: Which sharing information to include in the response, such as a URL
             to the collection
@@ -6518,7 +6646,7 @@ paths:
               type: string
             type: array
         - description: Cover image size
-          example: share_url
+          example: 1x
           in: query
           name: asset_hint
           schema:
@@ -6574,7 +6702,7 @@ paths:
         collection, including its cover image and timestamps for its creation
         and most recent update. To get the images, use `GET
         /v2/images/collections/featured/{id}/items`.
-      operationId: getFeaturedLightbox
+      operationId: getFeaturedImageCollection
       parameters:
         - description: Collection ID
           example: "136351027"
@@ -6636,7 +6764,7 @@ paths:
     get:
       description: This endpoint lists the IDs of images in a featured collection and
         the date that each was added.
-      operationId: getFeaturedLightboxItems
+      operationId: getFeaturedImageCollectionItems
       parameters:
         - description: Collection ID
           example: "136351027"
@@ -6696,7 +6824,7 @@ paths:
   "/v2/images/collections/{id}":
     delete:
       description: This endpoint deletes an image collection.
-      operationId: deleteLightbox
+      operationId: deleteImageCollection
       parameters:
         - description: Collection ID
           example: "136351027"
@@ -6706,8 +6834,6 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully deleted collection
         "400":
@@ -6741,7 +6867,7 @@ paths:
 
             const collectionId = "136351027"; // Collection ID
 
-            imagesApi.deleteLightbox(collectionId)
+            imagesApi.deleteImageCollection(collectionId)
               .catch((error) => {
                 console.error(error);
               });
@@ -6775,7 +6901,7 @@ paths:
         including its cover image and timestamps for its creation and most
         recent update. To get the images in collections, use `GET
         /v2/images/collections/{id}/items`.
-      operationId: getLightbox
+      operationId: getImageCollection
       parameters:
         - description: Collection ID
           example: "126351027"
@@ -6830,7 +6956,7 @@ paths:
         - images
     post:
       description: This endpoint sets a new name for an image collection.
-      operationId: renameLightbox
+      operationId: renameImageCollection
       parameters:
         - description: Collection ID
           example: "126351027"
@@ -6851,8 +6977,6 @@ paths:
         description: The new name for the collection
         required: true
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully updated collection
         "400":
@@ -6898,7 +7022,7 @@ paths:
               "name": "My new collection name"
             };
 
-            imagesApi.renameLightbox(collectionId, body)
+            imagesApi.renameImageCollection(collectionId, body)
               .catch((error) => {
                 console.error(error);
               });
@@ -6939,7 +7063,7 @@ paths:
   "/v2/images/collections/{id}/items":
     delete:
       description: This endpoint removes one or more images from a collection.
-      operationId: deleteLightboxItems
+      operationId: deleteImageCollectionItems
       parameters:
         - description: Collection ID
           example: "126351027"
@@ -6956,8 +7080,6 @@ paths:
               type: string
             type: array
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully removed collection items
         "400":
@@ -6999,7 +7121,7 @@ paths:
               ]
             };
 
-            imagesApi.deleteLightboxItems(collectionId, imagesToRemove)
+            imagesApi.deleteImageCollectionItems(collectionId, imagesToRemove)
               .catch((error) => {
                 console.error(error);
               });
@@ -7031,7 +7153,7 @@ paths:
     get:
       description: This endpoint lists the IDs of images in a collection and the date
         that each was added.
-      operationId: getLightboxItems
+      operationId: getImageCollectionItems
       parameters:
         - description: Collection ID
           example: "126351027"
@@ -7097,7 +7219,7 @@ paths:
         - images
     post:
       description: This endpoint adds one or more images to a collection by image IDs.
-      operationId: addLightboxItems
+      operationId: addImageCollectionItems
       parameters:
         - description: Collection ID
           example: "126351027"
@@ -7120,8 +7242,6 @@ paths:
         description: Array of image IDs to add to the collection
         required: true
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully added collection items
         "400":
@@ -7177,7 +7297,7 @@ paths:
               ]
             };
 
-            imagesApi.addLightboxItems(collectionId, body)
+            imagesApi.addImageCollectionItems(collectionId, body)
               .catch((error) => {
                 console.error(error);
               });
@@ -7226,16 +7346,20 @@ paths:
       operationId: getImageLicenseList
       parameters:
         - description: Show licenses for the specified image ID
+          example: "12345678"
           in: query
           name: image_id
           schema:
+            pattern: ^[1-9]\d*$
             type: string
         - description: Show images that are available with the specified license, such as
             `standard` or `enhanced`; prepending a `-` sign excludes results
             from that license
+          example: standard
           in: query
           name: license
           schema:
+            pattern: ^.+$
             type: string
         - description: Page number
           in: query
@@ -7250,7 +7374,7 @@ paths:
           schema:
             default: 20
             maximum: 200
-            minimum: 0
+            minimum: 1
             type: integer
         - description: Sort order
           in: query
@@ -7262,19 +7386,20 @@ paths:
               - oldest
             type: string
         - description: Filter licenses by username of licensee
+          example: aUniqueUsername
           in: query
           name: username
           schema:
             type: string
         - description: Show licenses created on or after the specified date
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: start_date
           schema:
             format: date-time
             type: string
         - description: Show licenses created before the specified date
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: end_date
           schema:
@@ -7350,6 +7475,65 @@ paths:
       summary: List image licenses
       tags:
         - images
+      x-code-samples:
+        - lang: shell
+          source: |
+            curl -X GET https://api.shutterstock.com/v2/images/licenses \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
+            -G \
+            --data-urlencode "start_date=2016-10-03T01:25:13.521Z" \
+            --data-urlencode "end_date=2016-10-04T13:25:13.521Z" \
+        - lang: javascript--nodejs
+          source: |
+            const sstk = require("shutterstock-api");
+
+            sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
+
+            const imagesApi = new sstk.ImagesApi();
+
+            const queryParams = {
+              "start_date": "2016-10-03T01:25:13.521Z",
+              "end_date": "2016-10-04T13:25:13.521Z"
+            };
+
+            imagesApi.getImageLicenseList(queryParams)
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+        - lang: php
+          source: >
+            $queryFields = [
+              "start_date" => "2016-10-03T01:25:13.521Z",
+              "end_date" => "2016-10-04T13:25:13.521Z"
+            ];
+
+
+            $options = [
+              CURLOPT_URL => "https://api.shutterstock.com/v2/images/licenses" . http_build_query($queryFields),
+              CURLOPT_USERAGENT => "php/curl",
+              CURLOPT_HTTPHEADER => [
+                "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
+              ],
+              CURLOPT_RETURNTRANSFER => 1
+            ];
+
+
+            $handle = curl_init();
+
+            curl_setopt_array($handle, $options);
+
+            $response = curl_exec($handle);
+
+            curl_close($handle);
+
+
+            $decodedResponse = json_decode($response);
+
+            print_r($decodedResponse);
     post:
       description: This endpoint gets licenses for one or more images. You must
         specify the image IDs in the body parameter and other details like the
@@ -7495,7 +7679,7 @@ paths:
             };
 
             imagesApi.licenseImages(body, queryParams)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -7559,10 +7743,8 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              default:
-                value:
-                  size: huge
+            example:
+              size: huge
             schema:
               $ref: "#/components/schemas/RedownloadImage"
         description: Information about the images to redownload
@@ -7574,7 +7756,7 @@ paths:
               examples:
                 response:
                   value:
-                    url: https://download.qa.shutterstock.com/gatekeeper/LzEyMy9odWdlLmpwZyIsIm0iOjEsvdjNsbFNWbVNEQ2FhcHV1VlhhSU9VeUpVIl0/shutterstock_60447496.jpg'
+                    url: https://download.qa.shutterstock.com/gatekeeper/LzEyMy9odWdlLmpwZyIsIm0iOjEsvdjNsbFNWbVNEQ2FhcHV1VlhhSU9VeUpVIl0/shutterstock_60447496.jpg
               schema:
                 $ref: "#/components/schemas/Url"
           description: OK
@@ -7733,12 +7915,14 @@ paths:
       operationId: searchImages
       parameters:
         - description: Show images added on the specified date
+          example: 2021-03-29
           in: query
           name: added_date
           schema:
             format: date
             type: string
         - description: Show images added on or after the specified date
+          example: 2021-03-29
           in: query
           name: added_date_start
           schema:
@@ -7747,6 +7931,7 @@ paths:
         - description: Show images with the specified aspect ratio or higher, using a
             positive decimal of the width divided by the height, such as 1.7778
             for a 16:9 image
+          example: 1.7778
           in: query
           name: aspect_ratio_min
           schema:
@@ -7756,6 +7941,7 @@ paths:
         - description: Show images with the specified aspect ratio or lower, using a
             positive decimal of the width divided by the height, such as 1.7778
             for a 16:9 image
+          example: 1.7778
           in: query
           name: aspect_ratio_max
           schema:
@@ -7765,6 +7951,7 @@ paths:
         - description: Show images with the specified aspect ratio, using a positive
             decimal of the width divided by the height, such as 1.7778 for a
             16:9 image
+          example: 1.7778
           in: query
           name: aspect_ratio
           schema:
@@ -7772,6 +7959,7 @@ paths:
             minimum: 0
             type: number
         - description: Show images added before the specified date
+          example: 2021-03-29
           in: query
           name: added_date_end
           schema:
@@ -7784,14 +7972,16 @@ paths:
           schema:
             type: string
         - description: Specify either a hexadecimal color in the format '4F21EA' or
-            'grayscale'; the API groups it into one of 15 color categories and
-            returns images that primarily use that color category
+            'grayscale'; the API returns images that use similar colors
+          example: 4F21EA
           in: query
           name: color
           schema:
             type: string
         - description: Show images with the specified contributor names or IDs, allows
             multiple
+          example:
+            - "123456"
           in: query
           name: contributor
           schema:
@@ -7800,6 +7990,7 @@ paths:
             type: array
         - description: Show images from contributors in one or more specified countries,
             or start with NOT to exclude a country from the search
+          example: US
           in: query
           name: contributor_country
           schema:
@@ -7827,16 +8018,19 @@ paths:
           schema:
             type: integer
         - description: Show images with the specified height or larger, in pixels
+          example: 1080
           in: query
           name: height_from
           schema:
             type: integer
         - description: Show images with the specified height or smaller, in pixels
+          example: 1080
           in: query
           name: height_to
           schema:
             type: integer
         - description: Show images of the specified type
+          example: photo
           in: query
           name: image_type
           schema:
@@ -7855,6 +8049,7 @@ paths:
             type: boolean
         - description: Set query and result language (uses Accept-Language header if not
             set)
+          example: fr
           in: query
           name: language
           schema:
@@ -7872,6 +8067,9 @@ paths:
               type: string
             type: array
         - description: Show image results with the specified model IDs
+          example:
+            - "12345"
+            - "67890"
           in: query
           name: model
           schema:
@@ -7879,6 +8077,7 @@ paths:
               type: string
             type: array
         - description: Show image results with horizontal or vertical orientation
+          example: vertical
           in: query
           name: orientation
           schema:
@@ -7887,6 +8086,7 @@ paths:
               - vertical
             type: string
         - description: Page number
+          example: 1
           in: query
           name: page
           schema:
@@ -7894,6 +8094,7 @@ paths:
             minimum: 1
             type: integer
         - description: Number of results per page
+          example: 50
           in: query
           name: per_page
           schema:
@@ -7902,11 +8103,13 @@ paths:
             minimum: 0
             type: integer
         - description: Show images of people with a signed model release
+          example: true
           in: query
           name: people_model_released
           schema:
             type: boolean
         - description: Show images that feature people of the specified age category
+          example: 20s
           in: query
           name: people_age
           schema:
@@ -7922,6 +8125,7 @@ paths:
               - older
             type: string
         - description: Show images with people of the specified ethnicities
+          example: hispanic
           in: query
           name: people_ethnicity
           schema:
@@ -7945,6 +8149,7 @@ paths:
               type: string
             type: array
         - description: Show images with people of the specified gender
+          example: both
           in: query
           name: people_gender
           schema:
@@ -7954,6 +8159,7 @@ paths:
               - both
             type: string
         - description: Show images with the specified number of people
+          example: 2
           in: query
           name: people_number
           schema:
@@ -7962,6 +8168,7 @@ paths:
             type: integer
         - description: One or more search terms separated by spaces; you can use NOT to
             filter out images that match a term
+          example: dogs on the beach
           in: query
           name: query
           schema:
@@ -7969,6 +8176,7 @@ paths:
         - description: Raise or lower search result rankings based on the result's
             relevance to a specified region; you can provide a country code or
             an IP address from which the API infers a country
+          example: US
           in: query
           name: region
           schema:
@@ -8017,11 +8225,13 @@ paths:
           schema:
             type: integer
         - description: Show images with the specified width or larger, in pixels
+          example: 1920
           in: query
           name: width_from
           schema:
             type: integer
         - description: Show images with the specified width or smaller, in pixels
+          example: 1920
           in: query
           name: width_to
           schema:
@@ -8174,6 +8384,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - cats
+                      - catwalk
+                      - cat and dog
+                      - cat dog
+                      - cat silhouette
               schema:
                 $ref: "#/components/schemas/Suggestions"
           description: OK
@@ -8192,10 +8411,13 @@ paths:
     post:
       description: This endpoint returns up to 10 important keywords from a block of
         plain text.
-      operationId: postImageEntities
+      operationId: getImageKeywordSuggestions
       requestBody:
         content:
           application/json:
+            example:
+              text: The beach is a wonderful place to visit. It has beautiful sand and ocean
+                waves.
             schema:
               $ref: "#/components/schemas/SearchEntitiesRequest"
         description: Plain text to extract keywords from
@@ -8204,6 +8426,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - beach
+                      - place
+                      - sand
+                      - ocean
               schema:
                 $ref: "#/components/schemas/SearchEntitiesResponse"
           description: OK
@@ -8251,7 +8481,7 @@ paths:
             };
 
 
-            imagesApi.postImageEntities(body)
+            imagesApi.getImageKeywordSuggestions(body)
               .then((data) => {
                 console.log(data);
               })
@@ -8305,6 +8535,7 @@ paths:
       parameters:
         - description: Show images that were added, deleted, or edited; by default, the
             endpoint returns images that were updated in any of these ways
+          example: addition
           in: query
           name: type
           schema:
@@ -8316,12 +8547,14 @@ paths:
               type: string
             type: array
         - description: Show images updated on or after the specified date
+          example: 2021-03-29
           in: query
           name: start_date
           schema:
             format: date
             type: string
         - description: Show images updated before the specified date
+          example: 2021-03-29
           in: query
           name: end_date
           schema:
@@ -8410,7 +8643,7 @@ paths:
             };
 
             imagesApi.getUpdatedImages(queryParams)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -8711,6 +8944,10 @@ paths:
                     - customer
                     - contributor
                   type: string
+                refresh_token:
+                  description: Pass this along with grant_type=refresh_token to get a fresh access
+                    token
+                  type: string
               required:
                 - client_id
                 - grant_type
@@ -8755,6 +8992,10 @@ paths:
                     - customer
                     - contributor
                   type: string
+                refresh_token:
+                  description: Pass this along with grant_type=refresh_token to get a fresh access
+                    token
+                  type: string
               required:
                 - client_id
                 - grant_type
@@ -8782,10 +9023,13 @@ paths:
         - oauth
       x-code-samples:
         - lang: shell
-          source: curl "https://api.shutterstock.com/v2/oauth/access_token" \ -X POST \
-            --data-urlencode "client_id=$CLIENT_ID" \ --data-urlencode
-            "client_secret=$CLIENT_SECRET" \ --data-urlencode
-            "grant_type=authorization_code" \ --data-urlencode "code=$CODE"
+          source: |-
+            curl "https://api.shutterstock.com/v2/oauth/access_token" \
+            -X POST \
+            --data-urlencode "client_id=$CLIENT_ID" \
+            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "grant_type=authorization_code" \
+            --data-urlencode "code=$CODE"
         - lang: javascript--nodejs
           source: >
             const axios = require("axios");
@@ -8920,12 +9164,22 @@ paths:
         - oauth
       x-code-samples:
         - lang: shell
-          source: curl "https://api.shutterstock.com/v2/oauth/authorize" \ -X GET \ -G \
-            --data-urlencode "scope=licenses.create licenses.view
-            purchases.view" \ --data-urlencode "state=demo_`date +%s`" \
-            --data-urlencode "response_type=code" \ --data-urlencode
-            "redirect_uri=http://localhost:3000/callback" \ --data-urlencode
-            "client_id=$CLIENT_ID"
+          source: >-
+            curl "https://api.shutterstock.com/v2/oauth/authorize" \
+
+            -X GET \
+
+            -G \
+
+            --data-urlencode "scope=licenses.create licenses.view purchases.view" \
+
+            --data-urlencode "state=demo_`date +%s`" \
+
+            --data-urlencode "response_type=code" \
+
+            --data-urlencode "redirect_uri=http://localhost:3000/callback" \
+
+            --data-urlencode "client_id=$CLIENT_ID"
         - lang: javascript--nodejs
           source: >
             const axios = require("axios");
@@ -9101,7 +9355,7 @@ paths:
         - users
   /v2/user/subscriptions:
     get:
-      operationId: getUserSubsciptionList
+      operationId: getUserSubscriptionList
       responses:
         "200":
           content:
@@ -9232,7 +9486,7 @@ paths:
     get:
       description: This endpoint lists the categories (Shutterstock-assigned genres)
         that videos can belong to.
-      operationId: getVideoCategories
+      operationId: listVideoCategories
       parameters:
         - description: Language for the keywords and categories in the response
           example: es
@@ -9277,7 +9531,7 @@ paths:
     get:
       description: This endpoint lists your collections of videos and their basic
         attributes.
-      operationId: getClipboxList
+      operationId: getVideoCollectionList
       parameters:
         - description: Page number
           in: query
@@ -9340,7 +9594,7 @@ paths:
     post:
       description: This endpoint creates one or more collections (clipboxes). To add
         videos to collections, use `POST /v2/videos/collections/{id}/items`.
-      operationId: createClipbox
+      operationId: createVideoCollection
       requestBody:
         content:
           application/json:
@@ -9353,12 +9607,6 @@ paths:
         description: Collection metadata
         required: true
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CollectionCreateResponse"
-          description: No response was specified
         "201":
           content:
             application/json:
@@ -9368,7 +9616,7 @@ paths:
                     id: "10120264"
               schema:
                 $ref: "#/components/schemas/CollectionCreateResponse"
-          description: Successfully created collection
+          description: Successfully created video collection
         "400":
           description: Bad Request
         "401":
@@ -9405,7 +9653,7 @@ paths:
               "name": "New collection name"
             };
 
-            videosApi.createClipbox(body)
+            videosApi.createVideoCollection(body)
               .catch((error) => {
                 console.error(error);
               });
@@ -9443,10 +9691,182 @@ paths:
             $decodedResponse = json_decode($response);
 
             print_r($decodedResponse);
+  /v2/videos/collections/featured:
+    get:
+      description: This endpoint lists featured video collections and a name and cover
+        video for each collection.
+      operationId: getFeaturedVideoCollectionList
+      parameters:
+        - description: What information to include in the response, such as a URL to the
+            collection
+          example: share_url
+          in: query
+          name: embed
+          schema:
+            enum:
+              - share_url
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - cover_item:
+                          url: https://ak.picdn.net/assets/cms/ecedf10e57824db9516560f7523f084b445c1672-shutterstock_104947832.jpg
+                        created_time: 2018-03-06T19:19:02.000Z
+                        id: "73497710"
+                        items_updated_time: 2018-01-30T09:49:22-05:00
+                        name: Flower Still Lifes
+                        share_url: http://www.shutterstock.com/collections/73497710-flower-still-lifes.html
+                        total_item_count: 50
+                        updated_time: 2018-03-06T21:28:06.000Z
+                      - cover_item:
+                          url: https://ak.picdn.net/assets/cms/3aa67c2b92c7cead79da08b955f409269553fade-shutterstock_343681901.jpg
+                        created_time: 2018-03-06T18:54:19.000Z
+                        id: "45566855"
+                        items_updated_time: 2016-05-18T10:49:02-04:00
+                        name: Feeling Down
+                        share_url: http://www.shutterstock.com/collections/45566855-feeling-down.html
+                        total_item_count: 100
+                        updated_time: 2018-03-07T13:58:21.000Z
+              schema:
+                $ref: "#/components/schemas/FeaturedCollectionDataList"
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - basic: []
+        - customer_accessCode: []
+      summary: List featured video collections
+      tags:
+        - videos
+  "/v2/videos/collections/featured/{id}":
+    get:
+      description: This endpoint gets more detailed information about a featured video
+        collection, including its cover video and timestamps for its creation
+        and most recent update. To get the videos, use `GET
+        /v2/videos/collections/featured/{id}/items`.
+      operationId: getFeaturedVideoCollection
+      parameters:
+        - description: Collection ID
+          example: "136351027"
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: What information to include in the response, such as a URL to the
+            collection
+          in: query
+          name: embed
+          schema:
+            enum:
+              - share_url
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    cover_item:
+                      url: https://ak.picdn.net/assets/cms/3aa67c2b92c7ceadd79da08b95d5f409269553fade-shutterstock_343681901.jpg
+                    created_time: 2018-03-06T18:54:19.000Z
+                    id: "136351027"
+                    items_updated_time: 2016-05-18T10:49:02-04:00
+                    name: Feeling Down
+                    total_item_count: 100
+                    updated_time: 2018-03-07T13:58:21.000Z
+              schema:
+                $ref: "#/components/schemas/FeaturedCollection"
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Featured collection not found
+      security:
+        - basic: []
+        - customer_accessCode: []
+      summary: Get the details of featured video collections
+      tags:
+        - videos
+  "/v2/videos/collections/featured/{id}/items":
+    get:
+      description: This endpoint lists the IDs of videos in a featured collection and
+        the date that each was added.
+      operationId: getFeaturedVideoCollectionItems
+      parameters:
+        - description: Collection ID
+          example: "136351027"
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Page number
+          in: query
+          name: page
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+        - description: Number of results per page
+          in: query
+          name: per_page
+          schema:
+            default: 100
+            maximum: 150
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - added_time: 2016-05-18T10:49:02-04:00
+                        id: "2931777093"
+                      - added_time: 2016-05-18T10:39:06-04:00
+                        id: "4101383321"
+                      - added_time: 2016-05-18T10:31:04-04:00
+                        id: "1821077001"
+                      - added_time: 2016-05-18T10:21:54-04:00
+                        id: "3451984902"
+              schema:
+                $ref: "#/components/schemas/VideoCollectionItemDataList"
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Featured collection not found
+      security:
+        - basic: []
+        - customer_accessCode: []
+      summary: Get the contents of featured video collections
+      tags:
+        - videos
   "/v2/videos/collections/{id}":
     delete:
       description: This endpoint deletes a collection.
-      operationId: deleteClipbox
+      operationId: deleteVideoCollection
       parameters:
         - description: The ID of the collection to delete
           example: "17555176"
@@ -9456,8 +9876,6 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully deleted collection
         "400":
@@ -9491,7 +9909,7 @@ paths:
 
             const collectionId = "17555176";
 
-            videosApi.deleteClipbox(collectionId)
+            videosApi.deleteVideoCollection(collectionId)
               .catch((error) => {
                 console.error(error);
               });
@@ -9524,7 +9942,7 @@ paths:
         including the timestamp for its creation and the number of videos in it.
         To get the videos in collections, use GET
         /v2/videos/collections/{id}/items.
-      operationId: getClipbox
+      operationId: getVideoCollection
       parameters:
         - description: The ID of the collection to return
           example: "17555176"
@@ -9561,7 +9979,7 @@ paths:
         - videos
     post:
       description: This endpoint sets a new name for a collection.
-      operationId: renameClipbox
+      operationId: renameVideoCollection
       parameters:
         - description: The ID of the collection to rename
           example: "17555176"
@@ -9582,8 +10000,6 @@ paths:
         description: The new name for the collection
         required: true
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully updated collection
         "400":
@@ -9629,7 +10045,7 @@ paths:
               "name": "My new collection name"
             };
 
-            videosApi.renameClipbox(collectionId, body)
+            videosApi.renameVideoCollection(collectionId, body)
               .catch((error) => {
                 console.error(error);
               });
@@ -9670,7 +10086,7 @@ paths:
   "/v2/videos/collections/{id}/items":
     delete:
       description: This endpoint removes one or more videos from a collection.
-      operationId: deleteClipboxItems
+      operationId: deleteVideoCollectionItems
       parameters:
         - description: The ID of the Collection from which items will be deleted
           example: "17555176"
@@ -9687,8 +10103,6 @@ paths:
               type: string
             type: array
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully removed collection items
         "400":
@@ -9707,7 +10121,8 @@ paths:
         - lang: shell
           source: >-
             curl -X DELETE
-            https://api.shutterstock.com/v2/videos/collections/17555176/items \
+            https://api.shutterstock.com/v2/videos/collections/17555176/items?item_id=495863218
+            \
 
             -H "Accept: application/json" \
 
@@ -9729,14 +10144,14 @@ paths:
               ]
             };
 
-            videosApi.deleteClipboxItems(collectionId, videosToRemove)
+            videosApi.deleteVideoCollectionItems(collectionId, videosToRemove)
               .catch((error) => {
                 console.error(error);
               });
         - lang: php
           source: >-
             $options = [
-              CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections/17555176/items",
+              CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections/17555176/items?item_id=495863218",
               CURLOPT_USERAGENT => "php/curl",
               CURLOPT_CUSTOMREQUEST => "DELETE",
               CURLOPT_HTTPHEADER => [
@@ -9761,7 +10176,7 @@ paths:
     get:
       description: This endpoint lists the IDs of videos in a collection and the date
         that each was added.
-      operationId: getClipboxItems
+      operationId: getVideoCollectionItems
       parameters:
         - description: The ID of the Collection whose items are to be returned
           example: "17555176"
@@ -9827,7 +10242,7 @@ paths:
         - videos
     post:
       description: This endpoint adds one or more videos to a collection by video IDs.
-      operationId: addClipboxItems
+      operationId: addVideoCollectionItems
       parameters:
         - description: The ID of the collection to which items should be added
           example: "17555176"
@@ -9850,8 +10265,6 @@ paths:
         description: Array of video IDs to add to the collection
         required: true
       responses:
-        "200":
-          description: No response was specified
         "204":
           description: Successfully added collection items
         "400":
@@ -9910,7 +10323,7 @@ paths:
               ]
             };
 
-            videosApi.addLightboxItems(collectionId, body)
+            videosApi.addImageCollectionItems(collectionId, body)
               .catch((error) => {
                 console.error(error);
               });
@@ -9961,16 +10374,20 @@ paths:
       operationId: getVideoLicenseList
       parameters:
         - description: Show licenses for the specified video ID
+          example: "12345678"
           in: query
           name: video_id
           schema:
+            pattern: ^[1-9]\d*$
             type: string
         - description: Show videos that are available with the specified license, such as
             `standard` or `enhanced`; prepending a `-` sign excludes results
             from that license
+          example: standard
           in: query
           name: license
           schema:
+            pattern: ^.+$
             type: string
         - description: Page number
           in: query
@@ -9997,19 +10414,20 @@ paths:
               - oldest
             type: string
         - description: Filter licenses by username of licensee
+          example: aUniqueUsername
           in: query
           name: username
           schema:
             type: string
         - description: Show licenses created on or after the specified date
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: start_date
           schema:
             format: date-time
             type: string
         - description: Show licenses created before the specified date
-          example: 2020-02-02T13:00-05:00
+          example: 2021-03-29T13:25:13.521Z
           in: query
           name: end_date
           schema:
@@ -10190,6 +10608,65 @@ paths:
       summary: List video licenses
       tags:
         - videos
+      x-code-samples:
+        - lang: shell
+          source: |
+            curl -X GET https://api.shutterstock.com/v2/videos/licenses \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
+            -G \
+            --data-urlencode "start_date=2016-10-03T01:25:13.521Z" \
+            --data-urlencode "end_date=2016-10-04T13:25:13.521Z" \
+        - lang: javascript--nodejs
+          source: |
+            const sstk = require("shutterstock-api");
+
+            sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
+
+            const videosApi = new sstk.VideosApi();
+
+            const queryParams = {
+              "start_date": "2016-10-03T01:25:13.521Z",
+              "end_date": "2016-10-04T13:25:13.521Z"
+            };
+
+            videosApi.getVideoLicenseList(queryParams)
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+        - lang: php
+          source: >
+            $queryFields = [
+              "start_date" => "2016-10-03T01:25:13.521Z",
+              "end_date" => "2016-10-04T13:25:13.521Z"
+            ];
+
+
+            $options = [
+              CURLOPT_URL => "https://api.shutterstock.com/v2/videos/licenses" . http_build_query($queryFields),
+              CURLOPT_USERAGENT => "php/curl",
+              CURLOPT_HTTPHEADER => [
+                "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
+              ],
+              CURLOPT_RETURNTRANSFER => 1
+            ];
+
+
+            $handle = curl_init();
+
+            curl_setopt_array($handle, $options);
+
+            $response = curl_exec($handle);
+
+            curl_close($handle);
+
+
+            $decodedResponse = json_decode($response);
+
+            print_r($decodedResponse);
     post:
       description: This endpoint gets licenses for one or more videos. You must
         specify the video IDs in the body parameter and the size and
@@ -10199,6 +10676,7 @@ paths:
       operationId: licenseVideos
       parameters:
         - description: The subscription ID to use for licensing
+          example: s1234567
           in: query
           name: subscription_id
           schema:
@@ -10317,7 +10795,7 @@ paths:
             };
 
             videosApi.searchVideos(body, queryParams)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -10382,9 +10860,8 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              default:
-                value: {}
+            example:
+              size: 4k
             schema:
               $ref: "#/components/schemas/RedownloadVideo"
         description: Information about the videos to redownload
@@ -10489,24 +10966,28 @@ paths:
       operationId: searchVideos
       parameters:
         - description: Show videos added on the specified date
+          example: 2020-05-29
           in: query
           name: added_date
           schema:
             format: date
             type: string
         - description: Show videos added on or after the specified date
+          example: 2020-05-29
           in: query
           name: added_date_start
           schema:
             format: date
             type: string
         - description: Show videos added before the specified date
+          example: 2020-05-29
           in: query
           name: added_date_end
           schema:
             format: date
             type: string
         - description: Show videos with the specified aspect ratio
+          example: 4_3
           in: query
           name: aspect_ratio
           schema:
@@ -10522,6 +11003,7 @@ paths:
           schema:
             type: string
         - description: Show videos with the specified artist names or IDs
+          example: "[12345678]"
           in: query
           name: contributor
           schema:
@@ -10545,11 +11027,13 @@ paths:
           schema:
             type: integer
         - description: Show videos with the specified duration or longer in seconds
+          example: 60
           in: query
           name: duration_from
           schema:
             type: integer
         - description: Show videos with the specified duration or shorter in seconds
+          example: 180
           in: query
           name: duration_to
           schema:
@@ -10562,11 +11046,13 @@ paths:
           schema:
             type: number
         - description: Show videos with the specified frames per second or more
+          example: 24
           in: query
           name: fps_from
           schema:
             type: number
         - description: Show videos with the specified frames per second or fewer
+          example: 60
           in: query
           name: fps_to
           schema:
@@ -10625,6 +11111,7 @@ paths:
             minimum: 0
             type: integer
         - description: Show videos that feature people of the specified age range
+          example: 20s
           in: query
           name: people_age
           schema:
@@ -10640,6 +11127,7 @@ paths:
               - older
             type: string
         - description: Show videos with people of the specified ethnicities
+          example: hispanic
           in: query
           name: people_ethnicity
           schema:
@@ -10663,6 +11151,7 @@ paths:
               type: string
             type: array
         - description: Show videos with people with the specified gender
+          example: female
           in: query
           name: people_gender
           schema:
@@ -10672,6 +11161,7 @@ paths:
               - both
             type: string
         - description: Show videos with the specified number of people
+          example: 2
           in: query
           name: people_number
           schema:
@@ -10679,17 +11169,20 @@ paths:
             minimum: 0
             type: integer
         - description: Show only videos of people with a signed model release
+          example: true
           in: query
           name: people_model_released
           schema:
             type: boolean
         - description: One or more search terms separated by spaces; you can use NOT to
             filter out videos that match a term
+          example: dogs running on the beach
           in: query
           name: query
           schema:
             type: string
         - description: Show videos with the specified resolution
+          example: 4k
           in: query
           name: resolution
           schema:
@@ -10863,6 +11356,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - cat scan
+                      - cats and dogs
+                      - cats playing
+                      - catsuit
+                      - cat silhouette
+                      - catskills
+                      - cats eyes
+                      - cat sitting
+                      - cat sleeping
+                      - cats eye
               schema:
                 $ref: "#/components/schemas/Suggestions"
           description: OK
@@ -10890,12 +11397,14 @@ paths:
       operationId: getUpdatedVideos
       parameters:
         - description: Show videos updated on or after the specified date
+          example: 2020-05-29
           in: query
           name: start_date
           schema:
             format: date
             type: string
         - description: Show videos updated before the specified date
+          example: 2021-05-29
           in: query
           name: end_date
           schema:
@@ -10987,7 +11496,7 @@ paths:
             };
 
             videosApi.getUpdatedVideos(queryParams)
-              .then(({ data }) => {
+              .then((data) => {
                 console.log(data);
               })
               .catch((error) => {
@@ -11029,7 +11538,7 @@ paths:
       operationId: getVideo
       parameters:
         - description: Video ID
-          example: "30867073"
+          example: "639703"
           in: path
           name: id
           required: true
@@ -11248,8 +11757,6 @@ paths:
         - videos
 components:
   schemas:
-    AssetUploadId: {}
-    AssetId: {}
     AccessTokenDetails:
       description: Access token details that are currently associated with this user
       properties:
@@ -11328,6 +11835,8 @@ components:
       required:
         - name
       type: object
+    AssetId: {}
+    AssetUploadId: {}
     Audio:
       additionalProperties: false
       description: Audio metadata
@@ -12996,7 +13505,7 @@ components:
           type: string
         hero_item:
           $ref: "#/components/schemas/FeaturedCollectionCoverItem"
-          description: Top-level item that is meant as a cover image, as the first image
+          description: Top-level item that is meant as a cover asset, as the first asset
             seen to represent the collection
         id:
           description: Collection ID
@@ -13359,11 +13868,13 @@ components:
         - cs
         - da
         - de
+        - el
         - en
         - es
         - fi
         - fr
         - hu
+        - id
         - it
         - ja
         - ko
@@ -13371,10 +13882,12 @@ components:
         - nl
         - pl
         - pt
+        - ro
         - ru
         - sv
         - th
         - tr
+        - vi
         - zh
         - zh-Hant
       title: language
@@ -13410,6 +13923,7 @@ components:
           description: List of audio tracks to license
           items:
             $ref: "#/components/schemas/LicenseAudio"
+          maxItems: 50
           type: array
       required:
         - audio
@@ -13675,6 +14189,7 @@ components:
           description: Images to create licenses for
           items:
             $ref: "#/components/schemas/LicenseImage"
+          maxItems: 50
           type: array
       required:
         - images
@@ -13785,6 +14300,7 @@ components:
           description: Videos to license
           items:
             $ref: "#/components/schemas/LicenseVideo"
+          maxItems: 50
           type: array
       required:
         - videos
@@ -14364,6 +14880,41 @@ components:
         web:
           $ref: "#/components/schemas/VideoSizeDetails"
       type: object
+    VideoCollectionItemDataList:
+      description: List of items in a collection
+      example:
+        data:
+          - added_time: 2016-08-18T18:52:59-04:00
+            id: "76688182"
+            media_type: video
+          - added_time: 2016-08-18T18:52:59-04:00
+            id: "40005859"
+            media_type: video
+        page: 1
+        per_page: 100
+      properties:
+        data:
+          description: Assets in the collection
+          items:
+            $ref: "#/components/schemas/CollectionItem"
+          type: array
+        errors:
+          description: Error list; appears only if there was an error
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
+        message:
+          description: Server-generated message, if any
+          type: string
+        page:
+          description: The current page of results
+          type: integer
+        per_page:
+          description: The number of results per page
+          type: integer
+        total_count:
+          description: The total number of results across all pages
+          type: integer
     VideoDataList:
       description: List of videos
       properties:
