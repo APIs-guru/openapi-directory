@@ -9517,6 +9517,14 @@ components:
     DvbSubSourceSettings:
       type: object
       properties:
+        OcrLanguage:
+          allOf:
+            - $ref: '#/components/schemas/DvbSubOcrLanguage'
+            - xml:
+                name: ocrLanguage
+              description: |-
+                If you will configure a WebVTT caption description that references this caption selector, use this field to
+                provide the language to consider when translating the image-based source to text.
         Pid:
           allOf:
             - $ref: '#/components/schemas/__integerMin1'
@@ -9571,6 +9579,14 @@ components:
     Scte27SourceSettings:
       type: object
       properties:
+        OcrLanguage:
+          allOf:
+            - $ref: '#/components/schemas/Scte27OcrLanguage'
+            - xml:
+                name: ocrLanguage
+              description: |-
+                If you will configure a WebVTT caption description that references this caption selector, use this field to
+                provide the language to consider when translating the image-based source to text.
         Pid:
           allOf:
             - $ref: '#/components/schemas/__integerMin1'
@@ -11310,6 +11326,16 @@ components:
         - FIXED
         - SCALED
       description: Dvb Sub Destination Teletext Grid Control
+    DvbSubOcrLanguage:
+      type: string
+      enum:
+        - DEU
+        - ENG
+        - FRA
+        - NLD
+        - POR
+        - SPA
+      description: Dvb Sub Ocr Language
     __integerMin1000Max30000:
       type: integer
       description: Placeholder documentation for __integerMin1000Max30000
@@ -13387,6 +13413,12 @@ components:
                 name: tag
               description: 'ID3 tag to insert into each segment. Supports special keyword identifiers to substitute in segment-related values.\nSupported keyword identifiers: https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html'
       description: Settings for the action to insert a user-defined ID3 tag in each HLS segment
+    HlsScte35SourceType:
+      type: string
+      enum:
+        - MANIFEST
+        - SEGMENTS
+      description: Hls Scte35 Source Type
     HlsInputSettings:
       type: object
       properties:
@@ -13414,6 +13446,12 @@ components:
             - xml:
                 name: retryInterval
               description: The number of seconds between retries when an attempt to read a manifest or segment fails.
+        Scte35Source:
+          allOf:
+            - $ref: '#/components/schemas/HlsScte35SourceType'
+            - xml:
+                name: scte35Source
+              description: Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.
       description: Hls Input Settings
     HlsMediaStoreStorageClass:
       type: string
@@ -15804,7 +15842,9 @@ components:
       enum:
         - ADVANCED_AUDIO
         - AUDIO_NORMALIZATION
-      description: 'Special features, ''ADVANCED_AUDIO'' or ''AUDIO_NORMALIZATION'''
+        - MGHD
+        - MGUHD
+      description: 'Special features, ''ADVANCED_AUDIO'' ''AUDIO_NORMALIZATION'' ''MGHD'' or ''MGUHD'''
     ReservationVideoQuality:
       type: string
       enum:
@@ -16099,6 +16139,16 @@ components:
         - DISABLED
         - UPCONVERT
       description: Scte20 Convert608 To708
+    Scte27OcrLanguage:
+      type: string
+      enum:
+        - DEU
+        - ENG
+        - FRA
+        - NLD
+        - POR
+        - SPA
+      description: Scte27 Ocr Language
     Scte35AposNoRegionalBlackoutBehavior:
       type: string
       enum:

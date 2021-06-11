@@ -595,12 +595,24 @@ paths:
                   description: The settings for source failover
                   type: object
                   properties:
+                    FailoverMode:
+                      allOf:
+                        - $ref: '#/components/schemas/FailoverMode'
+                        - xml:
+                            name: failoverMode
+                          description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
                     RecoveryWindow:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
                         - xml:
                             name: recoveryWindow
                           description: Search window time to look for dash-7 packets
+                    SourcePriority:
+                      allOf:
+                        - $ref: '#/components/schemas/SourcePriority'
+                        - xml:
+                            name: sourcePriority
+                          description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
                     State:
                       allOf:
                         - $ref: '#/components/schemas/State'
@@ -864,12 +876,24 @@ paths:
                   description: The settings for source failover
                   type: object
                   properties:
+                    FailoverMode:
+                      allOf:
+                        - $ref: '#/components/schemas/FailoverMode'
+                        - xml:
+                            name: failoverMode
+                          description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
                     RecoveryWindow:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
                         - xml:
                             name: recoveryWindow
                           description: Recovery window time to look for dash-7 packets
+                    SourcePriority:
+                      allOf:
+                        - $ref: '#/components/schemas/SourcePriority'
+                        - xml:
+                            name: sourcePriority
+                          description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
                     State:
                       allOf:
                         - $ref: '#/components/schemas/State'
@@ -3051,6 +3075,21 @@ components:
         - st2110-jpegxs
         - cdi
         - srt-listener
+    FailoverMode:
+      type: string
+      enum:
+        - MERGE
+        - FAILOVER
+    SourcePriority:
+      type: object
+      properties:
+        PrimarySource:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: primarySource
+              description: The name of the source you choose as the primary source for this flow.
+      description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
     State:
       type: string
       enum:
@@ -3628,12 +3667,24 @@ components:
     FailoverConfig:
       type: object
       properties:
+        FailoverMode:
+          allOf:
+            - $ref: '#/components/schemas/FailoverMode'
+            - xml:
+                name: failoverMode
+              description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
         RecoveryWindow:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: recoveryWindow
               description: Search window time to look for dash-7 packets
+        SourcePriority:
+          allOf:
+            - $ref: '#/components/schemas/SourcePriority'
+            - xml:
+                name: sourcePriority
+              description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
         State:
           allOf:
             - $ref: '#/components/schemas/State'
@@ -4971,12 +5022,24 @@ components:
     UpdateFailoverConfig:
       type: object
       properties:
+        FailoverMode:
+          allOf:
+            - $ref: '#/components/schemas/FailoverMode'
+            - xml:
+                name: failoverMode
+              description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
         RecoveryWindow:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: recoveryWindow
               description: Recovery window time to look for dash-7 packets
+        SourcePriority:
+          allOf:
+            - $ref: '#/components/schemas/SourcePriority'
+            - xml:
+                name: sourcePriority
+              description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
         State:
           allOf:
             - $ref: '#/components/schemas/State'
