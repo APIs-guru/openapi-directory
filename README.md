@@ -12,7 +12,7 @@
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 <a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/backers/badge.svg" /></a> <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/sponsors/badge.svg" /></a> <a href="#partners" alt="Partners on Open Collective"><img src="https://opencollective.com/openapi-directory/partner/badge.svg" /></a>
 
-Directory of API definitions in [OpenAPI(fka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md) formats.<BR>
+Directory of API definitions in [OpenAPI(fka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md) formats.<BR>
 API access to collection: [Go!][apiDoc-link] - We also have an [RSS Feed](http://api.apis.guru/v2/list.rss)
 
 [![Add API][addAPI-image]][addAPI-link]
