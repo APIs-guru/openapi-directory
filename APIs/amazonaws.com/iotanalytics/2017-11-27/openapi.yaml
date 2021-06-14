@@ -768,7 +768,7 @@ paths:
   /datastores:
     post:
       operationId: CreateDatastore
-      description: 'Creates a data store, which is a repository for messages.'
+      description: 'Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with <code>ParquetConfiguration</code>.'
       responses:
         '201':
           description: Success
@@ -871,6 +871,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ParquetConfiguration'
                         - description: Contains the configuration information of the Parquet format.
+                datastorePartitions:
+                  description: ' Contains information about partitions in a data store. '
+                  type: object
+                  properties:
+                    partitions:
+                      allOf:
+                        - $ref: '#/components/schemas/Partitions'
+                        - description: ' A list of partitions in a data store. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2429,7 +2437,7 @@ paths:
                     s3Paths:
                       allOf:
                         - $ref: '#/components/schemas/S3PathChannelMessages'
-                        - description: Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.
+                        - description: '<p>Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.</p> <p>You must use the full path for the key.</p> <p>Example path: <code>channel/mychannel/__dt=2020-02-29 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz</code> </p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2788,6 +2796,12 @@ components:
             - $ref: '#/components/schemas/SchemaDefinition'
             - description: Information needed to define a schema.
       description: Contains the configuration information of the Parquet format.
+    Partitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatastorePartition'
+      minItems: 0
+      maxItems: 25
     CreatePipelineResponse:
       type: object
       properties:
@@ -3278,6 +3292,7 @@ components:
         $ref: '#/components/schemas/BatchPutMessageErrorEntry'
     MessageId:
       type: string
+      pattern: '\p{ASCII}*'
       minLength: 1
       maxLength: 128
     ErrorCode:
@@ -3406,7 +3421,7 @@ components:
         s3Paths:
           allOf:
             - $ref: '#/components/schemas/S3PathChannelMessages'
-            - description: Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.
+            - description: '<p>Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.</p> <p>You must use the full path for the key.</p> <p>Example path: <code>channel/mychannel/__dt=2020-02-29 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz</code> </p>'
       description: Specifies one or more sets of channel messages.
     EstimatedResourceSize:
       type: object
@@ -3725,6 +3740,14 @@ components:
             - $ref: '#/components/schemas/ParquetConfiguration'
             - description: Contains the configuration information of the Parquet format.
       description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
+    DatastorePartitions:
+      type: object
+      properties:
+        partitions:
+          allOf:
+            - $ref: '#/components/schemas/Partitions'
+            - description: ' A list of partitions in a data store. '
+      description: ' Contains information about partitions in a data store. '
     CreateDatastoreRequest:
       type: object
       required:
@@ -3751,6 +3774,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileFormatConfiguration'
             - description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
+        datastorePartitions:
+          allOf:
+            - $ref: '#/components/schemas/DatastorePartitions'
+            - description: ' Contains information about the partitions in a data store. '
     DatastoreArn:
       type: string
     PipelineActivities:
@@ -4121,7 +4148,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileFormatConfiguration'
             - description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
+        datastorePartitions:
+          allOf:
+            - $ref: '#/components/schemas/DatastorePartitions'
+            - description: ' Contains information about the partitions in a data store. '
       description: Information about a data store.
+    Partition:
+      type: object
+      required:
+        - attributeName
+      properties:
+        attributeName:
+          allOf:
+            - $ref: '#/components/schemas/PartitionAttributeName'
+            - description: ' The attribute name of the partition. '
+      description: ' A single partition. '
+    TimestampPartition:
+      type: object
+      required:
+        - attributeName
+      properties:
+        attributeName:
+          allOf:
+            - $ref: '#/components/schemas/PartitionAttributeName'
+            - description: ' The attribute name of the partition defined by a timestamp. '
+        timestampFormat:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: ' The timestamp format of a partition defined by a timestamp. '
+      description: ' A partition defined by a timestamp. '
+    DatastorePartition:
+      type: object
+      properties:
+        attributePartition:
+          allOf:
+            - $ref: '#/components/schemas/Partition'
+            - description: ' A partition defined by an <code>attributeName</code>. '
+        timestampPartition:
+          allOf:
+            - $ref: '#/components/schemas/TimestampPartition'
+            - description: ' A partition defined by an <code>attributeName</code> and a timestamp format. '
+      description: ' A single partition in a data store. '
     DatastoreStatistics:
       type: object
       properties:
@@ -4177,6 +4244,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileFormatType'
             - description: The file format of the data in the data store.
+        datastorePartitions:
+          allOf:
+            - $ref: '#/components/schemas/DatastorePartitions'
+            - description: ' Contains information about the partitions in a data store. '
       description: A summary of information about a data store.
     DatastoreSummaries:
       type: array
@@ -4448,8 +4519,13 @@ components:
         columns:
           allOf:
             - $ref: '#/components/schemas/Columns'
-            - description: <p>Specifies one or more columns that store your data.</p> <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types</p>
+            - description: <p>Specifies one or more columns that store your data.</p> <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types.</p>
       description: Information needed to define a schema.
+    PartitionAttributeName:
+      type: string
+      pattern: '^[a-zA-Z0-9_]+$'
+      minLength: 1
+      maxLength: 128
     ReprocessingSummaries:
       type: array
       items:
@@ -4596,6 +4672,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The new or modified tags for the resource.
+    TimestampFormat:
+      type: string
+      pattern: '^[a-zA-Z0-9\s\[\]_,.''/:-]*$'
+      minLength: 1
+      maxLength: 50
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

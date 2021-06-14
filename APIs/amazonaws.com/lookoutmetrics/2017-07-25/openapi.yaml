@@ -558,7 +558,7 @@ paths:
                     $ref: '#/components/schemas/Metric'
                   minItems: 1
                 Offset:
-                  description: 'After an interval ends, the amount of time that the detector waits before importing data.'
+                  description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
                   type: integer
                   minimum: 0
                   maximum: 432000
@@ -2124,7 +2124,7 @@ paths:
                     $ref: '#/components/schemas/Metric'
                   minItems: 1
                 Offset:
-                  description: 'After an interval ends, the amount of time that the detector waits before importing data.'
+                  description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
                   type: integer
                   minimum: 0
                   maximum: 432000
@@ -2568,7 +2568,7 @@ components:
         Offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: The offset for the dataset.
+            - description: The offset in seconds. Only supported for S3 and Redshift datasources.
         MetricList:
           allOf:
             - $ref: '#/components/schemas/MetricList'
@@ -2959,6 +2959,7 @@ components:
         - DELETING
         - FAILED
         - INACTIVE
+        - LEARNING
         - BACK_TEST_ACTIVATING
         - BACK_TEST_ACTIVE
         - BACK_TEST_COMPLETE
@@ -3317,7 +3318,7 @@ components:
         Offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: 'After an interval ends, the amount of time that the detector waits before importing data.'
+            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
         TimestampColumn:
           allOf:
             - $ref: '#/components/schemas/TimestampColumn'
@@ -4012,7 +4013,7 @@ components:
         Offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: 'After an interval ends, the amount of time that the detector waits before importing data.'
+            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
         TimestampColumn:
           allOf:
             - $ref: '#/components/schemas/TimestampColumn'

@@ -114,6 +114,150 @@ servers:
     description: The AWS GreengrassV2 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices':
+    post:
+      operationId: BatchAssociateClientDeviceWithCoreDevice
+      description: '<p>Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices'' connectivity information and certificates. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html">Configure cloud discovery</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p> <note> <p>Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html">Interact with local IoT devices</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAssociateClientDeviceWithCoreDeviceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: coreDeviceThingName
+          in: path
+          required: true
+          description: The name of the core device. This is also the name of the AWS IoT thing.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entries:
+                  description: The list of client devices to associate.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceEntry'
+                  minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices':
+    post:
+      operationId: BatchDisassociateClientDeviceFromCoreDevice
+      description: 'Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won''t be able to use cloud discovery to retrieve the core device''s connectivity information and certificates.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDisassociateClientDeviceFromCoreDeviceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: coreDeviceThingName
+          in: path
+          required: true
+          description: The name of the core device. This is also the name of the AWS IoT thing.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entries:
+                  description: The list of client devices to disassociate.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceEntry'
+                  minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/greengrass/v2/deployments/{deploymentId}/cancel':
     post:
       operationId: CancelDeployment
@@ -857,10 +1001,82 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices':
+    get:
+      operationId: ListClientDevicesAssociatedWithCoreDevice
+      description: Retrieves a paginated list of client devices that are associated with a core device.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClientDevicesAssociatedWithCoreDeviceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: coreDeviceThingName
+          in: path
+          required: true
+          description: The name of the core device. This is also the name of the AWS IoT thing.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per paginated request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/greengrass/v2/components/{arn}/versions':
     get:
       operationId: ListComponentVersions
-      description: Retrieves a paginated list of all versions for a component.
+      description: Retrieves a paginated list of all versions for a component. Greater versions are listed first.
       responses:
         '200':
           description: Success
@@ -1500,6 +1716,45 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BatchAssociateClientDeviceWithCoreDeviceResponse:
+      type: object
+      properties:
+        errorEntries:
+          allOf:
+            - $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceErrorList'
+            - description: The list of any errors for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to associate.
+    AssociateClientDeviceWithCoreDeviceEntry:
+      type: object
+      required:
+        - thingName
+      properties:
+        thingName:
+          allOf:
+            - $ref: '#/components/schemas/IoTThingName'
+            - description: The name of the AWS IoT thing that represents the client device to associate.
+      description: 'Contains a request to associate a client device with a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.'
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    BatchDisassociateClientDeviceFromCoreDeviceResponse:
+      type: object
+      properties:
+        errorEntries:
+          allOf:
+            - $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceErrorList'
+            - description: The list of errors (if any) for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to disassociate.
+    DisassociateClientDeviceFromCoreDeviceEntry:
+      type: object
+      required:
+        - thingName
+      properties:
+        thingName:
+          allOf:
+            - $ref: '#/components/schemas/IoTThingName'
+            - description: The name of the AWS IoT thing that represents the client device to disassociate.
+      description: 'Contains a request to disassociate a client device from a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html">BatchDisassociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.'
     CancelDeploymentResponse:
       type: object
       properties:
@@ -1507,12 +1762,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: A message that communicates if the cancel was successful.
-    ResourceNotFoundException: {}
-    ValidationException: {}
-    AccessDeniedException: {}
-    InternalServerException: {}
     ConflictException: {}
-    ThrottlingException: {}
     CreateComponentVersionResponse:
       type: object
       required:
@@ -1852,6 +2102,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.'
+    ListClientDevicesAssociatedWithCoreDeviceResponse:
+      type: object
+      properties:
+        associatedClientDevices:
+          allOf:
+            - $ref: '#/components/schemas/AssociatedClientDeviceList'
+            - description: A list that describes the client devices that are associated with the core device.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextTokenString'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
     ListComponentVersionsResponse:
       type: object
       properties:
@@ -1966,6 +2227,87 @@ components:
       pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
       minLength: 1
       maxLength: 128
+    IoTThingName:
+      type: string
+      minLength: 1
+      maxLength: 128
+    AssociateClientDeviceWithCoreDeviceEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceEntry'
+      minItems: 1
+      maxItems: 100
+    AssociateClientDeviceWithCoreDeviceErrorEntry:
+      type: object
+      properties:
+        thingName:
+          allOf:
+            - $ref: '#/components/schemas/IoTThingName'
+            - description: The name of the AWS IoT thing whose associate request failed.
+        code:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error code for the request.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A message that provides additional information about the error.
+      description: 'Contains an error that occurs from a request to associate a client device with a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html">BatchAssociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.'
+    AssociateClientDeviceWithCoreDeviceErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceErrorEntry'
+      minItems: 1
+      maxItems: 100
+    Timestamp:
+      type: string
+      format: date-time
+    AssociatedClientDevice:
+      type: object
+      properties:
+        thingName:
+          allOf:
+            - $ref: '#/components/schemas/IoTThingName'
+            - description: The name of the AWS IoT thing that represents the associated client device.
+        associationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time that the client device was associated, expressed in ISO 8601 format.'
+      description: Contains information about a client device that is associated to a core device for cloud discovery.
+    AssociatedClientDeviceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssociatedClientDevice'
+      minItems: 1
+      maxItems: 100
+    BatchAssociateClientDeviceWithCoreDeviceRequest:
+      type: object
+      title: BatchAssociateClientDeviceWithCoreDeviceRequest
+      properties:
+        entries:
+          allOf:
+            - $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceEntryList'
+            - description: The list of client devices to associate.
+    DisassociateClientDeviceFromCoreDeviceEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceEntry'
+      minItems: 1
+      maxItems: 100
+    BatchDisassociateClientDeviceFromCoreDeviceRequest:
+      type: object
+      title: BatchDisassociateClientDeviceFromCoreDeviceRequest
+      properties:
+        entries:
+          allOf:
+            - $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceEntryList'
+            - description: The list of client devices to disassociate.
+    DisassociateClientDeviceFromCoreDeviceErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceErrorEntry'
+      minItems: 1
+      maxItems: 100
     CancelDeploymentRequest:
       type: object
       title: CancelDeploymentRequest
@@ -2109,9 +2451,6 @@ components:
     ComponentVersionARN:
       type: string
       pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
-    Timestamp:
-      type: string
-      format: date-time
     ComponentList:
       type: array
       items:
@@ -2398,6 +2737,22 @@ components:
       type: string
       minLength: 1
       maxLength: 500
+    DisassociateClientDeviceFromCoreDeviceErrorEntry:
+      type: object
+      properties:
+        thingName:
+          allOf:
+            - $ref: '#/components/schemas/IoTThingName'
+            - description: The name of the AWS IoT thing whose disassociate request failed.
+        code:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error code for the request.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A message that provides additional information about the error.
+      description: 'Contains an error that occurs from a request to disassociate a client device from a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html">BatchDisassociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.'
     IoTJobId:
       type: string
       minLength: 1
@@ -2782,6 +3137,10 @@ components:
       description: 'Contains information about a volume that Linux processes in a container can access. When you define a volume, the AWS IoT Greengrass Core software mounts the source files to the destination inside the container.'
     NextTokenString:
       type: string
+    ListClientDevicesAssociatedWithCoreDeviceRequest:
+      type: object
+      title: ListClientDevicesAssociatedWithCoreDeviceRequest
+      properties: {}
     ListComponentVersionsRequest:
       type: object
       title: ListComponentVersionsRequest
