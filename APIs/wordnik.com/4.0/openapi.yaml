@@ -19,14 +19,8 @@ info:
   x-providerName: wordnik.com
 externalDocs:
   url: http://developer.wordnik.com/
-securityDefinitions:
-  api_key:
-    in: query
-    name: _apikey
-    type: apiKey
 security:
   - {}
-  - api_key: []
 tags:
   - name: account
   - name: word
