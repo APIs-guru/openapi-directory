@@ -23,7 +23,7 @@ info:
   license:
     name: GNU GENERAL PUBLIC LICENSE
     url: http://www.gnu.org/licenses/gpl.html
-  termsOfServiceUrl: http://www.hhs.gov/web/socialmedia/policies/tos.html#ready
+  termsOfService: http://www.hhs.gov/web/socialmedia/policies/tos.html#ready
   title: HHS Media Services API
   version: "2"
   x-apisguru-categories:
@@ -42,20 +42,20 @@ info:
 tags:
   - description: Information about media
     name: media
-  - description: Information about tags
-    name: sources
   - description: Information about languages
     name: languages
-  - description: Get media from user generated lists.
-    name: userMediaLists
+  - description: Information about media types
+    name: mediaTypes
   - description: Information about tags
     name: tags
   - description: Information about campaigns
     name: campaigns
+  - description: Information about tags
+    name: sources
   - description: Global Search
     name: resources
-  - description: Information about media types
-    name: mediaTypes
+  - description: Get media from user generated lists.
+    name: userMediaLists
 paths:
   /resources.json:
     get:
