@@ -1,8 +1,7 @@
-host: maif.local
 openapi: 3.0.0
 servers:
-  - url: http://maif.local
   - url: http://otoroshi-api.oto.tools/
+  - url: http://maif.local
 info:
   contact:
     email: oss@maif.fr
@@ -12,7 +11,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Otoroshi Admin API
-  version: 1.5.0-alpha.8
+  version: 1.5.0-dev
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -3673,7 +3672,7 @@ components:
             between 0.0 and 1.0
           example: 42.2
           format: double
-          type: integer
+          type: number
         responses:
           description: The possibles responses
           items:
@@ -5337,7 +5336,7 @@ components:
             between 0.0 and 1.0
           example: 42.2
           format: double
-          type: integer
+          type: number
       required:
         - ratio
         - additionalRequestSize
@@ -5356,7 +5355,7 @@ components:
             between 0.0 and 1.0
           example: 42.2
           format: double
-          type: integer
+          type: number
       required:
         - ratio
         - additionalResponseSize
@@ -5374,7 +5373,7 @@ components:
             between 0.0 and 1.0
           example: 42.2
           format: double
-          type: integer
+          type: number
         to:
           description: The end range of latency added to the request
           example: 123123
@@ -6412,7 +6411,7 @@ components:
           description: The rate of data sent to the specified service or Otoroshi globally
           example: 42.2
           format: double
-          type: integer
+          type: number
         dataOut:
           description: The amount of data sent from the specified service or Otoroshi
             globally
@@ -6423,23 +6422,23 @@ components:
           description: The rate of data sent from the specified service or Otoroshi globally
           example: 42.2
           format: double
-          type: integer
+          type: number
         duration:
           description: The average duration for a call
           example: 42.2
           format: double
-          type: integer
+          type: number
         overhead:
           description: The average overhead time induced by Otoroshi for each call
           example: 42.2
           format: double
-          type: integer
+          type: number
         rate:
           description: The rate of data sent from and to the specified service or Otoroshi
             globally
           example: 42.2
           format: double
-          type: integer
+          type: number
       required:
         - calls
         - dataIn
