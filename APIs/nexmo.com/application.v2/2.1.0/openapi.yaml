@@ -13,7 +13,7 @@ info:
 
     This API is backwards compatible with version 1. Applications created using version 1 of the API can also be managed using version 2 (this version) of the API.
   title: Application API
-  version: 2.0.9
+  version: 2.1.0
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/application.v2.yml
@@ -348,6 +348,17 @@ paths:
                   description: Application Name
                   example: Demo Application
                   type: string
+                privacy:
+                  description: Application privacy config
+                  properties:
+                    improve_ai:
+                      default: true
+                      description: If set to `true`, Vonage may store and use your content and data
+                        for the improvement of Vonage's AI based services and
+                        technologies.
+                      example: true
+                      type: boolean
+                  type: object
               required:
                 - name
         required: true
@@ -694,6 +705,16 @@ paths:
                   description: Application Name
                   example: Demo Application
                   type: string
+                privacy:
+                  description: Application privacy config
+                  properties:
+                    improve_ai:
+                      description: If set to `true`, Vonage may store and use your content and data
+                        for the improvement of Vonage's AI based services and
+                        technologies.
+                      example: true
+                      type: boolean
+                  type: object
               required:
                 - name
         required: true
@@ -925,6 +946,16 @@ components:
           description: Friendly identifier for your application. This is not unique
           example: My Application
           type: string
+        privacy:
+          description: Application privacy config
+          properties:
+            improve_ai:
+              description: If set to `true`, Vonage may store and use your content and data
+                for the improvement of Vonage's AI based services and
+                technologies.
+              example: true
+              type: boolean
+          type: object
     ApplicationResponseCollection:
       properties:
         _embedded:
