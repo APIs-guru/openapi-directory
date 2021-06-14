@@ -45,11 +45,12 @@ paths:
         - GA
     servers:
       - url: https://accounts.twilio.com
-    x-default-output-properties:
-      - account_sid
-      - auth_token
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - auth_token
+        - date_created
+      pathType: instance
   /v1/AuthTokens/Secondary:
     delete:
       description: Delete the secondary Auth Token from your account
@@ -78,11 +79,12 @@ paths:
         - GA
     servers:
       - url: https://accounts.twilio.com
-    x-default-output-properties:
-      - account_sid
-      - secondary_auth_token
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - secondary_auth_token
+        - date_created
+      pathType: instance
   /v1/Credentials/AWS:
     description: User provided AWS keys
     get:
@@ -178,11 +180,12 @@ paths:
         - GA
     servers:
       - url: https://accounts.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   "/v1/Credentials/AWS/{Sid}":
     delete:
       description: Delete a Credential from your account
@@ -269,11 +272,12 @@ paths:
         - GA
     servers:
       - url: https://accounts.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
   /v1/Credentials/PublicKeys:
     description: User provided public keys
     get:
@@ -369,11 +373,12 @@ paths:
         - GA
     servers:
       - url: https://accounts.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   "/v1/Credentials/PublicKeys/{Sid}":
     delete:
       description: Delete a Credential from your account
@@ -460,11 +465,12 @@ paths:
         - GA
     servers:
       - url: https://accounts.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
 components:
   schemas:
     accounts.v1.auth_token_promotion:
