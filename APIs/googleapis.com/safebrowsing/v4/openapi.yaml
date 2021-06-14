@@ -464,6 +464,7 @@ components:
             - SUSPICIOUS
             - TRICK_TO_BILL
             - HIGH_CONFIDENCE_ALLOWLIST
+            - ACCURACY_TIPS
           type: string
       type: object
     GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints:
@@ -602,6 +603,7 @@ components:
             - SUSPICIOUS
             - TRICK_TO_BILL
             - HIGH_CONFIDENCE_ALLOWLIST
+            - ACCURACY_TIPS
           type: string
       type: object
     GoogleSecuritySafebrowsingV4FindFullHashesRequest:
@@ -847,6 +849,7 @@ components:
             - SUSPICIOUS
             - TRICK_TO_BILL
             - HIGH_CONFIDENCE_ALLOWLIST
+            - ACCURACY_TIPS
           type: string
         userInfo:
           $ref: "#/components/schemas/GoogleSecuritySafebrowsingV4ThreatHitUserInfo"
@@ -943,6 +946,7 @@ components:
               - SUSPICIOUS
               - TRICK_TO_BILL
               - HIGH_CONFIDENCE_ALLOWLIST
+              - ACCURACY_TIPS
             type: string
           type: array
       type: object
@@ -995,6 +999,7 @@ components:
             - SUSPICIOUS
             - TRICK_TO_BILL
             - HIGH_CONFIDENCE_ALLOWLIST
+            - ACCURACY_TIPS
           type: string
       type: object
     GoogleSecuritySafebrowsingV4ThreatMatch:
@@ -1055,5 +1060,6 @@ components:
             - SUSPICIOUS
             - TRICK_TO_BILL
             - HIGH_CONFIDENCE_ALLOWLIST
+            - ACCURACY_TIPS
           type: string
       type: object

@@ -116,7 +116,7 @@ tags:
 paths:
   /locations/global/firewallPolicies:
     get:
-      description: Lists all the policies that have been configured for the specified project.
+      description: Lists all the policies that have been configured for the specified folder or organization.
       operationId: compute.firewallPolicies.list
       parameters:
         - description: |-
@@ -37079,7 +37079,9 @@ components:
           description: |-
             Type of session affinity to use. The default is NONE.
 
-            When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or  CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
+            When the loadBalancingScheme is EXTERNAL:
+
+            * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or  CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
 
             When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
 
@@ -41222,7 +41224,7 @@ components:
         faultInjectionPolicy:
           $ref: "#/components/schemas/HttpFaultInjection"
           description: |-
-            The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests.
+            The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests. For the requests impacted by fault injection,
             timeout and retry_policy will be ignored by clients that are configured with a fault_injection_policy.
         maxStreamDuration:
           $ref: "#/components/schemas/Duration"
@@ -44541,7 +44543,8 @@ components:
           description: |-
             State of this notification, which can take one of the following values: 
             - ACTIVE: This outage notification is active. The event could be in the past, present, or future. See start_time and end_time for scheduling. 
-            - CANCELLED: The outage associated with this notification was cancelled before the outage was due to start. Note that the versions of this enum prefixed with "NS_" have been deprecated in favor of the unprefixed values.
+            - CANCELLED: The outage associated with this notification was cancelled before the outage was due to start. 
+            - COMPLETED: The outage associated with this notification is complete.  Note that the versions of this enum prefixed with "NS_" have been deprecated in favor of the unprefixed values.
           enum:
             - ACTIVE
             - CANCELLED

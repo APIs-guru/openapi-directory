@@ -2969,6 +2969,9 @@ components:
         diskType:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
+        imageType:
+          description: The image type to use for NAP created node.
+          type: string
         management:
           $ref: "#/components/schemas/NodeManagement"
           description: Specifies the node management options for NAP created node-pools.

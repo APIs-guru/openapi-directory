@@ -2953,6 +2953,13 @@ components:
             for more information about nodes.
           format: int32
           type: integer
+        processingUnits:
+          description: The number of processing units allocated to this instance. At most
+            one of processing_units or node_count should be present in the
+            message. This may be zero in API responses for instances that are
+            not yet in state `READY`.
+          format: int32
+          type: integer
         state:
           description: Output only. The current instance state. For CreateInstance, the
             state must be either omitted or set to `CREATING`. For
@@ -4653,6 +4660,7 @@ components:
             - ARRAY
             - STRUCT
             - NUMERIC
+            - JSON
           type: string
         structType:
           $ref: "#/components/schemas/StructType"

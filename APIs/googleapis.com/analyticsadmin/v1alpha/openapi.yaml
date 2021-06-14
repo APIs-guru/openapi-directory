@@ -2215,16 +2215,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        maximumUserAccess:
-          description: Maximum user access to the GA4 property allowed to admins of the
-            linked Firebase project.
-          enum:
-            - MAXIMUM_USER_ACCESS_UNSPECIFIED
-            - NO_ACCESS
-            - READ_AND_ANALYZE
-            - EDITOR_WITHOUT_LINK_MANAGEMENT
-            - EDITOR_INCLUDING_LINK_MANAGEMENT
-          type: string
         name:
           description: "Output only. Example format: properties/1234/firebaseLinks/5678"
           readOnly: true
@@ -2271,14 +2261,14 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        customerId:
-          description: Immutable. Google Ads customer ID.
-          type: string
-        emailAddress:
+        creatorEmailAddress:
           description: Output only. Email address of the user that created the link. An
             empty string will be returned if the email address can't be
             retrieved.
           readOnly: true
+          type: string
+        customerId:
+          description: Immutable. Google Ads customer ID.
           type: string
         name:
           description: "Output only. Format:

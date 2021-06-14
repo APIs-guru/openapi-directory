@@ -35,6 +35,48 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1beta1/{environment}:checkUpgrade":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Check if an upgrade operation on the environment will succeed. In case of problems detailed info can be found in the returned Operation.
+      operationId: composer.projects.locations.environments.checkUpgrade
+      parameters:
+        - description: 'The resource name of the environment to check upgrade for, in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}"'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckUpgradeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
@@ -436,6 +478,33 @@ components:
           type: string
         value:
           description: "IP address or range, defined using CIDR notation, of requests that this rule applies to. Examples: `192.168.1.1` or `192.168.0.0/16` or `2001:db8::/32` or `2001:0db8:0000:0042:0000:8a2e:0370:7334`. IP range prefixes should be properly truncated. For example, `1.2.3.4/24` should be truncated to `1.2.3.0/24`. Similarly, for IPv6, `2001:db8::1/32` should be truncated to `2001:db8::/32`."
+          type: string
+      type: object
+    CheckUpgradeRequest:
+      description: Request to check whether image upgrade will succeed.
+      properties:
+        imageVersion:
+          description: The version of the software running in the environment. This encapsulates both the version of Cloud Composer functionality and the version of Apache Airflow. It must match the regular expression `composer-([0-9]+\.[0-9]+\.[0-9]+|latest)-airflow-[0-9]+\.[0-9]+(\.[0-9]+.*)?`. When used as input, the server also checks if the provided version is supported and denies the request for an unsupported version. The Cloud Composer portion of the version is a [semantic version](https://semver.org) or `latest`. When the patch version is omitted, the current Cloud Composer patch version is selected. When `latest` is provided instead of an explicit version number, the server replaces `latest` with the current Cloud Composer version and stores that version number in the same field. The portion of the image version that follows `airflow-` is an official Apache Airflow repository [release name](https://github.com/apache/incubator-airflow/releases). See also [Version List] (/composer/docs/concepts/versioning/composer-versions).
+          type: string
+      type: object
+    CheckUpgradeResponse:
+      description: Message containing information about the result of an upgrade check operation.
+      properties:
+        buildLogUri:
+          description: Output only. Url for a docker build log of an upgraded image.
+          readOnly: true
+          type: string
+        containsPypiModulesConflict:
+          description: Output only. Whether build has succeeded or failed on modules conflicts.
+          enum:
+            - CONFLICT_RESULT_UNSPECIFIED
+            - CONFLICT
+            - NO_CONFLICT
+          readOnly: true
+          type: string
+        pypiConflictBuildLogExtract:
+          description: Output only. Extract from a docker image build log containing information about pypi modules conflicts.
+          readOnly: true
           type: string
       type: object
     DatabaseConfig:

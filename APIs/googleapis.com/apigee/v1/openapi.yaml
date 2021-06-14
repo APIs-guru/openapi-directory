@@ -685,14 +685,24 @@ paths:
           name: override
           schema:
             type: boolean
-        - description: Google Cloud IAM service account. The service account represents
-            the identity of the deployed proxy, and determines what permissions
-            it has. The format must be
-            `{ACCOUNT_ID}@{PROJECT}.iam.gserviceaccount.com`.
+        - description: Flag that specifies whether to enable sequenced rollout. If set to
+            `true`, a best-effort attempt will be made to roll out the routing
+            rules corresponding to this deployment and the environment changes
+            to add this deployment in a safe order. This reduces the risk of
+            downtime that could be caused by changing the environment group's
+            routing before the new destination for the affected traffic is ready
+            to receive it. This should only be necessary if the new deployment
+            will be capturing traffic from another environment under a shared
+            environment group or if traffic will be rerouted to a different
+            environment due to a base path removal. The
+            [GenerateDeployChangeReport API](GenerateDeployChangeReport) may be
+            used to examine routing changes before issuing the deployment
+            request, and its response will indicate if a sequenced rollout is
+            recommended for the deployment.
           in: query
-          name: serviceAccount
+          name: sequencedRollout
           schema:
-            type: string
+            type: boolean
       responses:
         "200":
           content:
@@ -5517,10 +5527,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1DeploymentChangeReportRoutingCon\
               flict"
           type: array
-        serviceAccount:
-          description: The full resource name of Cloud IAM Service Account that this
-            deployment is using, eg, `projects/-/serviceAccounts/{email}`.
-          type: string
         state:
           description: Current state of the deployment. This field is not populated in
             List APIs.
@@ -5620,6 +5626,7 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1DeploymentConfig:
+      description: "NEXT ID: 9"
       properties:
         attributes:
           additionalProperties:
@@ -5639,6 +5646,11 @@ components:
           type: string
         proxyUid:
           description: Unique ID of the API proxy revision.
+          type: string
+        serviceAccount:
+          description: "The service account identity associated with this deployment. If
+            non-empty, will be in the following format:
+            `projects/-/serviceAccounts/{account_email}`"
           type: string
         uid:
           description: Unique ID. The ID will only change if the deployment is deleted and

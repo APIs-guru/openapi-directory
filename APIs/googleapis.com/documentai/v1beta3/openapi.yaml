@@ -1036,6 +1036,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageParagraph"
           type: array
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
+          description: The history of this page.
         tables:
           description: A list of visually detected tables on the page.
           items:
@@ -1092,7 +1095,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element.
+          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element. This field is skipped when its value is the default 0. See https://developers.google.com/protocol-buffers/docs/proto3#json.
           format: int64
           type: string
       type: object
@@ -1151,6 +1154,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
           type: array
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
+          description: The history of this annotation.
         valueDetectedLanguages:
           description: A list of detected languages for value together with confidence.
           items:
@@ -1823,6 +1829,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageParagraph"
           type: array
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
+          description: The history of this page.
         tables:
           description: A list of visually detected tables on the page.
           items:
@@ -1879,7 +1888,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element.
+          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element. This field is skipped when its value is the default 0. See https://developers.google.com/protocol-buffers/docs/proto3#json.
           format: int64
           type: string
       type: object
@@ -1938,6 +1947,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
           type: array
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
+          description: The history of this annotation.
         valueDetectedLanguages:
           description: A list of detected languages for value together with confidence.
           items:
@@ -2544,8 +2556,26 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3DeleteProcessorMetadata:
+      description: The long running operation metadata for delete processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3DisableProcessorMetadata:
+      description: The long running operation metadata for disable processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
     GoogleCloudDocumentaiV1beta3DisableProcessorRequest:
       description: Request message for the disable processor method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3DisableProcessorResponse:
+      description: Response message for the disable processor method. Intentionally empty proto for adding fields in future.
       properties: {}
       type: object
     GoogleCloudDocumentaiV1beta3Document:
@@ -2731,6 +2761,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentPageParagraph"
           type: array
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentProvenance"
+          description: The history of this page.
         tables:
           description: A list of visually detected tables on the page.
           items:
@@ -2787,7 +2820,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element.
+          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element. This field is skipped when its value is the default 0. See https://developers.google.com/protocol-buffers/docs/proto3#json.
           format: int64
           type: string
       type: object
@@ -2846,6 +2879,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentPageDetectedLanguage"
           type: array
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentProvenance"
+          description: The history of this annotation.
         valueDetectedLanguages:
           description: A list of detected languages for value together with confidence.
           items:
@@ -3214,8 +3250,19 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentTextAnchor"
           description: Provenance of the correction. Text anchor indexing into the Document.text. There can only be a single `TextAnchor.text_segments` element. If the start and end index of the text segment are the same, the text change is inserted before that index.
       type: object
+    GoogleCloudDocumentaiV1beta3EnableProcessorMetadata:
+      description: The long running operation metadata for enable processor method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
     GoogleCloudDocumentaiV1beta3EnableProcessorRequest:
       description: Request message for the enable processor method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3EnableProcessorResponse:
+      description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
       properties: {}
       type: object
     GoogleCloudDocumentaiV1beta3FetchProcessorTypesResponse:
@@ -3437,14 +3484,23 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentRequest:
-      description: Request message for review document method.
+      description: "Request message for review document method. Next Id: 6."
       properties:
         document:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
           description: The document that needs human review.
+        enableSchemaValidation:
+          description: Whether the validation should be performed on the ad-hoc review request.
+          type: boolean
         inlineDocument:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
           description: An inline document proto.
+        priority:
+          description: The priority of the human review task.
+          enum:
+            - DEFAULT
+            - URGENT
+          type: string
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentResponse:
       description: Response message for review document method.

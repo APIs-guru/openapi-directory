@@ -3690,8 +3690,7 @@ components:
         experiments:
           description: The list of experiments to enable. This field should be used for
             SDK related experiments and not for service related experiments. The
-            proper field for service related experiments is service_options. For
-            more details see the rationale at go/user-specified-service-options.
+            proper field for service related experiments is service_options.
           items:
             type: string
           type: array
@@ -3728,8 +3727,7 @@ components:
           description: The list of service options to enable. This field should be used
             for service related experiments only. These experiments, when
             graduating to GA, should be replaced by dedicated fields or become
-            default (i.e. always on). For more details see the rationale at
-            go/user-specified-service-options.
+            default (i.e. always on).
           items:
             type: string
           type: array
@@ -3949,6 +3947,11 @@ components:
           description: The initial number of Google Compute Engine instances for the job.
           format: int32
           type: integer
+        sdkContainerImage:
+          description: Docker registry location of container image to use for the 'worker
+            harness. Default is the container for the version of the SDK. Note
+            this field is only valid for portable pipelines.
+          type: string
         serviceAccountEmail:
           description: The email address of the service account to run the job as.
           type: string
