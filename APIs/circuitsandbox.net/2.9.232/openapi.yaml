@@ -20,10 +20,6 @@ info:
       url: https://circuitsandbox.net/rest/v2/swagger
       version: "3.0"
   x-providerName: circuitsandbox.net
-securityDefinitions:
-  oauth:
-    scopes:
-      C4O365: {}
 paths:
   /conversations:
     get:
@@ -7886,40 +7882,42 @@ components:
             CALL_RECORDING: allows to record a call
             CREATE_CONVERSATIONS_CONTENT: Create content of conversations
             CREATE_SPACE_CONTENT:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             DELETE_CONVERSATIONS_CONTENT: Delete content of conversations
             DELETE_SPACE_CONTENT:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             GUEST_CALLS:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             MANAGE_CONVERSATIONS: Manage conversations
             MANAGE_PRESENCE: Manage presence state
             MANAGE_SPACE:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             MENTION_EVENT: allows to receive text item events in which the user was mentioned
             MODERATE_CONVERSATIONS: MOderate conversations
             ORGANIZE_CONVERSATIONS: Organize conversations
             ORGANIZE_SPACE:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             READ_CONVERSATIONS: allows to read conversations of the authenticated user
             READ_SPACE:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             READ_USER: allows to read user information for all users that belong to the
               tenant of the authenticated user
             READ_USER_PROFILE: allows to read the user profile of the authenticated user
             SDK_USER_TO_USER:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             SEARCH_CONVERSATIONS: Search conversations
             TELEPHONY:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             UPDATE_CONVERSATION_CONTENT: Update content of conversations
             UPDATE_SPACE_CONTENT:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             USER_MANAGEMENT: allows to create, update and delete users
             USER_TO_USER: User2User
             WRITE_CONVERSATIONS: allows to create and update conversations of the
               authenticated user or to post messages
             WRITE_SPACE:
-              $ref: "#/securityDefinitions/oauth/scopes/C4O365"
+              $ref: "#/components/securitySchemes/oauth/scopes/C4O365"
             WRITE_USER_PROFILE: allows to update the user profile of the authenticated user
+      scopes:
+        C4O365: {}
       type: oauth2
