@@ -518,7 +518,7 @@ components:
         response between JSON and XML.  
 
         When a field name has more than one word, JSON format will separate the words with an underscore, eg. "content_partner", whereas XML uses a hyphenated naming convention, eg. "content-partner".
-      in: query
+      in: path
       name: format
       required: true
       schema:
