@@ -27,10 +27,12 @@ tags: []
 paths:
   "/{format}/ActiveBoxScores":
     get:
-      description: This method returns box scores for all games that are either in-progress or have been updated within the last 30 minutes.
+      description: This method returns box scores for all games that are either
+        in-progress or have been updated within the last 30 minutes.
       operationId: LegacyBoxScoresActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -55,7 +57,8 @@ paths:
       description: Gets all teams, including pro bowl teams.
       operationId: TeamsAll
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -73,10 +76,13 @@ paths:
       summary: Teams (All)
   "/{format}/AreAnyGamesInProgress":
     get:
-      description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
+      description: Returns <code>true</code> if there is at least one game being
+        played at the time of the request or <code>false</code> if there are
+        none.
       operationId: AreGamesInProgress
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -99,7 +105,8 @@ paths:
     get:
       operationId: LegacyBoxScore
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -111,9 +118,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -123,7 +132,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -151,7 +162,8 @@ paths:
     get:
       operationId: BoxScoreByScoreidV
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -161,7 +173,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "The ScoreID of the game. Possible values include: <code>16247</code>, <code>16245</code>, etc."
+        - description: "The ScoreID of the game. Possible values include:
+            <code>16247</code>, <code>16245</code>, etc."
           in: path
           name: scoreid
           required: true
@@ -179,7 +192,8 @@ paths:
     get:
       operationId: BoxScoreV
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -189,9 +203,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -199,7 +215,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -209,7 +226,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Abbreviation of a team playing in this game. Example: <code>WAS</code>."
+        - description: "Abbreviation of a team playing in this game. Example:
+            <code>WAS</code>."
           in: path
           name: hometeam
           required: true
@@ -228,7 +246,8 @@ paths:
       description: This method returns all box scores for a given season and week.
       operationId: LegacyBoxScores
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -240,9 +259,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -252,7 +273,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -274,10 +297,12 @@ paths:
       summary: Legacy Box Scores
   "/{format}/BoxScoresDelta/{season}/{week}/{minutes}":
     get:
-      description: This method returns all box scores for a given season and week, but only returns player stats that have changed in the last X minutes.
+      description: This method returns all box scores for a given season and week, but
+        only returns player stats that have changed in the last X minutes.
       operationId: LegacyBoxScoresDelta
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -287,9 +312,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -297,7 +324,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -307,7 +335,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:<br>
+        - description: "Only returns player statistics that have changed in the last X
+            minutes.  You specify how many minutes in time to go back.  Valid
+            entries are:<br>
 
             \          <code>1</code> or <code>2</code>.
 
@@ -329,10 +359,14 @@ paths:
       summary: Legacy Box Scores Delta
   "/{format}/BoxScoresDeltaV3/{season}/{week}/{playerstoinclude}/{minutes}":
     get:
-      description: This method returns all box scores for a given season and week, but only returns player stats that have changed in the last X minutes. You can also filter by type of player stats to include, such as traditional fantasy players, IDP players or all players.
+      description: This method returns all box scores for a given season and week, but
+        only returns player stats that have changed in the last X minutes. You
+        can also filter by type of player stats to include, such as traditional
+        fantasy players, IDP players or all players.
       operationId: BoxScoresDeltaV
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -342,9 +376,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -352,7 +388,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -362,10 +399,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The subcategory of players to include in the returned PlayerGame records. Possible values include:<br><br>
+        - description: >-
+            The subcategory of players to include in the returned PlayerGame
+            records. Possible values include:<br><br>
+
             <code>all</code> Returns all players<br>
+
             <code>fantasy</code> Returns traditional fantasy players (QB, RB, WR, TE, K, DST)<br>
+
             <code>idp</code> Returns traditional fantasy players and IDP players.
           in: path
           name: playerstoinclude
@@ -377,7 +418,9 @@ paths:
               - fantasy
               - idp
             type: string
-        - description: "Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:<br><code>1</code>,
+        - description: "Only returns player statistics that have changed in the last X
+            minutes.  You specify how many minutes in time to go back.  Valid
+            entries are:<br><code>1</code>,
 
             \ <code>2</code>, etc.
 
@@ -402,7 +445,8 @@ paths:
       description: "Get bye weeks for the teams during a specified NFL season. "
       operationId: ByeWeeks
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -410,9 +454,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -432,10 +478,14 @@ paths:
       summary: Bye Weeks
   "/{format}/CurrentSeason":
     get:
-      description: Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the current NFL season. This value changes on July 1st. The
+        earliest season for Fantasy data is 2001. The earliest season for Team
+        data is 1985. The earliest season for Fantasy data is 2001. The earliest
+        season for Team data is 1985.
       operationId: SeasonCurrent
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -452,10 +502,12 @@ paths:
       summary: Season Current
   "/{format}/CurrentWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the current week of the NFL season. This value usually
+        changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekCurrent
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -474,7 +526,8 @@ paths:
     get:
       operationId: DailyFantasyPlayers
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -486,7 +539,8 @@ paths:
             type: string
         - description: "
 
-            \          The date of the contest for which you're pulling players
+            \          The date of the contest for which you're
+            pulling players
 
             \          <code>2014-SEP-21</code>,
 
@@ -512,7 +566,8 @@ paths:
     get:
       operationId: DailyFantasyScoring
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -545,7 +600,8 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -577,7 +633,8 @@ paths:
     get:
       operationId: DfsSlatesByWeek
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -587,9 +644,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -597,7 +656,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -621,7 +681,8 @@ paths:
     get:
       operationId: FantasyDefenseGameStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -633,9 +694,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -645,7 +708,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -669,7 +734,8 @@ paths:
     get:
       operationId: FantasyDefenseGameStatsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -679,9 +745,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -689,7 +757,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -717,7 +786,8 @@ paths:
     get:
       operationId: FantasyDefenseSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -729,9 +799,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -753,7 +825,8 @@ paths:
     get:
       operationId: FantasyDefenseSeasonStatsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -763,9 +836,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -789,10 +864,13 @@ paths:
       summary: Fantasy Defense Season Stats by Team
   "/{format}/FantasyPlayers":
     get:
-      description: This method returns a comprehensive list of draftable fantasy football players, including QB, RB, WR, TE, K and DEF.  Players are sorted by ADP (AverageDraftPosition).
+      description: This method returns a comprehensive list of draftable fantasy
+        football players, including QB, RB, WR, TE, K and DEF.  Players are
+        sorted by ADP (AverageDraftPosition).
       operationId: FantasyPlayersWithAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -814,10 +892,12 @@ paths:
       summary: Fantasy Players with ADP
   "/{format}/FantasyPlayersIDP":
     get:
-      description: This method returns the top 300+ IDP Fantasy Players for the current or upcoming season, ordered by AverageDraftPositionIDP.
+      description: This method returns the top 300+ IDP Fantasy Players for the
+        current or upcoming season, ordered by AverageDraftPositionIDP.
       operationId: IdpFantasyPlayersWithAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -841,7 +921,8 @@ paths:
     get:
       operationId: LegacyBoxScoresFinal
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -865,7 +946,8 @@ paths:
     get:
       operationId: PlayerDetailsByFreeAgents
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -891,7 +973,8 @@ paths:
       parameters:
         - description: "
 
-            \          Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+            \          Desired response format. Valid entries are
+            <code>XML</code> or <code>JSON</code>.
 
             \        "
           in: path
@@ -905,9 +988,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -917,7 +1002,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -975,7 +1062,8 @@ paths:
       description: Game stats for a specified season.
       operationId: GameStatsBySeasonDeprecatedUseTeamGameStatsInstead
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -987,9 +1075,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1012,7 +1102,8 @@ paths:
       description: Game stats for a specified season and week.
       operationId: GameStatsByWeekDeprecatedUseTeamGameStatsInstead
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1024,9 +1115,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1036,7 +1129,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1060,7 +1155,8 @@ paths:
     get:
       operationId: Injuries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1072,9 +1168,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1084,7 +1182,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1108,7 +1208,8 @@ paths:
     get:
       operationId: InjuriesByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1120,9 +1221,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1132,7 +1235,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1160,10 +1265,13 @@ paths:
       summary: Injuries by Team
   "/{format}/LastCompletedSeason":
     get:
-      description: Year of the most recently completed season. this value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the most recently completed season. this value changes
+        immediately after the Super Bowl. The earliest season for Fantasy data
+        is 2001. The earliest season for Team data is 1985.
       operationId: SeasonLastCompleted
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1180,10 +1288,12 @@ paths:
       summary: Season Last Completed
   "/{format}/LastCompletedWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the current week of the NFL season. This value usually
+        changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekLastCompleted
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1202,7 +1312,8 @@ paths:
     get:
       operationId: LegacyBoxScoresLive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1226,7 +1337,8 @@ paths:
     get:
       operationId: News
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1246,7 +1358,8 @@ paths:
     get:
       operationId: NewsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1276,7 +1389,8 @@ paths:
       parameters:
         - description: "
 
-            \          Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+            \          Desired response format. Valid entries are
+            <code>XML</code> or <code>JSON</code>.
 
             \        "
           in: path
@@ -1284,7 +1398,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>14257</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
+            can be determined by pulling player related data.
+            Example:<code>14257</code>.
           in: path
           name: playerid
           required: true
@@ -1304,7 +1420,8 @@ paths:
     get:
       operationId: NewsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1330,7 +1447,8 @@ paths:
     get:
       operationId: PlayerDetailsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1340,7 +1458,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>732</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
+            can be determined by pulling player related data.
+            Example:<code>732</code>.
           in: path
           name: playerid
           required: true
@@ -1358,7 +1478,8 @@ paths:
     get:
       operationId: PlayerGameRedZoneStatsInsideFive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1368,9 +1489,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1378,7 +1501,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -1402,7 +1526,8 @@ paths:
     get:
       operationId: PlayerGameRedZoneStatsInsideTen
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1412,9 +1537,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1422,7 +1549,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -1446,7 +1574,8 @@ paths:
     get:
       operationId: PlayerGameRedZoneStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1456,9 +1585,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1466,7 +1597,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -1490,7 +1622,8 @@ paths:
     get:
       operationId: PlayerGameStatsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1502,9 +1635,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1514,7 +1649,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1524,7 +1661,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>732</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
+            can be determined by pulling player related data.
+            Example:<code>732</code>.
           in: path
           name: playerid
           required: true
@@ -1542,7 +1681,8 @@ paths:
     get:
       operationId: PlayerGameLogsBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1551,7 +1691,8 @@ paths:
               - JSON
               - XML
             type: string
-        - description: Season to get games from. Example <code>2019POST</code>, <code>2020</code>
+        - description: Season to get games from. Example <code>2019POST</code>,
+            <code>2020</code>
           in: path
           name: season
           required: true
@@ -1563,7 +1704,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+        - description: How many games to return. Example <code>all</code>,
+            <code>10</code>, <code>25</code>
           in: path
           name: numberofgames
           required: true
@@ -1583,7 +1725,8 @@ paths:
     get:
       operationId: PlayerGameStatsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1595,9 +1738,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1607,7 +1752,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1637,7 +1784,8 @@ paths:
     get:
       operationId: PlayerGameStatsByWeek
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1649,9 +1797,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1661,7 +1811,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1685,7 +1837,8 @@ paths:
     get:
       operationId: PlayerGameStatsByWeekDelta
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1697,9 +1850,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1709,7 +1864,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -1719,7 +1876,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:<br>
+        - description: "Only returns player statistics that have changed in the last X
+            minutes.  You specify how many minutes in time to go back.  Valid
+            entries are:<br>
 
             \          <code>1</code> or <code>2</code>.
 
@@ -1743,7 +1902,8 @@ paths:
     get:
       operationId: PlayerGameStatsDelta
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1755,7 +1915,9 @@ paths:
             type: string
         - description: "
 
-            \          Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:
+            \          Only returns player statistics that have
+            changed in the last X minutes.  You specify how many minutes in time
+            to go back.  Valid entries are:
 
             \          <code>1</code> or <code>2</code>.
 
@@ -1779,7 +1941,8 @@ paths:
     get:
       operationId: FantasyPlayerOwnershipPercentagesSeasonLong
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1789,9 +1952,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1799,7 +1964,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
+            Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -1823,7 +1989,8 @@ paths:
     get:
       operationId: PlayerSeasonRedZoneStatsInsideFive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1833,9 +2000,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1857,7 +2026,8 @@ paths:
     get:
       operationId: PlayerSeasonRedZoneStatsInsideTen
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1867,9 +2037,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1891,7 +2063,8 @@ paths:
     get:
       operationId: PlayerSeasonRedZoneStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1901,9 +2074,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1925,7 +2100,8 @@ paths:
     get:
       operationId: PlayerSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1937,9 +2113,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1961,7 +2139,8 @@ paths:
     get:
       operationId: PlayerSeasonStatsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1973,9 +2152,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -1983,7 +2164,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>732</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
+            can be determined by pulling player related data.
+            Example:<code>732</code>.
           in: path
           name: playerid
           required: true
@@ -2003,7 +2186,8 @@ paths:
     get:
       operationId: PlayerSeasonStatsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2015,9 +2199,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2045,7 +2231,8 @@ paths:
     get:
       operationId: PlayerSeasonThirdDownStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2057,9 +2244,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2081,7 +2270,8 @@ paths:
     get:
       operationId: PlayerDetailsByAvailable
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2105,7 +2295,8 @@ paths:
     get:
       operationId: PlayerDetailsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2135,7 +2326,8 @@ paths:
     get:
       operationId: ProBowlers
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2167,7 +2359,8 @@ paths:
     get:
       operationId: LegacyBoxScoresDeltaCurrentWeek
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2177,7 +2370,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:<br>
+        - description: "Only returns player statistics that have changed in the last X
+            minutes.  You specify how many minutes in time to go back.  Valid
+            entries are:<br>
 
             \          <code>1</code> or <code>2</code>.
 
@@ -2201,13 +2396,15 @@ paths:
     get:
       operationId: PlayerDetailsByRookieDraftYear
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
           schema:
             type: string
-        - description: "Year of the season.<br>Examples: <code>2018</code>, <code>2019</code>, etc."
+        - description: "Year of the season.<br>Examples: <code>2018</code>,
+            <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -2228,13 +2425,16 @@ paths:
       description: Game schedule for a specified season.
       operationId: Schedule
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
           schema:
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>,
+            <code>2018STAR</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -2255,13 +2455,16 @@ paths:
       description: Game scores for a specified season.
       operationId: ScoresBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
           schema:
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>,
+            <code>2018STAR</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -2282,7 +2485,8 @@ paths:
       description: Get game scores for a specified week of a season.
       operationId: ScoresByWeek
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2290,9 +2494,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2302,7 +2508,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -2326,7 +2534,8 @@ paths:
     get:
       operationId: LeagueLeadersBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2338,9 +2547,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2393,10 +2604,12 @@ paths:
       summary: League Leaders by Season
   "/{format}/SimulatedBoxScoresV3/{numberofplays}":
     get:
-      description: Gets simulated live box scores of NFL games, covering the Conference Championship games on January 21, 2018.
+      description: Gets simulated live box scores of NFL games, covering the
+        Conference Championship games on January 21, 2018.
       operationId: BoxScoresVSimulation
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2406,7 +2619,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The number of plays to progress in this NFL live game simulation. Example entries are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>150</code>, <code>200</code>, etc.
+        - description: The number of plays to progress in this NFL live game simulation.
+            Example entries are <code>0</code>, <code>1</code>, <code>2</code>,
+            <code>3</code>, <code>150</code>, <code>200</code>, etc.
           in: path
           name: numberofplays
           required: true
@@ -2424,10 +2639,12 @@ paths:
       summary: Box Scores V3 Simulation
   "/{format}/SimulatedScores/{numberofplays}":
     get:
-      description: Gets simulated live scores of NFL games, covering the Conference Championship games on January 21, 2018.
+      description: Gets simulated live scores of NFL games, covering the Conference
+        Championship games on January 21, 2018.
       operationId: ScoresByWeekSimulation
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2437,7 +2654,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The number of plays to progress in this NFL live game simulation. Example entries are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>150</code>, <code>200</code>, etc.
+        - description: The number of plays to progress in this NFL live game simulation.
+            Example entries are <code>0</code>, <code>1</code>, <code>2</code>,
+            <code>3</code>, <code>150</code>, <code>200</code>, etc.
           in: path
           name: numberofplays
           required: true
@@ -2458,7 +2677,8 @@ paths:
       description: This method returns all stadiums.
       operationId: Stadiums
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2478,7 +2698,8 @@ paths:
     get:
       operationId: Standings
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2486,9 +2707,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2510,7 +2733,8 @@ paths:
     get:
       operationId: TeamGameStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2522,9 +2746,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2534,7 +2760,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -2558,7 +2786,8 @@ paths:
     get:
       operationId: TeamSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2570,9 +2799,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2595,7 +2826,8 @@ paths:
       description: Gets all active teams.
       operationId: TeamsActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2616,7 +2848,8 @@ paths:
       description: List of teams playing in a specified season.
       operationId: TeamsBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2624,9 +2857,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -2649,13 +2884,16 @@ paths:
       description: Get detailed information about past, present, and future timeframes.
       operationId: Timeframes
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
           schema:
             type: string
-        - description: The type of timeframes to return.  Valid entries are <code>current</code> or <code>upcoming</code> or <code>completed</code> or <code>recent</code> or <code>all</code>.
+        - description: The type of timeframes to return.  Valid entries are
+            <code>current</code> or <code>upcoming</code> or
+            <code>completed</code> or <code>recent</code> or <code>all</code>.
           in: path
           name: type
           required: true
@@ -2673,10 +2911,14 @@ paths:
       summary: Timeframes
   "/{format}/UpcomingSeason":
     get:
-      description: Year of the current NFL season, if we are in the mid-season. If we are in the off-season, then year of the next upcoming season. This value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the current NFL season, if we are in the mid-season. If we
+        are in the off-season, then year of the next upcoming season. This value
+        changes immediately after the Super Bowl. The earliest season for
+        Fantasy data is 2001. The earliest season for Team data is 1985.
       operationId: SeasonUpcoming
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -2693,10 +2935,12 @@ paths:
       summary: Season Upcoming
   "/{format}/UpcomingWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the current week of the NFL season. This value usually
+        changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekUpcoming
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true

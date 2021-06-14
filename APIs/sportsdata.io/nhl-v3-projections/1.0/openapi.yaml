@@ -28,7 +28,8 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -60,7 +61,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWInjuriesDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -72,7 +74,8 @@ paths:
             type: string
         - description: "The date of the game(s).
 
-            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>,
+            <code>2017-OCT-01</code>.
 
             \ "
           in: path
@@ -94,7 +97,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -106,7 +110,8 @@ paths:
             type: string
         - description: "The date of the game(s).
 
-            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>,
+            <code>2017-OCT-01</code>.
 
             \ "
           in: path

@@ -21,8 +21,10 @@ info:
 paths:
   "/domains/{source_domains_language}/{target_domains_language}":
     get:
-      description: |
-        Returns a list of the available [domains](documentation/glossary?term=domain) for a given bilingual language dataset.
+      description: >
+        Returns a list of the available
+        [domains](documentation/glossary?term=domain) for a given bilingual
+        language dataset.
       parameters:
         - description: IANA language code
           in: path
@@ -72,8 +74,10 @@ paths:
         - Utility
   "/domains/{source_language}":
     get:
-      description: |
-        Returns a list of the available [domains](documentation/glossary?term=domain) for a given monolingual language dataset.
+      description: >
+        Returns a list of the available
+        [domains](documentation/glossary?term=domain) for a given monolingual
+        language dataset.
       parameters:
         - description: IANA language code
           in: path
@@ -109,7 +113,7 @@ paths:
         - Utility
   "/entries/{source_language}/{word_id}/sentences":
     get:
-      description: |
+      description: >
         
         Use this to retrieve sentences extracted from  corpora which show how a word is used in the language. This is available for English and Spanish. For English, the sentences are linked to the correct [sense](documentation/glossary?term=sense) of the word in the dictionary. In Spanish, they are linked at the [headword](documentation/glossary?term=headword) level.
           <div id="sentences"></div>
@@ -153,7 +157,7 @@ paths:
         - The Sentence Dictionary
   "/entries/{source_lang}/{word_id}":
     get:
-      description: |
+      description: >
         
         Use this to retrieve definitions, [pronunciations](documentation/glossary?term=pronunciation), example sentences, [grammatical information](documentation/glossary?term=grammaticalfeatures) and [word origins](documentation/glossary?term=etymology). It only works for dictionary [headwords](documentation/glossary?term=headword), so you may need to use the [Lemmatron](documentation/glossary?term=lemma) first if your input is likely to be an [inflected](documentation/glossary?term=inflection) form (e.g., 'swimming'). This would return the linked [headword](documentation/glossary?term=headword) (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB). 
           <div id="dictionary_entries"></div>
@@ -193,8 +197,9 @@ paths:
                 $ref: "#/components/schemas/RetrieveEntry"
           description: Successful response.
         "404":
-          description: |
-            No entry is found matching supplied id and source_lang or filters are not recognized
+          description: >
+            No entry is found matching supplied id and source_lang or filters
+            are not recognized
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -203,7 +208,7 @@ paths:
         - Dictionary entries
   "/entries/{source_lang}/{word_id}/antonyms":
     get:
-      description: |
+      description: >
         
         Retrieve words that are opposite in meaning to the input word ([antonym](documentation/glossary?term=thesaurus)).
 
@@ -237,8 +242,9 @@ paths:
                 $ref: "#/components/schemas/Thesaurus"
           description: Successful response.
         "404":
-          description: |
-            No entry is found matching supplied id and source_lang or filters are not recognized
+          description: >
+            No entry is found matching supplied id and source_lang or filters
+            are not recognized
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -247,7 +253,7 @@ paths:
         - Thesaurus
   "/entries/{source_lang}/{word_id}/regions={region}":
     get:
-      description: |
+      description: >
         
         USe this filter to restrict the lookup to either our Oxford Dictionary of English (GB) or New Oxford American Dictionary (US).
       externalDocs:
@@ -269,7 +275,8 @@ paths:
           schema:
             default: ace
             type: string
-        - description: Region filter parameter. gb = Oxford Dictionary of English. us = New Oxford American Dictionary.
+        - description: Region filter parameter. gb = Oxford Dictionary of English. us =
+            New Oxford American Dictionary.
           in: path
           name: region
           required: true
@@ -288,8 +295,9 @@ paths:
                 $ref: "#/components/schemas/RetrieveEntry"
           description: Successful response.
         "404":
-          description: |
+          description: >
             no entry is found matching supplied source_lang and id
+
             and/or that entry has no senses with translations in the target language. 
         "500":
           description: |
@@ -299,7 +307,7 @@ paths:
         - Dictionary entries
   "/entries/{source_lang}/{word_id}/synonyms":
     get:
-      description: |
+      description: >
         
         Use this to retrieve words that are similar in meaning to the input word ([synonym](documentation/glossary?term=synonym)).
 
@@ -333,8 +341,9 @@ paths:
                 $ref: "#/components/schemas/Thesaurus"
           description: Successful response.
         "404":
-          description: |
-            No entry is found matching supplied id and source_lang or filters are not recognized
+          description: >
+            No entry is found matching supplied id and source_lang or filters
+            are not recognized
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -343,7 +352,7 @@ paths:
         - Thesaurus
   "/entries/{source_lang}/{word_id}/synonyms;antonyms":
     get:
-      description: |
+      description: >
         
         Retrieve available [synonyms](documentation/glossary?term=thesaurus) and [antonyms](documentation/glossary?term=thesaurus) for a given word and language. 
 
@@ -377,8 +386,9 @@ paths:
                 $ref: "#/components/schemas/Thesaurus"
           description: Successful response.
         "404":
-          description: |
-            No entry is found matching supplied id and source_lang or filters are not recognized
+          description: >
+            No entry is found matching supplied id and source_lang or filters
+            are not recognized
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -387,7 +397,7 @@ paths:
         - Thesaurus
   "/entries/{source_lang}/{word_id}/{filters}":
     get:
-      description: |
+      description: >
         
         Use filters to limit the [entry](documentation/glossary?term=entry) information that is returned. For example, you may only require definitions and not everything else, or just [pronunciations](documentation/glossary?term=pronunciation). The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined using a semicolon.
 
@@ -415,7 +425,10 @@ paths:
           schema:
             default: ace
             type: string
-        - description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
+        - description: Separate filtering conditions using a semicolon. Conditions take
+            values grammaticalFeatures and/or lexicalCategory and are
+            case-sensitive. To list multiple values in single condition divide
+            them with comma.
           in: path
           name: filters
           required: true
@@ -436,8 +449,9 @@ paths:
                 $ref: "#/components/schemas/RetrieveEntry"
           description: Successful response.
         "404":
-          description: |
+          description: >
             no entry is found matching supplied source_lang and id
+
             and/or that entry has no senses with translations in the target language. 
         "500":
           description: |
@@ -447,7 +461,7 @@ paths:
         - Dictionary entries
   "/entries/{source_translation_language}/{word_id}/translations={target_translation_language}":
     get:
-      description: |
+      description: >
         
         Use this to return translations for a given word. In the event that a word in the dataset does not have a direct translation, the response will be a [definition](documentation/glossary?term=entry) in the target language.
 
@@ -501,12 +515,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RetrieveEntry"
-          description: Successful response. In case word doesn't have a direct translation a response would be definitions.
+          description: Successful response. In case word doesn't have a direct translation
+            a response would be definitions.
         "400":
           description: any of target languages is unknown
         "404":
-          description: |
+          description: >
             no entry is found matching supplied source_lang and id
+
             and/or that entry has no senses with translations in the target language(s). 
         "500":
           description: |
@@ -535,8 +551,9 @@ paths:
         - Utility
   "/filters/{endpoint}":
     get:
-      description: |
-        Returns a list of all the valid filters for a given endpoint to construct API calls.
+      description: >
+        Returns a list of all the valid filters for a given endpoint to
+        construct API calls.
       parameters:
         - description: Name of the endpoint.
           in: path
@@ -566,10 +583,13 @@ paths:
         - Utility
   "/grammaticalFeatures/{source_language}":
     get:
-      description: |
-        Returns a list of the available [grammatical features](documentation/glossary?term=grammaticalfeatures) for a given language dataset.
+      description: >
+        Returns a list of the available [grammatical
+        features](documentation/glossary?term=grammaticalfeatures) for a given
+        language dataset.
       parameters:
-        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+        - description: IANA language code. If provided output will be filtered by
+            sourceLanguage.
           in: path
           name: source_language
           required: true
@@ -606,7 +626,7 @@ paths:
         - Utility
   "/inflections/{source_lang}/{word_id}/{filters}":
     get:
-      description: |
+      description: >
         
         Use this to check if a word exists in the dictionary, or what 'root' form it links to (e.g., swimming > swim). The response tells you the possible [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) word. This can then be combined with other endpoints to retrieve more information.
 
@@ -627,7 +647,10 @@ paths:
               - de
               - pt
             type: string
-        - description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
+        - description: Separate filtering conditions using a semicolon. Conditions take
+            values grammaticalFeatures and/or lexicalCategory and are
+            case-sensitive. To list multiple values in single condition divide
+            them with comma.
           in: path
           name: filters
           required: true
@@ -662,10 +685,12 @@ paths:
         - Lemmatron
   /languages:
     get:
-      description: |
-        Returns a list of monolingual and bilingual language datasets available in the API
+      description: >
+        Returns a list of monolingual and bilingual language datasets
+        available in the API
       parameters:
-        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+        - description: IANA language code. If provided output will be filtered by
+            sourceLanguage.
           in: query
           name: sourceLanguage
           required: false
@@ -688,7 +713,8 @@ paths:
               - ta
               - gu
             type: string
-        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+        - description: IANA language code. If provided output will be filtered by
+            sourceLanguage.
           in: query
           name: targetLanguage
           required: false
@@ -725,8 +751,10 @@ paths:
         - Utility
   "/lexicalcategories/{language}":
     get:
-      description: |
-        Returns a list of available [lexical categories](documentation/glossary?term=lexicalcategory) for a given language dataset.
+      description: >
+        Returns a list of available [lexical
+        categories](documentation/glossary?term=lexicalcategory) for a given
+        language dataset.
       parameters:
         - description: IANA language code
           in: path
@@ -769,8 +797,10 @@ paths:
         - Utility
   "/regions/{source_language}":
     get:
-      description: |
-        Returns a list of the available [regions](documentation/glossary?term=regions) for a given monolingual language dataset.
+      description: >
+        Returns a list of the available
+        [regions](documentation/glossary?term=regions) for a given monolingual
+        language dataset.
       parameters:
         - description: IANA language code
           in: path
@@ -796,8 +826,10 @@ paths:
         - Utility
   "/registers/{source_language}":
     get:
-      description: |
-        Returns a list of the available [registers](documentation/glossary?term=registers) for a given monolingual language dataset.
+      description: >
+        Returns a list of the available
+        [registers](documentation/glossary?term=registers) for a given
+        monolingual language dataset.
       parameters:
         - description: IANA language code
           in: path
@@ -836,8 +868,10 @@ paths:
         - Utility
   "/registers/{source_register_language}/{target_register_language}":
     get:
-      description: |
-        Returns a list of the available [registers](documentation/glossary?term=registers) for a given bilingual language dataset.
+      description: >
+        Returns a list of the available
+        [registers](documentation/glossary?term=registers) for a given bilingual
+        language dataset.
       parameters:
         - description: IANA language code
           in: path
@@ -890,7 +924,7 @@ paths:
         - Utility
   "/search/{source_lang}":
     get:
-      description: |
+      description: >
         
         Use this to retrieve possible [headword](documentation/glossary?term=headword) matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and [lemmatization](documentation/glossary?term=lemma) 
 
@@ -920,7 +954,8 @@ paths:
           schema:
             default: eye
             type: string
-        - description: Set prefix to true if you'd like to get results only starting with search string.
+        - description: Set prefix to true if you'd like to get results only starting with
+            search string.
           in: query
           name: prefix
           required: false
@@ -930,13 +965,15 @@ paths:
               - "false"
               - "true"
             type: boolean
-        - description: If searching in English, filter words with specific region(s) either 'us' or 'gb'.
+        - description: If searching in English, filter words with specific region(s)
+            either 'us' or 'gb'.
           in: query
           name: regions
           required: false
           schema:
             type: string
-        - description: Limit the number of results per response. Default and maximum limit is 5000.
+        - description: Limit the number of results per response. Default and maximum limit
+            is 5000.
           in: query
           name: limit
           required: false
@@ -958,8 +995,9 @@ paths:
                 $ref: "#/components/schemas/Wordlist"
           description: Successful response.
         "404":
-          description: |
-            No entry is found matching supplied id and source_lang or filters are not recognized
+          description: >
+            No entry is found matching supplied id and source_lang or filters
+            are not recognized
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -1017,7 +1055,8 @@ paths:
           schema:
             default: eye
             type: string
-        - description: Set prefix to true if you'd like to get results only starting with search string.
+        - description: Set prefix to true if you'd like to get results only starting with
+            search string.
           in: query
           name: prefix
           required: false
@@ -1027,13 +1066,15 @@ paths:
               - "false"
               - "true"
             type: boolean
-        - description: Filter words with specific region(s) E.g., regions=us. For now gb, us are available for en language.
+        - description: Filter words with specific region(s) E.g., regions=us. For now gb,
+            us are available for en language.
           in: query
           name: regions
           required: false
           schema:
             type: string
-        - description: Limit the number of results per response. Default and maximum limit is 5000.
+        - description: Limit the number of results per response. Default and maximum limit
+            is 5000.
           in: query
           name: limit
           required: false
@@ -1055,8 +1096,9 @@ paths:
                 $ref: "#/components/schemas/Wordlist"
           description: Successful response.
         "404":
-          description: |
-            No entry is found matching supplied id and source_lang or filters are not recognized
+          description: >
+            No entry is found matching supplied id and source_lang or filters
+            are not recognized
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -1065,10 +1107,23 @@ paths:
         - Search
   "/stats/frequency/ngrams/{source_lang}/{corpus}/{ngram-size}/":
     get:
-      description: |
-        This endpoint returns frequencies of ngrams of size 1-4. That is the number of times a word (ngram size = 1) or words (ngram size > 1) appear in the corpus. Ngrams are case sensitive ("I AM" and "I am" will have different frequency) and frequencies are calculated per word (true case) so "the book" and "the books" are two different ngrams. The results can be filtered based on query parameters. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overridden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> Example for bigrams (ngram of size 2):
+      description: >
+        This endpoint returns frequencies of ngrams of size 1-4. That is
+        the number of times a word (ngram size = 1) or words (ngram size > 1)
+        appear in the corpus. Ngrams are case sensitive ("I AM" and "I am" will
+        have different frequency) and frequencies are calculated per word (true
+        case) so "the book" and "the books" are two different ngrams. The
+        results can be filtered based on query parameters. <br> <br> Parameters
+        can be provided in PATH, GET or POST (form or json). The parameters in
+        PATH are overridden by parameters in GET, POST and json (in that order).
+        In PATH, individual options are separated by semicolon and values are
+        separated by commas (where multiple values can be used). <br> <br>
+        Example for bigrams (ngram of size 2):
+
         * PATH: /tokens=a word,another word
+
         * GET: /?tokens=a word&tokens=another word
+
         * POST (json):
 
           ```javascript
@@ -1078,6 +1133,7 @@ paths:
           ```
 
         Either "tokens" or "contains" has to be provided. <br> <br> Some queries with "contains" or "sort" can exceed the 30s timeout, in which case the API will return an error message with status code 503. You mitigate this by providing additional restrictions such as "minFrequency" and "maxFrequency". <br> <br> You can use the parameters "offset" and "limit" to paginate through large result sets. For convenience, the HTTP header "Link" is set on the response to provide links to "first", "self", "next", "prev" and "last" pages of results (depending on the context). For example, if the result set contains 50 results and the parameter "limit" is set to 25, the Links header will contain an URL for the first 25 results and the next 25 results. <br> <br> Some libraries such as python's `requests` can parse the header automatically and offer a convenient way of iterating through the results. For example:
+
         ```python def get_all_results(url):
             while url:
                 r = requests.get(url)
@@ -1094,7 +1150,8 @@ paths:
           schema:
             default: en
             type: string
-        - description: For corpora other than 'nmc' (New Monitor Corpus) please contact api@oxforddictionaries.com
+        - description: For corpora other than 'nmc' (New Monitor Corpus) please contact
+            api@oxforddictionaries.com
           in: path
           name: corpus
           required: true
@@ -1108,67 +1165,82 @@ paths:
           schema:
             default: 2
             type: string
-        - description: List of tokens to filter. The tokens are separated by spaces, the list items are separated by comma (e.g., for bigrams (n=2) tokens=this is,this was, this will)
+        - description: List of tokens to filter. The tokens are separated by spaces, the
+            list items are separated by comma (e.g., for bigrams (n=2)
+            tokens=this is,this was, this will)
           in: query
           name: tokens
           required: false
           schema:
             default: a word
             type: string
-        - description: Find ngrams containing the given token(s). Use comma or space as token separators; the order of tokens is irrelevant.
+        - description: Find ngrams containing the given token(s). Use comma or space as
+            token separators; the order of tokens is irrelevant.
           in: query
           name: contains
           required: false
           schema:
             type: string
-        - description: Flag specifying whether to lookup ngrams that include punctuation or not (possible values are "true" and "false"; default is "false")
+        - description: Flag specifying whether to lookup ngrams that include punctuation
+            or not (possible values are "true" and "false"; default is "false")
           in: query
           name: punctuation
           required: false
           schema:
             type: string
-        - description: Option specifying whether tokens should be returned as a single string (option "google") or as a list of strings (option "oup")
+        - description: Option specifying whether tokens should be returned as a single
+            string (option "google") or as a list of strings (option "oup")
           in: query
           name: format
           required: false
           schema:
             default: oup
             type: string
-        - description: Restrict the query to entries with frequency of at least `minFrequency`
+        - description: Restrict the query to entries with frequency of at least
+            `minFrequency`
           in: query
           name: minFrequency
           required: false
           schema:
             format: int64
             type: integer
-        - description: Restrict the query to entries with frequency of at most `maxFrequency`
+        - description: Restrict the query to entries with frequency of at most
+            `maxFrequency`
           in: query
           name: maxFrequency
           required: false
           schema:
             format: int64
             type: integer
-        - description: Restrict the query to entries that appear in at least `minDocumentFrequency` documents
+        - description: Restrict the query to entries that appear in at least
+            `minDocumentFrequency` documents
           in: query
           name: minDocumentFrequency
           required: false
           schema:
             format: int64
             type: integer
-        - description: Restrict the query to entries that appera in at most `maxDocumentFrequency` documents
+        - description: Restrict the query to entries that appera in at most
+            `maxDocumentFrequency` documents
           in: query
           name: maxDocumentFrequency
           required: false
           schema:
             format: int64
             type: integer
-        - description: collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).
+        - description: collate the results by wordform, trueCase, lemma, lexicalCategory.
+            Multiple values can be separated by commas (e.g.,
+            collate=trueCase,lemma,lexicalCategory).
           in: query
           name: collate
           required: false
           schema:
             type: string
-        - description: sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign ('-'). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)
+        - description: sort the resulting list by wordform, trueCase, lemma,
+            lexicalCategory, frequency, normalizedFrequency. Descending order is
+            achieved by prepending the value with the minus sign ('-'). Multiple
+            values can be separated by commas (e.g.,
+            sort=lexicalCategory,-frequency)
           in: query
           name: sort
           required: false
@@ -1216,10 +1288,31 @@ paths:
         - LexiStats
   "/stats/frequency/word/{source_lang}/":
     get:
-      description: |
-        This endpoint provides the frequency of a given word. When multiple database records match the query parameters, the returned frequency is the sum of the individual frequencies. For example, if the query parameters are lemma=test, the returned frequency will include the verb "test", the noun "test" and the adjective "test" in all forms (Test, tested, testing, etc.) <br> <br> If you are interested in the frequency of the word "test" but want to exclude other forms (e.g., tested) use the option trueCase=test. Normally, the word "test" will be spelt with a capital letter at the beginning of a sentence. The option trueCase will ignore this and it will count "Test" and "test" as the same token. If you are interested in frequencies of "Test" and "test", use the option wordform=test or wordform=Test. Note that trueCase is not just a lower case of the word as some words are genuinely spelt with a capital letter such as the word "press" in Oxford University Press. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). Examples:
+      description: >
+        This endpoint provides the frequency of a given word. When multiple
+        database records match the query parameters, the returned frequency is
+        the sum of the individual frequencies. For example, if the query
+        parameters are lemma=test, the returned frequency will include the verb
+        "test", the noun "test" and the adjective "test" in all forms (Test,
+        tested, testing, etc.) <br> <br> If you are interested in the frequency
+        of the word "test" but want to exclude other forms (e.g., tested) use
+        the option trueCase=test. Normally, the word "test" will be spelt with a
+        capital letter at the beginning of a sentence. The option trueCase will
+        ignore this and it will count "Test" and "test" as the same token. If
+        you are interested in frequencies of "Test" and "test", use the option
+        wordform=test or wordform=Test. Note that trueCase is not just a lower
+        case of the word as some words are genuinely spelt with a capital letter
+        such as the word "press" in Oxford University Press. <br> <br>
+        Parameters can be provided in PATH, GET or POST (form or json). The
+        parameters in PATH are overriden by parameters in GET, POST and json (in
+        that order). In PATH, individual options are separated by semicolon and
+        values are separated by commas (where multiple values can be used).
+        Examples:
+
         * PATH: /lemma=test;lexicalCategory=noun
+
         * GET: /?lemma=test&lexicalCategory=noun
+
         * POST (json):
 
           ```javascript
@@ -1238,26 +1331,30 @@ paths:
           schema:
             default: en
             type: string
-        - description: For corpora other than 'nmc' (New Monitor Corpus) please contact api@oxforddictionaries.com
+        - description: For corpora other than 'nmc' (New Monitor Corpus) please contact
+            api@oxforddictionaries.com
           in: query
           name: corpus
           required: false
           schema:
             default: nmc
             type: string
-        - description: The written form of the word to look up (preserving case e.g., Books vs books)
+        - description: The written form of the word to look up (preserving case e.g.,
+            Books vs books)
           in: query
           name: wordform
           required: false
           schema:
             type: string
-        - description: The written form of the word to look up with normalised case (Books --> books)
+        - description: The written form of the word to look up with normalised case (Books
+            --> books)
           in: query
           name: trueCase
           required: false
           schema:
             type: string
-        - description: The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")
+        - description: The lemma of the word to look up (e.g., Book, booked, books all
+            have the lemma "book")
           in: query
           name: lemma
           required: false
@@ -1283,8 +1380,9 @@ paths:
                 $ref: "#/components/schemas/StatsWordResult"
           description: Successful response.
         "400":
-          description: |
-            You need to specify at least one option. Try one of 'wordform, lemma, trueCase, lexicalCategory'.
+          description: >
+            You need to specify at least one option. Try one of 'wordform,
+            lemma, trueCase, lexicalCategory'.
         "404":
           description: |
             language is not in...
@@ -1296,17 +1394,34 @@ paths:
         - LexiStats
   "/stats/frequency/words/{source_lang}/":
     get:
-      description: |
-        This endpoint provides a list of frequencies for a given word or words. Unlike the /word/ endpoint, the results are split into the smallest units. <br> <br> To exclude a specific value, prepend it with the minus sign ('-'). For example, to get frequencies of the lemma 'happy' but exclude superlative forms (i.e., happiest) you could use options 'lemma=happy;grammaticalFeatures=-degreeType:superlative'. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overridden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> The parameters wordform/trueCase/lemma/lexicalCategory also exist in a plural form, taking a lists of items. Examples:
+      description: >
+        This endpoint provides a list of frequencies for a given word or
+        words. Unlike the /word/ endpoint, the results are split into the
+        smallest units. <br> <br> To exclude a specific value, prepend it with
+        the minus sign ('-'). For example, to get frequencies of the lemma
+        'happy' but exclude superlative forms (i.e., happiest) you could use
+        options 'lemma=happy;grammaticalFeatures=-degreeType:superlative'. <br>
+        <br> Parameters can be provided in PATH, GET or POST (form or json). The
+        parameters in PATH are overridden by parameters in GET, POST and json
+        (in that order). In PATH, individual options are separated by semicolon
+        and values are separated by commas (where multiple values can be used).
+        <br> <br> The parameters wordform/trueCase/lemma/lexicalCategory also
+        exist in a plural form, taking a lists of items. Examples:
+
         * PATH: /wordforms=happy,happier,happiest
+
         * GET: /?wordforms=happy&wordforms=happier&wordforms=happiest
+
         * POST (json):
+
         ```javascript
           {
             "wordforms": ["happy", "happier", "happiest"]
           }
         ```
+
         A mor complex example of retrieving frequencies of multiple lemmas:
+
         ```
           {
               "lemmas": ["happy", "content", "cheerful", "cheery", "merry", "joyful", "ecstatic"],
@@ -1317,7 +1432,9 @@ paths:
               "sort": ["lemma", "-frequency"]
           }
         ```
+
         Some queries with "collate" or "sort" can exceed the 30s timeout, in which case the API will return an error message with status code 503. You mitigate this by providing additional restrictions such as "minFrequency" and "maxFrequency". <br> <br> You can use the parameters "offset" and "limit" to paginate through large result sets. For convenience, the HTTP header "Link" is set on the response to provide links to "first", "self", "next", "prev" and "last" pages of results (depending on the context). For example, if the result set contains 50 results and the parameter "limit" is set to 25, the Links header will contain an URL for the first 25 results and the next 25 results. <br> <br> Some libraries such as python's `requests` can parse the header automatically and offer a convenient way of iterating through the results. For example:
+
         ```python def get_all_results(url):
             while url:
                 r = requests.get(url)
@@ -1334,78 +1451,94 @@ paths:
           schema:
             default: en
             type: string
-        - description: For corpora other than 'nmc' (New Monitor Corpus) please contact api@oxforddictionaries.com
+        - description: For corpora other than 'nmc' (New Monitor Corpus) please contact
+            api@oxforddictionaries.com
           in: query
           name: corpus
           required: false
           schema:
             default: nmc
             type: string
-        - description: The written form of the word to look up (preserving case e.g., Book vs book)
+        - description: The written form of the word to look up (preserving case e.g., Book
+            vs book)
           in: query
           name: wordform
           required: false
           schema:
             type: string
-        - description: The written form of the word to look up with normalised case (Books --> books)
+        - description: The written form of the word to look up with normalised case (Books
+            --> books)
           in: query
           name: trueCase
           required: false
           schema:
             type: string
-        - description: The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")
+        - description: The lemma of the word to look up (e.g., Book, booked, books all
+            have the lemma "book")
           in: query
           name: lemma
           required: false
           schema:
             default: test
             type: string
-        - description: The lexical category of the word(s) to look up (e.g., adjective or noun)
+        - description: The lexical category of the word(s) to look up (e.g., adjective or
+            noun)
           in: query
           name: lexicalCategory
           required: false
           schema:
             type: string
-        - description: The grammatical features of the word(s) to look up entered as a list of k:v (e.g., degree_type:comparative)
+        - description: The grammatical features of the word(s) to look up entered as a
+            list of k:v (e.g., degree_type:comparative)
           in: query
           name: grammaticalFeatures
           required: false
           schema:
             type: string
-        - description: sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign ('-'). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)
+        - description: sort the resulting list by wordform, trueCase, lemma,
+            lexicalCategory, frequency, normalizedFrequency. Descending order is
+            achieved by prepending the value with the minus sign ('-'). Multiple
+            values can be separated by commas (e.g.,
+            sort=lexicalCategory,-frequency)
           in: query
           name: sort
           required: false
           schema:
             type: string
-        - description: collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).
+        - description: collate the results by wordform, trueCase, lemma, lexicalCategory.
+            Multiple values can be separated by commas (e.g.,
+            collate=trueCase,lemma,lexicalCategory).
           in: query
           name: collate
           required: false
           schema:
             type: string
-        - description: Restrict the query to entries with frequency of at least `minFrequency`
+        - description: Restrict the query to entries with frequency of at least
+            `minFrequency`
           in: query
           name: minFrequency
           required: false
           schema:
             format: int64
             type: integer
-        - description: Restrict the query to entries with frequency of at most `maxFrequency`
+        - description: Restrict the query to entries with frequency of at most
+            `maxFrequency`
           in: query
           name: maxFrequency
           required: false
           schema:
             format: int64
             type: integer
-        - description: Restrict the query to entries with frequency of at least `minNormalizedFrequency`
+        - description: Restrict the query to entries with frequency of at least
+            `minNormalizedFrequency`
           in: query
           name: minNormalizedFrequency
           required: false
           schema:
             format: float
             type: number
-        - description: Restrict the query to entries with frequency of at most `maxNormalizedFrequency`
+        - description: Restrict the query to entries with frequency of at most
+            `maxNormalizedFrequency`
           in: query
           name: maxNormalizedFrequency
           required: false
@@ -1441,7 +1574,12 @@ paths:
                 $ref: "#/components/schemas/StatsWordResultList"
           description: Successful response.
         "400":
-          description: Invalid option name...; Option ... must have a value.; The option 'minFrequency' has to have an non-negative integer parameter.; The option 'maxFrequency' has to have an non-negative integer parameter.; The option 'limit' has to have an non-negative integer parameter.; The option 'offset' has to have an non-negative integer parameter.
+          description: Invalid option name...; Option ... must have a value.; The option
+            'minFrequency' has to have an non-negative integer parameter.; The
+            option 'maxFrequency' has to have an non-negative integer
+            parameter.; The option 'limit' has to have an non-negative integer
+            parameter.; The option 'offset' has to have an non-negative integer
+            parameter.
         "404":
           description: |
             language is not in...
@@ -1453,8 +1591,13 @@ paths:
         - LexiStats
   "/wordlist/{source_lang}/{filters_advanced}":
     get:
-      description: |
-        Use this to apply more complex filters to the [list of words](documentation/glossary?term=wordlist). For example, you may only want to filter out words for which all [senses](documentation/glossary?term=sense) match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix). 
+      description: >
+        Use this to apply more complex filters to the [list of
+        words](documentation/glossary?term=wordlist). For example, you may only
+        want to filter out words for which all
+        [senses](documentation/glossary?term=sense) match the filter, or only
+        its 'prime sense'. You can also filter by word length or match by
+        substring (prefix). 
 
           <div id="wordlist_advanced"></div>
       parameters:
@@ -1472,32 +1615,47 @@ paths:
               - ta
               - gu
             type: string
-        - description: "Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5."
+        - description: "Semicolon separated list of wordlist parameters, presented as
+            value pairs: LexicalCategory, domains, regions, registers.
+            Parameters can take comma separated list of values. E.g.,
+            lexicalCategory=noun,adjective;domains=sport. Number of values
+            limited to 5."
           in: path
           name: filters_advanced
           required: true
           schema:
             default: lexicalCategory=Noun;domains=sport
             type: string
-        - description: Semicolon separated list of parameters-value pairs (same as filters). Excludes headwords that have any senses in specified exclusion attributes (lexical categories, domains, etc.) from results.
+        - description: Semicolon separated list of parameters-value pairs (same as
+            filters). Excludes headwords that have any senses in specified
+            exclusion attributes (lexical categories, domains, etc.) from
+            results.
           in: query
           name: exclude
           required: false
           schema:
             type: string
-        - description: Semicolon separated list of parameters-value pairs (same as filters). Excludes only those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.
+        - description: Semicolon separated list of parameters-value pairs (same as
+            filters). Excludes only those senses of a particular headword that
+            match specified exclusion attributes (lexical categories, domains,
+            etc.) from results but includes the headword if it has other
+            permitted senses.
           in: query
           name: exclude_senses
           required: false
           schema:
             type: string
-        - description: Semicolon separated list of parameters-value pairs (same as filters). Excludes a headword only if the primary sense matches the specified exclusion attributes (registers, domains only).
+        - description: Semicolon separated list of parameters-value pairs (same as
+            filters). Excludes a headword only if the primary sense matches the
+            specified exclusion attributes (registers, domains only).
           in: query
           name: exclude_prime_senses
           required: false
           schema:
             type: string
-        - description: Parameter to speficy the minimum (>), exact or maximum (<) length of the words required. E.g., >5 - more than 5 chars; <4 - less than 4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.
+        - description: Parameter to speficy the minimum (>), exact or maximum (<) length
+            of the words required. E.g., >5 - more than 5 chars; <4 - less than
+            4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.
           in: query
           name: word_length
           required: false
@@ -1511,7 +1669,9 @@ paths:
           schema:
             default: goal
             type: string
-        - description: If exact=true wordlist returns a list of entries that exactly matches the search string. Otherwise wordlist lists entries that start with prefix string.
+        - description: If exact=true wordlist returns a list of entries that exactly
+            matches the search string. Otherwise wordlist lists entries that
+            start with prefix string.
           in: query
           name: exact
           required: false
@@ -1521,7 +1681,8 @@ paths:
               - "false"
               - "true"
             type: boolean
-        - description: Limit the number of results per response. Default and maximum limit is 5000.
+        - description: Limit the number of results per response. Default and maximum limit
+            is 5000.
           in: query
           name: limit
           required: false
@@ -1543,10 +1704,14 @@ paths:
                 $ref: "#/components/schemas/Wordlist"
           description: Successful response.
         "400":
-          description: disjoint sets of word_length values (eg <3>10); filter has no values; total number of filters > 20; filters and excludes values can not be the same; source_lang and translations can not be same; word_length conflicts with prefix length.
+          description: disjoint sets of word_length values (eg <3>10); filter has no
+            values; total number of filters > 20; filters and excludes values
+            can not be the same; source_lang and translations can not be same;
+            word_length conflicts with prefix length.
         "404":
-          description: |
-            No entries is found matching supplied filters or lang or filters is not recognized.
+          description: >
+            No entries is found matching supplied filters or lang or filters is
+            not recognized.
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -1555,7 +1720,7 @@ paths:
         - Wordlist
   "/wordlist/{source_lang}/{filters_basic}":
     get:
-      description: |
+      description: >
         
         Use this to retrieve a [list of words](documentation/glossary?term=wordlist) for particular [domain](documentation/glossary?term=domain), [lexical category](documentation/glossary?term=lexicalcategory), [register](documentation/glossary?term=registers) and/or [region](documentation/glossary?term=regions). View the full list of possible filters using the filters Utility endpoint.  The response only includes [headwords](documentation/glossary?term=headword), not all their possible [inflections](documentation/glossary?term=inflection). If you require a full [wordlist](documentation/glossary?term=wordlist) including [inflected forms](documentation/glossary?term=inflection), contact us and we can help.
 
@@ -1575,14 +1740,19 @@ paths:
               - ta
               - gu
             type: string
-        - description: "Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5."
+        - description: "Semicolon separated list of wordlist parameters, presented as
+            value pairs: LexicalCategory, domains, regions, registers.
+            Parameters can take comma separated list of values. E.g.,
+            lexicalCategory=noun,adjective;domains=sport. Number of values
+            limited to 5."
           in: path
           name: filters_basic
           required: true
           schema:
             default: registers=Rare;domains=Art
             type: string
-        - description: Limit the number of results per response. Default and maximum limit is 5000.
+        - description: Limit the number of results per response. Default and maximum limit
+            is 5000.
           in: query
           name: limit
           required: false
@@ -1606,8 +1776,9 @@ paths:
         "400":
           description: filter has no values; total number of filters > 20.
         "404":
-          description: |
-            No entries is found matching supplied filters or lang or filters is not recognized.
+          description: >
+            No entries is found matching supplied filters or lang or filters is
+            not recognized.
         "500":
           description: |
             Internal Error. An error occurred while processing the data.
@@ -1643,7 +1814,10 @@ components:
         default: ace
         type: string
     keyValFilters:
-      description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
+      description: Separate filtering conditions using a semicolon. Conditions take
+        values grammaticalFeatures and/or lexicalCategory and are
+        case-sensitive. To list multiple values in single condition divide them
+        with comma.
       in: path
       name: filters
       required: true
@@ -1757,7 +1931,9 @@ components:
       minItems: 1
       type: array
     CrossReferencesList:
-      description: A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.
+      description: A reference to another word that is closely related, might provide
+        additional information about the subject, has a variant spelling or is
+        an abbreviated form of it.
       items:
         additionalProperties: false
         description: cross references of a sense
@@ -1769,7 +1945,10 @@ components:
             description: The word of cooccurrence
             type: string
           type:
-            description: The type of relation between the two words. Possible values are 'close match', 'related', 'see also', 'variant spelling', and 'abbreviation' in case of crossreferences, or 'pre', 'post' in case of collocates.
+            description: The type of relation between the two words. Possible values are
+              'close match', 'related', 'see also', 'variant spelling', and
+              'abbreviation' in case of crossreferences, or 'pre', 'post' in
+              case of collocates.
             type: string
         required:
           - id
@@ -1787,7 +1966,9 @@ components:
         grammaticalFeatures:
           $ref: "#/components/schemas/GrammaticalFeaturesList"
         homographNumber:
-          description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
+          description: Identifies the homograph grouping. The last two digits identify
+            different entries of the same homograph. The first one/two digits
+            identify the homograph number.
           type: string
         notes:
           $ref: "#/components/schemas/CategorizedTextList"
@@ -1803,7 +1984,8 @@ components:
           $ref: "#/components/schemas/VariantFormsList"
       type: object
     ExamplesList:
-      description: A list of written or spoken rendering of examples of use of a word or text
+      description: A list of written or spoken rendering of examples of use of a word
+        or text
       items:
         additionalProperties: false
         properties:
@@ -1849,7 +2031,8 @@ components:
               $ref: "#/components/schemas/arrayofstrings"
           type: object
     GrammaticalFeaturesList:
-      description: The different forms are correlated with meanings or functions which we text as 'features'
+      description: The different forms are correlated with meanings or functions which
+        we text as 'features'
       items:
         additionalProperties: false
         properties:
@@ -1874,7 +2057,8 @@ components:
           description: IANA language code
           type: string
         lexicalEntries:
-          description: A grouping of various senses in a specific language, and a lexical category that relates to a word
+          description: A grouping of various senses in a specific language, and a lexical
+            category that relates to a word
           items:
             $ref: "#/components/schemas/lexicalEntry"
           minItems: 1
@@ -1904,7 +2088,8 @@ components:
           description: IANA language code
           type: string
         lexicalEntries:
-          description: A grouping of various senses in a specific language, and a lexical category that relates to a word
+          description: A grouping of various senses in a specific language, and a lexical
+            category that relates to a word
           items:
             $ref: "#/components/schemas/LemmatronLexicalEntry"
           minItems: 1
@@ -1932,7 +2117,8 @@ components:
           description: IANA language code
           type: string
         lexicalEntries:
-          description: A grouping of various senses in a specific language, and a lexical category that relates to a word
+          description: A grouping of various senses in a specific language, and a lexical
+            category that relates to a word
           items:
             $ref: "#/components/schemas/ThesaurusLexicalEntry"
           minItems: 1
@@ -1950,7 +2136,8 @@ components:
         - lexicalEntries
       type: object
     InflectionsList:
-      description: A grouping of the modifications of a word to express different grammatical categories
+      description: A grouping of the modifications of a word to express different
+        grammatical categories
       items:
         additionalProperties: false
         properties:
@@ -2028,7 +2215,8 @@ components:
       type: object
     LemmatronLexicalEntry:
       additionalProperties: false
-      description: Description of an entry for a particular part of speech and grammatical features
+      description: Description of an entry for a particular part of speech and
+        grammatical features
       properties:
         grammaticalFeatures:
           $ref: "#/components/schemas/GrammaticalFeaturesList"
@@ -2038,7 +2226,9 @@ components:
           description: IANA language code
           type: string
         lexicalCategory:
-          description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
+          description: A linguistic category of words (or more precisely lexical items),
+            generally defined by the syntactic or morphological behaviour of the
+            lexical item in question, such as noun or verb
           type: string
         text:
           description: A given written or spoken realisation of a an entry.
@@ -2062,7 +2252,8 @@ components:
             description: Ngrams matching the given options
             properties:
               frequency:
-                description: The number of times the ngram (a sequence of n words) appears in the corpus
+                description: The number of times the ngram (a sequence of n words) appears in
+                  the corpus
                 type: integer
               tokens:
                 description: A list of tokens
@@ -2093,7 +2284,9 @@ components:
             description: The alphabetic system used to display the phonetic spelling
             type: string
           phoneticSpelling:
-            description: Phonetic spelling is the representation of vocal sounds which express pronunciations of words. It is a system of spelling in which each letter represents invariably the same spoken sound
+            description: Phonetic spelling is the representation of vocal sounds which
+              express pronunciations of words. It is a system of spelling in
+              which each letter represents invariably the same spoken sound
             type: string
           regions:
             $ref: "#/components/schemas/arrayofstrings"
@@ -2126,7 +2319,8 @@ components:
       type: object
     Sense:
       additionalProperties: false
-      description: A lexical sense represents the lexical meaning of a lexical entry when interpreted as referring to the corresponding ontology element
+      description: A lexical sense represents the lexical meaning of a lexical entry
+        when interpreted as referring to the corresponding ontology element
       minProperties: 1
       properties:
         crossReferenceMarkers:
@@ -2180,7 +2374,8 @@ components:
           description: IANA language code
           type: string
         lexicalEntries:
-          description: A grouping of various senses in a specific language, and a lexical category that relates to a word
+          description: A grouping of various senses in a specific language, and a lexical
+            category that relates to a word
           items:
             $ref: "#/components/schemas/SentencesLexicalEntry"
           minItems: 1
@@ -2207,7 +2402,9 @@ components:
           description: IANA language code
           type: string
         lexicalCategory:
-          description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
+          description: A linguistic category of words (or more precisely lexical items),
+            generally defined by the syntactic or morphological behaviour of the
+            lexical item in question, such as noun or verb
           type: string
         sentences:
           $ref: "#/components/schemas/ExamplesList"
@@ -2233,7 +2430,8 @@ components:
           type: array
       type: object
     StatsWordResult:
-      description: Schema for lexi-stats results for a word/trueCase/lemma/lexicalCategory returned as a frequency
+      description: Schema for lexi-stats results for a
+        word/trueCase/lemma/lexicalCategory returned as a frequency
       properties:
         metadata:
           description: Additional Information provided by OUP
@@ -2246,22 +2444,26 @@ components:
               description: The number of times a word appears in the entire corpus
               type: integer
             lemma:
-              description: A lemma of the word (e.g., wordforms "lay", "laid" and "laying" have all lemma "lay")
+              description: A lemma of the word (e.g., wordforms "lay", "laid" and "laying"
+                have all lemma "lay")
               type: string
             lexicalCategory:
               description: A lexical category such as 'verb' or 'noun'
               type: string
             matchCount:
-              description: The number of database records that matched the query params (stated frequency is the sum of the individual frequencies)
+              description: The number of database records that matched the query params
+                (stated frequency is the sum of the individual frequencies)
               type: integer
             normalizedFrequency:
               description: The number of times a word appears on average in 1 million words
               type: integer
             trueCase:
-              description: A given written realisation of a an entry (e.g., "lay") usually lower case
+              description: A given written realisation of a an entry (e.g., "lay") usually
+                lower case
               type: string
             wordform:
-              description: A given written realisation of a an entry (e.g., "Lay") preserving case
+              description: A given written realisation of a an entry (e.g., "Lay") preserving
+                case
               type: string
           required:
             - frequency
@@ -2270,7 +2472,9 @@ components:
           type: object
       type: object
     StatsWordResultList:
-      description: Schema for lexi-stats results for a word/trueCase/lemma/lexicalCategory returned as a list of frequencies per wordform-trueCase-lemma-lexicalCategory entry.
+      description: Schema for lexi-stats results for a
+        word/trueCase/lemma/lexicalCategory returned as a list of frequencies
+        per wordform-trueCase-lemma-lexicalCategory entry.
       properties:
         metadata:
           description: Additional Information provided by OUP
@@ -2294,10 +2498,12 @@ components:
                 description: The number of times a word appears on average in 1 million words
                 type: integer
               trueCase:
-                description: A given written realisation of a an entry (e.g., "lay") usually lower case
+                description: A given written realisation of a an entry (e.g., "lay") usually
+                  lower case
                 type: string
               wordform:
-                description: A given written realisation of a an entry (e.g., "lay") preserving case
+                description: A given written realisation of a an entry (e.g., "lay") preserving
+                  case
                 type: string
             required:
               - wordform
@@ -2350,7 +2556,9 @@ components:
       minProperties: 1
       properties:
         homographNumber:
-          description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
+          description: Identifies the homograph grouping. The last two digits identify
+            different entries of the same homograph. The first one/two digits
+            identify the homograph number.
           type: string
         senses:
           description: Complete list of senses
@@ -2374,7 +2582,9 @@ components:
           description: IANA language code
           type: string
         lexicalCategory:
-          description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
+          description: A linguistic category of words (or more precisely lexical items),
+            generally defined by the syntactic or morphological behaviour of the
+            lexical item in question, such as noun or verb
           type: string
         text:
           description: A given written or spoken realisation of a an entry.
@@ -2388,7 +2598,8 @@ components:
       type: object
     ThesaurusSense:
       additionalProperties: false
-      description: A lexical sense represents the lexical meaning of a lexical entry when interpreted as referring to the corresponding ontology element
+      description: A lexical sense represents the lexical meaning of a lexical entry
+        when interpreted as referring to the corresponding ontology element
       minProperties: 1
       properties:
         antonyms:
@@ -2414,7 +2625,8 @@ components:
           $ref: "#/components/schemas/SynonymsAntonyms"
       type: object
     TranslationsList:
-      description: A list of written or spoken rendering of the meaning of a word or text in another language(s)
+      description: A list of written or spoken rendering of the meaning of a word or
+        text in another language(s)
       items:
         additionalProperties: false
         properties:
@@ -2447,7 +2659,8 @@ components:
           type: object
         results:
           additionalProperties:
-            description: the list of labels for an object. Every object can be a lexical category, or a register, or a domain.
+            description: the list of labels for an object. Every object can be a lexical
+              category, or a register, or a domain.
             properties:
               en:
                 description: Label in English
@@ -2456,7 +2669,8 @@ components:
           description: Mapping of labels available.
           type: object
     VariantFormsList:
-      description: Various words that are used interchangeably depending on the context, e.g 'aluminium' and 'aluminum'
+      description: Various words that are used interchangeably depending on the
+        context, e.g 'aluminium' and 'aluminum'
       items:
         additionalProperties: false
         properties:
@@ -2525,7 +2739,9 @@ components:
           description: IANA language code
           type: string
         lexicalCategory:
-          description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
+          description: A linguistic category of words (or more precisely lexical items),
+            generally defined by the syntactic or morphological behaviour of the
+            lexical item in question, such as noun or verb
           type: string
         notes:
           $ref: "#/components/schemas/CategorizedTextList"

@@ -2,9 +2,12 @@ openapi: 3.0.0
 servers:
   - url: https://circleci.com/api/v1
 info:
-  description: |
-    The CircleCI API is a RESTful, fully-featured API that allows you to do almost anything in CircleCI.
+  description: >
+    The CircleCI API is a RESTful, fully-featured API that allows you
+    to do almost anything in CircleCI.
+
     You can access all information and trigger all actions.
+
     The only thing we don’t provide access to is billing functions, which must be done from the CircleCI web UI.
   license:
     name: Attribution-NonCommercial-ShareAlike 4.0 International
@@ -199,8 +202,9 @@ paths:
       - $ref: "#/components/parameters/username"
       - $ref: "#/components/parameters/project"
     post:
-      description: |
-        Create an ssh key used to access external systems that require SSH key-based authentication
+      description: >
+        Create an ssh key used to access external systems that require SSH
+        key-based authentication
       parameters:
         - in: header
           name: Content-Type
@@ -240,9 +244,11 @@ paths:
       - $ref: "#/components/parameters/project"
       - $ref: "#/components/parameters/branch"
     post:
-      description: |
+      description: >
         Triggers a new build, returns a summary of the build.
+
         Optional build parameters can be set using an experimental API.
+
 
         Note: For more about build parameters, read about [using parameterized builds](https://circleci.com/docs/parameterized-builds/)
       requestBody:
@@ -271,8 +277,10 @@ paths:
                 type: string
   "/project/{username}/{project}/{build_num}":
     get:
-      description: |
-        Full details for a single build. The response includes all of the fields from the build summary.
+      description: >
+        Full details for a single build. The response includes all of the
+        fields from the build summary.
+
         This is also the payload for the [notification webhooks](/docs/configuration/#notify), in which case this object is the value to a key named 'payload'.
       responses:
         "200":
@@ -332,8 +340,9 @@ paths:
           description: returns a summary of the new build
   "/project/{username}/{project}/{build_num}/tests":
     get:
-      description: |
+      description: >
         Provides test metadata for a build
+
         Note: [Learn how to set up your builds to collect test metadata](https://circleci.com/docs/test-metadata/)
       responses:
         "200":
@@ -349,8 +358,9 @@ paths:
       - $ref: "#/components/parameters/build_num"
   /projects:
     get:
-      description: |
-        List of all the projects you're following on CircleCI, with build information organized by branch.
+      description: >
+        List of all the projects you're following on CircleCI, with build
+        information organized by branch.
       responses:
         "200":
           content:
@@ -361,8 +371,9 @@ paths:
             List of all the projects you're following on CircleCI
   /recent-builds:
     get:
-      description: |
-        Build summary for each of the last 30 recent builds, ordered by build_num.
+      description: >
+        Build summary for each of the last 30 recent builds, ordered by
+        build_num.
       parameters:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
@@ -415,8 +426,9 @@ components:
       schema:
         type: string
     filter:
-      description: |
+      description: >
         Restricts which builds are returned.
+
         Set to "completed", "successful", "failed", "running", or defaults to no filter.
       in: query
       name: filter
@@ -594,8 +606,9 @@ components:
           $ref: "#/components/schemas/User"
       type: object
     BuildParameters:
-      description: |
-        Additional environment variables to inject into the build environment. A map of names to values.
+      description: >
+        Additional environment variables to inject into the build
+        environment. A map of names to values.
       type: object
     BuildSummary:
       properties:
@@ -708,8 +721,9 @@ components:
         - success
       type: string
     Parallel:
-      description: |
-        The number of containers to use to run the build. Default is null and the project default is used.
+      description: >
+        The number of containers to use to run the build. Default is null
+        and the project default is used.
       type: string
     PreviousBuild:
       description: previous build
@@ -836,8 +850,9 @@ components:
         $ref: "#/components/schemas/Project"
       type: array
     Revision:
-      description: |
+      description: >
         The specific revision to build.
+
         Default is null and the head of the branch is used. Cannot be used with tag parameter.
       type: string
     Scope:
@@ -872,8 +887,9 @@ components:
       nullable: true
       type: string
     Tag:
-      description: |
-        The tag to build. Default is null. Cannot be used with revision parameter.
+      description: >
+        The tag to build. Default is null. Cannot be used with revision
+        parameter.
       type: string
     Tests:
       properties:

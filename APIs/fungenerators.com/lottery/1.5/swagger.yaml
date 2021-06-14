@@ -4,8 +4,9 @@ schemes:
   - http
 host: api.fungenerators.com
 info:
-  description: |
-    Below is the documentation for the API calls. You can try them out right here. 
+  description: >
+    Below is the documentation for the API calls. You can try them out
+    right here. 
   title: Random Lottery Number generator API
   version: "1.5"
   x-apisguru-categories:
@@ -36,7 +37,8 @@ tags:
 paths:
   /lottery/countries:
     get:
-      description: Get the complete list of countries supported in the number generation API.
+      description: Get the complete list of countries supported in the number
+        generation API.
       produces:
         - application/json
         - application/xml

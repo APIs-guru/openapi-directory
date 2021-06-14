@@ -24,13 +24,19 @@ info:
       version: "2.0"
   x-providerName: id4i.de
 tags:
-  - description: User accounts allows people to register for ID4i and login. All permissions and roles for interactive ID4i usage (as opposed to machine-to-machine interactions) are attached to Organizations and User Accounts. The API allows users to register, verify their registration, login and reset their passwords.
+  - description: User accounts allows people to register for ID4i and login. All
+      permissions and roles for interactive ID4i usage (as opposed to
+      machine-to-machine interactions) are attached to Organizations and User
+      Accounts. The API allows users to register, verify their registration,
+      login and reset their passwords.
     name: Accounts
   - description: Guid Alias Controller
     name: Alias
   - description: Api Key Controller
     name: Api Keys
-  - description: Auditing services allow to review changes made by users or api keys. Changelog messages can be resolved as plain text or formatted message with parameters.
+  - description: Auditing services allow to review changes made by users or api
+      keys. Changelog messages can be resolved as plain text or formatted
+      message with parameters.
     name: Auditing
   - description: Billing Controller
     name: Billing
@@ -40,7 +46,8 @@ tags:
     name: Guids
   - description: Allows to retrieve a GUID's history and to publish new history items.
     name: History
-  - description: Services can use images stored with public visibility. This API allows you to retrieve the stored image by ID.
+  - description: Services can use images stored with public visibility. This API
+      allows you to retrieve the stored image by ID.
     name: Images
   - description: Organization Messaging Controller
     name: Messaging
@@ -182,7 +189,8 @@ paths:
           application/xml:
             schema:
               $ref: "#/components/schemas/PasswordResetVerificationRequest"
-        description: Contains the new password and the verification token to set the new password.
+        description: Contains the new password and the verification token to set the new
+          password.
         required: true
       responses:
         "200":
@@ -393,7 +401,8 @@ paths:
       tags:
         - Accounts
     put:
-      description: Completing a registration e.g. for invited users. Finish registration with a username and a password.
+      description: Completing a registration e.g. for invited users. Finish
+        registration with a username and a password.
       operationId: completeRegistration
       requestBody:
         content:
@@ -601,7 +610,8 @@ paths:
         - Accounts
   /api/v1/apikeys:
     get:
-      description: Finding all API key assigned to the specified organization in a paginated manner.
+      description: Finding all API key assigned to the specified organization in a
+        paginated manner.
       operationId: listAllApiKeysOfOrganization
       parameters:
         - description: The namespace of the organization to search in.
@@ -1077,7 +1087,8 @@ paths:
       tags:
         - Api Keys
     put:
-      description: API keys can be updated with new labels, and be activated and deactivated. The secret or UUID cannot be changed.
+      description: API keys can be updated with new labels, and be activated and
+        deactivated. The secret or UUID cannot be changed.
       operationId: updateApiKey
       parameters:
         - description: The API key to be updated.
@@ -1983,13 +1994,15 @@ paths:
       description: Listing change log entries of the specified organization id.
       operationId: listOrganizationChangeLog
       parameters:
-        - description: The namespace identifying the organization whose change log entries are to be listed
+        - description: The namespace identifying the organization whose change log entries
+            are to be listed
           in: path
           name: organizationId
           required: true
           schema:
             type: string
-        - description: "The Mime-type for the message format that should be returned. e.g. 'text/plain' or 'text/mustache' "
+        - description: "The Mime-type for the message format that should be returned. e.g.
+            'text/plain' or 'text/mustache' "
           in: query
           name: messageMimeType
           required: false
@@ -3009,7 +3022,8 @@ paths:
       tags:
         - Storage
     post:
-      description: The documents' mime type is suggested on octet-stream data. Otherwise the specified content mime type is used.
+      description: The documents' mime type is suggested on octet-stream data.
+        Otherwise the specified content mime type is used.
       operationId: createDocument
       parameters:
         - description: organizationId
@@ -3941,13 +3955,15 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Show only entries created by one of the given organizations. This parameter can be used multiple times.
+        - description: Show only entries created by one of the given organizations. This
+            parameter can be used multiple times.
           in: query
           name: organization
           required: false
           schema:
             type: string
-        - description: Show only entries matching one of the given history item types. This parameter can be used multiple times.
+        - description: Show only entries matching one of the given history item types.
+            This parameter can be used multiple times.
           explode: true
           in: query
           name: type
@@ -4018,7 +4034,9 @@ paths:
                 - QUALITY_CHECK_PERFORMED
               type: string
             type: array
-        - description: Show only entries matching one of the given history item qualifiers (additional property de.id4i.history.item.qualifier). This parameter can be used multiple times.
+        - description: Show only entries matching one of the given history item qualifiers
+            (additional property de.id4i.history.item.qualifier). This parameter
+            can be used multiple times.
           explode: true
           in: query
           name: qualifier
@@ -4251,7 +4269,8 @@ paths:
   "/api/v1/history/{id4n}/{organizationId}":
     get:
       deprecated: true
-      description: DEPRECATED - please use filteredList with organization parameter to achieve the same functionality
+      description: DEPRECATED - please use filteredList with organization parameter to
+        achieve the same functionality
       operationId: list
       parameters:
         - description: GUID to retrieve the history for
@@ -4656,7 +4675,8 @@ paths:
         - History
   "/api/v1/id4ns/{id4n}":
     get:
-      description: Retrieving basic information about an ID like the type and the creation time.
+      description: Retrieving basic information about an ID like the type and the
+        creation time.
       operationId: getId4n
       parameters:
         - description: The ID to resolve to
@@ -4747,7 +4767,8 @@ paths:
         - Guids
   "/api/v1/id4ns/{id4n}/alias":
     get:
-      description: Looks up the alias for each alias type (group and single) and returns a map of all aliases found.
+      description: Looks up the alias for each alias type (group and single) and
+        returns a map of all aliases found.
       operationId: getGuidAliases
       parameters:
         - description: The GUID or Collection to operate on
@@ -4925,7 +4946,8 @@ paths:
         - Alias
         - Guids
     post:
-      description: Adds or replaces aliases for single ID4ns (alias type item and mapp) or groups of ID4ns (alias types gtin, ean and article)
+      description: Adds or replaces aliases for single ID4ns (alias type item and
+        mapp) or groups of ID4ns (alias types gtin, ean and article)
       operationId: addGuidAlias
       parameters:
         - description: The GUID or Collection to operate on
@@ -5058,7 +5080,8 @@ paths:
         - Guids
   "/api/v1/id4ns/{id4n}/collections":
     get:
-      description: Retrieving all owned or holding collections the specified id4n is assigned to.
+      description: Retrieving all owned or holding collections the specified id4n is
+        assigned to.
       operationId: getCollections
       parameters:
         - description: The ID which the collections should contain
@@ -5169,7 +5192,8 @@ paths:
         - Guids
   "/api/v1/id4ns/{id4n}/properties":
     delete:
-      description: Partial deletion of id4n properties. If the property does not exist, it will be ignored.
+      description: Partial deletion of id4n properties. If the property does not
+        exist, it will be ignored.
       operationId: deleteProperties
       parameters:
         - description: The id4n
@@ -5354,7 +5378,9 @@ paths:
         - Collections
         - Guids
     patch:
-      description: Partial updating of id4n properties. If a property contains a null value the property will be deleted other values will be saved and overwritten if they already exist.
+      description: Partial updating of id4n properties. If a property contains a null
+        value the property will be deleted other values will be saved and
+        overwritten if they already exist.
       operationId: patchProperties
       parameters:
         - description: The id4n
@@ -5410,7 +5436,8 @@ paths:
           application/xml:
             schema:
               $ref: "#/components/schemas/ImportGS1CodesRequest"
-        description: The information how the MAPP codes should be imported and the list of MAPP codes
+        description: The information how the MAPP codes should be imported and the list
+          of MAPP codes
         required: true
       responses:
         "200":
@@ -6666,7 +6693,10 @@ paths:
         - Organizations
   "/api/v1/organizations/{organizationId}/collections":
     get:
-      description: "Retrieving all collections of an organization in a paginated manner. You may filter the results by specifying id4n properties with filter operations (eq, in, ne) in the query parameters. e.g. `com.yourcompany.orderId.eq=1234`  "
+      description: "Retrieving all collections of an organization in a paginated
+        manner. You may filter the results by specifying id4n properties with
+        filter operations (eq, in, ne) in the query parameters. e.g.
+        `com.yourcompany.orderId.eq=1234`  "
       operationId: getAllCollectionsOfOrganization
       parameters:
         - description: Start with the n-th element
@@ -6713,7 +6743,9 @@ paths:
             maximum: 2147483647
             minimum: 1
             type: string
-        - description: List of i4dn property filter. e.g. "com.myorga.state:IN:waiting|processing" or "com.myorga.orderId:EQ:SAP001"
+        - description: List of i4dn property filter. e.g.
+            "com.myorga.state:IN:waiting|processing" or
+            "com.myorga.orderId:EQ:SAP001"
           explode: true
           in: query
           name: property
@@ -7289,7 +7321,8 @@ paths:
       tags:
         - Organizations
     put:
-      description: Adding a partner organization. If the given organization is already a partner the result will be state 200 too.
+      description: Adding a partner organization. If the given organization is already
+        a partner the result will be state 200 too.
       operationId: addPartnerOrganization
       parameters:
         - description: The namespace of the organization
@@ -7401,7 +7434,8 @@ paths:
         - Organizations
   "/api/v1/organizations/{organizationId}/privileges":
     get:
-      description: Listing all privileges of the current user/APIKey of the specified organization.
+      description: Listing all privileges of the current user/APIKey of the specified
+        organization.
       operationId: getOrganizationPrivileges
       parameters:
         - description: The namespace of the organization
@@ -9500,7 +9534,8 @@ paths:
         - Alias
   /api/v1/search/guids/aliases/types:
     get:
-      description: Retrieve this list to find out all alias types to use with alias search and change operations
+      description: Retrieve this list to find out all alias types to use with alias
+        search and change operations
       operationId: getGuidAliasTypes
       responses:
         "200":
@@ -9612,7 +9647,8 @@ paths:
         - Alias
   "/api/v1/transfers/{id4n}/receiveInfo":
     put:
-      description: Taking ownership can be forbidden by a previous owner. See methods prepare and getInfo
+      description: Taking ownership can be forbidden by a previous owner. See methods
+        prepare and getInfo
       operationId: receive
       parameters:
         - description: This ID4N identifies the object to take hold of
@@ -9719,7 +9755,8 @@ paths:
           description: Internal Server Error
       security:
         - Authorization: []
-      summary: Transfer a GUID or collection, obtaining it (i.e. becoming the holder) and if allowed also taking ownership
+      summary: Transfer a GUID or collection, obtaining it (i.e. becoming the holder)
+        and if allowed also taking ownership
       tags:
         - Transfer
   "/api/v1/transfers/{id4n}/sendInfo":
@@ -10733,7 +10770,8 @@ components:
         messageProperties:
           additionalProperties:
             type: object
-          description: "The values of the properties in the message. May be nested as object with a value field "
+          description: "The values of the properties in the message. May be nested as
+            object with a value field "
           example:
             object: nearly every object
             user:
@@ -10835,7 +10873,8 @@ components:
           minimum: 7
           type: integer
         organizationId:
-          description: The namespace of the organization where the generated GUIDs should be assigned.
+          description: The namespace of the organization where the generated GUIDs should
+            be assigned.
           example: de.acme
           type: string
       required:
@@ -10975,7 +11014,8 @@ components:
           readOnly: true
           type: string
         sequenceId:
-          description: Forms the primary key of the history item together with the GUID and the organizationId
+          description: Forms the primary key of the history item together with the GUID
+            and the organizationId
           example: 9784
           format: int32
           readOnly: true
@@ -11032,7 +11072,9 @@ components:
       description: GUID history item update (diff patch)
       properties:
         organizationId:
-          description: New organization id displayed for this item. If given, must match the holder of GUID and the organization the history item is found under.
+          description: New organization id displayed for this item. If given, must match
+            the holder of GUID and the organization the history item is found
+            under.
           example: de.acme
           type: string
         visibility:
@@ -11866,7 +11908,9 @@ components:
     TransferReceiveInfo:
       properties:
         organizationId:
-          description: Organization to take the ownership of the ID. If the sender chose to keep the ownership, this organization becomes the holder. Otherwise, it becomes the new owner.
+          description: Organization to take the ownership of the ID. If the sender chose
+            to keep the ownership, this organization becomes the holder.
+            Otherwise, it becomes the new owner.
           example: de.id4i
           type: string
       required:
@@ -11885,7 +11929,8 @@ components:
           example: true
           type: boolean
         openForClaims:
-          description: Allow anyone who knows (or can scan) the ID4N to claim ownership of this object
+          description: Allow anyone who knows (or can scan) the ID4N to claim ownership of
+            this object
           example: false
           type: boolean
         ownerOrganizationId:
@@ -11965,11 +12010,13 @@ components:
     Visibility:
       properties:
         public:
-          description: Document is publicly readable (if ID4N is owned by the same organization)
+          description: Document is publicly readable (if ID4N is owned by the same
+            organization)
           example: true
           type: boolean
         sharedOrganizationIds:
-          description: Document is readable by these organizations (independend of ID4N ownership)
+          description: Document is readable by these organizations (independend of ID4N
+            ownership)
           example:
             - de.acme
             - com.porsche
@@ -11982,11 +12029,13 @@ components:
     VisibilityUpdate:
       properties:
         public:
-          description: Document is publicly readable (if ID4N is owned by the same organization)
+          description: Document is publicly readable (if ID4N is owned by the same
+            organization)
           example: true
           type: boolean
         sharedWithOrganizationIds:
-          description: Document is readable by these organizations (independend of ID4N ownership)
+          description: Document is readable by these organizations (independend of ID4N
+            ownership)
           example:
             - de.acme
             - com.porsche

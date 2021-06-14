@@ -245,7 +245,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/EditionImage"
           description: Success
-      summary: Get the image object reference by of a Newsletter Edition associated with the image guid
+      summary: Get the image object reference by of a Newsletter Edition associated
+        with the image guid
       tags:
         - Newsletters
   "/api/Newsletters/{newsletterKey}":
@@ -417,13 +418,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: default or one key of the categories (ministries, sectors, services, tags, themes)
+        - description: default or one key of the categories (ministries, sectors,
+            services, tags, themes)
           in: path
           name: indexKey
           required: true
           schema:
             type: string
-        - description: "One of: releases, stories, factsheets, updates or default (releases+stories+factsheets)"
+        - description: "One of: releases, stories, factsheets, updates or default
+            (releases+stories+factsheets)"
           in: query
           name: postKind
           required: false
@@ -518,13 +521,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: default or one key of the categories (ministries, sectors, services, tags, themes)
+        - description: default or one key of the categories (ministries, sectors,
+            services, tags, themes)
           in: path
           name: indexKey
           required: true
           schema:
             type: string
-        - description: "One of: releases, stories, factsheets, updates or default (releases+stories except top/feature)"
+        - description: "One of: releases, stories, factsheets, updates or default
+            (releases+stories except top/feature)"
           in: query
           name: postKind
           required: false
@@ -573,7 +578,8 @@ paths:
                   $ref: "#/components/schemas/Post"
                 type: array
           description: Success
-      summary: Get the latest posts of postKind for the specified index (default or category)
+      summary: Get the latest posts of postKind for the specified index (default or
+        category)
       tags:
         - Posts
   "/api/Posts/LatestMediaUri/{mediaType}":

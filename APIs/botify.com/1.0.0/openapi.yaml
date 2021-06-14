@@ -182,7 +182,8 @@ paths:
           type: string
   "/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/time":
     get:
-      description: Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min) for an analysis
+      description: Return crawl statistics grouped by time frequency (1 min, 5 mins or
+        60 min) for an analysis
       operationId: getCrawlStatisticsByFrequency
       parameters:
         - description: max number of elements to retrieve
@@ -215,7 +216,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultPayload"
           description: error payload
-      summary: Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min)
+      summary: Return crawl statistics grouped by time frequency (1 min, 5 mins or 60
+        min)
       tags:
         - Analysis
     parameters:
@@ -239,7 +241,8 @@ paths:
           type: string
   "/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/urls/{list_type}":
     get:
-      description: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
+      description: Return a list of 1000 latest URLs crawled (all crawled URLs or only
+        URLS with HTTP errors)
       operationId: getCrawlStatisticsUrls
       responses:
         "200":
@@ -258,7 +261,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultPayload"
           description: error payload
-      summary: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
+      summary: Return a list of 1000 latest URLs crawled (all crawled URLs or only
+        URLS with HTTP errors)
       tags:
         - Analysis
     parameters:
@@ -291,7 +295,14 @@ paths:
           type: string
   "/analyses/{username}/{project_slug}/{analysis_slug}/features/ganalytics/orphan_urls/{medium}/{source}":
     get:
-      description: "List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)"
+      description: "List of Orphan URLs. URLs which generated visits from the selected
+        source according to Google Analytics data, but were not crawled with by
+        the Botify crawler (either because no links to them were found on the
+        website, or because the crawler was not allowed to follow these links
+        according to the project settings).   For a search engine (medium:
+        origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo,
+        yandex) or a social network (medium: social; sources: all, facebook,
+        google+, linkedin, pinterest, reddit, tumblr, twitter)"
       operationId: getGanalyticsOrphanURLs
       parameters:
         - description: Page Number
@@ -366,7 +377,8 @@ paths:
         required: true
         schema:
           type: string
-      - description: "Type of traffic, value: 'organic' (from search engine)or 'social' (from a social network)"
+      - description: "Type of traffic, value: 'organic' (from search engine)or 'social'
+          (from a social network)"
         in: path
         name: medium
         required: true
@@ -478,7 +490,8 @@ paths:
           type: string
   "/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report":
     get:
-      description: Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)
+      description: Get global information of the sitemaps found (sitemaps indexes,
+        invalid sitemaps urls, etc.)
       operationId: getSitemapsReport
       responses:
         "200":
@@ -493,7 +506,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultPayload"
           description: error payload
-      summary: Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc
+      summary: Get global information of the sitemaps found (sitemaps indexes, invalid
+        sitemaps urls, etc
       tags:
         - Analysis
     parameters:
@@ -517,7 +531,10 @@ paths:
           type: string
   "/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/out_of_config":
     get:
-      description: Sample list of URLs which were found in your sitemaps but outside of the crawl perimeter defined for the project, for instance domain/subdomain or protocol (HTTP/HTTPS) not allowed in the crawl settings.
+      description: Sample list of URLs which were found in your sitemaps but outside
+        of the crawl perimeter defined for the project, for instance
+        domain/subdomain or protocol (HTTP/HTTPS) not allowed in the crawl
+        settings.
       operationId: getSitemapsSamplesOutOfConfig
       parameters:
         - description: Page Number
@@ -594,7 +611,9 @@ paths:
           type: string
   "/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/sitemap_only":
     get:
-      description: Sample list of URLs which were found in your sitemaps, within the project allowed scope (allowed domains/subdomains/protocols), but not found by the Botify crawler.
+      description: Sample list of URLs which were found in your sitemaps, within the
+        project allowed scope (allowed domains/subdomains/protocols), but not
+        found by the Botify crawler.
       operationId: getSitemapsSamplesSitemapsOnly
       parameters:
         - description: Page Number
@@ -1106,7 +1125,8 @@ paths:
         schema:
           type: string
     post:
-      description: Creates a new UrlExport object and starts a task that will export the results into a csv. Returns the model id that manages the task
+      description: Creates a new UrlExport object and starts a task that will export
+        the results into a csv. Returns the model id that manages the task
       operationId: createUrlsExport
       parameters:
         - description: ""
@@ -1136,12 +1156,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultPayload"
           description: error payload
-      summary: Creates a new UrlExport object and starts a task that will export the results into a csv
+      summary: Creates a new UrlExport object and starts a task that will export the
+        results into a csv
       tags:
         - Analysis
   "/analyses/{username}/{project_slug}/{analysis_slug}/urls/export/{url_export_id}":
     get:
-      description: Checks the status of an CSVUrlExportJob object. Returns json object with the status.
+      description: Checks the status of an CSVUrlExportJob object. Returns json object
+        with the status.
       operationId: getUrlsExportStatus
       responses:
         "200":
@@ -1205,7 +1227,8 @@ paths:
         schema:
           type: string
     post:
-      description: Return most frequent segments (= suggested patterns in the previous version) for a Botify Query.
+      description: Return most frequent segments (= suggested patterns in the previous
+        version) for a Botify Query.
       operationId: getUrlsSuggestedFilters
       parameters:
         - description: ""
@@ -1236,7 +1259,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultPayload"
           description: error payload
-      summary: Return most frequent segments (= suggested patterns in the previous version)
+      summary: Return most frequent segments (= suggested patterns in the previous
+        version)
       tags:
         - Analysis
   "/analyses/{username}/{project_slug}/{analysis_slug}/urls/{url}":
@@ -1395,7 +1419,8 @@ paths:
         - Project
   "/projects/{username}/{project_slug}/filters":
     get:
-      description: List all the project's saved filters (each filter's name, ID and filter value)
+      description: List all the project's saved filters (each filter's name, ID and
+        filter value)
       operationId: getSavedFilters
       parameters:
         - description: Page Number
@@ -1448,7 +1473,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/DefaultPayload"
           description: error payload
-      summary: List all the project's saved filters (each filter's name, ID and filter value)
+      summary: List all the project's saved filters (each filter's name, ID and filter
+        value)
       tags:
         - Project
     parameters:
@@ -1518,7 +1544,8 @@ paths:
         schema:
           type: string
     post:
-      description: Project Query aggregator. It accepts multiple queries that will be executed on all completed analyses in the project
+      description: Project Query aggregator. It accepts multiple queries that will be
+        executed on all completed analyses in the project
       operationId: getProjectUrlsAggs
       parameters:
         - description: Analysis context to execute the queries
@@ -2042,7 +2069,8 @@ components:
       properties: {}
       type: object
     DefaultPayload:
-      description: default payload for object for all HTTP codes that are not covered individually
+      description: default payload for object for all HTTP codes that are not covered
+        individually
       properties:
         error:
           properties:

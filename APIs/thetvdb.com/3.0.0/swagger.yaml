@@ -4,43 +4,63 @@ schemes:
   - http
 basePath: /
 info:
-  description: |-
-    API v3 targets v2 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.
+  description: >-
+    API v3 targets v2 functionality with a few minor additions. The API
+    is accessible via https://api.thetvdb.com and provides the following REST
+    endpoints in JSON format.
+
 
 
     How to use this API documentation
+
     ----------------
 
 
+
     You may browse the API routes without authentication, but if you wish to send requests to the API and see response data, then you must authenticate.
+
     1. Obtain a JWT token by `POST`ing  to the `/login` route in the `Authentication` section with your API key and credentials.
+
     1. Paste the JWT token from the response into the "JWT Token" field at the top of the page and click the 'Add Token' button.
+
 
 
     You will now be able to use the remaining routes to send requests to the API and get a response.
 
 
+
     Language Selection
+
     ----------------
+
 
 
     Language selection is done via the `Accept-Language` header. At the moment, you may only pass one language abbreviation in the header at a time. Valid language abbreviations can be found at the `/languages` route..
 
 
+
     Authentication
+
     ----------------
+
 
 
     Authentication to use the API is similar to the How-to section above. Users must `POST` to the `/login` route with their API key and credentials in the following format in order to obtain a JWT token.
 
+
     `{"apikey":"APIKEY","username":"USERNAME","userkey":"USERKEY"}`
 
+
     Note that the username and key are ONLY required for the `/user` routes. The user's key is labled `Account Identifier` in the account section of the main site.
+
     The token is then used in all subsequent requests by providing it in the `Authorization` header. The header will look like: `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after 24 hours. You can `GET` the `/refresh_token` route to extend that expiration date.
 
 
+
     Versioning
+
     ----------------
+
 
 
     You may request a different version of the API by including an `Accept` header in your request with the following format: `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically uses the version seen at the top and bottom of the page.
@@ -68,7 +88,9 @@ securityDefinitions:
     type: apiKey
 parameters:
   Accept-Language:
-    description: Records are returned with the some fields in the desired language, if it exists. If there is no translation for the given language, then the record is still returned but with empty values for the translated fields.
+    description: Records are returned with the some fields in the desired language,
+      if it exists. If there is no translation for the given language, then the
+      record is still returned but with empty values for the translated fields.
     in: header
     name: Accept-Language
     type: string
@@ -149,7 +171,8 @@ parameters:
     name: itemType
     type: string
   keyType:
-    description: Type of image you're querying for (fanart, poster, etc. See ../images/query/params for more details).
+    description: Type of image you're querying for (fanart, poster, etc. See
+      ../images/query/params for more details).
     in: query
     name: keyType
     type: string
@@ -200,7 +223,8 @@ parameters:
     name: slug
     type: string
   subKey:
-    description: Subkey for the above query keys. See /series/{id}/images/query/params for more information
+    description: Subkey for the above query keys. See
+      /series/{id}/images/query/params for more information
     in: query
     name: subKey
     type: string
@@ -234,7 +258,9 @@ tags:
 paths:
   "/episodes/{id}":
     get:
-      description: Returns the full information for a given episode id. __Deprecation Warning:__ The _director_ key will be deprecated in favor of the new _directors_ key in a future release.
+      description: Returns the full information for a given episode id. __Deprecation
+        Warning:__ The _director_ key will be deprecated in favor of the new
+        _directors_ key in a future release.
       parameters:
         - $ref: "#/parameters/episodeId"
         - $ref: "#/parameters/Accept-Language"
@@ -257,7 +283,9 @@ paths:
         - Episodes
   /languages:
     get:
-      description: All available languages. These language abbreviations can be used in the `Accept-Language` header for routes that return translation records.
+      description: All available languages. These language abbreviations can be used
+        in the `Accept-Language` header for routes that return translation
+        records.
       responses:
         "200":
           description: An array of language objects.
@@ -295,7 +323,9 @@ paths:
         - Languages
   /login:
     post:
-      description: Returns a session token to be included in the rest of the requests. Note that API key authentication is required for all subsequent requests and user auth is required for routes in the `User` section
+      description: Returns a session token to be included in the rest of the requests.
+        Note that API key authentication is required for all subsequent requests
+        and user auth is required for routes in the `User` section
       parameters:
         - description: JSON string containing your authentication details.
           in: body
@@ -316,7 +346,8 @@ paths:
         - Authentication
   "/movies/{id}":
     get:
-      description: Returns a movies records that contains all information known about a particular movies id.
+      description: Returns a movies records that contains all information known about
+        a particular movies id.
       parameters:
         - $ref: "#/parameters/movieId"
         - $ref: "#/parameters/Accept-Language"
@@ -365,7 +396,9 @@ paths:
         - Movies
   /refresh_token:
     get:
-      description: Refreshes your current, valid JWT token and returns a new token. Hit this route so that you do not have to post to `/login` with your API key and credentials once you have already been authenticated.
+      description: Refreshes your current, valid JWT token and returns a new token.
+        Hit this route so that you do not have to post to `/login` with your API
+        key and credentials once you have already been authenticated.
       responses:
         "200":
           description: Returns a new token to use in your subsequent requests
@@ -423,7 +456,8 @@ paths:
         - Search
   "/series/{id}":
     get:
-      description: Returns a series records that contains all information known about a particular series id.
+      description: Returns a series records that contains all information known about
+        a particular series id.
       parameters:
         - $ref: "#/parameters/seriesId"
         - $ref: "#/parameters/Accept-Language"
@@ -451,7 +485,8 @@ paths:
         - $ref: "#/parameters/Accept-Language"
       responses:
         "200":
-          description: Series header information. Good for getting the Last-Updated header to find out when the series was last modified.
+          description: Series header information. Good for getting the Last-Updated header
+            to find out when the series was last modified.
         "401":
           description: Returned if your JWT token is missing or expired
           schema:
@@ -511,7 +546,8 @@ paths:
         - Series
   "/series/{id}/episodes/query":
     get:
-      description: This route allows the user to query against episodes for the given series. The response is a paginated array of episode records.
+      description: This route allows the user to query against episodes for the given
+        series. The response is a paginated array of episode records.
       parameters:
         - $ref: "#/parameters/seriesId"
         - $ref: "#/parameters/absoluteNumber"
@@ -532,7 +568,8 @@ paths:
           schema:
             $ref: "#/definitions/NotAuthorized"
         "404":
-          description: Returned if the given series ID does not exist or the query returns no results.
+          description: Returned if the given series ID does not exist or the query returns
+            no results.
           schema:
             $ref: "#/definitions/NotFound"
       security:
@@ -541,7 +578,8 @@ paths:
         - Series
   "/series/{id}/episodes/query/params":
     get:
-      description: Returns the allowed query keys for the `/series/{id}/episodes/query` route
+      description: Returns the allowed query keys for the
+        `/series/{id}/episodes/query` route
       parameters:
         - $ref: "#/parameters/seriesId"
       responses:
@@ -554,7 +592,8 @@ paths:
           schema:
             $ref: "#/definitions/NotAuthorized"
         "404":
-          description: Returned if the given series ID does not exist or the query returns no results.
+          description: Returned if the given series ID does not exist or the query returns
+            no results.
           schema:
             $ref: "#/definitions/NotFound"
       security:
@@ -563,15 +602,18 @@ paths:
         - Series
   "/series/{id}/episodes/summary":
     get:
-      description: |-
-        Returns a summary of the episodes and seasons available for the series.
+      description: >-
+        Returns a summary of the episodes and seasons available for the
+        series.
+
 
         __Note__: Season "0" is for all episodes that are considered to be specials.
       parameters:
         - $ref: "#/parameters/seriesId"
       responses:
         "200":
-          description: A summary of the episodes and seasons avaialable for the given series.
+          description: A summary of the episodes and seasons avaialable for the given
+            series.
           schema:
             $ref: "#/definitions/SeriesEpisodesSummary"
         "401":
@@ -588,7 +630,9 @@ paths:
         - Series
   "/series/{id}/filter":
     get:
-      description: Returns a series records, filtered by the supplied comma-separated list of keys. Query keys can be found at the `/series/{id}/filter/params` route.
+      description: Returns a series records, filtered by the supplied comma-separated
+        list of keys. Query keys can be found at the
+        `/series/{id}/filter/params` route.
       parameters:
         - $ref: "#/parameters/seriesId"
         - $ref: "#/parameters/filterKeys"
@@ -641,7 +685,8 @@ paths:
         - $ref: "#/parameters/Accept-Language"
       responses:
         "200":
-          description: A summary of the image types and counts available for the given series.
+          description: A summary of the image types and counts available for the given
+            series.
           schema:
             $ref: "#/definitions/SeriesImagesCounts"
         "401":
@@ -675,7 +720,8 @@ paths:
           schema:
             $ref: "#/definitions/NotAuthorized"
         "404":
-          description: Returned if the given series ID does not exist or the query returns no results.
+          description: Returned if the given series ID does not exist or the query returns
+            no results.
           schema:
             $ref: "#/definitions/NotFound"
       security:
@@ -684,7 +730,9 @@ paths:
         - Series
   "/series/{id}/images/query/params":
     get:
-      description: Returns the allowed query keys for the `/series/{id}/images/query` route. Contains a parameter record for each unique `keyType`, listing values that will return results.
+      description: Returns the allowed query keys for the `/series/{id}/images/query`
+        route. Contains a parameter record for each unique `keyType`, listing
+        values that will return results.
       parameters:
         - $ref: "#/parameters/seriesId"
         - $ref: "#/parameters/Accept-Language"
@@ -698,7 +746,8 @@ paths:
           schema:
             $ref: "#/definitions/NotAuthorized"
         "404":
-          description: Returned if the given series ID does not exist or the query returns no results.
+          description: Returned if the given series ID does not exist or the query returns
+            no results.
           schema:
             $ref: "#/definitions/NotFound"
       security:
@@ -707,8 +756,10 @@ paths:
         - Series
   /updated/query:
     get:
-      description: |-
-        Returns an array of series that have changed in a maximum of one week blocks since the provided `fromTime`.
+      description: >-
+        Returns an array of series that have changed in a maximum of one
+        week blocks since the provided `fromTime`.
+
 
 
         The user may specify a `toTime` to grab results for less than a week. Any timespan larger than a week will be reduced down to one week automatically.
@@ -735,7 +786,8 @@ paths:
         - Updates
   /updated/query/params:
     get:
-      description: Returns an array of valid query keys for the `/updated/query/params` route.
+      description: Returns an array of valid query keys for the
+        `/updated/query/params` route.
       responses:
         "200":
           description: An array of Update objects that match the given timeframe.
@@ -775,7 +827,8 @@ paths:
         - Users
   /user/favorites:
     get:
-      description: Returns an array of favorite series for a given user, will be a blank array if no favorites exist.
+      description: Returns an array of favorite series for a given user, will be a
+        blank array if no favorites exist.
       responses:
         "200":
           description: User favorites.
@@ -795,7 +848,8 @@ paths:
         - Users
   "/user/favorites/{id}":
     delete:
-      description: Deletes the given series ID from the user’s favorite’s list and returns the updated list.
+      description: Deletes the given series ID from the user’s favorite’s list and
+        returns the updated list.
       parameters:
         - $ref: "#/parameters/seriesId"
       responses:
@@ -820,7 +874,8 @@ paths:
       tags:
         - Users
     put:
-      description: Adds the supplied series ID to the user’s favorite’s list and returns the updated list.
+      description: Adds the supplied series ID to the user’s favorite’s list and
+        returns the updated list.
       parameters:
         - $ref: "#/parameters/seriesId"
       responses:
@@ -888,7 +943,8 @@ paths:
         - Users
   /user/ratings/query/params:
     get:
-      description: Returns a list of query params for use in the `/user/ratings/query` route.
+      description: Returns a list of query params for use in the `/user/ratings/query`
+        route.
       responses:
         "200":
           description: Parameters to use for querying.

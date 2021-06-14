@@ -2,30 +2,42 @@ openapi: 3.0.0
 servers:
   - url: https://api.icons8.com
 info:
-  description: |-
+  description: >-
     # Icons8 API
+
 
     Icons8 API allows us to search and obtain [our icons](https://icons8.com/web-app).
 
+
     You're welcome to use our icons to extend the functionality of your web and mobile applications, website templates, and even tattoos.
+
 
     ![Tattoos](https://cdn.rawgit.com/icons8/api-docs/cff6fdf0/tattoos.svg)
 
+
     ## Usage Examples
+
 
     Some examples of what you can do with our icons:
 
+
     * **Template customization.** This way, [Canva](https://www.canva.com/) uses our icons to customize their layouts.
+
 
     * **Graphics and text editors.** [Gravit](https://gravit.io/) allows to insert our icons into the mockups.
 
+
     * **Any application with customization.** [TimeTune](http://timetune.center/) uses our icons to customize the activities.
+
 
     ## Getting Started
 
+
     To get started, please [contact us](https://icons8.com/contact) to obtain an API key.
 
+
     ## Pricing
+
 
     Our API license starts at $100/month.
   title: Use a [New Version](https://icons8.github.io/icons8-docs/) Instead
@@ -43,46 +55,74 @@ info:
       version: 1A
   x-providerName: icons8.com
 tags:
-  - description: |-
+  - description: >-
       ## Platform
 
+
       Attributes and parameters named `platform` or `platform_api_code` or `platform_code` all indicate the style of the icons.
+
       We’re sorry we have various parameters meaning the same.
 
+
       `platform` | Icon style | Example
+
       ---:|---|---
+
       win8 | icons in the Microsoft Windows 8/Metro style | [example](https://icons8.com/windows-8-icons/)
+
       win10 | icons in the Microsoft Windows 10/Threshold style | [example](https://icons8.com/download-huge-windows8-set/)
+
       ios7 | icons in the Apple iOS 7/8/9/10 style | [example](https://icons8.com/free-ios-7-icons-in-vector/)
+
       android | icons in the Google Android 4 Kitkat style | [example](https://icons8.com/android-kitkat-icons/)
+
       androidL | icons in the Google Android 5 Lollipop (Material) style | [example](https://icons8.com/android-icons/)
+
       color | flat color icons | [example](https://icons8.com/color-icons/)
+
       office | icons in the Microsoft Office style | [example](https://icons8.com/office-icons/)
+
 
       ## Language
 
+
       Icon names, categories and tags are localized. Here's the list of supported languages:
 
+
       `language` | Language name
+
       ---|---
+
       `en-US` | English
+
       `fr-FR` | French
+
       `de-DE` | German
+
       `it-IT` | Italian
+
       `pt-BR` | Portuguese
+
       `pl-PL` | Polish
+
       `ru-RU` | Russian
+
       `es-ES` | Spanish
+
       `zh-CN` | Chinese
+
       `ja-JP` | Japanese
+
 
       The primary language is English - if we do not translate something, it will be in English.
     name: Parameters
 paths:
   "/api/iconsets/v3/categories?platform={platform}&language={language}":
     get:
-      description: |-
-        The operation will not return the categories that have less than 10 icons.
+      description: >-
+        The operation will not return the categories that have less than 10
+        icons.
+
         We need it to test the categories without showing garbage on the production website.
       operationId: Categories
       parameters:
@@ -520,8 +560,9 @@ paths:
       description: ""
       operationId: By Keyword v3
       parameters:
-        - description: |
+        - description: >
             the name or tag of the icon or any other phrase.
+
             e.g. use "@home" to find icons with the tag "home" and "=home" to find icons with the name "home"
           example: home
           in: path
@@ -529,14 +570,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: the maximum number of icons which you'd like to receive (will be multiplied by platforms count, if you didn't specify the platform and didn't set the 'exact_amount' parameter)
+        - description: the maximum number of icons which you'd like to receive (will be
+            multiplied by platforms count, if you didn't specify the platform
+            and didn't set the 'exact_amount' parameter)
           in: path
           name: amount
           required: true
           schema:
             default: 25
             type: number
-        - description: set it to 'true' if you'd like to receive the exact amount of icons, not multiplied by platforms count
+        - description: set it to 'true' if you'd like to receive the exact amount of
+            icons, not multiplied by platforms count
           in: path
           name: exact_amount
           required: true
@@ -675,8 +719,10 @@ paths:
       description: ""
       operationId: Totals
       parameters:
-        - description: |
-            the optional date to calculate the total number of icons that were created after it.
+        - description: >
+            the optional date to calculate the total number of icons that were
+            created after it.
+
             It should be in format "four year digits - dash - two month number digits - dash - two day number digits. For example 2014-12-31 means "31th of December, 2014".
           example: 2014-12-31
           in: path
@@ -729,8 +775,9 @@ paths:
       description: ""
       operationId: By Keyword v4
       parameters:
-        - description: |
+        - description: >
             the name or tag of the icon or any other phrase.
+
             e.g. use "@home" to find icons with the tag "home" and "=home" to find icons with the name "home"
           example: home
           in: path
@@ -738,7 +785,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: the maximum number of icons which you'd like to receive (will be multiplied by platforms count, if you didn't specify the platform and didn't set the 'exact_amount' parameter)
+        - description: the maximum number of icons which you'd like to receive (will be
+            multiplied by platforms count, if you didn't specify the platform
+            and didn't set the 'exact_amount' parameter)
           in: path
           name: amount
           required: true
@@ -1011,7 +1060,8 @@ components:
                         type: string
                       css_selector:
                         default: .icons8-{{glyph}}
-                        description: template for glyph selector; placeholder {{glyph}} will be replaced with glyph names
+                        description: template for glyph selector; placeholder {{glyph}} will be replaced
+                          with glyph names
                         type: string
                       font_name:
                         default: font_icons8
@@ -1059,7 +1109,8 @@ components:
                 - as_is
               type: string
             css_selector:
-              description: template for glyph selector; placeholder {{glyph}} will be replaced with glyph names
+              description: template for glyph selector; placeholder {{glyph}} will be replaced
+                with glyph names
               type: string
             font_name:
               description: name of iconic webfont
@@ -1084,13 +1135,15 @@ components:
         category:
           type: string
         common_icon_id:
-          description: identifier for group of the same icons in different styles; i.e. id of all "home" icons
+          description: identifier for group of the same icons in different styles; i.e. id
+            of all "home" icons
           type: number
         created:
           description: date (ISO8601 format) of icon was published
           type: string
         features:
-          description: internal service attribute; internal information about icon features; private; depend on the rights of the current user
+          description: internal service attribute; internal information about icon
+            features; private; depend on the rights of the current user
           properties:
             bitmap:
               description: '"Could user use images in bitmap / raster formats in any size ?"'
@@ -1140,10 +1193,12 @@ components:
           description: plain SVG content of icon
           type: string
         url:
-          description: internal service attribute; the meaning of this attribute is "Identifier of thread at Disquss"
+          description: internal service attribute; the meaning of this attribute is
+            "Identifier of thread at Disquss"
           type: string
         vector:
-          description: URLs to icon sources in different vector formats; private; depend on the current user and could be opened in user's browser only
+          description: URLs to icon sources in different vector formats; private; depend
+            on the current user and could be opened in user's browser only
           properties:
             eps:
               description: absolute URL to file in EPS format
@@ -1174,13 +1229,15 @@ components:
             category:
               type: string
             common_icon_id:
-              description: identifier for group of the same icons in different styles; i.e. id of all "home" icons
+              description: identifier for group of the same icons in different styles; i.e. id
+                of all "home" icons
               type: number
             created:
               description: date (ISO8601 format) of icon was published
               type: string
             features:
-              description: internal service attribute; internal information about icon features; private; depend on the rights of the current user
+              description: internal service attribute; internal information about icon
+                features; private; depend on the rights of the current user
               properties:
                 bitmap:
                   description: '"Could user use images in bitmap / raster formats in any size ?"'
@@ -1230,10 +1287,12 @@ components:
               description: plain SVG content of icon
               type: string
             url:
-              description: internal service attribute; the meaning of this attribute is "Identifier of thread at Disquss"
+              description: internal service attribute; the meaning of this attribute is
+                "Identifier of thread at Disquss"
               type: string
             vector:
-              description: URLs to icon sources in different vector formats; private; depend on the current user and could be opened in user's browser only
+              description: URLs to icon sources in different vector formats; private; depend
+                on the current user and could be opened in user's browser only
               properties:
                 eps:
                   description: absolute URL to file in EPS format
@@ -1320,7 +1379,8 @@ components:
     TotalV3Item:
       properties:
         api_code:
-          description: icons style code; in other places it named `plarform` or `platform_api_code`
+          description: icons style code; in other places it named `plarform` or
+            `platform_api_code`
           enum:
             - ios7
             - win8

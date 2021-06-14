@@ -7,7 +7,8 @@ info:
     url: https://kennethreitz.org
     x-responsibleDeveloper: Kenneth Reitz
     x-responsibleOrganization: Kenneth Reitz
-  description: "A simple HTTP Request & Response Service.<br/> <br/> <b>Run locally: </b> <code>$ docker run -p 80:80 kennethreitz/httpbin</code>"
+  description: "A simple HTTP Request & Response Service.<br/> <br/> <b>Run
+    locally: </b> <code>$ docker run -p 80:80 kennethreitz/httpbin</code>"
   title: httpbin.org
   version: 0.9.2
   x-apisguru-categories:
@@ -266,7 +267,8 @@ paths:
           description: Cached response
         "304":
           description: Modified
-      summary: Returns a 304 if an If-Modified-Since header or If-None-Match is present. Returns the same as a GET otherwise.
+      summary: Returns a 304 if an If-Modified-Since header or If-None-Match is
+        present. Returns the same as a GET otherwise.
       tags:
         - Response inspection
   "/cache/{value}":
@@ -306,7 +308,8 @@ paths:
       responses:
         "200":
           description: Redirect to cookie list
-      summary: Deletes cookie(s) as provided by the query string and redirects to cookie list.
+      summary: Deletes cookie(s) as provided by the query string and redirects to
+        cookie list.
       tags:
         - Cookies
   /cookies/set:
@@ -324,7 +327,8 @@ paths:
       responses:
         "200":
           description: Redirect to cookie list
-      summary: Sets cookie(s) as provided by the query string and redirects to cookie list.
+      summary: Sets cookie(s) as provided by the query string and redirects to cookie
+        list.
       tags:
         - Cookies
   "/cookies/set/{name}/{value}":
@@ -618,7 +622,8 @@ paths:
           description: Normal response
         "412":
           description: match
-      summary: Assumes the resource has the given etag and responds to If-None-Match and If-Match headers appropriately.
+      summary: Assumes the resource has the given etag and responds to If-None-Match
+        and If-Match headers appropriately.
       tags:
         - Response inspection
   /get:
@@ -784,7 +789,8 @@ paths:
       responses:
         "200":
           description: Bytes.
-      summary: Streams n random bytes generated with given seed, at given chunk size per packet.
+      summary: Streams n random bytes generated with given seed, at given chunk size
+        per packet.
       tags:
         - Dynamic data
   /redirect-to:
@@ -1053,7 +1059,8 @@ paths:
       responses:
         "200":
           description: Bytes.
-      summary: Streams n random bytes generated with given seed, at given chunk size per packet.
+      summary: Streams n random bytes generated with given seed, at given chunk size
+        per packet.
       tags:
         - Dynamic data
   "/stream/{n}":

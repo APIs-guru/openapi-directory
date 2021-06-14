@@ -21,20 +21,23 @@ paths:
       description: Authorization is not required
       operationId: getCountries
       parameters:
-        - description: MarketId in which the request is being made, and for which responses should be localized
+        - description: MarketId in which the request is being made, and for which
+            responses should be localized
           in: query
           name: marketId
           required: true
           schema:
             format: bcp-47
             type: string
-        - description: Restrict countries to this region type; required if regionName is supplied
+        - description: Restrict countries to this region type; required if regionName is
+            supplied
           in: query
           name: regionTypeId
           required: false
           schema:
             type: integer
-        - description: Restrict countries to this region name; required if regionTypeId is supplied
+        - description: Restrict countries to this region name; required if regionTypeId is
+            supplied
           in: query
           name: regionName
           required: false
@@ -72,7 +75,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: marketId is required<br>regionTypeId is not a valid integer<br>regionName is required when regionTypeId is provided<br>regionTypeId is required when regionName is provided
+          description: marketId is required<br>regionTypeId is not a valid
+            integer<br>regionName is required when regionTypeId is
+            provided<br>regionTypeId is required when regionName is provided
         "429":
           content:
             application/json:
@@ -85,7 +90,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Internal server error
-      summary: Retrieves summary country information for the provided marketId and filters
+      summary: Retrieves summary country information for the provided marketId and
+        filters
       tags:
         - v1
   "/v1/countries/{countryKey}":
@@ -100,7 +106,8 @@ paths:
           schema:
             format: iso-country-code
             type: string
-        - description: MarketId in which the request is being made, and for which responses should be localized
+        - description: MarketId in which the request is being made, and for which
+            responses should be localized
           in: query
           name: marketId
           required: true
@@ -203,7 +210,8 @@ components:
     Error:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
@@ -215,9 +223,11 @@ components:
           description: Human-readable, English description of the error
           type: string
         stack:
-          description: |-
+          description: >-
             Stack trace indicating where the error occurred.<br/>
+
             NOTE: This attribute <strong>MAY</strong> be included for Development and Test environments.
+
             However, it <strong>MUST NOT</strong> be exposed from OTE nor Production systems
           items:
             type: string
@@ -227,14 +237,17 @@ components:
     ErrorField:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         message:
-          description: Human-readable, English description of the problem with the contents of the field
+          description: Human-readable, English description of the problem with the
+            contents of the field
           type: string
         path:
-          description: JSONPath referring to the field within the submitted data containing an error
+          description: JSONPath referring to the field within the submitted data
+            containing an error
           format: json-path
           type: string
       required:
@@ -243,7 +256,8 @@ components:
     ErrorLimit:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
@@ -259,9 +273,11 @@ components:
           format: integer-positive
           type: integer
         stack:
-          description: |-
+          description: >-
             Stack trace indicating where the error occurred.<br/>
+
             NOTE: This attribute <strong>MAY</strong> be included for Development and Test environments.
+
             However, it <strong>MUST NOT</strong> be exposed from OTE nor Production systems
           items:
             type: string

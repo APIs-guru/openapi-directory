@@ -36,29 +36,37 @@ securityDefinitions:
     authorizationUrl: https://authorization.api.npr.org/v2/authorize
     flow: accessCode
     scopes:
-      identity.readonly: See your personal information, such as your first name, last name, and favorite station.
-      identity.write: Update your personal information, such as your favorite station(s) or program(s) you follow, on your behalf.
+      identity.readonly: See your personal information, such as your first name, last
+        name, and favorite station.
+      identity.write: Update your personal information, such as your favorite
+        station(s) or program(s) you follow, on your behalf.
       listening.readonly: See your NPR One listening history and get audio recommendations.
-      listening.write: Record that you have heard, marked as interesting, and/or skipped NPR One stories in order to personalize future audio recommendations.
-      localactivation: Connect you with your local NPR member station for communication purposes.
+      listening.write: Record that you have heard, marked as interesting, and/or
+        skipped NPR One stories in order to personalize future audio
+        recommendations.
+      localactivation: Connect you with your local NPR member station for
+        communication purposes.
     tokenUrl: https://authorization.api.npr.org/v2/token
     type: oauth2
 parameters:
   Authorization:
-    description: Your access token from the Authorization Service. Should start with `Bearer`, followed by a space, followed by the token.
+    description: Your access token from the Authorization Service. Should start with
+      `Bearer`, followed by a space, followed by the token.
     in: header
     name: Authorization
     required: true
     type: string
   X-Advertising-ID:
-    description: A device-specific advertising identifier, if possible. Apple's IDFA is an example.
+    description: A device-specific advertising identifier, if possible. Apple's IDFA
+      is an example.
     in: header
     name: X-Advertising-ID
     required: false
     type: string
 responses:
   400WithDocument:
-    description: A bad request; generally, one or more parameters passed in were incorrect or missing
+    description: A bad request; generally, one or more parameters passed in were
+      incorrect or missing
     headers:
       X-RateLimit-Limit:
         description: The number of allowed requests in the current period
@@ -72,11 +80,13 @@ responses:
     schema:
       $ref: "#/definitions/ErrorDocument"
   401WithDocument:
-    description: The client is not authorized to complete this request. Check to ensure a valid access token was passed in the headers.
+    description: The client is not authorized to complete this request. Check to
+      ensure a valid access token was passed in the headers.
     schema:
       $ref: "#/definitions/ErrorDocument"
   404WithDocument:
-    description: The resource with the requested ID could not be found, and the server was unable to complete the request.
+    description: The resource with the requested ID could not be found, and the
+      server was unable to complete the request.
     headers:
       X-RateLimit-Limit:
         description: The number of allowed requests in the current period
@@ -90,7 +100,10 @@ responses:
     schema:
       $ref: "#/definitions/ErrorDocument"
   429WithDocument:
-    description: The client has exceeded the number of daily calls as per their rate limit. For now, this only applies to prototype applications and untrusted clients. Trusted clients will never be rate-limited, nor will any production apps.
+    description: The client has exceeded the number of daily calls as per their rate
+      limit. For now, this only applies to prototype applications and untrusted
+      clients. Trusted clients will never be rate-limited, nor will any
+      production apps.
     headers:
       X-RateLimit-Limit:
         description: The number of allowed requests in the current period
@@ -118,7 +131,9 @@ responses:
     schema:
       $ref: "#/definitions/ErrorDocument"
   503WithDocument:
-    description: The system is undergoing maintenance and we are unable to fulfill this request. Look for a `Retry-After` header to see the predicted time the system will be back up.
+    description: The system is undergoing maintenance and we are unable to fulfill
+      this request. Look for a `Retry-After` header to see the predicted time
+      the system will be back up.
     headers:
       Retry-After:
         description: The predicted time the system will be back up
@@ -129,23 +144,30 @@ responses:
 paths:
   /v3/stations:
     get:
-      description: |-
+      description: >-
         This endpoint has two main use cases:
 
+
         - If no query parameters passed in, it returns a list of stations that are geographically closest to the calling client (based on GeoIP information)
+
         - If one or more query parameters are passed in, it performs a search of NPR stations that match those search criteria (not taking into account the client's physical location)
+
 
         Clients wanting to implement a 'Change Station' UI should use this endpoint to power their search. In most cases, you'll want to build a search interface that uses one of the 3 provided schemas: `lat` and `lon` (using e.g. the HTML5 Geolocation API), `city` and `state`, _or_ the generic `q` query which can accept a station name, call letters, network name, or zip code. Technically speaking, `q` can also take in either a city name or a state name, but using the `city` and `state` parameters together will yield more accurate geographic search results than `q={cityName}`.
 
+
         The `lat` and `lon` query parameters should always be passed in together (otherwise the API will return a 400 error), and if included in the query, they will take precedence over any other search criteria; that is, `lat` and `lon` will do a purely geographic search and not take into account `q`, `city` or `state`.
 
+
         Similarly, `city` and/or `state` will take precedence over (and ignore) `q`.
+
 
         If clients want to be able to offer multiple types of searches (e.g. 'Search for a station name, city or zipcode') using a *single* search input form, `q` should be used. But again, be aware that using `city` and `state` together will yield more accurate search results than `q={cityName}`.
       operationId: searchStations
       parameters:
         - $ref: "#/parameters/Authorization"
-        - description: Search terms to search on; can be a station name, network name, call letters, or zipcode
+        - description: Search terms to search on; can be a station name, network name,
+            call letters, or zipcode
           in: query
           name: q
           required: false
@@ -156,19 +178,22 @@ paths:
           pattern: ^[A-Za-z '\.]+$
           required: false
           type: string
-        - description: A state to look for stations from (using the 2-letter abbreviation); intended to be paired with `city`
+        - description: A state to look for stations from (using the 2-letter
+            abbreviation); intended to be paired with `city`
           in: query
           name: state
           pattern: ^[A-Z]{2}$
           required: false
           type: string
-        - description: A latitude value from a geographic coordinate system; only works if paired with `lon`
+        - description: A latitude value from a geographic coordinate system; only works if
+            paired with `lon`
           format: float
           in: query
           name: lat
           required: false
           type: number
-        - description: A longitude value from a geographic coordinate system; only works if paired with `lat`
+        - description: A longitude value from a geographic coordinate system; only works
+            if paired with `lat`
           format: float
           in: query
           name: lon
@@ -204,8 +229,10 @@ paths:
         - stationfinder
   "/v3/stations/{stationId}":
     get:
-      description: |-
-        This endpoint retrieves information about a given station, based on its numeric ID, which is consistent across all of NPR's APIs.
+      description: >-
+        This endpoint retrieves information about a given station, based on
+        its numeric ID, which is consistent across all of NPR's APIs.
+
 
         A typical use case for this data is for clients who want to create a dropdown menu, modal/pop-up or dedicated page displaying more information about the station the client is localized to, including, for example, links to the station's homepage and donation (pledge) page.
       operationId: getStationById
@@ -269,12 +296,15 @@ definitions:
     description: A program (aggregation) that a given user has shown an affiliation with
     properties:
       daysSinceLastListen:
-        description: The number of days since a user last listened to a story from this aggregation. Absent if user never listened to the aggregation.
+        description: The number of days since a user last listened to a story from this
+          aggregation. Absent if user never listened to the aggregation.
         format: int32
         type: integer
       following:
         default: false
-        description: Whether or not the user is following the aggregation. When changing affiliation status, the client is expected to toggle this value and then send the entire object back.
+        description: Whether or not the user is following the aggregation. When changing
+          affiliation status, the client is expected to toggle this value and
+          then send the entire object back.
         type: boolean
       href:
         description: A link to more details about the program from the NPR Story API
@@ -283,17 +313,22 @@ definitions:
         description: A unique identifier for the aggregation (program)
         type: string
       notif_following:
-        description: The topic in Firebase Cloud Messaging to which the device should subscribe if it supports notifications and the user wants notifications about the podcasts they follow.
+        description: The topic in Firebase Cloud Messaging to which the device should
+          subscribe if it supports notifications and the user wants
+          notifications about the podcasts they follow.
         items:
           type: string
         type: array
       notif_rated:
-        description: The topic in Firebase Cloud Messaging to which the device should subscribe if it supports notifications and the user wants notifications about the podcasts they have highly rated.
+        description: The topic in Firebase Cloud Messaging to which the device should
+          subscribe if it supports notifications and the user wants
+          notifications about the podcasts they have highly rated.
         items:
           type: string
         type: array
       rating:
-        description: The user's average rating for this affiliation on a scale of 0-1. Absent if user never listened to the aggregation.
+        description: The user's average rating for this affiliation on a scale of 0-1.
+          Absent if user never listened to the aggregation.
         format: float
         type: number
       title:
@@ -314,7 +349,8 @@ definitions:
           type: object
         type: array
       href:
-        description: A URL representation of the resource; should generally be ignored by clients unless noted otherwise
+        description: A URL representation of the resource; should generally be ignored
+          by clients unless noted otherwise
         type: string
       items:
         items:
@@ -374,29 +410,42 @@ definitions:
     properties:
       band:
         default: FM
-        description: The subsection of the radio spectrum -- 'AM' or 'FM' -- where this station can be heard
+        description: The subsection of the radio spectrum -- 'AM' or 'FM' -- where this
+          station can be heard
         enum:
           - FM
           - AM
         type: string
       call:
-        description: The three-to-four-letter identifying code for this station. Please use this with caution; most stations prefer to be identified by their `name` in client applications instead of `call`.
+        description: The three-to-four-letter identifying code for this station. Please
+          use this with caution; most stations prefer to be identified by their
+          `name` in client applications instead of `call`.
         pattern: ^(W|K)[A-Z]{2,3}$
         type: string
       frequency:
-        description: Where on the radio dial the station can be heard. If the `band` is AM, the frequency will be between 540 and 1600. If the `band` is FM, the frequency will be between 87.8 and 108.0.
+        description: Where on the radio dial the station can be heard. If the `band` is
+          AM, the frequency will be between 540 and 1600. If the `band` is FM,
+          the frequency will be between 87.8 and 108.0.
         pattern: ^\d{2,3}\.?\d$
         type: string
       marketCity:
-        description: The city that the station is most closely associated with. This may or may not be the city the station is licensed in and it may or may not be the city that the station or the station's antenna is located in.
+        description: The city that the station is most closely associated with. This may
+          or may not be the city the station is licensed in and it may or may
+          not be the city that the station or the station's antenna is located
+          in.
         pattern: ^[A-Za-z '\.]+$
         type: string
       marketState:
-        description: The state that the station is most closely associated with. This may or may not be the state the station is licensed in and it may or may not be the state that the station or the station's antenna is located in.
+        description: The state that the station is most closely associated with. This
+          may or may not be the state the station is licensed in and it may or
+          may not be the state that the station or the station's antenna is
+          located in.
         pattern: ^[A-Z]{2}$
         type: string
       name:
-        description: The display name for the station. In most cases, this will be the same as `call` letters combined with band. When returning networks, it will return the network name (e.g. Minnesota Public Radio).
+        description: The display name for the station. In most cases, this will be the
+          same as `call` letters combined with band. When returning networks, it
+          will return the network name (e.g. Minnesota Public Radio).
         type: string
       tagline:
         default: ""
@@ -413,7 +462,8 @@ definitions:
       - properties:
           rel:
             default: homepage
-            description: A short string identifier describing the way the way the link relates to the document
+            description: A short string identifier describing the way the way the link
+              relates to the document
             enum:
               - homepage
               - logo
@@ -425,7 +475,8 @@ definitions:
             type: string
         required:
           - rel
-    description: A link to a web page, logo, or audio file related to the branding of the station
+    description: A link to a web page, logo, or audio file related to the branding
+      of the station
   StationData:
     properties:
       brand:
@@ -435,7 +486,8 @@ definitions:
         $ref: "#/definitions/StationEligibilityData"
         description: An associative array of eligibility-related metadata for this station
       guid:
-        description: The system's internal unique identifier for a station, not typically used by other APIs or consumers
+        description: The system's internal unique identifier for a station, not
+          typically used by other APIs or consumers
         pattern: ^[0-9a-f]{32}$
         type: string
       network:
@@ -443,9 +495,12 @@ definitions:
         description: Metadata about the network, if this station is part of a network
       newscast:
         $ref: "#/definitions/StationNewscastData"
-        description: Metadata about the newscast for this station; this is handled internally by other microservices such as the NPR One Listening Service, so this data should typically not be used by consumers
+        description: Metadata about the newscast for this station; this is handled
+          internally by other microservices such as the NPR One Listening
+          Service, so this data should typically not be used by consumers
       orgId:
-        description: The system's unique ID for this station, used across NPR One Microservices and NPR's other APIs
+        description: The system's unique ID for this station, used across NPR One
+          Microservices and NPR's other APIs
         pattern: ^\d{1,4}$
         type: string
     required:
@@ -468,14 +523,16 @@ definitions:
             type: array
           links:
             $ref: "#/definitions/StationLinks"
-            description: A list of links consisting of logos, audio files, and external URLs related to this station.
+            description: A list of links consisting of logos, audio files, and external URLs
+              related to this station.
   StationDonationLink:
     allOf:
       - $ref: "#/definitions/StationLink"
       - properties:
           typeId:
             default: "4"
-            description: An identifier for the type of link; '4' denotes a generic pledge page, while '27' is an NPR One-specific pledge page
+            description: An identifier for the type of link; '4' denotes a generic pledge
+              page, while '27' is an NPR One-specific pledge page
             enum:
               - "4"
               - "27"
@@ -494,7 +551,8 @@ definitions:
         type: string
       localization:
         default: Show everywhere
-        description: Whether or not this station should be shown in search for news context, any context or no context
+        description: Whether or not this station should be shown in search for news
+          context, any context or no context
         type: string
       musicOnly:
         default: false
@@ -506,7 +564,8 @@ definitions:
         type: boolean
       status:
         default: "1"
-        description: The status of the station within NPR's system, not typically used by consumers
+        description: The status of the station within NPR's system, not typically used
+          by consumers
         enum:
           - "1"
           - "9"
@@ -524,7 +583,8 @@ definitions:
       - $ref: "#/definitions/AbstractLink"
       - properties:
           guid:
-            description: The system's internal unique identifier for a link, not typically used by consumers
+            description: The system's internal unique identifier for a link, not typically
+              used by consumers
             pattern: ^[0-9a-f]{32}$
             type: string
           title:
@@ -555,7 +615,9 @@ definitions:
           $ref: "#/definitions/StationPodcastsLink"
         type: array
       related:
-        description: One or more links to miscellaneous related content for the station; these typically are not present, and clients should generally not need to use any of these
+        description: One or more links to miscellaneous related content for the station;
+          these typically are not present, and clients should generally not need
+          to use any of these
         items:
           $ref: "#/definitions/StationRelatedLink"
         type: array
@@ -586,20 +648,23 @@ definitions:
     description: Metadata about the network, if this station is part of a network
     properties:
       currentOrgId:
-        description: The current station being viewed. Client applications should generally ignore this field.
+        description: The current station being viewed. Client applications should
+          generally ignore this field.
         pattern: ^\d{1,4}$
         type: string
       tier1:
         $ref: "#/definitions/StationNetworkTierOneData"
         description: The top-level organization, if this station is part of a network
       usesInheritance:
-        description: Whether or not the current station inherits from a parent organization, also referred to as a network
+        description: Whether or not the current station inherits from a parent
+          organization, also referred to as a network
         type: boolean
     required:
       - currentOrgId
       - usesInheritance
   StationNetworkTierOneData:
-    description: Metadata about the top-level organization in the network, if this station is part of a network
+    description: Metadata about the top-level organization in the network, if this
+      station is part of a network
     properties:
       id:
         description: The unique identifier of the top-level organization in the network
@@ -610,7 +675,8 @@ definitions:
         type: string
       status:
         default: "10"
-        description: The status of the top-level organization within NPR's system, not typically used by consumers
+        description: The status of the top-level organization within NPR's system, not
+          typically used by consumers
         enum:
           - "1"
           - "9"
@@ -619,19 +685,22 @@ definitions:
           - "15"
         type: string
       tier2:
-        description: One or more stations that are hierarchical children of this organization
+        description: One or more stations that are hierarchical children of this
+          organization
         items:
           $ref: "#/definitions/StationNetworkTierTwoData"
         type: array
       usesInheritance:
-        description: Whether or not this station inherits from a parent organization, also referred to as a network
+        description: Whether or not this station inherits from a parent organization,
+          also referred to as a network
         type: boolean
     required:
       - id
       - name
       - usesInheritance
   StationNetworkTierThreeData:
-    description: Metadata about a tier 3 organization in the network, if this station is part of a network
+    description: Metadata about a tier 3 organization in the network, if this
+      station is part of a network
     properties:
       id:
         description: The unique identifier of a tier 3 organization in the network
@@ -641,14 +710,16 @@ definitions:
         description: The display name for a tier 3 organization in the network
         type: string
       usesInheritance:
-        description: Whether or not this station inherits from a parent organization, also referred to as a network
+        description: Whether or not this station inherits from a parent organization,
+          also referred to as a network
         type: boolean
     required:
       - id
       - name
       - usesInheritance
   StationNetworkTierTwoData:
-    description: Metadata about a tier 2 organization in the network, if this station is part of a network
+    description: Metadata about a tier 2 organization in the network, if this
+      station is part of a network
     properties:
       id:
         description: The unique identifier of a tier 2 organization in the network
@@ -658,26 +729,35 @@ definitions:
         description: The display name for a tier 2 organization in the network
         type: string
       tier3:
-        description: One or more stations that are hierarchical children of this organization
+        description: One or more stations that are hierarchical children of this
+          organization
         items:
           $ref: "#/definitions/StationNetworkTierThreeData"
         type: array
       usesInheritance:
-        description: Whether or not this station inherits from a parent organization, also referred to as a network
+        description: Whether or not this station inherits from a parent organization,
+          also referred to as a network
         type: boolean
     required:
       - id
       - name
       - usesInheritance
   StationNewscastData:
-    description: Metadata about the newscast for this station; newscasts are handled internally by other microservices such as the NPR One Listening Service, so this data should typically not be used by consumers
+    description: Metadata about the newscast for this station; newscasts are handled
+      internally by other microservices such as the NPR One Listening Service,
+      so this data should typically not be used by consumers
     properties:
       id:
-        description: The ID of the newscast that should be played for this station; this is handled internally by other microservices such as the NPR One Listening Service, so this field should typically not be used by consumers
+        description: The ID of the newscast that should be played for this station; this
+          is handled internally by other microservices such as the NPR One
+          Listening Service, so this field should typically not be used by
+          consumers
         pattern: ^\d{1,4}$
         type: string
       recency:
-        description: How often the newscast should be played, in minutes; a value of `null` implies no information is available, and sensible defaults should be used
+        description: How often the newscast should be played, in minutes; a value of
+          `null` implies no information is available, and sensible defaults
+          should be used
         format: int32
         type: integer
     required:
@@ -705,14 +785,17 @@ definitions:
             type: string
         required:
           - typeId
-    description: A link to miscellaneous related content for the station; these typically are not present, and clients should generally not need to use these
+    description: A link to miscellaneous related content for the station; these
+      typically are not present, and clients should generally not need to use
+      these
   StationSearchMetaData:
     properties:
       city:
         description: The city searched for in the original request
         type: string
       countryCode:
-        description: The country where the original request originated, as determined by geolocation. The countryCode is in ISO 3166-1 numeric format
+        description: The country where the original request originated, as determined by
+          geolocation. The countryCode is in ISO 3166-1 numeric format
         type: string
       lat:
         description: The latitude parameter used in the original request
@@ -734,7 +817,8 @@ definitions:
       - properties:
           isPrimaryStream:
             default: true
-            description: Whether or not this stream is considered the station's primary stream
+            description: Whether or not this stream is considered the station's primary
+              stream
             type: boolean
           typeId:
             default: "10"

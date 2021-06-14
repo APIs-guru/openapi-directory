@@ -6,7 +6,11 @@ basePath: /mobility/sandbox/api
 info:
   contact:
     name: libertyapi@o2.cz
-  description: Transit API can be used to obtain time-aggregated data representing moving the people between various spatial points within the Czech Republic. Having A - 'from' and B - 'to' points, the API can return count of people traveling from A to B or people that are from A and traveling to B, etc. The mobility data is based on moving mobile stations in O2 mobile network.
+  description: Transit API can be used to obtain time-aggregated data representing
+    moving the people between various spatial points within the Czech Republic.
+    Having A - 'from' and B - 'to' points, the API can return count of people
+    traveling from A to B or people that are from A and traveling to B, etc. The
+    mobility data is based on moving mobile stations in O2 mobile network.
   license:
     name: O2 Czech Republic a.s.
     url: https://developer.o2.cz/portal/vop
@@ -46,7 +50,13 @@ paths:
         - info
   "/transit/{from}/{to}":
     get:
-      description: Get count of objects that were moving between basic residential units or objects that were visiting these basic residential units. Specific object's occurence type in the base residential unit can be requested. If none occurence type is present in the request or both occurence types are zero, the result will be aggregation of all types of occurence for given base residential units. More about base residential units can be found at https://www.czso.cz/csu/rso/zsj_rso (czech).
+      description: Get count of objects that were moving between basic residential
+        units or objects that were visiting these basic residential units.
+        Specific object's occurence type in the base residential unit can be
+        requested. If none occurence type is present in the request or both
+        occurence types are zero, the result will be aggregation of all types of
+        occurence for given base residential units. More about base residential
+        units can be found at https://www.czso.cz/csu/rso/zsj_rso (czech).
       operationId: transit
       parameters:
         - description: source basic residential unit
@@ -61,12 +71,14 @@ paths:
           required: true
           type: string
           x-example: "127761"
-        - description: occurence type in the source basic residential unit (1 - transit, 2 - visit, 0 - both)
+        - description: occurence type in the source basic residential unit (1 - transit, 2
+            - visit, 0 - both)
           in: query
           name: fromType
           required: false
           type: string
-        - description: occurence type in the destination basic residential unit (1 - transit, 2 - visit, 0 - both)
+        - description: occurence type in the destination basic residential unit (1 -
+            transit, 2 - visit, 0 - both)
           in: query
           name: toType
           required: false
@@ -85,7 +97,9 @@ paths:
           schema:
             $ref: "#/definitions/CountResult"
         "204":
-          description: The request is valid, but the platform is not able to serve the data. The reason may be restriction (e.g. differential privacy) or no data were found.
+          description: The request is valid, but the platform is not able to serve the
+            data. The reason may be restriction (e.g. differential privacy) or
+            no data were found.
         "400":
           description: Invalid request provided, missing or invalid parameter.
           schema:

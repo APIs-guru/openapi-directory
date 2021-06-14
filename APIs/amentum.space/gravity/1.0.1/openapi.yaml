@@ -4,18 +4,26 @@ servers:
 info:
   contact:
     x-twitter: amentumspace
-  description: |
-    The gravitational field of the earth is non-uniform.  The <a href='https://en.wikipedia.org/wiki/Geoid'>geoid</a> is the shape the
+  description: >
+    The gravitational field of the earth is non-uniform.  The <a
+    href='https://en.wikipedia.org/wiki/Geoid'>geoid</a> is the shape the
      ocean surface would take if only gravity and the rotation of the Earth
       were considered. The geoid is the surface that defines zero elevation.<br><br>
 
     The geoid height is the difference between an ideal reference ellipsoid  and the geoid.<br><br>
+
     The gravity anomaly is the difference between the acceleration due to gravity on the Earth's surface and the value calculated assuming the reference ellipsoid.<br><br>
+
     The official Earth Gravitational Model <a href=https://earth-info.nga.mil/GandG/wgs84/gravitymod/egm2008/>EGM2008</a> was developed and  released to the public by the National Geospatial-Intelligence Agency (NGA).<br><br>
+
     Our EGM2008 API provides on-demand access to the EGM2008 model, as implemented by the open-source GeographicLib  <a href=https://geographiclib.sourceforge.io/html/gravity.html>Gravity</a> library.<br><br>
+
     The API is rate limited to 10,000 calls per month for non commercial use.  Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to  discuss commercial use. <br><br>
+
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
+
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
+
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
   title: Gravity API
   version: 1.0.1
@@ -63,18 +71,23 @@ paths:
         - egm2008
       x-codeSamples:
         - lang: Shell
-          source: |
-            curl -X GET "https://gravity.amentum.space/egm2008/geoid_height?latitude=-45&longitude=45" -H  "accept: application/json"
+          source: >
+            curl -X GET
+            "https://gravity.amentum.space/egm2008/geoid_height?latitude=-45&longitude=45"
+            -H  "accept: application/json"
         - lang: Python
-          source: |
+          source: >
             import requests
+
 
             params = dict(
               latitude=-45,
               longitude=45
             )
 
+
             # Make the API call
+
             try:
               response = requests.get("https://gravity.amentum.space/egm2008/geoid_height",params=params)
               response_json = response.json()
@@ -117,18 +130,23 @@ paths:
         - egm2008
       x-codeSamples:
         - lang: Shell
-          source: |
-            curl -X GET "https://gravity.amentum.space/egm2008/gravity_anomaly?latitude=-45&longitude=45" -H  "accept: application/json"
+          source: >
+            curl -X GET
+            "https://gravity.amentum.space/egm2008/gravity_anomaly?latitude=-45&longitude=45"
+            -H  "accept: application/json"
         - lang: Python
-          source: |
+          source: >
             import requests
+
 
             params = dict(
               latitude=-45,
               longitude=45
             )
 
+
             # Make the API call
+
             try:
               response = requests.get("https://gravity.amentum.space/egm2008/gravity_anomaly",params=params)
               response_json = response.json()

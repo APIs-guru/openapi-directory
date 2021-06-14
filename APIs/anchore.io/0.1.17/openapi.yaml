@@ -6,7 +6,8 @@ info:
   contact:
     email: nurmi@anchore.com
     x-twitter: anchore
-  description: This is the Anchore Engine API. Provides the primary external API for users of the service.
+  description: This is the Anchore Engine API. Provides the primary external API
+    for users of the service.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -171,7 +172,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiErrorResponse"
           description: Internal error
-      summary: Delete the specified account, only allowed if the account is in the disabled state. All users will be deleted along with the account and all resources will be garbage collected
+      summary: Delete the specified account, only allowed if the account is in the
+        disabled state. All users will be deleted along with the account and all
+        resources will be garbage collected
       tags:
         - User Management
       x-anchore-authz-action: deleteAccount
@@ -197,7 +200,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiErrorResponse"
           description: Internal error
-      summary: Get info about an user. Only available to admin user. Uses the main user Id, not a username.
+      summary: Get info about an user. Only available to admin user. Uses the main
+        user Id, not a username.
       tags:
         - User Management
       x-anchore-authz-action: getAccount
@@ -236,7 +240,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiErrorResponse"
           description: Internal error
-      summary: Update the state of an account to either enabled or disabled. For deletion use the DELETE route
+      summary: Update the state of an account to either enabled or disabled. For
+        deletion use the DELETE route
       tags:
         - User Management
       x-anchore-authz-action: updateAccount
@@ -320,7 +325,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiErrorResponse"
           description: Internal error
-      summary: Delete a specific user credential by username of the credential. Cannot be the credential used to authenticate the request.
+      summary: Delete a specific user credential by username of the credential. Cannot
+        be the credential used to authenticate the request.
       tags:
         - User Management
       x-anchore-authz-action: deleteUser
@@ -381,7 +387,8 @@ paths:
         "204":
           description: Successful deletion
         "400":
-          description: Conflict, cannot delete the credential used to authenticate this request
+          description: Conflict, cannot delete the credential used to authenticate this
+            request
         "500":
           content:
             application/json:
@@ -486,7 +493,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ArchivedAnalyses"
-          description: Image analysis archive listing for the requesting account (not the whole system)
+          description: Image analysis archive listing for the requesting account (not the
+            whole system)
         "500":
           content:
             application/json:
@@ -551,7 +559,8 @@ paths:
       x-anchore-authz-action: deleteArchivedImageAnalysis
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.archive
     get:
-      description: Returns the archive metadata record identifying the image and tags for the analysis in the archive.
+      description: Returns the archive metadata record identifying the image and tags
+        for the analysis in the archive.
       operationId: get_archived_analysis
       parameters:
         - description: The image digest to identify the image analysis
@@ -581,7 +590,9 @@ paths:
     get:
       operationId: list_analysis_archive_rules
       parameters:
-        - description: If true include system global rules (owned by admin) even for non-admin users. Defaults to true if not set. Can be set to false to exclude globals
+        - description: If true include system global rules (owned by admin) even for
+            non-admin users. Defaults to true if not set. Can be set to false to
+            exclude globals
           in: query
           name: system_global
           required: false
@@ -694,7 +705,8 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.events
   /events:
     delete:
-      description: Delete all or a subset of events filtered using the optional query parameters
+      description: Delete all or a subset of events filtered using the optional query
+        parameters
       operationId: delete_events
       parameters:
         - description: Delete events that occurred before the timestamp
@@ -737,7 +749,8 @@ paths:
       x-anchore-authz-action: deleteEvents
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.events
     get:
-      description: Returns a paginated list of events in the descending order of their occurrence. Optional query parameters may be used for filtering results
+      description: Returns a paginated list of events in the descending order of their
+        occurrence. Optional query parameters may be used for filtering results
       operationId: list_events
       parameters:
         - description: Filter events by the originating service
@@ -752,14 +765,16 @@ paths:
           required: false
           schema:
             type: string
-        - description: Filter events by a prefix match on the event type (e.g. "user.image.")
+        - description: Filter events by a prefix match on the event type (e.g.
+            "user.image.")
           in: query
           name: event_type
           required: false
           schema:
             pattern: ^[a-z0-9-_.*]+$
             type: string
-        - description: Filter events by the type of resource - tag, imageDigest, repository etc
+        - description: Filter events by the type of resource - tag, imageDigest,
+            repository etc
           in: query
           name: resource_type
           required: false
@@ -789,7 +804,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Pagination controls - return the nth page of results. Defaults to first page if left empty
+        - description: Pagination controls - return the nth page of results. Defaults to
+            first page if left empty
           in: query
           name: page
           required: false
@@ -917,13 +933,16 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Full docker-pull string to filter results by (e.g. docker.io/library/nginx:latest, or myhost.com:5000/testimages:v1.1.1)
+        - description: Full docker-pull string to filter results by (e.g.
+            docker.io/library/nginx:latest, or
+            myhost.com:5000/testimages:v1.1.1)
           in: query
           name: fulltag
           required: false
           schema:
             type: string
-        - description: Filter by image_status value on the record. Default if omitted is 'active'.
+        - description: Filter by image_status value on the record. Default if omitted is
+            'active'.
           in: query
           name: image_status
           required: false
@@ -974,7 +993,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Instruct engine to automatically begin watching the added tag for updates from registry
+        - description: Instruct engine to automatically begin watching the added tag for
+            updates from registry
           in: query
           name: autosubscribe
           required: false
@@ -1787,7 +1807,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiErrorResponse"
           description: Internal Error
-      summary: Import an anchore image tar.gz archive file. This is a deprecated API replaced by the "/imports/images" route
+      summary: Import an anchore image tar.gz archive file. This is a deprecated API
+        replaced by the "/imports/images" route
       tags:
         - Import
       x-anchore-authz-action: importImage
@@ -2132,14 +2153,16 @@ paths:
           description: success
         "500":
           description: Internal Error
-      summary: Import a docker or OCI distribution manifest list to associate with the image
+      summary: Import a docker or OCI distribution manifest list to associate with the
+        image
       tags:
         - Imports
       x-anchore-authz-action: importImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.image_imports
   /oauth/token:
     post:
-      description: Request a jwt token for subsequent operations, this request is authenticated with normal HTTP auth
+      description: Request a jwt token for subsequent operations, this request is
+        authenticated with normal HTTP auth
       operationId: get_oauth_token
       requestBody:
         content:
@@ -2181,7 +2204,8 @@ paths:
       description: List all saved policy bundles
       operationId: list_policies
       parameters:
-        - description: Include policy bundle detail in the form of the full bundle content for each entry
+        - description: Include policy bundle detail in the form of the full bundle content
+            for each entry
           in: query
           name: detail
           required: false
@@ -2269,7 +2293,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Include policy bundle detail in the form of the full bundle content for each entry
+        - description: Include policy bundle detail in the form of the full bundle content
+            for each entry
           in: query
           name: detail
           required: false
@@ -2336,7 +2361,8 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.policies
   /query/images/by_package:
     get:
-      description: Filterable query interface to search for images containing specified package
+      description: Filterable query interface to search for images containing
+        specified package
       operationId: query_images_by_package
       parameters:
         - description: Name of package to search for (e.g. sed)
@@ -2363,7 +2389,8 @@ paths:
           required: false
           schema:
             type: string
-        - description: Limit the number of records for the requested page. If omitted or set to 0, return all results in a single page
+        - description: Limit the number of records for the requested page. If omitted or
+            set to 0, return all results in a single page
           in: query
           name: limit
           required: false
@@ -2390,28 +2417,33 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.query
   /query/images/by_vulnerability:
     get:
-      description: Returns a listing of images and their respective packages vulnerable to the given vulnerability ID
+      description: Returns a listing of images and their respective packages
+        vulnerable to the given vulnerability ID
       operationId: query_images_by_vulnerability
       parameters:
-        - description: The ID of the vulnerability to search for within all images stored in anchore-engine (e.g. CVE-1999-0001)
+        - description: The ID of the vulnerability to search for within all images stored
+            in anchore-engine (e.g. CVE-1999-0001)
           in: query
           name: vulnerability_id
           required: true
           schema:
             type: string
-        - description: Filter results to images within the given vulnerability namespace (e.g. debian:8, ubuntu:14.04)
+        - description: Filter results to images within the given vulnerability namespace
+            (e.g. debian:8, ubuntu:14.04)
           in: query
           name: namespace
           required: false
           schema:
             type: string
-        - description: Filter results to images with vulnable packages with the given package name (e.g. libssl)
+        - description: Filter results to images with vulnable packages with the given
+            package name (e.g. libssl)
           in: query
           name: affected_package
           required: false
           schema:
             type: string
-        - description: Filter results to vulnerable package/vulnerability with the given severity
+        - description: Filter results to vulnerable package/vulnerability with the given
+            severity
           in: query
           name: severity
           required: false
@@ -2424,7 +2456,8 @@ paths:
               - High
               - Critical
             type: string
-        - description: Filter results to include only vulnerabilities that are not marked as invalid by upstream OS vendor data
+        - description: Filter results to include only vulnerabilities that are not marked
+            as invalid by upstream OS vendor data
           in: query
           name: vendor_only
           required: false
@@ -2437,7 +2470,8 @@ paths:
           required: false
           schema:
             type: integer
-        - description: Limit the number of records for the requested page. If omitted or set to 0, return all results in a single page
+        - description: Limit the number of records for the requested page. If omitted or
+            set to 0, return all results in a single page
           in: query
           name: limit
           required: false
@@ -2464,7 +2498,8 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.query
   /query/vulnerabilities:
     get:
-      description: List (w/filters) vulnerability records known by the system, with affected packages information if present
+      description: List (w/filters) vulnerability records known by the system, with
+        affected packages information if present
       operationId: query_vulnerabilities
       parameters:
         - description: The ID of the vulnerability (e.g. CVE-1999-0001)
@@ -2496,7 +2531,8 @@ paths:
           schema:
             default: "1"
             type: string
-        - description: Limit the number of records for the requested page. If omitted or set to 0, return all results in a single page
+        - description: Limit the number of records for the requested page. If omitted or
+            set to 0, return all results in a single page
           in: query
           name: limit
           required: false
@@ -2552,7 +2588,8 @@ paths:
       description: Adds a new registry to the system
       operationId: create_registry
       parameters:
-        - description: flag to determine whether or not to validate registry/credential at registry add time
+        - description: flag to determine whether or not to validate registry/credential at
+            registry add time
           in: query
           name: validate
           required: false
@@ -2581,7 +2618,8 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.registries
   "/registries/{registry}":
     delete:
-      description: Delete a registry configuration record from the system. Does not remove any images.
+      description: Delete a registry configuration record from the system. Does not
+        remove any images.
       operationId: delete_registry
       parameters:
         - in: path
@@ -2638,7 +2676,8 @@ paths:
           schema:
             format: path
             type: string
-        - description: flag to determine whether or not to validate registry/credential at registry update time
+        - description: flag to determine whether or not to validate registry/credential at
+            registry update time
           in: query
           name: validate
           required: false
@@ -2676,13 +2715,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: flag to enable/disable auto tag_update activation when new images from a repo are added
+        - description: flag to enable/disable auto tag_update activation when new images
+            from a repo are added
           in: query
           name: autosubscribe
           required: false
           schema:
             type: boolean
-        - description: flag to return tags in the repository without actually watching the repository, default is false
+        - description: flag to return tags in the repository without actually watching the
+            repository, default is false
           in: query
           name: dryrun
           required: false
@@ -2864,7 +2905,8 @@ paths:
       description: List all image tags visible to the user
       operationId: list_imagetags
       parameters:
-        - description: Filter images in one or more states such as active, deleting. Defaults to active images only if unspecified
+        - description: Filter images in one or more states such as active, deleting.
+            Defaults to active images only if unspecified
           explode: false
           in: query
           name: image_status
@@ -2942,7 +2984,9 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /system/feeds:
     get:
-      description: Return a list of feed and their groups along with update and record count information. This data reflects the state of the policy engine, not the upstream feed service itself.
+      description: Return a list of feed and their groups along with update and record
+        count information. This data reflects the state of the policy engine,
+        not the upstream feed service itself.
       operationId: get_system_feeds
       responses:
         "200":
@@ -2965,10 +3009,12 @@ paths:
       x-anchore-authz-action: listFeeds
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
     post:
-      description: Execute a synchronous feed sync operation. The response will block until complete, then return the result summary.
+      description: Execute a synchronous feed sync operation. The response will block
+        until complete, then return the result summary.
       operationId: post_system_feeds
       parameters:
-        - description: instruct system to flush existing data feeds records from anchore-engine
+        - description: instruct system to flush existing data feeds records from
+            anchore-engine
           in: query
           name: flush
           required: false
@@ -3238,7 +3284,8 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   "/system/webhooks/{webhook_type}/test":
     post:
-      description: Loads the Webhook configuration for webhook_type, and sends the notification out as a test
+      description: Loads the Webhook configuration for webhook_type, and sends the
+        notification out as a test
       operationId: test_webhook
       parameters:
         - description: The Webhook Type that we should test
@@ -3261,7 +3308,9 @@ paths:
             type: string
       responses:
         "200":
-          description: The Webhook was sent successfully. Schemas may be found under Models (PolicyEvalNotification, TagUpdateNotification, VulnUpdateNotification, AnalysisUpdateNotification)
+          description: The Webhook was sent successfully. Schemas may be found under
+            Models (PolicyEvalNotification, TagUpdateNotification,
+            VulnUpdateNotification, AnalysisUpdateNotification)
         "400":
           content:
             application/json:
@@ -3274,7 +3323,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiErrorResponse"
           description: The Webhook failed to send due to an Internal Error
-      summary: Adds the capabilities to test a webhook delivery for the given notification type
+      summary: Adds the capabilities to test a webhook delivery for the given
+        notification type
       tags:
         - System
       x-anchore-authz-action: None
@@ -3345,7 +3395,8 @@ paths:
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.user
   /version:
     get:
-      description: Returns the version object for the service, including db schema version info
+      description: Returns the version object for the service, including db schema
+        version info
       operationId: version_check
       responses:
         "200":
@@ -3359,7 +3410,8 @@ paths:
 components:
   parameters:
     AsAccountParameter:
-      description: An account name to change the resource scope of the request to that account, if permissions allow (admin only)
+      description: An account name to change the resource scope of the request to that
+        account, if permissions allow (admin only)
       in: header
       name: x-anchore-account
       required: false
@@ -3380,7 +3432,9 @@ components:
       required: true
   schemas:
     AccessCredential:
-      description: A login credential mapped to a user identity. For password credentials, the username to present for Basic auth is the user's username from the user record
+      description: A login credential mapped to a user identity. For password
+        credentials, the username to present for Basic auth is the user's
+        username from the user record
       properties:
         created_at:
           description: The timestamp of creation of the credential
@@ -3408,21 +3462,26 @@ components:
           description: Optional email address associated with the account
           type: string
         last_updated:
-          description: The timestamp of the last update to the account metadata itself (not users or creds)
+          description: The timestamp of the last update to the account metadata itself
+            (not users or creds)
           format: date-time
           type: string
         name:
           description: The account identifier, not updatable after creation
           type: string
         state:
-          description: State of the account. Disabled accounts prevent member users from logging in, deleting accounts are disabled and pending deletion and will be removed once all owned resources are garbage collected by the system
+          description: State of the account. Disabled accounts prevent member users from
+            logging in, deleting accounts are disabled and pending deletion and
+            will be removed once all owned resources are garbage collected by
+            the system
           enum:
             - enabled
             - disabled
             - deleting
           type: string
         type:
-          description: The user type (admin vs user). If not specified in a POST request, 'user' is default
+          description: The user type (admin vs user). If not specified in a POST request,
+            'user' is default
           enum:
             - user
             - admin
@@ -3432,14 +3491,17 @@ components:
         - name
       type: object
     AccountCreationRequest:
-      description: An account to create/add to the system. If already exists will return 400.
+      description: An account to create/add to the system. If already exists will
+        return 400.
       properties:
         email:
           description: An optional email to associate with the account for contact purposes
-          pattern: "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+          pattern: "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[\
+            a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           type: string
         name:
-          description: The account name to use. This will identify the account and must be globally unique in the system.
+          description: The account name to use. This will identify the account and must be
+            globally unique in the system.
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9@.!#$+-=^_`~;]{1,126}[a-zA-Z0-9]$
           type: string
       required:
@@ -3474,7 +3536,8 @@ components:
           description: The image digest requested to be added
           type: string
         status:
-          description: The status of the archive add operation. Typically either 'archived' or 'error'
+          description: The status of the archive add operation. Typically either
+            'archived' or 'error'
           enum:
             - archived
             - archiving
@@ -3482,7 +3545,8 @@ components:
           type: string
       type: object
     AnalysisArchiveRules:
-      description: Rule set for automatic archiving of system objects and flushing of archived objects (permament delete).
+      description: Rule set for automatic archiving of system objects and flushing of
+        archived objects (permament delete).
       items:
         $ref: "#/components/schemas/AnalysisArchiveTransitionRule"
       type: array
@@ -3498,31 +3562,39 @@ components:
           type: string
       type: object
     AnalysisArchiveSource:
-      description: An image reference in the analysis archive for the purposes of loading analysis from the archive into th working set
+      description: An image reference in the analysis archive for the purposes of
+        loading analysis from the archive into th working set
       nullable: true
       properties:
         digest:
-          description: The image digest identify the analysis. Archived analyses are based on digest, tag records are restored as analysis is restored.
+          description: The image digest identify the analysis. Archived analyses are based
+            on digest, tag records are restored as analysis is restored.
           pattern: ^sha256:[a-fA-F0-9]{64}$
           type: string
       required:
         - digest
       type: object
     AnalysisArchiveSummary:
-      description: A summarization of the analysis archive, including size, counts, etc. This archive stores image analysis only, never the actual image content or layers.
+      description: A summarization of the analysis archive, including size, counts,
+        etc. This archive stores image analysis only, never the actual image
+        content or layers.
       properties:
         last_updated:
           description: The timestamp of the most recent archived image
           format: date-time
           type: string
         total_data_bytes:
-          description: The total sum of all the bytes stored to the backing storage. Accounts for anchore-applied compression, but not compression by the underlying storage system.
+          description: The total sum of all the bytes stored to the backing storage.
+            Accounts for anchore-applied compression, but not compression by the
+            underlying storage system.
           type: integer
         total_image_count:
           description: The number of unique images (digests) in the archive
           type: integer
         total_tag_count:
-          description: The number of tag records (registry/repo:tag pull strings) in the archive. This may include repeated tags but will always have a unique tag->digest mapping per record.
+          description: The number of tag records (registry/repo:tag pull strings) in the
+            archive. This may include repeated tags but will always have a
+            unique tag->digest mapping per record.
           type: integer
       type: object
     AnalysisArchiveTransitionHistory:
@@ -3562,7 +3634,8 @@ components:
           format: date-time
           type: string
         max_images_per_account:
-          description: This is the maximum number of image analyses an account can have. Can only be set on system_global rules
+          description: This is the maximum number of image analyses an account can have.
+            Can only be set on system_global rules
           type: integer
         rule_id:
           description: Unique identifier for archive rule
@@ -3570,13 +3643,18 @@ components:
         selector:
           $ref: "#/components/schemas/ImageSelector"
         system_global:
-          description: True if the rule applies to all accounts in the system. This is only available to admin users to update/modify, but all users with permission to list rules can see them
+          description: True if the rule applies to all accounts in the system. This is
+            only available to admin users to update/modify, but all users with
+            permission to list rules can see them
           type: boolean
         tag_versions_newer:
           description: Number of images mapped to the tag that are newer
           type: integer
         transition:
-          description: The type of transition to make. If "archive", then archive an image from the working set and remove it from the working set. If "delete", then match against archived images and delete from the archive if match.
+          description: The type of transition to make. If "archive", then archive an image
+            from the working set and remove it from the working set. If
+            "delete", then match against archived images and delete from the
+            archive if match.
           enum:
             - archive
             - delete
@@ -3589,7 +3667,8 @@ components:
       properties:
         expiration_days:
           default: -1
-          description: How long the image selected will be excluded from the archive transition
+          description: How long the image selected will be excluded from the archive
+            transition
           type: integer
         selector:
           $ref: "#/components/schemas/ImageSelector"
@@ -3643,10 +3722,12 @@ components:
           type: string
       type: object
     AnchoreImage:
-      description: A unique image in the engine. May have multiple tags or references. Unique to an image content across registries or repositories.
+      description: A unique image in the engine. May have multiple tags or references.
+        Unique to an image content across registries or repositories.
       properties:
         analysis_status:
-          description: A state value for the current status of the analysis progress of the image
+          description: A state value for the current status of the analysis progress of
+            the image
           enum:
             - not_analyzed
             - analyzing
@@ -3663,7 +3744,8 @@ components:
         image_content:
           $ref: "#/components/schemas/ImageContent"
         image_detail:
-          description: Details specific to an image reference and type such as tag and image source
+          description: Details specific to an image reference and type such as tag and
+            image source
           items:
             $ref: "#/components/schemas/ImageDetail"
           type: array
@@ -3722,7 +3804,8 @@ components:
           format: int32
           type: integer
         detail:
-          description: Details structure for additional information about the error if available. Content and structure will be error specific.
+          description: Details structure for additional information about the error if
+            available. Content and structure will be error specific.
           type: object
         error_type:
           type: string
@@ -3730,7 +3813,9 @@ components:
           type: string
       type: object
     ArchiveSummary:
-      description: A summarization of the available archives, a place to for long-term storage of audit, analysis, or other data to remove it from the system's working set but keep it available.
+      description: A summarization of the available archives, a place to for long-term
+        storage of audit, analysis, or other data to remove it from the system's
+        working set but keep it available.
       properties:
         images:
           $ref: "#/components/schemas/AnalysisArchiveSummary"
@@ -3757,7 +3842,8 @@ components:
           format: date-time
           type: string
         imageDigest:
-          description: The image digest (digest of the manifest describing the image, per docker spec)
+          description: The image digest (digest of the manifest describing the image, per
+            docker spec)
           type: string
         image_detail:
           description: List of tags associated with the image digest
@@ -3851,7 +3937,8 @@ components:
           items:
             properties:
               cpes:
-                description: A list of Common Platform Enumerations that may uniquely identify the package
+                description: A list of Common Platform Enumerations that may uniquely identify
+                  the package
                 items:
                   type: string
                 type: array
@@ -3896,7 +3983,8 @@ components:
           items:
             properties:
               cpes:
-                description: A list of Common Platform Enumerations that may uniquely identify the package
+                description: A list of Common Platform Enumerations that may uniquely identify
+                  the package
                 items:
                   type: string
                 type: array
@@ -3984,7 +4072,8 @@ components:
           description: The message associated with the event type
           type: string
         name:
-          description: The event type. The last component of the fully-qualified event_type (category.subcategory.event)
+          description: The event type. The last component of the fully-qualified
+            event_type (category.subcategory.event)
           type: string
         resource_type:
           description: The type of resource this event is generated from
@@ -3994,7 +4083,8 @@ components:
           type: string
       type: object
     EventResponse:
-      description: A record of occurance of an asynchronous event triggered either by system or by user activity
+      description: A record of occurance of an asynchronous event triggered either by
+        system or by user activity
       properties:
         created_at:
           format: date-time
@@ -4062,7 +4152,8 @@ components:
           description: Number of events in this page
           type: integer
         next_page:
-          description: Boolean flag, True indicates there are more events and False otherwise
+          description: Boolean flag, True indicates there are more events and False
+            otherwise
           type: boolean
         page:
           description: Page number of this result set
@@ -4087,7 +4178,8 @@ components:
           type: integer
       type: object
     FeedMetadata:
-      description: Metadata on a single feed based on what the engine finds from querying the endpoints
+      description: Metadata on a single feed based on what the engine finds from
+        querying the endpoints
       properties:
         created_at:
           description: Date the metadata record was created in engine (first seen on source)
@@ -4126,11 +4218,13 @@ components:
             - failure
           type: string
         total_time_seconds:
-          description: The duratin, in seconds, of the sync of the feed, the sum of all the group syncs
+          description: The duratin, in seconds, of the sync of the feed, the sum of all
+            the group syncs
           type: number
       type: object
     FeedSyncResults:
-      description: An array of feed sync summaries representing the result of an explicit feed sync operation
+      description: An array of feed sync summaries representing the result of an
+        explicit feed sync operation
       items:
         $ref: "#/components/schemas/FeedSyncResult"
       type: array
@@ -4150,7 +4244,8 @@ components:
           type: string
       type: object
     GateSpec:
-      description: A description of the set of gates available in this engine and the triggers and parameters supported
+      description: A description of the set of gates available in this engine and the
+        triggers and parameters supported
       properties:
         description:
           description: Description of the gate
@@ -4159,14 +4254,16 @@ components:
           description: Gate name, as it would appear in a policy document
           type: string
         state:
-          description: State of the gate and transitively all triggers it contains if not 'active'
+          description: State of the gate and transitively all triggers it contains if not
+            'active'
           enum:
             - active
             - deprecated
             - eol
           type: string
         superceded_by:
-          description: The name of another trigger that supercedes this on functionally if this is deprecated
+          description: The name of another trigger that supercedes this on functionally if
+            this is deprecated
           nullable: true
           type: string
         triggers:
@@ -4201,10 +4298,13 @@ components:
           description: The duration of the group sync in seconds
           type: number
         updated_image_count:
-          description: The number of images updated by the this group sync, across all accounts. This is typically only non-zero for vulnerability feeds which update images' vulnerability results during the sync.
+          description: The number of images updated by the this group sync, across all
+            accounts. This is typically only non-zero for vulnerability feeds
+            which update images' vulnerability results during the sync.
           type: integer
         updated_record_count:
-          description: The number of feed data records synced down as either updates or new records
+          description: The number of feed data records synced down as either updates or
+            new records
           type: integer
       type: object
     ImageAnalysisReferences:
@@ -4217,38 +4317,50 @@ components:
       description: Analysis report json to be imported
       type: object
     ImageAnalysisRequest:
-      description: A request to add an image to be watched and analyzed by the engine. Optionally include the dockerfile content. Either source, digest or tag must be present.
+      description: A request to add an image to be watched and analyzed by the engine.
+        Optionally include the dockerfile content. Either source, digest or tag
+        must be present.
       properties:
         annotations:
           description: Annotations to be associated with the added image in key/value form
           type: object
         created_at:
-          description: Optional override of the image creation time, only honored when both tag and digest are also supplied  e.g. 2018-10-17T18:14:00Z. Deprecated in favor of the 'source' field
+          description: Optional override of the image creation time, only honored when
+            both tag and digest are also supplied  e.g. 2018-10-17T18:14:00Z.
+            Deprecated in favor of the 'source' field
           format: date-time
           type: string
         digest:
-          description: A digest string for an image, maybe a pull string or just a digest. e.g. nginx@sha256:123 or sha256:abc123. If a pull string, it must have same regisry/repo as the tag field. Deprecated in favor of the 'source' field
+          description: A digest string for an image, maybe a pull string or just a digest.
+            e.g. nginx@sha256:123 or sha256:abc123. If a pull string, it must
+            have same regisry/repo as the tag field. Deprecated in favor of the
+            'source' field
           type: string
         dockerfile:
-          description: Base64 encoded content of the dockerfile for the image, if available. Deprecated in favor of the 'source' field.
+          description: Base64 encoded content of the dockerfile for the image, if
+            available. Deprecated in favor of the 'source' field.
           pattern: ^[a-zA-Z0-9+/=]+$
           type: string
         image_type:
-          description: Optional. The type of image this is adding, defaults to "docker". This can be ommitted until multiple image types are supported.
+          description: Optional. The type of image this is adding, defaults to "docker".
+            This can be ommitted until multiple image types are supported.
           type: string
         source:
           $ref: "#/components/schemas/ImageSource"
         tag:
-          description: Full pullable tag reference for image. e.g. docker.io/nginx:latest. Deprecated in favor of the 'source' field
+          description: Full pullable tag reference for image. e.g. docker.io/nginx:latest.
+            Deprecated in favor of the 'source' field
           type: string
       type: object
     ImageContent:
-      description: A metadata content record for a specific image, containing different content type entries
+      description: A metadata content record for a specific image, containing
+        different content type entries
       type: object
     ImageContentDeleteResponse:
       type: object
     ImageDetail:
-      description: A metadata detail record for a specific image. Multiple detail records may map a single catalog image.
+      description: A metadata detail record for a specific image. Multiple detail
+        records may map a single catalog image.
       properties:
         created_at:
           format: date-time
@@ -4257,7 +4369,8 @@ components:
           nullable: true
           type: string
         fulldigest:
-          description: Full docker-pullable digest string including the registry url and repository necessary get the image
+          description: Full docker-pullable digest string including the registry url and
+            repository necessary get the image
           type: string
         fulltag:
           description: Full docker-pullable tag string referencing the image
@@ -4306,7 +4419,9 @@ components:
         operation_uuid:
           type: string
         parent_digest:
-          description: The digest of the images's manifest-list parent if it was accessed from a multi-arch tag where the tag pointed to a manifest-list. This allows preservation of that relationship in the data
+          description: The digest of the images's manifest-list parent if it was accessed
+            from a multi-arch tag where the tag pointed to a manifest-list. This
+            allows preservation of that relationship in the data
           type: string
         tags:
           items:
@@ -4316,7 +4431,8 @@ components:
           type: array
       type: object
     ImageImportOperation:
-      description: An import record, creating a unique identifier for referencing the operation as well as its state
+      description: An import record, creating a unique identifier for referencing the
+        operation as well as its state
       properties:
         created_at:
           format: date-time
@@ -4379,10 +4495,12 @@ components:
         - value
       type: object
     ImageReference:
-      description: A summary of an image identity, including digest, id (if available), and any tags known to have ever been mapped to the digest
+      description: A summary of an image identity, including digest, id (if
+        available), and any tags known to have ever been mapped to the digest
       properties:
         analyzed_at:
-          description: Timestamp, in rfc3339 format, indicating when the image state became 'analyzed' in Anchore Engine.
+          description: Timestamp, in rfc3339 format, indicating when the image state
+            became 'analyzed' in Anchore Engine.
           type: string
         digest:
           description: The image digest
@@ -4414,16 +4532,21 @@ components:
         - image
       type: object
     ImageSelector:
-      description: A set of selection criteria to match an image by a tagged pullstring based on its components, with regex support in each field
+      description: A set of selection criteria to match an image by a tagged
+        pullstring based on its components, with regex support in each field
       properties:
         registry:
-          description: The registry section of a pull string. e.g. with "docker.io/anchore/anchore-engine:latest", this is "docker.io"
+          description: The registry section of a pull string. e.g. with
+            "docker.io/anchore/anchore-engine:latest", this is "docker.io"
           type: string
         repository:
-          description: The repository section of a pull string. e.g. with "docker.io/anchore/anchore-engine:latest", this is "anchore/anchore-engine"
+          description: The repository section of a pull string. e.g. with
+            "docker.io/anchore/anchore-engine:latest", this is
+            "anchore/anchore-engine"
           type: string
         tag:
-          description: The tag-only section of a pull string. e.g. with "docker.io/anchore/anchore-engine:latest", this is "latest"
+          description: The tag-only section of a pull string. e.g. with
+            "docker.io/anchore/anchore-engine:latest", this is "latest"
           type: string
       type: object
     ImageSource:
@@ -4631,7 +4754,9 @@ components:
         name:
           type: string
         policy_id:
-          description: Optional single policy to evalute, if set will override any value in policy_ids, for backwards compatibility. Generally, policy_ids should be used even with a array of length 1.
+          description: Optional single policy to evalute, if set will override any value
+            in policy_ids, for backwards compatibility. Generally, policy_ids
+            should be used even with a array of length 1.
           type: string
         policy_ids:
           description: List of policyIds to evaluate in order, to completion
@@ -4663,7 +4788,8 @@ components:
           type: string
       type: object
     NotificationBase:
-      description: base object for Notifications (every notification has this basic structure)
+      description: base object for Notifications (every notification has this basic
+        structure)
       properties:
         created_at:
           type: integer
@@ -4702,7 +4828,8 @@ components:
           type: string
       type: object
     PackageReference:
-      description: A record of a software item which is vulnerable or carries a fix for a vulnerability
+      description: A record of a software item which is vulnerable or carries a fix
+        for a vulnerability
       properties:
         name:
           description: Package name
@@ -4730,12 +4857,14 @@ components:
         - $ref: "#/components/schemas/PaginationProperties"
         - properties:
             vulnerabilities:
-              description: The listing of matching vulnerabilities for the query subject to pagination
+              description: The listing of matching vulnerabilities for the query subject to
+                pagination
               items:
                 $ref: "#/components/schemas/StandaloneVulnerability"
               type: array
           type: object
-      description: A paginated listing of vulnerability records sorted by ID in descending order
+      description: A paginated listing of vulnerability records sorted by ID in
+        descending order
     PaginatedVulnerableImageList:
       allOf:
         - $ref: "#/components/schemas/PaginationProperties"
@@ -4745,15 +4874,19 @@ components:
                 $ref: "#/components/schemas/VulnerableImage"
               type: array
           type: object
-      description: Pagination wrapped list of images with vulnerabilties that match some filter
+      description: Pagination wrapped list of images with vulnerabilties that match
+        some filter
     PaginationProperties:
-      description: Properties for common pagination handling to be included in any wrapping object that needs pagination elements
+      description: Properties for common pagination handling to be included in any
+        wrapping object that needs pagination elements
       properties:
         next_page:
-          description: True if additional pages exist (page + 1) or False if this is the last page
+          description: True if additional pages exist (page + 1) or False if this is the
+            last page
           type: string
         page:
-          description: The page number returned (should match the requested page query string param)
+          description: The page number returned (should match the requested page query
+            string param)
           type: string
         returned_count:
           description: The number of items sent in this response
@@ -4778,10 +4911,13 @@ components:
         - version
       type: object
     PolicyBundle:
-      description: A bundle containing a set of policies, whitelists, and rules for mapping them to specific images
+      description: A bundle containing a set of policies, whitelists, and rules for
+        mapping them to specific images
       properties:
         blacklisted_images:
-          description: List of mapping rules that define which images should always result in a STOP/FAIL policy result regardless of policy content or presence in whitelisted_images
+          description: List of mapping rules that define which images should always result
+            in a STOP/FAIL policy result regardless of policy content or
+            presence in whitelisted_images
           items:
             $ref: "#/components/schemas/ImageSelectionRule"
           type: array
@@ -4792,7 +4928,9 @@ components:
           description: Id of the bundle
           type: string
         mappings:
-          description: Mapping rules for defining which policy and whitelist(s) to apply to an image based on a match of the image tag or id. Evaluated in order.
+          description: Mapping rules for defining which policy and whitelist(s) to apply
+            to an image based on a match of the image tag or id. Evaluated in
+            order.
           items:
             $ref: "#/components/schemas/MappingRule"
           type: array
@@ -4800,7 +4938,8 @@ components:
           description: Human readable name for the bundle
           type: string
         policies:
-          description: Policies which define the go/stop/warn status of an image using rule matches on image properties
+          description: Policies which define the go/stop/warn status of an image using
+            rule matches on image properties
           items:
             $ref: "#/components/schemas/Policy"
           type: array
@@ -4808,12 +4947,14 @@ components:
           description: Version id for this bundle format
           type: string
         whitelisted_images:
-          description: List of mapping rules that define which images should always be passed (unless also on the blacklist), regardless of policy result.
+          description: List of mapping rules that define which images should always be
+            passed (unless also on the blacklist), regardless of policy result.
           items:
             $ref: "#/components/schemas/ImageSelectionRule"
           type: array
         whitelists:
-          description: Whitelists which define which policy matches to disregard explicitly in the final policy decision
+          description: Whitelists which define which policy matches to disregard
+            explicitly in the final policy decision
           items:
             $ref: "#/components/schemas/Whitelist"
           type: array
@@ -4891,7 +5032,8 @@ components:
         $ref: "#/components/schemas/PolicyEvaluation"
       type: array
     PolicyRule:
-      description: A rule that defines and decision value if the match is found true for a given image.
+      description: A rule that defines and decision value if the match is found true
+        for a given image.
       properties:
         action:
           enum:
@@ -4937,7 +5079,8 @@ components:
           type: string
       type: object
     RegistryConfiguration:
-      description: A registry entry describing the endpoint and credentials for a registry to pull images from
+      description: A registry entry describing the endpoint and credentials for a
+        registry to pull images from
       properties:
         created_at:
           format: date-time
@@ -4946,7 +5089,8 @@ components:
           format: date-time
           type: string
         registry:
-          description: hostname:port string for accessing the registry, as would be used in a docker pull operation
+          description: hostname:port string for accessing the registry, as would be used
+            in a docker pull operation
           type: string
         registry_name:
           description: human readable name associated with registry record
@@ -4973,7 +5117,10 @@ components:
       description: A registry record describing the endpoint and credentials for a registry
       properties:
         registry:
-          description: hostname:port string for accessing the registry, as would be used in a docker pull operation. May include some or all of a repository and wildcards (e.g. docker.io/library/* or gcr.io/myproject/myrepository)
+          description: hostname:port string for accessing the registry, as would be used
+            in a docker pull operation. May include some or all of a repository
+            and wildcards (e.g. docker.io/library/* or
+            gcr.io/myproject/myrepository)
           type: string
         registry_name:
           description: human readable name associated with registry record
@@ -4992,37 +5139,46 @@ components:
           type: boolean
       type: object
     RegistryDigestSource:
-      description: An image reference using a digest in a registry, includes some extra tag and timestamp info in addition to the pull string to allow proper tag history reconstruction.
+      description: An image reference using a digest in a registry, includes some
+        extra tag and timestamp info in addition to the pull string to allow
+        proper tag history reconstruction.
       nullable: true
       properties:
         creation_timestamp_override:
-          description: Optional override of the image creation time to support proper tag history construction in cases of out-of-order analysis compared to registry history for the tag
+          description: Optional override of the image creation time to support proper tag
+            history construction in cases of out-of-order analysis compared to
+            registry history for the tag
           format: date-time
           type: string
         dockerfile:
-          description: Base64 encoded content of the dockerfile used to build the image, if available.
+          description: Base64 encoded content of the dockerfile used to build the image,
+            if available.
           pattern: ^[a-zA-Z0-9+/=]+$
           type: string
         pullstring:
           description: A digest-based pullstring (e.g. docker.io/nginx@sha256:123abc)
           type: string
         tag:
-          description: A valid docker tag reference (e.g. docker.io/nginx:latest) that will be associated with the image but not used to pull the image.
+          description: A valid docker tag reference (e.g. docker.io/nginx:latest) that
+            will be associated with the image but not used to pull the image.
           type: string
       required:
         - pullstring
         - tag
       type: object
     RegistryTagSource:
-      description: An image reference using a tag in a registry, this is the most common source type.
+      description: An image reference using a tag in a registry, this is the most
+        common source type.
       nullable: true
       properties:
         dockerfile:
-          description: Base64 encoded content of the dockerfile used to build the image, if available.
+          description: Base64 encoded content of the dockerfile used to build the image,
+            if available.
           pattern: ^[a-zA-Z0-9+/=]+$
           type: string
         pullstring:
-          description: A docker pull string (e.g. docker.io/nginx:latest, or docker.io/nginx@sha256:abd) to retrieve the image
+          description: A docker pull string (e.g. docker.io/nginx:latest, or
+            docker.io/nginx@sha256:abd) to retrieve the image
           type: string
       required:
         - pullstring
@@ -5077,10 +5233,12 @@ components:
         status:
           type: boolean
         status_message:
-          description: A state indicating the condition of the service. Normal operation is 'registered'
+          description: A state indicating the condition of the service. Normal operation
+            is 'registered'
           type: string
         version:
-          description: The version of the service as reported by the service implementation on registration
+          description: The version of the service as reported by the service
+            implementation on registration
           type: string
       type: object
     ServiceList:
@@ -5112,10 +5270,12 @@ components:
           type: object
       type: object
     StandaloneVulnerability:
-      description: A single vulnerability record in a single namespace, the unique key is the combination of the id and namespace
+      description: A single vulnerability record in a single namespace, the unique key
+        is the combination of the id and namespace
       properties:
         affected_packages:
-          description: The array of packages (typically packages) that are vulnerable-to or provide fixes-for this vulnerability
+          description: The array of packages (typically packages) that are vulnerable-to
+            or provide fixes-for this vulnerability
           items:
             $ref: "#/components/schemas/PackageReference"
           type: array
@@ -5123,13 +5283,17 @@ components:
           description: Description of the vulnerability if available
           type: string
         id:
-          description: Vulnerability identifier. May be CVE-X, RHSA-X, etc. Not necessarily unique across namespaces
+          description: Vulnerability identifier. May be CVE-X, RHSA-X, etc. Not
+            necessarily unique across namespaces
           type: string
         link:
-          description: URL for the upstream CVE record in the reporting source (e.g. ubuntu security tracker)
+          description: URL for the upstream CVE record in the reporting source (e.g.
+            ubuntu security tracker)
           type: string
         namespace:
-          description: The namespace for the vulnerability record to avoid conflicts for the same id in different distros or sources (e.g. deb vs ubuntu for same CVE)
+          description: The namespace for the vulnerability record to avoid conflicts for
+            the same id in different distros or sources (e.g. deb vs ubuntu for
+            same CVE)
           type: string
         nvd_data:
           $ref: "#/components/schemas/NvdDataList"
@@ -5179,7 +5343,8 @@ components:
           description: the unique id for this subscription record
           type: string
         subscription_key:
-          description: The key value that the subscription references. E.g. a tag value or a repo name.
+          description: The key value that the subscription references. E.g. a tag value or
+            a repo name.
           type: string
         subscription_type:
           description: The type of the subscription
@@ -5229,7 +5394,9 @@ components:
       description: A docker-pullable tag value as well as deconstructed components
       properties:
         detected_at:
-          description: The timestamp at which the Anchore Engine detected this tag was mapped to the image digest. Does not necessarily indicate when the tag was actually pushed to the registry.
+          description: The timestamp at which the Anchore Engine detected this tag was
+            mapped to the image digest. Does not necessarily indicate when the
+            tag was actually pushed to the registry.
           format: date-time
           type: string
         pullstring:
@@ -5290,7 +5457,8 @@ components:
         description:
           type: string
         example:
-          description: An example value for the parameter (encoded as a string if the parameter is an object or list type)
+          description: An example value for the parameter (encoded as a string if the
+            parameter is an object or list type)
           nullable: true
           type: string
         name:
@@ -5307,18 +5475,21 @@ components:
             - eol
           type: string
         superceded_by:
-          description: The name of another trigger that supercedes this on functionally if this is deprecated
+          description: The name of another trigger that supercedes this on functionally if
+            this is deprecated
           nullable: true
           type: string
         validator:
-          description: If present, a definition for validation of input. Typically a jsonschema object that can be used to validate an input against.
+          description: If present, a definition for validation of input. Typically a
+            jsonschema object that can be used to validate an input against.
           type: object
       type: object
     TriggerSpec:
       description: Definition of a trigger and its parameters
       properties:
         description:
-          description: Trigger description for what it tests and when it will fire during evaluation
+          description: Trigger description for what it tests and when it will fire during
+            evaluation
           type: string
         name:
           description: Name of the trigger as it would appear in a policy document
@@ -5336,12 +5507,17 @@ components:
             - eol
           type: string
         superceded_by:
-          description: The name of another trigger that supercedes this on functionally if this is deprecated
+          description: The name of another trigger that supercedes this on functionally if
+            this is deprecated
           nullable: true
           type: string
       type: object
     User:
-      description: A username for authenticating with one or more types of credentials. User type defines the expected credentials allowed for the user. Native users have passwords, External users have no credential internally. Internal users are service/system users for inter-service communication.
+      description: A username for authenticating with one or more types of
+        credentials. User type defines the expected credentials allowed for the
+        user. Native users have passwords, External users have no credential
+        internally. Internal users are service/system users for inter-service
+        communication.
       properties:
         created_at:
           description: The timestampt the user record was created
@@ -5352,7 +5528,8 @@ components:
           format: date-time
           type: string
         source:
-          description: If the user is external, this is the source that the user was initialized from. All other user types have this set to null
+          description: If the user is external, this is the source that the user was
+            initialized from. All other user types have this set to null
           type: string
         type:
           description: The user's type
@@ -5368,10 +5545,12 @@ components:
         - username
       type: object
     UserCreationRequest:
-      description: A payload for creating a new user, includes the username and password in a single request
+      description: A payload for creating a new user, includes the username and
+        password in a single request
       properties:
         password:
-          description: The initial password for the user, must be at least 6 characters, up to 128
+          description: The initial password for the user, must be at least 6 characters,
+            up to 128
           pattern: .{6,128}$
           type: string
         username:
@@ -5459,13 +5638,15 @@ components:
           description: The package name and version that are vulnerable in the image
           type: string
         package_cpe:
-          description: The CPE string (if applicable) describing the package to vulnerability match
+          description: The CPE string (if applicable) describing the package to
+            vulnerability match
           type: string
         package_name:
           description: The name of the vulnerable package artifact
           type: string
         package_path:
-          description: The location (if applicable) of the vulnerable package in the container filesystem
+          description: The location (if applicable) of the vulnerable package in the
+            container filesystem
           type: string
         package_type:
           description: The type of vulnerable package
@@ -5515,7 +5696,8 @@ components:
           type: string
       type: object
     VulnerableImage:
-      description: A record of an image vulnerable to some known vulnerability. Includes vulnerable package information
+      description: A record of an image vulnerable to some known vulnerability.
+        Includes vulnerable package information
       properties:
         affected_packages:
           items:
@@ -5525,7 +5707,8 @@ components:
           $ref: "#/components/schemas/ImageReference"
       type: object
     VulnerablePackageReference:
-      description: A record of a software item which is vulnerable or carries a fix for a vulnerability
+      description: A record of a software item which is vulnerable or carries a fix
+        for a vulnerability
       properties:
         name:
           description: Package name
@@ -5564,7 +5747,8 @@ components:
         - version
       type: object
     WhitelistItem:
-      description: Identifies a specific gate and trigger match from a policy against an image and indicates it should be ignored in final policy decisions
+      description: Identifies a specific gate and trigger match from a policy against
+        an image and indicates it should be ignored in final policy decisions
       properties:
         expires_on:
           format: date-time

@@ -24,7 +24,11 @@ produces:
 paths:
   /open-banking/v2.2/branches:
     get:
-      description: This API will return the branch details for all branches and is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.
+      description: This API will return the branch details for all branches and is
+        prepared to the Open Banking standards as defined by the Open Banking
+        Implementation Entity (OBIE) in data dictionary version 2.2. It is
+        regulated by the UK Competition and Markets Authority (CMA). Data is
+        only available for the United Kingdom.
       responses:
         "200":
           description: Success
@@ -54,7 +58,12 @@ paths:
         - Branches
   "/x-open-banking/v2.2/branches/country/{country}":
     get:
-      description: This extended API will return the branch details for all branches in the specified country. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return the branch details for all branches
+        in the specified country. It is based-on the Open Banking standards as
+        defined by the Open Banking Implementation Entity (OBIE) in data
+        dictionary version 2.2. The extended functionality may not fully adhere
+        to the non-functional requirements of the regulator. Data is only
+        available for the United Kingdom.
       parameters:
         - description: The ISO country code e.g. &quot;GB&quot;
           in: path
@@ -90,7 +99,12 @@ paths:
         - Branches
   "/x-open-banking/v2.2/branches/country/{country}/town/{town}":
     get:
-      description: This extended API will return the branch details for all branches in the specified town. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return the branch details for all branches
+        in the specified town. It is based-on the Open Banking standards as
+        defined by the Open Banking Implementation Entity (OBIE) in data
+        dictionary version 2.2. The extended functionality may not fully adhere
+        to the non-functional requirements of the regulator. Data is only
+        available for the United Kingdom.
       parameters:
         - description: The ISO country code e.g. &quot;GB&quot;
           in: path
@@ -131,14 +145,22 @@ paths:
         - Branches
   "/x-open-banking/v2.2/branches/geo-location/lat/{latitude}/long/{longitude}":
     get:
-      description: This API will return the branch details for all branches within a specified radius (1 to 10 miles) of the specified latitude and longitude. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This API will return the branch details for all branches within a
+        specified radius (1 to 10 miles) of the specified latitude and
+        longitude. It is based-on the Open Banking standards as defined by the
+        Open Banking Implementation Entity (OBIE) in data dictionary version
+        2.2. The extended functionality may not fully adhere to the
+        non-functional requirements of the regulator. Data is only available for
+        the United Kingdom.
       parameters:
-        - description: Positive or negative decimal value in degrees. eg &quot;51.50551621597067&quot;
+        - description: Positive or negative decimal value in degrees. eg
+            &quot;51.50551621597067&quot;
           in: path
           name: latitude
           required: true
           type: string
-        - description: Positive or negative decimal value in degrees. eg &quot;-0.0180120225995&quot;
+        - description: Positive or negative decimal value in degrees. eg
+            &quot;-0.0180120225995&quot;
           in: path
           name: longitude
           required: true
@@ -177,9 +199,15 @@ paths:
         - Branches
   "/x-open-banking/v2.2/branches/postcode/{postcode}":
     get:
-      description: This extended API will return the branch details for all branches within a 5 mile radius of the specified postcode. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return the branch details for all branches
+        within a 5 mile radius of the specified postcode. It is based-on the
+        Open Banking standards as defined by the Open Banking Implementation
+        Entity (OBIE) in data dictionary version 2.2. The extended functionality
+        may not fully adhere to the non-functional requirements of the
+        regulator. Data is only available for the United Kingdom.
       parameters:
-        - description: Letters and numerals only. No spaces or special characters. eg. &quot;SW1A1AA&quot;
+        - description: Letters and numerals only. No spaces or special characters. eg.
+            &quot;SW1A1AA&quot;
           in: path
           name: postcode
           required: true
@@ -213,9 +241,15 @@ paths:
         - Branches
   "/x-open-banking/v2.2/branches/sortcode/{sortcode}":
     get:
-      description: This extended API will return the branch details for a branch specified by its sort code. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.
+      description: This extended API will return the branch details for a branch
+        specified by its sort code. It is based-on the Open Banking standards as
+        defined by the Open Banking Implementation Entity (OBIE) in data
+        dictionary version 2.2. The extended functionality may not fully adhere
+        to the non-functional requirements of the regulator. Data is only
+        available for the United Kingdom.
       parameters:
-        - description: 6 digit number with no spaces or special characters. eg. &quot;400003&quot;
+        - description: 6 digit number with no spaces or special characters. eg.
+            &quot;400003&quot;
           in: path
           name: sortcode
           required: true
@@ -259,14 +293,20 @@ definitions:
           properties:
             Branch:
               additionalProperties: false
-              description: Information that locates and identifies a specific branch of a financial institution.
+              description: Information that locates and identifies a specific branch of a
+                financial institution.
               items:
-                description: Information that locates and identifies a specific branch of a financial institution.
+                description: Information that locates and identifies a specific branch of a
+                  financial institution.
                 properties:
                   Accessibility:
-                    description: Accessibility is the ability and ease a customer can access a service, good, associate, or facility. Features which make the Bank accessible to disabled people
+                    description: Accessibility is the ability and ease a customer can access a
+                      service, good, associate, or facility. Features which make
+                      the Bank accessible to disabled people
                     items:
-                      description: Accessibility is the ability and ease a customer can access a service, good, associate, or facility. Features which make the Bank accessible to disabled people
+                      description: Accessibility is the ability and ease a customer can access a
+                        service, good, associate, or facility. Features which
+                        make the Bank accessible to disabled people
                       enum:
                         - AutomaticDoors
                         - AudioCashMachine
@@ -283,7 +323,8 @@ definitions:
                     type: array
                   Availability:
                     additionalProperties: false
-                    description: Days and times defining when the branch is available for use by a customer
+                    description: Days and times defining when the branch is available for use by a
+                      customer
                     properties:
                       NonStandardAvailability:
                         additionalProperties: false
@@ -308,7 +349,8 @@ definitions:
                                   title: Name
                                   type: string
                                 Notes:
-                                  description: Specify any note that is related the particular opening day e.g. Closed half day on Monday
+                                  description: Specify any note that is related the particular opening day e.g.
+                                    Closed half day on Monday
                                   maxLength: 2000
                                   minLength: 1
                                   title: Notes
@@ -320,25 +362,55 @@ definitions:
                                     description: Opening & Closing Times of a branch of an organisation
                                     properties:
                                       ClosingTime:
-                                        description: |-
-                                          A particular point in the progression of time in a calendar day expressed in either UTC time format (hh:mm:ss.sssZ), local time with UTC offset format (hh:mm:ss.sss+/-hh:mm), or local time format (hh:mm:ss.sss). These representations are defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.
+                                        description: >-
+                                          A particular point in the progression of time in a calendar day
+                                          expressed in either UTC time format
+                                          (hh:mm:ss.sssZ), local time with UTC
+                                          offset format (hh:mm:ss.sss+/-hh:mm),
+                                          or local time format (hh:mm:ss.sss).
+                                          These representations are defined in
+                                          "XML Schema Part 2: Datatypes Second
+                                          Edition - W3C Recommendation 28
+                                          October 2004" which is aligned with
+                                          ISO 8601.
+
                                           Note on the time format:
+
                                           1) beginning / end of calendar day
+
                                           00:00:00 = the beginning of a calendar day
+
                                           24:00:00 = the end of a calendar day
+
                                           2) fractions of second in time format
+
                                           Decimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.
                                         pattern: ^(2[0-3]|[01][0-9]):?([0-5][0-9])$
                                         title: ClosingTime
                                         type: string
                                       OpeningTime:
-                                        description: |-
-                                          A particular point in the progression of time in a calendar day expressed in either UTC time format (hh:mm:ss.sssZ), local time with UTC offset format (hh:mm:ss.sss+/-hh:mm), or local time format (hh:mm:ss.sss). These representations are defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.
+                                        description: >-
+                                          A particular point in the progression of time in a calendar day
+                                          expressed in either UTC time format
+                                          (hh:mm:ss.sssZ), local time with UTC
+                                          offset format (hh:mm:ss.sss+/-hh:mm),
+                                          or local time format (hh:mm:ss.sss).
+                                          These representations are defined in
+                                          "XML Schema Part 2: Datatypes Second
+                                          Edition - W3C Recommendation 28
+                                          October 2004" which is aligned with
+                                          ISO 8601.
+
                                           Note on the time format:
+
                                           1) beginning / end of calendar day
+
                                           00:00:00 = the beginning of a calendar day
+
                                           24:00:00 = the end of a calendar day
+
                                           2) fractions of second in time format
+
                                           Decimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.
                                         pattern: ^(2[0-3]|[01][0-9]):?([0-5][0-9])$
                                         title: OpeningTime
@@ -359,7 +431,11 @@ definitions:
                             title: Day
                             type: array
                           EndDate:
-                            description: 'A particular point in the progression of time in a calendar year expressed in the YYYY-MM-DD format. This representation is defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.'
+                            description: 'A particular point in the progression of time in a calendar year
+                              expressed in the YYYY-MM-DD format. This
+                              representation is defined in "XML Schema Part 2:
+                              Datatypes Second Edition - W3C Recommendation 28
+                              October 2004" which is aligned with ISO 8601.'
                             format: date
                             title: EndDate
                             type: string
@@ -370,13 +446,18 @@ definitions:
                             title: Name
                             type: string
                           Notes:
-                            description: Notes related to the Non-standard hours e.g. During shrimp season, the branch has extended opening hours
+                            description: Notes related to the Non-standard hours e.g. During shrimp season,
+                              the branch has extended opening hours
                             maxLength: 2000
                             minLength: 1
                             title: Notes
                             type: string
                           StartDate:
-                            description: 'A particular point in the progression of time in a calendar year expressed in the YYYY-MM-DD format. This representation is defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.'
+                            description: 'A particular point in the progression of time in a calendar year
+                              expressed in the YYYY-MM-DD format. This
+                              representation is defined in "XML Schema Part 2:
+                              Datatypes Second Edition - W3C Recommendation 28
+                              October 2004" which is aligned with ISO 8601.'
                             format: date
                             title: StartDate
                             type: string
@@ -407,7 +488,8 @@ definitions:
                                   title: Name
                                   type: string
                                 Notes:
-                                  description: Specify any note that is related the particular opening day e.g. Closed half day on Monday
+                                  description: Specify any note that is related the particular opening day e.g.
+                                    Closed half day on Monday
                                   maxLength: 2000
                                   minLength: 1
                                   title: Notes
@@ -419,25 +501,55 @@ definitions:
                                     description: Opening & Closing Times of a branch of an organisation
                                     properties:
                                       ClosingTime:
-                                        description: |-
-                                          A particular point in the progression of time in a calendar day expressed in either UTC time format (hh:mm:ss.sssZ), local time with UTC offset format (hh:mm:ss.sss+/-hh:mm), or local time format (hh:mm:ss.sss). These representations are defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.
+                                        description: >-
+                                          A particular point in the progression of time in a calendar day
+                                          expressed in either UTC time format
+                                          (hh:mm:ss.sssZ), local time with UTC
+                                          offset format (hh:mm:ss.sss+/-hh:mm),
+                                          or local time format (hh:mm:ss.sss).
+                                          These representations are defined in
+                                          "XML Schema Part 2: Datatypes Second
+                                          Edition - W3C Recommendation 28
+                                          October 2004" which is aligned with
+                                          ISO 8601.
+
                                           Note on the time format:
+
                                           1) beginning / end of calendar day
+
                                           00:00:00 = the beginning of a calendar day
+
                                           24:00:00 = the end of a calendar day
+
                                           2) fractions of second in time format
+
                                           Decimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.
                                         pattern: ^(2[0-3]|[01][0-9]):?([0-5][0-9])$
                                         title: ClosingTime
                                         type: string
                                       OpeningTime:
-                                        description: |-
-                                          A particular point in the progression of time in a calendar day expressed in either UTC time format (hh:mm:ss.sssZ), local time with UTC offset format (hh:mm:ss.sss+/-hh:mm), or local time format (hh:mm:ss.sss). These representations are defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.
+                                        description: >-
+                                          A particular point in the progression of time in a calendar day
+                                          expressed in either UTC time format
+                                          (hh:mm:ss.sssZ), local time with UTC
+                                          offset format (hh:mm:ss.sss+/-hh:mm),
+                                          or local time format (hh:mm:ss.sss).
+                                          These representations are defined in
+                                          "XML Schema Part 2: Datatypes Second
+                                          Edition - W3C Recommendation 28
+                                          October 2004" which is aligned with
+                                          ISO 8601.
+
                                           Note on the time format:
+
                                           1) beginning / end of calendar day
+
                                           00:00:00 = the beginning of a calendar day
+
                                           24:00:00 = the end of a calendar day
+
                                           2) fractions of second in time format
+
                                           Decimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.
                                         pattern: ^(2[0-3]|[01][0-9]):?([0-5][0-9])$
                                         title: OpeningTime
@@ -467,18 +579,23 @@ definitions:
                     type: object
                   ContactInfo:
                     additionalProperties: false
-                    description: Communication device number or electronic address used for communication.
+                    description: Communication device number or electronic address used for
+                      communication.
                     items:
-                      description: Communication device number or electronic address used for communication.
+                      description: Communication device number or electronic address used for
+                        communication.
                       properties:
                         ContactContent:
-                          description: Collection of information that identifies a phone/Fax number/ email, as defined by telecom services.
+                          description: Collection of information that identifies a phone/Fax number/
+                            email, as defined by telecom services.
                           maxLength: 256
                           minLength: 1
                           title: ContactContent
                           type: string
                         ContactDescription:
-                          description: Description of contact such as main phone number, alternate phone number, Fax number, alternate fax number, email and alternate email
+                          description: Description of contact such as main phone number, alternate phone
+                            number, Fax number, alternate fax number, email and
+                            alternate email
                           maxLength: 70
                           minLength: 1
                           title: ContactDescription
@@ -500,7 +617,8 @@ definitions:
                           description: Other contact type which is not in the standard code list
                           properties:
                             Code:
-                              description: The four letter Mnemonic used whithin an XML file to identify a code
+                              description: The four letter Mnemonic used whithin an XML file to identify a
+                                code
                               maxLength: 4
                               minLength: 0
                               pattern: ^\w{0,4}$
@@ -530,9 +648,24 @@ definitions:
                     title: ContactInfo
                     type: array
                   CustomerSegment:
-                    description: The marketing segment which the branch is able to address in terms of customer type. Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another
+                    description: The marketing segment which the branch is able to address in terms
+                      of customer type. Market segmentation is a marketing term
+                      referring to the aggregating of prospective buyers into
+                      groups, or segments, that have common needs and respond
+                      similarly to a marketing action. Market segmentation
+                      enables companies to target different categories of
+                      consumers who perceive the full value of certain products
+                      and services differently from one another
                     items:
-                      description: The marketing segment which the branch is able to address in terms of customer type. Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another
+                      description: The marketing segment which the branch is able to address in terms
+                        of customer type. Market segmentation is a marketing
+                        term referring to the aggregating of prospective buyers
+                        into groups, or segments, that have common needs and
+                        respond similarly to a marketing action. Market
+                        segmentation enables companies to target different
+                        categories of consumers who perceive the full value of
+                        certain products and services differently from one
+                        another
                       enum:
                         - Business
                         - Corporate
@@ -548,13 +681,15 @@ definitions:
                     title: CustomerSegment
                     type: array
                   Identification:
-                    description: Unique and unambiguous identification of a branch of a financial institution.
+                    description: Unique and unambiguous identification of a branch of a financial
+                      institution.
                     maxLength: 35
                     minLength: 1
                     title: Identification
                     type: string
                   Name:
-                    description: Name by which a branch is known and which is usually used to identify that branch.
+                    description: Name by which a branch is known and which is usually used to
+                      identify that branch.
                     maxLength: 140
                     minLength: 1
                     title: Name
@@ -567,9 +702,11 @@ definitions:
                     type: string
                   OtherAccessibility:
                     additionalProperties: false
-                    description: Enter any new code , name and description for any other Accessibility
+                    description: Enter any new code , name and description for any other
+                      Accessibility
                     items:
-                      description: Enter any new code , name and description for any other Accessibility
+                      description: Enter any new code , name and description for any other
+                        Accessibility
                       properties:
                         Code:
                           description: The four letter Mnemonic used within an XML file to identify a code
@@ -598,9 +735,11 @@ definitions:
                     type: array
                   OtherCustomerSegment:
                     additionalProperties: false
-                    description: Enter a new code , name and description for any other Customer Segment
+                    description: Enter a new code , name and description for any other Customer
+                      Segment
                     items:
-                      description: Enter a new code , name and description for any other Customer Segment
+                      description: Enter a new code , name and description for any other Customer
+                        Segment
                       properties:
                         Code:
                           description: The four letter Mnemonic used within an XML file to identify a code
@@ -664,10 +803,13 @@ definitions:
                     type: string
                   PostalAddress:
                     additionalProperties: false
-                    description: Information that locates and identifies a specific address, as defined by postal services.
+                    description: Information that locates and identifies a specific address, as
+                      defined by postal services.
                     properties:
                       AddressLine:
-                        description: Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.
+                        description: Information that locates and identifies a specific address, as
+                          defined by postal services, that is presented in free
+                          format text.
                         items:
                           description: maxLength 70 text
                           maxLength: 70
@@ -678,7 +820,8 @@ definitions:
                         title: AddressLine
                         type: array
                       BuildingNumber:
-                        description: Name or Number that identifies the position of a building on a street.
+                        description: Name or Number that identifies the position of a building on a
+                          street.
                         maxLength: 350
                         minLength: 1
                         title: BuildingNumber
@@ -689,7 +832,8 @@ definitions:
                         title: Country
                         type: string
                       CountrySubDivision:
-                        description: Identifies a subdivision of a country, for instance state, region, county.
+                        description: Identifies a subdivision of a country, for instance state, region,
+                          county.
                         items:
                           description: maxLength 35 text
                           maxLength: 35
@@ -701,11 +845,13 @@ definitions:
                         type: array
                       GeoLocation:
                         additionalProperties: false
-                        description: Geographic location of the ATM specified by geographic coordinates or UTM coordinates.
+                        description: Geographic location of the ATM specified by geographic coordinates
+                          or UTM coordinates.
                         properties:
                           GeographicCoordinates:
                             additionalProperties: false
-                            description: Location on the earth specified by two numbers representing vertical and horizontal position.
+                            description: Location on the earth specified by two numbers representing
+                              vertical and horizontal position.
                             properties:
                               Latitude:
                                 description: Latitude measured in decimal degrees
@@ -713,8 +859,10 @@ definitions:
                                 title: Latitude
                                 type: string
                               Longitude:
-                                description: |-
-                                  Angular measurement of the distance of a location on the earth east or west of the Greenwich observatory.
+                                description: >-
+                                  Angular measurement of the distance of a location on the earth east
+                                  or west of the Greenwich observatory.
+
                                   The longitude is measured in decimal degrees.
                                 pattern: ^-?\d{1,3}\.\d{1,8}$
                                 title: Longitude
@@ -729,7 +877,9 @@ definitions:
                         title: GeoLocation
                         type: object
                       PostCode:
-                        description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+                        description: Identifier consisting of a group of letters and/or numbers that is
+                          added to a postal address to assist the sorting of
+                          mail.
                         maxLength: 16
                         minLength: 1
                         title: PostCode
@@ -741,7 +891,8 @@ definitions:
                         title: StreetName
                         type: string
                       TownName:
-                        description: Name of a built-up area, with defined boundaries, and a local government.
+                        description: Name of a built-up area, with defined boundaries, and a local
+                          government.
                         maxLength: 35
                         minLength: 1
                         title: TownName
@@ -751,7 +902,10 @@ definitions:
                     title: PostalAddress
                     type: object
                   SequenceNumber:
-                    description: Sequence Number that is used in conjunction with Identification to uniquely identify a branch. Physical branches should have 0 assigned, mobile and sub branches should have 1,2,3....etc. assigned.
+                    description: Sequence Number that is used in conjunction with Identification to
+                      uniquely identify a branch. Physical branches should have
+                      0 assigned, mobile and sub branches should have
+                      1,2,3....etc. assigned.
                     maxLength: 35
                     minLength: 1
                     title: SequenceNumber
@@ -793,7 +947,12 @@ definitions:
                     title: ServiceAndFacility
                     type: array
                   SortCode:
-                    description: United Kingdom (UK) Sort Code - identifies British financial institutions on the British national clearing systems. The sort code, which is a six-digit number, is usually formatted as three pairs of numbers, for example 12-34-56. It identifies both the bank and the branch(s) where the account is held.
+                    description: United Kingdom (UK) Sort Code - identifies British financial
+                      institutions on the British national clearing systems. The
+                      sort code, which is a six-digit number, is usually
+                      formatted as three pairs of numbers, for example 12-34-56.
+                      It identifies both the bank and the branch(s) where the
+                      account is held.
                     items:
                       description: maxLength 8 text
                       maxLength: 8
@@ -802,7 +961,8 @@ definitions:
                     title: SortCode
                     type: array
                   Type:
-                    description: Codeset to indicate if a branch is physically in 1 location or is mobile
+                    description: Codeset to indicate if a branch is physically in 1 location or is
+                      mobile
                     enum:
                       - Mobile
                       - Physical
@@ -819,7 +979,8 @@ definitions:
               title: Branch
               type: array
             BrandName:
-              description: Brand Name that an organisation uses to market its products or services to a consumer
+              description: Brand Name that an organisation uses to market its products or
+                services to a consumer
               maxLength: 140
               minLength: 1
               title: BrandName
@@ -871,7 +1032,8 @@ definitions:
     properties:
       description:
         enum:
-          - Your client has failed to submit a request, and a timeout has occurred.
+          - Your client has failed to submit a request, and a timeout has
+            occurred.
         type: string
       status:
         enum:
@@ -955,7 +1117,8 @@ definitions:
     properties:
       Agreement:
         enum:
-          - Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions
+          - Use of the APIs and any related data will be subject to the terms of
+            the Open Licence and subject to terms and conditions
         type: string
       LastUpdated:
         format: date-time

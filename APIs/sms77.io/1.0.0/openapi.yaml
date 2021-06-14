@@ -73,12 +73,14 @@ paths:
     get:
       operationId: Analytics
       parameters:
-        - description: Start date of the statistics in the format YYYY-MM-DD. By default, the date of 30 days ago is set.
+        - description: Start date of the statistics in the format YYYY-MM-DD. By default,
+            the date of 30 days ago is set.
           in: query
           name: start
           schema:
             type: string
-        - description: End date of the statistics in the format YYYY-MM-DD. By default, the current day.
+        - description: End date of the statistics in the format YYYY-MM-DD. By default,
+            the current day.
           in: query
           name: end
           schema:
@@ -88,7 +90,8 @@ paths:
           name: label
           schema:
             type: string
-        - description: Receive the data only for the main account, all your (sub-)accounts or only for specific subaccounts.
+        - description: Receive the data only for the main account, all your (sub-)accounts
+            or only for specific subaccounts.
           in: query
           name: subaccounts
           schema:
@@ -156,7 +159,8 @@ paths:
             enum:
               - read
             type: string
-        - description: Defines whether to return the response as JSON or CSV separated by semicolon.
+        - description: Defines whether to return the response as JSON or CSV separated by
+            semicolon.
           in: query
           name: json
           schema:
@@ -191,7 +195,8 @@ paths:
               - del
               - write
             type: string
-        - description: Defines whether to return the response as JSON or CSV separated by semicolon.
+        - description: Defines whether to return the response as JSON or CSV separated by
+            semicolon.
           in: query
           name: json
           schema:
@@ -349,7 +354,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Determines whether the response shall be returned in JSON format. Does not work with type "format".
+        - description: Determines whether the response shall be returned in JSON format.
+            Does not work with type "format".
           in: query
           name: json
           schema:
@@ -364,7 +370,8 @@ paths:
                     schema:
                       properties:
                         carrier:
-                          description: The (former) mobile carrier the number got issued to on initial number release.
+                          description: The (former) mobile carrier the number got issued to on initial
+                            number release.
                           type: string
                         code:
                           enum:
@@ -374,7 +381,8 @@ paths:
                             - 600
                           type: number
                         country_code:
-                          description: The area code of the number belonging country. This value is numeric.
+                          description: The area code of the number belonging country. This value is
+                            numeric.
                           type: string
                         country_code_iso3:
                           type: string
@@ -395,7 +403,8 @@ paths:
                         international_format_number:
                           type: string
                         international_formatted:
-                          description: The number formatted accordingly to the E.164 standard in a human readable format.
+                          description: The number formatted accordingly to the E.164 standard in a human
+                            readable format.
                           type: string
                         lookup_outcome:
                           type: string
@@ -410,7 +419,8 @@ paths:
                         national_format_number:
                           type: string
                         number:
-                          description: The number formatted accordingly to the E.164 standard in a human readable format.
+                          description: The number formatted accordingly to the E.164 standard in a human
+                            readable format.
                           type: string
                         original_carrier:
                           schema:
@@ -450,12 +460,14 @@ paths:
     get:
       operationId: Pricing
       parameters:
-        - description: The countries ISO code to get pricings for. Allowed values are de, fr, at. Omit to show pricings for all channels.
+        - description: The countries ISO code to get pricings for. Allowed values are de,
+            fr, at. Omit to show pricings for all channels.
           in: query
           name: country
           schema:
             type: string
-        - description: Determines the response format. Allowed values are json and csv. The default value is json.
+        - description: Determines the response format. Allowed values are json and csv.
+            The default value is json.
           in: query
           name: format
           schema:
@@ -520,8 +532,9 @@ paths:
             text/csv:
               examples:
                 response:
-                  value: |
-                    countryCode,countryName,countryPrefix,mcc,mncs,networkName,price,features,comment "DE";"Germany";"49";"262";"15";" (Airdata)";"0.075";"";""
+                  value: >
+                    countryCode,countryName,countryPrefix,mcc,mncs,networkName,price,features,comment
+                    "DE";"Germany";"49";"262";"15";" (Airdata)";"0.075";"";""
           description: OK
       tags:
         - pricing
@@ -777,7 +790,8 @@ paths:
     post:
       operationId: ValidateForVoice
       parameters:
-        - description: Determines the recipient. Can only be a number, not a contact from your address book.
+        - description: Determines the recipient. Can only be a number, not a contact from
+            your address book.
           in: query
           name: number
           required: true
@@ -809,7 +823,8 @@ paths:
     post:
       operationId: Voice
       parameters:
-        - description: Determines the receiver. Must be a valid phone number or contact from the address book.
+        - description: Determines the receiver. Must be a valid phone number or contact
+            from the address book.
           in: query
           name: to
           required: true
@@ -822,7 +837,8 @@ paths:
           schema:
             maxLength: 10000
             type: string
-        - description: Decides whether the parameter "text" is plain text or XML. The default value is 0.
+        - description: Decides whether the parameter "text" is plain text or XML. The
+            default value is 0.
           in: query
           name: xml
           schema:
@@ -830,7 +846,8 @@ paths:
               - 1
               - 0
             type: number
-        - description: Sets the sender. Must be a verified sender. Use an inbound number of yours or one of ours.
+        - description: Sets the sender. Must be a verified sender. Use an inbound number
+            of yours or one of ours.
           in: query
           name: from
           schema:

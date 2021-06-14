@@ -8,7 +8,10 @@ info:
     email: support@selectpdf.com
     name: SelectPdf HTML To PDF API
     url: https://selectpdf.com/html-to-pdf-api/
-  description: SelectPdf HTML To PDF Online REST API is a professional solution that lets you create PDF from web pages and raw HTML code in your applications. The API is easy to use and the integration takes only a few lines of code.
+  description: SelectPdf HTML To PDF Online REST API is a professional solution
+    that lets you create PDF from web pages and raw HTML code in your
+    applications. The API is easy to use and the integration takes only a few
+    lines of code.
   title: SelectPdf HTML To PDF API
   version: 1.0.0
   x-apisguru-categories:
@@ -43,17 +46,21 @@ paths:
         "200":
           description: The API call succeeded. The pdf document is returned.
         "400":
-          description: Bad Request. Url or html string not specified. The body of the response contains an explanation in plain text.
+          description: Bad Request. Url or html string not specified. The body of the
+            response contains an explanation in plain text.
         "401":
-          description: Authorization Required. License key not specified or invalid. The body of the response contains an explanation in plain text.
+          description: Authorization Required. License key not specified or invalid. The
+            body of the response contains an explanation in plain text.
         "499":
-          description: Conversion error. The body of the response contains an explanation in plain text.
+          description: Conversion error. The body of the response contains an explanation
+            in plain text.
       summary: Performs a html to pdf conversion
 definitions:
   ConversionParameters:
     properties:
       base_url:
-        description: An optional base url parameter can be used together with html to resolve relative paths from the html string
+        description: An optional base url parameter can be used together with html to
+          resolve relative paths from the html string
         example: https://selectpdf.com
         type: string
       html:
@@ -66,19 +73,23 @@ definitions:
         format: uuid
         type: string
       margin_bottom:
-        description: Bottom margin of the generated PDF document in points (1 point = 1/72 inch)
+        description: Bottom margin of the generated PDF document in points (1 point =
+          1/72 inch)
         example: 5
         type: integer
       margin_left:
-        description: Left margin of the generated PDF document in points (1 point = 1/72 inch)
+        description: Left margin of the generated PDF document in points (1 point = 1/72
+          inch)
         example: 5
         type: integer
       margin_right:
-        description: Right margin of the generated PDF document in points (1 point = 1/72 inch)
+        description: Right margin of the generated PDF document in points (1 point =
+          1/72 inch)
         example: 5
         type: integer
       margin_top:
-        description: Top margin of the generated PDF document in points (1 point = 1/72 inch)
+        description: Top margin of the generated PDF document in points (1 point = 1/72
+          inch)
         example: 5
         type: integer
       page_orientation:

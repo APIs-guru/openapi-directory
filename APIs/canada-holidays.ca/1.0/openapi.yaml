@@ -6,7 +6,8 @@ info:
     email: paul@pcraig3.ca
     name: Paul Craig
     url: https://canada-holidays.ca/feedback
-  description: This API that lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.
+  description: This API that lists all 28 public holidays for all 13 provinces and
+    territories in Canada, including federal holidays.
   license:
     name: MIT
     url: https://github.com/pcraig3/hols/blob/master/LICENSE
@@ -48,7 +49,8 @@ paths:
                         href: http://localhost:3000/api/v1/provinces
                       self:
                         href: http://localhost:3000/api/v1/
-                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés
+                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans
+                      l’API canadienne des jours fériés
               schema:
                 properties:
                   _links:
@@ -86,7 +88,8 @@ paths:
         - root
   /api/v1/holidays:
     get:
-      description: Returns Canadian public holidays. Each holiday lists the regions that observe it.
+      description: Returns Canadian public holidays. Each holiday lists the regions
+        that observe it.
       operationId: get-api-v1-holidays
       parameters:
         - allowEmptyValue: true
@@ -100,7 +103,8 @@ paths:
             pattern: ^\d{4}$
             type: string
         - allowEmptyValue: true
-          description: A boolean parameter. If true, will return only federal holidays. If false, will return no federal holidays.
+          description: A boolean parameter. If true, will return only federal holidays. If
+            false, will return no federal holidays.
           in: query
           name: federal
           schema:
@@ -186,7 +190,8 @@ paths:
         - holidays
   "/api/v1/holidays/{holidayId}":
     get:
-      description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
+      description: Returns one Canadian statutory holiday by integer id. Returns a 404
+        response for invalid ids.
       operationId: get-holidays-holidayId
       parameters:
         - allowEmptyValue: true
@@ -256,7 +261,8 @@ paths:
           type: integer
   /api/v1/provinces:
     get:
-      description: Returns provinces and territories in Canada. Each province or territory lists its associated holidays.
+      description: Returns provinces and territories in Canada. Each province or
+        territory lists its associated holidays.
       operationId: get-api-v1-provinces
       parameters:
         - allowEmptyValue: true
@@ -447,7 +453,8 @@ components:
           status: 404
           timestamp: 2020-04-27T05:41:10.710Z
     Holiday:
-      description: A Canadian holiday. Includes a name, date, and a list of regions that observe this holiday.
+      description: A Canadian holiday. Includes a name, date, and a list of regions
+        that observe this holiday.
       properties:
         date:
           description: ISO date

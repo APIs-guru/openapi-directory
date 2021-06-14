@@ -9,7 +9,9 @@ info:
     email: support@pdfblocks.com
     name: PDF Blocks Support
     url: https://www.pdfblocks.com/support
-  description: "PDF Blocks is a secure, reliable, and fast API to work with PDF documents. Actions include: Merge PDF documents, add or remove passwords, add watermarks, remove, extract, reverse, and rotate pages, and more."
+  description: "PDF Blocks is a secure, reliable, and fast API to work with PDF
+    documents. Actions include: Merge PDF documents, add or remove passwords,
+    add watermarks, remove, extract, reverse, and rotate pages, and more."
   termsOfService: https://www.pdfblocks.com/terms
   title: PDF Blocks API
   version: 1.5.0
@@ -30,7 +32,8 @@ security:
 paths:
   /v1/add_password:
     post:
-      description: Protect a PDF document with a password. Encrypt the PDF document to prevent unauthorized access.
+      description: Protect a PDF document with a password. Encrypt the PDF document to
+        prevent unauthorized access.
       externalDocs:
         description: Documentation and examples
         url: https://www.pdfblocks.com/docs/api/v1/add-password
@@ -72,7 +75,8 @@ paths:
       summary: Add a password to a PDF
   /v1/add_restrictions:
     post:
-      description: Add restrictions to prevent copying, printing, and modifying a PDF document.
+      description: Add restrictions to prevent copying, printing, and modifying a PDF
+        document.
       externalDocs:
         description: Documentation and examples
         url: https://www.pdfblocks.com/docs/api/v1/add-restrictions
@@ -84,7 +88,8 @@ paths:
               properties:
                 allow_accessibility:
                   default: true
-                  description: If false, accessibility programs can't read the text or images of the document.
+                  description: If false, accessibility programs can't read the text or images of
+                    the document.
                   type: boolean
                 allow_assemble_document:
                   default: true
@@ -96,7 +101,8 @@ paths:
                   type: boolean
                 allow_comment_and_fill_form:
                   default: true
-                  description: If false, the user can't add, edit or modify annotations or fill form fields.
+                  description: If false, the user can't add, edit or modify annotations or fill
+                    form fields.
                   type: boolean
                 allow_copy_content:
                   default: true
@@ -127,14 +133,17 @@ paths:
                   format: binary
                   type: string
                 owner_password:
-                  description: The password required to open and change permissions of the PDF document.
+                  description: The password required to open and change permissions of the PDF
+                    document.
                   example: pa$$word
                   maxLength: 32
                   minLength: 4
                   pattern: ^[\x20-\x7e]{4,32}$
                   type: string
                 user_password:
-                  description: The password required to open the PDF document. If the `user_password` is not set, the user will be able to open the document without a password.
+                  description: The password required to open the PDF document. If the
+                    `user_password` is not set, the user will be able to open
+                    the document without a password.
                   example: pa$$word
                   maxLength: 32
                   minLength: 4
@@ -168,19 +177,22 @@ paths:
                   format: binary
                   type: string
                 image:
-                  description: The image to add as a watermark. The format of the image can be either PNG or JPEG.
+                  description: The image to add as a watermark. The format of the image can be
+                    either PNG or JPEG.
                   format: binary
                   type: string
                 margin:
                   default: 1
-                  description: The distance in inches from the border of the page to the image watermark.
+                  description: The distance in inches from the border of the page to the image
+                    watermark.
                   example: 1
                   format: float
                   minimum: 0
                   type: number
                 transparency:
                   default: 50
-                  description: The transparency level for the image watermark from 0 (opaque) to 100 (transparent).
+                  description: The transparency level for the image watermark from 0 (opaque) to
+                    100 (transparent).
                   example: 50
                   format: int32
                   maximum: 100
@@ -199,7 +211,8 @@ paths:
       summary: Add an image watermark to a PDF
   /v1/add_watermark/text:
     post:
-      description: Add a text watermark to each page of a PDF document. Choose from several watermark templates.
+      description: Add a text watermark to each page of a PDF document. Choose from
+        several watermark templates.
       externalDocs:
         description: Documentation and examples
         url: https://www.pdfblocks.com/docs/api/v1/add-watermark-text
@@ -240,14 +253,16 @@ paths:
                   type: string
                 margin:
                   default: 1
-                  description: The distance in inches from the border of the page to the text watermark.
+                  description: The distance in inches from the border of the page to the text
+                    watermark.
                   example: 1
                   format: float
                   minimum: 0
                   type: number
                 template:
                   default: 1001
-                  description: The [id of the text watermark template](https://www.pdfblocks.com/docs/api/v1/text-watermark-templates.pdf).
+                  description: The [id of the text watermark
+                    template](https://www.pdfblocks.com/docs/api/v1/text-watermark-templates.pdf).
                   example: 1001
                   format: int32
                   maximum: 66537
@@ -255,7 +270,8 @@ paths:
                   type: integer
                 transparency:
                   default: 75
-                  description: The transparency level for the text watermark from 0 (opaque) to 100 (transparent).
+                  description: The transparency level for the text watermark from 0 (opaque) to
+                    100 (transparent).
                   example: 75
                   format: int32
                   maximum: 100
@@ -289,12 +305,14 @@ paths:
                   format: binary
                   type: string
                 first_page:
-                  description: The first page of the range to extract. If empty, it defaults to the first page of the PDF document.
+                  description: The first page of the range to extract. If empty, it defaults to
+                    the first page of the PDF document.
                   format: int32
                   minimum: 1
                   type: integer
                 last_page:
-                  description: The last page of the range to extract. If empty, it defaults to the last page of the PDF document.
+                  description: The last page of the range to extract. If empty, it defaults to the
+                    last page of the PDF document.
                   format: int32
                   minimum: 1
                   type: integer
@@ -321,7 +339,8 @@ paths:
             schema:
               properties:
                 file:
-                  description: The array of PDF documents. PDF documents will be merged in the same order they are inserted into this array.
+                  description: The array of PDF documents. PDF documents will be merged in the
+                    same order they are inserted into this array.
                   items:
                     description: An input PDF document.
                     format: binary
@@ -352,12 +371,14 @@ paths:
                   format: binary
                   type: string
                 first_page:
-                  description: The first page of the range to remove from the PDF document. If empty, it defaults to the first page of the document.
+                  description: The first page of the range to remove from the PDF document. If
+                    empty, it defaults to the first page of the document.
                   format: int32
                   minimum: 1
                   type: integer
                 last_page:
-                  description: The last page of the range to remove from the PDF document. If empty, it defaults to the last page of the document.
+                  description: The last page of the range to remove from the PDF document. If
+                    empty, it defaults to the last page of the document.
                   format: int32
                   minimum: 1
                   type: integer
@@ -373,7 +394,8 @@ paths:
       summary: Remove pages from a PDF
   /v1/remove_password:
     post:
-      description: Remove the password from an encrypted PDF document. The PDF document will no longer require a password to open.
+      description: Remove the password from an encrypted PDF document. The PDF
+        document will no longer require a password to open.
       externalDocs:
         description: Documentation and examples
         url: https://www.pdfblocks.com/docs/api/v1/remove-password
@@ -494,7 +516,9 @@ paths:
             schema:
               properties:
                 angle:
-                  description: The angle of rotation of the pages. Positive angles rotate the pages clockwise. Negative angles rotate the pages counter-clockwise.
+                  description: The angle of rotation of the pages. Positive angles rotate the
+                    pages clockwise. Negative angles rotate the pages
+                    counter-clockwise.
                   enum:
                     - 0
                     - 90
@@ -511,12 +535,14 @@ paths:
                   format: binary
                   type: string
                 first_page:
-                  description: The first page of the range to rotate in the PDF document. If empty, it defaults to the first page of the document.
+                  description: The first page of the range to rotate in the PDF document. If
+                    empty, it defaults to the first page of the document.
                   format: int32
                   minimum: 1
                   type: integer
                 last_page:
-                  description: The last page of the range to rotate in the PDF document. If empty, it defaults to the last page of the document.
+                  description: The last page of the range to rotate in the PDF document. If empty,
+                    it defaults to the last page of the document.
                   format: int32
                   minimum: 1
                   type: integer
@@ -539,7 +565,8 @@ components:
           example:
             errors:
               file:
-                - Could not parse the PDF document. The file may be invalid or corrupt.
+                - Could not parse the PDF document. The file may be invalid or
+                  corrupt.
             status: 400
             title: One or more validation errors occurred.
             type: https://www.pdfblocks.com/docs/api/v1/error/400
@@ -566,7 +593,9 @@ components:
       description: The document was processed succesfully.
   securitySchemes:
     apiKey:
-      description: Find your API key in [your dashboard](https://dashboard.pdfblocks.com/users/sign_in), or [get a free API key](https://www.pdfblocks.com/try-free).
+      description: Find your API key in [your
+        dashboard](https://dashboard.pdfblocks.com/users/sign_in), or [get a
+        free API key](https://www.pdfblocks.com/try-free).
       in: header
       name: X-Api-Key
       type: apiKey

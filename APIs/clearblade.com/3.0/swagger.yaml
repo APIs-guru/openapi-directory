@@ -120,15 +120,21 @@ paths:
         - Developer
   /admin/audit:
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns list of assets and the information about the changes that have been made. This endpoint is for Admin only.
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object. 
         ## Audit Table Schema:
+
         Refer to this when building the query.
 
           | Column | Type | Possible Values|Example|
@@ -143,11 +149,15 @@ paths:
           |asset_id|string|ANY_STRING|"ClearBlade-iPhone"|
           |changes|string|STRINGIFIED_JSON|"{\\"newVersion\\":2}"|
           |user_type|string|UNKNOWN, DEV, USER, DEVICE, Invalid UserType|"DEVICE"|
+
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"asset_class":"services"}]},{"EQ":[{"action_type":"create"}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: GetAudit
       parameters:
@@ -156,7 +166,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -173,7 +184,8 @@ paths:
         - Audit
   /admin/audit/count:
     get:
-      description: Gets total number of changes made to assets across all systems on the instance. This endpoint is Admin only.
+      description: Gets total number of changes made to assets across all systems on
+        the instance. This endpoint is Admin only.
       operationId: GetCounts
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -191,16 +203,22 @@ paths:
         - Audit
   "/admin/audit/{systemKey}":
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns list of assets and the information about the changes that have been made. This endpoint is for Admin and Dev.
 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object. 
         ## Audit Table Schema:
+
         Refer to this when building the query.
 
           | Column | Type | Possible Values|Example|
@@ -215,11 +233,15 @@ paths:
           |asset_id|string|ANY_STRING|"ClearBlade-iPhone"|
           |changes|string|STRINGIFIED_JSON|"{\\"newVersion\\":2}"|
           |user_type|string|UNKNOWN, DEV, USER, DEVICE, Invalid UserType|"DEVICE"|
+
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"asset_class":"services"}]},{"EQ":[{"action_type":"create"}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: GetAuditDev
       parameters:
@@ -233,7 +255,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -250,7 +273,8 @@ paths:
         - Audit
   "/admin/audit/{systemKey}/count":
     get:
-      description: Gets total number of changes made to assets across all systems on the instance. This endpoint is for Admin and Dev.
+      description: Gets total number of changes made to assets across all systems on
+        the instance. This endpoint is for Admin and Dev.
       operationId: GetCountsDev
       parameters:
         - description: System Key that identifies the system that holds the deployment.
@@ -273,37 +297,50 @@ paths:
         - Audit
   /admin/auth:
     post:
-      description: |
+      description: >
         ## Description
+
         Logs developer into system and returns an Developer Token
+
         ## Endpoint Body Values
+
         Here are the body values for the two scenarios
+
         ### Basic Auth
+
         Required Keys
           - username
           - password
 
         Example 
+
         ```json
+
         {
           "username":"cbman@clearblade.com",
           "password":"cl34rbl4d3"
         }
+
         ```  
 
+
         ### Refreshing Token
+
         Required Keys 
           - grant_type (only one valid value - "refresh_token")
           - refresh_token
           - access_token
 
         Example 
+
         ```json
+
         {
           "grant_type":"refresh_token",
           "refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmMjkwZTJlYjBiZDRmNjhiZDRkM2RlZjNkMWM0MDEiLCJzaWQiOiIzOWFkM2U5OC1hMmU0LTQxYzQtOGMzNi03ZjQxNDFhYzYxN2IiLCJ1dCI6MiwidHQiOjMsImV4cCI6MTU5MDI3ODExMSwiaWF0IjoxNTg5NDE0MTExfQ.iY6uJu2QgNP0uHoGdmEZm9wsztB1SUrCHrisxoXoxolol",
           "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmMjkwZTJlYjBiZDRmNjhiZDRkM2RlZjNkMWM0MDEiLCJzaWQiOiI3NmY4ODg4MS04YmU5LTRiM2UtOWJkNi1jOTJjZGQ4OTNlMmEiLCJ1dCI6MiwidHQiOjEsImV4cCI6MTU4OTg0NjExMSwiaWF0IjoxNTg5NDE0MTExfQ.xboryHuVn2zz-gSZ_JcD7-j_eBmJU1SMHkiDl9j8bak"
         }
+
         ```
       operationId: AuthDev
       parameters:
@@ -390,7 +427,8 @@ paths:
       tags:
         - Developer
     put:
-      description: Creates or deletes a column within an existing collection, or updates an existing database connection in the specified system.
+      description: Creates or deletes a column within an existing collection, or
+        updates an existing database connection in the specified system.
       operationId: DevUpdateCollection
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -414,7 +452,8 @@ paths:
         - Developer
   /admin/count/developers:
     get:
-      description: Retrieves the number of developers who are considered administrators in their system.
+      description: Retrieves the number of developers who are considered
+        administrators in their system.
       operationId: GetAdminDevCount
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -456,7 +495,9 @@ paths:
         - Admin
   "/admin/developers/{systemKey}":
     put:
-      description: For admin, you can add/remove/change the owner of a system even if you’re not the system's owner. For Developer,you can add/remove a developer as long as you’re the owner of the system.
+      description: For admin, you can add/remove/change the owner of a system even if
+        you’re not the system's owner. For Developer,you can add/remove a
+        developer as long as you’re the owner of the system.
       operationId: AdminOwnerChange
       parameters:
         - description: System Key that identifies the system that holds the deployment.
@@ -498,7 +539,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the device currently belongs to.
+        - description: System key that identifies the system the device currently belongs
+            to.
           in: path
           name: systemKey
           required: true
@@ -525,7 +567,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the device you're updating belongs to.
+        - description: System key that identifies the system the device you're updating
+            belongs to.
           in: path
           name: systemKey
           required: true
@@ -590,12 +633,14 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the devices in question belong to.
+        - description: System key that identifies the system the devices in question
+            belong to.
           in: path
           name: systemKey
           required: true
           type: string
-        - description: Tags to filter devices by. See the query model below for an example. All devices are returned if a query is not specified.
+        - description: Tags to filter devices by. See the query model below for an
+            example. All devices are returned if a query is not specified.
           in: query
           name: query
           required: false
@@ -634,7 +679,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: A JSON object representing the SQL result set containing the list of affected devices.
+          description: A JSON object representing the SQL result set containing the list
+            of affected devices.
           schema:
             $ref: "#/definitions/QueryResultSet"
         "400":
@@ -652,7 +698,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the device currently belongs to.
+        - description: System key that identifies the system the device currently belongs
+            to.
           in: path
           name: systemKey
           required: true
@@ -679,7 +726,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the device in question belongs to.
+        - description: System key that identifies the system the device in question
+            belongs to.
           in: path
           name: systemKey
           required: true
@@ -739,7 +787,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the device you're updating belongs to.
+        - description: System key that identifies the system the device you're updating
+            belongs to.
           in: path
           name: systemKey
           required: true
@@ -765,7 +814,8 @@ paths:
         - Developer
   "/admin/edges/template/{systemKey}":
     get:
-      description: Get list of which triggers, services, and libraries should be copied onto which edge when it starts up.
+      description: Get list of which triggers, services, and libraries should be
+        copied onto which edge when it starts up.
       operationId: GetEdgeTemplate
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -830,7 +880,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the edges in question belong to.
+        - description: System key that identifies the system the edges in question belong
+            to.
           in: path
           name: systemKey
           required: true
@@ -853,7 +904,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the edges in question belong to.
+        - description: System key that identifies the system the edges in question belong
+            to.
           in: path
           name: systemKey
           required: true
@@ -903,7 +955,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the edge in question belongs to.
+        - description: System key that identifies the system the edge in question belongs
+            to.
           in: path
           name: systemKey
           required: true
@@ -963,7 +1016,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System key that identifies the system the edge you're updating belongs to.
+        - description: System key that identifies the system the edge you're updating
+            belongs to.
           in: path
           name: systemKey
           required: true
@@ -989,7 +1043,8 @@ paths:
         - Developer
   /admin/logout:
     post:
-      description: Logs the current developer out of their session and invalidates their DevToken
+      description: Logs the current developer out of their session and invalidates
+        their DevToken
       operationId: DevLogout
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -1111,16 +1166,22 @@ paths:
         - Admin
   /admin/platform/systems:
     get:
-      description: |
+      description: >
         ## Description:
+
         Get list of systems that have been updated. This is an Admin only endpoint.
 
+
         ### Query:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]],"SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object. 
         ## Admin Audit Table Schema:
+
         Refer to this when building the query.
 
           | Column | Type | Possible Values| Examples|
@@ -1151,6 +1212,7 @@ paths:
 
         ### Example:
 
+
         ```json
          "query":{"FILTERS":[[{"NEQ":[{"disabled":true}]},{"EQ":[{"numDevs":2}]}]],"PAGESIZE":0,"PAGENUM":0}
         ```
@@ -1161,7 +1223,8 @@ paths:
           name: Clearblade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -1178,16 +1241,21 @@ paths:
         - Audit
   "/admin/platform/systems/{systemKey}":
     get:
-      description: |
+      description: >
         ## Description:
          Get list of changes that have been made to the system. This is an Admin and Dev endpoint.
         ### Query:
+
         ```json
+
         "query":{"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]],"SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object. 
         ## Admin Audit Table Schema:
+
         ## Admin Audit Table Schema:
+
         Refer to this when building the query.
 
           | Column | Type | Possible Values| Examples|
@@ -1218,6 +1286,7 @@ paths:
 
         ### Example:
 
+
         ```json
          "query":{"FILTERS":[[{"NEQ":[{"disabled":true}]},{"EQ":[{"numDevs":2}]}]],"PAGESIZE":0,"PAGENUM":0}
         ```
@@ -1233,7 +1302,8 @@ paths:
           name: clearblade-devtoken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -1250,7 +1320,8 @@ paths:
         - Audit
   "/admin/platform/{systemKey}":
     get:
-      description: Retrieves the specified system's status as it relates to limits. To be used by the billing system.
+      description: Retrieves the specified system's status as it relates to limits. To
+        be used by the billing system.
       operationId: GetSystemStatus
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -1258,7 +1329,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System Key that identifies the system you're requesting information about.
+        - description: System Key that identifies the system you're requesting information
+            about.
           in: path
           name: systemKey
           required: true
@@ -1353,7 +1425,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: System Key that identifies the system you're regenerating the secret for.
+        - description: System Key that identifies the system you're regenerating the
+            secret for.
           in: body
           name: body
           required: true
@@ -1570,7 +1643,8 @@ paths:
       tags:
         - 2FA
     put:
-      description: Update instance wide security settings.TTL must be between 86400 and 2592000 seconds. This endpoint is Admin only.
+      description: Update instance wide security settings.TTL must be between 86400
+        and 2592000 seconds. This endpoint is Admin only.
       operationId: UpdateSecurity
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -1646,7 +1720,8 @@ paths:
       tags:
         - 2FA
     post:
-      description: Creates SMS communication . Twilio is the only supported service. This endpoint is Admin only.
+      description: Creates SMS communication . Twilio is the only supported service.
+        This endpoint is Admin only.
       operationId: CreateSMSCommunication
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -1675,7 +1750,8 @@ paths:
       tags:
         - 2FA
     put:
-      description: Updates SMS communication settings. Twilio is the only supported service. This endpoint is Admin only.
+      description: Updates SMS communication settings. Twilio is the only supported
+        service. This endpoint is Admin only.
       operationId: UpdateSMSSettings
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -1764,7 +1840,8 @@ paths:
         - Admin
   /admin/triggers/definitions:
     get:
-      description: Returns list of trigger definitions. These are the possible actions that can set off a trigger.
+      description: Returns list of trigger definitions. These are the possible actions
+        that can set off a trigger.
       operationId: GetTriggers
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -2164,7 +2241,8 @@ paths:
       tags:
         - Developer
     put:
-      description: Changes any colomn in users table and update password or permissions of the specified user.
+      description: Changes any colomn in users table and update password or
+        permissions of the specified user.
       operationId: UserChangeUserInfo
       parameters:
         - description: System Key that identifies the system the user is a part of.
@@ -2287,18 +2365,24 @@ paths:
       tags:
         - Developer
     get:
-      description: |
+      description: >
         ## Description:
           Get as a list of roles that are available to add to an user 
         ### Query:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"EQ":[{"name":"value"}]}]]}
+
         ```
+
 
         ### Example:
           0 and 0 for pagesize and pagenum returns all the information in one response.
         ```json
+
         {"PAGESIZE":0,"PAGENUM":0,"FILTERS":[[{"EQ":[{"name":"Authenticated"}]}]]}
+
         ```
       operationId: GetRoles
       parameters:
@@ -2425,7 +2509,8 @@ paths:
         - Developer
   /admin/userinfo:
     get:
-      description: Returns all user information about the current developer. This is a developer only endpoint.
+      description: Returns all user information about the current developer. This is a
+        developer only endpoint.
       operationId: GetDevInfo
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -2448,7 +2533,7 @@ paths:
       tags:
         - Developer
     put:
-      description: |
+      description: >
         ## Description:
           Update the developer 2FA information. This is a developer only endpoint.
           Note - the email is taken from the developer's account.
@@ -2641,25 +2726,34 @@ paths:
         - Shared Cache
   "/admin/v/4/session/{systemKey}/device":
     delete:
-      description: |
+      description: >
         ## Description:
+
         Delete device session. 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object.
           
           ### Filter Options
 
         * device_key - string
+
         * issued - int (Unix timestamp)
 
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"device_key":"e2c794e60bee9ced68fc101 :: DEVICENAME0001"}]},{"EQ":[{"issued":1587659839}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: DeleteDeviceSession
       parameters:
@@ -2668,7 +2762,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -2693,24 +2788,35 @@ paths:
       tags:
         - Session
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns list of device sessions with Device Key and Timestamps . 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object.
+
           
         ### Filter Options
 
+
         * device_key - string
+
         * issued - int (Unix timestamp)
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"device_key":"e2c794e60bee9ced68fc101 :: DEVICENAME0001}]},{"EQ":[{"issued":1587659839}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: GetDeviceSession
       parameters:
@@ -2719,7 +2825,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -2741,24 +2848,35 @@ paths:
         - Session
   "/admin/v/4/session/{systemKey}/device/count":
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns number of device sessions. 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object.
+
           
         ### Filter Options
 
+
         * device_key - string
+
         * issued - int
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"device_key":"e2c794e60bee9ced68fc101 :: DEVICENAME0001"}]},{"EQ":[{"issued":1587659839}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: GetDeviceSessionCount
       parameters:
@@ -2767,7 +2885,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -2789,23 +2908,33 @@ paths:
         - Session
   "/admin/v/4/session/{systemKey}/user":
     delete:
-      description: |
+      description: >
         ## Description:
+
         Delete user session. 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object.
         ### Filter Options
 
+
         * user_id - string
+
         * issued - int (Unix timestamp)
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"user_id":"9cd8ece70bea9e5a6de9cee05"}]},{"EQ":[{"issued":1587659839}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: DeleteUserSession
       parameters:
@@ -2814,7 +2943,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -2839,24 +2969,35 @@ paths:
       tags:
         - Session
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns list of user sessions with User ID and Timestamps . 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object.
+
           
         ### Filter Options
 
+
         * user_id - string
+
         * issued - int (Unix timestamp)
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"user_id":"9cd8ece70bea9e5a6de9cee05"}]},{"EQ":[{"issued":1587659839}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: GetUserSession
       parameters:
@@ -2865,7 +3006,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -2893,24 +3035,35 @@ paths:
         - Session
   "/admin/v/4/session/{systemKey}/user/count":
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns number of user sessions. 
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
           Note - You can generate a complex query object in a code service using the `ClearBlade.Query()` object.
+
           
         ### Filter Options
 
+
         * user_id - string
+
         * issued - int (Unix timestamp)
           
         ### Example:
 
+
         ```json
+
         {"FILTERS":[[{"NEQ":[{"user_id":"9cd8ece70bea9e5a6de9cee05"}]},{"EQ":[{"issued":1587659839}]}]],"PAGESIZE":0,"PAGENUM":0}
+
         ```
       operationId: GetUserSessionCount
       parameters:
@@ -2919,7 +3072,8 @@ paths:
           name: ClearBlade-DevToken
           required: true
           type: string
-        - description: Query object used to filter the items. See query model at in the description for example.
+        - description: Query object used to filter the items. See query model at in the
+            description for example.
           in: query
           name: query
           required: false
@@ -3207,11 +3361,13 @@ paths:
         - Webhooks
   /admin/validate:
     post:
-      description: |
+      description: >
         ## Description:
           Sends a validation link to either the developer's email or phone. This endpoint is for Dev only.
         ## Validation Method Types:
+
         * email
+
         * phone
       operationId: SendValidation
       parameters:
@@ -3445,7 +3601,8 @@ paths:
       tags:
         - Adapter
     post:
-      description: Create a new file with content and configuration, or replace an existing file's content & configuration.
+      description: Create a new file with content and configuration, or replace an
+        existing file's content & configuration.
       operationId: updateFileInfo
       parameters:
         - description: System Key that identifies the system the adapter is a part of.
@@ -3585,7 +3742,8 @@ paths:
           schema:
             properties:
               file:
-                description: base64 encoded string as file content to overwrite the existing content
+                description: base64 encoded string as file content to overwrite the existing
+                  content
                 example: IyEvYmluL2Jhc2gKZWNobyAiaGVsbG8gd29ybGQi
                 type: string
             required:
@@ -3623,7 +3781,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: Returns list of edges and the assets and their sync status related to them
+          description: Returns list of edges and the assets and their sync status related
+            to them
         "400":
           description: Bad request
       summary: EDGE - Gets sync status for all edges
@@ -3860,7 +4019,8 @@ paths:
           name: collectionName
           required: true
           type: string
-        - description: Query object used to filter the items. See query model below for example.
+        - description: Query object used to filter the items. See query model below for
+            example.
           in: query
           name: query
           required: false
@@ -3869,7 +4029,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: A list of the data rows from the specified collection that match the query.
+          description: A list of the data rows from the specified collection that match
+            the query.
           schema:
             $ref: "#/definitions/collectionSuccess"
         "400":
@@ -3902,7 +4063,9 @@ paths:
           name: collectionName
           required: true
           type: string
-        - description: New data row(s). Can accept multiple comma-separated key-value pairs to populate columns. Can also accept a blank object to create an unpopulated row.
+        - description: New data row(s). Can accept multiple comma-separated key-value
+            pairs to populate columns. Can also accept a blank object to create
+            an unpopulated row.
           in: body
           name: payload
           schema:
@@ -4008,7 +4171,8 @@ paths:
           name: collectionID
           required: true
           type: string
-        - description: Query object used to filter the items. See query model below for example.
+        - description: Query object used to filter the items. See query model below for
+            example.
           in: query
           name: query
           required: false
@@ -4017,7 +4181,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: A list of the data rows from the specified collection that match the query.
+          description: A list of the data rows from the specified collection that match
+            the query.
           schema:
             $ref: "#/definitions/collectionSuccess"
         "400":
@@ -4041,7 +4206,9 @@ paths:
           name: collectionID
           required: true
           type: string
-        - description: New data row(s). Can accept multiple comma-separated key-value pairs to populate columns. Can also accept a blank object to create an unpopulated row.
+        - description: New data row(s). Can accept multiple comma-separated key-value
+            pairs to populate columns. Can also accept a blank object to create
+            an unpopulated row.
           in: body
           name: payload
           required: true
@@ -4231,7 +4398,8 @@ paths:
         - Messaging
   "/api/v/1/message/{systemKey}/publish":
     post:
-      description: Publishes a message to a topic, given the user has permission to publish on that topic.
+      description: Publishes a message to a topic, given the user has permission to
+        publish on that topic.
       operationId: PublishMessage
       parameters:
         - description: Token obtained through user authentication.
@@ -4268,7 +4436,8 @@ paths:
           name: ClearBlade-UserToken
           required: true
           type: string
-        - description: Query object used to filter the user list. See the query model below for an example.
+        - description: Query object used to filter the user list. See the query model
+            below for an example.
           in: query
           name: query
           required: false
@@ -4281,7 +4450,8 @@ paths:
           schema:
             $ref: "#/definitions/getUsersSuccess"
         "400":
-          description: Invalid UserToken. Either the user is not authenticated or the token is malformed.
+          description: Invalid UserToken. Either the user is not authenticated or the
+            token is malformed.
           schema:
             $ref: "#/definitions/ErrorResp"
         "403":
@@ -4293,7 +4463,8 @@ paths:
         - User
   /api/v/1/user/anon:
     post:
-      description: Logs an anonymous user into the specified system and returns an UserToken.
+      description: Logs an anonymous user into the specified system and returns an
+        UserToken.
       operationId: AuthAnon
       parameters:
         - description: System Key that identifies the system you're logging the user into.
@@ -4330,37 +4501,50 @@ paths:
         - User
   /api/v/1/user/auth:
     post:
-      description: |
+      description: >
         ## Description
+
         Logs user into system and returns an UserToken.
+
         ## Endpoint Body Values
+
         Here are the body values for the two scenarios
+
         ### Basic Auth
+
         Required Keys
           - username
           - password
 
         Example 
+
         ```json
+
         {
           "username":"cbman@clearblade.com",
           "password":"cl34rbl4d3"
         }
+
         ```  
 
+
         ### Refreshing Token
+
         Required Keys 
           - grant_type (only one valid value - "refresh_token")
           - refresh_token
           - access_token
 
         Example 
+
         ```json
+
         {
           "grant_type":"refresh_token",
           "refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmMjkwZTJlYjBiZDRmNjhiZDRkM2RlZjNkMWM0MDEiLCJzaWQiOiIzOWFkM2U5OC1hMmU0LTQxYzQtOGMzNi03ZjQxNDFhYzYxN2IiLCJ1dCI6MiwidHQiOjMsImV4cCI6MTU5MDI3ODExMSwiaWF0IjoxNTg5NDE0MTExfQ.iY6uJu2QgNP0uHoGdmEZm9wsztB1SUrCHrisxoXoxolol",
           "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmMjkwZTJlYjBiZDRmNjhiZDRkM2RlZjNkMWM0MDEiLCJzaWQiOiI3NmY4ODg4MS04YmU5LTRiM2UtOWJkNi1jOTJjZGQ4OTNlMmEiLCJ1dCI6MiwidHQiOjEsImV4cCI6MTU4OTg0NjExMSwiaWF0IjoxNTg5NDE0MTExfQ.xboryHuVn2zz-gSZ_JcD7-j_eBmJU1SMHkiDl9j8bak"
         }
+
         ```  
       operationId: AuthUser
       parameters:
@@ -4431,7 +4615,8 @@ paths:
         - User
   /api/v/1/user/info:
     delete:
-      description: This endpoints provides user the ability to delete another user if the user has Delete User operation permissions in Roles settings.
+      description: This endpoints provides user the ability to delete another user if
+        the user has Delete User operation permissions in Roles settings.
       operationId: DeleteUserAsUser
       parameters:
         - description: Token obtained through user authentication.
@@ -4532,7 +4717,8 @@ paths:
         - User
   /api/v/1/user/logout:
     post:
-      description: Logs the current user out of the specified system and invalidates their UserToken.
+      description: Logs the current user out of the specified system and invalidates
+        their UserToken.
       operationId: UserLogout
       parameters:
         - description: Token obtained through user authentication.
@@ -4580,7 +4766,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: User's password was successfully changed. Returns `Success` as a response.
+          description: User's password was successfully changed. Returns `Success` as a
+            response.
         "400":
           description: Bad Request.
           schema:
@@ -4598,7 +4785,8 @@ paths:
         - User
   /api/v/1/user/reg:
     post:
-      description: Registers a new user in the specified system and returns an UserToken for them.
+      description: Registers a new user in the specified system and returns an
+        UserToken for them.
       operationId: RegUser
       parameters:
         - description: System Key that identifies the system you're adding the user to.
@@ -4729,7 +4917,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: A JSON object representing the SQL result set containing the list of affected devices.
+          description: A JSON object representing the SQL result set containing the list
+            of affected devices.
           schema:
             $ref: "#/definitions/QueryResultSet"
         "400":
@@ -4741,37 +4930,50 @@ paths:
         - Device
   "/api/v/2/devices/{SystemKey}/auth":
     post:
-      description: |
+      description: >
         ## Description
+
         Logs device into system and returns an Device Access Token.
+
         ## Endpoint Body Values
+
         Here are the body values for the two scenarios
+
         ### Basic Auth
+
         Required Keys
           - deviceName
           - activeKey
 
         Example 
+
         ```json
+
         {
           "deviceName":"BLEdevice",
           "activeKey":"378123BLE"
         }
+
         ```  
 
+
         ### Refreshing Token
+
         Required Keys 
           - grant_type (only one valid value - "refresh_token")
           - refresh_token
           - access_token
 
         Example 
+
         ```json
+
         {
           "grant_type":"refresh_token",
           "refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmMjkwZTJlYjBiZDRmNjhiZDRkM2RlZjNkMWM0MDEiLCJzaWQiOiIzOWFkM2U5OC1hMmU0LTQxYzQtOGMzNi03ZjQxNDFhYzYxN2IiLCJ1dCI6MiwidHQiOjMsImV4cCI6MTU5MDI3ODExMSwiaWF0IjoxNTg5NDE0MTExfQ.iY6uJu2QgNP0uHoGdmEZm9wsztB1SUrCHrisxoXoxolol",
           "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmMjkwZTJlYjBiZDRmNjhiZDRkM2RlZjNkMWM0MDEiLCJzaWQiOiI3NmY4ODg4MS04YmU5LTRiM2UtOWJkNi1jOTJjZGQ4OTNlMmEiLCJ1dCI6MiwidHQiOjEsImV4cCI6MTU4OTg0NjExMSwiaWF0IjoxNTg5NDE0MTExfQ.xboryHuVn2zz-gSZ_JcD7-j_eBmJU1SMHkiDl9j8bak"
         }
+
         ```
       operationId: AuthDevice
       parameters:
@@ -5392,7 +5594,8 @@ paths:
       tags:
         - Data
     put:
-      description: Creates or deletes a column within an existing collection, or updates an existing database connection in the specified system.
+      description: Creates or deletes a column within an existing collection, or
+        updates an existing database connection in the specified system.
       operationId: UpdateCollection
       parameters:
         - description: Token obtained through user authentication.
@@ -5496,7 +5699,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: Returns list of columns and their data types of edges table in a system.
+          description: Returns list of columns and their data types of edges table in a
+            system.
         "400":
           description: Bad request.
       summary: EDGE - Get columns
@@ -5630,7 +5834,8 @@ paths:
           name: ClearBlade-UserToken
           required: true
           type: string
-        - description: System key that identifies the system the edge you're updating belongs to.
+        - description: System key that identifies the system the edge you're updating
+            belongs to.
           in: path
           name: systemKey
           required: true
@@ -5658,16 +5863,23 @@ paths:
         - Edge
   "/api/v/3/{systemKey}/deployments":
     get:
-      description: |
+      description: >
         ## Description:
+
         Gets all deployment names and descriptions for a system
 
+
         ### Query:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"EQ":[{"valueType":"value"}]}]],"SORT":[{"DESC":"value"}]}
+
         ```
 
+
         ### Example:
+
 
         ```json
          {"PAGESIZE":0,"PAGENUM":0,"SORT":[{"DESC":"name"}]}
@@ -5678,7 +5890,8 @@ paths:
           name: ClearBlade-UserToken
           required: true
           type: string
-        - description: Tags to filter deployments by. See the query model above for an example.
+        - description: Tags to filter deployments by. See the query model above for an
+            example.
           in: query
           name: query
           required: false
@@ -5894,7 +6107,9 @@ paths:
       tags:
         - Data
     post:
-      description: This creates a non-unique index on a column. This is useful for speeding up certain queries, but doesn't work with upsert. This call will fail if the index already exists.
+      description: This creates a non-unique index on a column. This is useful for
+        speeding up certain queries, but doesn't work with upsert. This call
+        will fail if the index already exists.
       operationId: CreateNonUniqueIndex
       parameters:
         - description: Dev Token obtained through dev authentication.
@@ -5933,7 +6148,8 @@ paths:
         - Data
   "/api/v/4/data/{systemKey}/{collectionName}/listindexes":
     get:
-      description: This returns all USER CREATED indexes/constraints for the collection.For safety, primary key indexes are not returned.
+      description: This returns all USER CREATED indexes/constraints for the
+        collection.For safety, primary key indexes are not returned.
       operationId: GetIndexes
       parameters:
         - description: Dev Token obtained through authentication.
@@ -6009,7 +6225,9 @@ paths:
       tags:
         - Data
     post:
-      description: This creates a unique index on a column. A user has to do this before you can use upsert with columnName as the conflictColumn. This call will fail if the index already exists.
+      description: This creates a unique index on a column. A user has to do this
+        before you can use upsert with columnName as the conflictColumn. This
+        call will fail if the index already exists.
       operationId: CreateUniqueIndex
       parameters:
         - description: Dev Token obtained through dev authentication.
@@ -6048,7 +6266,8 @@ paths:
         - Data
   "/api/v/4/data/{systemKey}/{collectionName}/upsert":
     put:
-      description: This adds an insert (if the row does not exist) or an update (if the row exists)
+      description: This adds an insert (if the row does not exist) or an update (if
+        the row exists)
       operationId: UpdateUpsert
       parameters:
         - description: Dev Token obtained through dev authentication.
@@ -6066,7 +6285,8 @@ paths:
           name: collectionName
           required: true
           type: string
-        - description: A column in your table that has a unique constraint. `columnName` can be used.
+        - description: A column in your table that has a unique constraint. `columnName`
+            can be used.
           in: query
           name: conflictColumn
           required: true
@@ -6177,7 +6397,8 @@ paths:
         - Device
   "/api/v/4/external-db/{systemKey}":
     get:
-      description: Returns all the names and database types of the external database connections for that system. This is a developer only endpoint.
+      description: Returns all the names and database types of the external database
+        connections for that system. This is a developer only endpoint.
       operationId: GetAllExternalDB
       parameters:
         - description: Dev Token obtained through authentication.
@@ -6207,36 +6428,59 @@ paths:
       tags:
         - Databases
     post:
-      description: |
+      description: >
         ## Description:
+
         Creates an external database connections for that system. This is a developer only endpoint.
+
 
         ### List of database types supported:
 
+
         |Database Name|db_type|
+
         |-------------|-------|
+
         |MONGO|mongodb|
+
         |POSTGRES|postgres|
+
         |MYSQL|mysql|
+
         |MSSQL|mssql|
+
         |COUCHDB|couchdb|
+
 
 
 
         ### Database Credentials
 
+
         |Field|Type|Database|Description|Options|Default|
+
         |-----|----|-----|-------|-------|----|
+
         |user|string|All|The external database username|
+
         |password|string|All|The external database password|
+
         |address|string|All|The external database IP address|
+
         |port|string|All|The port used to connect to the external database||27017 (Mongo), 3306 (MySQL), 5432 (Postgres), 1433 (MSSQL)|
+
         |dbname|string|All|The name of the external database|
+
         |connection_type|string|Mongo|The external database DNS connection type|srv and standard|standard|
+
         |tls|boolean|Mongo and Postgres|Setting the tls to `true` allows for transport encryption. This field is optional|True and false|True (Mongo) False(Postgres)|
+
         |authMechanism|string|Mongo|Database authentication method. This field is optional|SCRAM-SHA-256, SCRAM-SHA-1, MONGODB-CR, PLAIN, GSSAPI, MONGODB-X509|SCRAM-SHA-1|
+
         |authSource|string|Mongo|Database authentication source. This field is optional||admin|
+
         |replicaSet|string|Mongo|Allows for use of Replication Methods such as `rs.reconfig()  `.This field is optional||empty string|
+
         |encryption|string|MSSQL|Setting the encryption to `true` allows for secure encryption|disable and true|
       operationId: CreateExternalDB
       parameters:
@@ -6275,7 +6519,8 @@ paths:
         - Databases
   "/api/v/4/external-db/{systemKey}/{name}":
     delete:
-      description: Deletes an existing external database connection in the specified system.This is a developer and user endpoint.
+      description: Deletes an existing external database connection in the specified
+        system.This is a developer and user endpoint.
       operationId: DeleteExternalDB
       parameters:
         - description: User Token obtained through authentication.
@@ -6310,7 +6555,8 @@ paths:
       tags:
         - Databases
     get:
-      description: Returns the name and database type of a external database connection. This is a developer and user endpoint.
+      description: Returns the name and database type of a external database
+        connection. This is a developer and user endpoint.
       operationId: GetExternalDB
       parameters:
         - description: User Token obtained through authentication.
@@ -6332,7 +6578,8 @@ paths:
         - application/json
       responses:
         "200":
-          description: Credentials for a specific external database connection. Refer to the 'credentials' table for each database in the endpoint above.
+          description: Credentials for a specific external database connection. Refer to
+            the 'credentials' table for each database in the endpoint above.
           schema:
             $ref: "#/definitions/externalDB"
         "400":
@@ -6347,7 +6594,8 @@ paths:
       tags:
         - Databases
     put:
-      description: Updates existing external database credentials in the specified system. This is a developer and user endpoint.
+      description: Updates existing external database credentials in the specified
+        system. This is a developer and user endpoint.
       operationId: UpdateDatabaseCredentials
       parameters:
         - description: User Token obtained through authentication.
@@ -6390,7 +6638,8 @@ paths:
         - Databases
   "/api/v/4/external-db/{systemKey}/{name}/data":
     post:
-      description: Perform an operation on the external database.This is a developer and user endpoint.
+      description: Perform an operation on the external database.This is a developer
+        and user endpoint.
       operationId: PerformDBOperation
       parameters:
         - description: User Token obtained through authentication.
@@ -6408,7 +6657,8 @@ paths:
           name: name
           required: true
           type: string
-        - description: List of operations to be performed. Refer to the operations that are supported on the ClearBlade Docs or Native Libraries.
+        - description: List of operations to be performed. Refer to the operations that
+            are supported on the ClearBlade Docs or Native Libraries.
           in: body
           name: body
           schema:
@@ -6433,18 +6683,25 @@ paths:
         - Databases
   "/api/v/4/message/{systemKey}/topics":
     get:
-      description: |
+      description: >
         ## Description:
+
         Returns the list of topics.
+
         ### Query Structure:
+
         ```json
+
         {"PAGESIZE":int,"PAGENUM":int,"FILTERS":[[{"_REPLACE_WITH_OPERATOR_":[{"valueType":"value"}]}]], "SORT":[{"DESC":"value"}]}
+
         ```
 
          ### Example:
 
         ```json
+
         {"FILTERS":[[{"NEQ":[{"concurrency":0}]}]],"PAGESIZE": ,"PAGENUM":1}
+
         ```
       operationId: GetTopics
       parameters:
@@ -6458,7 +6715,8 @@ paths:
           name: systemKey
           required: true
           type: string
-        - description: Query object used to filter the items. See query model in the description for example.
+        - description: Query object used to filter the items. See query model in the
+            description for example.
           in: query
           name: query
           required: false
@@ -6536,7 +6794,8 @@ paths:
         - User
   "/api/v/4/webhook/execute/{systemKey}/{webhookName}":
     get:
-      description: Executes the webhook of type Payload, authentication occurs over GET's query string
+      description: Executes the webhook of type Payload, authentication occurs over
+        GET's query string
       operationId: PayloadWebhookQuery
       parameters:
         - description: System Key that identifies the system the messages belong to.
@@ -6610,7 +6869,8 @@ paths:
           name: systemKey
           required: true
           type: string
-        - description: Uses query to limit scope of list of failed services. Check FailQuery Model at the bottom of this page.
+        - description: Uses query to limit scope of list of failed services. Check
+            FailQuery Model at the bottom of this page.
           in: query
           name: query
           type: string
@@ -6630,7 +6890,8 @@ paths:
         - Code
   /codeadmin/failed:
     get:
-      description: Returns list of failed code services for all systems the current developer is authorized to see.
+      description: Returns list of failed code services for all systems the current
+        developer is authorized to see.
       operationId: GetFailedServices
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -6648,7 +6909,8 @@ paths:
         - Developer
   "/codeadmin/failed/{systemKey}":
     delete:
-      description: Deletes the specified failed service run from the list of failed service runs. Does not delete the service.
+      description: Deletes the specified failed service run from the list of failed
+        service runs. Does not delete the service.
       operationId: DeleteFailedService
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -6792,7 +7054,8 @@ paths:
         - Developer
   "/codeadmin/v/2/library/{systemKey}":
     get:
-      description: Returns all available libraries in the specified system along with their meta information.
+      description: Returns all available libraries in the specified system along with
+        their meta information.
       operationId: GetLibraries
       parameters:
         - description: Developer Token obtained through admin authentication.
@@ -7090,7 +7353,8 @@ definitions:
         example: sms
         type: string
   AdapterFileConfig:
-    description: Adapter file content and config, to associate this file with a command, use MapAdapterCommand endpoint
+    description: Adapter file content and config, to associate this file with a
+      command, use MapAdapterCommand endpoint
     properties:
       adaptor_name:
         description: The adapter the file is a part of.
@@ -7103,7 +7367,8 @@ definitions:
         description: The name of the file, spaces ` ` or `-` are not allowed
         type: string
       path_name:
-        description: the file path where the adapter file is stored on the client side. For example, on the file system where edge is running.
+        description: the file path where the adapter file is stored on the client side.
+          For example, on the file system where edge is running.
         example: start.sh
         type: string
     required:
@@ -7112,7 +7377,9 @@ definitions:
     description: Assets for the deployment
     properties:
       asset_class:
-        description: The names of the services, users, devices, triggers, timers, adapters, portals, plugins or collection that are being updated in the deployment
+        description: The names of the services, users, devices, triggers, timers,
+          adapters, portals, plugins or collection that are being updated in the
+          deployment
         example: adapters
         type: string
       asset_id:
@@ -7318,19 +7585,30 @@ definitions:
         example: linux
         type: string
       start_command:
-        description: A command or shell script that will be executed to start the adapter on a ClearBlade Edge. If a start-up command is not specified , the adapter would need to be manually started by connecting to the gateway device (via ssh) and issuing an appropriate start
+        description: A command or shell script that will be executed to start the
+          adapter on a ClearBlade Edge. If a start-up command is not specified ,
+          the adapter would need to be manually started by connecting to the
+          gateway device (via ssh) and issuing an appropriate start
         example: ./start.sh
         type: string
       status_command:
-        description: A command or shell script that will be run to determine the status of the adapter on a specific ClearBlade Edge. A shell script that echoes the status of an adapter should be supplied
+        description: A command or shell script that will be run to determine the status
+          of the adapter on a specific ClearBlade Edge. A shell script that
+          echoes the status of an adapter should be supplied
         example: ./status.sh
         type: string
       stop_command:
-        description: A command or shell script that will be run to stop the adapter on a ClearBlade Edge.  If the Stop Command is not specified, the adapter would need to be manually stopped by connecting to the gateway device (via ssh) and issuing an appropriate stop command.
+        description: A command or shell script that will be run to stop the adapter on a
+          ClearBlade Edge.  If the Stop Command is not specified, the adapter
+          would need to be manually stopped by connecting to the gateway device
+          (via ssh) and issuing an appropriate stop command.
         example: ./stop.sh
         type: string
       undeploy_command:
-        description: A command or shell script that will be run to uninstall the adapter from a ClearBlade Edge. If the Undeploy Command is not specified the default behavior of the ClearBlade platform is to remove the adapter files from the directory where Edge is running.
+        description: A command or shell script that will be run to uninstall the adapter
+          from a ClearBlade Edge. If the Undeploy Command is not specified the
+          default behavior of the ClearBlade platform is to remove the adapter
+          files from the directory where Edge is running.
         example: ./undeploy.sh
         type: string
   Operator:
@@ -7366,7 +7644,8 @@ definitions:
         type: array
     type: object
   OperatorValue:
-    description: An object describing a column/value relationship to be used in a query's operators.
+    description: An object describing a column/value relationship to be used in a
+      query's operators.
     properties:
       "[columnName]":
         description: "[itemValue]"
@@ -7498,7 +7777,8 @@ definitions:
         example: ""
         type: string
       logs_command:
-        description: A command or shell script that will be used to retrieve any logs printed out by the adapter while it is running.
+        description: A command or shell script that will be used to retrieve any logs
+          printed out by the adapter while it is running.
         example: ""
         type: string
       name:
@@ -7510,19 +7790,30 @@ definitions:
         example: linux
         type: string
       start_command:
-        description: A command or shell script that will be executed to start the adapter on a ClearBlade Edge. If a start-up command is not specified , the adapter would need to be manually started by connecting to the gateway device (via ssh) and issuing an appropriate start
+        description: A command or shell script that will be executed to start the
+          adapter on a ClearBlade Edge. If a start-up command is not specified ,
+          the adapter would need to be manually started by connecting to the
+          gateway device (via ssh) and issuing an appropriate start
         example: ""
         type: string
       status_command:
-        description: A command or shell script that will be run to determine the status of the adapter on a specific ClearBlade Edge. A shell script that echoes the status of an adapter should be supplied
+        description: A command or shell script that will be run to determine the status
+          of the adapter on a specific ClearBlade Edge. A shell script that
+          echoes the status of an adapter should be supplied
         example: ""
         type: string
       stop_command:
-        description: A command or shell script that will be run to stop the adapter on a ClearBlade Edge.  If the Stop Command is not specified, the adapter would need to be manually stopped by connecting to the gateway device (via ssh) and issuing an appropriate stop command.
+        description: A command or shell script that will be run to stop the adapter on a
+          ClearBlade Edge.  If the Stop Command is not specified, the adapter
+          would need to be manually stopped by connecting to the gateway device
+          (via ssh) and issuing an appropriate stop command.
         example: ""
         type: string
       undeploy_command:
-        description: A command or shell script that will be run to uninstall the adapter from a ClearBlade Edge. If the Undeploy Command is not specified the default behavior of the ClearBlade platform is to remove the adapter files from the directory where Edge is running.
+        description: A command or shell script that will be run to uninstall the adapter
+          from a ClearBlade Edge. If the Undeploy Command is not specified the
+          default behavior of the ClearBlade platform is to remove the adapter
+          files from the directory where Edge is running.
         example: ""
         type: string
     required:
@@ -7753,7 +8044,8 @@ definitions:
   authUser:
     properties:
       expires_at:
-        description: The format is UNIX timestamp. If value is -1, then no refresh token is returned
+        description: The format is UNIX timestamp. If value is -1, then no refresh token
+          is returned
         example: 1589313683
         type: integer
       refresh_token:
@@ -7766,7 +8058,8 @@ definitions:
         example: jt-w5IiOOnhuSp8hJbanB2Tluj_ShXphjAta0_6_mAcUPSbatjFRYr1m5Ojl4skSOZ3txbbkFWArnUnfNA==
         type: string
   authdata:
-    description: The credentials to be used for authentication and refreshing developer tokens
+    description: The credentials to be used for authentication and refreshing
+      developer tokens
     properties:
       email:
         example: cbman@clearblade.com
@@ -7786,7 +8079,8 @@ definitions:
       - changes
       - id
   changeRolesObject:
-    description: Contains at least one of the keys, add or delete which consists of an array of roles
+    description: Contains at least one of the keys, add or delete which consists of
+      an array of roles
     properties:
       add:
         example:
@@ -7830,7 +8124,8 @@ definitions:
   codeSettings:
     properties:
       auto_balance:
-        description: When set to `true` automatically start this service on each of the available nodes with the number of instances in the concurrency limit
+        description: When set to `true` automatically start this service on each of the
+          available nodes with the number of instances in the concurrency limit
         example: false
         type: boolean
       auto_balance_euid:
@@ -8154,7 +8449,8 @@ definitions:
         example: 1dBfevzh0-lLVbZwx9DbyTLPyw-8F0RDq3qeUGqwinr8x3-bKMXLpfyliRSXsre5KxMn76CuChFQANoEEg==
         type: string
       expiresAt:
-        description: The format is UNIX timestamp. If value is -1, then no refresh token is returned
+        description: The format is UNIX timestamp. If value is -1, then no refresh token
+          is returned
         example: 1589313683
         type: integer
       refreshToken:
@@ -8253,7 +8549,8 @@ definitions:
       - old_password
       - new_password
   devregdata:
-    description: The information to be used for user registration. Custom fields may be added.
+    description: The information to be used for user registration. Custom fields may
+      be added.
     properties:
       email:
         description: Developer's email.
@@ -8287,7 +8584,8 @@ definitions:
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhNGE0YhjY2NhNS0xNjRhLTQ5ODgtYjU2MS1jYWVmNTcyNGU0NjAiLCJ1dCI6MSwidHQiOjEsImV4cCI6MTU4OTMxMzY4MywiaWF0IjoxNTg4ODgxNjgzfQ.0FK58r0wcJSQIDuDCAselAdmN-uj_CXHqJqk2mF9WB4
         type: string
       expires_at:
-        description: The format is UNIX timestamp. If value is -1, then no refresh token is returned
+        description: The format is UNIX timestamp. If value is -1, then no refresh token
+          is returned
         example: 1589313683
         type: integer
       is_two_factor:
@@ -8590,7 +8888,8 @@ definitions:
   libdata:
     properties:
       code:
-        example: function getter(uri){var r=Requests();r.get({'uri':uri},function(err,resp){log(JSON.stringify(resp));});}
+        example: function getter(uri){var
+          r=Requests();r.get({'uri':uri},function(err,resp){log(JSON.stringify(resp));});}
         type: string
       dependencies:
         example: http,log
@@ -8603,7 +8902,8 @@ definitions:
       - dependencies
       - visibility
   messagePublish:
-    description: The topic, message body and the qos (0,1 or 2) required to publish a message
+    description: The topic, message body and the qos (0,1 or 2) required to publish
+      a message
     properties:
       body:
         example: '{"temperature":43}'
@@ -8750,7 +9050,8 @@ definitions:
         example: cbman@clearblade.com
         type: string
       expires_at:
-        description: The format is UNIX timestamp. If value is -1, then no refresh token is returned
+        description: The format is UNIX timestamp. If value is -1, then no refresh token
+          is returned
         example: 1589313683
         type: integer
       options:
@@ -8881,7 +9182,8 @@ definitions:
         description: If concurrency > 0 then auto_balance can be set to true if needed
         type: boolean
       auto_restart:
-        description: If execution_timeout = -1 => Stream Service then auto_restart can be set to true if needed
+        description: If execution_timeout = -1 => Stream Service then auto_restart can
+          be set to true if needed
         type: boolean
       code:
         example: function serviceName(req,resp){resp.success(“success”);}
@@ -8944,7 +9246,8 @@ definitions:
         example: A6E0F8E20BDEB0C2838EF2B6D09801
         type: string
       auth_service:
-        description: Configure the system to have all authentication requests go through a specific Code Service.
+        description: Configure the system to have all authentication requests go through
+          a specific Code Service.
         example: ""
         type: string
       description:
@@ -8954,22 +9257,26 @@ definitions:
         example: ExampleSystem
         type: string
       reg_service:
-        description: Configure the system to have all registration requests go through a specific Code Service.
+        description: Configure the system to have all registration requests go through a
+          specific Code Service.
         example: ""
         type: string
       registration:
         example: ""
         type: string
       token_ttl:
-        description: ttl for developer tokens in seconds. Min - 86400   (1 day), Max- 2592000 (30 days), Default - 432000 Infinite - -1
+        description: ttl for developer tokens in seconds. Min - 86400   (1 day), Max-
+          2592000 (30 days), Default - 432000 Infinite - -1
         example: "432000"
         type: string
       token_ttl_device:
-        description: ttl for device tokens in seconds. Min - 3600   (1 hour), Max- 7776000 (90 days), Default - 432000 (5 days) Infinite - -1
+        description: ttl for device tokens in seconds. Min - 3600   (1 hour), Max-
+          7776000 (90 days), Default - 432000 (5 days) Infinite - -1
         example: "432000"
         type: string
       token_ttl_user:
-        description: ttl for user tokens in seconds. Min - 3600   (1 hour), Max- 7776000 (90 days), Default - 432000 (5 days) Infinite - -1
+        description: ttl for user tokens in seconds. Min - 3600   (1 hour), Max- 7776000
+          (90 days), Default - 432000 (5 days) Infinite - -1
         example: "432000"
         type: string
   timerArray:
@@ -8982,7 +9289,8 @@ definitions:
         example: This timer is 60 seconds
         type: string
       frequency:
-        description: Frequency (in seconds) between two consecutive invocations of a timer handler
+        description: Frequency (in seconds) between two consecutive invocations of a
+          timer handler
         example: 60
         type: integer
       name:
@@ -8992,7 +9300,8 @@ definitions:
         example: ""
         type: string
       repeats:
-        description: The number of times a timer handler is invoked. To invoke the handler indefinitely set 'repeats = -1'
+        description: The number of times a timer handler is invoked. To invoke the
+          handler indefinitely set 'repeats = -1'
         example: -1
         type: integer
       service_name:
@@ -9062,7 +9371,8 @@ definitions:
         example: My 10 second timer
         type: string
       frequency:
-        description: Frequency (in seconds) between two consecutive invocations of a timer handler
+        description: Frequency (in seconds) between two consecutive invocations of a
+          timer handler
         example: 10
         type: integer
       name:
@@ -9070,7 +9380,8 @@ definitions:
         example: tenSecondTimer
         type: string
       repeats:
-        description: The number of times a timer handler is invoked. To invoke the handler indefinitely set 'repeats = -1'
+        description: The number of times a timer handler is invoked. To invoke the
+          handler indefinitely set 'repeats = -1'
         example: 20
         type: integer
       service_name:
@@ -9140,7 +9451,8 @@ definitions:
     required:
       - ttl
   updateCollection:
-    description: The information necessary to create a new column in a collection. There is also a deleteColumn option using the same info as addColumn
+    description: The information necessary to create a new column in a collection.
+      There is also a deleteColumn option using the same info as addColumn
     properties:
       addColumn:
         $ref: "#/definitions/addColumnInfo"
@@ -9297,7 +9609,8 @@ definitions:
       - email
       - password
   userregdata:
-    description: The information to be used for user registration. Custom fields may be added.
+    description: The information to be used for user registration. Custom fields may
+      be added.
     properties:
       email:
         description: User's email.

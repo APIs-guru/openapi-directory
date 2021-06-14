@@ -30,7 +30,8 @@ paths:
       description: Gets all teams, including pro bowl teams.
       operationId: TeamsAll
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -52,10 +53,13 @@ paths:
       summary: Teams (All)
   "/{format}/AreAnyGamesInProgress":
     get:
-      description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
+      description: Returns <code>true</code> if there is at least one game being
+        played at the time of the request or <code>false</code> if there are
+        none.
       operationId: AreGamesInProgress
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -79,7 +83,8 @@ paths:
       description: "Get bye weeks for the teams during a specified NFL season. "
       operationId: ByeWeeks
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -91,9 +96,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -113,10 +120,14 @@ paths:
       summary: Bye Weeks
   "/{format}/CurrentSeason":
     get:
-      description: Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the current NFL season. This value changes on July 1st. The
+        earliest season for Fantasy data is 2001. The earliest season for Team
+        data is 1985. The earliest season for Fantasy data is 2001. The earliest
+        season for Team data is 1985.
       operationId: SeasonCurrent
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -137,10 +148,12 @@ paths:
       summary: Season Current
   "/{format}/CurrentWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the current week of the NFL season. This value usually
+        changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekCurrent
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -163,7 +176,8 @@ paths:
     get:
       operationId: PlayerDetailsByFreeAgents
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -187,7 +201,8 @@ paths:
     get:
       operationId: GameStatsBySeasonDeprecatedUseTeamGameStatsInstead
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -197,9 +212,11 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is
+            provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -221,7 +238,8 @@ paths:
     get:
       operationId: GameStatsByWeekDeprecatedUseTeamGameStatsInstead
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -233,9 +251,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -245,7 +265,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -267,10 +289,13 @@ paths:
       summary: Game Stats by Week (Deprecated, use Team Game Stats instead)
   "/{format}/LastCompletedSeason":
     get:
-      description: Year of the most recently completed season. this value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the most recently completed season. this value changes
+        immediately after the Super Bowl. The earliest season for Fantasy data
+        is 2001. The earliest season for Team data is 1985.
       operationId: SeasonLastCompleted
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -291,10 +316,12 @@ paths:
       summary: Season Last Completed
   "/{format}/LastCompletedWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the current week of the NFL season. This value usually
+        changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekLastCompleted
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -317,7 +344,8 @@ paths:
     get:
       operationId: News
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -341,7 +369,8 @@ paths:
     get:
       operationId: NewsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -375,7 +404,8 @@ paths:
       parameters:
         - description: "
 
-            \          Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+            \          Desired response format. Valid entries are
+            <code>XML</code> or <code>JSON</code>.
 
             \        "
           in: path
@@ -387,7 +417,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>14257</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
+            can be determined by pulling player related data.
+            Example:<code>14257</code>.
           in: path
           name: playerid
           required: true
@@ -407,7 +439,8 @@ paths:
     get:
       operationId: NewsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -438,7 +471,8 @@ paths:
       description: Ping NFL API
       operationId: XPing
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -466,7 +500,8 @@ paths:
     get:
       operationId: PlayerDetailsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -476,7 +511,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>732</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
+            can be determined by pulling player related data.
+            Example:<code>732</code>.
           in: path
           name: playerid
           required: true
@@ -494,7 +531,8 @@ paths:
     get:
       operationId: PlayerDetailsByAvailable
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -518,7 +556,8 @@ paths:
     get:
       operationId: PlayerDetailsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -549,7 +588,8 @@ paths:
       description: Returns full list of NFL Referees
       operationId: Referees
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -573,7 +613,8 @@ paths:
     get:
       operationId: PlayerDetailsByRookieDraftYear
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -583,7 +624,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season.<br>Examples: <code>2018</code>, <code>2019</code>, etc."
+        - description: "Year of the season.<br>Examples: <code>2018</code>,
+            <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -604,7 +646,8 @@ paths:
       description: Game schedule for a specified season.
       operationId: Schedule
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -614,7 +657,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>,
+            <code>2018STAR</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -635,7 +680,8 @@ paths:
       description: Game scores for a specified season.
       operationId: ScoresBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -645,7 +691,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>,
+            <code>2018STAR</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -666,7 +714,8 @@ paths:
       description: Get game scores for a specified week of a season.
       operationId: ScoresByWeek
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -678,9 +727,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -690,7 +741,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -712,10 +765,12 @@ paths:
       summary: Scores by Week
   "/{format}/SimulatedScores/{numberofplays}":
     get:
-      description: Gets simulated live scores of NFL games, covering the Conference Championship games on January 21, 2018.
+      description: Gets simulated live scores of NFL games, covering the Conference
+        Championship games on January 21, 2018.
       operationId: ScoresByWeekSimulation
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -725,7 +780,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The number of plays to progress in this NFL live game simulation. Example entries are <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>150</code>, <code>200</code>, etc.
+        - description: The number of plays to progress in this NFL live game simulation.
+            Example entries are <code>0</code>, <code>1</code>, <code>2</code>,
+            <code>3</code>, <code>150</code>, <code>200</code>, etc.
           in: path
           name: numberofplays
           required: true
@@ -746,7 +803,8 @@ paths:
       description: This method returns all stadiums.
       operationId: Stadiums
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -770,7 +828,8 @@ paths:
     get:
       operationId: Standings
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -782,9 +841,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -806,7 +867,8 @@ paths:
     get:
       operationId: TeamGameStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -818,9 +880,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -830,7 +894,9 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
+            \          Week of the season. Valid values are as
+            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
+            4.
 
             \          Example: <code>1</code>
 
@@ -854,7 +920,8 @@ paths:
     get:
       operationId: TeamSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -866,9 +933,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -891,7 +960,8 @@ paths:
       description: Gets all active teams.
       operationId: TeamsActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -916,7 +986,8 @@ paths:
       description: List of teams playing in a specified season.
       operationId: TeamsBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -928,9 +999,11 @@ paths:
             type: string
         - description: "
 
-            \          Year of the season and the season type. If no season type is provided, then the default is regular season.
+            \          Year of the season and the season type. If no
+            season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>,
+            <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -953,7 +1026,8 @@ paths:
       description: Get detailed information about past, present, and future timeframes.
       operationId: Timeframes
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -963,7 +1037,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The type of timeframes to return.  Valid entries are <code>current</code> or <code>upcoming</code> or <code>completed</code> or <code>recent</code> or <code>all</code>.
+        - description: The type of timeframes to return.  Valid entries are
+            <code>current</code> or <code>upcoming</code> or
+            <code>completed</code> or <code>recent</code> or <code>all</code>.
           in: path
           name: type
           required: true
@@ -988,10 +1064,14 @@ paths:
       summary: Timeframes
   "/{format}/UpcomingSeason":
     get:
-      description: Year of the current NFL season, if we are in the mid-season. If we are in the off-season, then year of the next upcoming season. This value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the current NFL season, if we are in the mid-season. If we
+        are in the off-season, then year of the next upcoming season. This value
+        changes immediately after the Super Bowl. The earliest season for
+        Fantasy data is 2001. The earliest season for Team data is 1985.
       operationId: SeasonUpcoming
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1012,10 +1092,12 @@ paths:
       summary: Season Upcoming
   "/{format}/UpcomingWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the current week of the NFL season. This value usually
+        changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekUpcoming
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true

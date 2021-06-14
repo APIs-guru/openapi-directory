@@ -8,16 +8,22 @@ info:
   contact:
     email: partner@flinkster.de
     name: DB Rent GmbH
-  description: |-
-    This REST-API enables you to query for private transport sharing offers provided by companies and cities in Germany, Netherland and Austria. 
+  description: >-
+    This REST-API enables you to query for private transport sharing
+    offers provided by companies and cities in Germany, Netherland and Austria. 
+
     You can search for informations about the rental stations (points or areas) where you can find the rentals by utilizing the /areas/ ressource. 
+
     With the help of the proximity search in the /bookingproposals/ URI you can request the availabilities of the rentalobjects for spontaneous or planed usage in the future. 
+
 
     Feel free to browse through data by setting the parameter 'providernetwork' to the value: 
      1: Search for car sharing offers provided by the Flinkster platform (http://www.flinkster.de)
     2: Finding bike rental offers from Call a Bike (http://www.callabike.de) 
 
+
     You can find more details in the documentation section (Unfortunately only available in german language).
+
 
     Have lots of fun and we are lucky to take notice of your products or getting your feedback.
   termsOfService: https://developer.deutschebahn.com/store/
@@ -156,7 +162,8 @@ paths:
       x-throttling-tier: Unlimited
   /bookingproposals:
     get:
-      description: Here you can query all bookable Rental Objects with different Parameters (Time, Location,...)
+      description: Here you can query all bookable Rental Objects with different
+        Parameters (Time, Location,...)
       operationId: listBookingProposals
       parameters:
         - format: double
@@ -325,8 +332,9 @@ paths:
       x-throttling-tier: Unlimited
   "/providernetworks/{providernetworkUID}/prices":
     get:
-      description: |
-        Prices of a rental object by query params. The params depend on the price determination strategy of the provider network.
+      description: >
+        Prices of a rental object by query params. The params depend on the
+        price determination strategy of the provider network.
       operationId: getPrices
       parameters:
         - in: path

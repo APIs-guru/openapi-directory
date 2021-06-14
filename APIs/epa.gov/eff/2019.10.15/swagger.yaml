@@ -7,36 +7,56 @@ info:
   contact:
     name: U.S. EPA, OECA Integration, Targeting and Access Branch
     url: https://echo.epa.gov/resources/general-info/contact-us
-  description: "Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use.
+  description: "Enforcement and Compliance History Online (ECHO) is a tool
+    developed and maintained by EPA's Office of Enforcement and Compliance
+    Assurance for public use.
 
-    \  ECHO provides integrated compliance and enforcement information for over 1 million regulated facilities nationwide.
+    \  ECHO provides integrated compliance and enforcement information for
+    over 1 million regulated facilities nationwide.
 
-    \   EFF Rest Services provides the data for ECHO's Effluent Charts, a set of dynamic charts and tables of permitted effluent limits, releases, and violations over time for Clean Water Act (CWA) wastewater discharge permits issued under the National Pollutant Discharge Elimination System (NPDES). \ 
+    \   EFF Rest Services provides the data for ECHO's Effluent Charts, a
+    set of dynamic charts and tables of permitted effluent limits, releases, and
+    violations over time for Clean Water Act (CWA) wastewater discharge permits
+    issued under the National Pollutant Discharge Elimination System (NPDES). \ 
 
 
-    See Effluent Charts Help (https://echo.epa.gov/help/reports/effluent-charts-help) for additional information.
+    See Effluent Charts Help
+    (https://echo.epa.gov/help/reports/effluent-charts-help) for additional
+    information.
 
-    \\ 
+    \\
 
-    The are 3 service end points for Effluent Charts:  get_summary_chart, get_effluent_chart, and download_effluent_chart.
+    The are 3 service end points for Effluent Charts:  get_summary_chart,
+    get_effluent_chart, and download_effluent_chart.
 
-    \\ 
+    \\
 
-    \ <b>1)</b>  Use get_summary_chart to retrieve a summary matrix of effluent parameters by effluent outfall and an overall violation status for a provided NPDES Permit and date range.
+    \ <b>1)</b>  Use get_summary_chart to retrieve a summary matrix of
+    effluent parameters by effluent outfall and an overall violation status for
+    a provided NPDES Permit and date range.
 
-    \ <b>2)</b>  Use get_effluent_chart to retrieve detailed Discharge Limit, DMR and NPDES Violation information for a provided NPDES Permit, date range, effluent parameter, or outfall.
+    \ <b>2)</b>  Use get_effluent_chart to retrieve detailed Discharge
+    Limit, DMR and NPDES Violation information for a provided NPDES Permit, date
+    range, effluent parameter, or outfall.
 
-    \ <b>3)</b>  Use download_effluent_chart to generate a Comma Separated Value (CSV) file of the detailed data provided with get_effluent chart, for a provided NPDES Permit, date range, effluent parameter, or outfall.
+    \ <b>3)</b>  Use download_effluent_chart to generate a Comma Separated
+    Value (CSV) file of the detailed data provided with get_effluent chart, for
+    a provided NPDES Permit, date range, effluent parameter, or outfall.
 
-    \\ 
+    \\
 
-    Additional ECHO Resources:   <a href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data Downloads</a>
+    Additional ECHO Resources:   <a
+    href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a
+    href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About
+    ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data
+    Downloads</a>
 
     \ "
   license:
     name: U.S. Public Domain License
     url: https://edg.epa.gov/EPA_Data_License.html
-  title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Effluent Charting and Reporting
+  title: U.S. EPA Enforcement and Compliance History Online (ECHO) - Effluent
+    Charting and Reporting
   version: 2019.10.15
   x-apisguru-categories:
     - open_data
@@ -56,28 +76,36 @@ produces:
   - application/xml
 parameters:
   f.callback:
-    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output
+      only.  Enter a name of the function in which to wrap the JSON response.
     in: formData
     name: callback
     required: false
     type: string
   f.end_date:
-    description: The end date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with start_date. If start_date and end_date are not specified, the service will return the last three years of data.
+    description: The end date (mm/dd/yyyy) for the date range of interest. Must be
+      used in conjunction with start_date. If start_date and end_date are not
+      specified, the service will return the last three years of data.
     in: formData
     name: end_date
     required: false
     type: string
   f.outfall:
-    description: Three-character code that identifies the point of discharge (e.g., pipe or outfall) for a facility. A single NPDES ID may have multiple points of discharge.
+    description: Three-character code that identifies the point of discharge (e.g.,
+      pipe or outfall) for a facility. A single NPDES ID may have multiple
+      points of discharge.
     in: formData
     name: outfall
     required: false
     type: string
   f.output:
-    description: |-
+    description: >-
       Output Format Flag.  Enter one of the following keywords:
+
       - JSON = Data model formatted as Javascript Object Notation (default).
+
       - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+
       - XML = Data model formatted as Extensible Markup Language.
     enum:
       - JSONP
@@ -94,7 +122,8 @@ parameters:
     required: true
     type: string
   f.parameter_code:
-    description: Five-digit numeric code identifying the parameter. See Parameter Lookup documentation for a complete list of codes.
+    description: Five-digit numeric code identifying the parameter. See Parameter
+      Lookup documentation for a complete list of codes.
     in: formData
     name: parameter_code
     required: false
@@ -112,34 +141,44 @@ parameters:
     required: false
     type: string
   f.start_date:
-    description: The start date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with end_date. If start_date and end_date are not specified, the service will return the last three years of data.
+    description: The start date (mm/dd/yyyy) for the date range of interest. Must be
+      used in conjunction with end_date. If start_date and end_date are not
+      specified, the service will return the last three years of data.
     in: formData
     name: start_date
     required: false
     type: string
   q.callback:
-    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output
+      only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
     type: string
   q.end_date:
-    description: The end date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with start_date. If start_date and end_date are not specified, the service will return the last three years of data.
+    description: The end date (mm/dd/yyyy) for the date range of interest. Must be
+      used in conjunction with start_date. If start_date and end_date are not
+      specified, the service will return the last three years of data.
     in: query
     name: end_date
     required: false
     type: string
   q.outfall:
-    description: Three-character code that identifies the point of discharge (e.g., pipe or outfall) for a facility. A single NPDES ID may have multiple points of discharge.
+    description: Three-character code that identifies the point of discharge (e.g.,
+      pipe or outfall) for a facility. A single NPDES ID may have multiple
+      points of discharge.
     in: query
     name: outfall
     required: false
     type: string
   q.output:
-    description: |-
+    description: >-
       Output Format Flag.  Enter one of the following keywords:
+
       - JSON = Data model formatted as Javascript Object Notation (default).
+
       - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+
       - XML = Data model formatted as Extensible Markup Language.
     enum:
       - JSONP
@@ -156,7 +195,8 @@ parameters:
     required: true
     type: string
   q.parameter_code:
-    description: Five-digit numeric code identifying the parameter. See Parameter Lookup documentation for a complete list of codes.
+    description: Five-digit numeric code identifying the parameter. See Parameter
+      Lookup documentation for a complete list of codes.
     in: query
     name: parameter_code
     required: false
@@ -174,7 +214,9 @@ parameters:
     required: false
     type: string
   q.start_date:
-    description: The start date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with end_date. If start_date and end_date are not specified, the service will return the last three years of data.
+    description: The start date (mm/dd/yyyy) for the date range of interest. Must be
+      used in conjunction with end_date. If start_date and end_date are not
+      specified, the service will return the last three years of data.
     in: query
     name: start_date
     required: false
@@ -182,7 +224,8 @@ parameters:
 paths:
   /eff_rest_services.download_effluent_chart:
     get:
-      description: Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.
+      description: Downloads tabular Discharge Monitoring Report (DMR) and compliance
+        data for one NPDES permit as a CSV.
       parameters:
         - $ref: "#/parameters/q.p_id"
         - $ref: "#/parameters/q.outfall"
@@ -198,7 +241,8 @@ paths:
       tags:
         - Effluent Charts
     post:
-      description: Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.
+      description: Downloads tabular Discharge Monitoring Report (DMR) and compliance
+        data for one NPDES permit as a CSV.
       parameters:
         - $ref: "#/parameters/f.p_id"
         - $ref: "#/parameters/f.outfall"
@@ -215,8 +259,10 @@ paths:
         - Effluent Charts
   /eff_rest_services.get_effluent_chart:
     get:
-      description: |+
-        Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. 
+      description: >+
+        Discharge Monitoring Report (DMR) data supporting each effluent
+        chart for one NPDES permit. Includes Discharge Monitoring Reports and
+        NPDES Violations. 
 
       parameters:
         - $ref: "#/parameters/q.p_id"
@@ -243,8 +289,10 @@ paths:
       tags:
         - Effluent Charts
     post:
-      description: |+
-        Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. 
+      description: >+
+        Discharge Monitoring Report (DMR) data supporting each effluent
+        chart for one NPDES permit. Includes Discharge Monitoring Reports and
+        NPDES Violations. 
 
       parameters:
         - $ref: "#/parameters/f.p_id"
@@ -272,7 +320,10 @@ paths:
         - Effluent Charts
   /eff_rest_services.get_summary_chart:
     get:
-      description: Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.
+      description: Summary of compliance status each outfall and parameter for one
+        NPDES permit. Provides the current compliance status and overall
+        compliance status for the date range of interest. This service supports
+        the Summary Matrix on the Effluent Charts.
       parameters:
         - $ref: "#/parameters/q.p_id"
         - $ref: "#/parameters/q.output"
@@ -296,7 +347,10 @@ paths:
       tags:
         - Effluent Charts
     post:
-      description: Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.
+      description: Summary of compliance status each outfall and parameter for one
+        NPDES permit. Provides the current compliance status and overall
+        compliance status for the date range of interest. This service supports
+        the Summary Matrix on the Effluent Charts.
       parameters:
         - $ref: "#/parameters/f.p_id"
         - $ref: "#/parameters/f.output"
@@ -321,7 +375,9 @@ paths:
         - Effluent Charts
   /rest_lookups.cwa_parameters:
     get:
-      description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
+      description: Look up Clean Water Act parameter codes and descriptions in the
+        Integrated Compliance Information System - National Pollutant Discharge
+        Elimination System (ICIS-NPDES) by code or term.
       parameters:
         - $ref: "#/parameters/q.output"
         - $ref: "#/parameters/q.callback"
@@ -329,8 +385,12 @@ paths:
         - $ref: "#/parameters/q.search_code"
       responses:
         "200":
-          description: |-
-            Returns an array of parameter codes and descriptions that contain the search_term or search_code entered. If search term or search code not provided, returns all values. ValueCode is the 5-digit parameter code.
+          description: >-
+            Returns an array of parameter codes and descriptions that contain
+            the search_term or search_code entered. If search term or search
+            code not provided, returns all values. ValueCode is the 5-digit
+            parameter code.
+
             ValueDescription is the parameter description.
           schema:
             description: Root Object
@@ -346,7 +406,9 @@ paths:
       tags:
         - Lookups
     post:
-      description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
+      description: Look up Clean Water Act parameter codes and descriptions in the
+        Integrated Compliance Information System - National Pollutant Discharge
+        Elimination System (ICIS-NPDES) by code or term.
       parameters:
         - $ref: "#/parameters/f.output"
         - $ref: "#/parameters/f.callback"
@@ -354,8 +416,12 @@ paths:
         - $ref: "#/parameters/f.search_code"
       responses:
         "200":
-          description: |-
-            Returns an array of parameter codes and descriptions that contain the search_term or search_code entered. If search term or search code not provided, returns all values. ValueCode is the 5-digit parameter code.
+          description: >-
+            Returns an array of parameter codes and descriptions that contain
+            the search_term or search_code entered. If search term or search
+            code not provided, returns all values. ValueCode is the 5-digit
+            parameter code.
+
             ValueDescription is the parameter description.
           schema:
             description: Root Object
@@ -385,12 +451,14 @@ definitions:
         title: Measured Value ID
         type: string
       DMRUnitCode:
-        description: The code representing the unit of measure applicable to quantity or concentration limits and measurements as entered into ICIS-NPDES
+        description: The code representing the unit of measure applicable to quantity or
+          concentration limits and measurements as entered into ICIS-NPDES
         example: "19"
         title: Measured Value Unit Code
         type: string
       DMRUnitDesc:
-        description: The short description of the unit of measure applicable to limit or DMR values
+        description: The short description of the unit of measure applicable to limit or
+          DMR values
         example: mg/L
         title: Measured Value Unit
         type: string
@@ -405,7 +473,9 @@ definitions:
         title: Measured Value
         type: string
       DMRValueQualifierCode:
-        description: The unique code identifying the DMR value operator (i.e., <, <=, >, >=, T, E, =). E indicates an estimated value. T indicates too numerous to count
+        description: The unique code identifying the DMR value operator (i.e., <, <=, >,
+          >=, T, E, =). E indicates an estimated value. T indicates too numerous
+          to count
         example: =
         title: DMR Value Qualifier Code
         type: string
@@ -420,17 +490,20 @@ definitions:
         title: Days Received Late
         type: string
       ExceedencePct:
-        description: The percent by which the DMR value (or adjusted value) exceeded its limit (or stay) value, as generated in ICIS-NPDES
+        description: The percent by which the DMR value (or adjusted value) exceeded its
+          limit (or stay) value, as generated in ICIS-NPDES
         example: "0"
         title: Exceedance Percentage
         type: string
       LimitBeginDate:
-        description: The date on which a limit becomes in effect for a particular parameter in a limit set
+        description: The date on which a limit becomes in effect for a particular
+          parameter in a limit set
         example: 01-APR-14
         title: Limit Begin Date
         type: string
       LimitEndDate:
-        description: The date on which a limit stops being in effect for a particular parameter in a limit set
+        description: The date on which a limit stops being in effect for a particular
+          parameter in a limit set
         example: 31-MAR-19
         title: Limit End Date
         type: string
@@ -445,7 +518,8 @@ definitions:
         title: Limit Set ID
         type: string
       LimitSetScheduleId:
-        description: The unique identifier of the Limit Set Schedule, generated in ICIS-NPDES
+        description: The unique identifier of the Limit Set Schedule, generated in
+          ICIS-NPDES
         example: "3400204974"
         title: Limit Set Schedule ID
         type: string
@@ -454,12 +528,14 @@ definitions:
         title: Limit Type Code
         type: string
       LimitUnitCode:
-        description: The code representing the unit of measure applicable to quantity or concentration limits and measurements as entered by the user
+        description: The code representing the unit of measure applicable to quantity or
+          concentration limits and measurements as entered by the user
         example: "12"
         title: Limit Unit Code
         type: string
       LimitUnitDesc:
-        description: The short description of the unit of measure applicable to limit or DMR values
+        description: The short description of the unit of measure applicable to limit or
+          DMR values
         example: SU
         title: Limit Unit Description
         type: string
@@ -474,34 +550,41 @@ definitions:
         title: Limit Value
         type: string
       LimitValueQualifierCode:
-        description: The unique code identifying the limit value operator (i.e., <, <=, >, >=, T, E, =). E indicates an estimated value. T indicates too numerous to count
+        description: The unique code identifying the limit value operator (i.e., <, <=,
+          >, >=, T, E, =). E indicates an estimated value. T indicates too
+          numerous to count
         example: =
         title: Limit Value Qualifier
         type: string
       LimitValueStdUnits:
-        description: The limit value expressed in standard units, as calculated in ICIS-NPDES
+        description: The limit value expressed in standard units, as calculated in
+          ICIS-NPDES
         example: "20"
         title: Limit Value in Standard Units
         type: string
       LimitValueTypeCode:
-        description: The code indicating the type of value the limit is given as (i.e., Q1, Q2, C1, C2, C3)
+        description: The code indicating the type of value the limit is given as (i.e.,
+          Q1, Q2, C1, C2, C3)
         example: C1
         title: Limit Value Code
         type: string
       LimitValueTypeDesc:
-        description: The description indicating the type of value the limit is given as (e.g., Concentration, Quantity)
+        description: The description indicating the type of value the limit is given as
+          (e.g., Concentration, Quantity)
         example: Concentration1
         title: Limit Value Type
         type: string
       MonitoringPeriodEndDate:
-        description: The date that the monitoring period for the values covered by the DMR Form ends
+        description: The date that the monitoring period for the values covered by the
+          DMR Form ends
         example: 30-APR-14
         title: Monitoring Period End Date
         type: string
       NODEDesc:
         type: string
       NODICode:
-        description: The unique code indicating why no DMR Value was submitted by the permittee for a Monitoring Period End Date
+        description: The unique code indicating why no DMR Value was submitted by the
+          permittee for a Monitoring Period End Date
         example: C
         title: No Discharge Code
         type: string
@@ -514,7 +597,10 @@ definitions:
           name: NPDESViolations
           wrapped: true
       NmbrOfSubmission:
-        description: The number of months of discharges represented on each DMR for the limit set (e.g., monthly = 1, bi-monthly = 2, quarterly = 3, triannual = 4, semi-annual = 6, annual = 12). This data element will be blank for Unscheduled Limit Sets
+        description: The number of months of discharges represented on each DMR for the
+          limit set (e.g., monthly = 1, bi-monthly = 2, quarterly = 3, triannual
+          = 4, semi-annual = 6, annual = 12). This data element will be blank
+          for Unscheduled Limit Sets
         example: "1"
         title: Number of Submissions
         type: string
@@ -524,34 +610,46 @@ definitions:
         title: Permit Feature ID
         type: string
       StatisticalBaseCode:
-        description: The code representing the unit of measure applicable to the limit and DMR values entered by the user (e.g., 30-day average, daily maximum)
+        description: The code representing the unit of measure applicable to the limit
+          and DMR values entered by the user (e.g., 30-day average, daily
+          maximum)
         example: DC
         title: Statistical Base Code
         type: string
       StatisticalBaseDesc:
         type: string
       StatisticalBaseTypeCode:
-        description: The code indicating whether the statistical base code is a minimum, average, or maximum for purposes of calculating compliance against the limit value
+        description: The code indicating whether the statistical base code is a minimum,
+          average, or maximum for purposes of calculating compliance against the
+          limit value
         example: MIN
         title: Statistical Base Type Code
         type: string
       StatisticalBaseTypeDesc:
-        description: A short description for indicating whether the statistical base code is a minimum, average, or maximum for purposes of calculating compliance against the limit value
+        description: A short description for indicating whether the statistical base
+          code is a minimum, average, or maximum for purposes of calculating
+          compliance against the limit value
         example: Minimum
         title: Statistical Base Type
         type: string
       StayValueNmbr:
-        description: The numeric limit value imposed during the period of the stay for the limit; if entered, during the stay period, ICIS-NPDES will use this limit value for calculating compliance rather than the actual limit value
+        description: The numeric limit value imposed during the period of the stay for
+          the limit; if entered, during the stay period, ICIS-NPDES will use
+          this limit value for calculating compliance rather than the actual
+          limit value
         example: ???
         title: Stay Value Number
         type: string
       StdUnitCode:
-        description: The code representing the standard unit of measure applicable to quantity or concentration limits and measurements as entered by the user
+        description: The code representing the standard unit of measure applicable to
+          quantity or concentration limits and measurements as entered by the
+          user
         example: "19"
         title: Standard Unit Code
         type: string
       StdUnitDesc:
-        description: The short description of the standard unit of measure applicable to limit or DMR values
+        description: The short description of the standard unit of measure applicable to
+          limit or DMR values
         example: mg/L
         title: Standard Unit Description
         type: string
@@ -561,17 +659,21 @@ definitions:
         title: Date Received
         type: string
       ValueTypeCode:
-        description: The indication of the limit value type (e.g., Quantity 1, Concentration 2)
+        description: The indication of the limit value type (e.g., Quantity 1,
+          Concentration 2)
         example: C1
         title: Measured Value Type Code
         type: string
       ValueTypeDesc:
-        description: The type of value the measured number is given as (e.g., Concentration, Quantity)
+        description: The type of value the measured number is given as (e.g.,
+          Concentration, Quantity)
         example: Concentration1
         title: Measured Value Type
         type: string
       VersionNmbr:
-        description: The version of the permit when a modification or reissuance is applied to the permit. Version = 0 indicates the original permit issuance
+        description: The version of the permit when a modification or reissuance is
+          applied to the permit. Version = 0 indicates the original permit
+          issuance
         example: "0"
         title: Version Number
         type: string
@@ -628,30 +730,54 @@ definitions:
         title: NPDES Violation ID
         type: string
       RNCDetectionCode:
-        description: |-
-          The code indicating the reportable noncompliance (RNC) detected for a violation:
+        description: >-
+          The code indicating the reportable noncompliance (RNC) detected for
+          a violation:
+
           - A = Enforcement Order
+
           - B = Manual 2A4 - Pass-Through
+
           - C = Chronic Violation
+
           - D = Manual Other
+
           - E = Manual 2F - Permit Narrative
+
           - F = Manual 2G - Violation of Concern
+
           - G = Manual 2A1 - Effluent Violation
+
           - H = Chronic Violation, Non-Monthly Average
+
           - I = Manual 2A2 - Unauthorized Bypass
+
           - J = Manual 2A3 - Unpermitted Discharge
+
           - K = Non-receipt Violation, Non-Monthly Average
+
           - N = Non-Receipt of DMR/Schedule Report
+
           - P = Enforcement Order, Non-Monthly Average
+
           - Q = Manual 2B - Pretreatment
+
           - R = TRC Limitations Exceeded, Non-Monthly Average
+
           - S = Schedule Violation
+
           - T = TRC Limitations Exceeded
+
           - U = Other Violation with TRC Non-Monthly Average
+
           - V = Other Violation with TRC
+
           - W = Manual 2E - Deficient Report
+
           - X = Manual Other Violation with TRC
+
           - Y = Manual TRC
+
           - Z = Manual Chronic
         example: K
         title: RNC Violation Code
@@ -667,33 +793,47 @@ definitions:
         title: RNC Violation
         type: string
       RNCResolutionCode:
-        description: The code indicating the resolution of noncompliance (RNC) for a violation
+        description: The code indicating the resolution of noncompliance (RNC) for a
+          violation
         example: "2"
         title: RNC Resolution Type Code
         type: string
       RNCResolutionDate:
-        description: The date RNC was marked to its current resolution status. It can be entered manually or automatically
+        description: The date RNC was marked to its current resolution status. It can be
+          entered manually or automatically
         example: 01-FEB-16
         title: Resolution Date
         type: string
       RNCResolutionDesc:
-        description: |-
+        description: >-
           - 1 = Unresolved RNC
+
           - 2 = Back into Compliance
+
           - 3 = Due to Formal Enforcement Action Final Order with Compliance Schedule
+
           - 4 = In Compliance with Formal Enforcement Action Final Order Requirement
+
           - 5 = Resolved RP by NPDES Closure of Enforcement Action Final Order with Compliance Schedule
+
           - 6 = Manual Resolution by Enforcement Action
+
           - 7 = Manual RP - In Compliance with Formal Enforcement Action Order Requirement
+
           - 8 = Manual Due to Formal Enforcement Action Formal Order
+
           - 9 = Manual by Back into Compliance
+
           - A = Manual Unresolved RNC
+
           - B = Manual by EPA/State/Tribal Action
         example: RE - Back into Compliance
         title: RNC Resolution Type
         type: string
       ViolationCode:
-        description: The code identifying which type of Violation has occurred (e.g., D80 = Required Monitoring DMR Value Non-Receipt, E90 = Effluent Violation, C20 = Schedule Event Achieved Late)
+        description: The code identifying which type of Violation has occurred (e.g.,
+          D80 = Required Monitoring DMR Value Non-Receipt, E90 = Effluent
+          Violation, C20 = Schedule Event Achieved Late)
         example: E90
         title: Violation Code
         type: string
@@ -730,32 +870,45 @@ definitions:
           name: DischargeMonitoringReports
           wrapped: true
       MonitoringLocationCode:
-        description: The code that the monitoring location at which the monitoring requirement (and effluent limit if limited) applies. One parameter may have several monitoring location codes pertaining to the same permitted feature
+        description: The code that the monitoring location at which the monitoring
+          requirement (and effluent limit if limited) applies. One parameter may
+          have several monitoring location codes pertaining to the same
+          permitted feature
         example: "1"
         title: Monitoring Location Code
         type: string
       MonitoringLocationDesc:
-        description: The name of the monitoring location at which the monitoring requirement (and effluent limit if limited) applies
+        description: The name of the monitoring location at which the monitoring
+          requirement (and effluent limit if limited) applies
         example: Effluent Gross
         title: Monitoring Location Description
         type: string
       ParameterCode:
-        description: The unique 5 digit numeric code identifying the parameter. If the code is less than 5 digits in the .CSV, append zeros to the beginning of the number (e.g., 100 is equivalent to 00100)
+        description: The unique 5 digit numeric code identifying the parameter. If the
+          code is less than 5 digits in the .CSV, append zeros to the beginning
+          of the number (e.g., 100 is equivalent to 00100)
         example: "00400"
         title: Parameter Code
         type: string
       ParameterDesc:
-        description: The pollutant name and form (e.g., dissolved, suspended) associated with the parameter code
+        description: The pollutant name and form (e.g., dissolved, suspended) associated
+          with the parameter code
         example: pH
         title: Parameter Description
         type: string
       StayTypeCode:
-        description: The unique identifier of the type of stay applied to a limit (e.g., X, Y, Z), which indicates whether the limits do not appear on the DMR at all, are treated as monitor only, or have a stay value in effect during the period of the stay
+        description: The unique identifier of the type of stay applied to a limit (e.g.,
+          X, Y, Z), which indicates whether the limits do not appear on the DMR
+          at all, are treated as monitor only, or have a stay value in effect
+          during the period of the stay
         example: ???
         title: Stay Type Code
         type: string
       StayTypeDesc:
-        description: The name of the type of stay applied to a limit, which indicates whether the limits do not appear on the DMR at all (X), are treated as monitor only (Y), or have a stay value in effect during the period of the stay (Z)
+        description: The name of the type of stay applied to a limit, which indicates
+          whether the limits do not appear on the DMR at all (X), are treated as
+          monitor only (Y), or have a stay value in effect during the period of
+          the stay (Z)
         example: ???
         title: Stay Type Description
         type: string
@@ -783,7 +936,11 @@ definitions:
           name: Parameters
           wrapped: true
       PermFeatureNmbr:
-        description: A three-character code in ICIS-NPDES that identifies the point of discharge (e.g., outfall) for a facility. A NPDES permit may have multiple points of discharge. If the code is less than three characters in the .CSV, append zeros to the beginning of the number (e.g., 1 is equivalent to 001)
+        description: A three-character code in ICIS-NPDES that identifies the point of
+          discharge (e.g., outfall) for a facility. A NPDES permit may have
+          multiple points of discharge. If the code is less than three
+          characters in the .CSV, append zeros to the beginning of the number
+          (e.g., 1 is equivalent to 001)
         example: "001"
         title: Discharge Point
         type: string
@@ -793,7 +950,8 @@ definitions:
         title: Permit Feature Type Code
         type: string
       PermFeatureTypeDesc:
-        description: The description indicating the type of permitted feature (e.g., External Outfall, Internal Outfall, Sum)
+        description: The description indicating the type of permitted feature (e.g.,
+          External Outfall, Internal Outfall, Sum)
         example: External Outfall
         title: Permit Feature Type
         type: string
@@ -814,7 +972,8 @@ definitions:
         title: City
         type: string
       CWPCurrentSNCStatus:
-        description: The type of noncompliance when a major source is in significant violation or a minor source has a Category 1 violation.
+        description: The type of noncompliance when a major source is in significant
+          violation or a minor source has a Category 1 violation.
         example: D (DMR NR)
         type: string
       CWPMajorMinorStatusFlag:
@@ -865,15 +1024,26 @@ definitions:
         title: Zip
         type: string
       EPASystem:
-        description: |-
-          The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: 
+        description: >-
+          The EPA data system in which permit and facility records are kept.
+          EPA's Facility Registry System (FRS) links all program database
+          records (such as permit IDs and IDs facilities use in reporting to
+          EPA) together. The following list describes the individual data
+          systems that are linked to from the detailed facility report: 
+
 
           - AFS: Air Facility System for Clean Air Act stationary source programs.
+
           - ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.
+
           - RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.
+
           - NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+
           - TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.
+
           - NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.
+
           - TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals.
         example: ICP
         title: EPA Data System
@@ -884,7 +1054,8 @@ definitions:
         title: End Date
         type: string
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -898,7 +1069,10 @@ definitions:
           name: PermFeatures
           wrapped: true
       RegistryId:
-        description: 12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records
+        description: 12-digit Facility Registry Service (FRS) identification
+          number.  FRS uniquely identifies a facility by assigning an
+          identification number (FRS ID), and uses this FRS ID to link together
+          all EPA regulatory program database records
         example: "110020837601"
         title: FRS Registry ID
         type: string
@@ -913,13 +1087,20 @@ definitions:
         title: Start Date
         type: string
       Statute:
-        description: |-
-          The name of the statute associated with each of the permits and identifiers linked to the facility: 
+        description: >-
+          The name of the statute associated with each of the permits and
+          identifiers linked to the facility: 
+
           - CAA = the Clean Air Act
+
           - CWA = the Clean Water Act
+
           - RCRA = the Resource Conservation and Recovery Act
+
           - EP313 = the Emergency Planning and Community Right-to-Know Act, Section 313 (also known as the Toxics Release Inventory Program)
+
           - TSCA = the Toxic Substances Control Act
+
           - SDWA = the Safe Drinking Water Act
         example: CWA
         title: Regulatory Statute
@@ -951,7 +1132,8 @@ definitions:
         title: City
         type: string
       CWPCurrentSNCStatus:
-        description: The type of noncompliance when a major source is in significant violation or a minor source has a Category 1 violation.
+        description: The type of noncompliance when a major source is in significant
+          violation or a minor source has a Category 1 violation.
         example: D (DMR NR)
         type: string
       CWPMajorMinorStatusFlag:
@@ -1024,22 +1206,27 @@ definitions:
     description: Parameters Object
     properties:
       CurrentVioStatus:
-        description: The most severe compliance status for an outfall and parameter during the current monitoring period
+        description: The most severe compliance status for an outfall and parameter
+          during the current monitoring period
         example: In Violation
         title: Current Violation Status
         type: string
       MaxVioStatus:
-        description: The most severe compliance status for an outfall and parameter during the entire selected date range
+        description: The most severe compliance status for an outfall and parameter
+          during the entire selected date range
         example: In Violation
         title: Most Severe Compliance Status
         type: string
       ParameterCode:
-        description: The unique 5 digit numeric code identifying the parameter. If the code is less than 5 digits in the .CSV, append zeros to the beginning of the number (e.g., 100 is equivalent to 00100)
+        description: The unique 5 digit numeric code identifying the parameter. If the
+          code is less than 5 digits in the .CSV, append zeros to the beginning
+          of the number (e.g., 100 is equivalent to 00100)
         example: "00400"
         title: Parameter Code
         type: string
       ParameterDesc:
-        description: The pollutant name and form (e.g., dissolved, suspended) associated with the parameter code
+        description: The pollutant name and form (e.g., dissolved, suspended) associated
+          with the parameter code
         example: pH
         title: Parameter Description
         type: string
@@ -1063,7 +1250,11 @@ definitions:
           name: Parameters
           wrapped: true
       PermFeatureNmbr:
-        description: A three-character code in ICIS-NPDES that identifies the point of discharge (e.g., outfall) for a facility. A NPDES permit may have multiple points of discharge. If the code is less than three characters in the .CSV, append zeros to the beginning of the number (e.g., 1 is equivalent to 001)
+        description: A three-character code in ICIS-NPDES that identifies the point of
+          discharge (e.g., outfall) for a facility. A NPDES permit may have
+          multiple points of discharge. If the code is less than three
+          characters in the .CSV, append zeros to the beginning of the number
+          (e.g., 1 is equivalent to 001)
         example: "001"
         title: Discharge Point
         type: string
@@ -1073,7 +1264,8 @@ definitions:
         title: Permit Feature Type Code
         type: string
       PermFeatureTypeDesc:
-        description: The description indicating the type of permitted feature (e.g., External Outfall, Internal Outfall, Sum)
+        description: The description indicating the type of permitted feature (e.g.,
+          External Outfall, Internal Outfall, Sum)
         example: External Outfall
         title: Permit Feature Type
         type: string
@@ -1094,7 +1286,8 @@ definitions:
         title: City
         type: string
       CWPCurrentSNCStatus:
-        description: The type of noncompliance when a major source is in significant violation or a minor source has a Category 1 violation.
+        description: The type of noncompliance when a major source is in significant
+          violation or a minor source has a Category 1 violation.
         example: D (DMR NR)
         type: string
       CWPMajorMinorStatusFlag:
@@ -1145,15 +1338,26 @@ definitions:
         title: Zip
         type: string
       EPASystem:
-        description: |-
-          The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: 
+        description: >-
+          The EPA data system in which permit and facility records are kept.
+          EPA's Facility Registry System (FRS) links all program database
+          records (such as permit IDs and IDs facilities use in reporting to
+          EPA) together. The following list describes the individual data
+          systems that are linked to from the detailed facility report: 
+
 
           - AFS: Air Facility System for Clean Air Act stationary source programs.
+
           - ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.
+
           - RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.
+
           - NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).
+
           - TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.
+
           - NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.
+
           - TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals.
         example: ICP
         title: EPA Data System
@@ -1172,7 +1376,8 @@ definitions:
           name: LinkedPermits
           wrapped: true
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string
@@ -1185,7 +1390,10 @@ definitions:
           name: PermFeatures
           wrapped: true
       RegistryId:
-        description: 12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records
+        description: 12-digit Facility Registry Service (FRS) identification
+          number.  FRS uniquely identifies a facility by assigning an
+          identification number (FRS ID), and uses this FRS ID to link together
+          all EPA regulatory program database records
         example: "110020837601"
         title: FRS Registry ID
         type: string
@@ -1200,13 +1408,20 @@ definitions:
         title: Start Date
         type: string
       Statute:
-        description: |-
-          The name of the statute associated with each of the permits and identifiers linked to the facility: 
+        description: >-
+          The name of the statute associated with each of the permits and
+          identifiers linked to the facility: 
+
           - CAA = the Clean Air Act
+
           - CWA = the Clean Water Act
+
           - RCRA = the Resource Conservation and Recovery Act
+
           - EP313 = the Emergency Planning and Community Right-to-Know Act, Section 313 (also known as the Toxics Release Inventory Program)
+
           - TSCA = the Toxic Substances Control Act
+
           - SDWA = the Safe Drinking Water Act
         example: CWA
         title: Regulatory Statute
@@ -1257,7 +1472,8 @@ definitions:
           name: LuValues
           wrapped: true
       Message:
-        description: Field to record messages (typically performance-related) about packet processing
+        description: Field to record messages (typically performance-related) about
+          packet processing
         example: Success
         title: Message
         type: string

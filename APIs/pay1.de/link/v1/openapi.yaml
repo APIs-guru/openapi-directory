@@ -501,7 +501,8 @@ components:
           description: final redirect after a final payment
           type: string
         expiration:
-          description: link expiration date, the link will only be executable until end of that day
+          description: link expiration date, the link will only be executable until end of
+            that day
           example: 2020-02-20
           format: date
           type: string
@@ -830,7 +831,8 @@ components:
           description: final redirect after a failed payment
           type: string
         expiration:
-          description: link expiration date, the link will only be executable until end of that day
+          description: link expiration date, the link will only be executable until end of
+            that day
           example: 2020-02-20
           format: date
           type: string
@@ -941,7 +943,8 @@ components:
           example: "1234567"
           type: string
         redirectUrl:
-          description: redirect url. empty if the payment process does not require a redirect.
+          description: redirect url. empty if the payment process does not require a
+            redirect.
           type: string
         reference:
           description: payment reference number, has to be unique per merchant and mode
@@ -1034,11 +1037,13 @@ components:
       type: object
   securitySchemes:
     createAuth:
-      description: Base64 encoded (merchantId + accountId + portalId + mode + reference + totalAmount + currency) signed with Portalkey in HmacSHA256
+      description: Base64 encoded (merchantId + accountId + portalId + mode +
+        reference + totalAmount + currency) signed with Portalkey in HmacSHA256
       scheme: payone-hmac-sha256
       type: http
     getMultipleAuth:
-      description: Base64 encoded (merchantId + accountId + portalId + mode) signed with Portalkey in HmacSHA256
+      description: Base64 encoded (merchantId + accountId + portalId + mode) signed
+        with Portalkey in HmacSHA256
       scheme: payone-hmac-sha256
       type: http
     getSingleAuth:

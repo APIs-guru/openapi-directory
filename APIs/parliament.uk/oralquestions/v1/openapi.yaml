@@ -7,7 +7,8 @@ info:
     email: softwareengineering@parliament.uk
     name: UK Parliament
     url: https://www.parliament.uk/
-  description: An API that allows querying all tabled oral and written questions, and motions for the House of Commons.
+  description: An API that allows querying all tabled oral and written questions,
+    and motions for the House of Commons.
   title: House of Commons Oral and Written Questions API
   version: v1
   x-apisguru-categories:
@@ -64,7 +65,8 @@ paths:
         - Early Day Motions
   /EarlyDayMotions/list:
     get:
-      description: Get a list of Early Day Motions which meet the specified criteria. Only supports Published and Withdrawn status.
+      description: Get a list of Early Day Motions which meet the specified criteria.
+        Only supports Published and Withdrawn status.
       parameters:
         - description: Early Day Motions with an ID in the list provided.
           explode: true
@@ -88,21 +90,24 @@ paths:
           required: false
           schema:
             type: string
-        - description: Early Day Motions where the current status has been set on or after the date provided. Date format YYYY-MM-DD.
+        - description: Early Day Motions where the current status has been set on or after
+            the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.currentStatusDateStart
           required: false
           schema:
             format: date-time
             type: string
-        - description: Early Day Motions where the current status has been set on or before the date provided. Date format YYYY-MM-DD.
+        - description: Early Day Motions where the current status has been set on or
+            before the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.currentStatusDateEnd
           required: false
           schema:
             format: date-time
             type: string
-        - description: Early Day Motions which are a prayer against a Negative Statutory Instrument.
+        - description: Early Day Motions which are a prayer against a Negative Statutory
+            Instrument.
           in: query
           name: parameters.isPrayer
           required: false
@@ -121,14 +126,16 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Early Day Motions where the date tabled is on or after the date provided. Date format YYYY-MM-DD.
+        - description: Early Day Motions where the date tabled is on or after the date
+            provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.tabledStartDate
           required: false
           schema:
             format: date-time
             type: string
-        - description: Early Day Motions where the date tabled is on or before the date provided. Date format YYYY-MM-DD.
+        - description: Early Day Motions where the date tabled is on or before the date
+            provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.tabledEndDate
           required: false
@@ -147,7 +154,8 @@ paths:
                 - Withdrawn
               type: string
             type: array
-        - description: Order results by date tabled, title or signature count. Default is date tabled.
+        - description: Order results by date tabled, title or signature count. Default is
+            date tabled.
           in: query
           name: parameters.orderBy
           required: false
@@ -213,21 +221,24 @@ paths:
       description: A list of oral questions meeting the specified criteria.
       operationId: PublishedOralQuestion_Get
       parameters:
-        - description: Oral Questions where the answering date has been set on or after the date provided. Date format YYYY-MM-DD.
+        - description: Oral Questions where the answering date has been set on or after
+            the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.answeringDateStart
           required: false
           schema:
             format: date-time
             type: string
-        - description: Oral Questions where the answering date has been set on or before the date provided. Date format YYYY-MM-DD.
+        - description: Oral Questions where the answering date has been set on or before
+            the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.answeringDateEnd
           required: false
           schema:
             format: date-time
             type: string
-        - description: Oral Questions where the question type is the selected type, substantive or topical.
+        - description: Oral Questions where the question type is the selected type,
+            substantive or topical.
           in: query
           name: parameters.questionType
           required: false
@@ -236,14 +247,20 @@ paths:
               - Substantive
               - Topical
             type: string
-        - description: Oral Questions where the question is within the question time with the ID provided
+        - description: Oral Questions where the question is within the question time with
+            the ID provided
           in: query
           name: parameters.oralQuestionTimeId
           required: false
           schema:
             format: int32
             type: integer
-        - description: The ID of the member asking the question. Lists of member IDs for each house are available <a href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Commons" target="_blank">Commons</a> and <a href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Lords" target="_blank">Lords</a>.
+        - description: The ID of the member asking the question. Lists of member IDs for
+            each house are available <a
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Commons"
+            target="_blank">Commons</a> and <a
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Lords"
+            target="_blank">Lords</a>.
           explode: true
           in: query
           name: parameters.askingMemberIds
@@ -253,7 +270,8 @@ paths:
               format: int32
               type: integer
             type: array
-        - description: The UIN for the question - note that UINs reset at the start of each Parliamentary session.
+        - description: The UIN for the question - note that UINs reset at the start of
+            each Parliamentary session.
           explode: true
           in: query
           name: parameters.uINs
@@ -263,7 +281,9 @@ paths:
               format: int32
               type: integer
             type: array
-        - description: Which answering body is to respond. A list of answering bodies can be found <a target="_blank" href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
+        - description: Which answering body is to respond. A list of answering bodies can
+            be found <a target="_blank"
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
           explode: true
           in: query
           name: parameters.answeringBodyIds
@@ -326,28 +346,32 @@ paths:
       description: A list of oral question times meeting the specified criteria.
       operationId: PublishedOralQuestionTime_Get
       parameters:
-        - description: Oral Questions Time where the answering date has been set on or after the date provided. Date format YYYY-MM-DD.
+        - description: Oral Questions Time where the answering date has been set on or
+            after the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.answeringDateStart
           required: false
           schema:
             format: date-time
             type: string
-        - description: Oral Questions Time where the answering date has been set on or before the date provided. Date format YYYY-MM-DD.
+        - description: Oral Questions Time where the answering date has been set on or
+            before the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.answeringDateEnd
           required: false
           schema:
             format: date-time
             type: string
-        - description: Oral Questions Time where the deadline date has been set on or after the date provided. Date format YYYY-MM-DD.
+        - description: Oral Questions Time where the deadline date has been set on or
+            after the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.deadlineDateStart
           required: false
           schema:
             format: date-time
             type: string
-        - description: Oral Questions Time where the deadline date has been set on or before the date provided. Date format YYYY-MM-DD.
+        - description: Oral Questions Time where the deadline date has been set on or
+            before the date provided. Date format YYYY-MM-DD.
           in: query
           name: parameters.deadlineDateEnd
           required: false
@@ -361,7 +385,9 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Which answering body is to respond. A list of answering bodies can be found <a target="_blank" href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
+        - description: Which answering body is to respond. A list of answering bodies can
+            be found <a target="_blank"
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
           explode: true
           in: query
           name: parameters.answeringBodyIds
@@ -965,11 +991,13 @@ components:
     PublishedEarlyDayMotionQueryParameters:
       properties:
         CurrentStatusDateEnd:
-          description: Early Day Motions where the current status has been set on or before the date provided. Date format YYYY-MM-DD.
+          description: Early Day Motions where the current status has been set on or
+            before the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         CurrentStatusDateStart:
-          description: Early Day Motions where the current status has been set on or after the date provided. Date format YYYY-MM-DD.
+          description: Early Day Motions where the current status has been set on or after
+            the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         EdmIds:
@@ -982,14 +1010,16 @@ components:
           description: Include Early Day Motions sponsored by Member specified
           type: boolean
         IsPrayer:
-          description: Early Day Motions which are a prayer against a Negative Statutory Instrument.
+          description: Early Day Motions which are a prayer against a Negative Statutory
+            Instrument.
           type: boolean
         MemberId:
           description: Return Early Day Motions tabled by Member with ID provided.
           format: int32
           type: integer
         OrderBy:
-          description: Order results by date tabled, title or signature count. Default is date tabled.
+          description: Order results by date tabled, title or signature count. Default is
+            date tabled.
           enum:
             - DateTabledAsc
             - DateTabledDesc
@@ -1014,11 +1044,13 @@ components:
             type: string
           type: array
         TabledEndDate:
-          description: Early Day Motions where the date tabled is on or before the date provided. Date format YYYY-MM-DD.
+          description: Early Day Motions where the date tabled is on or before the date
+            provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         TabledStartDate:
-          description: Early Day Motions where the date tabled is on or after the date provided. Date format YYYY-MM-DD.
+          description: Early Day Motions where the date tabled is on or after the date
+            provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         Take:
@@ -1118,31 +1150,42 @@ components:
     PublishedOralQuestionQueryParameters:
       properties:
         AnsweringBodyIds:
-          description: Which answering body is to respond. A list of answering bodies can be found <a target="_blank" href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
+          description: Which answering body is to respond. A list of answering bodies can
+            be found <a target="_blank"
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
           items:
             format: int32
             type: integer
           type: array
         AnsweringDateEnd:
-          description: Oral Questions where the answering date has been set on or before the date provided. Date format YYYY-MM-DD.
+          description: Oral Questions where the answering date has been set on or before
+            the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         AnsweringDateStart:
-          description: Oral Questions where the answering date has been set on or after the date provided. Date format YYYY-MM-DD.
+          description: Oral Questions where the answering date has been set on or after
+            the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         AskingMemberIds:
-          description: The ID of the member asking the question. Lists of member IDs for each house are available <a href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Commons" target="_blank">Commons</a> and <a href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Lords" target="_blank">Lords</a>.
+          description: The ID of the member asking the question. Lists of member IDs for
+            each house are available <a
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Commons"
+            target="_blank">Commons</a> and <a
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/members/query/house=Lords"
+            target="_blank">Lords</a>.
           items:
             format: int32
             type: integer
           type: array
         OralQuestionTimeId:
-          description: Oral Questions where the question is within the question time with the ID provided
+          description: Oral Questions where the question is within the question time with
+            the ID provided
           format: int32
           type: integer
         QuestionType:
-          description: Oral Questions where the question type is the selected type, substantive or topical.
+          description: Oral Questions where the question type is the selected type,
+            substantive or topical.
           enum:
             - Substantive
             - Topical
@@ -1156,7 +1199,8 @@ components:
           format: int32
           type: integer
         UINs:
-          description: The UIN for the question - note that UINs reset at the start of each Parliamentary session.
+          description: The UIN for the question - note that UINs reset at the start of
+            each Parliamentary session.
           items:
             format: int32
             type: integer
@@ -1187,25 +1231,31 @@ components:
     PublishedOralQuestionTimeQueryParameters:
       properties:
         AnsweringBodyIds:
-          description: Which answering body is to respond. A list of answering bodies can be found <a target="_blank" href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
+          description: Which answering body is to respond. A list of answering bodies can
+            be found <a target="_blank"
+            href="http://data.parliament.uk/membersdataplatform/services/mnis/referencedata/AnsweringBodies/">here</a>.
           items:
             format: int32
             type: integer
           type: array
         AnsweringDateEnd:
-          description: Oral Questions Time where the answering date has been set on or before the date provided. Date format YYYY-MM-DD.
+          description: Oral Questions Time where the answering date has been set on or
+            before the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         AnsweringDateStart:
-          description: Oral Questions Time where the answering date has been set on or after the date provided. Date format YYYY-MM-DD.
+          description: Oral Questions Time where the answering date has been set on or
+            after the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         DeadlineDateEnd:
-          description: Oral Questions Time where the deadline date has been set on or before the date provided. Date format YYYY-MM-DD.
+          description: Oral Questions Time where the deadline date has been set on or
+            before the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         DeadlineDateStart:
-          description: Oral Questions Time where the deadline date has been set on or after the date provided. Date format YYYY-MM-DD.
+          description: Oral Questions Time where the deadline date has been set on or
+            after the date provided. Date format YYYY-MM-DD.
           format: date-time
           type: string
         OralQuestionTimeId:

@@ -313,7 +313,8 @@ components:
       properties:
         endApproximate:
           default: false
-          description: Boolean flag to indicate whether or not the access end date is approximated
+          description: Boolean flag to indicate whether or not the access end date is
+            approximated
           example: yyyy-MM-ddThh-mm-ssZ
           type: boolean
           x-position: 3
@@ -325,7 +326,8 @@ components:
           x-position: 2
         startApproximate:
           default: false
-          description: Boolean flag to indicate whether or not the access start date is approximated
+          description: Boolean flag to indicate whether or not the access start date is
+            approximated
           type: boolean
           x-position: 1
         startDateTime:
@@ -375,7 +377,8 @@ components:
       properties:
         active:
           default: false
-          description: Indicate if the entity is active, inactive entity won't appear in Discovery API
+          description: Indicate if the entity is active, inactive entity won't appear in
+            Discovery API
           type: boolean
           x-position: 95
         additionalInfos:
@@ -420,12 +423,14 @@ components:
         references:
           additionalProperties:
             type: string
-          description: References of this entity in an other system. Reference is the exact same entity
+          description: References of this entity in an other system. Reference is the
+            exact same entity
           example: "sourceName: id"
           type: object
           x-position: 71
         relationships:
-          description: Relationships on the entity, like if the entity is a duplicate of another one
+          description: Relationships on the entity, like if the entity is a duplicate of
+            another one
           items:
             $ref: "#/components/schemas/Relationship"
           type: array
@@ -434,7 +439,8 @@ components:
           $ref: "#/components/schemas/Source"
         test:
           default: false
-          description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          description: Indicate if this is a test entity, by default test entities won't
+            appear in discovery API
           type: boolean
           x-position: 96
         type:
@@ -449,7 +455,8 @@ components:
           type: string
           x-position: 24
         version:
-          description: Version of the entity. Version is to avoid updated an entity with an older version
+          description: Version of the entity. Version is to avoid updated an entity with
+            an older version
           format: int64
           type: integer
           x-position: 80
@@ -480,7 +487,8 @@ components:
             - venue
           type: string
         score:
-          description: The confidence (%) level of the accuracy of this augmention data. 100 is the better
+          description: The confidence (%) level of the accuracy of this augmention data.
+            100 is the better
           format: float
           type: number
           x-position: 4
@@ -489,7 +497,8 @@ components:
           type: string
           x-position: 2
         versionNumber:
-          description: "Vesion of this augmentation data. This field is to avoid updating entity with old data. "
+          description: "Vesion of this augmentation data. This field is to avoid updating
+            entity with old data. "
           format: int64
           type: integer
           x-position: 3
@@ -518,7 +527,8 @@ components:
             - test
           type: string
         path:
-          description: Json path from the root of the document to the place where the change should be applied.
+          description: Json path from the root of the document to the place where the
+            change should be applied.
           type: string
           x-position: 2
         value:
@@ -675,7 +685,8 @@ components:
           type: object
           x-position: 6
         relatedEntityId:
-          description: Id of the entity to add this extionsion to. If the relatedEntityId is Null, a relatedEntitySource MUST be provided
+          description: Id of the entity to add this extionsion to. If the relatedEntityId
+            is Null, a relatedEntitySource MUST be provided
           type: string
           x-position: 1
         relatedEntitySource:
@@ -695,7 +706,8 @@ components:
             - ticketmaster
           type: string
         versionNumber:
-          description: Version of the entitlements. Version is to prevent to override an entitlements with an older one
+          description: Version of the entitlements. Version is to prevent to override an
+            entitlements with an older one
           format: int64
           type: integer
           x-position: 5
@@ -720,7 +732,8 @@ components:
       properties:
         active:
           default: false
-          description: Indicate if the entity is active, inactive entity won't appear in Discovery API
+          description: Indicate if the entity is active, inactive entity won't appear in
+            Discovery API
           type: boolean
           x-position: 95
         additionalInfos:
@@ -805,12 +818,14 @@ components:
         references:
           additionalProperties:
             type: string
-          description: References of this entity in an other system. Reference is the exact same entity
+          description: References of this entity in an other system. Reference is the
+            exact same entity
           example: "sourceName: id"
           type: object
           x-position: 71
         relationships:
-          description: Relationships on the entity, like if the entity is a duplicate of another one
+          description: Relationships on the entity, like if the entity is a duplicate of
+            another one
           items:
             $ref: "#/components/schemas/Relationship"
           type: array
@@ -821,7 +836,8 @@ components:
           $ref: "#/components/schemas/Source"
         test:
           default: false
-          description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          description: Indicate if this is a test entity, by default test entities won't
+            appear in discovery API
           type: boolean
           x-position: 96
         type:
@@ -840,7 +856,8 @@ components:
         venue:
           $ref: "#/components/schemas/Venue"
         version:
-          description: Version of the entity. Version is to avoid updated an entity with an older version
+          description: Version of the entity. Version is to avoid updated an entity with
+            an older version
           format: int64
           type: integer
           x-position: 80
@@ -901,7 +918,8 @@ components:
           type: object
           x-position: 6
         relatedEntityId:
-          description: Id of the entity to add this extionsion to. If the relatedEntityId is Null, a relatedEntitySource MUST be provided
+          description: Id of the entity to add this extionsion to. If the relatedEntityId
+            is Null, a relatedEntitySource MUST be provided
           type: string
           x-position: 3
         relatedEntitySource:
@@ -923,7 +941,8 @@ components:
           type: string
           x-position: 1
         versionNumber:
-          description: Version of the extensions. Version is to prevent to override an extension with an older one
+          description: Version of the extensions. Version is to prevent to override an
+            extension with an older one
           format: int64
           type: integer
           x-position: 5
@@ -1034,7 +1053,8 @@ components:
         missingProperties:
           additionalProperties:
             type: object
-          description: List of properties that should be present in your entity to ease its dicovery
+          description: List of properties that should be present in your entity to ease
+            its dicovery
           type: object
           x-position: 4
         status:
@@ -1288,12 +1308,14 @@ components:
       description: Event's Public Onsales Dates
       properties:
         endDateTime:
-          description: Public sale's end dates. The date and time when the public sale will end
+          description: Public sale's end dates. The date and time when the public sale
+            will end
           format: date-time
           type: string
           x-position: 1
         startDateTime:
-          description: Public sale's start dates. The date and time when the public sale will start
+          description: Public sale's start dates. The date and time when the public sale
+            will start
           format: date-time
           type: string
         startTBD:
@@ -1303,15 +1325,18 @@ components:
           x-position: 2
       type: object
     PublicVisibility:
-      description: The class defines the public visibility period on the Discovery/Publish API.
+      description: The class defines the public visibility period on the
+        Discovery/Publish API.
       properties:
         endDateTime:
-          description: The end of the public visibility. The date and time when the event will be public visible
+          description: The end of the public visibility. The date and time when the event
+            will be public visible
           format: date-time
           type: string
           x-position: 1
         startDateTime:
-          description: The start of the public visibility. The date and time when the event will be public visible
+          description: The start of the public visibility. The date and time when the
+            event will be public visible
           format: date-time
           type: string
         visible:
@@ -1392,7 +1417,8 @@ components:
           $ref: "#/components/schemas/LocalTime"
         noSpecificTime:
           default: false
-          description: Boolean flag to indicate whether or not the event has no specific time
+          description: Boolean flag to indicate whether or not the event has no specific
+            time
           type: boolean
           x-position: 6
         timeTBA:
@@ -1456,7 +1482,8 @@ components:
           x-position: 34
         active:
           default: false
-          description: Indicate if the entity is active, inactive entity won't appear in Discovery API
+          description: Indicate if the entity is active, inactive entity won't appear in
+            Discovery API
           type: boolean
           x-position: 95
         additionalInfos:
@@ -1537,12 +1564,14 @@ components:
         references:
           additionalProperties:
             type: string
-          description: References of this entity in an other system. Reference is the exact same entity
+          description: References of this entity in an other system. Reference is the
+            exact same entity
           example: "sourceName: id"
           type: object
           x-position: 71
         relationships:
-          description: Relationships on the entity, like if the entity is a duplicate of another one
+          description: Relationships on the entity, like if the entity is a duplicate of
+            another one
           items:
             $ref: "#/components/schemas/Relationship"
           type: array
@@ -1555,7 +1584,8 @@ components:
           $ref: "#/components/schemas/State"
         test:
           default: false
-          description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          description: Indicate if this is a test entity, by default test entities won't
+            appear in discovery API
           type: boolean
           x-position: 96
         timezone:
@@ -1576,7 +1606,8 @@ components:
           type: string
           x-position: 24
         version:
-          description: Version of the entity. Version is to avoid updated an entity with an older version
+          description: Version of the entity. Version is to avoid updated an entity with
+            an older version
           format: int64
           type: integer
           x-position: 80

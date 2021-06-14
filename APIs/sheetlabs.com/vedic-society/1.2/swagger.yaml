@@ -7,17 +7,24 @@ info:
   contact:
     email: ab.techwriter@gmail.com
     x-twitter: sheetlabs
-  description: |
+  description: >
     # Introduction
+
     This API returns data regarding almost all nouns in vedic literature. The results are JSON objects that contain the word transliterated to the Roman script, the word in the Nagari script, the meaning of the word, and the category the word belongs to. Proper nouns are not included (yet).
+
 
     The API uses the Swagger 2.0 specification.
 
+
     # Authentication
+
     This is an open API.
 
+
     # Try it out
+
     This sandbox can be used to get data for only one kind of resource, that is, to fetch data for a string contained in the meaning of any of the words.
+
 
     The remaining resources work a similar fashion. For details, see the reference documentation.
   license:
@@ -43,7 +50,8 @@ paths:
   /resources:
     get:
       parameters:
-        - description: The string you are looking for in the word meaning, for example, chariot. Wildcards are allowed, for example, char\*.
+        - description: The string you are looking for in the word meaning, for example,
+            chariot. Wildcards are allowed, for example, char\*.
           in: query
           name: description
           required: true

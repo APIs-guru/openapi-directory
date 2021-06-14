@@ -4,23 +4,35 @@ servers:
 info:
   contact:
     email: hi@asuarez.dev
-  description: |
+  description: >
     # Introduction
+
     The SearchLy API provides similarity searching based on song lyrics.
 
+
     # Operations
+
     The API allows for the `/similarity/by_song` operation, which allows clients to search the similarity for an existing song in the database. Also, the API has an additional `/similarity/by_content` endpoint which allows clients to search similarity given a free String input through a JSON request body. Additional `/song/search` operation is available for searching songs given a query String.
 
+
     # Endpoint
+
     The API endpoint for the SearchLy API v1 is as follows:
+
     ```
+
     https://searchly.asuarez.dev/api/v1
+
     ```
+
 
     # Motivation
+
     This project was built in order to create an API for searching similarities based on song lyrics. There are a lot of songs in the industry and most of them are talking about the same topic. What I wanted to prove with SearchLy was to estimate how similar are two songs between them based on the meaning of their lyrics.
 
+
     SearchLy is using a database of 100k songs from AZLyrics, using [this scraper](https://github.com/AlbertSuarez/azlyrics-scraper), which is being updated periodically. Then, using word2vec and NMSLIB, it was possible to create an index where you can search similarities using the k-nearest neighbors (KNN) algorithm.
+
 
     > **Note**: I am currently using a micro-instance from DigitalOcean where the API is deployed, so you should expect a bad performance. However, if this API becomes popular I will deploy it in a bigger instance.
   title: SearchLy API v1
@@ -44,13 +56,17 @@ tags:
 paths:
   /similarity/by_content:
     post:
-      description: |
+      description: >
         Endpoint for an end-user client to search similarity by content.
+
 
         If you want to run the /similarity/by_content operation, you can do so via an HTTP POST command to the following URL:
 
+
         ```
+
         https://searchly.asuarez.dev/api/v1/similarity/by_content
+
         ```
       operationId: src.searchly.api.v1.controllers.similarity.by_content
       requestBody:
@@ -70,7 +86,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponseSimilarity"
-          description: Standard SearchLy API v1 JSON response. You should check the `error` attribute to determine if there was an error.
+          description: Standard SearchLy API v1 JSON response. You should check the
+            `error` attribute to determine if there was an error.
         default:
           content:
             application/text:
@@ -98,7 +115,7 @@ paths:
             # The response is formatted in JSON
             json_response = response.json()
         - lang: Java
-          source: |
+          source: >
             try {
               URL myurl = new URL("https://searchly.asuarez.dev/api/v1/similarity/by_content");
               con = (HttpURLConnection) myurl.openConnection();
@@ -127,12 +144,17 @@ paths:
               con.disconnect();
             }
         - lang: C#
-          source: |
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_content");
+          source: >
+            var httpWebRequest =
+            (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_content");
+
             httpWebRequest.ContentType = "application/json";
+
             httpWebRequest.Method = "POST";
 
+
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+
             {
               string json = "{" +
                   "\"content\": \"CONTENT\"" +
@@ -140,13 +162,16 @@ paths:
               streamWriter.Write(json);
             }
 
+
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+
             {
               var result = streamReader.ReadToEnd();
             }
         - lang: php
-          source: |
+          source: >
             <?php
               // The data to send to the API
               $postData = array(
@@ -173,13 +198,18 @@ paths:
             -d content="CONTENT"
   /similarity/by_song:
     get:
-      description: |
-        Endpoint for an end-user client to search similarity by song identifier.
+      description: >
+        Endpoint for an end-user client to search similarity by song
+        identifier.
+
 
         If you want to run the /similarity/by_song operation, you can do so via an HTTP GET command to the following URL:
 
+
         ```
+
         https://searchly.asuarez.dev/api/v1/similarity/by_song
+
         ```
       operationId: src.searchly.api.v1.controllers.similarity.by_song
       parameters:
@@ -196,7 +226,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponseSimilarity"
-          description: Standard SearchLy API v1 JSON response. You should check the `error` attribute to determine if there was an error.
+          description: Standard SearchLy API v1 JSON response. You should check the
+            `error` attribute to determine if there was an error.
         default:
           content:
             application/text:
@@ -224,7 +255,7 @@ paths:
             # The response is formatted in JSON
             json_response = response.json()
         - lang: Java
-          source: |
+          source: >
             try {
               URL myurl = new URL("https://searchly.asuarez.dev/api/v1/similarity/by_song" +
                 "?song_id=" + "SONG_IDENTIFIER");
@@ -246,18 +277,23 @@ paths:
               con.disconnect();
             }
         - lang: C#
-          source: |
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_song" +
+          source: >
+            var httpWebRequest =
+            (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/similarity/by_song"
+            +
               "?song_id=" + "SONG_IDENTIFIER");
             httpWebRequest.Method = "GET";
 
+
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+
             {
               var result = streamReader.ReadToEnd();
             }
         - lang: php
-          source: |
+          source: >
             <?php
               // Setup cURL
               $ch = curl_init('https://searchly.asuarez.dev/api/v1/similarity/by_song'.'?song_id='.'SONG_IDENTIFIER');
@@ -266,17 +302,23 @@ paths:
               $response = curl_exec($ch);
             ?>
         - lang: shell
-          source: |
-            curl "https://searchly.asuarez.dev/api/v1/similarity/by_song?song_id=SONG_IDENTIFIER"
+          source: >
+            curl
+            "https://searchly.asuarez.dev/api/v1/similarity/by_song?song_id=SONG_IDENTIFIER"
   /song/search:
     get:
-      description: |
-        Endpoint for an end-user client to search songs from the database given a String query.
+      description: >
+        Endpoint for an end-user client to search songs from the database
+        given a String query.
+
 
         If you want to run the /song/search operation, you can do so via an HTTP GET command to the following URL:
 
+
         ```
+
         https://searchly.asuarez.dev/api/v1/song/search
+
         ```
       operationId: src.searchly.api.v1.controllers.song.search
       parameters:
@@ -293,7 +335,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponseSong"
-          description: Standard SearchLy API v1 JSON response. You should check the `error` attribute to determine if there was an error.
+          description: Standard SearchLy API v1 JSON response. You should check the
+            `error` attribute to determine if there was an error.
         default:
           content:
             application/text:
@@ -321,7 +364,7 @@ paths:
             # The response is formatted in JSON
             json_response = response.json()
         - lang: Java
-          source: |
+          source: >
             try {
               URL myurl = new URL("https://searchly.asuarez.dev/api/v1/song/search" +
                 "?query=" + "QUERY");
@@ -343,18 +386,23 @@ paths:
               con.disconnect();
             }
         - lang: C#
-          source: |
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/song/search" +
+          source: >
+            var httpWebRequest =
+            (HttpWebRequest)WebRequest.Create("https://searchly.asuarez.dev/api/v1/song/search"
+            +
               "?query=" + "QUERY");
             httpWebRequest.Method = "GET";
 
+
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+
             {
               var result = streamReader.ReadToEnd();
             }
         - lang: php
-          source: |
+          source: >
             <?php
               // Setup cURL
               $ch = curl_init('https://searchly.asuarez.dev/api/v1/song/search'.'?query='.'QUERY');

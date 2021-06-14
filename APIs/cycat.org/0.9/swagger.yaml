@@ -53,7 +53,8 @@ paths:
         - default
   /info:
     get:
-      description: Get information about the CyCAT backend services including status, overall statistics and version.
+      description: Get information about the CyCAT backend services including status,
+        overall statistics and version.
       operationId: get_info
       responses:
         "200":
@@ -176,7 +177,8 @@ paths:
         - default
   "/relationships/expanded/{uuid}":
     get:
-      description: Get relationship(s) UUID from a specified UUID including the relationships meta information.
+      description: Get relationship(s) UUID from a specified UUID including the
+        relationships meta information.
       operationId: get_relationshipsexpanded
       responses:
         "200":

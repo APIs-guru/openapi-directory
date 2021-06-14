@@ -6,7 +6,9 @@ servers:
   - url: https://api-cn.hosted.exlibrisgroup.com
   - url: https://api-ca.hosted.exlibrisgroup.com
 info:
-  description: For more information on how to use these APIs, including how to create an API key required for authentication, see [Alma REST APIs](https://developers.exlibrisgroup.com/alma/apis).
+  description: For more information on how to use these APIs, including how to
+    create an API key required for authentication, see [Alma REST
+    APIs](https://developers.exlibrisgroup.com/alma/apis).
   termsOfService: https://developers.exlibrisgroup.com/about/terms
   title: Ex Libris APIs
   version: "1.0"
@@ -44,7 +46,8 @@ paths:
           schema:
             default: ALL
             type: string
-        - description: "Printout status. Optional. Valid values are: Printed, Pending, Canceled."
+        - description: "Printout status. Optional. Valid values are: Printed, Pending,
+            Canceled."
           in: query
           name: status
           required: false
@@ -58,21 +61,25 @@ paths:
           schema:
             default: ALL
             type: string
-        - description: "A list of Printout IDs (for example: 123,456,778) from 1 to the limit of 100 Optional. Use of this option overrides all of the filtering parameters"
+        - description: "A list of Printout IDs (for example: 123,456,778) from 1 to the
+            limit of 100 Optional. Use of this option overrides all of the
+            filtering parameters"
           in: query
           name: printout_id
           required: false
           schema:
             default: ALL
             type: string
-        - description: "Limits the number of results. Optional. Valid values are 0-100. Default value: 10."
+        - description: "Limits the number of results. Optional. Valid values are 0-100.
+            Default value: 10."
           in: query
           name: limit
           required: false
           schema:
             default: "10"
             type: integer
-        - description: "Offset of the results returned. Optional. Default value: 0, which means that the first results will be returned."
+        - description: "Offset of the results returned. Optional. Default value: 0, which
+            means that the first results will be returned."
           in: query
           name: offset
           required: false
@@ -84,7 +91,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1xml/schema"
             application/xml:
               schema:
                 description: A list of printouts.
@@ -92,7 +100,8 @@ paths:
                   printout:
                     description: printout object.
                     items:
-                      $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses/200/content/application~1xml/schema"
+                      $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
+                        /200/content/application~1xml/schema"
                     type: array
                   total_record_count:
                     description: The total number of printouts.
@@ -104,7 +113,8 @@ paths:
                 type: object
                 xml:
                   name: printouts
-          description: OK - This method returns an object based on rest_printouts.xsd. See [here](/alma/apis/docs/xsd/rest_printouts.xsd)
+          description: OK - This method returns an object based on rest_printouts.xsd. See
+            [here](/alma/apis/docs/xsd/rest_printouts.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -119,7 +129,9 @@ paths:
       tags:
         - Printouts
     post:
-      description: "This API performs an action on printouts: mark as printed or canceled. 10,000 records can be handled in one requests. Only printouts which were updated will be returned."
+      description: "This API performs an action on printouts: mark as printed or
+        canceled. 10,000 records can be handled in one requests. Only printouts
+        which were updated will be returned."
       operationId: post/almaws/v1/task-lists/printouts
       parameters:
         - description: "Printout Name. Optional. "
@@ -129,7 +141,8 @@ paths:
           schema:
             default: ALL
             type: string
-        - description: "Printout status. Optional. Valid values are: Printed, Pending, Canceled."
+        - description: "Printout status. Optional. Valid values are: Printed, Pending,
+            Canceled."
           in: query
           name: status
           required: false
@@ -143,14 +156,17 @@ paths:
           schema:
             default: ALL
             type: string
-        - description: "A list of Printout IDs (for example: 123,456,778) from 1 to the limit of 100 Optional. Use of this option overrides all of the filtering parameters"
+        - description: "A list of Printout IDs (for example: 123,456,778) from 1 to the
+            limit of 100 Optional. Use of this option overrides all of the
+            filtering parameters"
           in: query
           name: printout_id
           required: false
           schema:
             default: ALL
             type: string
-        - description: "The operation to perform on the printout. Currently, the options are: 'mark_as_printed','mark_as_canceled'"
+        - description: "The operation to perform on the printout. Currently, the options
+            are: 'mark_as_printed','mark_as_canceled'"
           in: query
           name: op
           required: true
@@ -161,11 +177,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1xml/schema"
             application/xml:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/application~1xml/schema"
-          description: OK - This method returns an object based on rest_printouts.xsd. See [here](/alma/apis/docs/xsd/rest_printouts.xsd)
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1xml/schema"
+          description: OK - This method returns an object based on rest_printouts.xsd. See
+            [here](/alma/apis/docs/xsd/rest_printouts.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -195,7 +214,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
+                  /200/content/application~1xml/schema"
             application/xml:
               schema:
                 description: Printout Object.
@@ -261,7 +281,8 @@ paths:
                 type: object
                 xml:
                   name: printout
-          description: OK - This method returns an object based on rest_printout.xsd. See [here](/alma/apis/docs/xsd/rest_printout.xsd)
+          description: OK - This method returns an object based on rest_printout.xsd. See
+            [here](/alma/apis/docs/xsd/rest_printout.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -285,7 +306,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The operation to perform on the printout. Currently, the options are 'mark_as_printed','mark_as_canceled'
+        - description: The operation to perform on the printout. Currently, the options
+            are 'mark_as_printed','mark_as_canceled'
           in: query
           name: op
           required: true
@@ -296,11 +318,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
+                  /200/content/application~1xml/schema"
             application/xml:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses/200/content/application~1xml/schema"
-          description: OK - This method returns an object based on rest_printout.xsd. See [here](/alma/apis/docs/xsd/rest_printout.xsd)
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
+                  /200/content/application~1xml/schema"
+          description: OK - This method returns an object based on rest_printout.xsd. See
+            [here](/alma/apis/docs/xsd/rest_printout.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -320,10 +345,12 @@ paths:
         - Printouts
   /almaws/v1/task-lists/requested-resources:
     get:
-      description: This API returns a list of requested resources to be picked from the shelf in Alma
+      description: This API returns a list of requested resources to be picked from
+        the shelf in Alma
       operationId: get/almaws/v1/task-lists/requested-resources
       parameters:
-        - description: The library of the given circulation desk or department where the resources are located. Mandatory.
+        - description: The library of the given circulation desk or department where the
+            resources are located. Mandatory.
           in: query
           name: library
           required: true
@@ -342,7 +369,8 @@ paths:
           schema:
             default: ""
             type: string
-        - description: "The order in which to retrieve the results: location/call_number (default)."
+        - description: "The order in which to retrieve the results: location/call_number
+            (default)."
           in: query
           name: order_by
           required: false
@@ -377,14 +405,16 @@ paths:
           schema:
             default: ""
             type: string
-        - description: "Limits the number of results. Optional. Valid values are 0-100. Default value: 10."
+        - description: "Limits the number of results. Optional. Valid values are 0-100.
+            Default value: 10."
           in: query
           name: limit
           required: false
           schema:
             default: "10"
             type: integer
-        - description: "Offset of the results returned. Optional. Default value: 0, which means that the first results will be returned."
+        - description: "Offset of the results returned. Optional. Default value: 0, which
+            means that the first results will be returned."
           in: query
           name: offset
           required: false
@@ -396,7 +426,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
+                  content/application~1xml/schema"
             application/xml:
               schema:
                 description: A list of requested resources.
@@ -460,7 +491,8 @@ paths:
                                 name: copies
                                 wrapped: true
                             holding_id:
-                              description: Holding pid, a unique holding id that the resource is associated with.
+                              description: Holding pid, a unique holding id that the resource is associated
+                                with.
                               properties:
                                 link:
                                   type: string
@@ -473,7 +505,8 @@ paths:
                                     name: xml_value
                               type: object
                             library:
-                              description: Library of the requested resource. See [Get libraries API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+                              description: Library of the requested resource. See [Get libraries
+                                API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed).
                               properties:
                                 desc:
                                   type: string
@@ -502,7 +535,11 @@ paths:
                                 example: your request is important to us
                                 type: string
                               destination:
-                                description: "The destination will be a library in most cases. However, it may at times be: A circulation desk (when the pickup location is a reading room) A Home/Office code, where the request is for personal delivery A Work Order department"
+                                description: "The destination will be a library in most cases. However, it may
+                                  at times be: A circulation desk (when the
+                                  pickup location is a reading room) A
+                                  Home/Office code, where the request is for
+                                  personal delivery A Work Order department"
                                 properties:
                                   desc:
                                     type: string
@@ -601,7 +638,8 @@ paths:
                               example: ""
                               type: string
                             mms_id:
-                              description: The MMS id of the resource. See [GET BIB API](https://developers.exlibrisgroup.com/alma/apis/bibs/GET/gwPcGly021om4RTvtjbPleCklCGxeYAf3JPdiJpJhUA=/af2fb69d-64f4-42bc-bb05-d8a0ae56936e).
+                              description: The MMS id of the resource. See [GET BIB
+                                API](https://developers.exlibrisgroup.com/alma/apis/bibs/GET/gwPcGly021om4RTvtjbPleCklCGxeYAf3JPdiJpJhUA=/af2fb69d-64f4-42bc-bb05-d8a0ae56936e).
                               properties:
                                 link:
                                   type: string
@@ -627,7 +665,8 @@ paths:
                               type: string
                             title:
                               description: The resource title.
-                              example: "Sources of the self : the making of the modern identity / Charles Taylor."
+                              example: "Sources of the self : the making of the modern identity / Charles
+                                Taylor."
                               type: string
                           type: object
                           xml:
@@ -646,7 +685,9 @@ paths:
                 type: object
                 xml:
                   name: requested_resources
-          description: OK - This method returns an object based on rest_requested_resources.xsd. See [here](/alma/apis/docs/xsd/rest_requested_resources.xsd)
+          description: OK - This method returns an object based on
+            rest_requested_resources.xsd. See
+            [here](/alma/apis/docs/xsd/rest_requested_resources.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -665,10 +706,12 @@ paths:
       tags:
         - Requested Resources
     post:
-      description: This API performs an action on requested resources that are on the shelf in Alma
+      description: This API performs an action on requested resources that are on the
+        shelf in Alma
       operationId: post/almaws/v1/task-lists/requested-resources
       parameters:
-        - description: The library of the given circulation desk or department where the resources are located. Mandatory.
+        - description: The library of the given circulation desk or department where the
+            resources are located. Mandatory.
           in: query
           name: library
           required: false
@@ -682,7 +725,8 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Operation to be preformed on the list of given requests. Currently the only supported action is 'mark_reported'. Mandatory.
+        - description: Operation to be preformed on the list of given requests. Currently
+            the only supported action is 'mark_reported'. Mandatory.
           in: query
           name: op
           required: false
@@ -722,11 +766,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
+                  content/application~1xml/schema"
             application/xml:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/content/application~1xml/schema"
-          description: OK - This method returns an object based on rest_requested_resources.xsd. See [here](/alma/apis/docs/xsd/rest_requested_resources.xsd)
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
+                  content/application~1xml/schema"
+          description: OK - This method returns an object based on
+            rest_requested_resources.xsd. See
+            [here](/alma/apis/docs/xsd/rest_requested_resources.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -749,49 +797,69 @@ paths:
       description: This API returns a list of lending requests in Alma
       operationId: get/almaws/v1/task-lists/rs/lending-requests
       parameters:
-        - description: The resource sharing library for which lending requests should be retrieved. Mandatory. List of possible libraries can be retrieved using the [GET /almaws/v1/conf/libraries API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: The resource sharing library for which lending requests should be
+            retrieved. Mandatory. List of possible libraries can be retrieved
+            using the [GET /almaws/v1/conf/libraries
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: library
           required: false
           schema:
             default: ""
             type: string
-        - description: The status of lending requests to retrieve. Optional. List of possible statuses can be retrieved using the [GET almaws/v1/conf/code-tables/MandatoryLendingWorkflowSteps API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed) and the  [GET almaws/v1/conf/code-tables/OptionalLendingWorkflowSteps API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: The status of lending requests to retrieve. Optional. List of
+            possible statuses can be retrieved using the [GET
+            almaws/v1/conf/code-tables/MandatoryLendingWorkflowSteps
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed)
+            and the  [GET
+            almaws/v1/conf/code-tables/OptionalLendingWorkflowSteps
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: status
           required: false
           schema:
             default: ""
             type: string
-        - description: "The 'printed' value of lending requests to retrieve. Optional. Possible values: Y, N."
+        - description: "The 'printed' value of lending requests to retrieve. Optional.
+            Possible values: Y, N."
           in: query
           name: printed
           required: false
           schema:
             default: ""
             type: string
-        - description: "The 'reported' value of lending requests to retrieve. Optional. Possible values: Y, N."
+        - description: "The 'reported' value of lending requests to retrieve. Optional.
+            Possible values: Y, N."
           in: query
           name: reported
           required: false
           schema:
             default: ""
             type: string
-        - description: The partner value. Only lending requests from this partner should be retrieved. Optional. List of possible partners can be retrieved using the [GET almaws/v1/partners API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
+        - description: The partner value. Only lending requests from this partner should
+            be retrieved. Optional. List of possible partners can be retrieved
+            using the [GET almaws/v1/partners
+            API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
           in: query
           name: partner
           required: false
           schema:
             default: ""
             type: string
-        - description: Requested format of the resource. Optional. List of possible formats can be retrieved using the [GET almaws/v1/conf/code-tables/RequestFormats API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: Requested format of the resource. Optional. List of possible
+            formats can be retrieved using the [GET
+            almaws/v1/conf/code-tables/RequestFormats
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: requested_format
           required: false
           schema:
             default: ""
             type: string
-        - description: Supplied Format of the resource. Optional. List of possible formats can be retrieved using the [GET almaws/v1/conf/code-tables/RequestFormats API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: Supplied Format of the resource. Optional. List of possible formats
+            can be retrieved using the [GET
+            almaws/v1/conf/code-tables/RequestFormats
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: supplied_format
           required: false
@@ -803,7 +871,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                  /content/application~1xml/schema"
             application/xml:
               schema:
                 description: A list of resource sharing requests.
@@ -818,12 +887,15 @@ paths:
                   user_resource_sharing_request:
                     description: UserResourceSharingRequest object.
                     items:
-                      $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/200/content/application~1xml/schema"
+                      $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
+                        0/content/application~1xml/schema"
                     type: array
                 type: object
                 xml:
                   name: user_resource_sharing_requests
-          description: OK - This method returns an object based on rest_user_resource_sharing_requests.xsd. See [here](/alma/apis/docs/xsd/rest_user_resource_sharing_requests.xsd)
+          description: OK - This method returns an object based on
+            rest_user_resource_sharing_requests.xsd. See
+            [here](/alma/apis/docs/xsd/rest_user_resource_sharing_requests.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -842,59 +914,80 @@ paths:
       tags:
         - Lending Requests
     post:
-      description: This API preforms the requested action on a list (specified by given filters) of lending requests in Alma
+      description: This API preforms the requested action on a list (specified by
+        given filters) of lending requests in Alma
       operationId: post/almaws/v1/task-lists/rs/lending-requests
       parameters:
-        - description: The resource sharing library from which lending requests should be retrieved. Mandatory. List of possible libraries can be retrieved using the [GET /almaws/v1/conf/libraries API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: The resource sharing library from which lending requests should be
+            retrieved. Mandatory. List of possible libraries can be retrieved
+            using the [GET /almaws/v1/conf/libraries
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: library
           required: false
           schema:
             default: ""
             type: string
-        - description: Operation to be preformed on the list of given requests. Currently the only supported action is 'mark_reported'. Mandatory.
+        - description: Operation to be preformed on the list of given requests. Currently
+            the only supported action is 'mark_reported'. Mandatory.
           in: query
           name: op
           required: false
           schema:
             default: ""
             type: string
-        - description: The status of lending requests to retrieve. Optional. List of possible statuses can be retrieved using the [GET almaws/v1/conf/code-tables/MandatoryLendingWorkflowSteps API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).and the  [GET almaws/v1/conf/code-tables/OptionalLendingWorkflowSteps API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: The status of lending requests to retrieve. Optional. List of
+            possible statuses can be retrieved using the [GET
+            almaws/v1/conf/code-tables/MandatoryLendingWorkflowSteps
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).and
+            the  [GET almaws/v1/conf/code-tables/OptionalLendingWorkflowSteps
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: status
           required: false
           schema:
             default: ""
             type: string
-        - description: "The 'printed' value of lending requests to retrieve. Optional. Possible values: Y, N."
+        - description: "The 'printed' value of lending requests to retrieve. Optional.
+            Possible values: Y, N."
           in: query
           name: printed
           required: false
           schema:
             default: ""
             type: string
-        - description: "The 'reported' value of lending requests to retrieve. Optional. Possible values: Y, N."
+        - description: "The 'reported' value of lending requests to retrieve. Optional.
+            Possible values: Y, N."
           in: query
           name: reported
           required: false
           schema:
             default: ""
             type: string
-        - description: The partner value. Only lending requests from this partner should be. Optional. List of possible partners can be retrieved using the [GET almaws/v1/partners API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
+        - description: The partner value. Only lending requests from this partner should
+            be. Optional. List of possible partners can be retrieved using the
+            [GET almaws/v1/partners
+            API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
           in: query
           name: partner
           required: false
           schema:
             default: ""
             type: string
-        - description: Requested format of the resource. Optional. List of possible formats can be retrieved using the [GET almaws/v1/conf/code-tables/RequestFormats API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: Requested format of the resource. Optional. List of possible
+            formats can be retrieved using the [GET
+            almaws/v1/conf/code-tables/RequestFormats
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: requested_format
           required: false
           schema:
             default: ""
             type: string
-        - description: Supplied Format of the resource. Optional. List of possible formats can be retrieved using the [GET almaws/v1/conf/code-tables/RequestFormats API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
+        - description: Supplied Format of the resource. Optional. List of possible formats
+            can be retrieved using the [GET
+            almaws/v1/conf/code-tables/RequestFormats
+            API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4K7cQ0vuYHLS4NSgDGmcRpRYqx5hIMRTng9SIKO5Vof+/37088dc9-c685-4641-bc7f-60b5ca7cabed).
           in: query
           name: supplied_format
           required: false
@@ -906,13 +999,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
+                  0/content/application~1xml/schema"
             application/xml:
               schema:
                 description: Resource sharing request Object.
                 properties:
                   additional_barcode:
-                    description: List of additional barcodes. Note that the first one appears in the main barcode field.
+                    description: List of additional barcodes. Note that the first one appears in the
+                      main barcode field.
                     items:
                       example: "00023705571000021"
                       type: string
@@ -927,11 +1022,14 @@ paths:
                     example: John Smith
                     type: string
                   agree_to_copyright_terms:
-                    description: Indication whether the requester has agreed to the copyright terms. Mandatory for borrowing requests. Currently not relevant for lending requests.
+                    description: Indication whether the requester has agreed to the copyright terms.
+                      Mandatory for borrowing requests. Currently not relevant
+                      for lending requests.
                     example: "true"
                     type: boolean
                   allow_other_formats:
-                    description: Indication whether other formats besides the value in format field are acceptable. Default is false.
+                    description: Indication whether other formats besides the value in format field
+                      are acceptable. Default is false.
                     example: "true"
                     type: boolean
                   author:
@@ -951,7 +1049,8 @@ paths:
                     example: ""
                     type: string
                   call_number:
-                    description: The call number of the book. Indicates the library shelf on which the books are located.
+                    description: The call number of the book. Indicates the library shelf on which
+                      the books are located.
                     example: "1"
                     type: string
                   chapter:
@@ -967,7 +1066,16 @@ paths:
                     example: Chapter title
                     type: string
                   citation_type:
-                    description: "Type of the requested resource. For example, book or article. Mandatory for borrowing requests. Mandatory when creating a lending request unless mms_id is supplied. For borrowing requests, possible codes are listed in 'PhysicalReadingListCitationTypes' [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API): BK / CR. For lending requests, possible codes are listed in PR_CitationType [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API): BOOK / JOURNAL."
+                    description: "Type of the requested resource. For example, book or article.
+                      Mandatory for borrowing requests. Mandatory when creating
+                      a lending request unless mms_id is supplied. For borrowing
+                      requests, possible codes are listed in
+                      'PhysicalReadingListCitationTypes' [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-\
+                      with-the-code-tables-API): BK / CR. For lending requests,
+                      possible codes are listed in PR_CitationType [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-\
+                      with-the-code-tables-API): BOOK / JOURNAL."
                     properties:
                       desc:
                         type: string
@@ -980,7 +1088,14 @@ paths:
                           name: xml_value
                     type: object
                   copyright_status:
-                    description: The copyright status of the request. Relevant if requested format is Digital, and 'rs_borrower_copyright_management' in customer parameters is true. Possible options are listed in 'ResourceSharingCopyrightsStatus' [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API), default is generated per request. Relevant for GET, POST and PUT of borrowing requests, and GET of lending requests.
+                    description: The copyright status of the request. Relevant if requested format
+                      is Digital, and 'rs_borrower_copyright_management' in
+                      customer parameters is true. Possible options are listed
+                      in 'ResourceSharingCopyrightsStatus' [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API),
+                      default is generated per request. Relevant for GET, POST
+                      and PUT of borrowing requests, and GET of lending
+                      requests.
                     properties:
                       desc:
                         type: string
@@ -1011,7 +1126,8 @@ paths:
                     example: "1"
                     type: string
                   editor:
-                    description: The editor of the book (typically used for books where chapters have different authors).
+                    description: The editor of the book (typically used for books where chapters
+                      have different authors).
                     example: John Smith
                     type: string
                   end_page:
@@ -1019,11 +1135,15 @@ paths:
                     example: "49"
                     type: string
                   external_id:
-                    description: External identifier of the resource sharing request. Mandatory when creating a lending request.
+                    description: External identifier of the resource sharing request. Mandatory when
+                      creating a lending request.
                     example: "12013330000874120"
                     type: string
                   format:
-                    description: Format of the resource requested. For example, physical or digital. Mandatory. Possible codes are listed in RequestFormats [code tables](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                    description: Format of the resource requested. For example, physical or digital.
+                      Mandatory. Possible codes are listed in RequestFormats
+                      [code
+                      tables](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
                     properties:
                       desc:
                         type: string
@@ -1088,7 +1208,10 @@ paths:
                     example: "102188800001"
                     type: string
                   level_of_service:
-                    description: The code of the resource sharing request Level of Service. Possible options are listed in 'LevelOfService' [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API), default is generated per request.
+                    description: The code of the resource sharing request Level of Service. Possible
+                      options are listed in 'LevelOfService' [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API),
+                      default is generated per request.
                     properties:
                       desc:
                         type: string
@@ -1101,18 +1224,27 @@ paths:
                           name: xml_value
                     type: object
                   lost_damaged_fee:
-                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/200/content/application~1xml/schema/properties/request_cost"
+                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
+                      0/content/application~1xml/schema/properties/request_cost"
                   maximum_fee:
-                    description: Maximum fee the user is willing to pay for the request. Currently not relevant for lending requests.
+                    description: Maximum fee the user is willing to pay for the request. Currently
+                      not relevant for lending requests.
                     example: "2000.0"
                     format: float
                     type: number
                   mms_id:
-                    description: "MMS ID of the requested resource. Borrowing request: this is relevant after physical material has arrived. Lending request: if supplied when creating a request, the request will be attached to this bib record. See [GET BIB API](https://developers.exlibrisgroup.com/alma/apis/bibs/GET/gwPcGly021om4RTvtjbPleCklCGxeYAf3JPdiJpJhUA=/af2fb69d-64f4-42bc-bb05-d8a0ae56936e)."
+                    description: "MMS ID of the requested resource. Borrowing request: this is
+                      relevant after physical material has arrived. Lending
+                      request: if supplied when creating a request, the request
+                      will be attached to this bib record. See [GET BIB
+                      API](https://developers.exlibrisgroup.com/alma/apis/bibs/\
+                      GET/gwPcGly021om4RTvtjbPleCklCGxeYAf3JPdiJpJhUA=/af2fb69d\
+                      -64f4-42bc-bb05-d8a0ae56936e)."
                     example: "9933745180101020"
                     type: string
                   need_patron_info:
-                    description: Indication whether patron information is needed. Not relevant for lending requests.
+                    description: Indication whether patron information is needed. Not relevant for
+                      lending requests.
                     example: "true"
                     type: boolean
                   note:
@@ -1128,7 +1260,13 @@ paths:
                     example: "100100100"
                     type: string
                   owner:
-                    description: "The resource sharing library code. See [Get libraries API](https://developers.exlibrisgroup.com/alma/apis/conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9-c685-4641-bc7f-60b5ca7cabed). Borrowing request: Optional. Used only when there are more than one resource sharing library defined for the user. Lending request: Mandatory."
+                    description: "The resource sharing library code. See [Get libraries
+                      API](https://developers.exlibrisgroup.com/alma/apis/conf/\
+                      GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9\
+                      -c685-4641-bc7f-60b5ca7cabed). Borrowing request:
+                      Optional. Used only when there are more than one resource
+                      sharing library defined for the user. Lending request:
+                      Mandatory."
                     example: John Smith
                     type: string
                   pages:
@@ -1140,7 +1278,9 @@ paths:
                     example: ""
                     type: string
                   partner:
-                    description: The code of the partner related to this request. See [Get partners API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07). Mandatory when creating a lending request.
+                    description: The code of the partner related to this request. See [Get partners
+                      API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
+                      Mandatory when creating a lending request.
                     properties:
                       desc:
                         type: string
@@ -1153,7 +1293,10 @@ paths:
                           name: xml_value
                     type: object
                   pickup_location:
-                    description: The pickup library code where the resource will be delivered. Relevant and mandatory for physical format delivery Borrowing request. Optional for digital format. Not relevant for lending requests.
+                    description: The pickup library code where the resource will be delivered.
+                      Relevant and mandatory for physical format delivery
+                      Borrowing request. Optional for digital format. Not
+                      relevant for lending requests.
                     properties:
                       desc:
                         type: string
@@ -1166,7 +1309,8 @@ paths:
                           name: xml_value
                     type: object
                   pickup_location_type:
-                    description: "The pickup location type. The pickup location type. Possible values are: LIBRARY, CIRCULATION_DESK."
+                    description: "The pickup location type. The pickup location type. Possible
+                      values are: LIBRARY, CIRCULATION_DESK."
                     example: LIBRARY
                     type: string
                   place_of_publication:
@@ -1178,7 +1322,10 @@ paths:
                     example: "1284442031021"
                     type: string
                   preferred_send_method:
-                    description: Preferred send method. Possible options are listed in 'ResourceSharingRequestSendMethod' [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API). Currently not relevant for lending requests.
+                    description: Preferred send method. Possible options are listed in
+                      'ResourceSharingRequestSendMethod' [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                      Currently not relevant for lending requests.
                     properties:
                       desc:
                         type: string
@@ -1191,7 +1338,8 @@ paths:
                           name: xml_value
                     type: object
                   printed:
-                    description: Indication whether the request is printed. Output parameter. Relevant for lending requests.
+                    description: Indication whether the request is printed. Output parameter.
+                      Relevant for lending requests.
                     example: "true"
                     type: boolean
                   publisher:
@@ -1199,7 +1347,9 @@ paths:
                     example: John Smith
                     type: string
                   reading_room:
-                    description: The code of the reading room where the item will be picked up. Mandatory when for_reading_room_only is true. Not relevant for lending requests.
+                    description: The code of the reading room where the item will be picked up.
+                      Mandatory when for_reading_room_only is true. Not relevant
+                      for lending requests.
                     properties:
                       desc:
                         type: string
@@ -1212,20 +1362,23 @@ paths:
                           name: xml_value
                     type: object
                   receive_cost:
-                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/200/content/application~1xml/schema/properties/request_cost"
+                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
+                      0/content/application~1xml/schema/properties/request_cost"
                   remote_record_id:
                     description: The remote record id of the requested resource.
                     example: "100100100"
                     type: string
                   reported:
-                    description: Indication whether the request is reported. Output parameter. Relevant for lending requests.
+                    description: Indication whether the request is reported. Output parameter.
+                      Relevant for lending requests.
                     example: "false"
                     type: boolean
                   request_cost:
                     description: ""
                     properties:
                       currency:
-                        description: The currency. Possible values are listed in 'Currency_CT' [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                        description: The currency. Possible values are listed in 'Currency_CT' [code
+                          table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
                         properties:
                           desc:
                             type: string
@@ -1249,11 +1402,17 @@ paths:
                     xml:
                       name: amount
                   request_id:
-                    description: Internal identifier of the resource sharing request in Alma, generated by Alma. Should be used in subsequent queries regarding the request.
+                    description: Internal identifier of the resource sharing request in Alma,
+                      generated by Alma. Should be used in subsequent queries
+                      regarding the request.
                     example: "1001966830001021"
                     type: string
                   requested_language:
-                    description: The requested language for the resource sharing request. Possible codes are the enabled fields in ResourceSharingLanguages [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API). Default is null.
+                    description: The requested language for the resource sharing request. Possible
+                      codes are the enabled fields in ResourceSharingLanguages
+                      [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                      Default is null.
                     properties:
                       desc:
                         type: string
@@ -1266,11 +1425,18 @@ paths:
                           name: xml_value
                     type: object
                   requested_media:
-                    description: A description of the requested media. possible values are 1-7 (codes from request media code table), and the codes from 'AdditionalRequestedMedia' [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API). The valid values are according to the Requested media definition mapping table.
+                    description: A description of the requested media. possible values are 1-7
+                      (codes from request media code table), and the codes from
+                      'AdditionalRequestedMedia' [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                      The valid values are according to the Requested media
+                      definition mapping table.
                     example: "1"
                     type: string
                   requester:
-                    description: The primary identifier and full name of the requesting user. Relevant for borrowing requests. Not relevant for lending requests.
+                    description: The primary identifier and full name of the requesting user.
+                      Relevant for borrowing requests. Not relevant for lending
+                      requests.
                     properties:
                       desc:
                         type: string
@@ -1312,13 +1478,16 @@ paths:
                     example: "100"
                     type: string
                   shipping_cost:
-                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/200/content/application~1xml/schema/properties/request_cost"
+                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
+                      0/content/application~1xml/schema/properties/request_cost"
                   source:
                     description: The source of the requested resource.
                     example: ""
                     type: string
                   specific_edition:
-                    description: Indication whether edition is used in ISO Protocol and in Locate process. Default is true. Relevant when a book is requested.
+                    description: Indication whether edition is used in ISO Protocol and in Locate
+                      process. Default is true. Relevant when a book is
+                      requested.
                     example: "true"
                     type: boolean
                   start_page:
@@ -1326,7 +1495,15 @@ paths:
                     example: "2"
                     type: string
                   status:
-                    description: "The resource sharing request status. Borrowing request: Possible codes are listed in MandatoryBorrowingWorkflowSteps or OptionalBorrowingWorkflowSteps [code tables](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API). Lending request: Possible codes are listed in MandatoryLendingWorkflowSteps or OptionalLendingWorkflowSteps [code tables](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API)."
+                    description: "The resource sharing request status. Borrowing request: Possible
+                      codes are listed in MandatoryBorrowingWorkflowSteps or
+                      OptionalBorrowingWorkflowSteps [code
+                      tables](https://developers.exlibrisgroup.com/blog/Working\
+                      -with-the-code-tables-API). Lending request: Possible
+                      codes are listed in MandatoryLendingWorkflowSteps or
+                      OptionalLendingWorkflowSteps [code
+                      tables](https://developers.exlibrisgroup.com/blog/Working\
+                      -with-the-code-tables-API)."
                     properties:
                       desc:
                         type: string
@@ -1339,7 +1516,10 @@ paths:
                           name: xml_value
                     type: object
                   supplied_format:
-                    description: Format of the supplied item. For example, physical or digital. Possible codes are listed in RequestFormats [code table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API). Relevant only after the request is supplied.
+                    description: Format of the supplied item. For example, physical or digital.
+                      Possible codes are listed in RequestFormats [code
+                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                      Relevant only after the request is supplied.
                     properties:
                       desc:
                         type: string
@@ -1352,35 +1532,51 @@ paths:
                           name: xml_value
                     type: object
                   text_email:
-                    description: "Borrowing request: In use with alternative_address only. In use when sending in digital format. Lending request: Requester's Email."
+                    description: "Borrowing request: In use with alternative_address only. In use
+                      when sending in digital format. Lending request:
+                      Requester's Email."
                     example: ""
                     type: string
                   text_postal_1:
-                    description: In use with alternative_address only. Not relevant for lending requests.
+                    description: In use with alternative_address only. Not relevant for lending
+                      requests.
                     example: ""
                     type: string
                   text_postal_2:
-                    description: In use with alternative_address only. Not relevant for lending requests.
+                    description: In use with alternative_address only. Not relevant for lending
+                      requests.
                     example: ""
                     type: string
                   text_postal_3:
-                    description: In use with alternative_address only. Not relevant for lending requests.
+                    description: In use with alternative_address only. Not relevant for lending
+                      requests.
                     example: ""
                     type: string
                   text_postal_4:
-                    description: In use with alternative_address only. Not relevant for lending requests.
+                    description: In use with alternative_address only. Not relevant for lending
+                      requests.
                     example: ""
                     type: string
                   title:
-                    description: Title of the requested resource. Mandatory unless mms_id is supplied.
+                    description: Title of the requested resource. Mandatory unless mms_id is
+                      supplied.
                     example: Harry Potter
                     type: string
                   use_alternative_address:
-                    description: An indication of whether the delivery should be to an alternative address. Default is false. Not relevant for lending requests.
+                    description: An indication of whether the delivery should be to an alternative
+                      address. Default is false. Not relevant for lending
+                      requests.
                     example: "false"
                     type: boolean
                   user_request:
-                    description: "The request linked to the resource sharing request. Borrowing requests: this is the related user request. Lending requests: this is the move/digitization request (if exists). See [GET user's request API](https://developers.exlibrisgroup.com/alma/apis/users/GET/gwPcGly021r0XQMGAttqcPPFoLNxBoEZbQsUC/MWTX7aNWi0EYKYFUfYyI8KvpG73JPdiJpJhUA=/0aa8d36f-53d6-48ff-8996-485b90b103e4)."
+                    description: "The request linked to the resource sharing request. Borrowing
+                      requests: this is the related user request. Lending
+                      requests: this is the move/digitization request (if
+                      exists). See [GET user's request
+                      API](https://developers.exlibrisgroup.com/alma/apis/users\
+                      /GET/gwPcGly021r0XQMGAttqcPPFoLNxBoEZbQsUC/MWTX7aNWi0EYKY\
+                      FUfYyI8KvpG73JPdiJpJhUA=/0aa8d36f-53d6-48ff-8996-485b90b1\
+                      03e4)."
                     properties:
                       link:
                         type: string
@@ -1397,7 +1593,8 @@ paths:
                     example: "10"
                     type: string
                   willing_to_pay:
-                    description: Indication whether patron is willing to pay. Currently not relevant for lending requests.
+                    description: Indication whether patron is willing to pay. Currently not relevant
+                      for lending requests.
                     example: "false"
                     type: boolean
                   year:
@@ -1407,7 +1604,9 @@ paths:
                 type: object
                 xml:
                   name: user_resource_sharing_request
-          description: OK - This method returns an object based on rest_user_resource_sharing_request.xsd. See [here](/alma/apis/docs/xsd/rest_user_resource_sharing_request.xsd)
+          description: OK - This method returns an object based on
+            rest_user_resource_sharing_request.xsd. See
+            [here](/alma/apis/docs/xsd/rest_user_resource_sharing_request.xsd)
           headers:
             X-Exl-Api-Remaining:
               $ref: "#/components/headers/remaining"
@@ -1429,7 +1628,10 @@ paths:
         - Lending Requests
   /almaws/v1/task-lists/test:
     get:
-      description: "This API is used to test if the API key was configured correctly.It returns a short XML (no schema available - the output is subject to changes) with the following structure:<test>GET - OK - institutionCode: 01ABC_INST</test>"
+      description: "This API is used to test if the API key was configured
+        correctly.It returns a short XML (no schema available - the output is
+        subject to changes) with the following structure:<test>GET - OK -
+        institutionCode: 01ABC_INST</test>"
       operationId: get/almaws/v1/task-lists/test
       parameters: []
       responses:
@@ -1455,7 +1657,10 @@ paths:
       tags:
         - Test
     post:
-      description: This API is used to test if the API key was configured correctly, including read/write permissions.It returns a short XML (no schema available - the output is subject to changes) with the following structure:<test>POST - OK</test>
+      description: This API is used to test if the API key was configured correctly,
+        including read/write permissions.It returns a short XML (no schema
+        available - the output is subject to changes) with the following
+        structure:<test>POST - OK</test>
       operationId: post/almaws/v1/task-lists/test
       parameters: []
       responses:
@@ -1483,12 +1688,15 @@ paths:
 components:
   headers:
     remaining:
-      description: The number of remaining calls according to the [Governance Threshold](https://developers.exlibrisgroup.com/alma/apis/#threshold)
+      description: The number of remaining calls according to the [Governance
+        Threshold](https://developers.exlibrisgroup.com/alma/apis/#threshold)
       schema:
         type: integer
   securitySchemes:
     ApiKeyAuth:
-      description: API key used to authorize requests. Learn about how to create API keys at [Alma REST APIs](https://developers.exlibrisgroup.com/alma/apis/#defining)
+      description: API key used to authorize requests. Learn about how to create API
+        keys at [Alma REST
+        APIs](https://developers.exlibrisgroup.com/alma/apis/#defining)
       in: query
       name: apikey
       type: apiKey

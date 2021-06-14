@@ -4,7 +4,11 @@ schemes:
 host: api.brandlovers.com
 basePath: /marketplace/v1
 info:
-  description: "Allows sellers to: 1) Load products definitions to the BrandLovers marktplace. 2) Receive and update orders status. 3) Receive and update shipping information. 4) Receive and update customer tickets. All requests consume and return application/json content. All request must be authenticated and use HTTPS."
+  description: "Allows sellers to: 1) Load products definitions to the BrandLovers
+    marktplace. 2) Receive and update orders status. 3) Receive and update
+    shipping information. 4) Receive and update customer tickets. All requests
+    consume and return application/json content. All request must be
+    authenticated and use HTTPS."
   title: BrandLovers Marketplace API V1
   version: 1.0.0
   x-apisguru-categories:
@@ -18,7 +22,8 @@ produces:
   - application/json
 securityDefinitions:
   authorization:
-    description: Authorization token. The Authorization token can be found in your Admin console.
+    description: Authorization token. The Authorization token can be found in your
+      Admin console.
     in: header
     name: authorization
     type: apiKey
@@ -40,9 +45,11 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns all details of a single order, including last status, items shipped or not.
+      description: Returns all details of a single order, including last status, items
+        shipped or not.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -62,9 +69,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
         "404":
           description: Object not found. Was not able to find orderId
       summary: Returns all details of a order
@@ -74,9 +83,11 @@ paths:
     post:
       consumes:
         - application/json
-      description: Confirm shipment canceletion (when requested by the customer) or failure to deliver one shipment
+      description: Confirm shipment canceletion (when requested by the customer) or
+        failure to deliver one shipment
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -99,19 +110,24 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "404":
           description: Object not found. Was not able to find orderId
-      summary: Confirm shipment canceletion (when requested by the customer) or failure to deliver
+      summary: Confirm shipment canceletion (when requested by the customer) or
+        failure to deliver
       tags:
         - order
   "/order/{orderId}/shipment/delivered":
     post:
       consumes:
         - application/json
-      description: Confirms that a shipment was delivered. Must inform quantity of successfully deliverd items even if items deliverd was less than the original order
+      description: Confirms that a shipment was delivered. Must inform quantity of
+        successfully deliverd items even if items deliverd was less than the
+        original order
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -134,7 +150,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "404":
           description: Object not found. Was not able to find orderId
       summary: Confirms that a shipment was delivered
@@ -144,9 +161,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: This enpoint to confirm item exchange when failure to deliver or requested by the customer. All customer requests are tracket via trouble tickets
+      description: This enpoint to confirm item exchange when failure to deliver or
+        requested by the customer. All customer requests are tracket via trouble
+        tickets
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -169,7 +189,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "404":
           description: Object not found. Was not able to find orderId
       summary: Confirm item exchange
@@ -179,9 +200,11 @@ paths:
     post:
       consumes:
         - application/json
-      description: Use this endpoint to return and refund items froma a order. In order to fully return an order list all items and applicate quantity.
+      description: Use this endpoint to return and refund items froma a order. In
+        order to fully return an order list all items and applicate quantity.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -204,7 +227,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "404":
           description: Object not found. Was not able to find orderId
       summary: Confirm order item return and refund
@@ -214,9 +238,13 @@ paths:
     post:
       consumes:
         - application/json
-      description: Updates order to include shipment shiped information. This endpoint can be used to include a single or multiple shipments for any give order. In order to inform that all items of a order where shipped list all of them, including applicable quantities in the payload.
+      description: Updates order to include shipment shiped information. This endpoint
+        can be used to include a single or multiple shipments for any give
+        order. In order to inform that all items of a order where shipped list
+        all of them, including applicable quantities in the payload.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -239,7 +267,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "404":
           description: Object not found. Was not able to find orderId
       summary: Update new order to include shipment information
@@ -249,19 +278,24 @@ paths:
     get:
       consumes:
         - application/json
-      description: Retuns a list of orders associated with this seller. The list is ordered by dateCreated.
+      description: Retuns a list of orders associated with this seller. The list is
+        ordered by dateCreated.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -276,9 +310,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns orders details
       tags:
         - orders
@@ -286,9 +322,11 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns list of shipments. By default this will return list of the last shipments ordered by dateCreated, folowed by last update date.
+      description: Returns list of shipments. By default this will return list of the
+        last shipments ordered by dateCreated, folowed by last update date.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -298,12 +336,15 @@ paths:
           name: status
           required: false
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -318,18 +359,22 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns list of shipments
       tags:
         - orders
     post:
       consumes:
         - application/json
-      description: Bulk update of order shipments status. This alows to inform multiple shipments status
+      description: Bulk update of order shipments status. This alows to inform
+        multiple shipments status
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -348,9 +393,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Bulk update of order shipments
       tags:
         - orders
@@ -358,9 +405,11 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list of shipments shipped. By Default returns items ordered by dateCreated folowed by last update
+      description: Returns a list of shipments shipped. By Default returns items
+        ordered by dateCreated folowed by last update
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -375,12 +424,15 @@ paths:
           name: status
           required: false
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -395,9 +447,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns a list of shipments shipped
       tags:
         - orders
@@ -420,9 +474,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Bulk update of order shipments
       tags:
         - orders
@@ -430,19 +486,25 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list of approved orders. Orders in the `approved` state must be fullfiled imediadetelly.
+      description: Returns a list of approved orders. Orders in the `approved` state
+        must be fullfiled imediadetelly.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 100, max 200. Use this in conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 100,
+            max 200. Use this in conjuction with `offset` to paginate across the
+            results.
           in: query
           name: limit
           required: false
@@ -457,9 +519,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Return list of approved orders
       tags:
         - orders
@@ -467,20 +531,26 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list with canceled orders. Canceled orders should not be fullfiled.
+      description: Returns a list with canceled orders. Canceled orders should not be
+        fullfiled.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: Number or items to return when executing query. Default 100, max 250. Use this conjuction with `offset` to paginate across the results.
+          description: Number or items to return when executing query. Default 100, max
+            250. Use this conjuction with `offset` to paginate across the
+            results.
           in: query
           name: limit
           required: false
@@ -495,9 +565,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns lists of canceled orders
       tags:
         - orders
@@ -505,19 +577,24 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list of orders successfully delivered associated with this seller.
+      description: Returns a list of orders successfully delivered associated with
+        this seller.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -532,30 +609,39 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
-      summary: Returns a list of orders successfully delivered associated with this seller.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
+      summary: Returns a list of orders successfully delivered associated with this
+        seller.
       tags:
         - orders
   /orders/status/new:
     get:
       consumes:
         - application/json
-      description: Returns a list of orders flagged as new. New orders should not be fullfiled until marketplace flags them as approved.
+      description: Returns a list of orders flagged as new. New orders should not be
+        fullfiled until marketplace flags them as approved.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: Number or items to return when executing query. Defaults to 100. Max 250. Use this conjuction with `offset` to paginate across the results.
+          description: Number or items to return when executing query. Defaults to 100.
+            Max 250. Use this conjuction with `offset` to paginate across the
+            results.
           in: query
           name: limit
           required: false
@@ -570,9 +656,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns a list of orders flagged as new.
       tags:
         - orders
@@ -580,20 +668,26 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list of partially deliverd orders. This is a list of orders with items shipped but with not all items ackwlodged as deliverd
+      description: Returns a list of partially deliverd orders. This is a list of
+        orders with items shipped but with not all items ackwlodged as deliverd
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: Number or items to return when executing query. Defaults to 100. Max 250. Use this conjuction with `offset` to paginate across the results.
+          description: Number or items to return when executing query. Defaults to 100.
+            Max 250. Use this conjuction with `offset` to paginate across the
+            results.
           in: query
           name: limit
           required: false
@@ -608,9 +702,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns a list of partially deliverd orders
       tags:
         - orders
@@ -618,19 +714,26 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list of orders that contain one (or more) items that where not shipped. This will list the entire order as well the items with peding shipment. Use this service to track orders that need to be fullfiled.
+      description: Returns a list of orders that contain one (or more) items that
+        where not shipped. This will list the entire order as well the items
+        with peding shipment. Use this service to track orders that need to be
+        fullfiled.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 100. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 100.
+            Use this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -645,9 +748,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns a list of orders partially fullfiled
       tags:
         - orders
@@ -655,19 +760,25 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list with orders completely fullfiled, this means orders with all items sent. Orders will ordered by dateCreated fowllowed by last update
+      description: Returns a list with orders completely fullfiled, this means orders
+        with all items sent. Orders will ordered by dateCreated fowllowed by
+        last update
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -682,9 +793,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns a list with orders fully sent
       tags:
         - orders
@@ -692,9 +805,17 @@ paths:
     post:
       consumes:
         - application/json
-      description: Use this enpoint to create a single new product to the Marketplace. This enpoint expects a json document with one product. If you whant to upload multiple products in a single API call use POST /products method. The server will load each product as an individual item that can be manipulated using your own `skuSellerId`. This system is idenpontent, this means that once a `skuSellerId` is created it cannot be re-created using this tool. In order to update, edit a product use the PUT method with the correct reference to your `skuSellerId`
+      description: Use this enpoint to create a single new product to the Marketplace.
+        This enpoint expects a json document with one product. If you whant to
+        upload multiple products in a single API call use POST /products method.
+        The server will load each product as an individual item that can be
+        manipulated using your own `skuSellerId`. This system is idenpontent,
+        this means that once a `skuSellerId` is created it cannot be re-created
+        using this tool. In order to update, edit a product use the PUT method
+        with the correct reference to your `skuSellerId`
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -709,11 +830,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: Sucess! Server received your request and will start background processing.
+          description: Sucess! Server received your request and will start background
+            processing.
         "400":
           description: Bad Request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Create a new product to the marketplace
       tags:
         - product
@@ -721,9 +844,13 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns detailed information of a single product with the seller `skuSellerId`. This service will return a json document with product detail, status, price, invetory among other infomarion availble in the Brand Lovers marketplace
+      description: Returns detailed information of a single product with the seller
+        `skuSellerId`. This service will return a json document with product
+        detail, status, price, invetory among other infomarion availble in the
+        Brand Lovers marketplace
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -741,9 +868,11 @@ paths:
           schema:
             $ref: "#/definitions/GetProduct"
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
         "404":
           description: Object not found. In general this means a invalid skuSellerId.
       security:
@@ -754,9 +883,19 @@ paths:
     put:
       consumes:
         - application/json
-      description: Update a single product information such as name, brand, attribute, dimension, etc. Please note that data from your request will be merged with existing data. This allows you to easliy update only certain fields without the need to re-inform the other unchanged fields. For example in order to update just the field `title` simply send just this field with new information, remaining fields will not be changed. In order to erase an item the field must be informed as its default value, for example in order to erase the `videos` field must be sent as videos:[]. The `skuSellerId` field is always mandatory in the path and in the product json Object.
+      description: Update a single product information such as name, brand, attribute,
+        dimension, etc. Please note that data from your request will be merged
+        with existing data. This allows you to easliy update only certain fields
+        without the need to re-inform the other unchanged fields. For example in
+        order to update just the field `title` simply send just this field with
+        new information, remaining fields will not be changed. In order to erase
+        an item the field must be informed as its default value, for example in
+        order to erase the `videos` field must be sent as videos:[]. The
+        `skuSellerId` field is always mandatory in the path and in the product
+        json Object.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -780,9 +919,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
         "404":
           description: Object not found.
       security:
@@ -794,9 +935,13 @@ paths:
     put:
       consumes:
         - application/json
-      description: Allows seller to set the SKU prices (MSRP and/or offer price). All prices must be informed in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. Same as $1,2345.67 must be informed solely as 1234567
+      description: Allows seller to set the SKU prices (MSRP and/or offer price). All
+        prices must be informed in cents. No commas or periods are accepeted.
+        For example one dollar should be informed as 100. Same as $1,2345.67
+        must be informed solely as 1234567
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -820,7 +965,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Allows seller to update prices of a single SKU
       tags:
         - product
@@ -828,9 +974,11 @@ paths:
     put:
       consumes:
         - application/json
-      description: Update product status in the Marketplace. Set to `true` to enable, `false` to disable sale.
+      description: Update product status in the Marketplace. Set to `true` to enable,
+        `false` to disable sale.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -854,7 +1002,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Enable/disable a single product in the Marketplace
       tags:
         - product
@@ -862,9 +1011,11 @@ paths:
     put:
       consumes:
         - application/json
-      description: Update a single product inventory information. Products with zero stock will not be eligible for sale.
+      description: Update a single product inventory information. Products with zero
+        stock will not be eligible for sale.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -888,7 +1039,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Update a single product stock
       tags:
         - product
@@ -896,19 +1048,25 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get a list of my products loaded into the Marketplace. This dosen't means that products are eligible for sale, just that they are loaded in the database.
+      description: Get a list of my products loaded into the Marketplace. This dosen't
+        means that products are eligible for sale, just that they are loaded in
+        the database.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number of items to retun. Defaults to 100. Max alowed is 200. Use this conjuction with `offset` to paginate across the results.
+        - description: Number of items to retun. Defaults to 100. Max alowed is 200. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -923,9 +1081,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       security:
         - authorization: []
       summary: Returns a list of products loaded into BrandLovers Marketplace
@@ -934,9 +1094,18 @@ paths:
     post:
       consumes:
         - application/json
-      description: This enpoint to creates new products in the Marketplace using `skuSellerId` as a primary key. This enpoint expects a json document with array of products. The server will load each product as an individual item that can be manipulated using your own `skuSellerId`. All requests to This endpoint are idenpontent with respect of the `skuSellerId`, this means that once a `skuSellerId` is created it cannot be re-created using this tool. In order to update use the PUT method with the correct `skuSellerId`. You can also use the POST /product to create a single product per request
+      description: This enpoint to creates new products in the Marketplace using
+        `skuSellerId` as a primary key. This enpoint expects a json document
+        with array of products. The server will load each product as an
+        individual item that can be manipulated using your own `skuSellerId`.
+        All requests to This endpoint are idenpontent with respect of the
+        `skuSellerId`, this means that once a `skuSellerId` is created it cannot
+        be re-created using this tool. In order to update use the PUT method
+        with the correct `skuSellerId`. You can also use the POST /product to
+        create a single product per request
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -953,11 +1122,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: Sucess! Server received your request and will start background processing.
+          description: Sucess! Server received your request and will start background
+            processing.
         "400":
           description: Bad Request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Allows new products from the seller to be loaded into the marketplace
       tags:
         - products
@@ -965,9 +1136,15 @@ paths:
     put:
       consumes:
         - application/json
-      description: Allows bulk update of product prices. This endpoint expects a json document with an array of products with the `skuSellerId` and the new price. Server will process each new product update individually and will ackwlodge as much updates as possible, even if a single product update fails. After this request you can query product final status with GET /product/status
+      description: Allows bulk update of product prices. This endpoint expects a json
+        document with an array of products with the `skuSellerId` and the new
+        price. Server will process each new product update individually and will
+        ackwlodge as much updates as possible, even if a single product update
+        fails. After this request you can query product final status with GET
+        /product/status
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -988,7 +1165,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Allows bulk update of product prices.
       tags:
         - products
@@ -996,19 +1174,28 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns a list with seller products status. Please note that this endpoint will not return all details of each product, just the skuSellerId and status. Also please note that this endpoint will return 250 products per call. For full details of a given procuct use GET /product/{skuSellerId}
+      description: Returns a list with seller products status. Please note that this
+        endpoint will not return all details of each product, just the
+        skuSellerId and status. Also please note that this endpoint will return
+        250 products per call. For full details of a given procuct use GET
+        /product/{skuSellerId}
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number of items to return in this query. Defaults to 250. Maximum 1000. Use this conjuction with `offset` to paginate across the results.
+        - description: Number of items to return in this query. Defaults to 250. Maximum
+            1000. Use this conjuction with `offset` to paginate across the
+            results.
           in: query
           name: limit
           required: false
@@ -1021,16 +1208,21 @@ paths:
           schema:
             $ref: "#/definitions/GetSellerProductsStatus"
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns seller products status in the marketplace
       tags:
         - products
     put:
       consumes:
         - application/json
-      description: Bulk enable/disable products in the marketplace. This endpoint requires an array of objects with the seller SKU `skuSellerId` and boolean value that defines if the product is enabled or not for sale. This endpoint can be used to set a single product or many products.
+      description: Bulk enable/disable products in the marketplace. This endpoint
+        requires an array of objects with the seller SKU `skuSellerId` and
+        boolean value that defines if the product is enabled or not for sale.
+        This endpoint can be used to set a single product or many products.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1051,7 +1243,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Bulk enable/disable products in the marketplace
       tags:
         - products
@@ -1061,17 +1254,21 @@ paths:
         - application/json
       description: Returns products that are successfully listed for sale.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -1086,9 +1283,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
       summary: Returns products that are successfully listed for sale.
       tags:
         - products
@@ -1096,9 +1295,11 @@ paths:
     put:
       consumes:
         - application/json
-      description: Bulk product stock update. This endpoint expect a array of products `skuSellerId` with new inventory data
+      description: Bulk product stock update. This endpoint expect a array of products
+        `skuSellerId` with new inventory data
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1119,7 +1320,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
       summary: Bulk product stock update
       tags:
         - products
@@ -1127,9 +1329,17 @@ paths:
     post:
       consumes:
         - application/json
-      description: Use this service to create a new trouble ticket. Use this to include relevant information about the order, comunicate with the customer or marketplace team. Whenever possible message will be pushed to Mobile first. This is the primary mean of comunicaiton with the customer regarding orders, shippments, shippments status. New tickets will be automatically be set to 'OPEN'. Trouble tickets need to be associated with a orderId or customer. New tickets can optionally include a new message.
+      description: Use this service to create a new trouble ticket. Use this to
+        include relevant information about the order, comunicate with the
+        customer or marketplace team. Whenever possible message will be pushed
+        to Mobile first. This is the primary mean of comunicaiton with the
+        customer regarding orders, shippments, shippments status. New tickets
+        will be automatically be set to 'OPEN'. Trouble tickets need to be
+        associated with a orderId or customer. New tickets can optionally
+        include a new message.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1154,9 +1364,11 @@ paths:
     post:
       consumes:
         - application/json
-      description: Add a new message to this trouble ticket. Messages can be `CUSTOMER` (customer will be able to see it) or `INTERNAL`.
+      description: Add a new message to this trouble ticket. Messages can be
+        `CUSTOMER` (customer will be able to see it) or `INTERNAL`.
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1188,9 +1400,12 @@ paths:
     get:
       consumes:
         - application/json
-      description: Returns trouble ticket history with all messages exchanged. Only tickets related to your seller will be returned. Attempt to read other tickets will return 403 (acess denied).
+      description: Returns trouble ticket history with all messages exchanged. Only
+        tickets related to your seller will be returned. Attempt to read other
+        tickets will return 403 (acess denied).
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1200,12 +1415,15 @@ paths:
           name: ticketId
           required: true
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -1220,7 +1438,8 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
           description: Access denied. You can only access your trouble tickets
       summary: Get trouble ticket messages
@@ -1232,7 +1451,8 @@ paths:
         - application/json
       description: Alows the seller to update the status of a trouble ticket
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1256,9 +1476,11 @@ paths:
         "400":
           description: Bad request.
         "401":
-          description: Access denied. You're not authenticated or token expired. Check your request header the `authorization` field is required.
+          description: Access denied. You're not authenticated or token expired. Check
+            your request header the `authorization` field is required.
         "403":
-          description: Server refused to process your request. Please check the API SLA and reduce number of requests per second.
+          description: Server refused to process your request. Please check the API SLA
+            and reduce number of requests per second.
         "404":
           description: Object not found.
       summary: Update trouble ticket status
@@ -1268,9 +1490,11 @@ paths:
     get:
       consumes:
         - application/json
-      description: Allows seller to receive and status, queries, requests and complaints from customers. As well related messages
+      description: Allows seller to receive and status, queries, requests and
+        complaints from customers. As well related messages
       parameters:
-        - description: Authorization token. The Authorization token can be found in your Admin console.
+        - description: Authorization token. The Authorization token can be found in your
+            Admin console.
           in: header
           name: authorization
           required: true
@@ -1284,12 +1508,15 @@ paths:
           name: status
           required: false
           type: string
-        - description: Number or items to skip when executing query. List starts at zero. If omitted will default to zero. Use this conjuction with `limit` to paginate across the results.
+        - description: Number or items to skip when executing query. List starts at zero.
+            If omitted will default to zero. Use this conjuction with `limit` to
+            paginate across the results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: Number or items to return when executing query. Defaults to 10. Use this conjuction with `offset` to paginate across the results.
+        - description: Number or items to return when executing query. Defaults to 10. Use
+            this conjuction with `offset` to paginate across the results.
           in: query
           name: limit
           required: false
@@ -1352,13 +1579,17 @@ definitions:
     properties:
       crossDockingTime:
         default: 0
-        description: Time it will take to manufacture, prepare or setup this product. Time must be provided in seconds. For example 1 day should be informed as 86400. This time will be included in the ETA informed to the customer
+        description: Time it will take to manufacture, prepare or setup this product.
+          Time must be provided in seconds. For example 1 day should be informed
+          as 86400. This time will be included in the ETA informed to the
+          customer
         type: integer
       quantity:
         description: Quantity of product available for sale
         type: integer
       reserved:
-        description: Locked product invetory for orders that are not approved and are not ready to fullfil.
+        description: Locked product invetory for orders that are not approved and are
+          not ready to fullfil.
         type: integer
     required:
       - quantity
@@ -1378,7 +1609,8 @@ definitions:
         description: Customer tax information
         type: string
       email:
-        description: "Customer Email (when available). Please note: Email is not a mandatory field"
+        description: "Customer Email (when available). Please note: Email is not a
+          mandatory field"
         type: string
       id:
         description: Customer unqiue Id
@@ -1411,16 +1643,24 @@ definitions:
   Dimensions:
     properties:
       height:
-        description: Product height in millimeters. No commas or periods are accepeted. For example one meter produc must be informed as 1000. Another example 1 meter and 23 centimeters should be informed solely as 1230
+        description: Product height in millimeters. No commas or periods are accepeted.
+          For example one meter produc must be informed as 1000. Another example
+          1 meter and 23 centimeters should be informed solely as 1230
         type: integer
       length:
-        description: Product length in millimeters. No commas or periods are accepeted. For example one meter produc must be informed as 1000. Another example 1 meter and 23 centimeters should be informed solely as 1230
+        description: Product length in millimeters. No commas or periods are accepeted.
+          For example one meter produc must be informed as 1000. Another example
+          1 meter and 23 centimeters should be informed solely as 1230
         type: integer
       weight:
-        description: Product weight in Grams. No commas or periods are accepeted. For example one killo must be informed as 1000. Another example 1 Kilo and 234 grams should be informed solely as 1234
+        description: Product weight in Grams. No commas or periods are accepeted. For
+          example one killo must be informed as 1000. Another example 1 Kilo and
+          234 grams should be informed solely as 1234
         type: integer
       width:
-        description: Product width in millimeters. No commas or periods are accepeted. For example one meter produc must be informed as 1000. Another example 1 meter and 23 centimeters should be informed solely as 1230
+        description: Product width in millimeters. No commas or periods are accepeted.
+          For example one meter produc must be informed as 1000. Another example
+          1 meter and 23 centimeters should be informed solely as 1230
         type: integer
     required:
       - weight
@@ -1451,11 +1691,16 @@ definitions:
         description: Aditional information for the courier
         type: string
       chargedAmount:
-        description: Shipment cost. Must be informed in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. Same as $1,2345.67 must be informed solely as 1234567
+        description: Shipment cost. Must be informed in cents. No commas or periods are
+          accepeted. For example one dollar should be informed as 100. Same as
+          $1,2345.67 must be informed solely as 1234567
         type: integer
       crossDockingTime:
         default: 0
-        description: Time it will take to manufacture, prepare or setup this product. Time must be provided in seconds. For example 1 day should be informed as 86400. This time will be included in the product ETA informed to the customer
+        description: Time it will take to manufacture, prepare or setup this product.
+          Time must be provided in seconds. For example 1 day should be informed
+          as 86400. This time will be included in the product ETA informed to
+          the customer
         type: integer
       defaultAmount:
         description: Default value of this shippment.
@@ -1464,7 +1709,9 @@ definitions:
         description: Scheduled period
         type: string
       transitTime:
-        description: Deliver time in seconds. Time must be provided in seconds. For example 1 day should be informed as 86400. This time will be included in the product ETA informed to the customer
+        description: Deliver time in seconds. Time must be provided in seconds. For
+          example 1 day should be informed as 86400. This time will be included
+          in the product ETA informed to the customer
         type: integer
       type:
         description: Freight type
@@ -1531,14 +1778,18 @@ definitions:
           type: string
         type: array
       images:
-        description: List of valid Product image URLs. HTTP or HTTPS are valid. HTTPS is prefered.
+        description: List of valid Product image URLs. HTTP or HTTPS are valid. HTTPS is
+          prefered.
         items:
           type: string
         type: array
       price:
         $ref: "#/definitions/ProductPrice"
       productGroupId:
-        description: Unique Product Group ID. Products with the same `productGroupId` will be grouped and displayed as a unique entry. Use `productGroupId` to group diferent SKUs that represent diferent colors, sizes, capacities, etc..
+        description: Unique Product Group ID. Products with the same `productGroupId`
+          will be grouped and displayed as a unique entry. Use `productGroupId`
+          to group diferent SKUs that represent diferent colors, sizes,
+          capacities, etc..
         type: string
       skuSellerId:
         description: Unique Product Id (SKU) in the seller system
@@ -1547,13 +1798,17 @@ definitions:
         description: Product status
         type: string
       stock:
-        description: Number of products availble for sale from the seller. Each new successfull order will automatically reduce the number of products available.
+        description: Number of products availble for sale from the seller. Each new
+          successfull order will automatically reduce the number of products
+          available.
         type: integer
       title:
-        description: Product name as advertised by manufacturer. This how the product will be displayed in the Marketplace
+        description: Product name as advertised by manufacturer. This how the product
+          will be displayed in the Marketplace
         type: string
       videos:
-        description: List of videos de URLs associated with this product. HTTP or HTTPS are valid. HTTPS is prefered.
+        description: List of videos de URLs associated with this product. HTTP or HTTPS
+          are valid. HTTPS is prefered.
         items:
           type: string
         type: array
@@ -1607,7 +1862,9 @@ definitions:
         description: Product status in the marketplace
         type: string
       stock:
-        description: Number of products availble for sale from the seller. Each new successfull order will automatically reduce the number of products available.
+        description: Number of products availble for sale from the seller. Each new
+          successfull order will automatically reduce the number of products
+          available.
         type: integer
     required:
       - skuSellerId
@@ -1672,7 +1929,9 @@ definitions:
         description: Flag that defines if seller supports giftwrapp with a message
         type: boolean
       value:
-        description: Amount charged for gift wrap. All prices must be provided in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Amount charged for gift wrap. All prices must be provided in cents.
+          No commas or periods are accepeted. For example one dollar should be
+          informed as 100. $1,2345.67 should be informed solely as 1234567
         type: integer
     required:
       - available
@@ -1695,10 +1954,12 @@ definitions:
   Invoice:
     properties:
       accessKey:
-        description: Número da chave de acesso à nota fiscal. A chave possui 44 dígitos e contém todas as informações da DANFE
+        description: Número da chave de acesso à nota fiscal. A chave possui 44 dígitos
+          e contém todas as informações da DANFE
         type: string
       cnpj:
-        description: CNPJ responsável pelo envio dos produtos. Pode ser diferente caso a empresa possua diversos Centros de Distribuição (CDs)
+        description: CNPJ responsável pelo envio dos produtos. Pode ser diferente caso a
+          empresa possua diversos Centros de Distribuição (CDs)
         type: string
       issuedAt:
         description: Data de emissão da Nota Fiscal
@@ -1742,7 +2003,8 @@ definitions:
         description: Trouble ticked brief description
         type: string
       from:
-        description: Friendly name of the person sending this message, if not provided the seller `name` will be used
+        description: Friendly name of the person sending this message, if not provided
+          the seller `name` will be used
         type: string
       message:
         $ref: "#/definitions/NewTicketMessage"
@@ -1763,7 +2025,8 @@ definitions:
         description: Message text
         type: string
       visibility:
-        description: Defines if this message is `CUSTOMER` (customer will receive a copy) or `INTERNAL`
+        description: Defines if this message is `CUSTOMER` (customer will receive a
+          copy) or `INTERNAL`
         type: string
     required:
       - visibility
@@ -1790,7 +2053,8 @@ definitions:
         format: date-time
         type: string
       sellerShipmentId:
-        description: Unique Seller shipment Id. This must be unique across all orders and shipments
+        description: Unique Seller shipment Id. This must be unique across all orders
+          and shipments
         type: string
       tranckingUrl:
         description: Courier tracking URL
@@ -1808,7 +2072,8 @@ definitions:
       invoice:
         $ref: "#/definitions/Invoice"
       items:
-        description: List of Order IDs of this items from this order that will be updated in this shipment
+        description: List of Order IDs of this items from this order that will be
+          updated in this shipment
         items:
           type: string
         type: array
@@ -1820,7 +2085,8 @@ definitions:
         format: date-time
         type: string
       sellerShipmentId:
-        description: Unique Seller shipment Id. This must be unique across all orders and shipmnents
+        description: Unique Seller shipment Id. This must be unique across all orders
+          and shipmnents
         type: string
       trackingUrl:
         description: Courier tracking URL
@@ -1855,7 +2121,8 @@ definitions:
         description: Unique order Id (related to this seller)
         type: string
       orderMarketplaceId:
-        description: Unique Order Id that will be displayed to the customer. This Id is not the same as `orderId`
+        description: Unique Order Id that will be displayed to the customer. This Id is
+          not the same as `orderId`
         type: string
       seller:
         $ref: "#/definitions/Seller"
@@ -1869,16 +2136,24 @@ definitions:
         description: Order status
         type: string
       totalAmount:
-        description: Order total in cents, this is what the customer will be charged for. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Order total in cents, this is what the customer will be charged
+          for. No commas or periods are accepeted. For example one dollar should
+          be informed as 100. $1,2345.67 should be informed solely as 1234567
         type: integer
       totalDiscountAmount:
-        description: Total order discounts in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Total order discounts in cents. No commas or periods are accepeted.
+          For example one dollar should be informed as 100. $1,2345.67 should be
+          informed solely as 1234567
         type: integer
       totalItemsAmount:
-        description: Order items total amount in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Order items total amount in cents. No commas or periods are
+          accepeted. For example one dollar should be informed as 100.
+          $1,2345.67 should be informed solely as 1234567
         type: integer
       totalShippingAmount:
-        description: Total shipments amount items. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Total shipments amount items. No commas or periods are accepeted.
+          For example one dollar should be informed as 100. $1,2345.67 should be
+          informed solely as 1234567
         type: integer
       updatedAt:
         description: Last update data of this order
@@ -1911,7 +2186,9 @@ definitions:
         description: Defines if giftwrpping is available for this product.
         type: boolean
       value:
-        description: Amount charged for gift wrap. All prices must be provided in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Amount charged for gift wrap. All prices must be provided in cents.
+          No commas or periods are accepeted. For example one dollar should be
+          informed as 100. $1,2345.67 should be informed solely as 1234567
         type: integer
     required:
       - available
@@ -1955,7 +2232,8 @@ definitions:
         description: Quantity of items
         type: integer
       skuSellerId:
-        description: Unique Product Id (SKU) in the seller system. This is the key that defines witch product will be updated
+        description: Unique Product Id (SKU) in the seller system. This is the key that
+          defines witch product will be updated
         type: string
     required:
       - skuSellerId
@@ -1984,7 +2262,8 @@ definitions:
         description: Order unique Id
         type: string
       sellerShipmentId:
-        description: Unique Seller shipment Id. This must be unique across all orders and shipments
+        description: Unique Seller shipment Id. This must be unique across all orders
+          and shipments
         type: string
       status:
         description: Shipment status.
@@ -2031,7 +2310,9 @@ definitions:
   Product:
     properties:
       attributes:
-        description: List of `key` `value` attributes of this product. This is very important for search and SEO optmization. Include all relevant information
+        description: List of `key` `value` attributes of this product. This is very
+          important for search and SEO optmization. Include all relevant
+          information
         items:
           $ref: "#/definitions/ProductAttribute"
         type: array
@@ -2056,29 +2337,38 @@ definitions:
           type: string
         type: array
       images:
-        description: List of valid Product image URLs. HTTP or HTTPS are valid. HTTPS is prefered.
+        description: List of valid Product image URLs. HTTP or HTTPS are valid. HTTPS is
+          prefered.
         items:
           type: string
         type: array
       price:
         $ref: "#/definitions/ProductPrice"
       productGroupId:
-        description: Unique Product Group ID. Products with the same `productGroupId` will be grouped and displayed as a unique entry. Use `productGroupId` to group diferent SKUs that represent diferent colors, sizes, capacities, etc..
+        description: Unique Product Group ID. Products with the same `productGroupId`
+          will be grouped and displayed as a unique entry. Use `productGroupId`
+          to group diferent SKUs that represent diferent colors, sizes,
+          capacities, etc..
         type: string
       productId:
-        description: Brand Lovers Product ID. Use this to suggest a product association. This field is optional.
+        description: Brand Lovers Product ID. Use this to suggest a product association.
+          This field is optional.
         type: string
       skuSellerId:
         description: Unique Product Id (SKU) in the seller system
         type: string
       stock:
-        description: Number of products availble for sale from the seller. Each new successfull order will automatically reduce the number of products available.
+        description: Number of products availble for sale from the seller. Each new
+          successfull order will automatically reduce the number of products
+          available.
         type: integer
       title:
-        description: Product name as advertised by manufacturer. This how the product will be displayed in the Marketplace
+        description: Product name as advertised by manufacturer. This how the product
+          will be displayed in the Marketplace
         type: string
       videos:
-        description: List of videos de URLs associated with this product. HTTP or HTTPS are valid. HTTPS is prefered.
+        description: List of videos de URLs associated with this product. HTTP or HTTPS
+          are valid. HTTPS is prefered.
         items:
           type: string
         type: array
@@ -2106,10 +2396,17 @@ definitions:
   ProductPrice:
     properties:
       default:
-        description: List price, also known as MSRP (Manufacturer Suggest Retail Price) or the recommended retail price (RRP). All prices must be provided in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: List price, also known as MSRP (Manufacturer Suggest Retail Price)
+          or the recommended retail price (RRP). All prices must be provided in
+          cents. No commas or periods are accepeted. For example one dollar
+          should be informed as 100. $1,2345.67 should be informed solely as
+          1234567
         type: integer
       offer:
-        description: Product price. This is what will be offered to the customer. All prices must be provided in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Product price. This is what will be offered to the customer. All
+          prices must be provided in cents. No commas or periods are accepeted.
+          For example one dollar should be informed as 100. $1,2345.67 should be
+          informed solely as 1234567
         type: integer
     required:
       - default
@@ -2139,7 +2436,8 @@ definitions:
   ProductStatusUpdate:
     properties:
       active:
-        description: Defines if this product is ready for sale. Active `true`, disabled `false`
+        description: Defines if this product is ready for sale. Active `true`, disabled
+          `false`
         type: boolean
       skuSellerId:
         description: Seller product unique Id that will be updated
@@ -2163,7 +2461,9 @@ definitions:
   ProductUpdate:
     properties:
       attributes:
-        description: List of `key` `value` attributes of this product. This is very important for search and SEO optmization. Include all relevant information
+        description: List of `key` `value` attributes of this product. This is very
+          important for search and SEO optmization. Include all relevant
+          information
         items:
           $ref: "#/definitions/ProductAttribute"
         type: array
@@ -2188,14 +2488,18 @@ definitions:
           type: string
         type: array
       images:
-        description: List of valid Product image URLs. HTTP or HTTPS are valid. HTTPS is prefered.
+        description: List of valid Product image URLs. HTTP or HTTPS are valid. HTTPS is
+          prefered.
         items:
           type: string
         type: array
       price:
         $ref: "#/definitions/ProductPrice"
       productGroupId:
-        description: Unique Product Group ID. Products with the same `productGroupId` will be grouped and displayed as a unique entry. Use `productGroupId` to group diferent SKUs that represent diferent colors, sizes, capacities, etc..
+        description: Unique Product Group ID. Products with the same `productGroupId`
+          will be grouped and displayed as a unique entry. Use `productGroupId`
+          to group diferent SKUs that represent diferent colors, sizes,
+          capacities, etc..
         type: string
       productId:
         description: Brand Lovers Product Id. Use this to recommend a product association
@@ -2204,13 +2508,17 @@ definitions:
         description: Unique Product Id (SKU) in the seller system
         type: string
       stock:
-        description: Number of products availble for sale from the seller. Each new successfull order will automatically reduce the number of products available.
+        description: Number of products availble for sale from the seller. Each new
+          successfull order will automatically reduce the number of products
+          available.
         type: integer
       title:
-        description: Product name as advertised by manufacturer. This how the product will be displayed in the Marketplace
+        description: Product name as advertised by manufacturer. This how the product
+          will be displayed in the Marketplace
         type: string
       videos:
-        description: List of videos de URLs associated with this product. HTTP or HTTPS are valid. HTTPS is prefered.
+        description: List of videos de URLs associated with this product. HTTP or HTTPS
+          are valid. HTTPS is prefered.
         items:
           type: string
         type: array
@@ -2219,7 +2527,9 @@ definitions:
   Promotion:
     properties:
       amount:
-        description: Total discount in cents. No commas or periods are accepeted. For example one dollar should be informed as 100. $1,2345.67 should be informed solely as 1234567
+        description: Total discount in cents. No commas or periods are accepeted. For
+          example one dollar should be informed as 100. $1,2345.67 should be
+          informed solely as 1234567
         type: integer
       id:
         description: Promotion unique idenfitcation number
@@ -2284,7 +2594,8 @@ definitions:
           $ref: "#/definitions/ControlledStock"
         type: array
       title:
-        description: Product name as advertised by manufacturer. This how the product will be displayed in the Marketplace
+        description: Product name as advertised by manufacturer. This how the product
+          will be displayed in the Marketplace
         type: string
       urls:
         description: List of URLs where the product is listed for sale
@@ -2315,7 +2626,8 @@ definitions:
   SellerItemStatus:
     properties:
       active:
-        description: "Defines if this product is ready for sale. Active `true`, disabled `false` "
+        description: "Defines if this product is ready for sale. Active `true`, disabled
+          `false` "
         type: boolean
     required:
       - active
@@ -2330,7 +2642,8 @@ definitions:
         description: Additinal shipment tracking information
         type: string
       id:
-        description: Shipment Id associated with this shippment used to group diferent item or items from a single order
+        description: Shipment Id associated with this shippment used to group diferent
+          item or items from a single order
         type: string
       invoice:
         $ref: "#/definitions/Invoice"
@@ -2347,7 +2660,8 @@ definitions:
         format: date-time
         type: string
       sellerShipmentId:
-        description: Unique Seller shipment Id. This must be unique across all orders and shipments
+        description: Unique Seller shipment Id. This must be unique across all orders
+          and shipments
         type: string
       status:
         description: Shipment status
@@ -2366,7 +2680,10 @@ definitions:
     properties:
       crossDockingTime:
         default: 0
-        description: Time it will take to manufacture, prepare or setup this product. Time must be provided in seconds. For example 1 day should be informed as 86400. This time will be included in the product ETA informed to the customer
+        description: Time it will take to manufacture, prepare or setup this product.
+          Time must be provided in seconds. For example 1 day should be informed
+          as 86400. This time will be included in the product ETA informed to
+          the customer
         type: integer
       quantity:
         description: Stock available
@@ -2396,7 +2713,8 @@ definitions:
         description: Trouble ticket priority
         type: string
       sla:
-        description: Date-time with a promisse for the customer when this ticket will be resolved
+        description: Date-time with a promisse for the customer when this ticket will be
+          resolved
         format: date-time
         type: string
       status:
@@ -2428,7 +2746,8 @@ definitions:
         description: Trouble Ticket Id.
         type: string
       visibility:
-        description: Defines if this message is `CUSTOMER` (customer will receive a copy) or `INTERNAL`
+        description: Defines if this message is `CUSTOMER` (customer will receive a
+          copy) or `INTERNAL`
         type: string
     required:
       - createdAt

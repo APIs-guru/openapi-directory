@@ -56,7 +56,8 @@ paths:
           description: OK
           headers:
             Content-Range:
-              description: An decription of what part of the collection has been returned as well as the total size.
+              description: An decription of what part of the collection has been returned as
+                well as the total size.
               schema:
                 example: 1-50/1134
                 type: string
@@ -393,8 +394,12 @@ paths:
       tags:
         - Items
     patch:
-      description: |
-        Applies a modified [RFC6902 JSON Patch](https://tools.ietf.org/html/rfc6902) document to an Item or ItemField. This endpoint only supports `add`, `remove` and `replace` operations.
+      description: >
+        Applies a modified [RFC6902 JSON
+        Patch](https://tools.ietf.org/html/rfc6902) document to an Item or
+        ItemField. This endpoint only supports `add`, `remove` and `replace`
+        operations.
+
 
         When modifying a specific ItemField, the ItemField's ID in the `path` attribute of the operation object: `/fields/{fieldId}`
       operationId: PatchVaultItem
@@ -473,7 +478,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FullItem"
-          description: OK - Item updated. If no Patch operations were provided, Item is unmodified.
+          description: OK - Item updated. If no Patch operations were provided, Item is
+            unmodified.
         "401":
           content:
             application/json:
@@ -595,7 +601,8 @@ paths:
 components:
   schemas:
     APIRequest:
-      description: Represents a request that was made to the API. Including what Token was used and what resource was accessed.
+      description: Represents a request that was made to the API. Including what Token
+        was used and what resource was accessed.
       properties:
         action:
           enum:
@@ -674,19 +681,23 @@ components:
               items:
                 properties:
                   entropy:
-                    description: For fields with a purpose of `PASSWORD` this is the entropy of the value
+                    description: For fields with a purpose of `PASSWORD` this is the entropy of the
+                      value
                     readOnly: true
                     type: number
                   generate:
                     default: false
-                    description: If value is not present then a new value should be generated for this field
+                    description: If value is not present then a new value should be generated for
+                      this field
                     type: boolean
                   id:
                     type: string
                   label:
                     type: string
                   purpose:
-                    description: Some item types, Login and Password, have fields used for autofill. This property indicates that purpose and is required for some item types.
+                    description: Some item types, Login and Password, have fields used for autofill.
+                      This property indicates that purpose and is required for
+                      some item types.
                     enum:
                       - ""
                       - USERNAME
@@ -729,7 +740,8 @@ components:
               type: array
           type: object
     GeneratorRecipe:
-      description: The recipe is used in conjunction with the "generate" property to set the character set used to generate a new secure value
+      description: The recipe is used in conjunction with the "generate" property to
+        set the character set used to generate a new secure value
       properties:
         characterSets:
           items:
@@ -844,7 +856,8 @@ components:
               - replace
             type: string
           path:
-            description: An RFC6901 JSON Pointer pointing to the Item document, an Item Attribute, and Item Field by Field ID, or an Item Field Attribute
+            description: An RFC6901 JSON Pointer pointing to the Item document, an Item
+              Attribute, and Item Field by Field ID, or an Item Field Attribute
             example: /fields/vy09gd8EXAMPLE/label
             type: string
           value: {}

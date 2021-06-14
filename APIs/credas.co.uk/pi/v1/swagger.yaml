@@ -76,7 +76,8 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to insufficient credits.
+          description: Error code meaning that the operation was aborted due to
+            insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -89,14 +90,19 @@ paths:
   /api/companies:
     post:
       consumes: []
-      description: "If a company appears multiple times within the structure, it will only be detailed in full (i.e. with significant ownership details) in its first instance. Subsequent instances will be \r
+      description: "If a company appears multiple times within the structure, it will
+        only be detailed in full (i.e. with significant ownership details) in
+        its first instance. Subsequent instances will be \r
 
         \            marked as duplicates.\r
 
-        \            Whilst duplicate instances of companies can and will be identified, it is not possible to categorically identify duplicated people."
+        \            Whilst duplicate instances of companies can and
+        will be identified, it is not possible to categorically identify
+        duplicated people."
       operationId: SearchCompany
       parameters:
-        - description: The company registration number of the company that should be searched.
+        - description: The company registration number of the company that should be
+            searched.
           in: query
           name: companyNumber
           required: false
@@ -127,39 +133,49 @@ paths:
               region: Cardiff
               significantParentCompanies:
                 - addressLine1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   companyName: Widgets International Limited
                   companyNumber: "54345678"
                   dateOfRegistration: 0001-01-01T00:00:00
                   duplicate: false
                   id: ebbc9433-40a6-4197-902d-d4ff2efdbaa5
                   locality:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   postCode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   region:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   significantParentCompanies:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   significantPeople:
                     - forename: John
                       id: b58ec846-1da1-4ac2-be27-b1dcbff8c8dd
                       regEntryId:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       surname: Smith
                 - addressLine1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   companyName: Widget Services Limited
                   companyNumber: "23232321"
                   dateOfRegistration: 0001-01-01T00:00:00
                   duplicate: false
                   id: 48641603-7593-46a9-b993-8ead4daca09e
                   locality:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   postCode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   region:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   significantParentCompanies:
                     - addressLine1: 25 Westgate Street
                       companyName: Widgets International Limited
@@ -171,11 +187,14 @@ paths:
                       postCode: CF101NS
                       region: Cardiff
                       significantParentCompanies:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       significantPeople:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                   significantPeople:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
               significantPeople:
                 - forename: John
                   id: 108db0e1-fe11-44be-ad8f-405ed57d3fbc
@@ -184,7 +203,8 @@ paths:
                 - forename: Jane
                   id: 965f3298-da35-4906-8d9e-d346008289dc
                   regEntryId:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   surname: Smith
           schema:
             $ref: "#/definitions/Credas.Api.Models.Companies.CompanyDetail"
@@ -197,14 +217,16 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: If the consumer doesn't have the required permission to use the endpoint.
+          description: If the consumer doesn't have the required permission to use the
+            endpoint.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Searches for a company based on its Company Number and returns its details.
+      summary: Searches for a company based on its Company Number and returns its
+        details.
       tags:
         - Companies
   "/api/companies/{companyId}":
@@ -243,39 +265,49 @@ paths:
               region: Cardiff
               significantParentCompanies:
                 - addressLine1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   companyName: Widgets International Limited
                   companyNumber: "54345678"
                   dateOfRegistration: 0001-01-01T00:00:00
                   duplicate: false
                   id: ebbc9433-40a6-4197-902d-d4ff2efdbaa5
                   locality:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   postCode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   region:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   significantParentCompanies:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   significantPeople:
                     - forename: John
                       id: b58ec846-1da1-4ac2-be27-b1dcbff8c8dd
                       regEntryId:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       surname: Smith
                 - addressLine1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   companyName: Widget Services Limited
                   companyNumber: "23232321"
                   dateOfRegistration: 0001-01-01T00:00:00
                   duplicate: false
                   id: 48641603-7593-46a9-b993-8ead4daca09e
                   locality:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   postCode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   region:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   significantParentCompanies:
                     - addressLine1: 25 Westgate Street
                       companyName: Widgets International Limited
@@ -287,11 +319,14 @@ paths:
                       postCode: CF101NS
                       region: Cardiff
                       significantParentCompanies:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       significantPeople:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                   significantPeople:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
               significantPeople:
                 - forename: John
                   id: 108db0e1-fe11-44be-ad8f-405ed57d3fbc
@@ -300,7 +335,8 @@ paths:
                 - forename: Jane
                   id: 965f3298-da35-4906-8d9e-d346008289dc
                   regEntryId:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   surname: Smith
           schema:
             $ref: "#/definitions/Credas.Api.Models.Companies.CompanyDetail"
@@ -313,7 +349,8 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: If the consumer doesn't have the required permission to use the endpoint.
+          description: If the consumer doesn't have the required permission to use the
+            endpoint.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -359,11 +396,14 @@ paths:
                 - address1: Flat 30
                   address2: Richmond Court, St. Peters Street
                   address3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   address4:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   address5:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   amount: £5000.00
                   caseNumber: CS1113-56-33
                   courtName: CARMARTHEN COUNTY COURT
@@ -398,9 +438,11 @@ paths:
                     address2: Richmond Court
                     address3: St Peters Street
                     address4:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     address5:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     dps: DPS1
                     isEmpty: false
                     postcode: CF24 3AZ
@@ -416,7 +458,8 @@ paths:
                   occupation: Field Agent
                   presentationDate: 2018-01-15T00:00:00
                   previousAddress:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   serviceOffice: MR JON WILLIAM JONES
                   startDate: 2017-12-01T00:00:00
                   status: CURRENT
@@ -436,14 +479,16 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to insufficient credits.
+          description: Error code meaning that the operation was aborted due to
+            insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Check includes identifying bankruptcy, insolvency, CCJ's or Company Directorship.
+      summary: Check includes identifying bankruptcy, insolvency, CCJ's or Company
+        Directorship.
       tags:
         - CreditStatus
   /api/datachecks:
@@ -492,7 +537,8 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to insufficient credits.
+          description: Error code meaning that the operation was aborted due to
+            insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -551,7 +597,8 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to insufficient credits.
+          description: Error code meaning that the operation was aborted due to
+            insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -588,11 +635,14 @@ paths:
           examples:
             application/json:
               - addressCity:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 addressFull:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 addressPostcode:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 country: United Kingdom
                 countryCode: GBR
                 dateCreated: 2018-02-23T17:22:11.044
@@ -613,13 +663,15 @@ paths:
                 mrz1: P<GBRHARPER<<ALAN<WILLIAM<<<<<<<<<<<<<<<<<<<
                 mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                 mrz3:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 nameCheck: true
                 nfcCheck: true
                 nfcFacialUrl: https://
                 nfcReadStatus: 0
                 primaryScanId:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 status: 1
                 surname: Harper
                 url: https://
@@ -644,27 +696,35 @@ paths:
                 manuallyVerified: true
                 middleName: William
                 mrz1:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 mrz2:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 mrz3:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 nameCheck: true
                 nfcCheck: false
                 nfcFacialUrl:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 nfcReadStatus: 0
                 primaryScanId:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 status: 2
                 surname: Harper
                 url: https://
               - addressCity:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 addressFull:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 addressPostcode:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 country: United Kingdom
                 countryCode: GBR
                 dateCreated: 2018-02-23T19:24:51.112
@@ -683,15 +743,19 @@ paths:
                 manuallyVerified: false
                 middleName: William
                 mrz1:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 mrz2:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 mrz3:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 nameCheck: false
                 nfcCheck: false
                 nfcFacialUrl:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 nfcReadStatus: 8
                 primaryScanId: fedcba89-dead-1278-bead-8901234abcde
                 status: 2
@@ -982,7 +1046,8 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRequest"
+            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
+              quest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -1006,7 +1071,8 @@ paths:
               propertyOwnershipText: Joint Ownership
               titleNumber: TMP123456
           schema:
-            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckResponse"
+            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
+              sponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -1016,7 +1082,8 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to insufficient credits.
+          description: Error code meaning that the operation was aborted due to
+            insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -1060,7 +1127,8 @@ paths:
               propertyOwnershipText: Joint Ownership
               titleNumber: TMP123456
           schema:
-            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckResponse"
+            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
+              sponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -1155,7 +1223,7 @@ paths:
               regCode: QX92TAG7
               webJourneyUrl:
                 url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                validUntil: 2021-06-07T09:23:21.9362223Z
+                validUntil: 2021-06-14T10:06:55.8728689Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.Registrations.AddRegistrationResponse"
         "400":
@@ -1167,7 +1235,8 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to insufficient credits.
+          description: Error code meaning that the operation was aborted due to
+            insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -1187,15 +1256,18 @@ paths:
         - application/xml
         - text/xml
         - application/*+xml
-      description: It's designed to provide a quick integration path for external systems which capture these details.
+      description: It's designed to provide a quick integration path for external
+        systems which capture these details.
       operationId: AddInstantRegistration
       parameters:
-        - description: The Credas.Api.Models.Registrations.AddInstantRegistrationRequest object containing required data.
+        - description: The Credas.Api.Models.Registrations.AddInstantRegistrationRequest
+            object containing required data.
           in: body
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationRequest"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationRequ\
+              est"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -1217,7 +1289,8 @@ paths:
               id: abcdef12-abcd-abcd-beef-ab123cd12345
               regCode: QX92TAG7
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationResponse"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationResp\
+              onse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -1230,7 +1303,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Creates new registration record, adds an ID document and optional selfie image in one go.
+      summary: Creates new registration record, adds an ID document and optional
+        selfie image in one go.
       tags:
         - Registrations
   "/api/registrations/referenceid/{referenceId}/summary":
@@ -1283,11 +1357,14 @@ paths:
                     - address1: Flat 30
                       address2: Richmond Court, St. Peters Street
                       address3:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       address4:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       address5:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       amount: £5000.00
                       caseNumber: CS1113-56-33
                       courtName: CARMARTHEN COUNTY COURT
@@ -1322,9 +1399,11 @@ paths:
                         address2: Richmond Court
                         address3: St Peters Street
                         address4:
-                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                            rson/middleName"
                         address5:
-                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                            rson/middleName"
                         dps: DPS1
                         isEmpty: false
                         postcode: CF24 3AZ
@@ -1340,7 +1419,8 @@ paths:
                       occupation: Field Agent
                       presentationDate: 2018-01-15T00:00:00
                       previousAddress:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       serviceOffice: MR JON WILLIAM JONES
                       startDate: 2017-12-01T00:00:00
                       status: CURRENT
@@ -1351,9 +1431,11 @@ paths:
                   status: 3
                 customTermsAccepted: false
                 customTermsAcceptedDateTime:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 customTermsAcceptedVersion:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 dataCheckResult: 1
                 dataCheckSources:
                   - dateCreated: 2018-02-23T12:54:32.017
@@ -1361,7 +1443,8 @@ paths:
                     hasPepSanctionsData: false
                     label: Mortality
                     pepSanctionsData:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     remarks:
                       - category: 1
                         description: Halo source indicates this person is not deceased at address 1
@@ -1374,7 +1457,8 @@ paths:
                     hasPepSanctionsData: false
                     label: Address and DOB
                     pepSanctionsData:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     remarks:
                       - category: 1
                         description: "(Electoral Register) Address #1 details are valid"
@@ -1394,15 +1478,18 @@ paths:
                               - California
                               - USA
                         aliases:
-                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                            rson/middleName"
                         fullName: Alan Stuart Harper
                         id:
-                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                            rson/middleName"
                         positions:
                           - country: USA
                             position: Head of local gov
                         sanctionBodies:
-                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                            rson/middleName"
                         sanctionDates:
                           - date: 1937-04-03T12:00:00Z
                             day: 3
@@ -1421,11 +1508,14 @@ paths:
                 id: abcdef12-abcd-abcd-beef-ab123cd12345
                 idDocuments:
                   - addressCity:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     addressFull:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     addressPostcode:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     country: United Kingdom
                     countryCode: GBR
                     dateCreated: 2018-02-23T17:22:11.044
@@ -1445,12 +1535,14 @@ paths:
                     mrz1: P<GBRHARPER<<ALAN<WILLIAM<<<<<<<<<<<<<<<<<<<
                     mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                     mrz3:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     nameCheck: true
                     nfcCheck: true
                     nfcReadStatus: 1
                     primaryScanId:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     status: 1
                     surname: Harper
                   - addressCity: London
@@ -1473,24 +1565,31 @@ paths:
                     manuallyVerified: true
                     middleName: William
                     mrz1:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     mrz2:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     mrz3:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     nameCheck: true
                     nfcCheck: false
                     nfcReadStatus: 8
                     primaryScanId:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     status: 2
                     surname: Harper
                   - addressCity:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     addressFull:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     addressPostcode:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     country: United Kingdom
                     countryCode: GBR
                     dateCreated: 2018-02-23T19:24:51.112
@@ -1508,11 +1607,14 @@ paths:
                     manuallyVerified: false
                     middleName: William
                     mrz1:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     mrz2:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     mrz3:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     nameCheck: false
                     nfcCheck: false
                     nfcReadStatus: 8
@@ -1520,7 +1622,8 @@ paths:
                     status: 2
                     surname: Harper
                 idVerification:
-                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                  $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                    rson/middleName"
                 isAgentLed: false
                 livenessMethod: 1
                 livenessStatus: 1
@@ -1530,11 +1633,13 @@ paths:
                     addressLine1: Flat 30
                     addressLine2: Richmond Court, St. Peters Street
                     addressLine3:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     city: Cardiff
                     country: United Kingdom
                     county:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     postcode: CF24 3AZ
                   dateOfBirth: 1978-11-09T00:00:00
                   forename: Alan William
@@ -1632,11 +1737,14 @@ paths:
                   - address1: Flat 30
                     address2: Richmond Court, St. Peters Street
                     address3:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     address4:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     address5:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     amount: £5000.00
                     caseNumber: CS1113-56-33
                     courtName: CARMARTHEN COUNTY COURT
@@ -1671,9 +1779,11 @@ paths:
                       address2: Richmond Court
                       address3: St Peters Street
                       address4:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       address5:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       dps: DPS1
                       isEmpty: false
                       postcode: CF24 3AZ
@@ -1689,7 +1799,8 @@ paths:
                     occupation: Field Agent
                     presentationDate: 2018-01-15T00:00:00
                     previousAddress:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     serviceOffice: MR JON WILLIAM JONES
                     startDate: 2017-12-01T00:00:00
                     status: CURRENT
@@ -1700,9 +1811,11 @@ paths:
                 status: 3
               customTermsAccepted: false
               customTermsAcceptedDateTime:
-                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                  rson/middleName"
               customTermsAcceptedVersion:
-                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                  rson/middleName"
               dataCheckResult: 1
               dataCheckSources:
                 - dateCreated: 2018-02-23T12:54:32.017
@@ -1710,7 +1823,8 @@ paths:
                   hasPepSanctionsData: false
                   label: Mortality
                   pepSanctionsData:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   remarks:
                     - category: 1
                       description: Halo source indicates this person is not deceased at address 1
@@ -1723,7 +1837,8 @@ paths:
                   hasPepSanctionsData: false
                   label: Address and DOB
                   pepSanctionsData:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   remarks:
                     - category: 1
                       description: "(Electoral Register) Address #1 details are valid"
@@ -1743,15 +1858,18 @@ paths:
                             - California
                             - USA
                       aliases:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       fullName: Alan Stuart Harper
                       id:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       positions:
                         - country: USA
                           position: Head of local gov
                       sanctionBodies:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       sanctionDates:
                         - date: 1937-04-03T12:00:00Z
                           day: 3
@@ -1770,11 +1888,14 @@ paths:
               id: abcdef12-abcd-abcd-beef-ab123cd12345
               idDocuments:
                 - addressCity:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressFull:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressPostcode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   country: United Kingdom
                   countryCode: GBR
                   dateCreated: 2018-02-23T17:22:11.044
@@ -1794,12 +1915,14 @@ paths:
                   mrz1: P<GBRHARPER<<ALAN<WILLIAM<<<<<<<<<<<<<<<<<<<
                   mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                   mrz3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   nameCheck: true
                   nfcCheck: true
                   nfcReadStatus: 1
                   primaryScanId:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   status: 1
                   surname: Harper
                 - addressCity: London
@@ -1822,24 +1945,31 @@ paths:
                   manuallyVerified: true
                   middleName: William
                   mrz1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz2:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   nameCheck: true
                   nfcCheck: false
                   nfcReadStatus: 8
                   primaryScanId:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   status: 2
                   surname: Harper
                 - addressCity:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressFull:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressPostcode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   country: United Kingdom
                   countryCode: GBR
                   dateCreated: 2018-02-23T19:24:51.112
@@ -1857,11 +1987,14 @@ paths:
                   manuallyVerified: false
                   middleName: William
                   mrz1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz2:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   nameCheck: false
                   nfcCheck: false
                   nfcReadStatus: 8
@@ -1869,7 +2002,8 @@ paths:
                   status: 2
                   surname: Harper
               idVerification:
-                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                  rson/middleName"
               isAgentLed: false
               livenessMethod: 1
               livenessStatus: 1
@@ -1879,11 +2013,13 @@ paths:
                   addressLine1: Flat 30
                   addressLine2: Richmond Court, St. Peters Street
                   addressLine3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   city: Cardiff
                   country: United Kingdom
                   county:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   postcode: CF24 3AZ
                 dateOfBirth: 1978-11-09T00:00:00
                 forename: Alan William
@@ -2002,7 +2138,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: "Gets paged registration list by search criteria or nothing if there are no matching fields.\r
+      summary: "Gets paged registration list by search criteria or nothing if there
+        are no matching fields.\r
 
         Optional parameters may be appended to the query string.\r
 
@@ -2038,7 +2175,8 @@ paths:
               checkCode: 3
               message: Please provide proof of address.
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.CheckSubmittedIdDocumentsResponse"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.CheckSubmittedIdDocumentsR\
+              esponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -2077,7 +2215,8 @@ paths:
           name: details
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateContactDetailsRequest"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateContactDetailsReques\
+              t"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2137,7 +2276,8 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.StatusOverrides.OverrideCheckStatusRequest"
+            $ref: "#/definitions/Credas.Api.Models.StatusOverrides.OverrideCheckStatusReque\
+              st"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2317,7 +2457,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Gets registration settings or nothing if there are no settings associated with the registration.
+      summary: Gets registration settings or nothing if there are no settings
+        associated with the registration.
       tags:
         - Registrations
     put:
@@ -2402,7 +2543,8 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateRegistrationStatusRequest"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateRegistrationStatusRe\
+              quest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2486,11 +2628,14 @@ paths:
                   - address1: Flat 30
                     address2: Richmond Court, St. Peters Street
                     address3:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     address4:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     address5:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     amount: £5000.00
                     caseNumber: CS1113-56-33
                     courtName: CARMARTHEN COUNTY COURT
@@ -2525,9 +2670,11 @@ paths:
                       address2: Richmond Court
                       address3: St Peters Street
                       address4:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       address5:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       dps: DPS1
                       isEmpty: false
                       postcode: CF24 3AZ
@@ -2543,7 +2690,8 @@ paths:
                     occupation: Field Agent
                     presentationDate: 2018-01-15T00:00:00
                     previousAddress:
-                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                      $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                        rson/middleName"
                     serviceOffice: MR JON WILLIAM JONES
                     startDate: 2017-12-01T00:00:00
                     status: CURRENT
@@ -2554,9 +2702,11 @@ paths:
                 status: 3
               customTermsAccepted: false
               customTermsAcceptedDateTime:
-                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                  rson/middleName"
               customTermsAcceptedVersion:
-                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                  rson/middleName"
               dataCheckResult: 1
               dataCheckSources:
                 - dateCreated: 2018-02-23T12:54:32.017
@@ -2564,7 +2714,8 @@ paths:
                   hasPepSanctionsData: false
                   label: Mortality
                   pepSanctionsData:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   remarks:
                     - category: 1
                       description: Halo source indicates this person is not deceased at address 1
@@ -2577,7 +2728,8 @@ paths:
                   hasPepSanctionsData: false
                   label: Address and DOB
                   pepSanctionsData:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   remarks:
                     - category: 1
                       description: "(Electoral Register) Address #1 details are valid"
@@ -2597,15 +2749,18 @@ paths:
                             - California
                             - USA
                       aliases:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       fullName: Alan Stuart Harper
                       id:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       positions:
                         - country: USA
                           position: Head of local gov
                       sanctionBodies:
-                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                          rson/middleName"
                       sanctionDates:
                         - date: 1937-04-03T12:00:00Z
                           day: 3
@@ -2624,11 +2779,14 @@ paths:
               id: abcdef12-abcd-abcd-beef-ab123cd12345
               idDocuments:
                 - addressCity:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressFull:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressPostcode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   country: United Kingdom
                   countryCode: GBR
                   dateCreated: 2018-02-23T17:22:11.044
@@ -2648,12 +2806,14 @@ paths:
                   mrz1: P<GBRHARPER<<ALAN<WILLIAM<<<<<<<<<<<<<<<<<<<
                   mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                   mrz3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   nameCheck: true
                   nfcCheck: true
                   nfcReadStatus: 1
                   primaryScanId:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   status: 1
                   surname: Harper
                 - addressCity: London
@@ -2676,24 +2836,31 @@ paths:
                   manuallyVerified: true
                   middleName: William
                   mrz1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz2:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   nameCheck: true
                   nfcCheck: false
                   nfcReadStatus: 8
                   primaryScanId:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   status: 2
                   surname: Harper
                 - addressCity:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressFull:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   addressPostcode:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   country: United Kingdom
                   countryCode: GBR
                   dateCreated: 2018-02-23T19:24:51.112
@@ -2711,11 +2878,14 @@ paths:
                   manuallyVerified: false
                   middleName: William
                   mrz1:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz2:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   mrz3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   nameCheck: false
                   nfcCheck: false
                   nfcReadStatus: 8
@@ -2723,7 +2893,8 @@ paths:
                   status: 2
                   surname: Harper
               idVerification:
-                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                  rson/middleName"
               isAgentLed: false
               livenessMethod: 1
               livenessStatus: 1
@@ -2733,11 +2904,13 @@ paths:
                   addressLine1: Flat 30
                   addressLine2: Richmond Court, St. Peters Street
                   addressLine3:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   city: Cardiff
                   country: United Kingdom
                   county:
-                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+                    $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+                      rson/middleName"
                   postcode: CF24 3AZ
                 dateOfBirth: 1978-11-09T00:00:00
                 forename: Alan William
@@ -2857,7 +3030,9 @@ paths:
         - application/*+xml
       description: "It may return none, one or many (up to 20) matching results.\r
 
-        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
+        Each result contains a secure url; UTC date/time of when the
+        link expires; name details of a person associated with the
+        registration."
       operationId: GetReportViewByReferenceId
       parameters:
         - description: Request object
@@ -2865,7 +3040,8 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByReferenceIdRequest"
+            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByReferenceIdReq\
+              uest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2885,7 +3061,7 @@ paths:
                 - forename: Edward
                   surname: Roberts
                   url: https://report.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                  validUntil: 2021-06-07T09:23:21.9628969Z
+                  validUntil: 2021-06-14T10:06:55.905238Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2900,7 +3076,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure links to registration details pages searching by the Reference Id.
+      summary: Retrieves secure links to registration details pages searching by the
+        Reference Id.
       tags:
         - ReportView
   /api/report-view/by-registrationid:
@@ -2915,7 +3092,9 @@ paths:
         - application/*+xml
       description: "It may return none or one matching result.\r
 
-        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
+        Each result contains a secure url; UTC date/time of when the
+        link expires; name details of a person associated with the
+        registration."
       operationId: GetReportViewByRegistrationId
       parameters:
         - description: Request object
@@ -2923,7 +3102,8 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByRegistrationIdRequest"
+            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByRegistrationId\
+              Request"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2943,7 +3123,7 @@ paths:
                 - forename: Mike
                   surname: Jones
                   url: https://report.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                  validUntil: 2021-06-07T09:23:21.9640534Z
+                  validUntil: 2021-06-14T10:06:55.9063944Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2958,7 +3138,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure link to registration details page searching by the Registration Id.
+      summary: Retrieves secure link to registration details page searching by the
+        Registration Id.
       tags:
         - ReportView
   /api/web-verifications/by-referenceid:
@@ -2973,14 +3154,17 @@ paths:
         - application/*+xml
       description: "It may return none, one or many (up to 20) matching results.\r
 
-        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
+        Each result contains a secure url; UTC date/time of when the
+        link expires; name details of a person associated with the
+        registration."
       operationId: GetWebVerificationsByReferenceId
       parameters:
         - in: body
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByReferenceIdRequest"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByRe\
+              ferenceIdRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2999,9 +3183,10 @@ paths:
               results:
                 - journeyUrl:
                     url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                    validUntil: 2021-06-07T09:23:21.9652406Z
+                    validUntil: 2021-06-14T10:06:55.9075078Z
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResp\
+              onse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -3014,7 +3199,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure links to web verification pages searching by the Reference Id.
+      summary: Retrieves secure links to web verification pages searching by the
+        Reference Id.
       tags:
         - WebVerifications
   /api/web-verifications/by-registrationid:
@@ -3029,14 +3215,17 @@ paths:
         - application/*+xml
       description: "It may return none or one matching result.\r
 
-        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
+        Each result contains a secure url; UTC date/time of when the
+        link expires; name details of a person associated with the
+        registration."
       operationId: GetWebVerificationsByRegistrationId
       parameters:
         - in: body
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByRegistrationIdRequest"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByRe\
+              gistrationIdRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -3055,9 +3244,10 @@ paths:
               results:
                 - journeyUrl:
                     url: https://verify.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                    validUntil: 2021-06-07T09:23:21.9662449Z
+                    validUntil: 2021-06-14T10:06:55.9085536Z
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResp\
+              onse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -3070,7 +3260,8 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure link to web verification page searching by the Registration Id.
+      summary: Retrieves secure link to web verification page searching by the
+        Registration Id.
       tags:
         - WebVerifications
 definitions:
@@ -3093,16 +3284,19 @@ definitions:
         addressLine1: 10 Downing St
         addressLine2: Westminster
         addressLine3:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         city: London
         country: United Kingdom
         county:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         postcode: SW1A2AA
       person:
         forename: Angela
         middleName:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         surname: UK Specimen
       regEntryId: 141dbb24-c4ff-4658-9556-15ea25428d48
     properties:
@@ -3126,7 +3320,8 @@ definitions:
       accountNumber:
         type: string
       accountNumberValidation:
-        description: Unknown = 0, NoMatch = 1, Valid = 2, Invalid = 3, SevenDigitsMatched = 4, SixDigitsMatched = 5
+        description: Unknown = 0, NoMatch = 1, Valid = 2, Invalid = 3,
+          SevenDigitsMatched = 4, SixDigitsMatched = 5
         enum:
           - 0
           - 1
@@ -3154,7 +3349,8 @@ definitions:
       accountValid:
         type: boolean
       addressValidation:
-        description: Unknown = 0, NoMatch = 1, CurrentAddress = 2, PreviousAddress = 3, ForwardingAddress = 4
+        description: Unknown = 0, NoMatch = 1, CurrentAddress = 2, PreviousAddress = 3,
+          ForwardingAddress = 4
         enum:
           - 0
           - 1
@@ -3291,7 +3487,8 @@ definitions:
       regEntryId: 141dbb24-c4ff-4658-9556-15ea25428d48
     properties:
       checkType:
-        description: None = 0, StandardAml = 1, EnhancedAml = 2, InternationalPepSanctions = 3
+        description: None = 0, StandardAml = 1, EnhancedAml = 2,
+          InternationalPepSanctions = 3
         enum:
           - 0
           - 1
@@ -3466,7 +3663,8 @@ definitions:
   Credas.Api.Models.Images.AddIdDocumentImageRequest:
     example:
       documentParameters:
-        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+          rson/middleName"
       documentType: 1
       imageData: Base64EncodedJpegImage
       registrationId: 141dbb24-c4ff-4658-9556-15ea25428d48
@@ -3477,7 +3675,9 @@ definitions:
         type: array
         uniqueItems: false
       documentType:
-        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard = 4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7, ResidencePermit = 9
+        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard =
+          4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7,
+          ResidencePermit = 9
         enum:
           - 0
           - 1
@@ -3512,7 +3712,27 @@ definitions:
         format: int32
         type: integer
       documentType:
-        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard = 3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7, HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10, BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax = 14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21, MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument = 24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27, ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30, AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43, BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46, CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50, DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53, InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56, NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63, TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66, TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69, UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72, WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75, MedicareCardNew = 76, Certificate = 77
+        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard =
+          3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7,
+          HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10,
+          BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax =
+          14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice
+          = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21,
+          MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument =
+          24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27,
+          ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30,
+          AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43,
+          BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46,
+          CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50,
+          DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53,
+          InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56,
+          NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter
+          = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63,
+          TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66,
+          TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69,
+          UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72,
+          WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75,
+          MedicareCardNew = 76, Certificate = 77
         enum:
           - 0
           - 1
@@ -3653,7 +3873,8 @@ definitions:
       description:
         type: string
       documentAnalysisResult:
-        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4, Undefined = 5, Fail = 10, NotPerformed = 11
+        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4,
+          Undefined = 5, Fail = 10, NotPerformed = 11
         enum:
           - 0
           - 1
@@ -3708,7 +3929,9 @@ definitions:
       nfcFacialUrl:
         type: string
       nfcReadStatus:
-        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4, Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8, Expired = 9
+        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4,
+          Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8,
+          Expired = 9
         enum:
           - 0
           - 1
@@ -3809,9 +4032,11 @@ definitions:
       address:
         addressLine1: 25 Westgate Street
         addressLine2:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         addressLine3:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         city: Cardiff
         country: United Kingdom
         county: Cardiff
@@ -3819,7 +4044,8 @@ definitions:
       person:
         forename: Angela
         middleName:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         surname: UK Specimen
       regEntryId: 12345678-1234-1234-1234-1234567890ab
     properties:
@@ -3849,7 +4075,9 @@ definitions:
       hasBeenOverridden:
         type: boolean
       matchResult:
-        description: Unknown = 0, FullNameMatch = 1, SurnameMatch = 2, NoNameMatch = 3, NoAddressMatch = 4, TitleNotRegistered = 5, Unavailable = 6, OutOfHours = 7
+        description: Unknown = 0, FullNameMatch = 1, SurnameMatch = 2, NoNameMatch = 3,
+          NoAddressMatch = 4, TitleNotRegistered = 5, Unavailable = 6,
+          OutOfHours = 7
         enum:
           - 0
           - 1
@@ -3888,7 +4116,8 @@ definitions:
     example:
       document: Base64EncodedJpegImage
       documentParameters:
-        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+          rson/middleName"
       documentType: 1
       forename: Alan
       parameters:
@@ -3902,7 +4131,8 @@ definitions:
       regTypeId: 12345678-1234-1234-1234-1234567890ab
       selfie: Base64EncodedJpegImage
       significantPersonId:
-        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+          rson/middleName"
       surname: Harper
     properties:
       document:
@@ -3913,7 +4143,9 @@ definitions:
         type: array
         uniqueItems: false
       documentType:
-        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard = 4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7, ResidencePermit = 9
+        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard =
+          4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7,
+          ResidencePermit = 9
         enum:
           - 0
           - 1
@@ -3970,7 +4202,27 @@ definitions:
         format: int32
         type: integer
       documentType:
-        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard = 3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7, HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10, BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax = 14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21, MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument = 24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27, ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30, AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43, BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46, CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50, DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53, InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56, NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63, TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66, TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69, UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72, WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75, MedicareCardNew = 76, Certificate = 77
+        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard =
+          3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7,
+          HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10,
+          BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax =
+          14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice
+          = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21,
+          MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument =
+          24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27,
+          ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30,
+          AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43,
+          BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46,
+          CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50,
+          DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53,
+          InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56,
+          NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter
+          = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63,
+          TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66,
+          TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69,
+          UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72,
+          WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75,
+          MedicareCardNew = 76, Certificate = 77
         enum:
           - 0
           - 1
@@ -4081,12 +4333,15 @@ definitions:
         checkProfile: 2
         legislation: 3
         nameMatchRoutine:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         requiredChecks:
-          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+          $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+            rson/middleName"
         skipEmailStep: true
       significantPersonId:
-        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/person/middleName"
+        $ref: "#/definitions/Credas.Api.Models.DataCheck.AddDataCheckRequest/example/pe\
+          rson/middleName"
       surname: Harper
     properties:
       diallingCode:
@@ -4191,7 +4446,11 @@ definitions:
         type: array
         uniqueItems: false
       sourceType:
-        description: Unknown = 0, EditedElectoralRollUk = 1, LandlineAppendUk = 2, MortalityUk = 3, CreaditHeaderAmlUk = 4, NcoaAlertFlagUk = 5, NcoaAlertFullUk = 6, SanctionsEnhancedInternational = 7, PepEnhancedInternational = 8, NationalIdentityRegisterUk = 9, LandRegistry = 10
+        description: Unknown = 0, EditedElectoralRollUk = 1, LandlineAppendUk = 2,
+          MortalityUk = 3, CreaditHeaderAmlUk = 4, NcoaAlertFlagUk = 5,
+          NcoaAlertFullUk = 6, SanctionsEnhancedInternational = 7,
+          PepEnhancedInternational = 8, NationalIdentityRegisterUk = 9,
+          LandRegistry = 10
         enum:
           - 0
           - 1
@@ -4237,7 +4496,8 @@ definitions:
       description:
         type: string
       documentAnalysisResult:
-        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4, Undefined = 5, Fail = 10, NotPerformed = 11
+        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4,
+          Undefined = 5, Fail = 10, NotPerformed = 11
         enum:
           - 0
           - 1
@@ -4288,7 +4548,9 @@ definitions:
       nfcCheck:
         type: boolean
       nfcReadStatus:
-        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4, Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8, Expired = 9
+        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4,
+          Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8,
+          Expired = 9
         enum:
           - 0
           - 1
@@ -4383,7 +4645,8 @@ definitions:
       capturePersonalDetails:
         type: boolean
       checkProfile:
-        description: None = 0, StandardAml = 1, EnhancedAml = 2, InternationalPepSanctions = 3
+        description: None = 0, StandardAml = 1, EnhancedAml = 2,
+          InternationalPepSanctions = 3
         enum:
           - 0
           - 1
@@ -4392,7 +4655,13 @@ definitions:
         format: int32
         type: integer
       legislation:
-        description: NotSet = 0, RightToRent = 1, RightToWork = 2, AntiMoneyLaundering = 3, KnowYourCustomer = 4, AntiMoneyLaunderingTwoDocuments = 5, AntiMoneyLaunderingOneIdTwoAddressDocuments = 6, AntiMoneyLaunderingOneIdOneAddressOneBankStatement = 7, AntiMoneyLaunderingOneIdOneBankStatement = 8, DisclosureAndBarringService = 9, OnePassportOneDrivingLicence = 10, RightToRentWithAddress = 11, RightToWorkStrict = 12
+        description: NotSet = 0, RightToRent = 1, RightToWork = 2, AntiMoneyLaundering =
+          3, KnowYourCustomer = 4, AntiMoneyLaunderingTwoDocuments = 5,
+          AntiMoneyLaunderingOneIdTwoAddressDocuments = 6,
+          AntiMoneyLaunderingOneIdOneAddressOneBankStatement = 7,
+          AntiMoneyLaunderingOneIdOneBankStatement = 8,
+          DisclosureAndBarringService = 9, OnePassportOneDrivingLicence = 10,
+          RightToRentWithAddress = 11, RightToWorkStrict = 12
         enum:
           - 0
           - 1
@@ -4494,7 +4763,8 @@ definitions:
         format: int32
         type: integer
       livenessStatus:
-        description: NotSubmitted = 0, Verified = 1, Unverified = 2, Unknown = 3, RetakeRequested = 4
+        description: NotSubmitted = 0, Verified = 1, Unverified = 2, Unknown = 3,
+          RetakeRequested = 4
         enum:
           - 0
           - 1
@@ -4510,7 +4780,8 @@ definitions:
       phoneNumber:
         type: string
       proofOfOwnershipCheck:
-        $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckResponse"
+        $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
+          sponse"
       referenceId:
         maxLength: 255
         minLength: 0
@@ -4521,7 +4792,12 @@ definitions:
         format: uuid
         type: string
       rightToWorkDocumentsProvided:
-        description: Indicates whether sufficient right to work documents have been provided and validated. <br />This relies on the registration being submitted and the subject's liveness being confirmed. To check whether documents have been submitted, regardless of validation, please use the /api/registrations/{id}/check-submitted-id-documents endpoint.<br />  values=> Pending = 0, Pass = 1, Fail = 2
+        description: Indicates whether sufficient right to work documents have been
+          provided and validated. <br />This relies on the registration being
+          submitted and the subject's liveness being confirmed. To check whether
+          documents have been submitted, regardless of validation, please use
+          the /api/registrations/{id}/check-submitted-id-documents endpoint.<br
+          />  values=> Pending = 0, Pass = 1, Fail = 2
         enum:
           - 0
           - 1
@@ -4529,7 +4805,8 @@ definitions:
         format: int32
         type: integer
       status:
-        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported = 4, Invited = 6
+        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported =
+          4, Invited = 6
         enum:
           - 0
           - 1
@@ -4565,7 +4842,9 @@ definitions:
       name:
         type: string
       type:
-        description: Passport = 1, DrivingLicence = 2, NationalIdCard = 3, CscsCard = 4, ResidencePermit = 5, Visa = 6, BirthCertificate = 7, HomeOfficeLetter = 8, Other = 9
+        description: Passport = 1, DrivingLicence = 2, NationalIdCard = 3, CscsCard = 4,
+          ResidencePermit = 5, Visa = 6, BirthCertificate = 7, HomeOfficeLetter
+          = 8, Other = 9
         enum:
           - 0
           - 1
@@ -4626,7 +4905,8 @@ definitions:
       status: 2
     properties:
       status:
-        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported = 4, Invited = 6
+        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported =
+          4, Invited = 6
         enum:
           - 0
           - 1
@@ -4731,7 +5011,8 @@ definitions:
         format: date-time
         type: string
       judgementType:
-        description: Unknown = 0, Judgement = 1, Satisfaction = 2, Revocation = 3, SetAside = 4, AdministrationOrder = 5
+        description: Unknown = 0, Judgement = 1, Satisfaction = 2, Revocation = 3,
+          SetAside = 4, AdministrationOrder = 5
         enum:
           - 0
           - 1
@@ -4774,7 +5055,8 @@ definitions:
     properties:
       companyAppointments:
         items:
-          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyAppointment"
+          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyAppo\
+            intment"
         type: array
         uniqueItems: false
       companyName:
@@ -4785,7 +5067,8 @@ definitions:
         format: date-time
         type: string
       matchType:
-        description: Unknown = 0, NameAndDateOfBirth = 1, NameAndAddress = 2, NameAndAddressAndDateOfBirth = 3
+        description: Unknown = 0, NameAndDateOfBirth = 1, NameAndAddress = 2,
+          NameAndAddressAndDateOfBirth = 3
         enum:
           - 0
           - 1
@@ -4861,7 +5144,9 @@ definitions:
       tradingNames:
         type: string
       type:
-        description: Unknown = 0, NorthernIrelandBankruptcy = 1, ScottishSequestrationBankruptcy = 2, EnglandAndWalesIVA = 3, EnglandAndWalesDRO = 4, EnglandAndWalesBankruptcy = 5
+        description: Unknown = 0, NorthernIrelandBankruptcy = 1,
+          ScottishSequestrationBankruptcy = 2, EnglandAndWalesIVA = 3,
+          EnglandAndWalesDRO = 4, EnglandAndWalesBankruptcy = 5
         enum:
           - 0
           - 1
@@ -4887,7 +5172,8 @@ definitions:
         type: string
       companyDirector:
         items:
-          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyDirectorResult"
+          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyDire\
+            ctorResult"
         type: array
         uniqueItems: false
       hasBeenOverridden:
@@ -4928,7 +5214,8 @@ definitions:
       status: 1
     properties:
       checkType:
-        description: IdDocuments = 1, StandardChecks = 2, InternationalSanctionsAndPep = 3, CreditStatusCheck = 4, BankAccountCheck = 5, ProofOfOwnership = 6
+        description: IdDocuments = 1, StandardChecks = 2, InternationalSanctionsAndPep =
+          3, CreditStatusCheck = 4, BankAccountCheck = 5, ProofOfOwnership = 6
         enum:
           - 0
           - 1

@@ -4,8 +4,11 @@ schemes:
 host: mandrillapp.com
 basePath: /api/1.0/
 info:
-  description: |
-    Mandrill is a reliable, scalable, and secure delivery API for transactional emails from websites and applications. It's ideal for sending data-driven transactional emails, including targeted e-commerce and personalized one-to-one messages.
+  description: >
+    Mandrill is a reliable, scalable, and secure delivery API for
+    transactional emails from websites and applications. It's ideal for sending
+    data-driven transactional emails, including targeted e-commerce and
+    personalized one-to-one messages.
   title: Mandrill
   version: "1.0"
   x-apisguru-categories:
@@ -25,7 +28,13 @@ securityDefinitions: {}
 paths:
   /exports/activity.json:
     post:
-      description: "Begins an export of your activity history. The activity will be exported to a zip archive containing a single file named activity.csv in the same format as you would be able to export from your account's activity view. It includes the following fields: Date, Email Address, Sender, Subject, Status, Tags, Opens, Clicks, Bounce Detail. If you have configured any custom metadata fields, they will be included in the exported data."
+      description: "Begins an export of your activity history. The activity will be
+        exported to a zip archive containing a single file named activity.csv in
+        the same format as you would be able to export from your account's
+        activity view. It includes the following fields: Date, Email Address,
+        Sender, Subject, Status, Tags, Opens, Clicks, Bounce Detail. If you have
+        configured any custom metadata fields, they will be included in the
+        exported data."
       parameters:
         - in: body
           name: body
@@ -39,7 +48,11 @@ paths:
             $ref: "#/definitions/exports_satus"
   /exports/info.json:
     post:
-      description: Returns information about an export job. If the export job's state is 'complete', the returned data will include a URL you can use to fetch the results. Every export job produces a zip archive, but the format of the archive is distinct for each job type. The api calls that initiate exports include more details about the output format for that job type.
+      description: Returns information about an export job. If the export job's state
+        is 'complete', the returned data will include a URL you can use to fetch
+        the results. Every export job produces a zip archive, but the format of
+        the archive is distinct for each job type. The api calls that initiate
+        exports include more details about the output format for that job type.
       parameters:
         - in: body
           name: body
@@ -67,7 +80,10 @@ paths:
             $ref: "#/definitions/exports_list-response"
   /exports/rejects.json:
     post:
-      description: "Begins an export of your rejection blacklist. The blacklist will be exported to a zip archive containing a single file named rejects.csv that includes the following fields: email, reason, detail, created_at, expires_at, last_event_at, expires_at."
+      description: "Begins an export of your rejection blacklist. The blacklist will
+        be exported to a zip archive containing a single file named rejects.csv
+        that includes the following fields: email, reason, detail, created_at,
+        expires_at, last_event_at, expires_at."
       parameters:
         - in: body
           name: body
@@ -81,7 +97,10 @@ paths:
             $ref: "#/definitions/exports_satus"
   /exports/whitelist.json:
     post:
-      description: "Begins an export of your rejection whitelist. The whitelist will be exported to a zip archive containing a single file named whitelist.csv that includes the following fields: email, detail, created_at."
+      description: "Begins an export of your rejection whitelist. The whitelist will
+        be exported to a zip archive containing a single file named
+        whitelist.csv that includes the following fields: email, detail,
+        created_at."
       parameters:
         - in: body
           name: body
@@ -123,7 +142,8 @@ paths:
             $ref: "#/definitions/route"
   /inbound/check-domain.json:
     post:
-      description: Check the MX settings for an inbound domain. The domain must have already been added with the add-domain call
+      description: Check the MX settings for an inbound domain. The domain must have
+        already been added with the add-domain call
       parameters:
         - in: body
           name: body
@@ -137,7 +157,8 @@ paths:
             $ref: "#/definitions/inbound_info"
   /inbound/delete-domain.json:
     post:
-      description: Delete an inbound domain from the account. All mail will stop routing for this domain immediately.
+      description: Delete an inbound domain from the account. All mail will stop
+        routing for this domain immediately.
       parameters:
         - in: body
           name: body
@@ -193,7 +214,9 @@ paths:
             $ref: "#/definitions/inbound_routes-response"
   /inbound/send-raw.json:
     post:
-      description: Take a raw MIME document destined for a domain with inbound domains set up, and send it to the inbound hook exactly as if it had been sent over SMTP
+      description: Take a raw MIME document destined for a domain with inbound domains
+        set up, and send it to the inbound hook exactly as if it had been sent
+        over SMTP
       parameters:
         - in: body
           name: body
@@ -207,7 +230,8 @@ paths:
             $ref: "#/definitions/inbound_send-raw-response"
   /inbound/update-route.json:
     post:
-      description: Update the pattern or webhook of an existing inbound mailbox route. If null is provided for any fields, the values will remain unchanged.
+      description: Update the pattern or webhook of an existing inbound mailbox route.
+        If null is provided for any fields, the values will remain unchanged.
       parameters:
         - in: body
           name: body
@@ -235,7 +259,8 @@ paths:
             $ref: "#/definitions/ip_info"
   /ips/check-custom-dns.json:
     post:
-      description: Tests whether a domain name is valid for use as the custom reverse DNS for a dedicated IP.
+      description: Tests whether a domain name is valid for use as the custom reverse
+        DNS for a dedicated IP.
       parameters:
         - in: body
           name: body
@@ -249,7 +274,8 @@ paths:
             $ref: "#/definitions/ips_check-custom-dns-response"
   /ips/create-pool.json:
     post:
-      description: Creates a pool and returns it. If a pool already exists with this name, no action will be performed.
+      description: Creates a pool and returns it. If a pool already exists with this
+        name, no action will be performed.
       parameters:
         - in: body
           name: body
@@ -263,7 +289,8 @@ paths:
             $ref: "#/definitions/ips_pool"
   /ips/delete-pool.json:
     post:
-      description: Deletes a pool. A pool must be empty before you can delete it, and you cannot delete your default pool.
+      description: Deletes a pool. A pool must be empty before you can delete it, and
+        you cannot delete your default pool.
       parameters:
         - in: body
           name: body
@@ -347,7 +374,9 @@ paths:
             $ref: "#/definitions/ips_pool"
   /ips/provision.json:
     post:
-      description: Requests an additional dedicated IP for your account. Accounts may have one outstanding request at any time, and provisioning requests are processed within 24 hours.
+      description: Requests an additional dedicated IP for your account. Accounts may
+        have one outstanding request at any time, and provisioning requests are
+        processed within 24 hours.
       parameters:
         - in: body
           name: body
@@ -389,7 +418,11 @@ paths:
             $ref: "#/definitions/ip_info"
   /ips/start-warmup.json:
     post:
-      description: Begins the warmup process for a dedicated IP. During the warmup process, Mandrill will gradually increase the percentage of your mail that is sent over the warming-up IP, over a period of roughly 30 days. The rest of your mail will be sent over shared IPs or other dedicated IPs in the same pool.
+      description: Begins the warmup process for a dedicated IP. During the warmup
+        process, Mandrill will gradually increase the percentage of your mail
+        that is sent over the warming-up IP, over a period of roughly 30 days.
+        The rest of your mail will be sent over shared IPs or other dedicated
+        IPs in the same pool.
       parameters:
         - in: body
           name: body
@@ -459,7 +492,8 @@ paths:
             $ref: "#/definitions/messages_list-scheduled-response"
   /messages/parse.json:
     post:
-      description: Parse the full MIME document for an email message, returning the content of the message broken into its constituent pieces
+      description: Parse the full MIME document for an email message, returning the
+        content of the message broken into its constituent pieces
       parameters:
         - in: body
           name: body
@@ -487,7 +521,8 @@ paths:
             $ref: "#/definitions/schedulingchange_info"
   /messages/search-time-series.json:
     post:
-      description: Search the content of recently sent messages and return the aggregated hourly stats for matching messages
+      description: Search the content of recently sent messages and return the
+        aggregated hourly stats for matching messages
       parameters:
         - in: body
           name: body
@@ -501,7 +536,11 @@ paths:
             $ref: "#/definitions/timeseries"
   /messages/search.json:
     post:
-      description: Search the content of recently sent messages and optionally narrow by date range, tags and senders. This method may be called up to 20 times per minute. If you need the data more often, you can use /messages/info.json to get the information for a single message, or webhooks to push activity to your own application for querying.
+      description: Search the content of recently sent messages and optionally narrow
+        by date range, tags and senders. This method may be called up to 20
+        times per minute. If you need the data more often, you can use
+        /messages/info.json to get the information for a single message, or
+        webhooks to push activity to your own application for querying.
       parameters:
         - in: body
           name: body
@@ -515,7 +554,8 @@ paths:
             $ref: "#/definitions/messages_search-response"
   /messages/send-raw.json:
     post:
-      description: Take a raw MIME document for a message, and send it exactly as if it were sent through Mandrill's SMTP servers
+      description: Take a raw MIME document for a message, and send it exactly as if
+        it were sent through Mandrill's SMTP servers
       parameters:
         - in: body
           name: body
@@ -571,7 +611,9 @@ paths:
             $ref: "#/definitions/metadata_info"
   /metadata/delete.json:
     post:
-      description: Delete an existing custom metadata field. Deletion isn't instataneous, and /metadata/list will continue to return the field until the asynchronous deletion process is complete.
+      description: Delete an existing custom metadata field. Deletion isn't
+        instataneous, and /metadata/list will continue to return the field until
+        the asynchronous deletion process is complete.
       parameters:
         - in: body
           name: body
@@ -613,7 +655,10 @@ paths:
             $ref: "#/definitions/metadata_info"
   /rejects/add.json:
     post:
-      description: Adds an email to your email rejection blacklist. Addresses that you add manually will never expire and there is no reputation penalty for removing them from your blacklist. Attempting to blacklist an address that has been whitelisted will have no effect.
+      description: Adds an email to your email rejection blacklist. Addresses that you
+        add manually will never expire and there is no reputation penalty for
+        removing them from your blacklist. Attempting to blacklist an address
+        that has been whitelisted will have no effect.
       parameters:
         - in: body
           name: body
@@ -627,7 +672,9 @@ paths:
             $ref: "#/definitions/rejects_add-response"
   /rejects/delete.json:
     post:
-      description: Deletes an email rejection. There is no limit to how many rejections you can remove from your blacklist, but keep in mind that each deletion has an affect on your reputation.
+      description: Deletes an email rejection. There is no limit to how many
+        rejections you can remove from your blacklist, but keep in mind that
+        each deletion has an affect on your reputation.
       parameters:
         - in: body
           name: body
@@ -641,7 +688,10 @@ paths:
             $ref: "#/definitions/rejects_delete-response"
   /rejects/list.json:
     post:
-      description: Retrieves your email rejection blacklist. You can provide an email address to limit the results. Returns up to 1000 results. By default, entries that have expired are excluded from the results; set include_expired to true to include them.
+      description: Retrieves your email rejection blacklist. You can provide an email
+        address to limit the results. Returns up to 1000 results. By default,
+        entries that have expired are excluded from the results; set
+        include_expired to true to include them.
       parameters:
         - in: body
           name: body
@@ -655,7 +705,9 @@ paths:
             $ref: "#/definitions/rejects_list-response"
   /senders/add-domain.json:
     post:
-      description: Adds a sender domain to your account. Sender domains are added automatically as you send, but you can use this call to add them ahead of time.
+      description: Adds a sender domain to your account. Sender domains are added
+        automatically as you send, but you can use this call to add them ahead
+        of time.
       parameters:
         - in: body
           name: body
@@ -669,7 +721,9 @@ paths:
             $ref: "#/definitions/sender_domain_info"
   /senders/check-domain.json:
     post:
-      description: Checks the SPF and DKIM settings for a domain. If you haven't already added this domain to your account, it will be added automatically.
+      description: Checks the SPF and DKIM settings for a domain. If you haven't
+        already added this domain to your account, it will be added
+        automatically.
       parameters:
         - in: body
           name: body
@@ -697,7 +751,8 @@ paths:
             $ref: "#/definitions/senders_domains-response"
   /senders/info.json:
     post:
-      description: Return more detailed information about a single sender, including aggregates of recent stats
+      description: Return more detailed information about a single sender, including
+        aggregates of recent stats
       parameters:
         - in: body
           name: body
@@ -725,7 +780,8 @@ paths:
             $ref: "#/definitions/senders"
   /senders/time-series.json:
     post:
-      description: Return the recent history (hourly stats for the last 30 days) for a sender
+      description: Return the recent history (hourly stats for the last 30 days) for a
+        sender
       parameters:
         - in: body
           name: body
@@ -739,7 +795,12 @@ paths:
             $ref: "#/definitions/time-series"
   /senders/verify-domain.json:
     post:
-      description: Sends a verification email in order to verify ownership of a domain. Domain verification is an optional step to confirm ownership of a domain. Once a domain has been verified in a Mandrill account, other accounts may not have their messages signed by that domain unless they also verify the domain. This prevents other Mandrill accounts from sending mail signed by your domain.
+      description: Sends a verification email in order to verify ownership of a
+        domain. Domain verification is an optional step to confirm ownership of
+        a domain. Once a domain has been verified in a Mandrill account, other
+        accounts may not have their messages signed by that domain unless they
+        also verify the domain. This prevents other Mandrill accounts from
+        sending mail signed by your domain.
       parameters:
         - in: body
           name: body
@@ -767,7 +828,9 @@ paths:
             $ref: "#/definitions/subaccount_info2"
   /subaccounts/delete.json:
     post:
-      description: Delete an existing subaccount. Any email related to the subaccount will be saved, but stats will be removed and any future sending calls to this subaccount will fail.
+      description: Delete an existing subaccount. Any email related to the subaccount
+        will be saved, but stats will be removed and any future sending calls to
+        this subaccount will fail.
       parameters:
         - in: body
           name: body
@@ -795,7 +858,8 @@ paths:
             $ref: "#/definitions/subaccounts_info-response"
   /subaccounts/list.json:
     post:
-      description: Get the list of subaccounts defined for the account, optionally filtered by a prefix
+      description: Get the list of subaccounts defined for the account, optionally
+        filtered by a prefix
       parameters:
         - in: body
           name: body
@@ -809,7 +873,9 @@ paths:
             $ref: "#/definitions/subaccounts_list-response"
   /subaccounts/pause.json:
     post:
-      description: Pause a subaccount's sending. Any future emails delivered to this subaccount will be queued for a maximum of 3 days until the subaccount is resumed.
+      description: Pause a subaccount's sending. Any future emails delivered to this
+        subaccount will be queued for a maximum of 3 days until the subaccount
+        is resumed.
       parameters:
         - in: body
           name: body
@@ -851,7 +917,8 @@ paths:
             $ref: "#/definitions/subaccount_info2"
   /tags/all-time-series.json:
     post:
-      description: Return the recent history (hourly stats for the last 30 days) for all tags
+      description: Return the recent history (hourly stats for the last 30 days) for
+        all tags
       parameters:
         - in: body
           name: body
@@ -865,7 +932,9 @@ paths:
             $ref: "#/definitions/timeseries"
   /tags/delete.json:
     post:
-      description: Deletes a tag permanently. Deleting a tag removes the tag from any messages that have been sent, and also deletes the tag's stats. There is no way to undo this operation, so use it carefully.
+      description: Deletes a tag permanently. Deleting a tag removes the tag from any
+        messages that have been sent, and also deletes the tag's stats. There is
+        no way to undo this operation, so use it carefully.
       parameters:
         - in: body
           name: body
@@ -879,7 +948,8 @@ paths:
             $ref: "#/definitions/tags_delete-response"
   /tags/info.json:
     post:
-      description: Return more detailed information about a single tag, including aggregates of recent stats
+      description: Return more detailed information about a single tag, including
+        aggregates of recent stats
       parameters:
         - in: body
           name: body
@@ -977,7 +1047,8 @@ paths:
             $ref: "#/definitions/templates_list-response"
   /templates/publish.json:
     post:
-      description: Publish the content for the template. Any new messages sent using this template will start using the content that was previously in draft.
+      description: Publish the content for the template. Any new messages sent using
+        this template will start using the content that was previously in draft.
       parameters:
         - in: body
           name: body
@@ -991,7 +1062,8 @@ paths:
             $ref: "#/definitions/template_detailed"
   /templates/render.json:
     post:
-      description: Inject content and optionally merge fields into a template, returning the HTML that results
+      description: Inject content and optionally merge fields into a template,
+        returning the HTML that results
       parameters:
         - in: body
           name: body
@@ -1005,7 +1077,8 @@ paths:
             $ref: "#/definitions/templates_render-response"
   /templates/time-series.json:
     post:
-      description: Return the recent history (hourly stats for the last 30 days) for a template
+      description: Return the recent history (hourly stats for the last 30 days) for a
+        template
       parameters:
         - in: body
           name: body
@@ -1019,7 +1092,8 @@ paths:
             $ref: "#/definitions/time-series"
   /templates/update.json:
     post:
-      description: Update the code for an existing template. If null is provided for any fields, the values will remain unchanged.
+      description: Update the code for an existing template. If null is provided for
+        any fields, the values will remain unchanged.
       parameters:
         - in: body
           name: body
@@ -1047,7 +1121,8 @@ paths:
             $ref: "#/definitions/tracking-domain-status"
   /urls/check-tracking-domain.json:
     post:
-      description: Checks the CNAME settings for a tracking domain. The domain must have been added already with the add-tracking-domain call
+      description: Checks the CNAME settings for a tracking domain. The domain must
+        have been added already with the add-tracking-domain call
       parameters:
         - in: body
           name: body
@@ -1157,7 +1232,8 @@ paths:
             $ref: "#/definitions/users_ping2-response"
   /users/senders.json:
     post:
-      description: Return the senders that have tried to use this account, both verified and unverified
+      description: Return the senders that have tried to use this account, both
+        verified and unverified
       parameters:
         - in: body
           name: body
@@ -1241,7 +1317,9 @@ paths:
             $ref: "#/definitions/webhook"
   /whitelists/add.json:
     post:
-      description: Adds an email to your email rejection whitelist. If the address is currently on your blacklist, that blacklist entry will be removed automatically.
+      description: Adds an email to your email rejection whitelist. If the address is
+        currently on your blacklist, that blacklist entry will be removed
+        automatically.
       parameters:
         - in: body
           name: body
@@ -1269,7 +1347,9 @@ paths:
             $ref: "#/definitions/whitelists_delete-response"
   /whitelists/list.json:
     post:
-      description: Retrieves your email rejection whitelist. You can provide an email address or search prefix to limit the results. Returns up to 1000 results.
+      description: Retrieves your email rejection whitelist. You can provide an email
+        address or search prefix to limit the results. Returns up to 1000
+        results.
       parameters:
         - in: body
           name: body

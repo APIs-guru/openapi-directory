@@ -7,8 +7,14 @@ servers:
 info:
   contact:
     x-twitter: HERE
-  description: |
-    Positioning API accepts requests with radio network measurements and replies with corresponding location estimate. For more details and examples, see [Developer's Guide](https://developer.here.com/documentation/positioning). Cellular measurements are given in terms defined in 3GPP and 3GGP2 specifications, see the corresponsing documentation at http://www.3gpp.org.
+  description: >
+    Positioning API accepts requests with radio network measurements
+    and replies with corresponding location estimate. For more details and
+    examples, see [Developer's
+    Guide](https://developer.here.com/documentation/positioning). Cellular
+    measurements are given in terms defined in 3GPP and 3GGP2 specifications,
+    see the corresponsing documentation at http://www.3gpp.org.
+
 
     Breaking changes from v1:
       - JSON fields
@@ -28,8 +34,12 @@ info:
   version: 2.1.1
   x-apisguru-categories:
     - location
-  x-comment: |
-    This API definition uses custom keywords for specifying rules not defined in OAS 3.0.x. They convey machine-readable information on additional requirements on the request message and are used for request validation by Positioning servers.
+  x-comment: >
+    This API definition uses custom keywords for specifying rules not
+    defined in OAS 3.0.x. They convey machine-readable information on additional
+    requirements on the request message and are used for request validation by
+    Positioning servers.
+
     Following custom keywords are used:
       - x-comment - text
           For comments, to be only visible in the specification, not in documentation.
@@ -84,7 +94,8 @@ paths:
         - API Information
   /locate:
     post:
-      description: Request WGS-84 compliant geocoordinates for a location based on 2G/3G/4G cell and/or WLAN measurements.
+      description: Request WGS-84 compliant geocoordinates for a location based on
+        2G/3G/4G cell and/or WLAN measurements.
       operationId: postLocate
       parameters:
         - $ref: "#/components/parameters/Confidence"
@@ -98,8 +109,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Locate"
-        description: |
-          Request body containing cell and/or WLAN measurement data. Cellular measurements are given in terms defined in 3GPP and 3GGP2 specifications, see the corresponsing documentation at http://www.3gpp.org.
+        description: >
+          Request body containing cell and/or WLAN measurement data. Cellular
+          measurements are given in terms defined in 3GPP and 3GGP2
+          specifications, see the corresponsing documentation at
+          http://www.3gpp.org.
         required: true
       responses:
         "200":
@@ -122,8 +136,14 @@ paths:
                 title: Position not found
               schema:
                 $ref: "#/components/schemas/Error"
-          description: |
-            The values provided in the request cannot produce any content for the response. The location of the WLANs and cells in the request is unknown or the locations of the radio measurements are so widely scattered that the location cannot be determined. Make sure that the network measurements are correct and consistent. Try allowing fallbacks `area` or `any` for cell positioning and `singleWifi` for WLAN positioning.
+          description: >
+            The values provided in the request cannot produce any content for
+            the response. The location of the WLANs and cells in the request is
+            unknown or the locations of the radio measurements are so widely
+            scattered that the location cannot be determined. Make sure that the
+            network measurements are correct and consistent. Try allowing
+            fallbacks `area` or `any` for cell positioning and `singleWifi` for
+            WLAN positioning.
           headers:
             X-Correlation-ID:
               $ref: "#/components/headers/CorrelationID"
@@ -171,8 +191,12 @@ components:
         type: string
   parameters:
     Confidence:
-      description: |
-        Confidence level in percent for the accuracy/uncertainty in the location estimate response. If not specified, the default is 68 (this corresponds to a 68% probability that the true position is within the accuracy/uncertainty radius of the location estimate: the higher the number, the greater the confidence level).
+      description: >
+        Confidence level in percent for the accuracy/uncertainty in the
+        location estimate response. If not specified, the default is 68 (this
+        corresponds to a 68% probability that the true position is within the
+        accuracy/uncertainty radius of the location estimate: the higher the
+        number, the greater the confidence level).
       in: query
       name: confidence
       required: false
@@ -191,8 +215,11 @@ components:
           - gzip
         type: string
     CorrelationID:
-      description: |
-        ID used for correlating Positioning Service requests within other HERE Services. Used for logging and error reporting. Must be a valid UUID. For internal usage by HERE services. It will be echoed in the response.
+      description: >
+        ID used for correlating Positioning Service requests within other
+        HERE Services. Used for logging and error reporting. Must be a valid
+        UUID. For internal usage by HERE services. It will be echoed in the
+        response.
       in: header
       name: X-Correlation-ID
       required: false
@@ -200,8 +227,10 @@ components:
         format: uuid
         type: string
     Desired:
-      description: |
-        Comma-separated list of additional data fields that the service should include in the response if data is available. The query parameter supports the value `altitude`.
+      description: >
+        Comma-separated list of additional data fields that the service
+        should include in the response if data is available. The query parameter
+        supports the value `altitude`.
       explode: false
       in: query
       name: desired
@@ -214,10 +243,16 @@ components:
         type: array
       style: form
     Fallback:
-      description: |
-        Acceptable fallback options for cell and WLAN positioning. Values `area` and `any` apply to cell based positioning, and value `singleWifi` applies to WLAN based positioning. Both cell and WLAN options may be specified in the same request. If both `area` and `any` are specified, then `area` is ignored.
+      description: >
+        Acceptable fallback options for cell and WLAN positioning. Values
+        `area` and `any` apply to cell based positioning, and value `singleWifi`
+        applies to WLAN based positioning. Both cell and WLAN options may be
+        specified in the same request. If both `area` and `any` are specified,
+        then `area` is ignored.
+
 
         By default, cell based positioning returns cell tower level location estimates only. If you allow a WGS-84 compliant geocoordinate location estimate based on LAC, RNC, TAC, NID, or RZ areas, use the `fallback=area` setting. If you use the `fallback=any` setting, the service uses all available cell fallback methods and therefore the location estimate in the response may be at the MNC, SID, or MCC level.
+
 
         For privacy reasons, the precise positioning based on a single WLAN AP is not possible. You can use the `fallback=singleWifi` setting to allow less accurate positioning based on a single WLAN AP. In that case, the center location of the position estimate will be deviated and the reported accuracy radius will be larger.
       explode: false
@@ -234,16 +269,21 @@ components:
         type: array
       style: form
     RequestID:
-      description: |
-        ID used for correlating customer requests within HERE services. Used for logging and error reporting. Can be any string, but UUID is recommended. It will be echoed in the response.
+      description: >
+        ID used for correlating customer requests within HERE services.
+        Used for logging and error reporting. Can be any string, but UUID is
+        recommended. It will be echoed in the response.
       in: header
       name: X-Request-ID
       required: false
       schema:
         type: string
     Required:
-      description: |
-        Comma-separated list of additional data fields that the service should include in the response. If the data is not available, the response contains an error message. The query parameter supports the value `altitude`.
+      description: >
+        Comma-separated list of additional data fields that the service
+        should include in the response. If the data is not available, the
+        response contains an error message. The query parameter supports the
+        value `altitude`.
       explode: false
       in: query
       name: required
@@ -268,8 +308,10 @@ components:
             title: Bad Request
           schema:
             $ref: "#/components/schemas/Error"
-      description: |
-        The request is malformed. The URL query parameters or the JSON POST body in the request is invalid. Check the message in the response for additional troubleshooting information.
+      description: >
+        The request is malformed. The URL query parameters or the JSON POST
+        body in the request is invalid. Check the message in the response for
+        additional troubleshooting information.
       headers:
         X-Correlation-ID:
           $ref: "#/components/headers/CorrelationID"
@@ -289,8 +331,12 @@ components:
         application/json:
           example:
             error: Forbidden
-            error_description: |
-              These credentials do not authorize access. Please contact your customer representative or submit a request here https://developer.here.com/contact-us to upgrade your account. You can also get valid credentials by registering for a free trial license on https://developer.here.com.
+            error_description: >
+              These credentials do not authorize access. Please contact
+              your customer representative or submit a request here
+              https://developer.here.com/contact-us to upgrade your account. You
+              can also get valid credentials by registering for a free trial
+              license on https://developer.here.com.
           schema:
             $ref: "#/components/schemas/AuthError"
       description: Access denied.
@@ -316,7 +362,8 @@ components:
       content:
         application/json:
           example:
-            action: Check the request correctness and/or remove some measurements to reduce request size
+            action: Check the request correctness and/or remove some measurements to reduce
+              request size
             cause: The request body exceeds the maximum size limit
             code: E606413
             correlationId: 4199533b-6290-41db-8d79-edf4f4019a74
@@ -352,7 +399,8 @@ components:
       content:
         application/json:
           example:
-            action: Provide request body in application/json content type and/or correct Content-Type header
+            action: Provide request body in application/json content type and/or correct
+              Content-Type header
             cause: Content-Type should be application/json.
             code: E606415
             correlationId: 4199533b-6290-41db-8d79-edf4f4019a74
@@ -370,7 +418,8 @@ components:
       content:
         application/json:
           example:
-            action: System administrators have been notified about the problem. Please try again later.
+            action: System administrators have been notified about the problem. Please try
+              again later.
             cause: Something unexpected happened.
             code: E606500
             correlationId: 4199533b-6290-41db-8d79-edf4f4019a74
@@ -413,7 +462,8 @@ components:
             required:
               - location
             type: object
-      description: Request processed successfully and a WGS-84 compliant geocoordinate location estimate was included in the response.
+      description: Request processed successfully and a WGS-84 compliant geocoordinate
+        location estimate was included in the response.
       headers:
         X-Correlation-ID:
           $ref: "#/components/headers/CorrelationID"
@@ -464,7 +514,8 @@ components:
       minimum: -180
       type: number
     Bcch:
-      description: Broadcast Control Channel (BCCH, synonymous to ARFCN = Absolute Radio Frequency Channel)
+      description: Broadcast Control Channel (BCCH, synonymous to ARFCN = Absolute
+        Radio Frequency Channel)
       example: 82
       maximum: 1023
       minimum: 0
@@ -612,13 +663,17 @@ components:
           minLength: 3
           type: string
         platform:
-          description: Software platform information of the device, for example operating system name and version.
+          description: Software platform information of the device, for example operating
+            system name and version.
           example: Android 7.0
           maxLength: 50
           minLength: 3
           type: string
         version:
-          description: Version of the client software in format X.Y.Z, where X [0..255] is a major, Y [0..255] is a minor, and Z [0..65535] is a build version number. Increase the version/build number for each release of the client.
+          description: Version of the client software in format X.Y.Z, where X [0..255] is
+            a major, Y [0..255] is a minor, and Z [0..65535] is a build version
+            number. Increase the version/build number for each release of the
+            client.
           example: 2.0.31
           format: version
           maxLength: 13
@@ -712,14 +767,17 @@ components:
           type: string
       type: object
     EutranCid:
-      description: |
-        E-UTRA Cell Identifier (UC-Id), 28 bits (20 bits eNodeB and 8 bits Cell ID). MCC + MNC + CID uniquely identifies the LTE cell, TAC is optional.
+      description: >
+        E-UTRA Cell Identifier (UC-Id), 28 bits (20 bits eNodeB and 8 bits
+        Cell ID). MCC + MNC + CID uniquely identifies the LTE cell, TAC is
+        optional.
       example: 2898945
       maximum: 268435455
       minimum: 0
       type: integer
     EutranCidNmr:
-      description: E-UTRA Cell Identifier (UC-Id), 28 bits (20 bits eNodeB and 8 bits Cell ID).
+      description: E-UTRA Cell Identifier (UC-Id), 28 bits (20 bits eNodeB and 8 bits
+        Cell ID).
       example: 2898945
       maximum: 268435455
       minimum: 0
@@ -822,8 +880,10 @@ components:
       type: array
     GsmNmrGlobalId:
       additionalProperties: false
-      description: |
-        The `lac` and `cid` parameters of global ID for GSM neighbor measurement. They should be from the same PLMN (MCC+MNC) as the serving cell.
+      description: >
+        The `lac` and `cid` parameters of global ID for GSM neighbor
+        measurement. They should be from the same PLMN (MCC+MNC) as the serving
+        cell.
       properties:
         cid:
           $ref: "#/components/schemas/GeranCid"
@@ -833,7 +893,8 @@ components:
         - lac
         - cid
     GsmTimingAdvance:
-      description: Timing advance (TA). Expressed in the units of GSM bits equaling to 48/13 μs ~ 1107 meters.
+      description: Timing advance (TA). Expressed in the units of GSM bits equaling to
+        48/13 μs ~ 1107 meters.
       example: 3
       maximum: 63
       minimum: 0
@@ -855,8 +916,11 @@ components:
       type: number
     Locate:
       additionalProperties: false
-      description: |
-        Object wrapping the location data submitted in a request for a position. At least one of `gsm`, `wcdma`, `tdscdma`, `lte`, `cdma`, or `wlan` elements is required. Array elements should be unique within the request.
+      description: >
+        Object wrapping the location data submitted in a request for a
+        position. At least one of `gsm`, `wcdma`, `tdscdma`, `lte`, `cdma`, or
+        `wlan` elements is required. Array elements should be unique within the
+        request.
       example:
         client:
           manufacturer: Lemon
@@ -908,8 +972,12 @@ components:
           minItems: 1
           type: array
         wlan:
-          description: |
-            WLAN access positions. For privacy reasons positioning based on a single WLAN AP is not possible; there has to be at least one other matching wlan or cell. Alternatively, you can allow fallbacks to less accurate single WLAN AP location estimates by using the setting `fallback=singleWifi`.
+          description: >
+            WLAN access positions. For privacy reasons positioning based on a
+            single WLAN AP is not possible; there has to be at least one other
+            matching wlan or cell. Alternatively, you can allow fallbacks to
+            less accurate single WLAN AP location estimates by using the setting
+            `fallback=singleWifi`.
           items:
             $ref: "#/components/schemas/WlanLocate"
           maxItems: 256
@@ -924,7 +992,8 @@ components:
         - cdma
         - wlan
     Longitude:
-      description: Longitude in WGS-84 format, decimal representation ranging from -180 to 180.
+      description: Longitude in WGS-84 format, decimal representation ranging from
+        -180 to 180.
       example: 23.72265816
       maximum: 180
       minimum: -180
@@ -1018,15 +1087,18 @@ components:
       minItems: 1
       type: array
     LteTimingAdvance:
-      description: |
-        Timing Advance. Expressed in the units of 16*Ts (16 Basic time units) = 16/(15000*2048) seconds ~ 156meters. For reference see 3GPP TS 36.213 and 36.211.
+      description: >
+        Timing Advance. Expressed in the units of 16*Ts (16 Basic time
+        units) = 16/(15000*2048) seconds ~ 156meters. For reference see 3GPP TS
+        36.213 and 36.211.
       example: 40
       maximum: 1282
       minimum: 0
       type: integer
     Mcc:
-      description: |
-        Mobile Country Code (MCC). Note: 0xx is for test networks, 1xx and 8xx are not used
+      description: >
+        Mobile Country Code (MCC). Note: 0xx is for test networks, 1xx and
+        8xx are not used
       example: 262
       maximum: 999
       minimum: 200
@@ -1059,21 +1131,26 @@ components:
       minimum: 0
       type: integer
     PilotPower:
-      description: |
-        Pilot Power (dBm). If Pilot Power is not available directly, it needs to be calculated from Total Power in the band and Pilot Strength with respect to the Total Power. Pilot power less than -142dBm should be mapped to -142. Pilot power greater than -49dBm should be mapped to -49.
+      description: >
+        Pilot Power (dBm). If Pilot Power is not available directly, it
+        needs to be calculated from Total Power in the band and Pilot Strength
+        with respect to the Total Power. Pilot power less than -142dBm should be
+        mapped to -142. Pilot power greater than -49dBm should be mapped to -49.
       example: -99
       maximum: -49
       minimum: -142
       type: integer
     PnOffset:
-      description: |
-        Pseudonoise offset. This field and CDMA channel frequency together allow for the locally unique identification of the cell.
+      description: >
+        Pseudonoise offset. This field and CDMA channel frequency together
+        allow for the locally unique identification of the cell.
       example: 357
       maximum: 511
       minimum: 0
       type: integer
     PositionLocate:
-      description: Object containing information on a location where a measurement was taken.
+      description: Object containing information on a location where a measurement was
+        taken.
       example:
         accuracy: 829
         alt: 142
@@ -1082,17 +1159,21 @@ components:
         lng: 23.72265816
       properties:
         accuracy:
-          description: Uncertainty circle radius in meters (degree of confidence according to the `confidence` parameter).
+          description: Uncertainty circle radius in meters (degree of confidence according
+            to the `confidence` parameter).
           example: 829
           minimum: 1
           type: number
         alt:
-          description: Altitude in meters (referenced to the WGS-84 ellipsoid) negative or positive.
+          description: Altitude in meters (referenced to the WGS-84 ellipsoid) negative or
+            positive.
           example: 142
           type: number
         altAccuracy:
-          description: |
-            Uncertainty of the altitude estimate in meters (degree of confidence according to the `confidence` parameter). This field superceeds old `altaccuracy`.
+          description: >
+            Uncertainty of the altitude estimate in meters (degree of
+            confidence according to the `confidence` parameter). This field
+            superceeds old `altaccuracy`.
           example: 20
           minimum: 1
           type: number
@@ -1111,7 +1192,8 @@ components:
         altAccuracy:
           - alt
     Psc:
-      description: Primary Scrambling Code (PSC, Primary CPICH, Primary Control Pilot Channel).
+      description: Primary Scrambling Code (PSC, Primary CPICH, Primary Control Pilot
+        Channel).
       example: 149
       maximum: 511
       minimum: 0
@@ -1123,22 +1205,28 @@ components:
       minimum: 0
       type: integer
     Rscp:
-      description: |
-        Received Signal Code Power (RSCP) in dBm. Power less than -120dBm should be mapped to -120. Power greater than -25dBm should be mapped to -25.
+      description: >
+        Received Signal Code Power (RSCP) in dBm. Power less than -120dBm
+        should be mapped to -120. Power greater than -25dBm should be mapped to
+        -25.
       example: -50
       maximum: -25
       minimum: -120
       type: integer
     Rsrp:
-      description: |
-        Reference Signal Received Power (RSRP) in dBm. Power less than -140dBm should be mapped to -140. Power greater than -44dBm should be mapped to -44.
+      description: >
+        Reference Signal Received Power (RSRP) in dBm. Power less than
+        -140dBm should be mapped to -140. Power greater than -44dBm should be
+        mapped to -44.
       example: -95
       maximum: -44
       minimum: -140
       type: integer
     Rsrq:
-      description: |
-        Reference Signal Received Quality (RSRQ) in dBm. Values less than -19.5dB should be mapped to -19.5, and values greater than -3dB should be mapped to -3dB.
+      description: >
+        Reference Signal Received Quality (RSRQ) in dBm. Values less than
+        -19.5dB should be mapped to -19.5, and values greater than -3dB should
+        be mapped to -3dB.
       example: -12
       maximum: -3
       minimum: -19.5
@@ -1150,8 +1238,9 @@ components:
       minimum: -128
       type: integer
     RxLevel:
-      description: |
-        Received Signal power (dBm). Power less than -110dBm should be mapped to -110. Power greater than -25dBm should be mapped to -25.
+      description: >
+        Received Signal power (dBm). Power less than -110dBm should be
+        mapped to -110. Power greater than -25dBm should be mapped to -25.
       example: -77
       maximum: -25
       minimum: -110
@@ -1258,8 +1347,12 @@ components:
       minItems: 1
       type: array
     TdscdmaTimingAdvance:
-      description: |
-        Timing advance (TA). Round-Trip distance presented in the units of 4*c/7.68e6 ~156 meters. That is, the scaling factor is 4 times the chip length at chip rate of 7.68 Mchips/s. Note that at chip rates 1.28 Mchips/s and 3.84 Mchips/s you need to scale according to chip length of 7.68 Mchips/s, that is, multiply by 6 or 2 if needed.
+      description: >
+        Timing advance (TA). Round-Trip distance presented in the units of
+        4*c/7.68e6 ~156 meters. That is, the scaling factor is 4 times the chip
+        length at chip rate of 7.68 Mchips/s. Note that at chip rates 1.28
+        Mchips/s and 3.84 Mchips/s you need to scale according to chip length of
+        7.68 Mchips/s, that is, multiply by 6 or 2 if needed.
       example: 20
       maximum: 1530
       minimum: 0
@@ -1277,8 +1370,10 @@ components:
       minimum: 0
       type: integer
     UtranCid:
-      description: |
-        UTRAN Cell Identifier (UC-Id), 28 bits (12 bits RNC and 16 bits Cell ID). MCC + MNC + CID uniquely identifies the WCDMA cell, LAC is optional.
+      description: >
+        UTRAN Cell Identifier (UC-Id), 28 bits (12 bits RNC and 16 bits
+        Cell ID). MCC + MNC + CID uniquely identifies the WCDMA cell, LAC is
+        optional.
       example: 14674663
       maximum: 268435455
       minimum: 0
@@ -1383,8 +1478,11 @@ components:
         mac: 8C-1A-BF-20-66-AD
       properties:
         mac:
-          description: |
-            The MAC address of the WLAN access point. MAC-48 address with colon (:) or hyphen (-) separators, upper or lower case hex digits. Note that if the SSID contains postfix "_nomap", the AP should not be used for positioning.
+          description: >
+            The MAC address of the WLAN access point. MAC-48 address with colon
+            (:) or hyphen (-) separators, upper or lower case hex digits. Note
+            that if the SSID contains postfix "_nomap", the AP should not be
+            used for positioning.
           example: A0-E4-53-20-66-AD
           format: regex
           pattern: ^((([0-9a-fA-F]{2}:){5})|(([0-9a-fA-F]{2}-){5}))[0-9a-fA-F]{2}$
@@ -1396,8 +1494,15 @@ components:
       type: object
   securitySchemes:
     APIKey:
-      description: |
-        A 43-byte Base64 URL-safe encoded string used for the authentication of the client application. As a logged in user, you can generate it at your [Projects](https://developer.here.com/projects). API Keys never expire but you can invalidate your API Keys at any time. You cannot have more than two API Keys for one app at the same time. You must include API key with every request, unless bearer token is provided.
+      description: >
+        A 43-byte Base64 URL-safe encoded string used for the
+        authentication of the client application. As a logged in user, you can
+        generate it at your [Projects](https://developer.here.com/projects). API
+        Keys never expire but you can invalidate your API Keys at any time. You
+        cannot have more than two API Keys for one app at the same time. You
+        must include API key with every request, unless bearer token is
+        provided.
+
 
         See the [Identity & Access Management Developer Guide](https://developer.here.com/documentation/identity-access-management/dev_guide/index.html) for more details.
       in: query
@@ -1405,8 +1510,10 @@ components:
       type: apiKey
     AccessToken:
       bearerFormat: JWT
-      description: |
-        HERE Account bearer token. Required unless API Key provided in the query string parameters.
+      description: >
+        HERE Account bearer token. Required unless API Key provided in the
+        query string parameters.
+
         See the [Identity & Access Management Developer Guide](https://developer.here.com/documentation/identity-access-management/dev_guide/index.html) for more details.
       scheme: bearer
       type: http

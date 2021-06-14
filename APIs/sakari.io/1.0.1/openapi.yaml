@@ -5,30 +5,42 @@ servers:
 info:
   contact:
     email: support@sakari.io
-  description: |
+  description: >
     # Introduction
+
 
     Welcome to the documentation for the Sakari Messaging REST API. 
 
+
     Sakari provides an advanced platform to drive large scale customized SMS communication
+
 
     REST is a web-service protocol that lends itself to rapid development by using everyday HTTP and JSON technology.
 
+
     To find out more about our product offering, please visit [https://sakari.io](https://sakari.io).
+
 
     # Quickstart
 
+
     For your convenience we have created a quickstart guide to get you up and running in 5 minutes. 
+
 
     [https://sakari.io/blog/sakari-api-quickstart](https://sakari.io/blog/sakari-api-quickstart)
 
+
     # PostMan Collection
+
 
     We've created a simple set of examples using [PostMan](https://www.getpostman.com/) Simply click below to import these. You will need to setup three environment variables in PostMan - AccountId, ClientId and ClientSecret. Check out our PostMan blog post for more information
 
+
     [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d616e273edc916a7a6eb)
 
+
     # Finding your client id, client secret and account id
+
 
     To authenticate against the API's you will need three key pieces of data
      - client id
@@ -37,25 +49,36 @@ info:
 
     To retrieve these, simply login into [https://hub.sakari.io](https://hub.sakari.io) and click on the "cog" in the top right corner. In the popup dialog at the bottom you should see your API credentials and account id. If these are not visible you will need to click on "Request Credentials"
 
+
     # Versioning
+
 
     With any breaking changes we will introduce a new version of the API. The latest version is v1.
 
+
     The API uses an open schema model, which means server may add extra properties to responses. Likewise, the server will ignore any extra query parameters and request body properties. When you write clients, you need to ignore additional properties in responses to ensure they do not break.
+
 
     # Testing
 
+
     There are numerous tools available for testing the API's. We will include examples using curl and the client SDKs that we have created. If you would like to see an SDK in a language not currently available, please let us know.
+
 
     # Throttling / Limits
 
+
     Our API's have been specifically designed to support bulk messaging in a single API call. We therefore impose limits on the frequency of calling the APIs to prevent abuse or runaway processes. If you feel you need a higher limit, please contact us. If you hit the limit you will get a 429 error code returned from our servers
+
 
     # Errors
 
+
     The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:
 
+
     ```
+
     {
       "success": false,
       "error": {
@@ -63,13 +86,18 @@ info:
         "message": "Invalid mobile number"
       }
     }
+
     ```
+
 
     # Pagination
 
+
     For performance, most GET calls return a subset of data. This data is paginated for easy access. Most APIs which return collections of data will return a pagination object as such:
 
+
     ```
+
     {
       "pagination": {
         "offset": 0,
@@ -77,11 +105,15 @@ info:
         "totalCount": 21
       }  
     }
+
     ```
+
 
     When making calls to the API, you can adjust the slice of data returned using query parameters such as:
 
+
     `` https://api.sakari.io/v1/accounts/123/contacts?offset=20&limit=25 ``
+
 
     This will return 25 contacts with an offset of 20.
   termsOfService: https://sakari.io/terms-service.html
@@ -100,30 +132,43 @@ externalDocs:
   description: Find out more about Sakari
   url: https://sakari.io
 tags:
-  - description: |
-      Sakari uses OAuth2 for authentication. After you have created an account at [https://hub.sakari.io](https://hub.sakari.io), you can retrieve your client id and secret from the 'Account Details' screen (click on the 'cog' icon in the top right corner and scroll down to API Credentials)
+  - description: >
+      Sakari uses OAuth2 for authentication. After you have created an
+      account at [https://hub.sakari.io](https://hub.sakari.io), you can
+      retrieve your client id and secret from the 'Account Details' screen
+      (click on the 'cog' icon in the top right corner and scroll down to API
+      Credentials)
+
 
       Using your client id and secret, you can exchange these for a JWT ([JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token))
 
+
       The JWT should then be used when accessing any of the core API's. It should be passed in the `Authorization` header.
 
+
       For example:
+
 
       ``Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImt....``
     name: authentication
   - description: Create, modify or delete contacts
     name: contacts
-  - description: Send or track messages to one contact, a group of contacts or your entire address book
+  - description: Send or track messages to one contact, a group of contacts or your
+      entire address book
     name: messages
   - description: Define reusable message or web templates
     name: templates
-  - description: Define reusable message campaigns with a predefined contact list/filter, template and schedule
+  - description: Define reusable message campaigns with a predefined contact
+      list/filter, template and schedule
     name: campaigns
   - description: Conversations group your message history with each contact into one thread
     name: conversations
-  - description: Tools to assist with sending and receiving messages, such as file sharing, translation, etc.
+  - description: Tools to assist with sending and receiving messages, such as file
+      sharing, translation, etc.
     name: tools
-  - description: Webhooks allow your own system to be automatically notified upon certin events, such as a new message received from one of your contacts or a status change notification for your messages
+  - description: Webhooks allow your own system to be automatically notified upon
+      certin events, such as a new message received from one of your contacts or
+      a status change notification for your messages
     name: webhooks
 paths:
   "/accounts/{accountId}/campaigns":
@@ -178,7 +223,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns');
@@ -252,7 +297,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns');
@@ -307,13 +352,14 @@ paths:
         - campaigns
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X DELETE \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}',
               headers:
@@ -325,7 +371,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}');
@@ -366,13 +412,14 @@ paths:
         - campaigns
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}',
               headers:
@@ -384,7 +431,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}');
@@ -425,7 +472,7 @@ paths:
         - campaigns
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X POST \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}' \
@@ -439,8 +486,9 @@ paths:
               "reporting":{"when":"NoReport"}
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}',
               headers:
@@ -459,7 +507,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}');
@@ -542,7 +590,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts');
@@ -563,7 +611,8 @@ paths:
       operationId: contacts.create
       parameters:
         - $ref: "#/components/parameters/accountId"
-        - description: Determines how existing contacts with matching mobile numbers are treated
+        - description: Determines how existing contacts with matching mobile numbers are
+            treated
           in: query
           name: mergeStrategy
           required: false
@@ -580,8 +629,10 @@ paths:
               $ref: "#/components/schemas/ContactRequest"
           text/csv:
             schema:
-              example: |
-                country,firstName,lastName,email,mobile,jobTitle,Address,City,State,ZipCode US,Joe,Bloggs,joebloggs@sakari.co,123-456-7890,mover,123 Text Street,San Francisco,CA,12345
+              example: >
+                country,firstName,lastName,email,mobile,jobTitle,Address,City,State,ZipCode
+                US,Joe,Bloggs,joebloggs@sakari.co,123-456-7890,mover,123 Text
+                Street,San Francisco,CA,12345
               type: string
       responses:
         "201":
@@ -631,7 +682,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts');
@@ -685,15 +736,16 @@ paths:
         - contacts
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X DELETE \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}' \
               -H 'Content-Type: application/json' \
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}',
               headers:
@@ -706,7 +758,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}');
@@ -757,13 +809,14 @@ paths:
         - contacts
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}',
               headers:
@@ -775,7 +828,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}');
@@ -816,7 +869,7 @@ paths:
         - contacts
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X PUT \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'' \
@@ -830,8 +883,9 @@ paths:
               }
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'PUT',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}',
               headers:
@@ -849,7 +903,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}');
@@ -914,8 +968,9 @@ paths:
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations',
               headers:
@@ -927,7 +982,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations');
@@ -969,13 +1024,14 @@ paths:
         - conversations
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}',
               headers:
@@ -987,7 +1043,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}');
@@ -1029,13 +1085,14 @@ paths:
         - conversations
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}/close \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}/close',
               headers:
@@ -1047,7 +1104,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}/close');
@@ -1099,7 +1156,7 @@ paths:
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var settings = {
               "async": true,
               "crossDomain": true,
@@ -1110,11 +1167,12 @@ paths:
               }
             }
 
+
             $.ajax(settings).done(function (response) {
               console.log(response);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages');
@@ -1170,8 +1228,9 @@ paths:
               "template": "Congratulations! You just sent your first message"
             } '
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages',
               headers:
@@ -1189,7 +1248,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages');
@@ -1244,13 +1303,14 @@ paths:
         - messages
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages/{{MESSAGE_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages/{{MESSAGE_ID}}',
               headers:
@@ -1262,7 +1322,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages/{{MESSAGE_ID}}');
@@ -1331,7 +1391,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates');
@@ -1400,7 +1460,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates');
@@ -1452,13 +1512,14 @@ paths:
         - templates
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X DELETE \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
 
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}',
@@ -1471,7 +1532,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}');
@@ -1512,13 +1573,14 @@ paths:
         - templates
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X GET \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}',
               headers:
@@ -1530,7 +1592,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}');
@@ -1571,7 +1633,7 @@ paths:
         - templates
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X PUT \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}} \
               -H 'Authorization: Bearer {{TOKEN}}' \
@@ -1582,8 +1644,9 @@ paths:
               "type": "SMS"
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
 
             var options = { method: 'PUT',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}',
@@ -1602,7 +1665,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}');
@@ -1628,7 +1691,8 @@ paths:
               }
   "/accounts/{accountId}/webhooks":
     get:
-      description: When messages are acknowledge by carriers, a notification is sent to the specified URL
+      description: When messages are acknowledge by carriers, a notification is sent
+        to the specified URL
       operationId: webhooks.fetchAll
       parameters:
         - $ref: "#/components/parameters/accountId"
@@ -1654,7 +1718,7 @@ paths:
               "url": "https://requestbin.io"
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var settings = {
               "async": true,
               "crossDomain": true,
@@ -1666,11 +1730,12 @@ paths:
               "data": "{\n\t\"url\": \"https://requestbin.io\"\n}"
             }
 
+
             $.ajax(settings).done(function (response) {
               console.log(response);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks');
@@ -1692,7 +1757,8 @@ paths:
                 echo $ex;
               }
     post:
-      description: When messages are acknowledge by carriers, a notification is sent to the specified URL
+      description: When messages are acknowledge by carriers, a notification is sent
+        to the specified URL
       operationId: webhooks.subscribe
       parameters:
         - $ref: "#/components/parameters/accountId"
@@ -1737,8 +1803,9 @@ paths:
               "eventTypes": ["message-received"]
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks',
               headers:
@@ -1753,7 +1820,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks');
@@ -1811,13 +1878,14 @@ paths:
         - webhooks
       x-code-samples:
         - lang: CURL
-          source: |
+          source: >
             curl -X DELETE \
               https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks/{{URL_ENCODED CALLBACK_URL}} \
               -H 'Authorization: Bearer {{TOKEN}}'
         - lang: JavaScript
-          source: |
+          source: >
             var request = require("request");
+
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks/{{URL_ENCODED CALLBACK_URL}}',
               headers:
@@ -1829,7 +1897,7 @@ paths:
               console.log(body);
             });
         - lang: PHP
-          source: |
+          source: >
             <?php
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks/{{URL_ENCODED CALLBACK_URL}}');
@@ -1876,7 +1944,7 @@ paths:
               "client_secret": "87654321-4321-4321-4321-098765432121"
             }'
         - lang: JavaScript
-          source: |
+          source: >
             var settings = {
               "async": true,
               "crossDomain": true,
@@ -1888,6 +1956,7 @@ paths:
               "processData": false,
               "data": "{\n\t\"grant_type\": \"client_credentials\",\n\t\"client_id\": \"12345678-1234-1234-1234-123456789012\",\n\t\"client_secret\": \"87654321-4321-4321-4321-098765432121\"\n}"
             }
+
 
             $.ajax(settings).done(function (response) {
               console.log(response);
@@ -1955,7 +2024,8 @@ paths:
           description: invalid request
       security:
         - sakari_auth: []
-      summary: Share file - use to host a file and generate a short link to be used directly in a message or as a link to media for a MMS
+      summary: Share file - use to host a file and generate a short link to be used
+        directly in a message or as a link to media for a MMS
       tags:
         - tools
 components:
@@ -2153,8 +2223,9 @@ components:
         trigger:
           properties:
             code:
-              description: |
-                Campaign type specifies how it sources contacts and what event triggers its execution Sort order
+              description: >
+                Campaign type specifies how it sources contacts and what event
+                triggers its execution Sort order
                   * `M` - Manual
                   * `S` - Scheduled
                   * `FU` - File Upload

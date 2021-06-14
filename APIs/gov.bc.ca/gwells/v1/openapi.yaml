@@ -4,7 +4,10 @@ servers:
 info:
   contact:
     email: groundwater@gov.bc.ca
-  description: The groundwater wells, aquifers and registry API contains information related to groundwater wells and aquifers as well as a register of qualified well drillers and well pump installers registered to operate in B.C.
+  description: The groundwater wells, aquifers and registry API contains
+    information related to groundwater wells and aquifers as well as a register
+    of qualified well drillers and well pump installers registered to operate in
+    B.C.
   license:
     name: Open Government License - British Columbia
     url: https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61
@@ -474,7 +477,8 @@ paths:
           type: string
   /cities/drillers/:
     get:
-      description: returns a list of cities with a qualified, registered operator (driller or installer)
+      description: returns a list of cities with a qualified, registered operator
+        (driller or installer)
       operationId: cities_drillers_list
       responses:
         "200":
@@ -490,7 +494,8 @@ paths:
     parameters: []
   /cities/installers/:
     get:
-      description: returns a list of cities with a qualified, registered operator (driller or installer)
+      description: returns a list of cities with a qualified, registered operator
+        (driller or installer)
       operationId: cities_installers_list
       responses:
         "200":

@@ -120,10 +120,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Accounting.DomainWhitelistEntry_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ac\
+                  counting.DomainWhitelistEntry_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Accounting.DomainWhitelistEntry_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ac\
+                  counting.DomainWhitelistEntry_"
           description: ""
         "401":
           description: Unauthorized
@@ -259,10 +261,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -531,10 +535,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Grants.Grant_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Gr\
+                  ants.Grant_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Grants.Grant_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Gr\
+                  ants.Grant_"
           description: ""
         "401":
           description: Unauthorized
@@ -720,10 +726,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Accounting.IpBlacklistEntry_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ac\
+                  counting.IpBlacklistEntry_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Accounting.IpBlacklistEntry_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ac\
+                  counting.IpBlacklistEntry_"
           description: ""
         "401":
           description: Unauthorized
@@ -865,19 +873,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
+        - description: If using "yesterday" or "today" timeframe you can ask for the
+            hourly detail
           in: query
           name: hourly
           required: false
@@ -933,19 +944,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -959,16 +973,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about this customer for a timeframe grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about this customer for a timeframe grouped by some
+        temporal entity (day/week/month)
       tags:
         - Aggregated
   /aggregated/summary/conversions:
@@ -998,13 +1015,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -1071,7 +1090,8 @@ paths:
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about a subset of conversions for a timeframe with conversions data
+      summary: Retrieve statistics about a subset of conversions for a timeframe with
+        conversions data
       tags:
         - Aggregated
   /aggregated/summary/datapoints:
@@ -1110,13 +1130,15 @@ paths:
               - tp
               - tl
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -1204,7 +1226,8 @@ paths:
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
+      summary: Retrieve statistics about a subset of datapoints for a timeframe with
+        datapoints data
       tags:
         - Aggregated
   /aggregated/summary/groups:
@@ -1234,13 +1257,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -1319,7 +1344,8 @@ paths:
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about a subset of groups for a timeframe with groups data
+      summary: Retrieve statistics about a subset of groups for a timeframe with
+        groups data
       tags:
         - Aggregated
   /clickstream:
@@ -1327,21 +1353,24 @@ paths:
       deprecated: false
       operationId: ClickStream_Get
       parameters:
-        - description: Filter by this group id (mutually exclusive with "datapoint" and "conversion")
+        - description: Filter by this group id (mutually exclusive with "datapoint" and
+            "conversion")
           in: query
           name: group
           required: false
           schema:
             format: int64
             type: integer
-        - description: Filter by this datapoint id (mutually exclusive with "group" and "conversion")
+        - description: Filter by this datapoint id (mutually exclusive with "group" and
+            "conversion")
           in: query
           name: datapoint
           required: false
           schema:
             format: int64
             type: integer
-        - description: Filter by this conversion id (mutually exclusive with "datapoint" and "group")
+        - description: Filter by this conversion id (mutually exclusive with "datapoint"
+            and "group")
           in: query
           name: conversion
           required: false
@@ -1373,10 +1402,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.ClickStream.Hit_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Cl\
+                  ickStream.Hit_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.ClickStream.Hit_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Cl\
+                  ickStream.Hit_"
           description: ""
         "401":
           description: Unauthorized
@@ -1439,10 +1470,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -1525,13 +1558,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -1546,7 +1581,8 @@ paths:
               - deleted
               - active
             type: string
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -1560,16 +1596,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about this customer for a timeframe related to a subset of conversions grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about this customer for a timeframe related to a
+        subset of conversions grouped by some temporal entity (day/week/month)
       tags:
         - Conversions
   /conversions/count:
@@ -1788,13 +1827,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -1812,7 +1853,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
+        - description: If using "yesterday" or "today" timeframe you can ask for the
+            hourly detail
           in: query
           name: hourly
           required: false
@@ -1869,19 +1911,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -1895,16 +1940,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about this conversion for a timeframe grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about this conversion for a timeframe grouped by
+        some temporal entity (day/week/month)
       tags:
         - Conversions
   "/conversions/{conversionId}/datapoints":
@@ -1985,10 +2033,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -2211,19 +2261,22 @@ paths:
             maxLength: 0
             minLength: 0
             type: integer
-        - description: Offset where to start from (it's the lastKey field in the response object)
+        - description: Offset where to start from (it's the lastKey field in the response
+            object)
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -2348,7 +2401,8 @@ paths:
               - beginning
               - custom
             type: string
-        - description: Type of the event you want to filter this report with. By default no filter is applied.
+        - description: Type of the event you want to filter this report with. By default
+            no filter is applied.
           in: query
           name: hittype
           required: false
@@ -2357,13 +2411,15 @@ paths:
               - clicks
               - views
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -2393,7 +2449,8 @@ paths:
       deprecated: false
       operationId: DataPoints_Get
       parameters:
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -2482,10 +2539,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -2562,19 +2621,22 @@ paths:
               - tp
               - tl
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
+        - description: If using "yesterday" or "today" timeframe you can ask for the
+            hourly detail
           in: query
           name: hourly
           required: false
@@ -2656,13 +2718,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -2691,7 +2755,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -2705,16 +2770,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about all datapoints of this customer for a timeframe grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about all datapoints of this customer for a
+        timeframe grouped by some temporal entity (day/week/month)
       tags:
         - DataPoints
   /datapoints/batch:
@@ -2739,10 +2807,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core.Dto.Datapoints.Datapoint_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core\
+                  .Dto.Datapoints.Datapoint_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core.Dto.Datapoints.Datapoint_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core\
+                  .Dto.Datapoints.Datapoint_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -2774,10 +2844,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core.Dto.Datapoints.Datapoint_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core\
+                  .Dto.Datapoints.Datapoint_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core.Dto.Datapoints.Datapoint_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core\
+                  .Dto.Datapoints.Datapoint_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -2809,10 +2881,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core.Dto.Datapoints.Datapoint_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core\
+                  .Dto.Datapoints.Datapoint_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core.Dto.Datapoints.Datapoint_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.ModifyBatchItemResponce_Api.Core\
+                  .Dto.Datapoints.Datapoint_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -3041,19 +3115,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
+        - description: If using "yesterday" or "today" timeframe you can ask for the
+            hourly detail
           in: query
           name: hourly
           required: false
@@ -3110,19 +3187,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -3136,16 +3216,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about this datapoint for a timeframe grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about this datapoint for a timeframe grouped by
+        some temporal entity (day/week/month)
       tags:
         - DataPoints
   "/datapoints/{id}/favourite":
@@ -3225,19 +3308,22 @@ paths:
             maxLength: 0
             minLength: 0
             type: integer
-        - description: Offset where to start from (it's the lastKey field in the response object)
+        - description: Offset where to start from (it's the lastKey field in the response
+            object)
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -3363,13 +3449,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -3416,7 +3504,8 @@ paths:
             maxLength: 0
             minLength: 0
             type: integer
-        - description: Type of domain ("system"/"go"/"personal"/"dedicated"). If not specified default is "system"
+        - description: Type of domain ("system"/"go"/"personal"/"dedicated"). If not
+            specified default is "system"
           in: query
           name: type
           required: false
@@ -3439,10 +3528,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -3501,7 +3592,8 @@ paths:
       deprecated: false
       operationId: Domains_Count
       parameters:
-        - description: Type of domain ("system"/"go"/"personal"/"dedicated"). If not specified default is "system"
+        - description: Type of domain ("system"/"go"/"personal"/"dedicated"). If not
+            specified default is "system"
           in: query
           name: type
           required: false
@@ -3668,7 +3760,8 @@ paths:
       deprecated: false
       operationId: Groups_Get
       parameters:
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -3731,10 +3824,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -3802,19 +3897,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
+        - description: If using "yesterday" or "today" timeframe you can ask for the
+            hourly detail
           in: query
           name: hourly
           required: false
@@ -3885,13 +3983,15 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -3915,7 +4015,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -3929,16 +4030,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about all groups of this customer for a timeframe grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about all groups of this customer for a timeframe
+        grouped by some temporal entity (day/week/month)
       tags:
         - Groups
   /groups/count:
@@ -4148,19 +4252,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
+        - description: If using "yesterday" or "today" timeframe you can ask for the
+            hourly detail
           in: query
           name: hourly
           required: false
@@ -4217,19 +4324,22 @@ paths:
               - beginning
               - custom
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
           schema:
             type: string
-        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
+        - description: The temporal entity you want to group by ("week"/"month"). If
+            unspecified is "day".
           in: query
           name: groupBy
           required: false
@@ -4243,16 +4353,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Aggregated.AggregatedResult_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Dto.Ag\
+                  gregated.AggregatedResult_"
           description: ""
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about this group for a timeframe grouped by some temporal entity (day/week/month)
+      summary: Retrieve statistics about this group for a timeframe grouped by some
+        temporal entity (day/week/month)
       tags:
         - Groups
   "/groups/{id}/aggregated/summary":
@@ -4298,13 +4411,15 @@ paths:
               - tp
               - tl
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -4385,7 +4500,8 @@ paths:
           description: Unauthorized
         "500":
           description: Internal Server Error
-      summary: Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
+      summary: Retrieve statistics about a subset of datapoints for a timeframe with
+        datapoints data
       tags:
         - Groups
   "/groups/{id}/datapoints":
@@ -4400,7 +4516,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -4489,10 +4606,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -4705,19 +4824,22 @@ paths:
             maxLength: 0
             minLength: 0
             type: integer
-        - description: Offset where to start from (it's the lastKey field in the response object)
+        - description: Offset where to start from (it's the lastKey field in the response
+            object)
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -4843,7 +4965,8 @@ paths:
               - beginning
               - custom
             type: string
-        - description: Type of the event you want to filter this report with. By default no filter is applied.
+        - description: Type of the event you want to filter this report with. By default
+            no filter is applied.
           in: query
           name: hittype
           required: false
@@ -4852,13 +4975,15 @@ paths:
               - clicks
               - views
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -4912,19 +5037,22 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Offset where to start from (it's the lastKey field in the response object)
+        - description: Offset where to start from (it's the lastKey field in the response
+            object)
           in: query
           name: offset
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -5056,40 +5184,46 @@ paths:
               - beginning
               - custom
             type: string
-        - description: Type of the event you want to filter this report with. By default no filter is applied.
+        - description: Type of the event you want to filter this report with. By default
+            no filter is applied.
           in: query
           name: hittype
           required: false
           schema:
             type: string
-        - description: Filter by this group id (mutually exclusive with "datapoint" and "conversion")
+        - description: Filter by this group id (mutually exclusive with "datapoint" and
+            "conversion")
           in: query
           name: group
           required: false
           schema:
             format: int64
             type: integer
-        - description: Filter by this datapoint id (mutually exclusive with "group" and "conversion")
+        - description: Filter by this datapoint id (mutually exclusive with "group" and
+            "conversion")
           in: query
           name: datapoint
           required: false
           schema:
             format: int64
             type: integer
-        - description: Filter by this conversion id (mutually exclusive with "datapoint" and "group")
+        - description: Filter by this conversion id (mutually exclusive with "datapoint"
+            and "group")
           in: query
           name: conversion
           required: false
           schema:
             format: int64
             type: integer
-        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the starting day
+            (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           schema:
             type: string
-        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
+        - description: If using a "custom" timeFrame you can specify the ending day
+            (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -5119,7 +5253,8 @@ paths:
       deprecated: false
       operationId: Retargeting_Get
       parameters:
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -5143,10 +5278,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -5336,7 +5473,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -5416,10 +5554,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -5513,7 +5653,8 @@ paths:
       deprecated: false
       operationId: Tags_Get
       parameters:
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -5566,10 +5707,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -5776,7 +5919,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -5838,10 +5982,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -6012,7 +6158,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Where to start when retrieving elements. Default is 0 if not specified.
+        - description: Where to start when retrieving elements. Default is 0 if not
+            specified.
           in: query
           name: offset
           required: false
@@ -6063,10 +6210,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
             text/json:
               schema:
-                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Responses.EntityUri_System.Int64_"
+                $ref: "#/components/schemas/Api.Core.Responses.EntitiesResponse_Api.Core.Respon\
+                  ses.EntityUri_System.Int64_"
           description: ""
         "401":
           description: Unauthorized
@@ -7338,7 +7487,8 @@ components:
           $ref: "#/components/schemas/Api.Core.Dto.Datapoints.Datapoint"
         errors:
           items:
-            $ref: "#/components/schemas/ClickMeter.Infrastructure.Validation.ValidationFailure"
+            $ref: "#/components/schemas/ClickMeter.Infrastructure.Validation.ValidationFail\
+              ure"
           type: array
         result:
           $ref: "#/components/schemas/Api.Core.Responses.EntityUri_System.Int64_"

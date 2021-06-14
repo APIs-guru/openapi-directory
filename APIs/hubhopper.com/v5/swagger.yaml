@@ -4,7 +4,10 @@ schemes:
 host: apis.hubhopper.com
 basePath: /partner
 info:
-  description: This is an interactive document explaining the API(s) that could be used to fetch data from [Hubhopper](https://hubhopper.com). Use the api key provided to authorize `x-api-key` and test the API(s). The output data models are also available for reference.
+  description: This is an interactive document explaining the API(s) that could be
+    used to fetch data from [Hubhopper](https://hubhopper.com). Use the api key
+    provided to authorize `x-api-key` and test the API(s). The output data
+    models are also available for reference.
   title: Hubhopper Partner Integration API(s) - Production
   version: v5
   x-apisguru-categories:
@@ -116,14 +119,21 @@ paths:
           name: order
           required: false
           type: string
-        - description: |-
+        - description: >-
             Takes filters like 'lang' in a url encoded json. 
+
             Example:
+
             1)Single ->
+
             &nbsp;&nbsp;&nbsp;&nbsp; var filterJson = {"lang":["en"]};
+
             &nbsp;&nbsp;&nbsp;&nbsp; var url = baseUrl+'?'+filters=enocdeURI(JSON.stringify(filterJson));
+
             2)Multiple ->
+
             &nbsp;&nbsp;&nbsp;&nbsp; var filterJson = {"lang":["en","hi"]};
+
             &nbsp;&nbsp;&nbsp;&nbsp; var url = baseUrl+'?'+filters=enocdeURI(JSON.stringify(filterJson));
           in: query
           name: filters
@@ -167,14 +177,21 @@ paths:
           name: order
           required: false
           type: string
-        - description: |-
+        - description: >-
             Takes filters like 'lang' in a url encoded json. 
+
             Example:
+
             1)Single ->
+
             &nbsp;&nbsp;&nbsp;&nbsp; var filterJson = {"lang":["en"]};
+
             &nbsp;&nbsp;&nbsp;&nbsp; var url = baseUrl+'?'+filters=enocdeURI(JSON.stringify(filterJson));
+
             2)Multiple ->
+
             &nbsp;&nbsp;&nbsp;&nbsp; var filterJson = {"lang":["en","hi"]};
+
             &nbsp;&nbsp;&nbsp;&nbsp; var url = baseUrl+'?'+filters=enocdeURI(JSON.stringify(filterJson));
           in: query
           name: filters
@@ -248,14 +265,21 @@ paths:
           name: order
           required: false
           type: string
-        - description: |-
+        - description: >-
             Takes filters like 'lang' in a url encoded json. 
+
             Example:
+
             1)Single ->
+
             &nbsp;&nbsp;&nbsp;&nbsp; var filterJson = {"lang":["en"]};
+
             &nbsp;&nbsp;&nbsp;&nbsp; var url = baseUrl+'?'+filters=enocdeURI(JSON.stringify(filterJson));
+
             2)Multiple ->
+
             &nbsp;&nbsp;&nbsp;&nbsp; var filterJson = {"lang":["en","hi"]};
+
             &nbsp;&nbsp;&nbsp;&nbsp; var url = baseUrl+'?'+filters=enocdeURI(JSON.stringify(filterJson));
           in: query
           name: filters

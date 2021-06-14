@@ -4,78 +4,127 @@ servers:
     variables: {}
 info:
   contact: {}
-  description: |-
+  description: >-
     # Google Home Local API
+
     This is an unofficial documentation of the local API used by the Home app to communicate with GH devices.
+
     [GitHub Repo](https://github.com/rithvikvibhu/GHLocalApi)
+
 
     [![GitHub stars](https://img.shields.io/github/stars/rithvikvibhu/GHLocalApi)](https://github.com/rithvikvibhu/GHLocalApi/stargazers) [![GitHub license](https://img.shields.io/github/license/rithvikvibhu/GHLocalApi)](https://github.com/rithvikvibhu/GHLocalApi/blob/master/LICENSE.md)
 
+
     ## Getting Started
+
 
     Requests must be made over HTTPS, port 8443, so the base URL for these endpoints is: `https://<google-home-ip>:8443/setup/`
 
+
     Get the IP of Google Home from the Google Home app (Device Settings -> End of the list) or from your router.
 
+
     GET requests are simple, in the browser kind.  
+
     POST requests need to set the header (when there's a body): `content-type: application/json`
+
 
     ## Authentication
 
+
     Since June 2019, most requests (with exceptions like `/setup/eureka_info`) need a local authorization token.
+
 
     There are 3 kinds of tokens involved here:
 
+
     ### Local Authorization Token
+
     This token must be sent in all requests in the header `cast-local-authorization-token`. It is short-lived (~1 day) and may change unexpectedly (with a sync, change in homegraph, etc.)
+
     ##### Get this token
+
     - With access to an android device, [get this token directly by either method](https://gist.github.com/rithvikvibhu/1a0f4937af957ef6a78453e3be482c1f).
+
     - Without a device, or to integrate it with a script, use an access token to get the homegraph and extract the token. To get an access token, read the next section. Check the example section for more info.
 
+
     ### Access Token
+
     This is a standard google oauth2 access token. It is in the form `ya29.***`.
+
     This gives access to the Google Home Foyer API. These expire in an hour.
+
     Use this to get the homegraph (and then the local authorization token above).
+
     ##### Get this token
+
     To get this access token, either a Google account username/password or a Google Master Token is needed. More info in the gist.
+
     Use the script [from this gist](https://gist.github.com/rithvikvibhu/952f83ea656c6782fbd0f1645059055d).
 
+
     ### Master Token
+
     This is in the form `aas_et/***` and can be used to request access tokens.
+
     ##### Get this token
+
     The same [script in the gist](https://gist.github.com/rithvikvibhu/952f83ea656c6782fbd0f1645059055d) that gets the access token can also get the master token. Needs Google account creds.
+
 
     ## Example
 
+
     Here's the whole flow from just a pair of username/password to using the local API.
 
+
     Prerequisites:
+
     - [grpcurl](https://github.com/fullstorydev/grpcurl)
+
     - [Proto files](https://drive.google.com/drive/folders/1RvnN3y-G23pd2SWHmfV_7sef8QU5GNF4?usp=sharing) (preserve folder structure)
 
+
     ### 1. Get an access token with the script
+
     - Download get_tokens.py
+
     - Fill in username and password
+
     ```sh
+
     python3 get_tokens.py
+
     # Note down the access token printed.
+
     ```
 
+
     ### 2. Use the access token and get home graph
+
     - This prints the json and uses jq to parse and filter out the fields deviceName and localAuthToken
+
     - This will give a list of all devices and their local auth tokens
+
     ```sh
+
     ./grpcurl -H 'authorization: Bearer ya29.a0Af****' \
     	-import-path /path/to/protos \
     	-proto /path/to/protos/google/internal/home/foyer/v1.proto \
     	googlehomefoyer-pa.googleapis.com:443 \
     	google.internal.home.foyer.v1.StructuresService/GetHomeGraph | jq '.home.devices[] | {deviceName, localAuthToken}'
     # Note down the local auth token for the device you want.
+
     ```
 
+
     ### 3. Make the call to the local device using the local auth token
+
     ```sh
+
     curl -H "cast-local-authorization-token: LOCAL_AUTH_TOKEN" --verbose --insecure https://192.168.0.18:8443/setup/bluetooth/status
+
     ```
   title: Google Home
   version: "2.0"
@@ -178,7 +227,8 @@ tags:
     name: Device Info
   - description: This folder consists of all endpoints to modify and control the device.
     name: Device Settings
-  - description: This folder contains all endpoints related to Assistant's tasks like Do Not Disturb, Alarms and Timers, Accessibility and equalizer.
+  - description: This folder contains all endpoints related to Assistant's tasks
+      like Do Not Disturb, Alarms and Timers, Accessibility and equalizer.
     name: Assistant
   - description: This folder contains Bluetooth related endpoints.
     name: Bluetooth
@@ -236,9 +286,12 @@ paths:
   /assistant/a11y_mode:
     post:
       deprecated: false
-      description: |-
-        This controls Accessibility sounds. `hotword_enabled` is for 'Play start sound' and `endpoint_enabled` is for 'Play end sound'.  
+      description: >-
+        This controls Accessibility sounds. `hotword_enabled` is for 'Play
+        start sound' and `endpoint_enabled` is for 'Play end sound'.  
+
         Sending an empty-body POST request returns the current values.  
+
         Either of the fields or both can be sent and new values will be saved.
       operationId: Accessibility
       parameters: []
@@ -296,9 +349,12 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/a11y_mode
-          x-testDescription: |-
-            This controls Accessibility sounds. `hotword_enabled` is for 'Play start sound' and `endpoint_enabled` is for 'Play end sound'.  
+          x-testDescription: >-
+            This controls Accessibility sounds. `hotword_enabled` is for
+            'Play start sound' and `endpoint_enabled` is for 'Play end sound'.  
+
             Sending an empty-body POST request returns the current values.  
+
             Either of the fields or both can be sent and new values will be saved.
           x-testEnabled: true
           x-testName: Accessibility
@@ -306,15 +362,20 @@ paths:
   /assistant/alarms:
     get:
       deprecated: false
-      description: |-
+      description: >-
         This gives a list of all active alarms and timers.
+
 
         Both alarms and timers have `id`s which can be used to delete them. (There is no known way of creating/deleting yet). The value of `status` have different meanings for alarms and timers (given below).
 
+
         Alarms have `date_pattern` and `time_pattern` with day, month, year, hour, minute, second. `fire_time` is the same in unix time (milliseconds, not seconds).  
+
         `status` is 1 for set up and 2 for ringing.
 
+
         Timers have `original_duration` is the original duration.  
+
         `status` is 1 for set up and 3 for ringing.
       operationId: GetAlarmsandTimers
       parameters: []
@@ -421,15 +482,20 @@ paths:
           request:
             method: GET
             uri: /assistant/alarms
-          x-testDescription: |-
+          x-testDescription: >-
             This gives a list of all active alarms and timers.
+
 
             Both alarms and timers have `id`s which can be used to delete them. (There is no known way of creating/deleting yet). The value of `status` have different meanings for alarms and timers (given below).
 
+
             Alarms have `date_pattern` and `time_pattern` with day, month, year, hour, minute, second. `fire_time` is the same in unix time (milliseconds, not seconds).  
+
             `status` is 1 for set up and 2 for ringing.
 
+
             Timers have `original_duration` is the original duration.  
+
             `status` is 1 for set up and 3 for ringing.
           x-testEnabled: true
           x-testName: Get Alarms and Timers
@@ -437,8 +503,9 @@ paths:
   /assistant/alarms/delete:
     post:
       deprecated: false
-      description: |-
+      description: >-
         This deletes alarms and timers by their id.
+
 
         `ids` is a list of ids to be deleted. Sending invalid id still returns a 200 OK. The `/` in the ids have to be escaped like `\/`.
       operationId: DeleteAlarmsandTimers
@@ -501,8 +568,9 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/alarms/delete
-          x-testDescription: |-
+          x-testDescription: >-
             This deletes alarms and timers by their id.
+
 
             `ids` is a list of ids to be deleted. Sending invalid id still returns a 200 OK. The `/` in the ids have to be escaped like `\/`.
           x-testEnabled: true
@@ -511,11 +579,14 @@ paths:
   /assistant/alarms/volume:
     post:
       deprecated: false
-      description: |-
+      description: >-
         This gets and sets alarms and timers volume.  
+
         **Note:** This is not the same as normal volume.
 
+
         Volume is a float number in [0, 1] where 0 is minimum and 1 is maximum.  
+
         Sending an empty body gets the volume. Sending `volume` sets the volume.
       operationId: AlarmVolume
       parameters: []
@@ -565,11 +636,14 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/alarms/volume
-          x-testDescription: |-
+          x-testDescription: >-
             This gets and sets alarms and timers volume.  
+
             **Note:** This is not the same as normal volume.
 
+
             Volume is a float number in [0, 1] where 0 is minimum and 1 is maximum.  
+
             Sending an empty body gets the volume. Sending `volume` sets the volume.
           x-testEnabled: true
           x-testName: Alarm Volume
@@ -577,8 +651,10 @@ paths:
   /assistant/check_ready_status:
     post:
       deprecated: false
-      description: |-
-        **Update:** This seems to have changed now and is no longer possible. The error is also new.
+      description: >-
+        **Update:** This seems to have changed now and is no longer
+        possible. The error is also new.
+
 
         Setting `play_ready_message` to true plays a welcome message on the device saying "Hi, I'm your Google Assistant. I'm here to help. To learn a few things you can do, continue in the Google Home app."
       operationId: CheckReadyStatus
@@ -652,8 +728,10 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/check_ready_status
-          x-testDescription: |-
-            **Update:** This seems to have changed now and is no longer possible. The error is also new.
+          x-testDescription: >-
+            **Update:** This seems to have changed now and is no longer
+            possible. The error is also new.
+
 
             Setting `play_ready_message` to true plays a welcome message on the device saying "Hi, I'm your Google Assistant. I'm here to help. To learn a few things you can do, continue in the Google Home app."
           x-testEnabled: true
@@ -662,7 +740,8 @@ paths:
   /assistant/notifications:
     post:
       deprecated: false
-      description: This is for the Do Not Disturb option. Sending an empty-body POST returns the current value. Sending a new value changes it.
+      description: This is for the Do Not Disturb option. Sending an empty-body POST
+        returns the current value. Sending a new value changes it.
       operationId: DoNotDisturb
       parameters:
         - in: header
@@ -709,19 +788,25 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/notifications
-          x-testDescription: This is for the Do Not Disturb option. Sending an empty-body POST returns the current value. Sending a new value changes it.
+          x-testDescription: This is for the Do Not Disturb option. Sending an empty-body
+            POST returns the current value. Sending a new value changes it.
           x-testEnabled: true
           x-testName: Do Not Disturb
           x-testShouldPass: true
   /assistant/set_night_mode_params:
     post:
       deprecated: false
-      description: |-
+      description: >-
         This sets night mode options.  
+
         To view currently set values, use /setup/eureka_info.  
+
         If `enabled` is set to false, night mode is disabled and the other values do not matter.  
+
         `led_brightness` and `volume` refer to the maximum LED Brightness and Volume that is set during night mode.  
+
         `demo_to_user` is always set to `true` so change in values will be visible in realtime (like brightness).  
+
         `windows`: A combination of `length_hours` and `start_hour` is used to define start and end times for night mode. In this example, night mode starts at 10 PM (22) and ends at 6 AM (8 hours later). `windows.days` is an array of days of week when night mode will be enabled. Example: 0->Sunday, 1-> Monday, ..., 6->Saturday.
       operationId: NightModesettings
       parameters: []
@@ -842,12 +927,17 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /assistant/set_night_mode_params
-          x-testDescription: |-
+          x-testDescription: >-
             This sets night mode options.  
+
             To view currently set values, use /setup/eureka_info.  
+
             If `enabled` is set to false, night mode is disabled and the other values do not matter.  
+
             `led_brightness` and `volume` refer to the maximum LED Brightness and Volume that is set during night mode.  
+
             `demo_to_user` is always set to `true` so change in values will be visible in realtime (like brightness).  
+
             `windows`: A combination of `length_hours` and `start_hour` is used to define start and end times for night mode. In this example, night mode starts at 10 PM (22) and ends at 6 AM (8 hours later). `windows.days` is an array of days of week when night mode will be enabled. Example: 0->Sunday, 1-> Monday, ..., 6->Saturday.
           x-testEnabled: true
           x-testName: Night Mode settings
@@ -855,10 +945,12 @@ paths:
   /bluetooth/bond:
     post:
       deprecated: false
-      description: |-
+      description: >-
         *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
         **For both parts**
+
 
         This is to forget paired devices by mac address. Works for both kinds of devices (Part 1 and Part 2).
       operationId: Forgetpaireddevice
@@ -910,10 +1002,12 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /bluetooth/bond
-          x-testDescription: |-
+          x-testDescription: >-
             *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
             **For both parts**
+
 
             This is to forget paired devices by mac address. Works for both kinds of devices (Part 1 and Part 2).
           x-testEnabled: true
@@ -995,10 +1089,12 @@ paths:
   /bluetooth/discovery:
     post:
       deprecated: false
-      description: |-
+      description: >-
         *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
         **For Part 1 only**
+
 
         This enables/disables Home's bluetooth discovery and other devices can pair with Home (where Home acts as a speaker).
       operationId: ChangeDiscoverability
@@ -1047,10 +1143,12 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /bluetooth/discovery
-          x-testDescription: |-
+          x-testDescription: >-
             *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
             **For Part 1 only**
+
 
             This enables/disables Home's bluetooth discovery and other devices can pair with Home (where Home acts as a speaker).
           x-testEnabled: true
@@ -1059,10 +1157,12 @@ paths:
   /bluetooth/get_bonded:
     get:
       deprecated: false
-      description: |-
+      description: >-
         *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
         **For both parts**
+
 
         This gives a list of all paired or 'bonded' devices. The response field names are self-descriptive.
       operationId: GetPairedDevices
@@ -1141,10 +1241,12 @@ paths:
           request:
             method: GET
             uri: /bluetooth/get_bonded
-          x-testDescription: |-
+          x-testDescription: >-
             *See note for Bluetooth under `/setup/bluetooth/status`*
 
+
             **For both parts**
+
 
             This gives a list of all paired or 'bonded' devices. The response field names are self-descriptive.
           x-testEnabled: true
@@ -1153,12 +1255,15 @@ paths:
   /bluetooth/scan:
     post:
       deprecated: false
-      description: |-
+      description: >-
         *See note for Bluetooth under `/setup/bluetooth/status`*
+
 
         **For Part 2 only**
 
+
         This initiates scan for other bluetooth speakers/devices. Scan results will be updated continuously for `timeout` seconds.  
+
         To get the scan results, see /setup/bluetooth/scan_results.
       operationId: Scanfordevices
       parameters: []
@@ -1215,12 +1320,15 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /bluetooth/scan
-          x-testDescription: |-
+          x-testDescription: >-
             *See note for Bluetooth under `/setup/bluetooth/status`*
+
 
             **For Part 2 only**
 
+
             This initiates scan for other bluetooth speakers/devices. Scan results will be updated continuously for `timeout` seconds.  
+
             To get the scan results, see /setup/bluetooth/scan_results.
           x-testEnabled: true
           x-testName: Scan for devices
@@ -1228,15 +1336,20 @@ paths:
   /bluetooth/scan_results:
     get:
       deprecated: false
-      description: |-
+      description: >-
         *See note for Bluetooth under `/setup/bluetooth/status`*
+
 
         **For Part 2 only**
 
+
         This returns a list of all nearby bluetooth devices. While the Home app only shows speakers, this list contains all devices including TVs, mobiles, etc.
 
+
         `rssi` is signal strength, `name` is name, `mac_address` is mac address.  
+
         `device_class` and `device_type` are bluetooth codes.  
+
 
         The Home app only lists those devices with `expected_profiles` > 0. Basically, the device should function as a speaker.
       operationId: GetScanResults
@@ -1345,15 +1458,20 @@ paths:
           request:
             method: GET
             uri: /bluetooth/scan_results
-          x-testDescription: |-
+          x-testDescription: >-
             *See note for Bluetooth under `/setup/bluetooth/status`*
+
 
             **For Part 2 only**
 
+
             This returns a list of all nearby bluetooth devices. While the Home app only shows speakers, this list contains all devices including TVs, mobiles, etc.
 
+
             `rssi` is signal strength, `name` is name, `mac_address` is mac address.  
+
             `device_class` and `device_type` are bluetooth codes.  
+
 
             The Home app only lists those devices with `expected_profiles` > 0. Basically, the device should function as a speaker.
           x-testEnabled: true
@@ -1362,25 +1480,40 @@ paths:
   /bluetooth/status:
     get:
       deprecated: false
-      description: |-
+      description: >-
         > **There are 2 parts of Bluetooth.**
+
         >
+
         > *Part 1*: Devices like phones connect to Home and play audio through Home.  
+
         > For this, /setup/bluetooth/discovery is used to make Home discoverable. Then devices can connect to it as if Home is just another bluetooth speaker.
+
         >
+
         > *Part 2*: Bluetooth speakers connect to Home and Home plays audio through the speakers.
+
         > For this, /setup/bluetooth/scan and /setup/bluetooth/scan_results are used to connect to other speakers.
+
         >
+
         > The other endpoints are common for both parts.
+
 
 
         **For both parts**
 
+
         This gives the status of all bluetooth things.
+
         - Not sure what `audio_mode` is.
+
         - `discovery_enabled` states whether Home is discoverable. (**Part 1**)
+
         - `connecting_devices` is a list of all media sources (like phones) connected to Home. (**Part 1**)
+
         - `scanning_enabled` states whether Home scanning for other bluetooth speakers/devices. (**Part 2**)
+
         - `connected_devices` is a list of all speakers connected to Home. (**Part 2**)
       operationId: Status
       parameters: []
@@ -1467,17 +1600,23 @@ paths:
 
               \        \"service_uuids\": [\r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
+              \r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
+              \r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
+              \r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
+              \r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\
+              \r
 
-              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\r
+              \          \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\
+              \r
 
               \        ]\r
 
@@ -1542,25 +1681,40 @@ paths:
           request:
             method: GET
             uri: /bluetooth/status
-          x-testDescription: |-
+          x-testDescription: >-
             > **There are 2 parts of Bluetooth.**
+
             >
+
             > *Part 1*: Devices like phones connect to Home and play audio through Home.  
+
             > For this, /setup/bluetooth/discovery is used to make Home discoverable. Then devices can connect to it as if Home is just another bluetooth speaker.
+
             >
+
             > *Part 2*: Bluetooth speakers connect to Home and Home plays audio through the speakers.
+
             > For this, /setup/bluetooth/scan and /setup/bluetooth/scan_results are used to connect to other speakers.
+
             >
+
             > The other endpoints are common for both parts.
+
 
 
             **For both parts**
 
+
             This gives the status of all bluetooth things.
+
             - Not sure what `audio_mode` is.
+
             - `discovery_enabled` states whether Home is discoverable. (**Part 1**)
+
             - `connecting_devices` is a list of all media sources (like phones) connected to Home. (**Part 1**)
+
             - `scanning_enabled` states whether Home scanning for other bluetooth speakers/devices. (**Part 2**)
+
             - `connected_devices` is a list of all speakers connected to Home. (**Part 2**)
           x-testEnabled: true
           x-testName: Status
@@ -1626,11 +1780,14 @@ paths:
           request:
             method: GET
             uri: /configured_networks
-          x-testDescription: |-
+          x-testDescription: >-
             This gets a list of all saved Wi-Fi networks.
 
+
             Each network has `ssid`, `wpa_auth`, `wpa_cipher` and `wpa_id`.  
+
             `wpa_id` is an incrementing number used to identify a saved network.  
+
             #TODO: Add values for `wpa_auth` and `wpa_cipher`.
           x-testEnabled: true
           x-testName: Get Saved Networks
@@ -1638,7 +1795,10 @@ paths:
   /connect_wifi:
     post:
       deprecated: false
-      description: "**Note:** Not sure how the password is encrypted. Might be using the public certificate from /setup/eureka_info. So this cannot be used as of now. If someone figures it out, please [create a new issue here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
+      description: "**Note:** Not sure how the password is encrypted. Might be using
+        the public certificate from /setup/eureka_info. So this cannot be used
+        as of now. If someone figures it out, please [create a new issue
+        here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
       operationId: ConnecttoWi-FiNetwork
       parameters: []
       requestBody:
@@ -1695,19 +1855,28 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /connect_wifi
-          x-testDescription: "**Note:** Not sure how the password is encrypted. Might be using the public certificate from /setup/eureka_info. So this cannot be used as of now. If someone figures it out, please [create a new issue here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
+          x-testDescription: "**Note:** Not sure how the password is encrypted. Might be
+            using the public certificate from /setup/eureka_info. So this cannot
+            be used as of now. If someone figures it out, please [create a new
+            issue here](https://github.com/rithvikvibhu/GHLocalApi/issues/new)."
           x-testEnabled: true
           x-testName: Connect to Wi-Fi Network
           x-testShouldPass: true
   /eureka_info:
     get:
       deprecated: false
-      description: |-
-        This gives most of the device info. The GET parameter `param` is a comma separated list of json keys to fetch. Currently, these params are known: `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
+      description: >-
+        This gives most of the device info. The GET parameter `param` is a
+        comma separated list of json keys to fetch. Currently, these params are
+        known:
+        `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
+
 
         Nested items can also be filtered using the dot notation. Example: `audio.digital`
 
+
         The `options` GET parameter is always set to `detail` or `detail,sign`. `sign` signs the `nonce` and returns some value.
+
 
         The `nonce` GET parameter is an integer value signed with needed (see `option` parameter above).
       operationId: EurekaInfo
@@ -1957,7 +2126,8 @@ paths:
 
               \    \"preview_channel_state\": 4,\r
 
-              \    \"release_track\": \"preview-joining-stable-channel\",\r
+              \    \"release_track\":
+              \"preview-joining-stable-channel\",\r
 
               \    \"system_build_number\": \"195690\"\r
 
@@ -1985,13 +2155,15 @@ paths:
 
               \    \"locale\": {\r
 
-              \      \"display_string\": \"English (United States)\"\r
+              \      \"display_string\": \"English (United
+              States)\"\r
 
               \    },\r
 
               \    \"timezone\": {\r
 
-              \      \"display_string\": \"India Standard Time (Kolkata)\",\r
+              \      \"display_string\": \"India Standard Time
+              (Kolkata)\",\r
 
               \      \"offset\": 330\r
 
@@ -2039,7 +2211,8 @@ paths:
 
               \      \"input_management_supported\": true,\r
 
-              \      \"keep_hotspot_until_connected_supported\": true,\r
+              \      \"keep_hotspot_until_connected_supported\":
+              true,\r
 
               \      \"multi_user_supported\": true,\r
 
@@ -2085,7 +2258,8 @@ paths:
 
               \    \"hotspot_bssid\": \"FA:8F:CA:30:41:71\",\r
 
-              \    \"local_authorization_token_hash\": \"hBt2...\",\r
+              \    \"local_authorization_token_hash\":
+              \"hBt2...\",\r
 
               \    \"mac_address\": \"F4:F5:...\",\r
 
@@ -2273,11 +2447,13 @@ paths:
 
               \  \"sign\": {\r
 
-              \    \"certificate\": \"-----BEGIN CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
+              \    \"certificate\": \"-----BEGIN
+              CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
 
               \    \"intermediate_certs\": [\r
 
-              \      \"-----BEGIN CERTIFICATE-----\\nMIID...O/bYS\\n-----END CERTIFICATE-----\\n\"\r
+              \      \"-----BEGIN
+              CERTIFICATE-----\\nMIID...O/bYS\\n-----END CERTIFICATE-----\\n\"\r
 
               \    ],\r
 
@@ -2352,12 +2528,18 @@ paths:
           request:
             method: GET
             uri: /eureka_info?params=version%2Caudio%2Cname%2Cbuild_info%2Cdetail%2Cdevice_info%2Cnet%2Cwifi%2Csetup%2Csettings%2Copt_in%2Copencast%2Cmultizone%2Cproxy%2Cnight_mode_params%2Cuser_eq%2Croom_equalizer%2Csign%2Caogh%2Cultrasound%2Cmesh&options=detail%2Csign&nonce=1234512345
-          x-testDescription: |-
-            This gives most of the device info. The GET parameter `param` is a comma separated list of json keys to fetch. Currently, these params are known: `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
+          x-testDescription: >-
+            This gives most of the device info. The GET parameter `param`
+            is a comma separated list of json keys to fetch. Currently, these
+            params are known:
+            `version,audio,name,build_info,detail,device_info,net,wifi,setup,settings,opt_in,opencast,multizone,proxy,night_mode_params,user_eq,room_equalizer,sign,aogh,ultrasound,mesh`
+
 
             Nested items can also be filtered using the dot notation. Example: `audio.digital`
 
+
             The `options` GET parameter is always set to `detail` or `detail,sign`. `sign` signs the `nonce` and returns some value.
+
 
             The `nonce` GET parameter is an integer value signed with needed (see `option` parameter above).
           x-testEnabled: true
@@ -2366,7 +2548,8 @@ paths:
   /forget_wifi:
     post:
       deprecated: false
-      description: This is to forget a saved network by `wpa_id`. Get the `wpa_id` from /setup/configured_networks
+      description: This is to forget a saved network by `wpa_id`. Get the `wpa_id`
+        from /setup/configured_networks
       operationId: ForgetWi-FiNetwork
       parameters: []
       requestBody:
@@ -2409,18 +2592,22 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /forget_wifi
-          x-testDescription: This is to forget a saved network by `wpa_id`. Get the `wpa_id` from /setup/configured_networks
+          x-testDescription: This is to forget a saved network by `wpa_id`. Get the
+            `wpa_id` from /setup/configured_networks
           x-testEnabled: true
           x-testName: Forget Wi-Fi Network
           x-testShouldPass: true
   /get_app_device_id:
     post:
       deprecated: false
-      description: |-
+      description: >-
         This gives "app device id", "certificate" and "signed data".  
+
         The `app_id` in the request is mandatory and refers to Chromecast backdrop/screensaver app. It has to be set to `E8C28D3C`.  
 
+
         The certificate is valid and issued by `Chromecast ICA 6 (Audio Assist), Google Inc`.
+
 
         Not sure what the other two are.
       operationId: AppDeviceID
@@ -2464,7 +2651,8 @@ paths:
 
               \  \"app_device_id\": \"...\",\r
 
-              \  \"certificate\": \"-----BEGIN CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
+              \  \"certificate\": \"-----BEGIN
+              CERTIFICATE-----\\nMIID...Oeb0\\n-----END CERTIFICATE-----\\n\",\r
 
               \  \"signed_data\": \"HAjp...\"\r
 
@@ -2486,11 +2674,15 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /get_app_device_id
-          x-testDescription: |-
-            This gives "app device id", "certificate" and "signed data".  
+          x-testDescription: >-
+            This gives "app device id", "certificate" and "signed
+            data".  
+
             The `app_id` in the request is mandatory and refers to Chromecast backdrop/screensaver app. It has to be set to `E8C28D3C`.  
 
+
             The certificate is valid and issued by `Chromecast ICA 6 (Audio Assist), Google Inc`.
+
 
             Not sure what the other two are.
           x-testEnabled: true
@@ -2529,8 +2721,9 @@ paths:
           request:
             method: GET
             uri: /icon.png
-          x-testDescription: |-
+          x-testDescription: >-
             **Update:** This no longer exists. It's not useful, anyway.
+
 
             A redirect to `http://www.gstatic.com/eureka/images/eureka_device.png`
           x-testEnabled: true
@@ -2539,8 +2732,10 @@ paths:
   /offer:
     get:
       deprecated: false
-      description: |-
-        This gives a token which is used by the Home app to get offers. The offers themselves are not stored on the device.  
+      description: >-
+        This gives a token which is used by the Home app to get offers. The
+        offers themselves are not stored on the device.  
+
         A new token is generated for every request.
       operationId: Offer
       parameters: []
@@ -2579,8 +2774,10 @@ paths:
           request:
             method: GET
             uri: /offer
-          x-testDescription: |-
-            This gives a token which is used by the Home app to get offers. The offers themselves are not stored on the device.  
+          x-testDescription: >-
+            This gives a token which is used by the Home app to get
+            offers. The offers themselves are not stored on the device.  
+
             A new token is generated for every request.
           x-testEnabled: true
           x-testName: Offer
@@ -2588,7 +2785,8 @@ paths:
   /reboot:
     post:
       deprecated: false
-      description: 'This can simply reboot the device (`params: "now"`) or factory reset the device (`params: "fdr"`).'
+      description: 'This can simply reboot the device (`params: "now"`) or factory
+        reset the device (`params: "fdr"`).'
       operationId: RebootandFactoryReset
       parameters: []
       requestBody:
@@ -2634,15 +2832,17 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /reboot
-          x-testDescription: 'This can simply reboot the device (`params: "now"`) or factory reset the device (`params: "fdr"`).'
+          x-testDescription: 'This can simply reboot the device (`params: "now"`) or
+            factory reset the device (`params: "fdr"`).'
           x-testEnabled: true
           x-testName: Reboot and Factory Reset
           x-testShouldPass: true
   /scan_results:
     get:
       deprecated: false
-      description: |-
+      description: >-
         This gets a list of all nearby Wi-Fi access points.
+
 
         The list only has the connected AP by default. Once a scan is triggered by `/setup/scan_wifi`, the whole list is cached for ~3 minutes. Then it will revert to returning only the connected AP again.
       operationId: GetWi-FiScanResults
@@ -2703,8 +2903,9 @@ paths:
           request:
             method: GET
             uri: /scan_results
-          x-testDescription: |-
+          x-testDescription: >-
             This gets a list of all nearby Wi-Fi access points.
+
 
             The list only has the connected AP by default. Once a scan is triggered by `/setup/scan_wifi`, the whole list is cached for ~3 minutes. Then it will revert to returning only the connected AP again.
           x-testEnabled: true
@@ -2713,8 +2914,9 @@ paths:
   /scan_wifi:
     post:
       deprecated: false
-      description: |-
+      description: >-
         This initiates scanning for Wi-Fi networks.
+
 
         The results can be obtained with `/setup/scan_results` after triggering the scan with this request.
       operationId: ScanforNetworks
@@ -2748,8 +2950,9 @@ paths:
           request:
             method: POST
             uri: /scan_wifi
-          x-testDescription: |-
+          x-testDescription: >-
             This initiates scanning for Wi-Fi networks.
+
 
             The results can be obtained with `/setup/scan_results` after triggering the scan with this request.
           x-testEnabled: true
@@ -2758,12 +2961,15 @@ paths:
   /set_eureka_info:
     post:
       deprecated: false
-      description: |-
+      description: >-
         This can set custom values to some options.
+
 
         Only fields to be modified need to be sent, not all. The example has some modifiable fields.
 
+
         TODO: List all modifiable fields.
+
 
         Sending non-existant fields will still return a 200 OK, but they are not saved.
       operationId: SetEurekaInfo
@@ -2840,12 +3046,15 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /set_eureka_info
-          x-testDescription: |-
+          x-testDescription: >-
             This can set custom values to some options.
+
 
             Only fields to be modified need to be sent, not all. The example has some modifiable fields.
 
+
             TODO: List all modifiable fields.
+
 
             Sending non-existant fields will still return a 200 OK, but they are not saved.
           x-testEnabled: true
@@ -2984,8 +3193,9 @@ paths:
   /test_internet_download_speed:
     post:
       deprecated: false
-      description: |-
+      description: >-
         **Update:** This seems to have been removed. Returns 404 Not Found.
+
 
         This endpoint tests internet download speed. Any sample file URL can be provided.
       operationId: TestInternetDownloadSpeed
@@ -3036,15 +3246,19 @@ paths:
           request:
             body: "{\r
 
-              \  \"url\": \"https://storage.googleapis.com/reliability-speedtest/random.txt\"\r
+              \  \"url\":
+              \"https://storage.googleapis.com/reliability-speedtest/random.txt\
+              \"\r
 
               }"
             headers:
               Content-Type: application/json
             method: POST
             uri: /test_internet_download_speed
-          x-testDescription: |-
-            **Update:** This seems to have been removed. Returns 404 Not Found.
+          x-testDescription: >-
+            **Update:** This seems to have been removed. Returns 404 Not
+            Found.
+
 
             This endpoint tests internet download speed. Any sample file URL can be provided.
           x-testEnabled: true
@@ -3053,14 +3267,19 @@ paths:
   /user_eq/set_equalizer:
     post:
       deprecated: false
-      description: |-
-        This can only set new equalizer values. To get already set values, use /setup/eureka_info.
+      description: >-
+        This can only set new equalizer values. To get already set values,
+        use /setup/eureka_info.
+
 
         The body is mandatory. It can either contain `low_shelf` or `high_shelf` or both.
 
+
         `low_shelf.gain_db` and `high_shelf.gain_db` refer to **bass** and **treble** respectively.
 
+
         Default values are 0 for both.  
+
         While the slider in the Home app only ranges from -6 to +6, they can be set to any integer like 50 or -100. These changes persist.
       operationId: SetEqualizerValues
       parameters: []
@@ -3124,14 +3343,19 @@ paths:
               Content-Type: application/json
             method: POST
             uri: /user_eq/set_equalizer
-          x-testDescription: |-
-            This can only set new equalizer values. To get already set values, use /setup/eureka_info.
+          x-testDescription: >-
+            This can only set new equalizer values. To get already set
+            values, use /setup/eureka_info.
+
 
             The body is mandatory. It can either contain `low_shelf` or `high_shelf` or both.
 
+
             `low_shelf.gain_db` and `high_shelf.gain_db` refer to **bass** and **treble** respectively.
 
+
             Default values are 0 for both.  
+
             While the slider in the Home app only ranges from -6 to +6, they can be set to any integer like 50 or -100. These changes persist.
           x-testEnabled: true
           x-testName: Set Equalizer Values
@@ -5249,7 +5473,8 @@ components:
       type: object
   securitySchemes:
     cast-local-authorization-token:
-      description: Local authorization token. For more details, check the [Authentication section](#section/Google-Home-Local-API/Authentication).
+      description: Local authorization token. For more details, check the
+        [Authentication section](#section/Google-Home-Local-API/Authentication).
       in: header
       name: cast-local-authorization-token
       type: apiKey

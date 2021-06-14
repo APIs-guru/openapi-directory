@@ -7,24 +7,33 @@ info:
     email: support@receptive.io
     name: Feedback Support
     x-twitter: receptiveio
-  description: |-
+  description: >-
     ## Who is this for?
+
 
     This documentation is for developers creating their own integration with [Feedback's](https://www.pendo.io/product/feedback/) API. If you are doing a standard integration, there's a really easy [Javascript integration](https://help.receptive.io/hc/en-us/articles/209221969-How-to-integrate-Receptive-with-your-app) that you should know about before you go to the effort of building your own integration.
 
+
     ## Authentication
+
 
     API calls generally need to be authenticated. Generate an API Key at https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This key should then be added to every request as a request header named 'auth-token' (preferred), or as a query parameter named 'auth-token'.
 
+
     ## Endpoint
+
 
     API endpoint is https://api.feedback.eu.pendo.io / https://api.feedback.us.pendo.io depending where your datacenter is located.
 
+
     ## Notes
+
 
     API endpoints are being added to this documentation as needed by customers. If you don't see an endpoint you need please contact support and if it exists we'll publish the docs here. The 'try it out' feature on this documentation page will probably be blocked by your browser because the Access-Control-Allow-Origin header has its value set by the Feedback server depending on your hostname.
 
+
     ## Generating client code
+
 
     This documentation is automatically generated from an OpenAPI spec available [here](http://apidoc.receptive.io/receptive.swagger.json). You can use Swagger to auto-generate API client code in many languages using the [Swagger Editor](http://editor.swagger.io/#/)
   title: Pendo Feedback API
@@ -42,12 +51,16 @@ produces:
   - application/json
 securityDefinitions:
   userApiKey (query parameter):
-    description: Generate an API Key at https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This key should then be added to every request URL as a query parameter.
+    description: Generate an API Key at
+      https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This
+      key should then be added to every request URL as a query parameter.
     in: query
     name: auth-token
     type: apiKey
   userApiKey (request header):
-    description: Generate an API Key at https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This key should then be added to every request as a request header.
+    description: Generate an API Key at
+      https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This
+      key should then be added to every request as a request header.
     in: header
     name: auth-token
     type: apiKey
@@ -195,14 +208,19 @@ paths:
         - $ref: "#/parameters/accountIdInPath"
       responses:
         "200":
-          description: |-
-            Returns an array of maps specifying tags under each tag group, for example:
+          description: >-
+            Returns an array of maps specifying tags under each tag group, for
+            example:
+
 
             [
 
+
             {'impacts' => ['sales']},
 
+
             {'resources' => ['dev', 'test', 'support']}
+
 
             ]
         "404":
@@ -261,7 +279,8 @@ paths:
         - $ref: "#/parameters/limit"
         - $ref: "#/parameters/start"
         - $ref: "#/parameters/order_dir"
-        - description: Filter by whether the features are shown/hidden from customer, if supplied.
+        - description: Filter by whether the features are shown/hidden from customer, if
+            supplied.
           in: query
           name: is_private
           required: false
@@ -286,12 +305,16 @@ paths:
           name: order_by
           required: false
           type: string
-        - description: Tags to limit results by. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
+        - description: Tags to limit results by. Multiple tags can be provided via comma
+            delimeted string. Tags with contexts can be used. E.g.
+            "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
           in: query
           name: tags
           required: false
           type: string
-        - description: Products to limit results by. Comma delimeted string of either ids or names. E.g. "...&products=1,2,3" or "...products=Product1,Product2".
+        - description: Products to limit results by. Comma delimeted string of either ids
+            or names. E.g. "...&products=1,2,3" or
+            "...products=Product1,Product2".
           in: query
           name: products
           required: false
@@ -342,14 +365,19 @@ paths:
         - $ref: "#/parameters/accountIdInPath"
       responses:
         "200":
-          description: |-
-            Returns an array of maps specifying tags under each tag group, for example:
+          description: >-
+            Returns an array of maps specifying tags under each tag group, for
+            example:
+
 
             [
 
+
             {'impacts' => ['sales']},
 
+
             {'resources' => ['dev', 'test', 'support']}
+
 
             ]
         "404":
@@ -379,7 +407,8 @@ paths:
         - feature
   /health-check/ping:
     get:
-      description: Provides a response for automatic checks that the API and load balancers are healthy
+      description: Provides a response for automatic checks that the API and load
+        balancers are healthy
       responses:
         "200":
           description: API is healthy
@@ -399,10 +428,13 @@ paths:
           schema:
             properties:
               event:
-                description: |-
+                description: >-
                   The event field can contain one of the following values-
+
                   1) 'feature_created' - When a new feature is created a webhook will be triggered with the details of the feature. Feature details can be found in the model section under Feature object
+
                   2) 'feature_status_changed' - When a feature status is updated a webhook will be triggered with the updated Feature details. Feature details can be found in the model section under Feature object.
+
                   3) 'feature_comment_created' - When a commment is created on a feature, a webhook will be triggered with the details about the Feature and the new comment. Feature and Comment details can be found in the model section under Feature object and Comment object.
                 type: string
               target_url:
@@ -436,7 +468,8 @@ paths:
   /search:
     get:
       parameters:
-        - description: Specifies the type of entity being searched for. Must be set to 'feature'
+        - description: Specifies the type of entity being searched for. Must be set to
+            'feature'
           enum:
             - feature
           in: query
@@ -448,7 +481,9 @@ paths:
           name: q
           required: true
           type: string
-        - description: "A comma seperated list of status values to filter by, if required. Valid values: 'new', 'waiting', 'planned', 'developing', 'released', 'declined'."
+        - description: "A comma seperated list of status values to filter by, if required.
+            Valid values: 'new', 'waiting', 'planned', 'developing', 'released',
+            'declined'."
           enum:
             - new
             - waiting
@@ -460,12 +495,17 @@ paths:
           name: status
           required: false
           type: string
-        - description: Tags to limit results by - only applies when scope is 'case' or 'feature'. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
+        - description: Tags to limit results by - only applies when scope is 'case' or
+            'feature'. Multiple tags can be provided via comma delimeted string.
+            Tags with contexts can be used. E.g.
+            "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
           in: query
           name: tags
           required: false
           type: string
-        - description: Products to limit results by. Comma delimeted string of either ids or names. E.g. "...&products=1,2,3" or "...products=Product1,Product2".
+        - description: Products to limit results by. Comma delimeted string of either ids
+            or names. E.g. "...&products=1,2,3" or
+            "...products=Product1,Product2".
           in: query
           name: products
           required: false
@@ -492,7 +532,8 @@ paths:
           name: role
           required: true
           type: string
-        - description: Filter by Account ID, if supplied. Only useful if role param is endUser
+        - description: Filter by Account ID, if supplied. Only useful if role param is
+            endUser
           in: query
           name: account
           required: false
@@ -505,7 +546,8 @@ paths:
           required: false
           type: integer
         - default: 300
-          description: Limit the number of records returned. Max value can be 300. If limit is set to more than 300 the api will return an error
+          description: Limit the number of records returned. Max value can be 300. If
+            limit is set to more than 300 the api will return an error
           in: query
           name: limit
           required: false
@@ -525,7 +567,17 @@ paths:
     post:
       consumes:
         - application/json
-      description: Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. If you call this with a new User and/or Account, the record will be created. If you call for an existing User/Account, the record will be updated. You can also call this at EndUser login time, or more frequently, to notify Feedback that the EndUser has been seen. This keeps Feedback's 'last seen' data fresh and updates your reporting. This endpoint is used by our Zapier integration. The only value allowed in user.roles is 'endUser'. The id you supply here for the User and Account should be your own unique id, which Feedback calls external_id. This probably isn't the same as Feedback's id seen elsewhere in the API.
+      description: Replicates much of the functionality of the widget ping, allowing
+        callers to create or update User records for End Users. If you call this
+        with a new User and/or Account, the record will be created. If you call
+        for an existing User/Account, the record will be updated. You can also
+        call this at EndUser login time, or more frequently, to notify Feedback
+        that the EndUser has been seen. This keeps Feedback's 'last seen' data
+        fresh and updates your reporting. This endpoint is used by our Zapier
+        integration. The only value allowed in user.roles is 'endUser'. The id
+        you supply here for the User and Account should be your own unique id,
+        which Feedback calls external_id. This probably isn't the same as
+        Feedback's id seen elsewhere in the API.
       parameters:
         - description: the account and user
           in: body
@@ -617,12 +669,14 @@ paths:
           name: external_id
           required: false
           type: string
-        - description: Find user by their email address. Role param must be specified when using this option
+        - description: Find user by their email address. Role param must be specified when
+            using this option
           in: query
           name: email
           required: false
           type: string
-        - description: Users role ('vendorUser' or 'endUser'). Only useful when finding a user by their email address
+        - description: Users role ('vendorUser' or 'endUser'). Only useful when finding a
+            user by their email address
           enum:
             - endUser
             - vendorUser
@@ -641,7 +695,9 @@ paths:
         - user
   "/users/{id}":
     delete:
-      description: This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.
+      description: This removes most traces of a User's existence from the system. For
+        an EndUser you might want to consider just letting them churn after a
+        period of inactivity.
       parameters:
         - in: path
           name: id
@@ -725,14 +781,19 @@ paths:
           type: number
       responses:
         "200":
-          description: |-
-            Returns an array of maps specifying tags under each tag group, for example:
+          description: >-
+            Returns an array of maps specifying tags under each tag group, for
+            example:
+
 
             [
 
+
             {'impacts' => ['sales']},
 
+
             {'resources' => ['dev', 'test', 'support']}
+
 
             ]
         "404":
@@ -774,7 +835,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.
+      description: the POST /vendor_users is very similar to the POST
+        /users/invite_vendor_user but /vendor_users is intended for consumers to
+        refresh team member data periodically, rather than just a one-off user
+        creation.
       parameters:
         - in: body
           name: data
@@ -846,7 +910,8 @@ paths:
       tags:
         - votes
     post:
-      description: Automatically subscribes/unsubscribes the User to the specifed feature depending on the quantity value
+      description: Automatically subscribes/unsubscribes the User to the specifed
+        feature depending on the quantity value
       parameters:
         - in: body
           name: data
@@ -967,10 +1032,12 @@ definitions:
       developing_at:
         type: string
       effort:
-        description: How much Effort is assigned to the development of this Feature. Not visible to EndUsers
+        description: How much Effort is assigned to the development of this Feature. Not
+          visible to EndUsers
         type: integer
       form_entry:
-        description: a JSON serialized version of the Form containing the description and other fields for this Feature.
+        description: a JSON serialized version of the Form containing the description
+          and other fields for this Feature.
         type: string
       id:
         type: number
@@ -978,7 +1045,8 @@ definitions:
         description: Is this Feature hidden from EndUsers?
         type: boolean
       merged_to_feature_id:
-        description: If this Feature was merged into another, the ID of the preserved Feature
+        description: If this Feature was merged into another, the ID of the preserved
+          Feature
         type: integer
       planned_at:
         type: string
@@ -1020,7 +1088,8 @@ definitions:
       vendor_id:
         type: integer
       view_count:
-        description: How many times has this Feature been viewed. May only be visible to VendorUsers, depending on config
+        description: How many times has this Feature been viewed. May only be visible to
+          VendorUsers, depending on config
         type: integer
       waiting_at:
         type: string
@@ -1030,31 +1099,49 @@ definitions:
       feature_id:
         type: string
       quantity:
-        description: Value between -1 and 1000000. -1 indicates that the User is "Not Interested" in the feature.
+        description: Value between -1 and 1000000. -1 indicates that the User is "Not
+          Interested" in the feature.
         type: integer
     type: object
   Products:
-    description: |-
-      Supplied as an array of maps where each map describes an existing or new product e.g [{id:exising_product_id, name:existing name}, {id:new_product_id, name: new product name}]. 
+    description: >-
+      Supplied as an array of maps where each map describes an existing
+      or new product e.g [{id:exising_product_id, name:existing name},
+      {id:new_product_id, name: new product name}]. 
+
       Existing product id/names held in your account can be referenced at https://feedback.pendo.io/app/#/vendor/products
     items:
       type: string
     type: array
   Tags:
-    description: |-
-      Tags can contain simple tags or categorised tags. Simple tags are supplied as an array of Strings
+    description: >-
+      Tags can contain simple tags or categorised tags. Simple tags are
+      supplied as an array of Strings
+
       Simple Tag Example:
+
       ['Foo', 'Bar']. 
+
       To put the tags in categories replace the Strings with maps of using tag category as the key and tag value as the value where value can be array of strings, e.g
+
       Categorised Tag Example:
+
       [
+
       {'Color':['Red', 'Yellow']}, 
+
       {'Flavor':['Cherry']}
+
       ] 
+
       Simple and categorised tags can be mixed in the same array.
+
       Below validations are done on the tag values of both simple and categorised tags:
+
       1. Tag values must be strings
+
       2. Tags must be at least 2 characters in length
+
       3. Invalid characters (we dont accept following characters in tag value)  , | { } : < > 
   User:
     properties:
@@ -1099,7 +1186,9 @@ definitions:
       feature_id:
         type: integer
       quantity:
-        description: A negative number indicates that the User has indicated "Not Interested" in a Features. Between 0 and 1000000 is the User's current prioritization of the Feature.
+        description: A negative number indicates that the User has indicated "Not
+          Interested" in a Features. Between 0 and 1000000 is the User's current
+          prioritization of the Feature.
         type: integer
       updated_at:
         type: string

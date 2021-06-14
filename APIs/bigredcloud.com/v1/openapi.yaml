@@ -10,15 +10,27 @@ info:
 
     \    This API enables programmatic access to Big Red Cloud data.<br/>\r
 
-    \    We have used Swagger to auto generate the API documentation on this page, and it also enables direct interaction with the API in this page. <br/>\r
+    \    We have used Swagger to auto generate the API documentation on this
+    page, and it also enables direct interaction with the API in this page.
+    <br/>\r
 
-    \    To get started, you will require an API Key - check out our guide at <a target='_blank' href='https://www.bigredcloud.com/support/generating-api-key-guide/'>https://www.bigredcloud.com/support/generating-api-key-guide/</a> for information on how to get one. <br/>\r
+    \    To get started, you will require an API Key - check out our guide
+    at <a target='_blank'
+    href='https://www.bigredcloud.com/support/generating-api-key-guide/'>https:\
+    //www.bigredcloud.com/support/generating-api-key-guide/</a> for information
+    on how to get one. <br/>\r
 
-    \    Use the  'Enter API Key' button below to enter your API key and start interacting with your Big Red Cloud data right on this page. <br/>\r
+    \    Use the  'Enter API Key' button below to enter your API key and
+    start interacting with your Big Red Cloud data right on this page. <br/>\r
 
-    \    The API key will be stored in your browsers local storage for convenience, but you will be able to delete it at any time if you wish. <br/>\r
+    \    The API key will be stored in your browsers local storage for
+    convenience, but you will be able to delete it at any time if you wish.
+    <br/>\r
 
-    \    For additional information on the API, check out our support article at <a target='_blank' href='https://www.bigredcloud.com/support/api/'>https://www.bigredcloud.com/support/api/</a><br/>\r
+    \    For additional information on the API, check out our support
+    article at <a target='_blank'
+    href='https://www.bigredcloud.com/support/api/'>https://www.bigredcloud.com\
+    /support/api/</a><br/>\r
 
     </div>"
   title: Big Red Cloud API
@@ -64,7 +76,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_AccountDto_"
           description: OK
-      summary: "Returns a list of company's Accounts. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Accounts. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -105,7 +118,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_AnalysisCategoryDto_"
           description: OK
-      summary: "Returns a list of company's Analysis Categories. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Analysis Categories. Supports OData
+        querying protocol.\r
 
         Filtering is allowed by \"categoryTypeId\" field.\r
 
@@ -147,7 +161,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_BankAccountQueryDto_"
           description: OK
-      summary: "Returns a list of company's Bank Account. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Bank Account. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -321,7 +336,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_BookTranTypeDto_"
           description: OK
-      summary: "Returns a list of global Book Transactions' Types. Supports OData querying protocol.\r
+      summary: "Returns a list of global Book Transactions' Types. Supports OData
+        querying protocol.\r
 
         Filtering is forbidden.\r
 
@@ -341,7 +357,8 @@ paths:
                     Count: 1
                     Items:
                       - acCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         acEntries:
                           - accountCode: CP01
                             analysisCategoryId: 10433
@@ -361,16 +378,18 @@ paths:
                         lodgement: 0
                         note: Supplier 1
                         plaidTransactionId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         procDate: 2017-07-26T00:00:00
                         supplierId: 70599
-                        timestamp: k0t/YJMp2Qg=
+                        timestamp: UhYllhkv2Qg=
                         total: 100
                     NextPageLink: ""
               schema:
                 $ref: "#/components/schemas/PageResult_CashPaymentQueryDto_"
           description: OK
-      summary: "Returns a list of company's Cash Payments. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Cash Payments. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -462,7 +481,8 @@ paths:
                 response:
                   value:
                     acCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     acEntries:
                       - accountCode: CP01
                         analysisCategoryId: 10433
@@ -482,10 +502,11 @@ paths:
                     lodgement: 0
                     note: Supplier 1
                     plaidTransactionId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     procDate: 2017-07-26T00:00:00
                     supplierId: 70599
-                    timestamp: Ea6BYJMp2Qg=
+                    timestamp: 0Xgnlhkv2Qg=
                     total: 100
               schema:
                 $ref: "#/components/schemas/CashPaymentDto"
@@ -533,7 +554,8 @@ paths:
                     Count: 1
                     Items:
                       - acCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         acEntries:
                           - accountCode: "000"
                             analysisCategoryId: 1
@@ -547,7 +569,8 @@ paths:
                             userDefinedFieldId: 1
                             value: acudfv_1
                         customerId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         detailCollection:
                           - det_1
                           - det_2
@@ -558,9 +581,10 @@ paths:
                         ledger: 0
                         note: note1
                         plaidTransactionId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         procDate: 2011-01-05T00:00:00
-                        timestamp: RhCEYJMp2Qg=
+                        timestamp: 0Xgnlhkv2Qg=
                         total: 50
                         unallocated: 0
                         vatEntries:
@@ -569,12 +593,14 @@ paths:
                             percentage: 15
                             vatRateId: 1
                         vatTypeId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                     NextPageLink: ""
               schema:
                 $ref: "#/components/schemas/PageResult_CashReceiptQueryDto_"
           description: OK
-      summary: "Returns a list of company's Cash Receipts. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Cash Receipts. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -666,7 +692,8 @@ paths:
                 response:
                   value:
                     acCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     acEntries:
                       - accountCode: "000"
                         analysisCategoryId: 1
@@ -680,7 +707,8 @@ paths:
                         userDefinedFieldId: 1
                         value: acudfv_1
                     customerId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     detailCollection:
                       - det_1
                       - det_2
@@ -691,9 +719,10 @@ paths:
                     ledger: 0
                     note: note1
                     plaidTransactionId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     procDate: 2011-01-05T00:00:00
-                    timestamp: cHKGYJMp2Qg=
+                    timestamp: Adsplhkv2Qg=
                     total: 50
                     unallocated: 0
                     vatEntries:
@@ -702,7 +731,8 @@ paths:
                         percentage: 15
                         vatRateId: 1
                     vatTypeId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
               schema:
                 $ref: "#/components/schemas/CashReceiptDto"
           description: OK
@@ -754,7 +784,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_CategoryTypeDto_"
           description: OK
-      summary: "Returns a list of company's Category Types. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Category Types. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -779,7 +810,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_CompanySettingDto_"
           description: OK
-      summary: "Returns a list of company settings. Supports OData querying protocol.\r
+      summary: "Returns a list of company settings. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden."
       tags:
@@ -862,7 +894,7 @@ paths:
                         ourCode: OURCODE111
                         ownerTypeId: 1
                         phone: "1234596970"
-                        timestamp: JDeLYJMp2Qg=
+                        timestamp: oJ8ulhkv2Qg=
                         vatAnalysisTypeId: 1
                         vatReg: VATCODE0001
                         vatType: 2
@@ -870,7 +902,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_CustomerQueryDto_"
           description: OK
-      summary: "Returns a list of company's Customers. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Customers. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -954,7 +987,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: If "true" then Customer's ledger balance will be calculated; otherwise balance will be returned as 0.
+        - description: If "true" then Customer's ledger balance will be calculated;
+            otherwise balance will be returned as 0.
           in: query
           name: needBalance
           required: false
@@ -967,7 +1001,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/CustomerDto"
           description: OK
-      summary: Returns information about a single Customer. You may specify that Customer's ledger balance should be calculated.
+      summary: Returns information about a single Customer. You may specify that
+        Customer's ledger balance should be calculated.
       tags:
         - Customers
     put:
@@ -1064,7 +1099,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/OwnerOpeningBalanceInPeriodsDto"
           description: OK
-      summary: "Returns a Customer's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old."
+      summary: "Returns a Customer's opening balances, calculated for the next
+        periods: current month, one month old, two months old, three and more
+        months old."
       tags:
         - Customers
   "/v1/customers/{itemId}/openingBalanceList":
@@ -1089,7 +1126,7 @@ paths:
                       id: 1
                       procDate: 2011-02-01T00:00:00
                       reference: O/Bal
-                      timestamp: 7vuPYJMp2Qg=
+                      timestamp: EwIxlhkv2Qg=
                       total: 10
                       totalVAT: 1.3
                       unpaid: 0
@@ -1100,7 +1137,7 @@ paths:
                       id: 2
                       procDate: 2011-02-01T00:00:00
                       reference: O/Bal
-                      timestamp: 7vuPYJMp2Qg=
+                      timestamp: EwIxlhkv2Qg=
                       total: 20
                       totalVAT: 3.33
                       unpaid: 0
@@ -1156,7 +1193,8 @@ paths:
           description: OK
       summary: "Sends a Statement email.\r
 
-        If \"toAddress\" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address."
+        If \"toAddress\" is not empty then email will be sent to this
+        address. Otherwise email will be sent to Statement Customer's address."
       tags:
         - Email
   /v1/email/sendQuote:
@@ -1177,7 +1215,8 @@ paths:
           description: OK
       summary: "Sends a Quote email.\r
 
-        If \"toAddress\" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address."
+        If \"toAddress\" is not empty then email will be sent to this
+        address. Otherwise email will be sent to Statement Customer's address."
       tags:
         - Email
   /v1/email/sendSalesInvoice:
@@ -1198,7 +1237,9 @@ paths:
           description: OK
       summary: "Sends a Sales Invoice email.\r
 
-        If \"toAddress\" is not empty then email will be sent to this address. Otherwise email will be sent to Sales Invoice Customer's address."
+        If \"toAddress\" is not empty then email will be sent to this
+        address. Otherwise email will be sent to Sales Invoice Customer's
+        address."
       tags:
         - Email
   /v1/ownerTypeGroups:
@@ -1221,7 +1262,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_OwnerTypeGroupDto_"
           description: OK
-      summary: "Returns a list of global Owner Type Groups. Supports OData querying protocol.\r
+      summary: "Returns a list of global Owner Type Groups. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -1253,7 +1295,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_OwnerTypeDto_"
           description: OK
-      summary: "Returns a list of global Owner Types. Supports OData querying protocol.\r
+      summary: "Returns a list of global Owner Types. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -1294,11 +1337,12 @@ paths:
                         id: 2
                         note: "123"
                         plaidTransactionId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         procDate: 2011-08-08T00:00:00
                         reference: "000002"
                         supplierId: 2
-                        timestamp: ioWZYJMp2Qg=
+                        timestamp: aIs6lhkv2Qg=
                         total: 155
                         transferBankCode: ""
                         transferBankId: 1
@@ -1307,7 +1351,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_PaymentQueryDto_"
           description: OK
-      summary: "Returns a list of company's Payments. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Payments. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -1420,11 +1465,12 @@ paths:
                     id: 2
                     note: "123"
                     plaidTransactionId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     procDate: 2011-08-08T00:00:00
                     reference: "000002"
                     supplierId: 2
-                    timestamp: QuebYJMp2Qg=
+                    timestamp: aIs6lhkv2Qg=
                     total: 155
                     transferBankCode: ""
                     transferBankId: 1
@@ -1482,16 +1528,18 @@ paths:
                         hasDefaultVatRate: false
                         id: 9
                         stockCode: PRO1
-                        timestamp: QuebYJMp2Qg=
+                        timestamp: 3+08lhkv2Qg=
                         unitPrice: 100
                         vatAnalysisTypeId: 1
                         vatRateId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                     NextPageLink: ""
               schema:
                 $ref: "#/components/schemas/PageResult_ProductDto_"
           description: OK
-      summary: "Returns a list of company's Products. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Products. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -1590,11 +1638,12 @@ paths:
                     hasDefaultVatRate: false
                     id: 9
                     stockCode: PRO1
-                    timestamp: zUmeYJMp2Qg=
+                    timestamp: 3+08lhkv2Qg=
                     unitPrice: 100
                     vatAnalysisTypeId: 1
                     vatRateId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
               schema:
                 $ref: "#/components/schemas/ProductDto"
           description: OK
@@ -1658,7 +1707,7 @@ paths:
                         procDate: 2016-06-24T00:00:00
                         reference: "000001"
                         supplierId: 10173
-                        timestamp: zUmeYJMp2Qg=
+                        timestamp: h1A/lhkv2Qg=
                         total: 100
                         totalNet: 90.91
                         totalVAT: 9.09
@@ -1674,7 +1723,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_PurchaseQueryDto_"
           description: OK
-      summary: "Returns a list of company's Purchases. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Purchases. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -1783,7 +1833,7 @@ paths:
                     procDate: 2016-06-24T00:00:00
                     reference: "000001"
                     supplierId: 10173
-                    timestamp: +6ugYJMp2Qg=
+                    timestamp: h1A/lhkv2Qg=
                     total: 100
                     totalNet: 90.91
                     totalVAT: 9.09
@@ -1841,25 +1891,31 @@ paths:
                     Count: 1
                     Items:
                       - acCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         closedDate:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         comments: Sample
                         companyId: 40449
                         customFields:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         customerOwnerId: 70583
                         customerOwnerName: Customer 1
                         ddNumber: Sample
                         deliveryList:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         deliveryTo:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         entryDate: 2017-01-01T00:00:00
                         id: 1
                         layoutType: 1
                         note:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         poNumber: Sample
                         procDate: 2017-01-05T00:00:00
                         productTrans:
@@ -1886,9 +1942,10 @@ paths:
                         reference: "000032"
                         saleInvoiceId: 30044
                         saleRepCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         saleRepId: 75783
-                        timeStamp: Vw6jYJMp2Qg=
+                        timeStamp: ALNBlhkv2Qg=
                         total: 110
                         totalNet: 100
                         totalVat: 10
@@ -1995,7 +2052,8 @@ paths:
           description: OK
       summary: "Generate a sale invoice from a Quote.\r
 
-        When sale invoice is empty, new sale invoice will be generated from Quote."
+        When sale invoice is empty, new sale invoice will be generated
+        from Quote."
       tags:
         - Quote
   "/v1/quotes/reopen/{id}":
@@ -2063,20 +2121,25 @@ paths:
                 response:
                   value:
                     acCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     closedDate:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     comments: Sample
                     companyId: 40449
                     customFields:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     customerOwnerId: 70583
                     customerOwnerName: Customer 1
                     ddNumber: Sample
                     deliveryList:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     deliveryTo:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     entryDate: 2017-01-01T00:00:00
                     id: 1
                     layoutType: 1
@@ -2107,9 +2170,10 @@ paths:
                     reference: "000032"
                     saleInvoiceId: 30044
                     saleRepCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     saleRepId: 75783
-                    timeStamp: xXClYJMp2Qg=
+                    timeStamp: mhVElhkv2Qg=
                     total: 110
                     totalNet: 100
                     totalVat: 10
@@ -2188,7 +2252,7 @@ paths:
                         note: note_1
                         procDate: 2011-01-01T00:00:00
                         reference: "000001"
-                        timestamp: BtOnYJMp2Qg=
+                        timestamp: tXdGlhkv2Qg=
                         total: 82.5
                         totalNet: 70
                         totalVAT: 12.5
@@ -2207,7 +2271,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_SalesQueryDto_"
           description: OK
-      summary: "Returns a list of company's Sales Entries, Sales Invoices and Sales Credit Notes. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Sales Entries, Sales Invoices and Sales
+        Credit Notes. Supports OData querying protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -2246,9 +2311,11 @@ paths:
                         id: 75813
                         loType: "1"
                         netGoods:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         netServices:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         note: Customer 3
                         ourReference: ddNumber_1
                         procDate: 2016-06-24T00:00:00
@@ -2274,12 +2341,14 @@ paths:
                             vatAnalysisTypeId: 0
                             vatRateId: 30657
                         quoteId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         reference: "000001"
                         saleRepCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         saleRepId: 33110
-                        timestamp: u5esYJMp2Qg=
+                        timestamp: wtpIlhkv2Qg=
                         total: -220
                         totalNet: -200
                         totalVAT: -20
@@ -2290,7 +2359,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_SalesCreditNoteQueryDto_"
           description: OK
-      summary: "Returns a list of company's Sales Credit Notes. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Sales Credit Notes. Supports OData
+        querying protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -2349,7 +2419,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Timestamp of Sales Credit Note to remove. Should be encoded in Base64.
+        - description: Timestamp of Sales Credit Note to remove. Should be encoded in
+            Base64.
           in: query
           name: timestamp
           required: true
@@ -2401,9 +2472,11 @@ paths:
                     id: 75813
                     loType: "1"
                     netGoods:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     netServices:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     note: Customer 3
                     ourReference: ddNumber_1
                     procDate: 2016-06-24T00:00:00
@@ -2429,12 +2502,14 @@ paths:
                         vatAnalysisTypeId: 0
                         vatRateId: 30657
                     quoteId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     reference: "000001"
                     saleRepCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     saleRepId: 33110
-                    timestamp: D/quYJMp2Qg=
+                    timestamp: wtpIlhkv2Qg=
                     total: -220
                     totalNet: -200
                     totalVAT: -20
@@ -2512,7 +2587,7 @@ paths:
                         note: Customer 1
                         procDate: 2011-01-01T00:00:00
                         reference: "000001"
-                        timestamp: ZFyxYJMp2Qg=
+                        timestamp: WDxLlhkv2Qg=
                         total: 700
                         totalNet: 636.36
                         totalVAT: 63.64
@@ -2527,7 +2602,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_SalesEntryQueryDto_"
           description: OK
-      summary: "Returns a list of company's Sales Entries. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Sales Entries. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -2644,7 +2720,7 @@ paths:
                     note: Customer 1
                     procDate: 2011-01-01T00:00:00
                     reference: "000001"
-                    timestamp: ZFyxYJMp2Qg=
+                    timestamp: xJ5Nlhkv2Qg=
                     total: 700
                     totalNet: 636.36
                     totalVAT: 63.64
@@ -2720,9 +2796,11 @@ paths:
                         id: 75813
                         loType: "1"
                         netGoods:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         netServices:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         note: Customer 3
                         ourReference: ddNumber_1
                         procDate: 2016-06-24T00:00:00
@@ -2748,12 +2826,14 @@ paths:
                             vatAnalysisTypeId: 0
                             vatRateId: 30657
                         quoteId:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         reference: "000001"
                         saleRepCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         saleRepId: 33110
-                        timestamp: 8r6zYJMp2Qg=
+                        timestamp: CAFQlhkv2Qg=
                         total: -220
                         totalNet: -200
                         totalVAT: -20
@@ -2764,7 +2844,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_SalesInvoiceQueryDto_"
           description: OK
-      summary: "Returns a list of company's Sales Invoices. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Sales Invoices. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"entryDate\" field.\r
 
@@ -2895,9 +2976,11 @@ paths:
                     id: 75813
                     loType: "1"
                     netGoods:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     netServices:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     note: Customer 3
                     ourReference: ddNumber_1
                     procDate: 2016-06-24T00:00:00
@@ -2923,12 +3006,14 @@ paths:
                         vatAnalysisTypeId: 0
                         vatRateId: 30657
                     quoteId:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     reference: "000001"
                     saleRepCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     saleRepId: 33110
-                    timestamp: 8r6zYJMp2Qg=
+                    timestamp: CAFQlhkv2Qg=
                     total: -220
                     totalNet: -200
                     totalVAT: -20
@@ -2986,7 +3071,7 @@ paths:
                         id: 1
                         name: Sales Rep 1
                         phone: "1234567890"
-                        timeStamp: PyG2YJMp2Qg=
+                        timeStamp: CAFQlhkv2Qg=
                     NextPageLink: ""
               schema:
                 $ref: "#/components/schemas/PageResult_SaleRepsDto_"
@@ -3136,7 +3221,8 @@ paths:
                           name: bank Name
                           sortCode: B01
                         businessIdentifierCode:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         code: S001
                         contact: John Smith
                         eFTReference: Reference
@@ -3144,13 +3230,14 @@ paths:
                         fax: "1234567890"
                         id: 10589
                         internationalBankAccountNumber:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         mobile: "1234567890"
                         name: Supplier Name
                         ourCode: OURCODE111
                         ownerTypeId: 3
                         phone: "1234596970"
-                        timestamp: sIO4YJMp2Qg=
+                        timestamp: HGNSlhkv2Qg=
                         vatAnalysisTypeId: 1
                         vatReg: VATCODE0001
                         vatType: 2
@@ -3158,7 +3245,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_SupplierQueryDto_"
           description: OK
-      summary: "Returns a list of company's Suppliers. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Suppliers. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -3242,7 +3330,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: If "true" then Supplier's ledger balance will be calculated; otherwise balance will be returned as 0.
+        - description: If "true" then Supplier's ledger balance will be calculated;
+            otherwise balance will be returned as 0.
           in: query
           name: needBalance
           required: false
@@ -3267,7 +3356,8 @@ paths:
                       name: bank Name
                       sortCode: B01
                     businessIdentifierCode:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     code: S001
                     contact: John Smith
                     eFTReference: Reference
@@ -3275,20 +3365,22 @@ paths:
                     fax: "1234567890"
                     id: 10589
                     internationalBankAccountNumber:
-                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                      $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                        note"
                     mobile: "1234567890"
                     name: Supplier Name
                     ourCode: OURCODE111
                     ownerTypeId: 3
                     phone: "1234596970"
-                    timestamp: sIO4YJMp2Qg=
+                    timestamp: zMVUlhkv2Qg=
                     vatAnalysisTypeId: 1
                     vatReg: VATCODE0001
                     vatType: 2
               schema:
                 $ref: "#/components/schemas/SupplierDto"
           description: OK
-      summary: Returns information about a single Supplier. You may specify that Supplier's ledger balance should be calculated.
+      summary: Returns information about a single Supplier. You may specify that
+        Supplier's ledger balance should be calculated.
       tags:
         - Suppliers
     put:
@@ -3385,7 +3477,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/OwnerOpeningBalanceInPeriodsDto"
           description: OK
-      summary: "Returns a Supplier's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old."
+      summary: "Returns a Supplier's opening balances, calculated for the next
+        periods: current month, one month old, two months old, three and more
+        months old."
       tags:
         - Suppliers
   "/v1/suppliers/{itemId}/openingBalanceList":
@@ -3410,7 +3504,7 @@ paths:
                       id: 1
                       procDate: 2011-02-01T00:00:00
                       reference: O/Bal
-                      timestamp: 9uW6YJMp2Qg=
+                      timestamp: zMVUlhkv2Qg=
                       total: 10
                       totalVAT: 1.3
                       unpaid: 0
@@ -3421,7 +3515,7 @@ paths:
                       id: 2
                       procDate: 2011-02-01T00:00:00
                       reference: O/Bal
-                      timestamp: 9uW6YJMp2Qg=
+                      timestamp: zMVUlhkv2Qg=
                       total: 20
                       totalVAT: 3.33
                       unpaid: 0
@@ -3472,7 +3566,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_UserDefinedFieldDto_"
           description: OK
-      summary: "Returns a list of company's User Defined Fields. Supports OData querying protocol.\r
+      summary: "Returns a list of company's User Defined Fields. Supports OData
+        querying protocol.\r
 
         Filtering is allowed by \"categoryTypeId\" field.\r
 
@@ -3501,7 +3596,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_VatAnalysisTypeDto_"
           description: OK
-      summary: "Returns a list of global Vat Analysis Types. Supports OData querying protocol.\r
+      summary: "Returns a list of global Vat Analysis Types. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -3530,7 +3626,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_VatCategoryDto_"
           description: OK
-      summary: "Returns a list of global Vat Categories. Supports OData querying protocol.\r
+      summary: "Returns a list of global Vat Categories. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -3577,7 +3674,8 @@ paths:
                         orderIndex: 2
                         percentage: 20
                         timestamp:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         vatCategoryId: 3
                       - id: 3
                         isActive: true
@@ -3585,7 +3683,8 @@ paths:
                         orderIndex: 1
                         percentage: 25
                         timestamp:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         vatCategoryId: 1
                       - id: 1
                         isActive: true
@@ -3593,7 +3692,8 @@ paths:
                         orderIndex: 1
                         percentage: 15
                         timestamp:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         vatCategoryId: 3
                       - id: 4
                         isActive: true
@@ -3601,13 +3701,15 @@ paths:
                         orderIndex: 4
                         percentage: 30
                         timestamp:
-                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/note"
+                          $ref: "#/paths/~1v1~1quotes~1{id}/get/responses/200/examples/application~1json/\
+                            note"
                         vatCategoryId: 4
                     NextPageLink: ""
               schema:
                 $ref: "#/components/schemas/PageResult_VatRateDto_"
           description: OK
-      summary: "Returns a list of company's Vat Rates. Supports OData querying protocol.\r
+      summary: "Returns a list of company's Vat Rates. Supports OData querying
+        protocol.\r
 
         Filtering is allowed by \"vatCategoryId\" field.\r
 
@@ -3660,7 +3762,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PageResult_VatTypeDto_"
           description: OK
-      summary: "Returns a list of global Vat Types. Supports OData querying protocol.\r
+      summary: "Returns a list of global Vat Types. Supports OData querying
+        protocol.\r
 
         Filtering is forbidden.\r
 
@@ -3931,7 +4034,7 @@ components:
           note: Supplier 1
           procDate: 2017-07-26T00:00:00
           supplierId: 70599
-          timestamp: Ea6BYJMp2Qg=
+          timestamp: 0Xgnlhkv2Qg=
           total: 100
         opCode: 1
       properties:
@@ -3975,7 +4078,7 @@ components:
           ledger: 0
           note: note1
           procDate: 2011-01-05T00:00:00
-          timestamp: cHKGYJMp2Qg=
+          timestamp: Adsplhkv2Qg=
           total: 50
           unallocated: 0
           vatEntries:
@@ -4030,7 +4133,7 @@ components:
           ourCode: OURCODE111
           ownerTypeId: 1
           phone: "1234596970"
-          timestamp: 7vuPYJMp2Qg=
+          timestamp: EwIxlhkv2Qg=
           vatAnalysisTypeId: 1
           vatReg: VATCODE0001
           vatType: 2
@@ -4078,7 +4181,7 @@ components:
           procDate: 2011-08-08T00:00:00
           reference: "000002"
           supplierId: 2
-          timestamp: QuebYJMp2Qg=
+          timestamp: 3+08lhkv2Qg=
           total: 155
           transferBankCode: ""
           transferBankId: 1
@@ -4111,7 +4214,7 @@ components:
           hasDefaultVatRate: false
           id: 9
           stockCode: PRO1
-          timestamp: zUmeYJMp2Qg=
+          timestamp: 3+08lhkv2Qg=
           unitPrice: 100
           vatAnalysisTypeId: 1
         opCode: 1
@@ -4152,7 +4255,7 @@ components:
           procDate: 2016-06-24T00:00:00
           reference: "000001"
           supplierId: 10173
-          timestamp: +6ugYJMp2Qg=
+          timestamp: ALNBlhkv2Qg=
           total: 100
           totalNet: 90.91
           totalVAT: 9.09
@@ -4218,7 +4321,7 @@ components:
           reference: "000032"
           saleInvoiceId: 30044
           saleRepId: 75783
-          timeStamp: xXClYJMp2Qg=
+          timeStamp: mhVElhkv2Qg=
           total: 110
           totalNet: 100
           totalVat: 10
@@ -4249,7 +4352,7 @@ components:
           id: 1
           name: Sales Rep 1
           phone: "1234567890"
-          timeStamp: PyG2YJMp2Qg=
+          timeStamp: HGNSlhkv2Qg=
         opCode: 1
       properties:
         item:
@@ -4296,7 +4399,7 @@ components:
           note: Customer 1
           procDate: 2011-01-01T00:00:00
           reference: "000001"
-          timestamp: ZFyxYJMp2Qg=
+          timestamp: xJ5Nlhkv2Qg=
           total: 700
           totalNet: 636.36
           totalVAT: 63.64
@@ -4372,7 +4475,7 @@ components:
               vatRateId: 30657
           reference: "000001"
           saleRepId: 33110
-          timestamp: 8r6zYJMp2Qg=
+          timestamp: CAFQlhkv2Qg=
           total: -220
           totalNet: -200
           totalVAT: -20
@@ -4421,7 +4524,7 @@ components:
           ourCode: OURCODE111
           ownerTypeId: 3
           phone: "1234596970"
-          timestamp: 9uW6YJMp2Qg=
+          timestamp: zMVUlhkv2Qg=
           vatAnalysisTypeId: 1
           vatReg: VATCODE0001
           vatType: 2
@@ -4474,7 +4577,7 @@ components:
         note: Supplier 1
         procDate: 2017-07-26T00:00:00
         supplierId: 70599
-        timestamp: Ea6BYJMp2Qg=
+        timestamp: 0Xgnlhkv2Qg=
         total: 100
       properties:
         acCode:
@@ -4614,7 +4717,7 @@ components:
         ledger: 0
         note: note1
         procDate: 2011-01-05T00:00:00
-        timestamp: cHKGYJMp2Qg=
+        timestamp: Adsplhkv2Qg=
         total: 50
         unallocated: 0
         vatEntries:
@@ -4929,7 +5032,7 @@ components:
         ourCode: OURCODE111
         ownerTypeId: 1
         phone: "1234596970"
-        timestamp: 7vuPYJMp2Qg=
+        timestamp: EwIxlhkv2Qg=
         vatAnalysisTypeId: 1
         vatReg: VATCODE0001
         vatType: 2
@@ -6566,7 +6669,7 @@ components:
         procDate: 2011-08-08T00:00:00
         reference: "000002"
         supplierId: 2
-        timestamp: QuebYJMp2Qg=
+        timestamp: aIs6lhkv2Qg=
         total: 155
         transferBankCode: ""
         transferBankId: 1
@@ -6700,7 +6803,7 @@ components:
         hasDefaultVatRate: false
         id: 9
         stockCode: PRO1
-        timestamp: zUmeYJMp2Qg=
+        timestamp: 3+08lhkv2Qg=
         unitPrice: 100
         vatAnalysisTypeId: 1
       properties:
@@ -6841,7 +6944,7 @@ components:
         procDate: 2016-06-24T00:00:00
         reference: "000001"
         supplierId: 10173
-        timestamp: +6ugYJMp2Qg=
+        timestamp: h1A/lhkv2Qg=
         total: 100
         totalNet: 90.91
         totalVAT: 9.09
@@ -7041,7 +7144,7 @@ components:
             vatRateId: 30657
         saleInvoiceId: 30044
         saleRepId: 75783
-        timeStamp: BtOnYJMp2Qg=
+        timeStamp: tXdGlhkv2Qg=
         total: 110
         totalNet: 100
         totalVat: 10
@@ -7191,7 +7294,7 @@ components:
         id: 1
         name: Sales Rep 1
         phone: "1234567890"
-        timeStamp: PyG2YJMp2Qg=
+        timeStamp: CAFQlhkv2Qg=
       properties:
         code:
           type: string
@@ -7315,7 +7418,7 @@ components:
         note: Customer 1
         procDate: 2011-01-01T00:00:00
         reference: "000001"
-        timestamp: ZFyxYJMp2Qg=
+        timestamp: xJ5Nlhkv2Qg=
         total: 700
         totalNet: 636.36
         totalVAT: 63.64
@@ -7495,7 +7598,7 @@ components:
             vatAnalysisTypeId: 0
             vatRateId: 30657
         saleRepId: 33110
-        timestamp: 8r6zYJMp2Qg=
+        timestamp: CAFQlhkv2Qg=
         total: -220
         totalNet: -200
         totalVAT: -20
@@ -7837,7 +7940,7 @@ components:
         ourCode: OURCODE111
         ownerTypeId: 3
         phone: "1234596970"
-        timestamp: sIO4YJMp2Qg=
+        timestamp: zMVUlhkv2Qg=
         vatAnalysisTypeId: 1
         vatReg: VATCODE0001
         vatType: 2

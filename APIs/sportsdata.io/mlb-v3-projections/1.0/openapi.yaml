@@ -29,7 +29,8 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -61,7 +62,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -93,7 +95,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -128,12 +131,14 @@ paths:
                   $ref: "#/components/schemas/PlayerGameProjection"
                 type: array
           description: ""
-      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
+      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS
+        Salaries)
   "/{format}/PlayerSeasonProjectionStats/{season}":
     get:
       operationId: ProjectedPlayerSeasonStatsWithAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true

@@ -35,29 +35,37 @@ securityDefinitions:
     authorizationUrl: https://authorization.api.npr.org/v2/authorize
     flow: accessCode
     scopes:
-      identity.readonly: See your personal information, such as your first name, last name, and favorite station.
-      identity.write: Update your personal information, such as your favorite station(s) or program(s) you follow, on your behalf.
+      identity.readonly: See your personal information, such as your first name, last
+        name, and favorite station.
+      identity.write: Update your personal information, such as your favorite
+        station(s) or program(s) you follow, on your behalf.
       listening.readonly: See your NPR One listening history and get audio recommendations.
-      listening.write: Record that you have heard, marked as interesting, and/or skipped NPR One stories in order to personalize future audio recommendations.
-      localactivation: Connect you with your local NPR member station for communication purposes.
+      listening.write: Record that you have heard, marked as interesting, and/or
+        skipped NPR One stories in order to personalize future audio
+        recommendations.
+      localactivation: Connect you with your local NPR member station for
+        communication purposes.
     tokenUrl: https://authorization.api.npr.org/v2/token
     type: oauth2
 parameters:
   Authorization:
-    description: Your access token from the Authorization Service. Should start with `Bearer`, followed by a space, followed by the token.
+    description: Your access token from the Authorization Service. Should start with
+      `Bearer`, followed by a space, followed by the token.
     in: header
     name: Authorization
     required: true
     type: string
   X-Advertising-ID:
-    description: A device-specific advertising identifier, if possible. Apple's IDFA is an example.
+    description: A device-specific advertising identifier, if possible. Apple's IDFA
+      is an example.
     in: header
     name: X-Advertising-ID
     required: false
     type: string
 responses:
   400WithDocument:
-    description: A bad request; generally, one or more parameters passed in were incorrect or missing
+    description: A bad request; generally, one or more parameters passed in were
+      incorrect or missing
     headers:
       X-RateLimit-Limit:
         description: The number of allowed requests in the current period
@@ -71,11 +79,13 @@ responses:
     schema:
       $ref: "#/definitions/ErrorDocument"
   401WithDocument:
-    description: The client is not authorized to complete this request. Check to ensure a valid access token was passed in the headers.
+    description: The client is not authorized to complete this request. Check to
+      ensure a valid access token was passed in the headers.
     schema:
       $ref: "#/definitions/ErrorDocument"
   404WithDocument:
-    description: The resource with the requested ID could not be found, and the server was unable to complete the request.
+    description: The resource with the requested ID could not be found, and the
+      server was unable to complete the request.
     headers:
       X-RateLimit-Limit:
         description: The number of allowed requests in the current period
@@ -89,7 +99,10 @@ responses:
     schema:
       $ref: "#/definitions/ErrorDocument"
   429WithDocument:
-    description: The client has exceeded the number of daily calls as per their rate limit. For now, this only applies to prototype applications and untrusted clients. Trusted clients will never be rate-limited, nor will any production apps.
+    description: The client has exceeded the number of daily calls as per their rate
+      limit. For now, this only applies to prototype applications and untrusted
+      clients. Trusted clients will never be rate-limited, nor will any
+      production apps.
     headers:
       X-RateLimit-Limit:
         description: The number of allowed requests in the current period
@@ -117,7 +130,9 @@ responses:
     schema:
       $ref: "#/definitions/ErrorDocument"
   503WithDocument:
-    description: The system is undergoing maintenance and we are unable to fulfill this request. Look for a `Retry-After` header to see the predicted time the system will be back up.
+    description: The system is undergoing maintenance and we are unable to fulfill
+      this request. Look for a `Retry-After` header to see the predicted time
+      the system will be back up.
     headers:
       Retry-After:
         description: The predicted time the system will be back up
@@ -128,22 +143,31 @@ responses:
 paths:
   /v2/ads:
     get:
-      description: |-
-        **Not** for use by NPR One clients (for whom sponsorship is already integrated into the Listening Service), this endpoint is designed to be used by our other client applications to request sponsorship on behalf of a user. Sponsorship units are returned in the form of VAST XML. It is worth noting that this endpoint attempts to always return XML, even in the case of exceptions.
+      description: >-
+        **Not** for use by NPR One clients (for whom sponsorship is already
+        integrated into the Listening Service), this endpoint is designed to be
+        used by our other client applications to request sponsorship on behalf
+        of a user. Sponsorship units are returned in the form of VAST XML. It is
+        worth noting that this endpoint attempts to always return XML, even in
+        the case of exceptions.
+
 
         The default behavior of this endpoint is asynchronous; on an initial request, a call to our external sponsorship provider is placed on a queue, which is typically processed within 3 minutes. Once the sponsorship call is received and processed, the returned sponsorship units are placed in a cache on our server for the current user. Subsequent calls to this endpoint will return VAST sponsorship units from this cache until tracking information is submitted, which removes the ad from the cache and will automatically request additional ads asynchronously if there are fewer than a certain number remaining in the cache.
+
 
         For development purposes, it's worth noting that there is currently no way to clear a user's cache without submitting some form of tracking.
       operationId: getAds
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/X-Advertising-ID"
-        - description: Whether to force a synchronous call to our external sponsorship provider; the default behavior is asynchronous.
+        - description: Whether to force a synchronous call to our external sponsorship
+            provider; the default behavior is asynchronous.
           in: query
           name: forceResult
           required: false
           type: boolean
-        - description: How many sponsorship units to request in one call; if left unspecified, the default behavior is to return only 1.
+        - description: How many sponsorship units to request in one call; if left
+            unspecified, the default behavior is to return only 1.
           format: int32
           in: query
           maximum: 5
@@ -155,13 +179,18 @@ paths:
         - application/xml
       responses:
         "200":
-          description: Request completed successfully; a VAST XML document is returned. Note that this response will only be returned if either `force=true` was passed in the querystring, or a call to get sponsorship was previously made, and ads now exist in the cache for this user; otherwise, the 202 response is returned.
+          description: Request completed successfully; a VAST XML document is returned.
+            Note that this response will only be returned if either `force=true`
+            was passed in the querystring, or a call to get sponsorship was
+            previously made, and ads now exist in the cache for this user;
+            otherwise, the 202 response is returned.
           schema:
             $ref: "#/definitions/VASTXml"
         "202":
           description: Request accepted. Check back later for actual ads.
         "400":
-          description: A bad request; generally, one or more parameters passed in were incorrect or missing
+          description: A bad request; generally, one or more parameters passed in were
+            incorrect or missing
           schema:
             $ref: "#/definitions/ErrorXmlDocument"
         "500":
@@ -174,15 +203,20 @@ paths:
     post:
       consumes:
         - application/json
-      description: |-
-        **Not** for use by NPR One clients (for whom sponsorship is already integrated into the Listening Service), this endpoint is designed to be used by our other client applications to submit tracking information for sponsorship units obtained from the `GET /sponsorship/v2/ads` endpoint.
+      description: >-
+        **Not** for use by NPR One clients (for whom sponsorship is already
+        integrated into the Listening Service), this endpoint is designed to be
+        used by our other client applications to submit tracking information for
+        sponsorship units obtained from the `GET /sponsorship/v2/ads` endpoint.
+
 
         The tracking information should be submitted in the body of the request in the form of a JSON object following the Collection.Doc+JSON specification.
       operationId: receiveAdTracking
       parameters:
         - $ref: "#/parameters/Authorization"
         - $ref: "#/parameters/X-Advertising-ID"
-        - description: A JSON object representing sponsorship tracking data to submit to our external provider.
+        - description: A JSON object representing sponsorship tracking data to submit to
+            our external provider.
           in: body
           name: body
           required: true
@@ -190,9 +224,11 @@ paths:
             $ref: "#/definitions/UserAdDocument"
       responses:
         "204":
-          description: Request completed successfully, but there is nothing that we need to return to the caller.
+          description: Request completed successfully, but there is nothing that we need
+            to return to the caller.
         "400":
-          description: A bad request; generally, one or more parameters passed in were incorrect or missing
+          description: A bad request; generally, one or more parameters passed in were
+            incorrect or missing
           schema:
             $ref: "#/definitions/Error"
         "500":
@@ -221,7 +257,8 @@ definitions:
     required:
       - href
   AdTrackingData:
-    description: All the information needed for the Sponsorship Service to send back tracking information to our external sponsorship provider
+    description: All the information needed for the Sponsorship Service to send back
+      tracking information to our external sponsorship provider
     properties:
       adId:
         description: The VAST Ad node `id` attribute value, (e.g. AdswizzAd12345)
@@ -245,13 +282,15 @@ definitions:
       - properties:
           attributes:
             $ref: "#/definitions/AdTrackingData"
-            description: All the information needed for the Sponsorship Service to send back tracking information to our external sponsorship provider
+            description: All the information needed for the Sponsorship Service to send back
+              tracking information to our external sponsorship provider
           items:
             description: Not used
             items:
               type: object
             type: array
-    description: All the information needed for the Sponsorship Service to send back tracking information to our external sponsorship provider
+    description: All the information needed for the Sponsorship Service to send back
+      tracking information to our external sponsorship provider
   AdXml:
     properties:
       InLine:
@@ -268,12 +307,15 @@ definitions:
     description: A program (aggregation) that a given user has shown an affiliation with
     properties:
       daysSinceLastListen:
-        description: The number of days since a user last listened to a story from this aggregation. Absent if user never listened to the aggregation.
+        description: The number of days since a user last listened to a story from this
+          aggregation. Absent if user never listened to the aggregation.
         format: int32
         type: integer
       following:
         default: false
-        description: Whether or not the user is following the aggregation. When changing affiliation status, the client is expected to toggle this value and then send the entire object back.
+        description: Whether or not the user is following the aggregation. When changing
+          affiliation status, the client is expected to toggle this value and
+          then send the entire object back.
         type: boolean
       href:
         description: A link to more details about the program from the NPR Story API
@@ -282,17 +324,22 @@ definitions:
         description: A unique identifier for the aggregation (program)
         type: string
       notif_following:
-        description: The topic in Firebase Cloud Messaging to which the device should subscribe if it supports notifications and the user wants notifications about the podcasts they follow.
+        description: The topic in Firebase Cloud Messaging to which the device should
+          subscribe if it supports notifications and the user wants
+          notifications about the podcasts they follow.
         items:
           type: string
         type: array
       notif_rated:
-        description: The topic in Firebase Cloud Messaging to which the device should subscribe if it supports notifications and the user wants notifications about the podcasts they have highly rated.
+        description: The topic in Firebase Cloud Messaging to which the device should
+          subscribe if it supports notifications and the user wants
+          notifications about the podcasts they have highly rated.
         items:
           type: string
         type: array
       rating:
-        description: The user's average rating for this affiliation on a scale of 0-1. Absent if user never listened to the aggregation.
+        description: The user's average rating for this affiliation on a scale of 0-1.
+          Absent if user never listened to the aggregation.
         format: float
         type: number
       title:
@@ -313,7 +360,8 @@ definitions:
           type: object
         type: array
       href:
-        description: A URL representation of the resource; should generally be ignored by clients unless noted otherwise
+        description: A URL representation of the resource; should generally be ignored
+          by clients unless noted otherwise
         type: string
       items:
         items:
@@ -557,13 +605,22 @@ definitions:
     xml:
       name: Tracking
   UserAdData:
-    description: All information relevant to a user who has requested sponsorship or submitted tracking information
+    description: All information relevant to a user who has requested sponsorship or
+      submitted tracking information
     properties:
       ipAddress:
-        description: The TCP/IP address of the client making the request. The server will attempt to grab this from the headers, so it probably does not need to be passed in the body unless you get back an error message stating that we were unable to determine an IP address from the request.
+        description: The TCP/IP address of the client making the request. The server
+          will attempt to grab this from the headers, so it probably does not
+          need to be passed in the body unless you get back an error message
+          stating that we were unable to determine an IP address from the
+          request.
         type: string
       userAgent:
-        description: An identifying string for the browser making the request. The server will attempt to grab this from the headers, so it probably does not need to be passed in the body unless you get back an error message stating that we were unable to determine a User-Agent from the request.
+        description: An identifying string for the browser making the request. The
+          server will attempt to grab this from the headers, so it probably does
+          not need to be passed in the body unless you get back an error message
+          stating that we were unable to determine a User-Agent from the
+          request.
         type: string
   UserAdDocument:
     allOf:
@@ -571,15 +628,21 @@ definitions:
       - properties:
           attributes:
             $ref: "#/definitions/UserAdData"
-            description: All information relevant to a user who has requested sponsorship or submitted tracking information
+            description: All information relevant to a user who has requested sponsorship or
+              submitted tracking information
           items:
-            description: All the information needed for the Sponsorship Service to send back tracking information to our external sponsorship provider
+            description: All the information needed for the Sponsorship Service to send back
+              tracking information to our external sponsorship provider
             items:
               $ref: "#/definitions/AdTrackingDocument"
             type: array
-    description: All information relevant to a user who has requested sponsorship or submitted tracking information
+    description: All information relevant to a user who has requested sponsorship or
+      submitted tracking information
   VASTXml:
-    description: Please visit <a href='https://www.iab.com/guidelines/digital-video-ad-serving-template-vast/' target='_blank'>https://www.iab.com/guidelines/digital-video-ad-serving-template-vast/</a> for more information on the VAST XML specification.
+    description: Please visit <a
+      href='https://www.iab.com/guidelines/digital-video-ad-serving-template-vast/'
+      target='_blank'>https://www.iab.com/guidelines/digital-video-ad-serving-template-vast/</a>
+      for more information on the VAST XML specification.
     properties:
       Ad:
         $ref: "#/definitions/AdXml"

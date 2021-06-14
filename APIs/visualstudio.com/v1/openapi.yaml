@@ -307,6 +307,7 @@ paths:
       tags:
         - Environments
     get:
+      operationId: GetEnvironmentRoute
       parameters:
         - in: path
           name: environmentId
@@ -478,6 +479,7 @@ paths:
         - Environments
   "/api/v1/Environments/{environmentId}/_callback":
     post:
+      operationId: UpdateEnvironmentRoute
       parameters:
         - in: path
           name: environmentId
@@ -1446,6 +1448,96 @@ paths:
           description: Not Found
       tags:
         - Billing
+  "/api/v1/GenevaActions/Configuration/{target}":
+    post:
+      parameters:
+        - in: path
+          name: target
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSystemConfigurationBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSystemConfigurationBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSystemConfigurationBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSystemConfigurationBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+      tags:
+        - Configuration
+  "/api/v1/GenevaActions/Configuration/{target}/{key}":
+    get:
+      parameters:
+        - in: path
+          name: target
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Configuration
   "/api/v1/GenevaActions/Environments/{environmentId}":
     delete:
       parameters:
@@ -1793,6 +1885,61 @@ paths:
           description: Not Found
       tags:
         - Plans
+  /api/v1/Prebuilds/template:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+      tags:
+        - Prebuilds
   /api/v1/Sas:
     get:
       responses:
@@ -4335,8 +4482,6 @@ components:
           type: string
         gitStatus:
           $ref: "#/components/schemas/GitStatus"
-        hasUnpushedGitChanges:
-          type: boolean
         id:
           nullable: true
           type: string
@@ -5360,6 +5505,19 @@ components:
           nullable: true
           type: string
       type: object
+    SystemConfigurationResponse:
+      additionalProperties: false
+      properties:
+        comment:
+          nullable: true
+          type: string
+        key:
+          nullable: true
+          type: string
+        value:
+          nullable: true
+          type: string
+      type: object
     TelemetryData:
       additionalProperties: false
       properties:
@@ -5420,8 +5578,6 @@ components:
           type: string
         gitStatus:
           $ref: "#/components/schemas/GitStatus"
-        hasUnpushedGitChanges:
-          type: boolean
         id:
           nullable: true
           type: string
@@ -5503,6 +5659,19 @@ components:
           type: object
       required:
         - displayName
+      type: object
+    UpdateSystemConfigurationBody:
+      additionalProperties: false
+      properties:
+        comment:
+          nullable: true
+          type: string
+        key:
+          nullable: true
+          type: string
+        value:
+          nullable: true
+          type: string
       type: object
     UserIdentity:
       additionalProperties: false

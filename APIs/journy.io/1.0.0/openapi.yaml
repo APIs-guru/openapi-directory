@@ -7,55 +7,82 @@ info:
     email: hi@journy.io
     name: Support
     url: https://help.journy.io
-  description: |-
+  description: >-
     # Introduction
+
 
     The journy.io API is organized around REST. Our API has predictable resource-oriented URLs, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
+
     The API is hosted on api.journy.io.
+
 
     # Official SDKs
 
+
     Our SDKs are designed to help you interact with our APIs with less friction. They are written in several different languages and help bridge the gap between your application and journy.io APIs. They take away the need to know the exact URL and HTTP method to use for each API call among other things leaving you more time to focus on making your application.
 
+
     | Language   | Package                                                                        | Source code                                                                |
+
     |------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+
     | 💚 Node.js | [npm install @journyio/sdk ](https://www.npmjs.com/package/@journyio/sdk)      | [github.com/journy-io/js-sdk](https://github.com/journy-io/js-sdk)         |
+
     | 🐘 PHP     | [composer require journy-io/sdk](https://packagist.org/packages/journy-io/sdk) | [github.com/journy-io/php-sdk](https://github.com/journy-io/php-sdk)       |
+
     | 🐍 Python  | [pip install journyio-sdk](https://pypi.org/project/journyio-sdk/)             | [github.com/journy-io/python-sdk](https://github.com/journy-io/python-sdk) |
+
     | 💎 Ruby    | Coming soon                                                                    | Coming soon                                                                |
+
 
     Your favourite programming language not included? [Let us know!](mailto:hi@journy.io)
 
+
     In the meanwhile, you can use [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) to generate a client for your programming language.
+
 
     # Authentication
 
+
     The journy.io API uses API keys to authenticate requests. You can view and manage your API keys in the [connections screen](https://system.journy.io).
+
 
     Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.
 
+
     All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
+
 
     For every request send to the API we expect a header `X-Api-Key` to be set with the API Key.
 
+
     ## Permissions
+
 
     When creating an API Key in [the application](https://system.journy.io) you will have the choice to give permissions to an API Key (which you can change later on). These permissions restrict the API Key from different actions. When an API Key tries to perform a certain action it doesn't have the permissions for, you will receive a `401: Unauthorized` response.
 
+
     # Rate limiting
+
 
     To prevent abuse of the API we make use of a sliding-window rate limiter. Currently, every business can do up to *5000* requests *per hour*.
 
+
     In every response the headers `X-RateLimit-Limit` and `X-RateLimit-Remaining` will be set. The `X-RateLimit-Limit`-header will always contain the current limit of requests per hour. The `X-RateLimit-Remaining`-header will always contain the amount of requests you have left in the current sliding window.
+
 
     # Errors
 
+
     journy.io uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g. a required parameter was omitted). Codes in the 5xx range indicate an error with journy.io's servers (these are rare).
+
 
     When performing a `POST`- or `PUT`-request with a requestBody, or when including parameters, these parameters and fields will automatically be checked and validated against the API Spec. When any error occurs, you will get a response with an `errors`-field, structured as follows:
 
+
     ```json
+
     {
       "errors": {
         "parameters": {
@@ -79,9 +106,12 @@ info:
         }
       }
     }
+
     ```
 
+
     # Support
+
 
     Looking for a specific endpoint? Documentation not clear? [We would love to help!](mailto:hi@journy.io)
   termsOfService: https://www.journy.io/terms-of-use/
@@ -160,12 +190,18 @@ paths:
                 properties:
                   additionalProperties:
                     oneOf:
-                      - type: string
+                      - nullable: true
+                        type: string
                       - type: boolean
                       - type: number
                       - format: datetime
                         type: string
-                  description: The properties being set, possible values are strings, booleans, numbers and datetimes (ISO 8601)
+                      - items:
+                          format: non-empty-string
+                          type: string
+                        type: array
+                  description: The properties being set, possible values are strings, booleans,
+                    numbers and datetimes (ISO 8601)
                   type: object
               required:
                 - identification
@@ -177,7 +213,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -215,7 +252,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -282,7 +320,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -304,7 +343,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -319,7 +359,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -356,7 +397,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -403,18 +445,25 @@ paths:
             await client.upsertAccount({
               // required
               accountId: "accountId",
+              domain: "acme-inc.com",
 
               // optional
               properties: {
-                name: "Acme",
-                age: 26,
-                is_developer: true,
+                name: "ACME, Inc",
+                mrr: 399,
+                plan: "Pro",
                 registered_at: new Date(...),
-                this_property_will_be_deleted: "",
+                is_paying: true,
+                key_with_empty_value: "",
+                array_of_values: ["value1", "value2"],
+                this_property_will_be_deleted: null,
               },
 
               // optional
-              members: ["userId", "userId"]
+              members: [
+                { userId: "userId" },
+                { userId: "userId" }
+              ]
             });
         - lang: PHP
           source: |-
@@ -426,40 +475,62 @@ paths:
 
             $client = Client::withDefaults("your-api-key");
 
-            $call = $client->upsertAccount([
-                // required
+            $client->upsertAccount([
                 "accountId" => "accountId",
+                "domain" => "acme-inc.com",
 
                 // optional
                 "properties" => [
-                    "name" => "Acme",
+                    "name" => "ACME, Inc",
+                    "mrr" => 399,
                     "plan" => "Pro",
-                    "age" => 26,
-                    "is_developer" => true,
                     "registered_at" => new \DateTimeImmutable("..."),
-                    "this_property_will_be_deleted" => "",
+                    "is_paying" => true,
+                    "key_with_empty_value" => "",
+                    "array_of_values" => ["value1", "value2"],
+                    "this_property_will_be_deleted" => null,
                 ],
 
                 // optional
-                "members" => ["userId", "userId"],
+                "members" => [
+                    ["userId" => "userId"],
+                    ["userId" => "userId"],
+                ],
             ]);
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
 
             from journyio.client import Client, Config
             from journyio.client import Properties
+            from journyio.account_identified import AccountIdentified
+            from journyio.user_identified import UserIdentified
+            from datetime import datetime
 
             config = Config("api-key-secret")
             http_client = HttpClientRequests()
             client = Client(http_client, config)
 
+            account = AccountIdentified("accountId", "acme-inc.com")
+            # or
+            account = AccountIdentified.by_account_id("accountId")
+            # or
+            account = AccountIdentified.by_domain("acme-inc.com")
+
             properties = Properties()
-            properties["name"] = "Acme"
-            properties["age"] = "26"
-            properties["is_developer"] = "true"
-            properties["this_property_will_be_deleted"] = ""
-            client.upsert_account("accountId", "journy.io", properties, ["userId", "userId"])
+            properties["name"] = "ACME, Inc"
+            properties["mrr"] = 399
+            properties["plan"] = "Pro"
+            properties["registered_at"] = datetime.now()
+            properties["is_paying"] = True
+            properties["key_with_empty_value"] = ""
+            properties["this_property_will_be_deleted"] = None
+            properties["array_of_values"] = ["value1", "value2"]
+
+            member1 = UserIdentified.by_user_id("userId")
+            member2 = UserIdentified.by_user_id("userId")
+
+            client.upsert_account(account, properties, [member1, member2])
       x-key-permissions:
         - TrackData
   "/accounts/{accountId}/users":
@@ -493,7 +564,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -531,7 +603,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -598,7 +671,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -620,7 +694,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -635,7 +710,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -672,7 +748,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -720,16 +797,20 @@ paths:
         - lang: PHP
           source: |-
             <?php
+
             // https://github.com/journy-io/php-sdk
+
             use JournyIO\SDK\Client;
+
             $client = Client::withDefaults("your-api-key");
-            $call = $client->removeUserFromAccount(
+
+            $client->removeUserFromAccount(
                 "accountId",
                 "userId"
             );
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
 
             from journyio.client import Client, Config
 
@@ -770,7 +851,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -808,7 +890,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -875,7 +958,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -897,7 +981,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -912,7 +997,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -949,7 +1035,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -997,16 +1084,20 @@ paths:
         - lang: PHP
           source: |-
             <?php
+
             // https://github.com/journy-io/php-sdk
+
             use JournyIO\SDK\Client;
+
             $client = Client::withDefaults("your-api-key");
-            $call = $client->addUserToAccount(
+
+            $client->addUserToAccount(
                 "accountId",
                 "userId"
             );
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
 
             from journyio.client import Client, Config
 
@@ -1066,7 +1157,8 @@ paths:
                       - type: number
                       - format: datetime
                         type: string
-                  description: Event metadata, possible values are strings, booleans, numbers and datetimes (ISO 8601)
+                  description: Event metadata, possible values are strings, booleans, numbers and
+                    datetimes (ISO 8601)
                   type: object
                 name:
                   format: event-name
@@ -1086,7 +1178,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1124,7 +1217,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -1191,7 +1285,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1213,7 +1308,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -1228,7 +1324,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1265,7 +1362,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1302,64 +1400,113 @@ paths:
         - Events
       x-codeSamples:
         - lang: JavaScript
-          source: |-
+          source: >-
             // https://github.com/journy-io/js-sdk
 
-            import { Client, Event } from "@journyio/sdk";
+
+            import { Client, Event, UserIdentified, AccountIdentified } from "@journyio/sdk";
+
 
             const client = Client.withDefaults('your-api-key');
 
-            event = Event.forUser("login", "userId");
-            event = Event.forUser("some_historic_event", "userId").happenedAt(new Date(...));
-            event = Event.forAccount("reached_monthly_volume", "accountId").withMetadata({
-              number: 454554,
-              boolean: false,
-              string: "string"
-            });
-            event = Event.forUserInAccount("updated_settings", "userId", "accountId");
+
+            event = Event.forUser("login", UserIdentified.byUserId("userId"));
+
+
+            event = Event.forUser("some_historic_event", UserIdentified.byUserId("userId"))
+              .happenedAt(new Date(...))
+            ;
+
+
+            event = Event.forAccount("reached_monthly_volume", AccountIdentified.byAccountId("accountId"))
+              .withMetadata({
+                "number": 1313,
+                "string": "string",
+                "boolean": true,
+              })
+            ;
+
+
+            event = Event.forUserInAccount(
+              "updated_settings",
+              UserIdentified.byUserId("userId"),
+              AccountIdentified.byAccountId("accountId")
+            );
+
 
             await client.addEvent(event);
         - lang: PHP
-          source: |-
+          source: >-
             <?php
+
 
             // https://github.com/journy-io/php-sdk
 
+
             use JournyIO\SDK\Client;
+
             use JournyIO\SDK\Event;
+
+            use JournyIO\SDK\UserIdentified;
+
+            use JournyIO\SDK\AccountIdentified;
+
 
             $client = Client::withDefaults("your-api-key");
 
-            $event = Event::forUser("login", "userId");
-            $event = Event::forUser("some_historic_event", "userId")->happenedAt(new \DateTimeImmutable("now"));
-            $event = Event::forAccount("reached_monthly_volume", "accountId")->withMetadata([
-               "number" => 454554,
-               "boolean" => false,
-               "string" => "string",
-            ]);
-            $event = Event::forUserInAccount("updated_settings", "userId", "accountId");
 
-            $call = $client->addEvent($event);
+            $event = Event::forUser("login", UserIdentified::byUserId("userId"));
+
+
+            $event = Event::forUser("some_historic_event", UserIdentified::byUserId("userId"))
+                ->happenedAt(new \DateTimeImmutable("now"))
+            ;
+
+
+            $event = Event::forAccount("reached_monthly_volume", AccountIdentified::byAccountId("accountId"))
+                ->withMetadata([
+                    "number" => 13313,
+                    "string" => "string",
+                    "boolean" => true,
+                ])
+            ;
+
+
+            $event = Event::forUserInAccount(
+                "updated_settings",
+                UserIdentified::byUserId("userId"),
+                AccountIdentified::byAccountId("accountId")
+            );
+
+
+            $client->addEvent($event);
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
 
             from journyio.client import Client, Config
             from datetime import datetime
             from journyio.events import Event, Metadata
+            from journyio.account_identified import AccountIdentified
+            from journyio.user_identified import UserIdentified
 
             config = Config("api-key-secret")
             http_client = HttpClientRequests()
             client = Client(http_client, config)
 
+            account = AccountIdentified("accountId", "www.domain.tld")
+            user = UserIdentified("userId", "name@domain.tld")
+
             metadata = Metadata()
             metadata["number"] = 454554
             metadata["boolean"] = False
             metadata["string"] = "string"
+
             event = Event()
-                .for_user_in_account("settings_updated", "userId", "accountId")
+                .for_user_in_account("settings_updated", user, account)
                 .happened_at(datetime.now())
                 .with_metadata(metadata)
+
             client.add_event(event)
       x-key-permissions:
         - TrackData
@@ -1400,7 +1547,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1438,7 +1586,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -1505,7 +1654,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1527,7 +1677,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -1542,7 +1693,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1579,7 +1731,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1624,8 +1777,11 @@ paths:
             const client = Client.withDefaults('your-api-key');
 
             await client.link({
-              deviceId: 'deviceId',
-              userId: 'userId',
+              deviceId: request.cookies["__journey"],
+
+              userId: request.user.id,
+              // or
+              email: request.user.email,
             });
         - lang: PHP
           source: |-
@@ -1636,15 +1792,32 @@ paths:
             use JournyIO\SDK\Client;
 
             $client = Client::withDefaults("your-api-key");
-            $client->link($deviceId, $userId);
+
+            $client->link([
+                "deviceId" => "deviceId",
+
+                "userId" => "userId",
+                // or
+                "email" => "email",
+            ]);
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
+
             from journyio.client import Client, Config
+            from journyio.user_identified import UserIdentified
+
             config = Config("api-key-secret")
             http_client = HttpClientRequests()
             client = Client(http_client, config)
-            client.link("userId", "deviceId")
+
+            user = UserIdentified("userId", "name@domain.tld")
+            # or
+            user = UserIdentified.by_user_id("userId")
+            # or
+            user = UserIdentified.by_email("name@domain.tld")
+
+            client.link(user, "deviceId")
       x-key-permissions:
         - TrackData
   /tracking/snippet:
@@ -1665,7 +1838,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1712,7 +1886,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -1779,7 +1954,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1801,7 +1977,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -1816,7 +1993,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1853,7 +2031,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1890,7 +2069,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -1966,7 +2146,7 @@ paths:
             }
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
 
             from journyio.client import Client, Config
             from journyio.results import Success
@@ -2011,12 +2191,18 @@ paths:
                 properties:
                   additionalProperties:
                     oneOf:
-                      - type: string
+                      - nullable: true
+                        type: string
                       - type: boolean
                       - type: number
                       - format: datetime
                         type: string
-                  description: The properties being set, possible values are strings, booleans, numbers and datetimes (ISO 8601)
+                      - items:
+                          format: non-empty-string
+                          type: string
+                        type: array
+                  description: The properties being set, possible values are strings, booleans,
+                    numbers and datetimes (ISO 8601)
                   type: object
               required:
                 - identification
@@ -2028,7 +2214,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2066,7 +2253,8 @@ paths:
               schema:
                 allOf:
                   - allOf:
-                      - description: The basic response containing the unique ID of the request and the response status
+                      - description: The basic response containing the unique ID of the request and the
+                          response status
                         properties:
                           meta:
                             properties:
@@ -2133,7 +2321,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2155,7 +2344,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -2170,7 +2360,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2207,7 +2398,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2258,13 +2450,16 @@ paths:
 
               // optional
               properties: {
+                full_name: "John Doe",
                 first_name: "John",
                 last_name: "Doe",
+                phone: "123",
+                registered_at: new Date(/* ... */),
+                is_admin: true,
                 age: 26,
-                name: "John Doe",
-                is_developer: true,
-                registered_at: new Date(...),
-                this_property_will_be_deleted: "",
+                array_of_values: ["value1", "value2"],
+                key_with_empty_value: "",
+                this_property_will_be_deleted: null,
               },
             });
         - lang: PHP
@@ -2277,42 +2472,63 @@ paths:
 
             $client = Client::withDefaults("your-api-key");
 
-            $call = $client->upsertUser([
+            $client->upsertUser([
                 // required
                 "userId" => "userId",
                 "email" => "name@domain.tld",
 
                 // optional
                 "properties" => [
-                    first_name: "John",
-                    last_name: "Doe",
-                    "plan" => "Pro",
+                    "full_name" => "John Doe",
+                    "first_name" => "John",
+                    "last_name" => "Doe",
+                    "phone" => "123",
+                    "is_admin" => true,
+                    "registered_at" => new \DateTimeImmutable("..."),
                     "age" => 26,
-                    "is_developer" => true,
-                    "registered_at" => new DateTimeImmutable("..."),
-                    "this_property_will_be_deleted" => "",
+                    "array_of_values" => ["value1", "value2"],
+                    "key_with_empty_value" => "",
+                    "this_property_will_be_deleted" => null,
                 ],
             ]);
         - lang: Python
           source: |-
-            // https://github.com/journy-io/python-sdk
+            # https://github.com/journy-io/python-sdk
+
             from journyio.client import Client, Config
             from journyio.client import Properties
+            from journyio.user_identified import UserIdentified
+            from datetime import datetime
+
             config = Config("api-key-secret")
             http_client = HttpClientRequests()
             client = Client(http_client, config)
+
+            user = UserIdentified("userId", "name@domain.tld")
+            # or
+            user = UserIdentified.by_user_id("userId")
+            # or
+            user = UserIdentified.by_email("name@domain.tld")
+
             properties = Properties()
-            properties["age"] = "26"
+            properties["full_name"] = "John Doe"
             properties["first_name"] = "John"
             properties["last_name"] = "Doe"
-            properties["is_developer"] = "true"
-            properties["this_property_will_be_deleted"] = ""
-            client.upsert_user("name@domain.tld", "userId", properties)
+            properties["phone"] = "123"
+            properties["is_admin"] = True
+            properties["registered_at"] = datetime.now()
+            properties["age"] = 123
+            properties["array_of_values"] = ["value1", "value2"]
+            properties["key_with_empty_value"] = ""
+            properties["this_property_will_be_deleted"] = None
+
+            client.upsert_user(user, properties)
       x-key-permissions:
         - TrackData
   /validate:
     get:
-      description: Endpoint used to test the validity and some basic information about a specific API Key.
+      description: Endpoint used to test the validity and some basic information about
+        a specific API Key.
       operationId: getValidity
       responses:
         "200":
@@ -2320,7 +2536,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2364,7 +2581,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2386,7 +2604,8 @@ paths:
                     required:
                       - message
                     type: object
-          description: No API Key was provided or the key is not authorised to perform the action
+          description: No API Key was provided or the key is not authorised to perform the
+            action
           headers:
             X-RateLimit-Limit:
               description: Request limit per hour.
@@ -2401,7 +2620,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2438,7 +2658,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - description: The basic response containing the unique ID of the request and the response status
+                  - description: The basic response containing the unique ID of the request and the
+                      response status
                     properties:
                       meta:
                         properties:
@@ -2509,17 +2730,24 @@ paths:
                 var_dump($call->errors());
             }
         - lang: Python
-          source: |-
-            // https://github.com/journy-io/python-sdk
+          source: >-
+            # https://github.com/journy-io/python-sdk
+
 
             from journyio.client import Client, Config
+
             from journyio.results import Success
 
+
             config = Config("api-key-secret")
+
             http_client = HttpClientRequests()
+
             client = Client(http_client, config)
 
+
             client.get_api_key_details()
+
 
             if isinstance(result, Success):
                 print(result.request_id)  # str

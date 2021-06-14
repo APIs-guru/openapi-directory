@@ -4,7 +4,8 @@ servers:
 info:
   contact:
     url: http://developer.ticketmaster.com/support/contact-us/
-  description: The Ticketmaster Discovery API allows you to search for events, attractions, or venues.
+  description: The Ticketmaster Discovery API allows you to search for events,
+    attractions, or venues.
   title: Discovery API
   version: v2
   x-apisguru-categories:
@@ -20,10 +21,12 @@ tags:
 paths:
   /discovery/v2/attractions:
     get:
-      description: Find attractions (artists, sports, packages, plays and so on) and filter your search by name, and much more.
+      description: Find attractions (artists, sports, packages, plays and so on) and
+        filter your search by name, and much more.
       operationId: find
       parameters:
-        - description: "Sorting order of the search result. Allowable Values : 'name,asc', 'name,desc', 'relevance,asc', 'relevance,desc'"
+        - description: "Sorting order of the search result. Allowable Values : 'name,asc',
+            'name,desc', 'relevance,asc', 'relevance,desc'"
           example: ""
           in: query
           name: sort
@@ -32,7 +35,8 @@ paths:
             default: relevance,desc
             pattern: ^(name|relevance),(asc|desc)$
             type: string
-        - description: "Filter attractions by classification name: name of any segment, genre, sub-genre, type, sub-type"
+        - description: "Filter attractions by classification name: name of any segment,
+            genre, sub-genre, type, sub-type"
           example: ""
           explode: true
           in: query
@@ -42,7 +46,8 @@ paths:
             default: ""
             items: {}
             type: array
-        - description: "Filter attractions by classification id: id of any segment, genre, sub-genre, type, sub-type"
+        - description: "Filter attractions by classification id: id of any segment, genre,
+            sub-genre, type, sub-type"
           example: ""
           explode: true
           in: query
@@ -81,7 +86,8 @@ paths:
               - " frontgate"
               - " tmr"
             type: string
-        - description: True if you want to have entities flag as test in the response. Only, if you only wanted test entities
+        - description: True if you want to have entities flag as test in the response.
+            Only, if you only wanted test entities
           example: ""
           in: query
           name: includeTest
@@ -113,7 +119,11 @@ paths:
             maximum: 500
             minimum: 1
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -157,7 +167,8 @@ paths:
       summary: Attraction Search
   "/discovery/v2/attractions/{id}":
     get:
-      description: Get details for a specific attraction using the unique identifier for the attraction.
+      description: Get details for a specific attraction using the unique identifier
+        for the attraction.
       operationId: get
       parameters:
         - description: ID of the attraction
@@ -166,7 +177,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -196,7 +211,8 @@ paths:
       summary: Get Attraction Details
   /discovery/v2/classifications:
     get:
-      description: Find classifications and filter your search by name, and much more. Classifications help define the nature of attractions and events.
+      description: Find classifications and filter your search by name, and much more.
+        Classifications help define the nature of attractions and events.
       parameters:
         - description: Sorting order of the search result
           example: ""
@@ -236,7 +252,8 @@ paths:
               - " frontgate"
               - " tmr"
             type: string
-        - description: True if you want to have entities flag as test in the response. Only, if you only wanted test entities
+        - description: True if you want to have entities flag as test in the response.
+            Only, if you only wanted test entities
           example: ""
           in: query
           name: includeTest
@@ -268,7 +285,11 @@ paths:
             maximum: 500
             minimum: 1
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -321,7 +342,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -360,7 +385,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -399,7 +428,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -429,7 +462,8 @@ paths:
       summary: Get Sub-Genre Details
   "/discovery/v2/classifications/{id}":
     get:
-      description: Get details for a specific segment, genre, or sub-genre using its unique identifier.
+      description: Get details for a specific segment, genre, or sub-genre using its
+        unique identifier.
       parameters:
         - description: ID of the segment, genre, or sub-genre
           in: path
@@ -437,7 +471,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -467,9 +505,13 @@ paths:
       summary: Get Classification Details
   /discovery/v2/events:
     get:
-      description: Find events and filter your search by location, date, availability, and much more.
+      description: Find events and filter your search by location, date, availability,
+        and much more.
       parameters:
-        - description: "Sorting order of the search result. Allowable values : 'name,asc', 'name,desc', 'date,asc', 'date,desc', 'relevance,asc', 'relevance,desc', 'distance,asc', 'name,date,asc', 'name,date,desc', 'date,name,asc', 'date,name,desc','onsaleStartDate,asc', 'id,asc'"
+        - description: "Sorting order of the search result. Allowable values : 'name,asc',
+            'name,desc', 'date,asc', 'date,desc', 'relevance,asc',
+            'relevance,desc', 'distance,asc', 'name,date,asc', 'name,date,desc',
+            'date,name,asc', 'date,name,desc','onsaleStartDate,asc', 'id,asc'"
           example: ""
           in: query
           name: sort
@@ -590,7 +632,8 @@ paths:
           schema:
             default: ""
             type: string
-        - description: "Filter events by classification name: name of any segment, genre, sub-genre, type, sub-type"
+        - description: "Filter events by classification name: name of any segment, genre,
+            sub-genre, type, sub-type"
           example: ""
           explode: true
           in: query
@@ -600,7 +643,8 @@ paths:
             default: ""
             items: {}
             type: array
-        - description: "Filter events by classification id: id of any segment, genre, sub-genre, type, sub-type"
+        - description: "Filter events by classification id: id of any segment, genre,
+            sub-genre, type, sub-type"
           example: ""
           explode: true
           in: query
@@ -671,7 +715,8 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Filter events by latitude and longitude, this filter is deprecated and maybe removed in a future release, please use geoPoint instead
+        - description: Filter events by latitude and longitude, this filter is deprecated
+            and maybe removed in a future release, please use geoPoint instead
           example: 33.80003000,-117.88304300
           in: query
           name: latlong
@@ -739,7 +784,8 @@ paths:
               - " frontgate"
               - " tmr"
             type: string
-        - description: True if you want to have entities flag as test in the response. Only, if you only wanted test entities
+        - description: True if you want to have entities flag as test in the response.
+            Only, if you only wanted test entities
           example: ""
           in: query
           name: includeTest
@@ -771,7 +817,11 @@ paths:
             maximum: 500
             minimum: 1
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -815,7 +865,9 @@ paths:
       summary: Event Search
   "/discovery/v2/events/{id}":
     get:
-      description: Get details for a specific event using the unique identifier for the event. This includes the venue and location, the attraction(s), and the Ticketmaster Website URL for purchasing tickets for the event.
+      description: Get details for a specific event using the unique identifier for
+        the event. This includes the venue and location, the attraction(s), and
+        the Ticketmaster Website URL for purchasing tickets for the event.
       parameters:
         - description: ID of the event
           in: path
@@ -823,7 +875,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -853,7 +909,8 @@ paths:
       summary: Get Event Details
   "/discovery/v2/events/{id}/images":
     get:
-      description: Get images for a specific event using the unique identifier for the event.
+      description: Get images for a specific event using the unique identifier for the
+        event.
       operationId: getImages
       parameters:
         - description: ID of the event
@@ -862,7 +919,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -892,7 +953,8 @@ paths:
       summary: Get Event Images
   /discovery/v2/suggest:
     get:
-      description: Find search suggestions and filter your suggestions by location, source, etc.
+      description: Find search suggestions and filter your suggestions by location,
+        source, etc.
       parameters:
         - description: Keyword to search on
           example: ""
@@ -915,7 +977,8 @@ paths:
               - " frontgate"
               - " tmr"
             type: string
-        - description: Filter events by latitude and longitude, this filter is deprecated and maybe removed in a future release, please use geoPoint instead
+        - description: Filter events by latitude and longitude, this filter is deprecated
+            and maybe removed in a future release, please use geoPoint instead
           example: 33.80003000,-117.88304300
           in: query
           name: latlong
@@ -955,7 +1018,8 @@ paths:
             maximum: 5
             minimum: 1
             type: string
-        - description: yes, to include fuzzy matches in the search. This has performance impact.
+        - description: yes, to include fuzzy matches in the search. This has performance
+            impact.
           example: ""
           in: query
           name: includeFuzzy
@@ -1026,7 +1090,11 @@ paths:
             default: ""
             pattern: ^\s*$|^-?(90(\.0+)?|[0-8]?[0-9](\.\d+)?),-?(180(\.0+)?|(1[0-7][0-9]|\d{1,2})(\.\d+)?)$|^[a-zA-Z0-9]{1,9}$
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -1075,7 +1143,9 @@ paths:
     get:
       description: Find venues and filter your search by name, and much more.
       parameters:
-        - description: "Sorting order of the search result. Allowable Values: 'name,asc', 'name,desc', 'relevance,asc', 'relevance,desc', 'distance,asc', 'distance,desc'"
+        - description: "Sorting order of the search result. Allowable Values: 'name,asc',
+            'name,desc', 'relevance,asc', 'relevance,desc', 'distance,asc',
+            'distance,desc'"
           example: ""
           in: query
           name: sort
@@ -1100,7 +1170,8 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Filter events by latitude and longitude, this filter is deprecated and maybe removed in a future release, please use geoPoint instead
+        - description: Filter events by latitude and longitude, this filter is deprecated
+            and maybe removed in a future release, please use geoPoint instead
           example: 33.80003000,-117.88304300
           in: query
           name: latlong
@@ -1168,7 +1239,8 @@ paths:
               - " frontgate"
               - " tmr"
             type: string
-        - description: True if you want to have entities flag as test in the response. Only, if you only wanted test entities
+        - description: True if you want to have entities flag as test in the response.
+            Only, if you only wanted test entities
           example: ""
           in: query
           name: includeTest
@@ -1200,7 +1272,11 @@ paths:
             maximum: 500
             minimum: 1
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -1244,7 +1320,8 @@ paths:
       summary: Venue Search
   "/discovery/v2/venues/{id}":
     get:
-      description: Get details for a specific venue using the unique identifier for the venue.
+      description: Get details for a specific venue using the unique identifier for
+        the venue.
       parameters:
         - description: ID of the venue
           in: path
@@ -1252,7 +1329,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The locale in ISO code format. Multiple comma-separated values can be provided. When omitting the country part of the code (e.g. only 'en' or 'fr') then the first matching locale is used. When using a '*' it matches all locales. '*' can only be used at the end (e.g. 'en-us,en,*') "
+        - description: "The locale in ISO code format. Multiple comma-separated values can
+            be provided. When omitting the country part of the code (e.g. only
+            'en' or 'fr') then the first matching locale is used. When using a
+            '*' it matches all locales. '*' can only be used at the end (e.g.
+            'en-us,en,*') "
           example: en-us,en,fr
           in: query
           name: locale
@@ -1287,7 +1368,8 @@ components:
       properties:
         endApproximate:
           default: false
-          description: Boolean flag to indicate whether or not the access end date is approximated
+          description: Boolean flag to indicate whether or not the access end date is
+            approximated
           example: yyyy-MM-ddThh-mm-ssZ
           type: boolean
           x-position: 3
@@ -1299,7 +1381,8 @@ components:
           x-position: 2
         startApproximate:
           default: false
-          description: Boolean flag to indicate whether or not the access start date is approximated
+          description: Boolean flag to indicate whether or not the access start date is
+            approximated
           type: boolean
           x-position: 1
         startDateTime:
@@ -1385,7 +1468,8 @@ components:
           x-position: 10
         test:
           default: false
-          description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          description: Indicate if this is a test entity, by default test entities won't
+            appear in discovery API
           type: boolean
           x-position: 96
         type:
@@ -1584,7 +1668,8 @@ components:
           $ref: "#/components/schemas/LocalTime"
         noSpecificTime:
           default: false
-          description: Boolean flag to indicate whether or not the event end time has no specific time
+          description: Boolean flag to indicate whether or not the event end time has no
+            specific time
           type: boolean
           x-position: 4
       type: object
@@ -1695,7 +1780,8 @@ components:
           $ref: "#/components/schemas/SeatMap"
         test:
           default: false
-          description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          description: Indicate if this is a test entity, by default test entities won't
+            appear in discovery API
           type: boolean
           x-position: 96
         type:
@@ -1793,7 +1879,8 @@ components:
       description: ExternalLink
       properties:
         id:
-          description: An external link id is the unique identifier of a resource on a different domain or api
+          description: An external link id is the unique identifier of a resource on a
+            different domain or api
           type: string
           x-position: 2
         url:
@@ -2117,12 +2204,14 @@ components:
       description: Event's Public Onsales Dates
       properties:
         endDateTime:
-          description: Public sale's end dates. The date and time when the public sale will end
+          description: Public sale's end dates. The date and time when the public sale
+            will end
           format: date-time
           type: string
           x-position: 1
         startDateTime:
-          description: Public sale's start dates. The date and time when the public sale will start
+          description: Public sale's start dates. The date and time when the public sale
+            will start
           format: date-time
           type: string
         startTBD:
@@ -2132,7 +2221,8 @@ components:
           x-position: 2
       type: object
     PublicVisibility:
-      description: The class defines the public visibility period on the Discovery/Publish API.
+      description: The class defines the public visibility period on the
+        Discovery/Publish API.
       type: object
     Relationship:
       description: Relationship
@@ -2144,7 +2234,8 @@ components:
         references:
           additionalProperties:
             type: string
-          description: References of this relationship in another system. Reference is the exact same entity
+          description: References of this relationship in another system. Reference is the
+            exact same entity
           example: "sourceName: id"
           type: object
           x-position: 3
@@ -2214,7 +2305,8 @@ components:
           $ref: "#/components/schemas/LocalTime"
         noSpecificTime:
           default: false
-          description: Boolean flag to indicate whether or not the event start time has no specific time
+          description: Boolean flag to indicate whether or not the event start time has no
+            specific time
           type: boolean
           x-position: 6
         timeTBA:
@@ -2353,7 +2445,8 @@ components:
           $ref: "#/components/schemas/State"
         test:
           default: false
-          description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          description: Indicate if this is a test entity, by default test entities won't
+            appear in discovery API
           type: boolean
           x-position: 96
         timezone:

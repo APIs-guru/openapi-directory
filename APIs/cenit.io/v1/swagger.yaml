@@ -40,22 +40,34 @@ security:
   - X-User-Access-Key: []
     X-User-Access-Token: []
 tags:
-  - description: |
-      The Cenit IO API is organized around REST. Cenit IO is an Open Platform for Data 
+  - description: >
+      The Cenit IO API is organized around REST. Cenit IO is an Open
+      Platform for Data 
+
       and Business Integration (iPaaS) to process, storage and move data in connection 
+
       with Cloud or On-Premise services. 
 
+
       It has been designed to orchestrate data flows that may involve several kind of 
+
       endpoints (APIs, Datasets, EDI). It makes possible the automation of all operational 
+
       processes in a company, connecting between organization's on-premises infrastructure 
+
       and cloud provider services.
     name: Introduction
-  - description: |
+  - description: >
       When you sign up for an account, you are given your first API key.
+
       You can generate additional API keys, and delete API keys (as you may
+
       need to rotate your keys in the future). You authenticate to Cenit IO API 
+
       by providing your endpoint API keys and token in the header parameters into 
+
       request. You can have multiple API keys and token active at one time for 
+
       any endpoint.
     name: Authentication
   - description: |
@@ -69,21 +81,25 @@ tags:
       and/or changes in existing objects will result in events. These events 
       ultimately result in calls being made to various Flows in your endpoints.
     name: Data Event
-  - description: |
-      Schedulers are events triggered on a certain moment and can be optionally recurrent.
+  - description: >
+      Schedulers are events triggered on a certain moment and can be
+      optionally recurrent.
     name: Scheduler
   - description: |
       Define an HTTP Method and params.
     name: Webhook
-  - description: |
-      A translator defines a logic for data manipulation. Data manipulation can occurs in the following scenarios:
+  - description: >
+      A translator defines a logic for data manipulation. Data
+      manipulation can occurs in the following scenarios:
         - Importing outside data into Cenit
         - Updating data already stored in Cenit
         - Converting data already stored in Cenit
         - Exporting data outside Cenit
     name: Translator
-  - description: |
-      A flow defines how data is processed by the execution of one or more actions, if 
+  - description: >
+      A flow defines how data is processed by the execution of one or
+      more actions, if 
+
       the data is coming in to Cenit or going out of Cenit. Data processing involve:
 
         ₋ An execution trigger to start the data processing
@@ -104,7 +120,9 @@ tags:
 paths:
   /setup/connection:
     get:
-      description: Returns a list of connections you've previously created. The connections are returned in sorted order, with the most recent connection appearing first.
+      description: Returns a list of connections you've previously created. The
+        connections are returned in sorted order, with the most recent
+        connection appearing first.
       responses:
         "200":
           description: OK
@@ -116,7 +134,9 @@ paths:
       tags:
         - Connection
     post:
-      description: Creates or updates the specified connection by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified connection by setting the values
+        of the parameters passed. Any parameters not provided will be left
+        unchanged.
       responses:
         "200":
           description: OK
@@ -143,7 +163,9 @@ paths:
       tags:
         - Connection
     get:
-      description: Retrieves the details of an existing connection. You need only supply the unique connection identifier that was returned upon connection creation.
+      description: Retrieves the details of an existing connection. You need only
+        supply the unique connection identifier that was returned upon
+        connection creation.
       parameters:
         - description: Connection ID
           in: path
@@ -162,7 +184,9 @@ paths:
         - Connection
   /setup/connection_role:
     get:
-      description: Returns a list of connection roles you've previously created. The connection roles are returned in sorted order, with the most recent connection role appearing first.
+      description: Returns a list of connection roles you've previously created. The
+        connection roles are returned in sorted order, with the most recent
+        connection role appearing first.
       responses:
         "200":
           description: OK
@@ -174,7 +198,9 @@ paths:
       tags:
         - Connection Role
     post:
-      description: Creates or updates the specified connection role by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified connection role by setting the
+        values of the parameters passed. Any parameters not provided will be
+        left unchanged.
       responses:
         "200":
           description: OK
@@ -220,7 +246,9 @@ paths:
         - Connection Role
   /setup/data_type/:
     get:
-      description: Returns a list of data types you've previously created. The data types are returned in sorted order, with the most recent DataType appearing first.
+      description: Returns a list of data types you've previously created. The data
+        types are returned in sorted order, with the most recent DataType
+        appearing first.
       responses:
         "200":
           description: OK
@@ -232,7 +260,9 @@ paths:
       tags:
         - Data Type
     post:
-      description: Creates or updates the specified data type by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified data type by setting the values of
+        the parameters passed. Any parameters not provided will be left
+        unchanged.
       responses:
         "200":
           description: OK
@@ -259,7 +289,9 @@ paths:
       tags:
         - Data Type
     get:
-      description: Retrieves the details of an existing data type. You need only supply the unique data  type identifier that was returned upon DataType creation.
+      description: Retrieves the details of an existing data type. You need only
+        supply the unique data  type identifier that was returned upon DataType
+        creation.
       parameters:
         - description: data type ID
           in: path
@@ -278,7 +310,8 @@ paths:
         - Data Type
   /setup/flow/:
     get:
-      description: Returns a list of flows you've previously created. The flows are returned in sorted order, with the most recent flow appearing first.
+      description: Returns a list of flows you've previously created. The flows are
+        returned in sorted order, with the most recent flow appearing first.
       responses:
         "200":
           description: OK
@@ -290,7 +323,8 @@ paths:
       tags:
         - Flow
     post:
-      description: Creates or updates the specified flow. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified flow. Any parameters not provided
+        will be left unchanged.
       responses:
         "200":
           description: OK
@@ -317,7 +351,8 @@ paths:
       tags:
         - Flow
     get:
-      description: Retrieves the details of an existing flow. You need only supply the unique flow identifier that was returned upon flow creation.
+      description: Retrieves the details of an existing flow. You need only supply the
+        unique flow identifier that was returned upon flow creation.
       parameters:
         - description: Flow ID
           in: path
@@ -336,7 +371,9 @@ paths:
         - Flow
   /setup/namespace/:
     get:
-      description: Returns a list of namespaces you've previously created. The namespaces are returned in sorted order, with the most recent namespace appearing first.
+      description: Returns a list of namespaces you've previously created. The
+        namespaces are returned in sorted order, with the most recent namespace
+        appearing first.
       responses:
         "200":
           description: OK
@@ -348,7 +385,8 @@ paths:
       tags:
         - Namespace
     post:
-      description: Creates or updates the specified namespace. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified namespace. Any parameters not
+        provided will be left unchanged.
       responses:
         "200":
           description: OK
@@ -375,7 +413,9 @@ paths:
       tags:
         - Namespace
     get:
-      description: Retrieves the details of an existing namespace. You need only supply the unique webhook namespace that was returned upon namespace creation.
+      description: Retrieves the details of an existing namespace. You need only
+        supply the unique webhook namespace that was returned upon namespace
+        creation.
       parameters:
         - description: Namespace ID.
           in: path
@@ -394,7 +434,8 @@ paths:
         - Namespace
   /setup/observer/:
     get:
-      description: Returns a list of events you've previously created. The events are returned in sorted order, with the most recent event appearing first.
+      description: Returns a list of events you've previously created. The events are
+        returned in sorted order, with the most recent event appearing first.
       responses:
         "200":
           description: OK
@@ -406,7 +447,8 @@ paths:
       tags:
         - Data Event
     post:
-      description: Creates or updates the specified event observer. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified event observer. Any parameters not
+        provided will be left unchanged.
       responses:
         "200":
           description: OK
@@ -433,7 +475,8 @@ paths:
       tags:
         - Data Event
     get:
-      description: Retrieves the details of an existing event. You need only supply the unique event identifier that was returned upon event creation.
+      description: Retrieves the details of an existing event. You need only supply
+        the unique event identifier that was returned upon event creation.
       parameters:
         - description: Observer ID
           in: path
@@ -452,7 +495,9 @@ paths:
         - Data Event
   /setup/scheduler/:
     get:
-      description: Returns a list of schedulers you've previously created. The schedulers are returned in sorted order, with the most recent scheduler appearing first.
+      description: Returns a list of schedulers you've previously created. The
+        schedulers are returned in sorted order, with the most recent scheduler
+        appearing first.
       responses:
         "200":
           description: OK
@@ -464,7 +509,8 @@ paths:
       tags:
         - Scheduler
     post:
-      description: Creates or updates the specified scheduler. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified scheduler. Any parameters not
+        provided will be left unchanged.
       responses:
         "200":
           description: OK
@@ -491,7 +537,9 @@ paths:
       tags:
         - Scheduler
     get:
-      description: Retrieves the details of an existing scheduler. You need only supply the unique scheduler identifier that was returned upon scheduler creation.
+      description: Retrieves the details of an existing scheduler. You need only
+        supply the unique scheduler identifier that was returned upon scheduler
+        creation.
       parameters:
         - description: Scheduler ID
           in: path
@@ -510,7 +558,9 @@ paths:
         - Scheduler
   /setup/schema/:
     get:
-      description: Returns a list of schemas you've previously created. The schemas are returned in sorted order, with the most recent schema appearing first.
+      description: Returns a list of schemas you've previously created. The schemas
+        are returned in sorted order, with the most recent schema appearing
+        first.
       responses:
         "200":
           description: OK
@@ -522,7 +572,8 @@ paths:
       tags:
         - Schema
     post:
-      description: Creates or updates the specified schema. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified schema. Any parameters not
+        provided will be left unchanged.
       responses:
         "200":
           description: OK
@@ -549,7 +600,8 @@ paths:
       tags:
         - Schema
     get:
-      description: Retrieves the details of an existing schema. You need only supply the unique schema identifier that was returned upon schema creation.
+      description: Retrieves the details of an existing schema. You need only supply
+        the unique schema identifier that was returned upon schema creation.
       parameters:
         - description: Schema ID
           in: path
@@ -568,7 +620,9 @@ paths:
         - Schema
   /setup/translator/:
     get:
-      description: Returns a list of translators you've previously created. The translators are returned in sorted order, with the most recent translator appearing first.
+      description: Returns a list of translators you've previously created. The
+        translators are returned in sorted order, with the most recent
+        translator appearing first.
       responses:
         "200":
           description: OK
@@ -580,7 +634,8 @@ paths:
       tags:
         - Translator
     post:
-      description: Creates or updates the specified translator. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified translator. Any parameters not
+        provided will be left unchanged.
       responses:
         "200":
           description: OK
@@ -607,7 +662,9 @@ paths:
       tags:
         - Translator
     get:
-      description: Retrieves the details of an existing translator. You need only supply the unique translator identifier that was returned upon translator creation.
+      description: Retrieves the details of an existing translator. You need only
+        supply the unique translator identifier that was returned upon
+        translator creation.
       parameters:
         - description: Translator ID.
           in: path
@@ -626,7 +683,9 @@ paths:
         - Translator
   /setup/webhook/:
     get:
-      description: Returns a list of webhooks you've previously created. The webhooks are returned in sorted order, with the most recent webhook appearing first.
+      description: Returns a list of webhooks you've previously created. The webhooks
+        are returned in sorted order, with the most recent webhook appearing
+        first.
       responses:
         "200":
           description: OK
@@ -638,7 +697,8 @@ paths:
       tags:
         - Webhook
     post:
-      description: Creates or updates the specified webhook. Any parameters not provided will be left unchanged.
+      description: Creates or updates the specified webhook. Any parameters not
+        provided will be left unchanged.
       responses:
         "200":
           description: OK
@@ -665,7 +725,8 @@ paths:
       tags:
         - Webhook
     get:
-      description: Retrieves the details of an existing webhook. You need only supply the unique webhook identifier that was returned upon webhook creation.
+      description: Retrieves the details of an existing webhook. You need only supply
+        the unique webhook identifier that was returned upon webhook creation.
       parameters:
         - description: Webhook ID.
           in: path

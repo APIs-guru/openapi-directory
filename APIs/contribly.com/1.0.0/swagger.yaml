@@ -35,9 +35,13 @@ tags:
     name: form
   - description: Submit media
     name: media
-  - description: Notifications are templated email messages which can be sent to contributors. A notification might be used to request further information from a contributor or inform them when their contribution has been published.
+  - description: Notifications are templated email messages which can be sent to
+      contributors. A notification might be used to request further information
+      from a contributor or inform them when their contribution has been
+      published.
     name: notifications
-  - description: Subscribe to be alerted when events occur. For example receive email notification when a contribution is flagged.
+  - description: Subscribe to be alerted when events occur. For example receive
+      email notification when a contribution is flagged.
     name: subscriptions
   - description: Create and list tags and tag sets
     name: tag
@@ -75,7 +79,8 @@ paths:
           name: pageSize
           required: false
           type: integer
-        - description: Restrict results to assignments whose name or description matches this keyword.
+        - description: Restrict results to assignments whose name or description matches
+            this keyword.
           in: query
           name: q
           required: false
@@ -100,7 +105,8 @@ paths:
           name: tag
           required: false
           type: string
-        - description: Restrict results to the assignment (or potentially assignments) with this exact name
+        - description: Restrict results to the assignment (or potentially assignments)
+            with this exact name
           in: query
           name: name
           required: false
@@ -137,7 +143,8 @@ paths:
           schema:
             $ref: "#/definitions/Assignment"
         "400":
-          description: The new assignment vailed to validate. Check the response body for details.
+          description: The new assignment vailed to validate. Check the response body for
+            details.
           schema:
             $ref: "#/definitions/ErrorResponse"
         "500":
@@ -199,7 +206,8 @@ paths:
     get:
       responses:
         "200":
-          description: An array of refinement types. These are the possible values of the get contribution refinements parameter.
+          description: An array of refinement types. These are the possible values of the
+            get contribution refinements parameter.
           schema:
             items:
               type: string
@@ -209,14 +217,17 @@ paths:
         - contribution
   /contribution-refinements:
     get:
-      description: Given a contribution list query determine the available filter options. Can be used to generate the UI to refinement a filter.
+      description: Given a contribution list query determine the available filter
+        options. Can be used to generate the UI to refinement a filter.
       parameters:
         - description: Restrict results to contributions submitted to this assignment.
           in: query
           name: assignment
           required: false
           type: string
-        - description: Limit results to contributions which have a publicly visible location within the given country (specified by two letter country code).
+        - description: Limit results to contributions which have a publicly visible
+            location within the given country (specified by two letter country
+            code).
           in: query
           name: country
           required: false
@@ -233,38 +244,46 @@ paths:
           name: createdAfter
           required: false
           type: string
-        - description: Restrict results to contributions which have specified a location which falls within this geohash (or comma seperated list of multiple geohashes)
+        - description: Restrict results to contributions which have specified a location
+            which falls within this geohash (or comma seperated list of multiple
+            geohashes)
           in: query
           name: geohash
           required: false
           type: string
-        - description: Restrict results to contributions which have a publicly visible location.
+        - description: Restrict results to contributions which have a publicly visible
+            location.
           in: query
           name: hasLocation
           required: false
           type: boolean
-        - description: Limit results to contributions with location near this latitude and longitude (comma seperated lat/long pair). Also see radius
+        - description: Limit results to contributions with location near this latitude and
+            longitude (comma seperated lat/long pair). Also see radius
           in: query
           name: latLong
           required: false
           type: string
-        - description: When limiting result by location with the latLong parameter, specify the radius in kilometers.
+        - description: When limiting result by location with the latLong parameter,
+            specify the radius in kilometers.
           format: double
           in: query
           name: radius
           required: false
           type: number
-        - description: Restrict results to contributions which include a media file of the given type (ie. image / video)
+        - description: Restrict results to contributions which include a media file of the
+            given type (ie. image / video)
           in: query
           name: mediaType
           required: false
           type: string
-        - description: Restrict results to contributions which are fall under the jurisdiction by this user.
+        - description: Restrict results to contributions which are fall under the
+            jurisdiction by this user.
           in: query
           name: ownedBy
           required: false
           type: string
-        - description: Restrict results to contributions whose headline text matches this keyword.
+        - description: Restrict results to contributions whose headline text matches this
+            keyword.
           in: query
           name: q
           required: false
@@ -310,7 +329,9 @@ paths:
           name: assignment
           required: false
           type: string
-        - description: Limit results to contributions which have a publicly visible location within the given country (specified by two letter country code).
+        - description: Limit results to contributions which have a publicly visible
+            location within the given country (specified by two letter country
+            code).
           in: query
           name: country
           required: false
@@ -338,38 +359,46 @@ paths:
           name: createdMonth
           required: false
           type: string
-        - description: Restrict results to contributions which have specified a location which falls within this geohash (or comma seperated list of multiple geohashes)
+        - description: Restrict results to contributions which have specified a location
+            which falls within this geohash (or comma seperated list of multiple
+            geohashes)
           in: query
           name: geohash
           required: false
           type: string
-        - description: Restrict results to contributions which have a publicly visible location.
+        - description: Restrict results to contributions which have a publicly visible
+            location.
           in: query
           name: hasLocation
           required: false
           type: boolean
-        - description: Limit results to contributions with location near this latitude and longitude (comma seperated lat/long pair). Also see radius
+        - description: Limit results to contributions with location near this latitude and
+            longitude (comma seperated lat/long pair). Also see radius
           in: query
           name: latLong
           required: false
           type: string
-        - description: When limiting result by location with the latLong parameter, specify the radius in kilometers.
+        - description: When limiting result by location with the latLong parameter,
+            specify the radius in kilometers.
           format: double
           in: query
           name: radius
           required: false
           type: number
-        - description: Restrict results to contributions which include a media file of the given type (ie. image / video)
+        - description: Restrict results to contributions which include a media file of the
+            given type (ie. image / video)
           in: query
           name: mediaType
           required: false
           type: string
-        - description: Restrict results to contributions which are fall under the jurisdiction by this user.
+        - description: Restrict results to contributions which are fall under the
+            jurisdiction by this user.
           in: query
           name: ownedBy
           required: false
           type: string
-        - description: Restrict results to contributions whose headline text matches this keyword.
+        - description: Restrict results to contributions whose headline text matches this
+            keyword.
           in: query
           name: q
           required: false
@@ -384,7 +413,8 @@ paths:
           name: user
           required: false
           type: string
-        - description: Restrict results to a list of specific contributions identified by a comma seperated list of ids.
+        - description: Restrict results to a list of specific contributions identified by
+            a comma seperated list of ids.
           in: query
           name: ids
           required: false
@@ -437,11 +467,13 @@ paths:
           type: string
       responses:
         "200":
-          description: The deletion request has been accepted and will be processed in the background.
+          description: The deletion request has been accepted and will be processed in the
+            background.
           schema:
             $ref: "#/definitions/Contribution"
         "403":
-          description: The currently authorised user is not allowed to delete this contribution.
+          description: The currently authorised user is not allowed to delete this
+            contribution.
         "404":
           description: Not found
       summary: Delete this contribution
@@ -468,7 +500,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: Allows end users to bring potential issues with publicly visible content to the attention of moderators.
+      description: Allows end users to bring potential issues with publicly visible
+        content to the attention of moderators.
       parameters:
         - description: Id of the contribution to flag
           in: path
@@ -547,7 +580,8 @@ paths:
           schema:
             type: string
         "400":
-          description: The submission falied to validate. Check the response body for details.
+          description: The submission falied to validate. Check the response body for
+            details.
           schema:
             $ref: "#/definitions/ErrorResponse"
         "401":
@@ -595,14 +629,17 @@ paths:
         - info
   /export:
     post:
-      description: Begin an export job. Returns a export job which can be polled to follow the progress of an export.
+      description: Begin an export job. Returns a export job which can be polled to
+        follow the progress of an export.
       parameters:
         - description: Restrict results to contributions submitted to this assignment.
           in: query
           name: assignment
           required: false
           type: string
-        - description: Limit results to contributions which have a publicly visible location within the given country (specified by two letter country code).
+        - description: Limit results to contributions which have a publicly visible
+            location within the given country (specified by two letter country
+            code).
           in: query
           name: country
           required: false
@@ -619,38 +656,46 @@ paths:
           name: createdAfter
           required: false
           type: string
-        - description: Restrict results to contributions which have specified a location which falls within this geohash (or comma seperated list of multiple geohashes)
+        - description: Restrict results to contributions which have specified a location
+            which falls within this geohash (or comma seperated list of multiple
+            geohashes)
           in: query
           name: geohash
           required: false
           type: string
-        - description: Restrict results to contributions which have a publicly visible location.
+        - description: Restrict results to contributions which have a publicly visible
+            location.
           in: query
           name: hasLocation
           required: false
           type: boolean
-        - description: Limit results to contributions with location near this latitude and longitude (comma seperated lat/long pair). Also see radius
+        - description: Limit results to contributions with location near this latitude and
+            longitude (comma seperated lat/long pair). Also see radius
           in: query
           name: latLong
           required: false
           type: string
-        - description: When limiting result by location with the latLong parameter, specify the radius in kilometers.
+        - description: When limiting result by location with the latLong parameter,
+            specify the radius in kilometers.
           format: double
           in: query
           name: radius
           required: false
           type: number
-        - description: Restrict results to contributions which include a media file of the given type (ie. image / video)
+        - description: Restrict results to contributions which include a media file of the
+            given type (ie. image / video)
           in: query
           name: mediaType
           required: false
           type: string
-        - description: Restrict results to contributions which are fall under the jurisdiction by this user.
+        - description: Restrict results to contributions which are fall under the
+            jurisdiction by this user.
           in: query
           name: ownedBy
           required: false
           type: string
-        - description: Restrict results to contributions whose headline text matches this keyword.
+        - description: Restrict results to contributions whose headline text matches this
+            keyword.
           in: query
           name: q
           required: false
@@ -665,7 +710,8 @@ paths:
           name: user
           required: false
           type: string
-        - description: Should exported media files be tagged with metadata. Deprecated; use format instead.
+        - description: Should exported media files be tagged with metadata. Deprecated;
+            use format instead.
           in: query
           name: tagged
           required: false
@@ -707,7 +753,9 @@ paths:
           name: assignment
           required: false
           type: string
-        - description: Limit results to contributions which have a publicly visible location within the given country (specified by two letter country code).
+        - description: Limit results to contributions which have a publicly visible
+            location within the given country (specified by two letter country
+            code).
           in: query
           name: country
           required: false
@@ -724,38 +772,46 @@ paths:
           name: createdAfter
           required: false
           type: string
-        - description: Restrict results to contributions which have specified a location which falls within this geohash (or comma seperated list of multiple geohashes)
+        - description: Restrict results to contributions which have specified a location
+            which falls within this geohash (or comma seperated list of multiple
+            geohashes)
           in: query
           name: geohash
           required: false
           type: string
-        - description: Restrict results to contributions which have a publicly visible location.
+        - description: Restrict results to contributions which have a publicly visible
+            location.
           in: query
           name: hasLocation
           required: false
           type: boolean
-        - description: Limit results to contributions with location near this latitude and longitude (comma seperated lat/long pair). Also see radius
+        - description: Limit results to contributions with location near this latitude and
+            longitude (comma seperated lat/long pair). Also see radius
           in: query
           name: latLong
           required: false
           type: string
-        - description: When limiting result by location with the latLong parameter, specify the radius in kilometers.
+        - description: When limiting result by location with the latLong parameter,
+            specify the radius in kilometers.
           format: double
           in: query
           name: radius
           required: false
           type: number
-        - description: Restrict results to contributions which include a media file of the given type (ie. image / video)
+        - description: Restrict results to contributions which include a media file of the
+            given type (ie. image / video)
           in: query
           name: mediaType
           required: false
           type: string
-        - description: Restrict results to contributions which are fall under the jurisdiction by this user.
+        - description: Restrict results to contributions which are fall under the
+            jurisdiction by this user.
           in: query
           name: ownedBy
           required: false
           type: string
-        - description: Restrict results to contributions whose headline text matches this keyword.
+        - description: Restrict results to contributions whose headline text matches this
+            keyword.
           in: query
           name: q
           required: false
@@ -772,7 +828,8 @@ paths:
           type: string
       responses:
         "200":
-          description: A summary of the number of contributions, media files and approximate total size of media files.
+          description: A summary of the number of contributions, media files and
+            approximate total size of media files.
           schema:
             $ref: "#/definitions/ExportSummary"
       summary: Export contributions preflight summary.
@@ -1061,7 +1118,8 @@ paths:
           name: tagSet
           required: false
           type: string
-        - description: Restrict results by urlWords. Should be used with ownedBy when searching for one of your own tags.
+        - description: Restrict results by urlWords. Should be used with ownedBy when
+            searching for one of your own tags.
           in: query
           name: urlWords
           required: false
@@ -1098,7 +1156,8 @@ paths:
           schema:
             $ref: "#/definitions/Tag"
         "400":
-          description: The new tag submission failed to validate. Check the response body for details.
+          description: The new tag submission failed to validate. Check the response body
+            for details.
           schema:
             $ref: "#/definitions/ErrorResponse"
         "500":
@@ -1135,7 +1194,8 @@ paths:
           name: ownedBy
           required: false
           type: string
-        - description: Restrict results by urlWords. Should be used with ownedBy when searching for one of your own tag sets.
+        - description: Restrict results by urlWords. Should be used with ownedBy when
+            searching for one of your own tag sets.
           in: query
           name: urlWords
           required: false
@@ -1195,17 +1255,20 @@ paths:
   /users:
     get:
       parameters:
-        - description: Restrict results to the users who have contributed to this assignment.
+        - description: Restrict results to the users who have contributed to this
+            assignment.
           in: query
           name: assignment
           required: false
           type: string
-        - description: Restrict results to the users who have submitted a contribution with a public location located within this country.
+        - description: Restrict results to the users who have submitted a contribution
+            with a public location located within this country.
           in: query
           name: country
           required: false
           type: string
-        - description: Restrict results to the users who have submitted at least this many contributions.
+        - description: Restrict results to the users who have submitted at least this many
+            contributions.
           in: query
           name: minimumContributions
           required: false
@@ -1220,13 +1283,15 @@ paths:
           name: ownedBy
           required: false
           type: string
-        - description: Limit results to users who have submitted at least one contribution before this date time.
+        - description: Limit results to users who have submitted at least one contribution
+            before this date time.
           format: date-time
           in: query
           name: submittedBefore
           required: false
           type: string
-        - description: Limit results to users who have submitted at least one contribution after this date time.
+        - description: Limit results to users who have submitted at least one contribution
+            after this date time.
           format: date-time
           in: query
           name: submittedAfter
@@ -1361,7 +1426,8 @@ definitions:
       allowsAnonymousContributions:
         type: boolean
       callToAction:
-        description: An optional call to action specific to this assignment. ie. Submit your snow pictures.
+        description: An optional call to action specific to this assignment. ie. Submit
+          your snow pictures.
         type: string
       cover:
         $ref: "#/definitions/MediaUsage"
@@ -1383,15 +1449,19 @@ definitions:
       mediaRequired:
         type: boolean
       moderator:
-        description: Optional credential id of the moderator who owns this particular assignment.
+        description: Optional credential id of the moderator who owns this particular
+          assignment.
         type: string
       name:
         type: string
       open:
-        description: Helper value. Is this assignment currently open? Based on the value of the ends field.
+        description: Helper value. Is this assignment currently open? Based on the value
+          of the ends field.
         type: boolean
       receiptMessage:
-        description: An optional assignment specific message to be displayed on successful contribution submission. For example, this might be used to inform contributors of assignment specific moderation time frames.
+        description: An optional assignment specific message to be displayed on
+          successful contribution submission. For example, this might be used to
+          inform contributors of assignment specific moderation time frames.
         type: string
       starts:
         format: date-time
@@ -1426,12 +1496,15 @@ definitions:
       mediaRequired:
         type: boolean
       moderator:
-        description: Optional credential id of the login which will moderator this assignment.
+        description: Optional credential id of the login which will moderator this
+          assignment.
         type: string
       name:
         type: string
       receiptMessage:
-        description: An optional assignment specific message to be displayed on successful contribution submission. For example, this might be used to inform contributors of assignment specific moderation time frames.
+        description: An optional assignment specific message to be displayed on
+          successful contribution submission. For example, this might be used to
+          inform contributors of assignment specific moderation time frames.
         type: string
       starts:
         format: date-time
@@ -1479,7 +1552,11 @@ definitions:
       assignment:
         $ref: "#/definitions/Assignment"
       attribution:
-        description: The public attribution for this contribution. This will be the display name of the registered user or the contributor's first and last name if they provided them while making a non authenticated contribution. A blank attribution field indicates and anonymous contribution.
+        description: The public attribution for this contribution. This will be the
+          display name of the registered user or the contributor's first and
+          last name if they provided them while making a non authenticated
+          contribution. A blank attribution field indicates and anonymous
+          contribution.
         type: string
       body:
         type: string

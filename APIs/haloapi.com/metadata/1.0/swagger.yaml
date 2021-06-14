@@ -38,9 +38,11 @@ tags: []
 paths:
   /h5/metadata/campaign-missions:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -62,9 +64,12 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A listing of campaign missions supported in the title. There is no significance to the
+            application/json: >
+              // A listing of campaign missions supported in the title.
+              There is no significance to the
+
               // ordering.
+
               [
                 {
                   // The order of the mission in the story. The first mission is #1.
@@ -94,9 +99,11 @@ paths:
       summary: Halo 5 - Campaign Missions
   /h5/metadata/commendations:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -118,8 +125,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of commendations for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of commendations for the title. There is no
+              significance to the ordering.
+
               [
                 {
                   // Indicates the type of commendation. This is one of the two following options:
@@ -410,8 +419,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of commendations for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of commendations for the title. There is no
+              significance to the ordering.
+
               [
                 {
                   // Indicates the type of commendation. This is one of the two following options:
@@ -680,9 +691,11 @@ paths:
       summary: Halo 5 - Company Commendations
   /h5/metadata/csr-designations:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -704,17 +717,28 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of CSR designations for the title. CSR stands for Competitive Skill Rank. CSR
+            application/json: >
+              // A list of CSR designations for the title. CSR stands for
+              Competitive Skill Rank. CSR
+
               // is organized into a series of designations, each with a set of tiers within the
+
               // designation. The designations are: Bronze, Silver, Gold, Platinum, Diamond, Onyx, and
+
               // Champion. Within each designation are tiers, for example, Bronze 1, Bronze 2, Bronze
+
               // 3, etc. The Onyx and Champion designations are special. They only have one tier. For
+
               // non-Champion players, we keep the raw CSR value and absolute ranking hidden and show
+
               // the CSR tier. For Onyx and Champion players, we display the raw CSR value. For
+
               // Champion players, we show a leaderboard ranking. To determine what CSR a player has
+
               // earned, view the Service Record stats for that player. There is no significance to the
+
               // ordering.
+
               [
                 {
                   // A localized name for the designation, suitable for display to users. The text is
@@ -751,9 +775,11 @@ paths:
       summary: Halo 5 - CSR Designations
   /h5/metadata/enemies:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -762,6 +788,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -781,8 +808,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of enemies for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of enemies for the title. There is no significance
+              to the ordering.
+
               [
                 {
                   // The faction that this enemy is affiliated with. One of the following options:
@@ -816,9 +845,11 @@ paths:
       summary: Halo 5 - Enemies
   /h5/metadata/flexible-stats:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -840,9 +871,12 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of defined flexible stat entries for the title. There is no significance to the
+            application/json: >
+              // A list of defined flexible stat entries for the title.
+              There is no significance to the
+
               // ordering.
+
               [
                 {
                   // A localized name for the data point, suitable for display to users. The text is
@@ -864,9 +898,11 @@ paths:
       summary: Halo 5 - Flexible Stats
   /h5/metadata/game-base-variants:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -888,11 +924,16 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of game base variants for the title. There is no mechanism to determine which
+            application/json: >
+              // A list of game base variants for the title. There is no
+              mechanism to determine which
+
               // game base variants are currently available for play. To determine which game base
+
               // variants a specific player has played, view the Service Record stats for that
+
               // player.There is no significance to the ordering.
+
               [
                 {
                   // A localized name for the game base variant, suitable for display to users. The
@@ -925,9 +966,11 @@ paths:
       summary: Halo 5 - Game Base Variants
   "/h5/metadata/game-variants/{id}":
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -954,8 +997,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of game variants for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of game variants for the title. There is no
+              significance to the ordering.
+
               {
                 // A localized name, suitable for display to users.
                 "name": "string",
@@ -981,9 +1026,11 @@ paths:
       summary: Halo 5 - Game Variant
   /h5/metadata/impulses:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1005,9 +1052,12 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of impulses (essentially invisible medals) for the title. There is no
+            application/json: >
+              // A list of impulses (essentially invisible medals) for the
+              title. There is no
+
               // significance to the ordering.
+
               [
                 {
                   // Internal use. The non-localized name of the impulse.
@@ -1023,9 +1073,11 @@ paths:
       summary: Halo 5 - Impulses
   "/h5/metadata/map-variants/{id}":
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1052,8 +1104,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of map variants for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of map variants for the title. There is no
+              significance to the ordering.
+
               {
                 // A localized name, suitable for display to users.
                 "name": "string",
@@ -1102,8 +1156,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of maps for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of maps for the title. There is no significance to
+              the ordering.
+
               [
                 {
                   // A localized name, suitable for display to users.
@@ -1158,8 +1214,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of medals for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of medals for the title. There is no significance to
+              the ordering.
+
               [
                 {
                   // A localized name for the medal, suitable for display to users.
@@ -1219,9 +1277,11 @@ paths:
       summary: Halo 5 - Medals
   /h5/metadata/playlists:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1243,10 +1303,14 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of playlists for the title. To determine which playlists a specific player has
+            application/json: >
+              // A list of playlists for the title. To determine which
+              playlists a specific player has
+
               // played within, view the Service Record stats for that player. There is no significance
+
               // to the ordering.
+
               [
                 {
                   // A localized name for the playlist, suitable for display to users. The text is
@@ -1283,9 +1347,11 @@ paths:
       summary: Halo 5 - Playlists
   "/h5/metadata/requisition-packs/{id}":
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1312,8 +1378,9 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               // A requisition pack for the title.
+
               {
                 // A localized name for the pack, suitable for display to users. The text is title
                 // cased. 
@@ -1391,9 +1458,11 @@ paths:
       summary: Halo 5 - Requisition Pack
   "/h5/metadata/requisitions/{id}":
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1420,8 +1489,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of requisitions for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of requisitions for the title. There is no
+              significance to the ordering.
+
               [
                 {
                   // This lists all the game modes that this requisition is redeemable in. Options are:
@@ -1566,8 +1637,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of seasons for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of seasons for the title. There is no significance
+              to the ordering.
+
               [
                 {
                   // One or more playlists that are available in this season.
@@ -1656,8 +1729,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of skulls for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of skulls for the title. There is no significance to
+              the ordering.
+
               [
                 {
                   // A localized name, suitable for display to users. The text is title cased.
@@ -1683,9 +1758,11 @@ paths:
       summary: Halo 5 - Skulls
   /h5/metadata/spartan-ranks:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1707,8 +1784,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of Spartan Ranks for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of Spartan Ranks for the title. There is no
+              significance to the ordering.
+
               [
                 {
                   // The amount of XP required to enter this rank.
@@ -1811,9 +1890,11 @@ paths:
       summary: Halo 5 - Spartan Ranks
   /h5/metadata/team-colors:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1835,9 +1916,12 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A listing of team colors supported in the title. There is no significance to the
+            application/json: >
+              // A listing of team colors supported in the title. There is
+              no significance to the
+
               // ordering.
+
               [
                 {
                   // A localized name, suitable for display to users.
@@ -1865,9 +1949,11 @@ paths:
       summary: Halo 5 - Team Colors
   /h5/metadata/vehicles:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1889,8 +1975,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A list of vehicles for the title. There is no significance to the ordering.
+            application/json: >
+              // A list of vehicles for the title. There is no significance
+              to the ordering.
+
               [
                 {
                   // A localized name for the object, suitable for display to users. The text is title
@@ -1921,9 +2009,11 @@ paths:
       summary: Halo 5 - Vehicles
   /h5/metadata/weapons:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1932,6 +2022,7 @@ paths:
                 <li>Documented "Accept-Language" Request Header.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 26, 2016:</strong></p>
             <ul>
@@ -1951,8 +2042,10 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
-              // A listing of weapons supported in the title. There is no significance to the ordering.
+            application/json: >
+              // A listing of weapons supported in the title. There is no
+              significance to the ordering.
+
               [
                 {
                   // A localized name for the object, suitable for display to users. The text is title
@@ -2002,10 +2095,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Campaign-Levels
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -2022,7 +2117,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -3021,10 +3116,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Campaign-Logs
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -3036,7 +3133,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -3131,10 +3228,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Card-Keywords
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -3151,7 +3250,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -3321,10 +3420,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Cards
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -3341,7 +3442,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -3680,10 +3781,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-CSR-Designations
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -3700,7 +3803,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -4000,10 +4103,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Difficulties
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -4020,7 +4125,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -4187,10 +4292,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Game-Object-Categories
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -4202,7 +4309,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -4293,10 +4400,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Game-Objects
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -4313,7 +4422,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -4608,10 +4717,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Leader-Powers
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -4628,7 +4739,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -4801,10 +4912,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Leaders
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -4821,7 +4934,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -5244,10 +5357,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Maps
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -5264,7 +5379,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -5508,10 +5623,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Packs
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -5528,7 +5645,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -6179,10 +6296,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Playlists
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -6199,7 +6318,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -6970,10 +7089,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Seasons
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -6990,7 +7111,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -7168,15 +7289,18 @@ paths:
       summary: Halo Wars 2 - Seasons
   /hw2/spartan-ranks:
     get:
-      description: |
+      description: >
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 27, 2017:</strong></p>
             <ul>
                 <li>Updated documentation to clarify the relationship between the Spartan Rank content item and the Spartan Rank Display Info content item.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -7185,10 +7309,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Spartan-Ranks
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -7205,7 +7331,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {
@@ -7403,10 +7529,12 @@ paths:
         </div>
       operationId: Halo-Wars-2-Techs
       parameters:
-        - description: |-
+        - description: >-
             When specified, this indicates the index of the item to start at.
 
+
             When omitted, 0 is assumed.
+
 
             When the value contains a non-digit or is not a multiple of 100, HTTP 400 ("Bad Request") is returned.
           in: query
@@ -7423,7 +7551,7 @@ paths:
         "200":
           description: The response body will contain the requested Metadata.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Pagination information.
                 "Paging": {

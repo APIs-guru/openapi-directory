@@ -7,7 +7,18 @@ info:
     name: nFusion Solutions
     url: https://nfusionsolutions.com/contact-us
     x-twitter: nfusionsolution
-  description: "[nFusion Solutions](https://nfusionsolutions.com) provides [REST APIs](https://nfusionsolutions.com/data-feeds/) that deliver enterprise-grade financial data. Data sets include real-time and historical pricing for Spot prices of precious metals such as Gold, Silver, Platinum, and Palladium, exchange rates for major currency pairs, exchange rates for Crypto Currencies such as BTC, ETH, and LTC. All API access requires authentication. In order to be issued access credentials you must first enter into a service agreement with nFusion Solutions and acquire a commercial license. For information on how to obtain a licence [take a tour of our products](https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-feed-tour/) or email sales@nfusionsolutions.com."
+  description: "[nFusion Solutions](https://nfusionsolutions.com) provides [REST
+    APIs](https://nfusionsolutions.com/data-feeds/) that deliver
+    enterprise-grade financial data. Data sets include real-time and historical
+    pricing for Spot prices of precious metals such as Gold, Silver, Platinum,
+    and Palladium, exchange rates for major currency pairs, exchange rates for
+    Crypto Currencies such as BTC, ETH, and LTC. All API access requires
+    authentication. In order to be issued access credentials you must first
+    enter into a service agreement with nFusion Solutions and acquire a
+    commercial license. For information on how to obtain a licence [take a tour
+    of our
+    products](https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-\
+    feed-tour/) or email sales@nfusionsolutions.com."
   license:
     name: Commercial License
     url: https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-feed-quote/
@@ -29,9 +40,11 @@ paths:
 
         \r
 
-        The combination of the interval parameter and start and end dates can result in results\r
+        The combination of the interval parameter and start and end
+        dates can result in results\r
 
-        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
+        being truncated to conform to result size limits. See comments
+        on interval parameter for details on valid interval values."
       parameters:
         - description: auth token
           in: query
@@ -39,7 +52,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
+        - description: "comma separated list of currency pairs. For example:
+            USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
           required: true
@@ -52,15 +66,18 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is
+            current date.
           in: query
           name: end
           schema:
             format: date-time
             type: string
-        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
+        - description: "aggregation interval. Composed of an optional integer value (which
+            defaults to 1 when not specified), \r
 
-            followed by a type string which must be one of the following values:\r
+            followed by a type string which must be one of the
+            following values:\r
 
             y=year,\r
 
@@ -76,11 +93,13 @@ paths:
 
             \r
 
-            For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
+            For example, a yearly interval can be specified as \"y\"
+            and 6 month interval as \"6m\". \r
 
             \r
 
-            If not specified the interval parameter default is 1 Day."
+            If not specified the interval parameter default is 1
+            Day."
           in: query
           name: interval
           schema:
@@ -133,7 +152,8 @@ paths:
         - Currencies
   "/api/v{version}/Currencies/history/supported":
     get:
-      description: "Only the currency pairs in the direction noted can be used with the history endpoint.\r
+      description: "Only the currency pairs in the direction noted can be used with
+        the history endpoint.\r
 
         For example: USD/CAD is not the same as CAD/USD"
       parameters:
@@ -199,7 +219,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
+        - description: "comma separated list of currency pairs. For example:
+            USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
           required: true
@@ -253,7 +274,8 @@ paths:
         - Currencies
   "/api/v{version}/Currencies/rate/supported":
     get:
-      description: "Any of the currencies in this list can be paired with any other currency in this list when supplied to the Rate endpoint.\r
+      description: "Any of the currencies in this list can be paired with any other
+        currency in this list when supplied to the Rate endpoint.\r
 
         For example: USD/CAD,CAD/USD,USD/EUR,EUR/CAD"
       parameters:
@@ -319,7 +341,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
+        - description: "comma separated list of currency pairs. For example:
+            USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
           required: true
@@ -373,7 +396,8 @@ paths:
         - Currencies
   "/api/v{version}/Currencies/summary/supported":
     get:
-      description: "Only the currency pairs in the direction noted can be used with the Summary endpoint.\r
+      description: "Only the currency pairs in the direction noted can be used with
+        the Summary endpoint.\r
 
         For example: USD/CAD is not the same as CAD/USD"
       parameters:
@@ -435,13 +459,17 @@ paths:
 
         \r
 
-        The combination of the interval parameter and start and end dates can result in results\r
+        The combination of the interval parameter and start and end
+        dates can result in results\r
 
-        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r
+        being truncated to conform to result size limits. See comments
+        on interval parameter for details on valid interval values.\r
 
         \r
 
-        The historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
+        The historicalfx flag is used to determine whether to apply
+        today's fx rates to a historical period, or to apply the historical
+        rates from that same time frame."
       parameters:
         - description: auth token
           in: query
@@ -462,15 +490,18 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is
+            current date.
           in: query
           name: end
           schema:
             format: date-time
             type: string
-        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
+        - description: "aggregation interval. Composed of an optional integer value (which
+            defaults to 1 when not specified), \r
 
-            followed by a type string which must be one of the following values:\r
+            followed by a type string which must be one of the
+            following values:\r
 
             y=year,\r
 
@@ -486,16 +517,19 @@ paths:
 
             \r
 
-            For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
+            For example, a yearly interval can be specified as \"y\"
+            and 6 month interval as \"6m\". \r
 
             \r
 
-            If not specified the interval parameter default is 1 Day."
+            If not specified the interval parameter default is 1
+            Day."
           in: query
           name: interval
           schema:
             type: string
-        - description: if true use historical currency rates otherwise current currency rates. Defaults to true.
+        - description: if true use historical currency rates otherwise current currency
+            rates. Defaults to true.
           in: query
           name: historicalfx
           schema:
@@ -722,13 +756,17 @@ paths:
 
         \r
 
-        The combination of the interval parameter and start and end dates can result in results\r
+        The combination of the interval parameter and start and end
+        dates can result in results\r
 
-        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values.\r
+        being truncated to conform to result size limits. See comments
+        on interval parameter for details on valid interval values.\r
 
         \r
 
-        The historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
+        The historicalfx flag is used to determine whether to apply
+        today's fx rates to a historical period, or to apply the historical
+        rates from that same time frame."
       parameters:
         - description: auth token
           in: query
@@ -749,15 +787,18 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is
+            current date.
           in: query
           name: end
           schema:
             format: date-time
             type: string
-        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
+        - description: "aggregation interval. Composed of an optional integer value (which
+            defaults to 1 when not specified), \r
 
-            followed by a type string which must be one of the following values:\r
+            followed by a type string which must be one of the
+            following values:\r
 
             y=year,\r
 
@@ -773,16 +814,19 @@ paths:
 
             \r
 
-            For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
+            For example, a yearly interval can be specified as \"y\"
+            and 6 month interval as \"6m\". \r
 
             \r
 
-            If not specified the interval parameter default is 1 Day."
+            If not specified the interval parameter default is 1
+            Day."
           in: query
           name: interval
           schema:
             type: string
-        - description: if true use historical currency rates otherwise current currency rates. Defaults to true.
+        - description: if true use historical currency rates otherwise current currency
+            rates. Defaults to true.
           in: query
           name: historicalfx
           schema:
@@ -1047,9 +1091,11 @@ paths:
 
         \r
 
-        The combination of the interval parameter and start and end dates can result in results\r
+        The combination of the interval parameter and start and end
+        dates can result in results\r
 
-        being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
+        being truncated to conform to result size limits. See comments
+        on interval parameter for details on valid interval values."
       parameters:
         - description: auth token
           in: query
@@ -1070,15 +1116,18 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is current date.
+        - description: end date of time period. format is <i>yyyy-mm-dd</i>. Default is
+            current date.
           in: query
           name: end
           schema:
             format: date-time
             type: string
-        - description: "aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r
+        - description: "aggregation interval. Composed of an optional integer value (which
+            defaults to 1 when not specified), \r
 
-            followed by a type string which must be one of the following values:\r
+            followed by a type string which must be one of the
+            following values:\r
 
             y=year,\r
 
@@ -1094,11 +1143,13 @@ paths:
 
             \r
 
-            For example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r
+            For example, a yearly interval can be specified as \"y\"
+            and 6 month interval as \"6m\". \r
 
             \r
 
-            If not specified the interval parameter default is 1 Day."
+            If not specified the interval parameter default is 1
+            Day."
           in: query
           name: interval
           schema:
@@ -1159,7 +1210,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "comma separated list of metal pairs. For example: gold/silver,gold/platinum,silver/palladium"
+        - description: "comma separated list of metal pairs. For example:
+            gold/silver,gold/platinum,silver/palladium"
           in: query
           name: pairs
           required: true
@@ -1408,7 +1460,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
-      summary: Get list of currencies supported by metals endpoints for currency conversion
+      summary: Get list of currencies supported by metals endpoints for currency
+        conversion
       tags:
         - Metals
 components:

@@ -8,8 +8,9 @@ info:
     name: Listen Notes
     url: https://www.listennotes.com/api/
     x-twitter: listennotes
-  description: |
-    Simple & no-nonsense podcast search & directory API. Search all podcasts and episodes by people, places, or topics.
+  description: >
+    Simple & no-nonsense podcast search & directory API. Search all
+    podcasts and episodes by people, places, or topics.
   termsOfService: https://www.listennotes.com/api/terms/
   title: "Listen API: Podcast Search & Directory API"
   version: "2.0"
@@ -35,12 +36,17 @@ tags:
 paths:
   /best_podcasts:
     get:
-      description: |
+      description: >
         Get a list of curated best podcasts by genre,
+
         which are curated by Listen Notes staffs based on various signals from the Internet, e.g.,
+
         top charts on other podcast platforms, recommendations from mainstream media,
+
         user activities on listennotes.com...
+
         You can get the genre ids from `GET /genres` endpoint.
+
         This endpoint returns same data as https://www.listennotes.com/best-podcasts/
       operationId: getBestPodcasts
       parameters:
@@ -52,7 +58,9 @@ paths:
           schema:
             type: string
           style: simple
-        - description: You can get the id from `GET /genres`. If not specified, it'll be the overall best podcasts, which can be considered as a special genre.
+        - description: You can get the id from `GET /genres`. If not specified, it'll be
+            the overall best podcasts, which can be considered as a special
+            genre.
           explode: true
           in: query
           name: genre_id
@@ -70,11 +78,15 @@ paths:
             example: 2
             type: integer
           style: form
-        - description: |
+        - description: >
             Filter best podcasts by country/region.
+
             Please note that podcasts that are "best" in a country/region may not be produced in that country/region.
+
             For example, a podcast from the US may be very popular in Canada.
+
             You can get the supported country codes (e.g., us, jp, gb...) from `GET /regions`.
+
             If not specified, you'll get "best podcasts" in United States.
           explode: true
           in: query
@@ -85,13 +97,19 @@ paths:
             example: us
             type: string
           style: form
-        - description: |
+        - description: >
             Filter best podcasts by the publisher's country/region.
+
             This is to narrow down the results to include "best podcasts" produced in a specific country/region.
+
             You can get the supported country codes (e.g., us, jp, gb...) from `GET /regions`.
+
             If not specified, you'll get "best podcasts" produced in any country/region.
+
             If you want to get a country/region's "best podcasts" that are also produced in that country/region,
+
             then you need to specify both **region** and **publisher_region**,
+
             e.g., `region=jp` and `publisher_region=jp`.
           explode: true
           in: query
@@ -100,9 +118,11 @@ paths:
           schema:
             type: string
           style: form
-        - description: |
+        - description: >
             Filter best podcasts by language.
+
             You can get a list of supported languages (e.g., English, Chinese, Japanese...) from `GET /languages`.
+
             If not specified, you'll get "best podcasts" in any language.
           explode: true
           in: query
@@ -111,7 +131,8 @@ paths:
           schema:
             type: string
           style: form
-        - description: Whether or not to exclude podcasts with explicit language. 1 is yes, and 0 is no.
+        - description: Whether or not to exclude podcasts with explicit language. 1 is
+            yes, and 0 is no.
           explode: true
           in: query
           name: safe_mode
@@ -159,8 +180,12 @@ paths:
         - Directory API
   /curated_podcasts:
     get:
-      description: |
-        A bunch of curated lists from online media. For each list, you'll get basic info of up to 5 podcasts. To get detailed meta data of all podcasts in a specific list, you need to use `GET /curated_podcasts/{id}`. We add new curated lists to the database on a daily basis.
+      description: >
+        A bunch of curated lists from online media. For each list, you'll
+        get basic info of up to 5 podcasts. To get detailed meta data of all
+        podcasts in a specific list, you need to use `GET
+        /curated_podcasts/{id}`. We add new curated lists to the database on a
+        daily basis.
       operationId: getCuratedPodcasts
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -214,8 +239,9 @@ paths:
         - Directory API
   "/curated_podcasts/{id}":
     get:
-      description: |
+      description: >
         Get detailed meta data of all podcasts in a specific curated list.
+
         This endpoint returns same data as https://www.listennotes.com/curated-podcasts/
       operationId: getCuratedPodcastById
       parameters:
@@ -227,8 +253,10 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
-            id for a specific curated list of podcasts. You can get the id from the response of `GET /search?type=curated` or `GET /curated_podcasts`.
+        - description: >
+            id for a specific curated list of podcasts. You can get the id from
+            the response of `GET /search?type=curated` or `GET
+            /curated_podcasts`.
           explode: false
           in: path
           name: id
@@ -266,8 +294,12 @@ paths:
         - Directory API
   /episodes:
     post:
-      description: |
-        Batch fetch basic meta data for up to 10 episodes. This endpoint could be used to implement custom playlists for individual episodes. For detailed meta data of an individual episode, you need to use `GET /episodes/{id}`. This endpoint is available only in the PRO/ENTERPRISE plan.
+      description: >
+        Batch fetch basic meta data for up to 10 episodes. This endpoint
+        could be used to implement custom playlists for individual episodes. For
+        detailed meta data of an individual episode, you need to use `GET
+        /episodes/{id}`. This endpoint is available only in the PRO/ENTERPRISE
+        plan.
       operationId: getEpisodesInBatch
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -322,7 +354,8 @@ paths:
           schema:
             type: string
           style: simple
-        - description: id for a specific episode. You can get episode id from using other endpoints, e.g., `GET /search`...
+        - description: id for a specific episode. You can get episode id from using other
+            endpoints, e.g., `GET /search`...
           explode: false
           in: path
           name: id
@@ -331,7 +364,12 @@ paths:
             example: 6b6d65930c5a4f71b254465871fed370
             type: string
           style: simple
-        - description: To include the transcript of this episode or not? If it is 1, then include the transcript in the **transcript** field. The default value is 0 - we don't include transcript by default, because 1) it would make the response data very big, thus slow response time; 2) less than 1% of episodes have transcripts. The transcript field is available only in the PRO/ENTERPRISE plan.
+        - description: To include the transcript of this episode or not? If it is 1, then
+            include the transcript in the **transcript** field. The default
+            value is 0 - we don't include transcript by default, because 1) it
+            would make the response data very big, thus slow response time; 2)
+            less than 1% of episodes have transcripts. The transcript field is
+            available only in the PRO/ENTERPRISE plan.
           explode: false
           in: query
           name: show_transcript
@@ -390,7 +428,8 @@ paths:
           schema:
             type: string
           style: simple
-        - description: Whether or not to exclude podcasts with explicit language. 1 is yes, and 0 is no.
+        - description: Whether or not to exclude podcasts with explicit language. 1 is
+            yes, and 0 is no.
           explode: true
           in: query
           name: safe_mode
@@ -432,10 +471,13 @@ paths:
         - Directory API
   /genres:
     get:
-      description: |
+      description: >
         Get a list of podcast genres that are supported in Listen Notes.
+
         The genre id can be passed to other endpoints as a parameter to get podcasts in a specific genre,
+
         e.g., `GET /best_podcasts`, `GET /search`...
+
         You may want to cache the list of genres on the client side.
       operationId: getGenres
       parameters:
@@ -447,8 +489,9 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
-            Just show top level genres? If 1, yes, just show top level genres. If 0, no, show all genres.
+        - description: >
+            Just show top level genres? If 1, yes, just show top level genres.
+            If 0, no, show all genres.
           explode: true
           in: query
           name: top_level_only
@@ -526,8 +569,10 @@ paths:
         - Directory API
   /languages:
     get:
-      description: |
-        Get a list of languages that are supported in Listen Notes database. You can use the language string as query parameter in `GET /search`.
+      description: >
+        Get a list of languages that are supported in Listen Notes
+        database. You can use the language string as query parameter in `GET
+        /search`.
       operationId: getLanguages
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -565,8 +610,10 @@ paths:
         - Directory API
   /playlists:
     get:
-      description: |
-        This endpoint returns same data as listennotes.com/listen under your account.
+      description: >
+        This endpoint returns same data as listennotes.com/listen under
+        your account.
+
         You can use the **page** parameter to do pagination and fetch more playlists.
       operationId: getPlaylists
       parameters:
@@ -638,14 +685,22 @@ paths:
         - Playlist API
   "/playlists/{id}":
     get:
-      description: |
-        A playlist can be an episode list (i.e., all items are episodes) or a podcast list (i.e., all items are podcasts),
+      description: >
+        A playlist can be an episode list (i.e., all items are episodes) or
+        a podcast list (i.e., all items are podcasts),
+
         which is essentially the same as those created via listennotes.com/listen/.
+
         This endpoint fetches a list of items (i.e., episodes or podcasts) in the playlist.
+
         You can use the **last_pub_date_ms** parameter to do pagination and fetch more items.
+
         A playlist can be **public** (discoverable on ListenNotes.com),
+
         **unlisted** (accessible to anyone who knows the playlist id),
+
         or **private** (accessible to its owner).
+
         You can fetch all playlists created by you, and **public** / **unlisted** playlists created by others.
       operationId: getPlaylistById
       parameters:
@@ -657,9 +712,11 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
+        - description: >
             Playlist id (always 11 characters, e.g., m1pe7z60bsw).
+
             You can get the podcast id from the url of a playlist, e.g.,
+
             m1pe7z60bsw is the playlist id of listennotes.com/listen/podcasts-about-podcasting-m1pe7z60bsw
           example: m1pe7z60bsw
           explode: false
@@ -669,8 +726,9 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
-            The type of this playlist, which should be either **episode_list** or **podcast_list**.
+        - description: >
+            The type of this playlist, which should be either **episode_list**
+            or **podcast_list**.
           explode: true
           in: query
           name: type
@@ -683,10 +741,13 @@ paths:
             example: episode_list
             type: string
           style: form
-        - description: |
+        - description: >
             For playlist items pagination.
+
             It's the value of **last_timestamp_ms** from the response of last request.
+
             If it's 0 or not specified, just return the latest or the oldest 20 items,
+
             depending on the value of the **sort** parameter.
           explode: true
           in: query
@@ -748,10 +809,13 @@ paths:
         - Playlist API
   /podcasts:
     post:
-      description: |
+      description: >
         Batch fetch basic meta data for up to 10 podcasts.
+
         This endpoint could be used to build something like OPML import,
+
         allowing users to import a bunch of podcasts via rss urls.
+
         For detailed meta data (including episodes) of an individual podcast, you need to use `GET /podcasts/{id}`. This endpoint is available only in the PRO/ENTERPRISE plan.
       operationId: getPodcastsInBatch
       parameters:
@@ -802,8 +866,16 @@ paths:
         - Directory API
   /podcasts/submit:
     post:
-      description: |
-        Podcast hosting services can use this endpoint to help your users directly submit a new podcast to Listen Notes database. If the podcast doesn't exist in the database, "status" in the response will be "in review", and we'll review it within 12 hours. If the podcast exists, "status" in the response will be "found". You can use `POST /podcasts` to check if multiple podcasts exist in the database. If you want to get a notification once the podcast is accepted, you can either specify the "email" parameter or configure a webhook url in the dashboard: listennotes.com/api/dashboard/#webhooks
+      description: >
+        Podcast hosting services can use this endpoint to help your users
+        directly submit a new podcast to Listen Notes database. If the podcast
+        doesn't exist in the database, "status" in the response will be "in
+        review", and we'll review it within 12 hours. If the podcast exists,
+        "status" in the response will be "found". You can use `POST /podcasts`
+        to check if multiple podcasts exist in the database. If you want to get
+        a notification once the podcast is accepted, you can either specify the
+        "email" parameter or configure a webhook url in the dashboard:
+        listennotes.com/api/dashboard/#webhooks
       operationId: submitPodcast
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -837,7 +909,8 @@ paths:
             X-listenAPI-Latency-Seconds:
               $ref: "#/components/headers/X-listenAPI-Latency-Seconds"
         "400":
-          description: Something wrong on your end (Client side errors), e.g., missing required parameters.
+          description: Something wrong on your end (Client side errors), e.g., missing
+            required parameters.
         "401":
           description: Wrong api key or your account is suspended.
         "429":
@@ -849,8 +922,14 @@ paths:
         - Podcaster API
   "/podcasts/{id}":
     delete:
-      description: |
-        Podcast hosting services can use this endpoint to streamline the process of podcast deletion on behave of their users (podcasters). We will review the deletion request within 12 hours. If the podcast is already deleted, the "status" field in the response will be "deleted". Otherwise, the status field will be "in review". If you want to get a notification once the podcast is deleted, you can configure a webhook url in the dashboard: listennotes.com/api/dashboard/#webhooks
+      description: >
+        Podcast hosting services can use this endpoint to streamline the
+        process of podcast deletion on behave of their users (podcasters). We
+        will review the deletion request within 12 hours. If the podcast is
+        already deleted, the "status" field in the response will be "deleted".
+        Otherwise, the status field will be "in review". If you want to get a
+        notification once the podcast is deleted, you can configure a webhook
+        url in the dashboard: listennotes.com/api/dashboard/#webhooks
       operationId: deletePodcastById
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -861,7 +940,8 @@ paths:
           schema:
             type: string
           style: simple
-        - description: Podcast id. You can get podcast id from using other endpoints, e.g., `GET /search`, `GET /best_podcasts`...
+        - description: Podcast id. You can get podcast id from using other endpoints,
+            e.g., `GET /search`, `GET /best_podcasts`...
           example: 4d3fe717742d4963a85562e9f84d8c79
           explode: false
           in: path
@@ -870,7 +950,10 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The reason why this podcast should be deleted, e.g., copyright violation, the podcaster wants to delete it... You can put "testing" here to indicate that you are testing this endpoint, so we will not actually delete the podcast.
+        - description: The reason why this podcast should be deleted, e.g., copyright
+            violation, the podcaster wants to delete it... You can put "testing"
+            here to indicate that you are testing this endpoint, so we will not
+            actually delete the podcast.
           example: the podcaster wants to delete it
           explode: true
           in: query
@@ -907,8 +990,10 @@ paths:
       tags:
         - Podcaster API
     get:
-      description: |
-        Fetch detailed meta data and episodes for a specific podcast (up to 10 episodes each time).
+      description: >
+        Fetch detailed meta data and episodes for a specific podcast (up to
+        10 episodes each time).
+
         You can use the **next_episode_pub_date** parameter to do pagination and fetch more episodes.
       operationId: getPodcastById
       parameters:
@@ -920,7 +1005,8 @@ paths:
           schema:
             type: string
           style: simple
-        - description: Podcast id. You can get podcast id from using other endpoints, e.g., `GET /search`, `GET /best_podcasts`...
+        - description: Podcast id. You can get podcast id from using other endpoints,
+            e.g., `GET /search`, `GET /best_podcasts`...
           example: 4d3fe717742d4963a85562e9f84d8c79
           explode: false
           in: path
@@ -929,8 +1015,11 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
-            For episodes pagination. It's the value of **next_episode_pub_date** from the response of last request. If not specified, just return latest 10 episodes or oldest 10 episodes, depending on the value of the **sort** parameter.
+        - description: >
+            For episodes pagination. It's the value of
+            **next_episode_pub_date** from the response of last request. If not
+            specified, just return latest 10 episodes or oldest 10 episodes,
+            depending on the value of the **sort** parameter.
           example: 1479154463000
           explode: true
           in: query
@@ -1008,7 +1097,8 @@ paths:
           schema:
             type: string
           style: simple
-        - description: Whether or not to exclude podcasts with explicit language. 1 is yes, and 0 is no.
+        - description: Whether or not to exclude podcasts with explicit language. 1 is
+            yes, and 0 is no.
           explode: true
           in: query
           name: safe_mode
@@ -1050,8 +1140,10 @@ paths:
         - Directory API
   /regions:
     get:
-      description: |
-        It returns a dictionary of country codes (e.g., us, gb...) & country names (United States, United Kingdom...). The country code is used in the query parameter **region** of `GET /best_podcasts`.
+      description: >
+        It returns a dictionary of country codes (e.g., us, gb...) &
+        country names (United States, United Kingdom...). The country code is
+        used in the query parameter **region** of `GET /best_podcasts`.
       operationId: getRegions
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -1089,11 +1181,16 @@ paths:
         - Directory API
   /search:
     get:
-      description: |
-        Full-text search on episodes, podcasts, or curated lists of podcasts.
+      description: >
+        Full-text search on episodes, podcasts, or curated lists of
+        podcasts.
+
         Use the `offset` parameter to paginate through search results.
+
         The FREE plan allows to see up to 30 search results (or `offset` < 30) per query.
+
         The PRO plan allows to see up to 300 search results (or `offset` < 300) per query.
+
         The ENTERPRISE plan allows to see up to 10,000 search results (or `offset` < 10000) per query.
       operationId: search
       parameters:
@@ -1105,8 +1202,10 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
-            Search term, e.g., person, place, topic... You can use double quotes to do verbatim match, e.g., "game of thrones". Otherwise, it's fuzzy search.
+        - description: >
+            Search term, e.g., person, place, topic... You can use double
+            quotes to do verbatim match, e.g., "game of thrones". Otherwise,
+            it's fuzzy search.
           explode: true
           in: query
           name: q
@@ -1115,8 +1214,9 @@ paths:
             example: star wars
             type: string
           style: form
-        - description: |
-            Sort by date or not? If 0, then sort by relevance. If 1, then sort by date.
+        - description: >
+            Sort by date or not? If 0, then sort by relevance. If 1, then sort
+            by date.
           explode: true
           in: query
           name: sort_by_date
@@ -1144,8 +1244,9 @@ paths:
             example: episode
             type: string
           style: form
-        - description: |
-            Offset for search results, for pagination. You'll use **next_offset** from response for this parameter.
+        - description: >
+            Offset for search results, for pagination. You'll use
+            **next_offset** from response for this parameter.
           explode: true
           in: query
           name: offset
@@ -1155,8 +1256,9 @@ paths:
             example: 0
             type: integer
           style: form
-        - description: |
-            Minimum audio length in minutes. Applicable only when type parameter is **episode**.
+        - description: >
+            Minimum audio length in minutes. Applicable only when type
+            parameter is **episode**.
           explode: true
           in: query
           name: len_min
@@ -1166,8 +1268,9 @@ paths:
             example: 10
             type: integer
           style: form
-        - description: |
-            Maximum audio length in minutes. Applicable only when type parameter is **episode**.
+        - description: >
+            Maximum audio length in minutes. Applicable only when type
+            parameter is **episode**.
           explode: true
           in: query
           name: len_max
@@ -1176,8 +1279,9 @@ paths:
             example: 30
             type: integer
           style: form
-        - description: |
-            Minimum number of episodes. Applicable only when type parameter is **podcast**.
+        - description: >
+            Minimum number of episodes. Applicable only when type parameter is
+            **podcast**.
           explode: true
           in: query
           name: episode_count_min
@@ -1185,8 +1289,9 @@ paths:
           schema:
             type: integer
           style: form
-        - description: |
-            Maximum number of episodes. Applicable only when type parameter is **podcast**.
+        - description: >
+            Maximum number of episodes. Applicable only when type parameter is
+            **podcast**.
           explode: true
           in: query
           name: episode_count_max
@@ -1194,8 +1299,11 @@ paths:
           schema:
             type: integer
           style: form
-        - description: |
-            A comma-delimited string of a list of genre ids. If not specified, then all genres are included. You can find the id and the name of all genres from `GET /genres`. It works only when **type** is *episode* or *podcast*.
+        - description: >
+            A comma-delimited string of a list of genre ids. If not specified,
+            then all genres are included. You can find the id and the name of
+            all genres from `GET /genres`. It works only when **type** is
+            *episode* or *podcast*.
           explode: true
           in: query
           name: genre_ids
@@ -1204,8 +1312,11 @@ paths:
             example: 68,82
             type: string
           style: form
-        - description: |
-            Only show episodes/podcasts/curated lists published before this timestamp (in milliseconds). If **published_before** & **published_after** are used at the same time, **published_before** should be bigger than **published_after**.
+        - description: >
+            Only show episodes/podcasts/curated lists published before this
+            timestamp (in milliseconds). If **published_before** &
+            **published_after** are used at the same time, **published_before**
+            should be bigger than **published_after**.
           explode: true
           in: query
           name: published_before
@@ -1214,8 +1325,11 @@ paths:
             example: 1580172454000
             type: integer
           style: form
-        - description: |
-            Only show episodes/podcasts/curated lists published after this timestamp (in milliseconds). If **published_before** & **published_after** are used at the same time, **published_before** should be bigger than **published_after**.
+        - description: >
+            Only show episodes/podcasts/curated lists published after this
+            timestamp (in milliseconds). If **published_before** &
+            **published_after** are used at the same time, **published_before**
+            should be bigger than **published_after**.
           explode: true
           in: query
           name: published_after
@@ -1225,8 +1339,10 @@ paths:
             example: 0
             type: integer
           style: form
-        - description: |
-            A comma-delimited string to search only in specific fields. Allowed values are title, description, author, and audio. If not specified, then search every fields.
+        - description: >
+            A comma-delimited string to search only in specific fields. Allowed
+            values are title, description, author, and audio. If not specified,
+            then search every fields.
           explode: true
           in: query
           name: only_in
@@ -1236,8 +1352,11 @@ paths:
             example: title,description
             type: string
           style: form
-        - description: |
-            Limit search results to a specific language. If not specified, it'll be any language. You can get a list of supported languages from `GET /languages`. It works only when **type** is *episode* or *podcast*.
+        - description: >
+            Limit search results to a specific language. If not specified,
+            it'll be any language. You can get a list of supported languages
+            from `GET /languages`. It works only when **type** is *episode* or
+            *podcast*.
           explode: true
           in: query
           name: language
@@ -1246,8 +1365,11 @@ paths:
             example: English
             type: string
           style: form
-        - description: |
-            Limit search results to a specific region (e.g., us, gb, in...). If not specified, it'll be any region. You can get the supported country codes from `GET /regions`. It works only when **type** is *episode* or *podcast*.
+        - description: >
+            Limit search results to a specific region (e.g., us, gb, in...). If
+            not specified, it'll be any region. You can get the supported
+            country codes from `GET /regions`. It works only when **type** is
+            *episode* or *podcast*.
           explode: true
           in: query
           name: region
@@ -1256,8 +1378,11 @@ paths:
             example: ""
             type: string
           style: form
-        - description: |
-            A comma-delimited string of podcast ids (up to 5 podcasts) - you can get a podcast id from the **podcast_id** field in response. This parameter is to limit search results from only a few specific podcasts. It works only when **type** is *episode*.
+        - description: >
+            A comma-delimited string of podcast ids (up to 5 podcasts) - you
+            can get a podcast id from the **podcast_id** field in response. This
+            parameter is to limit search results from only a few specific
+            podcasts. It works only when **type** is *episode*.
           explode: true
           in: query
           name: ocid
@@ -1265,8 +1390,11 @@ paths:
           schema:
             type: string
           style: form
-        - description: |
-            A comma-delimited string of podcast ids (up to 5 podcasts) - you can get a podcast id from the **podcast_id** field in response. This parameter is to exclude search results of a few specific podcasts. It works only when **type** is *episode*.
+        - description: >
+            A comma-delimited string of podcast ids (up to 5 podcasts) - you
+            can get a podcast id from the **podcast_id** field in response. This
+            parameter is to exclude search results of a few specific podcasts.
+            It works only when **type** is *episode*.
           explode: true
           in: query
           name: ncid
@@ -1274,8 +1402,10 @@ paths:
           schema:
             type: string
           style: form
-        - description: |
-            Whether or not to exclude podcasts/episodes with explicit language. 1 is yes and 0 is no. It works only when **type** is *episode* or *podcast*.
+        - description: >
+            Whether or not to exclude podcasts/episodes with explicit language.
+            1 is yes and 0 is no. It works only when **type** is *episode* or
+            *podcast*.
           explode: true
           in: query
           name: safe_mode
@@ -1311,7 +1441,8 @@ paths:
               parameters:
                 offset: $response.body#/next_offset
         "400":
-          description: Something wrong on your end (Client side errors), e.g., missing required parameters.
+          description: Something wrong on your end (Client side errors), e.g., missing
+            required parameters.
         "401":
           description: Wrong api key or your account is suspended.
         "429":
@@ -1334,8 +1465,10 @@ paths:
           schema:
             type: string
           style: simple
-        - description: |
-            Search term, e.g., person, place, topic... You can use double quotes to do verbatim match, e.g., "game of thrones". Otherwise, it's fuzzy search.
+        - description: >
+            Search term, e.g., person, place, topic... You can use double
+            quotes to do verbatim match, e.g., "game of thrones". Otherwise,
+            it's fuzzy search.
           explode: true
           in: query
           name: q
@@ -1344,8 +1477,12 @@ paths:
             example: star wars
             type: string
           style: form
-        - description: |
-            Autosuggest podcasts. This only searches podcast title and publisher and returns very limited info of 5 podcasts. 1 is yes, 0 is no. It's a bit slow to autosuggest podcasts, so we turn it off by default. If show_podcasts=1, you can also pass iTunes id (e.g., 474722933) to the q parameter to fetch podcast meta data.
+        - description: >
+            Autosuggest podcasts. This only searches podcast title and
+            publisher and returns very limited info of 5 podcasts. 1 is yes, 0
+            is no. It's a bit slow to autosuggest podcasts, so we turn it off by
+            default. If show_podcasts=1, you can also pass iTunes id (e.g.,
+            474722933) to the q parameter to fetch podcast meta data.
           explode: true
           in: query
           name: show_podcasts
@@ -1372,8 +1509,9 @@ paths:
             example: 1
             type: integer
           style: form
-        - description: |
-            Whether or not to exclude podcasts/episodes with explicit language. 1 is yes and 0 is no. It works only when **show_podcasts** is *1*.
+        - description: >
+            Whether or not to exclude podcasts/episodes with explicit language.
+            1 is yes and 0 is no. It works only when **show_podcasts** is *1*.
           explode: true
           in: query
           name: safe_mode
@@ -1403,7 +1541,8 @@ paths:
             X-listenAPI-Latency-Seconds:
               $ref: "#/components/headers/X-listenAPI-Latency-Seconds"
         "400":
-          description: Something wrong on your end (Client side errors), e.g., missing required parameters.
+          description: Something wrong on your end (Client side errors), e.g., missing
+            required parameters.
         "401":
           description: Wrong api key or your account is suspended.
         "429":
@@ -1455,7 +1594,8 @@ components:
         type: string
       style: simple
     genreIdParam:
-      description: You can get the id from `GET /genres`. If not specified, it'll be the overall best podcasts, which can be considered as a special genre.
+      description: You can get the id from `GET /genres`. If not specified, it'll be
+        the overall best podcasts, which can be considered as a special genre.
       explode: true
       in: query
       name: genre_id
@@ -1465,8 +1605,10 @@ components:
         type: string
       style: form
     queryParam:
-      description: |
-        Search term, e.g., person, place, topic... You can use double quotes to do verbatim match, e.g., "game of thrones". Otherwise, it's fuzzy search.
+      description: >
+        Search term, e.g., person, place, topic... You can use double
+        quotes to do verbatim match, e.g., "game of thrones". Otherwise, it's
+        fuzzy search.
       explode: true
       in: query
       name: q
@@ -1476,7 +1618,8 @@ components:
         type: string
       style: form
     safeModeParam:
-      description: Whether or not to exclude podcasts with explicit language. 1 is yes, and 0 is no.
+      description: Whether or not to exclude podcasts with explicit language. 1 is
+        yes, and 0 is no.
       explode: true
       in: query
       name: safe_mode
@@ -1491,7 +1634,8 @@ components:
       style: form
   responses:
     BadRequest:
-      description: Something wrong on your end (Client side errors), e.g., missing required parameters.
+      description: Something wrong on your end (Client side errors), e.g., missing
+        required parameters.
     NotFound:
       description: Endpoint not exist, or podcast / episode not exist.
     ServerError:
@@ -1510,7 +1654,8 @@ components:
       example: 567
       type: integer
     BestPodcastsLNUrlField:
-      description: Url of the list of best podcasts on [ListenNotes.com](https://www.ListenNotes.com).
+      description: Url of the list of best podcasts on
+        [ListenNotes.com](https://www.ListenNotes.com).
       example: https://www.listennotes.com/best-business-news-podcasts-95/
       type: string
     BestPodcastsResponse:
@@ -1569,14 +1714,18 @@ components:
       type: string
     CuratedDescriptionField:
       description: This curated list's description.
-      example: Commuting to work is always better when you have a great new podcast to listen to, and this year, we have discovered some of our favorite podcasts yet for readers and book-lovers. These podcasts for readers entertain us and provide no shortage of new book recommendations too.
+      example: Commuting to work is always better when you have a great new podcast to
+        listen to, and this year, we have discovered some of our favorite
+        podcasts yet for readers and book-lovers. These podcasts for readers
+        entertain us and provide no shortage of new book recommendations too.
       type: string
     CuratedIdField:
       description: Curated list id.
       example: Vb017Sx3l8F
       type: string
     CuratedLNUrlField:
-      description: The url of this curated list on [ListenNotes.com](https://www.ListenNotes.com).
+      description: The url of this curated list on
+        [ListenNotes.com](https://www.ListenNotes.com).
       example: https://www.listennotes.com/curated-podcasts/7-bookish-podcasts-for-avid-readers-on-H2r-TCWai8K/
       type: string
     CuratedListFull:
@@ -1608,7 +1757,9 @@ components:
       properties:
         description_highlighted:
           description: Highlighted segment of this curated list's description
-          example: ...<span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> fans in Reddit shared their favorite podcasts.
+          example: ...<span class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> fans in Reddit shared their
+            favorite podcasts.
           type: string
         description_original:
           description: Plain text of this curated list's description
@@ -1631,8 +1782,9 @@ components:
           $ref: "#/components/schemas/CuratedSourceUrlField"
         title_highlighted:
           description: Highlighted segment of this curated list's title
-          example: |
-            What are some good <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> Podcast to listen to?
+          example: >
+            What are some good <span class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> Podcast to listen to?
           type: string
         title_original:
           description: Plain text of this curated list's title
@@ -1728,9 +1880,11 @@ components:
         - status
       type: object
     DeletedItem:
-      description: |
+      description: >
         A deleted episode or podcast.
+
         An episode or a podcast could be deleted from our podcast database.
+
         Possible reasons: 1) Podcast producers sometimes delete their old episodes. 2) Copyright issues.
       properties:
         error:
@@ -1742,7 +1896,8 @@ components:
           example: 96fc400171364e32897b25d84a8ed8ec
           type: string
         status:
-          description: The status of this episode or podcast. For now, the only possible value is **deleted**.
+          description: The status of this episode or podcast. For now, the only possible
+            value is **deleted**.
           example: deleted
           type: string
         title:
@@ -1755,13 +1910,26 @@ components:
       example: 1470667902000
       type: integer
     EmailField:
-      description: The email of this podcast's producer. This field is available only in the PRO/ENTERPRISE plan.
+      description: The email of this podcast's producer. This field is available only
+        in the PRO/ENTERPRISE plan.
       example: hello@example.com
       type: string
     EpisodeDescriptionField:
       description: Html of this episode's full description
-      example: |
-        <p>Disney chief Bob Iger shared news about Star Wars movies in 2020 and beyond, but some media outlets gave conflicting reports about it. Here's the real scoop. Punch it!</p> <p>***We’re listener supported! Go to http://Patreon.com/sw7x7 to donate to the Star Wars 7x7 podcast, and you’ll get some fabulous rewards for your pledge.*** </p> <p>Check out SW7x7.com for full Star Wars 7x7 show notes and links, and to comment on any of the content of this episode! If you like what you've heard, please leave us a rating or review on iTunes or Stitcher, which will also help more people discover this Star Wars podcast.</p> <p>Don't forget to join the Star Wars 7x7 fun on Facebook at Facebook.com/SW7x7, and follow the breaking news Twitter feed at Twitter.com/SW7x7Podcast. We're also on Pinterest and Instagram as "SW7x7" too, and we'd love to connect with you there!</p>
+      example: >
+        <p>Disney chief Bob Iger shared news about Star Wars movies in 2020 and
+        beyond, but some media outlets gave conflicting reports about it. Here's
+        the real scoop. Punch it!</p> <p>***We’re listener supported! Go to
+        http://Patreon.com/sw7x7 to donate to the Star Wars 7x7 podcast, and
+        you’ll get some fabulous rewards for your pledge.*** </p> <p>Check out
+        SW7x7.com for full Star Wars 7x7 show notes and links, and to comment on
+        any of the content of this episode! If you like what you've heard,
+        please leave us a rating or review on iTunes or Stitcher, which will
+        also help more people discover this Star Wars podcast.</p> <p>Don't
+        forget to join the Star Wars 7x7 fun on Facebook at Facebook.com/SW7x7,
+        and follow the breaking news Twitter feed at Twitter.com/SW7x7Podcast.
+        We're also on Pinterest and Instagram as "SW7x7" too, and we'd love to
+        connect with you there!</p>
       type: string
     EpisodeFull:
       properties:
@@ -1801,20 +1969,26 @@ components:
       example: 4d82e50314174754a3b603912448e812
       type: string
     EpisodeImageField:
-      description: |
+      description: >
         Image url for this episode.
+
         If an episode doesn't have its own image, then this field would be the url of the podcast artwork image.
+
         If you are using PRO/ENTERPRISE plan, then it's
+
         a high resolution image (1400x1400). If you are using FREE plan, then it's the same as **thumbnail**,
+
         low resolution image (300x300).
       example: https://cdn-images-1.listennotes.com/podcasts/exponent-ben-thompson-james-allworth-OaJSjb4xQv3.1400x1400.jpg
       type: string
     EpisodeLNEditUrlField:
-      description: Edit url of this episode where you can update the audio url if you find the audio is broken.
+      description: Edit url of this episode where you can update the audio url if you
+        find the audio is broken.
       example: https://www.listennotes.com/e/11b34041e804491b9704d11f283c74de/#edit
       type: string
     EpisodeLNUrlField:
-      description: The url of this episode on [ListenNotes.com](https://www.ListenNotes.com).
+      description: The url of this episode on
+        [ListenNotes.com](https://www.ListenNotes.com).
       example: https://www.listennotes.com/e/4d82e50314174754a3b603912448e812/
       type: string
     EpisodeMinimum:
@@ -1848,7 +2022,8 @@ components:
       type: object
     EpisodeNameField:
       description: Episode name.
-      example: "Celebration Recap, Jason Fry and Christian Blauvelt Interviews – SWBW #101"
+      example: "Celebration Recap, Jason Fry and Christian Blauvelt Interviews – SWBW
+        #101"
       type: string
     EpisodePubDateMsField:
       description: Published date for this episode. In millisecond.
@@ -1863,13 +2038,31 @@ components:
           $ref: "#/components/schemas/AudioLengthSecField"
         description_highlighted:
           description: Highlighted segment of this episode's description
-          example: |
-            ...Go to http://Patreon.com/sw7x7 to donate to the <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> 7x7 podcast, and you'll get some fabulous rewards for your pledge.***  Check out SW7x7.com for full <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> 7x7 show notes and links, and to
+          example: >
+            ...Go to http://Patreon.com/sw7x7 to donate to the <span
+            class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> 7x7 podcast, and you'll get
+            some fabulous rewards for your pledge.***  Check out SW7x7.com for
+            full <span class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> 7x7 show notes and links,
+            and to
           type: string
         description_original:
           description: Plain text of this episode's description
-          example: |
-            Yeah, Star Wars Celebration Orlando is 32 days away, but what's the scoop on Celebration 2018? Plus, Rebels Day is Saturday, and much more in our update. Punch it! ***We're listener supported! Go to http://Patreon.com/sw7x7 to donate to the Star Wars 7x7 podcast, and youâ€™ll get some fabulous rewards for your pledge.***  Check out SW7x7.com for full Star Wars 7x7 show notes and links, and to comment on any of the content of this episode! If you like what you've heard, please leave us a rating or review on iTunes or Stitcher, which will also help more people discover this Star Wars podcast. Don't forget to join the Star Wars 7x7 fun on Facebook at Facebook.com/SW7x7, and follow the breaking news Twitter feed at Twitter.com/SW7x7Podcast. We're also on Pinterest and Instagram as "SW7x7" too, and we'd love to connect with you there!
+          example: >
+            Yeah, Star Wars Celebration Orlando is 32 days away, but what's the
+            scoop on Celebration 2018? Plus, Rebels Day is Saturday, and much
+            more in our update. Punch it! ***We're listener supported! Go to
+            http://Patreon.com/sw7x7 to donate to the Star Wars 7x7 podcast, and
+            youâ€™ll get some fabulous rewards for your pledge.***  Check out
+            SW7x7.com for full Star Wars 7x7 show notes and links, and to
+            comment on any of the content of this episode! If you like what
+            you've heard, please leave us a rating or review on iTunes or
+            Stitcher, which will also help more people discover this Star Wars
+            podcast. Don't forget to join the Star Wars 7x7 fun on Facebook at
+            Facebook.com/SW7x7, and follow the breaking news Twitter feed at
+            Twitter.com/SW7x7Podcast. We're also on Pinterest and Instagram as
+            "SW7x7" too, and we'd love to connect with you there!
           type: string
         explicit_content:
           $ref: "#/components/schemas/ExplicitField"
@@ -1893,7 +2086,8 @@ components:
           $ref: "#/components/schemas/EpisodeThumbnailField"
         title_highlighted:
           description: Highlighted segment of this episode's title
-          example: '815: <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> 2020 Movie and Beyond!'
+          example: '815: <span class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> 2020 Movie and Beyond!'
           type: string
         title_original:
           description: Plain text of this episode' title
@@ -1902,8 +2096,16 @@ components:
         transcripts_highlighted:
           description: Up to 2 highlighted segments of the audio transcript of this episode.
           items:
-            example: |
-              00:21:27  when Disney bought the <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> franchise from George Lucas they had a plan lots of <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> movies new <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> movies every month another one was just released while I was talking
+            example: >
+              00:21:27  when Disney bought the <span
+              class="ln-search-highlight">Star</span> <span
+              class="ln-search-highlight">Wars</span> franchise from George
+              Lucas they had a plan lots of <span
+              class="ln-search-highlight">Star</span> <span
+              class="ln-search-highlight">Wars</span> movies new <span
+              class="ln-search-highlight">Star</span> <span
+              class="ln-search-highlight">Wars</span> movies every month another
+              one was just released while I was talking
             type: string
           type: array
       type: object
@@ -1965,8 +2167,9 @@ components:
           $ref: "#/components/schemas/EpisodeNameField"
       type: object
     EpisodeThumbnailField:
-      description: |
+      description: >
         Thumbnail image (300x300) url for this episode.
+
         If an episode doesn't have its own image, then this field would be the url of the podcast artwork thumbnail image.
       example: https://cdn-images-1.listennotes.com/podcasts/exponent-ben-thompson-james-allworth-OaJSjb4xQv3.300x300.jpg
       type: string
@@ -2134,8 +2337,10 @@ components:
           example: 1457514703,1386234384,659155419
           type: string
         next_episode_pub_date:
-          description: |
-            For latest episodes pagination. It's the value of **next_episode_pub_date** from the response of last request. If not specified, just return latest 10 episodes.
+          description: >
+            For latest episodes pagination. It's the value of
+            **next_episode_pub_date** from the response of last request. If not
+            specified, just return latest 10 episodes.
           example: 1557394247000
           type: integer
         rsses:
@@ -2144,8 +2349,9 @@ components:
           type: string
         show_latest_episodes:
           default: 0
-          description: |
-            Whether or not to fetch up to 10 latest episodes from these podcasts, sorted by pub_date. 1 is yes, and 0 is no.
+          description: >
+            Whether or not to fetch up to 10 latest episodes from these
+            podcasts, sorted by pub_date. 1 is yes, and 0 is no.
           enum:
             - 0
             - 1
@@ -2155,8 +2361,10 @@ components:
     GetPodcastsInBatchResponse:
       properties:
         latest_episodes:
-          description: |
-            Up to 10 latest episodes from these podcasts, sorted by **pub_date**. This field shows up only when **show_latest_episodes** is 1.
+          description: >
+            Up to 10 latest episodes from these podcasts, sorted by
+            **pub_date**. This field shows up only when **show_latest_episodes**
+            is 1.
           items:
             $ref: "#/components/schemas/EpisodeSimple"
           type: array
@@ -2180,18 +2388,23 @@ components:
         - regions
       type: object
     ImageField:
-      description: |
-        Image url for this podcast's artwork. If you are using PRO/ENTERPRISE plan, then it's
+      description: >
+        Image url for this podcast's artwork. If you are using
+        PRO/ENTERPRISE plan, then it's
+
         a high resolution image (1400x1400). If you are using FREE plan, then it's the same as **thumbnail**,
+
         low resolution image (300x300).
       example: https://cdn-images-1.listennotes.com/podcasts/exponent-ben-thompson-james-allworth-OaJSjb4xQv3.1400x1400.jpg
       type: string
     IsClaimedField:
-      description: Whether this podcast is claimed by its producer on [ListenNotes.com](https://www.ListenNotes.com).
+      description: Whether this podcast is claimed by its producer on
+        [ListenNotes.com](https://www.ListenNotes.com).
       example: true
       type: boolean
     LanguageField:
-      description: The language of this podcast. You can get all supported languages from `GET /languages`.
+      description: The language of this podcast. You can get all supported languages
+        from `GET /languages`.
       example: English
       type: string
     LatestPubDateMsField:
@@ -2203,24 +2416,31 @@ components:
       example: https://www.npr.org/2020/01/22/798532179/soleimanis-iran
       type: string
     ListenScoreField:
-      description: |
-        The estimated popularity score of a podcast compared to all other rss-based public podcasts in the world on a scale from 0 to 100.
+      description: >
+        The estimated popularity score of a podcast compared to all other
+        rss-based public podcasts in the world on a scale from 0 to 100.
+
         If the score is not available, it'll be null. Learn more at listennotes.com/listen-score
       example: 81
       type: integer
     ListenScoreGlobalRankField:
-      description: |
-        The estimated popularity ranking of a podcast compared to all other rss-based public podcasts in the world.
+      description: >
+        The estimated popularity ranking of a podcast compared to all other
+        rss-based public podcasts in the world.
+
         For example, if the value is 0.5%, then this podcast is one of the top 0.5% most popular shows out of all podcasts globally, ranked by Listen Score.
+
         If the ranking is not available, it'll be null. Learn more at listennotes.com/listen-score
       example: 0.5%
       type: string
     MaybeAudioInvalidField:
-      description: Whether or not this episode's audio is invalid. Podcasters may delete the original audio.
+      description: Whether or not this episode's audio is invalid. Podcasters may
+        delete the original audio.
       example: false
       type: boolean
     NextEpisodePubDateField:
-      description: Passed to the **next_episode_pub_date** parameter of `GET /podcasts/{id}` to paginate through episodes of that podcast.
+      description: Passed to the **next_episode_pub_date** parameter of `GET
+        /podcasts/{id}` to paginate through episodes of that podcast.
       example: 1470667902000
       type: integer
     PlaylistDescriptionField:
@@ -2257,9 +2477,11 @@ components:
           example: This is a good episode.
           type: string
         type:
-          description: |
+          description: >
             The type of this playlist item.
+
             If a playlist is **episode_list**, then an item could be either **episode** or **custom_audio**.
+
             If it's **podcast_list**, then an item can only be **podcast**.
           enum:
             - episode
@@ -2269,8 +2491,9 @@ components:
           type: string
       type: object
     PlaylistLastTimestampMsField:
-      description: |
-        Passed to the **last_timestamp_ms** parameter of `GET /playlists/{id}` to paginate through items of that playlist.
+      description: >
+        Passed to the **last_timestamp_ms** parameter of `GET
+        /playlists/{id}` to paginate through items of that playlist.
       example: 1595641092907
       type: integer
     PlaylistListennotesUrlField:
@@ -2307,8 +2530,9 @@ components:
           example: 325
           type: integer
         type:
-          description: |
-            The type of this playlist, which should be either **episode_list** or **podcast_list**.
+          description: >
+            The type of this playlist, which should be either **episode_list**
+            or **podcast_list**.
           enum:
             - episode_list
             - podcast_list
@@ -2384,7 +2608,12 @@ components:
       type: object
     PodcastDescriptionField:
       description: Html of this episode's full description
-      example: <p>The Star Wars 7x7 Podcast is Rebel-rousing fun for everyday Jedi, between 7 and 14 minutes a day, 7 days a week. Join host Allen Voivod for Star Wars news, history, interviews, trivia, and deep dives into the Star Wars story as told in movies, books, comics, games, cartoons, and more. Subscribe now for your daily dose of Star Wars joy. It's destiny unleashed!</p>
+      example: <p>The Star Wars 7x7 Podcast is Rebel-rousing fun for everyday Jedi,
+        between 7 and 14 minutes a day, 7 days a week. Join host Allen Voivod
+        for Star Wars news, history, interviews, trivia, and deep dives into the
+        Star Wars story as told in movies, books, comics, games, cartoons, and
+        more. Subscribe now for your daily dose of Star Wars joy. It's destiny
+        unleashed!</p>
       type: string
     PodcastExtraField:
       properties:
@@ -2494,7 +2723,8 @@ components:
       example: 4d3fe717742d4963a85562e9f84d8c79
       type: string
     PodcastLNUrlField:
-      description: The url of this podcast on [ListenNotes.com](https://www.ListenNotes.com).
+      description: The url of this podcast on
+        [ListenNotes.com](https://www.ListenNotes.com).
       example: https://www.listennotes.com/c/4d3fe717742d4963a85562e9f84d8c79/
       type: string
     PodcastLookingForField:
@@ -2504,7 +2734,8 @@ components:
           example: true
           type: boolean
         cross_promotion:
-          description: Whether this podcast is looking for cross promotion opportunities with other podcasts.
+          description: Whether this podcast is looking for cross promotion opportunities
+            with other podcasts.
           example: true
           type: boolean
         guests:
@@ -2544,13 +2775,24 @@ components:
       properties:
         description_highlighted:
           description: Highlighted segment of podcast description
-          example: |
-            ...Join host Allen Voivod for <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> news, history, interviews, trivia, and deep dives into the <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> story as told in movies, books, comics, games, cartoons, and more.
+          example: >
+            ...Join host Allen Voivod for <span
+            class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> news, history, interviews,
+            trivia, and deep dives into the <span
+            class="ln-search-highlight">Star</span> <span
+            class="ln-search-highlight">Wars</span> story as told in movies,
+            books, comics, games, cartoons, and more.
           type: string
         description_original:
           description: Plain text of podcast description
-          example: |
-            The Star Wars 7x7 Podcast is Rebel-rousing fun for everyday Jedi, between 7 and 14 minutes a day, 7 days a week. Join host Allen Voivod for Star Wars news, history, interviews, trivia, and deep dives into the Star Wars story as told in movies, books, comics, games, cartoons, and more. Subscribe now for your daily dose of Star Wars joy. It's destiny unleashed! #SW7x7
+          example: >
+            The Star Wars 7x7 Podcast is Rebel-rousing fun for everyday Jedi,
+            between 7 and 14 minutes a day, 7 days a week. Join host Allen
+            Voivod for Star Wars news, history, interviews, trivia, and deep
+            dives into the Star Wars story as told in movies, books, comics,
+            games, cartoons, and more. Subscribe now for your daily dose of Star
+            Wars joy. It's destiny unleashed! #SW7x7
           type: string
         earliest_pub_date_ms:
           $ref: "#/components/schemas/EarliestPubDateMsField"
@@ -2644,7 +2886,10 @@ components:
       type: object
     PodcastTitleHighlightedField:
       description: Highlighted segment of podcast name.
-      example: <span class=\"ln-search-highlight\">Star</span> <span class=\"ln-search-highlight\">Wars</span> 7x7 | <span class=\"ln-search-highlight\">Star</span> <span class=\"ln-search-highlight\">Wars</span> News, Interviews, and More!
+      example: <span class=\"ln-search-highlight\">Star</span> <span
+        class=\"ln-search-highlight\">Wars</span> 7x7 | <span
+        class=\"ln-search-highlight\">Star</span> <span
+        class=\"ln-search-highlight\">Wars</span> News, Interviews, and More!
       type: string
     PodcastTitleOriginalField:
       description: Plain text of podcast name.
@@ -2682,14 +2927,16 @@ components:
       type: string
     PublisherHighlightedField:
       description: Highlighted segment of this podcast's publisher name.
-      example: <span class=\"ln-search-highlight\">Star</span> <span class=\"ln-search-highlight\">Wars</span> Daily, by Allen Voivod
+      example: <span class=\"ln-search-highlight\">Star</span> <span
+        class=\"ln-search-highlight\">Wars</span> Daily, by Allen Voivod
       type: string
     PublisherOriginalField:
       description: Plain text of this podcast's publisher name.
       example: Star Wars Daily, by Allen Voivod
       type: string
     RssField:
-      description: RSS url of this podcast. This field is available only in the PRO/ENTERPRISE plan.
+      description: RSS url of this podcast. This field is available only in the
+        PRO/ENTERPRISE plan.
       example: https://sw7x7.libsyn.com/rss
       type: string
     SearchResponse:
@@ -2699,7 +2946,8 @@ components:
           example: 10
           type: integer
         next_offset:
-          description: Pass this value to the **offset** parameter to do pagination of search results.
+          description: Pass this value to the **offset** parameter to do pagination of
+            search results.
           example: 10
           type: integer
         results:
@@ -2722,7 +2970,8 @@ components:
     SubmitPodcastForm:
       properties:
         email:
-          description: A valid email address. If **email** is specified, then we'll notify this email address once the podcast is accepted.
+          description: A valid email address. If **email** is specified, then we'll notify
+            this email address once the podcast is accepted.
           example: hello@example.com
           type: string
         rss:
@@ -2756,19 +3005,23 @@ components:
       example: 324
       type: integer
     TranscriptField:
-      description: The transcript of this episode, in plain text (with the newline character \n). If there's not transcript, it is null. This field is available only in the PRO/ENTERPRISE plan.
+      description: The transcript of this episode, in plain text (with the newline
+        character \n). If there's not transcript, it is null. This field is
+        available only in the PRO/ENTERPRISE plan.
       example: |
         00:00:07 Welcome to this podcast...
       type: string
     TypeaheadResponse:
       properties:
         genres:
-          description: Genre suggestions. It'll show up when the **show_genres** parameter is *1*.
+          description: Genre suggestions. It'll show up when the **show_genres** parameter
+            is *1*.
           items:
             $ref: "#/components/schemas/Genre"
           type: array
         podcasts:
-          description: Podcast suggestions. It'll show up when the **show_podcasts** parameter is 1.
+          description: Podcast suggestions. It'll show up when the **show_podcasts**
+            parameter is 1.
           items:
             $ref: "#/components/schemas/PodcastTypeaheadResult"
           type: array

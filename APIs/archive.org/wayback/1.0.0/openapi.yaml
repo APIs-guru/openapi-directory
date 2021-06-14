@@ -75,16 +75,22 @@ paths:
 components:
   parameters:
     callback:
-      description: |
-        Specifies a JavaScript function func, for a JSON-P response. When provided, results are wrapped as `callback(data)`, and the returned MIME type is application/javascript. This causes the caller to automatically run the func with the JSON results as its argument.
+      description: >
+        Specifies a JavaScript function func, for a JSON-P response. When
+        provided, results are wrapped as `callback(data)`, and the returned MIME
+        type is application/javascript. This causes the caller to automatically
+        run the func with the JSON results as its argument.
       in: query
       name: callback
       required: false
       schema:
         type: string
     closest:
-      description: |
-        The direction specifies whether to match archived timestamps that are before the provided one, after, or the default either (closest in either direction). Must be before, after, or either. May be overidden by individual requests.
+      description: >
+        The direction specifies whether to match archived timestamps that
+        are before the provided one, after, or the default either (closest in
+        either direction). Must be before, after, or either. May be overidden by
+        individual requests.
       in: query
       name: closest
       required: false
@@ -96,8 +102,9 @@ components:
           - after
         type: string
     status_code:
-      description: |
-        HTTP status codes to filter by. Only results with these codes will be returned
+      description: >
+        HTTP status codes to filter by. Only results with these codes will
+        be returned
       explode: true
       in: query
       name: status_code
@@ -155,16 +162,19 @@ components:
           - 511
         type: integer
     tag:
-      description: |
-        The optional tag can have any value, and is returned with the results; it can be used to help collate input and output values.
+      description: >
+        The optional tag can have any value, and is returned with the
+        results; it can be used to help collate input and output values.
       in: query
       name: tag
       required: false
       schema:
         type: string
     timeout:
-      description: |
-        Timeout is the maximum number of seconds to wait for the availability API to get its underlying results from the CDX server. The default value is 5.0.
+      description: >
+        Timeout is the maximum number of seconds to wait for the
+        availability API to get its underlying results from the CDX server. The
+        default value is 5.0.
       in: query
       name: timeout
       required: false
@@ -172,8 +182,9 @@ components:
         default: 5
         type: number
     timestamp:
-      description: |
-        Timestamp requested in ISO 8601 format. The following formats are acceptable:
+      description: >
+        Timestamp requested in ISO 8601 format. The following formats are
+        acceptable:
          - YYYY
          - YYYY-MM
          - YYYY-MM-DD
@@ -231,7 +242,8 @@ components:
           description: The user-supplied tag for use in collation
           type: string
         timestamp:
-          description: The _intepreted_ timestamp requested, in [RFC 3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format
+          description: The _intepreted_ timestamp requested, in [RFC
+            3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format
           format: dateTime
           type: string
         url:
@@ -255,8 +267,10 @@ components:
           description: A user-supplied tag, used for collation
           type: string
         timestamp:
-          description: |
-            Timestamp requested in ISO 8601 format. The following formats are acceptable: - YYYY - YYYY-MM - YYYY-MM-DD - YYYY-MM-DDTHH:mm:SSz - YYYY-MM-DD:HH:mm+00:00
+          description: >
+            Timestamp requested in ISO 8601 format. The following formats are
+            acceptable: - YYYY - YYYY-MM - YYYY-MM-DD - YYYY-MM-DDTHH:mm:SSz -
+            YYYY-MM-DD:HH:mm+00:00
           type: string
         url:
           description: The URL requested
@@ -301,7 +315,8 @@ components:
           description: The HTTP status of the URL requested
           type: integer
         timestamp:
-          description: The timestamp of the snapshot in [RFC 3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format
+          description: The timestamp of the snapshot in [RFC
+            3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format
           format: dateTime
           type: string
         url:

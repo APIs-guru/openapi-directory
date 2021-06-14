@@ -2,7 +2,8 @@ openapi: 3.0.0
 servers:
   - url: /story
 info:
-  description: This API is the main entry point for creating, editing and publishing analytics throught the Presalytics API
+  description: This API is the main entry point for creating, editing and
+    publishing analytics throught the Presalytics API
   title: Story
   version: 0.3.1
   x-apisguru-categories:
@@ -25,7 +26,8 @@ tags:
 paths:
   /:
     get:
-      description: Returns a list of stories for this user identifie via the access token presentated to the api
+      description: Returns a list of stories for this user identifie via the access
+        token presentated to the api
       operationId: story_get
       parameters:
         - $ref: "#/components/parameters/include_relationships"
@@ -73,7 +75,9 @@ paths:
         - Story
   /cache:
     post:
-      description: An endpoint for Presalytics Renderers to cache html subdocuments for subsequent retrieval by the browser.  Documents Are retrieved via token expire after 1 minute.
+      description: An endpoint for Presalytics Renderers to cache html subdocuments
+        for subsequent retrieval by the browser.  Documents Are retrieved via
+        token expire after 1 minute.
       operationId: cache_post
       requestBody:
         content:
@@ -96,7 +100,8 @@ paths:
         - Cache
   "/cache/{nonce}":
     get:
-      description: An endpoint for broswer retreive html documents that were cached durin the rendering process via a nonce (token)
+      description: An endpoint for broswer retreive html documents that were cached
+        durin the rendering process via a nonce (token)
       operationId: cache_nonce_get
       parameters:
         - $ref: "#/components/parameters/nonce"
@@ -120,7 +125,8 @@ paths:
         - Cache
   /collaborators:
     post:
-      description: Allows for bulk updates on collaborator metadata.  Restricted to internal admins
+      description: Allows for bulk updates on collaborator metadata.  Restricted to
+        internal admins
       operationId: collaborators_post
       requestBody:
         content:
@@ -206,7 +212,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/file_upload"
-        description: A json-formatted object that includes a base64 encoded file (file encoded utf-8)
+        description: A json-formatted object that includes a base64 encoded file (file
+          encoded utf-8)
       responses:
         "200":
           $ref: "#/components/responses/story"
@@ -220,7 +227,8 @@ paths:
       x-operationName: upload-file-json
   /no_tags_spec:
     get:
-      description: json-formatted version of this spec with the tags removed to help with codegen processes
+      description: json-formatted version of this spec with the tags removed to help
+        with codegen processes
       operationId: spec_no_tags
       responses:
         "200":
@@ -341,7 +349,8 @@ paths:
         content:
           application/json:
             schema:
-              description: A page view required a page number from the story outline to be created
+              description: A page view required a page number from the story outline to be
+                created
               properties:
                 activeMSecs:
                   type: integer
@@ -486,7 +495,8 @@ paths:
         - Story
   "/{id}/analytics":
     get:
-      description: returns an html document containing session and event metrics for the story
+      description: returns an html document containing session and event metrics for
+        the story
       operationId: story_id_analytics
       parameters:
         - $ref: "#/components/parameters/id"
@@ -570,12 +580,17 @@ paths:
         - Story Collaborators
   "/{id}/collaborators/authorize/{story_collaborator_userid}/{permissiontype}":
     get:
-      description: Check whether user have certain types of permissions.  Use http status codes to understand if permission is granted - 204 = Granted, 403 = Forbidden
+      description: Check whether user have certain types of permissions.  Use http
+        status codes to understand if permission is granted - 204 = Granted, 403
+        = Forbidden
       operationId: story_id_collaborators_userid_permissiontype_get
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/story_collaborator_userid"
-        - description: the type of permission requested.  can be a permission_type object name (e.g., owner, editor, create, viewer, admin) or a permission type field (e.g., can_edit, can_view, can_add_collaborators, can_delete)
+        - description: the type of permission requested.  can be a permission_type object
+            name (e.g., owner, editor, create, viewer, admin) or a permission
+            type field (e.g., can_edit, can_view, can_add_collaborators,
+            can_delete)
           in: path
           name: permissiontype
           required: true
@@ -645,7 +660,8 @@ paths:
       tags:
         - Story Collaborators
     get:
-      description: Data to help you understand the access rights of a particular collaborator on this story
+      description: Data to help you understand the access rights of a particular
+        collaborator on this story
       operationId: story_id_collaborators_userid_get
       parameters:
         - $ref: "#/components/parameters/id"
@@ -800,7 +816,8 @@ paths:
         - Story
       x-operationName: download
     get:
-      description: Redtreives updated story as open office xml file (e.g., .pptx, .docx, .xlsx)
+      description: Redtreives updated story as open office xml file (e.g., .pptx,
+        .docx, .xlsx)
       operationId: story_id_file_ooxmlautomationid_get
       parameters:
         - $ref: "#/components/parameters/id"
@@ -934,7 +951,8 @@ paths:
       x-operationName: postOutline
   "/{id}/public/":
     get:
-      description: returns an html document containing a reveal.js epresentation of the story, if the story if set to is_public = True
+      description: returns an html document containing a reveal.js epresentation of
+        the story, if the story if set to is_public = True
       operationId: story_id_public
       parameters:
         - $ref: "#/components/parameters/id"
@@ -957,7 +975,8 @@ paths:
       x-operationName: getPublic
   "/{id}/reveal":
     get:
-      description: returns an html document containing a reveal.js epresentation of the story
+      description: returns an html document containing a reveal.js epresentation of
+        the story
       operationId: story_id_reveal
       parameters:
         - $ref: "#/components/parameters/id"
@@ -1043,7 +1062,8 @@ paths:
       x-operationName: create-session
   "/{id}/status":
     get:
-      description: Returns code indicating whether story has active running background and is healthy (e.g., the latest outline is valid)
+      description: Returns code indicating whether story has active running background
+        and is healthy (e.g., the latest outline is valid)
       operationId: story_id_status_get
       parameters:
         - $ref: "#/components/parameters/id"
@@ -1072,14 +1092,16 @@ components:
       schema:
         type: string
     figure_id:
-      description: A matplotlib figure id from a MatplotlibResponsiveFigure instance in the Presaltyics Python Library
+      description: A matplotlib figure id from a MatplotlibResponsiveFigure instance
+        in the Presaltyics Python Library
       in: path
       name: figure_id
       required: true
       schema:
         type: string
     full:
-      description: Pull a story object with associated collaborator user, permission, and session data(faster if cached from prior api call)
+      description: Pull a story object with associated collaborator user, permission,
+        and session data(faster if cached from prior api call)
       in: query
       name: full
       required: false
@@ -1094,7 +1116,9 @@ components:
         format: uuid
         type: string
     include_outline:
-      description: Determines whether a repsonse including story objects should include the story outline.  Defaults to true. Useful for speeding up processing times.
+      description: Determines whether a repsonse including story objects should
+        include the story outline.  Defaults to true. Useful for speeding up
+        processing times.
       in: query
       name: include_outline
       required: false
@@ -1116,7 +1140,8 @@ components:
         format: uuid
         type: string
     obsolete_id:
-      description: A primary key pointing to an obsolete item in the story. Item type is context-dependent
+      description: A primary key pointing to an obsolete item in the story. Item type
+        is context-dependent
       in: query
       name: obsolete_id
       required: false
@@ -1146,7 +1171,8 @@ components:
       schema:
         type: boolean
     replace_existing:
-      description: Indicates whether a put or post method would replace the existing contents
+      description: Indicates whether a put or post method would replace the existing
+        contents
       in: query
       name: replace_existing
       required: false
@@ -1290,7 +1316,8 @@ components:
       title: Cache Post Request body
       type: object
     collaborator_bulk_update_request:
-      description: allows for bulk updating of user_ids and active status based on a lead id or user_id
+      description: allows for bulk updating of user_ids and active status based on a
+        lead id or user_id
       properties:
         active:
           type: boolean
@@ -1380,7 +1407,8 @@ components:
           type: string
       title: Message
     modify_inactive_collaborator:
-      description: Action can be either "delete" or "activate".  Either lead_id or user_id is required.  user_id takes precedence.
+      description: Action can be either "delete" or "activate".  Either lead_id or
+        user_id is required.  user_id takes precedence.
       properties:
         action:
           type: string
@@ -1404,7 +1432,8 @@ components:
               format: uuid
               type: string
           type: object
-      description: A reference to an Ooxml Automation Document from the Presalytics Ooxml Automation API
+      description: A reference to an Ooxml Automation Document from the Presalytics
+        Ooxml Automation API
       title: Ooxml Document
     outline:
       description: story_outline (json object)

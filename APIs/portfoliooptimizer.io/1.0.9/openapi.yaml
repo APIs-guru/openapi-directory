@@ -5,7 +5,8 @@ info:
   contact:
     email: contact@portfoliooptimizer.io
     url: https://portfoliooptimizer.io/contact/
-  description: The Portfolio Optimizer Web API allows to optimize investment portfolios using mathematical algorithms
+  description: The Portfolio Optimizer Web API allows to optimize investment
+    portfolios using mathematical algorithms
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -66,7 +67,10 @@ tags:
 paths:
   /assets/correlation/matrix:
     post:
-      description: Computes the correlation matrix of assets [from their returns](https://docs.portfoliooptimizer.io/#correlation-matrix-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#correlation-matrix-from-covariance-matrix).
+      description: Computes the correlation matrix of assets [from their
+        returns](https://docs.portfoliooptimizer.io/#correlation-matrix-from-returns)
+        or [from their covariance
+        matrix](https://docs.portfoliooptimizer.io/#correlation-matrix-from-covariance-matrix).
       requestBody:
         content:
           application/json:
@@ -135,7 +139,8 @@ paths:
       x-codegen-request-body-name: body
   /assets/correlation/matrix/nearest:
     post:
-      description: Computes the nearest correlation matrix to an approximate correlation matrix.
+      description: Computes the nearest correlation matrix to an approximate
+        correlation matrix.
       requestBody:
         content:
           application/json:
@@ -265,7 +270,12 @@ paths:
       x-codegen-request-body-name: body
   /assets/covariance/matrix:
     post:
-      description: Computes the covariance matrix of assets [from their returns](https://docs.portfoliooptimizer.io/#covariance-matrix-from-returns) or [from their correlation matrix and their volatilities](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-standard-deviations) (i.e., standard deviations) or [from their correlation matrix and their variances](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-variances).
+      description: Computes the covariance matrix of assets [from their
+        returns](https://docs.portfoliooptimizer.io/#covariance-matrix-from-returns)
+        or [from their correlation matrix and their
+        volatilities](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-standard-deviations)
+        (i.e., standard deviations) or [from their correlation matrix and their
+        variances](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-variances).
       requestBody:
         content:
           application/json:
@@ -544,7 +554,12 @@ paths:
       x-codegen-request-body-name: body
   /assets/variances:
     post:
-      description: Computes the variances of assets [from their returns](https://docs.portfoliooptimizer.io/#variances-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#variances-from-covariance-matrix) or [from their volatilities](https://docs.portfoliooptimizer.io/#variances-from-volatilities).
+      description: Computes the variances of assets [from their
+        returns](https://docs.portfoliooptimizer.io/#variances-from-returns) or
+        [from their covariance
+        matrix](https://docs.portfoliooptimizer.io/#variances-from-covariance-matrix)
+        or [from their
+        volatilities](https://docs.portfoliooptimizer.io/#variances-from-volatilities).
       requestBody:
         content:
           application/json:
@@ -672,7 +687,13 @@ paths:
       x-codegen-request-body-name: body
   /assets/volatilities:
     post:
-      description: Computes the volatilities (i.e., standard deviations) of assets [from their returns](https://docs.portfoliooptimizer.io/#volatilities-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#volatilities-from-covariance-matrix) or [from their variances](https://docs.portfoliooptimizer.io/#volatilities-from-variances).
+      description: Computes the volatilities (i.e., standard deviations) of assets
+        [from their
+        returns](https://docs.portfoliooptimizer.io/#volatilities-from-returns)
+        or [from their covariance
+        matrix](https://docs.portfoliooptimizer.io/#volatilities-from-covariance-matrix)
+        or [from their
+        variances](https://docs.portfoliooptimizer.io/#volatilities-from-variances).
       requestBody:
         content:
           application/json:
@@ -752,7 +773,8 @@ paths:
       x-codegen-request-body-name: body
   /assets/volatilities/sample:
     post:
-      description: Computes the sample volatilities (i.e., sample standard deviations) of assets from their returns.
+      description: Computes the sample volatilities (i.e., sample standard deviations)
+        of assets from their returns.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#sample-volatilities-from-returns
       requestBody:
@@ -983,7 +1005,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/drawdowns:
     post:
-      description: Computes the drawdown function - also called the underwater equity curve -, as well as the worst 10 drawdowns of one or several portfolio(s).
+      description: Computes the drawdown function - also called the underwater equity
+        curve -, as well as the worst 10 drawdowns of one or several
+        portfolio(s).
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#portfolio-drawdowns
       requestBody:
@@ -1040,7 +1064,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/mean-variance/efficient-frontier:
     post:
-      description: Computes the (discretized) mean-variance efficient frontier associated to a list of assets.
+      description: Computes the (discretized) mean-variance efficient frontier
+        associated to a list of assets.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#mean-variance-efficient-frontier
       requestBody:
@@ -1144,7 +1169,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/mean-variance/minimum-variance-frontier:
     post:
-      description: Computes the (discretized) mean-variance minimum variance frontier associated to a list of assets.
+      description: Computes the (discretized) mean-variance minimum variance frontier
+        associated to a list of assets.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#mean-variance-minimum-variance-frontier
       requestBody:
@@ -1253,7 +1279,10 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/return:
     post:
-      description: Computes the rate of return of one or several portfolio(s) [from assets](https://docs.portfoliooptimizer.io/#portfolio-return-from-assets) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-return-from-portfolio-values).
+      description: Computes the rate of return of one or several portfolio(s) [from
+        assets](https://docs.portfoliooptimizer.io/#portfolio-return-from-assets)
+        or [from portfolio
+        values](https://docs.portfoliooptimizer.io/#portfolio-return-from-portfolio-values).
       requestBody:
         content:
           application/json:
@@ -1319,7 +1348,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/returns/average:
     post:
-      description: Computes the average return of one or several portfolio(s) [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-average-return-from-portfolio-values).
+      description: Computes the average return of one or several portfolio(s) [from
+        portfolio
+        values](https://docs.portfoliooptimizer.io/#portfolio-average-return-from-portfolio-values).
       requestBody:
         content:
           application/json:
@@ -1359,7 +1390,10 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/sharpe-ratio:
     post:
-      description: Computes the Sharpe ratio of one or several portfolio(s) [from assets](https://docs.portfoliooptimizer.io/#portfolio-sharpe-ratio-from-assets) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-sharpe-ratio-from-portfolio-values).
+      description: Computes the Sharpe ratio of one or several portfolio(s) [from
+        assets](https://docs.portfoliooptimizer.io/#portfolio-sharpe-ratio-from-assets)
+        or [from portfolio
+        values](https://docs.portfoliooptimizer.io/#portfolio-sharpe-ratio-from-portfolio-values).
       requestBody:
         content:
           application/json:
@@ -1437,7 +1471,10 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/volatility:
     post:
-      description: Computes the volatility of one or several portfolio(s) [from assets](https://docs.portfoliooptimizer.io/#portfolio-volatility-from-assets) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-volatility-from-portfolio-values).
+      description: Computes the volatility of one or several portfolio(s) [from
+        assets](https://docs.portfoliooptimizer.io/#portfolio-volatility-from-assets)
+        or [from portfolio
+        values](https://docs.portfoliooptimizer.io/#portfolio-volatility-from-portfolio-values).
       requestBody:
         content:
           application/json:
@@ -1505,7 +1542,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/construction/investable:
     post:
-      description: Computes an investable portfolio as close as possible, in terms of assets weights, to a desired portfolio.
+      description: Computes an investable portfolio as close as possible, in terms of
+        assets weights, to a desired portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#investable-portfolio
       requestBody:
@@ -1531,8 +1569,12 @@ paths:
                   assetsWeights:
                     - 0.2
                     - null
-                    - $ref: "#/paths/~1portfolio~1construction~1investable/post/requestBody/content/application~1json/examples/Example (groups weights)/value/assetsWeights/1"
-                    - $ref: "#/paths/~1portfolio~1construction~1investable/post/requestBody/content/application~1json/examples/Example (groups weights)/value/assetsWeights/1"
+                    - $ref: "#/paths/~1portfolio~1construction~1investable/post/requestBody/content/a\
+                        pplication~1json/examples/Example (groups
+                        weights)/value/assetsWeights/1"
+                    - $ref: "#/paths/~1portfolio~1construction~1investable/post/requestBody/content/a\
+                        pplication~1json/examples/Example (groups
+                        weights)/value/assetsWeights/1"
                   portfolioValue: 10000
               Example (no groups weights):
                 value:
@@ -1622,7 +1664,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/construction/mimicking:
     post:
-      description: Computes a portfolio as close as possible, in terms of portfolio returns, to a benchmark portfolio.
+      description: Computes a portfolio as close as possible, in terms of portfolio
+        returns, to a benchmark portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#mimicking-portfolio
       requestBody:
@@ -1764,7 +1807,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/equal-risk-contributions:
     post:
-      description: Computes the weights of the assets composing an equal risk contributions portfolio.
+      description: Computes the weights of the assets composing an equal risk
+        contributions portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#inverse-volatility-weighted-portfolio
       requestBody:
@@ -1823,7 +1867,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/equal-sharpe-ratio-contributions:
     post:
-      description: Computes the weights of the assets composing an equal Sharpe Ratio contributions portfolio.
+      description: Computes the weights of the assets composing an equal Sharpe Ratio
+        contributions portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#equal-sharpe-ratio-contributions-portfolio
       requestBody:
@@ -1910,7 +1955,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/inverse-variance-weighted:
     post:
-      description: Computes the weights of the assets composing an inverse variance weighted portfolio.
+      description: Computes the weights of the assets composing an inverse variance
+        weighted portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#inverse-variance-weighted-portfolio
       requestBody:
@@ -1950,7 +1996,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/inverse-volatility-weighted:
     post:
-      description: Computes the weights of the assets composing an inverse volatility weighted portfolio.
+      description: Computes the weights of the assets composing an inverse volatility
+        weighted portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#inverse-volatility-weighted-portfolio
       requestBody:
@@ -1990,7 +2037,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/market-capitalization-weighted:
     post:
-      description: Computes the weights of the assets composing a market capitalization weighted portfolio.
+      description: Computes the weights of the assets composing a market
+        capitalization weighted portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#market-capitalization-weighted-portfolio
       requestBody:
@@ -2030,7 +2078,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/maximum-decorrelation:
     post:
-      description: Computes the weights of the assets composing the maximum decorrelation portfolio.
+      description: Computes the weights of the assets composing the maximum
+        decorrelation portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#maximum-decorrelation-portfolio
       requestBody:
@@ -2111,7 +2160,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/maximum-return:
     post:
-      description: Computes the weights of the assets composing the maximum return portfolio.
+      description: Computes the weights of the assets composing the maximum return
+        portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#maximum-return-portfolio
       requestBody:
@@ -2192,7 +2242,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/maximum-sharpe-ratio:
     post:
-      description: Computes the weights of the assets composing the maximum Sharpe Ratio portfolio.
+      description: Computes the weights of the assets composing the maximum Sharpe
+        Ratio portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#maximum-sharpe-ratio-portfolio
       requestBody:
@@ -2277,7 +2328,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/mean-variance:
     post:
-      description: Computes the weights of the assets composing an efficient mean-variance portfolio - that is, a portfolio belonging to the mean-variance efficient frontier.
+      description: Computes the weights of the assets composing an efficient
+        mean-variance portfolio - that is, a portfolio belonging to the
+        mean-variance efficient frontier.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#mean-variance-efficient-portfolio
       requestBody:
@@ -2385,7 +2438,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/minimum-correlation:
     post:
-      description: Computes the weights of the assets composing the minimum correlation portfolio, using the Minimum Correlation Algorithm discovered by David Varadi.
+      description: Computes the weights of the assets composing the minimum
+        correlation portfolio, using the Minimum Correlation Algorithm
+        discovered by David Varadi.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#minimum-correlation-portfolio
       requestBody:
@@ -2443,7 +2498,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/minimum-variance:
     post:
-      description: Computes the weights of the assets composing the minimum variance portfolio.
+      description: Computes the weights of the assets composing the minimum variance
+        portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#minimum-variance-portfolio
       requestBody:
@@ -2528,7 +2584,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/most-diversified:
     post:
-      description: Computes the weights of the assets composing the most diversified portfolio.
+      description: Computes the weights of the assets composing the most diversified
+        portfolio.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#most-diversified-portfolio
       requestBody:
@@ -2603,7 +2660,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/simulation/rebalancing/drift-weight:
     post:
-      description: Simulates the evolution of one or several portfolio(s), the portfolio(s) being never rebalanced (a.k.a. buy and hold).
+      description: Simulates the evolution of one or several portfolio(s), the
+        portfolio(s) being never rebalanced (a.k.a. buy and hold).
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#drift-weight-portfolio-rebalancing
       requestBody:
@@ -2678,7 +2736,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/simulation/rebalancing/fixed-weight:
     post:
-      description: Simulates the evolution of one or several portfolio(s), the portfolio(s) being rebalanced toward fixed weights at the beginning of each time period.
+      description: Simulates the evolution of one or several portfolio(s), the
+        portfolio(s) being rebalanced toward fixed weights at the beginning of
+        each time period.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#fixed-weight-portfolio-rebalancing
       requestBody:
@@ -2753,7 +2813,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/simulation/rebalancing/random-weight:
     post:
-      description: Simulates the evolution of one or several portfolio(s), the portfolio(s) being rebalanced toward random weights at the beginning of each time period.
+      description: Simulates the evolution of one or several portfolio(s), the
+        portfolio(s) being rebalanced toward random weights at the beginning of
+        each time period.
       externalDocs:
         url: https://docs.portfoliooptimizer.io/#random-rebalancing-portfolio-values
       requestBody:

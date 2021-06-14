@@ -8,7 +8,8 @@ info:
   contact:
     email: michael.binzen@deutschebahn.com
     name: Michael Binzen
-  description: A RESTful webservice to retrieve data about the operational state of public elevators and escalators in german railway stations.
+  description: A RESTful webservice to retrieve data about the operational state
+    of public elevators and escalators in german railway stations.
   license:
     name: CC-BY 4.0
     url: https://creativecommons.org/licenses/by/4.0/
@@ -41,7 +42,8 @@ security:
 paths:
   /facilities:
     get:
-      description: Access to public facilities (escalators and elevators) in railway stations
+      description: Access to public facilities (escalators and elevators) in railway
+        stations
       operationId: findFacilities
       parameters:
         - collectionFormat: csv
@@ -95,7 +97,10 @@ paths:
           required: false
           type: integer
         - collectionFormat: csv
-          description: "Geo coordinate rectangle in WGS84-format to filter facilities by geographical position. Parameters must be 4 numbers exactly as follows: longitudeWest, latitudeSouth, longitudeEast, latitudeNorth."
+          description: "Geo coordinate rectangle in WGS84-format to filter facilities by
+            geographical position. Parameters must be 4 numbers exactly as
+            follows: longitudeWest, latitudeSouth, longitudeEast,
+            latitudeNorth."
           in: query
           items:
             type: string
@@ -155,7 +160,8 @@ paths:
       x-throttling-tier: Unlimited
   "/stations/{stationnumber}":
     get:
-      description: Returns information about a station (and its corresponding facilities) identified by a stationnumber.
+      description: Returns information about a station (and its corresponding
+        facilities) identified by a stationnumber.
       operationId: findStationByStationNumber
       parameters:
         - description: Number of the station to fetch.
@@ -184,7 +190,8 @@ paths:
       x-throttling-tier: Unlimited
 definitions:
   facility:
-    description: A facility provided by this API is either a public elevator or escalator located at a German railway station.
+    description: A facility provided by this API is either a public elevator or
+      escalator located at a German railway station.
     properties:
       description:
         description: Textual description of the facility.

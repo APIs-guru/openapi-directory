@@ -6,7 +6,8 @@ basePath: /v2.0/{apikey}
 info:
   contact:
     x-twitter: faretrotter
-  description: Multimodal travel API to return modes of transportation between cities and points of interest.
+  description: Multimodal travel API to return modes of transportation between
+    cities and points of interest.
   title: Faretrotter Travel API
   version: "2.0"
   x-apisguru-categories:
@@ -35,7 +36,8 @@ paths:
           schema:
             $ref: "#/definitions/PlaceResponse"
         "400":
-          description: Parameters did not match the endpoint requirements. Check that all required fields are present and spelt correctly.
+          description: Parameters did not match the endpoint requirements. Check that all
+            required fields are present and spelt correctly.
         "401":
           description: Authentication Failed.
         "402":
@@ -81,7 +83,8 @@ paths:
           schema:
             $ref: "#/definitions/RoutesResponse"
         "400":
-          description: Parameters did not match the endpoint requirements. Check that all required fields are present and spelt correctly.
+          description: Parameters did not match the endpoint requirements. Check that all
+            required fields are present and spelt correctly.
         "401":
           description: Authentication Failed.
         "402":

@@ -11,7 +11,9 @@ info:
     url: https://www.motaword.com/developer/register
   x-apisguru-categories:
     - text
-  x-cli-description: Use MotaWord CLI to interact with your MotaWord account in many ways to manage your translation and localization needs. Visit motaword.com/developer for details.
+  x-cli-description: Use MotaWord CLI to interact with your MotaWord account in
+    many ways to manage your translation and localization needs. Visit
+    motaword.com/developer for details.
   x-cli-name: motaword
   x-logo:
     url: https://dentycj2qhk72.cloudfront.net/new/images/new_logo_horizontal.png
@@ -83,13 +85,15 @@ paths:
     get:
       operationId: getBlogPosts
       parameters:
-        - description: Article language, default `en`. When no blog article is available and `fallback=true` is specified, it falls back to `en`.
+        - description: Article language, default `en`. When no blog article is available
+            and `fallback=true` is specified, it falls back to `en`.
           in: query
           name: locale
           required: false
           schema:
             type: string
-        - description: When `true`, and no article is found in the locale, it falls back to `locale=en`.
+        - description: When `true`, and no article is found in the locale, it falls back
+            to `locale=en`.
           in: query
           name: fallback
           required: false
@@ -274,7 +278,8 @@ paths:
             schema:
               properties:
                 contents:
-                  description: Simple list of strings to be translated. You can also choose to upload files instead of strings.
+                  description: Simple list of strings to be translated. You can also choose to
+                    upload files instead of strings.
                   items:
                     type: string
                   type: array
@@ -284,7 +289,8 @@ paths:
                     $ref: "#/components/schemas/FileAsData"
                   type: array
                 meta:
-                  description: Free-form meta data to attach to your instant translation request. This can be used in statistics and analytical dashboards.
+                  description: Free-form meta data to attach to your instant translation request.
+                    This can be used in statistics and analytical dashboards.
                   type: object
               type: object
       responses:
@@ -298,7 +304,8 @@ paths:
                       - $ref: "#/components/schemas/InstantContentsTranslationResult"
                       - $ref: "#/components/schemas/InstantFilesTranslationResult"
                 type: object
-          description: Instant translation result. It may return a list of translated strings, or a list of translated files.
+          description: Instant translation result. It may return a list of translated
+            strings, or a list of translated files.
       summary: Instantly translate your content with your existing TM and MT resources.
       tags:
         - ContinuousProject
@@ -320,7 +327,8 @@ paths:
       x-cli-cmd-group: corporates
   /corporate/permissions:
     get:
-      description: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      description: Get a list of available permissions for this corporate account.
+        They are used when assigning permissions to corporate users.
       operationId: getAvailableCorporatePermissions
       responses:
         "200":
@@ -329,7 +337,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PermissionList"
           description: List of permission strings
-      summary: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      summary: Get a list of available permissions for this corporate account. They
+        are used when assigning permissions to corporate users.
       tags:
         - Corporate
       x-cli-cmd-group: corporates
@@ -429,7 +438,8 @@ paths:
     x-internal: true
   "/corporates/{corporateId}/permissions":
     get:
-      description: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      description: Get a list of available permissions for this corporate account.
+        They are used when assigning permissions to corporate users.
       operationId: getAvailableCorporatePermissionsById
       parameters:
         - description: Corporate ID
@@ -446,7 +456,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/PermissionList"
           description: List of permission strings
-      summary: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      summary: Get a list of available permissions for this corporate account. They
+        are used when assigning permissions to corporate users.
       tags:
         - Corporate
       x-cli-cmd-group: corporates
@@ -583,7 +594,8 @@ paths:
               - STYLE_GUIDES
               - GLOSSARIES
             type: string
-        - description: searches in source language of documents, in source and target languages of document's quote
+        - description: searches in source language of documents, in source and target
+            languages of document's quote
           in: query
           name: language_code
           required: false
@@ -620,7 +632,10 @@ paths:
           schema:
             $ref: "#/components/schemas/ListOrderType"
             default: desc
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch
+            temporary preview URLs for Box.com or native PDF. This is NOT
+            recommended to be used with list calls. Only use with[]=preview for
+            single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -668,7 +683,8 @@ paths:
     x-internal: true
   "/documents/{documentId}/similars":
     get:
-      description: Find documents similar to this document. Optionally, include translation information.
+      description: Find documents similar to this document. Optionally, include
+        translation information.
       operationId: getSimilarDocuments
       parameters:
         - description: Document ID
@@ -686,7 +702,10 @@ paths:
             default: 1
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch
+            temporary preview URLs for Box.com or native PDF. This is NOT
+            recommended to be used with list calls. Only use with[]=preview for
+            single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -711,7 +730,8 @@ paths:
     x-internal: true
   "/documents/{documentId}/use_as_draft":
     post:
-      description: Use the translation of given source manual document as manual draft source for the given target document.
+      description: Use the translation of given source manual document as manual draft
+        source for the given target document.
       operationId: useAsDraft
       parameters:
         - description: Document ID
@@ -733,7 +753,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/OperationStatus"
           description: Operation status
-      summary: Use the translation of given source manual document as manual draft source for the given target document.
+      summary: Use the translation of given source manual document as manual draft
+        source for the given target document.
       tags:
         - Document
       x-cli-cmd-group: documents
@@ -805,14 +826,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.
+      summary: Returns your vendor earnings. Includes real-time earnings from ongoing
+        projects, and fixed earnings from completed projects. Also includes
+        total earnings and string edits.
       tags:
         - User
       x-cli-cmd-group: users
   /formats:
     get:
-      description: |
-        Get a list of supported formats for documents, style guides and extensions.
+      description: >
+        Get a list of supported formats for documents, style guides and
+        extensions.
       operationId: getFormats
       responses:
         "200":
@@ -852,7 +876,8 @@ paths:
       x-cli-cmd-group: users
   /glossary:
     get:
-      description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers.
+      description: Download your corporate account's global glossary. This endpoint is
+        available only for corporate account customers.
       operationId: downloadGlobalGlossary
       responses:
         "200":
@@ -872,7 +897,8 @@ paths:
         - Glossary
       x-cli-cmd-group: glossaries
     post:
-      description: Update your corporate account's global glossary. This endpoint is available only for corporate account customers.
+      description: Update your corporate account's global glossary. This endpoint is
+        available only for corporate account customers.
       operationId: updateGlobalGlossary
       requestBody:
         content:
@@ -985,7 +1011,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Log user's current location. This data is used in our Intelligent Project Manager for various data analysis, including project prioritization for vendors and account validation.
+      summary: Log user's current location. This data is used in our Intelligent
+        Project Manager for various data analysis, including project
+        prioritization for vendors and account validation.
       tags:
         - User
       x-cli-cmd-group: users
@@ -1173,7 +1201,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Update user password. Password should contain at least one uppercase, lowercase character and one number
+      summary: Update user password. Password should contain at least one uppercase,
+        lowercase character and one number
       tags:
         - User
       x-cli-cmd-group: users
@@ -1186,7 +1215,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PaymentInfo"
-          description: Returns billing and saved card information for user, and their corporate if present.
+          description: Returns billing and saved card information for user, and their
+            corporate if present.
         "404":
           content:
             application/json:
@@ -1291,14 +1321,16 @@ paths:
             default: 10
             format: int64
             type: integer
-        - description: Filter projects by status. Accepts multiple statuses. Possible values 'pending', 'started', 'completed'
+        - description: Filter projects by status. Accepts multiple statuses. Possible
+            values 'pending', 'started', 'completed'
           in: query
           name: status[]
           required: false
           schema:
             items:
               $ref: "#/components/schemas/ProjectStatus"
-              description: progress-related project status enums are not supported, such as "translated", "proofread".
+              description: progress-related project status enums are not supported, such as
+                "translated", "proofread".
             type: array
         - deprecated: true
           description: deprecated. use `status[]` param.
@@ -1361,18 +1393,26 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+                  description: Optional. If you provide a callback URL, we will send POST
+                    callbacks when the status of the current project is changed.
+                    Possible status changes are, 'translated', 'proofread',
+                    'completed'.
                   type: string
                 coupon_code:
                   description: Coupon code to redeem
                   type: string
                 custom:
-                  description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value.
+                  description: Optional. This is a consistent custom data parameter that will be
+                    given to you in the response across every request of this
+                    project model. Values should be provided like this,
+                    custom[my_key] = my_value.
                   items:
                     type: string
                   type: array
                 "documents[]":
-                  description: Optional. You can add as many files as you want in documents[] parameter. Or you add your documents later in separate calls.
+                  description: Optional. You can add as many files as you want in documents[]
+                    parameter. Or you add your documents later in separate
+                    calls.
                   format: binary
                   type: string
                 "glossaries[]":
@@ -1382,7 +1422,9 @@ paths:
                 source_language:
                   type: string
                 "styleguides[]":
-                  description: Optional. You can add as many files as you want in styleguides[] parameter. Or you add your style guides later in separate calls.
+                  description: Optional. You can add as many files as you want in styleguides[]
+                    parameter. Or you add your style guides later in separate
+                    calls.
                   format: binary
                   type: string
                 "target_languages[]":
@@ -1408,7 +1450,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
+          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat
+            UnsupportedGlossaryFormat
         "406":
           content:
             application/json:
@@ -1473,7 +1516,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Return only projects that have been completed. When `true`, this makes `joined` true as well.
+        - description: Return only projects that have been completed. When `true`, this
+            makes `joined` true as well.
           in: query
           name: completed
           required: false
@@ -1550,7 +1594,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Include detailed information. Possible values 'client', 'vendor', 'score'
+        - description: Include detailed information. Possible values 'client', 'vendor',
+            'score'
           in: query
           name: with[]
           required: false
@@ -1596,13 +1641,20 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+                  description: Optional. If you provide a callback URL, we will send POST
+                    callbacks when the status of the current project is changed.
+                    Possible status changes are, 'translated', 'proofread',
+                    'completed'.
                   type: string
                 coupon_code:
                   description: Coupon code to redeem
                   type: string
                 custom:
-                  description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value. If you previously provided one, it will be replaced.
+                  description: Optional. This is a consistent custom data parameter that will be
+                    given to you in the response across every request of this
+                    project model. Values should be provided like this,
+                    custom[my_key] = my_value. If you previously provided one,
+                    it will be replaced.
                   items:
                     type: string
                   type: array
@@ -1743,7 +1795,9 @@ paths:
       x-cli-cmd-group: projects
   "/projects/{id}/download":
     get:
-      description: Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
+      description: Download the latest translation package. You must have given a
+        /package call beforehand and wait until the packaging status is
+        'completed'.
       operationId: download
       parameters:
         - description: Project ID
@@ -1760,7 +1814,9 @@ paths:
               schema:
                 format: binary
                 type: string
-          description: Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.
+          description: Translation package streamed. The streamed file is always a ZIP
+            file, except when the API client is configured for Drupal and
+            Wordpress.
         "402":
           content:
             application/json:
@@ -1779,7 +1835,9 @@ paths:
       x-cli-cmd-group: projects
   "/projects/{id}/download/{language}":
     get:
-      description: Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
+      description: Download only the translation package of this language. You must
+        have given a /package call beforehand and wait until the packaging
+        status is 'completed'.
       operationId: downloadLanguage
       parameters:
         - description: Project ID
@@ -1789,7 +1847,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Language code. You can download the translation of only a specific language.
+        - description: Language code. You can download the translation of only a specific
+            language.
           in: path
           name: language
           required: true
@@ -1802,7 +1861,9 @@ paths:
               schema:
                 format: binary
                 type: string
-          description: Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.
+          description: Translation package streamed. The streamed file is always a ZIP
+            file, except when the API client is configured for Drupal and
+            Wordpress.
         "402":
           content:
             application/json:
@@ -1924,20 +1985,28 @@ paths:
             schema:
               properties:
                 bin:
-                  description: Last 4 digits of the credit card you are using one-time. This parameter is only required when stripe_token is provided.
+                  description: Last 4 digits of the credit card you are using one-time. This
+                    parameter is only required when stripe_token is provided.
                   type: string
                 budget_code:
                   description: Optional with corporate accounts. Not available for others.
                   type: string
                 card_id:
-                  description: Optional. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin.
+                  description: Optional. `client`, `app`, `corporate_card` methods require a
+                    credit card ID. `credit` method requires Stripe token and
+                    bin.
                   format: int64
                   type: integer
                 payment_code:
                   description: Optional. `corporate` payment method requires this.s
                   type: string
                 payment_method:
-                  description: Optional. Determines which method to use for payment. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin. `corporate` method follows corporate account policy automatically, either follows invoicing flow or automatically charges corporate's primary card.
+                  description: Optional. Determines which method to use for payment. `client`,
+                    `app`, `corporate_card` methods require a credit card ID.
+                    `credit` method requires Stripe token and bin. `corporate`
+                    method follows corporate account policy automatically,
+                    either follows invoicing flow or automatically charges
+                    corporate's primary card.
                   enum:
                     - corporate
                     - client
@@ -1946,7 +2015,10 @@ paths:
                     - corporate_card
                   type: string
                 stripe_token:
-                  description: This is required if you are using a one-time credit card. This is the token generted from frontend via Stripe SDK. If you are using a one-time card with `stripe_token`, you must also provide `bin`, last 4 digits of the card.
+                  description: This is required if you are using a one-time credit card. This is
+                    the token generted from frontend via Stripe SDK. If you are
+                    using a one-time card with `stripe_token`, you must also
+                    provide `bin`, last 4 digits of the card.
                   type: string
               type: object
       responses:
@@ -1967,7 +2039,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: CorporateAccountNotAllowedForApiPayment ApiClientMissingPaymentInformation
+          description: CorporateAccountNotAllowedForApiPayment
+            ApiClientMissingPaymentInformation
         "404":
           content:
             application/json:
@@ -1990,7 +2063,10 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.
+        - description: If you want to package and download the translation synchronously,
+            mark this parameter as '0'. It will package the translation and then
+            return the packaged file in the response, identical to /download
+            call after an asynchronous /package call.
           in: query
           name: async
           schema:
@@ -2023,7 +2099,8 @@ paths:
       x-cli-cmd-group: projects
   "/projects/{id}/package/check":
     get:
-      description: This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.
+      description: This request will tell you the current progress of the translation
+        packaging. You will use the 'key' provided by the /package call.
       operationId: trackPackage
       parameters:
         - description: Project ID
@@ -2033,7 +2110,8 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: This is the package tracking key provided in the response of a /package call.
+        - description: This is the package tracking key provided in the response of a
+            /package call.
           in: query
           name: key
           schema:
@@ -2073,13 +2151,17 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Language code. You can package the translation of only a specific language.
+        - description: Language code. You can package the translation of only a specific
+            language.
           in: path
           name: language
           required: true
           schema:
             type: string
-        - description: If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.
+        - description: If you want to package and download the translation synchronously,
+            mark this parameter as '0'. It will package the translation and then
+            return the packaged file in the response, identical to /download
+            call after an asynchronous /package call.
           in: query
           name: async
           schema:
@@ -2096,7 +2178,9 @@ paths:
               schema:
                 format: binary
                 type: string
-          description: Packaging status and tracking code. With the package key, you can track the progress of translation packaging.Also packaged translation streamed.
+          description: Packaging status and tracking code. With the package key, you can
+            track the progress of translation packaging.Also packaged
+            translation streamed.
         "402":
           content:
             application/json:
@@ -2125,7 +2209,10 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: This will return a more raw progress information for translation and proofreading. For instance, when completed, we will return 100% for both tasks by default, whereas their actual progress may be lower than 100%.
+        - description: This will return a more raw progress information for translation
+            and proofreading. For instance, when completed, we will return 100%
+            for both tasks by default, whereas their actual progress may be
+            lower than 100%.
           in: query
           name: raw
           schema:
@@ -2184,7 +2271,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Recreate your translation project from scratch. This is a risky action, you will lose current translations.
+      summary: Recreate your translation project from scratch. This is a risky action,
+        you will lose current translations.
       tags:
         - Project
       x-cli-cmd-group: projects
@@ -2316,7 +2404,8 @@ paths:
     x-internal: true
   "/projects/{id}/webhooks":
     delete:
-      description: Delete project webhooks. Projects currently support registering only 1 webhook. This endpoint deletes the previously registered webhook.
+      description: Delete project webhooks. Projects currently support registering
+        only 1 webhook. This endpoint deletes the previously registered webhook.
       operationId: deleteProjectWebhook
       parameters:
         - description: Project ID
@@ -2344,7 +2433,8 @@ paths:
         - Project Webhooks
       x-cli-cmd-group: webhooks
     get:
-      description: Get project information (includes callback_url for webhook). Currently projects can have only 1 webhook registered.
+      description: Get project information (includes callback_url for webhook).
+        Currently projects can have only 1 webhook registered.
       operationId: getProjectWebhooks
       parameters:
         - description: Project ID
@@ -2388,7 +2478,9 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+                  description: Webhook URL. We will send POST callbacks when the status of the
+                    current project is changed. Possible status changes are,
+                    'translated', 'proofread', 'completed'.
                   type: string
               type: object
       responses:
@@ -2425,7 +2517,9 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+                  description: Webhook URL. We will send POST callbacks when the status of the
+                    current project is changed. Possible status changes are,
+                    'translated', 'proofread', 'completed'.
                   type: string
               type: object
       responses:
@@ -2447,7 +2541,8 @@ paths:
       x-cli-cmd-group: webhooks
   "/projects/{projectId}/activities":
     get:
-      description: Get a list of realtime activities on the project, such as translation suggestion and translation approval.
+      description: Get a list of realtime activities on the project, such as
+        translation suggestion and translation approval.
       operationId: getActivities
       parameters:
         - description: Project ID
@@ -2657,7 +2752,10 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch
+            temporary preview URLs for Box.com or native PDF. This is NOT
+            recommended to be used with list calls. Only use with[]=preview for
+            single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -2708,10 +2806,15 @@ paths:
                     type: string
                   type: array
                 "schemes[]":
-                  description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
+                  description: JSON string. If your documents have a scheme, as in cases of CSV
+                    files, use the same array index keys for `schemes` parameter
+                    to specify their schemes. See `Document Schemes` title in
+                    the API documentation.
                   type: string
                 "source-links[]":
-                  description: When provided, we will download the files from these URLs, in addition to files provded in `documents` parameter and then save as source documents
+                  description: When provided, we will download the files from these URLs, in
+                    addition to files provded in `documents` parameter and then
+                    save as source documents
                   items:
                     $ref: "#/components/schemas/LinkedSourceDocument"
                   type: array
@@ -2817,7 +2920,10 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch
+            temporary preview URLs for Box.com or native PDF. This is NOT
+            recommended to be used with list calls. Only use with[]=preview for
+            single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -2846,7 +2952,8 @@ paths:
         - Project Document
       x-cli-cmd-group: project-documents
     post:
-      description: Update the document. File name and contents will replaced with the new one.
+      description: Update the document. File name and contents will replaced with the
+        new one.
       operationId: updateProjectDocument
       parameters:
         - description: Project ID
@@ -2869,11 +2976,15 @@ paths:
             schema:
               properties:
                 documents:
-                  description: Single file data. The name is plural to provide a consistent naming convention.
+                  description: Single file data. The name is plural to provide a consistent naming
+                    convention.
                   format: binary
                   type: string
                 schemes:
-                  description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
+                  description: JSON string. If your documents have a scheme, as in cases of CSV
+                    files, use the same array index keys for `schemes` parameter
+                    to specify their schemes. See `Document Schemes` title in
+                    the API documentation.
                   type: string
                 source-link:
                   $ref: "#/components/schemas/LinkedSourceDocument"
@@ -3015,7 +3126,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: Get a list of strings and its translations in the document for this target language of the project.
+      summary: Get a list of strings and its translations in the document for this
+        target language of the project.
       tags:
         - Translations
       x-cli-cmd-group: translations
@@ -3065,7 +3177,9 @@ paths:
             schema:
               properties:
                 glossaries:
-                  description: You can only add one glossary, even though the name suggests multiple glossaries. This may be updated in the future to support multiple glossaries.
+                  description: You can only add one glossary, even though the name suggests
+                    multiple glossaries. This may be updated in the future to
+                    support multiple glossaries.
                   format: binary
                   type: string
               required:
@@ -3190,7 +3304,8 @@ paths:
         - Glossary
       x-cli-cmd-group: glossaries
     put:
-      description: Update the glossary. File name and contents will replaced with the new one.
+      description: Update the glossary. File name and contents will replaced with the
+        new one.
       operationId: updateGlossary
       parameters:
         - description: Project ID
@@ -3213,7 +3328,8 @@ paths:
             schema:
               properties:
                 glossaries:
-                  description: Single file data. The name is plural to provide a consistent naming convention.
+                  description: Single file data. The name is plural to provide a consistent naming
+                    convention.
                   format: binary
                   type: string
               required:
@@ -3323,7 +3439,11 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: If you want to package and download the translation memory synchronously, mark this parameter as '0'. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.
+        - description: If you want to package and download the translation memory
+            synchronously, mark this parameter as '0'. It will package the
+            translation memory and then return the packaged file in the
+            response, identical to async/download call after an asynchronous
+            /package call.
           in: query
           name: async
           schema:
@@ -3375,7 +3495,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
-          description: Async operation status. Use the key to query status of this operation.
+          description: Async operation status. Use the key to query status of this
+            operation.
       summary: If package call was async, check the status of the request
       tags:
         - Strings
@@ -3397,7 +3518,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: If you want to package and download the translation memory synchronously, mark this parameter as '0'. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.
+        - description: If you want to package and download the translation memory
+            synchronously, mark this parameter as '0'. It will package the
+            translation memory and then return the packaged file in the
+            response, identical to async/download call after an asynchronous
+            /package call.
           in: query
           name: async
           schema:
@@ -3455,7 +3580,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
-          description: Async operation status. Use the key to query status of this operation.
+          description: Async operation status. Use the key to query status of this
+            operation.
       summary: If package call was async, check the status of the request
       tags:
         - Strings
@@ -3484,7 +3610,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: Get a list of strings and its translations in the project for this target language in the project.
+      summary: Get a list of strings and its translations in the project for this
+        target language in the project.
       tags:
         - Strings
       x-cli-cmd-group: strings
@@ -3500,7 +3627,10 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch
+            temporary preview URLs for Box.com or native PDF. This is NOT
+            recommended to be used with list calls. Only use with[]=preview for
+            single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -3645,7 +3775,10 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch
+            temporary preview URLs for Box.com or native PDF. This is NOT
+            recommended to be used with list calls. Only use with[]=preview for
+            single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -3673,7 +3806,8 @@ paths:
         - Style Guide
       x-cli-cmd-group: styleguides
     put:
-      description: Update the style guide. File name and contents will replaced with the new one.
+      description: Update the style guide. File name and contents will replaced with
+        the new one.
       operationId: updateStyleGuide
       parameters:
         - description: Project ID
@@ -3696,7 +3830,8 @@ paths:
             schema:
               properties:
                 styleguides:
-                  description: Single file data. The name is plural to provide a consistent naming convention.
+                  description: Single file data. The name is plural to provide a consistent naming
+                    convention.
                   format: binary
                   type: string
               required:
@@ -3957,7 +4092,9 @@ paths:
                           - already_confirmed
                         type: string
                     type: object
-          description: When confirmation email is sent, status is `success`, or `already_confirmed` when user has already confirmed their email address.
+          description: When confirmation email is sent, status is `success`, or
+            `already_confirmed` when user has already confirmed their email
+            address.
       summary: Sends email confirmation email for current user
       tags:
         - User
@@ -4009,7 +4146,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Search in these entities. Current oprions are projects, documents, strings. Can be multiple. When not provided, we'll search through all entities.
+        - description: Search in these entities. Current oprions are projects, documents,
+            strings. Can be multiple. When not provided, we'll search through
+            all entities.
           in: query
           name: include[]
           required: false
@@ -4055,7 +4194,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
-          description: Async operation status. Use the key to query status of this operation.
+          description: Async operation status. Use the key to query status of this
+            operation.
       summary: Reindex for search all of the client source and translation documents.
       tags:
         - Search
@@ -4077,7 +4217,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
-          description: Async operation status. Use the key to query status of this operation.
+          description: Async operation status. Use the key to query status of this
+            operation.
       summary: Check reindex status of the client source and translation documents.
       tags:
         - Search
@@ -4099,7 +4240,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your client and vendor statistics. This used to be called "summary" (\@deprecated).
+      summary: Returns your client and vendor statistics. This used to be called
+        "summary" (\@deprecated).
       tags:
         - User
       x-cli-cmd-group: users
@@ -4277,7 +4419,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: If you want to package and download the translation memory synchronously, mark this parameter as '0'. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.
+        - description: If you want to package and download the translation memory
+            synchronously, mark this parameter as '0'. It will package the
+            translation memory and then return the packaged file in the
+            response, identical to async/download call after an asynchronous
+            /package call.
           in: query
           name: async
           schema:
@@ -4328,14 +4474,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
-          description: Async operation status. Use the key to query status of this operation.
+          description: Async operation status. Use the key to query status of this
+            operation.
       summary: If package call was async, check the status of the request
       tags:
         - Strings
       x-cli-cmd-group: strings
   /styleguide:
     get:
-      description: Download your corporate account's global style guide. This endpoint is available only for corporate account customers.
+      description: Download your corporate account's global style guide. This endpoint
+        is available only for corporate account customers.
       operationId: downloadGlobalStyleGuide
       responses:
         "200":
@@ -4355,7 +4503,8 @@ paths:
         - Style Guide
       x-cli-cmd-group: styleguides
     post:
-      description: Update your corporate account's global style guide. This endpoint is available only for corporate account customers.
+      description: Update your corporate account's global style guide. This endpoint
+        is available only for corporate account customers.
       operationId: updateGlobalStyleGuide
       requestBody:
         content:
@@ -4363,7 +4512,7 @@ paths:
             schema:
               properties:
                 styleguide:
-                  description: |
+                  description: >
                     Style guide file. Currently supported formats: .pdf, .docx, .txt
                   format: binary
                   type: string
@@ -4410,8 +4559,10 @@ paths:
       x-cli-cmd-group: static
   /token:
     post:
-      description: |
-        MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
+      description: >
+        MotaWord API is using OAuth2 procedures when authenticating or
+        authorizing your API call. Currently, we only allow Client Credential
+        type flow.
       operationId: getAccessToken
       requestBody:
         content:
@@ -4419,7 +4570,8 @@ paths:
             schema:
               properties:
                 grant_type:
-                  description: OAuth2 grant type. Supports 'client_credentials', 'password' or 'refresh_token', 'user_id' available.
+                  description: OAuth2 grant type. Supports 'client_credentials', 'password' or
+                    'refresh_token', 'user_id' available.
                   type: string
                 password:
                   description: MW Account password (to be used in password grant type)
@@ -4453,7 +4605,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TokenError"
-          description: Authentication error - for vendor auth, it will also fail if their account is not approved yet. In that case, the error response will include "account_status" key.
+          description: Authentication error - for vendor auth, it will also fail if their
+            account is not approved yet. In that case, the error response will
+            include "account_status" key.
       security:
         - basicAuth: []
       summary: Retrieve an access token to interact with the API.
@@ -4546,7 +4700,8 @@ paths:
       description: Get a list of vendors available for the criteria given
       operationId: getAvailableVendors
       parameters:
-        - description: Include detailed information. Possible values 'user'. Requesting user info enrichment takes much longer.
+        - description: Include detailed information. Possible values 'user'. Requesting
+            user info enrichment takes much longer.
           in: query
           name: with[]
           required: false
@@ -4679,7 +4834,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/OperationStatus"
-          description: Vendor application of this user is approved. User is ready to work with us.
+          description: Vendor application of this user is approved. User is ready to work
+            with us.
         "404":
           content:
             application/json:
@@ -4765,7 +4921,8 @@ paths:
               - STYLE_GUIDES
               - GLOSSARIES
             type: string
-        - description: searches in source language of documents, in source and target languages of document's quote
+        - description: searches in source language of documents, in source and target
+            languages of document's quote
           in: query
           name: language_code
           required: false
@@ -4874,7 +5031,9 @@ paths:
       security:
         - mwoAuth:
             - privileged
-      summary: Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.
+      summary: Returns your vendor earnings. Includes real-time earnings from ongoing
+        projects, and fixed earnings from completed projects. Also includes
+        total earnings and string edits.
       tags:
         - User
       x-cli-cmd-group: users
@@ -5044,7 +5203,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PaymentInfo"
-          description: Returns billing and saved card information for user, and their corporate if present.
+          description: Returns billing and saved card information for user, and their
+            corporate if present.
         "404":
           content:
             application/json:
@@ -5178,7 +5338,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: Return only projects that have been completed. When `true`, this makes `joined` true as well.
+        - description: Return only projects that have been completed. When `true`, this
+            makes `joined` true as well.
           in: query
           name: completed
           required: false
@@ -5286,7 +5447,8 @@ paths:
                           - already_confirmed
                         type: string
                     type: object
-          description: status is `already_confirmed` when user has already confirmed their email address.
+          description: status is `already_confirmed` when user has already confirmed their
+            email address.
         "400":
           content:
             application/json:
@@ -5381,7 +5543,8 @@ paths:
       security:
         - mwoAuth:
             - privileged
-      summary: Returns a user's client and vendor statistics. This used to be called "summary" (\@deprecated).
+      summary: Returns a user's client and vendor statistics. This used to be called
+        "summary" (\@deprecated).
       tags:
         - User
       x-cli-cmd-group: users
@@ -5561,14 +5724,16 @@ components:
           description: Source text
           type: string
         target_text:
-          description: Target text of the activity, which is actually the translation of the source text.
+          description: Target text of the activity, which is actually the translation of
+            the source text.
           type: string
         translator:
           description: Unique identifier of the translator/proofreader of this activity.
           format: int64
           type: integer
         type:
-          description: Currently there are two available activity types; 'translated', 'proofread'.
+          description: Currently there are two available activity types; 'translated',
+            'proofread'.
           enum:
             - translated
             - proofread
@@ -5677,7 +5842,8 @@ components:
           description: Article content
           type: string
         created_at:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         excerpt:
@@ -5736,7 +5902,8 @@ components:
     ClientProfile:
       properties:
         account_creation_date:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         client_project_count:
@@ -5763,10 +5930,13 @@ components:
           description: full name of the client
           type: string
         growth:
-          description: The answer for the question "Is there any growth for this corporate's spending". The values can be true, false or null if the corporate is oour client for less than 6 months
+          description: The answer for the question "Is there any growth for this
+            corporate's spending". The values can be true, false or null if the
+            corporate is oour client for less than 6 months
           type: boolean
         is_complex:
-          description: the answer for the question "Is this client usually sent complex projects?"
+          description: the answer for the question "Is this client usually sent complex
+            projects?"
           type: boolean
         last_12_months_spending:
           description: corporate's spending in twelve months
@@ -5816,10 +5986,12 @@ components:
               type: object
           type: object
         user_rank_in_project_count:
-          description: rank of the user in all corporate users for project count. If the user is the most active user foor sending projects her rank is 1
+          description: rank of the user in all corporate users for project count. If the
+            user is the most active user foor sending projects her rank is 1
           type: number
         user_rank_in_spending:
-          description: rank of the user in all corporate users for total spending. If the user is the most active user for spending her rank is 1
+          description: rank of the user in all corporate users for total spending. If the
+            user is the most active user for spending her rank is 1
           type: number
       type: object
     ClientProjectStat:
@@ -5887,7 +6059,8 @@ components:
         content:
           type: string
         last_changed:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         resource:
@@ -5909,7 +6082,8 @@ components:
         language:
           type: string
         last_changed:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         translations:
@@ -5965,7 +6139,8 @@ components:
         amount:
           $ref: "#/components/schemas/Monetary"
         date:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         project:
@@ -6003,7 +6178,8 @@ components:
     ContinuousProject:
       properties:
         created_at:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         id:
@@ -6110,18 +6286,25 @@ components:
               type: object
             preview-box:
               $ref: "#/components/schemas/Href"
-              description: Box.com URL to preview this document. This URL is temporary. You need to re-fetch the file to refresh the Box.com preview URL. Available for documents and style guides.
+              description: Box.com URL to preview this document. This URL is temporary. You
+                need to re-fetch the file to refresh the Box.com preview URL.
+                Available for documents and style guides.
             preview-pdf:
               $ref: "#/components/schemas/Href"
-              description: This is our fallback preview URL, providing a PDF file. Use this file to embed in your PDF viewer. Available for documents and style guides.
+              description: This is our fallback preview URL, providing a PDF file. Use this
+                file to embed in your PDF viewer. Available for documents and
+                style guides.
             preview-pdf-viewer:
               $ref: "#/components/schemas/Href"
-              description: This is another version of preview-pdf, this time pointing to a preview viewer page on front application. This page requires authentication and comes with its own PDF viewer.
+              description: This is another version of preview-pdf, this time pointing to a
+                preview viewer page on front application. This page requires
+                authentication and comes with its own PDF viewer.
             project:
               $ref: "#/components/schemas/Href"
             thumbnail:
               $ref: "#/components/schemas/Href"
-              description: Thumbnail preview URL of the document. If doc has a page structure, this is probably only the first page.
+              description: Thumbnail preview URL of the document. If doc has a page structure,
+                this is probably only the first page.
           type: object
     DocumentList:
       properties:
@@ -6141,7 +6324,8 @@ components:
           default: usd
           type: string
         due_date:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         status:
@@ -6319,7 +6503,8 @@ components:
           format: int64
           type: integer
         invoiced_at:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         links:
@@ -6404,7 +6589,8 @@ components:
           format: int64
           type: integer
         source:
-          description: Preferred source names are listed as enum. If you have a custom file type, simply enter that name.
+          description: Preferred source names are listed as enum. If you have a custom
+            file type, simply enter that name.
           enum:
             - dropbox
             - googledrive
@@ -6520,7 +6706,9 @@ components:
         - $ref: "#/components/schemas/PackageStatus"
         - properties:
             key:
-              description: This is the unique package tracking key. You can use this key to track the current progress of the translation packaging with /package/check call.
+              description: This is the unique package tracking key. You can use this key to
+                track the current progress of the translation packaging with
+                /package/check call.
               type: string
           type: object
     PackageStatus:
@@ -6529,7 +6717,9 @@ components:
           $ref: "#/components/schemas/PackageStatusEnum"
       type: object
     PackageStatusEnum:
-      description: The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package.
+      description: The status of translation packaging. Possible values are 'started',
+        'packaging', 'completed'. When completed, you can make a /download call
+        to download the last translation package.
       enum:
         - started
         - packaging
@@ -6652,9 +6842,11 @@ components:
           type: string
         client:
           $ref: "#/components/schemas/User"
-          description: User entity for Client. This is only given when project is requested with detailed=true
+          description: User entity for Client. This is only given when project is
+            requested with detailed=true
         completed_on:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         created_at:
@@ -6669,7 +6861,8 @@ components:
           format: int64
           type: integer
         errors:
-          description: A list of errors. Visible when creating a project and uploading your documents at the same time, in case of multiple errors.
+          description: A list of errors. Visible when creating a project and uploading
+            your documents at the same time, in case of multiple errors.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -6684,7 +6877,9 @@ components:
           $ref: "#/components/schemas/ProjectLinks"
         pairs:
           $ref: "#/components/schemas/VendorProjectPairs"
-          description: Currently authed vendor's available working language pairs in this project. Includes rates per language pair. Includes complex pair logic such as bilingualism, project reverse pair enforcement etc.
+          description: Currently authed vendor's available working language pairs in this
+            project. Includes rates per language pair. Includes complex pair
+            logic such as bilingualism, project reverse pair enforcement etc.
         price:
           properties:
             amount:
@@ -6694,7 +6889,8 @@ components:
               default: usd
               type: string
             usd_amount:
-              description: USD is our base pricing currency. If `currency` is different, this will help.
+              description: USD is our base pricing currency. If `currency` is different, this
+                will help.
               format: float
               type: number
           type: object
@@ -6707,7 +6903,8 @@ components:
               default: usd
               type: string
             usd_amount:
-              description: USD is our base pricing currency. If `currency` is different, this will help.
+              description: USD is our base pricing currency. If `currency` is different, this
+                will help.
               format: float
               type: number
           type: object
@@ -6717,7 +6914,8 @@ components:
           type: boolean
         source:
           $ref: "#/components/schemas/ProjectSource"
-          descriptipon: The source platform where this project was first created. Current options are "api", "web".
+          descriptipon: The source platform where this project was first created. Current
+            options are "api", "web".
         source_language:
           type: string
         status:
@@ -6800,13 +6998,15 @@ components:
     ProjectTQS:
       properties:
         is_above_average:
-          description: Is this score above or below the average among other vendors in the same project?
+          description: Is this score above or below the average among other vendors in the
+            same project?
           type: boolean
         score:
           format: float
           type: number
         strings_edited:
-          description: The number of translated strings by this translator which was edited by a proofreader.
+          description: The number of translated strings by this translator which was
+            edited by a proofreader.
           format: int64
           type: integer
         strings_translated:
@@ -6827,7 +7027,8 @@ components:
           description: language code (i.e en-US)
           type: string
         vendor_link:
-          description: link to the vendor that can be only used in motaword admin application
+          description: link to the vendor that can be only used in motaword admin
+            application
           type: string
       type: object
     RegeneratePreviewResponse:
@@ -6843,11 +7044,13 @@ components:
           description: budget code filter. valid for corporate accounts only.
           type: string
         date_from:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         date_to:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         source_languages:
@@ -6982,7 +7185,8 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          description: the date-time notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         project_id:
@@ -7007,7 +7211,9 @@ components:
         tm_name:
           type: string
         type:
-          description: String search result typ from ZNT. Options are LOCAL_PROJECT, IMPORTED_TM. Imported TM results should probably not be visible to end users.
+          description: String search result typ from ZNT. Options are LOCAL_PROJECT,
+            IMPORTED_TM. Imported TM results should probably not be visible to
+            end users.
           enum:
             - LOCAL_PROJECT
             - IMPORTED_TM
@@ -7373,13 +7579,15 @@ components:
                   type: boolean
               type: object
             notify:
-              description: Notify new user account creation with login information and MotaWord introduction.
+              description: Notify new user account creation with login information and
+                MotaWord introduction.
               type: boolean
             paypal_email:
               description: Optional. Vendor paypal e-mail
               type: string
             require_1099:
-              description: Optional. Whether this vendor requires 1099 form in US for their earnings.
+              description: Optional. Whether this vendor requires 1099 form in US for their
+                earnings.
               type: boolean
             user_groups:
               description: A list of user group IDs
@@ -7448,7 +7656,9 @@ components:
         $ref: "#/components/schemas/VendorProjectPair"
       type: array
     VendorProjectRole:
-      description: Currently authed vendor's role in this project. If vendor has already joined, this contains the role they joined the project with. If not joined yet, this is the role that they can join the project with.
+      description: Currently authed vendor's role in this project. If vendor has
+        already joined, this contains the role they joined the project with. If
+        not joined yet, this is the role that they can join the project with.
       enum:
         - translator
         - proofreader
@@ -7456,7 +7666,8 @@ components:
     VendorProjectStats:
       properties:
         invited:
-          description: total number of projects that this user was invited to. TODO this key is to replace "total" key due to naming ambiguity.
+          description: total number of projects that this user was invited to. TODO this
+            key is to replace "total" key due to naming ambiguity.
           format: int64
           type: integer
         total:

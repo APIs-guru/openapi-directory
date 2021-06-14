@@ -74,7 +74,8 @@ paths:
             items:
               $ref: "#/definitions/DiaryBookingModel"
             type: array
-      summary: Get a list of all available allocations for a date + 7 days for a specified appointment type
+      summary: Get a list of all available allocations for a date + 7 days for a
+        specified appointment type
       tags:
         - DiaryController
   "/v3/diary/{shortName}/appointment":
@@ -316,7 +317,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/DiaryAppointmentModelResults"
-      summary: A collection of diary appointments linked to a company filtered between specific dates and by appointment type
+      summary: A collection of diary appointments linked to a company filtered between
+        specific dates and by appointment type
       tags:
         - DiaryController
   "/v3/diary/{shortName}/appointmenttypes":
@@ -476,7 +478,8 @@ definitions:
         format: date-time
         type: string
       RemindBefore:
-        description: The number of minutes before the appointment start date/time to remind the staff member. -1 means don't remind.
+        description: The number of minutes before the appointment start date/time to
+          remind the staff member. -1 means don't remind.
         enum:
           - Min
           - Min2

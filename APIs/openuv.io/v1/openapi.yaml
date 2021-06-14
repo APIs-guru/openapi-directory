@@ -5,7 +5,8 @@ servers:
       version:
         default: v1
 info:
-  description: The missing minimalistic JSON real-time UV Index API for awesome Developers, Innovators and Smart Home Enthusiasts
+  description: The missing minimalistic JSON real-time UV Index API for awesome
+    Developers, Innovators and Smart Home Enthusiasts
   title: OpenUV - Global Real-Time UV Index Forecast API
   version: v1
   x-origin:
@@ -17,7 +18,8 @@ paths:
   /forecast:
     description: Hourly UV Index Forecast
     get:
-      description: Get hourly UV Index Forecast by location and date. Optional altitude, ozone level and datetime could be provided.
+      description: Get hourly UV Index Forecast by location and date. Optional
+        altitude, ozone level and datetime could be provided.
       parameters:
         - description: latitude, from -90.00 to 90.00
           in: query
@@ -35,28 +37,36 @@ paths:
             description: longitude, from -180.00 to 180.00
             example: 115.67
             type: number
-        - description: Altitude in meters, from 0 to 10000m, 0m by default. If provided the altitude correction factor will be applied to clear sky sea level UV Index value.
+        - description: Altitude in meters, from 0 to 10000m, 0m by default. If provided
+            the altitude correction factor will be applied to clear sky sea
+            level UV Index value.
           in: query
           name: alt
           required: false
           schema:
-            description: Altitude in meters, from 0 to 10000m, 0m by default. If provided the altitude correction factor will be applied to clear sky sea level UV Index value.
+            description: Altitude in meters, from 0 to 10000m, 0m by default. If provided
+              the altitude correction factor will be applied to clear sky sea
+              level UV Index value.
             example: 1050
             type: number
-        - description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast from OMI dataset is used by default.
+        - description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast
+            from OMI dataset is used by default.
           in: query
           name: ozone
           required: false
           schema:
-            description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast from OMI dataset is used by default.
+            description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast
+              from OMI dataset is used by default.
             example: 304.5
             type: number
-        - description: UTC datetime in ISO-8601 format, now by default. Use that parameter to get UV Index Forecast for any point in time.
+        - description: UTC datetime in ISO-8601 format, now by default. Use that parameter
+            to get UV Index Forecast for any point in time.
           in: query
           name: dt
           required: false
           schema:
-            description: UTC datetime in ISO-8601 format, now by default. Use that parameter to get UV Index Forecast for any point in time.
+            description: UTC datetime in ISO-8601 format, now by default. Use that parameter
+              to get UV Index Forecast for any point in time.
             example: 2018-02-04T04:39:06.467Z
             format: date-time
             type: string
@@ -80,7 +90,9 @@ paths:
   /protection:
     description: Daily Protection Time
     get:
-      description: Get daily protection time by location, UV Index from and UV Index to with 10 minutes accuracy. Optional altitide and ozone level could be provided.
+      description: Get daily protection time by location, UV Index from and UV Index
+        to with 10 minutes accuracy. Optional altitide and ozone level could be
+        provided.
       parameters:
         - description: latitude, from -90.00 to 90.00
           in: query
@@ -114,20 +126,26 @@ paths:
             description: UV Index to value for protection datetime lookup. From 0 to 40.
             example: 3.6
             type: number
-        - description: Altitude in meters, from 0 to 10000m, 0m by default. If provided the altitude correction factor will be applied to clear sky sea level UV Index value.
+        - description: Altitude in meters, from 0 to 10000m, 0m by default. If provided
+            the altitude correction factor will be applied to clear sky sea
+            level UV Index value.
           in: query
           name: alt
           required: false
           schema:
-            description: Altitude in meters, from 0 to 10000m, 0m by default. If provided the altitude correction factor will be applied to clear sky sea level UV Index value.
+            description: Altitude in meters, from 0 to 10000m, 0m by default. If provided
+              the altitude correction factor will be applied to clear sky sea
+              level UV Index value.
             example: 1050
             type: number
-        - description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast from OMI dataset is used by default.
+        - description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast
+            from OMI dataset is used by default.
           in: query
           name: ozone
           required: false
           schema:
-            description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast from OMI dataset is used by default.
+            description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast
+              from OMI dataset is used by default.
             example: 304.5
             type: number
         - description: This header is used to send data that contains your OpenUV API key
@@ -149,7 +167,8 @@ paths:
   /uv:
     description: Real-time UV Index
     get:
-      description: Get real-time UV Index by location. Optional altitude, ozone level and datetime could be provided.
+      description: Get real-time UV Index by location. Optional altitude, ozone level
+        and datetime could be provided.
       parameters:
         - description: latitude, from -90.00 to 90.00
           in: query
@@ -167,28 +186,36 @@ paths:
             description: longitude, from -180.00 to 180.00
             example: 115.67
             type: number
-        - description: Altitude in meters, from 0 to 10000m, 0m by default. If provided the altitude correction factor will be applied to clear sky sea level UV Index value.
+        - description: Altitude in meters, from 0 to 10000m, 0m by default. If provided
+            the altitude correction factor will be applied to clear sky sea
+            level UV Index value.
           in: query
           name: alt
           required: false
           schema:
-            description: Altitude in meters, from 0 to 10000m, 0m by default. If provided the altitude correction factor will be applied to clear sky sea level UV Index value.
+            description: Altitude in meters, from 0 to 10000m, 0m by default. If provided
+              the altitude correction factor will be applied to clear sky sea
+              level UV Index value.
             example: 1050
             type: number
-        - description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast from OMI dataset is used by default.
+        - description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast
+            from OMI dataset is used by default.
           in: query
           name: ozone
           required: false
           schema:
-            description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast from OMI dataset is used by default.
+            description: Ozone in du (Dobson Units), from 100 to 550du, the latest forecast
+              from OMI dataset is used by default.
             example: 304.5
             type: number
-        - description: UTC datetime in ISO-8601 format, now by default. Use that parameter to get UV Index Forecast for any point in time.
+        - description: UTC datetime in ISO-8601 format, now by default. Use that parameter
+            to get UV Index Forecast for any point in time.
           in: query
           name: dt
           required: false
           schema:
-            description: UTC datetime in ISO-8601 format, now by default. Use that parameter to get UV Index Forecast for any point in time.
+            description: UTC datetime in ISO-8601 format, now by default. Use that parameter
+              to get UV Index Forecast for any point in time.
             example: 2018-02-04T04:39:06.467Z
             format: date-time
             type: string

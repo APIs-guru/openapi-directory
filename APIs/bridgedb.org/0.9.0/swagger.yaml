@@ -18,10 +18,15 @@ produces:
 paths:
   "/{organism}/attributeSearch/{query}":
     get:
-      description: |
-        Returns a list of xrefs and associated attributes that contain the query string for a given organism. Results are not restricted to exact matches. Optionally limit results to a specified number per data source, or by the type of attribute. See possible attribute types via /{organism}/attributeSet.
+      description: >
+        Returns a list of xrefs and associated attributes that contain the
+        query string for a given organism. Results are not restricted to exact
+        matches. Optionally limit results to a specified number per data source,
+        or by the type of attribute. See possible attribute types via
+        /{organism}/attributeSet.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -98,21 +103,24 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: Restrict search by attribute name (case sensitive). Use GET /{organism}/attributeSet to find out which attributes are supported.
+        - description: Restrict search by attribute name (case sensitive). Use GET
+            /{organism}/attributeSet to find out which attributes are supported.
           in: query
           name: attrName
           required: false
           type: string
       responses:
         "200":
-          description: returns a tab-delimited list with the identifier, data source and descriptions found.
+          description: returns a tab-delimited list with the identifier, data source and
+            descriptions found.
       tags:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/attributeSet":
     get:
       description: Returns the supported attributes to the given Organism.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -186,9 +194,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/attributes/{systemCode}/{identifier}":
     get:
-      description: Returns the attributes for a given identifier, data source, organism. Optionally display only a specified attribute
+      description: Returns the attributes for a given identifier, data source,
+        organism. Optionally display only a specified attribute
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -316,9 +326,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/isFreeSearchSupported":
     get:
-      description: Returns `true` or `false` based on whether or not /{organism}/search/{query} is supported for a given organism.
+      description: Returns `true` or `false` based on whether or not
+        /{organism}/search/{query} is supported for a given organism.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -392,9 +404,14 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/isMappingSupported/{sourceSystemCode}/{targetSystemCode}":
     get:
-      description: Returns `true` or `false` based on whether or not /{organism}/xrefs/{systemCode}/{identifier} would possibly return a {targetSystemCode} result given a {sourceSystemCode} query. This function basically combines the results of /{organism}/sourceDataSources and /{organism}/targetDataSources into a single boolean result.
+      description: Returns `true` or `false` based on whether or not
+        /{organism}/xrefs/{systemCode}/{identifier} would possibly return a
+        {targetSystemCode} result given a {sourceSystemCode} query. This
+        function basically combines the results of /{organism}/sourceDataSources
+        and /{organism}/targetDataSources into a single boolean result.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -462,7 +479,8 @@ paths:
           required: true
           type: string
         - default: L
-          description: "[System code](http://vocabularies.bridgedb.org/#systemCode) for source (input/query) data source"
+          description: "[System code](http://vocabularies.bridgedb.org/#systemCode) for
+            source (input/query) data source"
           enum:
             - En
             - Cs
@@ -504,7 +522,8 @@ paths:
           name: sourceSystemCode
           required: true
           type: string
-        - description: "[System code](http://vocabularies.bridgedb.org/#systemCode) for target (output/result) data source"
+        - description: "[System code](http://vocabularies.bridgedb.org/#systemCode) for
+            target (output/result) data source"
           enum:
             - En
             - Cs
@@ -556,7 +575,8 @@ paths:
       description: |
         Returns the list of properties available for a given organism
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -630,9 +650,12 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/search/{query}":
     get:
-      description: Returns a list of xrefs with identifiers that contain the query string for a given organism. Results are not restricted to exact matches. Optionally limit results to a specified number per data source.
+      description: Returns a list of xrefs with identifiers that contain the query
+        string for a given organism. Results are not restricted to exact
+        matches. Optionally limit results to a specified number per data source.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -712,14 +735,17 @@ paths:
           type: integer
       responses:
         "200":
-          description: Returns a tab-delimited list of xrefs with identifiers that contain the query string for a given organism
+          description: Returns a tab-delimited list of xrefs with identifiers that contain
+            the query string for a given organism
       tags:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/sourceDataSources":
     get:
-      description: Returns a list of data sources available as xref sources for a given organism.
+      description: Returns a list of data sources available as xref sources for a
+        given organism.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -793,9 +819,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/targetDataSources":
     get:
-      description: Returns a list of data sources available as xref targets for a given organism.
+      description: Returns a list of data sources available as xref targets for a
+        given organism.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -869,9 +897,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/xrefExists/{systemCode}/{identifier}":
     get:
-      description: Returns `true` or `false` based on whether or not an xref exists in the database given an identifier, data source, and organism.
+      description: Returns `true` or `false` based on whether or not an xref exists in
+        the database given an identifier, data source, and organism.
       parameters:
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -939,7 +969,8 @@ paths:
           required: true
           type: string
         - default: L
-          description: Source (input) data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+          description: Source (input) data source [system
+            code](http://vocabularies.bridgedb.org/#systemCode)
           enum:
             - En
             - Cs
@@ -994,9 +1025,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/xrefs/{systemCode}/{identifier}":
     get:
-      description: Returns a list of xrefs that map to a given identifier, data source, and organism.
+      description: Returns a list of xrefs that map to a given identifier, data
+        source, and organism.
       parameters:
-        - description: (Optional) Restrict results by data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+        - description: (Optional) Restrict results by data source [system
+            code](http://vocabularies.bridgedb.org/#systemCode)
           enum:
             - En
             - Cs
@@ -1038,7 +1071,8 @@ paths:
           name: dataSource
           required: false
           type: string
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -1106,7 +1140,8 @@ paths:
           required: true
           type: string
         - default: L
-          description: Source (input) data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+          description: Source (input) data source [system
+            code](http://vocabularies.bridgedb.org/#systemCode)
           enum:
             - En
             - Cs
@@ -1161,9 +1196,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/xrefsBatch":
     post:
-      description: Returns a list of xrefs, per identifier, that maps to a given list of identifiers an data source given an organism.
+      description: Returns a list of xrefs, per identifier, that maps to a given list
+        of identifiers an data source given an organism.
       parameters:
-        - description: (Optional) Restrict results by data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+        - description: (Optional) Restrict results by data source [system
+            code](http://vocabularies.bridgedb.org/#systemCode)
           enum:
             - En
             - Cs
@@ -1205,7 +1242,8 @@ paths:
           name: dataSource
           required: false
           type: string
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -1291,9 +1329,11 @@ paths:
         - Identifiers (Genes, proteins, metabolites, interactions)
   "/{organism}/xrefsBatch/{systemCode}":
     post:
-      description: Returns a list of xrefs, that maps to a given list of identifiers to a given data source and organism.
+      description: Returns a list of xrefs, that maps to a given list of identifiers
+        to a given data source and organism.
       parameters:
-        - description: (Optional) Restrict results by data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+        - description: (Optional) Restrict results by data source [system
+            code](http://vocabularies.bridgedb.org/#systemCode)
           enum:
             - En
             - Cs
@@ -1335,7 +1375,8 @@ paths:
           name: dataSource
           required: false
           type: string
-        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName) or [short name](http://vocabularies.bridgedb.org/#shortName).
+        - description: Organism [Latin name](http://vocabularies.bridgedb.org/#latinName)
+            or [short name](http://vocabularies.bridgedb.org/#shortName).
           enum:
             - Human
             - Homo sapiens
@@ -1403,7 +1444,8 @@ paths:
           required: true
           type: string
         - default: L
-          description: Source (input) data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+          description: Source (input) data source [system
+            code](http://vocabularies.bridgedb.org/#systemCode)
           enum:
             - En
             - Cs

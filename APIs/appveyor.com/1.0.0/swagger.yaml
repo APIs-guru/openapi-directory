@@ -53,11 +53,15 @@ produces:
   - application/xml
 securityDefinitions:
   apiToken:
-    description: |-
+    description: >-
       API token can be acquired from https://ci.appveyor.com/api-token
+
       This value must be passed to the server in the `Authorization` header as `"Bearer <token>"`.  Since [bearer token authentication support is not explicitly supported in OpenAPI 2.0](https://github.com/OAI/OpenAPI-Specification/issues/583), client code will vary.  Clients created with [swagger-codegen](https://github.com/swagger-api/swagger-codegen) should set `apiKeyPrefix` to `"Bearer"` and set `apiKey` to the token.  Other clients may need to set `apiKey` to the string `"Bearer <token>"`.
+
       Note that this should be [fixed in OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/pull/807)), whenever that becomes available and supported.
+
       #### User-Level API Keys
+
       To use a user-level API key (prefixed with "v2."), `basePath` must be changed to `/api/account/{accountName}` where `{accountName}` is the name of the account for which requests will be made.
     in: header
     name: Authorization
@@ -118,8 +122,9 @@ parameters:
     required: true
     type: string
   deploymentEnvironmentId:
-    description: |
-      Deployment Environment ID (`deploymentEnvironmentId` property of `DeploymentEnvironment`)
+    description: >
+      Deployment Environment ID (`deploymentEnvironmentId` property of
+      `DeploymentEnvironment`)
     in: path
     minimum: 0
     name: deploymentEnvironmentId
@@ -177,7 +182,12 @@ parameters:
     required: true
     type: string
   recordsNumber:
-    description: Number of results to include in the response. getProjectDeployments is documented to have a maximum of 20. It currently returns 500 Internal Server Error for recordsNumber <= 5. In the past it has returned 500 Internal Server Error for many different values which did not match the value used by the ci.appveyor.com web interface at the time.  As of 2018-09-08, the value used by the web interface is 10.
+    description: Number of results to include in the response. getProjectDeployments
+      is documented to have a maximum of 20. It currently returns 500 Internal
+      Server Error for recordsNumber <= 5. In the past it has returned 500
+      Internal Server Error for many different values which did not match the
+      value used by the ci.appveyor.com web interface at the time.  As of
+      2018-09-08, the value used by the web interface is 10.
     in: query
     minimum: 0
     name: recordsNumber
@@ -403,7 +413,9 @@ paths:
       tags:
         - Build
     put:
-      description: If `reRunIncomplete` is `true` and all jobs in the referenced build completed successfully, a 500 Internal Server Error is returned with the message "No failed or cancelled jobs in build with ID {buildId}".
+      description: If `reRunIncomplete` is `true` and all jobs in the referenced build
+        completed successfully, a 500 Internal Server Error is returned with the
+        message "No failed or cancelled jobs in build with ID {buildId}".
       externalDocs:
         url: https://www.appveyor.com/docs/api/projects-builds/#re-run-build
       operationId: reRunBuild
@@ -1939,13 +1951,19 @@ paths:
         url: https://www.appveyor.com/docs/api/projects-builds/#update-project-settings-in-yaml
       operationId: updateProjectSettingsYaml
       parameters:
-        - description: |
+        - description: >
             The body of requests should contain YAML data.  It is unclear how
+
             to specify this since the OpenAPI spec requires `schema` without
+
             `type` for `in: body` parameters and does not allow `type: file` in
+
             `schema`.  See https://github.com/OAI/OpenAPI-Specification/issues/326
+
             swagger-codegen (for Java, probably others) allows a binary
+
             string body parameter with non-application/json `consumes` to be
+
             passed through in the request body without conversion to JSON.
           in: body
           name: body
@@ -2514,9 +2532,14 @@ definitions:
       - name
     type: object
   BuildWorkerImageName:
-    description: |-
-      Defines the available build worker image templates used to provision a virtual machine for a build.  Images are updated regularly.  "Previous" selects the previous version of an image, for use as a temporary workaround for regressions.
+    description: >-
+      Defines the available build worker image templates used to
+      provision a virtual machine for a build.  Images are updated
+      regularly.  "Previous" selects the previous version of an image, for use
+      as a temporary workaround for regressions.
+
       `Ubuntu` is the same as `Ubuntu1604`. `Previous Ubuntu` is the same as `Previous Ubuntu1604`.
+
       See https://www.appveyor.com/docs/build-environment/#build-worker-images for details.
     enum:
       - Previous Ubuntu
@@ -2612,9 +2635,11 @@ definitions:
           accountId:
             type: integer
           projectsMode:
-            description: |-
+            description: >-
               0 is "Any project can be deployed to the environment"
+
               1 is "Only selected projects can be deployed to the environment"
+
               2 is "All except selected projects can be deployed to the environment"
             enum:
               - 0
@@ -3284,7 +3309,9 @@ definitions:
             type: boolean
           securityDescriptor:
             $ref: "#/definitions/SecurityDescriptor"
-            description: Not present in response from addProject. Not always present in response from getProjects (only after updateProject or startBuild?).
+            description: Not present in response from addProject. Not always present in
+              response from getProjects (only after updateProject or
+              startBuild?).
           skipBranchesWithoutAppveyorYml:
             type: boolean
           tags:
@@ -3299,7 +3326,8 @@ definitions:
           - repositoryName
         type: object
   ProjectAddition:
-    description: "`repositoryAuthentication` is only used for git, mercurial, subversion `repositoryProvider`."
+    description: "`repositoryAuthentication` is only used for git, mercurial,
+      subversion `repositoryProvider`."
     example:
       repositoryName: FeodorFitsner/demo-app
       repositoryProvider: gitHub
@@ -3307,7 +3335,8 @@ definitions:
       repositoryAuthentication:
         $ref: "#/definitions/RepositoryAuthenticationType"
       repositoryName:
-        description: URL when repositoryProvider is git, mercurial, subversion username/project when repositoryProvider is gitHub
+        description: URL when repositoryProvider is git, mercurial, subversion
+          username/project when repositoryProvider is gitHub
         minLength: 1
         type: string
       repositoryPassword:
@@ -3486,7 +3515,9 @@ definitions:
           $ref: "#/definitions/Script"
         type: array
       matrixAllowFailures:
-        description: Although the names and values are not enforced, the combinations which are meaningful are documented at https://www.appveyor.com/docs/build-configuration/#allow-failing-jobs
+        description: Although the names and values are not enforced, the combinations
+          which are meaningful are documented at
+          https://www.appveyor.com/docs/build-configuration/#allow-failing-jobs
         items:
           $ref: "#/definitions/StoredNameValueMatrix"
         type: array
@@ -3829,7 +3860,8 @@ definitions:
           repositoryUsername:
             type: string
           scheduleCrontabExpression:
-            description: Build schedule as an NCrontab Expression.  See https://github.com/atifaziz/NCrontab/wiki/Crontab-Expression
+            description: Build schedule as an NCrontab Expression.  See
+              https://github.com/atifaziz/NCrontab/wiki/Crontab-Expression
             externalDocs:
               url: https://www.appveyor.com/docs/build-configuration/#scheduled-builds
             type: string
@@ -3860,7 +3892,9 @@ definitions:
         minimum: 0
         type: integer
       reRunIncomplete:
-        description: Set `reRunIncomplete` set to `false` (default value) for full build re-run. Set it set to `true` to rerun only failed or cancelled jobs in multijob build.
+        description: Set `reRunIncomplete` set to `false` (default value) for full build
+          re-run. Set it set to `true` to rerun only failed or cancelled jobs in
+          multijob build.
         type: boolean
     required:
       - buildId
@@ -4161,7 +4195,8 @@ definitions:
       successfulBuildNotification: all
       userId: 3019
   UserAccountRolesResults:
-    description: The roles property contains all roles, not only the role for which the user is a member.
+    description: The roles property contains all roles, not only the role for which
+      the user is a member.
     properties:
       roles:
         items:

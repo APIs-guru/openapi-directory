@@ -69,7 +69,8 @@ paths:
                   format: double
                   type: number
                 travel_class:
-                  description: Travel class can be 'First Class', 'Economy', 'Business' or 'Premium Economy'
+                  description: Travel class can be 'First Class', 'Economy', 'Business' or
+                    'Premium Economy'
                   example: Economy
                   type: string
                 travel_mode:
@@ -834,15 +835,18 @@ paths:
                   format: int32
                   type: integer
                 vehicle_make:
-                  description: "vehicle make (like: Honda, Toyota, Smart), Required only when vehicle_type is 'personal car' "
+                  description: "vehicle make (like: Honda, Toyota, Smart), Required only when
+                    vehicle_type is 'personal car' "
                   example: Honda
                   type: string
                 vehicle_type:
-                  description: Vehicle type can be 'personal car', 'light truck' or 'heavy-duty truck'
+                  description: Vehicle type can be 'personal car', 'light truck' or 'heavy-duty
+                    truck'
                   example: personal car
                   type: string
                 vehicle_year:
-                  description: "vehicle year (like: 2010, 2015, 2019), Required only when vehicle_type is 'personal car' "
+                  description: "vehicle year (like: 2010, 2015, 2019), Required only when
+                    vehicle_type is 'personal car' "
                   example: 2010
                   format: int32
                   type: integer
@@ -1084,7 +1088,8 @@ paths:
                   format: double
                   type: number
                 vehicle_type:
-                  description: "Vehicle type (like: private car, motorcycle,cargo van,zero-emission)"
+                  description: "Vehicle type (like: private car, motorcycle,cargo
+                    van,zero-emission)"
                   example: PRIVATE CAR
                   type: string
               required:

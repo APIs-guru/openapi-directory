@@ -26,7 +26,8 @@ paths:
           required: false
           schema:
             type: integer
-        - description: Unique identifier of the Market used to retrieve/translate Legal Agreements
+        - description: Unique identifier of the Market used to retrieve/translate Legal
+            Agreements
           in: header
           name: X-Market-Id
           required: false
@@ -171,7 +172,8 @@ components:
     Error:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
@@ -187,23 +189,30 @@ components:
     ErrorField:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         message:
-          description: Human-readable, English description of the problem with the contents of the field
+          description: Human-readable, English description of the problem with the
+            contents of the field
           type: string
         path:
-          description: |-
+          description: >-
             <ul>
+
             <li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>
+
             <strong style='margin-left: 12px;'>OR</strong>
+
             <li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>
+
             </ul>
           format: json-path
           type: string
         pathRelated:
-          description: JSONPath referring to a field containing an error, which is referenced by `path`
+          description: JSONPath referring to a field containing an error, which is
+            referenced by `path`
           format: json-path
           type: string
       required:
@@ -212,7 +221,8 @@ components:
     ErrorLimit:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the specific error within client code
+          description: Short identifier for the error, suitable for indicating the
+            specific error within client code
           format: constant
           type: string
         fields:
