@@ -2,138 +2,169 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com/
 info:
-  title: Transactional Email
+  description: >
+    These APIs allow you to interact with HubSpot's Marketing Events
+    Extension. It allows you to:
+
+    * Create, Read or update Marketing Event information in HubSpot
+
+    * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event.
+
+    * Specify a URL that can be called to get the details of a Marketing Event.
+  title: Marketing Events Extension
   version: v3
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
     - format: openapi
-      url: https://api.hubspot.com/api-catalog-public/v1/apis/marketing/v3/transactional
+      url: https://api.hubspot.com/api-catalog-public/v1/apis/marketing/v3/marketing-events-beta
       version: "3.0"
   x-providerName: hubapi.com
   x-serviceName: marketing
+tags:
+  - description: Operations to interact with URL settings for an external application.
+    name: Settings
+  - description: Endpoints that allow you to create or modify the state of an
+      individual Marketing Event in HubSpot.
+    name: Basic
+  - description: Endpoints that allow you to create or modify the state of multiple
+      Marketing Events in HubSpot.
+    name: Batch
+  - description: Endpoints that allow you to search for Marketing Events in HubSpot.
+    name: Search
+  - description: Operations to mark HubSpot contacts as registered, attended or
+      cancelled a registration to a Marketing Event.
+    name: Subscriber State Changes
 paths:
-  /marketing/v3/transactional/single-email/send:
+  /marketing/v3/marketing-events-beta/events:
     post:
-      description: Asynchronously send a transactional email. Returns the status of
-        the email send with a statusId that can be used to continuously query
-        for the status using the Email Send Status API.
-      operationId: post-/marketing/v3/transactional/single-email/send_sendEmail
+      description: Creates a new marketing event in HubSpot
+      operationId: post-/marketing/v3/marketing-events-beta/events
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PublicSingleSendRequestEgg"
-        description: A request object describing the email to send.
-        required: false
+              $ref: "#/components/schemas/MarketingEventCreateRequestParams"
+        description: The details of the marketing event to create
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EmailSendStatusView"
+                $ref: "#/components/schemas/MarketingEventDefaultResponse"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
         - oauth2:
-            - transactional-email
-      summary: Send a single transactional email asynchronously.
-      tags: []
-      x-hubspot-rate-limit-exemptions:
-        - daily
-        - ten-secondly
-  /marketing/v3/transactional/smtp-tokens:
+            - crm.objects.marketing_events.write
+      summary: Create a marketing event
+      tags:
+        - Basic
+  /marketing/v3/marketing-events-beta/events/delete:
+    post:
+      description: Bulk delete a number of marketing events in HubSpot
+      operationId: post-/marketing/v3/marketing-events-beta/events/delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInputMarketingEventExternalUniqueIdentifier"
+        description: The details of the marketing events to delete
+        required: true
+      responses:
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Delete multiple marketing events
+      tags:
+        - Batch
+  /marketing/v3/marketing-events-beta/events/search:
     get:
-      description: Query multiple SMTP API tokens by campaign name or a single token
-        by emailCampaignId.
-      operationId: get-/marketing/v3/transactional/smtp-tokens_getTokensPage
+      description: Search for marketing events that have an event id that starts with
+        the query string
+      operationId: get-/marketing/v3/marketing-events-beta/events/search
       parameters:
-        - description: A name for the campaign tied to the SMTP API token.
+        - description: The partial event id to search for
           explode: true
           in: query
-          name: campaignName
-          required: false
+          name: q
+          required: true
           schema:
             type: string
-          style: form
-        - description: Identifier assigned to the campaign provided during the token
-            creation.
-          explode: true
-          in: query
-          name: emailCampaignId
-          required: false
-          schema:
-            type: string
-          style: form
-        - description: Starting point to get the next set of results.
-          explode: true
-          in: query
-          name: after
-          required: false
-          schema:
-            type: string
-          style: form
-        - description: Maximum number of tokens to return.
-          explode: true
-          in: query
-          name: limit
-          required: false
-          schema:
-            format: int32
-            type: integer
           style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CollectionResponseSmtpApiTokenView"
+                $ref: "#/components/schemas/CollectionResponseMarketingEventExternalUniqueIdent\
+                  ifierNoPaging"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-      summary: Query SMTP API tokens by campaign name or an emailCampaignId.
-      tags: []
+        - oauth2:
+            - crm.objects.marketing_events.read
+      summary: Search for marketing events
+      tags:
+        - Search
+  /marketing/v3/marketing-events-beta/events/upsert:
     post:
-      description: Create a SMTP API token.
-      operationId: post-/marketing/v3/transactional/smtp-tokens_createToken
+      description: Upset multiple Marketing Event. If there is an existing Marketing
+        event with the specified id, it will be updated; otherwise a new event
+        will be created.
+      operationId: post-/marketing/v3/marketing-events-beta/events/upsert
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SmtpApiTokenRequestEgg"
-        description: A request object that includes the campaign name tied to the token
-          and whether contacts should be created for recipients of emails.
-        required: false
+              $ref: "#/components/schemas/BatchInputMarketingEventCreateRequestParams"
+        description: The details of the marketing events to upsert
+        required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SmtpApiTokenView"
+                $ref: "#/components/schemas/BatchResponseMarketingEventPublicDefaultResponse"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-      summary: Create a SMTP API token.
-      tags: []
-  "/marketing/v3/transactional/smtp-tokens/{tokenId}":
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Create or update multiple marketing events
+      tags:
+        - Batch
+  "/marketing/v3/marketing-events-beta/events/{externalEventId}":
     delete:
-      description: Delete a single token by ID.
-      operationId: delete-/marketing/v3/transactional/smtp-tokens/{tokenId}_archiveToken
+      description: Deletes an existing Marketing Event with the specified id, if one exists.
+      operationId: delete-/marketing/v3/marketing-events-beta/events/{externalEventId}
       parameters:
-        - description: Identifier generated when a token is created.
+        - description: The id of the marketing event to delete
           explode: false
           in: path
-          name: tokenId
+          name: externalEventId
           required: true
           schema:
             type: string
           style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
       responses:
         "204":
           content: {}
@@ -142,61 +173,325 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-      summary: Delete a single token by ID.
-      tags: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Delete a marketing event
+      tags:
+        - Basic
     get:
-      description: Query a single token by ID.
-      operationId: get-/marketing/v3/transactional/smtp-tokens/{tokenId}_getTokenById
+      description: Returns the details of the Marketing Event with the specified id,
+        if one exists.
+      operationId: get-/marketing/v3/marketing-events-beta/events/{externalEventId}
       parameters:
-        - description: Identifier generated when a token is created.
+        - description: The id of the marketing event to return
           explode: false
           in: path
-          name: tokenId
+          name: externalEventId
           required: true
           schema:
             type: string
           style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SmtpApiTokenView"
+                $ref: "#/components/schemas/MarketingEventPublicReadResponse"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-      summary: Query a single token by ID.
-      tags: []
-  "/marketing/v3/transactional/smtp-tokens/{tokenId}/password-reset":
+        - oauth2:
+            - crm.objects.marketing_events.read
+      summary: Get a marketing event
+      tags:
+        - Basic
+    patch:
+      description: Updates an existing Marketing Event with the specified id, if one exists.
+      operationId: patch-/marketing/v3/marketing-events-beta/events/{externalEventId}
+      parameters:
+        - description: The id of the marketing event to update
+          explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MarketingEventUpdateRequestParams"
+        description: The details of the marketing event to update
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketingEventPublicDefaultResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Update a marketing event
+      tags:
+        - Basic
+    put:
+      description: Upsets a Marketing Event. If there is an existing Marketing event
+        with the specified id, it will be updated; otherwise a new event will be
+        created.
+      operationId: put-/marketing/v3/marketing-events-beta/events/{externalEventId}
+      parameters:
+        - description: The id of the marketing event to upsert
+          explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MarketingEventCreateRequestParams"
+        description: The details of the marketing event to upsert
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketingEventPublicDefaultResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Create or update a marketing event
+      tags:
+        - Basic
+  "/marketing/v3/marketing-events-beta/events/{externalEventId}/cancel":
     post:
-      description: Allows the creation of a replacement password for a given token.
-        Once the password is successfully reset, the old password for the token
-        will be invalid.
-      operationId: post-/marketing/v3/transactional/smtp-tokens/{tokenId}/password-reset_resetPassword
+      description: Mark a marketing event as cancelled.
+      operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/cancel
       parameters:
-        - description: Identifier generated when a token is created.
+        - description: The id of the marketing event to mark as cancelled
           explode: false
           in: path
-          name: tokenId
+          name: externalEventId
           required: true
           schema:
             type: string
+          style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketingEventDefaultResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Mark a marketing event as cancelled
+      tags:
+        - Basic
+  "/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/email-upsert":
+    post:
+      description: Record a subscription state between multiple HubSpot contacts and a
+        marketing event, using contact email addresses.
+      operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/email-upsert
+      parameters:
+        - description: The id of the marketing event
+          explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The new subscriber state for the HubSpot contacts and the specified
+            marketing event
+          explode: false
+          in: path
+          name: subscriberState
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInputMarketingEventEmailSubscriber"
+        description: The details of the contacts to subscribe to the event
+        required: true
+      responses:
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Record
+      tags:
+        - Subscriber State Changes
+  "/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/upsert":
+    post:
+      description: Record a subscription state between multiple HubSpot contacts and a
+        marketing event, using HubSpot contact ids.
+      operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/upsert
+      parameters:
+        - description: The id of the marketing event
+          explode: false
+          in: path
+          name: externalEventId
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The new subscriber state for the HubSpot contacts and the specified
+            marketing event
+          explode: false
+          in: path
+          name: subscriberState
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The account id associated with the marketing event
+          explode: true
+          in: query
+          name: externalAccountId
+          required: true
+          schema:
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInputMarketingEventSubscriber"
+        description: The details of the contacts to subscribe to the event
+        required: true
+      responses:
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - oauth2:
+            - crm.objects.marketing_events.write
+      summary: Record
+      tags:
+        - Subscriber State Changes
+  "/marketing/v3/marketing-events-beta/{appId}/settings":
+    get:
+      description: Retrieve the current settings for the application.
+      operationId: get-/marketing/v3/marketing-events-beta/{appId}/settings
+      parameters:
+        - description: The id of the application to retrieve the settings for.
+          explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
           style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SmtpApiTokenView"
+                $ref: "#/components/schemas/EventDetailSettings"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-      summary: Reset the password of an existing token.
-      tags: []
+        - developer_hapikey: []
+      summary: Retrieve the application settings
+      tags:
+        - Settings
+    post:
+      description: Create or update the current settings for the application.
+      operationId: post-/marketing/v3/marketing-events-beta/{appId}/settings
+      parameters:
+        - description: The id of the application to update the settings for.
+          explode: false
+          in: path
+          name: appId
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventDetailSettingsUrl"
+        description: The new application settings
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventDetailSettings"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - hapikey: []
+        - developer_hapikey: []
+      summary: Update the application settings
+      tags:
+        - Settings
 components:
   responses:
     Error:
@@ -206,95 +501,93 @@ components:
             $ref: "#/components/schemas/Error"
       description: An error occurred.
   schemas:
-    CollectionResponseSmtpApiTokenView:
-      description: A collection of SMTP API tokens.
+    BatchInputMarketingEventCreateRequestParams:
       properties:
-        paging:
-          $ref: "#/components/schemas/Paging"
-        results:
-          description: The actual collection of tokens.
+        inputs:
           items:
-            $ref: "#/components/schemas/SmtpApiTokenView"
+            $ref: "#/components/schemas/MarketingEventCreateRequestParams"
           type: array
       required:
-        - results
+        - inputs
       type: object
-    EmailSendStatusView:
-      description: Describes the status of an email send request.
+    BatchInputMarketingEventEmailSubscriber:
+      description: List of marketing event details to create or update
+      properties:
+        inputs:
+          description: List of marketing event details to create or update
+          items:
+            $ref: "#/components/schemas/MarketingEventEmailSubscriber"
+          type: array
+      required:
+        - inputs
+      type: object
+    BatchInputMarketingEventExternalUniqueIdentifier:
+      properties:
+        inputs:
+          items:
+            $ref: "#/components/schemas/MarketingEventExternalUniqueIdentifier"
+          type: array
+      required:
+        - inputs
+      type: object
+    BatchInputMarketingEventSubscriber:
+      description: List of HubSpot contacts to subscribe to the marketing event
+      properties:
+        inputs:
+          description: List of HubSpot contacts to subscribe to the marketing event
+          items:
+            $ref: "#/components/schemas/MarketingEventSubscriber"
+          type: array
+      required:
+        - inputs
+      type: object
+    BatchResponseMarketingEventPublicDefaultResponse:
       properties:
         completedAt:
-          description: Time when the send was completed.
           format: date-time
           type: string
-        eventId:
-          $ref: "#/components/schemas/EventIdView"
+        errors:
+          items:
+            $ref: "#/components/schemas/StandardError"
+          type: array
+        links:
+          additionalProperties:
+            type: string
+          type: object
+        numErrors:
+          format: int32
+          type: integer
         requestedAt:
-          description: Time when the send was requested.
           format: date-time
           type: string
-        sendResult:
-          description: Result of the send.
-          enum:
-            - SENT
-            - IDEMPOTENT_IGNORE
-            - QUEUED
-            - IDEMPOTENT_FAIL
-            - THROTTLED
-            - EMAIL_DISABLED
-            - PORTAL_SUSPENDED
-            - INVALID_TO_ADDRESS
-            - BLOCKED_DOMAIN
-            - PREVIOUSLY_BOUNCED
-            - EMAIL_UNCONFIRMED
-            - PREVIOUS_SPAM
-            - PREVIOUSLY_UNSUBSCRIBED_MESSAGE
-            - PREVIOUSLY_UNSUBSCRIBED_PORTAL
-            - INVALID_FROM_ADDRESS
-            - CAMPAIGN_CANCELLED
-            - VALIDATION_FAILED
-            - MTA_IGNORE
-            - BLOCKED_ADDRESS
-            - PORTAL_OVER_LIMIT
-            - PORTAL_EXPIRED
-            - PORTAL_MISSING_MARKETING_SCOPE
-            - MISSING_TEMPLATE_PROPERTIES
-            - MISSING_REQUIRED_PARAMETER
-            - PORTAL_AUTHENTICATION_FAILURE
-            - MISSING_CONTENT
-            - CORRUPT_INPUT
-            - TEMPLATE_RENDER_EXCEPTION
-            - GRAYMAIL_SUPPRESSED
-            - UNCONFIGURED_SENDING_DOMAIN
-            - UNDELIVERABLE
-            - CANCELLED_ABUSE
-            - QUARANTINED_ADDRESS
-            - ADDRESS_ONLY_ACCEPTED_ON_PROD
-            - PORTAL_NOT_AUTHORIZED_FOR_APPLICATION
-            - ADDRESS_LIST_BOMBED
-            - ADDRESS_OPTED_OUT
-            - RECIPIENT_FATIGUE_SUPPRESSED
-            - TOO_MANY_RECIPIENTS
-            - PREVIOUSLY_UNSUBSCRIBED_BRAND
-            - NON_MARKETABLE_CONTACT
-          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/MarketingEventPublicDefaultResponse"
+          type: array
         startedAt:
-          description: Time when the send began processing.
           format: date-time
           type: string
         status:
-          description: Status of the send request.
           enum:
             - PENDING
             - PROCESSING
             - CANCELED
             - COMPLETE
           type: string
-        statusId:
-          description: Identifier used to query the status of the send.
-          type: string
       required:
+        - completedAt
+        - results
+        - startedAt
         - status
-        - statusId
+      type: object
+    CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging:
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/MarketingEventExternalUniqueIdentifier"
+          type: array
+      required:
+        - results
       type: object
     Error:
       example:
@@ -351,6 +644,78 @@ components:
         - correlationId
         - message
       type: object
+    ErrorCategory:
+      properties:
+        httpStatus:
+          enum:
+            - CONTINUE
+            - SWITCHING_PROTOCOLS
+            - PROCESSING
+            - OK
+            - CREATED
+            - ACCEPTED
+            - NON_AUTHORITATIVE_INFORMATION
+            - NO_CONTENT
+            - RESET_CONTENT
+            - PARTIAL_CONTENT
+            - MULTI_STATUS
+            - ALREADY_REPORTED
+            - IM_USED
+            - MULTIPLE_CHOICES
+            - MOVED_PERMANENTLY
+            - FOUND
+            - SEE_OTHER
+            - NOT_MODIFIED
+            - USE_PROXY
+            - TEMPORARY_REDIRECT
+            - PERMANENT_REDIRECT
+            - BAD_REQUEST
+            - UNAUTHORIZED
+            - PAYMENT_REQUIRED
+            - FORBIDDEN
+            - NOT_FOUND
+            - METHOD_NOT_ALLOWED
+            - NOT_ACCEPTABLE
+            - PROXY_AUTHENTICATION_REQUIRED
+            - REQUEST_TIMEOUT
+            - CONFLICT
+            - GONE
+            - LENGTH_REQUIRED
+            - PRECONDITION_FAILED
+            - REQUEST_ENTITY_TOO_LARGE
+            - REQUEST_URI_TOO_LONG
+            - UNSUPPORTED_MEDIA_TYPE
+            - REQUESTED_RANGE_NOT_SATISFIABLE
+            - EXPECTATION_FAILED
+            - IM_A_TEAPOT
+            - MISDIRECTED_REQUEST
+            - UNPROCESSABLE_ENTITY
+            - LOCKED
+            - FAILED_DEPENDENCY
+            - UPGRADE_REQUIRED
+            - PRECONDITION_REQUIRED
+            - TOO_MANY_REQUESTS
+            - REQUEST_HEADERS_FIELDS_TOO_LARGE
+            - INTERNAL_STALE_SERVICE_DISCOVERY
+            - UNAVAILABLE_FOR_LEGAL_REASONS
+            - INTERNAL_SERVER_ERROR
+            - NOT_IMPLEMENTED
+            - BAD_GATEWAY
+            - SERVICE_UNAVAILABLE
+            - GATEWAY_TIMEOUT
+            - HTTP_VERSION_NOT_SUPPORTED
+            - VARIANT_ALSO_NEGOTIATES
+            - INSUFFICIENT_STORAGE
+            - LOOP_DETECTED
+            - NOT_EXTENDED
+            - NETWORK_AUTHENTICATION_REQUIRED
+          type: string
+        name:
+          type: string
+      required:
+        - httpStatus
+        - name
+      type: object
     ErrorDetail:
       properties:
         code:
@@ -381,155 +746,522 @@ components:
       required:
         - message
       type: object
-    EventIdView:
-      description: The ID of a send event.
+    EventDetailSettings:
       properties:
-        created:
-          description: Time of event creation.
-          format: date-time
-          type: string
-        id:
-          description: Identifier of event.
-          type: string
-      required:
-        - created
-        - id
-      type: object
-    NextPage:
-      properties:
-        after:
-          type: string
-        link:
-          type: string
-      required:
-        - after
-      type: object
-    Paging:
-      properties:
-        next:
-          $ref: "#/components/schemas/NextPage"
-      type: object
-    PublicSingleSendEmail:
-      description: A JSON object containing anything you want to override.
-      properties:
-        bcc:
-          description: List of email addresses to send as Bcc.
-          items:
-            type: string
-          type: array
-        cc:
-          description: List of email addresses to send as Cc.
-          items:
-            type: string
-          type: array
-        from:
-          description: The From header for the email.
-          type: string
-        replyTo:
-          description: List of Reply-To header values for the email.
-          items:
-            type: string
-          type: array
-        sendId:
-          description: ID for a particular send. No more than one email will be sent per
-            sendId.
-          type: string
-        to:
-          description: The recipient of the email.
-          type: string
-      required:
-        - bcc
-        - cc
-        - replyTo
-      type: object
-    PublicSingleSendRequestEgg:
-      description: A request to send a single transactional email asynchronously.
-      properties:
-        contactProperties:
-          additionalProperties:
-            type: string
-          description: The contactProperties field is a map of contact property values.
-            Each contact property value contains a name and value property. Each
-            property will get set on the contact record and will be visible in
-            the template under {{ contact.NAME }}. Use these properties when you
-            want to set a contact property while you’re sending the email. For
-            example, when sending a reciept you may want to set a last_paid_date
-            property, as the sending of the receipt will have information about
-            the last payment.
-          type: object
-        customProperties:
-          description: >-
-            The customProperties field is a map of property values. Each
-            property value contains a name and value property. Each property
-            will be visible in the template under {{ custom.NAME }}.
-
-            Note: Custom properties do not currently support arrays. To provide a listing in an email, one workaround is to build an HTML list (either with tables or ul) and specify it as a custom property.
-          properties: {}
-          type: object
-        emailId:
-          description: The content ID for the transactional email, which can be found in
-            email tool UI.
+        appId:
+          description: The id of the application the settings are for
           format: int32
           type: integer
-        message:
-          $ref: "#/components/schemas/PublicSingleSendEmail"
-      required:
-        - contactProperties
-        - customProperties
-        - emailId
-        - message
-      type: object
-    SmtpApiTokenRequestEgg:
-      description: A request object to create a SMTP API token
-      properties:
-        campaignName:
-          description: A name for the campaign tied to the SMTP API token.
+        eventDetailsUrl:
+          description: The url that will be used to fetch marketing event details by id
           type: string
-        createContact:
-          description: Indicates whether a contact should be created for recipients of
-            emails.
-          type: boolean
       required:
-        - campaignName
-        - createContact
+        - appId
+        - eventDetailsUrl
       type: object
-    SmtpApiTokenView:
-      description: A SMTP API token provides both an ID and password that can be used
-        to send email through the HubSpot SMTP API.
+    EventDetailSettingsUrl:
       properties:
-        campaignName:
-          description: A name for the campaign tied to the token.
+        eventDetailsUrl:
+          description: "The url that will be used to fetch marketing event details by id.
+            Must contain a `%s` character sequence that will be substituted with
+            the event id. For example: `https://my.event.app/events/%s`"
           type: string
-        createContact:
-          description: Indicates whether a contact should be created for recipients of
-            emails.
-          type: boolean
-        createdAt:
-          description: Timestamp generated when a token is created.
+      required:
+        - eventDetailsUrl
+      type: object
+    MarketingEventCreateRequestParams:
+      properties:
+        customProperties:
+          description: >
+            A list of PropertyValues. These can be whatever kind of property
+            names and values you want. However, they must already exist on the
+            HubSpot account's definition of the MarketingEvent Object. If they
+            don't they will be filtered out and not set.
+
+            In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
+          items:
+            $ref: "#/components/schemas/PropertyValue"
+          type: array
+        endDateTime:
+          description: The end date and time of the marketing event.
           format: date-time
           type: string
-        createdBy:
-          description: Email address of the user that sent the token creation request.
+        eventCancelled:
+          description: Indicates if the marketing event has been cancelled.  Defaults to
+            `false`
+          type: boolean
+        eventDescription:
+          description: The description of the marketing event.
           type: string
-        emailCampaignId:
-          description: Identifier assigned to the campaign provided in the token creation
-            request.
+        eventName:
+          description: The name of the marketing event.
           type: string
-        id:
-          description: User name to log into the HubSpot SMTP server.
+        eventOrganizer:
+          description: The name of the organizer of the marketing event.
           type: string
-        password:
-          description: Password used to log into the HubSpot SMTP server.
+        eventType:
+          description: "Describes what type of event this is.  For example: `WEBINAR`,
+            `CONFERENCE`, `WORKSHOP`"
+          type: string
+        eventUrl:
+          description: A URL in the external event application where the marketing event
+            can be managed.
+          type: string
+        externalAccountId:
+          description: The accountId that is associated with this marketing event in the
+            external event application.
+          type: string
+        externalEventId:
+          description: The id of the marketing event in the external event application.
+          type: string
+        startDateTime:
+          description: The start date and time of the marketing event.
+          format: date-time
           type: string
       required:
-        - campaignName
-        - createContact
+        - customProperties
+        - eventName
+        - eventOrganizer
+        - externalAccountId
+        - externalEventId
+      type: object
+    MarketingEventDefaultResponse:
+      properties:
+        customProperties:
+          description: >
+            A list of PropertyValues. These can be whatever kind of property
+            names and values you want. However, they must already exist on the
+            HubSpot account's definition of the MarketingEvent Object. If they
+            don't they will be filtered out and not set.
+
+            In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
+          items:
+            $ref: "#/components/schemas/PropertyValue"
+          type: array
+        endDateTime:
+          description: The end date and time of the marketing event.
+          format: date-time
+          type: string
+        eventCancelled:
+          description: Indicates if the marketing event has been cancelled.
+          type: boolean
+        eventDescription:
+          description: The description of the marketing event.
+          type: string
+        eventName:
+          description: The name of the marketing event.
+          type: string
+        eventOrganizer:
+          description: The name of the organizer of the marketing event.
+          type: string
+        eventType:
+          description: The type of the marketing event.
+          type: string
+        eventUrl:
+          description: The URL in the external event application where the marketing event
+            can be managed.
+          type: string
+        startDateTime:
+          description: The start date and time of the marketing event.
+          format: date-time
+          type: string
+      required:
+        - customProperties
+        - eventName
+        - eventOrganizer
+      type: object
+    MarketingEventEmailSubscriber:
+      properties:
+        email:
+          description: The email address of the contact in HubSpot to associate with the
+            event. Note that the contact must already exist in HubSpot; a
+            contact will not be created.
+          type: string
+        interactionDateTime:
+          description: The date and time at which the contact subscribed to the event.
+          format: int64
+          type: integer
+      required:
+        - email
+        - interactionDateTime
+      type: object
+    MarketingEventExternalUniqueIdentifier:
+      properties:
+        appId:
+          description: The id of the application that created the marketing event in
+            HubSpot.
+          format: int32
+          type: integer
+        externalAccountId:
+          description: The accountId that is associated with this marketing event in the
+            external event application.
+          type: string
+        externalEventId:
+          description: The id of the marketing event in the external event application.
+          type: string
+      required:
+        - appId
+        - externalAccountId
+        - externalEventId
+      type: object
+    MarketingEventPublicDefaultResponse:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        customProperties:
+          description: >
+            A list of PropertyValues. These can be whatever kind of property
+            names and values you want. However, they must already exist on the
+            HubSpot account's definition of the MarketingEvent Object. If they
+            don't they will be filtered out and not set.
+
+            In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
+          items:
+            $ref: "#/components/schemas/PropertyValue"
+          type: array
+        endDateTime:
+          description: The end date and time of the marketing event.
+          format: date-time
+          type: string
+        eventCancelled:
+          description: Indicates if the marketing event has been cancelled.
+          type: boolean
+        eventDescription:
+          description: The description of the marketing event.
+          type: string
+        eventName:
+          description: The name of the marketing event.
+          type: string
+        eventOrganizer:
+          description: The name of the organizer of the marketing event.
+          type: string
+        eventType:
+          description: The type of the marketing event.
+          type: string
+        eventUrl:
+          description: A URL in the external event application where the marketing event
+            can be managed.
+          type: string
+        id:
+          type: string
+        startDateTime:
+          description: The start date and time of the marketing event.
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
         - createdAt
-        - createdBy
-        - emailCampaignId
+        - customProperties
+        - eventName
+        - eventOrganizer
         - id
+        - updatedAt
+      type: object
+    MarketingEventPublicReadResponse:
+      properties:
+        attendees:
+          description: The number of HubSpot contacts that attended this marketing event.
+          format: int32
+          type: integer
+        cancellations:
+          description: The number of HubSpot contacts that registered for this marketing
+            event, but later cancelled their registration.
+          format: int32
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        customProperties:
+          description: >
+            A list of PropertyValues. These can be whatever kind of property
+            names and values you want. However, they must already exist on the
+            HubSpot account's definition of the MarketingEvent Object. If they
+            don't they will be filtered out and not set.
+
+            In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
+          items:
+            $ref: "#/components/schemas/PropertyValue"
+          type: array
+        endDateTime:
+          description: The end date and time of the marketing event.
+          format: date-time
+          type: string
+        eventCancelled:
+          description: Indicates if the marketing event has been cancelled.
+          type: boolean
+        eventDescription:
+          description: The description of the marketing event.
+          type: string
+        eventName:
+          description: The name of the marketing event.
+          type: string
+        eventOrganizer:
+          description: The name of the organizer of the marketing event.
+          type: string
+        eventType:
+          description: The type of the marketing event.
+          type: string
+        eventUrl:
+          description: A URL in the external event application where the marketing event
+            can be managed.
+          type: string
+        externalEventId:
+          description: The id of the marketing event in the external event application.
+          type: string
+        id:
+          type: string
+        noShows:
+          description: The number of HubSpot contacts that registered for this marketing
+            event, but did not attend. This field only had a value when the
+            event is over.
+          format: int32
+          type: integer
+        registrants:
+          description: The number of HubSpot contacts that registered for this marketing
+            event.
+          format: int32
+          type: integer
+        startDateTime:
+          description: The start date and time of the marketing event.
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - attendees
+        - cancellations
+        - createdAt
+        - customProperties
+        - eventName
+        - eventOrganizer
+        - externalEventId
+        - id
+        - noShows
+        - registrants
+        - updatedAt
+      type: object
+    MarketingEventSubscriber:
+      properties:
+        interactionDateTime:
+          description: The date and time at which the contact subscribed to the event.
+          format: int64
+          type: integer
+        vid:
+          format: int32
+          type: integer
+      required:
+        - interactionDateTime
+        - vid
+      type: object
+    MarketingEventUpdateRequestParams:
+      properties:
+        customProperties:
+          description: >
+            A list of PropertyValues. These can be whatever kind of property
+            names and values you want. However, they must already exist on the
+            HubSpot account's definition of the MarketingEvent Object. If they
+            don't they will be filtered out and not set.
+
+            In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
+          items:
+            $ref: "#/components/schemas/PropertyValue"
+          type: array
+        endDateTime:
+          description: The end date and time of the marketing event.
+          format: date-time
+          type: string
+        eventCancelled:
+          description: Indicates if the marketing event has been cancelled. Defaults to
+            `false`
+          type: boolean
+        eventDescription:
+          description: The description of the marketing event.
+          type: string
+        eventName:
+          description: The name of the marketing event.
+          type: string
+        eventOrganizer:
+          description: The name of the organizer of the marketing event.
+          type: string
+        eventType:
+          description: "Describes what type of event this is.  For example: `WEBINAR`,
+            `CONFERENCE`, `WORKSHOP`"
+          type: string
+        eventUrl:
+          description: A URL in the external event application where the marketing event
+            can be managed.
+          type: string
+        startDateTime:
+          description: The start date and time of the marketing event.
+          format: date-time
+          type: string
+      required:
+        - customProperties
+      type: object
+    PropertyValue:
+      properties:
+        name:
+          type: string
+        requestId:
+          type: string
+        selectedByUser:
+          type: boolean
+        selectedByUserTimestamp:
+          format: int64
+          type: integer
+        source:
+          enum:
+            - IMPORT
+            - API
+            - FORM
+            - ANALYTICS
+            - MIGRATION
+            - SALESFORCE
+            - INTEGRATION
+            - CONTACTS_WEB
+            - WAL_INCREMENTAL
+            - TASK
+            - EMAIL
+            - WORKFLOWS
+            - CALCULATED
+            - SOCIAL
+            - BATCH_UPDATE
+            - SIGNALS
+            - BIDEN
+            - DEFAULT
+            - COMPANIES
+            - DEALS
+            - ASSISTS
+            - PRESENTATIONS
+            - TALLY
+            - SIDEKICK
+            - CRM_UI
+            - MERGE_CONTACTS
+            - PORTAL_USER_ASSOCIATOR
+            - INTEGRATIONS_PLATFORM
+            - BCC_TO_CRM
+            - FORWARD_TO_CRM
+            - ENGAGEMENTS
+            - SALES
+            - HEISENBERG
+            - LEADIN
+            - GMAIL_INTEGRATION
+            - ACADEMY
+            - SALES_MESSAGES
+            - AVATARS_SERVICE
+            - MERGE_COMPANIES
+            - SEQUENCES
+            - COMPANY_FAMILIES
+            - MOBILE_IOS
+            - MOBILE_ANDROID
+            - CONTACTS
+            - ASSOCIATIONS
+            - EXTENSION
+            - SUCCESS
+            - BOT
+            - INTEGRATIONS_SYNC
+            - AUTOMATION_PLATFORM
+            - CONVERSATIONS
+            - EMAIL_INTEGRATION
+            - CONTENT_MEMBERSHIP
+            - QUOTES
+            - BET_ASSIGNMENT
+            - QUOTAS
+            - BET_CRM_CONNECTOR
+            - MEETINGS
+            - MERGE_OBJECTS
+            - RECYCLING_BIN
+            - ADS
+            - AI_GROUP
+            - COMMUNICATOR
+            - SETTINGS
+            - PROPERTY_SETTINGS
+            - PIPELINE_SETTINGS
+            - COMPANY_INSIGHTS
+            - BEHAVIORAL_EVENTS
+            - PAYMENTS
+            - GOALS
+            - PORTAL_OBJECT_SYNC
+          type: string
+        sourceId:
+          type: string
+        sourceLabel:
+          type: string
+        sourceMetadata:
+          description: "Source metadata encoded as a base64 string. For example:
+            `ZXhhbXBsZSBzdHJpbmc=`"
+          type: string
+        sourceVid:
+          items:
+            format: int64
+            type: integer
+          type: array
+        timestamp:
+          format: int64
+          type: integer
+        updatedByUserId:
+          format: int32
+          type: integer
+        value:
+          type: string
+      required:
+        - name
+        - requestId
+        - selectedByUser
+        - selectedByUserTimestamp
+        - source
+        - sourceId
+        - sourceLabel
+        - sourceMetadata
+        - sourceVid
+        - timestamp
+        - updatedByUserId
+        - value
+      type: object
+    StandardError:
+      properties:
+        category:
+          $ref: "#/components/schemas/ErrorCategory"
+        context:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        errors:
+          items:
+            $ref: "#/components/schemas/ErrorDetail"
+          type: array
+        id:
+          type: string
+        links:
+          additionalProperties:
+            type: string
+          type: object
+        message:
+          type: string
+        status:
+          type: string
+        subCategory:
+          properties: {}
+          type: object
+      required:
+        - category
+        - context
+        - errors
+        - links
+        - message
+        - status
       type: object
   securitySchemes:
+    developer_hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
     hapikey:
       in: query
       name: hapikey
@@ -539,8 +1271,7 @@ components:
         authorizationCode:
           authorizationUrl: https://app.hubspot.com/oauth/authorize
           scopes:
-            transactional-email: Transactional Emails
+            crm.objects.marketing_events.read: Read marketing events
+            crm.objects.marketing_events.write: Write marketing events
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
-source:
-  url: {}
