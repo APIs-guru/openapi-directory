@@ -4773,9 +4773,7 @@ components:
             - $ref: '#/components/schemas/Name'
             - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
         properties:
-          allOf:
-            - $ref: '#/components/schemas/AssetModelPropertyDefinitions'
-            - description: The asset property definitions for this composite model.
+          description: The asset property definitions for this composite model.
       description: Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.
     CreateDashboardResponse:
       type: object
@@ -5648,9 +5646,7 @@ components:
             - $ref: '#/components/schemas/Name'
             - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
         properties:
-          allOf:
-            - $ref: '#/components/schemas/AssetModelProperties'
-            - description: The asset property definitions for this composite model.
+          description: The asset property definitions for this composite model.
       description: Contains information about a composite model in an asset model. This object contains the asset property definitions that you define in the composite model.
     UpdateDashboardResponse:
       type: object
@@ -5860,10 +5856,6 @@ components:
       pattern: '[^\u0000-\u001F\u007F]+'
       minLength: 1
       maxLength: 2048
-    AssetProperties:
-      type: array
-      items:
-        $ref: '#/components/schemas/AssetProperty'
     AssetCompositeModel:
       type: object
       required:
@@ -5884,9 +5876,7 @@ components:
             - $ref: '#/components/schemas/Name'
             - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
         properties:
-          allOf:
-            - $ref: '#/components/schemas/AssetProperties'
-            - description: The asset properties that this composite model defines.
+          description: The asset properties that this composite model defines.
       description: Contains information about a composite model in an asset. This object contains the asset's properties that you define in the composite model.
     AssetCompositeModels:
       type: array
@@ -5952,14 +5942,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ID'
-    AssetModelProperties:
-      type: array
-      items:
-        $ref: '#/components/schemas/AssetModelProperty'
-    AssetModelPropertyDefinitions:
-      type: array
-      items:
-        $ref: '#/components/schemas/AssetModelPropertyDefinition'
     AssetModelCompositeModelDefinitions:
       type: array
       items:
@@ -5976,6 +5958,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssetModelHierarchyDefinition'
+    AssetModelProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelProperty'
     PropertyDataType:
       type: string
       enum:
@@ -6009,6 +5995,10 @@ components:
             - $ref: '#/components/schemas/Metric'
             - description: 'Specifies an asset metric property. A metric contains a mathematical expression that uses aggregate functions to process all input data points over a time interval and output a single data point, such as to calculate the average hourly temperature.'
       description: 'Contains a property type, which can be one of <code>attribute</code>, <code>measurement</code>, <code>metric</code>, or <code>transform</code>.'
+    AssetModelPropertyDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelPropertyDefinition'
     AssetModelState:
       type: string
       enum:
@@ -6127,6 +6117,10 @@ components:
             - $ref: '#/components/schemas/PropertyUnit'
             - description: The unit (such as <code>Newtons</code> or <code>RPM</code>) of the asset property.
       description: Contains asset property information.
+    AssetProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetProperty'
     PropertyAlias:
       type: string
       pattern: '[^\u0000-\u001F\u007F]+'

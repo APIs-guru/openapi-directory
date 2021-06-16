@@ -3321,9 +3321,7 @@ components:
             - $ref: '#/components/schemas/GeneratedPolicyList'
             - description: 'The text to use as the content for the new policy. The policy is created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> action.'
         properties:
-          allOf:
-            - $ref: '#/components/schemas/GeneratedPolicyProperties'
-            - description: A <code>GeneratedPolicyProperties</code> object that contains properties of the generated policy.
+          description: A <code>GeneratedPolicyProperties</code> object that contains properties of the generated policy.
       description: Contains the text for the generated policy and its details.
     GetAccessPreviewRequest:
       type: object

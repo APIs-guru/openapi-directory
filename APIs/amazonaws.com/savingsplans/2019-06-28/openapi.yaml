@@ -1452,10 +1452,6 @@ components:
         - payment-option
         - start
         - end
-    SavingsPlanOfferingPropertyList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SavingsPlanOfferingProperty'
     SavingsPlanOffering:
       type: object
       properties:
@@ -1500,9 +1496,7 @@ components:
             - $ref: '#/components/schemas/SavingsPlanOperation'
             - description: The specific AWS operation for the line item in the billing report.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/SavingsPlanOfferingPropertyList'
-            - description: The properties.
+          description: The properties.
       description: Information about a Savings Plan offering.
     SavingsPlanOfferingFilterAttribute:
       type: string
@@ -1526,6 +1520,10 @@ components:
             - $ref: '#/components/schemas/JsonSafeFilterValueString'
             - description: The property value.
       description: Information about a property.
+    SavingsPlanOfferingPropertyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SavingsPlanOfferingProperty'
     SavingsPlanRatePricePerUnit:
       type: string
     SavingsPlanRateUnit:
@@ -1534,10 +1532,6 @@ components:
         - Hrs
         - Lambda-GB-Second
         - Request
-    SavingsPlanOfferingRatePropertyList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SavingsPlanOfferingRateProperty'
     SavingsPlanOfferingRate:
       type: object
       properties:
@@ -1570,9 +1564,7 @@ components:
             - $ref: '#/components/schemas/SavingsPlanRateOperation'
             - description: The specific AWS operation for the line item in the billing report.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/SavingsPlanOfferingRatePropertyList'
-            - description: The properties.
+          description: The properties.
       description: Information about a Savings Plan offering rate.
     SavingsPlanRateFilterAttribute:
       type: string
@@ -1595,10 +1587,10 @@ components:
             - $ref: '#/components/schemas/JsonSafeFilterValueString'
             - description: The property value.
       description: Information about a property.
-    SavingsPlanRatePropertyList:
+    SavingsPlanOfferingRatePropertyList:
       type: array
       items:
-        $ref: '#/components/schemas/SavingsPlanRateProperty'
+        $ref: '#/components/schemas/SavingsPlanOfferingRateProperty'
     SavingsPlanRate:
       type: object
       properties:
@@ -1631,9 +1623,7 @@ components:
             - $ref: '#/components/schemas/SavingsPlanRateOperation'
             - description: The specific AWS operation for the line item in the billing report.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/SavingsPlanRatePropertyList'
-            - description: The properties.
+          description: The properties.
       description: Information about a Savings Plan rate.
     SavingsPlanRateFilterName:
       type: string
@@ -1666,6 +1656,10 @@ components:
             - $ref: '#/components/schemas/JsonSafeFilterValueString'
             - description: The property value.
       description: Information about a property.
+    SavingsPlanRatePropertyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SavingsPlanRateProperty'
     TagKeyList:
       type: array
       items:

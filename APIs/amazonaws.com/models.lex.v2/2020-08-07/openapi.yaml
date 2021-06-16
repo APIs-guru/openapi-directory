@@ -1892,7 +1892,7 @@ paths:
   '/policy/{resourceArn}/statements/':
     post:
       operationId: CreateResourcePolicyStatement
-      description: '<p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn''t exist, a new policy is created.</p> <p>You can create a resource policy statement that allows cross-account access.</p>'
+      description: '<p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn''t exist, a new policy is created.</p> <p>You can''t create a resource policy statement that allows cross-account access.</p>'
       responses:
         '200':
           description: Success
@@ -2148,6 +2148,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ObfuscationSettingType'
                         - description: Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.
+                multipleValuesSetting:
+                  description: Indicates whether a slot can return multiple values.
+                  type: object
+                  properties:
+                    allowMultipleValues:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: '<p>Indicates whether a slot can return multiple values. When <code>true</code>, the slot may return more than one value in a response. When <code>false</code>, the slot returns only a single value.</p> <p>Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>allowMutlipleValues</code> is not set, the default value is <code>false</code>.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3267,7 +3275,7 @@ paths:
             maxLength: 10
     put:
       operationId: UpdateExport
-      description: Updates the password used to encrypt an export zip archive.
+      description: '<p>Updates the password used to protect an export zip archive.</p> <p>The password is not required. If you don''t supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.</p>'
       responses:
         '202':
           description: Success
@@ -4169,6 +4177,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ObfuscationSettingType'
                         - description: Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.
+                multipleValuesSetting:
+                  description: Indicates whether a slot can return multiple values.
+                  type: object
+                  properties:
+                    allowMultipleValues:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: '<p>Indicates whether a slot can return multiple values. When <code>true</code>, the slot may return more than one value in a response. When <code>false</code>, the slot returns only a single value.</p> <p>Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>allowMutlipleValues</code> is not set, the default value is <code>false</code>.</p>'
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/':
     delete:
       operationId: DeleteSlotType
@@ -5573,6 +5589,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The timestamp of the date and time that the slot was created.
+        multipleValuesSetting:
+          allOf:
+            - $ref: '#/components/schemas/MultipleValuesSetting'
+            - description: Indicates whether the slot returns multiple values in one response.
     SlotDefaultValueSpecification:
       type: object
       required:
@@ -6210,6 +6230,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp of the date and time that the slot was last updated.
+        multipleValuesSetting:
+          allOf:
+            - $ref: '#/components/schemas/MultipleValuesSetting'
+            - description: '<p>Indicates whether the slot accepts multiple values in a single utterance.</p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>'
     DescribeSlotTypeResponse:
       type: object
       properties:
@@ -7052,6 +7076,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The timestamp of the date and time that the slot was last updated.
+        multipleValuesSetting:
+          allOf:
+            - $ref: '#/components/schemas/MultipleValuesSetting'
+            - description: Indicates whether the slot accepts multiple values in one response.
     UpdateSlotTypeResponse:
       type: object
       properties:
@@ -8101,6 +8129,14 @@ components:
             - $ref: '#/components/schemas/ObfuscationSettingType'
             - description: Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.
       description: 'Determines whether Amazon Lex obscures slot values in conversation logs. '
+    MultipleValuesSetting:
+      type: object
+      properties:
+        allowMultipleValues:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Indicates whether a slot can return multiple values. When <code>true</code>, the slot may return more than one value in a response. When <code>false</code>, the slot returns only a single value.</p> <p>Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>allowMutlipleValues</code> is not set, the default value is <code>false</code>.</p>'
+      description: Indicates whether a slot can return multiple values.
     CreateSlotRequest:
       type: object
       required:
@@ -8129,6 +8165,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ObfuscationSetting'
             - description: '<p>Determines how slot values are used in Amazon CloudWatch logs. If the value of the <code>obfuscationSetting</code> parameter is <code>DefaultObfuscation</code>, slot values are obfuscated in the log output. If the value is <code>None</code>, the actual value is present in the log output.</p> <p>The default is to obfuscate values in the CloudWatch logs.</p>'
+        multipleValuesSetting:
+          allOf:
+            - $ref: '#/components/schemas/MultipleValuesSetting'
+            - description: '<p>Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>. </p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>'
     SlotTypeValues:
       type: array
       items:
@@ -9323,6 +9363,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ObfuscationSetting'
             - description: 'New settings that determine how slot values are formatted in Amazon CloudWatch logs. '
+        multipleValuesSetting:
+          allOf:
+            - $ref: '#/components/schemas/MultipleValuesSetting'
+            - description: '<p>Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>'
     UpdateSlotTypeRequest:
       type: object
       required:

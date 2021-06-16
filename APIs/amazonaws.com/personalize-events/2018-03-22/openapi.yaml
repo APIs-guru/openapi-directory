@@ -356,9 +356,7 @@ components:
             - $ref: '#/components/schemas/ItemId'
             - description: The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/EventPropertiesJSON'
-            - description: '<p>A string map of event-specific data that you might choose to record. For example, if a user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>) , you might also send the number of movie ratings made by the user.</p> <p>Each item in the map consists of a key-value pair. For example,</p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Interactions schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Interactions schema.</p>'
+          description: '<p>A string map of event-specific data that you might choose to record. For example, if a user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>) , you might also send the number of movie ratings made by the user.</p> <p>Each item in the map consists of a key-value pair. For example,</p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Interactions schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Interactions schema.</p>'
         sentAt:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -383,9 +381,7 @@ components:
             - $ref: '#/components/schemas/StringType'
             - description: The ID associated with the item.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/ItemProperties'
-            - description: '<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfRatings": "12"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Items dataset. In the previous example, the <code>numberOfRatings</code> matches the ''NUMBER_OF_RATINGS'' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Horror|Action\"</code>.</p>'
+          description: '<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfRatings": "12"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Items dataset. In the previous example, the <code>numberOfRatings</code> matches the ''NUMBER_OF_RATINGS'' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Horror|Action\"</code>.</p>'
       description: 'Represents item metadata added to an Items dataset using the <code>PutItems</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html">Importing Items Incrementally</a>. '
     ResourceNotFoundException: {}
     ResourceInUseException: {}
@@ -399,9 +395,7 @@ components:
             - $ref: '#/components/schemas/StringType'
             - description: The ID associated with the user.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/UserProperties'
-            - description: '<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfVideosWatched": "45"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Users dataset. In the previous example, the <code>numberOfVideosWatched</code> matches the ''NUMBER_OF_VIDEOS_WATCHED'' field defined in the Users schema. For categorical string data, to include multiple categories for a single user, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Member|Frequent shopper\"</code>.</p>'
+          description: '<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfVideosWatched": "45"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Users dataset. In the previous example, the <code>numberOfVideosWatched</code> matches the ''NUMBER_OF_VIDEOS_WATCHED'' field defined in the Users schema. For categorical string data, to include multiple categories for a single user, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Member|Frequent shopper\"</code>.</p>'
       description: 'Represents user metadata added to a Users dataset using the <code>PutUsers</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html">Importing Users Incrementally</a>.'
     Arn:
       type: string
@@ -421,10 +415,6 @@ components:
       type: string
       minLength: 1
       maxLength: 256
-    EventPropertiesJSON:
-      type: string
-      minLength: 1
-      maxLength: 1024
     RecommendationId:
       type: string
       minLength: 1
@@ -441,16 +431,20 @@ components:
         $ref: '#/components/schemas/Event'
       minItems: 1
       maxItems: 10
-    ItemProperties:
+    EventPropertiesJSON:
       type: string
       minLength: 1
-      maxLength: 24262
+      maxLength: 1024
     ItemList:
       type: array
       items:
         $ref: '#/components/schemas/Item'
       minItems: 1
       maxItems: 10
+    ItemProperties:
+      type: string
+      minLength: 1
+      maxLength: 24262
     UserId:
       type: string
       minLength: 1

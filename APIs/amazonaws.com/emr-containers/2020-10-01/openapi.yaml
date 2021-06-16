@@ -1435,11 +1435,6 @@ components:
       pattern: .*\S.*
       minLength: 1
       maxLength: 1024
-    SensitivePropertiesMap:
-      type: object
-      maxProperties: 100
-      additionalProperties:
-        $ref: '#/components/schemas/String1024'
     Configuration:
       type: object
       required:
@@ -1450,9 +1445,7 @@ components:
             - $ref: '#/components/schemas/String1024'
             - description: The classification within a configuration.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/SensitivePropertiesMap'
-            - description: A set of properties specified within a configuration classification.
+          description: A set of properties specified within a configuration classification.
         configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
@@ -1907,6 +1900,11 @@ components:
             - $ref: '#/components/schemas/UriString'
             - description: Amazon S3 destination URI for log publishing.
       description: ' Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3.'
+    SensitivePropertiesMap:
+      type: object
+      maxProperties: 100
+      additionalProperties:
+        $ref: '#/components/schemas/String1024'
     SparkSubmitParameters:
       type: string
       pattern: '(?!\s*$)(^[^'';|\u0026\u003C\u003E*?`$(){}\[\]!#\\]*$)'

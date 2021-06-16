@@ -4050,11 +4050,6 @@ components:
             - $ref: '#/components/schemas/AllowedAccounts'
             - description: A list of AWS account IDs with access to use the action type in their pipelines.
       description: Details identifying the users with permissions to use the action type.
-    ActionTypeProperties:
-      type: array
-      items:
-        $ref: '#/components/schemas/ActionTypeProperty'
-      maxItems: 10
     ActionTypeUrls:
       type: object
       properties:
@@ -4108,9 +4103,7 @@ components:
             - $ref: '#/components/schemas/ActionTypePermissions'
             - description: Details identifying the accounts with permissions to use the action type.
         properties:
-          allOf:
-            - $ref: '#/components/schemas/ActionTypeProperties'
-            - description: The properties of the action type to be updated.
+          description: The properties of the action type to be updated.
         urls:
           allOf:
             - $ref: '#/components/schemas/ActionTypeUrls'
@@ -4192,6 +4185,11 @@ components:
             - $ref: '#/components/schemas/PropertyDescription'
             - description: The description of the property that is displayed to users.
       description: 'Represents information about each property specified in the action configuration, such as the description and key name that display for the customer using the action type.'
+    ActionTypeProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActionTypeProperty'
+      maxItems: 10
     PropertyDescription:
       type: string
       minLength: 1

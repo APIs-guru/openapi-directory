@@ -168,7 +168,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -194,6 +194,165 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/bot':
+    put:
+      operationId: AssociateBot
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex or Amazon Lex V2 bot.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                LexBot:
+                  description: Configuration information of an Amazon Lex bot.
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/BotName'
+                        - description: The name of the Amazon Lex bot.
+                    LexRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/LexRegion'
+                        - description: The Region that the Amazon Lex bot was created in.
+                LexV2Bot:
+                  description: Configuration information of an Amazon Lex V2 bot.
+                  type: object
+                  properties:
+                    AliasArn:
+                      allOf:
+                        - $ref: '#/components/schemas/AliasArn'
+                        - description: The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: DisassociateBot
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes authorization from the specified instance to access the specified Amazon Lex or Amazon Lex V2 bot. </p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                LexBot:
+                  description: Configuration information of an Amazon Lex bot.
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/BotName'
+                        - description: The name of the Amazon Lex bot.
+                    LexRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/LexRegion'
+                        - description: The Region that the Amazon Lex bot was created in.
+                LexV2Bot:
+                  description: Configuration information of an Amazon Lex V2 bot.
+                  type: object
+                  properties:
+                    AliasArn:
+                      allOf:
+                        - $ref: '#/components/schemas/AliasArn'
+                        - description: The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
   '/instance/{InstanceId}/storage-config':
     put:
       operationId: AssociateInstanceStorageConfig
@@ -245,7 +404,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -359,7 +518,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -439,7 +598,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -520,7 +679,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -596,7 +755,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -688,7 +847,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1017,7 +1176,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1113,7 +1272,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1201,7 +1360,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1328,7 +1487,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1432,7 +1591,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1529,7 +1688,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1631,7 +1790,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1711,7 +1870,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1807,7 +1966,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -1957,7 +2116,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2014,7 +2173,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2059,7 +2218,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2099,7 +2258,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2161,7 +2320,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2224,7 +2383,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2270,7 +2429,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2340,7 +2499,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2409,7 +2568,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2467,7 +2626,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2530,7 +2689,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2651,7 +2810,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2715,7 +2874,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2782,7 +2941,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2860,7 +3019,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -2934,7 +3093,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3000,7 +3159,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3108,7 +3267,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3172,7 +3331,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3236,7 +3395,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3295,7 +3454,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3374,7 +3533,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3435,7 +3594,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance..
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance..
           schema:
             type: string
             minLength: 1
@@ -3497,7 +3656,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3565,7 +3724,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3641,7 +3800,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3715,7 +3874,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3835,7 +3994,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -3952,7 +4111,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4010,7 +4169,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4066,7 +4225,7 @@ paths:
                     $ref: '#/components/schemas/Grouping'
                   maxItems: 2
                 HistoricalMetrics:
-                  description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800 (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for "Less than"). </p> </dd> </dl>'
+                  description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <note> <p>This API does not support a contacts incoming metric (there''s no CONTACTS_INCOMING metric missing from the documented list). </p> </note> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800 (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for "Less than"). </p> </dd> </dl>'
                   type: array
                   items:
                     $ref: '#/components/schemas/HistoricalMetric'
@@ -4131,7 +4290,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4150,6 +4309,93 @@ paths:
             type: integer
             minimum: 1
             maximum: 25
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/bots#lexVersion':
+    get:
+      operationId: ListBots
+      description: '<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBotsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: lexVersion
+          in: query
+          required: true
+          description: The version of Amazon Lex or Amazon Lex V2.
+          schema:
+            type: string
+            enum:
+              - V1
+              - V2
         - name: MaxResults
           in: query
           schema:
@@ -4215,7 +4461,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4308,7 +4554,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4392,7 +4638,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4476,7 +4722,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4573,7 +4819,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4657,7 +4903,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4741,7 +4987,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -4927,7 +5173,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5017,7 +5263,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5110,7 +5356,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5195,7 +5441,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5267,7 +5513,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5351,7 +5597,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5435,7 +5681,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5634,7 +5880,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5718,7 +5964,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -5799,7 +6045,7 @@ paths:
                 - InitialContactId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -5875,7 +6121,7 @@ paths:
                 - ParticipantDetails
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -5969,7 +6215,7 @@ paths:
                 - VoiceRecordingConfiguration
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -6072,12 +6318,12 @@ paths:
                   type: string
                   maxLength: 500
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
                 ClientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. If the contact is disconnected, a new contact is started.'
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. '
                   type: string
                   maxLength: 500
                 SourcePhoneNumber:
@@ -6159,7 +6405,7 @@ paths:
                 - Name
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -6262,7 +6508,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -6316,7 +6562,7 @@ paths:
                 - InitialContactId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -6380,7 +6626,7 @@ paths:
                 - InitialContactId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -6517,7 +6763,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance.
+                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -6735,7 +6981,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -6807,7 +7053,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -6884,7 +7130,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -6961,7 +7207,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7046,7 +7292,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7121,7 +7367,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7210,7 +7456,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7287,7 +7533,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7361,7 +7607,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7439,7 +7685,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7522,7 +7768,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7598,7 +7844,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7670,7 +7916,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7755,7 +8001,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7844,7 +8090,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -7916,7 +8162,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance.
+          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
           schema:
             type: string
             minLength: 1
@@ -8004,6 +8250,17 @@ components:
     InvalidParameterException: {}
     ServiceQuotaExceededException: {}
     ThrottlingException: {}
+    BotName:
+      type: string
+      maxLength: 50
+    LexRegion:
+      type: string
+      maxLength: 60
+    AliasArn:
+      type: string
+      minLength: 1
+      maxLength: 100
+    LimitExceededException: {}
     AssociateInstanceStorageConfigResponse:
       type: object
       properties:
@@ -8081,15 +8338,8 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) of the delivery stream.
       description: Configuration information of a Kinesis Data Firehose delivery stream.
-    BotName:
-      type: string
-      maxLength: 50
-    LexRegion:
-      type: string
-      maxLength: 60
     QuickConnectId:
       type: string
-    LimitExceededException: {}
     RoutingProfileQueueConfig:
       type: object
       required:
@@ -8505,6 +8755,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/OriginsList'
             - description: The approved origins.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListBotsResponse:
+      type: object
+      properties:
+        LexBots:
+          allOf:
+            - $ref: '#/components/schemas/LexBotConfigList'
+            - description: The names and Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified instance.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -9123,6 +9384,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/Origin'
             - description: The domain to add to your allow list.
+    LexBot:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/BotName'
+            - description: The name of the Amazon Lex bot.
+        LexRegion:
+          allOf:
+            - $ref: '#/components/schemas/LexRegion'
+            - description: The Region that the Amazon Lex bot was created in.
+      description: Configuration information of an Amazon Lex bot.
+    LexV2Bot:
+      type: object
+      properties:
+        AliasArn:
+          allOf:
+            - $ref: '#/components/schemas/AliasArn'
+            - description: The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
+      description: Configuration information of an Amazon Lex V2 bot.
+    AssociateBotRequest:
+      type: object
+      title: AssociateBotRequest
+      properties:
+        LexBot:
+          $ref: '#/components/schemas/LexBot'
+        LexV2Bot:
+          allOf:
+            - $ref: '#/components/schemas/LexV2Bot'
+            - description: The Amazon Lex V2 bot to associate with the instance.
     InstanceStorageResourceType:
       type: string
       enum:
@@ -9191,18 +9482,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/FunctionArn'
             - description: The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum number of characters allowed is 140.
-    LexBot:
-      type: object
-      properties:
-        Name:
-          allOf:
-            - $ref: '#/components/schemas/BotName'
-            - description: The name of the Amazon Lex bot.
-        LexRegion:
-          allOf:
-            - $ref: '#/components/schemas/LexRegion'
-            - description: The Region that the Amazon Lex bot was created in.
-      description: Configuration information of an Amazon Lex bot.
     AssociateLexBotRequest:
       type: object
       required:
@@ -9212,7 +9491,7 @@ components:
         LexBot:
           allOf:
             - $ref: '#/components/schemas/LexBot'
-            - description: The Amazon Lex box to associate with the instance.
+            - description: The Amazon Lex bot to associate with the instance.
     QueueId:
       type: string
     QuickConnectsList:
@@ -10040,7 +10319,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         Arn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -10168,7 +10447,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         Name:
           allOf:
             - $ref: '#/components/schemas/RoutingProfileName'
@@ -10322,6 +10601,16 @@ components:
       type: object
       title: DisassociateApprovedOriginRequest
       properties: {}
+    DisassociateBotRequest:
+      type: object
+      title: DisassociateBotRequest
+      properties:
+        LexBot:
+          $ref: '#/components/schemas/LexBot'
+        LexV2Bot:
+          allOf:
+            - $ref: '#/components/schemas/LexV2Bot'
+            - description: The Amazon Lex V2 bot to disassociate from the instance.
     DisassociateInstanceStorageConfigRequest:
       type: object
       title: DisassociateInstanceStorageConfigRequest
@@ -10479,7 +10768,7 @@ components:
         HistoricalMetrics:
           allOf:
             - $ref: '#/components/schemas/HistoricalMetrics'
-            - description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800 (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for "Less than"). </p> </dd> </dl>'
+            - description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <note> <p>This API does not support a contacts incoming metric (there''s no CONTACTS_INCOMING metric missing from the documented list). </p> </note> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800 (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for "Less than"). </p> </dd> </dl>'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -10814,7 +11103,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         IntegrationType:
           allOf:
             - $ref: '#/components/schemas/IntegrationType'
@@ -10844,10 +11133,29 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    LexBotConfig:
+      type: object
+      properties:
+        LexBot:
+          $ref: '#/components/schemas/LexBot'
+        LexV2Bot:
+          allOf:
+            - $ref: '#/components/schemas/LexV2Bot'
+            - description: Configuration information of an Amazon Lex V2 bot.
+      description: Configuration information of an Amazon Lex or Amazon Lex V2 bot.
+    LexBotConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LexBotConfig'
     LexBotsList:
       type: array
       items:
         $ref: '#/components/schemas/LexBot'
+    LexVersion:
+      type: string
+      enum:
+        - V1
+        - V2
     MaxResult25:
       type: integer
       minimum: 1
@@ -10860,6 +11168,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Origin'
+    ListBotsRequest:
+      type: object
+      title: ListBotsRequest
+      properties: {}
     MaxResult1000:
       type: integer
       minimum: 1
@@ -11167,7 +11479,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -11272,7 +11584,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         ContactFlowId:
           allOf:
             - $ref: '#/components/schemas/ContactFlowId'
@@ -11313,7 +11625,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -11345,11 +11657,11 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. If the contact is disconnected, a new contact is started.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. '
         SourcePhoneNumber:
           allOf:
             - $ref: '#/components/schemas/PhoneNumber'
@@ -11373,7 +11685,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         PreviousContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -11413,7 +11725,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -11436,7 +11748,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
     SuspendContactRecordingRequest:
       type: object
       required:
@@ -11448,7 +11760,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -11495,7 +11807,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance.
+            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
         Attributes:
           allOf:
             - $ref: '#/components/schemas/Attributes'
