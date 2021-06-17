@@ -2603,6 +2603,7 @@ components:
             asHarvested:read: Required for retrieving harvest data
             asPlanted:read: Required for retrieving planting data
             avroAgronomicData:read: Required for retrieving agronomic data
+            boundaries:write: "*Originally missing*"
             customerInsights:read: Required for retrieving customer insights metrics data
             diagnostics:read: Required for retrieving CNH machine diagnostic data
             farmOrganizations:read: Required for retrieving farm organization information
@@ -2616,5 +2617,7 @@ components:
             rx:write: Required for uploading prescriptions
             scouting:read: Required for retrieving user\'s scouting information
             soil:write: Required for uploading soil sample results
+            standCount:write: "*Originally missing*"
+            weedCount:write: "*Originally missing*"
           tokenUrl: https://api.climate.com/api/oauth/token
       type: oauth2
