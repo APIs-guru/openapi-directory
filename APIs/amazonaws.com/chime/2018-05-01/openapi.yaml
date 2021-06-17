@@ -3150,7 +3150,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMeetings
-      description: ' Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: ' Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
       responses:
         '200':
           description: Success
@@ -9275,7 +9275,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetVoiceConnectorGroup
-      description: ' Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code> . '
+      description: ' Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code>.'
       responses:
         '200':
           description: Success
@@ -11793,7 +11793,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutRetentionSettings
-      description: '<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i> . </p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i> . </p>'
+      description: '<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
       responses:
         '204':
           description: Success
@@ -15264,6 +15264,104 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}':
+    post:
+      operationId: UpdateSipMediaApplicationCall
+      description: 'Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSipMediaApplicationCallResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The ID of the SIP media application handling the call.
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: transactionId
+          in: path
+          required: true
+          description: The ID of the call transaction.
+          schema:
+            type: string
+            pattern: .*\S.*
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Arguments
+              properties:
+                Arguments:
+                  description: Arguments made available to the Lambda function as part of the <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/SensitiveString'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -16726,6 +16824,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/SipMediaApplication'
             - description: The updated SIP media application details.
+    UpdateSipMediaApplicationCallResponse:
+      type: object
+      properties:
+        SipMediaApplicationCall:
+          $ref: '#/components/schemas/SipMediaApplicationCall'
     UpdateSipRuleResponse:
       type: object
       properties:
@@ -19988,6 +20091,12 @@ components:
       type: object
       title: RestorePhoneNumberRequest
       properties: {}
+    SMAUpdateCallArgumentsMap:
+      type: object
+      minProperties: 0
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/SensitiveString'
     TollFreePrefix:
       type: string
       pattern: ^8(00|33|44|55|66|77|88)$
@@ -20280,6 +20389,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveString'
             - description: The room name.
+    UpdateSipMediaApplicationCallRequest:
+      type: object
+      required:
+        - Arguments
+      title: UpdateSipMediaApplicationCallRequest
+      properties:
+        Arguments:
+          allOf:
+            - $ref: '#/components/schemas/SMAUpdateCallArgumentsMap'
+            - description: Arguments made available to the Lambda function as part of the <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.
     UpdateSipMediaApplicationRequest:
       type: object
       title: UpdateSipMediaApplicationRequest

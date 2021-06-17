@@ -4304,6 +4304,54 @@ components:
             - $ref: '#/components/schemas/DocumentAttributeValue'
             - description: The value of the attribute.
       description: 'A custom attribute value assigned to a document. '
+    BasicAuthenticationConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BasicAuthenticationConfiguration'
+      minItems: 0
+      maxItems: 10
+    AuthenticationConfiguration:
+      type: object
+      properties:
+        BasicAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthenticationConfigurationList'
+            - description: <p>The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials.</p> <p>The list includes the name and port number of the website host.</p>
+      description: Provides the configuration information to connect to websites that require user authentication.
+    Host:
+      type: string
+      pattern: '([^\s]*)'
+      minLength: 1
+      maxLength: 253
+    Port:
+      type: integer
+      minimum: 1
+      maximum: 65535
+    SecretArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 1
+      maxLength: 1284
+    BasicAuthenticationConfiguration:
+      type: object
+      required:
+        - Host
+        - Port
+        - Credentials
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: '<p>The name of the website host you want to connect to using authentication credentials.</p> <p>For example, the host name of https://a.example.com/page1.html is "a.example.com".</p>'
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - description: '<p>The port number of the website host you want to connect to using authentication credentials.</p> <p>For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.</p>'
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: '<p>Your secret ARN, which you can create in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a> </p> <p>You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.</p>'
+      description: Provides the configuration information to connect to websites that require basic user authentication.
     IndexId:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9-]*'
@@ -4443,12 +4491,12 @@ components:
         StorageCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/StorageCapacityUnit'
-            - description: 'The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.'
+            - description: 'The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.'
         QueryCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/QueryCapacityUnit'
-            - description: 'The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.'
-      description: Specifies capacity units configured for your index. You can add and remove capacity units to tune an index to your requirements.
+            - description: '<p>The amount of extra query capacity for an index and <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>'
+      description: Specifies capacity units configured for your enterprise edition index. You can add and remove capacity units to tune an index to your requirements.
     ChangeDetectingColumns:
       type: array
       items:
@@ -4629,11 +4677,6 @@ components:
       pattern: '^(https?|ftp|file):\/\/([^\s]*)'
       minLength: 1
       maxLength: 2048
-    SecretArn:
-      type: string
-      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-      minLength: 1
-      maxLength: 1284
     ConfluenceVersion:
       type: string
       enum:
@@ -4872,6 +4915,10 @@ components:
         - MS_WORD
         - PLAIN_TEXT
         - PPT
+    CrawlDepth:
+      type: integer
+      minimum: 0
+      maximum: 10
     DataSourceName:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
@@ -4889,6 +4936,7 @@ components:
         - CUSTOM
         - CONFLUENCE
         - GOOGLEDRIVE
+        - WEBCRAWLER
     DataSourceConfiguration:
       type: object
       properties:
@@ -4924,6 +4972,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/GoogleDriveConfiguration'
             - description: 'Provides configuration for data sources that connect to Google Drive. '
+        WebCrawlerConfiguration:
+          $ref: '#/components/schemas/WebCrawlerConfiguration'
       description: Configuration information for a Amazon Kendra data source.
     Description:
       type: string
@@ -5275,6 +5325,48 @@ components:
             - $ref: '#/components/schemas/ExcludeSharedDrivesList'
             - description: A list of identifiers or shared drives to exclude from the index. All files and folders stored on the shared drive are excluded.
       description: Provides configuration information for data sources that connect to Google Drive.
+    WebCrawlerConfiguration:
+      type: object
+      required:
+        - Urls
+      properties:
+        Urls:
+          allOf:
+            - $ref: '#/components/schemas/Urls'
+            - description: '<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
+        CrawlDepth:
+          allOf:
+            - $ref: '#/components/schemas/CrawlDepth'
+            - description: '<p>Specifies the number of levels in a website that you want to crawl.</p> <p>The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1.</p> <p>The default crawl depth is set to 2.</p>'
+        MaxLinksPerPage:
+          allOf:
+            - $ref: '#/components/schemas/MaxLinksPerPage'
+            - description: '<p>The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage.</p> <p>As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance.</p> <p>The default maximum links per page is 100.</p>'
+        MaxContentSizePerPageInMegaBytes:
+          allOf:
+            - $ref: '#/components/schemas/MaxContentSizePerPageInMegaBytes'
+            - description: <p>The maximum size (in MB) of a webpage or attachment to crawl.</p> <p>Files larger than this size (in MB) are skipped/not crawled.</p> <p>The default maximum size of a webpage or attachment is set to 50 MB.</p>
+        MaxUrlsPerMinuteCrawlRate:
+          allOf:
+            - $ref: '#/components/schemas/MaxUrlsPerMinuteCrawlRate'
+            - description: <p>The maximum number of URLs crawled per website host per minute.</p> <p>A minimum of one URL is required.</p> <p>The default maximum number of URLs crawled per website host per minute is 300.</p>
+        UrlInclusionPatterns:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>The regular expression pattern to include certain URLs to crawl.</p> <p>If there is a regular expression pattern to exclude certain URLs that conflicts with the include pattern, the exclude pattern takes precedence.</p>'
+        UrlExclusionPatterns:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>The regular expression pattern to exclude certain URLs to crawl.</p> <p>If there is a regular expression pattern to include certain URLs that conflicts with the exclude pattern, the exclude pattern takes precedence.</p>'
+        ProxyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProxyConfiguration'
+            - description: '<p>Provides configuration information required to connect to your internal websites via a web proxy.</p> <p>You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS.</p> <p>Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a>.</p>'
+        AuthenticationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationConfiguration'
+            - description: '<p>Provides configuration information required to connect to websites using authentication.</p> <p>You can connect to websites using basic authentication of user name and password.</p> <p>You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. You use a secret in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a> to store your authentication credentials.</p>'
+      description: Provides the configuration information required for Amazon Kendra web crawler.
     DataSourceFieldName:
       type: string
       pattern: '^[a-zA-Z][a-zA-Z0-9_.]*$'
@@ -6125,6 +6217,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ThesaurusSummary'
+    MaxContentSizePerPageInMegaBytes:
+      type: number
+      format: float
+      minimum: 0.000001
+      maximum: 50
+    MaxLinksPerPage:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    MaxUrlsPerMinuteCrawlRate:
+      type: integer
+      minimum: 1
+      maximum: 300
     TenantDomain:
       type: string
       pattern: '^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-z]{2,}$'
@@ -6193,6 +6298,25 @@ components:
             - $ref: '#/components/schemas/ReadAccessType'
             - description: Whether to allow or deny access to the principal.
       description: Provides user and group information for document access filtering.
+    ProxyConfiguration:
+      type: object
+      required:
+        - Host
+        - Port
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: '<p>The name of the website host you want to connect to via a web proxy server.</p> <p>For example, the host name of https://a.example.com/page1.html is "a.example.com".</p>'
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - description: '<p>The port number of the website host you want to connect to via a web proxy server. </p> <p>For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.</p>'
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: '<p>Your secret ARN, which you can create in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a> </p> <p>The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.</p>'
+      description: Provides the configuration information for a web proxy to connect to website hosts.
     QueryId:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9-]*'
@@ -6548,6 +6672,37 @@ components:
       pattern: '[-0-9a-zA-Z]+'
       minLength: 1
       maxLength: 200
+    SeedUrl:
+      type: string
+      pattern: '^(https?):\/\/([^\s]*)'
+      minLength: 1
+      maxLength: 2048
+    SeedUrlList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SeedUrl'
+      minItems: 0
+      maxItems: 100
+    WebCrawlerMode:
+      type: string
+      enum:
+        - HOST_ONLY
+        - SUBDOMAINS
+        - EVERYTHING
+    SeedUrlConfiguration:
+      type: object
+      required:
+        - SeedUrls
+      properties:
+        SeedUrls:
+          allOf:
+            - $ref: '#/components/schemas/SeedUrlList'
+            - description: <p>The list of seed or starting point URLs of the websites you want to crawl.</p> <p>The list can include a maximum of 100 seed URLs.</p>
+        WebCrawlerMode:
+          allOf:
+            - $ref: '#/components/schemas/WebCrawlerMode'
+            - description: '<p>You can choose one of the following modes:</p> <ul> <li> <p> <code>HOST_ONLY</code> – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.</p> </li> <li> <p> <code>SUBDOMAINS</code> – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.</p> </li> <li> <p> <code>EVERYTHING</code> – crawl the website host names with subdomains and other domains that the webpages link to.</p> </li> </ul> <p>The default mode is set to <code>HOST_ONLY</code>.</p>'
+      description: '<p>Provides the configuration information of the seed or starting point URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
     ServiceNowAuthenticationType:
       type: string
       enum:
@@ -6642,6 +6797,27 @@ components:
         $ref: '#/components/schemas/Url'
       minItems: 1
       maxItems: 100
+    SiteMap:
+      type: string
+      pattern: '^(https?):\/\/([^\s]*)'
+      minLength: 1
+      maxLength: 2048
+    SiteMapsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SiteMap'
+      minItems: 0
+      maxItems: 3
+    SiteMapsConfiguration:
+      type: object
+      required:
+        - SiteMaps
+      properties:
+        SiteMaps:
+          allOf:
+            - $ref: '#/components/schemas/SiteMapsList'
+            - description: <p>The list of sitemap URLs of the websites you want to crawl.</p> <p>The list can include a maximum of three sitemap URLs.</p>
+      description: '<p>Provides the configuration information of the sitemap URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
     SortOrder:
       type: string
       enum:
@@ -6758,6 +6934,18 @@ components:
       pattern: '^\P{C}*$'
       minLength: 1
       maxLength: 100000
+    Urls:
+      type: object
+      properties:
+        SeedUrlConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SeedUrlConfiguration'
+            - description: '<p>Provides the configuration of the seed or starting point URLs of the websites you want to crawl.</p> <p>You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to.</p> <p>You can list up to 100 seed URLs.</p>'
+        SiteMapsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SiteMapsConfiguration'
+            - description: <p>Provides the configuration of the sitemap URLs of the websites you want to crawl.</p> <p>Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.</p>
+      description: '<p>Provides the configuration information of the URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
     UserTokenConfiguration:
       type: object
       properties:
