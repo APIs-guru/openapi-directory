@@ -3206,16 +3206,8 @@ paths:
                                         +# NEW COMMENT
                                         \ No newline at end of file
                                       type: string
-                                    new:
-                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
-                                        1xml;
-                                        charset=utf-8/schema/components/schemas\
-                                        /OldNewFile"
-                                    old:
-                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
-                                        1xml;
-                                        charset=utf-8/schema/components/schemas\
-                                        /OldNewFile"
+                                    new: {}
+                                    old: {}
                                     state:
                                       example: changed
                                       type: string
@@ -3262,16 +3254,8 @@ paths:
                             type: string
                             xml:
                               attribute: true
-                          new:
-                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
-                              1xml;
-                              charset=utf-8/schema/components/schemas/NewOldDes\
-                              tination"
-                          old:
-                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
-                              1xml;
-                              charset=utf-8/schema/components/schemas/NewOldDes\
-                              tination"
+                          new: {}
+                          old: {}
                         type: object
                       target:
                         properties:
