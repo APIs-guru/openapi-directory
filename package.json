@@ -1,50 +1,37 @@
 {
-  "dependencies": {
-    "api-spec-converter": "^2.7.31",
-    "commander": "^2.19.0",
-    "deep-sort-object": "^1.0.1",
-    "editor": "^1.0.0",
-    "glob": "^7.1.3",
-    "jgexml": "^0.4.4",
-    "jiff": "^0.7.3",
-    "js-yaml": "^3.14.0",
-    "json-merge-patch": "^0.2.3",
-    "json-pointer": "^0.6.0",
-    "json-refs": "git+https://github.com/whitlockjc/json-refs.git",
-    "jsondiffpatch": "^0.1.33",
-    "jsonpath": "^1.0.2",
-    "lodash": "^4.17.20",
-    "makeRequest": "github:apis-guru/makeRequest",
-    "mime-db": "^1.38.0",
-    "mime-lookup": "0.0.2",
-    "mkdirp": "^0.5.1",
-    "mktemp": "^0.4.0",
-    "opencollective": "^1.0.3",
-    "parse-domain": "^0.2.0",
-    "recursive-readdir": "^2.2.2",
-    "reftools": "^1.0.7",
-    "remove-markdown": "^0.2.2",
-    "sanitize-filename": "^1.5.3",
-    "shelljs": "^0.8.4",
-    "swagger-methods": "^1.0.8",
-    "sway": "^2.0.5",
-    "urijs": "^1.19.1"
-  },
+  "dependencies": {},
   "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/APIs-guru/openapi-directory.git"
   },
-  "scripts": {
-    "test": "scripts/collection.js validate -q",
-    "deploy": "scripts/deploy.js && scripts/deployRss.js && ./scripts/deploy_badges.js",
-    "postinstall": "opencollective postinstall"
-  },
-  "devDependencies": {
-    "dredd": "^5.4.6"
-  },
+  "scripts": {},
+  "devDependencies": {},
   "collective": {
     "type": "opencollective",
     "url": "https://opencollective.com/openapi-directory"
-  }
+  },
+  "name": "openapi-directory",
+  "description": "Wikipedia for Web APIs",
+  "bugs": {
+    "url": "https://github.com/APIs-guru/openapi-directory/issues"
+  },
+  "homepage": "https://github.com/APIs-guru/openapi-directory#readme",
+  "version": "2.0.0",
+  "main": "index.js",
+  "keywords": [
+    "OpenAPI",
+    "Swagger",
+    "API",
+    "directory"
+  ],
+  "authors": [
+    {
+      "name": "Mike Ralphson"
+    },
+    {
+      "name": "Ivan Goncharov"
+    }
+  ],
+  "license": "MIT"
 }
