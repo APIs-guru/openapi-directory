@@ -6,6 +6,7 @@
 [![APIs in collection][numApis-image]][apisDir-link]
 [![OpenAPI definitions][numSpecs-image]][apisDir-link]
 [![Endpoints][endpoints-image]][apisDir-link]
+[![Fixes][fixes-image]][apisDir-link]
 [![Chat on Slack][slack-image]][slack-link]
 
 [![Share on Twitter][twitter-image]][twitter-link]
@@ -97,7 +98,6 @@ Instead, we strongly recommend you to use our [REST API][apiDoc-link].
 
 Licenses
 --------------------------
-All code in this repository is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
 All API definitions contributed to project by authors are covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
 All API definitions acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principle.
 
@@ -114,11 +114,12 @@ Some definitions are taken from Open Source projects:
 [twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20by%20@APIs_guru%20pic.twitter.com/UhlhbMw1NP
 [twitterFollow-image]: https://img.shields.io/twitter/follow/APIs_guru.svg?style=social
 [twitterFollow-link]: https://twitter.com/intent/follow?screen_name=APIs_guru
-[slack-image]: https://img.shields.io/badge/Slack-Mermade-brightgreen
+[slack-image]: https://img.shields.io/badge/Slack-APIs_Working_Group-brightgreen
 [slack-link]: https://join.slack.com/t/mermade/shared_invite/zt-g78g7xir-MLE_CTCcXCdfJfG3CJe9qA
 [numApis-image]: https://api.apis.guru/badges/apis_in_collection.svg
 [numSpecs-image]: https://api.apis.guru/badges/openapi_specs.svg
 [endpoints-image]: https://api.apis.guru/badges/endpoints.svg
+[fixes-image]: https://api.apis.guru/badges/fixes.svg
 [apisDir-link]: ./APIs
 [addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
 [addAPI-link]: https://apis.guru/add-api/
