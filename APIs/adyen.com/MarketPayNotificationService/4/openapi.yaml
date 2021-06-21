@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   contact:
     email: developer-experience@adyen.com
@@ -22,379 +22,11 @@ info:
         version: 7.0.4
       format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/MarketPayNotificationService-v4.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: MarketPayNotificationService
-paths:
-  /ACCOUNT_CLOSED:
-    post:
-      description: This notification is sent when an account has been closed.
-      operationId: post-ACCOUNT_CLOSED
-      requestBody:
-        content:
-          application/json:
-            examples:
-              accountClosed:
-                $ref: "#/components/examples/post-ACCOUNT_CLOSED-accountClosed"
-            schema:
-              $ref: "#/components/schemas/AccountCloseNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                accountClosed:
-                  $ref: "#/components/examples/WebhookAck"
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the closure of an account.
-      x-groupName: Accounts
-      x-sortIndex: 3
-  /ACCOUNT_CREATED:
-    post:
-      description: This notification is sent when an account has been created.
-      operationId: post-ACCOUNT_CREATED
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountCreateNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the creation of an account.
-      x-groupName: Accounts
-      x-sortIndex: 1
-  /ACCOUNT_FUNDS_BELOW_THRESHOLD:
-    post:
-      description: This notification is sent when a liable account's current funds are below configured threshold from the Adyen platform.
-      operationId: post-ACCOUNT_FUNDS_BELOW_THRESHOLD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountFundsBelowThresholdNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered when a liable account current funds are below configured threshold.
-      x-groupName: Fund management
-      x-sortIndex: 7
-  /ACCOUNT_HOLDER_CREATED:
-    post:
-      description: This notification is sent when an account holder has been created.
-      operationId: post-ACCOUNT_HOLDER_CREATED
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderCreateNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the creation of an account holder.
-      x-groupName: Account holders
-      x-sortIndex: 1
-  /ACCOUNT_HOLDER_PAYOUT:
-    post:
-      description: This notification is sent when a payout request to an account holder has been processed and the payout has been scheduled.
-      operationId: post-ACCOUNT_HOLDER_PAYOUT
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderPayoutNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon a payout to an account holder.
-      x-groupName: Fund management
-      x-sortIndex: 1
-  /ACCOUNT_HOLDER_STATUS_CHANGE:
-    post:
-      description: This notification is sent when the status of an account holder has been changed.
-      operationId: post-ACCOUNT_HOLDER_STATUS_CHANGE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderStatusChangeNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the status change of an account holder.
-      x-groupName: Account holders
-      x-sortIndex: 4
-  /ACCOUNT_HOLDER_STORE_STATUS_CHANGE:
-    post:
-      description: This notification is sent when the status of a store tied to an account holder has been changed.
-      operationId: post-ACCOUNT_HOLDER_STORE_STATUS_CHANGE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderStoreStatusChangeNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the status change of a store tied to an account holder.
-      x-groupName: Account holders
-      x-sortIndex: 4
-  /ACCOUNT_HOLDER_UPCOMING_DEADLINE:
-    post:
-      description: This notification is sent when an Account Holder has a deadline, to fulfill the requirements of a specific event, coming up.
-      operationId: post-ACCOUNT_HOLDER_UPCOMING_DEADLINE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderUpcomingDeadlineNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon an upcoming deadline.
-      x-groupName: Account holders
-      x-sortIndex: 1
-  /ACCOUNT_HOLDER_UPDATED:
-    post:
-      description: This notification is sent when an account holder has been updated.
-      operationId: post-ACCOUNT_HOLDER_UPDATED
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderUpdateNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the update of an account holder.
-      x-groupName: Account holders
-      x-sortIndex: 2
-  /ACCOUNT_HOLDER_VERIFICATION:
-    post:
-      description: This notification is sent when KYC Verification results are made available.
-      operationId: post-ACCOUNT_HOLDER_VERIFICATION
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountHolderVerificationNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the receipt of KYC Verification results.
-      x-groupName: Account holders
-      x-sortIndex: 3
-  /ACCOUNT_UPDATED:
-    post:
-      description: This notification is sent when an account has been updated.
-      operationId: post-ACCOUNT_UPDATED
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AccountUpdateNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the update of an account.
-      x-groupName: Accounts
-      x-sortIndex: 2
-  /BENEFICIARY_SETUP:
-    post:
-      description: This notification is sent when a benefactor/beneficiary relationship between accounts has been set up.
-      operationId: post-BENEFICIARY_SETUP
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BeneficiarySetupNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the setup of a beneficiary.
-      x-groupName: Fund management
-      x-sortIndex: 3
-  /COMPENSATE_NEGATIVE_BALANCE:
-    post:
-      description: This notification is sent when funds have been transferred from your platform's liable account to an overdrawn account in order to compensate for the overdraft.
-      operationId: post-COMPENSATE_NEGATIVE_BALANCE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CompensateNegativeBalanceNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the compensation of negative account balances.
-      x-groupName: Fund management
-      x-sortIndex: 5
-  /DIRECT_DEBIT_INITIATED:
-    post:
-      description: This notification is sent when an automated direct debit is initiated from the Adyen platform.
-      operationId: post-DIRECT_DEBIT_INITIATED
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DirectDebitInitiatedNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered when an automated direct debit is initiated.
-      x-groupName: Fund management
-      x-sortIndex: 7
-  /PAYMENT_FAILURE:
-    post:
-      description: This notification is sent when a [split payment](https://docs.adyen.com/platforms/processing-payments#providing-split-information) booking for a capture or refund fails. When a booking fails due to an invalid account status or an unknown `accountCode`, the funds are credited or debited to your platform's liable account instead of the account specified in the split data.
-      operationId: post-PAYMENT_FAILURE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PaymentFailureNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered when a booking for a capture or refund fails.
-      x-groupName: Other
-      x-sortIndex: 1
-  /REFUND_FUNDS_TRANSFER:
-    post:
-      description: This notification is sent when the refund of funds from an account have been transferred to another account.
-      operationId: post-REFUND_FUNDS_TRANSFER
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RefundFundsTransferNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the transfer refund of funds between accounts.
-      x-groupName: Fund management
-      x-sortIndex: 6
-  /REPORT_AVAILABLE:
-    post:
-      description: This notification is sent when a report has been made available.
-      operationId: post-REPORT_AVAILABLE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ReportAvailableNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered when a report is made available.
-      x-groupName: Other
-      x-sortIndex: 2
-  /SCHEDULED_REFUNDS:
-    post:
-      description: This notification is sent when a 'Refund Transfers Not Paid Out' call has been processed and the associated refunds have been scheduled.
-      operationId: post-SCHEDULED_REFUNDS
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ScheduledRefundsNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
-      x-groupName: Fund management
-      x-sortIndex: 4
-  /TRANSFER_FUNDS:
-    post:
-      description: This notification is sent when the funds from an account have been transferred to another account.
-      operationId: post-TRANSFER_FUNDS
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TransferFundsNotification"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotificationResponse"
-          description: OK - the request has succeeded.
-      summary: Triggered upon the transfer of funds between accounts.
-      x-groupName: Fund management
-      x-sortIndex: 2
 components:
   examples:
     WebhookAck:
@@ -930,6 +562,9 @@ components:
         shareholderCode:
           description: The code of the shareholder that has been verified.
           type: string
+        signatoryCode:
+          description: The code of the signatory that has been verified.
+          type: string
         statusSummary:
           $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the verification status.
@@ -953,17 +588,12 @@ components:
             - BANK_ACCOUNT_VERIFICATION
             - CARD_VERIFICATION
             - COMPANY_VERIFICATION
-            - CRIMINAL_BACKGROUND_EXTENSIVE_VERIFICATION
-            - CRIMINAL_BACKGROUND_MEDIUM_VERIFICATION
             - IDENTITY_VERIFICATION
             - LEGAL_ARRANGEMENT_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
             - PAYOUT_METHOD_VERIFICATION
-            - PCI_SELF_ASSESSMENT_PRESENCE_VERIFICATION
             - PCI_VERIFICATION
-            - POLITICALLY_EXPOSED_IDENTIFICATION_VERIFICATION
-            - POLITICALLY_EXPOSED_VERIFICATION
           type: string
       required:
         - accountHolderCode
@@ -1736,49 +1366,38 @@ components:
           $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the execution of the check.
         type:
-          description: "The type of check.
-
+          description: |-
+            The type of check.
 
             Possible values:
 
+             * **BANK_ACCOUNT_VERIFICATION**: Used in v5 and earlier. Replaced by **PAYOUT_METHOD_VERIFICATION** in v6 and later.
 
-            \ * **BANK_ACCOUNT_VERIFICATION**: Used in v5 and earlier. Replaced by **PAYOUT_METHOD_VERIFICATION** in v6 and later.
+             * **COMPANY_VERIFICATION**
 
-
-            \ * **COMPANY_VERIFICATION**
-
-
-            \  * **CARD_VERIFICATION**
-
+              * **CARD_VERIFICATION**
 
             * **IDENTITY_VERIFICATION**
 
-
-            * **PASSPORT_VERIFICATION**
-
-
-            * **PAYOUT_METHOD_VERIFICATION**: Used in v6 and later.
-
+            * **LEGAL_ARRANGEMENT_VERIFICATION**
 
             * **NONPROFIT_VERIFICATION**
 
+             * **PASSPORT_VERIFICATION**
 
-            \ "
+            * **PAYOUT_METHOD_VERIFICATION**: Used in v6 and later.
+
+            * **PCI_VERIFICATION**
           enum:
             - BANK_ACCOUNT_VERIFICATION
             - CARD_VERIFICATION
             - COMPANY_VERIFICATION
-            - CRIMINAL_BACKGROUND_EXTENSIVE_VERIFICATION
-            - CRIMINAL_BACKGROUND_MEDIUM_VERIFICATION
             - IDENTITY_VERIFICATION
             - LEGAL_ARRANGEMENT_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
             - PAYOUT_METHOD_VERIFICATION
-            - PCI_SELF_ASSESSMENT_PRESENCE_VERIFICATION
             - PCI_VERIFICATION
-            - POLITICALLY_EXPOSED_IDENTIFICATION_VERIFICATION
-            - POLITICALLY_EXPOSED_VERIFICATION
           type: string
       required:
         - type
@@ -1804,6 +1423,16 @@ components:
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
+    KYCSignatoryCheckResult:
+      properties:
+        checks:
+          description: A list of the checks and their statuses.
+          items:
+            $ref: "#/components/schemas/KYCCheckStatusData"
+          type: array
+        signatoryCode:
+          description: The code of the signatory to which the check applies.
+          type: string
     KYCVerificationResult2:
       properties:
         accountHolder:
@@ -1818,6 +1447,11 @@ components:
           description: The results of the checks on the shareholders.
           items:
             $ref: "#/components/schemas/KYCShareholderCheckResult"
+          type: array
+        signatories:
+          description: The results of the checks on the signatories.
+          items:
+            $ref: "#/components/schemas/KYCSignatoryCheckResult"
           type: array
     LocalDate:
       properties:
@@ -2624,10 +2258,377 @@ components:
     BasicAuth:
       scheme: basic
       type: http
+webhooks:
+  /ACCOUNT_CLOSED:
+    post:
+      description: This notification is sent when an account has been closed.
+      operationId: post-ACCOUNT_CLOSED
+      requestBody:
+        content:
+          application/json:
+            examples:
+              accountClosed:
+                $ref: "#/components/examples/post-ACCOUNT_CLOSED-accountClosed"
+            schema:
+              $ref: "#/components/schemas/AccountCloseNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                accountClosed:
+                  $ref: "#/components/examples/WebhookAck"
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the closure of an account.
+      x-groupName: Accounts
+      x-sortIndex: 3
+  /ACCOUNT_CREATED:
+    post:
+      description: This notification is sent when an account has been created.
+      operationId: post-ACCOUNT_CREATED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountCreateNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the creation of an account.
+      x-groupName: Accounts
+      x-sortIndex: 1
+  /ACCOUNT_FUNDS_BELOW_THRESHOLD:
+    post:
+      description: This notification is sent when a liable account's current funds are below configured threshold from the Adyen platform.
+      operationId: post-ACCOUNT_FUNDS_BELOW_THRESHOLD
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountFundsBelowThresholdNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when a liable account current funds are below configured threshold.
+      x-groupName: Fund management
+      x-sortIndex: 7
+  /ACCOUNT_HOLDER_CREATED:
+    post:
+      description: This notification is sent when an account holder has been created.
+      operationId: post-ACCOUNT_HOLDER_CREATED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderCreateNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the creation of an account holder.
+      x-groupName: Account holders
+      x-sortIndex: 1
+  /ACCOUNT_HOLDER_PAYOUT:
+    post:
+      description: This notification is sent when a payout request to an account holder has been processed and the payout has been scheduled.
+      operationId: post-ACCOUNT_HOLDER_PAYOUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderPayoutNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon a payout to an account holder.
+      x-groupName: Fund management
+      x-sortIndex: 1
+  /ACCOUNT_HOLDER_STATUS_CHANGE:
+    post:
+      description: This notification is sent when the status of an account holder has been changed.
+      operationId: post-ACCOUNT_HOLDER_STATUS_CHANGE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderStatusChangeNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the status change of an account holder.
+      x-groupName: Account holders
+      x-sortIndex: 4
+  /ACCOUNT_HOLDER_STORE_STATUS_CHANGE:
+    post:
+      description: This notification is sent when the status of a store tied to an account holder has been changed.
+      operationId: post-ACCOUNT_HOLDER_STORE_STATUS_CHANGE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderStoreStatusChangeNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the status change of a store tied to an account holder.
+      x-groupName: Account holders
+      x-sortIndex: 4
+  /ACCOUNT_HOLDER_UPCOMING_DEADLINE:
+    post:
+      description: This notification is sent when an Account Holder has a deadline, to fulfill the requirements of a specific event, coming up.
+      operationId: post-ACCOUNT_HOLDER_UPCOMING_DEADLINE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderUpcomingDeadlineNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon an upcoming deadline.
+      x-groupName: Account holders
+      x-sortIndex: 1
+  /ACCOUNT_HOLDER_UPDATED:
+    post:
+      description: This notification is sent when an account holder has been updated.
+      operationId: post-ACCOUNT_HOLDER_UPDATED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderUpdateNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the update of an account holder.
+      x-groupName: Account holders
+      x-sortIndex: 2
+  /ACCOUNT_HOLDER_VERIFICATION:
+    post:
+      description: This notification is sent when KYC Verification results are made available.
+      operationId: post-ACCOUNT_HOLDER_VERIFICATION
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderVerificationNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the receipt of KYC Verification results.
+      x-groupName: Account holders
+      x-sortIndex: 3
+  /ACCOUNT_UPDATED:
+    post:
+      description: This notification is sent when an account has been updated.
+      operationId: post-ACCOUNT_UPDATED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountUpdateNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the update of an account.
+      x-groupName: Accounts
+      x-sortIndex: 2
+  /BENEFICIARY_SETUP:
+    post:
+      description: This notification is sent when a benefactor/beneficiary relationship between accounts has been set up.
+      operationId: post-BENEFICIARY_SETUP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BeneficiarySetupNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the setup of a beneficiary.
+      x-groupName: Fund management
+      x-sortIndex: 3
+  /COMPENSATE_NEGATIVE_BALANCE:
+    post:
+      description: This notification is sent when funds have been transferred from your platform's liable account to an overdrawn account in order to compensate for the overdraft.
+      operationId: post-COMPENSATE_NEGATIVE_BALANCE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompensateNegativeBalanceNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the compensation of negative account balances.
+      x-groupName: Fund management
+      x-sortIndex: 5
+  /DIRECT_DEBIT_INITIATED:
+    post:
+      description: This notification is sent when an automated direct debit is initiated from the Adyen platform.
+      operationId: post-DIRECT_DEBIT_INITIATED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DirectDebitInitiatedNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when an automated direct debit is initiated.
+      x-groupName: Fund management
+      x-sortIndex: 7
+  /PAYMENT_FAILURE:
+    post:
+      description: This notification is sent when a [split payment](https://docs.adyen.com/platforms/processing-payments#providing-split-information) booking for a capture or refund fails. When a booking fails due to an invalid account status or an unknown `accountCode`, the funds are credited or debited to your platform's liable account instead of the account specified in the split data.
+      operationId: post-PAYMENT_FAILURE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentFailureNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when a booking for a capture or refund fails.
+      x-groupName: Other
+      x-sortIndex: 1
+  /REFUND_FUNDS_TRANSFER:
+    post:
+      description: This notification is sent when the refund of funds from an account have been transferred to another account.
+      operationId: post-REFUND_FUNDS_TRANSFER
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundFundsTransferNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the transfer refund of funds between accounts.
+      x-groupName: Fund management
+      x-sortIndex: 6
+  /REPORT_AVAILABLE:
+    post:
+      description: This notification is sent when a report has been made available.
+      operationId: post-REPORT_AVAILABLE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportAvailableNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when a report is made available.
+      x-groupName: Other
+      x-sortIndex: 2
+  /SCHEDULED_REFUNDS:
+    post:
+      description: This notification is sent when a 'Refund Transfers Not Paid Out' call has been processed and the associated refunds have been scheduled.
+      operationId: post-SCHEDULED_REFUNDS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScheduledRefundsNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
+      x-groupName: Fund management
+      x-sortIndex: 4
+  /TRANSFER_FUNDS:
+    post:
+      description: This notification is sent when the funds from an account have been transferred to another account.
+      operationId: post-TRANSFER_FUNDS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferFundsNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the transfer of funds between accounts.
+      x-groupName: Fund management
+      x-sortIndex: 2
 x-groups:
   - Account holders
   - Accounts
   - Fund management
   - Other
-x-isWebhook: "true"
 x-staticResponse: response.json
