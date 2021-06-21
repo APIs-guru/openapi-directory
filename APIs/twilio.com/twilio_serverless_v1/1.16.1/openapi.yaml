@@ -122,11 +122,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+      pathType: list
   "/v1/Services/{ServiceSid}/Assets":
     description: A wrapper that represents a static file and groups the different
       Versions of the static file.
@@ -222,11 +223,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions":
     description: The content of an Asset.
     get:
@@ -297,12 +299,13 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - path
-      - visibility
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - path
+        - visibility
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions/{Sid}":
     description: The content of an Asset.
     get:
@@ -347,12 +350,13 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - path
-      - visibility
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - path
+        - visibility
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/Assets/{Sid}":
     delete:
       description: Delete an Asset resource.
@@ -457,11 +461,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/Builds":
     description: A collection of Function Versions, Asset Versions, Dependencies,
       and a Runtime that form a deployable unit.
@@ -578,11 +583,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - status
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - status
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Builds/{Sid}":
     delete:
       description: Delete a Build resource.
@@ -644,11 +650,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - status
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - status
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/Builds/{Sid}/Status":
     description: The status of a Build resource.
     get:
@@ -683,10 +690,11 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - status
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - status
+      pathType: instance
   "/v1/Services/{ServiceSid}/Environments":
     description: Represents a deployed build of a given set of Functions and/or
       Assets at a specific URL.
@@ -786,12 +794,13 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - domain_name
-      - build_sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - domain_name
+        - build_sid
+      pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments":
     description: An association of a Build with an Environment so that the Build is
       published in the Environment.
@@ -905,11 +914,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - build_sid
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - build_sid
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments/{Sid}":
     description: An association of a Build with an Environment so that the Build is
       published in the Environment.
@@ -954,11 +964,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - build_sid
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - build_sid
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Logs":
     description: A record of an event that occurred related to a function invocation.
     get:
@@ -1051,8 +1062,9 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties: []
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties: []
+      pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Logs/{Sid}":
     description: A record of an event that occurred related to a function invocation.
     get:
@@ -1096,8 +1108,9 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties: []
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties: []
+      pathType: instance
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables":
     description: A key and value pair that is specific to an Environment.
     get:
@@ -1215,11 +1228,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - key
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - key
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables/{Sid}":
     delete:
       description: Delete a specific Variable.
@@ -1352,11 +1366,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - key
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - key
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/Environments/{Sid}":
     delete:
       description: Delete a specific environment.
@@ -1418,12 +1433,13 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - domain_name
-      - build_sid
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - domain_name
+        - build_sid
+      pathType: instance
   "/v1/Services/{ServiceSid}/Functions":
     description: A wrapper that represents a Serverless JavaScript function and
       groups the different  and groups the different Versions of this code.
@@ -1519,11 +1535,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions":
     description: The content of a Function.
     get:
@@ -1594,12 +1611,13 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - path
-      - visibility
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - path
+        - visibility
+        - date_created
+      pathType: list
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}":
     description: The content of a Function.
     get:
@@ -1644,12 +1662,13 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - path
-      - visibility
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - path
+        - visibility
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}/Content":
     description: The code of a Function Version.
     get:
@@ -1695,10 +1714,11 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - content
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - content
+      pathType: instance
   "/v1/Services/{ServiceSid}/Functions/{Sid}":
     delete:
       description: Delete a Function resource.
@@ -1803,11 +1823,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
   "/v1/Services/{Sid}":
     delete:
       description: Delete a Service resource.
@@ -1891,11 +1912,12 @@ paths:
         - Beta
     servers:
       - url: https://serverless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+      pathType: instance
 components:
   schemas:
     serverless.v1.service:

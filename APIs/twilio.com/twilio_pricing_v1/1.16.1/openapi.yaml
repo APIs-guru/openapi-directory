@@ -79,12 +79,14 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - outbound_sms_prices
-      - inbound_sms_prices
-      - price_unit
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - outbound_sms_prices
+        - inbound_sms_prices
+        - price_unit
+      pathType: list
+      sidKey: iso_country
   "/v1/Messaging/Countries/{IsoCountry}":
     description: Messaging pricing by country
     get:
@@ -112,12 +114,14 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - outbound_sms_prices
-      - inbound_sms_prices
-      - price_unit
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - outbound_sms_prices
+        - inbound_sms_prices
+        - price_unit
+      pathType: instance
+      sidKey: iso_country
   /v1/PhoneNumbers/Countries:
     description: Phone number pricing by country
     get:
@@ -172,10 +176,12 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - price_unit
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - price_unit
+      pathType: list
+      sidKey: iso_country
   "/v1/PhoneNumbers/Countries/{IsoCountry}":
     description: Phone number pricing by country
     get:
@@ -204,10 +210,12 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - price_unit
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - price_unit
+      pathType: instance
+      sidKey: iso_country
   /v1/Voice/Countries:
     description: Voice pricing by country
     get:
@@ -262,10 +270,12 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - price_unit
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - price_unit
+      pathType: list
+      sidKey: iso_country
   "/v1/Voice/Countries/{IsoCountry}":
     description: Voice pricing by country
     get:
@@ -293,10 +303,12 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - price_unit
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - price_unit
+      pathType: instance
+      sidKey: iso_country
   "/v1/Voice/Numbers/{Number}":
     description: Voice pricing for a specific phone number
     get:
@@ -322,12 +334,14 @@ paths:
         - GA
     servers:
       - url: https://pricing.twilio.com
-    x-default-output-properties:
-      - country
-      - outbound_call_price
-      - inbound_call_price
-      - price_unit
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - country
+        - outbound_call_price
+        - inbound_call_price
+        - price_unit
+      pathType: instance
+      sidKey: number
 components:
   schemas:
     pricing.v1.messaging:

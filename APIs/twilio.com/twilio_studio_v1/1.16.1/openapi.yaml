@@ -79,12 +79,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - status
-      - version
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - status
+        - version
+      pathType: list
   "/v1/Flows/{FlowSid}/Engagements":
     description: "[DEPRECATED] Excecutions of Studio flows"
     get:
@@ -201,12 +202,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - contact_sid
-      - status
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - contact_sid
+        - status
+        - date_created
+      pathType: list
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Context":
     description: "[DEPRECATED] JSON context for engagements"
     get:
@@ -244,9 +246,10 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - context
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - context
+      pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps":
     description: Steps within a Studio flow
     get:
@@ -319,12 +322,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - name
-      - transitioned_from
-      - transitioned_to
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - name
+        - transitioned_from
+        - transitioned_to
+      pathType: list
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{Sid}":
     description: Steps within a Studio flow
     get:
@@ -371,12 +375,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - name
-      - transitioned_from
-      - transitioned_to
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - name
+        - transitioned_from
+        - transitioned_to
+      pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{StepSid}/Context":
     description: JSON context for individual steps
     get:
@@ -423,9 +428,10 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - context
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - context
+      pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{Sid}":
     delete:
       description: Delete this Engagement and all Steps relating to it.
@@ -492,12 +498,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - contact_sid
-      - status
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - contact_sid
+        - status
+        - date_created
+      pathType: instance
   "/v1/Flows/{FlowSid}/Executions":
     description: Executions of Studio flows
     get:
@@ -631,12 +638,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - contact_sid
-      - status
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - contact_sid
+        - status
+        - date_created
+      pathType: list
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Context":
     description: JSON context for executions
     get:
@@ -674,9 +682,10 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - context
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - context
+      pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
     description: Individual steps within an execution
     get:
@@ -749,11 +758,12 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - name
+        - date_created
+      pathType: list
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}":
     description: Individual steps within an execution
     get:
@@ -800,11 +810,12 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - name
+        - date_created
+      pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context":
     description: JSON context for an individual step within an execution
     get:
@@ -852,9 +863,10 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - context
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - context
+      pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{Sid}":
     delete:
       description: Delete the Execution and all Steps relating to it.
@@ -969,12 +981,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - contact_sid
-      - status
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - contact_sid
+        - status
+        - date_created
+      pathType: instance
   "/v1/Flows/{Sid}":
     delete:
       description: Delete a specific Flow.
@@ -1023,12 +1036,13 @@ paths:
         - GA
     servers:
       - url: https://studio.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - status
-      - version
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - status
+        - version
+      pathType: instance
 components:
   schemas:
     studio.v1.flow:

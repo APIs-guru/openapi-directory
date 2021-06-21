@@ -139,11 +139,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+      pathType: list
   "/v1/Services/{ServiceSid}/Documents":
     description: Sync Document objects
     get:
@@ -250,11 +251,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - revision
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - revision
+      pathType: list
   "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions":
     description: Sync document permissions
     get:
@@ -324,12 +326,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - identity
-      - read
-      - write
-      - manage
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - identity
+        - read
+        - write
+        - manage
+      pathType: list
   "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
     delete:
       description: Delete a specific Sync Document Permission.
@@ -466,12 +469,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - identity
-      - read
-      - write
-      - manage
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - identity
+        - read
+        - write
+        - manage
+      pathType: instance
   "/v1/Services/{ServiceSid}/Documents/{Sid}":
     delete:
       description: ""
@@ -584,11 +588,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - revision
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - revision
+      pathType: instance
   "/v1/Services/{ServiceSid}/Lists":
     description: Sync list objects
     get:
@@ -697,11 +702,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - revision
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - revision
+      pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items":
     description: Items in a sync list
     get:
@@ -856,11 +862,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - index
-      - revision
-      - created_by
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - index
+        - revision
+        - created_by
+      pathType: list
+      sidKey: index
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
     delete:
       description: ""
@@ -1013,11 +1021,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - index
-      - revision
-      - created_by
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - index
+        - revision
+        - created_by
+      pathType: instance
+      sidKey: index
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
     description: Permissions for Sync list items
     get:
@@ -1087,12 +1097,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - identity
-      - read
-      - write
-      - manage
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - identity
+        - read
+        - write
+        - manage
+      pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
     delete:
       description: Delete a specific Sync List Permission.
@@ -1227,12 +1238,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - identity
-      - read
-      - write
-      - manage
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - identity
+        - read
+        - write
+        - manage
+      pathType: instance
   "/v1/Services/{ServiceSid}/Lists/{Sid}":
     delete:
       description: ""
@@ -1339,11 +1351,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - revision
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - revision
+      pathType: instance
   "/v1/Services/{ServiceSid}/Maps":
     description: Sync map objects
     get:
@@ -1450,11 +1463,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - revision
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - revision
+      pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items":
     description: Keys in a sync map
     get:
@@ -1616,11 +1630,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - key
-      - revision
-      - created_by
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - key
+        - revision
+        - created_by
+      pathType: list
+      sidKey: key
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
     delete:
       description: ""
@@ -1772,11 +1788,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - key
-      - revision
-      - created_by
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - key
+        - revision
+        - created_by
+      pathType: instance
+      sidKey: key
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
     description: "TODO: Resource-level docs"
     get:
@@ -1847,12 +1865,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - identity
-      - read
-      - write
-      - manage
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - identity
+        - read
+        - write
+        - manage
+      pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
     delete:
       description: Delete a specific Sync Map Permission.
@@ -1990,12 +2009,13 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - identity
-      - read
-      - write
-      - manage
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - identity
+        - read
+        - write
+        - manage
+      pathType: instance
   "/v1/Services/{ServiceSid}/Maps/{Sid}":
     delete:
       description: ""
@@ -2102,11 +2122,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - revision
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - revision
+      pathType: instance
   "/v1/Services/{ServiceSid}/Streams":
     description: "TODO: Resource-level docs"
     get:
@@ -2211,11 +2232,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - created_by
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - created_by
+      pathType: list
   "/v1/Services/{ServiceSid}/Streams/{Sid}":
     delete:
       description: Delete a specific Stream.
@@ -2315,11 +2337,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - created_by
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - created_by
+      pathType: instance
   "/v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages":
     description: "TODO: Resource-level docs"
     post:
@@ -2368,9 +2391,10 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+      pathType: list
   "/v1/Services/{Sid}":
     delete:
       description: ""
@@ -2480,11 +2504,12 @@ paths:
         - GA
     servers:
       - url: https://sync.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+      pathType: instance
 components:
   schemas:
     sync.v1.service:

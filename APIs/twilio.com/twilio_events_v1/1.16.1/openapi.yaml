@@ -51,9 +51,10 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - id
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - id
+      pathType: instance
   "/v1/Schemas/{Id}/Versions":
     description: Version of the Schema
     get:
@@ -115,11 +116,12 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - id
-      - version
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - id
+        - version
+        - date_created
+      pathType: list
   "/v1/Schemas/{Id}/Versions/{SchemaVersion}":
     description: Version of the Schema
     get:
@@ -152,11 +154,12 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - id
-      - version
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - id
+        - version
+        - date_created
+      pathType: instance
   /v1/Sinks:
     description: Sink destination to send events to
     get:
@@ -263,15 +266,16 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - date_created
-      - date_updated
-      - description
-      - sid
-      - sink_configuration
-      - sink_type
-      - status
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - date_created
+        - date_updated
+        - description
+        - sid
+        - sink_configuration
+        - sink_type
+        - status
+      pathType: list
   "/v1/Sinks/{Sid}":
     delete:
       description: Delete a specific Sink.
@@ -357,15 +361,16 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - date_created
-      - date_updated
-      - description
-      - sid
-      - sink_configuration
-      - sink_type
-      - status
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - date_created
+        - date_updated
+        - description
+        - sid
+        - sink_configuration
+        - sink_type
+        - status
+      pathType: instance
   "/v1/Sinks/{Sid}/Test":
     description: Test sink
     post:
@@ -394,9 +399,10 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - result
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - result
+      pathType: list
   "/v1/Sinks/{Sid}/Validate":
     description: Validate sink
     post:
@@ -439,9 +445,10 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - result
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - result
+      pathType: list
   /v1/Subscriptions:
     description: Subscription to send Event Types to a Sink
     get:
@@ -548,13 +555,14 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - account_sid
-      - sid
-      - sink_sid
-      - date_created
-      - date_updated
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - sid
+        - sink_sid
+        - date_created
+        - date_updated
+      pathType: list
   "/v1/Subscriptions/{Sid}":
     delete:
       description: Delete a specific Subscription.
@@ -645,13 +653,14 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - account_sid
-      - sid
-      - sink_sid
-      - date_created
-      - date_updated
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - sid
+        - sink_sid
+        - date_created
+        - date_updated
+      pathType: instance
   "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents":
     description: Event subscribed to in the parent subscription
     get:
@@ -754,12 +763,13 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - type
-      - schema_version
-      - account_sid
-      - subscription_sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - type
+        - schema_version
+        - account_sid
+        - subscription_sid
+      pathType: list
   "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}":
     delete:
       description: Remove an event type from a subscription.
@@ -860,12 +870,13 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - type
-      - schema_version
-      - account_sid
-      - subscription_sid
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - type
+        - schema_version
+        - account_sid
+        - subscription_sid
+      pathType: instance
   /v1/Types:
     description: Event Types available
     get:
@@ -926,11 +937,12 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - type
-      - schema_id
-      - description
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - type
+        - schema_id
+        - description
+      pathType: list
   "/v1/Types/{Type}":
     description: Event Types available
     get:
@@ -956,11 +968,12 @@ paths:
         - Beta
     servers:
       - url: https://events.twilio.com
-    x-default-output-properties:
-      - type
-      - schema_id
-      - description
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - type
+        - schema_id
+        - description
+      pathType: instance
 components:
   schemas:
     events.v1.event_type:

@@ -192,14 +192,15 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - command_mode
-      - transport
-      - status
-      - direction
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - command_mode
+        - transport
+        - status
+        - direction
+        - date_created
+      pathType: list
   "/v1/Commands/{Sid}":
     delete:
       description: Delete a Command instance from your account.
@@ -248,14 +249,15 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - command_mode
-      - transport
-      - status
-      - direction
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - command_mode
+        - transport
+        - status
+        - direction
+        - date_created
+      pathType: instance
   /v1/RatePlans:
     description: Capabilities and restrictions for SIMs
     get:
@@ -390,12 +392,13 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+        - date_created
+      pathType: list
   "/v1/RatePlans/{Sid}":
     delete:
       description: ""
@@ -475,12 +478,13 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+        - date_created
+      pathType: instance
   /v1/Sims:
     description: A resource representing a Programmable Wireless SIM
     get:
@@ -573,12 +577,13 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-      - status
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+        - status
+      pathType: list
   "/v1/Sims/{Sid}":
     delete:
       description: Delete a Sim resource on your Account.
@@ -800,12 +805,13 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-      - status
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+        - status
+      pathType: instance
   "/v1/Sims/{SimSid}/DataSessions":
     description: Data session information for SIMs
     get:
@@ -868,13 +874,14 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - sid
-      - packets_uploaded
-      - packets_downloaded
-      - start
-      - end
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - packets_uploaded
+        - packets_downloaded
+        - start
+        - end
+      pathType: list
   "/v1/Sims/{SimSid}/UsageRecords":
     description: Usage information for SIMs
     get:
@@ -966,9 +973,10 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - period
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - period
+      pathType: list
   /v1/UsageRecords:
     description: Aggregated Usage information for all SIMs on an Account
     get:
@@ -1050,9 +1058,10 @@ paths:
         - GA
     servers:
       - url: https://wireless.twilio.com
-    x-default-output-properties:
-      - period
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - period
+      pathType: list
 components:
   schemas:
     wireless.v1.account_usage_record:

@@ -75,19 +75,20 @@ paths:
         - GA
     servers:
       - url: https://bulkexports.twilio.com
-    x-default-output-properties:
-      - details
-      - email
-      - end_day
-      - estimated_completion_time
-      - friendly_name
-      - job_queue_position
-      - job_sid
-      - resource_type
-      - start_day
-      - webhook_method
-      - webhook_url
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - details
+        - email
+        - end_day
+        - estimated_completion_time
+        - friendly_name
+        - job_queue_position
+        - job_sid
+        - resource_type
+        - start_day
+        - webhook_method
+        - webhook_url
+      pathType: instance
   "/v1/Exports/{ResourceType}":
     description: "TODO: Resource-level docs"
     get:
@@ -114,8 +115,9 @@ paths:
         - GA
     servers:
       - url: https://bulkexports.twilio.com
-    x-default-output-properties: []
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties: []
+      pathType: instance
   "/v1/Exports/{ResourceType}/Configuration":
     description: "TODO: Resource-level docs"
     get:
@@ -185,13 +187,14 @@ paths:
         - GA
     servers:
       - url: https://bulkexports.twilio.com
-    x-default-output-properties:
-      - enabled
-      - resource_type
-      - url
-      - webhook_method
-      - webhook_url
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - enabled
+        - resource_type
+        - url
+        - webhook_method
+        - webhook_url
+      pathType: instance
   "/v1/Exports/{ResourceType}/Days":
     description: "TODO: Resource-level docs"
     get:
@@ -253,14 +256,15 @@ paths:
         - GA
     servers:
       - url: https://bulkexports.twilio.com
-    x-default-output-properties:
-      - friendly_name
-      - create_date
-      - day
-      - resource_type
-      - size
-      - redirectTo
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - friendly_name
+        - create_date
+        - day
+        - resource_type
+        - size
+        - redirectTo
+      pathType: list
   "/v1/Exports/{ResourceType}/Days/{Day}":
     description: "TODO: Resource-level docs"
     get:
@@ -293,14 +297,15 @@ paths:
         - GA
     servers:
       - url: https://bulkexports.twilio.com
-    x-default-output-properties:
-      - friendly_name
-      - create_date
-      - day
-      - resource_type
-      - size
-      - redirectTo
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - friendly_name
+        - create_date
+        - day
+        - resource_type
+        - size
+        - redirectTo
+      pathType: instance
   "/v1/Exports/{ResourceType}/Jobs":
     description: "TODO: Resource-level docs"
     get:
@@ -424,19 +429,20 @@ paths:
         - GA
     servers:
       - url: https://bulkexports.twilio.com
-    x-default-output-properties:
-      - details
-      - email
-      - end_day
-      - estimated_completion_time
-      - friendly_name
-      - job_queue_position
-      - job_sid
-      - resource_type
-      - start_day
-      - webhook_method
-      - webhook_url
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - details
+        - email
+        - end_day
+        - estimated_completion_time
+        - friendly_name
+        - job_queue_position
+        - job_sid
+        - resource_type
+        - start_day
+        - webhook_method
+        - webhook_url
+      pathType: list
 components:
   schemas:
     bulkexports.v1.export:

@@ -150,11 +150,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - type
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - type
+      pathType: list
   "/v2/Credentials/{Sid}":
     delete:
       description: ""
@@ -274,11 +275,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - type
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - type
+      pathType: instance
   /v2/Services:
     description: Top level scope for all chat resources
     get:
@@ -359,11 +361,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Bindings":
     description: Push notification subscription for users
     get:
@@ -453,11 +456,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - endpoint
-      - identity
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - endpoint
+        - identity
+      pathType: list
   "/v2/Services/{ServiceSid}/Bindings/{Sid}":
     delete:
       description: ""
@@ -528,11 +532,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - endpoint
-      - identity
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - endpoint
+        - identity
+      pathType: instance
   "/v2/Services/{ServiceSid}/Channels":
     description: Channels represent chat rooms
     get:
@@ -694,11 +699,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+      pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites":
     description: Pending invitations to users to become channel members
     get:
@@ -842,11 +848,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}":
     delete:
       description: ""
@@ -933,11 +940,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members":
     description: Users joined to specific channels
     get:
@@ -1129,11 +1137,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}":
     delete:
       description: ""
@@ -1323,11 +1332,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages":
     description: Individual chat messages
     get:
@@ -1498,12 +1508,13 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - from
-      - to
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - from
+        - to
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}":
     delete:
       description: ""
@@ -1688,12 +1699,13 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - from
-      - to
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - from
+        - to
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks":
     description: Webhooks for specific channels
     get:
@@ -1859,10 +1871,11 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - configuration
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - configuration
+      pathType: list
   "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks/{Sid}":
     delete:
       description: ""
@@ -2041,10 +2054,11 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - configuration
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - configuration
+      pathType: instance
   "/v2/Services/{ServiceSid}/Channels/{Sid}":
     delete:
       description: ""
@@ -2200,11 +2214,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - unique_name
-      - friendly_name
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - unique_name
+        - friendly_name
+      pathType: instance
   "/v2/Services/{ServiceSid}/Roles":
     description: Roles determining user or member permissions
     get:
@@ -2329,11 +2344,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - type
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - type
+      pathType: list
   "/v2/Services/{ServiceSid}/Roles/{Sid}":
     delete:
       description: ""
@@ -2460,11 +2476,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - type
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - type
+      pathType: instance
   "/v2/Services/{ServiceSid}/Users":
     description: Unique chat users within a chat service
     get:
@@ -2596,12 +2613,13 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - identity
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - identity
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Users/{Sid}":
     delete:
       description: ""
@@ -2731,12 +2749,13 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - identity
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - identity
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings":
     description: List of bindings for a given user
     get:
@@ -2826,12 +2845,13 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - endpoint
-      - identity
-      - binding_type
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - endpoint
+        - identity
+        - binding_type
+      pathType: list
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}":
     delete:
       description: ""
@@ -2922,12 +2942,13 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - endpoint
-      - identity
-      - binding_type
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - endpoint
+        - identity
+        - binding_type
+      pathType: instance
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels":
     description: List of channels for a given user
     get:
@@ -3002,10 +3023,11 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - channel_sid
-      - status
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - channel_sid
+        - status
+      pathType: list
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}":
     delete:
       description: Removes User from selected Channel.
@@ -3163,10 +3185,11 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - channel_sid
-      - status
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - channel_sid
+        - status
+      pathType: instance
   "/v2/Services/{Sid}":
     delete:
       description: ""
@@ -3415,11 +3438,12 @@ paths:
         - GA
     servers:
       - url: https://chat.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
 components:
   schemas:
     chat.v2.credential:

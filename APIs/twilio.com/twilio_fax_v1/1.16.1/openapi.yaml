@@ -187,13 +187,14 @@ paths:
         - Beta
     servers:
       - url: https://fax.twilio.com
-    x-default-output-properties:
-      - sid
-      - from
-      - to
-      - status
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - from
+        - to
+        - status
+        - date_created
+      pathType: list
   "/v1/Faxes/{FaxSid}/Media":
     description: "TODO: Resource-level docs"
     get:
@@ -257,10 +258,11 @@ paths:
         - Beta
     servers:
       - url: https://fax.twilio.com
-    x-default-output-properties:
-      - content_type
-      - url
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - content_type
+        - url
+      pathType: list
   "/v1/Faxes/{FaxSid}/Media/{Sid}":
     delete:
       description: Delete a specific fax media instance.
@@ -329,10 +331,11 @@ paths:
         - Beta
     servers:
       - url: https://fax.twilio.com
-    x-default-output-properties:
-      - content_type
-      - url
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - content_type
+        - url
+      pathType: instance
   "/v1/Faxes/{Sid}":
     delete:
       description: Delete a specific fax and its associated media.
@@ -423,13 +426,14 @@ paths:
         - Beta
     servers:
       - url: https://fax.twilio.com
-    x-default-output-properties:
-      - sid
-      - from
-      - to
-      - status
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - from
+        - to
+        - status
+        - date_created
+      pathType: instance
 components:
   schemas:
     fax.v1.fax:

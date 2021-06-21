@@ -144,12 +144,13 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - sid
-      - flex_flow_sid
-      - user_sid
-      - task_sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+        - user_sid
+        - task_sid
+      pathType: list
   "/v1/Channels/{Sid}":
     delete:
       description: ""
@@ -198,12 +199,13 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - sid
-      - flex_flow_sid
-      - user_sid
-      - task_sid
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+        - user_sid
+        - task_sid
+      pathType: instance
   /v1/Configuration:
     description: Configuration for a Flex instance
     get:
@@ -242,12 +244,13 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - status
-      - ui_language
-      - ui_version
-      - service_version
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - status
+        - ui_language
+        - ui_version
+        - service_version
+      pathType: instance
   /v1/FlexFlows:
     description: Flex Flow
     get:
@@ -435,12 +438,13 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - channel_type
-      - integration_type
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - channel_type
+        - integration_type
+      pathType: list
   "/v1/FlexFlows/{Sid}":
     delete:
       description: ""
@@ -623,12 +627,13 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - channel_type
-      - integration_type
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - channel_type
+        - integration_type
+      pathType: instance
   /v1/WebChannels:
     description: "TODO: Resource-level docs"
     get:
@@ -730,10 +735,11 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - sid
-      - flex_flow_sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+      pathType: list
   "/v1/WebChannels/{Sid}":
     delete:
       description: ""
@@ -821,10 +827,11 @@ paths:
         - GA
     servers:
       - url: https://flex-api.twilio.com
-    x-default-output-properties:
-      - sid
-      - flex_flow_sid
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - flex_flow_sid
+      pathType: instance
 components:
   schemas:
     flex.v1.channel:

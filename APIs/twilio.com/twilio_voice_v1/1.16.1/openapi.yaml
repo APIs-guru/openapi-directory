@@ -179,11 +179,12 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - voice_url
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - voice_url
+      pathType: list
   "/v1/ByocTrunks/{Sid}":
     delete:
       description: ""
@@ -344,11 +345,12 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - voice_url
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - voice_url
+      pathType: instance
   /v1/ConnectionPolicies:
     description: Connection Policy for sending traffic to your communications
       infrastructure.
@@ -429,10 +431,11 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+      pathType: list
   "/v1/ConnectionPolicies/{ConnectionPolicySid}/Targets":
     description: Network element entry points into your communications infrastructure
     get:
@@ -553,12 +556,13 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - target
-      - enabled
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - target
+        - enabled
+      pathType: list
   "/v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}":
     delete:
       description: ""
@@ -692,12 +696,13 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - target
-      - enabled
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - target
+        - enabled
+      pathType: instance
   "/v1/ConnectionPolicies/{Sid}":
     delete:
       description: ""
@@ -785,10 +790,11 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+      pathType: instance
   /v1/DialingPermissions/BulkCountryUpdates:
     description: "TODO: Resource-level docs"
     post:
@@ -825,10 +831,11 @@ paths:
         - Preview
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - update_request
-      - update_count
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - update_request
+        - update_count
+      pathType: list
   /v1/DialingPermissions/Countries:
     description: "TODO: Resource-level docs"
     get:
@@ -923,11 +930,13 @@ paths:
         - Preview
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - iso_code
-      - name
-      - continent
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - iso_code
+        - name
+        - continent
+      pathType: list
+      sidKey: iso_code
   "/v1/DialingPermissions/Countries/{IsoCode}":
     description: "TODO: Resource-level docs"
     get:
@@ -957,11 +966,13 @@ paths:
         - Preview
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - iso_code
-      - name
-      - continent
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - iso_code
+        - name
+        - continent
+      pathType: instance
+      sidKey: iso_code
   "/v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes":
     description: "TODO: Resource-level docs"
     get:
@@ -1028,9 +1039,11 @@ paths:
         - Preview
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - prefix
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - prefix
+      pathType: list
+      sidKey: iso_code
   /v1/IpRecords:
     description: IP Records hold information about the IP addresses and ranges
       ([CIDR](https://tools.ietf.org/html/rfc4632) blocks) that your traffic
@@ -1123,12 +1136,13 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - ip_address
-      - cidr_prefix_length
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - ip_address
+        - cidr_prefix_length
+      pathType: list
   "/v1/IpRecords/{Sid}":
     delete:
       description: ""
@@ -1217,12 +1231,13 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - ip_address
-      - cidr_prefix_length
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - ip_address
+        - cidr_prefix_length
+      pathType: instance
   /v1/Settings:
     description: "TODO: Resource-level docs"
     get:
@@ -1268,9 +1283,10 @@ paths:
         - Preview
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - dialing_permissions_inheritance
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - dialing_permissions_inheritance
+      pathType: instance
   /v1/SourceIpMappings:
     description: With Source IP Mappings, Twilio can recognize your SIP requests
       based on where they are sent from. The Request-URI no longer has to have
@@ -1364,11 +1380,12 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - ip_record_sid
-      - sip_domain_sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - ip_record_sid
+        - sip_domain_sid
+      pathType: list
   "/v1/SourceIpMappings/{Sid}":
     delete:
       description: ""
@@ -1461,11 +1478,12 @@ paths:
         - GA
     servers:
       - url: https://voice.twilio.com
-    x-default-output-properties:
-      - sid
-      - ip_record_sid
-      - sip_domain_sid
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - ip_record_sid
+        - sip_domain_sid
+      pathType: instance
 components:
   schemas:
     voice.v1.byoc_trunk:

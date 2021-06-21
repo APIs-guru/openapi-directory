@@ -103,12 +103,13 @@ paths:
         - GA
     servers:
       - url: https://monitor.twilio.com
-    x-default-output-properties:
-      - sid
-      - error_code
-      - log_level
-      - alert_text
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - error_code
+        - log_level
+        - alert_text
+      pathType: list
   "/v1/Alerts/{Sid}":
     description: Debugger alerts
     get:
@@ -137,12 +138,13 @@ paths:
         - GA
     servers:
       - url: https://monitor.twilio.com
-    x-default-output-properties:
-      - sid
-      - error_code
-      - log_level
-      - alert_text
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - error_code
+        - log_level
+        - alert_text
+      pathType: instance
   /v1/Events:
     description: Debugger events
     get:
@@ -244,12 +246,13 @@ paths:
         - GA
     servers:
       - url: https://monitor.twilio.com
-    x-default-output-properties:
-      - sid
-      - event_type
-      - event_type
-      - description
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - event_type
+        - event_type
+        - description
+      pathType: list
   "/v1/Events/{Sid}":
     description: Debugger events
     get:
@@ -278,12 +281,13 @@ paths:
         - GA
     servers:
       - url: https://monitor.twilio.com
-    x-default-output-properties:
-      - sid
-      - event_type
-      - event_type
-      - description
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - event_type
+        - event_type
+        - description
+      pathType: instance
 components:
   schemas:
     monitor.v1.alert:

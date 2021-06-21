@@ -99,13 +99,14 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - date_created
-      - date_updated
-      - conversion_status
-      - channel
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+        - date_updated
+        - conversion_status
+        - channel
+      pathType: list
   "/v2/Attempts/{Sid}":
     description: "TODO: Resource-level docs"
     get:
@@ -134,13 +135,14 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - date_created
-      - date_updated
-      - conversion_status
-      - channel
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+        - date_updated
+        - conversion_status
+        - channel
+      pathType: instance
   "/v2/Forms/{FormType}":
     description: "TODO: Resource-level docs"
     get:
@@ -168,9 +170,10 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - form_type
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - form_type
+      pathType: instance
   /v2/Services:
     description: "TODO: Resource-level docs"
     get:
@@ -338,11 +341,12 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/AccessTokens":
     description: "TODO: Resource-level docs"
     post:
@@ -392,9 +396,10 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - token
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - token
+      pathType: list
   "/v2/Services/{ServiceSid}/Entities":
     description: "TODO: Resource-level docs"
     get:
@@ -497,11 +502,12 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}":
     delete:
       description: Delete a specific Entity.
@@ -562,11 +568,12 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges":
     description: "TODO: Resource-level docs"
     get:
@@ -738,12 +745,13 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - factor_type
-      - status
-      - responded_reason
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - factor_type
+        - status
+        - responded_reason
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{ChallengeSid}/Notifications":
     description: "TODO: Resource-level docs"
     post:
@@ -805,12 +813,13 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - identity
-      - challenge_sid
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - identity
+        - challenge_sid
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{Sid}":
     description: "TODO: Resource-level docs"
     get:
@@ -910,12 +919,13 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - factor_type
-      - status
-      - responded_reason
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - factor_type
+        - status
+        - responded_reason
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors":
     description: "TODO: Resource-level docs"
     get:
@@ -1146,12 +1156,13 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - status
-      - factor_type
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - status
+        - factor_type
+      pathType: list
   "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}":
     delete:
       description: Delete a specific Factor.
@@ -1318,12 +1329,13 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - status
-      - factor_type
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - status
+        - factor_type
+      pathType: instance
   "/v2/Services/{ServiceSid}/MessagingConfigurations":
     description: "TODO: Resource-level docs"
     get:
@@ -1439,14 +1451,15 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - account_sid
-      - service_sid
-      - country
-      - messaging_service_sid
-      - date_created
-      - date_updated
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - service_sid
+        - country
+        - messaging_service_sid
+        - date_created
+        - date_updated
+      pathType: list
   "/v2/Services/{ServiceSid}/MessagingConfigurations/{Country}":
     delete:
       description: Delete a specific MessagingConfiguration.
@@ -1569,14 +1582,15 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - account_sid
-      - service_sid
-      - country
-      - messaging_service_sid
-      - date_created
-      - date_updated
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - account_sid
+        - service_sid
+        - country
+        - messaging_service_sid
+        - date_created
+        - date_updated
+      pathType: instance
   "/v2/Services/{ServiceSid}/RateLimits":
     description: "TODO: Resource-level docs"
     get:
@@ -1685,15 +1699,16 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - service_sid
-      - account_sid
-      - unique_name
-      - description
-      - date_created
-      - date_updated
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - service_sid
+        - account_sid
+        - unique_name
+        - description
+        - date_created
+        - date_updated
+      pathType: list
   "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets":
     description: "TODO: Resource-level docs"
     get:
@@ -1821,16 +1836,17 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - service_sid
-      - rate_limit_sid
-      - account_sid
-      - max
-      - interval
-      - date_created
-      - date_updated
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - service_sid
+        - rate_limit_sid
+        - account_sid
+        - max
+        - interval
+        - date_created
+        - date_updated
+      pathType: list
   "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets/{Sid}":
     delete:
       description: Delete a specific Bucket.
@@ -1979,16 +1995,17 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - service_sid
-      - rate_limit_sid
-      - account_sid
-      - max
-      - interval
-      - date_created
-      - date_updated
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - service_sid
+        - rate_limit_sid
+        - account_sid
+        - max
+        - interval
+        - date_created
+        - date_updated
+      pathType: instance
   "/v2/Services/{ServiceSid}/RateLimits/{Sid}":
     delete:
       description: Delete a specific Rate Limit.
@@ -2107,15 +2124,16 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - service_sid
-      - account_sid
-      - unique_name
-      - description
-      - date_created
-      - date_updated
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - service_sid
+        - account_sid
+        - unique_name
+        - description
+        - date_created
+        - date_updated
+      pathType: instance
   "/v2/Services/{ServiceSid}/VerificationCheck":
     description: "TODO: Resource-level docs"
     post:
@@ -2182,14 +2200,15 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - to
-      - channel
-      - status
-      - valid
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - to
+        - channel
+        - status
+        - valid
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Verifications":
     description: "TODO: Resource-level docs"
     post:
@@ -2295,14 +2314,15 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - to
-      - channel
-      - status
-      - valid
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - to
+        - channel
+        - status
+        - valid
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Verifications/{Sid}":
     description: "TODO: Resource-level docs"
     get:
@@ -2388,14 +2408,15 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - to
-      - channel
-      - status
-      - valid
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - to
+        - channel
+        - status
+        - valid
+        - date_created
+      pathType: instance
   "/v2/Services/{ServiceSid}/Webhooks":
     description: "TODO: Resource-level docs"
     get:
@@ -2515,16 +2536,17 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - service_sid
-      - friendly_name
-      - event_types
-      - webhook_url
-      - webhook_method
-      - status
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - service_sid
+        - friendly_name
+        - event_types
+        - webhook_url
+        - webhook_method
+        - status
+        - date_created
+      pathType: list
   "/v2/Services/{ServiceSid}/Webhooks/{Sid}":
     delete:
       description: Delete a specific Webhook.
@@ -2655,16 +2677,17 @@ paths:
         - Beta
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - service_sid
-      - friendly_name
-      - event_types
-      - webhook_url
-      - webhook_method
-      - status
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - service_sid
+        - friendly_name
+        - event_types
+        - webhook_url
+        - webhook_method
+        - status
+        - date_created
+      pathType: instance
   "/v2/Services/{Sid}":
     delete:
       description: Delete a specific Verification Service Instance.
@@ -2833,11 +2856,12 @@ paths:
         - GA
     servers:
       - url: https://verify.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
 components:
   schemas:
     verify.v2.form:

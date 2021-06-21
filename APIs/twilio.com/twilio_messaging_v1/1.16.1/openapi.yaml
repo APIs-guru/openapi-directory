@@ -54,9 +54,10 @@ paths:
         - GA
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - redirect_to
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - redirect_to
+      pathType: instance
   /v1/Services:
     description: A Messaging Service resource to create, fetch, update, delete or
       add/remove senders from Messaging Services.
@@ -235,11 +236,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: list
   /v1/Services/PreregisteredUsa2p:
     description: Resource to associate preregistered campaign with Messaging Service.
     post:
@@ -279,10 +281,11 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - campaign_id
-      - messaging_service_sid
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - campaign_id
+        - messaging_service_sid
+      pathType: list
   /v1/Services/Usecases:
     description: Use Case resource. Fetch possible use cases for a Messaging Service.
     get:
@@ -301,9 +304,10 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - usecases
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - usecases
+      pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p":
     description: A service for (fetch/create/delete) A2P Campaign for a Messaging Service
     get:
@@ -434,11 +438,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - brand_registration_sid
-      - campaign_status
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - brand_registration_sid
+        - campaign_status
+        - date_created
+      pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases":
     description: Messaging Service Use Case resource. Fetch possible use cases for service.
     get:
@@ -469,9 +474,10 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - us_app_to_person_usecases
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - us_app_to_person_usecases
+      pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}":
     delete:
       description: ""
@@ -544,11 +550,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - brand_registration_sid
-      - campaign_status
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - brand_registration_sid
+        - campaign_status
+        - date_created
+      pathType: instance
   "/v1/Services/{ServiceSid}/AlphaSenders":
     description: A Messaging Service resource to add, fetch or remove an Alpha
       Sender ID from a Messaging Service.
@@ -655,10 +662,11 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - alpha_sender
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - alpha_sender
+      pathType: list
   "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}":
     delete:
       description: ""
@@ -724,10 +732,11 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - alpha_sender
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - alpha_sender
+      pathType: instance
   "/v1/Services/{ServiceSid}/PhoneNumbers":
     description: A Messaging Service resource to add, fetch or remove phone numbers
       from a Messaging Service.
@@ -835,11 +844,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - phone_number
-      - country_code
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - phone_number
+        - country_code
+      pathType: list
   "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}":
     delete:
       description: ""
@@ -905,11 +915,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - phone_number
-      - country_code
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - phone_number
+        - country_code
+      pathType: instance
   "/v1/Services/{ServiceSid}/ShortCodes":
     description: A Messaging Service resource to add, fetch or remove short code
       numbers from a Messaging Service.
@@ -1017,11 +1028,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - short_code
-      - country_code
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - short_code
+        - country_code
+      pathType: list
   "/v1/Services/{ServiceSid}/ShortCodes/{Sid}":
     delete:
       description: ""
@@ -1087,11 +1099,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - short_code
-      - country_code
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - short_code
+        - country_code
+      pathType: instance
   "/v1/Services/{Sid}":
     delete:
       description: ""
@@ -1272,11 +1285,12 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - friendly_name
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - friendly_name
+        - date_created
+      pathType: instance
   /v1/a2p/BrandRegistrations:
     description: A Messaging Service resource to add and fetch Brand Registrations.
     get:
@@ -1367,10 +1381,11 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - date_created
-    x-path-type: list
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+      pathType: list
   "/v1/a2p/BrandRegistrations/{Sid}":
     description: A Messaging Service resource to add and fetch Brand Registrations.
     get:
@@ -1399,10 +1414,11 @@ paths:
         - Beta
     servers:
       - url: https://messaging.twilio.com
-    x-default-output-properties:
-      - sid
-      - date_created
-    x-path-type: instance
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - date_created
+      pathType: instance
 components:
   schemas:
     messaging.v1.brand_registrations:
