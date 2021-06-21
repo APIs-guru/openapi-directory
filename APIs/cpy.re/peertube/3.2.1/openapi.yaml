@@ -56,27 +56,53 @@ info:
 
     The API uses standard HTTP status codes to indicate the success or failure
 
-    of the API call.
+    of the API call, completed by a [RFC7807-compliant](https://tools.ietf.org/html/rfc7807) response body.
 
 
     ```
 
     HTTP 1.1 404 Not Found
 
-    Content-Type: application/json
+    Content-Type: application/problem+json; charset=utf-8
 
 
     {
-      "errorCode": 1
-      "error": "Account not found"
+      "detail": "Video not found",
+      "docs": "https://docs.joinpeertube.org/api-rest-reference.html#operation/getVideo",
+      "status": 404,
+      "title": "Not Found",
+      "type": "about:blank"
     }
 
     ```
 
 
-    We provide error codes for [a growing number of cases](https://github.com/Chocobozzz/PeerTube/blob/develop/shared/models/server/server-error-code.enum.ts),
+    We provide error `type` values for [a growing number of cases](https://github.com/Chocobozzz/PeerTube/blob/develop/shared/models/server/server-error-code.enum.ts),
 
-    but it is still optional.
+    but it is still optional. Types are used to disambiguate errors that bear the same status code
+
+    and are non-obvious:
+
+
+    ```
+
+    HTTP 1.1 403 Forbidden
+
+    Content-Type: application/problem+json; charset=utf-8
+
+
+    {
+      "detail": "Cannot get this video regarding follow constraints",
+      "docs": "https://docs.joinpeertube.org/api-rest-reference.html#operation/getVideo",
+      "status": 403,
+      "title": "Forbidden",
+      "type": "https://docs.joinpeertube.org/api-rest-reference.html#section/Errors/does_not_respect_follow_constraints"
+    }
+
+    ```
+
+
+    Here a 403 error could otherwise mean that the video is private or blocklisted.
 
 
     ### Validation errors
@@ -84,27 +110,33 @@ info:
 
     Each parameter is evaluated on its own against a set of rules before the route validator
 
-    proceeds with potential testing involving parameter combinations. Errors coming from Validation
+    proceeds with potential testing involving parameter combinations. Errors coming from validation
 
-    errors appear earlier and benefit from a more detailed error type:
+    errors appear earlier and benefit from a more detailed error description:
 
 
     ```
 
     HTTP 1.1 400 Bad Request
 
-    Content-Type: application/json
+    Content-Type: application/problem+json; charset=utf-8
 
 
     {
-      "errors": {
+      "detail": "Incorrect request parameters: id",
+      "docs": "https://docs.joinpeertube.org/api-rest-reference.html#operation/getVideo",
+      "instance": "/api/v1/videos/9c9de5e8-0a1e-484a-b099-e80766180",
+      "invalid-params": {
         "id": {
-          "value": "a117eb-c6a9-4756-bb09-2a956239f",
-          "msg": "Should have a valid id",
+          "location": "params",
+          "msg": "Invalid value",
           "param": "id",
-          "location": "params"
+          "value": "9c9de5e8-0a1e-484a-b099-e80766180"
         }
-      }
+      },
+      "status": 400,
+      "title": "Bad Request",
+      "type": "about:blank"
     }
 
     ```
@@ -112,11 +144,21 @@ info:
 
     Where `id` is the name of the field concerned by the error, within the route definition.
 
-    `errors.<field>.location` can be either 'params', 'body', 'header', 'query' or 'cookies', and
+    `invalid-params.<field>.location` can be either 'params', 'body', 'header', 'query' or 'cookies', and
 
-    `errors.<field>.value` reports the value that didn't pass validation whose `errors.<field>.msg`
+    `invalid-params.<field>.value` reports the value that didn't pass validation whose `invalid-params.<field>.msg`
 
     is about.
+
+
+    ### Deprecated error fields
+
+
+    Some fields could be included with previous versions. They are still included but their use is deprecated:
+
+    - `error`: superseded by `detail`
+
+    - `code`: superseded by `type` (which is now an URI)
 
 
     # Rate limits
@@ -419,7 +461,7 @@ paths:
           name: searchVideoChannel
           schema:
             type: string
-        - description: only list blacklisted or deleted videos
+        - description: only list deleted or blocklisted videos
           in: query
           name: videoIs
           schema:
@@ -2610,6 +2652,18 @@ paths:
                     type: string
                 type: object
           description: successful operation
+        "400":
+          description: |
+            Disambiguate via `type`:
+            - `invalid_client` for an unmatched `client_id`
+            - `invalid_grant` for unmatched credentials
+          x-summary: client or credentials are invalid
+        "401":
+          description: |
+            Disambiguate via `type`:
+            - default value for a regular authentication failure
+            - `invalid_token` for an expired token
+          x-summary: token expired
       summary: Login
       tags:
         - Session
@@ -3487,8 +3541,27 @@ paths:
               schema:
                 $ref: "#/components/schemas/VideoUploadResponse"
           description: successful operation
+        "400":
+          description: >
+            Disambiguate via `type`:
+
+            - default type for a validation error
+
+            - `live_conflicting_permanent_and_save_replay` for conflicting parameters set
+          x-summary: validation error, or conflicting `saveReplay` and `permanentLive`
+            parameter set
         "403":
-          description: live is not enabled, allow replay is not enabled, or max
+          description: >
+            Disambiguate via `type`:
+
+            - `live_not_enabled` for a disabled live feature
+
+            - `live_not_allowing_replay` for a disabled replay feature
+
+            - `max_instance_lives_limit_reached` for the absolute concurrent live limit
+
+            - `max_user_lives_limit_reached` for the user concurrent live limit
+          x-summary: live is not enabled, allow replay is not enabled, or max
             instance/user live videos limit is exceeded
       security:
         - OAuth2: []
@@ -3622,21 +3695,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/VideoUploadResponse"
           description: successful operation
-        "400":
-          description: invalid file field, schedule date or parameter
         "403":
           description: video didn't pass upload filter
         "408":
           description: upload has timed out
         "413":
-          description: video file too large, due to quota or max body size limit set by
-            the reverse-proxy
+          description: >
+            If the response has no body, it means the reverse-proxy didn't let
+            it through. Otherwise disambiguate via `type`:
+
+            - `quota_reached` for quota limits wether daily or global
           headers:
             X-File-Maximum-Size:
               description: Maximum file size for the video
               schema:
                 format: Nginx size
                 type: string
+          x-summary: video file too large, due to quota or max body size limit set by the
+            reverse-proxy
         "415":
           description: video type unsupported
         "422":
@@ -3718,6 +3794,8 @@ paths:
               schema:
                 example: 0
                 type: number
+        "404":
+          description: upload not found
       security:
         - OAuth2: []
       summary: Cancel the resumable upload of a video, deleting any data uploaded so far
@@ -3769,10 +3847,12 @@ paths:
                 example: /api/v1/videos/upload-resumable?upload_id=471e97554f21dec3b8bb5d4602939c51
                 format: url
                 type: string
-        "400":
-          description: invalid file field, schedule date or parameter
         "413":
-          description: video file too large, due to quota, absolute max file size or
+          description: |
+            Disambiguate via `type`:
+            - `max_file_size_reached` for the absolute file size limit
+            - `quota_reached` for quota limits whether daily or global
+          x-summary: video file too large, due to quota, absolute max file size or
             concurrent partial upload limit
         "415":
           description: video type unsupported
@@ -3859,11 +3939,14 @@ paths:
                 type: string
         "403":
           description: video didn't pass upload filter
-        "413":
-          description: video file too large, due to quota or max body size limit set by
-            the reverse-proxy
+        "404":
+          description: upload not found
+        "409":
+          description: chunk doesn't match range
         "422":
           description: video unreadable
+        "429":
+          description: too many concurrent requests
       security:
         - OAuth2: []
       summary: Send chunk for the resumable upload of a video
@@ -4263,6 +4346,7 @@ paths:
         - Video Rates
   "/videos/{id}/views":
     post:
+      operationId: addView
       parameters:
         - $ref: "#/components/parameters/idOrUUID"
       responses:
@@ -4273,6 +4357,7 @@ paths:
         - Video
   "/videos/{id}/watching":
     put:
+      operationId: setProgress
       parameters:
         - $ref: "#/components/parameters/idOrUUID"
       requestBody:
@@ -4341,7 +4426,7 @@ components:
           - Organization
         type: string
     blacklistsSort:
-      description: Sort blacklists by criteria
+      description: Sort blocklists by criteria
       in: query
       name: sort
       required: false
@@ -5973,7 +6058,7 @@ components:
           description: Enable P2P in the player
           type: boolean
     UserAdminFlags:
-      description: Admin flags for the user (None = `0`, Bypass video blacklist = `1`)
+      description: Admin flags for the user (None = `0`, Bypass video blocklist = `1`)
       enum:
         - 0
         - 1

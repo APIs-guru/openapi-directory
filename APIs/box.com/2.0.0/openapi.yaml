@@ -3843,10 +3843,8 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
-                      vanity_url:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_name: null
+                      vanity_url: null
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -3958,10 +3956,8 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
-                      vanity_url:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_name: null
+                      vanity_url: null
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -4041,8 +4037,7 @@ paths:
                   description: |-
                     By setting this value to `null`, the shared link
                     is removed from the file.
-                  example:
-                    $ref: "#/components/schemas/FileConflict/x-box-tag"
+                  example: null
                   nullable: true
                   type: object
               type: object
@@ -4055,8 +4050,7 @@ paths:
                   value:
                     etag: "1"
                     id: "12345"
-                    shared_link:
-                      $ref: "#/components/schemas/FileConflict/x-box-tag"
+                    shared_link: null
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -4252,10 +4246,8 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
-                      vanity_url:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_name: null
+                      vanity_url: null
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -8535,10 +8527,8 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
-                      vanity_url:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_name: null
+                      vanity_url: null
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -8656,10 +8646,8 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
-                      vanity_url:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_name: null
+                      vanity_url: null
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -8743,8 +8731,7 @@ paths:
                   description: |-
                     By setting this value to `null`, the shared link
                     is removed from the folder.
-                  example:
-                    $ref: "#/components/schemas/FileConflict/x-box-tag"
+                  example: null
                   nullable: true
                   type: object
               type: object
@@ -8757,8 +8744,7 @@ paths:
                   value:
                     etag: "1"
                     id: "12345"
-                    shared_link:
-                      $ref: "#/components/schemas/FileConflict/x-box-tag"
+                    shared_link: null
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -8948,10 +8934,8 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
-                      vanity_url:
-                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_name: null
+                      vanity_url: null
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -17610,8 +17594,7 @@ paths:
                   description: |-
                     Set this to `null` to roll the user out of the enterprise
                     and make them a free user
-                  example:
-                    $ref: "#/components/schemas/FileConflict/x-box-tag"
+                  example: null
                   nullable: true
                   type: string
                 is_exempt_from_device_limits:

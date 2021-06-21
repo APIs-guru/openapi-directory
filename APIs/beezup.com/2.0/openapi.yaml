@@ -840,7 +840,6 @@ paths:
         - $ref: "#/components/parameters/changeOrderTypeParameter"
         - $ref: "#/components/parameters/userNameInQueryParameter"
         - $ref: "#/components/parameters/testModeInQueryParameter"
-        - $ref: "#/components/parameters/ifMatchParameter"
       requestBody:
         $ref: "#/components/requestBodies/changeOrderRequest"
       responses:
@@ -9281,7 +9280,7 @@ components:
         changeOrderRequest:
           $ref: "#/components/schemas/changeOrderRequest"
         order:
-          $ref: "#/components/schemas/orderIdentifierWithETag"
+          $ref: "#/components/schemas/orderIdentifier"
       required:
         - order
       type: object
@@ -17517,7 +17516,7 @@ components:
           items:
             $ref: "#/components/schemas/reportByDay"
           type: array
-        global:
+        globalPerformanceIndicators:
           $ref: "#/components/schemas/reportByDayGlobal"
       required:
         - currencyCode

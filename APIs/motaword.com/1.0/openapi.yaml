@@ -936,10 +936,10 @@ paths:
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
-  /invitation/needs:
+  /invitation/vendors:
     post:
       description: Get vendor list for compiled invitation needs
-      operationId: getVendors
+      operationId: getInvitationVendors
       requestBody:
         content:
           multipart/form-data:

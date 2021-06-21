@@ -21161,6 +21161,8 @@ paths:
       tags:
         - distribute
     patch:
+      consumes:
+        - text/plain
       description: Updates a release.
       operationId: releases_update
       parameters:
@@ -21191,16 +21193,14 @@ paths:
                     type: string
                 type: object
               destination_id:
-                description: >
-                  OBSOLETE. Will be removed in future releases - use destinations
+                description: OBSOLETE. Will be removed in future releases - use destinations
                   instead. Id of a destination. The release will be associated
                   with this destination. If the destination doesn't exist a 400
                   is returned. If both destination name and id are passed, the
                   id is taking precedence.
                 type: string
               destination_name:
-                description: >
-                  OBSOLETE. Will be removed in future releases - use destinations
+                description: OBSOLETE. Will be removed in future releases - use destinations
                   instead. Name of a destination. The release will be associated
                   with this destination. If the destination doesn't exist a 400
                   is returned. If both distribution group name and id are
@@ -21235,16 +21235,14 @@ paths:
                   type: object
                 type: array
               distribution_group_id:
-                description: >
-                  OBSOLETE. Will be removed in future releases - use destinations
+                description: OBSOLETE. Will be removed in future releases - use destinations
                   instead. Id of a distribution group. The release will be
                   associated with this distribution group. If the distribution
                   group doesn't exist a 400 is returned. If both distribution
                   group name and id are passed, the id is taking precedence.
                 type: string
               distribution_group_name:
-                description: >
-                  OBSOLETE. Will be removed in future releases - use destinations
+                description: OBSOLETE. Will be removed in future releases - use destinations
                   instead. Name of a distribution group. The release will be
                   associated with this distribution group. If the distribution
                   group doesn't exist a 400 is returned. If both distribution
@@ -21272,6 +21270,7 @@ paths:
               release_notes:
                 description: Release notes for this release.
                 type: string
+            type: object
         - description: The name of the owner
           in: path
           name: owner_name
@@ -51194,7 +51193,6 @@ definitions:
       shortversion:
         type: string
       uploaded_at:
-        format: date-time
         type: string
       version:
         type: string
@@ -58189,7 +58187,6 @@ definitions:
       expired_at:
         description: The profile's expiration date in RFC 3339 format, i.e.
           2017-07-21T17:32:28Z
-        format: date-time
         type: string
       name:
         description: The name of the provisioning profile.
@@ -58240,7 +58237,6 @@ definitions:
       expired_at:
         description: The provisioning profile's expiration date in RFC 3339 format, i.e.
           2017-07-21T17:32:28Z.
-        format: date-time
         type: string
       is_appex:
         description: A boolean value that indicates whether the provisioning profile
@@ -58821,7 +58817,6 @@ definitions:
             expired_at:
               description: The profile's expiration date in RFC 3339 format, i.e.
                 2017-07-21T17:32:28Z
-              format: date-time
               type: string
             name:
               description: The name of the provisioning profile.
@@ -58905,7 +58900,6 @@ definitions:
           expired_at:
             description: The profile's expiration date in RFC 3339 format, i.e.
               2017-07-21T17:32:28Z
-            format: date-time
             type: string
           name:
             description: The name of the provisioning profile.
@@ -59474,15 +59468,13 @@ definitions:
             type: string
         type: object
       destination_id:
-        description: >
-          OBSOLETE. Will be removed in future releases - use destinations
+        description: OBSOLETE. Will be removed in future releases - use destinations
           instead. Id of a destination. The release will be associated with this
           destination. If the destination doesn't exist a 400 is returned. If
           both destination name and id are passed, the id is taking precedence.
         type: string
       destination_name:
-        description: >
-          OBSOLETE. Will be removed in future releases - use destinations
+        description: OBSOLETE. Will be removed in future releases - use destinations
           instead. Name of a destination. The release will be associated with
           this destination. If the destination doesn't exist a 400 is returned.
           If both distribution group name and id are passed, the id is taking
@@ -59517,16 +59509,14 @@ definitions:
           type: object
         type: array
       distribution_group_id:
-        description: >
-          OBSOLETE. Will be removed in future releases - use destinations
+        description: OBSOLETE. Will be removed in future releases - use destinations
           instead. Id of a distribution group. The release will be associated
           with this distribution group. If the distribution group doesn't exist
           a 400 is returned. If both distribution group name and id are passed,
           the id is taking precedence.
         type: string
       distribution_group_name:
-        description: >
-          OBSOLETE. Will be removed in future releases - use destinations
+        description: OBSOLETE. Will be removed in future releases - use destinations
           instead. Name of a distribution group. The release will be associated
           with this distribution group. If the distribution group doesn't exist
           a 400 is returned. If both distribution group name and id are passed,
@@ -59554,6 +59544,7 @@ definitions:
       release_notes:
         description: Release notes for this release.
         type: string
+    type: object
   ReleaseUpdateResponse:
     description: Response for updating a release
     properties:

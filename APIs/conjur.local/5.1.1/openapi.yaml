@@ -91,10 +91,10 @@ paths:
       tags:
         - status
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/authn-azure/{service_id}/{account}/{login}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         The access token is used to communicate to the REST API that
@@ -126,21 +126,21 @@ paths:
         documentation: [Azure Authenticator](https://docs.conjur.org/Latest/en/Content/Operations/Services/azure_authn.htm) (`authn-azure`).
       operationId: getAccessTokenViaAzure
       parameters:
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           in: path
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: URL-encoded login name. For users, it’s the user ID. For hosts, the
             login name is `host/<host-id>`
           in: path
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
-              ma"
+            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
+              s/1/schema"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -166,21 +166,23 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
+            /200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
+      security: []
       summary: Gets a short-lived access token for applications running in Azure.
       tags:
         - authentication
   "/authn-gcp/{account}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Use the GCP Authenticator API to send an authentication
@@ -221,13 +223,14 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
+      security: []
       summary: |
         Gets a short-lived access token for applications running in
         Google Cloud Platform.
@@ -261,43 +264,30 @@ paths:
             type: string
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  error:
-                    description: The error message if there was an error
-                    example: "#<Errors::Authentication::AuthenticatorNotFound: CONJ00001E
-                      Authenticator 'authn-oidc' is not implemented in Conjur>"
-                    type: string
-                  status:
-                    description: The status of the endpoint, 'error' if there was an error
-                    example: error
-                    type: string
-                required:
-                  - status
-                type: object
-          description: The response contains info about the result
+          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
+            et/responses/200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
           description: The service was not found
         "500":
-          $ref: "#/paths/~1authn-gcp~1{account}~1status/get/responses/200"
+          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
+            et/responses/200"
         "501":
-          $ref: "#/paths/~1authn-gcp~1{account}~1status/get/responses/200"
+          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
+            et/responses/200"
       security:
         - conjurAuth: []
       summary: Details whether an authentication service has been configured properly
       tags:
         - status
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/authn-iam/{service_id}/{account}/{login}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         The access token is used to communicate to the REST API that
@@ -331,20 +321,20 @@ paths:
         [AWS IAM Authenticator](https://docs.conjur.org/Latest/en/Content/Operations/Services/AWS_IAM_Authenticator.htm) (`authn-iam`).
       operationId: getAccessTokenViaAWS
       parameters:
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           in: path
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: URL-encoded login name. For hosts, the login name is `host/<host-id>`
           in: path
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
-              ma"
+            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
+              s/1/schema"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -365,21 +355,71 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
+            /200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
+      security: []
       summary: Get a short-lived access token for applications running in AWS.
+      tags:
+        - authentication
+  "/authn-jwt/{service_id}/{account}/authenticate":
+    parameters:
+      - $ref: "#/components/parameters/RequestID"
+    post:
+      description: |
+        Use the JWT Authenticator to leverage the identity layer
+        provided by JWT to authenticate with Conjur.
+      operationId: getAccessTokenViaJWT
+      parameters:
+        - description: Organization account name
+          in: path
+          name: account
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountName"
+        - $ref: "#/components/parameters/ServiceID"
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              example:
+                jwt: eyJhbGciOiJSUzI1NiIs......uTonCA
+              properties:
+                jwt:
+                  type: string
+              type: object
+        description: ID token
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
+            /200"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security: []
+      summary: >
+        Gets a short-lived access token for applications using JSON Web Token
+        (JWT)
+
+        to access the Conjur API.
       tags:
         - authentication
   "/authn-k8s/{service_id}/inject_client_cert":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         This request sends a Certificate Signing Request to Conjur,
@@ -398,7 +438,7 @@ paths:
         see [the documentation](https://docs.conjur.org/Latest/en/Content/Integrations/kubernetes.htm).
       operationId: k8sInjectClientCert
       parameters:
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Dot-separated policy tree, prefixed by `host.`, where the
             application identity is defined
           example: host/conjur/authn-k8s/my-authenticator-id/apps
@@ -419,11 +459,11 @@ paths:
         "202":
           description: The injected certificate was accepted.
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
       summary: |
         For applications running in Kubernetes; sends Conjur a certificate
         signing request (CSR) and requests a client certificate injected into
@@ -432,7 +472,7 @@ paths:
         - authentication
   "/authn-k8s/{service_id}/{account}/{login}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         The access token is used to communicate to the REST API that
@@ -464,21 +504,21 @@ paths:
         documentation: [Kubernetes Authenticator](https://docs.conjur.org/Latest/en/Content/Operations/Services/k8s_auth.htm) (`authn-k8s`).
       operationId: getAccessTokenViaKubernetes
       parameters:
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           in: path
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: URL-encoded login name. For users, it’s the user ID. For hosts, the
             login name is `host/<host-id>`
           in: path
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
-              ma"
+            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
+              s/1/schema"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -491,15 +531,16 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
+            /200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
       security:
         - conjurKubernetesMutualTls: []
       summary: Gets a short-lived access token for applications running in Kubernetes.
@@ -531,32 +572,26 @@ paths:
         Your HTTP/REST client probably provides HTTP basic authentication support.
       operationId: getAPIKeyViaLDAP
       parameters:
-        - description: URL-Encoded authenticator service ID
-          example: prod%2fgke
-          in: path
-          name: service_id
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           in: path
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
       security:
         - basicAuth: []
       summary: |
@@ -565,10 +600,10 @@ paths:
       tags:
         - authentication
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/authn-ldap/{service_id}/{account}/{login}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         The access token is used to communicate to the REST API that
@@ -605,21 +640,21 @@ paths:
         [LDAP Authenticator](https://docs.conjur.org/Latest/en/Content/Integrations/ldap/ldap_authenticator.html) (`authn-ldap`).
       operationId: getAccessTokenViaLDAP
       parameters:
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           in: path
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: URL-encoded login name. For users, it’s the user ID. For hosts, the
             login name is `host/<host-id>`
           in: path
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
-              ma"
+            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
+              s/1/schema"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -634,21 +669,23 @@ paths:
         content:
           text/plain:
             schema:
-              $ref: "#/paths/~1authn~1{account}~1login/get/responses/200/content/text~1plain/\
-                schema"
+              $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200/content/text~1pl\
+                ain/schema"
         description: API key
         required: false
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
+            /200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
+      security: []
       summary: |
         Gets a short-lived access token for users and hosts using their
         LDAP identity to access the Conjur API.
@@ -656,7 +693,7 @@ paths:
         - authentication
   "/authn-oidc/{service_id}/{account}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Use the OIDC Authenticator to leverage the identity layer
@@ -667,13 +704,13 @@ paths:
         For more information see [the documentation](https://docs.conjur.org/Latest/en/Content/OIDC/OIDC.htm).
       operationId: getAccessTokenViaOIDC
       parameters:
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           in: path
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -689,13 +726,15 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
+            /200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "502":
           description: Error connecting conjur to the OIDC provider
+      security: []
       summary: |
         Gets a short-lived access token for applications using OpenID
         Connect (OIDC) to access the Conjur API.
@@ -703,7 +742,7 @@ paths:
         - authentication
   "/authn/{account}/api_key":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     put:
       description: >
         Any role can rotate its own API key. The name and password
@@ -751,7 +790,7 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: |
             (**Optional**) role specifier in `{kind}:{identifier}` format
 
@@ -761,18 +800,18 @@ paths:
           in: query
           name: role
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "200":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/200"
+          $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
       security:
         - basicAuth: []
           conjurAuth: []
@@ -819,7 +858,7 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
       responses:
         "200":
           content:
@@ -831,15 +870,15 @@ paths:
                 type: string
           description: The response body is the API key
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
         "500":
-          description: Malfromed request, rejected by the server
+          $ref: "#/components/responses/InternalServerError"
       security:
         - basicAuth: []
       summary: |
@@ -848,10 +887,10 @@ paths:
       tags:
         - authentication
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/authn/{account}/password":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     put:
       description: |
         You must provide the login name and current password or
@@ -882,7 +921,7 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
       requestBody:
         content:
           text/plain:
@@ -896,13 +935,13 @@ paths:
         "204":
           description: The password has been changed
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
       security:
         - basicAuth: []
       summary: Changes a user’s password.
@@ -910,7 +949,7 @@ paths:
         - authentication
   "/authn/{account}/{login}/authenticate":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         A client can obtain an access token by presenting a valid
@@ -959,7 +998,7 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: URL-encoded login name. For users, it’s the user ID. For hosts, the
             login name is `host/<host-id>`
           in: path
@@ -983,8 +1022,8 @@ paths:
         content:
           text/plain:
             schema:
-              $ref: "#/paths/~1authn~1{account}~1login/get/responses/200/content/text~1plain/\
-                schema"
+              $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200/content/text~1pl\
+                ain/schema"
         description: API Key
         required: true
       responses:
@@ -995,13 +1034,14 @@ paths:
                 type: string
           description: The response is an access token for conjur
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
+      security: []
       summary: |
         Gets a short-lived access token, which is required in the header
         of most subsequent API requests.
@@ -1009,7 +1049,7 @@ paths:
         - authentication
   "/ca/{account}/{service_id}/sign":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Gets a signed certificate from the configured Certificate Authority
@@ -1033,7 +1073,7 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Name of the Certificate Authority service
           in: path
           name: service_id
@@ -1080,9 +1120,9 @@ paths:
                 type: string
           description: The response body is the newly signed certificate
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
           description: >
             Either          
@@ -1131,7 +1171,7 @@ paths:
       enterprise-only: true
   /host_factories/hosts:
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Creates a Host using the Host Factory and returns a JSON
@@ -1210,9 +1250,9 @@ paths:
                 type: object
           description: The response body contains the newly-created host
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Creates a Host using the Host Factory.
@@ -1220,7 +1260,7 @@ paths:
         - host factory
   /host_factory_tokens:
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Creates one or more tokens which can be used to bootstrap host
@@ -1304,15 +1344,13 @@ paths:
                 type: array
           description: Zero or more tokens were created and delivered in the response body
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          description: The requested resource does not exist, the authenticated user lacks
-            the required privileges to enumerate this resource, or its value has
-            not been set
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Creates one or more host identity tokens.
@@ -1339,18 +1377,18 @@ paths:
         "204":
           description: Token was successfully revoked
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
       security:
         - conjurAuth: []
       summary: Revokes a token, immediately disabling it.
       tags:
         - host factory
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   /info:
     get:
       description: >
@@ -1405,7 +1443,7 @@ paths:
       enterprise-only: true
   "/policies/{account}/policy/{identifier}":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     patch:
       description: |
         Modifies an existing Conjur policy. Data may be explicitly deleted using
@@ -1420,49 +1458,50 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: ID of the policy to update
           example: root
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
       requestBody:
         content:
           application/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/plain:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
         description: Policy
         required: true
       responses:
         "201":
-          $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/responses/201"
+          $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/response\
+            s/201"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "409":
-          $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/responses/409"
+          $ref: "#/components/responses/Busy"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Modifies an existing Conjur policy.
@@ -1488,49 +1527,50 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: ID of the policy to update
           example: root
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
       requestBody:
         content:
           application/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/plain:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
         description: Policy
         required: true
       responses:
         "201":
-          $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/responses/201"
+          $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/response\
+            s/201"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "409":
-          $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/responses/409"
+          $ref: "#/components/responses/Busy"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Adds data to the existing Conjur policy.
@@ -1549,28 +1589,28 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: ID of the policy to load (root if no root policy has been loaded yet)
           example: root
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
       requestBody:
         content:
           application/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/plain:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
-                ent/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
+                ody/content/text~1yaml/schema"
           text/yaml:
             schema:
               example: |
@@ -1605,17 +1645,17 @@ paths:
                 type: object
           description: Decsribes new data created by a successful policy load
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "409":
-          description: Similar operation already in progress, retry after a delay
+          $ref: "#/components/responses/Busy"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Loads or replaces a Conjur policy document.
@@ -1635,21 +1675,21 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: ID of the resource for which to get the information about
           example: admin
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
       responses:
         "200":
           content:
@@ -1664,18 +1704,18 @@ paths:
             compatibility with the authorized_keys SSH format. Empty string if
             the resource does not exist
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
       summary: Shows all public keys for a resource.
       tags:
         - public keys
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/remote_health/{remote}":
     get:
       description: >
@@ -1754,18 +1794,13 @@ paths:
           in: query
           name: account
           schema:
-            description: Conjur account name
-            example: default
-            minLength: 1
-            type: string
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: query
           name: kind
           schema:
-            example: variable
-            minLength: 1
-            type: string
+            $ref: "#/components/schemas/Kind"
         - description: Filter resources based on this value by name
           example: db
           in: query
@@ -1779,69 +1814,32 @@ paths:
           in: query
           name: offset
           schema:
-            description: Skips this many items before returning the rest
-            example: 20
-            type: integer
+            $ref: "#/components/schemas/Offset"
         - description: When listing resources, return up to this many results.
           in: query
           name: limit
           schema:
-            description: Return no more than this number of results
-            example: 10
-            type: integer
+            $ref: "#/components/schemas/Limit"
         - description: When listing resources, if `true`, return only the count of the
             results.
           in: query
           name: count
           schema:
-            description: Return only the count of results
-            example: true
-            type: boolean
+            $ref: "#/components/schemas/Count"
         - description: Retrieves the resources list for a different role if the
             authenticated role has access
           example: myorg:host:host1
           in: query
           name: role
           schema:
-            description: >
-              ##### Kinds of roles:
-
-
-              - User: one unique wonderful human
-
-              - Host: a single logical machine (in the broad sense, not just physical)
-
-              - Layer: a collection of hosts that have the same privileges
-
-              - Group: a collection of users and groups that have the same privileges
-
-              - Policy: a role which owns of a set of related object
-
-
-              Any identifier included in the URL must be URL-encoded to be recognized by the Conjur API.
-
-
-              ##### Resource Identifiers:
-
-
-              - `myapp-01` -> `myapp-01` (unchanged)
-
-              - `alice@devops` -> `alice%40devops`
-
-              - `prod/aws/db-password` -> `prod%2Faws%2Fdb-password`
-
-              - `research+development` -> `research%2Bdevelopment`
-
-              - `sales&marketing` -> `sales%26marketing`
-            minLength: 1
-            type: string
+            $ref: "#/components/schemas/RoleType"
         - description: Retrieves the resources list for a different role if the
             authenticated role has access
           example: myorg:host:host1
           in: query
           name: acting_as
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "200":
           content:
@@ -1937,18 +1935,18 @@ paths:
                 type: array
           description: The response body contains a list of resources
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Lists resources within an organization account.
       tags:
         - resources
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/resources/{account}":
     get:
       description: >
@@ -1987,13 +1985,13 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: query
           name: kind
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: Filter resources based on this value by name
           example: db
           in: query
@@ -2004,50 +2002,50 @@ paths:
           in: query
           name: offset
           schema:
-            $ref: "#/paths/~1resources/get/parameters/3/schema"
+            $ref: "#/components/schemas/Offset"
         - description: When listing resources, return up to this many results.
           in: query
           name: limit
           schema:
-            $ref: "#/paths/~1resources/get/parameters/4/schema"
+            $ref: "#/components/schemas/Limit"
         - description: When listing resources, if `true`, return only the count of the
             results.
           in: query
           name: count
           schema:
-            $ref: "#/paths/~1resources/get/parameters/5/schema"
+            $ref: "#/components/schemas/Count"
         - description: Retrieves the resources list for a different role if the
             authenticated role has access
           example: myorg:host:host1
           in: query
           name: role
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
         - description: Retrieves the resources list for a different role if the
             authenticated role has access
           example: myorg:host:host1
           in: query
           name: acting_as
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "200":
           $ref: "#/paths/~1resources/get/responses/200"
         "400":
-          description: The server cannot process the request due to malformed request syntax
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Lists resources within an organization account.
       tags:
         - resources
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/resources/{account}/{kind}":
     get:
       description: >
@@ -2086,14 +2084,14 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: Filter resources based on this value by name
           example: db
           in: query
@@ -2104,50 +2102,50 @@ paths:
           in: query
           name: offset
           schema:
-            $ref: "#/paths/~1resources/get/parameters/3/schema"
+            $ref: "#/components/schemas/Offset"
         - description: When listing resources, return up to this many results.
           in: query
           name: limit
           schema:
-            $ref: "#/paths/~1resources/get/parameters/4/schema"
+            $ref: "#/components/schemas/Limit"
         - description: When listing resources, if `true`, return only the count of the
             results.
           in: query
           name: count
           schema:
-            $ref: "#/paths/~1resources/get/parameters/5/schema"
+            $ref: "#/components/schemas/Count"
         - description: Retrieves the resources list for a different role if the
             authenticated role has access
           example: myorg:host:host1
           in: query
           name: role
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
         - description: Retrieves the resources list for a different role if the
             authenticated role has access
           example: myorg:host:host1
           in: query
           name: acting_as
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "200":
           $ref: "#/paths/~1resources/get/responses/200"
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Lists resources of the same kind within an organization account.
       tags:
         - resources
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/resources/{account}/{kind}/{identifier}":
     get:
       description: >
@@ -2175,21 +2173,21 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: ID of the resource for which to get the information about
           example: conjur/authn-iam/test
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
         - description: Lists the roles which have the named privilege on a resource.
           in: query
           name: permitted_roles
@@ -2218,7 +2216,7 @@ paths:
           in: query
           name: role
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "200":
           content:
@@ -2231,22 +2229,22 @@ paths:
         "204":
           description: Permissions check was successful
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Shows a description of a single resource.
       tags:
         - resources
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/roles/{account}/{kind}/{identifier}":
     delete:
       description: >
@@ -2271,21 +2269,21 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: ID of the role for which to get the information about
           example: admin
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
         - description: Returns a list of the Role's members.
           in: query
           name: members
@@ -2297,20 +2295,20 @@ paths:
           name: member
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "204":
           description: Member was deleted from role successfully
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Deletes an existing role membership
@@ -2382,33 +2380,21 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: ID of the role for which to get the information about
           example: admin
           in: path
           name: identifier
           required: true
           schema:
-            description: |
-              Resource identifier. Requires to be encoded when in path.
-
-              ##### Examples:
-
-              - `myapp-01` -> `myapp-01` (unchanged)
-              - `alice@devops` -> `alice%40devops`
-              - `prod/aws/db-password` -> `prod%2Faws%2Fdb-password`
-              - `research+development` -> `research%2Bdevelopment`
-              - `sales&marketing` -> `sales%26marketing`
-            example: prod%2Faws%2Fdb-password
-            minLength: 1
-            type: string
+            $ref: "#/components/schemas/ResourceID"
         - description: Returns an array of Role IDs representing all role memberships,
             expanded recursively.
           in: query
@@ -2430,17 +2416,17 @@ paths:
           in: query
           name: offset
           schema:
-            $ref: "#/paths/~1resources/get/parameters/3/schema"
+            $ref: "#/components/schemas/Offset"
         - description: When listing members, return up to this many results.
           in: query
           name: limit
           schema:
-            $ref: "#/paths/~1resources/get/parameters/4/schema"
+            $ref: "#/components/schemas/Limit"
         - description: When listing members, if `true`, return only the count of members.
           in: query
           name: count
           schema:
-            $ref: "#/paths/~1resources/get/parameters/5/schema"
+            $ref: "#/components/schemas/Count"
         - description: When listing members, the results will be narrowed to only those
             matching the provided string
           in: query
@@ -2467,22 +2453,22 @@ paths:
                 type: object
           description: The response body contains the requested role(s)/member(s)
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Get role information
       tags:
         - roles
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Updates or modifies an existing role membership.
@@ -2506,21 +2492,21 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource
           example: user
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: ID of the role for which to get the information about
           example: admin
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
         - description: Returns a list of the Role's members.
           in: query
           name: members
@@ -2532,20 +2518,20 @@ paths:
           name: member
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/6/schema"
+            $ref: "#/components/schemas/RoleType"
       responses:
         "204":
           description: Member was added to role successfully
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Update or modify an existing role membership
@@ -2592,11 +2578,11 @@ paths:
                 type: object
           description: The batch secret values
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          description: The authenticated user lacks the necessary privileges
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          description: At least one resource was unable to be found
+          $ref: "#/components/responses/ResourcesNotFound"
         "406":
           content:
             application/json:
@@ -2604,14 +2590,14 @@ paths:
                 type: object
           description: Issue encoding secret into JSON format
         "422":
-          description: A request parameter was either missing or invalid.
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Fetch multiple secrets
       tags:
         - secrets
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
   "/secrets/{account}/{kind}/{identifier}":
     get:
       description: >
@@ -2634,28 +2620,25 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource - in almost all cases this should be `variable`
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: URL-encoded variable ID
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
         - description: (**Optional**) Version you want to retrieve (Conjur keeps the last
             20 versions of a secret)
           in: query
           name: version
           schema:
-            description: Version of the resource (Conjur keeps the last 20 versions of a
-              secret)
-            example: 1
-            type: integer
+            $ref: "#/components/schemas/ResourceVersion"
       responses:
         "200":
           content:
@@ -2665,22 +2648,22 @@ paths:
                 type: string
           description: The secret value was added successfully
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Fetches the value of a secret from the specified Secret.
       tags:
         - secrets
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     post:
       description: >
         Creates a secret value within the specified Secret.
@@ -2697,19 +2680,19 @@ paths:
           name: account
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/0/schema"
+            $ref: "#/components/schemas/AccountName"
         - description: Type of resource - in almost all cases this should be `variable`
           in: path
           name: kind
           required: true
           schema:
-            $ref: "#/paths/~1resources/get/parameters/1/schema"
+            $ref: "#/components/schemas/Kind"
         - description: URL-encoded variable ID
           in: path
           name: identifier
           required: true
           schema:
-            $ref: "#/paths/~1roles~1{account}~1{kind}~1{identifier}/get/parameters/2/schema"
+            $ref: "#/components/schemas/ResourceID"
         - description: Tells the server to reset the variables expiration date
           in: query
           name: expirations
@@ -2727,13 +2710,13 @@ paths:
         "201":
           description: The secret value was added successfully
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "422":
-          $ref: "#/paths/~1secrets/get/responses/422"
+          $ref: "#/components/responses/UnprocessableEntity"
       security:
         - conjurAuth: []
       summary: Creates a secret value within the specified variable.
@@ -2783,26 +2766,17 @@ paths:
                 type: object
           description: Details about the client making the request
         "401":
-          description: Authentication information is missing or invalid
+          $ref: "#/components/responses/UnauthorizedError"
       security:
         - conjurAuth: []
       summary: Provides information about the client making an API request.
       tags:
         - status
     parameters:
-      - description: |
-          Add an ID to the request being made so it can be tracked in Conjur.
-          If not provided the server will automatically generate one.
-        example: test-id
-        in: header
-        name: X-Request-Id
-        required: false
-        schema:
-          pattern: ^[a-zA-Z\d-]{1,255}$
-          type: string
+      - $ref: "#/components/parameters/RequestID"
   "/{authenticator}/{service_id}/{account}":
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
     patch:
       description: >
         Allows you to either enable or disable a given authenticator
@@ -2847,8 +2821,9 @@ paths:
               - authn-k8s
               - authn-gcp
               - authn-azure
+              - authn-jwt
             type: string
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: Organization account name
           example: dev
           in: path
@@ -2872,13 +2847,13 @@ paths:
         "204":
           description: The config was updated properly
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          $ref: "#/paths/~1host_factory_tokens/post/responses/404"
+          $ref: "#/components/responses/ResourceNotFound"
         "500":
-          $ref: "#/paths/~1authn~1{account}~1login/get/responses/500"
+          $ref: "#/components/responses/InternalServerError"
       security:
         - conjurAuth: []
       summary: Enables or disables authenticator service instances.
@@ -2916,7 +2891,7 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: "#/paths/~1authn-ldap~1{service_id}~1{account}~1login/get/parameters/0"
+        - $ref: "#/components/parameters/ServiceID"
         - description: The organization account name
           example: dev
           in: path
@@ -2926,26 +2901,44 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1authn-gcp~1{account}~1status/get/responses/200"
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    description: The error message if there was an error
+                    example: "#<Errors::Authentication::AuthenticatorNotFound: CONJ00001E
+                      Authenticator 'authn-oidc' is not implemented in Conjur>"
+                    type: string
+                  status:
+                    description: The status of the endpoint, 'error' if there was an error
+                    example: error
+                    type: string
+                required:
+                  - status
+                type: object
+          description: The response contains info about the result
         "400":
-          $ref: "#/paths/~1resources~1{account}/get/responses/400"
+          $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/paths/~1whoami/get/responses/401"
+          $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/paths/~1secrets/get/responses/403"
+          $ref: "#/components/responses/InadequatePrivileges"
         "404":
           description: The service was not found
         "500":
-          $ref: "#/paths/~1authn-gcp~1{account}~1status/get/responses/200"
+          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
+            et/responses/200"
         "501":
-          $ref: "#/paths/~1authn-gcp~1{account}~1status/get/responses/200"
+          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
+            et/responses/200"
       security:
         - conjurAuth: []
       summary: Details whether an authentication service has been configured properly
       tags:
         - status
     parameters:
-      - $ref: "#/paths/~1whoami/parameters/0"
+      - $ref: "#/components/parameters/RequestID"
 components:
   parameters:
     RequestID:

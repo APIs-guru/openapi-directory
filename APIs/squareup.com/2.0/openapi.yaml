@@ -20878,7 +20878,6 @@ components:
       type: object
       x-is-beta: true
       x-release-status: BETA
-    GANSource: {}
     GetBankAccountByV1IdRequest:
       description: |-
         Request object for fetching a specific `BankAccount`
@@ -21965,8 +21964,6 @@ components:
           name: DIGITAL
       x-is-beta: true
       x-release-status: BETA
-    Info: {}
-    InfoCode: {}
     InlineTypes:
       description: Object types to inline under their respective parent object in
         certain connect v2 responses
@@ -30476,7 +30473,6 @@ components:
       type: object
       x-is-beta: true
       x-release-status: BETA
-    Reason: {}
     RedeemLoyaltyRewardRequest:
       description: A request to redeem a loyalty reward.
       example:
@@ -32791,8 +32787,7 @@ components:
                 name: Varietal
                 selection_uid_values:
                   - MERLOT_SELECTION_ID
-                  - $ref: "#/components/schemas/CreateLocationRequest/example/request_body/location\
-                      /facebook_url"
+                  - null
                 type: SELECTION
               VINTAGE:
                 custom_attribute_definition_id: EI7IJQDUKYSHULREPIPH6HNU
@@ -34940,7 +34935,6 @@ components:
           type: array
       type: object
       x-release-status: PUBLIC
-    Status: {}
     SubmitEvidenceRequest:
       description: Defines the parameters for a `SubmitEvidence` request.
       example:
@@ -36115,7 +36109,6 @@ components:
         - description: ""
           name: CREDIT
       x-release-status: PUBLIC
-    Type: {}
     UnlinkCustomerFromGiftCardRequest:
       description: A request to unlink a customer to a gift card
       example:
@@ -36655,9 +36648,7 @@ components:
                   end_local_time: 17:00
                   start_local_time: 09:00
             description: Updated description
-            facebook_url:
-              $ref: "#/components/schemas/CreateLocationRequest/example/request_body/location\
-                /facebook_url"
+            facebook_url: null
             instagram_username: instagram
             name: Updated nickname
             twitter_username: twitter
@@ -37051,9 +37042,7 @@ components:
             price_override_money:
               amount: 2000
               currency: USD
-            tax_percentage:
-              $ref: "#/components/schemas/CreateLocationRequest/example/request_body/location\
-                /facebook_url"
+            tax_percentage: null
             version: 1594155459464
       properties:
         subscription:
@@ -39076,7 +39065,6 @@ components:
         - start_of_day_local_time
       type: object
       x-release-status: PUBLIC
-    invoice_delivery_methodInvoiceDeliveryMethod: {}
   securitySchemes:
     oauth2:
       flows:

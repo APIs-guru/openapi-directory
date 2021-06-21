@@ -848,7 +848,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Order"
-        - description: ""
+        - description: Deprecated, if orderData.ApiAccountId is set, it will be used
+            instead of 'shopId'
           format: int64
           in: query
           name: shopId
@@ -2524,7 +2525,7 @@ definitions:
       SKU:
         type: string
       ShippingProductId:
-        format: int32
+        format: int64
         type: integer
       ShortDescription:
         items:
@@ -2938,6 +2939,14 @@ definitions:
         format: double
         type: number
       AdjustmentReason:
+        type: string
+      ApiAccountId:
+        description: Id of the account, this order belongs to
+        format: int64
+        type: integer
+      ApiAccountName:
+        description: The name of the account, this order belongs to. Will be ignored on
+          order creation.
         type: string
       BillBeeOrderId:
         description: The Order.Id from the Billbee database

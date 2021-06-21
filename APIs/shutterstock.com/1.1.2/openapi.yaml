@@ -7626,6 +7626,7 @@ paths:
         - customer_accessCode:
             - licenses.create
             - purchases.view
+          ldap_accessCode: []
       summary: License images
       tags:
         - images
@@ -9315,7 +9316,8 @@ paths:
         "403":
           description: Forbidden
       security:
-        - customer_accessCode:
+        - contributor_accessCode: []
+          customer_accessCode:
             - user.view
       summary: Get user details
       tags:
@@ -11835,8 +11837,6 @@ components:
       required:
         - name
       type: object
-    AssetId: {}
-    AssetUploadId: {}
     Audio:
       additionalProperties: false
       description: Audio metadata

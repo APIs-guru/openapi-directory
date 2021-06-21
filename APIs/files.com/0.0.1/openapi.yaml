@@ -12699,8 +12699,7 @@ paths:
                 icon128_file:
                   format: binary
                   type: string
-                  x-ms-summary:
-                    $ref: "#/components/schemas/UserEntity/x-docs"
+                  x-ms-summary: null
                 icon16_delete:
                   description: If true, will delete the file stored in icon16
                   type: boolean
@@ -12708,8 +12707,7 @@ paths:
                 icon16_file:
                   format: binary
                   type: string
-                  x-ms-summary:
-                    $ref: "#/components/schemas/UserEntity/x-docs"
+                  x-ms-summary: null
                 icon32_delete:
                   description: If true, will delete the file stored in icon32
                   type: boolean
@@ -12717,8 +12715,7 @@ paths:
                 icon32_file:
                   format: binary
                   type: string
-                  x-ms-summary:
-                    $ref: "#/components/schemas/UserEntity/x-docs"
+                  x-ms-summary: null
                 icon48_delete:
                   description: If true, will delete the file stored in icon48
                   type: boolean
@@ -12726,8 +12723,7 @@ paths:
                 icon48_file:
                   format: binary
                   type: string
-                  x-ms-summary:
-                    $ref: "#/components/schemas/UserEntity/x-docs"
+                  x-ms-summary: null
                 immutable_files:
                   description: Are files protected from modification?
                   type: boolean
@@ -12832,8 +12828,7 @@ paths:
                 logo_file:
                   format: binary
                   type: string
-                  x-ms-summary:
-                    $ref: "#/components/schemas/UserEntity/x-docs"
+                  x-ms-summary: null
                 max_prior_passwords:
                   description: Number of prior passwords to disallow
                   format: int32
@@ -17455,6 +17450,32 @@ components:
                 example: my-bucket
                 type: string
                 x-ms-summary: S3 bucket name
+              s3_compatible_access_key:
+                description: S3-compatible access key
+                type: string
+                x-ms-summary: S3-compatible access key
+              s3_compatible_bucket:
+                default: my-bucket
+                description: S3-compatible Bucket name
+                example: my-bucket
+                type: string
+                x-ms-summary: S3-compatible Bucket name
+              s3_compatible_endpoint:
+                default: mys3platform.com
+                description: S3-compatible endpoint
+                example: mys3platform.com
+                type: string
+                x-ms-summary: S3-compatible endpoint
+              s3_compatible_region:
+                default: us-east-1
+                description: S3-compatible Bucket name
+                example: us-east-1
+                type: string
+                x-ms-summary: S3-compatible Bucket name
+              s3_compatible_secret_key:
+                description: S3-compatible secret key
+                type: string
+                x-ms-summary: S3-compatible secret key
               s3_region:
                 default: us-east-1
                 description: S3 region
@@ -17498,6 +17519,7 @@ components:
                   - google_drive
                   - azure
                   - sharepoint
+                  - s3_compatible
                 example: s3
                 type: string
                 x-ms-summary: Remote server type.
@@ -17527,17 +17549,17 @@ components:
                 type: string
                 x-ms-summary: Wasabi access key.
               wasabi_bucket:
-                default: us-west-1
-                description: Wasabi region
-                example: us-west-1
-                type: string
-                x-ms-summary: Wasabi region
-              wasabi_region:
                 default: my-bucket
                 description: Wasabi Bucket name
                 example: my-bucket
                 type: string
                 x-ms-summary: Wasabi Bucket name
+              wasabi_region:
+                default: us-west-1
+                description: Wasabi region
+                example: us-west-1
+                type: string
+                x-ms-summary: Wasabi region
               wasabi_secret_key:
                 description: Wasabi secret key.
                 type: string
@@ -17703,8 +17725,7 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     ActionEntity:
       description: List site full action history.
       properties:
@@ -17983,8 +18004,7 @@ components:
           example: true
           type: boolean
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     ApiKeyEntity:
       description: List Api Keys
       properties:
@@ -18149,6 +18169,7 @@ components:
             - google_drive
             - azure
             - sharepoint
+            - s3_compatible
           example: ""
           type: string
         screenshot_list_urls:
@@ -18217,8 +18238,7 @@ components:
           properties: {}
           type: object
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     AutomationEntity:
       description: List Automations
       properties:
@@ -18673,8 +18693,7 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     BehaviorEntity:
       description: List Behaviors
       properties:
@@ -18738,8 +18757,7 @@ components:
           example: a/b/test.txt
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     BundleEntity:
       description: Create Bundle
       properties:
@@ -19002,8 +19020,7 @@ components:
             type: string
           type: array
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     ExternalEventEntity:
       description: List External Events
       properties:
@@ -19060,8 +19077,7 @@ components:
           example: enqueued
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     FileCommentEntity:
       description: List File Comments by path
       properties:
@@ -19175,8 +19191,7 @@ components:
           example: file
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     FileUploadPartEntity:
       description: Begin file upload
       properties:
@@ -19248,8 +19263,7 @@ components:
           example: ""
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     FormFieldEntity:
       properties:
         default_option:
@@ -19295,8 +19309,7 @@ components:
           example: true
           type: boolean
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     FormFieldSetEntity:
       description: Create Form Field Set
       properties:
@@ -19743,8 +19756,7 @@ components:
           example: jerry
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     ImageEntity:
       properties:
         name:
@@ -19756,8 +19768,7 @@ components:
           example: https://mysite.files.com/.../my_image.png
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     InboxRecipientEntity:
       description: List Inbox Recipients
       properties:
@@ -19837,8 +19848,7 @@ components:
           example: a/b/test.txt
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     InvoiceLineItemEntity:
       properties:
         amount:
@@ -19890,8 +19900,7 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     IpAddressEntity:
       description: List IP Addresses associated with the current site
       properties:
@@ -20152,8 +20161,7 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     PermissionEntity:
       description: List Permissions
       properties:
@@ -20400,6 +20408,18 @@ components:
           description: S3 bucket name
           example: my-bucket
           type: string
+        s3_compatible_bucket:
+          description: S3-compatible Bucket name
+          example: my-bucket
+          type: string
+        s3_compatible_endpoint:
+          description: S3-compatible endpoint
+          example: mys3platform.com
+          type: string
+        s3_compatible_region:
+          description: S3-compatible Bucket name
+          example: us-east-1
+          type: string
         s3_region:
           description: S3 region
           example: us-east-1
@@ -20434,6 +20454,7 @@ components:
             - google_drive
             - azure
             - sharepoint
+            - s3_compatible
           example: s3
           type: string
         ssl:
@@ -20450,12 +20471,12 @@ components:
           example: user
           type: string
         wasabi_bucket:
-          description: Wasabi region
-          example: us-west-1
-          type: string
-        wasabi_region:
           description: Wasabi Bucket name
           example: my-bucket
+          type: string
+        wasabi_region:
+          description: Wasabi region
+          example: us-west-1
           type: string
       type: object
       x-docs: >
@@ -20475,6 +20496,9 @@ components:
 
 
         S3 Buckets require that you specify their `s3_bucket` name, and `s3_region`.  Optionally provide a `aws_access_key`, and `aws_secret_key`.  If you don't provide credentials, you will need to use AWS to grant us access to your bucket.
+
+
+        S3-Compatible Buckets require that you specify `s3_compatible_bucket`, `s3_compatible_region`, `s3_compatible_endpoint`, `s3_compatible_access_key`, and `s3_compatible_secret_key`.
 
 
         Google Cloud Storage requires that you specify `google_cloud_storage_bucket`, `google_cloud_storage_project_id`, and `google_cloud_storage_credentials_json`.
@@ -21422,8 +21446,7 @@ components:
           example: ""
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     StyleEntity:
       description: Show Style
       properties:
@@ -21479,8 +21502,7 @@ components:
           example: ""
           type: string
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     UsageDailySnapshotEntity:
       description: List Usage Daily Snapshots
       properties:
@@ -21505,8 +21527,7 @@ components:
           items: {}
           type: array
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     UsageSnapshotEntity:
       description: List Usage Snapshots
       properties:
@@ -21580,8 +21601,7 @@ components:
           example: {}
           type: object
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     UserCipherUseEntity:
       description: List User Cipher Uses
       properties:
@@ -21913,8 +21933,7 @@ components:
           example: true
           type: boolean
       type: object
-      x-docs:
-        $ref: "#/components/schemas/UserEntity/x-docs"
+      x-docs: null
     patchFormFieldSets:
       description: Update Form Field Set
       properties:

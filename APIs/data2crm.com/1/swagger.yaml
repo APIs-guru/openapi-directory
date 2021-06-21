@@ -41,74 +41,74 @@ responses:
   "415":
     description: Unsupported Media Type
 tags:
-  - description: Platform Operations
-    name: platform
-  - description: Application Operations
-    name: application
-  - description: Request Operations
-    name: request
   - description: Account Operations
     name: account
-  - description: Contact Operations
-    name: contact
-  - description: Lead Operations
-    name: lead
-  - description: Opportunity Operations
-    name: opportunity
-  - description: Task Operations
-    name: task
-  - description: User Operations
-    name: user
-  - description: Note Operations
-    name: note
+  - description: Application Operations
+    name: application
   - description: Attachment Operations
     name: attachment
-  - description: Event Operations
-    name: event
-  - description: Email Operations
-    name: email
   - description: Call Operations
     name: call
-  - description: Meeting Operations
-    name: meeting
-  - description: Product Operations
-    name: product
-  - description: OpportunityProduct Operations
-    name: opportunityProduct
-  - description: Case Operations
-    name: case
-  - description: Tag Operations
-    name: tag
-  - description: Post Operations
-    name: post
-  - description: Comment Operations
-    name: comment
-  - description: Project Operations
-    name: project
   - description: Campaign Operations
     name: campaign
-  - description: Quote Operations
-    name: quote
-  - description: QuoteItem Operations
-    name: quoteItem
-  - description: Invoice Operations
-    name: invoice
-  - description: InvoiceItem Operations
-    name: invoiceItem
-  - description: PriceBook Operations
-    name: priceBook
-  - description: PriceBookItem Operations
-    name: priceBookItem
-  - description: Ticket Operations
-    name: ticket
-  - description: Custom Field Operations
-    name: customField
-  - description: Custom Field Item Operations
-    name: customFieldItem
+  - description: Case Operations
+    name: case
+  - description: Comment Operations
+    name: comment
+  - description: Contact Operations
+    name: contact
   - description: Custom Entity Operations
     name: customEntity
   - description: Custom Entity Item Operations
     name: customEntityItem
+  - description: Custom Field Operations
+    name: customField
+  - description: Custom Field Item Operations
+    name: customFieldItem
+  - description: Email Operations
+    name: email
+  - description: Event Operations
+    name: event
+  - description: Invoice Operations
+    name: invoice
+  - description: InvoiceItem Operations
+    name: invoiceItem
+  - description: Lead Operations
+    name: lead
+  - description: Meeting Operations
+    name: meeting
+  - description: Note Operations
+    name: note
+  - description: Opportunity Operations
+    name: opportunity
+  - description: OpportunityProduct Operations
+    name: opportunityProduct
+  - description: Platform Operations
+    name: platform
+  - description: Post Operations
+    name: post
+  - description: PriceBook Operations
+    name: priceBook
+  - description: PriceBookItem Operations
+    name: priceBookItem
+  - description: Product Operations
+    name: product
+  - description: Project Operations
+    name: project
+  - description: Quote Operations
+    name: quote
+  - description: QuoteItem Operations
+    name: quoteItem
+  - description: Request Operations
+    name: request
+  - description: Tag Operations
+    name: tag
+  - description: Task Operations
+    name: task
+  - description: Ticket Operations
+    name: ticket
+  - description: User Operations
+    name: user
 paths:
   /account:
     get:
@@ -23900,6 +23900,33 @@ definitions:
         type: object
       type:
         description: Application platform type
+        enum:
+          - Bitrix24
+          - MicrosoftDynamics
+          - Vtiger
+          - ZohoCRM
+          - Salesforce
+          - SalesforceSandbox
+          - Solve360
+          - Highrise
+          - Insightly
+          - HubSpot
+          - PipelineDeals
+          - SugarCRM
+          - SuiteCRM
+          - CapsuleCRM
+          - Pipedrive
+          - Infusionsoft
+          - CloseIO
+          - BaseCRM
+          - Act
+          - AgileCRM
+          - ProsperWorks
+          - FreshSales
+          - Odoo
+          - GSuite
+          - ActPremiumWeb
+          - Marketo
         type: string
       updated_at:
         description: Updated At
@@ -23937,6 +23964,33 @@ definitions:
         type: string
       type:
         description: Application platform type
+        enum:
+          - Bitrix24
+          - MicrosoftDynamics
+          - Vtiger
+          - ZohoCRM
+          - Salesforce
+          - SalesforceSandbox
+          - Solve360
+          - Highrise
+          - Insightly
+          - HubSpot
+          - PipelineDeals
+          - SugarCRM
+          - SuiteCRM
+          - CapsuleCRM
+          - Pipedrive
+          - Infusionsoft
+          - CloseIO
+          - BaseCRM
+          - Act
+          - AgileCRM
+          - ProsperWorks
+          - FreshSales
+          - Odoo
+          - GSuite
+          - ActPremiumWeb
+          - Marketo
         type: string
       updated_at:
         description: Updated At
@@ -23967,6 +24021,33 @@ definitions:
         type: string
       type:
         description: Application platform type
+        enum:
+          - Bitrix24
+          - MicrosoftDynamics
+          - Vtiger
+          - ZohoCRM
+          - Salesforce
+          - SalesforceSandbox
+          - Solve360
+          - Highrise
+          - Insightly
+          - HubSpot
+          - PipelineDeals
+          - SugarCRM
+          - SuiteCRM
+          - CapsuleCRM
+          - Pipedrive
+          - Infusionsoft
+          - CloseIO
+          - BaseCRM
+          - Act
+          - AgileCRM
+          - ProsperWorks
+          - FreshSales
+          - Odoo
+          - GSuite
+          - ActPremiumWeb
+          - Marketo
         type: string
     type: object
   AttachmentDescribe:

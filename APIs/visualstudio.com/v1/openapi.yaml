@@ -4660,6 +4660,12 @@ components:
           deprecated: true
           nullable: true
           type: string
+        prebuildHash:
+          nullable: true
+          type: string
+        repoId:
+          format: int64
+          type: integer
         secrets:
           items:
             $ref: "#/components/schemas/SecretDataBody"
@@ -4997,7 +5003,6 @@ components:
         - 30 (ExceededOrgDevContainerMaxLength)
         - 31 (ActionNotAllowedInThisState)
         - 32 (ExportRunningEnvironmentError)
-        - 33 (GitHubProxyError)
         - 34 (EnvironmentCreationIsNotAllowed)
       format: int32
       type: integer

@@ -425,8 +425,7 @@ paths:
             access_token: ZTZmYjU4ZmQxZWNmMzk1M2NlYzA5NmFhNmIzVjExMzE4NmJmODBkZGIyYTliYmQyNjk2ZDQwZThmNjdiZDQzOQ
             expires_in: 3600
             refresh_token: M2FlODI0OTE3ODMyNjViMzRiOWE5ODMyNWViMThkNDU5YzJjNjFiZjNkZWFjMzIyYjc4YTgzZWY1MjE5ZTY5Mw
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
             token_type: bearer
           schema:
             properties:
@@ -629,8 +628,7 @@ paths:
                     de_DE: Bilder
                     en_US: Pictures
                     fr_FR: Images
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/asset-categories/front_views
@@ -1405,24 +1403,18 @@ paths:
                           type: colorspace
                       source:
                         attribute: main_image
-                        channel:
-                          $ref: "#/definitions/Product/example/parent"
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        channel: null
+                        locale: null
                       target:
                         attribute: thumbnail
-                        channel:
-                          $ref: "#/definitions/Product/example/parent"
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        channel: null
+                        locale: null
                   “naming_convention”:
                     abort_asset_creation_on_error: true
                     pattern: /(?P<product_ref>.*)\.jpg/
                     source:
-                      channel:
-                        $ref: "#/definitions/Product/example/parent"
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      channel: null
+                      locale: null
                       property: code
                 - _links:
                     self:
@@ -1516,10 +1508,8 @@ paths:
                                   abort_asset_creation_on_error: true
                                   pattern: /(?P<product_ref>.*)-.*/
                                   source:
-                                    channel:
-                                      $ref: "#/definitions/Product/example/parent"
-                                    locale:
-                                      $ref: "#/definitions/Product/example/parent"
+                                    channel: null
+                                    locale: null
                                     property: code
                                 product_link_rules:
                                   - assign_assets_to:
@@ -1542,16 +1532,12 @@ paths:
                                         type: colorspace
                                     source:
                                       attribute: main_image
-                                      channel:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      channel: null
+                                      locale: null
                                     target:
                                       attribute: thumbnail
-                                      channel:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      channel: null
+                                      locale: null
                               properties:
                                 attribute_as_main_media:
                                   default: First media file or media link attribute that was created
@@ -1857,24 +1843,18 @@ paths:
                   updated: 2021-05-31T09:23:34+00:00
                   values:
                     media_link:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: allie_jean_model_picture.png
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     model_is_wearing_size:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: size_27
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     warning_mention:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Photo not retouched
                         locale: en_US
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Photo non retouchée
                         locale: fr_FR
                 - _links:
@@ -1885,24 +1865,18 @@ paths:
                   updated: 2021-05-31T09:23:34+00:00
                   values:
                     media_link:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: amy_socks_model_picture.png
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     model_is_wearing_size:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: unique_size
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     warning_mention:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Photo not retouched
                         locale: en_US
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Photo non retouchée
                         locale: fr_FR
                 - _links:
@@ -1913,24 +1887,18 @@ paths:
                   updated: 2021-05-31T09:23:34+00:00
                   values:
                     media_link:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: alice_blouse_model_picture.png
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     model_is_wearing_size:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: small
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     warning_mention:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Photo retouched
                         locale: en_US
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Photo non retouchée
                         locale: fr_FR
             _links:
@@ -1988,37 +1956,27 @@ paths:
                                 updated: 2021-05-31T09:23:34+00:00
                                 values:
                                   end_of_use_date:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: 02/03/2021
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   main_colors:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data:
                                         - red
                                         - purple
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   media_preview:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: sku_54628_picture1.jpg
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   model_wears_size:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: s
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   photographer:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: ben_levy
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                               properties:
                                 code:
                                   description: Code of the asset
@@ -2129,108 +2087,78 @@ paths:
                 updated: 2021-05-31T09:23:34+00:00
                 values:
                   end_of_use_date:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 02/03/2021
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   main_colors:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data:
                         - red
                         - purple
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   media_preview:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: sku_54628_picture1.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   model_wears_size:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: s
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   photographer:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: ben_levy
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
               - code: sku_54628_picture2
                 created: 2021-05-31T09:23:34+00:00
                 updated: 2021-05-31T09:23:34+00:00
                 values:
                   end_of_use_date:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 02/03/2021
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   main_colors:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data:
                         - blue
                         - white
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   media_preview:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: sku_54628_picture2.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   model_wears_size:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: s
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   photographer:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: ben_levy
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
               - code: sku_54628_picture3
                 created: 2021-05-31T09:23:34+00:00
                 updated: 2021-05-31T09:23:34+00:00
                 values:
                   end_of_use_date:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 02/03/2021
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   main_colors:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data:
                         - purple
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   media_preview:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: sku_54628_picture3.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   model_wears_size:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: s
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   photographer:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: ben_levy
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
             items:
               example:
                 code: sku_54628_picture1
@@ -2238,37 +2166,27 @@ paths:
                 updated: 2021-05-31T09:23:34+00:00
                 values:
                   end_of_use_date:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 02/03/2021
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   main_colors:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data:
                         - red
                         - purple
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   media_preview:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: sku_54628_picture1.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   model_wears_size:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: s
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   photographer:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: ben_levy
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
               properties:
                 code:
                   description: Code of the asset
@@ -2498,37 +2416,27 @@ paths:
               updated: 2021-05-31T09:23:34+00:00
               values:
                 end_of_use_date:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: 02/03/2021
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 main_colors:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data:
                       - red
                       - purple
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 media_preview:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: sku_54628_picture1.jpg
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 model_wears_size:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: s
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 photographer:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: ben_levy
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
             properties:
               code:
                 description: Code of the asset
@@ -2655,37 +2563,27 @@ paths:
               updated: 2021-05-31T09:23:34+00:00
               values:
                 end_of_use_date:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: 02/03/2021
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 main_colors:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data:
                       - red
                       - purple
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 media_preview:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: sku_54628_picture1.jpg
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 model_wears_size:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: s
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 photographer:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: ben_levy
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
             properties:
               code:
                 description: Code of the asset
@@ -2895,14 +2793,12 @@ paths:
                   type: integer
                   x-warning: Only for `text` attribute type
                 max_file_size:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Max file size in MB when the attribute type is `media_file`
                   type: string
                   x-warning: Only for `media_file` attribute type
                 max_value:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Maximum value allowed when the attribute type is `number`
                   type: string
                   x-validation-rules: The maximum value must be greater than the minimum value
@@ -2920,22 +2816,19 @@ paths:
                   type: string
                   x-warning: Only required for `media_link` and `media_file` attribute types
                 min_value:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Minimum value allowed when the attribute type is `number`
                   type: string
                   x-validation-rules: The minimum value must be lower than the maximum value
                   x-warning: Only for `number` attribute type
                 prefix:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Prefix of the `media_link` attribute type. The common url root that
                     prefixes the link to the media
                   type: string
                   x-warning: Only for `media_link` attribute type
                 suffix:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Suffix of the `media_link` attribute type. The common url suffix
                     for the media
                   type: string
@@ -2954,8 +2847,7 @@ paths:
                   type: string
                   x-immutable: true
                 validation_regexp:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Regexp expression used to validate the attribute value when the
                     attribute type is `text`
                   type: string
@@ -3020,8 +2912,7 @@ paths:
                 fr_FR: Phrase d'avertissement
               max_characters: "50"
               type: text
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
               validation_rule: none
               value_per_channel: false
               value_per_locale: true
@@ -3479,14 +3370,12 @@ paths:
                 type: integer
                 x-warning: Only for `text` attribute type
               max_file_size:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Max file size in MB when the attribute type is `media_file`
                 type: string
                 x-warning: Only for `media_file` attribute type
               max_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Maximum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The maximum value must be greater than the minimum value
@@ -3504,22 +3393,19 @@ paths:
                 type: string
                 x-warning: Only required for `media_link` and `media_file` attribute types
               min_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Minimum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The minimum value must be lower than the maximum value
                 x-warning: Only for `number` attribute type
               prefix:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Prefix of the `media_link` attribute type. The common url root that
                   prefixes the link to the media
                 type: string
                 x-warning: Only for `media_link` attribute type
               suffix:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Suffix of the `media_link` attribute type. The common url suffix
                   for the media
                 type: string
@@ -3538,8 +3424,7 @@ paths:
                 type: string
                 x-immutable: true
               validation_regexp:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Regexp expression used to validate the attribute value when the
                   attribute type is `text`
                 type: string
@@ -3715,14 +3600,12 @@ paths:
                 type: integer
                 x-warning: Only for `text` attribute type
               max_file_size:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Max file size in MB when the attribute type is `media_file`
                 type: string
                 x-warning: Only for `media_file` attribute type
               max_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Maximum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The maximum value must be greater than the minimum value
@@ -3740,22 +3623,19 @@ paths:
                 type: string
                 x-warning: Only required for `media_link` and `media_file` attribute types
               min_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Minimum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The minimum value must be lower than the maximum value
                 x-warning: Only for `number` attribute type
               prefix:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Prefix of the `media_link` attribute type. The common url root that
                   prefixes the link to the media
                 type: string
                 x-warning: Only for `media_link` attribute type
               suffix:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Suffix of the `media_link` attribute type. The common url suffix
                   for the media
                 type: string
@@ -3774,8 +3654,7 @@ paths:
                 type: string
                 x-immutable: true
               validation_regexp:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Regexp expression used to validate the attribute value when the
                   attribute type is `text`
                 type: string
@@ -3909,10 +3788,8 @@ paths:
                 abort_asset_creation_on_error: true
                 pattern: /(?P<product_ref>.*)-.*/
                 source:
-                  channel:
-                    $ref: "#/definitions/Product/example/parent"
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  channel: null
+                  locale: null
                   property: code
               product_link_rules:
                 - assign_assets_to:
@@ -3935,16 +3812,12 @@ paths:
                       type: colorspace
                   source:
                     attribute: main_image
-                    channel:
-                      $ref: "#/definitions/Product/example/parent"
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    channel: null
+                    locale: null
                   target:
                     attribute: thumbnail
-                    channel:
-                      $ref: "#/definitions/Product/example/parent"
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    channel: null
+                    locale: null
             properties:
               attribute_as_main_media:
                 default: First media file or media link attribute that was created
@@ -4221,10 +4094,8 @@ paths:
                 abort_asset_creation_on_error: true
                 pattern: /(?P<product_ref>.*)-.*/
                 source:
-                  channel:
-                    $ref: "#/definitions/Product/example/parent"
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  channel: null
+                  locale: null
                   property: code
               product_link_rules:
                 - assign_assets_to:
@@ -4247,16 +4118,12 @@ paths:
                       type: colorspace
                   source:
                     attribute: main_image
-                    channel:
-                      $ref: "#/definitions/Product/example/parent"
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    channel: null
+                    locale: null
                   target:
                     attribute: thumbnail
-                    channel:
-                      $ref: "#/definitions/Product/example/parent"
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    channel: null
+                    locale: null
             properties:
               attribute_as_main_media:
                 default: First media file or media link attribute that was created
@@ -5159,8 +5026,7 @@ paths:
                         self:
                           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
                       code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   tags:
                     - tshirts
                     - red
@@ -5172,8 +5038,7 @@ paths:
                         self:
                           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
                       code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                       scope: e_commerce
                     - _link:
                         download:
@@ -5181,8 +5046,7 @@ paths:
                         self:
                           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
                       code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                       scope: print
                 - _links:
                     self:
@@ -5200,8 +5064,7 @@ paths:
                         self:
                           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_profile_picture/reference-files/no_locale
                       code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_profile_picture.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   tags:
                     - tshirts
                     - red
@@ -5214,8 +5077,7 @@ paths:
                         self:
                           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_profile_picture/variation-files/ecommerce/no_locale
                       code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_profile_picture_ecommerce.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                       scope: e_commerce
                     - _link:
                         download:
@@ -5223,8 +5085,7 @@ paths:
                         self:
                           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_profile_picture/variation-files/print/no_locale
                       code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_profile_picture_print.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                       scope: print
                 - _links:
                     self:
@@ -5233,8 +5094,7 @@ paths:
                     - tshirts_assets
                   code: tshirt_artemis_maintenance_manual
                   description: The maintenance manual of the Artemis t-shirt
-                  end_of_use:
-                    $ref: "#/definitions/Product/example/parent"
+                  end_of_use: null
                   localizable: true
                   reference_files:
                     - _link:
@@ -5330,8 +5190,7 @@ paths:
                                       self:
                                         href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
                                     code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-                                    locale:
-                                      $ref: "#/definitions/Product/example/parent"
+                                    locale: null
                                 tags:
                                   - tshirts
                                   - red
@@ -5343,8 +5202,7 @@ paths:
                                       self:
                                         href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
                                     code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-                                    locale:
-                                      $ref: "#/definitions/Product/example/parent"
+                                    locale: null
                                     scope: e_commerce
                                   - _link:
                                       download:
@@ -5352,8 +5210,7 @@ paths:
                                       self:
                                         href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
                                     code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-                                    locale:
-                                      $ref: "#/definitions/Product/example/parent"
+                                    locale: null
                                     scope: print
                               properties:
                                 categories:
@@ -5369,13 +5226,11 @@ paths:
                                   type: string
                                   x-immutable: true
                                 description:
-                                  default:
-                                    $ref: "#/definitions/Product/example/parent"
+                                  default: null
                                   description: Description of the PAM asset
                                   type: string
                                 end_of_use:
-                                  default:
-                                    $ref: "#/definitions/Product/example/parent"
+                                  default: null
                                   description: Date on which the PAM asset expire
                                   format: dateTime
                                   type: string
@@ -5539,8 +5394,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
               tags:
                 - tshirts
                 - red
@@ -5552,8 +5406,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
                   code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: e_commerce
                 - _link:
                     download:
@@ -5561,8 +5414,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: print
             properties:
               categories:
@@ -5578,13 +5430,11 @@ paths:
                 type: string
                 x-immutable: true
               description:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Description of the PAM asset
                 type: string
               end_of_use:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Date on which the PAM asset expire
                 format: dateTime
                 type: string
@@ -5797,8 +5647,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
               tags:
                 - tshirts
                 - red
@@ -5810,8 +5659,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
                   code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: e_commerce
                 - _link:
                     download:
@@ -5819,8 +5667,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: print
             properties:
               categories:
@@ -5836,13 +5683,11 @@ paths:
                 type: string
                 x-immutable: true
               description:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Description of the PAM asset
                 type: string
               end_of_use:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Date on which the PAM asset expire
                 format: dateTime
                 type: string
@@ -6047,8 +5892,7 @@ paths:
                 download:
                   href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale/download
               code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-              locale:
-                $ref: "#/definitions/Product/example/parent"
+              locale: null
             properties:
               _link:
                 description: Links to get and download the reference file
@@ -6422,8 +6266,7 @@ paths:
                 download:
                   href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale/download
               code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-              locale:
-                $ref: "#/definitions/Product/example/parent"
+              locale: null
               scope: ecommerce
             properties:
               _link:
@@ -6783,8 +6626,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
               tags:
                 - tshirts
                 - red
@@ -6796,8 +6638,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
                   code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: e_commerce
                 - _link:
                     download:
@@ -6805,8 +6646,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: print
             properties:
               categories:
@@ -6822,13 +6662,11 @@ paths:
                 type: string
                 x-immutable: true
               description:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Description of the PAM asset
                 type: string
               end_of_use:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Date on which the PAM asset expire
                 format: dateTime
                 type: string
@@ -7012,8 +6850,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
               tags:
                 - tshirts
                 - red
@@ -7025,8 +6862,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
                   code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: e_commerce
                 - _link:
                     download:
@@ -7034,8 +6870,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
                   code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-                  locale:
-                    $ref: "#/definitions/Product/example/parent"
+                  locale: null
                   scope: print
             properties:
               categories:
@@ -7051,13 +6886,11 @@ paths:
                 type: string
                 x-immutable: true
               description:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Description of the PAM asset
                 type: string
               end_of_use:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Date on which the PAM asset expire
                 format: dateTime
                 type: string
@@ -8938,15 +8771,11 @@ paths:
                   allowed_extensions: []
                   available_locales: []
                   code: sku
-                  date_max:
-                    $ref: "#/definitions/Product/example/parent"
-                  date_min:
-                    $ref: "#/definitions/Product/example/parent"
+                  date_max: null
+                  date_min: null
                   decimals_allowed: false
-                  default_metric_unit:
-                    $ref: "#/definitions/Product/example/parent"
-                  default_value:
-                    $ref: "#/definitions/Product/example/parent"
+                  default_metric_unit: null
+                  default_value: null
                   group: other
                   group_labels:
                     en_US: Other
@@ -8955,30 +8784,21 @@ paths:
                     en_US: Identifier
                     fr_FR: Identifiant
                   localizable: false
-                  max_characters:
-                    $ref: "#/definitions/Product/example/parent"
-                  max_file_size:
-                    $ref: "#/definitions/Product/example/parent"
-                  metric_family:
-                    $ref: "#/definitions/Product/example/parent"
-                  minimum_input_length:
-                    $ref: "#/definitions/Product/example/parent"
+                  max_characters: null
+                  max_file_size: null
+                  metric_family: null
+                  minimum_input_length: null
                   negative_allowed: false
-                  number_max:
-                    $ref: "#/definitions/Product/example/parent"
-                  number_min:
-                    $ref: "#/definitions/Product/example/parent"
-                  reference_data_name:
-                    $ref: "#/definitions/Product/example/parent"
+                  number_max: null
+                  number_min: null
+                  reference_data_name: null
                   scopable: false
                   sort_order: 1
                   type: pim_catalog_identifier
                   unique: true
                   useable_as_grid_filter: true
-                  validation_regexp:
-                    $ref: "#/definitions/Product/example/parent"
-                  validation_rule:
-                    $ref: "#/definitions/Product/example/parent"
+                  validation_regexp: null
+                  validation_rule: null
                   wysiwyg_enabled: false
                 - _links:
                     self:
@@ -8989,39 +8809,28 @@ paths:
                   date_max: 2017-08-08T22:00:00
                   date_min: 2017-06-28T08:00:00
                   decimals_allowed: false
-                  default_metric_unit:
-                    $ref: "#/definitions/Product/example/parent"
-                  default_value:
-                    $ref: "#/definitions/Product/example/parent"
+                  default_metric_unit: null
+                  default_value: null
                   group: marketing
                   labels:
                     en_US: Sale date
                     fr_FR: Date des soldes
                   localizable: false
-                  max_characters:
-                    $ref: "#/definitions/Product/example/parent"
-                  max_file_size:
-                    $ref: "#/definitions/Product/example/parent"
-                  metric_family:
-                    $ref: "#/definitions/Product/example/parent"
-                  minimum_input_length:
-                    $ref: "#/definitions/Product/example/parent"
+                  max_characters: null
+                  max_file_size: null
+                  metric_family: null
+                  minimum_input_length: null
                   negative_allowed: false
-                  number_max:
-                    $ref: "#/definitions/Product/example/parent"
-                  number_min:
-                    $ref: "#/definitions/Product/example/parent"
-                  reference_data_name:
-                    $ref: "#/definitions/Product/example/parent"
+                  number_max: null
+                  number_min: null
+                  reference_data_name: null
                   scopable: false
                   sort_order: 1
                   type: pim_catalog_date
                   unique: false
                   useable_as_grid_filter: true
-                  validation_regexp:
-                    $ref: "#/definitions/Product/example/parent"
-                  validation_rule:
-                    $ref: "#/definitions/Product/example/parent"
+                  validation_regexp: null
+                  validation_rule: null
                   wysiwyg_enabled: false
             _links:
               first:
@@ -9090,12 +8899,9 @@ paths:
                                 code: release_date
                                 date_max: 2017-08-08T22:00:00
                                 date_min: 2017-06-28T08:00:00
-                                decimals_allowed:
-                                  $ref: "#/definitions/Product/example/parent"
-                                default_metric_unit:
-                                  $ref: "#/definitions/Product/example/parent"
-                                default_value:
-                                  $ref: "#/definitions/Product/example/parent"
+                                decimals_allowed: null
+                                default_metric_unit: null
+                                default_value: null
                                 group: marketing
                                 group_labels:
                                   en_US: Marketing
@@ -9104,33 +8910,22 @@ paths:
                                   en_US: Sale date
                                   fr_FR: Date des soldes
                                 localizable: false
-                                max_characters:
-                                  $ref: "#/definitions/Product/example/parent"
-                                max_file_size:
-                                  $ref: "#/definitions/Product/example/parent"
-                                metric_family:
-                                  $ref: "#/definitions/Product/example/parent"
-                                minimum_input_length:
-                                  $ref: "#/definitions/Product/example/parent"
-                                negative_allowed:
-                                  $ref: "#/definitions/Product/example/parent"
-                                number_max:
-                                  $ref: "#/definitions/Product/example/parent"
-                                number_min:
-                                  $ref: "#/definitions/Product/example/parent"
-                                reference_data_name:
-                                  $ref: "#/definitions/Product/example/parent"
+                                max_characters: null
+                                max_file_size: null
+                                metric_family: null
+                                minimum_input_length: null
+                                negative_allowed: null
+                                number_max: null
+                                number_min: null
+                                reference_data_name: null
                                 scopable: false
                                 sort_order: 1
                                 type: pim_catalog_date
                                 unique: false
                                 useable_as_grid_filter: true
-                                validation_regexp:
-                                  $ref: "#/definitions/Product/example/parent"
-                                validation_rule:
-                                  $ref: "#/definitions/Product/example/parent"
-                                wysiwyg_enabled:
-                                  $ref: "#/definitions/Product/example/parent"
+                                validation_regexp: null
+                                validation_rule: null
+                                wysiwyg_enabled: null
                               properties:
                                 allowed_extensions:
                                   description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -9409,12 +9204,9 @@ paths:
               code: release_date
               date_max: 2017-08-08T22:00:00
               date_min: 2017-06-28T08:00:00
-              decimals_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              default_metric_unit:
-                $ref: "#/definitions/Product/example/parent"
-              default_value:
-                $ref: "#/definitions/Product/example/parent"
+              decimals_allowed: null
+              default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -9423,33 +9215,22 @@ paths:
                 en_US: Sale date
                 fr_FR: Date des soldes
               localizable: false
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
-              max_file_size:
-                $ref: "#/definitions/Product/example/parent"
-              metric_family:
-                $ref: "#/definitions/Product/example/parent"
-              minimum_input_length:
-                $ref: "#/definitions/Product/example/parent"
-              negative_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              number_max:
-                $ref: "#/definitions/Product/example/parent"
-              number_min:
-                $ref: "#/definitions/Product/example/parent"
-              reference_data_name:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
+              max_file_size: null
+              metric_family: null
+              minimum_input_length: null
+              negative_allowed: null
+              number_max: null
+              number_min: null
+              reference_data_name: null
               scopable: false
               sort_order: 1
               type: pim_catalog_date
               unique: false
               useable_as_grid_filter: true
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
-              validation_rule:
-                $ref: "#/definitions/Product/example/parent"
-              wysiwyg_enabled:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
+              validation_rule: null
+              wysiwyg_enabled: null
             properties:
               allowed_extensions:
                 description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -9770,12 +9551,9 @@ paths:
               code: release_date
               date_max: 2017-08-08T22:00:00
               date_min: 2017-06-28T08:00:00
-              decimals_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              default_metric_unit:
-                $ref: "#/definitions/Product/example/parent"
-              default_value:
-                $ref: "#/definitions/Product/example/parent"
+              decimals_allowed: null
+              default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -9784,33 +9562,22 @@ paths:
                 en_US: Sale date
                 fr_FR: Date des soldes
               localizable: false
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
-              max_file_size:
-                $ref: "#/definitions/Product/example/parent"
-              metric_family:
-                $ref: "#/definitions/Product/example/parent"
-              minimum_input_length:
-                $ref: "#/definitions/Product/example/parent"
-              negative_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              number_max:
-                $ref: "#/definitions/Product/example/parent"
-              number_min:
-                $ref: "#/definitions/Product/example/parent"
-              reference_data_name:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
+              max_file_size: null
+              metric_family: null
+              minimum_input_length: null
+              negative_allowed: null
+              number_max: null
+              number_min: null
+              reference_data_name: null
               scopable: false
               sort_order: 1
               type: pim_catalog_date
               unique: false
               useable_as_grid_filter: true
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
-              validation_rule:
-                $ref: "#/definitions/Product/example/parent"
-              wysiwyg_enabled:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
+              validation_rule: null
+              wysiwyg_enabled: null
             properties:
               allowed_extensions:
                 description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -10937,12 +10704,9 @@ paths:
               code: release_date
               date_max: 2017-08-08T22:00:00
               date_min: 2017-06-28T08:00:00
-              decimals_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              default_metric_unit:
-                $ref: "#/definitions/Product/example/parent"
-              default_value:
-                $ref: "#/definitions/Product/example/parent"
+              decimals_allowed: null
+              default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -10951,33 +10715,22 @@ paths:
                 en_US: Sale date
                 fr_FR: Date des soldes
               localizable: false
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
-              max_file_size:
-                $ref: "#/definitions/Product/example/parent"
-              metric_family:
-                $ref: "#/definitions/Product/example/parent"
-              minimum_input_length:
-                $ref: "#/definitions/Product/example/parent"
-              negative_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              number_max:
-                $ref: "#/definitions/Product/example/parent"
-              number_min:
-                $ref: "#/definitions/Product/example/parent"
-              reference_data_name:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
+              max_file_size: null
+              metric_family: null
+              minimum_input_length: null
+              negative_allowed: null
+              number_max: null
+              number_min: null
+              reference_data_name: null
               scopable: false
               sort_order: 1
               type: pim_catalog_date
               unique: false
               useable_as_grid_filter: true
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
-              validation_rule:
-                $ref: "#/definitions/Product/example/parent"
-              wysiwyg_enabled:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
+              validation_rule: null
+              wysiwyg_enabled: null
             properties:
               allowed_extensions:
                 description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -11271,12 +11024,9 @@ paths:
               code: release_date
               date_max: 2017-08-08T22:00:00
               date_min: 2017-06-28T08:00:00
-              decimals_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              default_metric_unit:
-                $ref: "#/definitions/Product/example/parent"
-              default_value:
-                $ref: "#/definitions/Product/example/parent"
+              decimals_allowed: null
+              default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -11285,33 +11035,22 @@ paths:
                 en_US: Sale date
                 fr_FR: Date des soldes
               localizable: false
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
-              max_file_size:
-                $ref: "#/definitions/Product/example/parent"
-              metric_family:
-                $ref: "#/definitions/Product/example/parent"
-              minimum_input_length:
-                $ref: "#/definitions/Product/example/parent"
-              negative_allowed:
-                $ref: "#/definitions/Product/example/parent"
-              number_max:
-                $ref: "#/definitions/Product/example/parent"
-              number_min:
-                $ref: "#/definitions/Product/example/parent"
-              reference_data_name:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
+              max_file_size: null
+              metric_family: null
+              minimum_input_length: null
+              negative_allowed: null
+              number_max: null
+              number_min: null
+              reference_data_name: null
               scopable: false
               sort_order: 1
               type: pim_catalog_date
               unique: false
               useable_as_grid_filter: true
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
-              validation_rule:
-                $ref: "#/definitions/Product/example/parent"
-              wysiwyg_enabled:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
+              validation_rule: null
+              wysiwyg_enabled: null
             properties:
               allowed_extensions:
                 description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -11668,8 +11407,7 @@ paths:
                     de_DE: Winter-Kollektion
                     en_US: Winter collection
                     fr_FR: Collection hiver
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   updated: 2021-05-21T11:32:00+02:00
                 - _links:
                     self:
@@ -11709,8 +11447,7 @@ paths:
                     de_DE: Sommer-Kollektion
                     en_US: Summer collection
                     fr_FR: Collection été
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   updated: 2021-04-04T09:42:00+02:00
             _links:
               first:
@@ -11778,8 +11515,7 @@ paths:
                                 labels:
                                   en_US: Winter collection
                                   fr_FR: Collection hiver
-                                parent:
-                                  $ref: "#/definitions/Product/example/parent"
+                                parent: null
                                 updated: 2021-05-22T12:48:00+02:00
                               properties:
                                 code:
@@ -11885,8 +11621,7 @@ paths:
               labels:
                 en_US: Winter collection
                 fr_FR: Collection hiver
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
@@ -12039,8 +11774,7 @@ paths:
               labels:
                 en_US: Winter collection
                 fr_FR: Collection hiver
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
@@ -12189,8 +11923,7 @@ paths:
               labels:
                 en_US: Winter collection
                 fr_FR: Collection hiver
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
@@ -12316,8 +12049,7 @@ paths:
               labels:
                 en_US: Winter collection
                 fr_FR: Collection hiver
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               updated: 2021-05-22T12:48:00+02:00
             properties:
               code:
@@ -12500,8 +12232,7 @@ paths:
                   conversion_units:
                     a_metric: KILOWATT
                     a_metric_negative: CELSIUS
-                    a_metric_to_not_convert:
-                      $ref: "#/definitions/Product/example/parent"
+                    a_metric_to_not_convert: null
                   currencies:
                     - USD
                     - EUR
@@ -12521,8 +12252,7 @@ paths:
                   conversion_units:
                     a_metric: KILOWATT
                     a_metric_negative: CELSIUS
-                    a_metric_to_not_convert:
-                      $ref: "#/definitions/Product/example/parent"
+                    a_metric_to_not_convert: null
                   currencies:
                     - USD
                     - EUR
@@ -17629,8 +17359,7 @@ paths:
                   created: 2017-10-04T18:04:10+02:00
                   family: shoes
                   family_variant: shoes_VariantA1
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   quantified_associations:
                     PRODUCT_SET:
                       product_models:
@@ -17651,10 +17380,8 @@ paths:
                       - data:
                           - amount: "50.00"
                             currency: EUR
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                 - _links:
                     self:
                       href: http://demo.akeneo.com/api/rest/v1/product-models/Abiloitshirt
@@ -17671,8 +17398,7 @@ paths:
                   created: 2017-10-04T18:04:10+02:00
                   family: clothing
                   family_variant: clothing_VariantA1
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   quantified_associations:
                     PRODUCT_SET:
                       product_models: []
@@ -17689,10 +17415,8 @@ paths:
                       - data:
                           - amount: "50.00"
                             currency: EUR
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                 - _links:
                     self:
                       href: http://demo.akeneo.com/api/rest/v1/product-models/Astertrousers
@@ -17703,8 +17427,7 @@ paths:
                   created: 2017-10-04T18:04:10+02:00
                   family: clothing
                   family_variant: clothing_VariantA1
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   updated: 2017-10-04T18:04:10+02:00
                   values:
                     associations:
@@ -17721,10 +17444,8 @@ paths:
                       - data:
                           - amount: "50.00"
                             currency: EUR
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     quantified_associations: {}
             _links:
               first:
@@ -17813,36 +17534,28 @@ paths:
                                   collection:
                                     - data:
                                         - summer_2017
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   color:
                                     - data: antique_white
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   description:
                                     - data: Biker jacket
                                       locale: en_US
                                       scope: ecommerce
                                   material:
                                     - data: leather
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   name:
                                     - data: Biker jacket
                                       locale: en_US
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      scope: null
                                   variation_name:
                                     - data: Biker jacket leather
                                       locale: en_US
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      scope: null
                               properties:
                                 associations:
                                   description: Several associations related to groups, product and/or other
@@ -18114,36 +17827,28 @@ paths:
                 collection:
                   - data:
                       - summer_2017
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: antique_white
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Biker jacket
                     locale: en_US
                     scope: ecommerce
                 material:
                   - data: leather
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 name:
                   - data: Biker jacket
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 variation_name:
                   - data: Biker jacket leather
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product and/or other
@@ -18453,36 +18158,28 @@ paths:
                 collection:
                   - data:
                       - summer_2017
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: antique_white
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Biker jacket
                     locale: en_US
                     scope: ecommerce
                 material:
                   - data: leather
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 name:
                   - data: Biker jacket
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 variation_name:
                   - data: Biker jacket leather
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product and/or other
@@ -18764,36 +18461,28 @@ paths:
                 collection:
                   - data:
                       - summer_2017
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: antique_white
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Biker jacket
                     locale: en_US
                     scope: ecommerce
                 material:
                   - data: leather
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 name:
                   - data: Biker jacket
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 variation_name:
                   - data: Biker jacket leather
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product and/or other
@@ -19053,36 +18742,28 @@ paths:
                 collection:
                   - data:
                       - summer_2017
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: antique_white
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Biker jacket
                     locale: en_US
                     scope: ecommerce
                 material:
                   - data: leather
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 name:
                   - data: Biker jacket
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 variation_name:
                   - data: Biker jacket leather
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product and/or other
@@ -19355,36 +19036,28 @@ paths:
                 collection:
                   - data:
                       - summer_2017
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: antique_white
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Biker jacket
                     locale: en_US
                     scope: ecommerce
                 material:
                   - data: leather
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 name:
                   - data: Biker jacket
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 variation_name:
                   - data: Biker jacket leather
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product and/or other
@@ -19846,8 +19519,7 @@ paths:
                   family: tshirt
                   groups: []
                   identifier: top
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   quality_scores:
                     - data: A
                       locale: en_US
@@ -19883,10 +19555,8 @@ paths:
                             labels:
                               en_US: Winter 2016
                               fr_FR: Hiver 2016
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     color:
                       - data: black
                         linked_data:
@@ -19895,10 +19565,8 @@ paths:
                           labels:
                             en_US: Black
                             fr_FR: Noir
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     description:
                       - data: Summer top
                         locale: en_US
@@ -19915,22 +19583,18 @@ paths:
                     name:
                       - data: Top
                         locale: en_US
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                       - data: Débardeur
                         locale: fr_FR
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                     price:
                       - data:
                           - amount: "15.5"
                             currency: EUR
                           - amount: "15"
                             currency: USD
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     size:
                       - data: m
                         linked_data:
@@ -19939,10 +19603,8 @@ paths:
                           labels:
                             en_US: M
                             fr_FR: M
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/product/cap
@@ -19972,8 +19634,7 @@ paths:
                   family: caps
                   groups: []
                   identifier: cap
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   quality_scores:
                     - data: A
                       locale: en_US
@@ -19998,10 +19659,8 @@ paths:
                           labels:
                             en_US: Black
                             fr_FR: Noir
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     description:
                       - data: Cap unisex
                         locale: en_US
@@ -20018,22 +19677,18 @@ paths:
                     name:
                       - data: Cap
                         locale: en_US
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                       - data: Casquette
                         locale: fr_FR
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                     price:
                       - data:
                           - amount: "20"
                             currency: EUR
                           - amount: "20"
                             currency: USD
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/product/sweat
@@ -20043,12 +19698,10 @@ paths:
                   completenesses: {}
                   created: 2016-06-23T11:24:44+02:00
                   enabled: true
-                  family:
-                    $ref: "#/definitions/Product/example/parent"
+                  family: null
                   groups: []
                   identifier: sweat
-                  parent:
-                    $ref: "#/definitions/Product/example/parent"
+                  parent: null
                   quality_scores: {}
                   quantified_associations: {}
                   updated: 2016-06-23T11:24:44+02:00
@@ -20141,8 +19794,7 @@ paths:
                                 family: tshirt
                                 groups: []
                                 identifier: top
-                                parent:
-                                  $ref: "#/definitions/Product/example/parent"
+                                parent: null
                                 quality_scores:
                                   - data: A
                                     locale: en_US
@@ -20178,10 +19830,8 @@ paths:
                                           labels:
                                             en_US: Winter 2016
                                             fr_FR: Hiver 2016
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   color:
                                     - data: black
                                       linked_data:
@@ -20190,10 +19840,8 @@ paths:
                                         labels:
                                           en_US: Black
                                           fr_FR: Noir
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   description:
                                     - data: Summer top
                                       locale: en_US
@@ -20210,22 +19858,18 @@ paths:
                                   name:
                                     - data: Top
                                       locale: en_US
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      scope: null
                                     - data: Débardeur
                                       locale: fr_FR
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      scope: null
                                   price:
                                     - data:
                                         - amount: "15.5"
                                           currency: EUR
                                         - amount: "15"
                                           currency: USD
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   size:
                                     - data: m
                                       linked_data:
@@ -20234,10 +19878,8 @@ paths:
                                         labels:
                                           en_US: M
                                           fr_FR: M
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                               properties:
                                 associations:
                                   description: Several associations related to groups, product models and/or other
@@ -20555,8 +20197,7 @@ paths:
               family: tshirt
               groups: []
               identifier: top
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               quality_scores:
                 - data: A
                   locale: en_US
@@ -20592,10 +20233,8 @@ paths:
                         labels:
                           en_US: Winter 2016
                           fr_FR: Hiver 2016
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: black
                     linked_data:
@@ -20604,10 +20243,8 @@ paths:
                       labels:
                         en_US: Black
                         fr_FR: Noir
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Summer top
                     locale: en_US
@@ -20624,22 +20261,18 @@ paths:
                 name:
                   - data: Top
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                   - data: Débardeur
                     locale: fr_FR
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 price:
                   - data:
                       - amount: "15.5"
                         currency: EUR
                       - amount: "15"
                         currency: USD
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 size:
                   - data: m
                     linked_data:
@@ -20648,10 +20281,8 @@ paths:
                       labels:
                         en_US: M
                         fr_FR: M
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product models and/or other
@@ -20984,8 +20615,7 @@ paths:
               family: tshirt
               groups: []
               identifier: top
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               quality_scores:
                 - data: A
                   locale: en_US
@@ -21021,10 +20651,8 @@ paths:
                         labels:
                           en_US: Winter 2016
                           fr_FR: Hiver 2016
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: black
                     linked_data:
@@ -21033,10 +20661,8 @@ paths:
                       labels:
                         en_US: Black
                         fr_FR: Noir
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Summer top
                     locale: en_US
@@ -21053,22 +20679,18 @@ paths:
                 name:
                   - data: Top
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                   - data: Débardeur
                     locale: fr_FR
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 price:
                   - data:
                       - amount: "15.5"
                         currency: EUR
                       - amount: "15"
                         currency: USD
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 size:
                   - data: m
                     linked_data:
@@ -21077,10 +20699,8 @@ paths:
                       labels:
                         en_US: M
                         fr_FR: M
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product models and/or other
@@ -21500,8 +21120,7 @@ paths:
               family: tshirt
               groups: []
               identifier: top
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               quality_scores:
                 - data: A
                   locale: en_US
@@ -21537,10 +21156,8 @@ paths:
                         labels:
                           en_US: Winter 2016
                           fr_FR: Hiver 2016
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: black
                     linked_data:
@@ -21549,10 +21166,8 @@ paths:
                       labels:
                         en_US: Black
                         fr_FR: Noir
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Summer top
                     locale: en_US
@@ -21569,22 +21184,18 @@ paths:
                 name:
                   - data: Top
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                   - data: Débardeur
                     locale: fr_FR
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 price:
                   - data:
                       - amount: "15.5"
                         currency: EUR
                       - amount: "15"
                         currency: USD
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 size:
                   - data: m
                     linked_data:
@@ -21593,10 +21204,8 @@ paths:
                       labels:
                         en_US: M
                         fr_FR: M
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product models and/or other
@@ -21902,8 +21511,7 @@ paths:
               family: tshirt
               groups: []
               identifier: top
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               quality_scores:
                 - data: A
                   locale: en_US
@@ -21939,10 +21547,8 @@ paths:
                         labels:
                           en_US: Winter 2016
                           fr_FR: Hiver 2016
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: black
                     linked_data:
@@ -21951,10 +21557,8 @@ paths:
                       labels:
                         en_US: Black
                         fr_FR: Noir
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Summer top
                     locale: en_US
@@ -21971,22 +21575,18 @@ paths:
                 name:
                   - data: Top
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                   - data: Débardeur
                     locale: fr_FR
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 price:
                   - data:
                       - amount: "15.5"
                         currency: EUR
                       - amount: "15"
                         currency: USD
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 size:
                   - data: m
                     linked_data:
@@ -21995,10 +21595,8 @@ paths:
                       labels:
                         en_US: M
                         fr_FR: M
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product models and/or other
@@ -22316,8 +21914,7 @@ paths:
               family: tshirt
               groups: []
               identifier: top
-              parent:
-                $ref: "#/definitions/Product/example/parent"
+              parent: null
               quality_scores:
                 - data: A
                   locale: en_US
@@ -22353,10 +21950,8 @@ paths:
                         labels:
                           en_US: Winter 2016
                           fr_FR: Hiver 2016
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 color:
                   - data: black
                     linked_data:
@@ -22365,10 +21960,8 @@ paths:
                       labels:
                         en_US: Black
                         fr_FR: Noir
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Summer top
                     locale: en_US
@@ -22385,22 +21978,18 @@ paths:
                 name:
                   - data: Top
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                   - data: Débardeur
                     locale: fr_FR
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 price:
                   - data:
                       - amount: "15.5"
                         currency: EUR
                       - amount: "15"
                         currency: USD
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 size:
                   - data: m
                     linked_data:
@@ -22409,10 +21998,8 @@ paths:
                       labels:
                         en_US: M
                         fr_FR: M
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups, product models and/or other
@@ -22874,10 +22461,8 @@ paths:
                   values:
                     color:
                       - data: black
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     description:
                       - data: Summer top
                         locale: en_US
@@ -22894,28 +22479,22 @@ paths:
                     name:
                       - data: Top
                         locale: en_US
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                       - data: Débardeur
                         locale: fr_FR
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                     price:
                       - data:
                           - amount: "15.5"
                             currency: EUR
                           - amount: "15"
                             currency: USD
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     size:
                       - data: m
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/published-products/cap
@@ -22936,10 +22515,8 @@ paths:
                   values:
                     color:
                       - data: black
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                     description:
                       - data: Cap unisex
                         locale: en_US
@@ -22956,22 +22533,18 @@ paths:
                     name:
                       - data: Cap
                         locale: en_US
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                       - data: Casquette
                         locale: fr_FR
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        scope: null
                     price:
                       - data:
                           - amount: "20"
                             currency: EUR
                           - amount: "20"
                             currency: USD
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
-                        scope:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
+                        scope: null
                 - _links:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/published-products/sweat
@@ -22980,8 +22553,7 @@ paths:
                     - winter_collection
                   created: 2016-06-23T11:24:44+02:00
                   enabled: true
-                  family:
-                    $ref: "#/definitions/Product/example/parent"
+                  family: null
                   groups: []
                   identifier: sweat
                   updated: 2016-06-23T11:24:44+02:00
@@ -23065,10 +22637,8 @@ paths:
                                 values:
                                   color:
                                     - data: black
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   description:
                                     - data: Summer top
                                       locale: en_US
@@ -23085,28 +22655,22 @@ paths:
                                   name:
                                     - data: Top
                                       locale: en_US
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      scope: null
                                     - data: Débardeur
                                       locale: fr_FR
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      scope: null
                                   price:
                                     - data:
                                         - amount: "15.5"
                                           currency: EUR
                                         - amount: "15"
                                           currency: USD
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                                   size:
                                     - data: m
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
-                                      scope:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
+                                      scope: null
                               properties:
                                 associations:
                                   description: Several associations related to groups and/or other published
@@ -23341,10 +22905,8 @@ paths:
               values:
                 color:
                   - data: black
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 description:
                   - data: Summer top
                     locale: en_US
@@ -23361,28 +22923,22 @@ paths:
                 name:
                   - data: Top
                     locale: en_US
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                   - data: Débardeur
                     locale: fr_FR
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    scope: null
                 price:
                   - data:
                       - amount: "15.5"
                         currency: EUR
                       - amount: "15"
                         currency: USD
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
                 size:
                   - data: m
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
-                    scope:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
+                    scope: null
             properties:
               associations:
                 description: Several associations related to groups and/or other published
@@ -23593,8 +23149,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/reference-entities/designers
                   code: designers
-                  image:
-                    $ref: "#/definitions/Product/example/parent"
+                  image: null
                   labels:
                     en_US: Designers
                     fr_FR: Designers
@@ -23602,8 +23157,7 @@ paths:
                     self:
                       href: https://demo.akeneo.com/api/rest/v1/reference-entities/colors
                   code: colors
-                  image:
-                    $ref: "#/definitions/Product/example/parent"
+                  image: null
                   labels:
                     en_US: Colors
                     fr_FR: Couleurs
@@ -23674,8 +23228,7 @@ paths:
                                   type: string
                                   x-immutable: true
                                 image:
-                                  default:
-                                    $ref: "#/definitions/Product/example/parent"
+                                  default: null
                                   description: Code of the reference entity image
                                   type: string
                                 labels:
@@ -23926,8 +23479,7 @@ paths:
                     type: string
                     x-immutable: true
                   image:
-                    default:
-                      $ref: "#/definitions/Product/example/parent"
+                    default: null
                     description: Code of the reference entity image
                     type: string
                   labels:
@@ -24036,8 +23588,7 @@ paths:
                 type: string
                 x-immutable: true
               image:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Code of the reference entity image
                 type: string
               labels:
@@ -24151,11 +23702,9 @@ paths:
                 labels:
                   en_US: Description
                   fr_FR: Description
-                max_characters:
-                  $ref: "#/definitions/Product/example/parent"
+                max_characters: null
                 type: text
-                validation_regexp:
-                  $ref: "#/definitions/Product/example/parent"
+                validation_regexp: null
                 validation_rule: none
                 value_per_channel: false
                 value_per_locale: true
@@ -24209,28 +23758,24 @@ paths:
                   type: integer
                   x-warning: Only for `text` attribute type
                 max_file_size:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Max file size in MB when the attribute type is `image`
                   type: string
                   x-warning: Only for `image` attribute type
                 max_value:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Maximum value allowed when the attribute type is `number`
                   type: string
                   x-validation-rules: The maximum value must be greater than the minimum value
                   x-warning: Only for `number` attribute type
                 min_value:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Minimum value allowed when the attribute type is `number`
                   type: string
                   x-validation-rules: The minimum value must be lower than the maximum value
                   x-warning: Only for `number` attribute type
                 reference_entity_code:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Code of the linked reference entity when the attribute type is
                     `reference_entity_single_link` or
                     `reference_entity_multiple_links`
@@ -24254,8 +23799,7 @@ paths:
                   type: string
                   x-immutable: true
                 validation_regexp:
-                  default:
-                    $ref: "#/definitions/Product/example/parent"
+                  default: null
                   description: Regexp expression used to validate the attribute value when the
                     attribute type is `text`
                   type: string
@@ -24298,11 +23842,9 @@ paths:
               labels:
                 en_US: Description
                 fr_FR: Description
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
               type: text
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
               validation_rule: none
               value_per_channel: false
               value_per_locale: true
@@ -24736,11 +24278,9 @@ paths:
               labels:
                 en_US: Description
                 fr_FR: Description
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
               type: text
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
               validation_rule: none
               value_per_channel: false
               value_per_locale: true
@@ -24794,28 +24334,24 @@ paths:
                 type: integer
                 x-warning: Only for `text` attribute type
               max_file_size:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Max file size in MB when the attribute type is `image`
                 type: string
                 x-warning: Only for `image` attribute type
               max_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Maximum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The maximum value must be greater than the minimum value
                 x-warning: Only for `number` attribute type
               min_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Minimum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The minimum value must be lower than the maximum value
                 x-warning: Only for `number` attribute type
               reference_entity_code:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Code of the linked reference entity when the attribute type is
                   `reference_entity_single_link` or
                   `reference_entity_multiple_links`
@@ -24839,8 +24375,7 @@ paths:
                 type: string
                 x-immutable: true
               validation_regexp:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Regexp expression used to validate the attribute value when the
                   attribute type is `text`
                 type: string
@@ -24959,11 +24494,9 @@ paths:
               labels:
                 en_US: Description
                 fr_FR: Description
-              max_characters:
-                $ref: "#/definitions/Product/example/parent"
+              max_characters: null
               type: text
-              validation_regexp:
-                $ref: "#/definitions/Product/example/parent"
+              validation_regexp: null
               validation_rule: none
               value_per_channel: false
               value_per_locale: true
@@ -25017,28 +24550,24 @@ paths:
                 type: integer
                 x-warning: Only for `text` attribute type
               max_file_size:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Max file size in MB when the attribute type is `image`
                 type: string
                 x-warning: Only for `image` attribute type
               max_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Maximum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The maximum value must be greater than the minimum value
                 x-warning: Only for `number` attribute type
               min_value:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Minimum value allowed when the attribute type is `number`
                 type: string
                 x-validation-rules: The minimum value must be lower than the maximum value
                 x-warning: Only for `number` attribute type
               reference_entity_code:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Code of the linked reference entity when the attribute type is
                   `reference_entity_single_link` or
                   `reference_entity_multiple_links`
@@ -25062,8 +24591,7 @@ paths:
                 type: string
                 x-immutable: true
               validation_regexp:
-                default:
-                  $ref: "#/definitions/Product/example/parent"
+                default: null
                 description: Regexp expression used to validate the attribute value when the
                   attribute type is `text`
                 type: string
@@ -25227,29 +24755,22 @@ paths:
                   code: kartell
                   values:
                     country:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: italy
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     description:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: The contemporary Italian furniture brand
                         locale: en_US
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: L'éditeur de meubles comtemporain italien
                         locale: fr_FR
                     image:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     label:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Kartell
                         locale: en_US
                 - _links:
@@ -25258,30 +24779,23 @@ paths:
                   code: usm
                   values:
                     country:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: switzerland
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     description:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Modular furniture from Switzerland for your home and office
                         locale: en_US
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: L'éditeur de meubles modulaires suisse pour votre intérieur et pour les
                           entreprises
                         locale: fr_FR
                     image:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: 9/c/g/1/0cb0c0e115dedba76f8d1ad8343ec897abc43bv4_image.jpg
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     label:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: USM
                         locale: en_US
                 - _links:
@@ -25290,29 +24804,22 @@ paths:
                   code: ligneroset
                   values:
                     country:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: france
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     description:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Very well known French brand of modern and luxury furniture
                         locale: en_US
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: La marque renommée des meubles de luxe à la française
                         locale: fr_FR
                     image:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: 4/b/0/1/0cb0c0e115dedde78b8d1ad8343ec980cd5daa54_image.jpg
-                        locale:
-                          $ref: "#/definitions/Product/example/parent"
+                        locale: null
                     label:
-                      - channel:
-                          $ref: "#/definitions/Product/example/parent"
+                      - channel: null
                         data: Ligne Roset
                         locale: en_US
             _links:
@@ -25368,43 +24875,32 @@ paths:
                                 code: kartell
                                 values:
                                   collection_overview:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   country:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: italy
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   creation_year:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: "1949"
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   description:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: Kartell, the Italian furniture company that sells modern and remarkable
                                         pieces of furnitures.
                                       locale: en_US
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
                                         pièces au design contemporain.
                                       locale: fr_FR
                                   image:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                                      locale:
-                                        $ref: "#/definitions/Product/example/parent"
+                                      locale: null
                                   label:
-                                    - channel:
-                                        $ref: "#/definitions/Product/example/parent"
+                                    - channel: null
                                       data: Kartell
                                       locale: en_US
                               properties:
@@ -25504,112 +25000,83 @@ paths:
               - code: kartell
                 values:
                   collection_overview:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   country:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: italy
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   creation_year:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: "1949"
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   description:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Kartell, the Italian furniture company that sells modern and remarkable
                         pieces of furnitures.
                       locale: en_US
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
                         pièces au design contemporain.
                       locale: fr_FR
                   image:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   label:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Kartell
                       locale: en_US
               - code: ligneroset
                 values:
                   country:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: france
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   creation_year:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: "1860"
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   description:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Very well known French brand of modern and luxury furniture
                       locale: en_US
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: La marque renommée des meubles de luxe à la française
                       locale: fr_FR
                   image:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 4/b/0/1/0cb0c0e115dedde78b8d1ad8343ec980cd5daa54_image.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   label:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Ligne Roset
                       locale: en_US
               - code: usm
                 values:
                   country:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: switzerland
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   creation_year:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: "1885"
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   description:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Modular furniture from Switzerland for your home and office
                       locale: en_US
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: L'éditeur de meubles modulaires suisse pour votre intérieur et pour les
                         entreprises
                       locale: fr_FR
                   image:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 9/c/g/1/0cb0c0e115dedba76f8d1ad8343ec897abc43bv4_image.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   label:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: USM
                       locale: en_US
             items:
@@ -25617,43 +25084,32 @@ paths:
                 code: kartell
                 values:
                   collection_overview:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   country:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: italy
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   creation_year:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: "1949"
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   description:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Kartell, the Italian furniture company that sells modern and remarkable
                         pieces of furnitures.
                       locale: en_US
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
                         pièces au design contemporain.
                       locale: fr_FR
                   image:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                      locale:
-                        $ref: "#/definitions/Product/example/parent"
+                      locale: null
                   label:
-                    - channel:
-                        $ref: "#/definitions/Product/example/parent"
+                    - channel: null
                       data: Kartell
                       locale: en_US
               properties:
@@ -25798,43 +25254,32 @@ paths:
               code: kartell
               values:
                 collection_overview:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 country:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: italy
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 creation_year:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: "1949"
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 description:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: Kartell, the Italian furniture company that sells modern and remarkable
                       pieces of furnitures.
                     locale: en_US
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
                       pièces au design contemporain.
                     locale: fr_FR
                 image:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 label:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: Kartell
                     locale: en_US
             properties:
@@ -25950,43 +25395,32 @@ paths:
               code: kartell
               values:
                 collection_overview:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 country:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: italy
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 creation_year:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: "1949"
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 description:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: Kartell, the Italian furniture company that sells modern and remarkable
                       pieces of furnitures.
                     locale: en_US
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
                       pièces au design contemporain.
                     locale: fr_FR
                 image:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                    locale:
-                      $ref: "#/definitions/Product/example/parent"
+                    locale: null
                 label:
-                  - channel:
-                      $ref: "#/definitions/Product/example/parent"
+                  - channel: null
                     data: Kartell
                     locale: en_US
             properties:
@@ -26159,14 +25593,12 @@ definitions:
           type: integer
           x-warning: Only for `text` attribute type
         max_file_size:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Max file size in MB when the attribute type is `media_file`
           type: string
           x-warning: Only for `media_file` attribute type
         max_value:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Maximum value allowed when the attribute type is `number`
           type: string
           x-validation-rules: The maximum value must be greater than the minimum value
@@ -26184,22 +25616,19 @@ definitions:
           type: string
           x-warning: Only required for `media_link` and `media_file` attribute types
         min_value:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Minimum value allowed when the attribute type is `number`
           type: string
           x-validation-rules: The minimum value must be lower than the maximum value
           x-warning: Only for `number` attribute type
         prefix:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Prefix of the `media_link` attribute type. The common url root that
             prefixes the link to the media
           type: string
           x-warning: Only for `media_link` attribute type
         suffix:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Suffix of the `media_link` attribute type. The common url suffix
             for the media
           type: string
@@ -26218,8 +25647,7 @@ definitions:
           type: string
           x-immutable: true
         validation_regexp:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Regexp expression used to validate the attribute value when the
             attribute type is `text`
           type: string
@@ -26313,10 +25741,8 @@ definitions:
             abort_asset_creation_on_error: true
             pattern: /(?P<product_ref>.*)-.*/
             source:
-              channel:
-                $ref: "#/definitions/Product/example/parent"
-              locale:
-                $ref: "#/definitions/Product/example/parent"
+              channel: null
+              locale: null
               property: code
           product_link_rules:
             - assign_assets_to:
@@ -26339,16 +25765,12 @@ definitions:
                   type: colorspace
               source:
                 attribute: main_image
-                channel:
-                  $ref: "#/definitions/Product/example/parent"
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                channel: null
+                locale: null
               target:
                 attribute: thumbnail
-                channel:
-                  $ref: "#/definitions/Product/example/parent"
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                channel: null
+                locale: null
         properties:
           attribute_as_main_media:
             default: First media file or media link attribute that was created
@@ -26574,37 +25996,27 @@ definitions:
           updated: 2021-05-31T09:23:34+00:00
           values:
             end_of_use_date:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: 02/03/2021
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             main_colors:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data:
                   - red
                   - purple
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             media_preview:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: sku_54628_picture1.jpg
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             model_wears_size:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: s
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             photographer:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: ben_levy
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
         properties:
           code:
             description: Code of the asset
@@ -26740,12 +26152,9 @@ definitions:
       code: release_date
       date_max: 2017-08-08T22:00:00
       date_min: 2017-06-28T08:00:00
-      decimals_allowed:
-        $ref: "#/definitions/Product/example/parent"
-      default_metric_unit:
-        $ref: "#/definitions/Product/example/parent"
-      default_value:
-        $ref: "#/definitions/Product/example/parent"
+      decimals_allowed: null
+      default_metric_unit: null
+      default_value: null
       group: marketing
       group_labels:
         en_US: Marketing
@@ -26754,33 +26163,22 @@ definitions:
         en_US: Sale date
         fr_FR: Date des soldes
       localizable: false
-      max_characters:
-        $ref: "#/definitions/Product/example/parent"
-      max_file_size:
-        $ref: "#/definitions/Product/example/parent"
-      metric_family:
-        $ref: "#/definitions/Product/example/parent"
-      minimum_input_length:
-        $ref: "#/definitions/Product/example/parent"
-      negative_allowed:
-        $ref: "#/definitions/Product/example/parent"
-      number_max:
-        $ref: "#/definitions/Product/example/parent"
-      number_min:
-        $ref: "#/definitions/Product/example/parent"
-      reference_data_name:
-        $ref: "#/definitions/Product/example/parent"
+      max_characters: null
+      max_file_size: null
+      metric_family: null
+      minimum_input_length: null
+      negative_allowed: null
+      number_max: null
+      number_min: null
+      reference_data_name: null
       scopable: false
       sort_order: 1
       type: pim_catalog_date
       unique: false
       useable_as_grid_filter: true
-      validation_regexp:
-        $ref: "#/definitions/Product/example/parent"
-      validation_rule:
-        $ref: "#/definitions/Product/example/parent"
-      wysiwyg_enabled:
-        $ref: "#/definitions/Product/example/parent"
+      validation_regexp: null
+      validation_rule: null
+      wysiwyg_enabled: null
     properties:
       allowed_extensions:
         description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -27087,12 +26485,9 @@ definitions:
           code: release_date
           date_max: 2017-08-08T22:00:00
           date_min: 2017-06-28T08:00:00
-          decimals_allowed:
-            $ref: "#/definitions/Product/example/parent"
-          default_metric_unit:
-            $ref: "#/definitions/Product/example/parent"
-          default_value:
-            $ref: "#/definitions/Product/example/parent"
+          decimals_allowed: null
+          default_metric_unit: null
+          default_value: null
           group: marketing
           group_labels:
             en_US: Marketing
@@ -27101,33 +26496,22 @@ definitions:
             en_US: Sale date
             fr_FR: Date des soldes
           localizable: false
-          max_characters:
-            $ref: "#/definitions/Product/example/parent"
-          max_file_size:
-            $ref: "#/definitions/Product/example/parent"
-          metric_family:
-            $ref: "#/definitions/Product/example/parent"
-          minimum_input_length:
-            $ref: "#/definitions/Product/example/parent"
-          negative_allowed:
-            $ref: "#/definitions/Product/example/parent"
-          number_max:
-            $ref: "#/definitions/Product/example/parent"
-          number_min:
-            $ref: "#/definitions/Product/example/parent"
-          reference_data_name:
-            $ref: "#/definitions/Product/example/parent"
+          max_characters: null
+          max_file_size: null
+          metric_family: null
+          minimum_input_length: null
+          negative_allowed: null
+          number_max: null
+          number_min: null
+          reference_data_name: null
           scopable: false
           sort_order: 1
           type: pim_catalog_date
           unique: false
           useable_as_grid_filter: true
-          validation_regexp:
-            $ref: "#/definitions/Product/example/parent"
-          validation_rule:
-            $ref: "#/definitions/Product/example/parent"
-          wysiwyg_enabled:
-            $ref: "#/definitions/Product/example/parent"
+          validation_regexp: null
+          validation_rule: null
+          wysiwyg_enabled: null
         properties:
           allowed_extensions:
             description: Extensions allowed when the attribute type is `pim_catalog_file` or
@@ -27402,8 +26786,7 @@ definitions:
       labels:
         en_US: Winter collection
         fr_FR: Collection hiver
-      parent:
-        $ref: "#/definitions/Product/example/parent"
+      parent: null
       updated: 2021-05-22T12:48:00+02:00
     properties:
       code:
@@ -27452,8 +26835,7 @@ definitions:
           labels:
             en_US: Winter collection
             fr_FR: Collection hiver
-          parent:
-            $ref: "#/definitions/Product/example/parent"
+          parent: null
           updated: 2021-05-22T12:48:00+02:00
         properties:
           code:
@@ -27692,8 +27074,7 @@ definitions:
             self:
               href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
           code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-          locale:
-            $ref: "#/definitions/Product/example/parent"
+          locale: null
       tags:
         - tshirts
         - red
@@ -27705,8 +27086,7 @@ definitions:
             self:
               href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
           code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-          locale:
-            $ref: "#/definitions/Product/example/parent"
+          locale: null
           scope: e_commerce
         - _link:
             download:
@@ -27714,8 +27094,7 @@ definitions:
             self:
               href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
           code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-          locale:
-            $ref: "#/definitions/Product/example/parent"
+          locale: null
           scope: print
     properties:
       categories:
@@ -27730,13 +27109,11 @@ definitions:
         type: string
         x-immutable: true
       description:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Description of the PAM asset
         type: string
       end_of_use:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Date on which the PAM asset expire
         format: dateTime
         type: string
@@ -27919,8 +27296,7 @@ definitions:
                 self:
                   href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale
               code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-              locale:
-                $ref: "#/definitions/Product/example/parent"
+              locale: null
           tags:
             - tshirts
             - red
@@ -27932,8 +27308,7 @@ definitions:
                 self:
                   href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale
               code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-              locale:
-                $ref: "#/definitions/Product/example/parent"
+              locale: null
               scope: e_commerce
             - _link:
                 download:
@@ -27941,8 +27316,7 @@ definitions:
                 self:
                   href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/print/no_locale
               code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_print.jpg
-              locale:
-                $ref: "#/definitions/Product/example/parent"
+              locale: null
               scope: print
         properties:
           categories:
@@ -27958,13 +27332,11 @@ definitions:
             type: string
             x-immutable: true
           description:
-            default:
-              $ref: "#/definitions/Product/example/parent"
+            default: null
             description: Description of the PAM asset
             type: string
           end_of_use:
-            default:
-              $ref: "#/definitions/Product/example/parent"
+            default: null
             description: Date on which the PAM asset expire
             format: dateTime
             type: string
@@ -28052,8 +27424,7 @@ definitions:
         download:
           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/reference-files/no_locale/download
       code: 7/5/8/e/759e39d48va7b42a55002434fd3d7b6cf3189b7f_tshirt_artemis_main_picture.jpg
-      locale:
-        $ref: "#/definitions/Product/example/parent"
+      locale: null
     properties:
       _link:
         description: Links to get and download the reference file
@@ -28135,8 +27506,7 @@ definitions:
         download:
           href: https://demo.akeneo.com/api/rest/v1/assets/tshirt_artemis_main_picture/variation-files/ecommerce/no_locale/download
       code: 7/5/8/e/758e39d48va7b42a55001434fd3d7b6cf3189b7f_tshirt_artemis_main_picture_ecommerce.jpg
-      locale:
-        $ref: "#/definitions/Product/example/parent"
+      locale: null
       scope: ecommerce
     properties:
       _link:
@@ -29162,10 +28532,8 @@ definitions:
                 labels:
                   en_US: Winter 2016
                   fr_FR: Hiver 2016
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         color:
           - data: black
             linked_data:
@@ -29174,10 +28542,8 @@ definitions:
               labels:
                 en_US: Black
                 fr_FR: Noir
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         description:
           - data: Summer top
             locale: en_US
@@ -29194,22 +28560,18 @@ definitions:
         name:
           - data: Top
             locale: en_US
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
           - data: Débardeur
             locale: fr_FR
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
         price:
           - data:
               - amount: "15.5"
                 currency: EUR
               - amount: "15"
                 currency: USD
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         size:
           - data: m
             linked_data:
@@ -29218,10 +28580,8 @@ definitions:
               labels:
                 en_US: M
                 fr_FR: M
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
     properties:
       associations:
         description: Several associations related to groups, product models and/or other
@@ -29447,8 +28807,7 @@ definitions:
           family: tshirt
           groups: []
           identifier: top
-          parent:
-            $ref: "#/definitions/Product/example/parent"
+          parent: null
           quality_scores:
             - data: A
               locale: en_US
@@ -29484,10 +28843,8 @@ definitions:
                     labels:
                       en_US: Winter 2016
                       fr_FR: Hiver 2016
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             color:
               - data: black
                 linked_data:
@@ -29496,10 +28853,8 @@ definitions:
                   labels:
                     en_US: Black
                     fr_FR: Noir
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             description:
               - data: Summer top
                 locale: en_US
@@ -29516,22 +28871,18 @@ definitions:
             name:
               - data: Top
                 locale: en_US
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                scope: null
               - data: Débardeur
                 locale: fr_FR
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                scope: null
             price:
               - data:
                   - amount: "15.5"
                     currency: EUR
                   - amount: "15"
                     currency: USD
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             size:
               - data: m
                 linked_data:
@@ -29540,10 +28891,8 @@ definitions:
                   labels:
                     en_US: M
                     fr_FR: M
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
         properties:
           associations:
             description: Several associations related to groups, product models and/or other
@@ -29761,36 +29110,28 @@ definitions:
         collection:
           - data:
               - summer_2017
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         color:
           - data: antique_white
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         description:
           - data: Biker jacket
             locale: en_US
             scope: ecommerce
         material:
           - data: leather
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         name:
           - data: Biker jacket
             locale: en_US
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
         variation_name:
           - data: Biker jacket leather
             locale: en_US
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
     properties:
       associations:
         description: Several associations related to groups, product and/or other
@@ -29986,36 +29327,28 @@ definitions:
             collection:
               - data:
                   - summer_2017
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             color:
               - data: antique_white
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             description:
               - data: Biker jacket
                 locale: en_US
                 scope: ecommerce
             material:
               - data: leather
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             name:
               - data: Biker jacket
                 locale: en_US
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                scope: null
             variation_name:
               - data: Biker jacket leather
                 locale: en_US
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                scope: null
         properties:
           associations:
             description: Several associations related to groups, product and/or other
@@ -30190,10 +29523,8 @@ definitions:
       values:
         color:
           - data: black
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         description:
           - data: Summer top
             locale: en_US
@@ -30210,28 +29541,22 @@ definitions:
         name:
           - data: Top
             locale: en_US
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
           - data: Débardeur
             locale: fr_FR
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            scope: null
         price:
           - data:
               - amount: "15.5"
                 currency: EUR
               - amount: "15"
                 currency: USD
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
         size:
           - data: m
-            locale:
-              $ref: "#/definitions/Product/example/parent"
-            scope:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
+            scope: null
     properties:
       associations:
         description: Several associations related to groups and/or other published
@@ -30363,10 +29688,8 @@ definitions:
           values:
             color:
               - data: black
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             description:
               - data: Summer top
                 locale: en_US
@@ -30383,28 +29706,22 @@ definitions:
             name:
               - data: Top
                 locale: en_US
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                scope: null
               - data: Débardeur
                 locale: fr_FR
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                scope: null
             price:
               - data:
                   - amount: "15.5"
                     currency: EUR
                   - amount: "15"
                     currency: USD
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
             size:
               - data: m
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
-                scope:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
+                scope: null
         properties:
           associations:
             description: Several associations related to groups and/or other published
@@ -30534,8 +29851,7 @@ definitions:
             type: string
             x-immutable: true
           image:
-            default:
-              $ref: "#/definitions/Product/example/parent"
+            default: null
             description: Code of the reference entity image
             type: string
           labels:
@@ -30569,11 +29885,9 @@ definitions:
       labels:
         en_US: Description
         fr_FR: Description
-      max_characters:
-        $ref: "#/definitions/Product/example/parent"
+      max_characters: null
       type: text
-      validation_regexp:
-        $ref: "#/definitions/Product/example/parent"
+      validation_regexp: null
       validation_rule: none
       value_per_channel: false
       value_per_locale: true
@@ -30626,28 +29940,24 @@ definitions:
         type: integer
         x-warning: Only for `text` attribute type
       max_file_size:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Max file size in MB when the attribute type is `image`
         type: string
         x-warning: Only for `image` attribute type
       max_value:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Maximum value allowed when the attribute type is `number`
         type: string
         x-validation-rules: The maximum value must be greater than the minimum value
         x-warning: Only for `number` attribute type
       min_value:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Minimum value allowed when the attribute type is `number`
         type: string
         x-validation-rules: The minimum value must be lower than the maximum value
         x-warning: Only for `number` attribute type
       reference_entity_code:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Code of the linked reference entity when the attribute type is
           `reference_entity_single_link` or `reference_entity_multiple_links`
         type: string
@@ -30669,8 +29979,7 @@ definitions:
         type: string
         x-immutable: true
       validation_regexp:
-        default:
-          $ref: "#/definitions/Product/example/parent"
+        default: null
         description: Regexp expression used to validate the attribute value when the
           attribute type is `text`
         type: string
@@ -30711,11 +30020,9 @@ definitions:
         labels:
           en_US: Description
           fr_FR: Description
-        max_characters:
-          $ref: "#/definitions/Product/example/parent"
+        max_characters: null
         type: text
-        validation_regexp:
-          $ref: "#/definitions/Product/example/parent"
+        validation_regexp: null
         validation_rule: none
         value_per_channel: false
         value_per_locale: true
@@ -30768,28 +30075,24 @@ definitions:
           type: integer
           x-warning: Only for `text` attribute type
         max_file_size:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Max file size in MB when the attribute type is `image`
           type: string
           x-warning: Only for `image` attribute type
         max_value:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Maximum value allowed when the attribute type is `number`
           type: string
           x-validation-rules: The maximum value must be greater than the minimum value
           x-warning: Only for `number` attribute type
         min_value:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Minimum value allowed when the attribute type is `number`
           type: string
           x-validation-rules: The minimum value must be lower than the maximum value
           x-warning: Only for `number` attribute type
         reference_entity_code:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Code of the linked reference entity when the attribute type is
             `reference_entity_single_link` or `reference_entity_multiple_links`
           type: string
@@ -30811,8 +30114,7 @@ definitions:
           type: string
           x-immutable: true
         validation_regexp:
-          default:
-            $ref: "#/definitions/Product/example/parent"
+          default: null
           description: Regexp expression used to validate the attribute value when the
             attribute type is `text`
           type: string
@@ -30942,8 +30244,7 @@ definitions:
             type: string
             x-immutable: true
           image:
-            default:
-              $ref: "#/definitions/Product/example/parent"
+            default: null
             description: Code of the reference entity image
             type: string
           labels:
@@ -30964,43 +30265,32 @@ definitions:
       code: kartell
       values:
         collection_overview:
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-            locale:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
         country:
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: italy
-            locale:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
         creation_year:
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: "1949"
-            locale:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
         description:
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: Kartell, the Italian furniture company that sells modern and remarkable
               pieces of furnitures.
             locale: en_US
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
               pièces au design contemporain.
             locale: fr_FR
         image:
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-            locale:
-              $ref: "#/definitions/Product/example/parent"
+            locale: null
         label:
-          - channel:
-              $ref: "#/definitions/Product/example/parent"
+          - channel: null
             data: Kartell
             locale: en_US
     properties:
@@ -31061,43 +30351,32 @@ definitions:
           code: kartell
           values:
             collection_overview:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: 5/1/d/8/51d81dc778ba1501a8f998f3ab5797569f3b9e25_img.png
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             country:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: italy
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             creation_year:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: "1949"
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             description:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: Kartell, the Italian furniture company that sells modern and remarkable
                   pieces of furnitures.
                 locale: en_US
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: Kartell, l'éditeur de meuble italien spécialisé dans la signature de belle
                   pièces au design contemporain.
                 locale: fr_FR
             image:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: 0/c/b/0/0cb0c0e115dedba676f8d1ad8343ec207ab54c7b_image.jpg
-                locale:
-                  $ref: "#/definitions/Product/example/parent"
+                locale: null
             label:
-              - channel:
-                  $ref: "#/definitions/Product/example/parent"
+              - channel: null
                 data: Kartell
                 locale: en_US
         properties:

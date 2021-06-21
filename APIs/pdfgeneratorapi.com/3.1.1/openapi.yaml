@@ -818,7 +818,13 @@ paths:
       description: Deletes the template from workspace
       operationId: deleteTemplate
       parameters:
-        - $ref: "#/components/parameters/templateId"
+        - description: Template unique identifier
+          in: query
+          name: templateId
+          required: true
+          schema:
+            example: 19375
+            type: integer
       responses:
         "200":
           $ref: "#/components/responses/success"
@@ -971,7 +977,13 @@ paths:
       description: Returns template configuration
       operationId: getTemplate
       parameters:
-        - $ref: "#/components/parameters/templateId"
+        - description: Template unique identifier
+          in: query
+          name: templateId
+          required: true
+          schema:
+            example: 19375
+            type: integer
       responses:
         "200":
           $ref: "#/components/responses/templateConfig"
@@ -1120,7 +1132,13 @@ paths:
         replaced and not merged.
       operationId: updateTemplate
       parameters:
-        - $ref: "#/components/parameters/templateId"
+        - description: Template unique identifier
+          in: query
+          name: templateId
+          required: true
+          schema:
+            example: 19375
+            type: integer
       requestBody:
         content:
           application/json:
@@ -1338,7 +1356,13 @@ paths:
         authentication parameters.
       operationId: copyTemplate
       parameters:
-        - $ref: "#/components/parameters/templateId"
+        - description: Template unique identifier
+          in: query
+          name: templateId
+          required: true
+          schema:
+            example: 19375
+            type: integer
         - description: Name for the copied template. If name is not specified then the
             original name is used.
           example: My copied template
@@ -1506,7 +1530,13 @@ paths:
         source to show the editor within your application.
       operationId: getEditorUrl
       parameters:
-        - $ref: "#/components/parameters/templateId"
+        - description: Template unique identifier
+          in: query
+          name: templateId
+          required: true
+          schema:
+            example: 19375
+            type: integer
         - description: Specify the editor UI language. Defaults to organization editor
             language.
           example: en
@@ -1714,7 +1744,13 @@ paths:
         automatically deleted.
       operationId: mergeTemplate
       parameters:
-        - $ref: "#/components/parameters/templateId"
+        - description: Template unique identifier
+          in: query
+          name: templateId
+          required: true
+          schema:
+            example: 19375
+            type: integer
         - $ref: "#/components/parameters/doc_name"
         - $ref: "#/components/parameters/format"
         - $ref: "#/components/parameters/output"
@@ -1904,7 +1940,13 @@ paths:
       description: Deletes the workspace
       operationId: deleteWorkspace
       parameters:
-        - $ref: "#/components/parameters/workspaceId"
+        - description: Workspace identifier
+          example: demo.example@actualreports.com
+          in: query
+          name: workspaceId
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           $ref: "#/components/responses/success"
@@ -2057,7 +2099,13 @@ paths:
       description: Returns workspace information
       operationId: getWorkspace
       parameters:
-        - $ref: "#/components/parameters/workspaceId"
+        - description: Workspace identifier
+          example: demo.example@actualreports.com
+          in: query
+          name: workspaceId
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           $ref: "#/components/responses/workspace"
@@ -2243,7 +2291,7 @@ components:
         type: string
     templateId:
       description: Template unique identifier
-      in: query
+      in: path
       name: templateId
       required: true
       schema:
@@ -2252,7 +2300,7 @@ components:
     workspaceId:
       description: Workspace identifier
       example: demo.example@actualreports.com
-      in: query
+      in: path
       name: workspaceId
       required: true
       schema:

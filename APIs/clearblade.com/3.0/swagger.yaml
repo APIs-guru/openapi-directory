@@ -143,7 +143,7 @@ paths:
           |system_key|string|SINGLE_STRING_WITH_HEX_CHARS_ONLY|"ccafb4cadaccaf9ebba01"|
           |time|timestamp|ISO_DATE_TIME_STRING|"2020-01-29T20:18:18.475214Z"|
           |response_time|bigint|ANY_POSITIVE_INTEGER|4038669|
-          |asset_class|string|adaptors, adaptorFiles, devices, users, multi_dev, services, libraries, servicecaches, timers, triggers, webhooks, portals, plugins, rolesperms, collections, edges, messaging, deployments, edgegroups, system, usersessions, devicesessions|"collections"|
+          |asset_class|string|adapters, adapterFiles, devices, users, multi_dev, services, libraries, servicecaches, timers, triggers, webhooks, portals, plugins, rolesperms, collections, edges, messaging, deployments, edgegroups, system, usersessions, devicesessions|"collections"|
           |action_type|string|Create, Update, Delete, Create Columns, Delete Columns, Developer Password Reset, User Password Reset, MQTT Disconnect, MQTT Connect|"MQTT Connect"|
           |email|string|SINGLE_VALID_EMAIL_STRING|"example@clearblade.com"|
           |asset_id|string|ANY_STRING|"ClearBlade-iPhone"|
@@ -227,7 +227,7 @@ paths:
           |system_key|string|SINGLE_STRING_WITH_HEX_CHARS_ONLY|"ccafb4cadaccaf9ebba01"|
           |time|timestamp|ISO_DATE_TIME_STRING|"2020-01-29T20:18:18.475214Z"|
           |response_time|bigint|ANY_POSITIVE_INTEGER|4038669|
-          |asset_class|string|adaptors, adaptorFiles, devices, users, multi_dev, services, libraries, servicecaches, timers, triggers, webhooks, portals, plugins, rolesperms, collections, edges, messaging, deployments, edgegroups, system, usersessions, devicesessions|"collections"|
+          |asset_class|string|adapters, adapterFiles, devices, users, multi_dev, services, libraries, servicecaches, timers, triggers, webhooks, portals, plugins, rolesperms, collections, edges, messaging, deployments, edgegroups, system, usersessions, devicesessions|"collections"|
           |action_type|string|Create, Update, Delete, Create Columns, Delete Columns, Developer Password Reset, User Password Reset, MQTT Disconnect, MQTT Connect|"MQTT Connect"|
           |email|string|SINGLE_VALID_EMAIL_STRING|"example@clearblade.com"|
           |asset_id|string|ANY_STRING|"ClearBlade-iPhone"|
@@ -3396,372 +3396,6 @@ paths:
       summary: 2FA - Send validation link
       tags:
         - 2FA
-  "/admin/{SystemKey}/adaptors":
-    get:
-      description: Returns all device info that the current user is authorized to see.
-      operationId: GetAdapters
-      parameters:
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: A list of adapters.
-        "400":
-          description: Bad request.
-        "401":
-          description: User cannot access resource
-      summary: ADAPTERS - Get all adapters
-      tags:
-        - Adapter
-    post:
-      description: Adds an adapter to the system
-      operationId: addAdapter
-      parameters:
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication..
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Information to create an adapter.
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/addAdapter"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Dev authenticated.
-        "400":
-          description: Bad Request.
-        "401":
-          description: Unauthorized.
-        "500":
-          description: Server error.
-      summary: ADAPTERS - Add an adapter
-      tags:
-        - Adapter
-  "/admin/{SystemKey}/adaptors/{AdapterName}":
-    delete:
-      description: Deletes the adapter
-      operationId: DeleteAdapter
-      parameters:
-        - description: System Key that identifies the system the device is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Developer Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: No response or 'Unknown Response type' (it's successful)
-        "400":
-          description: Bad request.
-      summary: ADAPTERS - Delete adapter
-      tags:
-        - Adapter
-    put:
-      description: Adds a command to the configuration section of the adapter.
-      operationId: MapAdapterCommand
-      parameters:
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Updated user information.
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/MapAdapterCommand"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Command has been added.
-        "400":
-          description: Bad Request.
-        "401":
-          description: Unauthorized.
-        "500":
-          description: Server error.
-      summary: ADAPTERS - Map Adapter command to execute a file
-      tags:
-        - Adapter
-  "/admin/{SystemKey}/adaptors/{AdapterName}/control":
-    put:
-      description: Commands with files will send data to an edge
-      operationId: AddEdgeCommand
-      parameters:
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Updated user information.
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/edgeCommand"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Edge command is working.
-        "400":
-          description: Bad Request.
-        "401":
-          description: Unauthorized.
-        "500":
-          description: Server error.
-      summary: ADAPTERS - Send command to edge
-      tags:
-        - Adapter
-  "/admin/{SystemKey}/adaptors/{AdapterName}/files":
-    get:
-      description: Lists configuration information for all versions of all adapter files
-      operationId: AdapterConfig
-      parameters:
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Configuration page appears.
-        "400":
-          description: Bad request.
-        "401":
-          description: Unauthorized.
-        "500":
-          description: Internal Server error.
-      summary: Gets list of configuration information for all adapter files
-      tags:
-        - Adapter
-    post:
-      description: Create a new file with content and configuration, or replace an
-        existing file's content & configuration.
-      operationId: updateFileInfo
-      parameters:
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Information about the file that was added.
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/AdapterFileConfig"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Dev authenticated.
-        "400":
-          description: Bad Request.
-        "401":
-          description: Unauthorized.
-        "500":
-          description: Server error.
-      summary: ADAPTERS - Add or replace file content & configuration
-      tags:
-        - Adapter
-  "/admin/{SystemKey}/adaptors/{AdapterName}/files/{fileName}":
-    delete:
-      description: Deletes the adapter file for a command
-      operationId: DeleteFile
-      parameters:
-        - description: System Key that identifies the system the device is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Developer Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: File Name identifies the file in the adapter.
-          in: path
-          name: fileName
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: No response or ‘Unknown Response type’ (it’s successful)
-        "400":
-          description: Bad request.
-        "500":
-          description: Internal Server Error
-      summary: ADAPTERS - Delete adapter files
-      tags:
-        - Adapter
-    get:
-      description: Downloads file from command in adapter to computer.
-      operationId: FileDownload
-      parameters:
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: File Name identifies the file in the adapter.
-          in: path
-          name: fileName
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: File is downloaded unto computer.
-        "400":
-          description: Bad request.
-      summary: ADAPTERS - Download file from adapter
-      tags:
-        - Adapter
-    put:
-      description: Update the content of the existing file
-      operationId: updateExistingFileContent
-      parameters:
-        - description: System Key that identifies the system the adapter is a part of.
-          in: path
-          name: SystemKey
-          required: true
-          type: string
-        - description: Identifies an adapter in the system.
-          in: path
-          name: AdapterName
-          required: true
-          type: string
-        - description: File Name identifies the file in the adapter.
-          in: path
-          name: fileName
-          required: true
-          type: string
-        - description: Dev Token obtained through authentication.
-          in: header
-          name: ClearBlade-DevToken
-          required: true
-          type: string
-        - description: Information about the file that was added.
-          in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              file:
-                description: base64 encoded string as file content to overwrite the existing
-                  content
-                example: IyEvYmluL2Jhc2gKZWNobyAiaGVsbG8gd29ybGQi
-                type: string
-            required:
-              - file
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Returns the config and content of the file updated.
-        "400":
-          description: Bad Request.
-        "401":
-          description: Unauthorized.
-        "500":
-          description: Server error.
-      summary: ADAPTERS - Update Existing File's content
-      tags:
-        - Adapter
   "/admin/{systemKey}/sync/alledges/status":
     get:
       description: Returns sync status for all edges in a system
@@ -6854,6 +6488,372 @@ paths:
       summary: WEBHOOKS - Executing a webhook
       tags:
         - Webhooks
+  "/api/v/4/{SystemKey}/adapters":
+    get:
+      description: Returns all device info that the current user is authorized to see.
+      operationId: GetAdapters
+      parameters:
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: A list of adapters.
+        "400":
+          description: Bad request.
+        "401":
+          description: User cannot access resource
+      summary: ADAPTERS - Get all adapters
+      tags:
+        - Adapter
+    post:
+      description: Adds an adapter to the system
+      operationId: addAdapter
+      parameters:
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication..
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Information to create an adapter.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/addAdapter"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Dev authenticated.
+        "400":
+          description: Bad Request.
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Server error.
+      summary: ADAPTERS - Add an adapter
+      tags:
+        - Adapter
+  "/api/v/4/{SystemKey}/adapters/{AdapterName}":
+    delete:
+      description: Deletes the adapter
+      operationId: DeleteAdapter
+      parameters:
+        - description: System Key that identifies the system the device is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Developer Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: No response or 'Unknown Response type' (it's successful)
+        "400":
+          description: Bad request.
+      summary: ADAPTERS - Delete adapter
+      tags:
+        - Adapter
+    put:
+      description: Adds a command to the configuration section of the adapter.
+      operationId: MapAdapterCommand
+      parameters:
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Updated adapter information.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/MapAdapterCommand"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Command has been added.
+        "400":
+          description: Bad Request.
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Server error.
+      summary: ADAPTERS - Map Adapter command to execute a file
+      tags:
+        - Adapter
+  "/api/v/4/{SystemKey}/adapters/{AdapterName}/control":
+    put:
+      description: Commands with files will send data to an edge
+      operationId: AddEdgeCommand
+      parameters:
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Updated user information.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/edgeCommand"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Edge command is working.
+        "400":
+          description: Bad Request.
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Server error.
+      summary: ADAPTERS - Send command to edge
+      tags:
+        - Adapter
+  "/api/v/4/{SystemKey}/adapters/{AdapterName}/files":
+    get:
+      description: Lists configuration information for all versions of all adapter files
+      operationId: AdapterConfig
+      parameters:
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Configuration page appears.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Internal Server error.
+      summary: Gets list of configuration information for all adapter files
+      tags:
+        - Adapter
+    post:
+      description: Create a new file with content and configuration, or replace an
+        existing file's content & configuration.
+      operationId: updateFileInfo
+      parameters:
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Information about the file that was added.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/AdapterFileConfig"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Dev authenticated.
+        "400":
+          description: Bad Request.
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Server error.
+      summary: ADAPTERS - Add or replace file content & configuration
+      tags:
+        - Adapter
+  "/api/v/4/{SystemKey}/adapters/{AdapterName}/files/{fileName}":
+    delete:
+      description: Deletes the adapter file for a command
+      operationId: DeleteFile
+      parameters:
+        - description: System Key that identifies the system the device is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Developer Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: File Name identifies the file in the adapter.
+          in: path
+          name: fileName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: No response or ‘Unknown Response type’ (it’s successful)
+        "400":
+          description: Bad request.
+        "500":
+          description: Internal Server Error
+      summary: ADAPTERS - Delete adapter files
+      tags:
+        - Adapter
+    get:
+      description: Downloads file from command in adapter to computer.
+      operationId: FileDownload
+      parameters:
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: File Name identifies the file in the adapter.
+          in: path
+          name: fileName
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: File is downloaded unto computer.
+        "400":
+          description: Bad request.
+      summary: ADAPTERS - Download file from adapter
+      tags:
+        - Adapter
+    put:
+      description: Update the content of the existing file
+      operationId: updateExistingFileContent
+      parameters:
+        - description: System Key that identifies the system the adapter is a part of.
+          in: path
+          name: SystemKey
+          required: true
+          type: string
+        - description: Identifies an adapter in the system.
+          in: path
+          name: AdapterName
+          required: true
+          type: string
+        - description: File Name identifies the file in the adapter.
+          in: path
+          name: fileName
+          required: true
+          type: string
+        - description: Dev Token obtained through authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Information about the file that was added.
+          in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              file:
+                description: base64 encoded string as file content to overwrite the existing
+                  content
+                example: IyEvYmluL2Jhc2gKZWNobyAiaGVsbG8gd29ybGQi
+                type: string
+            required:
+              - file
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Returns the config and content of the file updated.
+        "400":
+          description: Bad Request.
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Server error.
+      summary: ADAPTERS - Update Existing File's content
+      tags:
+        - Adapter
   "/api/v/4/{systemKey}/code/failed":
     get:
       description: Returns list of failed code services.
@@ -7356,7 +7356,7 @@ definitions:
     description: Adapter file content and config, to associate this file with a
       command, use MapAdapterCommand endpoint
     properties:
-      adaptor_name:
+      adapter_name:
         description: The adapter the file is a part of.
         type: string
       file:
@@ -7584,6 +7584,18 @@ definitions:
         description: The os this adapter is going to run on.
         example: linux
         type: string
+      run_deploy_on_deploy:
+        description: ""
+        example: true
+        type: boolean
+      run_start_on_deploy:
+        description: ""
+        example: true
+        type: boolean
+      run_stop_on_deploy:
+        description: ""
+        example: true
+        type: boolean
       start_command:
         description: A command or shell script that will be executed to start the
           adapter on a ClearBlade Edge. If a start-up command is not specified ,

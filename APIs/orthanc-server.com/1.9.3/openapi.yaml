@@ -2113,9 +2113,7 @@ paths:
               schema:
                 description: Information about the parent DICOM series
                 example:
-                  ExpectedNumberOfInstances:
-                    $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                      ple/StorageAreaPlugin"
+                  ExpectedNumberOfInstances: null
                   ID: 52f4cb90-29d1d1a2-2ca34edd-4b8851fc-8cb269f2
                   Instances:
                     - ccc7cee2-81566098-5531d590-57b3c148-1787d177
@@ -4759,9 +4757,7 @@ paths:
               schema:
                 description: JSON array containing information about the child DICOM series
                 example:
-                  - ExpectedNumberOfInstances:
-                      $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                        ple/StorageAreaPlugin"
+                  - ExpectedNumberOfInstances: null
                     ID: 52cc572c-3ee31930-c4b6d5e7-16c786dc-97bc209b
                     Instances:
                       - e3dfd688-80e4743a-29c45f90-371ec4a4-04d18ae5
@@ -5065,9 +5061,7 @@ paths:
                 description: Configuration of the peer
                 example:
                   HttpHeaders: {}
-                  Password:
-                    $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                      ple/StorageAreaPlugin"
+                  Password: null
                   Pkcs11: false
                   Url: http://127.0.1.1:5000/
                   Username: alice
@@ -5904,9 +5898,7 @@ paths:
               schema:
                 description: Information about the DICOM series
                 example:
-                  ExpectedNumberOfInstances:
-                    $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                      ple/StorageAreaPlugin"
+                  ExpectedNumberOfInstances: null
                   ID: 37836232-d13a2350-fa1dedc5-962b31aa-010f8e52
                   Instances:
                     - 6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f
@@ -9305,9 +9297,7 @@ paths:
               schema:
                 description: JSON array containing information about the child DICOM series
                 example:
-                  - ExpectedNumberOfInstances:
-                      $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                        ple/StorageAreaPlugin"
+                  - ExpectedNumberOfInstances: null
                     ID: 635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509
                     Instances:
                       - ed8aacd6-5d2cfad4-9e1a2f77-edf1cee5-8f3bdde0
@@ -9319,9 +9309,7 @@ paths:
                     IsStable: true
                     LastUpdate: 20180414T091528
                     "{...}": ...
-                  - ExpectedNumberOfInstances:
-                      $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                        ple/StorageAreaPlugin"
+                  - ExpectedNumberOfInstances: null
                     ID: dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e
                     Instances:
                       - 2cd73574-190bb147-0a86bcca-68c75104-d22f09dd
@@ -9333,9 +9321,7 @@ paths:
                     IsStable: true
                     LastUpdate: 20180414T091530
                     "{...}": ...
-                  - ExpectedNumberOfInstances:
-                      $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                        ple/StorageAreaPlugin"
+                  - ExpectedNumberOfInstances: null
                     ID: 1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0
                     Instances:
                       - 2db53a93-91179cd5-f2080c32-c9b156ec-b8f65fa7
@@ -9347,9 +9333,7 @@ paths:
                     IsStable: true
                     LastUpdate: 20180414T091530
                     "{...}": ...
-                  - ExpectedNumberOfInstances:
-                      $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                        ple/StorageAreaPlugin"
+                  - ExpectedNumberOfInstances: null
                     ID: 4baa97c7-d53d3d82-a5eb9403-17ef5a77-4e0efb55
                     Instances:
                       - 9b41ef96-b4031ffc-b1b7ea5d-8a38d55d-fe804601
@@ -9361,9 +9345,7 @@ paths:
                     IsStable: true
                     LastUpdate: 20180414T091531
                     "{...}": ...
-                  - ExpectedNumberOfInstances:
-                      $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                        ple/StorageAreaPlugin"
+                  - ExpectedNumberOfInstances: null
                     ID: 2ac1316d-3e432022-62eabff2-c59f5475-9b1ac3f8
                     Instances:
                       - 61eeef27-cb5515a3-0860ab44-90125207-a56e6883
@@ -9593,9 +9575,7 @@ paths:
                 example:
                   ApiVersion: 12
                   CheckRevisions: false
-                  DatabaseBackendPlugin:
-                    $ref: "#/paths/~1system/get/responses/200/content/application~1json/schema/exam\
-                      ple/StorageAreaPlugin"
+                  DatabaseBackendPlugin: null
                   DatabaseVersion: 6
                   DicomAet: ORTHANC
                   DicomPort: 4242

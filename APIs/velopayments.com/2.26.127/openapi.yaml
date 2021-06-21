@@ -4325,8 +4325,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/PayeeDeltaResponse"
           description: Details of Payee Changes
-          x-contracts:
-            $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+          x-contracts: null
         "400":
           description: Bad Request
       summary: List Payee Changes
@@ -6949,8 +6948,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/PayeeDeltaResponse_2"
           description: Details of Payee Changes
-          x-contracts:
-            $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+          x-contracts: null
         "400":
           description: Bad Request
       summary: List Payee Changes
@@ -11908,8 +11906,8 @@ components:
       example:
         authorizationHeader: authorizationHeader
         categories:
-          - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
-          - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+          - null
+          - null
         enabled: true
         payorId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         webhookUrl: webhookUrl
@@ -20335,8 +20333,8 @@ components:
       example:
         authorizationHeader: authorizationHeader
         categories:
-          - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
-          - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+          - null
+          - null
         enabled: true
         webhookUrl: webhookUrl
       properties:
@@ -20652,7 +20650,7 @@ components:
         authorizationHeader: authorizationHeader
         categories:
           - null
-          - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+          - null
         enabled: true
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         payorId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -20681,16 +20679,16 @@ components:
         content:
           - authorizationHeader: authorizationHeader
             categories:
-              - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
-              - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+              - null
+              - null
             enabled: true
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             payorId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             webhookUrl: webhookUrl
           - authorizationHeader: authorizationHeader
             categories:
-              - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
-              - $ref: "#/components/schemas/WebhookResponse/example/categories/0"
+              - null
+              - null
             enabled: true
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             payorId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

@@ -51,6 +51,8 @@ paths:
         - $ref: "#/components/parameters/vehicle_type"
         - $ref: "#/components/parameters/car_vins"
         - $ref: "#/components/parameters/car_taxonomy_vins"
+        - $ref: "#/components/parameters/mm"
+        - $ref: "#/components/parameters/ymm"
         - $ref: "#/components/parameters/ymmt"
         - $ref: "#/components/parameters/match"
         - $ref: "#/components/parameters/cylinders"
@@ -1418,6 +1420,8 @@ paths:
         - $ref: "#/components/parameters/vehicle_type"
         - $ref: "#/components/parameters/car_vins"
         - $ref: "#/components/parameters/car_taxonomy_vins"
+        - $ref: "#/components/parameters/mm"
+        - $ref: "#/components/parameters/ymm"
         - $ref: "#/components/parameters/ymmt"
         - $ref: "#/components/parameters/match"
         - $ref: "#/components/parameters/cylinders"
@@ -1690,6 +1694,8 @@ paths:
         - $ref: "#/components/parameters/vehicle_type"
         - $ref: "#/components/parameters/car_vins"
         - $ref: "#/components/parameters/car_taxonomy_vins"
+        - $ref: "#/components/parameters/mm"
+        - $ref: "#/components/parameters/ymm"
         - $ref: "#/components/parameters/ymmt"
         - $ref: "#/components/parameters/match"
         - $ref: "#/components/parameters/cylinders"
@@ -1821,6 +1827,26 @@ paths:
         - $ref: "#/components/parameters/city"
         - $ref: "#/components/parameters/country"
         - $ref: "#/components/parameters/car_type"
+        - description: Flag to indicate whether to include non vin listing terms in
+            results or not. Default is false to avoid un-normalised terms from
+            non vin listings out of results
+          in: query
+          name: include_non_vin_listings
+          required: false
+          schema:
+            default: "false"
+            enum:
+              - "true"
+              - "false"
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: equals
+            targetAlias: is_non_vin_listing_is
+            transformConstraints:
+              - transformer: boolToFlag
+                type: string
         - description: Boolean variable to indicate ignore case of current input
           in: query
           name: ignore_case
@@ -1919,6 +1945,8 @@ paths:
         - $ref: "#/components/parameters/vehicle_type"
         - $ref: "#/components/parameters/car_vins"
         - $ref: "#/components/parameters/car_taxonomy_vins"
+        - $ref: "#/components/parameters/mm"
+        - $ref: "#/components/parameters/ymm"
         - $ref: "#/components/parameters/ymmt"
         - $ref: "#/components/parameters/match"
         - $ref: "#/components/parameters/cylinders"
@@ -4429,6 +4457,23 @@ components:
             defaultMin: 1000
             transformer: parseInt
             type: integer
+    mm:
+      description: Make-Model concatenated string. To help passing the results of
+        auto-complete API on mm field, use this parameter and pass in the
+        selected value as is
+      in: query
+      name: mm
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: equals
+        targetAlias: mm
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
     model:
       description: To filter listings on their model
       in: query
@@ -4851,6 +4896,23 @@ components:
             min: 1800
             transformer: parseInt
             type: integer
+    ymm:
+      description: Year-Make-Model concatenated string. To help passing the results of
+        auto-complete API on ymm field, use this parameter and pass in the
+        selected value as is
+      in: query
+      name: ymm
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: equals
+        targetAlias: ymm
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
     ymmt:
       description: Comma separated list of Year, Make, Model, Trim combinations. Each
         combination needs to have the year,make,model, trim values separated by

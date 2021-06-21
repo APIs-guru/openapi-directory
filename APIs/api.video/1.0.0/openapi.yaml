@@ -1678,9 +1678,7 @@ paths:
                 response:
                   value:
                     createdAt: 2020-12-02T10:13:19+00:00
-                    expiresAt:
-                      $ref: "#/paths/~1upload-tokens/get/responses/200/content/application~1json/exam\
-                        ples/response/value/data/1/expiresAt"
+                    expiresAt: null
                     token: to1tcmSFHeYY5KzyhOqVKMKb
                     ttl: 0
               schema:
@@ -2446,8 +2444,7 @@ paths:
                   value:
                     name: string (required)
                     problems:
-                      - $ref: "#/paths/~1upload-tokens/get/responses/200/content/application~1json/exam\
-                          ples/response/value/data/1/expiresAt"
+                      - null
                     status: integer (required)
                     title: string (required)
                     type: string (required)

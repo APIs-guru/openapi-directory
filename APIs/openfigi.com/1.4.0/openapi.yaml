@@ -8,6 +8,7 @@ servers:
         enum:
           - v1
           - v2
+          - v3
 info:
   contact:
     email: support@openfigi.com
@@ -165,15 +166,9 @@ components:
         ticker:
           nullable: true
           type: string
-        uniqueID:
-          nullable: true
-          type: string
-        uniqueIDFutOpt:
-          nullable: true
-          type: string
       type: object
     MappingJob:
-      description: "For V2: securityType2 is required when idType is BASE_TICKER or
+      description: "For V3: securityType2 is required when idType is BASE_TICKER or
         ID_EXCH_SYMBOL.  expiration is required when securityType2 is Option or
         Warrant.  maturity is required when securityType2 is Pool."
       properties:
@@ -425,7 +420,7 @@ components:
       type: object
     MappingJobResultFigiNotFound:
       properties:
-        error:
+        warning:
           type: string
       type: object
     NullableDateInterval:

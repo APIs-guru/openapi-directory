@@ -4101,6 +4101,45 @@ paths:
         - Connections
         - Banks
         - Providers
+    put:
+      description: ""
+      parameters:
+        - description: ""
+          in: path
+          name: id_connector
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: expand
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                disabled_capabilities:
+                  description: list (json format) of capabilities the sources will be disabled for
+                  type: string
+                unavailable_capabilities:
+                  description: list (json format) of capabilities the sources will be unavailable
+                    for
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectorSource"
+          description: Successful PUT on ConnectorSource resource
+      summary: Edit several connector sources
+      tags:
+        - Connections
+        - Banks
+        - Providers
   "/connectors/{id_connector}/sources/{id_connector_source}/fields":
     get:
       description: ""
@@ -4207,10 +4246,16 @@ paths:
                 disabled:
                   description: to enable or disable connector source
                   type: boolean
+                disabled_capabilities:
+                  description: list (json format) of capabilities this source will be disabled for
+                  type: string
                 unavailable:
                   description: to enable or disable the source (can only be edited by BI
                     employees)
-                  format: date-time
+                  type: boolean
+                unavailable_capabilities:
+                  description: list (json format) of capabilities this source will be unavailable
+                    for
                   type: string
               type: object
       responses:
@@ -8641,8 +8686,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2021-06-14 11:32:00.211010
-        disabled: 2021-06-14 11:32:00.211048
+        deleted: 2021-06-18 19:02:36.832387
+        disabled: 2021-06-18 19:02:36.832457
         display: true
         error: ""
         iban: ""
@@ -8652,10 +8697,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2021-06-14 11:32:00.210945
+        last_update: 2021-06-18 19:02:36.832316
         name: ""
         number: ""
-        opening_date: 2021-06-14
+        opening_date: 2021-06-18
         original_name: ""
         ownership: ""
         usage: ""
@@ -8761,7 +8806,7 @@ components:
         id_account: 0
         id_connection_log: 0
         id_connector: 0
-        timestamp: <function datetime.now at 0x7f6329bc26a8>
+        timestamp: <function datetime.now at 0x7fb6a962ef28>
       properties:
         balance:
           description: Balanced recorded
@@ -8791,7 +8836,7 @@ components:
           description: provider id
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f6329bc26a8>
+          default: <function datetime.now at 0x7fb6a962ef28>
           description: Timestamp of log
           format: date-time
           type: string
@@ -8856,7 +8901,7 @@ components:
         id_investment: 0
         id_transaction: 0
         id_user: 0
-        timestamp: <function datetime.now at 0x7f6329a041e0>
+        timestamp: <function datetime.now at 0x7fb6a944e730>
         type: ""
         value: 0
       properties:
@@ -8875,7 +8920,7 @@ components:
           description: ID of the related user
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f6329a041e0>
+          default: <function datetime.now at 0x7fb6a944e730>
           description: Date of the alerts emission
           format: date-time
           type: string
@@ -8967,7 +9012,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2021-06-14 11:32:00.107658
+        created: 2021-06-18 19:02:36.639528
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -9038,7 +9083,7 @@ components:
         new_value: ""
         origin: ""
         previous_value: ""
-        timestamp: <function datetime.now at 0x7f63298cd8c8>
+        timestamp: <function datetime.now at 0x7fb6a9305158>
         type: ""
       properties:
         id:
@@ -9053,7 +9098,7 @@ components:
         previous_value:
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f63298cd8c8>
+          default: <function datetime.now at 0x7fb6a9305158>
           description: Timestamp of when the configuration key was changed
           format: date-time
           type: string
@@ -9069,20 +9114,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7f6329b8b9d8>
+        created: <function datetime.now at 0x7fb6a9665620>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2021-06-14 11:32:00.087393
-        last_update: 2021-06-14 11:32:00.087230
-        next_try: 2021-06-14 11:32:00.087434
+        last_push: 2021-06-18 19:02:36.607733
+        last_update: 2021-06-18 19:02:36.607481
+        next_try: 2021-06-18 19:02:36.607805
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7f6329b8b9d8>
+          default: <function datetime.now at 0x7fb6a9665620>
           description: Creation date
           format: date-time
           type: string
@@ -9124,11 +9169,11 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2021-06-14 11:32:00.093153
+        next_try: 2021-06-18 19:02:36.615257
         session_folder_id: ""
-        start: 2021-06-14 11:32:00.094326
+        start: 2021-06-18 19:02:36.617314
         statut: 0
-        timestamp: <function datetime.now at 0x7f6329bea2f0>
+        timestamp: <function datetime.now at 0x7fb6a9641d08>
         worker: ""
       properties:
         error:
@@ -9180,7 +9225,7 @@ components:
           description: Status of user (1 = charged user)
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f6329bea2f0>
+          default: <function datetime.now at 0x7fb6a9641d08>
           description: Timestamp of log, when the synchronization has finished
           format: date-time
           type: string
@@ -9194,16 +9239,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2021-06-14 11:32:00.100168
-        created: <function datetime.now at 0x7f6329bad730>
-        disabled: 2021-06-14 11:32:00.100021
-        expire: 2021-06-14 11:32:00.100202
+        access_expire: 2021-06-18 19:02:36.628784
+        created: <function datetime.now at 0x7fb6a9614730>
+        disabled: 2021-06-18 19:02:36.628532
+        expire: 2021-06-18 19:02:36.628852
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2021-06-14 11:32:00.099974
+        last_update: 2021-06-18 19:02:36.628442
         name: ""
-        next_try: 2021-06-14 11:32:00.100327
+        next_try: 2021-06-18 19:02:36.629064
         state: ""
       properties:
         access_expire:
@@ -9211,7 +9256,7 @@ components:
           format: date-time
           type: string
         created:
-          default: <function datetime.now at 0x7f6329bad730>
+          default: <function datetime.now at 0x7fb6a9614730>
           description: Creation date of the connection source
           format: date-time
           type: string
@@ -9367,7 +9412,8 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2021-06-14 11:32:00.088430
+        disabled: 2021-06-18 19:02:36.609088
+        disabled_capabilities: ""
         fallback: ""
         id: 0
         id_connector: 0
@@ -9381,6 +9427,10 @@ components:
         disabled:
           description: This source is not used to synchronize the connection
           format: date-time
+          type: string
+        disabled_capabilities:
+          description: Comma separated list of capabilities disabled on this connector
+            source
           type: string
         fallback:
           description: Name of the source this fallback is for
@@ -9399,6 +9449,9 @@ components:
         priority:
           description: The source priority order for the synchronization
           type: integer
+        stability:
+          description: last known stability
+          type: string
       required:
         - id
         - id_connector
@@ -9447,7 +9500,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2021-06-14 11:32:00.120406
+        datetime: 2021-06-18 19:02:36.655550
         id: ""
         marketcap: 0
         precision: 2
@@ -9490,7 +9543,7 @@ components:
         debug: false
         id: 0
         id_token: 0
-        last_update: <function datetime.now at 0x7f6329a047b8>
+        last_update: <function datetime.now at 0x7fb6a944e488>
         notification_token: ""
         type: ""
         version: ""
@@ -9503,7 +9556,7 @@ components:
         id_token:
           type: integer
         last_update:
-          default: <function datetime.now at 0x7f6329a047b8>
+          default: <function datetime.now at 0x7fb6a944e488>
           format: date-time
           type: string
         notification_token:
@@ -9524,8 +9577,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2021-06-14 11:32:00.130053
-        duedate: 2021-06-14
+        date: 2021-06-18 19:02:36.670783
+        duedate: 2021-06-18
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -9536,11 +9589,11 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2021-06-14 11:32:00.130947
+        last_update: 2021-06-18 19:02:36.672556
         name: ""
         number: ""
         readonly: true
-        timestamp: <function datetime.now at 0x7f63291b6d08>
+        timestamp: <function datetime.now at 0x7fb6a8c3b378>
         total_amount: 0
         untaxed_amount: 0
         vat: 0
@@ -9590,7 +9643,7 @@ components:
           default: true
           type: boolean
         timestamp:
-          default: <function datetime.now at 0x7f63291b6d08>
+          default: <function datetime.now at 0x7fb6a8c3b378>
           format: date-time
           type: string
         total_amount:
@@ -9796,7 +9849,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2021-06-14 11:32:00.185120
+        deleted: 2021-06-18 19:02:36.799694
         description: ""
         diff: 0
         diff_percent: 0
@@ -9804,7 +9857,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2021-06-14 11:32:00.185083
+        last_update: 2021-06-18 19:02:36.799624
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9812,13 +9865,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2021-06-14
+        prev_vdate: 2021-06-18
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2021-06-14
+        vdate: 2021-06-18
       properties:
         code:
           description: Investment code
@@ -9929,7 +9982,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2021-06-14
+        vdate: 2021-06-18
       properties:
         id:
           description: ID of the value
@@ -9986,13 +10039,13 @@ components:
     LockedUser:
       example:
         id_user: 0
-        timestamp: <function datetime.now at 0x7f6329921730>
+        timestamp: <function datetime.now at 0x7fb6a93d7c80>
         worker: ""
       properties:
         id_user:
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f6329921730>
+          default: <function datetime.now at 0x7fb6a93d7c80>
           format: date-time
           type: string
         worker:
@@ -10005,14 +10058,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2021-06-14 11:32:00.180401
-        date: 2021-06-14
-        deleted: 2021-06-14 11:32:00.180441
-        execution_date: 2021-06-14
+        created: 2021-06-18 19:02:36.792927
+        date: 2021-06-18
+        deleted: 2021-06-18 19:02:36.793090
+        execution_date: 2021-06-18
         id: 0
         id_account: 0
         label: ""
-        last_update: 2021-06-14 11:32:00.180311
+        last_update: 2021-06-18 19:02:36.792789
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -10020,7 +10073,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2021-06-14
+        validity_date: 2021-06-18
         webid: ""
       properties:
         amount:
@@ -10123,7 +10176,7 @@ components:
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2021-06-14 11:32:00.077112
+        register_date: 2021-06-18 19:02:36.592194
         state: ""
         validate_uri: ""
       properties:
@@ -10153,7 +10206,7 @@ components:
       type: object
     PaymentAccount:
       example:
-        disabled_date: 2021-06-14 11:32:00.070261
+        disabled_date: 2021-06-18 19:02:36.582769
         id: 0
         id_account: 0
         identification: ""
@@ -10193,7 +10246,7 @@ components:
         id_file: 0
         id_payment: 0
         state: ""
-        timestamp: <function datetime.now at 0x7f6328a52d08>
+        timestamp: <function datetime.now at 0x7fb6a87246a8>
       properties:
         error_code:
           description: In case of error, the error code
@@ -10213,7 +10266,7 @@ components:
           description: State of the payment
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f6328a52d08>
+          default: <function datetime.now at 0x7fb6a87246a8>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -10223,14 +10276,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2021-06-14
+        availability_date: 2021-06-18
         condition: inconnu
-        deleted: 2021-06-14 11:32:00.150629
+        deleted: 2021-06-18 19:02:36.718139
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2021-06-14 11:32:00.150589
+        last_update: 2021-06-18 19:02:36.718007
         quantity: 0
         value: 0
       properties:
@@ -10344,7 +10397,7 @@ components:
              - the list of PSD2 API to create (needed when a new connector is added)
              - the list of broken connectors
       example:
-        created_at: 2021-06-14 11:32:00.353207
+        created_at: 2021-06-18 19:02:37.134199
         error_message: ""
         id: 0
         id_psd2registration: 0
@@ -10376,18 +10429,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2021-06-14 11:32:00.186101
-        enabled_at: 2021-06-14 11:32:00.186169
+        deleted: 2021-06-18 19:02:36.801212
+        enabled_at: 2021-06-18 19:02:36.801347
         error: ""
-        expire: 2021-06-14 11:32:00.186134
+        expire: 2021-06-18 19:02:36.801281
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2021-06-14 11:32:00.186032
+        last_update: 2021-06-18 19:02:36.801073
         state: ""
-        time_scraped: 2021-06-14 11:32:00.186067
+        time_scraped: 2021-06-18 19:02:36.801142
         webid: ""
       properties:
         add_verified:
@@ -10463,7 +10516,7 @@ components:
         id_recipient: 0
         request_data: ""
         step: ""
-        timestamp: <function datetime.now at 0x7f6329b6b488>
+        timestamp: <function datetime.now at 0x7fb6a95bb9d8>
       properties:
         error:
           description: Error message during recipient addition, if any
@@ -10489,7 +10542,7 @@ components:
             addition validated, creation, storing_files)
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f6329b6b488>
+          default: <function datetime.now at 0x7fb6a95bb9d8>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -10502,7 +10555,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2021-06-14 11:32:00.068225
+        last_update: 2021-06-18 19:02:36.580086
         name: ""
       properties:
         code:
@@ -10527,19 +10580,19 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2021-06-14 11:32:00.205447
-        disabled: 2021-06-14 11:32:00.205486
+        deleted: 2021-06-18 19:02:36.824480
+        disabled: 2021-06-18 19:02:36.824557
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2021-06-14 11:32:00.205397
+        last_update: 2021-06-18 19:02:36.824408
         number: ""
-        renewdate: 2021-06-14
+        renewdate: 2021-06-18
         subscriber: ""
-        validity: 2021-06-14
+        validity: 2021-06-18
       properties:
         deleted:
           description: This subscription is not found on the website anymore
@@ -10600,7 +10653,7 @@ components:
         id_source: 0
         id_subscription: 0
         nb_docs: 0
-        timestamp: <function datetime.now at 0x7f632919b7b8>
+        timestamp: <function datetime.now at 0x7fb6a92f1d08>
       properties:
         error:
           description: If fail, contains the error code
@@ -10624,7 +10677,7 @@ components:
           description: Number of docs on the subscription
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f632919b7b8>
+          default: <function datetime.now at 0x7fb6a92f1d08>
           description: Timestamp of log
           format: date-time
           type: string
@@ -10635,8 +10688,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2021-06-14 11:32:00.243623
-        deleted: 2021-06-14 11:32:00.243674
+        created: 2021-06-18 19:02:36.882036
+        deleted: 2021-06-18 19:02:36.882112
         id: 0
         version: ""
       properties:
@@ -10658,8 +10711,8 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2021-06-14
-        bdate: 2021-06-14
+        application_date: 2021-06-18
+        bdate: 2021-06-18
         card: ""
         coming: false
         comment: ""
@@ -10667,23 +10720,23 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2021-06-14
-        date_scraped: 2021-06-14 11:32:00.146769
-        deleted: 2021-06-14 11:32:00.148025
+        date: 2021-06-18
+        date_scraped: 2021-06-18 19:02:36.708743
+        deleted: 2021-06-18 19:02:36.711514
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2021-06-14 11:32:00.147979
+        last_update: 2021-06-18 19:02:36.711386
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2021-06-14
+        rdate: 2021-06-18
         state: new
         value: 0
-        vdate: 2021-06-14
+        vdate: 2021-06-18
         webid: ""
         wording: ""
       properties:
@@ -10847,7 +10900,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2021-06-14
+        next_date: 2021-06-18
         wording: ""
       properties:
         created_by:
@@ -10889,7 +10942,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2021-06-14
+        exec_date: 2021-06-18
         fees: 0
         id: 0
         id_account: 0
@@ -10898,7 +10951,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2021-06-14 11:32:00.152100
+        register_date: 2021-06-18 19:02:36.721802
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10993,7 +11046,7 @@ components:
         id_transfer: 0
         request_data: ""
         state: ""
-        timestamp: <function datetime.now at 0x7f6329b6b0d0>
+        timestamp: <function datetime.now at 0x7fb6a95bb730>
       properties:
         error:
           description: Error message during transfer, if any
@@ -11019,7 +11072,7 @@ components:
             done, canceled, error, bug)
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f6329b6b0d0>
+          default: <function datetime.now at 0x7fb6a95bb730>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -11031,7 +11084,7 @@ components:
       example:
         id: 0
         platform: ""
-        signin: <function datetime.now at 0x7f63298cdb70>
+        signin: <function datetime.now at 0x7fb6a93a52f0>
       properties:
         id:
           type: integer
@@ -11049,7 +11102,7 @@ components:
             - refresh_token
           type: string
         signin:
-          default: <function datetime.now at 0x7f63298cdb70>
+          default: <function datetime.now at 0x7fb6a93a52f0>
           format: date-time
           type: string
       required:
@@ -11129,14 +11182,14 @@ components:
       type: object
     Webhook:
       example:
-        created: 2021-06-14 11:32:00.344962
-        deleted: 2021-06-14 11:32:00.345110
+        created: 2021-06-18 19:02:37.114005
+        deleted: 2021-06-18 19:02:37.114281
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2021-06-14 11:32:00.345033
+        updated: 2021-06-18 19:02:37.114151
         url: ""
       properties:
         add_to_data:
@@ -11182,14 +11235,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2021-06-14 11:32:00.347929
+        created: 2021-06-18 19:02:37.119896
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2021-06-14 11:32:00.347987
+        success: 2021-06-18 19:02:37.120055
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -11231,10 +11284,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2021-06-14 11:32:00.348980
+        next_try: 2021-06-18 19:02:37.122474
         response_code: 0
-        response_date: 2021-06-14 11:32:00.348500
-        timestamp: 2021-06-14 11:32:00.348461
+        response_date: 2021-06-18 19:02:37.121613
+        timestamp: 2021-06-18 19:02:37.121462
       properties:
         id:
           description: ID of the log

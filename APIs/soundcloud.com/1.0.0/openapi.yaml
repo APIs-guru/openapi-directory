@@ -1225,10 +1225,8 @@ components:
         avatar_url: https://i1.sndcdn.com/avatars.jpg
         city: City
         country: Country
-        description:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        discogs_name:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        description: null
+        discogs_name: null
         first_name: First_name
         followers_count: 0
         followings_count: 0
@@ -1238,8 +1236,7 @@ components:
         last_modified: 2020/01/03 12:08:25 +0000
         last_name: Last_name
         locale: en
-        myspace_name:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        myspace_name: null
         permalink: permalink
         permalink_url: https://soundcloud.com/permalink
         plan: Free
@@ -1261,10 +1258,8 @@ components:
         upload_seconds_left: 10800
         uri: https://api.soundcloud.com/users/1234
         username: some.user
-        website:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        website_title:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        website: null
+        website_title: null
     Connection:
       value:
         created_at: 1995/07/24 08:55:02 +0000
@@ -1340,40 +1335,29 @@ components:
       value:
         artwork_url: ""
         created_at: 2020/07/16 16:09:54 +0000
-        description:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        description: null
         downloadable: true
         duration: 11000
-        ean:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        ean: null
         embeddable_by: all
         genre: ""
         id: 12345
         kind: playlist
-        label:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        label_id:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        label_name:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        label: null
+        label_id: null
+        label_name: null
         last_modified: 2020/09/08 09:13:00 +0000
         license: all-rights-reserved
         likes_count: 0
         permalink: permalink
         permalink_url: https://soundcloud.com/userPermalink/sets/permalink
         playlist_type: ""
-        purchase_title:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        purchase_url:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        release:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        release_day:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        release_month:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        release_year:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        purchase_title: null
+        purchase_url: null
+        release: null
+        release_day: null
+        release_month: null
+        release_year: null
         sharing: public
         streamable: true
         tag_list: ""
@@ -1425,15 +1409,12 @@ components:
       value:
         access: playable
         artwork_url: https://i1.sndcdn.com/artworks-large.jpg
-        available_country_codes:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        bpm:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        available_country_codes: null
+        bpm: null
         comment_count: 4
         commentable: true
         created_at: 2019/01/15 15:40:49 +0000
-        description:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        description: null
         download_count: 0
         download_url: https://api.soundcloud.com/tracks/1234/download
         downloadable: false
@@ -1442,27 +1423,21 @@ components:
         favoritings_count: 271
         genre: Rock
         id: 1234
-        isrc:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        key_signature:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        isrc: null
+        key_signature: null
         kind: track
         label_name: some label
         license: all-rights-reserved
         permalink_url: https://soundcloud.com/userPermalink/trackPermalink
         playback_count: 8027
-        purchase_title:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        purchase_url:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        release:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        purchase_title: null
+        purchase_url: null
+        release: null
         release_day: 22
         release_month: 8
         release_year: 2019
         reposts_count: 18
-        secret_uri:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        secret_uri: null
         sharing: public
         stream_url: https://api.soundcloud.com/tracks/1234/stream
         streamable: true
@@ -1476,29 +1451,23 @@ components:
         waveform_url: https://wave.sndcdn.com/someString.png
     TrackDataRequest:
       value:
-        "track[artwork_data]":
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        "track[artwork_data]": null
         "track[asset_data]": <binary string>
         "track[commentable]": true
         "track[description]": Public-api test sample upload
         "track[downloadable]": false
         "track[embeddable_by]": me
         "track[genre]": Pop
-        "track[isrc]":
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        "track[label_name]":
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        "track[isrc]": null
+        "track[label_name]": null
         "track[license]": no-rights-reserved
         "track[permalink]": test-drum-sample
-        "track[purchase_url]":
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        "track[release]":
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        "track[purchase_url]": null
+        "track[release]": null
         "track[release_date]": 2021-02-18T00:00:00.000Z
         "track[sharing]": private
         "track[streamable]": true
-        "track[tag_list]":
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        "track[tag_list]": null
         "track[title]": Test drum sample
     TrackMetadataRequest:
       value:
@@ -1528,10 +1497,8 @@ components:
         city: City
         country: Country
         created_at: 2018/01/01 12:08:25 +0000
-        description:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        discogs_name:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        description: null
+        discogs_name: null
         first_name: First_name
         followers_count: 0
         followings_count: 0
@@ -1540,8 +1507,7 @@ components:
         kind: user
         last_modified: 2020/01/03 12:08:25 +0000
         last_name: Last_name
-        myspace_name:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        myspace_name: null
         permalink: permalink
         permalink_url: https://soundcloud.com/permalink
         plan: Free
@@ -1556,10 +1522,8 @@ components:
         upload_seconds_left: 10800
         uri: https://api.soundcloud.com/users/1234
         username: some.user
-        website:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
-        website_title:
-          $ref: "#/components/schemas/Track/properties/access/enum/3"
+        website: null
+        website_title: null
     UserOf:
       value:
         avatar_url: https://i1.sndcdn.com/avatars-large.jpg

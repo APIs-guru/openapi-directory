@@ -8060,7 +8060,6 @@ paths:
             ```
           direction: response
           format: json
-          request: {}
           response:
             endPosition: "1"
             envelopes:
@@ -9236,9 +9235,6 @@ paths:
             ```
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response:
             allowMarkup: "false"
             autoNavigation: "true"
@@ -9286,9 +9282,6 @@ paths:
             ```
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response:
             endPosition: "1"
             envelopes:
@@ -11260,9 +11253,6 @@ paths:
             ```
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response:
             envelopeDocuments:
               - availableDocumentTypes:
@@ -11531,9 +11521,6 @@ paths:
 
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response: PDF File
           style: custom
           title: Get a Single Document as a PDF File
@@ -11559,9 +11546,6 @@ paths:
 
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response: PDF File
           style: custom
           title: Get All Documents as a Single PDF File
@@ -11586,9 +11570,6 @@ paths:
             ```
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response:
             envelopeDocuments:
               - availableDocumentTypes:
@@ -13670,9 +13651,6 @@ paths:
 
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response:
             agents: []
             carbonCopies:
@@ -13716,9 +13694,6 @@ paths:
             * Authentication via Facebook. The Facebook email address is recorded in the Certificate of Completion
           direction: response
           format: json
-          request:
-            $ref: "#/paths/~1v2.1~1accounts~1{accountId}~1envelopes/get/x-ds-examples/0/req\
-              uest"
           response:
             agents: []
             carbonCopies: []
@@ -65292,7 +65267,6 @@ components:
       type: object
       x-ds-definition-name: oauthAccess
       x-ms-summary: ""
-    offlineAttributes: {}
     page:
       description: Description of a page of a document.
       properties:
@@ -70345,7 +70319,6 @@ components:
       type: object
       x-ds-definition-name: sharedItem
       x-ms-summary: Information about the shared item.
-    signHashDocument: {}
     signHere:
       description: |
         A tab that allows the recipient to sign a document. May be

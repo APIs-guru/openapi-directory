@@ -7,13 +7,13 @@ info:
     email: develop@digitalnz.org
     name: DigitalNZ
   description: >
-    OpenAPI specification of DigitalNZ's Record API.
+    OpenAPI specification of DigitalNZ's Record API.  
 
-    For more information about the API see [digitalnz.org/developers](https://digitalnz.org/developers).
+    For more information about the API see [digitalnz.org/developers](https://digitalnz.org/developers).  
 
-    To learn more about the metadata/fields used in the API see the [Metadata Dictionary](https://docs.google.com/document/pub?id=1Z3I_ckQWjnQQ4SzpORbClcIXUheO-Jd4jt-oZFuMcoQ).
+    To learn more about the metadata/fields used in the API see the [Metadata Dictionary](https://docs.google.com/document/pub?id=1Z3I_ckQWjnQQ4SzpORbClcIXUheO-Jd4jt-oZFuMcoQ).  
 
-    To get a sense of what content is available via the API take a look at the search feature on the [DigitalNZ website](https://digitalnz.org/records?text=all%20sorts&tab=Images).
+    To get a sense of what content is available via the API take a look at the search feature on the [DigitalNZ website](https://digitalnz.org/records?text=all%20sorts&tab=Images).  
 
     The [terms of use](https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use) specify how developers can use the DigitalNZ API.
   title: DigitalNZ API
@@ -41,13 +41,13 @@ paths:
             This field enables queries based on one or more search terms and
             provides the functionality of the main search box on
             [digitalnz.org](https://digitalnz.org). Search terms can be combined
-            with boolean operators (AND, OR).
+            with boolean operators (AND, OR).  
 
-            A minus sign excludes certain terms, eg. "-horse".
+            A minus sign excludes certain terms, eg. "-horse".  
 
-            An asterisk (\*) acts as a wildcard, eg. "ted*".
+            An asterisk (\*) acts as a wildcard, eg. "ted*".  
 
-            Multiple search terms are combined with an AND by default.
+            Multiple search terms are combined with an AND by default.  
 
             Examples: `"moustache"`, `"Wanganui OR Whanganui"`,  `"-paperspast"`, `"ted*"`
           in: query
@@ -80,22 +80,22 @@ paths:
               - Sets
             type: string
         - description: >
-            Allows filtering for records from a particular Content Partner.
+            Allows filtering for records from a particular Content Partner.  
 
             Examples: `"Ministry for Culture and Heritage"` `"Trove"` `"V.C. Browne & Son"`
-
-            *Tip* - To see a list of Content Partners available for filtering use the *facets* parameter, eg. *"&facets=content_partner"*.
+              
+            *Tip* - To see a list of Content Partners available for filtering use the *facets* parameter, eg. *"&facets=content_partner"*.  
           in: query
           name: and[content_partner][]
           schema:
             type: string
         - description: >
             Allows filtering for records from a particular
-            *primary_collection*.
+            *primary_collection*.  
 
-            Examples: `"Puke Ariki"` `"NZHistory"` `"TAPUHI"`
-
-            *Tip* - To see a list of Primary_Collections available for filtering use the *facets* parameter, eg. *"&facets=primary_collection"*.
+            Examples: `"Puke Ariki"` `"NZHistory"` `"TAPUHI"`  
+              
+            *Tip* - To see a list of Primary_Collections available for filtering use the *facets* parameter, eg. *"&facets=primary_collection"*.   
           in: query
           name: and[primary_collection][]
           schema:
@@ -103,11 +103,11 @@ paths:
         - description: >
             Allows filtering for records from a particular Collection.
             Collections can be thought of as sub-collections or groupings under
-            Primary_Collections.
+            Primary_Collections.  
 
             Examples: `"Music 101"` `"Mollusks"` `"Wairarapa Daily Times"`
-
-            *Tip* - To see a list of Collections available for filtering use the *facets* parameter, eg. *"&facets=collection"*.
+              
+            *Tip* - To see a list of Collections available for filtering use the *facets* parameter, eg. *"&facets=collection"*. 
           in: query
           name: and[collection][]
           schema:
@@ -142,7 +142,7 @@ paths:
             type: string
         - description: >
             This field can be used for text-based location search. For a more
-            advanced coordinate-based search, see the "geo_bbox" field below.
+            advanced coordinate-based search, see the "geo_bbox" field below.  
 
             Examples: `"Scott Base"` `"Wainuiomata"` `"castle*"`
           in: query
@@ -169,7 +169,7 @@ paths:
             are plenty with no date information at all. So, if you query for
             records from a specific date you may get some matching results, but
             might also be missing other potentially relevant records that don't
-            have date metadata available.
+            have date metadata available.  
 
             Example: `"1970-12-25"`
 
@@ -183,7 +183,7 @@ paths:
             This field allows searching specifically by year. The metadata is
             derived from the same date information that is searchable and
             returned in the date field. It is possible to search across a range
-            using syntax the following syntax `[{start year} TO {end year}]`.
+            using syntax the following syntax `[{start year} TO {end year}]`.  
 
             Example: `"1893"` `"[1982 TO 1987]"`
           in: query
@@ -193,7 +193,7 @@ paths:
         - description: >
             This field allows searching specifically by decade. The metadata is
             derived from the same date information that is searchable and
-            returned in the date field.
+            returned in the date field.  
 
             Example: `"1850"` `"1990"`
           in: query
@@ -203,7 +203,7 @@ paths:
         - description: >
             This field allows searching specifically by century. The metadata
             is derived from the same date information that is searchable and
-            returned in the date field.
+            returned in the date field.  
 
             Example: `"1900"` `"2000"`
           in: query
@@ -222,21 +222,21 @@ paths:
         - description: >
             All of the above `and[___][]` filters in this document are also
             able to be used with the `and[or][___][]` syntax to allow
-            multi-select *OR* queries within one field.
+            multi-select *OR* queries within one field.  
 
-            Basic example:
+            Basic example: 
 
-            - To filter your results to only those with a category or Audio or Videos:
+            - To filter your results to only those with a category or Audio or Videos:   
 
-            `&and[or][category][]=Audio&and[or][category][]=Videos`
+            `&and[or][category][]=Audio&and[or][category][]=Videos` 
+              
+            In order to combine *OR* filters across multiple fields the syntax needs to be nested as follows  
 
-            In order to combine *OR* filters across multiple fields the syntax needs to be nested as follows
-
-            Nested examples:
-             - To search for *(year is 2014 OR 2015) AND (primary_collection is TAPUHI OR Public Address)*
-             `&and[or][year][]=2015&and[or][year][]=2014&and[and][or][primary_collection][]=TAPUHI&and[and][or][primary_collection][]=Public+Address`
-             - To search for *(category is Images OR Video) AND (subject is cat OR cats)*
-             `&and[or][category][]=Images&and[or][category][]=Videos&and[and][or][subject][]=cat&and[and][or][subject][]=cats`
+            Nested examples: 
+             - To search for *(year is 2014 OR 2015) AND (primary_collection is TAPUHI OR Public Address)*  
+             `&and[or][year][]=2015&and[or][year][]=2014&and[and][or][primary_collection][]=TAPUHI&and[and][or][primary_collection][]=Public+Address`  
+             - To search for *(category is Images OR Video) AND (subject is cat OR cats)*  
+             `&and[or][category][]=Images&and[or][category][]=Videos&and[and][or][subject][]=cat&and[and][or][subject][]=cats`  
           in: query
           name: and[or][{filter_field}][]
           schema:
@@ -255,7 +255,7 @@ paths:
             type: boolean
         - description: >
             Filters results to only those records that have an image available
-            in the *large_thumbnail_url* field.
+            in the *large_thumbnail_url* field.  
 
             **Note:** There is an issue with this field where, in order to get results, it needs to be specified with "Y" or not specified at all.
           in: query
@@ -267,7 +267,7 @@ paths:
         - description: >
             Filters results to only those records that have latitude and
             longitude coordinates present in the metadata.
-
+              
             *Tip* - To see the location metadata you'll need to specifically request that field using the *fields* parameter - *"&fields=verbose,locations"*  as it is not part of the default, or verbose field sets.
           in: query
           name: and[has_lat_lng]
@@ -290,10 +290,9 @@ paths:
             Used to control the order of the results in conjunction with the
             *direction* field.
               - *syndication_date* - is the creation date of the record within DigitalNZ, ie. when DigitalNZ first harvested the record.
-              - *date* - is the date metadata (if present) associated with the record.
+              - *date* - is the date metadata (if present) associated with the record.  
 
-
-
+                
             To sort the search results with newest records at the top use: "&sort=syndication_date&direction=desc"
           in: query
           name: sort
@@ -384,7 +383,7 @@ paths:
             facet counts (eg. Images, Audio, Video, etc). Setting this to 'true'
             will not effect the search results returned but will ignore all
             search filters (eg. "and[category]=Audio") when calculating the
-            facet counts.
+            facet counts. 
           in: query
           name: exclude_filters_from_facets
           schema:
@@ -406,7 +405,7 @@ paths:
                       returned as separate elements. Each of those will contain
                       a sorted list of elements that are made up of a value (eg
                       collection name, subject, date) and the number of results
-                      associated with that value.
+                      associated with that value.  
                     example:
                       display_collection:
                         Canterbury Museum: 39109
@@ -467,7 +466,7 @@ paths:
             type: integer
         - description: >
             Note - There is a small difference with some field names in the
-            response between JSON and XML.
+            response between JSON and XML.  
 
             When a field name has more than one word, JSON format will separate the words with an underscore, eg. "content_partner", whereas XML uses a hyphenated naming convention, eg. "content-partner".
           in: query
@@ -528,7 +527,7 @@ components:
     format:
       description: >
         Note - There is a small difference with some field names in the
-        response between JSON and XML.
+        response between JSON and XML.  
 
         When a field name has more than one word, JSON format will separate the words with an underscore, eg. "content_partner", whereas XML uses a hyphenated naming convention, eg. "content-partner".
       in: path
@@ -573,7 +572,7 @@ components:
         DigitalNZ. For instance there are custom built fields that are only
         relevant, and only found on specific collections. The schema below
         focuses on the most common / well populated fields and does not show
-        every possible field available for a single record.
+        every possible field available for a single record. 
       properties:
         category:
           description: There will always be at least 1 human-readable category label in
@@ -603,7 +602,7 @@ components:
           description: >
             In addition to the top level *"display_collection"* above, this
             field can also contain sub-collections or groupings within the main
-            collection.
+            collection. 
           items:
             type: string
           type: array
@@ -695,7 +694,7 @@ components:
         landing_url:
           description: >
             This field will always contain a URL of the item on the content
-            partner's website.
+            partner's website.  
 
             *Note:* Please use the source_url when providing HTML links.
           type: string

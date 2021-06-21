@@ -13086,6 +13086,7 @@ paths:
                   maxLength: 5000
                   type: string
                 tax_id_collection:
+                  description: Controls tax ID collection settings for the session.
                   properties:
                     enabled:
                       type: boolean
@@ -15092,6 +15093,10 @@ paths:
                           - br_cnpj
                           - br_cpf
                           - ca_bn
+                          - ca_gst_hst
+                          - ca_pst_bc
+                          - ca_pst_mb
+                          - ca_pst_sk
                           - ca_qst
                           - ch_vat
                           - cl_tin
@@ -18057,7 +18062,7 @@ paths:
                     - send_invoice
                   type: string
                 coupon:
-                  description: The code of the coupon to apply to this subscription. A coupon
+                  description: The ID of the coupon to apply to this subscription. A coupon
                     applied to a subscription will only affect invoices created
                     for that particular subscription.
                   maxLength: 5000
@@ -18632,7 +18637,7 @@ paths:
                     - send_invoice
                   type: string
                 coupon:
-                  description: The code of the coupon to apply to this subscription. A coupon
+                  description: The ID of the coupon to apply to this subscription. A coupon
                     applied to a subscription will only affect invoices created
                     for that particular subscription.
                   maxLength: 5000
@@ -19174,17 +19179,23 @@ paths:
                   type: array
                 type:
                   description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`,
-                    `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`,
-                    `gb_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `jp_rn`,
-                    `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`,
-                    `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`,
-                    `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`
+                    `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`,
+                    `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`,
+                    `eu_vat`, `gb_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`,
+                    `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`,
+                    `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`,
+                    `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or
+                    `za_vat`
                   enum:
                     - ae_trn
                     - au_abn
                     - br_cnpj
                     - br_cpf
                     - ca_bn
+                    - ca_gst_hst
+                    - ca_pst_bc
+                    - ca_pst_mb
+                    - ca_pst_sk
                     - ca_qst
                     - ch_vat
                     - cl_tin
@@ -22688,6 +22699,10 @@ paths:
                         - br_cnpj
                         - br_cpf
                         - ca_bn
+                        - ca_gst_hst
+                        - ca_pst_bc
+                        - ca_pst_mb
+                        - ca_pst_sk
                         - ca_qst
                         - ch_vat
                         - cl_tin
@@ -23295,6 +23310,10 @@ paths:
                         - br_cnpj
                         - br_cpf
                         - ca_bn
+                        - ca_gst_hst
+                        - ca_pst_bc
+                        - ca_pst_mb
+                        - ca_pst_sk
                         - ca_qst
                         - ch_vat
                         - cl_tin
@@ -27721,7 +27740,7 @@ paths:
                   maxLength: 5000
                   type: string
                 currency:
-                  description: The currency for the card. This currently must be `usd`.
+                  description: The currency for the card.
                   type: string
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -45688,7 +45707,7 @@ paths:
                     - send_invoice
                   type: string
                 coupon:
-                  description: The code of the coupon to apply to this subscription. A coupon
+                  description: The ID of the coupon to apply to this subscription. A coupon
                     applied to a subscription will only affect invoices created
                     for that particular subscription.
                   maxLength: 5000
@@ -46241,7 +46260,7 @@ paths:
                     - send_invoice
                   type: string
                 coupon:
-                  description: The code of the coupon to apply to this subscription. A coupon
+                  description: The ID of the coupon to apply to this subscription. A coupon
                     applied to a subscription will only affect invoices created
                     for that particular subscription.
                   maxLength: 5000
@@ -53807,7 +53826,13 @@ components:
             - $ref: "#/components/schemas/payment_pages_checkout_session_total_details"
           description: Tax and discount details for the computed total amount.
           nullable: true
+        url:
+          description: The URL to the Checkout Session.
+          maxLength: 5000
+          nullable: true
+          type: string
       required:
+        - automatic_tax
         - cancel_url
         - id
         - livemode
@@ -58118,6 +58143,7 @@ components:
         - amount_remaining
         - attempt_count
         - attempted
+        - automatic_tax
         - created
         - currency
         - default_tax_rates
@@ -58605,14 +58631,19 @@ components:
             `gb_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
             `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`,
             `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`,
-            `us_ein`, `kr_brn`, `ca_qst`, `my_sst`, `sg_gst`, `ae_trn`,
-            `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
+            `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`,
+            `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`,
+            `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
           enum:
             - ae_trn
             - au_abn
             - br_cnpj
             - br_cpf
             - ca_bn
+            - ca_gst_hst
+            - ca_pst_bc
+            - ca_pst_mb
+            - ca_pst_sk
             - ca_qst
             - ch_vat
             - cl_tin
@@ -66588,14 +66619,19 @@ components:
             `gb_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
             `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`,
             `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`,
-            `us_ein`, `kr_brn`, `ca_qst`, `my_sst`, `sg_gst`, `ae_trn`,
-            `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
+            `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`,
+            `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`,
+            `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
           enum:
             - ae_trn
             - au_abn
             - br_cnpj
             - br_cpf
             - ca_bn
+            - ca_gst_hst
+            - ca_pst_bc
+            - ca_pst_mb
+            - ca_pst_sk
             - ca_qst
             - ch_vat
             - cl_tin
@@ -72035,6 +72071,7 @@ components:
           nullable: true
           type: integer
       required:
+        - automatic_tax
         - billing_cycle_anchor
         - cancel_at_period_end
         - created
@@ -72859,18 +72896,23 @@ components:
           type: string
         type:
           description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`,
-            `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `gb_vat`,
-            `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`,
-            `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`,
-            `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`,
-            `tw_vat`, `us_ein`, or `za_vat`. Note that some legacy tax IDs have
-            type `unknown`
+            `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`,
+            `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `gb_vat`, `hk_br`,
+            `id_npwp`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`,
+            `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`,
+            `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`,
+            `us_ein`, or `za_vat`. Note that some legacy tax IDs have type
+            `unknown`
           enum:
             - ae_trn
             - au_abn
             - br_cnpj
             - br_cpf
             - ca_bn
+            - ca_gst_hst
+            - ca_pst_bc
+            - ca_pst_mb
+            - ca_pst_sk
             - ca_qst
             - ch_vat
             - cl_tin

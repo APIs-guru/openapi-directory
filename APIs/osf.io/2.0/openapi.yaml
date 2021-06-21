@@ -992,17 +992,12 @@ paths:
                         links: {}
                         type: addon
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      meta:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      meta: null
+                      next: null
                       per_page: 1000
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       total: 10
           description: OK
       summary: List all addons
@@ -1098,22 +1093,19 @@ paths:
                       - attributes:
                           date_parsed: 2015-02-16T04:16:25.732000
                           short_title: AMR
-                          summary:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          summary: null
                           title: Academy of Management Review
                         id: academy-of-management-review
                         links: {}
                         type: citation-styles
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/citations/styles/?page=115
                       meta:
                         per_page: 10
                         total: 1149
                       next: https://api.osf.io/v2/citations/styles/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all citation styles
       tags:
@@ -1199,8 +1191,7 @@ paths:
                       attributes:
                         date_parsed: 2015-02-16T04:16:26.233000
                         short_title: APA
-                        summary:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        summary: null
                         title: American Psychological Association 6th edition
                       id: apa
                       links: {}
@@ -1445,12 +1436,10 @@ paths:
                                 href: https://api.osf.io/v2/providers/collections/metascience/
                                 meta: {}
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/collections/?page=2
                       next: https://api.osf.io/v2/collections/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       self: https://api.osf.io/v2/collections/
                     meta:
                       per_page: 10
@@ -1501,8 +1490,6 @@ paths:
                 response:
                   value: null
           description: Created
-          x-examples:
-            application/json: {}
       summary: Create a Collection
       tags:
         - Collections
@@ -1830,8 +1817,7 @@ paths:
                                 current_user_is_contributor_or_group_member: false
                                 current_user_permissions:
                                   - read
-                                custom_citation:
-                                  $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                                custom_citation: null
                                 date_created: 2020-05-11T17:57:58.725950
                                 date_modified: 2020-11-20T14:31:59.946554
                                 description: A Good Node Description
@@ -2041,17 +2027,13 @@ paths:
                                 meta: {}
                         type: collected-metadata
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: Retrieve a list of collected metadata for a collection
       tags:
@@ -2180,16 +2162,14 @@ paths:
                             current_user_is_contributor: false
                             current_user_is_contributor_or_group_member: false
                             current_user_permissions: []
-                            custom_citation:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            custom_citation: null
                             date_created: 2020-06-05T18:02:28.254638Z
                             date_modified: 2020-10-21T15:47:17.646448Z
                             description: flaksdjfasdlkfj lkjdf aslkdfj sdlfkj
                             fork: false
                             node_license:
                               copyright_holders: []
-                              year:
-                                $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                              year: null
                             preprint: false
                             public: false
                             registration: false
@@ -2248,8 +2228,7 @@ paths:
                                   href: https://api.osf.io/v2/nodes/zw4sh/files/
                                   meta: {}
                             forked_from:
-                              data:
-                                $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                              data: null
                             forks:
                               links:
                                 related:
@@ -2310,8 +2289,7 @@ paths:
                                   href: https://api.osf.io/v2/nodes/zw4sh/logs/
                                   meta: {}
                             parent:
-                              data:
-                                $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                              data: null
                             preprints:
                               links:
                                 related:
@@ -2363,8 +2341,7 @@ paths:
                                   href: https://api.osf.io/v2/nodes/zw4sh/relationships/subjects/
                                   meta: {}
                             template_node:
-                              data:
-                                $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                              data: null
                             view_only_links:
                               links:
                                 related:
@@ -2613,18 +2590,13 @@ paths:
                                 href: http://localhost:8000/v2/subjects/5fd228b7e64e1300aa99ee15/children/
                                 meta: {}
                           parent:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                         type: subjects
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      next: null
+                      prev: null
                       self: http://localhost:8000/v2/collections/nywr6/collected_metadata/zjxhs/subjects/
                     meta:
                       per_page: 10
@@ -2678,8 +2650,7 @@ paths:
                           current_user_is_contributor: false
                           current_user_is_contributor_or_group_member: false
                           current_user_permissions: []
-                          custom_citation:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          custom_citation: null
                           date_created: 2020-05-11T17:57:58.725950Z
                           date_modified: 2020-11-20T14:31:59.946554Z
                           description: A good Node description.
@@ -2746,8 +2717,7 @@ paths:
                                 href: https://api.osf.io/v2/nodes/2vewn/files/
                                 meta: {}
                           forked_from:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           forks:
                             links:
                               related:
@@ -2808,8 +2778,7 @@ paths:
                                 href: https://api.osf.io/v2/nodes/2vewn/logs/
                                 meta: {}
                           parent:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           preprints:
                             links:
                               related:
@@ -2861,8 +2830,7 @@ paths:
                                 href: https://api.osf.io/v2/nodes/2vewn/relationships/subjects/
                                 meta: {}
                           template_node:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           view_only_links:
                             links:
                               related:
@@ -2875,14 +2843,10 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      next: null
+                      prev: null
                       self: https://api.osf.io/v2/collections/ux3nq/linked_nodes/
                     meta:
                       per_page: 10
@@ -2922,8 +2886,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value:
-                    $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                  value: null
           description: OK
       summary: Remove Nodes From Collection
       tags:
@@ -3013,8 +2976,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value:
-                    $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                  value: null
           description: Created
       summary: Link Nodes to Collection
       tags:
@@ -3060,16 +3022,13 @@ paths:
                           date_last_transitioned: 2020-12-10T13:55:05.046084Z
                           date_modified: 2020-12-10T13:55:05.252565Z
                           date_published: 2020-12-10T13:55:05.046084Z
-                          date_withdrawn:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          date_withdrawn: null
                           description: Research physical language morning consumer front population.
                           doi: 10.123/0
                           is_preprint_orphan: false
                           is_published: true
-                          license_record:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                          original_publication_date:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          license_record: null
+                          original_publication_date: null
                           preprint_doi_created: 2020-12-10T13:55:05.230155Z
                           public: true
                           reviews_state: accepted
@@ -3111,8 +3070,7 @@ paths:
                                 href: https://api.osf.io/v2/preprints/zjxhs/identifiers/
                                 meta: {}
                           license:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           node:
                             links:
                               self:
@@ -3154,14 +3112,10 @@ paths:
               examples:
                 response:
                   value:
-                    first:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                    last:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                    next:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                    prev:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                    first: null
+                    last: null
+                    next: null
+                    prev: null
                     self: https://api.osf.io/v2/collections/nywr6/linked_preprints/
             meta:
               examples:
@@ -3211,11 +3165,9 @@ paths:
                     data:
                       - attributes:
                           access_requests_enabled: false
-                          analytics_key:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          analytics_key: null
                           archiving: false
-                          article_doi:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          article_doi: null
                           category: project
                           collection: false
                           current_user_can_comment: true
@@ -3226,15 +3178,12 @@ paths:
                           date_created: 2020-12-10T14:36:42.195364Z
                           date_modified: 2020-12-10T14:36:39.925278Z
                           date_registered: 2020-12-10T14:36:42.166193Z
-                          date_withdrawn:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          date_withdrawn: null
                           description: Half believe though on significant.
-                          embargo_end_date:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          embargo_end_date: null
                           embargoed: false
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           pending_embargo_approval: false
                           pending_embargo_termination_approval: false
                           pending_registration_approval: false
@@ -3250,8 +3199,7 @@ paths:
                           tags: []
                           title: A Good Registration Title
                           wiki_enabled: true
-                          withdrawal_justification:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          withdrawal_justification: null
                           withdrawn: false
                         id: qrwhu
                         links:
@@ -3300,8 +3248,7 @@ paths:
                                 href: https://api.osf.io/v2/registrations/qrwhu/files/
                                 meta: {}
                           forked_from:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           forks:
                             links:
                               related:
@@ -3318,8 +3265,7 @@ paths:
                                 href: https://api.osf.io/v2/registrations/qrwhu/implicit_contributors/
                                 meta: {}
                           license:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           linked_by_nodes:
                             links:
                               related:
@@ -3352,8 +3298,7 @@ paths:
                                 href: https://api.osf.io/v2/registrations/qrwhu/logs/
                                 meta: {}
                           parent:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           provider:
                             data:
                               id: osf
@@ -3429,8 +3374,7 @@ paths:
                                 href: https://api.osf.io/v2/registrations/qrwhu/relationships/subjects/
                                 meta: {}
                           template_node:
-                            data:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            data: null
                           view_only_links:
                             links:
                               related:
@@ -3446,14 +3390,10 @@ paths:
               examples:
                 response:
                   value:
-                    first:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                    last:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                    next:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                    prev:
-                      $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                    first: null
+                    last: null
+                    next: null
+                    prev: null
                     self: https://api.osf.io/v2/collections/nywr6/linked_registrations/
             meta:
               examples:
@@ -3497,8 +3437,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value:
-                    $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                  value: null
           description: OK
       summary: Remove Registrations From Collection
       tags:
@@ -3589,8 +3528,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value:
-                    $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                  value: null
           description: Created
       summary: Link Registrations to Collection
       tags:
@@ -4103,8 +4041,7 @@ paths:
                   value:
                     data:
                       attributes:
-                        checkout:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        checkout: null
                         current_user_can_comment: true
                         current_version: 1
                         date_created: 2014-10-17T19:24:12.264Z
@@ -4285,17 +4222,13 @@ paths:
                           self: https://api.osf.io/v2/files/553e69248c5e4a219919ea54/versions/1/
                         type: file_versions
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all file versions
       tags:
@@ -4505,8 +4438,7 @@ paths:
                   value:
                     data:
                       - attributes:
-                          auth_url:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          auth_url: null
                           description: COS is a non-profit technology company providing free and open
                             services to increase inclusivity and transparency of
                             research. Find out more at <a
@@ -4534,15 +4466,13 @@ paths:
                                 meta: {}
                         type: institutions
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/institutions/cos/nodes/?page=2
                       meta:
                         per_page: 10
                         total: 15
                       next: https://api.osf.io/v2/institutions/cos/nodes/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all institutions
       tags:
@@ -4647,8 +4577,7 @@ paths:
                   value:
                     data:
                       attributes:
-                        auth_url:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        auth_url: null
                         description: COS is a non-profit technology company providing free and open
                           services to increase inclusivity and transparency of
                           research. Find out more at <a
@@ -5099,15 +5028,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/institutions/cos/nodes/?page=330
                       meta:
                         per_page: 10
                         total: 337
                       next: https://api.osf.io/v2/institutions/cos/nodes/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all affiliated nodes
       tags:
@@ -5266,15 +5193,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/institutions/cos/registrations/?page=3
                       meta:
                         per_page: 10
                         total: 22
                       next: https://api.osf.io/v2/institutions/cos/registrations/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all affiliated registrations
       tags:
@@ -5458,15 +5383,13 @@ paths:
                                 meta: {}
                         type: users
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/institutions/cos/users/?page=8
                       meta:
                         per_page: 10
                         total: 77
                       next: https://api.osf.io/v2/institutions/cos/users/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all affiliated users
       tags:
@@ -6141,17 +6064,12 @@ paths:
                           self: https://api.osf.io/v2/metaschemas/564d31db8c5e4a7c9694b2c0/
                         type: metaschemas
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      meta:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      meta: null
+                      next: null
                       per_page: 10
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       total: 1
           description: OK
       summary: List all metaschemas
@@ -6598,8 +6516,7 @@ paths:
                           date_modified: 2016-12-08T21:45:17.058000
                           description: ""
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: true
                           registration: false
@@ -6711,15 +6628,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/nodes/?page=1954
                       meta:
                         per_page: 10
                         total: 19536
                       next: https://api.osf.io/v2/nodes/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all nodes
       tags:
@@ -7091,8 +7006,7 @@ paths:
                           of cancer biology published between 2010-2012 are
                           being replicated by the Science Exchange network.
                         fork: false
-                        node_license:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        node_license: null
                         preprint: false
                         public: true
                         registration: false
@@ -7332,12 +7246,9 @@ paths:
                     data:
                       - attributes:
                           configured: false
-                          external_account_id:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                          folder_id:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                          folder_path:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          external_account_id: null
+                          folder_id: null
+                          folder_path: null
                           node_has_auth: false
                         id: <provider_id>
                         links:
@@ -7345,29 +7256,22 @@ paths:
                         type: node_addons
                       - attributes:
                           configured: false
-                          external_account_id:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                          folder_id:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                          folder_path:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          external_account_id: null
+                          folder_id: null
+                          folder_path: null
                           node_has_auth: false
                         id: <another_provider_id>
                         links:
                           self: http://api.osf.io/v2/nodes/gaz5n/addons/<another_provider_id>/
                         type: node_addons
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all addons
       tags:
@@ -7485,12 +7389,9 @@ paths:
                     data:
                       attributes:
                         configured: false
-                        external_account_id:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                        folder_id:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                        folder_path:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        external_account_id: null
+                        folder_id: null
+                        folder_path: null
                         node_has_auth: false
                       id: box
                       links:
@@ -7661,17 +7562,13 @@ paths:
                           root: https://api.osf.io/v2/nodes/<node_id>/addons/<provider_id>/folders/
                         type: node_addon_folders
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 1000
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all addon folders
       tags:
@@ -8006,8 +7903,7 @@ paths:
                             evidence than by characteristics of the original and
                             replication teams.
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: true
                           public: true
                           registration: false
@@ -8119,15 +8015,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/nodes/ezcuj/children/?page=5
                       meta:
                         per_page: 10
                         total: 49
                       next: https://api.osf.io/v2/nodes/ezcuj/children/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all child nodes
       tags:
@@ -8595,8 +8489,7 @@ paths:
                           has_report: false
                           is_abuse: false
                           is_ham: false
-                          modified:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          modified: null
                           page: node
                         id: 23pk9
                         links:
@@ -8630,17 +8523,13 @@ paths:
                                 meta: {}
                         type: comments
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all comments
       tags:
@@ -8950,8 +8839,7 @@ paths:
                           bibliographic: true
                           index: 0
                           permission: admin
-                          unregistered_contributor:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          unregistered_contributor: null
                         embeds:
                           users:
                             data:
@@ -9001,18 +8889,14 @@ paths:
                                 meta: {}
                         type: contributors
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 9
                         total_bibliographic: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all contributors
       tags:
@@ -9234,8 +9118,7 @@ paths:
                         bibliographic: true
                         index: 0
                         permission: admin
-                        unregistered_contributor:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        unregistered_contributor: null
                       embeds:
                         users:
                           data:
@@ -10038,17 +9921,13 @@ paths:
                                 meta: {}
                         type: files
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all storage providers
       tags:
@@ -10543,8 +10422,7 @@ paths:
                   value:
                     data:
                       - attributes:
-                          checkout:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          checkout: null
                           current_user_can_comment: true
                           current_version: 1
                           date_created: 2014-10-17T19:24:12.264Z
@@ -10590,17 +10468,13 @@ paths:
                                 meta: {}
                         type: files
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all node files
       tags:
@@ -10813,8 +10687,7 @@ paths:
                   value:
                     data:
                       attributes:
-                        checkout:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        checkout: null
                         current_user_can_comment: true
                         current_version: 1
                         date_created: 2014-10-17T19:24:12.264Z
@@ -11166,8 +11039,7 @@ paths:
                           description: ""
                           fork: true
                           forked_date: 2016-11-08T15:59:03.114000
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: false
                           registration: false
@@ -11284,17 +11156,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all forks of this node
       tags:
@@ -11462,17 +11330,13 @@ paths:
                                 meta: {}
                         type: identifiers
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all identifiers
       tags:
@@ -11580,8 +11444,7 @@ paths:
                   value:
                     data:
                       - attributes:
-                          auth_url:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          auth_url: null
                           description: COS is a non-profit technology company providing free and open
                             services to increase inclusivity and transparency of
                             research. Find out more at <a
@@ -11646,17 +11509,13 @@ paths:
                                 meta: {}
                         type: institutions
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all institutions
       tags:
@@ -11962,8 +11821,7 @@ paths:
                           description: "This is an independent replication as part of the Reproducibility
                             Project: Psychology."
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: true
                           registration: false
@@ -12074,8 +11932,7 @@ paths:
                             - read
                           date_created: 2012-10-31T18:50:46.111000
                           date_modified: 2016-10-02T19:50:23.605000
-                          description:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          description: null
                           fork: true
                           node_license:
                             copyright_holders:
@@ -12199,17 +12056,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all linked nodes
       tags:
@@ -12577,15 +12430,13 @@ paths:
                             params_node:
                               id: fejxb
                               title: Replication of Correll (2008, JPSP, Study 2)
-                            params_project:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            params_project: null
                             pointer:
                               category: project
                               id: iraqy
                               title: "Independent Direct Replication #2 of Correll (2008, JPSP, Study 2)"
                               url: /iraqy/
-                            preprint_provider:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            preprint_provider: null
                         id: 58862f8f594d9001f547f484
                         links:
                           self: https://api.osf.io/v2/logs/58862f8f594d9001f547f484/
@@ -12619,10 +12470,8 @@ paths:
                             params_node:
                               id: rtjws
                               title: Analysis Audit
-                            params_project:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                            preprint_provider:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            params_project: null
+                            preprint_provider: null
                         id: 5873190554be8101d7e30b3e
                         links:
                           self: https://api.osf.io/v2/logs/5873190554be8101d7e30b3e/
@@ -12639,17 +12488,12 @@ paths:
                                 meta: {}
                         type: logs
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      meta:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      meta: null
+                      next: null
                       per_page: 10
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       total: 2
           description: OK
       summary: List all logs
@@ -12848,8 +12692,7 @@ paths:
                           doi: 10.1371/journal.pbio.1002456
                           is_preprint_orphan: false
                           is_published: true
-                          license_record:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          license_record: null
                           subjects:
                             - - id: 584240da54be81056cecac48
                                 text: Social and Behavioral Sciences
@@ -12899,17 +12742,13 @@ paths:
                                 meta: {}
                         type: preprints
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all preprints
       tags:
@@ -13249,11 +13088,9 @@ paths:
                         date_modified: 2017-02-12T19:22:26.488000
                         date_registered: 2017-02-12T19:28:48.864000
                         description: ""
-                        embargo_end_date:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        embargo_end_date: null
                         fork: false
-                        node_license:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        node_license: null
                         node_links:
                           links:
                             related:
@@ -13279,8 +13116,7 @@ paths:
                         tags: []
                         title: How Awareness Impacts Multiple Forms of Social Bias in Behavior (Final
                           Data Collection and Analysis Plan)
-                        withdrawal_justification:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        withdrawal_justification: null
                         withdrawn: false
                       id: esa63
                       links:
@@ -13542,17 +13378,12 @@ paths:
                                 meta: {}
                         type: view_only_links
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      meta:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      meta: null
+                      next: null
                       per_page: 10
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       total: 2
           description: OK
       summary: List all view only links
@@ -13659,8 +13490,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value:
-                    $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                  value: null
           description: OK
       summary: Retrieve a view only link
       tags:
@@ -14298,17 +14128,13 @@ paths:
                               meta: {}
                       type: preprint_providers
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 5
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: Retrieve a preprint provider
       tags:
@@ -14407,17 +14233,13 @@ paths:
                           self: https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e965/
                         type: licenses
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 3
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all licenses
       tags:
@@ -14619,8 +14441,7 @@ paths:
                           date_created: 2017-02-03T06:16:57.129000
                           date_modified: 2017-02-03T06:19:00.158000
                           date_published: 2017-02-03T06:18:59.788000
-                          doi:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          doi: null
                           is_preprint_orphan: false
                           is_published: true
                           license_record:
@@ -14663,15 +14484,13 @@ paths:
                                 meta: {}
                         type: preprints
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/preprints/?page=172
                       meta:
                         per_page: 10
                         total: 1720
                       next: https://api.osf.io/v2/preprints/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all preprints
       tags:
@@ -14776,15 +14595,13 @@ paths:
                           self: https://api.osf.io/v2/taxonomies/584240d854be81056ceca838/
                         type: taxonomies
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/preprint_providers/osf/taxonomies/?page=122
                       meta:
                         per_page: 10
                         total: 1217
                       next: https://api.osf.io/v2/preprint_providers/osf/taxonomies/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all taxonomies
       tags:
@@ -14978,8 +14795,7 @@ paths:
                           date_created: 2017-02-03T06:16:57.129000
                           date_modified: 2017-02-03T06:19:00.158000
                           date_published: 2017-02-03T06:18:59.788000
-                          doi:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          doi: null
                           is_preprint_orphan: false
                           is_published: true
                           license_record:
@@ -15028,15 +14844,13 @@ paths:
                                 meta: {}
                         type: preprints
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/preprints/?page=172
                       meta:
                         per_page: 10
                         total: 1720
                       next: https://api.osf.io/v2/preprints/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all preprints
       tags:
@@ -15391,8 +15205,7 @@ paths:
                         doi: 10.1371/journal.pbio.1002456
                         is_preprint_orphan: false
                         is_published: true
-                        license_record:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        license_record: null
                         subjects:
                           - - id: 584240da54be81056cecac48
                               text: Social and Behavioral Sciences
@@ -16028,16 +15841,13 @@ paths:
                           date_created: 2015-05-21T19:38:55.398000
                           date_modified: 2016-02-04T20:58:11.042000
                           date_registered: 2015-06-01T14:47:40.064000
-                          date_withdrawn:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          date_withdrawn: null
                           description: This investigation seeks to evaluate the impact of badges on the
                             availability and accessibility of open data and
                             materials.
-                          embargo_end_date:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          embargo_end_date: null
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           pending_embargo_approval: false
                           pending_registration_approval: false
                           pending_withdrawal: false
@@ -16060,8 +15870,7 @@ paths:
                             - open data
                             - open materials
                           title: The Effect of Badges on Availability of Data and Materials
-                          withdrawal_justification:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          withdrawal_justification: null
                           withdrawn: false
                         id: ipkea
                         links:
@@ -16153,15 +15962,13 @@ paths:
                                 meta: {}
                         type: registrations
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/registrations/?page=856
                       meta:
                         per_page: 10
                         total: 8559
                       next: https://api.osf.io/v2/registrations/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all registrations
       tags:
@@ -16874,11 +16681,9 @@ paths:
                           date_modified: 2016-05-23T14:22:03.885000
                           date_registered: 2016-05-23T14:24:25.478000
                           description: ""
-                          embargo_end_date:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          embargo_end_date: null
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           node_links:
                             links:
                               related:
@@ -16910,8 +16715,7 @@ paths:
                           registration_supplement: OSF-Standard Pre-Data Collection Registration
                           tags: []
                           title: Full Project Description
-                          withdrawal_justification:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          withdrawal_justification: null
                           withdrawn: false
                         id: 4cmnz
                         links:
@@ -17008,17 +16812,13 @@ paths:
                                 meta: {}
                         type: registrations
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all child registrations
       tags:
@@ -17118,24 +16918,19 @@ paths:
                       - attributes:
                           date_parsed: 2015-02-16T04:16:25.732000
                           short_title: AMR
-                          summary:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          summary: null
                           title: Academy of Management Review
                         id: academy-of-management-review
                         links: {}
                         type: citation-styles
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all citation styles
       tags:
@@ -17496,8 +17291,7 @@ paths:
                           has_report: false
                           is_abuse: false
                           is_ham: false
-                          modified:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          modified: null
                           page: node
                         id: 23pk9
                         links:
@@ -17531,17 +17325,13 @@ paths:
                                 meta: {}
                         type: comments
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all comments
       tags:
@@ -17689,8 +17479,7 @@ paths:
                           bibliographic: true
                           index: 0
                           permission: admin
-                          unregistered_contributor:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          unregistered_contributor: null
                         embeds:
                           users:
                             data:
@@ -17739,17 +17528,13 @@ paths:
                                 meta: {}
                         type: contributors
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all contributors
       tags:
@@ -17882,8 +17667,7 @@ paths:
                         bibliographic: true
                         index: 0
                         permission: admin
-                        unregistered_contributor:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        unregistered_contributor: null
                       embeds:
                         users:
                           data:
@@ -18161,17 +17945,13 @@ paths:
                                 meta: {}
                         type: files
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all storage providers
       tags:
@@ -18394,8 +18174,7 @@ paths:
                   value:
                     data:
                       - attributes:
-                          checkout:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          checkout: null
                           current_user_can_comment: true
                           current_version: 1
                           date_created: 2014-10-17T19:24:12.264Z
@@ -18441,17 +18220,13 @@ paths:
                                 meta: {}
                         type: files
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all files
       tags:
@@ -18664,8 +18439,7 @@ paths:
                   value:
                     data:
                       attributes:
-                        checkout:
-                          $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                        checkout: null
                         current_user_can_comment: true
                         current_version: 1
                         date_created: 2014-10-17T19:24:12.264Z
@@ -19047,11 +18821,9 @@ paths:
                           date_modified: 2016-05-23T14:22:03.885000
                           date_registered: 2016-05-23T14:24:25.478000
                           description: ""
-                          embargo_end_date:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          embargo_end_date: null
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           node_links:
                             links:
                               related:
@@ -19083,8 +18855,7 @@ paths:
                           registration_supplement: OSF-Standard Pre-Data Collection Registration
                           tags: []
                           title: Full Project Description
-                          withdrawal_justification:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          withdrawal_justification: null
                           withdrawn: false
                         id: 4cmnz
                         links:
@@ -19181,17 +18952,13 @@ paths:
                                 meta: {}
                         type: registrations
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all forks
       tags:
@@ -19359,17 +19126,13 @@ paths:
                                 meta: {}
                         type: identifiers
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all identifiers
       tags:
@@ -19477,8 +19240,7 @@ paths:
                   value:
                     data:
                       - attributes:
-                          auth_url:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          auth_url: null
                           description: COS is a non-profit technology company providing free and open
                             services to increase inclusivity and transparency of
                             research. Find out more at <a
@@ -19543,17 +19305,13 @@ paths:
                                 meta: {}
                         type: institutions
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all institutions
       tags:
@@ -19859,8 +19617,7 @@ paths:
                           description: "This is an independent replication as part of the Reproducibility
                             Project: Psychology."
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: true
                           registration: false
@@ -19971,8 +19728,7 @@ paths:
                             - read
                           date_created: 2012-10-31T18:50:46.111000
                           date_modified: 2016-10-02T19:50:23.605000
-                          description:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          description: null
                           fork: true
                           node_license:
                             copyright_holders:
@@ -20096,17 +19852,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all linked nodes
       tags:
@@ -20475,8 +20227,7 @@ paths:
                               id: 5wprs
                               title: Full Project Description
                             path: /StudyMaterials_UEH1.pdf
-                            preprint_provider:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            preprint_provider: null
                             urls:
                               download: /project/7eshv/files/osfstorage/5742f41c6c613b01de5b15dd/?action=download
                               view: /project/7eshv/files/osfstorage/5742f41c6c613b01de5b15dd/
@@ -20508,10 +20259,8 @@ paths:
                             params_node:
                               id: 7eshv
                               title: Full Questionnaire [in original language]
-                            params_project:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                            preprint_provider:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            params_project: null
+                            preprint_provider: null
                         id: 57431299594d9001ead7174d
                         links:
                           self: https://api.osf.io/v2/logs/57431299594d9001ead7174d/
@@ -20540,10 +20289,8 @@ paths:
                             params_node:
                               id: 5wprs
                               title: Full Project Description
-                            params_project:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                            preprint_provider:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            params_project: null
+                            preprint_provider: null
                         id: 57431299594d9001ead71746
                         links:
                           self: https://api.osf.io/v2/logs/57431299594d9001ead71746/
@@ -20574,10 +20321,8 @@ paths:
                               title: Investigating fluctuations in cooperative preferences across the natural
                                 female menstrual cycle in a
                                 within-subjects-design
-                            params_project:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                            preprint_provider:
-                              $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                            params_project: null
+                            preprint_provider: null
                         id: 57431299594d9001ead71742
                         links:
                           self: https://api.osf.io/v2/logs/57431299594d9001ead71742/
@@ -20599,17 +20344,13 @@ paths:
                                 meta: {}
                         type: logs
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 5
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all logs
       tags:
@@ -20773,17 +20514,13 @@ paths:
                                 meta: {}
                         type: view_only_links
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all view only links
       tags:
@@ -21107,17 +20844,13 @@ paths:
                                 meta: {}
                         type: wikis
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all wikis
       tags:
@@ -21274,17 +21007,12 @@ paths:
                           self: https://api.osf.io/v2/taxonomies/584240d854be81056ceca83c/
                         type: taxonomies
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      meta:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      meta: null
+                      next: null
                       per_page: 10
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       total: 5
           description: OK
       summary: List all taxonomies
@@ -21567,15 +21295,13 @@ paths:
                                 meta: {}
                         type: users
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/users/?page=4337
                       meta:
                         per_page: 10
                         total: 43370
                       next: https://api.osf.io/v2/users/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all users
       tags:
@@ -22038,17 +21764,13 @@ paths:
                           self: https://api.osf.io/v2/users/me/addons/googledrive/
                         type: user_addons
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 4
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all user addons
       tags:
@@ -22258,25 +21980,20 @@ paths:
                     data:
                       - attributes:
                           display_name: Fabrice Mizero
-                          profile_url:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          profile_url: null
                           provider: dropbox
                         id: 58d16ece9ad5a10201027eb4
                         links:
                           self: https://api.osf.io/v2/users/me/addons/dropbox/accounts/58d16ece9ad5a10201027eb4/
                         type: external_accounts
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 1
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all addon accounts
       tags:
@@ -22382,8 +22099,7 @@ paths:
                       data:
                         attributes:
                           display_name: Fabrice Mizero
-                          profile_url:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          profile_url: null
                           provider: dropbox
                         id: 58d16ece9ad5a10201027eb4
                         links:
@@ -22533,17 +22249,13 @@ paths:
                                 meta: {}
                         type: institutions
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 2
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all institutions
       tags:
@@ -22854,11 +22566,9 @@ paths:
                             - read
                           date_created: 2013-10-22T20:07:57.674000
                           date_modified: 2017-02-09T20:37:49.060000
-                          description:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          description: null
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: true
                           registration: false
@@ -22967,15 +22677,13 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/users/alh38/nodes/?page=23
                       meta:
                         per_page: 10
                         total: 224
                       next: https://api.osf.io/v2/users/alh38/nodes/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all nodes
       tags:
@@ -23177,8 +22885,7 @@ paths:
                           doi: 10.1371/journal.pbio.1002456
                           is_preprint_orphan: false
                           is_published: true
-                          license_record:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          license_record: null
                           subjects:
                             - - id: 584240da54be81056cecac48
                                 text: Social and Behavioral Sciences
@@ -23228,17 +22935,13 @@ paths:
                                 meta: {}
                         type: preprints
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
                       meta:
                         per_page: 10
                         total: 4
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      next: null
+                      prev: null
           description: OK
       summary: List all preprints
       tags:
@@ -23299,11 +23002,9 @@ paths:
                           date_modified: 2016-11-18T19:14:42.873000
                           date_registered: 2016-11-18T19:16:56.962000
                           description: ""
-                          embargo_end_date:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          embargo_end_date: null
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           node_links:
                             links:
                               related:
@@ -23331,8 +23032,7 @@ paths:
                           registration_supplement: OSF-Standard Pre-Data Collection Registration
                           tags: []
                           title: Replication Reports
-                          withdrawal_justification:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          withdrawal_justification: null
                           withdrawn: false
                         id: d5r99
                         links:
@@ -23429,15 +23129,13 @@ paths:
                                 meta: {}
                         type: registrations
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
                       last: https://api.osf.io/v2/users/cdi38/registrations/?page=17
                       meta:
                         per_page: 10
                         total: 170
                       next: https://api.osf.io/v2/users/cdi38/registrations/?page=2
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
           description: OK
       summary: List all registrations
       tags:
@@ -23863,8 +23561,7 @@ paths:
                           description: "This is an independent replication as part of the Reproducibility
                             Project: Psychology."
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: true
                           registration: false
@@ -23975,8 +23672,7 @@ paths:
                             - read
                           date_created: 2012-10-31T18:50:46.111000
                           date_modified: 2016-10-02T19:50:23.605000
-                          description:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          description: null
                           fork: true
                           node_license:
                             copyright_holders:
@@ -24107,11 +23803,9 @@ paths:
                             - read
                           date_created: 2014-09-23T18:58:54.915000
                           date_modified: 2016-08-31T18:16:25.056000
-                          description:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          description: null
                           fork: false
-                          node_license:
-                            $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                          node_license: null
                           preprint: false
                           public: true
                           registration: false
@@ -24220,17 +23914,12 @@ paths:
                                 meta: {}
                         type: nodes
                     links:
-                      first:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      last:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      meta:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
-                      next:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      first: null
+                      last: null
+                      meta: null
+                      next: null
                       per_page: 10
-                      prev:
-                        $ref: "#/paths/~1collections~1/post/responses/201/examples/application~1json"
+                      prev: null
                       total: 3
           description: OK
       summary: List all nodes

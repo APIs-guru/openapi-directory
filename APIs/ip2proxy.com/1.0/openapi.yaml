@@ -5,10 +5,10 @@ info:
   contact:
     x-twitter: ip2location
   description: IP2Proxy allows instant detection of anonymous proxy, VPN, TOR exit
-    nodes, search engine robots (SES) and residential (RES, available in PX10)
-    by IP address. It also returns the threat type of the proxy (PX9 or higher).
-    Visit https://www.ip2location.com/web-service/ip2proxy for further
-    information.
+    nodes, search engine robots (SES), data center ranges (PX2-PX10),
+    residential proxies (PX10) and VPN provider name (PX11) by IP address. It
+    also returns the threat type of the proxy (PX9 or higher). Visit
+    https://www.ip2location.com/web-service/ip2proxy for further information.
   title: IP2Proxy Proxy Detection
   version: "1.0"
   x-apisguru-categories:
@@ -28,7 +28,8 @@ paths:
     get:
       description: Check if an IP address is proxy
       parameters:
-        - description: If not present, the web service will assume the PX1 package query.
+        - description: Package name from PX1 to PX11. If not present, the web service will
+            assume the PX1 package query.
           in: query
           name: package
           schema:
@@ -63,7 +64,8 @@ paths:
                   value: '{"response": "","countryCode": "","countryName": "","regionName":
                     "","cityName": "","isp": "","domain":
                     "","usageType":"","asn":"","as": "","lastSeen":
-                    "","proxyType":"","isProxy": "","threat": ""}'
+                    "","proxyType":"","isProxy": "","threat": "","provider":
+                    ""}'
               schema:
                 type: string
           description: Get response from IP2Proxy

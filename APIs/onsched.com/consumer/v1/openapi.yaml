@@ -2252,10 +2252,10 @@ paths:
     get:
       description: "The results are returned in pages. Use the offset and limit
         parameters to control the page start and size. Default offset is 0, and
-        limit is 20.\r
+        limit is 20. \r
 
-        Use the other query parameters to optionally filter the results
-        list."
+        You will get a Validation error if any other parameter is
+        selected to avoid confusion.        ///"
       parameters:
         - description: The id of the business location. Defaults to first business location.
           in: query
@@ -2274,6 +2274,35 @@ paths:
           name: defaultService
           schema:
             type: boolean
+        - description: Filter Services by Company Scope or Location Scope
+          in: query
+          name: scope
+          schema:
+            default: ""
+            enum:
+              - company
+              - location
+              - all
+            nullable: true
+            type: string
+        - description: Filter Services using Service Names. Supports Partial name search
+          in: query
+          name: name
+          schema:
+            default: ""
+            type: string
+        - description: Filter based on ServiceId
+          in: query
+          name: serviceId
+          schema:
+            default: ""
+            type: string
+        - description: Search on all Locations
+          in: query
+          name: allLocations
+          schema:
+            nullable: true
+            type: boolean
         - description: Starting row of page, default 0
           in: query
           name: offset
@@ -2286,6 +2315,23 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Sort Results using Natural Sort or Sorted alphabetically along
+            Service Names
+          in: query
+          name: sortOrder
+          schema:
+            default: ""
+            enum:
+              - natural
+              - name
+            nullable: true
+            type: string
+        - description: Sort Result in Descending Order. Default Ascending
+          in: query
+          name: sortDescending
+          schema:
+            nullable: true
+            type: boolean
       responses:
         "200":
           content:

@@ -337,7 +337,8 @@ paths:
       description: WebSocket to get logs for :appID. Optional queryString arg
         bind_to_es=true to bind WS on log storage and not real time AMQP broker
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -360,7 +361,8 @@ paths:
     put:
       description: Fetch all the logs drains (ccadmin dedicated route)
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: drainId
           required: true
           schema:
@@ -493,7 +495,8 @@ paths:
     get:
       description: Fetch the logs drains for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -507,7 +510,8 @@ paths:
     post:
       description: Add a log drain for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -522,7 +526,8 @@ paths:
     delete:
       description: Delete the logs drain by id or url for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -536,7 +541,8 @@ paths:
     get:
       description: Fetch the logs drain by id or url for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -553,7 +559,8 @@ paths:
         authorization, you have to add `authorization=oAuthAuthorizationString`
         as query param.
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -584,7 +591,8 @@ paths:
     get:
       description: list created e-mail hooks
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -597,7 +605,8 @@ paths:
     post:
       description: create a hook for e-mail notifications
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -611,7 +620,8 @@ paths:
     delete:
       description: delete an e-mail hook
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -624,7 +634,8 @@ paths:
     put:
       description: edit an e-mail hook
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -655,7 +666,8 @@ paths:
     get:
       description: list created hooks
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -668,7 +680,8 @@ paths:
     post:
       description: create a hook for notifications
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -682,7 +695,8 @@ paths:
     delete:
       description: delete a hook
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -695,7 +709,8 @@ paths:
     put:
       description: edit a hook
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: ownerId
           required: true
           schema:
@@ -5301,7 +5316,8 @@ paths:
     get:
       description: Fetch the logs for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -5316,7 +5332,8 @@ paths:
     get:
       description: Fetch the logs drains for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -5330,7 +5347,8 @@ paths:
     post:
       description: Add a log drain for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -5345,7 +5363,8 @@ paths:
     delete:
       description: Delete the logs drain by id or url for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -5359,7 +5378,8 @@ paths:
     get:
       description: Fetch the logs drain by id or url for a given application
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -5374,7 +5394,8 @@ paths:
     get:
       description: Retrieve logs as they come through a chunked, never-ending response
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:
@@ -5391,7 +5412,8 @@ paths:
         authorization, you have to send a `{ "message_type": "oauth",
         "authorization": "oauth authorization string" }` message'
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: appId
           required: true
           schema:

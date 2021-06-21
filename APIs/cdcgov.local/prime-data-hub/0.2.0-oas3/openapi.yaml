@@ -3,11 +3,11 @@ servers:
   - url: http://cdcgov.local
 info:
   contact:
-    email: usds@cdc.gov
+    email: reportstream@cdc.gov
     name: USDS at Centers for Disease Control and Prevention
-    url: https://open.cdc.gov
+    url: https://reportstream.cdc.gov
   description: A router of public health data from multiple senders and receivers
-  title: Prime Data Hub
+  title: Prime ReportStream
   version: 0.2.0-oas3
   x-apisguru-categories:
     - open_data
@@ -460,6 +460,65 @@ paths:
             - org_admin
 components:
   schemas:
+    AS2Transport:
+      description: Describes a single AS2 connection in all of it variations
+      properties:
+        contentDescription:
+          default: SARS-CoV-2 Electronic Lab Results
+          description: A description of the content of the message. Usually, the same for
+            all messages.
+          type: string
+        mimeType:
+          default: application/hl7-v2
+          description: The MIME type of the message
+          type: string
+        receiverId:
+          description: The AS2 id of the receiver. Usually, the same for all senders.
+          example: exampleAS2Id
+          type: string
+        receiverUrl:
+          description: The URL to the AS2 end-point
+          example: https://as2.example.com/receiver.aspx
+          type: string
+        senderEmail:
+          default: reportstream@cdc.gov
+          description: The email address to contact someone about the message
+          type: string
+        senderId:
+          description: The AS2 id of the sender. Usually, assigned by receiver to PRIME.
+          example: primeAS2Id
+          type: string
+        type:
+          description: The discriminator
+          example: AS2
+          type: string
+      required:
+        - type
+        - receiverUrl
+        - receiverId
+        - senderId
+      type: object
+    BlobStoreTransport:
+      description: Moves results to a Azure Blob Store. Typcially used for HHS Protect
+        interfaces.
+      properties:
+        containerName:
+          description: This name of the Azure container
+          example: hhsprotect
+          type: string
+        storageName:
+          description: This looks for an env var with this name. env var value is the
+            connection string
+          type: string
+        type:
+          description: The discriminator
+          example: BLOBSTORE
+          type: string
+      required:
+        - type
+        - storageName
+        - containerName
+      type: object
     CustomConfiguration:
       description: A custom configuration for a custom schema
       properties:
@@ -476,7 +535,9 @@ components:
           description: The transport to use
           oneOf:
             - $ref: "#/components/schemas/SFTPTransport"
-            - $ref: "#/components/schemas/DownloadTransport"
+            - $ref: "#/components/schemas/AS2Transport"
+            - $ref: "#/components/schemas/BlobStoreTransport"
+            - $ref: "#/components/schemas/NullTransport"
         type:
           description: The discrimenator
           example: CUSTOM
@@ -508,12 +569,15 @@ components:
             - Item
           type: string
       type: object
-    DownloadTransport:
-      description: Make the report available for download. A null transport.
+    NullTransport:
+      description: A transport type that does not do anything
       properties:
+        dummy:
+          description: A dummy value
+          type: string
         type:
           description: The discriminator
-          example: DOWNLOAD
+          example: null
           type: string
       required:
         - type
@@ -633,45 +697,6 @@ components:
         - jurisdictionalFilter
         - reportConfiguations
         - timing
-      type: object
-    RedoxConfiguration:
-      description: A Redox configuration
-      properties:
-        destinationId:
-          description: the Redox destination id
-          example: fcafe93a-9e04-4e3f-9aac-203518f6c4c9
-          type: string
-        destinationName:
-          description: the Redox destination Name
-          example: CDC Bucks County PDH Destination (p)
-          type: string
-        sourceId:
-          description: The Redox source id
-          example: a3834c9d-e3ff-4602-b360-dcb0ad08fce5
-          type: string
-        sourceName:
-          description: The Redox source name
-          example: Prime Data Hub (Prod)
-          type: string
-        transport:
-          description: The redox transport
-          oneOf:
-            - $ref: "#/components/schemas/RedoxTransport"
-        type:
-          description: the discrimenator
-          example: REDOX
-          type: string
-        useTestProcessingMode:
-          default: false
-          description: Set a test process mode flag
-          type: boolean
-      required:
-        - type
-        - destinationId
-        - destinationName
-        - sourceId
-        - sourceName
-        - transport
       type: object
     RedoxTransport:
       description: Describe the Redox transport
@@ -818,29 +843,39 @@ components:
           description: Include the AOE
           type: boolean
         receivingApplicationName:
-          default:
-            $ref: "#/components/schemas/RedoxTransport/properties/baseUrl/default"
+          default: null
           description: The receiving application name (needed for HL7 formats)
           type: string
         receivingApplicationOID:
-          default:
-            $ref: "#/components/schemas/RedoxTransport/properties/baseUrl/default"
+          default: null
           description: The receiving application OID
           type: string
         receivingFacilityName:
-          default:
-            $ref: "#/components/schemas/RedoxTransport/properties/baseUrl/default"
+          default: null
           description: The receiving facility name
           type: string
         receivingFacilityOID:
-          default:
-            $ref: "#/components/schemas/RedoxTransport/properties/baseUrl/default"
+          default: null
           description: The receiving facility name
+          type: string
+        reportingFacilityId:
+          default: null
+          description: The reporting facility id (if different from CDC PRIME's OID)
+          type: string
+        reportingFacilityIdType:
+          default: null
+          description: The reporting facility id type (if different from OID)
+          type: string
+        reportingFacilityName:
+          default: null
+          description: The reporting facility name (if different from CDC PRIME)
           type: string
         transport:
           oneOf:
             - $ref: "#/components/schemas/SFTPTransport"
-            - $ref: "#/components/schemas/DownloadTransport"
+            - $ref: "#/components/schemas/AS2Transport"
+            - $ref: "#/components/schemas/BlobStoreTransport"
+            - $ref: "#/components/schemas/NullTransport"
         type:
           description: The discrimenator
           example: STANDARD_HL7

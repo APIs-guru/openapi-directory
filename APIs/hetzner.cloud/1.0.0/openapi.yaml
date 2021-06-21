@@ -1036,9 +1036,7 @@ paths:
                     name: my website cert
                     not_valid_after: 2019-07-08T09:59:59+00:00
                     not_valid_before: 2019-01-08T10:00:00+00:00
-                    status:
-                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                        le/image/name"
+                    status: null
                     type: uploaded
                     used_by:
                       - id: 4711
@@ -1108,9 +1106,7 @@ paths:
                             error:
                               description: If issuance or renewal reports `failed`, this property contains
                                 information about what happened
-                              example:
-                                $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                  le/image/name"
+                              example: null
                               nullable: true
                               properties:
                                 code:
@@ -1279,9 +1275,7 @@ paths:
                   description: Domains and subdomains that should be contained in the Certificate
                     issued by *Let's Encrypt*. Required for type `managed`
                     Certificates.
-                  example:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  example: null
                   items:
                     type: string
                   type: array
@@ -1326,9 +1320,7 @@ paths:
                       error:
                         code: action_failed
                         message: Action failed
-                      finished:
-                        $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                          le/image/name"
+                      finished: null
                       id: 13
                       progress: 0
                       resources:
@@ -1337,30 +1329,20 @@ paths:
                       started: 2019-01-08T12:10:00+00:00
                       status: running
                     certificate:
-                      certificate:
-                        $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                          le/image/name"
+                      certificate: null
                       created: 2019-01-08T12:10:00+00:00
                       domain_names:
                         - example.com
                         - webmail.example.com
                         - www.example.com
-                      fingerprint:
-                        $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                          le/image/name"
+                      fingerprint: null
                       id: 897
                       labels: {}
                       name: my website cert
-                      not_valid_after:
-                        $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                          le/image/name"
-                      not_valid_before:
-                        $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                          le/image/name"
+                      not_valid_after: null
+                      not_valid_before: null
                       status:
-                        error:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        error: null
                         issuance: pending
                         renewal: unavailable
                       type: managed
@@ -1370,9 +1352,7 @@ paths:
                 uploaded:
                   summary: Response when creating a type `uploaded` Certificate
                   value:
-                    action:
-                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                        le/image/name"
+                    action: null
                     certificate:
                       certificate: |-
                         -----BEGIN CERTIFICATE-----
@@ -1388,9 +1368,7 @@ paths:
                       name: my website cert
                       not_valid_after: 2019-07-08T09:59:59+00:00
                       not_valid_before: 2019-01-08T10:00:00+00:00
-                      status:
-                        $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                          le/image/name"
+                      status: null
                       type: uploaded
                       used_by:
                         - id: 4711
@@ -1535,9 +1513,7 @@ paths:
                           error:
                             description: If issuance or renewal reports `failed`, this property contains
                               information about what happened
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             properties:
                               code:
@@ -1656,9 +1632,7 @@ paths:
                   name: my website cert
                   not_valid_after: 2019-07-08T09:59:59+00:00
                   not_valid_before: 2019-01-08T10:00:00+00:00
-                  status:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  status: null
                   type: uploaded
                   used_by:
                     - id: 4711
@@ -1727,9 +1701,7 @@ paths:
                           error:
                             description: If issuance or renewal reports `failed`, this property contains
                               information about what happened
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             properties:
                               code:
@@ -1854,9 +1826,7 @@ paths:
                   name: my website cert
                   not_valid_after: 2019-07-08T09:59:59+00:00
                   not_valid_before: 2019-01-08T10:00:00+00:00
-                  status:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  status: null
                   type: uploaded
                   used_by:
                     - id: 4711
@@ -1925,9 +1895,7 @@ paths:
                           error:
                             description: If issuance or renewal reports `failed`, this property contains
                               information about what happened
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             properties:
                               code:
@@ -2876,6 +2844,8 @@ paths:
                                   - tcp
                                   - udp
                                   - icmp
+                                  - esp
+                                  - gre
                                 type: string
                               source_ips:
                                 description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use
@@ -3080,6 +3050,8 @@ paths:
                           - tcp
                           - udp
                           - icmp
+                          - esp
+                          - gre
                         type: string
                       source_ips:
                         description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use
@@ -3321,6 +3293,8 @@ paths:
                                 - tcp
                                 - udp
                                 - icmp
+                                - esp
+                                - gre
                               type: string
                             source_ips:
                               description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use
@@ -3500,6 +3474,8 @@ paths:
                                 - tcp
                                 - udp
                                 - icmp
+                                - esp
+                                - gre
                               type: string
                             source_ips:
                               description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use
@@ -3682,6 +3658,8 @@ paths:
                                 - tcp
                                 - udp
                                 - icmp
+                                - esp
+                                - gre
                               type: string
                             source_ips:
                               description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use
@@ -4435,6 +4413,8 @@ paths:
                           - tcp
                           - udp
                           - icmp
+                          - esp
+                          - gre
                         type: string
                       source_ips:
                         description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use
@@ -5027,9 +5007,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -6523,9 +6501,7 @@ paths:
                         bound_to:
                           description: ID of Server the Image is bound to. Only set for Images of type
                             `backup`.
-                          example:
-                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                              le/image/name"
+                          example: null
                           nullable: true
                           type: integer
                         created:
@@ -6550,9 +6526,7 @@ paths:
                           type: object
                         deleted:
                           description: Point in time where the Image was deleted (in ISO-8601 format)
-                          example:
-                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                              le/image/name"
+                          example: null
                           nullable: true
                           type: string
                         deprecated:
@@ -6749,9 +6723,7 @@ paths:
                       bound_to:
                         description: ID of Server the Image is bound to. Only set for Images of type
                           `backup`.
-                        example:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        example: null
                         nullable: true
                         type: integer
                       created:
@@ -6776,9 +6748,7 @@ paths:
                         type: object
                       deleted:
                         description: Point in time where the Image was deleted (in ISO-8601 format)
-                        example:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        example: null
                         nullable: true
                         type: string
                       deprecated:
@@ -6931,16 +6901,12 @@ paths:
             application/json:
               example:
                 image:
-                  bound_to:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  bound_to: null
                   created: 2016-01-30T23:50:00+00:00
                   created_from:
                     id: 1
                     name: Server
-                  deleted:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  deleted: null
                   deprecated: 2018-02-28T00:00:00+00:00
                   description: My new Image description
                   disk_size: 10
@@ -6963,9 +6929,7 @@ paths:
                       bound_to:
                         description: ID of Server the Image is bound to. Only set for Images of type
                           `backup`.
-                        example:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        example: null
                         nullable: true
                         type: integer
                       created:
@@ -6990,9 +6954,7 @@ paths:
                         type: object
                       deleted:
                         description: Point in time where the Image was deleted (in ISO-8601 format)
-                        example:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        example: null
                         nullable: true
                         type: string
                       deprecated:
@@ -8968,9 +8930,7 @@ paths:
                         - health_status:
                             - listen_port: 443
                               status: healthy
-                          label_selector:
-                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                              le/image/name"
+                          label_selector: null
                           server:
                             id: 80
                           type: server
@@ -10218,9 +10178,7 @@ paths:
                         - health_status:
                             - listen_port: 443
                               status: healthy
-                          label_selector:
-                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                              le/image/name"
+                          label_selector: null
                           server:
                             id: 80
                           type: server
@@ -11836,9 +11794,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -12088,9 +12044,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -12219,9 +12173,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -12337,9 +12289,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -14279,9 +14229,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -14436,9 +14384,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -14847,9 +14793,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -14982,9 +14926,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -15934,9 +15876,7 @@ paths:
                             bound_to:
                               description: ID of Server the Image is bound to. Only set for Images of type
                                 `backup`.
-                              example:
-                                $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                  le/image/name"
+                              example: null
                               nullable: true
                               type: integer
                             created:
@@ -15961,9 +15901,7 @@ paths:
                               type: object
                             deleted:
                               description: Point in time where the Image was deleted (in ISO-8601 format)
-                              example:
-                                $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                  le/image/name"
+                              example: null
                               nullable: true
                               type: string
                             deprecated:
@@ -16552,9 +16490,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 1
                   progress: 0
                   resources:
@@ -16567,9 +16503,7 @@ paths:
                     error:
                       code: action_failed
                       message: Action failed
-                    finished:
-                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                        le/image/name"
+                    finished: null
                     id: 13
                     progress: 0
                     resources:
@@ -16609,16 +16543,12 @@ paths:
                         - 3
                   id: 42
                   image:
-                    bound_to:
-                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                        le/image/name"
+                    bound_to: null
                     created: 2016-01-30T23:50:00+00:00
                     created_from:
                       id: 1
                       name: Server
-                    deleted:
-                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                        le/image/name"
+                    deleted: null
                     deprecated: 2018-02-28T00:00:00+00:00
                     description: Ubuntu 20.04 Standard 64 bit
                     disk_size: 10
@@ -16976,9 +16906,7 @@ paths:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type
                               `backup`.
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             type: integer
                           created:
@@ -17003,9 +16931,7 @@ paths:
                             type: object
                           deleted:
                             description: Point in time where the Image was deleted (in ISO-8601 format)
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             type: string
                           deprecated:
@@ -17703,9 +17629,7 @@ paths:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type
                               `backup`.
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             type: integer
                           created:
@@ -17730,9 +17654,7 @@ paths:
                             type: object
                           deleted:
                             description: Point in time where the Image was deleted (in ISO-8601 format)
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             type: string
                           deprecated:
@@ -18348,9 +18270,7 @@ paths:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type
                               `backup`.
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             type: integer
                           created:
@@ -18375,9 +18295,7 @@ paths:
                             type: object
                           deleted:
                             description: Point in time where the Image was deleted (in ISO-8601 format)
-                            example:
-                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                                le/image/name"
+                            example: null
                             nullable: true
                             type: string
                           deprecated:
@@ -19069,9 +18987,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -19235,9 +19151,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -19377,9 +19291,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -19522,9 +19434,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -19811,9 +19721,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -19973,25 +19881,19 @@ paths:
                   started: 2016-01-30T23:55:00+00:00
                   status: success
                 image:
-                  bound_to:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  bound_to: null
                   created: 2016-01-30T23:50:00+00:00
                   created_from:
                     id: 1
                     name: Server
-                  deleted:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  deleted: null
                   deprecated: 2018-02-28T00:00:00+00:00
                   description: my image
                   disk_size: 10
                   id: 4711
                   image_size: 2.3
                   labels: {}
-                  name:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  name: null
                   os_flavor: ubuntu
                   os_version: "20.04"
                   protection:
@@ -20081,9 +19983,7 @@ paths:
                       bound_to:
                         description: ID of Server the Image is bound to. Only set for Images of type
                           `backup`.
-                        example:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        example: null
                         nullable: true
                         type: integer
                       created:
@@ -20108,9 +20008,7 @@ paths:
                         type: object
                       deleted:
                         description: Point in time where the Image was deleted (in ISO-8601 format)
-                        example:
-                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                            le/image/name"
+                        example: null
                         nullable: true
                         type: string
                       deprecated:
@@ -20258,9 +20156,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -20378,9 +20274,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -20622,9 +20516,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21015,9 +20907,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21131,9 +21021,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21249,9 +21137,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21389,9 +21275,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21399,9 +21283,7 @@ paths:
                       type: server
                   started: 2016-01-30T23:50:00+00:00
                   status: running
-                root_password:
-                  $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                    le/image/name"
+                root_password: null
               schema:
                 properties:
                   action:
@@ -21644,9 +21526,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21769,9 +21649,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -21893,9 +21771,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -22928,9 +22804,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -22945,9 +22819,7 @@ paths:
                     error:
                       code: action_failed
                       message: Action failed
-                    finished:
-                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                        le/image/name"
+                    finished: null
                     id: 13
                     progress: 0
                     resources:
@@ -23843,9 +23715,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -24086,9 +23956,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:
@@ -24214,9 +24082,7 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished:
-                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/examp\
-                      le/image/name"
+                  finished: null
                   id: 13
                   progress: 0
                   resources:

@@ -137,15 +137,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1/get/responses/200/content/text~1xml/schema"
-            text/xml:
-              schema:
                 properties:
                   status:
                     enum:
                       - OK
                     type: string
                 type: object
+            text/xml:
+              schema:
+                $ref: "#/paths/~1/get/responses/200/content/application~1json/schema"
           description: Return Status OK and/or resource list
       summary: List global resources
       tags:
@@ -157,10 +157,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1/get/responses/200/content/text~1xml/schema"
+                $ref: "#/paths/~1/get/responses/200/content/application~1json/schema"
             text/xml:
               schema:
-                $ref: "#/paths/~1/get/responses/200/content/text~1xml/schema"
+                $ref: "#/paths/~1/get/responses/200/content/application~1json/schema"
           description: Return Status OK and/or resource list
       summary: List global announcements
       tags:
@@ -218,20 +218,41 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/400/content/application~1json/schema"
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                        - message
+                        - field
+                      type: object
+                    type: array
+                required:
+                  - errors
+                type: object
           description: Bad data
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/404/content/application~1json/schema"
+                properties:
+                  message:
+                    type: string
+                type: object
           description: Sorry, you have reached your max quota of 10 announcement files.
             Please delete some.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/404/content/application~1json/schema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
+                  ema"
           description: Problem saving file
       summary: Add a new announcement audio file
       tags:
@@ -267,39 +288,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1/get/responses/200/content/text~1xml/schema"
+                $ref: "#/paths/~1/get/responses/200/content/application~1json/schema"
           description: OK
         "400":
           content:
             application/json:
               schema:
-                properties:
-                  errors:
-                    items:
-                      properties:
-                        field:
-                          type: string
-                        message:
-                          items:
-                            type: string
-                          type: array
-                      required:
-                        - message
-                        - field
-                      type: object
-                    type: array
-                required:
-                  - errors
-                type: object
+                $ref: "#/paths/~1announcements/post/responses/400/content/application~1json/sch\
+                  ema"
           description: Bad query data
         "404":
           content:
             application/json:
               schema:
-                properties:
-                  message:
-                    type: string
-                type: object
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
+                  ema"
           description: Only partners or admins can list all live calls.
       summary: Validate a phone number by calling it once
       tags:
@@ -427,13 +430,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/400/content/application~1json/schema"
+                $ref: "#/paths/~1announcements/post/responses/400/content/application~1json/sch\
+                  ema"
           description: Bad data
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/404/content/application~1json/schema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
+                  ema"
           description: Only customer accounts can create calls.
         "500":
           description: Issue with API interface to core platform.
@@ -567,7 +572,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/404/content/application~1json/schema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
+                  ema"
           description: Not found
       summary: List of announcement audio files
       tags:
@@ -575,28 +581,30 @@ paths:
   "/customers/{account}/announcements/{announcement_id}":
     delete:
       parameters:
-        - $ref: "#/paths/~1customers~1{account}~1announcements/get/parameters/0"
-        - $ref: "#/paths/~1customers~1{account}~1announcements~1{announcement_id}/get/par\
-            ameters/1"
+        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements/get/parameters/0"
+        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements~1%7Bannouncement_id%7D\
+            /get/parameters/1"
       responses:
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/404/content/application~1json/schema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
+                  ema"
           description: Not found
         "410":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1calls/get/responses/404/content/application~1json/schema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
+                  ema"
           description: Gone
       summary: Delete an announcement audio file
       tags:
         - announcements
     get:
       parameters:
-        - $ref: "#/paths/~1customers~1{account}~1announcements/get/parameters/0"
+        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements/get/parameters/0"
         - description: Announcement ID of audio file
           in: path
           name: announcement_id

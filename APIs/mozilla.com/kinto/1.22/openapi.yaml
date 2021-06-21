@@ -3031,12 +3031,14 @@ paths:
     get:
       operationId: get_blocklist
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: api_ver:\d+
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: metrics:.*
           required: true
           schema:

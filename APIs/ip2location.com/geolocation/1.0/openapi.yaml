@@ -37,20 +37,50 @@ paths:
           in: query
           name: package
           schema:
+            enum:
+              - WS1
+              - WS2
+              - WS3
+              - WS4
+              - WS5
+              - WS6
+              - WS7
+              - WS8
+              - WS9
+              - WS10
+              - WS11
+              - WS12
+              - WS13
+              - WS14
+              - WS15
+              - WS16
+              - WS17
+              - WS18
+              - WS19
+              - WS20
+              - WS21
+              - WS22
+              - WS23
+              - WS24
+              - WS25
             type: string
         - description: Extra information in addition to the above selected package.
+          explode: false
           in: query
           name: addon
           schema:
-            enum:
-              - continent
-              - country
-              - region
-              - city
-              - geotargeting
-              - country_groupings
-              - time_zone_info
-            type: string
+            example: continent,country
+            items:
+              enum:
+                - continent
+                - country
+                - region
+                - city
+                - geotargeting
+                - country_groupings
+                - time_zone_info
+              type: string
+            type: array
         - description: IP address (IPv4 or IPv6) for reverse IP location lookup purpose.
             If not present, the server IP address will be used for the location
             lookup.
@@ -58,6 +88,7 @@ paths:
           name: ip
           required: true
           schema:
+            example: 8.8.8.8
             type: string
         - description: Format of the response message.
           in: query
@@ -101,6 +132,7 @@ paths:
           name: key
           required: true
           schema:
+            example: demo
             type: string
       responses:
         "200":

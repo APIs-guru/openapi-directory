@@ -91,17 +91,74 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
-                  plication~1xml/schema"
-            application/xml:
-              schema:
                 description: A list of printouts.
                 properties:
                   printout:
                     description: printout object.
                     items:
-                      $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
-                        /200/content/application~1xml/schema"
+                      description: Printout Object.
+                      properties:
+                        date:
+                          description: The time that the letter has been send to the Printout Queue.
+                          example: 2019-11-07T08:08:38.614Z
+                          format: date-time
+                          type: string
+                        id:
+                          description: The printout id.
+                          example: "129313760000121"
+                          type: string
+                        letter:
+                          description: Letter Html body.
+                          example: <div> Welcome to...</div>
+                          type: string
+                        link:
+                          example: ""
+                          type: string
+                          xml:
+                            attribute: true
+                        printer:
+                          description: The printer.
+                          properties:
+                            desc:
+                              example: printer name
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: Printout Queue.
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        printout:
+                          description: The printout name.
+                          example: Testing
+                          type: string
+                        size:
+                          description: The size of the letter.
+                          example: 3.6kb
+                          type: string
+                        source:
+                          description: The user who printed the letter.
+                          example: Implementor, Ex Libris
+                          type: string
+                        status:
+                          description: Status of the printout (Pending/Printed/Canceled).
+                          properties:
+                            desc:
+                              example: Pending
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: Pending
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                      type: object
+                      xml:
+                        name: printout
                     type: array
                   total_record_count:
                     description: The total number of printouts.
@@ -113,6 +170,10 @@ paths:
                 type: object
                 xml:
                   name: printouts
+            application/xml:
+              schema:
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1json/schema"
           description: OK - This method returns an object based on rest_printouts.xsd. See
             [here](/alma/apis/docs/xsd/rest_printouts.xsd)
           headers:
@@ -178,11 +239,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
-                  plication~1xml/schema"
+                  plication~1json/schema"
             application/xml:
               schema:
                 $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
-                  plication~1xml/schema"
+                  plication~1json/schema"
           description: OK - This method returns an object based on rest_printouts.xsd. See
             [here](/alma/apis/docs/xsd/rest_printouts.xsd)
           headers:
@@ -214,73 +275,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
-                  /200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1json/schema/properties/printout/items"
             application/xml:
               schema:
-                description: Printout Object.
-                properties:
-                  date:
-                    description: The time that the letter has been send to the Printout Queue.
-                    example: 2019-11-07T08:08:38.614Z
-                    format: date-time
-                    type: string
-                  id:
-                    description: The printout id.
-                    example: "129313760000121"
-                    type: string
-                  letter:
-                    description: Letter Html body.
-                    example: <div> Welcome to...</div>
-                    type: string
-                  link:
-                    example: ""
-                    type: string
-                    xml:
-                      attribute: true
-                  printer:
-                    description: The printer.
-                    properties:
-                      desc:
-                        example: printer name
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: Printout Queue.
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  printout:
-                    description: The printout name.
-                    example: Testing
-                    type: string
-                  size:
-                    description: The size of the letter.
-                    example: 3.6kb
-                    type: string
-                  source:
-                    description: The user who printed the letter.
-                    example: Implementor, Ex Libris
-                    type: string
-                  status:
-                    description: Status of the printout (Pending/Printed/Canceled).
-                    properties:
-                      desc:
-                        example: Pending
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: Pending
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                type: object
-                xml:
-                  name: printout
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1json/schema/properties/printout/items"
           description: OK - This method returns an object based on rest_printout.xsd. See
             [here](/alma/apis/docs/xsd/rest_printout.xsd)
           headers:
@@ -318,12 +318,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
-                  /200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1json/schema/properties/printout/items"
             application/xml:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts~1{printout_id}/get/responses\
-                  /200/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1printouts/get/responses/200/content/ap\
+                  plication~1json/schema/properties/printout/items"
           description: OK - This method returns an object based on rest_printout.xsd. See
             [here](/alma/apis/docs/xsd/rest_printout.xsd)
           headers:
@@ -425,10 +425,6 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
-                  content/application~1xml/schema"
-            application/xml:
               schema:
                 description: A list of requested resources.
                 properties:
@@ -685,6 +681,10 @@ paths:
                 type: object
                 xml:
                   name: requested_resources
+            application/xml:
+              schema:
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
+                  content/application~1json/schema"
           description: OK - This method returns an object based on
             rest_requested_resources.xsd. See
             [here](/alma/apis/docs/xsd/rest_requested_resources.xsd)
@@ -767,11 +767,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
-                  content/application~1xml/schema"
+                  content/application~1json/schema"
             application/xml:
               schema:
                 $ref: "#/paths/~1almaws~1v1~1task-lists~1requested-resources/get/responses/200/\
-                  content/application~1xml/schema"
+                  content/application~1json/schema"
           description: OK - This method returns an object based on
             rest_requested_resources.xsd. See
             [here](/alma/apis/docs/xsd/rest_requested_resources.xsd)
@@ -871,10 +871,6 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
-                  /content/application~1xml/schema"
-            application/xml:
-              schema:
                 description: A list of resource sharing requests.
                 properties:
                   total_record_count:
@@ -887,12 +883,624 @@ paths:
                   user_resource_sharing_request:
                     description: UserResourceSharingRequest object.
                     items:
-                      $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
-                        0/content/application~1xml/schema"
+                      description: Resource sharing request Object.
+                      properties:
+                        additional_barcode:
+                          description: List of additional barcodes. Note that the first one appears in the
+                            main barcode field.
+                          items:
+                            example: "00023705571000021"
+                            type: string
+                            xml:
+                              name: additional_barcode
+                          type: array
+                          xml:
+                            name: additional_barcodes
+                            wrapped: true
+                        additional_person_name:
+                          description: The name of an additional contact.
+                          example: John Smith
+                          type: string
+                        agree_to_copyright_terms:
+                          description: Indication whether the requester has agreed to the copyright terms.
+                            Mandatory for borrowing requests. Currently not
+                            relevant for lending requests.
+                          example: "true"
+                          type: boolean
+                        allow_other_formats:
+                          description: Indication whether other formats besides the value in format field
+                            are acceptable. Default is false.
+                          example: "true"
+                          type: boolean
+                        author:
+                          description: Author of the requested resource.
+                          example: John Smith
+                          type: string
+                        author_initials:
+                          description: Author initials of the requested resource.
+                          example: J.S
+                          type: string
+                        barcode:
+                          description: Barcode of the requested resource.
+                          example: "00023705571000021"
+                          type: string
+                        bib_note:
+                          description: The note of the bibliographic record.
+                          example: ""
+                          type: string
+                        call_number:
+                          description: The call number of the book. Indicates the library shelf on which
+                            the books are located.
+                          example: "1"
+                          type: string
+                        chapter:
+                          description: The chapter number in the journal that contains the article.
+                          example: "4"
+                          type: string
+                        chapter_author:
+                          description: For a book chapter, the author of this chapter.
+                          example: John Smith
+                          type: string
+                        chapter_title:
+                          description: For a book chapter, the title of this chapter.
+                          example: Chapter title
+                          type: string
+                        citation_type:
+                          description: "Type of the requested resource. For example, book or article.
+                            Mandatory for borrowing requests. Mandatory when
+                            creating a lending request unless mms_id is
+                            supplied. For borrowing requests, possible codes are
+                            listed in 'PhysicalReadingListCitationTypes' [code
+                            table](https://developers.exlibrisgroup.com/blog/Wo\
+                            rking-with-the-code-tables-API): BK / CR. For
+                            lending requests, possible codes are listed in
+                            PR_CitationType [code
+                            table](https://developers.exlibrisgroup.com/blog/Wo\
+                            rking-with-the-code-tables-API): BOOK / JOURNAL."
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: BK
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        copyright_status:
+                          description: The copyright status of the request. Relevant if requested format
+                            is Digital, and 'rs_borrower_copyright_management'
+                            in customer parameters is true. Possible options are
+                            listed in 'ResourceSharingCopyrightsStatus' [code
+                            table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API),
+                            default is generated per request. Relevant for GET,
+                            POST and PUT of borrowing requests, and GET of
+                            lending requests.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: APPROVED
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        created_date:
+                          description: The request creation date.
+                          example: 2013-11-12Z
+                          format: date
+                          type: string
+                        created_time:
+                          description: The request creation time.
+                          example: 2019-12-18T14:36:48.659Z
+                          format: date-time
+                          type: string
+                        doi:
+                          description: The doi of the requested resource.
+                          example: ""
+                          type: string
+                        edition:
+                          description: The edition of the requested resource.
+                          example: "1"
+                          type: string
+                        editor:
+                          description: The editor of the book (typically used for books where chapters
+                            have different authors).
+                          example: John Smith
+                          type: string
+                        end_page:
+                          description: The end page of the requested resource.
+                          example: "49"
+                          type: string
+                        external_id:
+                          description: External identifier of the resource sharing request. Mandatory when
+                            creating a lending request.
+                          example: "12013330000874120"
+                          type: string
+                        format:
+                          description: Format of the resource requested. For example, physical or digital.
+                            Mandatory. Possible codes are listed in
+                            RequestFormats [code
+                            tables](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: PHYSICAL
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        fund:
+                          description: The code of the fund. Not relevant for lending requests.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ""
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        has_active_notes:
+                          description: Indication whether the request has active notes. Output parameter.
+                          example: "false"
+                          type: boolean
+                        isbn:
+                          description: ISBN of the requested resource.
+                          example: 0674824253 (alk. paper)
+                          type: string
+                        issn:
+                          description: ISSN of the requested resource.
+                          example: ""
+                          type: string
+                        issue:
+                          description: The issue of the requested resource.
+                          example: ""
+                          type: string
+                        journal_title:
+                          description: The title of the journal. Relevant when an article is requested.
+                          example: Journal title
+                          type: string
+                        last_interest_date:
+                          description: Last date the request is needed. Optional.
+                          example: 2013-12-13Z
+                          format: date
+                          type: string
+                        last_modified_date:
+                          description: Date by which the last change to the request was made.
+                          example: 2015-10-11Z
+                          format: date
+                          type: string
+                        last_modified_time:
+                          description: Time by which the last change to the request was made.
+                          example: 2019-12-18T14:36:48.659Z
+                          format: date-time
+                          type: string
+                        lcc_number:
+                          description: The library of congress number of the book.
+                          example: "102188800001"
+                          type: string
+                        level_of_service:
+                          description: The code of the resource sharing request Level of Service. Possible
+                            options are listed in 'LevelOfService' [code
+                            table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API),
+                            default is generated per request.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: NORMAL_LOCAL
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        lost_damaged_fee:
+                          $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                            /content/application~1json/schema/properties/user_r\
+                            esource_sharing_request/items/properties/shipping_c\
+                            ost"
+                        maximum_fee:
+                          description: Maximum fee the user is willing to pay for the request. Currently
+                            not relevant for lending requests.
+                          example: "2000.0"
+                          format: float
+                          type: number
+                        mms_id:
+                          description: "MMS ID of the requested resource. Borrowing request: this is
+                            relevant after physical material has arrived.
+                            Lending request: if supplied when creating a
+                            request, the request will be attached to this bib
+                            record. See [GET BIB
+                            API](https://developers.exlibrisgroup.com/alma/apis\
+                            /bibs/GET/gwPcGly021om4RTvtjbPleCklCGxeYAf3JPdiJpJh\
+                            UA=/af2fb69d-64f4-42bc-bb05-d8a0ae56936e)."
+                          example: "9933745180101020"
+                          type: string
+                        need_patron_info:
+                          description: Indication whether patron information is needed. Not relevant for
+                            lending requests.
+                          example: "true"
+                          type: boolean
+                        note:
+                          description: General note.
+                          example: ""
+                          type: string
+                        oclc_number:
+                          description: The oclc number of the book.
+                          example: "100100100"
+                          type: string
+                        other_standard_id:
+                          description: The other standard id of the requested resource.
+                          example: "100100100"
+                          type: string
+                        owner:
+                          description: "The resource sharing library code. See [Get libraries
+                            API](https://developers.exlibrisgroup.com/alma/apis\
+                            /conf/GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRa\
+                            VE=/37088dc9-c685-4641-bc7f-60b5ca7cabed). Borrowing
+                            request: Optional. Used only when there are more
+                            than one resource sharing library defined for the
+                            user. Lending request: Mandatory."
+                          example: John Smith
+                          type: string
+                        pages:
+                          description: The relevant pages of the requested resource.
+                          example: ""
+                          type: string
+                        part:
+                          description: The part of the requested resource.
+                          example: ""
+                          type: string
+                        partner:
+                          description: The code of the partner related to this request. See [Get partners
+                            API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
+                            Mandatory when creating a lending request.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: "10218885421021"
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        pickup_location:
+                          description: The pickup library code where the resource will be delivered.
+                            Relevant and mandatory for physical format delivery
+                            Borrowing request. Optional for digital format. Not
+                            relevant for lending requests.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ONL
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        pickup_location_type:
+                          description: "The pickup location type. The pickup location type. Possible
+                            values are: LIBRARY, CIRCULATION_DESK."
+                          example: LIBRARY
+                          type: string
+                        place_of_publication:
+                          description: The publication place of the requested resource.
+                          example: "Cambridge, Mass. :"
+                          type: string
+                        pmid:
+                          description: The pmid of the requested resource.
+                          example: "1284442031021"
+                          type: string
+                        preferred_send_method:
+                          description: Preferred send method. Possible options are listed in
+                            'ResourceSharingRequestSendMethod' [code
+                            table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                            Currently not relevant for lending requests.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ARIEL
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        printed:
+                          description: Indication whether the request is printed. Output parameter.
+                            Relevant for lending requests.
+                          example: "true"
+                          type: boolean
+                        publisher:
+                          description: Publisher of the requested resource.
+                          example: John Smith
+                          type: string
+                        reading_room:
+                          description: The code of the reading room where the item will be picked up.
+                            Mandatory when for_reading_room_only is true. Not
+                            relevant for lending requests.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ""
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        receive_cost:
+                          $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                            /content/application~1json/schema/properties/user_r\
+                            esource_sharing_request/items/properties/shipping_c\
+                            ost"
+                        remote_record_id:
+                          description: The remote record id of the requested resource.
+                          example: "100100100"
+                          type: string
+                        reported:
+                          description: Indication whether the request is reported. Output parameter.
+                            Relevant for lending requests.
+                          example: "false"
+                          type: boolean
+                        request_cost:
+                          $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                            /content/application~1json/schema/properties/user_r\
+                            esource_sharing_request/items/properties/shipping_c\
+                            ost"
+                        request_id:
+                          description: Internal identifier of the resource sharing request in Alma,
+                            generated by Alma. Should be used in subsequent
+                            queries regarding the request.
+                          example: "1001966830001021"
+                          type: string
+                        requested_language:
+                          description: The requested language for the resource sharing request. Possible
+                            codes are the enabled fields in
+                            ResourceSharingLanguages [code
+                            table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                            Default is null.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ml
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        requested_media:
+                          description: A description of the requested media. possible values are 1-7
+                            (codes from request media code table), and the codes
+                            from 'AdditionalRequestedMedia' [code
+                            table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                            The valid values are according to the Requested
+                            media definition mapping table.
+                          example: "1"
+                          type: string
+                        requester:
+                          description: The primary identifier and full name of the requesting user.
+                            Relevant for borrowing requests. Not relevant for
+                            lending requests.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: Jane doe
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        rs_note:
+                          description: List of related notes that appear in the Notes tab in the UI..
+                          items:
+                            description: Specific related note.
+                            properties:
+                              content:
+                                description: The note's text. Mandatory.
+                                example: ""
+                                type: string
+                              created_by:
+                                description: The creator of the note.
+                                example: ""
+                                type: string
+                              created_date:
+                                description: The creation date of the note. Default is the current date.
+                                example: 2024-05-30Z
+                                format: date
+                                type: string
+                            type: object
+                            xml:
+                              name: rs_note
+                          type: array
+                          xml:
+                            name: rs_notes
+                            wrapped: true
+                        series_title_number:
+                          description: The series title number of the requested resource.
+                          example: "100"
+                          type: string
+                        shipping_cost:
+                          description: ""
+                          properties:
+                            currency:
+                              description: The currency. Possible values are listed in 'Currency_CT' [code
+                                table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                              properties:
+                                desc:
+                                  type: string
+                                  xml:
+                                    attribute: true
+                                value:
+                                  example: USD
+                                  type: string
+                                  xml:
+                                    name: xml_value
+                              type: object
+                            sum:
+                              description: The total sum.
+                              example: "0.00"
+                              format: double
+                              type: number
+                          required:
+                            - sum
+                            - currency
+                          type: object
+                          xml:
+                            name: amount
+                        source:
+                          description: The source of the requested resource.
+                          example: ""
+                          type: string
+                        specific_edition:
+                          description: Indication whether edition is used in ISO Protocol and in Locate
+                            process. Default is true. Relevant when a book is
+                            requested.
+                          example: "true"
+                          type: boolean
+                        start_page:
+                          description: The relevant start page of the requested resource.
+                          example: "2"
+                          type: string
+                        status:
+                          description: "The resource sharing request status. Borrowing request: Possible
+                            codes are listed in MandatoryBorrowingWorkflowSteps
+                            or OptionalBorrowingWorkflowSteps [code
+                            tables](https://developers.exlibrisgroup.com/blog/W\
+                            orking-with-the-code-tables-API). Lending request:
+                            Possible codes are listed in
+                            MandatoryLendingWorkflowSteps or
+                            OptionalLendingWorkflowSteps [code
+                            tables](https://developers.exlibrisgroup.com/blog/W\
+                            orking-with-the-code-tables-API)."
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ACTIVE
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        supplied_format:
+                          description: Format of the supplied item. For example, physical or digital.
+                            Possible codes are listed in RequestFormats [code
+                            table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
+                            Relevant only after the request is supplied.
+                          properties:
+                            desc:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: DIGITAL
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        text_email:
+                          description: "Borrowing request: In use with alternative_address only. In use
+                            when sending in digital format. Lending request:
+                            Requester's Email."
+                          example: ""
+                          type: string
+                        text_postal_1:
+                          description: In use with alternative_address only. Not relevant for lending
+                            requests.
+                          example: ""
+                          type: string
+                        text_postal_2:
+                          description: In use with alternative_address only. Not relevant for lending
+                            requests.
+                          example: ""
+                          type: string
+                        text_postal_3:
+                          description: In use with alternative_address only. Not relevant for lending
+                            requests.
+                          example: ""
+                          type: string
+                        text_postal_4:
+                          description: In use with alternative_address only. Not relevant for lending
+                            requests.
+                          example: ""
+                          type: string
+                        title:
+                          description: Title of the requested resource. Mandatory unless mms_id is
+                            supplied.
+                          example: Harry Potter
+                          type: string
+                        use_alternative_address:
+                          description: An indication of whether the delivery should be to an alternative
+                            address. Default is false. Not relevant for lending
+                            requests.
+                          example: "false"
+                          type: boolean
+                        user_request:
+                          description: "The request linked to the resource sharing request. Borrowing
+                            requests: this is the related user request. Lending
+                            requests: this is the move/digitization request (if
+                            exists). See [GET user's request
+                            API](https://developers.exlibrisgroup.com/alma/apis\
+                            /users/GET/gwPcGly021r0XQMGAttqcPPFoLNxBoEZbQsUC/MW\
+                            TX7aNWi0EYKYFUfYyI8KvpG73JPdiJpJhUA=/0aa8d36f-53d6-\
+                            48ff-8996-485b90b103e4)."
+                          properties:
+                            link:
+                              type: string
+                              xml:
+                                attribute: true
+                            value:
+                              example: ""
+                              type: string
+                              xml:
+                                name: xml_value
+                          type: object
+                        volume:
+                          description: The volume number of the journal that contains the article.
+                          example: "10"
+                          type: string
+                        willing_to_pay:
+                          description: Indication whether patron is willing to pay. Currently not relevant
+                            for lending requests.
+                          example: "false"
+                          type: boolean
+                        year:
+                          description: Publication date of the requested resource.
+                          example: "2010"
+                          type: string
+                      type: object
+                      xml:
+                        name: user_resource_sharing_request
                     type: array
                 type: object
                 xml:
                   name: user_resource_sharing_requests
+            application/xml:
+              schema:
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                  /content/application~1json/schema"
           description: OK - This method returns an object based on
             rest_user_resource_sharing_requests.xsd. See
             [here](/alma/apis/docs/xsd/rest_user_resource_sharing_requests.xsd)
@@ -999,611 +1607,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
-                  0/content/application~1xml/schema"
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                  /content/application~1json/schema/properties/user_resource_sh\
+                  aring_request/items"
             application/xml:
               schema:
-                description: Resource sharing request Object.
-                properties:
-                  additional_barcode:
-                    description: List of additional barcodes. Note that the first one appears in the
-                      main barcode field.
-                    items:
-                      example: "00023705571000021"
-                      type: string
-                      xml:
-                        name: additional_barcode
-                    type: array
-                    xml:
-                      name: additional_barcodes
-                      wrapped: true
-                  additional_person_name:
-                    description: The name of an additional contact.
-                    example: John Smith
-                    type: string
-                  agree_to_copyright_terms:
-                    description: Indication whether the requester has agreed to the copyright terms.
-                      Mandatory for borrowing requests. Currently not relevant
-                      for lending requests.
-                    example: "true"
-                    type: boolean
-                  allow_other_formats:
-                    description: Indication whether other formats besides the value in format field
-                      are acceptable. Default is false.
-                    example: "true"
-                    type: boolean
-                  author:
-                    description: Author of the requested resource.
-                    example: John Smith
-                    type: string
-                  author_initials:
-                    description: Author initials of the requested resource.
-                    example: J.S
-                    type: string
-                  barcode:
-                    description: Barcode of the requested resource.
-                    example: "00023705571000021"
-                    type: string
-                  bib_note:
-                    description: The note of the bibliographic record.
-                    example: ""
-                    type: string
-                  call_number:
-                    description: The call number of the book. Indicates the library shelf on which
-                      the books are located.
-                    example: "1"
-                    type: string
-                  chapter:
-                    description: The chapter number in the journal that contains the article.
-                    example: "4"
-                    type: string
-                  chapter_author:
-                    description: For a book chapter, the author of this chapter.
-                    example: John Smith
-                    type: string
-                  chapter_title:
-                    description: For a book chapter, the title of this chapter.
-                    example: Chapter title
-                    type: string
-                  citation_type:
-                    description: "Type of the requested resource. For example, book or article.
-                      Mandatory for borrowing requests. Mandatory when creating
-                      a lending request unless mms_id is supplied. For borrowing
-                      requests, possible codes are listed in
-                      'PhysicalReadingListCitationTypes' [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-\
-                      with-the-code-tables-API): BK / CR. For lending requests,
-                      possible codes are listed in PR_CitationType [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-\
-                      with-the-code-tables-API): BOOK / JOURNAL."
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: BK
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  copyright_status:
-                    description: The copyright status of the request. Relevant if requested format
-                      is Digital, and 'rs_borrower_copyright_management' in
-                      customer parameters is true. Possible options are listed
-                      in 'ResourceSharingCopyrightsStatus' [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API),
-                      default is generated per request. Relevant for GET, POST
-                      and PUT of borrowing requests, and GET of lending
-                      requests.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: APPROVED
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  created_date:
-                    description: The request creation date.
-                    example: 2013-11-12Z
-                    format: date
-                    type: string
-                  created_time:
-                    description: The request creation time.
-                    example: 2019-12-18T14:36:48.659Z
-                    format: date-time
-                    type: string
-                  doi:
-                    description: The doi of the requested resource.
-                    example: ""
-                    type: string
-                  edition:
-                    description: The edition of the requested resource.
-                    example: "1"
-                    type: string
-                  editor:
-                    description: The editor of the book (typically used for books where chapters
-                      have different authors).
-                    example: John Smith
-                    type: string
-                  end_page:
-                    description: The end page of the requested resource.
-                    example: "49"
-                    type: string
-                  external_id:
-                    description: External identifier of the resource sharing request. Mandatory when
-                      creating a lending request.
-                    example: "12013330000874120"
-                    type: string
-                  format:
-                    description: Format of the resource requested. For example, physical or digital.
-                      Mandatory. Possible codes are listed in RequestFormats
-                      [code
-                      tables](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: PHYSICAL
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  fund:
-                    description: The code of the fund. Not relevant for lending requests.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ""
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  has_active_notes:
-                    description: Indication whether the request has active notes. Output parameter.
-                    example: "false"
-                    type: boolean
-                  isbn:
-                    description: ISBN of the requested resource.
-                    example: 0674824253 (alk. paper)
-                    type: string
-                  issn:
-                    description: ISSN of the requested resource.
-                    example: ""
-                    type: string
-                  issue:
-                    description: The issue of the requested resource.
-                    example: ""
-                    type: string
-                  journal_title:
-                    description: The title of the journal. Relevant when an article is requested.
-                    example: Journal title
-                    type: string
-                  last_interest_date:
-                    description: Last date the request is needed. Optional.
-                    example: 2013-12-13Z
-                    format: date
-                    type: string
-                  last_modified_date:
-                    description: Date by which the last change to the request was made.
-                    example: 2015-10-11Z
-                    format: date
-                    type: string
-                  last_modified_time:
-                    description: Time by which the last change to the request was made.
-                    example: 2019-12-18T14:36:48.659Z
-                    format: date-time
-                    type: string
-                  lcc_number:
-                    description: The library of congress number of the book.
-                    example: "102188800001"
-                    type: string
-                  level_of_service:
-                    description: The code of the resource sharing request Level of Service. Possible
-                      options are listed in 'LevelOfService' [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API),
-                      default is generated per request.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: NORMAL_LOCAL
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  lost_damaged_fee:
-                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
-                      0/content/application~1xml/schema/properties/request_cost"
-                  maximum_fee:
-                    description: Maximum fee the user is willing to pay for the request. Currently
-                      not relevant for lending requests.
-                    example: "2000.0"
-                    format: float
-                    type: number
-                  mms_id:
-                    description: "MMS ID of the requested resource. Borrowing request: this is
-                      relevant after physical material has arrived. Lending
-                      request: if supplied when creating a request, the request
-                      will be attached to this bib record. See [GET BIB
-                      API](https://developers.exlibrisgroup.com/alma/apis/bibs/\
-                      GET/gwPcGly021om4RTvtjbPleCklCGxeYAf3JPdiJpJhUA=/af2fb69d\
-                      -64f4-42bc-bb05-d8a0ae56936e)."
-                    example: "9933745180101020"
-                    type: string
-                  need_patron_info:
-                    description: Indication whether patron information is needed. Not relevant for
-                      lending requests.
-                    example: "true"
-                    type: boolean
-                  note:
-                    description: General note.
-                    example: ""
-                    type: string
-                  oclc_number:
-                    description: The oclc number of the book.
-                    example: "100100100"
-                    type: string
-                  other_standard_id:
-                    description: The other standard id of the requested resource.
-                    example: "100100100"
-                    type: string
-                  owner:
-                    description: "The resource sharing library code. See [Get libraries
-                      API](https://developers.exlibrisgroup.com/alma/apis/conf/\
-                      GET/gwPcGly021p29HpB7XTI4Dp4I8TKv6CAxBlD4LyRaVE=/37088dc9\
-                      -c685-4641-bc7f-60b5ca7cabed). Borrowing request:
-                      Optional. Used only when there are more than one resource
-                      sharing library defined for the user. Lending request:
-                      Mandatory."
-                    example: John Smith
-                    type: string
-                  pages:
-                    description: The relevant pages of the requested resource.
-                    example: ""
-                    type: string
-                  part:
-                    description: The part of the requested resource.
-                    example: ""
-                    type: string
-                  partner:
-                    description: The code of the partner related to this request. See [Get partners
-                      API](https://developers.exlibrisgroup.com/alma/apis/partners/GET/gwPcGly021piAVNPLaef7suP1zfa6Lui/8883ef41-c3b8-4792-9ff8-cb6b729d6e07).
-                      Mandatory when creating a lending request.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: "10218885421021"
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  pickup_location:
-                    description: The pickup library code where the resource will be delivered.
-                      Relevant and mandatory for physical format delivery
-                      Borrowing request. Optional for digital format. Not
-                      relevant for lending requests.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ONL
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  pickup_location_type:
-                    description: "The pickup location type. The pickup location type. Possible
-                      values are: LIBRARY, CIRCULATION_DESK."
-                    example: LIBRARY
-                    type: string
-                  place_of_publication:
-                    description: The publication place of the requested resource.
-                    example: "Cambridge, Mass. :"
-                    type: string
-                  pmid:
-                    description: The pmid of the requested resource.
-                    example: "1284442031021"
-                    type: string
-                  preferred_send_method:
-                    description: Preferred send method. Possible options are listed in
-                      'ResourceSharingRequestSendMethod' [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
-                      Currently not relevant for lending requests.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ARIEL
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  printed:
-                    description: Indication whether the request is printed. Output parameter.
-                      Relevant for lending requests.
-                    example: "true"
-                    type: boolean
-                  publisher:
-                    description: Publisher of the requested resource.
-                    example: John Smith
-                    type: string
-                  reading_room:
-                    description: The code of the reading room where the item will be picked up.
-                      Mandatory when for_reading_room_only is true. Not relevant
-                      for lending requests.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ""
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  receive_cost:
-                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
-                      0/content/application~1xml/schema/properties/request_cost"
-                  remote_record_id:
-                    description: The remote record id of the requested resource.
-                    example: "100100100"
-                    type: string
-                  reported:
-                    description: Indication whether the request is reported. Output parameter.
-                      Relevant for lending requests.
-                    example: "false"
-                    type: boolean
-                  request_cost:
-                    description: ""
-                    properties:
-                      currency:
-                        description: The currency. Possible values are listed in 'Currency_CT' [code
-                          table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
-                        properties:
-                          desc:
-                            type: string
-                            xml:
-                              attribute: true
-                          value:
-                            example: USD
-                            type: string
-                            xml:
-                              name: xml_value
-                        type: object
-                      sum:
-                        description: The total sum.
-                        example: "0.00"
-                        format: double
-                        type: number
-                    required:
-                      - sum
-                      - currency
-                    type: object
-                    xml:
-                      name: amount
-                  request_id:
-                    description: Internal identifier of the resource sharing request in Alma,
-                      generated by Alma. Should be used in subsequent queries
-                      regarding the request.
-                    example: "1001966830001021"
-                    type: string
-                  requested_language:
-                    description: The requested language for the resource sharing request. Possible
-                      codes are the enabled fields in ResourceSharingLanguages
-                      [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
-                      Default is null.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ml
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  requested_media:
-                    description: A description of the requested media. possible values are 1-7
-                      (codes from request media code table), and the codes from
-                      'AdditionalRequestedMedia' [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
-                      The valid values are according to the Requested media
-                      definition mapping table.
-                    example: "1"
-                    type: string
-                  requester:
-                    description: The primary identifier and full name of the requesting user.
-                      Relevant for borrowing requests. Not relevant for lending
-                      requests.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: Jane doe
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  rs_note:
-                    description: List of related notes that appear in the Notes tab in the UI..
-                    items:
-                      description: Specific related note.
-                      properties:
-                        content:
-                          description: The note's text. Mandatory.
-                          example: ""
-                          type: string
-                        created_by:
-                          description: The creator of the note.
-                          example: ""
-                          type: string
-                        created_date:
-                          description: The creation date of the note. Default is the current date.
-                          example: 2024-05-30Z
-                          format: date
-                          type: string
-                      type: object
-                      xml:
-                        name: rs_note
-                    type: array
-                    xml:
-                      name: rs_notes
-                      wrapped: true
-                  series_title_number:
-                    description: The series title number of the requested resource.
-                    example: "100"
-                    type: string
-                  shipping_cost:
-                    $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/post/responses/20\
-                      0/content/application~1xml/schema/properties/request_cost"
-                  source:
-                    description: The source of the requested resource.
-                    example: ""
-                    type: string
-                  specific_edition:
-                    description: Indication whether edition is used in ISO Protocol and in Locate
-                      process. Default is true. Relevant when a book is
-                      requested.
-                    example: "true"
-                    type: boolean
-                  start_page:
-                    description: The relevant start page of the requested resource.
-                    example: "2"
-                    type: string
-                  status:
-                    description: "The resource sharing request status. Borrowing request: Possible
-                      codes are listed in MandatoryBorrowingWorkflowSteps or
-                      OptionalBorrowingWorkflowSteps [code
-                      tables](https://developers.exlibrisgroup.com/blog/Working\
-                      -with-the-code-tables-API). Lending request: Possible
-                      codes are listed in MandatoryLendingWorkflowSteps or
-                      OptionalLendingWorkflowSteps [code
-                      tables](https://developers.exlibrisgroup.com/blog/Working\
-                      -with-the-code-tables-API)."
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ACTIVE
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  supplied_format:
-                    description: Format of the supplied item. For example, physical or digital.
-                      Possible codes are listed in RequestFormats [code
-                      table](https://developers.exlibrisgroup.com/blog/Working-with-the-code-tables-API).
-                      Relevant only after the request is supplied.
-                    properties:
-                      desc:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: DIGITAL
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  text_email:
-                    description: "Borrowing request: In use with alternative_address only. In use
-                      when sending in digital format. Lending request:
-                      Requester's Email."
-                    example: ""
-                    type: string
-                  text_postal_1:
-                    description: In use with alternative_address only. Not relevant for lending
-                      requests.
-                    example: ""
-                    type: string
-                  text_postal_2:
-                    description: In use with alternative_address only. Not relevant for lending
-                      requests.
-                    example: ""
-                    type: string
-                  text_postal_3:
-                    description: In use with alternative_address only. Not relevant for lending
-                      requests.
-                    example: ""
-                    type: string
-                  text_postal_4:
-                    description: In use with alternative_address only. Not relevant for lending
-                      requests.
-                    example: ""
-                    type: string
-                  title:
-                    description: Title of the requested resource. Mandatory unless mms_id is
-                      supplied.
-                    example: Harry Potter
-                    type: string
-                  use_alternative_address:
-                    description: An indication of whether the delivery should be to an alternative
-                      address. Default is false. Not relevant for lending
-                      requests.
-                    example: "false"
-                    type: boolean
-                  user_request:
-                    description: "The request linked to the resource sharing request. Borrowing
-                      requests: this is the related user request. Lending
-                      requests: this is the move/digitization request (if
-                      exists). See [GET user's request
-                      API](https://developers.exlibrisgroup.com/alma/apis/users\
-                      /GET/gwPcGly021r0XQMGAttqcPPFoLNxBoEZbQsUC/MWTX7aNWi0EYKY\
-                      FUfYyI8KvpG73JPdiJpJhUA=/0aa8d36f-53d6-48ff-8996-485b90b1\
-                      03e4)."
-                    properties:
-                      link:
-                        type: string
-                        xml:
-                          attribute: true
-                      value:
-                        example: ""
-                        type: string
-                        xml:
-                          name: xml_value
-                    type: object
-                  volume:
-                    description: The volume number of the journal that contains the article.
-                    example: "10"
-                    type: string
-                  willing_to_pay:
-                    description: Indication whether patron is willing to pay. Currently not relevant
-                      for lending requests.
-                    example: "false"
-                    type: boolean
-                  year:
-                    description: Publication date of the requested resource.
-                    example: "2010"
-                    type: string
-                type: object
-                xml:
-                  name: user_resource_sharing_request
+                $ref: "#/paths/~1almaws~1v1~1task-lists~1rs~1lending-requests/get/responses/200\
+                  /content/application~1json/schema/properties/user_resource_sh\
+                  aring_request/items"
           description: OK - This method returns an object based on
             rest_user_resource_sharing_request.xsd. See
             [here](/alma/apis/docs/xsd/rest_user_resource_sharing_request.xsd)

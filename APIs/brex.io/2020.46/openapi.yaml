@@ -71,14 +71,14 @@ paths:
                     text:
                       type: string
                     time:
-                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
-                        /application~1json/schema/properties/timestamp"
+                      format: date
+                      type: string
                     type:
                       type: string
                 type: array
           description: List of announcements
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves announcement data
@@ -139,7 +139,7 @@ paths:
                 type: array
           description: Result of a lookup by ISIN number
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of stock exchange listings
@@ -173,8 +173,50 @@ paths:
               schema:
                 properties:
                   company:
-                    $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/ap\
-                      plication~1json/schema"
+                    properties:
+                      address:
+                        items:
+                          type: string
+                        type: array
+                      country:
+                        type: string
+                      dateOfIncorporation:
+                        type: string
+                      extraData:
+                        type: object
+                      formattedAddress:
+                        items:
+                          type: string
+                        type: array
+                      id:
+                        type: string
+                      legalForm:
+                        type: string
+                      managingDirectors:
+                        items:
+                          type: string
+                        type: array
+                      name:
+                        type: string
+                      registrationNumber:
+                        type: string
+                      requestTime:
+                        type: integer
+                      secretaries:
+                        items:
+                          type: string
+                        type: array
+                      sicNaceCodes:
+                        items:
+                          type: string
+                        type: array
+                      status:
+                        type: string
+                    required:
+                      - country
+                      - id
+                      - name
+                      - registrationNumber
                   current_page:
                     format: int32
                     type: integer
@@ -196,7 +238,7 @@ paths:
                     type: boolean
           description: Result of a lookup by LEI number
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies
@@ -224,9 +266,10 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
+            responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the official business register
@@ -254,9 +297,10 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
+            responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the official business register
@@ -268,29 +312,10 @@ paths:
       operationId: CompanyNotificationList
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  properties:
-                    callbackCount:
-                      format: int32
-                      type: integer
-                    callbackUrl:
-                      type: string
-                    created:
-                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
-                        /application~1json/schema/properties/timestamp"
-                    monitorStatus:
-                      type: string
-                    notificationId:
-                      type: string
-                    subjectId:
-                      type: string
-                type: array
-          description: List of monitor webhooks
+          $ref: "#/paths/~1api~1v1~1company~1notification~1list~1%7Bid%7D/get/responses/2\
+            00"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of registered notifications
@@ -311,9 +336,29 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1notification~1list/get/responses/200"
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    callbackCount:
+                      format: int32
+                      type: integer
+                    callbackUrl:
+                      type: string
+                    created:
+                      $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
+                        tent/application~1json/schema/items/properties/time"
+                    monitorStatus:
+                      type: string
+                    notificationId:
+                      type: string
+                    subjectId:
+                      type: string
+                type: array
+          description: List of monitor webhooks
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of registered notifications
@@ -356,7 +401,7 @@ paths:
                   - monitorStatus
           description: Successful webhook registration response
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Creates a new notification
@@ -379,7 +424,7 @@ paths:
         "200":
           description: Empty response body
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Deactivates an active notification
@@ -412,91 +457,6 @@ paths:
           schema:
             format: int64
             type: integer
-      responses:
-        "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
-        default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
-      security:
-        - user_key: []
-      summary: Retrieves a list of companies from the KYC API company index
-      tags:
-        - v1-company
-  "/api/v1/company/search/number/{country}/{number}":
-    get:
-      description: KYC API company index lookup for companies with a certain register
-        number in a country.
-      operationId: CompanySearchNumber
-      parameters:
-        - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
-          in: path
-          name: country
-          required: true
-          schema:
-            format: string
-            type: string
-        - description: company registration number
-          in: path
-          name: number
-          required: true
-          schema:
-            format: string
-            type: string
-        - description: number of search results
-          in: query
-          name: limit
-          required: false
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
-        default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
-      security:
-        - user_key: []
-      summary: Retrieves a list of companies from the KYC API company index
-      tags:
-        - v1-company
-  "/api/v1/company/search/{country}":
-    post:
-      description: KYC API company index lookup by country and mixed parameters. This
-        function requires a country code then a mixture of name
-      operationId: CompanyAlternativeSearch
-      parameters:
-        - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
-          in: path
-          name: country
-          required: true
-          schema:
-            format: string
-            type: string
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              properties:
-                address:
-                  description: Company address (or address partial)
-                  type: string
-                name:
-                  description: Company name
-                  type: string
-                number:
-                  description: Company registration number
-                  type: string
-                phone:
-                  description: Company contact phone number
-                  type: string
-                url:
-                  description: Company url
-                  type: string
-                vat:
-                  description: Company VAT number
-                  type: string
-              type: object
-        description: VAT number and the company details
       responses:
         "200":
           content:
@@ -545,7 +505,94 @@ paths:
                 type: array
           description: List of companies
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Retrieves a list of companies from the KYC API company index
+      tags:
+        - v1-company
+  "/api/v1/company/search/number/{country}/{number}":
+    get:
+      description: KYC API company index lookup for companies with a certain register
+        number in a country.
+      operationId: CompanySearchNumber
+      parameters:
+        - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          in: path
+          name: country
+          required: true
+          schema:
+            format: string
+            type: string
+        - description: company registration number
+          in: path
+          name: number
+          required: true
+          schema:
+            format: string
+            type: string
+        - description: number of search results
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
+            responses/200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Retrieves a list of companies from the KYC API company index
+      tags:
+        - v1-company
+  "/api/v1/company/search/{country}":
+    post:
+      description: KYC API company index lookup by country and mixed parameters. This
+        function requires a country code then a mixture of name
+      operationId: CompanyAlternativeSearch
+      parameters:
+        - description: ISO_3166-1_alpha-2 representation of a country name - 2 chars
+          in: path
+          name: country
+          required: true
+          schema:
+            format: string
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                address:
+                  description: Company address (or address partial)
+                  type: string
+                name:
+                  description: Company name
+                  type: string
+                number:
+                  description: Company registration number
+                  type: string
+                phone:
+                  description: Company contact phone number
+                  type: string
+                url:
+                  description: Company url
+                  type: string
+                vat:
+                  description: Company VAT number
+                  type: string
+              type: object
+        description: VAT number and the company details
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
+            responses/200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the KYC API company index
@@ -589,9 +636,9 @@ paths:
             type: boolean
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves company announcements
@@ -629,9 +676,10 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
+            responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves structured data extracted from a company document
@@ -675,53 +723,11 @@ paths:
           content:
             application/json:
               schema:
-                properties:
-                  address:
-                    items:
-                      type: string
-                    type: array
-                  country:
-                    type: string
-                  dateOfIncorporation:
-                    type: string
-                  extraData:
-                    type: object
-                  formattedAddress:
-                    items:
-                      type: string
-                    type: array
-                  id:
-                    type: string
-                  legalForm:
-                    type: string
-                  managingDirectors:
-                    items:
-                      type: string
-                    type: array
-                  name:
-                    type: string
-                  registrationNumber:
-                    type: string
-                  requestTime:
-                    type: integer
-                  secretaries:
-                    items:
-                      type: string
-                    type: array
-                  sicNaceCodes:
-                    items:
-                      type: string
-                    type: array
-                  status:
-                    type: string
-                required:
-                  - country
-                  - id
-                  - name
-                  - registrationNumber
+                $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/\
+                  200/content/application~1json/schema/properties/company"
           description: ""
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves company details
@@ -775,7 +781,7 @@ paths:
                   - timestamp
           description: Result of a basic EIN number verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Verifies an EIN number
@@ -816,7 +822,7 @@ paths:
                   - timestamp
           description: Result of a comprehensive EIN number verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Verifies EIN number and retrieves company data
@@ -917,7 +923,7 @@ paths:
                   - timestamp
           description: Result of a EIN reverse lookup
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of EIN numbers
@@ -953,7 +959,7 @@ paths:
                   - valid
           description: Denotes validity of checked IBAN
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Checks validity of an IBAN number
@@ -988,7 +994,7 @@ paths:
           description: Denotes validity of checked IBAN and provides comprehensive
             information
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Checks validity of an IBAN number
@@ -1047,7 +1053,7 @@ paths:
                   - validationStatus
           description: Result of a basic NIF verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Verifies a NIF number
@@ -1128,7 +1134,7 @@ paths:
                   - validationStatus
           description: Result of a comprehensive NIF verification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Verifies a NIF number and retrieves company data
@@ -1152,8 +1158,8 @@ paths:
                     caseId:
                       type: string
                     created:
-                      $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
-                        /application~1json/schema/properties/timestamp"
+                      $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
+                        tent/application~1json/schema/items/properties/time"
                     identifier:
                       type: string
                     structured:
@@ -1165,7 +1171,7 @@ paths:
                 type: array
           description: View Pep Sanction Report monitors
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of monitor entries
@@ -1185,9 +1191,10 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1pepsanction~1monitor~1update~1{id}/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1pepsanction~1monitor~1update~1%7Bid%7D/post/responses\
+            /200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Deactive a pep sanction monitor
@@ -1228,8 +1235,8 @@ paths:
                   caseId:
                     type: string
                   created:
-                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
-                      /application~1json/schema/properties/timestamp"
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
+                      tent/application~1json/schema/items/properties/time"
                   identifier:
                     type: string
                   structured:
@@ -1240,7 +1247,7 @@ paths:
                     type: string
           description: View a monitor for a Pep Sanction Report
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Update details of active Pep Sanction monitor
@@ -1354,47 +1361,10 @@ paths:
         description: Optional parameters to enhance search
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  availability:
-                    type: string
-                  category:
-                    type: string
-                  countryCode:
-                    type: string
-                  description:
-                    type: string
-                  hasOptions:
-                    type: boolean
-                  options:
-                    items:
-                      type: string
-                    type: array
-                  price:
-                    format: float
-                    type: number
-                  provider:
-                    type: string
-                  sku:
-                    type: string
-                  type:
-                    type: string
-                required:
-                  - availability
-                  - category
-                  - countryCode
-                  - description
-                  - hasOptions
-                  - options
-                  - price
-                  - provider
-                  - sku
-                  - type
-          description: Product details
+          $ref: "#/paths/~1api~1v1~1product~1availability~1%7Bsku%7D~1%7BsubjectId%7D/get\
+            /responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Orders a new Pep Sanction Check Report
@@ -1457,8 +1427,8 @@ paths:
                   status:
                     type: string
                   timestamp:
-                    format: date
-                    type: string
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
+                      tent/application~1json/schema/items/properties/time"
                   type:
                     type: string
                 required:
@@ -1469,7 +1439,7 @@ paths:
                   - type
           description: Result of a PEP and sanctions list check
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a json or pdf report
@@ -1497,10 +1467,47 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1pepsanction~1order~1{type}~1{search}/post/responses/2\
-            00"
+          content:
+            application/json:
+              schema:
+                properties:
+                  availability:
+                    type: string
+                  category:
+                    type: string
+                  countryCode:
+                    type: string
+                  description:
+                    type: string
+                  hasOptions:
+                    type: boolean
+                  options:
+                    items:
+                      type: string
+                    type: array
+                  price:
+                    format: float
+                    type: number
+                  provider:
+                    type: string
+                  sku:
+                    type: string
+                  type:
+                    type: string
+                required:
+                  - availability
+                  - category
+                  - countryCode
+                  - description
+                  - hasOptions
+                  - options
+                  - price
+                  - provider
+                  - sku
+                  - type
+          description: Product details
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a document availability result
@@ -1546,7 +1553,7 @@ paths:
                   - url
           description: Product with details like URI to purchase it
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a catalog of products
@@ -1568,32 +1575,10 @@ paths:
             type: string
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  callback:
-                    type: string
-                  identity:
-                    type: string
-                  lastCallTime:
-                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
-                      /application~1json/schema/properties/timestamp"
-                  lastResponseCode:
-                    type: integer
-                  notifierType:
-                    type: string
-                  productOrderIdentity:
-                    type: string
-                required:
-                  - callback
-                  - lastCallTime
-                  - lastResponseCode
-                  - notifierType
-                  - productOrderIdentity
-          description: Details of configured product order notification
+          $ref: "#/paths/~1api~1v1~1product~1notifier~1%7BorderId%7D~1%7Btype%7D~1%7Buri%\
+            7D/post/responses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns metadata for a notifier
@@ -1635,9 +1620,32 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1notifier~1{notifierId}/get/responses/200"
+          content:
+            application/json:
+              schema:
+                properties:
+                  callback:
+                    type: string
+                  identity:
+                    type: string
+                  lastCallTime:
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
+                      tent/application~1json/schema/items/properties/time"
+                  lastResponseCode:
+                    type: integer
+                  notifierType:
+                    type: string
+                  productOrderIdentity:
+                    type: string
+                required:
+                  - callback
+                  - lastCallTime
+                  - lastResponseCode
+                  - notifierType
+                  - productOrderIdentity
+          description: Details of configured product order notification
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Creates a notifier for an order
@@ -1715,9 +1723,10 @@ paths:
         description: Parameters for the concierge order
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
+            nses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Places a concierge order
@@ -1766,43 +1775,10 @@ paths:
         description: Parameters for the UBO order
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  identity:
-                    type: string
-                  option:
-                    type: string
-                  ordered:
-                    $ref: "#/paths/~1api~1v1~1pepsanction~1retrieve~1{id}/get/responses/200/content\
-                      /application~1json/schema/properties/timestamp"
-                  owner:
-                    type: string
-                  price:
-                    format: float
-                    type: number
-                  sku:
-                    type: string
-                  status:
-                    type: string
-                  subjectId:
-                    type: string
-                  subjectValue:
-                    type: string
-                required:
-                  - identity
-                  - option
-                  - ordered
-                  - owner
-                  - price
-                  - sku
-                  - status
-                  - subjectId
-                  - subjectValue
-          description: Product order details
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
+            nses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Places a UBO order
@@ -1837,9 +1813,10 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
+            nses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Places a product order
@@ -1867,9 +1844,43 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
+          content:
+            application/json:
+              schema:
+                properties:
+                  identity:
+                    type: string
+                  option:
+                    type: string
+                  ordered:
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
+                      tent/application~1json/schema/items/properties/time"
+                  owner:
+                    type: string
+                  price:
+                    format: float
+                    type: number
+                  sku:
+                    type: string
+                  status:
+                    type: string
+                  subjectId:
+                    type: string
+                  subjectValue:
+                    type: string
+                required:
+                  - identity
+                  - option
+                  - ordered
+                  - owner
+                  - price
+                  - sku
+                  - status
+                  - subjectId
+                  - subjectValue
+          description: Product order details
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Places a product order
@@ -1921,7 +1932,7 @@ paths:
                 type: array
           description: List of products
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a list of products
@@ -1942,9 +1953,10 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
+            nses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns metadata for a order
@@ -1983,9 +1995,10 @@ paths:
         description: Parameters for the update order endpoint
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1ubo/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
+            nses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Updates metadata of an order
@@ -2044,7 +2057,7 @@ paths:
                       - data
           description: Details for retrieval of a delivered product
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves the result of an order
@@ -2068,7 +2081,24 @@ paths:
                 type: array
           description: List of countries
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    format: int32
+                    type: integer
+                  fault:
+                    type: string
+                  message:
+                    type: string
+                  tag:
+                    type: string
+                required:
+                  - code
+                  - message
+                  - tag
+          description: Detailed information about the error
       security:
         - user_key: []
       summary: Returns a list of countries
@@ -2094,24 +2124,7 @@ paths:
                 type: array
           description: List of the commercial registers and their health data
         default:
-          content:
-            application/json:
-              schema:
-                properties:
-                  code:
-                    format: int32
-                    type: integer
-                  fault:
-                    type: string
-                  message:
-                    type: string
-                  tag:
-                    type: string
-                required:
-                  - code
-                  - message
-                  - tag
-          description: Detailed information about the error
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns the health information for the official business registers
@@ -2142,7 +2155,7 @@ paths:
                 type: array
           description: List of pricing rules
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a list of products with prices
@@ -2191,7 +2204,7 @@ paths:
                   - possibleMatch
           description: Result of a basic TIN number check with company name
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Verifies a TIN number
@@ -2234,8 +2247,8 @@ paths:
                   einResult:
                     type: string
                   matchedCompanies:
-                    $ref: "#/paths/~1api~1v1~1company~1search~1{country}/post/responses/200/content\
-                      /application~1json/schema"
+                    $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
+                      responses/200/content/application~1json/schema"
                   tinResult:
                     type: string
                 required:
@@ -2245,7 +2258,7 @@ paths:
           description: Result of a basic TIN number check with company name and the list
             of matched companies
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: EIN Name Lookup with TIN number and retrieves company data
@@ -2281,7 +2294,7 @@ paths:
                   - possibleMatch
           description: Result of a EIN name lookup with TIN number
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: EIN Name Lookup with TIN number
@@ -2329,8 +2342,8 @@ paths:
               schema:
                 properties:
                   company:
-                    $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/ap\
-                      plication~1json/schema"
+                    $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/\
+                      200/content/application~1json/schema/properties/company"
                   confidenceScore:
                     type: number
                   validationStatus:
@@ -2340,7 +2353,7 @@ paths:
                   - validationStatus
           description: Denotes validity of checked VAT
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a verification result
@@ -2383,10 +2396,10 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1{country}/post/respons\
-            es/200"
+          $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1%7Bcountry%7D/post/res\
+            ponses/200"
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a verification result and company data
@@ -2443,7 +2456,7 @@ paths:
                   - level
           description: Denotes second level validity result of checked VAT
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a level two verification result
@@ -2490,8 +2503,9 @@ paths:
                     items:
                       properties:
                         company:
-                          $ref: "#/paths/~1api~1v1~1company~1{id}~1{dataset}/get/responses/200/content/ap\
-                            plication~1json/schema"
+                          $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/\
+                            200/content/application~1json/schema/properties/com\
+                            pany"
                         vat:
                           type: string
                     type: array
@@ -2509,7 +2523,7 @@ paths:
                   - level
           description: Result of a VAT number reverse Lookup
         default:
-          $ref: "#/paths/~1api~1v1~1system~1health/get/responses/default"
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Returns a list of vat numbers with additional data

@@ -4711,15 +4711,26 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
+        - description: Search for videos by specific artists (free-text, comma-separated
             list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated
+            description: Search for videos by specific artists (free-text, comma-separated
               list of artists).
             nullable: true
             type: string
+        - description: Search for videos by specific aspect ratios.
+          explode: false
+          in: query
+          name: aspect_ratios
+          schema:
+            description: Search for videos by specific aspect ratios.
+            items:
+              $ref: "#/components/schemas/VideoAspectRatioFilterType"
+            nullable: true
+            type: array
+          style: form
         - description: Provides filtering by collection code.
           explode: false
           in: query
@@ -5166,6 +5177,17 @@ paths:
               list of artists).
             nullable: true
             type: string
+        - description: Search for videos by specific aspect ratios.
+          explode: false
+          in: query
+          name: aspect_ratios
+          schema:
+            description: Search for videos by specific aspect ratios.
+            items:
+              $ref: "#/components/schemas/VideoAspectRatioFilterType"
+            nullable: true
+            type: array
+          style: form
         - description: Provides filtering by collection code.
           explode: false
           in: query
@@ -7182,6 +7204,7 @@ components:
       enum:
         - allowed_use
         - artist
+        - aspect_ratio
         - asset_family
         - call_for_image
         - caption
@@ -8647,6 +8670,17 @@ components:
           nullable: true
           type: string
       type: object
+    VideoAspectRatioFilterType:
+      enum:
+        - 16:9
+        - 9:16
+        - 3:4
+        - 4:3
+        - 4:5
+        - 2:1
+        - 17:9
+        - 9:17
+      type: string
     VideoDetailFieldValues:
       enum:
         - id
@@ -8847,6 +8881,7 @@ components:
       enum:
         - allowed_use
         - artist
+        - aspect_ratio
         - asset_family
         - call_for_image
         - caption

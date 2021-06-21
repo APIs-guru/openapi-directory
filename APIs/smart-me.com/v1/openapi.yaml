@@ -1901,6 +1901,29 @@ paths:
           description: OK
       tags:
         - OAuth
+  "/api/pico/charging/{id}":
+    get:
+      deprecated: false
+      operationId: PicoCharging_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PicoChargingData"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PicoChargingData"
+          description: OK
+      summary: Gets the active charging data of a pico station
+      tags:
+        - PicoCharging
   "/api/pico/history/{id}":
     get:
       deprecated: false
@@ -1938,6 +1961,111 @@ paths:
       summary: Gets the last charging history for a pico station
       tags:
         - PicoChargingHistory
+  /api/pico/loadmanagementgroup:
+    get:
+      deprecated: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+                type: array
+          description: OK
+      summary: "GET: api/pico/loadmanagementgroup\r
+
+        \            \r
+
+        \            Returns all available load management groups"
+      tags:
+        - PicoLoadmanagementGroup
+  "/api/pico/loadmanagementgroup/current/{serial}":
+    post:
+      deprecated: false
+      operationId: PicoLoadmanagementSetDynamicCurrent_Post
+      parameters:
+        - description: The serial number can be any pico serial in the group (e.g. 700001)
+          in: path
+          name: serial
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: The dynamic current of the group (in mA)
+          in: query
+          name: current
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+          description: OK
+      summary: Sets the dynamic current of a load management group or a single station.
+      tags:
+        - PicoLoadmanagementSetDynamicCurrent
+  "/api/pico/loadmanagementgroup/{id}":
+    get:
+      deprecated: false
+      operationId: PicoLoadmanagementGroup_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/PicoLoadmanagementGroupDto"
+          description: OK
+      summary: "GET: api/pico/loadmanagementgroup\r
+
+        \            \r
+
+        \            Returns a pico load management group by it's id"
+      tags:
+        - PicoLoadmanagementGroup
   "/api/pico/settings/{id}":
     get:
       deprecated: false
@@ -1971,90 +2099,6 @@ paths:
         \            Returns the settings of a pico charging station."
       tags:
         - PicoSettings
-  "/api/pico/{id}":
-    get:
-      deprecated: false
-      operationId: PicoCharging_Get
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PicoChargingData"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/PicoChargingData"
-          description: OK
-      summary: Gets the active charging data of a pico station
-      tags:
-        - PicoCharging
-  /api/rocketmaster/smartmedevices:
-    get:
-      deprecated: false
-      operationId: RocketmasterSmartMeDevices_Get
-      parameters:
-        - in: query
-          name: filter
-          required: true
-          schema:
-            enum:
-              - MeterFamilyTypeUnknown
-              - MeterFamilyTypeSmartMeConnectV1
-              - MeterFamiliyTypeSmartMeMeter
-              - MeterFamiliyTypeSmartMeMeterWithSwitch
-              - MeterFamilyTypeMBusGatewayV1
-              - MeterFamilyTypeRS485GatewayV1
-              - MeterFamilyTypeKamstrupModule
-              - MeterFamilyTypeSmartMe3PhaseMeter80A
-              - MeterFamilyTypeSmartMe3PhaseMeter32A
-              - MeterFamilyTypeSmartMe3PhaseTelstarTransformer
-              - MeterFamilyTypeLandisGyrModule
-              - MeterFamilyTypeFnnOpticalModule
-              - MeterFamilyTypeSmartMe3PhaseTelstar80AWiFi
-              - MeterFamilyTypeSmartMe3PhaseTelstar80AMobile
-              - MeterFamilyTypeSmartMe1PhaseMeter80AV2WiFi
-              - MeterFamilyTypeSmartMe1PhaseMeter32AV2WiFi
-              - MeterFamilyTypeSmartMe1PhaseMeter80AGprs
-              - MeterFamilyTypeSmartMe1PhaseMeter32AGprs
-              - MeterFamilyTypeWMBusGatewayV1
-              - MeterFamilyTypeSmartMe3PhaseTelstarTransformerMobile
-              - MeterFamilyTypeMithralHallV1
-              - MeterFamilyTypeRestApiMeter
-              - MeterFamilyTypeVirtualBillingMeter
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/SmartMeDeviceData"
-                type: array
-            application/xml:
-              schema:
-                items:
-                  $ref: "#/components/schemas/SmartMeDeviceData"
-                type: array
-            text/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/SmartMeDeviceData"
-                type: array
-            text/xml:
-              schema:
-                items:
-                  $ref: "#/components/schemas/SmartMeDeviceData"
-                type: array
-          description: OK
-      summary: Gets all smart-me devices
-      tags:
-        - RocketmasterSmartMeDevices
 components:
   schemas:
     AccessTokenToPut:
@@ -3033,6 +3077,24 @@ components:
           format: date-time
           type: string
       type: object
+    PicoLoadmanagementGroupDto:
+      description: DTO for the pico loadmanagement group
+      properties:
+        Id:
+          description: The ID of the loadmanagement group
+          type: string
+        MaxCurrent:
+          description: The max current of this loadmanagement group
+          format: double
+          type: number
+        Name:
+          description: The name of the station
+          type: string
+        NumberOfStations:
+          description: The number of assigned stations
+          format: int32
+          type: integer
+      type: object
     PicoSettingsDto:
       description: DTO for the pico charging station settings
       properties:
@@ -3052,6 +3114,17 @@ components:
         IdleImageUrl:
           description: The url of the idle image
           type: string
+        LoadmanagementGroupId:
+          description: The ID of the loadmanagement group
+          type: string
+        MaxCurrent:
+          description: The max current of this station (in A)
+          format: int32
+          type: integer
+        MinCurrent:
+          description: The max current of this station (in A)
+          format: int32
+          type: integer
         Name:
           description: The name of the station
           type: string
@@ -3148,82 +3221,6 @@ components:
             - UploadInterval_6h
             - UploadInterval_12h
             - UploadInterval_24h
-          type: string
-      type: object
-    SmartMeDeviceData:
-      description: Container for the smart-me device data (rocketmaster)
-      properties:
-        Connection:
-          description: The state of the connection
-          type: string
-        HWVersion:
-          description: The HW version of the meter
-          format: int32
-          type: integer
-        Id:
-          description: The ID of the device
-          type: string
-        IsOnline:
-          description: Flag if the meter is online
-          type: boolean
-        MeterFamilyType:
-          description: The meter family type
-          enum:
-            - MeterFamilyTypeUnknown
-            - MeterFamilyTypeSmartMeConnectV1
-            - MeterFamiliyTypeSmartMeMeter
-            - MeterFamiliyTypeSmartMeMeterWithSwitch
-            - MeterFamilyTypeMBusGatewayV1
-            - MeterFamilyTypeRS485GatewayV1
-            - MeterFamilyTypeKamstrupModule
-            - MeterFamilyTypeSmartMe3PhaseMeter80A
-            - MeterFamilyTypeSmartMe3PhaseMeter32A
-            - MeterFamilyTypeSmartMe3PhaseTelstarTransformer
-            - MeterFamilyTypeLandisGyrModule
-            - MeterFamilyTypeFnnOpticalModule
-            - MeterFamilyTypeSmartMe3PhaseTelstar80AWiFi
-            - MeterFamilyTypeSmartMe3PhaseTelstar80AMobile
-            - MeterFamilyTypeSmartMe1PhaseMeter80AV2WiFi
-            - MeterFamilyTypeSmartMe1PhaseMeter32AV2WiFi
-            - MeterFamilyTypeSmartMe1PhaseMeter80AGprs
-            - MeterFamilyTypeSmartMe1PhaseMeter32AGprs
-            - MeterFamilyTypeWMBusGatewayV1
-            - MeterFamilyTypeSmartMe3PhaseTelstarTransformerMobile
-            - MeterFamilyTypeMithralHallV1
-            - MeterFamilyTypeRestApiMeter
-            - MeterFamilyTypeVirtualBillingMeter
-          type: string
-        MeterUpateInProgress:
-          description: Flag if there is a meter update in progress
-          type: boolean
-        MeterUpdate:
-          description: Flag if there is a meter update
-          type: boolean
-        Name:
-          description: The name
-          type: string
-        SSID:
-          description: The wifi ssid
-          type: string
-        SWVerison:
-          description: The SW Version of the meter
-          format: int32
-          type: integer
-        SerialNumber:
-          description: The serial number
-          format: int64
-          type: integer
-        SupportReboot:
-          description: Flag if the device supports a reboot
-          type: boolean
-        SupportWiFiUpdate:
-          description: Flag if the device supports a wifi update
-          type: boolean
-        User:
-          description: The EMail of the user
-          type: string
-        WiFiVersion:
-          description: The version of the wifi module
           type: string
       type: object
     SubUserData:

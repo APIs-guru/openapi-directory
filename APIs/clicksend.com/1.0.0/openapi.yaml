@@ -832,8 +832,7 @@ paths:
                         email: ICMGR@VBSPT.com
                         first_name: Firstname40710
                         last_name: Lastname3672
-                        notes:
-                          $ref: "#/components/examples/example1/value"
+                        notes: null
                         phone_number: "+61433333333"
                         share_campaigns: 1
                         subaccount_id: 1716
@@ -956,8 +955,7 @@ paths:
                         email: johndoe1@awesome.com
                         first_name: John
                         last_name: Doe
-                        notes:
-                          $ref: "#/components/examples/example1/value"
+                        notes: null
                         phone_number: "+15184811001"
                         share_campaigns: 0
                         subaccount_id: 126
@@ -973,8 +971,7 @@ paths:
                       banned: 0
                       country: US
                       default_country_sms: US
-                      delivery_to:
-                        $ref: "#/components/examples/example1/value"
+                      delivery_to: null
                       low_credit_amount: "0.00"
                       old_dashboard: 0
                       reply_to: originalemail
@@ -1078,8 +1075,7 @@ paths:
                         currency_name_short: AUD
                         currency_prefix_c: c
                         currency_prefix_d: $
-                      _subaccount:
-                        $ref: "#/components/examples/example1/value"
+                      _subaccount: null
                       account: 0
                       account_billing_email: 1@test.com
                       account_billing_mobile: "+19171234591"
@@ -1204,10 +1200,8 @@ paths:
                         user_id: 1
                       account: 1
                       account_billing_email: 1@test.com
-                      account_billing_mobile:
-                        $ref: "#/components/examples/example1/value"
-                      account_name:
-                        $ref: "#/components/examples/example1/value"
+                      account_billing_mobile: null
+                      account_name: null
                       active: 1
                       auto_recharge: 0
                       auto_recharge_amount: "20.00"
@@ -1215,8 +1209,7 @@ paths:
                       banned: 0
                       country: US
                       default_country_sms: US
-                      delivery_to:
-                        $ref: "#/components/examples/example1/value"
+                      delivery_to: null
                       low_credit_amount: "1.50"
                       reply_to: 1@test.com
                       setting_beta: 0
@@ -1379,11 +1372,9 @@ paths:
                           rule_name: test
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 4
                       total: 4
                     http_code: 200
@@ -1691,8 +1682,7 @@ paths:
                       last_page: 2
                       next_page_url: https://rest.clicksend.com/v3/automations/fax/inbound?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 20
                     http_code: 200
@@ -1865,11 +1855,9 @@ paths:
                           rule_name: test
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 4
                       total: 4
                     http_code: 200
@@ -1957,8 +1945,7 @@ paths:
               examples:
                 response:
                   value:
-                    data:
-                      $ref: "#/components/examples/example1/value"
+                    data: null
                     http_code: 200
                     response_code: SUCCESS
                     response_msg: Your rule incoming fax receipt has been deleted.
@@ -2085,8 +2072,7 @@ paths:
                           rule_name: My Rule 10
                         - action: CREATE_CONTACT
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 9
@@ -2095,8 +2081,7 @@ paths:
                           rule_name: My Rule 9
                         - action: MOVE_CONTACT
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 8
@@ -2105,8 +2090,7 @@ paths:
                           rule_name: My Rule 8
                         - action: GROUP_SMS
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 7
@@ -2115,8 +2099,7 @@ paths:
                           rule_name: My Rule 7
                         - action: POLL
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 6
@@ -2125,8 +2108,7 @@ paths:
                           rule_name: My Rule 6
                         - action: SMS
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 5
@@ -2135,8 +2117,7 @@ paths:
                           rule_name: My Rule 5
                         - action: URL
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 4
@@ -2145,8 +2126,7 @@ paths:
                           rule_name: My Rule 4
                         - action: EMAIL_FIXED
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 3
@@ -2155,8 +2135,7 @@ paths:
                           rule_name: My Rule 3
                         - action: EMAIL_USER
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 2
@@ -2165,33 +2144,27 @@ paths:
                           rule_name: My Rule 2
                         - action: AUTO_REPLY
                           action_address: john@doe.com
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 1
-                          message_search_term:
-                            $ref: "#/components/examples/example1/value"
+                          message_search_term: null
                           message_search_type: 3
                           rule_name: My Rule 1
                         - action: CREATE_CONTACT_PLUS_NAME
                           action_address: 534
-                          body:
-                            $ref: "#/components/examples/example1/value"
+                          body: null
                           dedicated_number: "+61298441484"
                           enabled: 1
                           inbound_rule_id: 1
-                          message_search_term:
-                            $ref: "#/components/examples/example1/value"
+                          message_search_term: null
                           message_search_type: 3
                           rule_name: My Rule 1
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 10
                       total: 10
                     http_code: 200
@@ -2323,13 +2296,11 @@ paths:
                     data:
                       action: EMAIL_FIXED
                       action_address: john@doe.com
-                      body:
-                        $ref: "#/components/examples/example1/value"
+                      body: null
                       dedicated_number: "+61298441484"
                       enabled: 1
                       inbound_rule_id: 1
-                      message_search_term:
-                        $ref: "#/components/examples/example1/value"
+                      message_search_term: null
                       message_search_type: 3
                       rule_name: My Rule
                     http_code: 200
@@ -2401,13 +2372,11 @@ paths:
                     data:
                       action: EMAIL_FIXED
                       action_address: john@doe.com
-                      body:
-                        $ref: "#/components/examples/example1/value"
+                      body: null
                       dedicated_number: "+61298441484"
                       enabled: 1
                       inbound_rule_id: 1
-                      message_search_term:
-                        $ref: "#/components/examples/example1/value"
+                      message_search_term: null
                       message_search_type: 3
                       rule_name: My Rule
                     http_code: 200
@@ -2463,11 +2432,9 @@ paths:
                           rule_name: My Rule
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 5
                       total: 5
                     http_code: 200
@@ -2618,11 +2585,9 @@ paths:
                           rule_name: My Rule 2
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 1
                       total: 1
                     http_code: 200
@@ -2982,83 +2947,66 @@ paths:
                     data:
                       current_page: 1
                       data:
-                        - client_comments:
-                            $ref: "#/components/examples/example1/value"
+                        - client_comments: null
                           date_added: 1481610495
                           description: this is a test.
                           email_address: test@user.com
                           issue_id: 1
                           message_id: B388828B-AD46-4366-8AD3-0305FF5E3FE5
                           resolved: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
-                          support_comments:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
+                          support_comments: null
                           type: sms
                           user_id: 3820
-                        - client_comments:
-                            $ref: "#/components/examples/example1/value"
+                        - client_comments: null
                           date_added: 1481610523
                           description: this is a test.
                           email_address: test@user.com
                           issue_id: 2
                           message_id: 90396A38-146B-46C4-A455-675F620C2E05
                           resolved: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
-                          support_comments:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
+                          support_comments: null
                           type: sms
                           user_id: 3820
-                        - client_comments:
-                            $ref: "#/components/examples/example1/value"
+                        - client_comments: null
                           date_added: 1481611389
                           description: this is a test.
                           email_address: test@user.com
                           issue_id: 3
                           message_id: 4ECFB6CB-0300-45EC-96E1-5AB189432AF5
                           resolved: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
-                          support_comments:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
+                          support_comments: null
                           type: sms
                           user_id: 3820
-                        - client_comments:
-                            $ref: "#/components/examples/example1/value"
+                        - client_comments: null
                           date_added: 1481611467
                           description: this is a test.
                           email_address: test@user.com
                           issue_id: 4
                           message_id: test
                           resolved: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
-                          support_comments:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
+                          support_comments: null
                           type: sms
                           user_id: 3820
-                        - client_comments:
-                            $ref: "#/components/examples/example1/value"
+                        - client_comments: null
                           date_added: 1481614516
                           description: this is a test.
                           email_address: test@user.com
                           issue_id: 5
                           message_id: test
                           resolved: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
-                          support_comments:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
+                          support_comments: null
                           type: SMS
                           user_id: 3820
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 7
                       total: 5
                     http_code: 200
@@ -3185,11 +3133,9 @@ paths:
                           user_id: 1201
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 5
                       total: 5
                     http_code: 200
@@ -3321,8 +3267,7 @@ paths:
                           hard_bounce_count: 13
                           message_id: 7CB3227C-7F8C-4A72-A0CB-36283236D99F
                           open_count: 0
-                          processed_at:
-                            $ref: "#/components/examples/example1/value"
+                          processed_at: null
                           soft_bounce_count: 1
                           status: SpamReport
                           subject: tet subject
@@ -3336,11 +3281,9 @@ paths:
                           hard_bounce_count: 0
                           message_id: 603C5349-5A24-40B4-89ED-F7619F7CC8A3
                           open_count: 0
-                          processed_at:
-                            $ref: "#/components/examples/example1/value"
+                          processed_at: null
                           soft_bounce_count: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           subject: tet subject
                           to_address: test@test.com
                           to_name: test@test.com
@@ -3352,21 +3295,17 @@ paths:
                           hard_bounce_count: 0
                           message_id: 5C5C0918-B263-42AA-8B5D-9E8ACECC0C64
                           open_count: 0
-                          processed_at:
-                            $ref: "#/components/examples/example1/value"
+                          processed_at: null
                           soft_bounce_count: 0
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           subject: tet subject
                           to_address: test2@test.com
                           to_name: test2@test.com
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 3
                       total: 3
                     http_code: 200
@@ -3586,8 +3525,7 @@ paths:
               examples:
                 response:
                   value:
-                    data:
-                      $ref: "#/components/examples/example1/value"
+                    data: null
                     http_code: 200
                     response_code: SUCCESS
                     response_msg: Verification email has been sent.
@@ -3660,11 +3598,9 @@ paths:
                           verified: 0
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 2
                       total: 2
                     http_code: 200
@@ -3737,8 +3673,7 @@ paths:
               examples:
                 response:
                   value:
-                    data:
-                      $ref: "#/components/examples/example1/value"
+                    data: null
                     http_code: 200
                     response_code: SUCCESS
                     response_msg: Email address deleted.
@@ -3798,18 +3733,15 @@ paths:
                             currency_name_short: PHP
                             currency_prefix_c: c
                             currency_prefix_d: "?"
-                          bcc:
-                            $ref: "#/components/examples/example1/value"
+                          bcc: null
                           body: This is a test content <img
                             src="cid:7c65ccc4a134a809db09a839df9b75f055afcb62@click-send.com"
                             />
                           body_plain_text: This is a test content <img
                             src="cid:7c65ccc4a134a809db09a839df9b75f055afcb62@click-send.com"
                             />
-                          cc:
-                            $ref: "#/components/examples/example1/value"
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          cc: null
+                          custom_string: null
                           date_added: "1469001354"
                           from_email_address_id: 2
                           from_name: test
@@ -3836,14 +3768,11 @@ paths:
                             currency_name_short: PHP
                             currency_prefix_c: c
                             currency_prefix_d: "?"
-                          bcc:
-                            $ref: "#/components/examples/example1/value"
+                          bcc: null
                           body: This is a test content
                           body_plain_text: This is a test content
-                          cc:
-                            $ref: "#/components/examples/example1/value"
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          cc: null
+                          custom_string: null
                           date_added: "1469002942"
                           from_email_address_id: 2
                           from_name: test
@@ -3853,8 +3782,7 @@ paths:
                           schedule: "1469002942"
                           soft_bounce_count: 0
                           status: Queued:WaitSend
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_text: null
                           subaccount_id: 1039
                           subject: test email transaction
                           to:
@@ -3862,11 +3790,9 @@ paths:
                           user_id: 1201
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 2
                     http_code: 200
@@ -4190,8 +4116,7 @@ paths:
                         currency_name_short: AUD
                         currency_prefix_c: c
                         currency_prefix_d: $
-                      bcc_array:
-                        $ref: "#/components/examples/example1/value"
+                      bcc_array: null
                       body: This is a test <img src='cid:test'/>
                       cc_array:
                         - email: user1@test.com
@@ -4325,8 +4250,7 @@ paths:
                       cc:
                         - email: test2@clicksend.com
                           name: Jane Doe
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       date_added: 1507018182
                       from_email_address_id: 1
                       from_name: Joanne Doe
@@ -4371,11 +4295,9 @@ paths:
                           template_name: Minions
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 2
                       total: 2
                     http_code: 200
@@ -4665,14 +4587,11 @@ paths:
                           carrier: ""
                           country: AU
                           custom_string: custom_string
-                          date:
-                            $ref: "#/components/examples/example1/value"
+                          date: null
                           date_added: 1457572619
                           from: "+61267132168"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
+                          list_id: null
                           message_id: 2FDA7622-FC6E-4D21-B335-32FF860D7E19
                           message_pages: "6.00"
                           message_price: "13.2000"
@@ -4688,33 +4607,26 @@ paths:
                           carrier: ""
                           country: AU
                           custom_string: custom_string
-                          date:
-                            $ref: "#/components/examples/example1/value"
+                          date: null
                           date_added: 1457586514
                           from: "+61267132168"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
+                          list_id: null
                           message_id: A6A20382-8211-46B9-8F09-E7337AE6626D
                           message_pages: "6.00"
                           message_price: "13.2000"
                           schedule: "1436874701"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61261111115"
                           user_id: 1
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 2
                       total: 2
                     http_code: 200
@@ -4750,17 +4662,14 @@ paths:
                           date_added: 1457504350
                           from: "+61298441484"
                           from_email: will@smith.com
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 5106363A-AF38-4FB9-AF0E-B5FD38F62BDC
                           message_pages: 0
                           message_price: "0.0000"
                           schedule: "1436874701"
                           status: SUCCESS
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61261111111"
                           user_id: 1
@@ -4770,17 +4679,14 @@ paths:
                           date_added: 1457504350
                           from: "+61298441484"
                           from_email: john@doe.com
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 6BBEB11E-CAA6-4B04-8537-63619F3D6B37
                           message_pages: 6
                           message_price: "13.2000"
                           schedule: "1436874701"
                           status: SUCCESS
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61261111122"
                           user_id: 1
@@ -4821,11 +4727,9 @@ paths:
                           timestamp_send: "1450854013"
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 1
                       total: 1
                     http_code: 200
@@ -4849,12 +4753,9 @@ paths:
                 response:
                   value:
                     data:
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
-                      error_code:
-                        $ref: "#/components/examples/example1/value"
-                      error_text:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
+                      error_code: null
+                      error_text: null
                       message_id: 493FFB41-9733-4641-985F-BD79A067B58F
                       status_code: "201"
                       status_text: "Success: Message received on handset."
@@ -4926,17 +4827,14 @@ paths:
                       custom_string: custom_string
                       date_added: 1454394659
                       from: "+61267132168"
-                      list_id:
-                        $ref: "#/components/examples/example1/value"
+                      list_id: null
                       message_id: 3FAC74F1-D2AF-479B-8955-6395D561DEF4
                       message_pages: "1.00"
                       message_price: "1.000000"
                       schedule: "1436874701"
                       status: WaitApproval
-                      status_code:
-                        $ref: "#/components/examples/example1/value"
-                      status_text:
-                        $ref: "#/components/examples/example1/value"
+                      status_code: null
+                      status_text: null
                       subaccount_id: 1
                       to: "+61267132168"
                       user_id: 1
@@ -4987,17 +4885,14 @@ paths:
                           date_added: 1457504350
                           from: "+61298441484"
                           from_email: will@smith.com
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 5106363A-AF38-4FB9-AF0E-B5FD38F62BDC
                           message_pages: 0
                           message_price: "0.0000"
                           schedule: "1436874701"
                           status: SUCCESS
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61261111111"
                           user_id: 1
@@ -5007,17 +4902,14 @@ paths:
                           date_added: 1457504350
                           from: "+61298441484"
                           from_email: john@doe.com
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 6BBEB11E-CAA6-4B04-8537-63619F3D6B37
                           message_pages: 6
                           message_price: "13.2000"
                           schedule: "1436874701"
                           status: SUCCESS
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61261111122"
                           user_id: 1
@@ -5199,11 +5091,9 @@ paths:
                           list_name: ListFfD3OIiTwJ
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 9
                       total: 9
                     http_code: 200
@@ -5290,8 +5180,7 @@ paths:
                       address_city: Nashville
                       address_country: US
                       address_line_1: 1554 Buffalo Creek Road
-                      address_line_2:
-                        $ref: "#/components/examples/example1/value"
+                      address_line_2: null
                       address_postal_code: "37214"
                       address_state: TN
                       contact_id: 1
@@ -5441,186 +5330,130 @@ paths:
                       current_page: 1
                       data:
                         - _list_name: List6eaG4lGIc9
-                          address_city:
-                            $ref: "#/components/examples/example1/value"
-                          address_country:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_1:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
-                          address_postal_code:
-                            $ref: "#/components/examples/example1/value"
-                          address_state:
-                            $ref: "#/components/examples/example1/value"
+                          address_city: null
+                          address_country: null
+                          address_line_1: null
+                          address_line_2: null
+                          address_postal_code: null
+                          address_state: null
                           contact_id: 552786
                           custom_1: ""
                           custom_2: ""
                           custom_3: ""
                           custom_4: ""
                           date_added: "1436157486"
-                          email:
-                            $ref: "#/components/examples/example1/value"
-                          fax_number:
-                            $ref: "#/components/examples/example1/value"
+                          email: null
+                          fax_number: null
                           first_name: Ellen
                           last_name: Diaz
                           list_id: 428
-                          organization_name:
-                            $ref: "#/components/examples/example1/value"
+                          organization_name: null
                           phone_number: "+16783270696"
                         - _list_name: List6eaG4lGIc9
-                          address_city:
-                            $ref: "#/components/examples/example1/value"
-                          address_country:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_1:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
-                          address_postal_code:
-                            $ref: "#/components/examples/example1/value"
-                          address_state:
-                            $ref: "#/components/examples/example1/value"
+                          address_city: null
+                          address_country: null
+                          address_line_1: null
+                          address_line_2: null
+                          address_postal_code: null
+                          address_state: null
                           contact_id: 552787
                           custom_1: ""
                           custom_2: ""
                           custom_3: ""
                           custom_4: ""
                           date_added: "1436157925"
-                          email:
-                            $ref: "#/components/examples/example1/value"
-                          fax_number:
-                            $ref: "#/components/examples/example1/value"
+                          email: null
+                          fax_number: null
                           first_name: Ellen
                           last_name: Diaz
                           list_id: 428
-                          organization_name:
-                            $ref: "#/components/examples/example1/value"
+                          organization_name: null
                           phone_number: "+16783270697"
                         - _list_name: List6eaG4lGIc9
-                          address_city:
-                            $ref: "#/components/examples/example1/value"
-                          address_country:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_1:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
-                          address_postal_code:
-                            $ref: "#/components/examples/example1/value"
-                          address_state:
-                            $ref: "#/components/examples/example1/value"
+                          address_city: null
+                          address_country: null
+                          address_line_1: null
+                          address_line_2: null
+                          address_postal_code: null
+                          address_state: null
                           contact_id: 552790
                           custom_1: ""
                           custom_2: ""
                           custom_3: ""
                           custom_4: ""
                           date_added: "1436158227"
-                          email:
-                            $ref: "#/components/examples/example1/value"
-                          fax_number:
-                            $ref: "#/components/examples/example1/value"
+                          email: null
+                          fax_number: null
                           first_name: Ellen
                           last_name: Diaz
                           list_id: 428
-                          organization_name:
-                            $ref: "#/components/examples/example1/value"
+                          organization_name: null
                           phone_number: "+16783271811"
                         - _list_name: List6eaG4lGIc9
-                          address_city:
-                            $ref: "#/components/examples/example1/value"
-                          address_country:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_1:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
-                          address_postal_code:
-                            $ref: "#/components/examples/example1/value"
-                          address_state:
-                            $ref: "#/components/examples/example1/value"
+                          address_city: null
+                          address_country: null
+                          address_line_1: null
+                          address_line_2: null
+                          address_postal_code: null
+                          address_state: null
                           contact_id: 552791
                           custom_1: ""
                           custom_2: ""
                           custom_3: ""
                           custom_4: ""
                           date_added: "1436158297"
-                          email:
-                            $ref: "#/components/examples/example1/value"
-                          fax_number:
-                            $ref: "#/components/examples/example1/value"
+                          email: null
+                          fax_number: null
                           first_name: Ellen
                           last_name: Diaz
                           list_id: 428
-                          organization_name:
-                            $ref: "#/components/examples/example1/value"
+                          organization_name: null
                           phone_number: "+16783271975"
                         - _list_name: List6eaG4lGIc9
-                          address_city:
-                            $ref: "#/components/examples/example1/value"
-                          address_country:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_1:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
-                          address_postal_code:
-                            $ref: "#/components/examples/example1/value"
-                          address_state:
-                            $ref: "#/components/examples/example1/value"
+                          address_city: null
+                          address_country: null
+                          address_line_1: null
+                          address_line_2: null
+                          address_postal_code: null
+                          address_state: null
                           contact_id: 552789
                           custom_1: ""
                           custom_2: ""
                           custom_3: ""
                           custom_4: ""
                           date_added: "1436158143"
-                          email:
-                            $ref: "#/components/examples/example1/value"
-                          fax_number:
-                            $ref: "#/components/examples/example1/value"
+                          email: null
+                          fax_number: null
                           first_name: Ellen
                           last_name: Diaz
                           list_id: 428
-                          organization_name:
-                            $ref: "#/components/examples/example1/value"
+                          organization_name: null
                           phone_number: "+16783272925"
                         - _list_name: List6eaG4lGIc9
-                          address_city:
-                            $ref: "#/components/examples/example1/value"
-                          address_country:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_1:
-                            $ref: "#/components/examples/example1/value"
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
-                          address_postal_code:
-                            $ref: "#/components/examples/example1/value"
-                          address_state:
-                            $ref: "#/components/examples/example1/value"
+                          address_city: null
+                          address_country: null
+                          address_line_1: null
+                          address_line_2: null
+                          address_postal_code: null
+                          address_state: null
                           contact_id: 552788
                           custom_1: ""
                           custom_2: ""
                           custom_3: ""
                           custom_4: ""
                           date_added: "1436158047"
-                          email:
-                            $ref: "#/components/examples/example1/value"
-                          fax_number:
-                            $ref: "#/components/examples/example1/value"
+                          email: null
+                          fax_number: null
                           first_name: Ellen
                           last_name: Diaz
                           list_id: 428
-                          organization_name:
-                            $ref: "#/components/examples/example1/value"
+                          organization_name: null
                           phone_number: "+16783273589"
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 6
                       total: 6
                     http_code: 200
@@ -5983,7 +5816,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: list_id
           required: true
           schema:
@@ -6135,7 +5969,8 @@ paths:
       description: ""
       operationId: Get List of Acceptable Import Fields
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: list_id
           required: true
           schema:
@@ -6379,8 +6214,7 @@ paths:
                           date_added: 1467356623
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 2453E085-C1F8-47EC-AD35-B793960B1313
                           message_parts: "1.00"
@@ -6404,8 +6238,7 @@ paths:
                           date_added: 1467356623
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 54889DC7-A840-4A21-A977-EBE8C51FC2F8
                           message_parts: "1.00"
@@ -6413,10 +6246,8 @@ paths:
                           priority: 10
                           schedule: "1467356623"
                           status: Queued:WaitSend
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6431,8 +6262,7 @@ paths:
                           date_added: 1467356623
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: F2E75443-35A4-4300-9D12-E67682E762DB
                           message_parts: "1.00"
@@ -6440,10 +6270,8 @@ paths:
                           priority: 10
                           schedule: "1467356623"
                           status: Queued:WaitSend
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6458,8 +6286,7 @@ paths:
                           date_added: 1467356623
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 26B77CD6-5C98-46C7-A6DF-F76F29B7E09F
                           message_parts: "1.00"
@@ -6467,10 +6294,8 @@ paths:
                           priority: 10
                           schedule: "1467356623"
                           status: Queued:WaitSend
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6485,8 +6310,7 @@ paths:
                           date_added: 1467356623
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 70BAB69D-8EA5-417C-A8EA-7F0D843E30F3
                           message_parts: "1.00"
@@ -6510,8 +6334,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 42E3C025-FD9D-4C9F-B374-C7DF5337F6AF
                           message_parts: "1.00"
@@ -6519,10 +6342,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6537,8 +6358,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 218D5034-89A0-4C6C-B8F9-006BEF50B92B
                           message_parts: "1.00"
@@ -6546,10 +6366,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6564,8 +6382,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: EFCF9FAA-1BCA-4C58-884A-257C0D87124E
                           message_parts: "1.00"
@@ -6573,10 +6390,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6591,8 +6406,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 3E0DC217-7D0F-4C20-A3F2-E3362B938CAF
                           message_parts: "1.00"
@@ -6600,10 +6414,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6618,8 +6430,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 7827223E-0D73-49A1-95D0-8B85C3F5CC71
                           message_parts: "1.00"
@@ -6627,10 +6438,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6645,8 +6454,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 0D902342-3873-4EE9-A86A-CA1B0B755BBA
                           message_parts: "1.00"
@@ -6654,10 +6462,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6672,8 +6478,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 0549ADFD-9D70-4B1A-B62F-875A05B481D9
                           message_parts: "1.00"
@@ -6681,10 +6486,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6699,8 +6502,7 @@ paths:
                           date_added: 1467358732
                           direction: out
                           from: "+61298444213"
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           list_id: 429
                           message_id: 1327677D-D2EF-4442-A0F3-B480C7E94359
                           message_parts: "1.00"
@@ -6708,10 +6510,8 @@ paths:
                           priority: 10
                           schedule: "1467358732"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61298444214"
@@ -6720,27 +6520,22 @@ paths:
                           _media_file_url: http://yourdomain.com/_mms/C755FD73-AD7A-4EB8-A521-FC10BB37F3B7.gif
                           body: This is a test message.
                           carrier: Telstra
-                          contact_id:
-                            $ref: "#/components/examples/example1/value"
+                          contact_id: null
                           country: AU
                           custom_string: ""
                           date_added: 1467363093
                           direction: out
                           from: ""
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
+                          list_id: null
                           message_id: 42ABDB50-3DAE-41B5-8F48-6F227F38DB2E
                           message_parts: "1.00"
                           message_price: "2.4200"
                           priority: 10
                           schedule: "1467363093"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61437887633"
@@ -6749,27 +6544,22 @@ paths:
                           _media_file_url: http://yourdomain.com/_mms/2289C892-7518-4FBB-9A1C-7C34A93F6328.gif
                           body: This is a test message.
                           carrier: Telstra
-                          contact_id:
-                            $ref: "#/components/examples/example1/value"
+                          contact_id: null
                           country: AU
                           custom_string: ""
                           date_added: 1467363210
                           direction: out
                           from: ""
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
+                          list_id: null
                           message_id: 53271F40-EEB2-4DE9-A525-F0620211A4C9
                           message_parts: "1.00"
                           message_price: "2.4200"
                           priority: 10
                           schedule: "1467363210"
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           subject: This is a subject
                           to: "+61437887633"
@@ -6778,8 +6568,7 @@ paths:
                       last_page: 3
                       next_page_url: /?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 31
                     http_code: 200
@@ -7039,11 +6828,9 @@ paths:
                           timestamp_send: "1450854013"
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 3
                       total: 3
                     http_code: 200
@@ -7065,8 +6852,7 @@ paths:
               examples:
                 response:
                   value:
-                    data:
-                      $ref: "#/components/examples/example1/value"
+                    data: null
                     http_code: 200
                     response_code: SUCCESS
                     response_msg: Receipts has been marked as read.
@@ -7104,8 +6890,7 @@ paths:
                       date_added: 1467358732
                       direction: out
                       from: "+61298444213"
-                      from_email:
-                        $ref: "#/components/examples/example1/value"
+                      from_email: null
                       list_id: 429
                       message_id: 3E0DC217-7D0F-4C20-A3F2-E3362B938CAF
                       message_parts: "1.00"
@@ -7113,10 +6898,8 @@ paths:
                       priority: 10
                       schedule: "1467358732"
                       status: Queued
-                      status_code:
-                        $ref: "#/components/examples/example1/value"
-                      status_text:
-                        $ref: "#/components/examples/example1/value"
+                      status_code: null
+                      status_text: null
                       subaccount_id: 1
                       subject: This is a subject
                       to: "+61298444214"
@@ -7351,8 +7134,7 @@ paths:
               examples:
                 response:
                   value:
-                    data:
-                      $ref: "#/components/examples/example1/value"
+                    data: null
                     http_code: 200
                     response_code: SUCCESS
                     response_msg: MMS has been cancelled.
@@ -7444,8 +7226,7 @@ paths:
                       last_page: 2
                       next_page_url: https://rest.clicksend.com/v3/numbers/?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 22
                     http_code: 200
@@ -7610,8 +7391,7 @@ paths:
                       last_page: 1490
                       next_page_url: /?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 22346
                     http_code: 200
@@ -7639,409 +7419,312 @@ paths:
                         - _areas:
                             - campaign_id: 34
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 34
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 34
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 34
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1477040355
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 35
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 35
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 35
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 35
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1477040625
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas: []
                           _total_quantity: 0
                           campaign_id: 37
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1477040829
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 38
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 38
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 38
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 38
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1477040843
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 39
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 39
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 39
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 39
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1477275714
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 40
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 40
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 40
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 40
                           custom_string: Custom String
                           date_added: 1477275760
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 42
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 42
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 42
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 42
                           custom_string: Custom String
                           date_added: 1477276756
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 43
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 43
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 43
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 43
                           custom_string: Custom String
                           date_added: 1477276830
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 49
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 49
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 49
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 49
                           custom_string: Custom String
                           date_added: 1477279662
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 51
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 51
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 51
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 51
                           custom_string: Custom String
                           date_added: 1477279949
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 52
                               location_id: 1
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 52
                               location_id: 2
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 52
                               location_id: 3
-                              price:
-                                $ref: "#/components/examples/example1/value"
+                              price: null
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 52
                           custom_string: Custom String
                           date_added: 1477280021
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 53
                               location_id: 1
                               price: "222.00"
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 53
                               location_id: 2
                               price: "222.00"
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 53
                               location_id: 3
                               price: "111.00"
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 53
                           custom_string: Custom String
                           date_added: 1477280780
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 54
                               location_id: 1
                               price: "222.00"
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 54
                               location_id: 2
                               price: "222.00"
                               quantity: 100
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                             - campaign_id: 54
                               location_id: 3
                               price: "111.00"
                               quantity: 50
-                              status:
-                                $ref: "#/components/examples/example1/value"
+                              status: null
                           _total_quantity: "250"
                           campaign_id: 54
                           custom_string: Custom String
                           date_added: 1477281977
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
-                          status:
-                            $ref: "#/components/examples/example1/value"
+                          status: null
                           user_id: 1
                         - _areas:
                             - campaign_id: 55
@@ -8063,8 +7746,7 @@ paths:
                           campaign_id: 55
                           custom_string: Custom String
                           date_added: 1477284216
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477032023
                           status: Queued
@@ -8089,8 +7771,7 @@ paths:
                           campaign_id: 56
                           custom_string: Custom String
                           date_added: 1477284517
-                          message_id:
-                            $ref: "#/components/examples/example1/value"
+                          message_id: null
                           name: My Campaign
                           schedule: 1477384503
                           status: Scheduled
@@ -8177,8 +7858,7 @@ paths:
                         currency_prefix_d: Â£
                       data:
                         _areas:
-                          - campaign_id:
-                              $ref: "#/components/examples/example1/value"
+                          - campaign_id: null
                             country_code: AU
                             country_name: Australia
                             location_id: 22
@@ -8187,8 +7867,7 @@ paths:
                             price: 133.2
                             quantity: 12
                             status: Queued
-                          - campaign_id:
-                              $ref: "#/components/examples/example1/value"
+                          - campaign_id: null
                             country_code: GB
                             country_name: United Kingdom
                             location_id: 21
@@ -8197,8 +7876,7 @@ paths:
                             price: 11.1
                             quantity: 10
                             status: Queued
-                          - campaign_id:
-                              $ref: "#/components/examples/example1/value"
+                          - campaign_id: null
                             country_code: GB
                             country_name: United Kingdom
                             location_id: 21
@@ -8366,11 +8044,9 @@ paths:
                           postal_code: AD100
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 1
                       total: 1
                     http_code: 200
@@ -8459,26 +8135,21 @@ paths:
                         - address_city: DENVER
                           address_country: AU
                           address_line_1: 130 Scheuvront Drive
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
+                          address_line_2: null
                           address_name: John Smith
                           address_postal_code: "80202"
                           address_state: CO
                           colour: 0
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1447642486
                           duplex: 0
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 7C0CF79F-F6E0-471D-8CC8-D7AB34A4D423
                           post_pages: 1
                           post_price: "1.100000"
                           return_address_id: 4
-                          schedule:
-                            $ref: "#/components/examples/example1/value"
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          schedule: null
+                          source: null
                           status: Queued:Stamped
                           status_code: ""
                           status_text: ""
@@ -8487,26 +8158,21 @@ paths:
                         - address_city: DENVER
                           address_country: AU
                           address_line_1: 130 Scheuvront Drive
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
+                          address_line_2: null
                           address_name: John Smith
                           address_postal_code: "80202"
                           address_state: CO
                           colour: 0
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1447645676
                           duplex: 0
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: D7E64413-EE22-4E75-9D7D-1653AE5625CB
                           post_pages: 1
                           post_price: "1.100000"
                           return_address_id: 4
-                          schedule:
-                            $ref: "#/components/examples/example1/value"
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          schedule: null
+                          source: null
                           status: Queued:Stamped
                           status_code: ""
                           status_text: ""
@@ -8515,130 +8181,100 @@ paths:
                         - address_city: DENVER
                           address_country: AU
                           address_line_1: 130 Scheuvront Drive
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
+                          address_line_2: null
                           address_name: John Smith
                           address_postal_code: "80202"
                           address_state: CO
                           colour: 0
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1447742914
                           duplex: 0
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 0AE161A5-8054-4E4C-B4CC-82E1CAE25D92
                           post_pages: 1
                           post_price: "1.100000"
                           return_address_id: 4
-                          schedule:
-                            $ref: "#/components/examples/example1/value"
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          schedule: null
+                          source: null
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           user_id: 1
                         - address_city: DENVER
                           address_country: AU
                           address_line_1: 130 Scheuvront Drive
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
+                          address_line_2: null
                           address_name: John Smith
                           address_postal_code: "80202"
                           address_state: CO
                           colour: 0
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1447745108
                           duplex: 0
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: F18B4ECD-7508-4694-814C-BC87028A8AAE
                           post_pages: 1
                           post_price: "1.100000"
                           return_address_id: 4
-                          schedule:
-                            $ref: "#/components/examples/example1/value"
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          schedule: null
+                          source: null
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           user_id: 1
                         - address_city: DENVER
                           address_country: AU
                           address_line_1: 130 Scheuvront Drive
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
+                          address_line_2: null
                           address_name: John Smith
                           address_postal_code: "80202"
                           address_state: CO
                           colour: 0
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1447745144
                           duplex: 0
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 8849F629-F9DB-499E-B084-5088399A51E9
                           post_pages: 1
                           post_price: "1.100000"
                           return_address_id: 4
-                          schedule:
-                            $ref: "#/components/examples/example1/value"
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          schedule: null
+                          source: null
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           user_id: 1
                         - address_city: DENVER
                           address_country: AU
                           address_line_1: 130 Scheuvront Drive
-                          address_line_2:
-                            $ref: "#/components/examples/example1/value"
+                          address_line_2: null
                           address_name: John Smith
                           address_postal_code: "80202"
                           address_state: CO
                           colour: 0
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1447745652
                           duplex: 0
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 3095F46F-8ED2-49A2-B4CC-DC20786A6209
                           post_pages: 1
                           post_price: "1.100000"
                           return_address_id: 4
-                          schedule:
-                            $ref: "#/components/examples/example1/value"
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          schedule: null
+                          source: null
                           status: Queued
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           user_id: 1
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 6
                       total: 6
                     http_code: 200
@@ -8949,13 +8585,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482308357
                           ip_address: 127.0.0.1
                           letter_file_name: 65889986-E306-4309-B229-FD9215EE1013A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 909D6F4F-FC88-4BB8-AD96-D2F4B3139301
                           message_id_supplier: 2RXWRVFFG3G8D6TB6V6P6VX7RHR7
                           post_price: "1.710000"
@@ -8986,13 +8620,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482308357
                           ip_address: 127.0.0.1
                           letter_file_name: 2B306DC3-FD44-488B-92B2-D895934289FCA.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: E4FBBB5F-9E05-45D8-93AF-2C1A3BFD5284
                           message_id_supplier: 3HKQX79D2CT6DXDRQVRHPW7GDTM6
                           post_price: "1.710000"
@@ -9023,13 +8655,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482308357
                           ip_address: 127.0.0.1
                           letter_file_name: 81D66A74-E41A-4C9B-AD51-CC932051F486A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 550CB11B-2D75-4851-8E2C-798F67A0BF9D
                           message_id_supplier: B3YCJJRHQ2WD3CJFXKWB4BTFVYW8
                           post_price: "1.710000"
@@ -9060,13 +8690,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482308357
                           ip_address: 127.0.0.1
                           letter_file_name: 80686068-68A5-42C6-8CD3-DE2FF5914D81A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 65C65D93-C327-45BD-BD6D-3C9682C88533
                           message_id_supplier: R8CR92RVJH2Y8JC9JJCGT8RWH8B2
                           post_price: "1.710000"
@@ -9097,13 +8725,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482308357
                           ip_address: 127.0.0.1
                           letter_file_name: DD750F79-A44F-4729-AC35-9267FE5AB2EFA.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: B4E256A5-1D25-45D7-9DB5-EEC17761372A
                           message_id_supplier: V88MF93C9TVG2VF83T6K2GQVD6DJ
                           post_price: "1.710000"
@@ -9134,13 +8760,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482311889
                           ip_address: 127.0.0.1
                           letter_file_name: BB141DB5-57DF-4FA5-A9E4-A13E5AC716E7A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 4BF01D93-8BE5-42E4-AEAF-C9D1B27DCA23
                           message_id_supplier: CQK8KTHP3J2B2WG2DW86C2DDH6WW
                           post_price: "1.370000"
@@ -9171,13 +8795,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482311889
                           ip_address: 127.0.0.1
                           letter_file_name: BF430552-0581-42DD-BA00-B2228E7FE34BA.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: BBA4C1F0-5C7C-4A58-9B93-C48FAB2DA649
                           message_id_supplier: X9FBM27WHPJJW9JWT2XVJTYXVDY2
                           post_price: "1.370000"
@@ -9208,13 +8830,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482311889
                           ip_address: 127.0.0.1
                           letter_file_name: 13BB1876-E421-4B5A-8017-81E7F9598FE5A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 5BC692D1-EC43-4C4F-9E83-8543B52F8B7B
                           message_id_supplier: 7VW44YDFPJB7WWDRTXPKK9F7Q4RJ
                           post_price: "1.370000"
@@ -9245,13 +8865,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482311889
                           ip_address: 127.0.0.1
                           letter_file_name: 77A18FEA-8935-430E-B14A-7EBF5E1E19C8AA.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: CD2C87AA-D352-4998-BE7F-5EBDF089AF61
                           message_id_supplier: GQ8MJ4DBRGQFPQ9K9M239CBVKDP2
                           post_price: "1.370000"
@@ -9282,13 +8900,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482311889
                           ip_address: 127.0.0.1
                           letter_file_name: 21837EDA-1167-4104-A4D3-4A22FA0585E4AA.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 17CD0519-4E91-4EC0-B9AF-F1BE3BC7A485
                           message_id_supplier: GFJKTT8CJBCYR3DFFMPPBDQJQP32
                           post_price: "1.370000"
@@ -9319,13 +8935,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482313126
                           ip_address: 127.0.0.1
                           letter_file_name: C738FB89-750F-45E4-9E0A-EBD19A8B2884A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 8A2DAFE7-130F-4F9A-820B-85D79F874E05
                           message_id_supplier: 4F2JH87CP3PX22WRRYWVK8JJKXR2
                           post_price: "1.370000"
@@ -9356,13 +8970,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482313126
                           ip_address: 127.0.0.1
                           letter_file_name: 5089F9FC-0179-44E8-AC5E-225932FE9500A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 047CDB95-6C9D-4485-962F-EA28FFD7C0D9
                           message_id_supplier: MHPDXPKFJFR9H677TQM8PH4YDMHP
                           post_price: "1.370000"
@@ -9393,13 +9005,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482313126
                           ip_address: 127.0.0.1
                           letter_file_name: E17C7CE6-C2C9-476D-8886-E2B8CA6C30E3A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 653C5ED0-5AAD-4946-8E72-8152E23A6AA5
                           message_id_supplier: JYPVGC83PH68XX64QYBHQXRD4V2G
                           post_price: "1.370000"
@@ -9430,13 +9040,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482313126
                           ip_address: 127.0.0.1
                           letter_file_name: 252678EE-C597-4D20-B1DE-F21629E77831A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: EF4177A7-AE6D-4035-9052-10B2C9DF4564
                           message_id_supplier: 68TC768BG42TK6Q83VBFVKY87D99
                           post_price: "1.370000"
@@ -9467,13 +9075,11 @@ paths:
                           address_name: John Smith
                           address_postal_code: "123456"
                           address_state: State
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: 1482313126
                           ip_address: 127.0.0.1
                           letter_file_name: 8B2A85E1-D092-47DC-B70B-983B10AD83D6A.pdf
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: E196E8B4-1233-4EF4-8689-C296D55B9DAE
                           message_id_supplier: 8BF2H8CCDJMHCMCKR3THJ6XDDJ9K
                           post_price: "1.370000"
@@ -9489,8 +9095,7 @@ paths:
                       last_page: 3
                       next_page_url: https://rest.clicksend.com/v3/post/postcards/history?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 32
                     http_code: 200
@@ -9824,11 +9429,9 @@ paths:
                           user_id: 1
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 10
                       total: 10
                     http_code: 200
@@ -10504,8 +10107,7 @@ paths:
                       last_page: 2
                       next_page_url: https://rest.clicksend.com/v3/recharge/transactions/?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 16
                     http_code: 200
@@ -10578,11 +10180,9 @@ paths:
                           referral_rule_id: 5
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 5
                       total: 5
                     http_code: 200
@@ -10952,8 +10552,7 @@ paths:
                           banned: 0
                           country: AU
                           default_country_sms: AU
-                          delivery_to:
-                            $ref: "#/components/examples/example1/value"
+                          delivery_to: null
                           low_credit_amount: "1.50"
                           reply_to: originalemail
                           setting_beta: 0
@@ -11270,11 +10869,9 @@ paths:
                           username: username59
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 11
                       total: 11
                     http_code: 200
@@ -11334,8 +10931,7 @@ paths:
                       banned: 0
                       country: US
                       default_country_sms: US
-                      delivery_to:
-                        $ref: "#/components/examples/example1/value"
+                      delivery_to: null
                       low_credit_amount: "0.00"
                       old_dashboard: 0
                       reply_to: originalemail
@@ -11445,8 +11041,7 @@ paths:
                         email: johnis@awesome.com
                         first_name: John
                         last_name: Awesome
-                        notes:
-                          $ref: "#/components/examples/example1/value"
+                        notes: null
                         phone_number: "+61261063270"
                         subaccount_id: 146
                       account: 0
@@ -11461,8 +11056,7 @@ paths:
                       banned: 0
                       country: AU
                       default_country_sms: AU
-                      delivery_to:
-                        $ref: "#/components/examples/example1/value"
+                      delivery_to: null
                       low_credit_amount: "0.00"
                       old_dashboard: 0
                       reply_to: originalemail
@@ -11589,8 +11183,7 @@ paths:
                         currency_name_short: USD
                         currency_prefix_c: ¢
                         currency_prefix_d: $
-                      _subaccount:
-                        $ref: "#/components/examples/example1/value"
+                      _subaccount: null
                       account: 0
                       account_billing_email: johndoe2@awesome.com
                       account_billing_mobile: "+15184811002"
@@ -11603,8 +11196,7 @@ paths:
                       banned: 0
                       country: US
                       default_country_sms: US
-                      delivery_to:
-                        $ref: "#/components/examples/example1/value"
+                      delivery_to: null
                       low_credit_amount: "0.00"
                       old_dashboard: 0
                       reply_to: originalemail
@@ -11798,8 +11390,7 @@ paths:
                       current_page: 1
                       data:
                         - contact: "+16783270696"
-                          contacts_count:
-                            $ref: "#/components/examples/example1/value"
+                          contacts_count: null
                           id: 552807
                           name: Gorne
                           type: contact
@@ -11810,11 +11401,9 @@ paths:
                           type: list
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 2
                       total: 2
                     http_code: 200
@@ -11841,8 +11430,7 @@ paths:
                       data:
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444962803"
                           from: "+61353787447"
                           ip_address: 192.168.10.1
@@ -11850,15 +11438,13 @@ paths:
                           name: This is my awesome campaign.
                           schedule: "1444821615"
                           sms_campaign_id: 1
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Cancelled
                           subaccount_id: 1
                           user_id: 1
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444962630"
                           from: "+61353787448"
                           ip_address: 192.168.10.1
@@ -11866,15 +11452,13 @@ paths:
                           name: My Campaign 1
                           schedule: "1444821615"
                           sms_campaign_id: 7
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Queued
                           subaccount_id: 1
                           user_id: 1
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444893067"
                           from: "+61353787448"
                           ip_address: 192.168.10.1
@@ -11882,15 +11466,13 @@ paths:
                           name: My Campaign 1
                           schedule: "1444821615"
                           sms_campaign_id: 6
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Queued
                           subaccount_id: 1
                           user_id: 1
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444891837"
                           from: "+61353787448"
                           ip_address: 192.168.10.1
@@ -11898,15 +11480,13 @@ paths:
                           name: My Campaign 1
                           schedule: "1444821615"
                           sms_campaign_id: 5
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Sent
                           subaccount_id: 1
                           user_id: 1
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444888498"
                           from: "+61353787448"
                           ip_address: 192.168.10.1
@@ -11914,15 +11494,13 @@ paths:
                           name: My Campaign 1
                           schedule: "1444821615"
                           sms_campaign_id: 4
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Sent
                           subaccount_id: 1
                           user_id: 1
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444882130"
                           from: "+61353787448"
                           ip_address: 192.168.10.1
@@ -11930,15 +11508,13 @@ paths:
                           name: My Campaign 1
                           schedule: "1444821615"
                           sms_campaign_id: 3
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Sent
                           subaccount_id: 1
                           user_id: 1
                         - _total_count: 10
                           body: This is my new campaign message.
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
                           date_added: "1444882068"
                           from: "+61353787448"
                           ip_address: 192.168.10.1
@@ -11946,18 +11522,15 @@ paths:
                           name: My Campaign 1
                           schedule: "1444821615"
                           sms_campaign_id: 2
-                          source:
-                            $ref: "#/components/examples/example1/value"
+                          source: null
                           status: Sent
                           subaccount_id: 1
                           user_id: 1
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 20
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 7
                       total: 7
                     http_code: 200
@@ -12081,16 +11654,14 @@ paths:
                   value:
                     data:
                       body: "This is my new campaign message. Visit this url: smsg.us/xxxxx"
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       date_added: "1444962630"
                       from: "+61353787448"
                       list_id: 428
                       name: My Campaign 1
                       schedule: "1444821615"
                       sms_campaign_id: 7
-                      source:
-                        $ref: "#/components/examples/example1/value"
+                      source: null
                       status: Queued
                       subaccount_id: 1
                       url_to_shorten: http://yourdomain.com/
@@ -12275,19 +11846,13 @@ paths:
                             first_name: John
                             last_name: Smith
                             phone_number: "+61411111111"
-                          date_opened:
-                            $ref: "#/components/examples/example1/value"
+                          date_opened: null
                           open_count: 0
-                          user_browser:
-                            $ref: "#/components/examples/example1/value"
-                          user_device:
-                            $ref: "#/components/examples/example1/value"
-                          user_geo_country:
-                            $ref: "#/components/examples/example1/value"
-                          user_geo_region:
-                            $ref: "#/components/examples/example1/value"
-                          user_os:
-                            $ref: "#/components/examples/example1/value"
+                          user_browser: null
+                          user_device: null
+                          user_geo_country: null
+                          user_geo_region: null
+                          user_os: null
                         - contact:
                             contact_id: 2
                             first_name: Jane
@@ -12316,8 +11881,7 @@ paths:
                       last_page: 1
                       next_page_url: https://rest.clicksend.com/v3/sms-campaigns/1/link-tracking?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 3
                       total: 3
                     http_code: 200
@@ -12350,8 +11914,7 @@ paths:
                     data:
                       _total_count: 10
                       body: This is my new campaign message.
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       date_added: "1444882068"
                       from: "+61353787448"
                       ip_address: 192.168.10.1
@@ -12359,8 +11922,7 @@ paths:
                       name: My Campaign 1
                       schedule: "1444821615"
                       sms_campaign_id: 2
-                      source:
-                        $ref: "#/components/examples/example1/value"
+                      source: null
                       status: Sent
                       subaccount_id: 1
                       user_id: 1
@@ -12426,8 +11988,7 @@ paths:
                   value:
                     data:
                       body: This is an awesome message.
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       date_added: "1444962803"
                       from: "+61353787447"
                       ip_address: 192.168.10.1
@@ -12435,8 +11996,7 @@ paths:
                       name: Awesome campaign.
                       schedule: "1444821615"
                       sms_campaign_id: 1
-                      source:
-                        $ref: "#/components/examples/example1/value"
+                      source: null
                       status: Queued
                       subaccount_id: 1
                       user_id: 1
@@ -12469,8 +12029,7 @@ paths:
                   value:
                     data:
                       body: This is an awesome message.
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       date_added: "1444959876"
                       from: "+61353787447"
                       ip_address: 192.168.10.1
@@ -12478,8 +12037,7 @@ paths:
                       name: Awesome campaign.
                       schedule: "1444821615"
                       sms_campaign_id: 1
-                      source:
-                        $ref: "#/components/examples/example1/value"
+                      source: null
                       status: Cancelled
                       subaccount_id: 1
                       user_id: 1
@@ -12575,8 +12133,7 @@ paths:
                       last_page: 2
                       next_page_url: https://rest.clicksend.com/v3/sms/email-sms/?page=2
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 15
                       total: 25
                     http_code: 200
@@ -12649,11 +12206,9 @@ paths:
                           strip_string: This is a test2.
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 2
                       total: 2
                     http_code: 200
@@ -13006,26 +12561,20 @@ paths:
                           custom_string: this is a test
                           date: "1436932432"
                           direction: out
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           first_name: John
                           from: sendlist
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           last_name: Doe
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 4E90F4C3-43A3-489D-9AB8-DA1F4332A0C3
                           message_parts: "1.00"
                           message_price: "0.070000"
                           schedule: "1436879372"
                           status: Completed
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+16783270696"
                           user_id: 1
@@ -13037,26 +12586,20 @@ paths:
                           custom_string: this is a test
                           date: "1436932432"
                           direction: out
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           first_name: John
                           from: sendlist
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           last_name: Doe
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 7DA5EB64-29FF-4E8A-AB6B-FE945EC9B45E
                           message_parts: "1.00"
                           message_price: "0.070000"
                           schedule: "1436879372"
                           status: Completed
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+16783275492"
                           user_id: 1
@@ -13068,24 +12611,18 @@ paths:
                           custom_string: this is a test
                           date: "1436932503"
                           direction: out
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           from: sendmobile
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
+                          list_id: null
                           message_id: 064AF521-2A27-4B2A-9AB5-C45F555024EA
                           message_parts: "1.00"
                           message_price: "0.070000"
                           schedule: "1436871976"
                           status: Completed
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61411111111"
                           user_id: 1
@@ -13097,24 +12634,18 @@ paths:
                           custom_string: this is a test
                           date: "1436932503"
                           direction: out
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           from: sendlist
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
+                          list_id: null
                           message_id: 25DD465D-2286-45AF-AE25-D7AB36587B57
                           message_parts: "1.00"
                           message_price: "0.070000"
                           schedule: "1436879372"
                           status: Completed
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+61411111111"
                           user_id: 1
@@ -13126,26 +12657,20 @@ paths:
                           custom_string: this is a test
                           date: "1436932503"
                           direction: out
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           first_name: John
                           from: sendlist
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           last_name: Doe
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: CBC8FCF2-78B2-4C7B-ABFB-76B7AC5CB558
                           message_parts: "1.00"
                           message_price: "0.070000"
                           schedule: "1436879372"
                           status: Completed
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+16783270696"
                           user_id: 1
@@ -13157,36 +12682,28 @@ paths:
                           custom_string: this is a test
                           date: "1436932503"
                           direction: out
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           first_name: John
                           from: sendlist
-                          from_email:
-                            $ref: "#/components/examples/example1/value"
+                          from_email: null
                           last_name: Doe
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           message_id: 39266530-5430-44AA-B620-FDFC7D4A9184
                           message_parts: "1.00"
                           message_price: "0.070000"
                           schedule: "1436879372"
                           status: Completed
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+16783275492"
                           user_id: 1
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 6
                       total: 6
                     http_code: 200
@@ -13241,11 +12758,9 @@ paths:
                           to: SA9F3863C-D88E-4A54-BEF1-BD73A6E42E2E
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 3
                       total: 3
                     http_code: 200
@@ -13271,8 +12786,7 @@ paths:
                     data:
                       _keyword: this
                       body: This is a test incoming SMS. 5IHHOWWZTB.
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       from: "+61468460249"
                       message_id: C557B56E-83C0-4070-A74C-9BF05474B418
                       original_body: This is the original message. AA4NN45X7J.
@@ -13514,36 +13028,27 @@ paths:
                       current_page: 1
                       data:
                         - _message_type: sms
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
+                          error_code: null
+                          error_text: null
                           message_id: 31BC271B-1E0C-45F6-9E7E-97186C46BB82
                           status_code: "201"
                           status_text: "Success: Message received on handset."
                           timestamp: "1442381791"
                           timestamp_send: "1442381791"
                         - _message_type: sms
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
+                          error_code: null
+                          error_text: null
                           message_id: 23C8ADA3-FD8B-420B-801A-F829BB87AC6F
                           status_code: "201"
                           status_text: "Success: Message received on handset."
                           timestamp: "1442381829"
                           timestamp_send: "1442381829"
                         - _message_type: sms
-                          custom_string:
-                            $ref: "#/components/examples/example1/value"
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          custom_string: null
+                          error_code: null
+                          error_text: null
                           message_id: 3BD22FAD-A5D3-4D99-B4C0-16BF65BE052C
                           status_code: "201"
                           status_text: "Success: Message received on handset."
@@ -13551,11 +13056,9 @@ paths:
                           timestamp_send: "1442381861"
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 3
                       total: 3
                     http_code: 200
@@ -13578,12 +13081,9 @@ paths:
                 response:
                   value:
                     data:
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
-                      error_code:
-                        $ref: "#/components/examples/example1/value"
-                      error_text:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
+                      error_code: null
+                      error_text: null
                       message_id: 493FFB41-9733-4641-985F-BD79A067B58F
                       status_code: "201"
                       status_text: "Success: Message received on handset."
@@ -13859,11 +13359,9 @@ paths:
                           template_name: My Awesome Template
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 10
                       total: 10
                     http_code: 200
@@ -14540,8 +14038,7 @@ paths:
                           email: john@doe.com
                           first_name: John
                           last_name: Doe
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+13523944199"
                           share_campaigns: 0
                           subaccount_id: 1
@@ -14562,8 +14059,7 @@ paths:
                           email: testvT9@gmail.com
                           first_name: Firstname7JiPG
                           last_name: Lastname2olB1
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+19417516953"
                           share_campaigns: 0
                           subaccount_id: 27
@@ -14584,8 +14080,7 @@ paths:
                           email: testIiq@gmail.com
                           first_name: FirstnameSA3tA
                           last_name: Lastname22Pam
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+19417519130"
                           share_campaigns: 0
                           subaccount_id: 28
@@ -14606,8 +14101,7 @@ paths:
                           email: testxQv.updated@gmail.com
                           first_name: Firstname5dgZw Updated
                           last_name: Lastname0voRd Updated
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+19417519640"
                           share_campaigns: 0
                           subaccount_id: 29
@@ -14628,8 +14122,7 @@ paths:
                           email: testaLj.updated@gmail.com
                           first_name: FirstnameZcMSS Updated
                           last_name: LastnameDLmEB Updated
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+19417514461"
                           share_campaigns: 0
                           subaccount_id: 30
@@ -14650,8 +14143,7 @@ paths:
                           email: frank@test.com
                           first_name: John
                           last_name: Doe
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+13108147982"
                           share_campaigns: 0
                           subaccount_id: 47
@@ -14672,8 +14164,7 @@ paths:
                           email: frank@test.com
                           first_name: John
                           last_name: Doe
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+13108147982"
                           share_campaigns: 0
                           subaccount_id: 48
@@ -14694,18 +14185,15 @@ paths:
                           email: frank@test.com
                           first_name: John
                           last_name: Doe
-                          notes:
-                            $ref: "#/components/examples/example1/value"
+                          notes: null
                           phone_number: "+13108147982"
                           share_campaigns: 0
                           subaccount_id: 49
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 8
                       total: 8
                     http_code: 200
@@ -14800,8 +14288,7 @@ paths:
                       email: testvrq@gmail.com
                       first_name: FirstnameeGPqV
                       last_name: LastnamePvjJp
-                      notes:
-                        $ref: "#/components/examples/example1/value"
+                      notes: null
                       phone_number: "+619417513278"
                       share_campaigns: 0
                       subaccount_id: 59
@@ -14867,8 +14354,7 @@ paths:
                       email: testvrq@gmail.com
                       first_name: FirstnameeGPqV
                       last_name: LastnamePvjJp
-                      notes:
-                        $ref: "#/components/examples/example1/value"
+                      notes: null
                       phone_number: "+619417513278"
                       share_campaigns: 0
                       subaccount_id: 59
@@ -14905,8 +14391,7 @@ paths:
                 email: testfP0.updated@gmail.com
                 first_name: FirstnameKvdRZUpdated
                 last_name: LastnameHUPYGUpdated
-                notes:
-                  $ref: "#/components/examples/example1/value"
+                notes: null
                 password: pass
                 phone_number: "+19417519130"
                 share_campaigns: 0
@@ -14970,8 +14455,7 @@ paths:
                       email: testfP0.updated@gmail.com
                       first_name: FirstnameKvdRZ Updated
                       last_name: LastnameHUPYG Updated
-                      notes:
-                        $ref: "#/components/examples/example1/value"
+                      notes: null
                       phone_number: "+619417513065"
                       share_campaigns: 0
                       subaccount_id: 59
@@ -15595,12 +15079,10 @@ paths:
                           country: US
                           custom_string: mystring
                           date_added: 1443501617
-                          digits:
-                            $ref: "#/components/examples/example1/value"
+                          digits: null
                           from: "+19403944918"
                           lang: en-us
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           machine_detected: 0
                           message_id: D6456F8A-9DF9-46EC-8014-BFE87860F65C
                           message_parts: "1.00"
@@ -15608,10 +15090,8 @@ paths:
                           require_input: 0
                           schedule: "1538672470"
                           status: WaitApproval
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+15184811537"
                           to_type: mobile
@@ -15622,12 +15102,10 @@ paths:
                           country: US
                           custom_string: mystring
                           date_added: 1443501727
-                          digits:
-                            $ref: "#/components/examples/example1/value"
+                          digits: null
                           from: "+19403944918"
                           lang: en-us
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           machine_detected: 0
                           message_id: 25304958-15F2-41D9-8716-CF1F28EF506B
                           message_parts: "1.00"
@@ -15635,10 +15113,8 @@ paths:
                           require_input: 0
                           schedule: "1538672470"
                           status: WaitApproval
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+15184811537"
                           to_type: mobile
@@ -15649,12 +15125,10 @@ paths:
                           country: US
                           custom_string: mystring
                           date_added: 1443501727
-                          digits:
-                            $ref: "#/components/examples/example1/value"
+                          digits: null
                           from: "+19403944918"
                           lang: en-us
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           machine_detected: 0
                           message_id: 0B474459-B75F-4180-9567-7ECA3FC56BD7
                           message_parts: "1.00"
@@ -15662,10 +15136,8 @@ paths:
                           require_input: 0
                           schedule: "1538672470"
                           status: WaitApproval
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+15184811538"
                           to_type: mobile
@@ -15676,12 +15148,10 @@ paths:
                           country: US
                           custom_string: mystring
                           date_added: 1443501727
-                          digits:
-                            $ref: "#/components/examples/example1/value"
+                          digits: null
                           from: "+19403944918"
                           lang: en-us
-                          list_id:
-                            $ref: "#/components/examples/example1/value"
+                          list_id: null
                           machine_detected: 0
                           message_id: A991556C-D4A5-47D5-A5E5-C9D251C8743A
                           message_parts: "1.00"
@@ -15689,10 +15159,8 @@ paths:
                           require_input: 0
                           schedule: "1538672470"
                           status: WaitApproval
-                          status_code:
-                            $ref: "#/components/examples/example1/value"
-                          status_text:
-                            $ref: "#/components/examples/example1/value"
+                          status_code: null
+                          status_text: null
                           subaccount_id: 1
                           to: "+15184811539"
                           to_type: mobile
@@ -15700,11 +15168,9 @@ paths:
                           voice: female
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 4
                       total: 4
                     http_code: 200
@@ -15914,8 +15380,7 @@ paths:
                           country: AU
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
@@ -15933,8 +15398,7 @@ paths:
                           country: AU
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: D0C273EE-816D-4DF2-8E9D-9D9C65F168F3
@@ -15952,8 +15416,7 @@ paths:
                           country: US
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: A1845B61-C404-4793-8661-97890C19C8A2
@@ -15971,8 +15434,7 @@ paths:
                           country: US
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: DB545FAA-7325-465F-A696-8BDBFA8C1E49
@@ -16013,26 +15475,20 @@ paths:
                     data:
                       current_page: 1
                       data:
-                        - custom_string:
-                            $ref: "#/components/examples/example1/value"
+                        - custom_string: null
                           digits: "2"
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           message_id: 31BC271B-1E0C-45F6-9E7E-97186C46BB82
                           message_type: voice
                           status_code: "201"
                           status_text: "Success: Message received on handset."
                           timestamp: "1442381791"
                           timestamp_send: "1442381791"
-                        - custom_string:
-                            $ref: "#/components/examples/example1/value"
+                        - custom_string: null
                           digits: "5"
-                          error_code:
-                            $ref: "#/components/examples/example1/value"
-                          error_text:
-                            $ref: "#/components/examples/example1/value"
+                          error_code: null
+                          error_text: null
                           message_id: 23C8ADA3-FD8B-420B-801A-F829BB87AC6F
                           message_type: voice
                           status_code: "201"
@@ -16041,11 +15497,9 @@ paths:
                           timestamp_send: "1442381829"
                       from: 1
                       last_page: 1
-                      next_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      next_page_url: null
                       per_page: 15
-                      prev_page_url:
-                        $ref: "#/components/examples/example1/value"
+                      prev_page_url: null
                       to: 2
                       total: 2
                     http_code: 200
@@ -16068,13 +15522,10 @@ paths:
                 response:
                   value:
                     data:
-                      custom_string:
-                        $ref: "#/components/examples/example1/value"
+                      custom_string: null
                       digits: "2"
-                      error_code:
-                        $ref: "#/components/examples/example1/value"
-                      error_text:
-                        $ref: "#/components/examples/example1/value"
+                      error_code: null
+                      error_text: null
                       message_id: CEA5E06A-F4BF-4EC6-8315-B25087352DFA
                       message_type: voice
                       status_code: "201"
@@ -16112,8 +15563,7 @@ paths:
               examples:
                 response:
                   value:
-                    data:
-                      $ref: "#/components/examples/example1/value"
+                    data: null
                     http_code: 200
                     response_code: SUCCESS
                     response_msg: Receipts have been marked as read.
@@ -16256,8 +15706,7 @@ paths:
                           country: AU
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
@@ -16276,8 +15725,7 @@ paths:
                           country: AU
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: D0C273EE-816D-4DF2-8E9D-9D9C65F168F3
@@ -16296,8 +15744,7 @@ paths:
                           country: US
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: A1845B61-C404-4793-8661-97890C19C8A2
@@ -16316,8 +15763,7 @@ paths:
                           country: US
                           custom_string: this is a test
                           date: 1436871253
-                          from:
-                            $ref: "#/components/examples/example1/value"
+                          from: null
                           lang: en-au
                           machine_detection: 0
                           message_id: DB545FAA-7325-465F-A696-8BDBFA8C1E49
@@ -16373,9 +15819,6 @@ paths:
       tags:
         - Voice
 components:
-  examples:
-    example1:
-      value: null
   parameters:
     subaccount_id1:
       description: The subaccount ID you want to access.

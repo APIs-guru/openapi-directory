@@ -102,7 +102,8 @@ paths:
   "/anything/{anything}":
     delete:
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: anything
           required: true
           schema:
@@ -115,7 +116,8 @@ paths:
         - Anything
     get:
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: anything
           required: true
           schema:
@@ -128,7 +130,8 @@ paths:
         - Anything
     patch:
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: anything
           required: true
           schema:
@@ -141,7 +144,8 @@ paths:
         - Anything
     post:
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: anything
           required: true
           schema:
@@ -154,7 +158,8 @@ paths:
         - Anything
     put:
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: anything
           required: true
           schema:
@@ -167,7 +172,8 @@ paths:
         - Anything
     trace:
       parameters:
-        - in: path
+        - description: Automatically added
+          in: path
           name: anything
           required: true
           schema:
@@ -612,7 +618,8 @@ paths:
           name: If-Match
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: etag
           required: true
           schema:

@@ -6,12 +6,10 @@ info:
   contact:
     email: support@exavault.com
     name: ExaVault Support
-  description: >
-    ExaVault's API allows you to incorporate ExaVault's suite of file
-    transfer and user management tools into your own application.
-
-
-    ExaVault supports both POST (recommended when requesting large data sets) and GET operations, and requires an API key in order to use.
+  description: ExaVaults API allows you to incorporate ExaVaults suite of file
+    transfer and user management tools into your own application.\nExaVault
+    supports both POST (recommended when requesting large data sets) and GET
+    operations, and requires an API key in order to use.
   title: ExaVault
   version: "2.0"
   x-apisguru-categories:
@@ -67,6 +65,11 @@ tags:
       users, so consider adding a user facing confirmation step before sending
       an update call.
     name: Account
+  - description: THe SSH Keys APIs allow you to manage SSH keys for users in your
+      account. You can upload the contents of a public key for a user, get
+      information for keys which are already defined, and remove a key from a
+      user.
+    name: SSH Keys
   - description: The forms APIs allow you to manage the inputs and data submitted
       through receive folder forms.
     name: Form
@@ -115,36 +118,6 @@ paths:
                     accountOnboarding: true
                     allowedIp: null
                     branding: true
-                    callbackSettings:
-                      - accountId: 2
-                        endpointUrl: https://example.com
-                        triggers:
-                          compress: false
-                          copy: false
-                          createFolder: false
-                          createNotification: false
-                          createUser: false
-                          delete: false
-                          deleteNotification: false
-                          deleteReceive: false
-                          deleteSend: false
-                          deleteShare: false
-                          deleteUser: false
-                          download: false
-                          extract: false
-                          move: false
-                          receiveFiles: false
-                          rename: false
-                          sendFiles: false
-                          shareFolder: false
-                          updateNotification: false
-                          updateReceive: false
-                          updateShare: false
-                          updateUser: false
-                          upload: false
-                          userConnect: false
-                          userDisconnect: false
-                        verificationToken: 345a09f7a4ee8c2889d3ee4909838237
                     clientId: 1
                     complexPasswords: false
                     created: 2019-05-30T20:48:57Z
@@ -154,10 +127,15 @@ paths:
                     maxUsers: 5
                     modified: 2019-08-27T01:03:41Z
                     quota:
-                      diskLimit: 37580963840
-                      diskUsed: 24938382543
-                      noticeEnabled: true
+                      bandwidthLimit: 9223372036854776000
+                      bandwidthUsed: 0
+                      diskLimit: 107374182400
+                      diskUsed: 4770252339
+                      noticeEnabled: false
                       noticeThreshold: 90
+                      transactionsLimit: 120000
+                      transactionsNoticeEnabled: false
+                      transactionsNoticeThreshold: 90
                     secureOnly: false
                     showReferralLinks: true
                     status: 1
@@ -258,34 +236,6 @@ paths:
               brandingSettings:
                 companyName: Example File Transfer
                 theme: light
-              callbackSettings:
-                endpointUrl: https://example.com/api/listen
-                triggers:
-                  compress: false
-                  copy: false
-                  createFolder: false
-                  createNotification: true
-                  createUser: false
-                  delete: false
-                  deleteNotification: false
-                  deleteReceive: false
-                  deleteSend: false
-                  deleteShare: false
-                  deleteUser: false
-                  download: true
-                  extract: false
-                  move: false
-                  receiveFiles: false
-                  rename: false
-                  sendFiles: true
-                  shareFolder: false
-                  updateNotification: false
-                  updateReceive: false
-                  updateShare: false
-                  updateUser: false
-                  upload: true
-                  userConnect: false
-                  userDisconnect: false
               complexPasswords: true
               customSignature: Please consider the planet before printing this email
               emailContent: Greetings, ExampleUser!  Your account is ready for you to start
@@ -294,8 +244,11 @@ paths:
                 [[username]]
               emailSubject: Welcome to the Example Account
               externalDomain: https://example.com/files
-              quotaNoticeEnabled: false
-              quotaNoticeThreshold: 80
+              quota:
+                noticeEnabled: true
+                noticeThreshold: 90
+                transactionsNoticeEnabled: true
+                transactionsNoticeThreshold: 80
               secureOnly: true
               showReferralLinks: false
             schema:
@@ -321,7 +274,6 @@ paths:
                   properties:
                     companyName:
                       description: Custom company name to include in copyright and title bar.
-                      example: null
                       type: string
                     customEmail:
                       description: Address to use as sender of email messages generated by ExaVault
@@ -335,67 +287,6 @@ paths:
                       type: string
                   title: BrandingSettingsValues
                   type: object
-                callbackSettings:
-                  properties:
-                    endpointUrl:
-                      format: uri
-                      type: string
-                    triggers:
-                      description: Whether a webhook should be sent for various operations.
-                      properties:
-                        compress:
-                          type: boolean
-                        copy:
-                          type: boolean
-                        createFolder:
-                          type: boolean
-                        createNotification:
-                          type: boolean
-                        createUser:
-                          type: boolean
-                        delete:
-                          type: boolean
-                        deleteNotification:
-                          type: boolean
-                        deleteReceive:
-                          type: boolean
-                        deleteSend:
-                          type: boolean
-                        deleteShare:
-                          type: boolean
-                        deleteUser:
-                          type: boolean
-                        download:
-                          type: boolean
-                        extract:
-                          type: boolean
-                        move:
-                          type: boolean
-                        receiveFiles:
-                          type: boolean
-                        rename:
-                          type: boolean
-                        sendFiles:
-                          type: boolean
-                        shareFolder:
-                          type: boolean
-                        updateNotification:
-                          type: boolean
-                        updateReceive:
-                          type: boolean
-                        updateShare:
-                          type: boolean
-                        updateUser:
-                          type: boolean
-                        upload:
-                          type: boolean
-                        userConnect:
-                          type: boolean
-                        userDisconnect:
-                          type: boolean
-                      type: object
-                  title: CallbackSettingsValues
-                  type: object
                 complexPasswords:
                   description: Whether to require complex passwords for all passwords.
                   example: false
@@ -403,7 +294,6 @@ paths:
                 customSignature:
                   description: Signature to be automatically added to the bottom of emails
                     generated by the account.
-                  example: null
                   type: string
                 emailContent:
                   description: Content of welcome email template.
@@ -419,20 +309,32 @@ paths:
                 externalDomain:
                   description: Custom address used for web file manager. Not available for all
                     account types.
-                  example: null
                   type: string
-                quotaNoticeEnabled:
-                  description: Whether the system should email the account owner when usage
-                    exceeds quotaNoticeThreshold value
-                  example: false
-                  type: boolean
-                quotaNoticeThreshold:
-                  description: Percent of account usage to trigger quota notices for.
-                  example: 90
-                  maximum: 100
-                  minimum: 70
-                  multipleOf: 10
-                  type: integer
+                quota:
+                  description: ""
+                  properties:
+                    noticeEnabled:
+                      description: Whether the system should email the account owner if the account
+                        storage exceeds the noticeThreshold value. Storage
+                        notice emails are sent no mo once per day.
+                      type: boolean
+                    noticeThreshold:
+                      description: Percent of account storage that would trigger a notice email. Must
+                        be a whole number between 70 and 100 (inclusive).
+                      type: integer
+                    transactionsNoticeEnabled:
+                      description: Whether the system should email the account owner if the daily
+                        transaction usage exceeds the
+                        transactionsNoticeThreshold value. Transaction notice
+                        emails are sent no more than once per day.
+                      type: boolean
+                    transactionsNoticeThreshold:
+                      description: Percent of daily transaction usage that would trigger a notice
+                        email. Must be a whole number between 70 and 100
+                        (inclusive).
+                      type: integer
+                  title: AccountQuotaValues
+                  type: object
                 secureOnly:
                   description: Whether unencrypted FTP connections should be denied for the
                     account.
@@ -458,41 +360,17 @@ paths:
                     allowedIp: []
                     branding: true
                     brandingSettings:
+                      accountName: exampleaccount
                       companyName: Example Company
+                      created: 2021-01-14T11:06:52-08:00
                       customEmail: custom@example.com
                       logo: examplelogo.png
                       logoExt: png
+                      modified: 2021-02-08T10:35:15-08:00
                       theme: default
-                    callbackSettings:
-                      - accountId: 2
-                        endpointUrl: https://example.com
-                        triggers:
-                          compress: false
-                          copy: false
-                          createFolder: false
-                          createNotification: false
-                          createUser: false
-                          delete: false
-                          deleteNotification: false
-                          deleteReceive: false
-                          deleteSend: false
-                          deleteShare: false
-                          deleteUser: false
-                          download: false
-                          extract: false
-                          move: false
-                          receiveFiles: false
-                          rename: false
-                          sendFiles: false
-                          shareFolder: false
-                          updateNotification: false
-                          updateReceive: false
-                          updateShare: false
-                          updateUser: false
-                          upload: false
-                          userConnect: false
-                          userDisconnect: false
-                        verificationToken: 345a09f7a4ee8c2889d3ee4909838237
+                      verifiedDomain: null
+                      verifiedDomainId: null
+                      verifiedDomainValid: false
                     clientId: 1
                     complexPasswords: false
                     created: 2019-05-30T20:48:57Z
@@ -502,10 +380,15 @@ paths:
                     maxUsers: 5
                     modified: 2019-08-27T01:03:41Z
                     quota:
-                      diskLimit: 37580963840
-                      diskUsed: 24938382543
+                      bandwidthLimit: 9223372036854776000
+                      bandwidthUsed: 0
+                      diskLimit: 107374182400
+                      diskUsed: 4770252339
                       noticeEnabled: true
                       noticeThreshold: 90
+                      transactionsLimit: 120000
+                      transactionsNoticeEnabled: true
+                      transactionsNoticeThreshold: 80
                     secureOnly: false
                     showReferralLinks: true
                     status: 1
@@ -537,6 +420,9 @@ paths:
         Returns the detailed activity logs for your account. Optional query
         paramaters will filter the returned results based on a number of options
         including usernames, activity types, or date ranges. 
+
+
+        **NOTE:** Total Results will always return as 0 to avoid quering data you're not using and stay as performant as possible. 
           
         **Operation Types**
 
@@ -643,7 +529,7 @@ paths:
         - description: Username used for filtering a list
           example: jdoe
           in: query
-          name: userName
+          name: username
           schema:
             type: string
         - description: Path used to filter records
@@ -671,7 +557,11 @@ paths:
           name: limit
           schema:
             type: integer
-        - description: Comma separated list sort params
+        - description: Comma separated list sort params. The sort order for each sort
+            field is ascending unless it is prefixed with a minus (“-“), in
+            which case it will be descending. <br> Sort options are; **date**,
+            **ip_address**, **username**, **file**, **sort_logs_file_source**,
+            **type**, **duration**, **size**, and **protocol**
           in: query
           name: sort
           schema:
@@ -681,6 +571,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example-1:
+                  value:
+                    data:
+                      - attributes:
+                          bytesTransferred: 10815676
+                          created: 2019-10-18T06:48:40Z
+                          duration: 5
+                          fileName: /test2/Cassandra2020The20Definitive20Guide.2030947496.pdf
+                          fileSource: ""
+                          ipAddress: 185.223.113.224
+                          operation: PASS
+                          protocol: web
+                          sessionId: 5da9b4a8bd961dfa0a56fa0dc15aaffe57069271b389e
+                          status: "-"
+                          username: exavault
+                        id: 12345
+                        type: sessionActivity
+                    responseStatus: 200
+                    returnedResults: 2
+                    totalResults: 2
               schema:
                 $ref: "#/components/schemas/SessionActivityResponse"
           description: Successful operation
@@ -689,69 +600,39 @@ paths:
         - Activity
   /activity/webhooks:
     get:
-      description: >-
-        Returns the webhook logs for your account. Optional query
-        paramaters will filter the returned results based on a number of options
-        including path, tpye of event, or status code. 
+      description: >
+        Returns the webhook logs for your account. Use the available query
+        parameters to filter the listing of activity that is returned.
+
+
+        **NOTE:** Total Results will always return as 0 to avoid querying data you're not using and stay as performant as possible. 
 
 
         **Event Types**
 
 
-        Webhooks are triggered by enabled event types for your account, which are configured on the [developer settings page](/docs/account/09-settings/06-developer-settings). These are the valid options for event types:
+        Webhooks are triggered by enabled event types for your account, which are configured on the [developer settings page](/docs/account/09-settings/06-developer-settings). Not all event types may be allowed for your account type. These are the valid options for event types:
 
 
-        - Upload
+        - resources.upload
 
-        - Download
+        - resources.download
 
-        - Delete File
+        - resources.delete
 
-        - Delete Folder
+        - resources.createFolder
 
-        - Create Folder
+        - resources.rename
 
-        - Rename
+        - resources.move
 
-        - Move
+        - resources.copy
 
-        - Copy
+        - resources.compress
 
-        - Compress
+        - resources.extract
 
-        - Extract
-
-        - Share Folder
-
-        - Send Files
-
-        - Receive Files
-
-        - Update Share
-
-        - Update Receive
-
-        - Delete Send
-
-        - Delete Receive
-
-        - Delete Share
-
-        - Create Notification
-
-        - Update Notification
-
-        - Delete Notification
-
-        - Create User
-
-        - Update User 
-
-        - Delete User
-
-        - Connect
-
-        - Disconnect
+        - shares.formSubmit
       operationId: getWebhookLogs
       parameters:
         - description: API Key
@@ -768,49 +649,41 @@ paths:
           schema:
             example: 19853ef63a0bc348024a9e4cfd4a92520d2dfd04e88d8679fb1ed6bc551593d1
             type: string
-        - description: Filter by triggered event
+        - description: Earliest date of entries to include in list
+          in: query
+          name: startDate
+          schema:
+            format: date-time
+            type: string
+        - description: Latest date of entries to include in list
+          in: query
+          name: endDate
+          schema:
+            format: date-time
+            type: string
+        - description: Webhook listener endpoint
+          in: query
+          name: endpointUrl
+          schema:
+            format: uri
+            type: string
+        - description: Type of activity that triggered the webhook attempt
           in: query
           name: event
           schema:
-            enum:
-              - Upload
-              - Download
-              - Delete
-              - Create Folder
-              - Rename
-              - Move
-              - Copy
-              - Compress
-              - Extract
-              - Share Folder
-              - Send Files
-              - Receive Files
-              - Update Share
-              - Update Receive
-              - Delete Send
-              - Delete Receive
-              - Delete Share
-              - Create Notification
-              - Update Notification
-              - Delete Notification
-              - Create User
-              - Update User
-              - Delete User
-              - Connect
-              - Disconnect
-            example: Upload
+            example: resources.upload
             type: string
-        - description: Filter by webhook response status code
+        - description: Response code from the webhook endpoint
           example: 200
           in: query
           name: statusCode
           schema:
-            example: "200"
+            example: 200
             type: integer
-        - description: Path used to filter records
+        - description: Path of the resource that triggered the webhook attempt
           example: /folder*
           in: query
-          name: path
+          name: resourcePath
           schema:
             example: /Production
             type: string
@@ -820,7 +693,7 @@ paths:
           schema:
             example: exampleuser
             type: string
-        - description: Records to skip before returning results
+        - description: Records to skip before returning results.
           example: 100
           in: query
           name: offset
@@ -834,7 +707,11 @@ paths:
           schema:
             example: 100
             type: integer
-        - description: Comma separated list sort params
+        - description: Comma separated list sort params. The sort order for each sort
+            field is ascending unless it is prefixed with a minus (“-“), in
+            which case it will be descending. <br> Sort options are;
+            **endpoint_url**, **event**, **status**, **username**,
+            **attempt_id**, and **resource_path**
           example: -date,event
           in: query
           name: sort
@@ -860,11 +737,12 @@ paths:
                 returnedResults: 1
                 totalResults: 1469
               schema:
-                $ref: "#/components/schemas/WebhooksActivityResponse"
+                $ref: "#/components/schemas/WebhookActivityResponse"
           description: Successful operation
       summary: Get webhook logs
       tags:
         - Activity
+    parameters: []
   /email-lists:
     get:
       description: List all email groups for authenticated user
@@ -899,8 +777,8 @@ paths:
                   - attributes:
                       created: 2020-07-30T10:09:05-07:00
                       emails:
-                        - exavault@exavault.com
-                        - exavault+1@exavault.com
+                        - exavault@example.com
+                        - exavault+1@example.com
                       modified: 2020-07-30T10:09:05-07:00
                       name: ExaVault Test
                     id: 27
@@ -974,16 +852,16 @@ paths:
             example:
               value:
                 emails:
-                  - exavault@exavault.com
-                  - exavault+1@exavault.com
+                  - exavault@example.com
+                  - exavault+1@example.com
                 name: ExaVault Test
             schema:
               properties:
                 emails:
                   description: "Array of email addresses to include in the email list. "
                   example:
-                    - ykravchuk@exavault.com
-                    - jdoe@exavault.com
+                    - johns@example.com
+                    - jdoe@example.com
                   items:
                     type: string
                   type: array
@@ -1005,8 +883,8 @@ paths:
                   attributes:
                     created: 2020-07-30T10:09:05-07:00
                     emails:
-                      - exavault@exavault.com
-                      - exavault+1@exavault.com
+                      - exavault@example.com
+                      - exavault+1@example.com
                     modified: 2020-07-30T10:09:05-07:00
                     name: ExaVault Test
                   id: 27
@@ -1188,17 +1066,17 @@ paths:
           application/json:
             example:
               emails:
-                - test@exavault.com
-                - test+1@exavault.com
-                - newaddress@exavault.com
+                - test@example.com
+                - test+1@example.com
+                - newaddress@example.com
               name: Renamed Test Email List
             schema:
               properties:
                 emails:
                   description: Email addresses that replace existing list.
                   example:
-                    - ykravchuk@exavault.com
-                    - jdoe@exavault.com
+                    - yuk@example.com
+                    - jdoe@example.com
                   items:
                     type: string
                   type: array
@@ -1218,9 +1096,9 @@ paths:
                   attributes:
                     created: 2020-09-03T11:10:55-07:00
                     emails:
-                      - test@exavault.com
-                      - test+1@exavault.com
-                      - newaddress@exavault.com
+                      - test@example.com
+                      - test+1@example.com
+                      - newaddress@example.com
                     modified: 2020-09-03T11:36:05-07:00
                     name: Renamed Test Email List
                   id: 33
@@ -1262,6 +1140,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  emails:
+                    - user@example.com
+                  message: I use ExaVault for secure file sending, and so should you. Follow my
+                    link to sign up for a trial.
             schema:
               properties:
                 emails:
@@ -1270,7 +1155,8 @@ paths:
                     type: string
                   type: array
                 message:
-                  example: null
+                  example: I use ExaVault for secure file sending, and so should you. Follow my
+                    link to sign up for a trial.
                   type: string
               required:
                 - emails
@@ -1643,11 +1529,11 @@ paths:
                       fields:
                         - name: Email Address
                           order: 1
-                          value: test451@exavault.com
+                          value: test451@example.com
                       modified: 2020-09-16T05:36:44-07:00
                       paths:
-                        - /example/test451@exavault.com/1.csv
-                        - /example/test451@exavault.com/2.csv
+                        - /example/test451@example.com/1.csv
+                        - /example/test451@example.com/2.csv
                       status: completed
                     id: 320721
                     type: formEntry
@@ -1656,11 +1542,11 @@ paths:
                       fields:
                         - name: Email Address
                           order: 1
-                          value: test455@exavault.com
+                          value: test455@example.com
                       modified: 2020-09-17T05:36:44-07:00
                       paths:
-                        - /example/test455@exavault.com/1.csv
-                        - /example/test455@exavault.com/2.csv
+                        - /example/test455@example.com/1.csv
+                        - /example/test455@example.com/2.csv
                       status: completed
                     id: 32021
                     type: formEntry
@@ -2285,10 +2171,10 @@ paths:
                       readableDescription: anybody uploads to, downloads from or deletes from '/Test'
                       readableDescriptionWithoutPath: anybody uploads to or downloads from this folder
                       recipientEmails:
-                        - exavault@exavault.com
+                        - exavault@example.com
                       recipients:
                         - created: 2020-07-29T19:51:21-07:00
-                          email: exavault@exavault.com
+                          email: exavault@example.com
                           id: null
                           modified: 2020-07-29T19:51:21-07:00
                           notificationId: null
@@ -2349,6 +2235,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  action: upload
+                  message: hello world
+                  recipients:
+                    - myemail@example.com
+                  resource: examplefile.txt
+                  sendEmail: true
+                  type: file
+                  usernames:
+                    - exavault
+                    - exavalut2
             schema:
               properties:
                 action:
@@ -2435,12 +2334,12 @@ paths:
                     readableDescriptionWithoutPath: anybody uploads to this folder
                     recipients:
                       - created: 2020-07-29T20:15:09-07:00
-                        email: exavault@exavault.com
+                        email: exavault@example.com
                         id: 81
                         modified: 2020-07-29T20:15:09-07:00
                         notificationId: 1143
                       - created: 2020-07-29T20:15:09-07:00
-                        email: exavault@exavault.com
+                        email: exavault@example.com
                         id: 83
                         modified: 2020-07-29T20:15:09-07:00
                         notificationId: 1143
@@ -2577,12 +2476,12 @@ paths:
                     readableDescriptionWithoutPath: anybody uploads to this folder
                     recipients:
                       - created: 2020-07-29T20:15:09-07:00
-                        email: exavault@exavault.com
+                        email: exavault@example.com
                         id: 81
                         modified: 2020-07-29T20:15:09-07:00
                         notificationId: 1143
                       - created: 2020-07-29T20:15:09-07:00
-                        email: exavault+1@exavault.com
+                        email: exavault+1@example.com
                         id: 83
                         modified: 2020-07-29T20:15:09-07:00
                         notificationId: 1143
@@ -2656,9 +2555,8 @@ paths:
                 value:
                   action: upload
                   emails:
-                    - exavault@exavault.com
-                    - exavault+1@exavault.com
-                  path: /Test Folder
+                    - exavault@example.com
+                    - exavault+1@example.com
                   sendEmail: "true"
                   usernames:
                     - notice_user_all_recipients
@@ -2705,7 +2603,7 @@ paths:
 
                     - **notice\_user\_all\_users** for activity only by user accounts
 
-                    - **notice\_user\_all\_recipient** for activity only by share recipients
+                    - **notice\_user\_all\_recipients** for activity only by share recipients
                   example:
                     - notice_user_all
                   items:
@@ -2730,12 +2628,12 @@ paths:
                     readableDescriptionWithoutPath: anybody uploads to or downloads from this folder
                     recipients:
                       - created: 2020-07-30T06:01:09-07:00
-                        email: exavault@exavault.com
+                        email: exavault@example.com
                         id: 85
                         modified: 2020-07-30T06:01:09-07:00
                         notificationId: 1143
                       - created: 2020-07-30T06:01:09-07:00
-                        email: exavault+1@exavault.com
+                        email: exavault+1@example.com
                         id: 87
                         modified: 2020-07-30T06:01:09-07:00
                         notificationId: 1143
@@ -2754,7 +2652,7 @@ paths:
                         id: 2554051
                         type: resource
                   type: notification
-                include: []
+                included: []
                 responseStatus: 200
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
@@ -2795,6 +2693,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              example-1:
+                value:
+                  recipientId: 0
             schema:
               properties:
                 recipientId:
@@ -2809,9 +2711,9 @@ paths:
             application/json:
               example:
                 data:
-                  - test+3@exavault.com
-                  - test+4@exavault.com
-                  - test+5@exavault.com
+                  - test+3@example.com
+                  - test+4@example.com
+                  - test+5@example.com
                 responseStatus: 201
               schema:
                 $ref: "#/components/schemas/ShareRecipientsResponse"
@@ -2850,6 +2752,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  resources:
+                    - exampleFile1.txt
+                    - exampleFile2.txt
             schema:
               properties:
                 resources:
@@ -3035,16 +2943,16 @@ paths:
                       readableDescription: anybody uploads to '/Test'
                       readableDescriptionWithoutPath: anybody uploads to this folder
                       recipientEmails:
-                        - exavault@exavault.com
-                        - exavault+1@exavault.com
+                        - exavault@example.com
+                        - exavault+1@example.com
                       recipients:
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault@exavault.com
+                          email: exavault@example.com
                           id: 81
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault+1@exavault.com
+                          email: exavault+1@example.com
                           id: 83
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
@@ -3067,7 +2975,7 @@ paths:
                       accessTimestamp: 2020-07-27 19:32:45
                       accountName: exavault
                       created: 2020-07-24T07:51:12-07:00
-                      email: test@exavault.com
+                      email: test@example.com
                       expiration: null
                       firstLogin: false
                       homeDir: /
@@ -3105,36 +3013,6 @@ paths:
                       accountOnboarding: true
                       allowedIp: null
                       branding: true
-                      callbackSettings:
-                        - accountId: 2
-                          endpointUrl: https://example.com
-                          triggers:
-                            compress: false
-                            copy: false
-                            createFolder: false
-                            createNotification: false
-                            createUser: false
-                            delete: false
-                            deleteNotification: false
-                            deleteReceive: false
-                            deleteSend: false
-                            deleteShare: false
-                            deleteUser: false
-                            download: false
-                            extract: false
-                            move: false
-                            receiveFiles: false
-                            rename: false
-                            sendFiles: false
-                            shareFolder: false
-                            updateNotification: false
-                            updateReceive: false
-                            updateShare: false
-                            updateUser: false
-                            upload: false
-                            userConnect: false
-                            userDisconnect: false
-                          verificationToken: 345a09f7a4ee8c2889d3ee4909838237
                       clientId: 1
                       complexPasswords: false
                       created: 2019-05-30T20:48:57Z
@@ -3239,6 +3117,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example using path:
+                value:
+                  path: /exavault/exampleFile.txt
+              Example without path:
+                value:
+                  name: exampleFile.txt
+                  parentResource: /exavault
             schema:
               properties:
                 name:
@@ -3253,8 +3139,9 @@ paths:
                   type: string
               title: AddFolderRequestBody
               type: object
+        description: ""
       responses:
-        "200":
+        "201":
           content:
             application/json:
               example:
@@ -3338,12 +3225,14 @@ paths:
         content:
           application/json:
             examples:
-              example-1:
+              Example:
                 value:
-                  archiveName: string
-                  parentResource: string
+                  archiveName: exampleFiles.zip
+                  parentResource: /exavault
                   resources:
-                    - string
+                    - exampleFile1.txt
+                    - exampleFile2.txt
+                    - id:234222
             schema:
               properties:
                 archiveName:
@@ -3439,11 +3328,13 @@ paths:
         content:
           application/json:
             examples:
-              example-1:
+              Example:
                 value:
-                  parentResource: string
+                  parentResource: /exavault/exampleFileFolder
                   resources:
-                    - string
+                    - /exavault/exampleFile.txt
+                    - /exavault/otherFile.txt
+                    - id:28282828
             schema:
               properties:
                 parentResource:
@@ -3463,28 +3354,70 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                data:
-                  attributes:
-                    accessedAt: 2020-07-29T12:53:26-07:00
-                    createdAt: 2020-07-29T12:53:26-07:00
-                    createdBy: exavault
-                    extension: jpg
-                    fileCount: null
-                    hash: f573b417707095b017a26d4e5a2e6dd0
-                    name: test.jpg
-                    path: /HomeTest/test.jpg
-                    previewable: false
-                    size: 33415
-                    type: file
-                    updatedAt: 2020-07-29T12:53:26-07:00
-                    uploadDate: 2020-07-29T12:53:26-07:00
-                  id: 2563533
-                  type: resource
-                meta:
-                  destinationPath: /HomeTest
-                  path: /Test/test.jpg
-                responseStatus: 200
+              examples:
+                $:
+                  x-data:
+                    attributes:
+                      accessedAt: 2020-07-29T12:53:26-07:00
+                      createdAt: 2020-07-29T12:53:26-07:00
+                      createdBy: exavault
+                      extension: jpg
+                      fileCount: null
+                      hash: f573b417707095b017a26d4e5a2e6dd0
+                      name: test.jpg
+                      path: /HomeTest/test.jpg
+                      previewable: false
+                      size: 33415
+                      type: file
+                      updatedAt: 2020-07-29T12:53:26-07:00
+                      uploadDate: 2020-07-29T12:53:26-07:00
+                    id: 2563533
+                    type: resource
+                  x-meta:
+                    destinationPath: /HomeTest
+                    path: /Test/test.jpg
+                  x-responseStatus: 200
+                Example:
+                  value:
+                    data:
+                      attributes:
+                        accessedAt: 2011-03-21T00:18:56-07:00
+                        accessedTime: 0
+                        createdAt: 2011-03-21T00:18:56-07:00
+                        createdBy: exampleuser
+                        createdTime: 0
+                        extension: string
+                        fileCount: 0
+                        hash: ec4aa9a91be282666a165899a14f29b1
+                        name: examplefolder
+                        path: /examplefolder
+                        previewable: true
+                        size: 0
+                        type: file
+                        updatedAt: 2011-03-21T00:18:56-07:00
+                        updatedTime: 0
+                        uploadDate: 2011-03-21T00:18:56-07:00
+                      id: 1
+                      relationships:
+                        directFile:
+                          data:
+                            id: 2
+                            type: directFile
+                        notifications:
+                          - data:
+                              id: 2
+                              type: notification
+                        parentResource:
+                          data:
+                            id: 2
+                            type: resource
+                        share:
+                          data:
+                            id: 2345
+                            type: share
+                      type: resource
+                    meta:
+                      id: 2321
               schema:
                 $ref: "#/components/schemas/ResourceCopyMove"
           description: Successful Operation
@@ -3612,6 +3545,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  parentResource: /extractFolder
+                  resource: /exavault/exampleFiles.zip
             schema:
               properties:
                 parentResource:
@@ -3725,7 +3663,9 @@ paths:
         - description: Endpoint support multiple sort fields by allowing array of sort
             params. Sort fields should be applied in the order specified. The
             sort order for each sort field is ascending unless it is prefixed
-            with a minus (“-“), in which case it will be descending.
+            with a minus (“-“), in which case it will be descending. <br> Sort
+            values are; **name**, **size**, **date**, **type**, and
+            **timeline**.
           in: query
           name: sort
           schema:
@@ -3874,16 +3814,16 @@ paths:
                       readableDescription: anybody uploads to '/Test'
                       readableDescriptionWithoutPath: anybody uploads to this folder
                       recipientEmails:
-                        - exavault@exavault.com
-                        - exavault+1@exavault.com
+                        - exavault@example.com
+                        - exavault+1@example.com
                       recipients:
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault@exavault.com
+                          email: exavault@example.com
                           id: 81
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault+1@exavault.com
+                          email: exavault+1@example.com
                           id: 83
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
@@ -3906,7 +3846,7 @@ paths:
                       accessTimestamp: 2020-07-27 19:32:45
                       accountName: exavault
                       created: 2020-07-24T07:51:12-07:00
-                      email: test@exavault.com
+                      email: test@example.com
                       expiration: null
                       firstLogin: false
                       homeDir: /
@@ -3944,36 +3884,6 @@ paths:
                       accountOnboarding: true
                       allowedIp: null
                       branding: true
-                      callbackSettings:
-                        - accountId: 2
-                          endpointUrl: https://example.com
-                          triggers:
-                            compress: false
-                            copy: false
-                            createFolder: false
-                            createNotification: false
-                            createUser: false
-                            delete: false
-                            deleteNotification: false
-                            deleteReceive: false
-                            deleteSend: false
-                            deleteShare: false
-                            deleteUser: false
-                            download: false
-                            extract: false
-                            move: false
-                            receiveFiles: false
-                            rename: false
-                            sendFiles: false
-                            shareFolder: false
-                            updateNotification: false
-                            updateReceive: false
-                            updateShare: false
-                            updateUser: false
-                            upload: false
-                            userConnect: false
-                            userDisconnect: false
-                          verificationToken: 345a09f7a4ee8c2889d3ee4909838237
                       clientId: 1
                       complexPasswords: false
                       created: 2019-05-30T20:48:57Z
@@ -4090,7 +4000,9 @@ paths:
         - description: Endpoint support multiple sort fields by allowing array of sort
             params. Sort fields should be applied in the order specified. The
             sort order for each sort field is ascending unless it is prefixed
-            with a minus (“-“), in which case it will be descending.
+            with a minus (“-“), in which case it will be descending. <br> Sort
+            values are; **name**, **size**, **date**, **type**, and
+            **timeline**.
           in: query
           name: sort
           schema:
@@ -4228,16 +4140,16 @@ paths:
                       readableDescription: anybody uploads to '/Test'
                       readableDescriptionWithoutPath: anybody uploads to this folder
                       recipientEmails:
-                        - exavault@exavault.com
-                        - exavault+1@exavault.com
+                        - exavault@example.com
+                        - exavault+1@example.com
                       recipients:
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault@exavault.com
+                          email: exavault@example.com
                           id: 81
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault+1@exavault.com
+                          email: exavault+1@example.com
                           id: 83
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
@@ -4260,7 +4172,7 @@ paths:
                       accessTimestamp: 2020-07-27 19:32:45
                       accountName: exavault
                       created: 2020-07-24T07:51:12-07:00
-                      email: test@exavault.com
+                      email: test@example.com
                       expiration: null
                       firstLogin: false
                       homeDir: /
@@ -4298,36 +4210,6 @@ paths:
                       accountOnboarding: true
                       allowedIp: null
                       branding: true
-                      callbackSettings:
-                        - accountId: 2
-                          endpointUrl: https://example.com
-                          triggers:
-                            compress: false
-                            copy: false
-                            createFolder: false
-                            createNotification: false
-                            createUser: false
-                            delete: false
-                            deleteNotification: false
-                            deleteReceive: false
-                            deleteSend: false
-                            deleteShare: false
-                            deleteUser: false
-                            download: false
-                            extract: false
-                            move: false
-                            receiveFiles: false
-                            rename: false
-                            sendFiles: false
-                            shareFolder: false
-                            updateNotification: false
-                            updateReceive: false
-                            updateShare: false
-                            updateUser: false
-                            upload: false
-                            userConnect: false
-                            userDisconnect: false
-                          verificationToken: 345a09f7a4ee8c2889d3ee4909838237
                       clientId: 1
                       complexPasswords: false
                       created: 2019-05-30T20:48:57Z
@@ -4437,6 +4319,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              Example:
+                value:
+                  parentResource: /copyhere
+                  resources:
+                    - /testone.jpg
+                    - /folder
             schema:
               properties:
                 parentResource:
@@ -4460,28 +4349,70 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                data:
-                  attributes:
-                    accessedAt: 2020-07-29T12:53:26-07:00
-                    createdAt: 2020-07-29T12:53:26-07:00
-                    createdBy: exavault
-                    extension: jpg
-                    fileCount: null
-                    hash: f573b417707095b017a26d4e5a2e6dd0
-                    name: test.jpg
-                    path: /HomeTest/test.jpg
-                    previewable: false
-                    size: 33415
-                    type: file
-                    updatedAt: 2020-07-29T12:53:26-07:00
-                    uploadDate: 2020-07-29T12:53:26-07:00
-                  id: 2563533
-                  type: resource
-                meta:
-                  destinationPath: /HomeTest
-                  path: /Test/test.jpg
-                responseStatus: 200
+              examples:
+                $:
+                  x-data:
+                    attributes:
+                      accessedAt: 2020-07-29T12:53:26-07:00
+                      createdAt: 2020-07-29T12:53:26-07:00
+                      createdBy: exavault
+                      extension: jpg
+                      fileCount: null
+                      hash: f573b417707095b017a26d4e5a2e6dd0
+                      name: test.jpg
+                      path: /HomeTest/test.jpg
+                      previewable: false
+                      size: 33415
+                      type: file
+                      updatedAt: 2020-07-29T12:53:26-07:00
+                      uploadDate: 2020-07-29T12:53:26-07:00
+                    id: 2563533
+                    type: resource
+                  x-meta:
+                    destinationPath: /HomeTest
+                    path: /Test/test.jpg
+                  x-responseStatus: 200
+                Example:
+                  value:
+                    data:
+                      attributes:
+                        accessedAt: 2011-03-21T00:18:56-07:00
+                        accessedTime: 0
+                        createdAt: 2011-03-21T00:18:56-07:00
+                        createdBy: exampleuser
+                        createdTime: 0
+                        extension: string
+                        fileCount: 0
+                        hash: ec4aa9a91be282666a165899a14f29b1
+                        name: examplefolder
+                        path: /examplefolder
+                        previewable: true
+                        size: 0
+                        type: file
+                        updatedAt: 2011-03-21T00:18:56-07:00
+                        updatedTime: 0
+                        uploadDate: 2011-03-21T00:18:56-07:00
+                      id: 1
+                      relationships:
+                        directFile:
+                          data:
+                            id: 2
+                            type: directFile
+                        notifications:
+                          - data:
+                              id: 2
+                              type: notification
+                        parentResource:
+                          data:
+                            id: 2
+                            type: resource
+                        share:
+                          data:
+                            id: 2345
+                            type: share
+                      type: resource
+                    meta:
+                      id: 2321
               schema:
                 $ref: "#/components/schemas/ResourceCopyMove"
           description: Successful Operation
@@ -4902,16 +4833,16 @@ paths:
                       readableDescription: anybody uploads to '/Test'
                       readableDescriptionWithoutPath: anybody uploads to this folder
                       recipientEmails:
-                        - exavault@exavault.com
-                        - exavault+1@exavault.com
+                        - exavault@example.com
+                        - exavault+1@example.com
                       recipients:
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault@exavault.com
+                          email: exavault@example.com
                           id: 81
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
                         - created: 2020-07-29T20:15:09-07:00
-                          email: exavault+1@exavault.com
+                          email: exavault+1@example.com
                           id: 83
                           modified: 2020-07-29T20:15:09-07:00
                           notificationId: 1143
@@ -4934,7 +4865,7 @@ paths:
                       accessTimestamp: 2020-07-27 19:32:45
                       accountName: exavault
                       created: 2020-07-24T07:51:12-07:00
-                      email: test@exavault.com
+                      email: test@example.com
                       expiration: null
                       firstLogin: false
                       homeDir: /
@@ -4972,36 +4903,6 @@ paths:
                       accountOnboarding: true
                       allowedIp: null
                       branding: true
-                      callbackSettings:
-                        - accountId: 2
-                          endpointUrl: https://example.com
-                          triggers:
-                            compress: false
-                            copy: false
-                            createFolder: false
-                            createNotification: false
-                            createUser: false
-                            delete: false
-                            deleteNotification: false
-                            deleteReceive: false
-                            deleteSend: false
-                            deleteShare: false
-                            deleteUser: false
-                            download: false
-                            extract: false
-                            move: false
-                            receiveFiles: false
-                            rename: false
-                            sendFiles: false
-                            shareFolder: false
-                            updateNotification: false
-                            updateReceive: false
-                            updateShare: false
-                            updateUser: false
-                            upload: false
-                            userConnect: false
-                            userDisconnect: false
-                          verificationToken: 345a09f7a4ee8c2889d3ee4909838237
                       clientId: 1
                       complexPasswords: false
                       created: 2019-05-30T20:48:57Z
@@ -5234,7 +5135,9 @@ paths:
               - active
               - currentUser
             type: string
-        - description: What order the list of matches should be in.
+        - description: What order the list of matches should be in. <br> Sort values are;
+            **sort_shares_name**, **created**, **sort_shares_user**, and
+            **sort_shares_access_mode**.
           example: created
           in: query
           name: sort
@@ -5424,24 +5327,6 @@ paths:
           - A file **send** lets you send one or more files via an easy download link. File sends are different than shared folders because file sends are 'point in time' -- the recipient will get the files as you sent them. If you later make a change to the source file, it will not be updated for the recipient.
           - A **receive** folder lets you receive files into your account. You can either send users a link, or optionally [embed a customized form](/docs/account/05-file-sharing/05-upload-widget) on your website.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           
         **How to send files from your computer using the API**:
 
@@ -5454,6 +5339,26 @@ paths:
         2. Use the [POST /resources/upload](#operation/uploadFile) endpoint to upload your files to the send you've created. The "/" path represents the root of the share, not your home directory. **You must send the access token that you received from the first step in the `ev-access-token` header**
 
         3. Use the [POST /shares/complete-send/{id}](#operation/completeDirectSend) endpoint to indicate that you have finished uploading files to your send. This will trigger the system to remove the **upload** permission from the share and send any invitation emails you set up in the first step of the process. **You must send YOUR access token in the `ev-access-token` header, not the temporary access token**
+
+
+        **Setting the Share Permissions**
+
+
+        Only 5 different combinations of permissions are valid for the `accessMode` object:
+
+
+        - **Upload Only**: This allows share visitors to upload to a share but do nothing else to the contained files. To use this mode, set `upload` to **true** and all other permissions to **false**
+
+        - **Download Only**: This allows share visitors to download files from a share but do nothing else to the contained files. To use this mode, set `download` to **true** and all other permissions to **false**
+
+        - **Upload and Download**: This allows share visitors to upload new files to the share or download files within the share, but not make any other changes to the share contents. To use this mode, set `upload` and `download` to **true** and set both `modify` and `delete` to **false**
+
+        - **All but Delete**: This allows share visitors to make any changes to the contents of a share except deleting files. To use this mode, set `upload`, `download`, and `modify` to **true** and set `delete` to **false**
+
+        - **Full Access**: This allows share visitors to make any changes to the contents of a share. To use this mode, set all 4 permissions `upload`, `download`, `modify`, and `delete` to **true**
+
+
+        Any other combination of permissions provided as the `accessMode` will be rejected as a bad request.
 
 
         **Notes:**
@@ -5479,6 +5384,34 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              example-1:
+                value:
+                  accessMode:
+                    delete: true
+                    download: true
+                    modify: true
+                    upload: true
+                  embed: false
+                  expiration: 2017-09-25T14:12:10Z
+                  fileDropCreateFolders: false
+                  hasNotification: false
+                  isPublic: true
+                  messageBody: null
+                  messageSubject: Invitation to a shared folder
+                  name: Shared Folder
+                  notificationEmails:
+                    - notify@example.com
+                    - notify2@example.com
+                  password: null
+                  recipients:
+                    - email: user@example.com
+                      type: string
+                  requireEmail: false
+                  resources:
+                    - /testfolder
+                  sendingLocalFiles: true
+                  type: shared_folder
             schema:
               properties:
                 accessMode:
@@ -5636,7 +5569,7 @@ paths:
                     public: true
                     recipients:
                       - created: 2017-04-21T10:53:47Z
-                        email: recipient@gmail.com
+                        email: recipient@example.com
                         hash: fsesghan
                         id: 11
                         received: false
@@ -5838,7 +5771,7 @@ paths:
                     public: true
                     recipients:
                       - created: 2017-04-21T10:53:47Z
-                        email: recipient@gmail.com
+                        email: recipient@example.com
                         hash: fethwxan
                         id: 11
                         received: false
@@ -5980,6 +5913,26 @@ paths:
         When updating invitees, pass the `recipients` body paramater with the full list of people who should be included on the share. If you resend the list without an existing recipient, they will be removed from the share.
 
 
+        **Setting the Share Permissions**
+
+
+        Only 5 different combinations of permissions are valid for the `accessMode` object:
+
+
+        - **Upload Only**: This allows share visitors to upload to a share but do nothing else to the contained files. To use this mode, set `upload` to **true** and all other permissions to **false**
+
+        - **Download Only**: This allows share visitors to download files from a share but do nothing else to the contained files. To use this mode, set `download` to **true** and all other permissions to **false**
+
+        - **Upload and Download**: This allows share visitors to upload new files to the share or download files within the share, but not make any other changes to the share contents. To use this mode, set `upload` and `download` to **true** and set both `modify` and `delete` to **false**
+
+        - **All but Delete**: This allows share visitors to make any changes to the contents of a share except deleting files. To use this mode, set `upload`, `download`, and `modify` to **true** and set `delete` to **false**
+
+        - **Full Access**: This allows share visitors to make any changes to the contents of a share. To use this mode, set all 4 permissions `upload`, `download`, `modify`, and `delete` to **true**
+
+
+        Any other combination of permissions provided as the `accessMode` will be rejected as a bad request.
+
+
         **Notes:**
 
           - Authenticated user should be the owner of the specified share.
@@ -6002,6 +5955,33 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              example-1:
+                value:
+                  accessMode:
+                    delete: true
+                    download: true
+                    modify: true
+                    upload: true
+                  embed: false
+                  expiration: 2017-09-25T14:12:10Z
+                  fileDropCreateFolders: false
+                  hasNotification: false
+                  isPublic: true
+                  messageBody: null
+                  messageSubject: Invitation to a shared folder
+                  name: Shared Folder
+                  notificationEmails:
+                    - notify@example.com
+                    - notify2@example.com
+                  password: null
+                  recipients:
+                    - email: user@example.com
+                      type: string
+                  requireEmail: false
+                  resources:
+                    - /testfolder
+                  status: 0
             schema:
               properties:
                 accessMode:
@@ -6148,7 +6128,7 @@ paths:
                     public: true
                     recipients:
                       - created: 2017-04-21T10:53:47Z
-                        email: recipient@gmail.com
+                        email: recipient@example.com
                         hash: fsesghan
                         id: 11
                         received: false
@@ -6183,6 +6163,118 @@ paths:
       summary: Update a share
       tags:
         - Shares
+  /ssh-keys:
+    get:
+      description: Returns a list of SSH Keys within the account. Can be filtered for
+        a single user.
+      operationId: getSSHKeysList
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+        - description: " Only return results for the given user ID. This is not the
+            username, but the numeric ID of the user."
+          in: query
+          name: userId
+          schema:
+            type: string
+        - description: " Limits the results by the given number. Cannot be set higher than
+            100."
+          in: query
+          name: limit
+          schema:
+            type: integer
+        - description: " Determines which item to start on for pagination. Use zero (0) to
+            start at the beginning of the list."
+          in: query
+          name: offset
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SSHKeyCollectionResponse"
+          description: Successful Operation
+      summary: Get metadata for a list of SSH Keys
+      tags:
+        - SSH Keys
+    post:
+      description: >-
+        Create a new SSH Key for a user. Provide the Public Key as
+        formatted from the ssh-keygen command (openssh format or RFC-4716
+        format).
+
+
+        If you'd prefer to let us generate your key automatically, you can log in to your account via the web portal and set up new keys via the SSH Keys page. 
+      operationId: addSSHKey
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                publicKey:
+                  description: "Public Key to provide ExaVault. You can provide the Public Key as
+                    formatted from the ssh-keygen command or a standard rfc-4716
+                    format. "
+                  type: string
+                userId:
+                  description: "ID of the user to assign the new key to. "
+                  type: integer
+              required:
+                - userId
+                - publicKey
+              title: AddSSHKeyRequestBody
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SSHKeyResponse"
+          description: Successful Operation
+      summary: Create a new SSH Key
+      tags:
+        - SSH Keys
+  "/ssh-keys/{id}":
+    delete:
+      description: Delete the specified SSH key. This will not delete or deactivate
+        the user tied to the key.
+      operationId: deleteSSHKey
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      responses:
+        "200":
+          description: Successful Operation
+      summary: Delete an SSH Key
+      tags:
+        - SSH Keys
+    get:
+      description: Return the information for a single SSH Key
+      operationId: getSSHKey
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SSHKeyResponse"
+          description: Successful Operation
+      summary: Get metadata for an SSH Key
+      tags:
+        - SSH Keys
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
   /users:
     get:
       description: >-
@@ -6227,6 +6319,12 @@ paths:
           required: false
           schema:
             type: string
+        - description: Resource identifier for user's home directory. Does not support
+            wildcard searches.
+          in: query
+          name: homeResource
+          schema:
+            type: string
         - description: Nickname to search for. Ignored if `username` is provided. Supports
             wildcard searches.
           in: query
@@ -6253,12 +6351,6 @@ paths:
           name: status
           schema:
             type: integer
-        - description: Path for user's home directory. Ignored if `username` is provided.
-            Supports wildcard searches.
-          in: query
-          name: homeDir
-          schema:
-            type: string
         - description: Searches the nickname, email, role and homeDir fields for the
             provided value. Ignored if `username` is provided. Supports wildcard
             searches.
@@ -6314,7 +6406,7 @@ paths:
                       accessTimestamp: 2020-07-24 23:37:39
                       accountName: exavault
                       created: 2020-07-24T08:03:57-07:00
-                      email: test@exavault.com
+                      email: test@example.com
                       expiration: null
                       firstLogin: false
                       homeDir: /
@@ -6351,7 +6443,7 @@ paths:
                       accessTimestamp: 0000-00-00 00:00:00
                       accountName: exavault
                       created: 2020-07-24T08:08:51-07:00
-                      email: test@exavault.com
+                      email: test@example.com
                       expiration: null
                       firstLogin: true
                       homeDir: /
@@ -6388,7 +6480,7 @@ paths:
                       accessTimestamp: 0000-00-00 00:00:00
                       accountName: exavault
                       created: 2020-07-27T02:04:11-07:00
-                      email: test+4@exavault.com
+                      email: test+4@example.com
                       expiration: null
                       firstLogin: false
                       homeDir: /Sample Files and Folders
@@ -6463,11 +6555,36 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              example-1:
+                value:
+                  email: testuser@example.com
+                  expiration: 2011-03-21 00:18:56
+                  homeResource: /
+                  locked: true
+                  nickname: testnickname
+                  onboarding: true
+                  password: string
+                  permissions:
+                    changePassword: true
+                    delete: true
+                    deleteFormData: true
+                    download: true
+                    list: true
+                    modify: true
+                    notification: true
+                    share: true
+                    upload: true
+                    viewFormData: true
+                  role: user
+                  timeZone: America/Los_Angeles
+                  username: testuser
+                  welcomeEmail: true
             schema:
               properties:
                 email:
                   description: Email address for the user
-                  example: testuser@email.com
+                  example: testuser@example.com
                   format: email
                   type: string
                 expiration:
@@ -6484,7 +6601,7 @@ paths:
                     The user will be locked to this directory and unable to move 'up' in the account. If the folder does not exist in the account, it will be created when the user is created. 
 
 
-                    This setting is ignored for users with the `role` **admin**.
+                    Users with the `role` **admin** should have their homeResource set to '/'
                   example: /
                   type: string
                 locked:
@@ -6504,10 +6621,13 @@ paths:
                   description: Password for the user
                   type: string
                 permissions:
-                  description: An object containing name/value pairs for each permission. Any
+                  description: >-
+                    An object containing name/value pairs for each permission. Any
                     permission that is not passed will be set to `false` by
                     default. Note that users will be unable to see any files in
                     the account unless you include `list` permission.
+
+                    When creating a user with the `role` **admin**, you should set all of the permissions to `true`
                   properties:
                     changePassword:
                       example: true
@@ -6541,11 +6661,7 @@ paths:
                       type: boolean
                   type: object
                 role:
-                  description: The type of user to create. Note that admin users cannot have a
-                    `homeResource` other than '/', and will have full
-                    permissions, but you must provide at least
-                    "download,upload,list,delete" in the `permissions`
-                    parameter.
+                  description: The type of user to create, either **user** or **admin**.
                   enum:
                     - user
                     - admin
@@ -6594,7 +6710,7 @@ paths:
                     accessTimestamp: null
                     accountName: exavault
                     created: 2020-07-27T14:58:01-07:00
-                    email: test@exavault.com
+                    email: test@example.com
                     expiration: 2020-07-31T17:00:00-07:00
                     firstLogin: false
                     homePath: /
@@ -6728,7 +6844,7 @@ paths:
                     accessTimestamp: 2020-07-27 19:32:45
                     accountName: exavault
                     created: 2020-07-24T07:51:12-07:00
-                    email: test@exavault.com
+                    email: test@example.com
                     expiration: null
                     firstLogin: false
                     homeDir: /
@@ -6779,7 +6895,7 @@ paths:
         schema:
           example: 2224
           format: int32
-          type: number
+          type: integer
     patch:
       description: >-
         Updates the settings for the user. Note that the unique key for
@@ -6816,16 +6932,35 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              example-1:
+                value:
+                  email: testuser@example.com
+                  expiration: 2011-03-21 00:18:56
+                  homeResource: /
+                  locked: true
+                  nickname: testnickname
+                  onboarding: true
+                  password: string
+                  permissions:
+                    changePassword: true
+                    delete: true
+                    deleteFormData: true
+                    download: true
+                    list: true
+                    modify: true
+                    notification: true
+                    share: true
+                    upload: true
+                    viewFormData: true
+                  role: user
+                  timeZone: America/Los_Angeles
+                  username: testuser
             schema:
               properties:
-                currentUserPassword:
-                  description: The password of the currently authenticated user. Required when
-                    updating any user’s email, username or password.
-                  example: examplespass
-                  type: string
                 email:
                   description: Email address for the user
-                  example: testuser@email.com
+                  example: testuser@example.com
                   format: email
                   type: string
                 expiration:
@@ -6861,42 +6996,7 @@ paths:
                   description: New password for the user
                   type: string
                 permissions:
-                  description: An object containing name/value pairs for each permission. Any
-                    permission that is not passed will be set to `false` by
-                    default. Note that users will be unable to see any files in
-                    the account unless you include `list` permission.
-                  properties:
-                    changePassword:
-                      example: true
-                      type: boolean
-                    delete:
-                      example: true
-                      type: boolean
-                    deleteFormData:
-                      example: true
-                      type: boolean
-                    download:
-                      example: true
-                      type: boolean
-                    list:
-                      example: true
-                      type: boolean
-                    modify:
-                      example: true
-                      type: boolean
-                    notification:
-                      example: true
-                      type: boolean
-                    share:
-                      example: true
-                      type: boolean
-                    upload:
-                      example: true
-                      type: boolean
-                    viewFormData:
-                      example: true
-                      type: boolean
-                  type: object
+                  $ref: "#/components/schemas/UserPermissions"
                 role:
                   description: The type of user (**admin** or **user**). Note that admin users
                     cannot have a `homeResource` other than '/', and will have
@@ -6937,7 +7037,7 @@ paths:
                     accessTimestamp: 0000-00-00 00:00:00
                     accountName: exavault
                     created: 2020-07-27T14:50:39-07:00
-                    email: test@exavault.com
+                    email: test@example.com
                     expiration: 2020-08-29T17:00:00-07:00
                     firstLogin: false
                     homeDir: /
@@ -6978,6 +7078,491 @@ paths:
       summary: Update a user
       tags:
         - Users
+  /webhooks:
+    get:
+      description: "Returns a list of Webhooks. By default, this will return metadata
+        on all Webhooks within the account. "
+      operationId: getWehooksList
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+        - description: List of related record types to include in the response. Valid
+            options are `owningAccount` and `resource`
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: Records to skip before returning results.
+          example: 100
+          in: query
+          name: offset
+          schema:
+            minimum: 0
+            type: integer
+        - description: Limit of the records list
+          example: 10
+          in: query
+          name: limit
+          schema:
+            example: 100
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebhookCollectionResponse"
+          description: Successful Operation
+      summary: Get Webhooks List
+      tags:
+        - Webhooks
+    post:
+      description: >-
+        Create a new Webhook on your account. Creating a Webhook will
+        require an endpoint URL, a path, what events should trigger a webhook,
+        and what request version to use. 
+
+
+        **Notes:**
+
+
+        While you can use our v1 request body, it will be deprecated in the future. 
+      operationId: addWebhook
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Sample Request:
+                value:
+                  endpointUrl: https://example.com/webhook
+                  resource: /uploads-folder
+                  responseVersion: v1
+                  triggers:
+                    resources:
+                      compress: true
+                      copy: true
+                      createFolder: true
+                      delete: true
+                      download: true
+                      extract: true
+                      move: true
+                      rename: true
+                      upload: true
+                    shares:
+                      formSubmit: true
+            schema:
+              properties:
+                endpointUrl:
+                  description: The endpoint is where the webhook request will be sent.
+                  example: https://example.com/webhook
+                  format: uri
+                  type: string
+                resource:
+                  description: Resource identifier for the top folder this webhook is associated
+                    with
+                  example: /uploads-folder
+                  type: string
+                responseVersion:
+                  description: What version of webhook request should be sent to the endpoint URL
+                    when messages are sent
+                  enum:
+                    - v1
+                    - v2
+                  example: v2
+                  type: string
+                triggers:
+                  $ref: "#/components/schemas/WebhookTriggers"
+              required:
+                - endpointUrl
+              title: AddWebhookRequestBody
+              type: object
+          application/xml:
+            schema:
+              properties: {}
+              type: object
+        description: ""
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                New webhook:
+                  value:
+                    data:
+                      attributes:
+                        created: 2021-03-04T22:22:00-08:00
+                        endpointUrl: https://example.com/webhook
+                        failed: true
+                        modified: 2021-03-04T22:23:03-08:00
+                        responseVersion: v2
+                        triggers:
+                          resources:
+                            compress: true
+                            copy: true
+                            createFolder: true
+                            delete: true
+                            download: true
+                            extract: true
+                            move: true
+                            rename: true
+                            upload: true
+                          shares:
+                            formSubmit: true
+                        verificationToken: 8df8200f7dee90ba4a41abe39c858c6c
+                      id: 0
+                      relationships:
+                        ownerAccount:
+                          data:
+                            id: 5
+                            type: account
+                        resource:
+                          data:
+                            id: 234232
+                            type: resource
+                      type: webhook
+                    included: []
+                    responseStatus: 201
+              schema:
+                $ref: "#/components/schemas/WebhookResponse"
+          description: Created
+      summary: Add A New Webhook
+      tags:
+        - Webhooks
+  "/webhooks/regenerate-token/{id}":
+    parameters:
+      - description: Webhook ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    post:
+      description: "This endpoint will allow you to regenerate the security token for
+        a webhook if you believe it’s been compromised in any way. "
+      operationId: regenerateWebhookToken
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    data:
+                      attributes:
+                        created: 2021-03-04T22:22:00-08:00
+                        endpointUrl: https://example.com/webhook
+                        failed: true
+                        modified: 2021-03-04T22:23:03-08:00
+                        responseVersion: v2
+                        triggers:
+                          resources:
+                            compress: true
+                            copy: true
+                            createFolder: true
+                            delete: true
+                            download: true
+                            extract: true
+                            move: true
+                            rename: true
+                            upload: true
+                          shares:
+                            formSubmit: true
+                        verificationToken: 771820badeefa22a4a41abe39c858c6c
+                      id: 0
+                      relationships:
+                        ownerAccount:
+                          data:
+                            id: 23422
+                            type: account
+                        resource:
+                          data:
+                            id: 134122
+                            type: resource
+                      type: webhook
+                    included: []
+                    responseStatus: 200
+              schema:
+                $ref: "#/components/schemas/WebhookResponse"
+          description: Successful Operation
+      summary: Regenerate security token
+      tags:
+        - Webhooks
+  "/webhooks/resend/{activityId}":
+    parameters:
+      - description: Webhooks activity entry ID
+        in: path
+        name: activityId
+        required: true
+        schema:
+          type: string
+    post:
+      description: This endpoint will allow you to resend a webhook that was
+        previously sent. Resent webhooks will send exactly the same as the
+        original webhook with the exception of the “sent” timestamp. Activity
+        IDs can be retrieve from the webhook logs in your account or via GET
+        /activity/webhooks
+      operationId: resendWebhookActivityEntry
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmptyResponse"
+          description: Successful operation
+      summary: Resend a webhook message
+      tags:
+        - Webhooks
+  "/webhooks/{id}":
+    delete:
+      description: "Deleted the specified webhook. This will not affect logs or any
+        resources the webhook is connected to. "
+      operationId: deleteWebhook
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Delete operation OK:
+                  value:
+                    data: []
+                    responseStatus: 200
+              schema:
+                $ref: "#/components/schemas/EmptyResponse"
+          description: Sucessful operation
+      summary: Delete a webhook
+      tags:
+        - Webhooks
+    get:
+      description: Returns the metadata for a specific webhook. Webhook IDs can be
+        retrieve from GET /webhooks
+      operationId: getWebhookById
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+        - description: " Include metadata for related items; `ownerAccount` and/or
+            `resource` "
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Operation Success:
+                  value:
+                    data:
+                      - attributes:
+                          created: 2021-03-04T22:22:00-08:00
+                          endpointUrl: https://example.com/webhook
+                          failed: true
+                          modified: 2021-03-04T22:23:03-08:00
+                          responseVersion: v2
+                          triggers:
+                            resources:
+                              compress: true
+                              copy: true
+                              createFolder: true
+                              delete: true
+                              download: true
+                              extract: true
+                              move: true
+                              rename: true
+                              upload: true
+                            shares:
+                              formSubmit: true
+                          verificationToken: 8df8200f7dee90ba4a41abe39c858c6c
+                        id: 0
+                        relationships:
+                          ownerAccount:
+                            data:
+                              id: 23422
+                              type: account
+                          resource:
+                            data:
+                              id: 134122
+                              type: resource
+                        type: webhook
+                    included:
+                      - attributes:
+                          accountName: string
+                          accountOnboarding: false
+                          allowedIp:
+                            - ipEnd: 192.30.24.5
+                              ipStart: 192.30.23.2
+                          branding: true
+                          brandingSettings:
+                            companyName: null
+                            customEmail: custom@example.com
+                            logo: examplelogo.png
+                            logoExt: png
+                            theme: default
+                            verifiedDomain: string
+                            verifiedDomainId: string
+                            verifiedDomainValid: true
+                          clientId: 1
+                          complexPasswords: false
+                          created: 2017-01-12T09:06:21Z
+                          customDomain: true
+                          customSignature: null
+                          externalDomains: []
+                          maxUsers: 1000
+                          modified: 2017-06-03T20:42:05Z
+                          planDetails:
+                            apiKeys: 0
+                            apiTokens: 0
+                            colorSchema: true
+                            customDomain: true
+                            customName: true
+                            directLinks: true
+                            ipWhitelist: true
+                            sharingOptions:
+                              - string
+                            sshKeys: 0
+                            storageAddOn: 0
+                            unlimitedUsers: true
+                            userExpiration: true
+                            userImport: true
+                            webhookOptions:
+                              amount: 0
+                              includeTriggers: string
+                              restrictionTypes:
+                                - string
+                          quota:
+                            bandwidthLimit: 0
+                            bandwidthUsed: 0
+                            diskLimit: 375809638400
+                            diskUsed: 1225352192
+                            noticeEnabled: true
+                            noticeThreshold: 80
+                            transactionsLimit: 0
+                            transactionsNoticeEnabled: true
+                            transactionsNoticeThreshold: 0
+                          secureOnly: false
+                          showReferralLinks: true
+                          status: 1
+                          userCount: 3
+                          welcomeEmailContent: Welcome to your new account!
+                          welcomeEmailSubject: ExaVault File Sharing Account
+                        id: 13758
+                        relationships:
+                          masterUser:
+                            data:
+                              id: 0
+                              type: user
+                        type: account
+                    responseStatus: 200
+              schema:
+                $ref: "#/components/schemas/WebhookResponse"
+          description: Successful Operation
+      summary: Get info for a webhook
+      tags:
+        - Webhooks
+    parameters:
+      - description: Webhook endpoint ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    patch:
+      description: >-
+        Update the specified webhook. Updated webhooks will take effect
+        immediately and could impact active workflows. Please be certain the
+        webhook is not currently in use prior to updating. 
+
+
+        You only need to send the portions of the webhook configuration you wish to change, rather than the entire webhook object.
+      operationId: updateWebhook
+      parameters:
+        - $ref: "#/components/parameters/apiKeyParam"
+        - $ref: "#/components/parameters/accessTokenParam"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ""
+              properties:
+                endpointUrl:
+                  description: New endpoint URL to use for the webhook configuration
+                  example: https://example.com/new-endpoint
+                  format: uri
+                  type: string
+                resource:
+                  description: Resource identifier of the top folder watched by this webhook.
+                  example: /newfolder
+                  type: string
+                responseVersion:
+                  description: Version of the webhooks message to send to the endpoint
+                  enum:
+                    - v2
+                    - v1
+                  example: v1
+                  type: string
+                triggers:
+                  $ref: "#/components/schemas/WebhookTriggers"
+              title: UpdateWebhookRequestBody
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Updated webhook:
+                  value:
+                    data:
+                      attributes:
+                        created: 2021-03-04T22:22:00-08:00
+                        endpointUrl: https://example.com/new-endpoint
+                        failed: true
+                        modified: 2021-03-04T22:23:03-08:00
+                        responseVersion: v1
+                        triggers:
+                          resources:
+                            compress: true
+                            copy: true
+                            createFolder: true
+                            delete: true
+                            download: true
+                            extract: true
+                            move: true
+                            rename: true
+                            upload: true
+                          shares:
+                            formSubmit: true
+                        verificationToken: 8df822322dee90ba4a41abe39c858c11
+                      id: 0
+                      relationships:
+                        ownerAccount:
+                          data:
+                            id: 23422
+                            type: account
+                        resource:
+                          data:
+                            id: 433
+                            type: resource
+                      type: webhook
+                    included: []
+                    responseStatus: 200
+              schema:
+                $ref: "#/components/schemas/WebhookResponse"
+          description: Successful Operation
+      summary: Update a webhook
+      tags:
+        - Webhooks
 components:
   examples:
     EmailListsExample:
@@ -6987,8 +7572,8 @@ components:
           - attributes:
               created: 2019-10-10T06:58:07Z
               emails:
-                - jdoe@exavault.com
-                - yk@exavault.com
+                - jdoe@example.com
+                - yk@example.com
               modified: 2019-10-10T06:58:07Z
               name: My friends
             id: 1
@@ -7006,8 +7591,8 @@ components:
           - attributes:
               created: 2019-10-10T06:58:07Z
               emails:
-                - jdoe@exavault.com
-                - yk@exavault.com
+                - jdoe@example.com
+                - yk@example.com
               modified: 2019-10-10T06:58:07Z
               name: My friends
             id: 1
@@ -7023,7 +7608,7 @@ components:
               accountId: 5
               accountName: jdoe
               created: 2019-10-10T06:58:07Z
-              email: jdoe@exavault.com
+              email: jdoe@example.com
               expiration: null
               firstLogin: false
               homeDir: /
@@ -7260,7 +7845,7 @@ components:
               public: true
               recipients:
                 - created: 2017-04-21T10:53:47Z
-                  email: recipient@gmail.com
+                  email: recipient@example.com
                   hash: fseowxan
                   id: 11
                   received: false
@@ -7321,7 +7906,7 @@ components:
               public: true
               recipients:
                 - created: 2017-04-21T10:53:47Z
-                  email: recipient@gmail.com
+                  email: recipient@example.com
                   hash: fseowxan
                   id: 11
                   received: false
@@ -7471,7 +8056,7 @@ components:
             public: true
             recipients:
               - created: 2017-04-21T10:53:47Z
-                email: recipient@gmail.com
+                email: recipient@example.com
                 hash: fseowxan
                 id: 11
                 received: false
@@ -7619,7 +8204,7 @@ components:
             public: true
             recipients:
               - created: 2017-04-21T10:53:47Z
-                email: recipient@gmail.com
+                email: recipient@example.com
                 hash: fseowxan
                 id: 11
                 received: false
@@ -7700,125 +8285,6 @@ components:
                     type: string
                 title: BrandingSettings
                 type: object
-              callbackSettings:
-                properties:
-                  accountId:
-                    description: ID of the account these settings belongs to.
-                    example: "13058"
-                    type: string
-                  endpointUrl:
-                    description: Where callback settings object sent to.
-                    example: http://test-endpoint.exavault.com
-                    type: string
-                  token:
-                    description: Verification token for the request authentication.
-                    example: 380814daa6886641d2ffsw2f43b30312
-                    type: string
-                  triggers:
-                    properties:
-                      compress:
-                        description: Trigger callback on compress.
-                        example: "0"
-                        type: string
-                      copy:
-                        description: Trigger callback on copy.
-                        example: "0"
-                        type: string
-                      createFolder:
-                        description: Trigger callback on fodler create.
-                        example: "1"
-                        type: string
-                      createNotification:
-                        description: Trigger callback on notification create.
-                        example: "0"
-                        type: string
-                      createUser:
-                        description: Trigger callback on user create.
-                        example: "0"
-                        type: string
-                      delete:
-                        description: Trigger callback on delete.
-                        example: "0"
-                        type: string
-                      deleteNotification:
-                        description: Trigger callback on notification delete.
-                        example: "0"
-                        type: string
-                      deleteReceive:
-                        description: Trigger callback on receive folder delete.
-                        example: "0"
-                        type: string
-                      deleteSend:
-                        description: Trigger callback on send files delete.
-                        example: "0"
-                        type: string
-                      deleteShare:
-                        description: Trigger callback on share folder delete.
-                        example: "0"
-                        type: string
-                      deleteUser:
-                        description: Trigger callback on user delete.
-                        example: "0"
-                        type: string
-                      download:
-                        description: Trigger callback on download.
-                        example: "0"
-                        type: string
-                      extract:
-                        description: Trigger callback on extract.
-                        example: "0"
-                        type: string
-                      move:
-                        description: Trigger callback on move.
-                        example: "0"
-                        type: string
-                      receiveFiles:
-                        description: Trigger callback on receive folder create.
-                        example: "1"
-                        type: string
-                      rename:
-                        description: Trigger callback on rename.
-                        example: "0"
-                        type: string
-                      sendFiles:
-                        description: Trigger callback on send files.
-                        example: "0"
-                        type: string
-                      shareFolder:
-                        description: Trigger callback on share folder create.
-                        example: "0"
-                        type: string
-                      updateNotification:
-                        description: Trigger callback on notification update.
-                        example: "1"
-                        type: string
-                      updateReceive:
-                        description: Trigger callback on receive folder update.
-                        example: "0"
-                        type: string
-                      updateShare:
-                        description: Trigger callback on share folder update.
-                        example: "0"
-                        type: string
-                      updateUser:
-                        description: Trigger callback on user update.
-                        example: "0"
-                        type: string
-                      upload:
-                        description: Trigger callback on upload.
-                        example: "1"
-                        type: string
-                      userConnect:
-                        description: Trigger callback on user connect.
-                        example: "0"
-                        type: string
-                      userDisconnect:
-                        description: Trigger callback on user disconnect.
-                        example: "0"
-                        type: string
-                    type: object
-                title: CallbackSettings
-                type: object
               complexPasswords:
                 example: false
                 type: boolean
@@ -7898,7 +8364,6 @@ components:
           description: Type of item. "account"
           enum:
             - account
-          example: account
           type: string
       title: Account
       type: object
@@ -7907,7 +8372,6 @@ components:
       properties:
         accountName:
           description: Name of the account
-          example: exampleaccount
           type: string
         accountOnboarding:
           description: Whether the web application onboarding help is enabled for new
@@ -7937,8 +8401,6 @@ components:
           type: boolean
         brandingSettings:
           $ref: "#/components/schemas/BrandingSettings"
-        callbackSettings:
-          $ref: "#/components/schemas/CallbackSettings"
         clientId:
           description: (ExaVault Use Only) Internal ID of the account in CMS.
           example: 1
@@ -7984,6 +8446,8 @@ components:
           example: 2017-06-03T20:42:05Z
           format: date-time
           type: string
+        planDetails:
+          $ref: "#/components/schemas/PlanDetails"
         quota:
           $ref: "#/components/schemas/Quota"
         secureOnly:
@@ -8011,10 +8475,6 @@ components:
           example: 3
           format: int32
           type: integer
-        username:
-          description: Name of account's master user
-          example: exampleuser
-          type: string
         welcomeEmailContent:
           description: Content of welcome email each new user will receive.
           example: Welcome to your new account!
@@ -8023,6 +8483,7 @@ components:
           description: Subject of welcome email each new user will receive.
           example: ExaVault File Sharing Account
           type: string
+      title: ""
       type: object
     AccountResponse:
       properties:
@@ -8057,126 +8518,13 @@ components:
         theme:
           example: default
           type: string
+        verifiedDomain:
+          type: string
+        verifiedDomainId:
+          type: string
+        verifiedDomainValid:
+          type: boolean
       title: BrandingSettings
-      type: object
-    CallbackSettings:
-      properties:
-        accountId:
-          description: ID of the account these settings belongs to.
-          example: "13058"
-          type: string
-        endpointUrl:
-          description: Where callback settings object sent to.
-          example: http://test-endpoint.exavault.com
-          type: string
-        token:
-          description: Verification token for the request authentication.
-          example: 380814daa6886641d2ffsw2f43b30312
-          type: string
-        triggers:
-          properties:
-            compress:
-              description: Trigger callback on compress.
-              example: false
-              type: boolean
-            copy:
-              description: Trigger callback on copy.
-              example: false
-              type: boolean
-            createFolder:
-              description: Trigger callback on fodler create.
-              example: true
-              type: boolean
-            createNotification:
-              description: Trigger callback on notification create.
-              example: false
-              type: boolean
-            createUser:
-              description: Trigger callback on user create.
-              example: false
-              type: boolean
-            delete:
-              description: Trigger callback on delete.
-              example: false
-              type: boolean
-            deleteNotification:
-              description: Trigger callback on notification delete.
-              example: false
-              type: boolean
-            deleteReceive:
-              description: Trigger callback on receive folder delete.
-              example: false
-              type: boolean
-            deleteSend:
-              description: Trigger callback on send files delete.
-              example: false
-              type: boolean
-            deleteShare:
-              description: Trigger callback on share folder delete.
-              example: false
-              type: boolean
-            deleteUser:
-              description: Trigger callback on user delete.
-              example: false
-              type: boolean
-            download:
-              description: Trigger callback on download.
-              example: false
-              type: boolean
-            extract:
-              description: Trigger callback on extract.
-              example: false
-              type: boolean
-            move:
-              description: Trigger callback on move.
-              example: false
-              type: boolean
-            receiveFiles:
-              description: Trigger callback on receive folder create.
-              example: "1"
-              type: boolean
-            rename:
-              description: Trigger callback on rename.
-              example: false
-              type: boolean
-            sendFiles:
-              description: Trigger callback on send files.
-              example: false
-              type: boolean
-            shareFolder:
-              description: Trigger callback on share folder create.
-              example: false
-              type: boolean
-            updateNotification:
-              description: Trigger callback on notification update.
-              example: true
-              type: boolean
-            updateReceive:
-              description: Trigger callback on receive folder update.
-              example: false
-              type: boolean
-            updateShare:
-              description: Trigger callback on share folder update.
-              example: false
-              type: boolean
-            updateUser:
-              description: Trigger callback on user update.
-              example: false
-              type: boolean
-            upload:
-              description: Trigger callback on upload.
-              example: true
-              type: boolean
-            userConnect:
-              description: Trigger callback on user connect.
-              example: false
-              type: boolean
-            userDisconnect:
-              description: Trigger callback on user disconnect.
-              example: false
-              type: boolean
-          type: object
-      title: CallbackSettings
       type: object
     EmailList:
       description: A single email group list
@@ -8189,7 +8537,7 @@ components:
         relationships:
           $ref: "#/components/schemas/EmailListRelationships"
         type:
-          description: Type of record. "EmailList"
+          description: Type of record. "emailList"
           type: string
       title: EmailList
       type: object
@@ -8505,7 +8853,7 @@ components:
           type: integer
         value:
           description: Field value
-          example: example@email.com
+          example: example@example.com
           type: string
       title: FormEntryField
       type: object
@@ -8518,11 +8866,11 @@ components:
               fields:
                 - name: Email Address
                   order: 1
-                  value: test451@exavault.com
+                  value: test451@example.com
               modified: 2020-09-16T05:36:44-07:00
               paths:
-                - /example/test451@exavault.com/1.csv
-                - /example/test451@exavault.com/2.csv
+                - /example/test451@example.com/1.csv
+                - /example/test451@example.com/2.csv
               status: completed
             id: 320721
             type: formEntry
@@ -8531,11 +8879,11 @@ components:
               fields:
                 - name: Email Address
                   order: 1
-                  value: test455@exavault.com
+                  value: test455@example.com
               modified: 2020-09-17T05:36:44-07:00
               paths:
-                - /example/test455@exavault.com/1.csv
-                - /example/test455@exavault.com/2.csv
+                - /example/test455@example.com/1.csv
+                - /example/test455@example.com/2.csv
               status: completed
             id: 32021
             type: formEntry
@@ -8838,7 +9186,7 @@ components:
           type: string
         email:
           description: Recipient email.
-          example: exampleuser@exavault.com
+          example: exampleuser@example.com
           type: string
         id:
           description: ID of the recipient.
@@ -8875,6 +9223,49 @@ components:
           example: 200
           type: integer
       title: NotificationResponse
+      type: object
+    PlanDetails:
+      properties:
+        apiKeys:
+          type: integer
+        apiTokens:
+          type: integer
+        colorSchema:
+          type: boolean
+        customDomain:
+          type: boolean
+        customName:
+          type: boolean
+        directLinks:
+          type: boolean
+        ipWhitelist:
+          type: boolean
+        sharingOptions:
+          items:
+            type: string
+          type: array
+        sshKeys:
+          type: integer
+        storageAddOn:
+          type: integer
+        unlimitedUsers:
+          type: boolean
+        userExpiration:
+          type: boolean
+        userImport:
+          type: boolean
+        webhookOptions:
+          properties:
+            amount:
+              type: integer
+            includeTriggers:
+              type: string
+            restrictionTypes:
+              items:
+                type: string
+              type: array
+          type: object
+      title: PlanDetails
       type: object
     PreviewFile:
       description: Object with preview image properties.
@@ -8923,6 +9314,14 @@ components:
       type: object
     Quota:
       properties:
+        bandwidthLimit:
+          description: Total number of bytes that can be transferred per month.
+          format: int64
+          type: integer
+        bandwidthUsed:
+          description: Number of bytes transferred this month.
+          format: int64
+          type: integer
         diskLimit:
           description: Amount of disk space that the account has available to it. This may
             be increased by upgrading to a larger plan.
@@ -8944,6 +9343,20 @@ components:
             "percent full" your account must be before the quota notification is
             generated.
           example: 80
+          format: int32
+          type: integer
+        transactionsLimit:
+          description: Total number of transactions allowed in a 24-hour period.
+          format: int32
+          type: integer
+        transactionsNoticeEnabled:
+          description: Whether an email should be sent to the account owner up to once per
+            day if transaction usage exceeds `transactionsNoticeThreshold`
+            value.
+          type: boolean
+        transactionsNoticeThreshold:
+          description: Percent of daily transactions limit that will trigger an email if
+            activity exceeds it.
           format: int32
           type: integer
       title: Quota
@@ -9210,6 +9623,90 @@ components:
           example: 200
           type: integer
       title: ResourceResponse
+      type: object
+    SSHKey:
+      description: Object representing an SSH Key associated with a user.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SSHKeyAttributes"
+        id:
+          description: ID of the key.
+          example: 655621
+          format: int32
+          type: integer
+        relationships:
+          properties:
+            ownerUser:
+              properties:
+                data:
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                  type: object
+              type: object
+          type: object
+        type:
+          description: "Type of the object. "
+          enum:
+            - sshKey
+          example: sshKey
+          type: string
+      title: SSH Key
+      type: object
+    SSHKeyAttributes:
+      properties:
+        created:
+          description: The date-time the SSH Key was created.
+          format: date-time
+          type: string
+        fingerprint:
+          description: "The Key Fingerprint. The fingerprint can be used to identify and
+            keep track of the key without exposing the actual credential. "
+          type: string
+        lastLogin:
+          description: "The date-time the SSH Key was last used to access ExaVault. "
+          format: date-time
+          type: string
+      title: SSHKeysAttributes
+      type: object
+    SSHKeyCollectionResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/SSHKey"
+          type: array
+        included:
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
+        responseStatus:
+          description: Http status code of the response.
+          example: 200
+          type: integer
+        returnedResults:
+          description: Number of returned results.
+          example: 2
+          type: integer
+        totalResults:
+          description: "Total results found. "
+          example: 2
+          type: integer
+      title: SSHKeyCollectionResponse
+      type: object
+    SSHKeyResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/SSHKey"
+        included:
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
+        responseStatus:
+          description: Http status code of the response.
+          type: integer
+      title: SSHKeyResponse
       type: object
     SessionActivityEntry:
       description: Single entry of session activity
@@ -9479,7 +9976,7 @@ components:
           description: Array of recipients.
           example:
             - created: 2017-04-21T10:53:47Z
-              email: recipient@gmail.com
+              email: recipient@example.com
               hash: fseowxan
               id: 2
               received: false
@@ -9487,54 +9984,7 @@ components:
               shareId: 23
               type: direct
           items:
-            properties:
-              created:
-                description: Timestamp of adding recipient to the share.
-                example: 2017-01-26T18:10:47Z
-                format: date-time
-                type: string
-              email:
-                description: Recipient email address.
-                example: recipient@gmail.com
-                type: string
-              hash:
-                description: Share hash.
-                example: fseowxan
-                type: string
-              id:
-                description: ID of the recipient.
-                example: 2
-                format: int32
-                type: integer
-              received:
-                description: Set to true if recipient has accessed the share. Note this is set
-                  to true when the recipient clicks the link to access the
-                  share; not when they download a file.
-                enum:
-                  - true
-                  - false
-                example: false
-                type: boolean
-              sent:
-                description: Set to true if invite email was sent; false otherwise.
-                enum:
-                  - true
-                  - false
-                example: true
-                type: boolean
-              shareId:
-                description: ID of the share that the recipoient belongs to.
-                example: 23
-                type: string
-              type:
-                description: Type of the recipient.
-                enum:
-                  - owner
-                  - direct
-                example: owner
-                type: string
-            title: ShareRecipient
-            type: object
+            $ref: "#/components/schemas/ShareRecipient"
           type: array
         requireEmail:
           description: True if share requires email to access.
@@ -9603,46 +10053,96 @@ components:
       type: object
     ShareMessage:
       properties:
-        attributes:
-          properties:
-            body:
-              description: Message text.
-              example: You have files available for download.
-              type: string
-            created:
-              description: Timestamp of message creation.
-              example: 2017-01-26T18:10:47Z
-              format: date-time
-              type: string
-            modified:
-              description: Timestamp of message modification.
-              example: 2017-01-28T13:10:47Z
-              format: date-time
-              type: string
-            subject:
-              description: Message subject.
-              example: Files available for download
-              type: string
-          type: object
+        body:
+          description: Share invitation message text.
+          example: You have files available for download.
+          type: string
+        created:
+          description: Timestamp of message creation.
+          example: 2017-01-26T18:10:47Z
+          format: date-time
+          type: string
         id:
           description: Message id.
           example: 397584
           format: int32
           type: integer
-        type:
-          description: Resource type
-          enum:
-            - message
-          example: message
+        modified:
+          description: Timestamp of message modification.
+          example: 2017-01-28T13:10:47Z
+          format: date-time
           type: string
+        shareId:
+          description: ID of associated share
+          example: 3544253
+          format: int32
+          type: integer
+        subject:
+          description: Share invitation message subject.
+          example: Files available for download
+          type: string
+        userId:
+          description: User ID who generated share invite
+          example: 119394
+          format: int32
+          type: integer
       title: Message
+      type: object
+    ShareRecipient:
+      properties:
+        created:
+          description: Timestamp of adding recipient to the share.
+          example: 2017-01-26T18:10:47Z
+          format: date-time
+          type: string
+        email:
+          description: Recipient email address.
+          example: recipient@example.com
+          type: string
+        hash:
+          description: Share hash.
+          example: fseowxan
+          type: string
+        id:
+          description: ID of the recipient.
+          example: 2
+          format: int32
+          type: integer
+        received:
+          description: Set to true if recipient has accessed the share. Note this is set
+            to true when the recipient clicks the link to access the share; not
+            when they download a file.
+          enum:
+            - true
+            - false
+          example: false
+          type: boolean
+        sent:
+          description: Set to true if invite email was sent; false otherwise.
+          enum:
+            - true
+            - false
+          example: true
+          type: boolean
+        shareId:
+          description: ID of the share that the recipoient belongs to.
+          example: 23
+          type: string
+        type:
+          description: Type of the recipient.
+          enum:
+            - owner
+            - direct
+          example: owner
+          type: string
+      title: ShareRecipient
       type: object
     ShareRecipientsResponse:
       properties:
         data:
           example:
-            - test+3@exavault.com
-            - test+4@exavault.com
+            - test+3@example.com
+            - test+4@example.com
           items:
             format: email
             type: string
@@ -9917,32 +10417,382 @@ components:
           type: integer
       title: UserResponse
       type: object
-    WebhooksActivityEntry:
+    Webhook:
       properties:
         attributes:
+          $ref: "#/components/schemas/WebhookAttributes"
+        id:
+          type: integer
+        relationships:
           properties:
-            attempt:
-              example: 1
-              type: integer
-            created:
-              example: 2019-10-20T23:16:55Z
+            ownerAccount:
+              properties:
+                data:
+                  properties:
+                    id:
+                      description: Account ID
+                      example: 23422
+                      type: integer
+                    type:
+                      description: Type of thing it is "account"
+                      example: account
+                      type: string
+                  type: object
+              type: object
+            resource:
+              properties:
+                data:
+                  properties:
+                    id:
+                      description: ID of the resource associated with the webhook
+                      example: 134122
+                      type: integer
+                    type:
+                      description: Type of thing it is. "resource"
+                      example: resource
+                      type: string
+                  type: object
+              type: object
+          type: object
+        type:
+          description: Type of thing it is. "webhook"
+          example: webhook
+          type: string
+      title: Webhook
+      type: object
+    WebhookActivityAttributesV1:
+      properties:
+        accountId:
+          description: Unique ID of account
+          type: string
+        attemptId:
+          description: Event - retry identifier
+          type: string
+        created:
+          description: Date and time of webhook message being generated by system
+          type: string
+        details:
+          properties:
+            accountName:
+              description: Account master username
               type: string
-            endpointUrl:
-              example: https://example.com
+            attempt:
+              description: Number of times the system has attempted to send
+              type: integer
+            attemptId:
+              description: Entry - retry identifier
               type: string
             event:
-              example: Delete File
+              description: Type of related activity
               type: string
-            response:
-              example: OK
+            protocol:
+              description: Type of connection used for related activity
               type: string
-            responseSize:
-              example: 654
-              type: integer
-            status:
-              example: 200
-              type: integer
+            username:
+              description: Username logged for related activity. May refer to someone who is
+                not a user of the account, such as a share recipient or "publ
+              type: string
+          title: WebhookV1Details
           type: object
+        endpointUrl:
+          description: The URL the message was sent to
+          format: uri
+          type: string
+        event:
+          description: Event type
+          enum:
+            - resources.upload
+            - resources.download
+            - resources.delete
+            - resources.rename
+            - resources.copy
+            - resources.move
+            - resources.compress
+            - resources.extract
+            - resources.createFolder
+            - shares.formSubmit
+          type: string
+        ipAddress:
+          description: IP Address of related activity
+          type: string
+        resend:
+          description: Whether this attempt was a re-send of a previous attempt
+          type: boolean
+        resourcePath:
+          description: Path of resource that matched webhook
+          type: string
+        response:
+          description: Body of web response returned by webhook listener
+          type: string
+        status:
+          description: HTTP Status Code returned by webhook listener
+          type: integer
+        username:
+          description: Username of related activity
+          type: string
+        webhookFormat:
+          description: What version of webhook message is being sent `v1`
+          type: string
+        webhookId:
+          description: Unique ID of webhook configuration
+          type: integer
+        webhookPath:
+          description: Path that webhook is watching
+          type: string
+      title: WebhookActivityAttributesV1
+      type: object
+    WebhookActivityAttributesV2:
+      properties:
+        accountId:
+          description: Unique ID of account
+          type: string
+        attemptId:
+          description: Event - retry identifier
+          type: string
+        created:
+          description: Date and time of webhook message being generated by system
+          type: string
+        details:
+          properties:
+            accountName:
+              description: Account master username
+              type: string
+            attemptId:
+              description: Entry - retry identifier
+              type: string
+            event:
+              description: Type of related activity
+              type: string
+            eventData:
+              properties:
+                formDetails:
+                  items:
+                    type: object
+                  type: array
+                resources:
+                  items:
+                    properties:
+                      accessedAt:
+                        description: Date and time resource was most recently downloaded
+                        format: date-time
+                        type: string
+                      createdAt:
+                        description: Date and time of resource creation
+                        format: date-time
+                        type: string
+                      createdBy:
+                        description: Username who originally created resource
+                        type: string
+                      fileCount:
+                        description: Number of resources contained in this folder. If this is a file,
+                          fileCount is null
+                        type: integer
+                      hash:
+                        description: Resource hash value
+                        type: string
+                      id:
+                        description: Resource ID
+                        type: integer
+                      name:
+                        description: Resource name
+                        type: string
+                      path:
+                        description: Full path to resource
+                        type: string
+                      previewable:
+                        description: Whether the resource can be previewed
+                        type: boolean
+                      size:
+                        description: Size of resource in bytes
+                        format: int32
+                        type: integer
+                      type:
+                        description: Type of resource `file` or `dir`
+                        type: string
+                      updatedAt:
+                        description: Date and time resource was most recently changed
+                        format: date-time
+                        type: string
+                      uploadDate:
+                        description: Date resource was first uploaded
+                        format: date-time
+                        type: string
+                    type: object
+                  type: array
+                share:
+                  items:
+                    properties:
+                      accessDescription:
+                        description: Human readable description of what visitors are allowed to do with
+                          the receive folder
+                        type: string
+                      accessMode:
+                        $ref: "#/components/schemas/AccessMode"
+                      assets:
+                        description: List of items included in the share
+                        items:
+                          type: string
+                        type: array
+                      created:
+                        description: Date and ti
+                        format: date-time
+                        type: string
+                      embed:
+                        description: Whether the receive folder can be embedded within a web page
+                        type: boolean
+                      expiration:
+                        description: "Date and time when the receive folder will no longer be "
+                        type: string
+                      expired:
+                        description: Whether access to the receive folder has expired
+                        type: boolean
+                      fileDropCreateFolders:
+                        description: Whether files should be automatically placed in subfolders of the
+                          receive folder
+                        type: boolean
+                      formId:
+                        description: ID of the associated form
+                        type: integer
+                      hasNotification:
+                        description: Whether delivery receipts are enabled for this share
+                        type: boolean
+                      hasPassword:
+                        description: Whether the receive folder requires visitors to enter a password
+                        type: boolean
+                      hash:
+                        description: Hash value of the receive
+                        type: string
+                      id:
+                        description: Unique ID of associated receive folder
+                        type: integer
+                      inherited:
+                        description: Whether this share is inherited from a parent fol
+                        type: boolean
+                      isPublic:
+                        description: Whether visitors can acccess the receive folder without an
+                          invitation link
+                        type: boolean
+                      messages:
+                        description: Invitation messages sent for receive folder
+                        items:
+                          $ref: "#/components/schemas/ShareMessage"
+                        type: array
+                      modified:
+                        description: Date and time when the share was last changed
+                        format: date-time
+                        type: string
+                      name:
+                        description: Name of receiv
+                        type: string
+                      ownerHash:
+                        description: Hash value of the user who "owns" the receive fo
+                        type: string
+                      paths:
+                        description: List
+                        items:
+                          type: string
+                        type: array
+                      recipients:
+                        description: List of recipients invited  to the receive folder
+                        items:
+                          $ref: "#/components/schemas/ShareRecipient"
+                        type: array
+                      requireEmail:
+                        description: Whether visitors must enter their email addresses to access the
+                          receive folder
+                        type: boolean
+                      resent:
+                        description: Whether invitations to the receive folder have been re-sent to
+                          recipients
+                        type: boolean
+                      status:
+                        description: 1 if share is active. 0 if not.
+                        type: integer
+                      trackingStatus:
+                        description: Status of invitations sent for this receive folder
+                        type: string
+                      type:
+                        description: Type of share **"receive"**
+                        type: string
+                    type: object
+                  type: array
+                transferStatus:
+                  description: For uploads, and downloads, whether the file transferred OK.
+                    `success` means the transfer did not have errors
+                  type: string
+              title: WebhookV2EventData
+              type: object
+            eventTimestamp:
+              description: Date and time event originally took place
+              format: date-time
+              type: string
+            ipAddress:
+              description: IP address of related activity
+              type: string
+            protocol:
+              description: Type of connection used for related activity
+              type: string
+            username:
+              description: Username logged for related activity. May refer to someone who is
+                not a user of the account, such as a share recipient or "publ
+              type: string
+          title: WebhookV2Details
+          type: object
+        endpointUrl:
+          description: The URL the message was sent to
+          format: uri
+          type: string
+        event:
+          description: Event type
+          enum:
+            - resources.upload
+            - resources.download
+            - resources.delete
+            - resources.rename
+            - resources.copy
+            - resources.move
+            - resources.compress
+            - resources.extract
+            - resources.createFolder
+            - shares.formSubmit
+          type: string
+        ipAddress:
+          description: IP Address of related activity
+          type: string
+        resend:
+          description: Whether this attempt was a re-send of a previous attempt
+          type: boolean
+        resourcePath:
+          description: Path of resource that matched webhook
+          type: string
+        response:
+          description: Body of web response returned by webhook listener
+          type: string
+        status:
+          description: HTTP Status Code returned by webhook listener
+          type: integer
+        username:
+          description: Username of related activity
+          type: string
+        webhookFormat:
+          description: What version of webhook message is being sent `v2`
+          type: string
+        webhookId:
+          description: Unique ID of webhook configuration
+          type: integer
+        webhookPath:
+          description: Path that webhook is watching
+          type: string
+      title: WebhookActivityAttributesV2
+      type: object
+    WebhookActivityEntry:
+      properties:
+        attributes:
+          discriminator:
+            propertyName: webhookFormat
+          oneOf:
+            - $ref: "#/components/schemas/WebhookActivityAttributesV2"
+            - $ref: "#/components/schemas/WebhookActivityAttributesV1"
         id:
           example: 12345
           format: int64
@@ -9952,14 +10802,14 @@ components:
             - webhookActivity
           example: webhookActivity
           type: string
-      title: WebhooksActivityEntry
+      title: WebhookActivityEntry
       type: object
-    WebhooksActivityResponse:
+    WebhookActivityResponse:
       description: Session activity list response
       properties:
         data:
           items:
-            $ref: "#/components/schemas/WebhooksActivityEntry"
+            $ref: "#/components/schemas/WebhookActivityEntry"
           type: array
         responseStatus:
           description: Http status code of the response.
@@ -9973,7 +10823,130 @@ components:
           description: Total results found.
           example: 2
           type: integer
-      title: WebhooksActivityResponse
+      title: WebhookActivityResponse
+      type: object
+    WebhookAttributes:
+      properties:
+        created:
+          description: Timestamp when webhook configuration was added to system.
+          example: 2021-03-04T22:22:00-08:00
+          format: date-time
+          type: string
+        endpointUrl:
+          description: The endpoint is where the webhook request will be sent.
+          example: https://example.com/webhook
+          format: uri
+          type: string
+        failed:
+          description: Whether webhook has been disabled for too many consecutive failures
+          type: boolean
+        modified:
+          description: Timestamp when webhook configuration was last modified
+          example: 2021-03-04T22:23:03-08:00
+          format: date-time
+          type: string
+        responseVersion:
+          description: The version of webhook request to send to the endpoint URL
+          enum:
+            - v1
+            - v2
+          example: v2
+          type: string
+        triggers:
+          $ref: "#/components/schemas/WebhookTriggers"
+        verificationToken:
+          description: Token for verifying sender is ExaVault
+          example: 8df8200f7dee90ba4a41abe39c858c6c
+          type: string
+      title: WebhookAttributes
+      type: object
+      x-examples: {}
+    WebhookCollectionResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Webhook"
+          type: array
+        included:
+          items:
+            anyOf:
+              - $ref: "#/components/schemas/Account"
+              - $ref: "#/components/schemas/Resource"
+            discriminator:
+              propertyName: type
+          type: array
+        responseStatus:
+          description: "Http status code of the response. "
+          example: 200
+          type: integer
+        returnedResults:
+          description: Number of results returned.
+          example: 2
+          type: integer
+        totalResults:
+          description: Total results found.
+          example: 2
+          type: integer
+      type: object
+    WebhookResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Webhook"
+          type: array
+        included:
+          items:
+            anyOf:
+              - $ref: "#/components/schemas/Account"
+              - $ref: "#/components/schemas/Resource"
+            discriminator:
+              propertyName: type
+          type: array
+        responseStatus:
+          description: "Http status code of the response. "
+          example: 200
+          type: integer
+      type: object
+    WebhookTriggers:
+      properties:
+        resources:
+          properties:
+            compress:
+              description: Send webhook messages when resources are compressed into an
+                archive.
+              type: boolean
+            copy:
+              description: Send webhook messages when resources are copied.
+              type: boolean
+            createFolder:
+              description: Send webhook messages when a new folder is created.
+              type: boolean
+            delete:
+              description: Send webhook messages when resources are deleted
+              type: boolean
+            download:
+              description: Send webhook messages when resources are downloaded.
+              type: boolean
+            extract:
+              description: Send webhook messages when resources are extracted from an archive.
+              type: boolean
+            move:
+              description: Send webhook messages when resources are moved.
+              type: boolean
+            rename:
+              description: Send webhook messages when resources are renamed.
+              type: boolean
+            upload:
+              description: Send webhook messages when resources are uploaded.
+              type: boolean
+          type: object
+        shares:
+          properties:
+            formSubmit:
+              description: Send webhook messages when a receive folder form is submitted.
+              type: boolean
+          type: object
+      title: WebhookTriggers
       type: object
 x-tagGroups:
   - name: API Documentation
@@ -9984,7 +10957,9 @@ x-tagGroups:
       - Notifications
       - Shares
       - Recipients
+      - Webhooks
       - Form
       - Email Lists
+      - SSH Keys
       - Account
       - Email

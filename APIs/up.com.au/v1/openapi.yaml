@@ -93,8 +93,7 @@ paths:
               headers:
                 Authorization: Bearer up:demo:HIvThbob76kGCuol
               pathParameters: {}
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters:
                 "page[size]": 1
             response:
@@ -117,8 +116,7 @@ paths:
                   type: accounts
               links:
                 next: https://api.up.com.au/api/v1/accounts?page%5Bafter%5D=WyIyMDIwLTA5LTA0VDAzOjM3OjA3Ljg3MDU4MTAwMFoiLCJlMDc0NjkzMy0wNDVkLTRjMWItYTBiMi05MzhkM2U1ODc1ODMiXQ%3D%3D&page%5Bsize%5D=1
-                prev:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                prev: null
             type: exampleRequestResponse
       summary: List accounts
       tags:
@@ -216,8 +214,7 @@ paths:
                 Authorization: Bearer up:demo:gOJGDHqZa3HSYFZD
               pathParameters:
                 accountId: a84f4f2b-1281-4f8f-9fbd-3e00fc28af90
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters:
                 "filter[category]": good-life
                 "filter[status]": HELD
@@ -229,26 +226,20 @@ paths:
                       currencyCode: AUD
                       value: "-11.95"
                       valueInBaseUnits: -1195
-                    cashback:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    cashback: null
                     createdAt: 2020-09-01T09:28:36+10:00
                     description: Spotify
-                    foreignAmount:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    foreignAmount: null
                     holdInfo:
                       amount:
                         currencyCode: AUD
                         value: "-11.95"
                         valueInBaseUnits: -1195
-                      foreignAmount:
-                        $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                    message:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                      foreignAmount: null
+                    message: null
                     rawText: Spotify 0123456789
-                    roundUp:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                    settledAt:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    roundUp: null
+                    settledAt: null
                     status: HELD
                   id: f86b92e8-abda-4f8d-9101-59897ff0ca1b
                   links:
@@ -278,10 +269,8 @@ paths:
                         self: https://api.up.com.au/api/v1/transactions/f86b92e8-abda-4f8d-9101-59897ff0ca1b/relationships/tags
                   type: transactions
               links:
-                next:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                prev:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                next: null
+                prev: null
             type: exampleRequestResponse
       summary: List transactions by account
       tags:
@@ -312,8 +301,7 @@ paths:
                 Authorization: Bearer up:demo:orwRnj3vlo9ZTw8c
               pathParameters:
                 id: 66938e72-9d80-4b91-99bf-281ce20b161a
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
             response:
               data:
@@ -365,8 +353,7 @@ paths:
               headers:
                 Authorization: Bearer up:demo:NbylCaQt4uXPoAdn
               pathParameters: {}
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters:
                 "filter[parent]": good-life
             response:
@@ -435,8 +422,7 @@ paths:
                 Authorization: Bearer up:demo:z1uQ6Ph1KhcWXcn1
               pathParameters:
                 id: home
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
             response:
               data:
@@ -453,8 +439,7 @@ paths:
                     links:
                       related: https://api.up.com.au/api/v1/categories?filter%5Bparent%5D=home
                   parent:
-                    data:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    data: null
                 type: categories
             type: exampleRequestResponse
       summary: Retrieve category
@@ -508,8 +493,7 @@ paths:
                   type: tags
               links:
                 next: https://api.up.com.au/api/v1/tags?page%5Bafter%5D=WyJQaXp6YSBOaWdodCJd&page%5Bsize%5D=2
-                prev:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                prev: null
             type: exampleRequestResponse
       summary: List tags
       tags:
@@ -605,8 +589,7 @@ paths:
               headers:
                 Authorization: Bearer up:demo:GghWDaFwjaTZl5EE
               pathParameters: {}
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters:
                 "filter[status]": SETTLED
                 "filter[tag]": Pizza Night
@@ -618,19 +601,14 @@ paths:
                       currencyCode: AUD
                       value: "-59.98"
                       valueInBaseUnits: -5998
-                    cashback:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    cashback: null
                     createdAt: 2020-09-03T06:35:27+10:00
                     description: David Taylor
-                    foreignAmount:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                    holdInfo:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    foreignAmount: null
+                    holdInfo: null
                     message: Money for the pizzas last night.
-                    rawText:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                    roundUp:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    rawText: null
+                    roundUp: null
                     settledAt: 2020-09-03T06:35:27+10:00
                     status: SETTLED
                   id: faf43161-fb81-4e23-a900-c234ac099437
@@ -644,11 +622,9 @@ paths:
                       links:
                         related: https://api.up.com.au/api/v1/accounts/091ef233-f7d5-4900-aafc-82f77555e5b2
                     category:
-                      data:
-                        $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                      data: null
                     parentCategory:
-                      data:
-                        $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                      data: null
                     tags:
                       data:
                         - id: Pizza Night
@@ -657,10 +633,8 @@ paths:
                         self: https://api.up.com.au/api/v1/transactions/faf43161-fb81-4e23-a900-c234ac099437/relationships/tags
                   type: transactions
               links:
-                next:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                prev:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                next: null
+                prev: null
             type: exampleRequestResponse
       summary: List transactions
       tags:
@@ -691,8 +665,7 @@ paths:
                 Authorization: Bearer up:demo:mYhaIvMQsZr4Jkio
               pathParameters:
                 id: 75d3cffa-c517-4e64-8e41-acd63156c8b0
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
             response:
               data:
@@ -701,8 +674,7 @@ paths:
                     currencyCode: AUD
                     value: "-107.92"
                     valueInBaseUnits: -10792
-                  cashback:
-                    $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                  cashback: null
                   createdAt: 2020-09-01T04:00:00+10:00
                   description: Warung Bebek Bengil
                   foreignAmount:
@@ -714,18 +686,15 @@ paths:
                       currencyCode: AUD
                       value: "-107.92"
                       valueInBaseUnits: -10792
-                    foreignAmount:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
-                  message:
-                    $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    foreignAmount: null
+                  message: null
                   rawText: WARUNG BEBEK, UBUD INDONES
                   roundUp:
                     amount:
                       currencyCode: AUD
                       value: "-0.08"
                       valueInBaseUnits: -8
-                    boostPortion:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    boostPortion: null
                   settledAt: 2020-08-30T11:34:29+10:00
                   status: SETTLED
                 id: 75d3cffa-c517-4e64-8e41-acd63156c8b0
@@ -739,11 +708,9 @@ paths:
                     links:
                       related: https://api.up.com.au/api/v1/accounts/139ed96d-9697-4c4a-b221-3d0f72d656cd
                   category:
-                    data:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    data: null
                   parentCategory:
-                    data:
-                      $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                    data: null
                   tags:
                     data: []
                     links:
@@ -797,8 +764,7 @@ paths:
                   - id: Queensland
                     type: tags
               queryParameters: {}
-            response:
-              $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+            response: null
             type: exampleRequestResponse
       summary: Remove tags from transaction
       tags:
@@ -842,8 +808,7 @@ paths:
                   - id: Queensland
                     type: tags
               queryParameters: {}
-            response:
-              $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+            response: null
             type: exampleRequestResponse
       summary: Add tags to transaction
       tags:
@@ -867,8 +832,7 @@ paths:
               headers:
                 Authorization: Bearer up:demo:Ei7727gXam4j0JOy
               pathParameters: {}
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
             response:
               meta:
@@ -885,8 +849,7 @@ paths:
             request:
               headers: {}
               pathParameters: {}
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
             response:
               errors:
@@ -927,8 +890,7 @@ paths:
               headers:
                 Authorization: Bearer up:demo:9E64pZGsOXbna3ZG
               pathParameters: {}
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters:
                 "page[size]": 1
             response:
@@ -947,8 +909,7 @@ paths:
                   type: webhooks
               links:
                 next: https://api.up.com.au/api/v1/webhooks?page%5Bafter%5D=WyIyMDIwLTA5LTAyVDAzOjM3OjM3LjM2MjQxMjAwMFoiLCJjNGM5YmNiOS04OGFhLTRhNTItODdjOC05ZWFhOWZlZjczNWYiXQ%3D%3D&page%5Bsize%5D=1
-                prev:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                prev: null
             type: exampleRequestResponse
       summary: List webhooks
       tags:
@@ -1186,7 +1147,8 @@ paths:
                   required: false
                   schema:
                     type: string
-                - in: path
+                - description: Automatically added
+                  in: path
                   name: webhookURL
                   required: true
                   schema:
@@ -1325,11 +1287,9 @@ paths:
                 Authorization: Bearer up:demo:wJTpdJqQniotjF64
               pathParameters:
                 id: a64bdc5f-d245-4678-a1af-9894318ebcec
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
-            response:
-              $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+            response: null
             type: exampleRequestResponse
       summary: Delete webhook
       tags:
@@ -1359,8 +1319,7 @@ paths:
                 Authorization: Bearer up:demo:qqUmYsIcKyjjLBBM
               pathParameters:
                 id: c6715e53-68d8-4315-b183-5993dea31603
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters: {}
             response:
               data:
@@ -1419,8 +1378,7 @@ paths:
                 Authorization: Bearer up:demo:cDMrkDxg8msPDmVC
               pathParameters:
                 webhookId: 843f52cf-ceab-43cc-a7c6-449cf82c49e3
-              payload:
-                $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+              payload: null
               queryParameters:
                 "page[size]": 1
             response:
@@ -1442,8 +1400,7 @@ paths:
                   type: webhook-delivery-logs
               links:
                 next: https://api.up.com.au/api/v1/webhooks/843f52cf-ceab-43cc-a7c6-449cf82c49e3/logs?page%5Bafter%5D=WyIyMDIwLTA5LTAzVDAzOjM4OjQzLjYxMzE3MTAwMFoiLCI3ZGZiZDczMS01NTM3LTQ2YWItYjY1OC03Njc2ZjYwMjQ0NzUiXQ%3D%3D&page%5Bsize%5D=1
-                prev:
-                  $ref: "#/paths/~1tags/get/responses/200/x-up:example/request/payload"
+                prev: null
             type: exampleRequestResponse
       summary: List webhook logs
       tags:

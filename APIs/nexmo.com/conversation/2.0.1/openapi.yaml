@@ -1035,12 +1035,7 @@ components:
                   example: p*123#
                   type: string
                 number:
-                  description: The phone number to connect to
-                  example: "14155550100"
-                  maxLength: 15
-                  minLength: 7
-                  pattern: \d{7,15}
-                  type: string
+                  $ref: "#/components/schemas/channel/properties/from/oneOf/1/properties/number"
                 type:
                   description: The type of connection. Must be `phone`
                   example: phone

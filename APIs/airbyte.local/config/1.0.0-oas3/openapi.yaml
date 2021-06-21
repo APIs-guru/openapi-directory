@@ -1613,8 +1613,7 @@ components:
         namespaceDefinition:
           $ref: "#/components/schemas/NamespaceDefinitionType"
         namespaceFormat:
-          default:
-            $ref: "#/components/schemas/ConnectionRead/properties/namespaceFormat/default"
+          default: null
           description: Used when namespaceDefinition is 'customformat'. If blank then
             behaves like namespaceDefinition = 'destination'. If
             "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition =
@@ -1749,8 +1748,7 @@ components:
         namespaceDefinition:
           $ref: "#/components/schemas/NamespaceDefinitionType"
         namespaceFormat:
-          default:
-            $ref: "#/components/schemas/ConnectionRead/properties/namespaceFormat/default"
+          default: null
           description: Used when namespaceDefinition is 'customformat'. If blank then
             behaves like namespaceDefinition = 'destination'. If
             "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition =
@@ -2522,7 +2520,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/ConnectionCreate"
         - properties:
-            withOperations:
+            operations:
               items:
                 $ref: "#/components/schemas/OperationCreate"
               type: array
@@ -2549,8 +2547,7 @@ components:
         namespaceDefinition:
           $ref: "#/components/schemas/NamespaceDefinitionType"
         namespaceFormat:
-          default:
-            $ref: "#/components/schemas/ConnectionRead/properties/namespaceFormat/default"
+          default: null
           description: Used when namespaceDefinition is 'customformat'. If blank then
             behaves like namespaceDefinition = 'destination'. If
             "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition =

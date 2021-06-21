@@ -8445,14 +8445,12 @@ components:
               totalClaimedAccepted: 4000
             restaurantResponse:
               decision: Accepted
-              justification:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              justification: null
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 4000
           - affectedItems:
-              - additionalContext:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+              - additionalContext: null
                 decision: NotDecided
                 id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 name: Potato skin
@@ -8460,8 +8458,7 @@ components:
                 reference: productid%4t56574596
                 totalClaimed: 1900
                 unitPrice: 2000
-              - additionalContext:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+              - additionalContext: null
                 decision: NotDecided
                 id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 name: Pizza
@@ -8475,10 +8472,8 @@ components:
             id: 2f749442-a62a-abcd-8623-04202878e034
             issueType: Damaged
             orderId: r23tqoxdoeupdx9w8evorw
-            resolution:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            restaurantResponse:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            resolution: null
+            restaurantResponse: null
             state: Open
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 3800
@@ -8507,8 +8502,7 @@ components:
                 - decision: Rejected
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
               justification:
-                comments:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                comments: null
                 reason: OrderWasHot
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
@@ -8537,8 +8531,7 @@ components:
               items:
                 - decision: Accepted
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-              justification:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              justification: null
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 1900
@@ -8576,8 +8569,7 @@ components:
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 - decision: Rejected
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc3
-              justification:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              justification: null
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 1900
@@ -11437,13 +11429,11 @@ components:
           helpData_helpSessionId: helpsessionid
           helpData_isPilot: 32
           trData_menuType: collection
-          trData_trId:
-            $ref: "#/components/schemas/ValidationError/example/customState"
+          trData_trId: null
           transactionData_dateDiff: -1800
           transactionData_nTotalItems: 0
           transactionData_newTransactionId: orderid
-          transactionData_orderDelay:
-            $ref: "#/components/schemas/ValidationError/example/customState"
+          transactionData_orderDelay: null
           transactionData_orderStatus: Accepted
         experimentEvents:
           - id: EX-1742
@@ -11502,8 +11492,7 @@ components:
               title: I'm unhappy with my order
               type: ChapiGet
         topLevelActions:
-          - action:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+          - action: null
             buttonEvent:
               action: click_open_chatbot
               category: engagement
@@ -11597,13 +11586,11 @@ components:
           helpData_helpSessionId: helpsessionid
           helpData_isPilot: 32
           trData_menuType: collection
-          trData_trId:
-            $ref: "#/components/schemas/ValidationError/example/customState"
+          trData_trId: null
           transactionData_dateDiff: -1800
           transactionData_nTotalItems: 0
           transactionData_newTransactionId: orderid
-          transactionData_orderDelay:
-            $ref: "#/components/schemas/ValidationError/example/customState"
+          transactionData_orderDelay: null
           transactionData_orderStatus: Accepted
         helpSessionId: helpsessionid
         order:
@@ -11673,18 +11660,14 @@ components:
           telephone: +44 1234 123123
           thumbnail: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRnTQ8sfP8yxicqMBoAymdKzrpjhtwSeCIXdpqhZ7Hrj8FLBfB
         topLevelActions:
-          - action:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+          - action: null
             buttonEvent:
               action: click_open_chatbot
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: null
+              value: null
             buttonType: Primary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: null
             department: LiveChat
             id: StartChatBot
             notes: note
@@ -11696,13 +11679,10 @@ components:
             buttonEvent:
               action: click_email_justeat
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: null
+              value: null
             buttonType: Secondary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: null
             department: LiveChat
             id: EmailJustEat
             notes: note
@@ -11714,13 +11694,10 @@ components:
             buttonEvent:
               action: click_call_justeat
               category: engagement
-              label:
-                $ref: "#/components/schemas/ValidationError/example/customState"
-              value:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              label: null
+              value: null
             buttonType: Secondary
-            data:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            data: null
             department: LiveChat
             id: PhoneJustEat
             notes: note
@@ -12030,8 +12007,7 @@ components:
         deliveryMinutes: 5
         unboundedZone:
           items:
-            - coordinates:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+            - coordinates: null
               items:
                 - latitude: 57.159200668
                   longitude: -2.08593559299993
@@ -12501,18 +12477,15 @@ components:
                   label: confirm_charged
                   value: 550
                 buttonType: Primary
-                data:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                data: null
                 department: LiveChat
                 id: ConfirmCancel
-                notes:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                notes: null
                 postText: []
                 preText: []
                 title: Cancel order - pay £5.50
                 type: ChapiPost
-              - action:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+              - action: null
                 buttonEvent:
                   action: form_cancel_order
                   category: engagement
@@ -12522,8 +12495,7 @@ components:
                 data: {}
                 department: LiveChat
                 id: EndFlow
-                notes:
-                  $ref: "#/components/schemas/ValidationError/example/customState"
+                notes: null
                 postText: []
                 preText: []
                 title: Keep my order
@@ -12534,8 +12506,7 @@ components:
               - We are unable to offer a full refund because the restaurant has
                 already started preparing your food.
             header: Are you sure you want to cancel this order?
-            iconType:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            iconType: null
             title: Cancel order
           type: TextAndActions
       properties:
@@ -12784,8 +12755,7 @@ components:
           - deliveryMinutes: 5
             unboundedZone:
               items:
-                - coordinates:
-                    $ref: "#/components/schemas/ValidationError/example/customState"
+                - coordinates: null
                   items:
                     - latitude: 57.159200668
                       longitude: -2.08593559299993
@@ -12799,8 +12769,7 @@ components:
           - deliveryMinutes: 7
             unboundedZone:
               items:
-                - coordinates:
-                    $ref: "#/components/schemas/ValidationError/example/customState"
+                - coordinates: null
                   items:
                     - latitude: 57.159200668
                       longitude: -2.08593559299993
@@ -17483,8 +17452,7 @@ components:
         Id: "111"
         IsOffline: false
         Name: Coca-Cola 0.33L
-        NextAvailableAt:
-          $ref: "#/components/schemas/ValidationError/example/customState"
+        NextAvailableAt: null
         Price:
           CurrencyCode: GBP
           Value: 99
@@ -17535,8 +17503,7 @@ components:
             Id: "111"
             IsOffline: false
             Name: Coca-Cola 0.33L
-            NextAvailableAt:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            NextAvailableAt: null
             Price:
               CurrencyCode: GBP
               Value: 99
@@ -17546,8 +17513,7 @@ components:
             Id: "112"
             IsOffline: false
             Name: Coca-Cola 1.5L
-            NextAvailableAt:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            NextAvailableAt: null
             Price:
               CurrencyCode: GBP
               Value: 199
@@ -19787,10 +19753,8 @@ components:
             inspectionDate: 02-01-2021
             rate: 1
           fourth:
-            inspectionDate:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            rate:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            inspectionDate: null
+            rate: null
           second:
             inspectionDate: 02-01-2021
             rate: 1
@@ -20297,8 +20261,7 @@ components:
           Longitude: 0
           Postcode: EC4
           ResultCount: 1
-          SearchedTerms:
-            $ref: "#/components/schemas/ValidationError/example/customState"
+          SearchedTerms: null
           TagDetails:
             - BackgroundColour: "#E6F6C5"
               Colour: "#04822C"
@@ -20316,8 +20279,7 @@ components:
             Badges: []
             BrandName: ""
             City: London
-            CollectionMenuId:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            CollectionMenuId: null
             CuisineTypes:
               - Id: 2
                 IsTopCuisine: false
@@ -20335,28 +20297,22 @@ components:
             DeliveryChargeBands: []
             DeliveryCost: 0.12
             DeliveryEtaMinutes:
-              Approximate:
-                $ref: "#/components/schemas/ValidationError/example/customState"
+              Approximate: null
               RangeLower: 10
               RangeUpper: 25
             DeliveryMenuId: 224651
             DeliveryOpeningTime: 2019-11-18T01:00:00Z
             DeliveryOpeningTimeLocal: 2019-11-18T01:00:00
-            DeliveryOpeningTimeUtc:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            DeliveryOpeningTimeUtc: null
             DeliveryStartTime: 2019-11-18T01:00:00Z
-            DeliveryTime:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            DeliveryTimeMinutes:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            DeliveryTime: null
+            DeliveryTimeMinutes: null
             DeliveryWorkingTimeMinutes: 10
-            DeliveryZipcode:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            DeliveryZipcode: null
             Description: ""
             DriveDistance: 0
             DriveInfoCalculated: true
-            HygieneRating:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            HygieneRating: null
             Id: 102215
             IsBrand: false
             IsCloseBy: true
@@ -20394,8 +20350,7 @@ components:
             OpeningTime: 2019-11-19T01:00:00Z
             OpeningTimeIso: 2019-11-19T01:00:00
             OpeningTimeLocal: 2019-11-19T01:00:00
-            OpeningTimeUtc:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            OpeningTimeUtc: null
             OpeningTimes: []
             Postcode: EC4M 7RF
             Rating:
@@ -20416,13 +20371,10 @@ components:
             SendsOnItsWayNotifications: false
             ServiceableAreas: []
             ShowSmiley: false
-            SmileyDate:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            SmileyDate: null
             SmileyElite: false
-            SmileyResult:
-              $ref: "#/components/schemas/ValidationError/example/customState"
-            SmileyUrl:
-              $ref: "#/components/schemas/ValidationError/example/customState"
+            SmileyResult: null
+            SmileyUrl: null
             SponsoredPosition: 0
             Tags: []
             UniqueName: test_dp-london-london
@@ -22208,19 +22160,16 @@ components:
     ValidationError:
       additionalProperties: false
       example:
-        attemptedValue:
-          $ref: "#/components/schemas/ValidationError/example/customState"
+        attemptedValue: null
         customState: null
         errorCode: NotEmptyValidator
         errorMessage: TestProperty is empty
         formattedMessageArguments: []
         formattedMessagePlaceHolderValues:
           PropertyName: User Role
-          PropertyValue:
-            $ref: "#/components/schemas/ValidationError/example/customState"
+          PropertyValue: null
         propertyName: TestProperty
-        resourceName:
-          $ref: "#/components/schemas/ValidationError/example/customState"
+        resourceName: null
         severity: 0
       properties:
         attemptedValue:
@@ -24210,8 +24159,7 @@ components:
       type: object
     delivery-eta-minutes:
       example:
-        Approximate:
-          $ref: "#/components/schemas/ValidationError/example/customState"
+        Approximate: null
         RangeLower: 35
         RangeUpper: 50
       nullable: true

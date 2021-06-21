@@ -463,7 +463,8 @@ paths:
             description: The id of the account.
             format: int32
             type: integer
-        - in: path
+        - description: Automatically added
+          in: path
           name: accountId
           required: true
           schema:
@@ -531,7 +532,8 @@ paths:
               lookups of SRV records.
             nullable: true
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -572,7 +574,8 @@ paths:
           schema:
             description: The domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -611,12 +614,14 @@ paths:
           schema:
             description: The id of the record.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: recordId
           required: true
           schema:
@@ -643,12 +648,14 @@ paths:
           schema:
             description: The id of the record.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: recordId
           required: true
           schema:
@@ -679,12 +686,14 @@ paths:
           schema:
             description: The id of the record.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: recordId
           required: true
           schema:
@@ -774,7 +783,8 @@ paths:
           schema:
             description: The domain name
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -800,7 +810,8 @@ paths:
           schema:
             description: The domain name
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -833,7 +844,8 @@ paths:
           schema:
             description: The domain name
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -908,7 +920,8 @@ paths:
           schema:
             description: The Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -934,7 +947,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -964,7 +978,8 @@ paths:
           schema:
             description: Linux hosting domain name
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -992,7 +1007,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1020,7 +1036,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1048,7 +1065,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1077,7 +1095,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1104,7 +1123,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1144,12 +1164,14 @@ paths:
           schema:
             description: Id of the scheduled task.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: scheduledTaskId
           required: true
           schema:
@@ -1179,12 +1201,14 @@ paths:
           schema:
             description: Id of the scheduled task.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: scheduledTaskId
           required: true
           schema:
@@ -1216,12 +1240,14 @@ paths:
           schema:
             description: Id of the scheduled task.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: scheduledTaskId
           required: true
           schema:
@@ -1251,7 +1277,8 @@ paths:
           schema:
             description: Linux hosting domain name
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1286,12 +1313,14 @@ paths:
           schema:
             description: Name of the site on the linux hosting.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: siteName
           required: true
           schema:
@@ -1337,12 +1366,14 @@ paths:
               For HTTP/2 to work correctly, the site must have ssl
               enabled."
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: siteName
           required: true
           schema:
@@ -1372,7 +1403,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1402,7 +1434,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1429,7 +1462,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1469,7 +1503,8 @@ paths:
           schema:
             description: Fingerprint of public key.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1500,7 +1535,8 @@ paths:
           schema:
             description: Specific hostname.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1535,7 +1571,8 @@ paths:
           schema:
             description: Specific hostname.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1563,7 +1600,8 @@ paths:
           schema:
             description: Linux hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1603,12 +1641,14 @@ paths:
           schema:
             description: Name of the site on the linux hosting.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: siteName
           required: true
           schema:
@@ -1675,7 +1715,8 @@ paths:
           schema:
             description: Mailbox name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: mailboxName
           required: true
           schema:
@@ -1698,7 +1739,8 @@ paths:
           schema:
             description: Mailbox name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: mailboxName
           required: true
           schema:
@@ -1724,7 +1766,8 @@ paths:
           schema:
             description: Mailbox name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: mailboxName
           required: true
           schema:
@@ -1752,7 +1795,8 @@ paths:
           schema:
             description: Mailbox name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: mailboxName
           required: true
           schema:
@@ -1780,7 +1824,8 @@ paths:
           schema:
             description: Mailbox name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: mailboxName
           required: true
           schema:
@@ -1808,7 +1853,8 @@ paths:
           schema:
             description: Mail zone domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1834,7 +1880,8 @@ paths:
           schema:
             description: Mail zone domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1880,12 +1927,14 @@ paths:
           schema:
             description: Alias e-mail address.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: emailAddress
           required: true
           schema:
@@ -1915,12 +1964,14 @@ paths:
           schema:
             description: Alias e-mail address.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: emailAddress
           required: true
           schema:
@@ -1954,7 +2005,8 @@ paths:
           schema:
             description: Mail zone domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -1982,7 +2034,8 @@ paths:
           schema:
             description: Mail zone domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -2024,12 +2077,14 @@ paths:
             description: E-mail address to which all e-mails are sent to inexistent
               mailboxes or aliases.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: emailAddress
           required: true
           schema:
@@ -2051,7 +2106,8 @@ paths:
           schema:
             description: Mail zone domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -2097,7 +2153,8 @@ paths:
           schema:
             description: Smtp domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -2127,7 +2184,8 @@ paths:
           schema:
             description: Smtp domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:
@@ -2228,7 +2286,8 @@ paths:
           schema:
             description: Name of the database.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
@@ -2249,7 +2308,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
@@ -2275,7 +2335,8 @@ paths:
           schema:
             description: Name of the database.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
@@ -2304,7 +2365,8 @@ paths:
           schema:
             description: Name of the database.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
@@ -2346,12 +2408,14 @@ paths:
           schema:
             description: Name of the user.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: userName
           required: true
           schema:
@@ -2382,12 +2446,14 @@ paths:
           schema:
             description: Name of the user.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: userName
           required: true
           schema:
@@ -2422,12 +2488,14 @@ paths:
           schema:
             description: Name of the user.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: databaseName
           required: true
           schema:
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: userName
           required: true
           schema:
@@ -2458,7 +2526,8 @@ paths:
           schema:
             format: uuid
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: jobId
           required: true
           schema:
@@ -2737,7 +2806,8 @@ paths:
           schema:
             description: The SHA-1 fingerprint of the certificate.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: sha1Fingerprint
           required: true
           schema:
@@ -2782,7 +2852,8 @@ paths:
           schema:
             description: The password used to protect the certificate file.<br />
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: sha1Fingerprint
           required: true
           schema:
@@ -2858,7 +2929,8 @@ paths:
           schema:
             description: The Windows hosting domain name.
             type: string
-        - in: path
+        - description: Automatically added
+          in: path
           name: domainName
           required: true
           schema:

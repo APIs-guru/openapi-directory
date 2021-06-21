@@ -97,14 +97,14 @@ info:
 externalDocs:
   url: http://api2.bigoven.com/web/documentation
 paths:
-  "/article/{term}":
+  "/article/{uniqueKeyword}":
     get:
       deprecated: false
       operationId: Article_Get
       parameters:
-        - description: ""
+        - description: The article unique keyword
           in: path
-          name: term
+          name: uniqueKeyword
           required: true
           schema:
             type: string
@@ -114,47 +114,6 @@ paths:
         "404":
           description: Article not found
       summary: Get a food article
-      tags:
-        - Article
-    put:
-      deprecated: false
-      operationId: Article_Put
-      parameters:
-        - description: ""
-          in: path
-          name: term
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/API2.Controllers.WebAPI.ArticleController.PutArticl\
-                eReq"
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: "#/components/schemas/API2.Controllers.WebAPI.ArticleController.PutArticl\
-                eReq"
-          application/xml:
-            schema:
-              $ref: "#/components/schemas/API2.Controllers.WebAPI.ArticleController.PutArticl\
-                eReq"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/API2.Controllers.WebAPI.ArticleController.PutArticl\
-                eReq"
-          text/xml:
-            schema:
-              $ref: "#/components/schemas/API2.Controllers.WebAPI.ArticleController.PutArticl\
-                eReq"
-        required: true
-      responses:
-        "200":
-          description: Article successfully returned
-        "404":
-          description: Article not found
-      summary: Update the article by term
       tags:
         - Article
   "/collection/{id}":
@@ -286,59 +245,6 @@ paths:
         collections.
       tags:
         - Collection
-  "/glossary/byterm/{term}":
-    get:
-      deprecated: false
-      operationId: Glossary_ByTerm
-      parameters:
-        - description: Keyword used to look up article, e.g., asparagus
-          in: path
-          name: term
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BigOven.Model.API.GlossaryEntry"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/BigOven.Model.API.GlossaryEntry"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/BigOven.Model.API.GlossaryEntry"
-            text/xml:
-              schema:
-                $ref: "#/components/schemas/BigOven.Model.API.GlossaryEntry"
-          description: OK
-      summary: Get food glossary article by term (e.g., asparagus). This editorial is
-        (c) BigOven and MUST carry attribution and a link back to the glossary
-        entry on BigOven.com.
-      tags:
-        - Glossary
-  "/glossary/{id}":
-    get:
-      deprecated: false
-      operationId: Glossary_Get
-      parameters:
-        - description: identifier of  article to retrieve
-          in: path
-          name: id
-          required: true
-          schema:
-            format: int32
-            type: integer
-      responses:
-        "200":
-          description: Glossary article successfully returned
-        "404":
-          description: Glossary article not found
-      summary: DEPRECATED. Please use "Article", which is a new format for food
-        glossary articles, which separates out the images.
-      tags:
-        - Glossary
   /grocerylist:
     delete:
       deprecated: false
@@ -3565,13 +3471,6 @@ components:
             $ref: "#/components/schemas/BigOven.Model.API.Recipe"
       required: true
   schemas:
-    API2.Controllers.WebAPI.ArticleController.PutArticleReq:
-      description: Update an article
-      properties:
-        definition:
-          description: the html definition
-          type: string
-      type: object
     API2.Controllers.WebAPI.GroceryListController.DepartmentModel:
       description: ""
       properties:
@@ -4087,22 +3986,6 @@ components:
         StatusCode:
           format: int32
           type: integer
-      type: object
-    BigOven.Model.API.GlossaryEntry:
-      properties:
-        CreationDate:
-          format: date-time
-          type: string
-        Definition:
-          type: string
-        GlossaryEntryID:
-          format: int32
-          type: integer
-        LastModified:
-          format: date-time
-          type: string
-        Term:
-          type: string
       type: object
     BigOven.Model.API.Grocery.GroceryList:
       properties:
@@ -4904,81 +4787,6 @@ components:
           format: int32
           type: integer
         UserName:
-          type: string
-      type: object
-    BigOven.Model.Article:
-      properties:
-        AllCategoriesText:
-          type: string
-        ApprovedForDisplay:
-          type: boolean
-        ArticleId:
-          format: int32
-          type: integer
-        AssignedToUserID:
-          format: int32
-          type: integer
-        Body:
-          type: string
-        Byline:
-          type: string
-        CaptionedImages:
-          items:
-            $ref: "#/components/schemas/BigOven.Model.CaptionedImage"
-          type: array
-        CategoryID:
-          format: int32
-          type: integer
-        DateApproved:
-          format: date-time
-          type: string
-        DateAssigned:
-          format: date-time
-          type: string
-        DateCreated:
-          format: date-time
-          type: string
-        DeadlineDate:
-          format: date-time
-          type: string
-        Id:
-          type: string
-        InternalAbstract:
-          type: string
-        IsSeasonal:
-          type: boolean
-        LineOrder:
-          format: int32
-          type: integer
-        PrimaryImage:
-          type: string
-        ReadyForReview:
-          type: boolean
-        SeasonalEndEmphasis:
-          format: date-time
-          type: string
-        SeasonalStartEmphasis:
-          format: date-time
-          type: string
-        ShortURL:
-          type: string
-        Slug:
-          type: string
-        SubcategoryID:
-          format: int32
-          type: integer
-        Subhead:
-          type: string
-        Title:
-          type: string
-        keywordUnique:
-          type: string
-      type: object
-    BigOven.Model.CaptionedImage:
-      properties:
-        Caption:
-          type: string
-        PhotoUrl:
           type: string
       type: object
     BigOven.Model.InstructionStep:

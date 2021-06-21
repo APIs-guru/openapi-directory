@@ -112,8 +112,7 @@ paths:
       summary: Places a multiple or a complex bet.
       tags:
         - Bets
-      x-canReturnErrors:
-        $ref: "#/x-globalerrors"
+      x-canReturnErrors: null
   /bet/single:
     post:
       description: Places a single bet. When placing a single bet using live inplay
@@ -184,8 +183,7 @@ paths:
       summary: Places a single bet
       tags:
         - Bets
-      x-canReturnErrors:
-        $ref: "#/x-globalerrors"
+      x-canReturnErrors: null
   /betslips:
     post:
       description: Organises the betslip when one or more selections are made. It
@@ -246,8 +244,7 @@ paths:
       summary: Returns available free bets
       tags:
         - Bets
-      x-canreturnErrors:
-        $ref: "#/x-globalerrors"
+      x-canreturnErrors: null
   /history:
     get:
       description: Retrieves the customer’s bet history. Options are available to
