@@ -7,6 +7,7 @@
 [![OpenAPI definitions][numSpecs-image]][apisDir-link]
 [![Endpoints][endpoints-image]][apisDir-link]
 [![Fixes][fixes-image]][apisDir-link]
+![oad Actions](https://api.meercode.io/badge/Mermade/oad?type=ci-count&token=y7EdP0Hxb6q8PoG3h2JEmDVQDatZmttj&lastDay=7)
 [![Chat on Slack][slack-image]][slack-link]
 
 [![Share on Twitter][twitter-image]][twitter-link]
