@@ -768,7 +768,7 @@ paths:
         - projects
   "/v1/{parent}/fields":
     get:
-      description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false`.
+      description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` .
       operationId: firestore.projects.databases.collectionGroups.fields.list
       parameters:
         - description: Required. A parent name of the form `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
@@ -777,7 +777,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The filter to apply to list results. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false`.
+        - description: The filter to apply to list results. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with a filter that includes `indexConfig.usesAncestorConfig:false` .
           in: query
           name: filter
           schema:

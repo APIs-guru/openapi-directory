@@ -3087,6 +3087,9 @@ components:
             canChangeCopyRequiresWriterPermission:
               description: Whether the current user can change the copyRequiresWriterPermission restriction of this file.
               type: boolean
+            canChangeSecurityUpdateEnabled:
+              description: Whether the current user can change the securityUpdateEnabled field on link share metadata.
+              type: boolean
             canChangeViewersCanCopyContent:
               description: Deprecated
               type: boolean
@@ -3352,6 +3355,16 @@ components:
         lastModifyingUser:
           $ref: "#/components/schemas/User"
           description: The last user to modify the file.
+        linkShareMetadata:
+          description: Contains details about the link URLs that clients are using to refer to this item.
+          properties:
+            securityUpdateEligible:
+              description: Whether the file is eligible for security update.
+              type: boolean
+            securityUpdateEnabled:
+              description: Whether the security update is enabled for this file.
+              type: boolean
+          type: object
         md5Checksum:
           description: The MD5 checksum for the content of the file. This is only applicable to files with binary content in Google Drive.
           type: string
@@ -3416,6 +3429,9 @@ components:
           description: The number of storage quota bytes used by the file. This includes the head revision as well as previous revisions with keepForever enabled.
           format: int64
           type: string
+        resourceKey:
+          description: A key needed to access the item via a shared link.
+          type: string
         shared:
           description: Whether the file has been shared. Not populated for items in shared drives.
           type: boolean
@@ -3434,6 +3450,9 @@ components:
               type: string
             targetMimeType:
               description: The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target's MIME type, captured when the shortcut is created.
+              type: string
+            targetResourceKey:
+              description: The ResourceKey for the target file.
               type: string
           type: object
         size:

@@ -560,6 +560,9 @@ components:
         accessDeniedPageUri:
           description: The URI to be redirected to when access is denied.
           type: string
+        generateTroubleshootingUri:
+          description: Whether to generate a troubleshooting URL on access denied events to this application.
+          type: boolean
       type: object
     AccessSettings:
       description: Access related settings for IAP protected apps.

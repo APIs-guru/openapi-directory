@@ -3299,6 +3299,9 @@ components:
         desiredIntraNodeVisibilityConfig:
           $ref: "#/components/schemas/IntraNodeVisibilityConfig"
           description: The desired config of Intra-node visibility.
+        desiredL4ilbSubsettingConfig:
+          $ref: "#/components/schemas/ILBSubsettingConfig"
+          description: The desired L4 Internal Load Balancer Subsetting configuration.
         desiredLocations:
           description: "The desired list of Google Compute Engine [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes should be located. This list must always include the cluster's primary zone. Warning: changing cluster locations will update the locations of all node pools and will result in nodes being added and/or removed."
           items:
@@ -3554,6 +3557,13 @@ components:
           description: Whether the HTTP Load Balancing controller is enabled in the cluster. When enabled, it runs a small pod in the cluster that manages the load balancers.
           type: boolean
       type: object
+    ILBSubsettingConfig:
+      description: ILBSubsettingConfig contains the desired config of L4 Internal LoadBalancer subsetting on this cluster.
+      properties:
+        enabled:
+          description: Enables l4 ILB subsetting for this cluster.
+          type: boolean
+      type: object
     IPAllocationPolicy:
       description: Configuration for controlling how IPs are allocated in the cluster.
       properties:
@@ -3807,6 +3817,9 @@ components:
           description: Whether the cluster disables default in-node sNAT rules. In-node sNAT rules will be disabled when default_snat_status is disabled. When disabled is set to false, default IP masquerade rules will be applied to the nodes to prevent sNAT on cluster internal traffic.
         enableIntraNodeVisibility:
           description: Whether Intra-node visibility is enabled for this cluster. This makes same node pod to pod traffic visible for VPC network.
+          type: boolean
+        enableL4ilbSubsetting:
+          description: Whether L4ILB Subsetting is enabled for this cluster.
           type: boolean
         network:
           description: "Output only. The relative name of the Google Compute Engine network(https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the cluster is connected. Example: projects/my-project/global/networks/my-network"

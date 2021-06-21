@@ -745,6 +745,50 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:updateConfig":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update Notebook Instance configurations.
+      operationId: notebooks.projects.locations.instances.updateConfig
+      parameters:
+        - description: "Required. Format:
+            `projects/{project_id}/locations/{location}/instances/{instance_id}\
+            `"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInstanceConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}:updateShieldedInstanceConfig":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1893,6 +1937,7 @@ components:
             - FAILED
             - CANCELLING
             - CANCELLED
+            - EXPIRED
           readOnly: true
           type: string
         updateTime:
@@ -2257,6 +2302,19 @@ components:
         vmImage:
           $ref: "#/components/schemas/VmImage"
           description: Use a Compute Engine VM image to start the notebook instance.
+      type: object
+    InstanceConfig:
+      description: Notebook instance configurations that can be updated.
+      properties:
+        enableHealthMonitoring:
+          description: "Verifies core internal services are running. More info:
+            go/notebooks-health"
+          type: boolean
+        notebookUpgradeSchedule:
+          description: Cron expression in UTC timezone, used to schedule instance auto
+            upgrade. Please follow the [cron
+            format](https://en.wikipedia.org/wiki/Cron).
+          type: string
       type: object
     IsInstanceUpgradeableResponse:
       description: Response for checking if a notebook instance is upgradeable.
@@ -3171,6 +3229,13 @@ components:
     TriggerScheduleRequest:
       description: Request for created scheduled notebooks
       properties: {}
+      type: object
+    UpdateInstanceConfigRequest:
+      description: Request for updating instance configurations.
+      properties:
+        config:
+          $ref: "#/components/schemas/InstanceConfig"
+          description: The instance configurations to be updated.
       type: object
     UpdateShieldedInstanceConfigRequest:
       description: Request for updating the Shielded Instance config for a notebook

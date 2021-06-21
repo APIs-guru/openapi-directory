@@ -49,7 +49,8 @@ paths:
           name: includeSpamTrash
           schema:
             type: boolean
-        - description: Maximum number of drafts to return.
+        - description: Maximum number of drafts to return. This field defaults to 100. The
+            maximum allowed value for this field is 500.
           in: query
           name: maxResults
           schema:
@@ -559,7 +560,8 @@ paths:
           name: labelId
           schema:
             type: string
-        - description: The maximum number of history records to return.
+        - description: Maximum number of history records to return. This field defaults to
+            100. The maximum allowed value for this field is 500.
           in: query
           name: maxResults
           schema:
@@ -926,7 +928,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Maximum number of messages to return.
+        - description: Maximum number of messages to return. This field defaults to 100.
+            The maximum allowed value for this field is 500.
           in: query
           name: maxResults
           schema:
@@ -3379,7 +3382,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: Maximum number of threads to return.
+        - description: Maximum number of threads to return. This field defaults to 100.
+            The maximum allowed value for this field is 500.
           in: query
           name: maxResults
           schema:

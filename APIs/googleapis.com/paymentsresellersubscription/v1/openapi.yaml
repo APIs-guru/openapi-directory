@@ -836,6 +836,12 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        upgradeDowngradeDetails:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscripti\
+            onUpgradeDowngradeDetails"
+          description: Optional. Details about the previous subscription that this new
+            subscription upgrades/downgrades from. Only populated if this
+            subscription is an upgrade/downgrade from another subscription.
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails:
       description: Describes the details of a cancelled subscription.
@@ -851,6 +857,23 @@ components:
             - CANCELLATION_REASON_ACCOUNT_CLOSED
             - CANCELLATION_REASON_UPGRADE_DOWNGRADE
             - CANCELLATION_REASON_OTHER
+          type: string
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails:
+      description: Details about the previous subscription that this new subscription
+        upgrades/downgrades from.
+      properties:
+        billingCycleSpec:
+          description: Required. Specifies the billing cycle spec for the new
+            upgraded/downgraded subscription.
+          enum:
+            - BILLING_CYCLE_SPEC_UNSPECIFIED
+            - BILLING_CYCLE_SPEC_ALIGN_WITH_PREVIOUS_SUBSCRIPTION
+            - BILLING_CYCLE_SPEC_START_IMMEDIATELY
+          type: string
+        previousSubscriptionId:
+          description: Required. The previous subscription id to be replaced. This is not
+            the full resource name, use the subscription_id segment only.
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1UndoCancelSubscriptionRequest:

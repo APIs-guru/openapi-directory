@@ -580,6 +580,10 @@ components:
               - COUNTRY
               - FORMAT
               - PLATFORM
+              - MOBILE_OS_VERSION
+              - GMA_SDK_VERSION
+              - APP_VERSION_NAME
+              - SERVING_RESTRICTION
             type: string
           type: array
         localizationSettings:
@@ -631,6 +635,10 @@ components:
             - COUNTRY
             - FORMAT
             - PLATFORM
+            - MOBILE_OS_VERSION
+            - GMA_SDK_VERSION
+            - APP_VERSION_NAME
+            - SERVING_RESTRICTION
           type: string
         matchesAny:
           $ref: "#/components/schemas/StringList"
@@ -654,6 +662,10 @@ components:
             - COUNTRY
             - FORMAT
             - PLATFORM
+            - MOBILE_OS_VERSION
+            - GMA_SDK_VERSION
+            - APP_VERSION_NAME
+            - SERVING_RESTRICTION
           type: string
         metric:
           description: Sort by the specified metric.
@@ -701,6 +713,10 @@ components:
               - COUNTRY
               - FORMAT
               - PLATFORM
+              - MOBILE_OS_VERSION
+              - GMA_SDK_VERSION
+              - APP_VERSION_NAME
+              - SERVING_RESTRICTION
             type: string
           type: array
         localizationSettings:
@@ -751,6 +767,10 @@ components:
             - COUNTRY
             - FORMAT
             - PLATFORM
+            - MOBILE_OS_VERSION
+            - GMA_SDK_VERSION
+            - APP_VERSION_NAME
+            - SERVING_RESTRICTION
           type: string
         matchesAny:
           $ref: "#/components/schemas/StringList"
@@ -772,6 +792,10 @@ components:
             - COUNTRY
             - FORMAT
             - PLATFORM
+            - MOBILE_OS_VERSION
+            - GMA_SDK_VERSION
+            - APP_VERSION_NAME
+            - SERVING_RESTRICTION
           type: string
         metric:
           description: Sort by the specified metric.

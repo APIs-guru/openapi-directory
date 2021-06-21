@@ -4052,6 +4052,9 @@ components:
             - PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE
             - PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL
           type: string
+        serviceExternalIpsConfig:
+          $ref: "#/components/schemas/ServiceExternalIPsConfig"
+          description: ServiceExternalIPsConfig specifies if services with externalIPs field are blocked or not.
         subnetwork:
           description: "Output only. The relative name of the Google Compute Engine [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the cluster is connected. Example: projects/my-project/regions/us-central1/subnetworks/my-subnet"
           type: string
@@ -4666,6 +4669,13 @@ components:
             $ref: "#/components/schemas/WindowsVersions"
           description: Maps of Kubernetes version and supported Windows server versions.
           type: object
+      type: object
+    ServiceExternalIPsConfig:
+      description: Config to block services with externalIPs field.
+      properties:
+        enabled:
+          description: Whether Services with ExternalIPs field are allowed or not.
+          type: boolean
       type: object
     SetAddonsConfigRequest:
       description: SetAddonsRequest sets the addons associated with the cluster.

@@ -603,6 +603,27 @@ components:
             $ref: "#/components/schemas/Tile"
           type: array
       type: object
+    OperationMetadata:
+      description: Contains metadata for longrunning operation for the edit Metrics Scope endpoints.
+      properties:
+        createTime:
+          description: The time when the batch request was received.
+          format: google-datetime
+          type: string
+        state:
+          description: Current state of the batch operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATED
+            - RUNNING
+            - DONE
+            - CANCELLED
+          type: string
+        updateTime:
+          description: The time when the operation result was last updated.
+          format: google-datetime
+          type: string
+      type: object
     Option:
       description: A protocol buffer option, which can be attached to a message, field, enumeration, etc.
       properties:

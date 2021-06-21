@@ -37,10 +37,10 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: managedidentities.projects.locations.global.operations.delete
+      description: Deletes identified Peering.
+      operationId: managedidentities.projects.locations.global.peerings.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: "Required. Peering resource name using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`"
           in: path
           name: name
           required: true
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -61,10 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: managedidentities.projects.locations.global.operations.list
+      description: Gets details of a single Peering.
+      operationId: managedidentities.projects.locations.global.peerings.get
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: "Required. Peering resource name using the form: `projects/{project_id}/locations/global/domains/{peering_id}`"
           in: path
           name: name
           required: true
@@ -90,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
+                $ref: "#/components/schemas/Peering"
           description: Successful response
       security:
         - Oauth2:
@@ -112,16 +112,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the metadata and configuration of a domain.
-      operationId: managedidentities.projects.locations.global.domains.patch
+      description: Updates the labels for specified Peering.
+      operationId: managedidentities.projects.locations.global.peerings.patch
       parameters:
-        - description: "Output only. The unique name of the domain using the form: `projects/{project_id}/locations/global/domains/{domain_name}`."
+        - description: "Output only. Unique name of the peering in this scope including projects and location using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`."
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include fields from Domain: * `labels` * `locations` * `authorized_networks` * `audit_logs_enabled`"
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Peering: * `labels`"
           in: query
           name: updateMask
           schema:
@@ -130,7 +130,78 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Domain"
+              $ref: "#/components/schemas/Peering"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}/ldapssettings":
+    get:
+      description: Gets the domain ldaps settings.
+      operationId: managedidentities.projects.locations.global.domains.getLdapssettings
+      parameters:
+        - description: "Required. The domain resource name using the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LDAPSSettings"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Patches a single ldaps settings.
+      operationId: managedidentities.projects.locations.global.domains.updateLdapssettings
+      parameters:
+        - description: "The resource name of the LDAPS settings. Uses the form: `projects/{project}/locations/{location}/domains/{domain}`."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LDAPSSettings"
       responses:
         "200":
           content:
@@ -540,6 +611,97 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/peerings":
+    get:
+      description: Lists Peerings in a given project.
+      operationId: managedidentities.projects.locations.global.peerings.list
+      parameters:
+        - description: "Required. The resource name of the domain location using the form: `projects/{project_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter specifying constraints of a list operation. For example, `peering.authoized_network ="/projects/myprojectid"`.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 1000 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPeeringsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Peering for Managed AD instance.
+      operationId: managedidentities.projects.locations.global.peerings.create
+      parameters:
+        - description: "Required. Resource project name and location using the form: `projects/{project_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Peering Id, unique name to identify peering.
+          in: query
+          name: peeringId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Peering"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{parent}/sqlIntegrations":
     get:
       description: Lists SqlIntegrations in a given domain.
@@ -824,6 +986,28 @@ components:
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
+      type: object
+    Certificate:
+      description: Certificate used to configure LDAPS.
+      properties:
+        expireTime:
+          description: The certificate expire time.
+          format: google-datetime
+          type: string
+        issuingCertificate:
+          $ref: "#/components/schemas/Certificate"
+          description: The issuer of this certificate.
+        subject:
+          description: The certificate subject.
+          type: string
+        subjectAlternativeName:
+          description: The additional hostnames for the domain.
+          items:
+            type: string
+          type: array
+        thumbprint:
+          description: The certificate thumbprint which uniquely identifies the certificate.
+          type: string
       type: object
     DailyCycle:
       description: Time window specified for daily operations.
@@ -1247,6 +1431,38 @@ components:
           description: Name of the SLO tier the Instance belongs to. This name will be expected to match the tiers specified in the service SLO configuration. Field is mandatory and must not be empty.
           type: string
       type: object
+    LDAPSSettings:
+      description: LDAPSSettings represents the ldaps settings for domain resource. LDAP is the Lightweight Directory Access Protocol, defined in https://tools.ietf.org/html/rfc4511. The settings object configures LDAP over SSL/TLS, whether it is over port 636 or the StartTLS operation. If LDAPSSettings is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
+      properties:
+        certificate:
+          $ref: "#/components/schemas/Certificate"
+          description: Output only. The certificate used to configure LDAPS. Certificates can be chained with a maximum length of 15.
+          readOnly: true
+        certificatePassword:
+          description: Input only. The password used to encrypt the uploaded pfx certificate.
+          type: string
+        certificatePfx:
+          description: "Input only. The uploaded PKCS12-formatted certificate to configure LDAPS with. It will enable the domain controllers in this domain to accept LDAPS connections (either LDAP over SSL/TLS or the StartTLS operation). A valid certificate chain must form a valid x.509 certificate chain (or be comprised of a single self-signed certificate. It must be encrypted with either: 1) PBES2 + PBKDF2 + AES256 encryption and SHA256 PRF; or 2) pbeWithSHA1And3-KeyTripleDES-CBC Private key must be included for the leaf / single self-signed certificate. Note: For a fqdn your-example-domain.com, the wildcard fqdn is *.your-example-domain.com. Specifically the leaf certificate must have: - Either a blank subject or a subject with CN matching the wildcard fqdn. - Exactly two SANs - the fqdn and wildcard fqdn. - Encipherment and digital key signature key usages. - Server authentication extended key usage (OID=1.3.6.1.5.5.7.3.1) - Private key must be in one of the following formats: RSA, ECDSA, ED25519. - Private key must have appropriate key length: 2048 for RSA, 256 for ECDSA - Signature algorithm of the leaf certificate cannot be MD2, MD5 or SHA1."
+          format: byte
+          type: string
+        name:
+          description: "The resource name of the LDAPS settings. Uses the form: `projects/{project}/locations/{location}/domains/{domain}`."
+          type: string
+        state:
+          description: Output only. The current state of this LDAPS settings.
+          enum:
+            - STATE_UNSPECIFIED
+            - UPDATING
+            - ACTIVE
+            - FAILED
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Last update time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ListDomainsResponse:
       description: Response message for ListDomains
       properties:
@@ -1286,6 +1502,23 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListPeeringsResponse:
+      description: ListPeeringsResponse is the response message for ListPeerings method.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        peerings:
+          description: A list of Managed Identities Service Peerings in the project.
+          items:
+            $ref: "#/components/schemas/Peering"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
           type: array
       type: object
     ListSqlIntegrationsResponse:
@@ -1419,6 +1652,49 @@ components:
           type: string
         verb:
           description: "[Output only] Name of the verb executed by the operation."
+          type: string
+      type: object
+    Peering:
+      description: Represents a Managed Microsoft Identities Peering.
+      properties:
+        authorizedNetwork:
+          description: Required. The full names of the Google Compute Engine [networks](/compute/docs/networks-and-firewalls#networks) to which the instance is connected. Caller needs to make sure that CIDR subnets do not overlap between networks, else peering creation will fail.
+          type: string
+        createTime:
+          description: Output only. The time the instance was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        domainResource:
+          description: "Required. Full domain resource path for the Managed AD Domain involved in peering. The resource path should be in the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user provided metadata.
+          type: object
+        name:
+          description: "Output only. Unique name of the peering in this scope including projects and location using the form: `projects/{project_id}/locations/global/peerings/{peering_id}`."
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The current state of this Peering.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - CONNECTED
+            - DISCONNECTED
+            - DELETING
+          readOnly: true
+          type: string
+        statusMessage:
+          description: Output only. Additional information about the current status of this peering, if available.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Last update time.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     Policy:

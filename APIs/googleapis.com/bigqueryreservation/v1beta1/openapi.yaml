@@ -105,10 +105,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing reservation resource.
-      operationId: bigqueryreservation.projects.locations.reservations.patch
+      description: Updates an existing assignment. Only the `priority` field can be updated.
+      operationId: bigqueryreservation.projects.locations.reservations.assignments.patch
       parameters:
-        - description: The resource name of the reservation, e.g., `projects/*/locations/*/reservations/team1-prod`.
+        - description: "Output only. Name of the resource. E.g.: `projects/myproject/locations/US/reservations/team1-prod/assignments/123`."
           in: path
           name: name
           required: true
@@ -123,13 +123,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Reservation"
+              $ref: "#/components/schemas/Assignment"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Reservation"
+                $ref: "#/components/schemas/Assignment"
           description: Successful response
       security:
         - Oauth2:

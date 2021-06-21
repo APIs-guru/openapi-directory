@@ -869,6 +869,7 @@ components:
             - DISCOVERY
             - ATTESTATION
             - UPGRADE
+            - COMPLIANCE
           type: string
         name:
           description: Output only. The name of the occurrence in the form of `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
@@ -932,6 +933,14 @@ components:
           type: string
         package:
           description: The package being analysed for vulnerabilities
+          type: string
+        packageType:
+          description: "The type of package: os, maven, go, etc."
+          enum:
+            - PACKAGE_TYPE_UNSPECIFIED
+            - OS
+            - MAVEN
+            - GO
           type: string
         unused:
           type: string

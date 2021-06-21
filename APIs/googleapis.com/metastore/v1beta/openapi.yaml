@@ -1173,6 +1173,11 @@ components:
         description:
           description: The description of the metadata import.
           type: string
+        endTime:
+          description: Output only. The time when the metadata import finished.
+          format: google-datetime
+          readOnly: true
+          type: string
         name:
           description: Immutable. The relative resource name of the metadata import, of the form:projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{metadata_import_id}.
           type: string

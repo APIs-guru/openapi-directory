@@ -125,7 +125,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Standard field mask for the set of fields to be updated.
+        - description: Required. Standard field mask for the set of fields to be updated.
           in: query
           name: updateMask
           schema:
@@ -615,7 +615,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Standard field mask for the set of fields to be updated.
+        - description: Required. Standard field mask for the set of fields to be updated.
           in: query
           name: updateMask
           schema:
@@ -1270,7 +1270,7 @@ paths:
           name: migrateTraffic
           schema:
             type: boolean
-        - description: Standard field mask for the set of fields to be updated.
+        - description: Required. Standard field mask for the set of fields to be updated.
           in: query
           name: updateMask
           schema:
