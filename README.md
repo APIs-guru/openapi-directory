@@ -14,12 +14,12 @@
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 <a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/backers/badge.svg" /></a> <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/sponsors/badge.svg" /></a> <a href="#partners" alt="Partners on Open Collective"><img src="https://opencollective.com/openapi-directory/partner/badge.svg" /></a>
 
-Directory of API definitions in [OpenAPI(fka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md) formats.<BR>
+Directory of API definitions in [OpenAPI(fka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) and [3.x](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md) formats.<BR>
 API access to collection: [Go!][apiDoc-link] - We also have an [RSS Feed](http://api.apis.guru/v2/list.rss)
 
 [![Add API][addAPI-image]][addAPI-link]
 
-Our goal is to create the most comprehensive, standards-compliant and up-to-date directory of machine-readable API definitions with the following principles:
+Our goal is to create the most comprehensive, standards-compliant and up-to-date directory of machine-readable API definitions, with the following principles:
 - Open source, community driven project.
 - Only publicly available APIs (free or paid).
 - Anyone can add or change an API, not only API owners.
@@ -37,7 +37,7 @@ You can contact us at founders@apis.guru / mike.ralphson@gmail.com
 What does APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs
-* [Convert](https://github.com/lucybot/api-spec-converter) non-OpenAPI formats into OpenAPI 3.0
+* [Convert](https://github.com/Mermade/oas-kit) non-OpenAPI formats into OpenAPI 3.x
 * Fix mistakes, ~80% of definitions have some
 * Add additional data, like: logo, categories, …
 * Update definitions on at least a weekly basis
