@@ -29,8 +29,8 @@ paths:
   /mobile/authorization-code:
     post:
       description: >-
-        Generates code to authorize a mobile application to connect to a
-        Square card reader
+        Generates code to authorize a mobile application to connect to a Square
+        card reader
 
 
         Authorization codes are one-time-use and expire __60 minutes__ after being issued.
@@ -332,7 +332,7 @@ paths:
       x-release-status: PUBLIC
       x-sq-version: 2021-06-16
     post:
-      description: |2-
+      description: |-2
          Use the CreateEmployee endpoint to add an employee to a Square
         account. Employees created with the Connect API have an initial status
         of `INACTIVE`. Inactive employees cannot sign in to Square Point of Sale
@@ -2008,8 +2008,7 @@ paths:
   /v2/catalog/batch-upsert:
     post:
       description: >-
-        Creates or updates up to 10,000 target objects based on the
-        provided
+        Creates or updates up to 10,000 target objects based on the provided
 
         list of objects. The target objects are grouped into batches and each batch is
 
@@ -2101,8 +2100,8 @@ paths:
       operationId: ListCatalog
       parameters:
         - description: >-
-            The pagination cursor returned in the previous response. Leave
-            unset for an initial request.
+            The pagination cursor returned in the previous response. Leave unset
+            for an initial request.
 
             The page size is currently set to be 100.
 
@@ -2771,8 +2770,8 @@ paths:
   /v2/customers/search:
     post:
       description: >-
-        Searches the customer profiles associated with a Square account
-        using a supported query filter.
+        Searches the customer profiles associated with a Square account using a
+        supported query filter.
 
 
         Calling `SearchCustomers` without any explicit query filter returns all
@@ -2882,8 +2881,8 @@ paths:
   "/v2/customers/{customer_id}":
     delete:
       description: >-
-        Deletes a customer profile from a business. This operation also
-        unlinks any associated cards on file. 
+        Deletes a customer profile from a business. This operation also unlinks
+        any associated cards on file. 
 
 
         As a best practice, you should include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency) control. The value must be set to the current version of the customer profile. 
@@ -3370,8 +3369,8 @@ paths:
   "/v2/disputes/{dispute_id}/accept":
     post:
       description: >-
-        Accepts the loss on a dispute. Square returns the disputed amount
-        to the cardholder and
+        Accepts the loss on a dispute. Square returns the disputed amount to the
+        cardholder and
 
         updates the dispute state to ACCEPTED.
 
@@ -3698,8 +3697,8 @@ paths:
             type: string
           x-is-beta: true
         - description: >-
-            If the state is provided, it returns the gift cards in the
-            specified state 
+            If the state is provided, it returns the gift cards in the specified
+            state 
 
             (see [GiftCardStatus](https://developer.squareup.com/reference/square_2021-06-16/enums/GiftCardStatus)).
 
@@ -3763,8 +3762,7 @@ paths:
       x-sq-version: 2021-06-16
     post:
       description: >-
-        Creates a digital gift card. You must activate the gift card
-        before 
+        Creates a digital gift card. You must activate the gift card before 
 
         it can be used. For more information, see 
 
@@ -3801,8 +3799,8 @@ paths:
   /v2/gift-cards/activities:
     get:
       description: >-
-        Lists gift card activities. By default, you get gift card
-        activities for all
+        Lists gift card activities. By default, you get gift card activities for
+        all
 
         gift cards in the seller's account. You can optionally specify query parameters to
 
@@ -3847,8 +3845,8 @@ paths:
             type: string
           x-is-beta: true
         - description: >-
-            The timestamp for the beginning of the reporting period, in RFC
-            3339 format.
+            The timestamp for the beginning of the reporting period, in RFC 3339
+            format.
 
             Inclusive. Default: The current time minus one year.
           in: query
@@ -4674,8 +4672,8 @@ paths:
       x-sq-version: 2021-06-16
     put:
       description: >-
-        Updates an invoice by modifying fields, clearing fields, or both.
-        For most updates, you can use a sparse 
+        Updates an invoice by modifying fields, clearing fields, or both. For
+        most updates, you can use a sparse 
 
         `Invoice` object to add fields or change values and use the `fields_to_clear` field to specify fields to clear. 
 
@@ -5670,8 +5668,7 @@ paths:
             type: string
           x-is-deprecated: true
         - description: >-
-            The beginning of the requested reporting period, in RFC 3339
-            format.
+            The beginning of the requested reporting period, in RFC 3339 format.
 
 
             See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
@@ -5762,8 +5759,7 @@ paths:
             type: string
           x-is-deprecated: true
         - description: >-
-            The beginning of the requested reporting period, in RFC 3339
-            format.
+            The beginning of the requested reporting period, in RFC 3339 format.
 
 
             See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
@@ -5834,8 +5830,7 @@ paths:
       x-sq-version: 2021-06-16
     post:
       description: >-
-        Charges a card represented by a card nonce or a customer's card on
-        file.
+        Charges a card represented by a card nonce or a customer's card on file.
 
 
         Your request to this endpoint must include _either_:
@@ -6382,8 +6377,8 @@ paths:
   "/v2/loyalty/programs/{program_id}":
     get:
       description: >-
-        Retrieves the loyalty program in a seller's account, specified by
-        the program ID or the keyword `main`. 
+        Retrieves the loyalty program in a seller's account, specified by the
+        program ID or the keyword `main`. 
 
 
         Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
@@ -6472,8 +6467,7 @@ paths:
   /v2/loyalty/rewards:
     post:
       description: >-
-        Creates a loyalty reward. In the process, the endpoint does
-        following:
+        Creates a loyalty reward. In the process, the endpoint does following:
 
 
         - Uses the `reward_tier_id` in the request to determine the number of points 
@@ -6869,8 +6863,7 @@ paths:
   /v2/orders/search:
     post:
       description: >-
-        Search all orders for one or more locations. Orders include all
-        sales,
+        Search all orders for one or more locations. Orders include all sales,
 
         returns, and exchanges regardless of how or when they entered the Square
 
@@ -7091,8 +7084,7 @@ paths:
   /v2/payments:
     get:
       description: >-
-        Retrieves a list of payments taken by the account making the
-        request.
+        Retrieves a list of payments taken by the account making the request.
 
 
         Results are eventually consistent, and new payments or changes to payments might take several
@@ -7103,8 +7095,8 @@ paths:
         The maximum results per page is 100.
       parameters:
         - description: >-
-            The timestamp for the beginning of the reporting period, in RFC
-            3339 format.
+            The timestamp for the beginning of the reporting period, in RFC 3339
+            format.
 
             Inclusive. Default: The current time minus one year.
           in: query
@@ -7209,8 +7201,7 @@ paths:
       x-sq-version: 2021-06-16
     post:
       description: >-
-        Creates a payment using the provided source. You can use this
-        endpoint 
+        Creates a payment using the provided source. You can use this endpoint 
 
         to charge a card (credit/debit card or    
 
@@ -7375,8 +7366,8 @@ paths:
   "/v2/payments/{payment_id}/cancel":
     post:
       description: >-
-        Cancels (voids) a payment. You can use this endpoint to cancel a
-        payment with 
+        Cancels (voids) a payment. You can use this endpoint to cancel a payment
+        with 
 
         the APPROVED `status`.
       operationId: CancelPayment
@@ -7693,9 +7684,9 @@ paths:
       x-sq-version: 2021-06-16
     get:
       description: >-
-        Retrieves your snippet from a Square Online site. A site can
-        contain snippets from multiple snippet applications, but you can
-        retrieve only the snippet that was added by your application.
+        Retrieves your snippet from a Square Online site. A site can contain
+        snippets from multiple snippet applications, but you can retrieve only
+        the snippet that was added by your application.
 
 
         You can call [ListSites](https://developer.squareup.com/reference/square_2021-06-16/sites-api/list-sites) to get the IDs of the sites that belong to a seller.
@@ -7730,8 +7721,8 @@ paths:
       x-sq-version: 2021-06-16
     post:
       description: >-
-        Adds a snippet to a Square Online site or updates the existing
-        snippet on the site. 
+        Adds a snippet to a Square Online site or updates the existing snippet
+        on the site. 
 
         The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages. A snippet application can add one snippet to a given site. 
 
@@ -8144,8 +8135,8 @@ paths:
   /v2/team-members/bulk-create:
     post:
       description: >-
-        Creates multiple `TeamMember` objects. The created `TeamMember`
-        objects are returned on successful creates.
+        Creates multiple `TeamMember` objects. The created `TeamMember` objects
+        are returned on successful creates.
 
         This process is non-transactional and processes as much of the request as possible. If one of the creates in
 
@@ -8186,8 +8177,8 @@ paths:
   /v2/team-members/bulk-update:
     post:
       description: >-
-        Updates multiple `TeamMember` objects. The updated `TeamMember`
-        objects are returned on successful updates.
+        Updates multiple `TeamMember` objects. The updated `TeamMember` objects
+        are returned on successful updates.
 
         This process is non-transactional and processes as much of the request as possible. If one of the updates in
 
@@ -8366,8 +8357,7 @@ paths:
       x-sq-version: 2021-06-16
     put:
       description: >-
-        Creates or updates a `WageSetting` object. The object is created if
-        a
+        Creates or updates a `WageSetting` object. The object is created if a
 
         `WageSetting` with the specified `team_member_id` does not exist. Otherwise,
 
@@ -8415,8 +8405,8 @@ paths:
   /v2/terminals/checkouts:
     post:
       description: >-
-        Creates a Terminal checkout request and sends it to the specified
-        device to take a payment
+        Creates a Terminal checkout request and sends it to the specified device
+        to take a payment
 
         for the requested amount.
       operationId: CreateTerminalCheckout
@@ -9740,8 +9730,8 @@ components:
           type: array
         states:
           description: >-
-            The filter to return results by `InventoryState`. The filter is
-            only applicable when set.
+            The filter to return results by `InventoryState`. The filter is only
+            applicable when set.
 
             Ignored are untracked states of `NONE`, `SOLD`, and `UNLINKED_RETURN`.
 
@@ -10159,8 +10149,8 @@ components:
         ruby: /sdk_samples/Catalog/BatchUpsertCatalogObjects/BatchUpsertCatalogObjectsResponse.ruby
     Booking:
       description: >-
-        Represents a booking as a time-bound service contract for a
-        seller's staff member to provide a specified service
+        Represents a booking as a time-bound service contract for a seller's
+        staff member to provide a specified service
 
         at a given location to a requesting customer in one or more appointment segments.
       properties:
@@ -11354,8 +11344,7 @@ components:
         ruby: /sdk_samples/CaptureTransaction/CaptureTransactionResponse.ruby
     Card:
       description: >-
-        Represents the payment details of a card to be used for payments.
-        These
+        Represents the payment details of a card to be used for payments. These
 
         details are determined by the payment token generated by Web Payments SDK.
       properties:
@@ -11432,8 +11421,7 @@ components:
           x-read-only: true
         reference_id:
           description: >-
-            An optional user-defined reference ID that associates this card
-            with
+            An optional user-defined reference ID that associates this card with
 
             another entity in an external system. For example, a customer ID from an
 
@@ -11950,8 +11938,7 @@ components:
       x-release-status: PUBLIC
     CatalogCustomAttributeDefinition:
       description: >-
-        Contains information defining a custom attribute. Custom attributes
-        are
+        Contains information defining a custom attribute. Custom attributes are
 
         intended to store additional information about a catalog object or to associate a
 
@@ -11990,8 +11977,7 @@ components:
           x-read-only: true
         description:
           description: >-
-            Seller-oriented description of the meaning of this Custom
-            Attribute,
+            Seller-oriented description of the meaning of this Custom Attribute,
 
             any constraints that the seller should observe, etc. May be displayed as a tooltip in Square UIs.
           maxLength: 255
@@ -12011,7 +11997,7 @@ components:
           pattern: ^[a-zA-Z0-9_-]*$
           type: string
         name:
-          description: >2-
+          description: >-2
              The name of this definition for API and seller-facing UI purposes.
             The name must be unique within the (merchant, application) pair. Required.
 
@@ -12025,8 +12011,8 @@ components:
           $ref: "#/components/schemas/CatalogCustomAttributeDefinitionSelectionConfig"
         seller_visibility:
           description: >-
-            The visibility of a custom attribute in seller-facing UIs
-            (including Square Point
+            The visibility of a custom attribute in seller-facing UIs (including
+            Square Point
 
             of Sale applications and Square Dashboard). May be modified.
           type: string
@@ -12050,8 +12036,8 @@ components:
       x-release-status: BETA
     CatalogCustomAttributeDefinitionAppVisibility:
       description: >-
-        Defines the visibility of a custom attribute to applications other
-        than their
+        Defines the visibility of a custom attribute to applications other than
+        their
 
         creating application.
       enum:
@@ -12106,8 +12092,8 @@ components:
       properties:
         allowed_selections:
           description: >-
-            The set of valid `CatalogCustomAttributeSelections`. Up to a
-            maximum of 100
+            The set of valid `CatalogCustomAttributeSelections`. Up to a maximum
+            of 100
 
             selections can be defined. Can be modified.
           items:
@@ -12211,8 +12197,7 @@ components:
       x-release-status: BETA
     CatalogCustomAttributeValue:
       description: >-
-        An instance of a custom attribute. Custom attributes can be defined
-        and
+        An instance of a custom attribute. Custom attributes can be defined and
 
         added to `ITEM` and `ITEM_VARIATION` type catalog objects.
 
@@ -12415,8 +12400,7 @@ components:
           type: string
         name:
           description: >-
-            The internal name to identify this image in calls to the Square
-            API.
+            The internal name to identify this image in calls to the Square API.
 
             This is a searchable attribute for use in applicable query filters
 
@@ -12540,8 +12524,8 @@ components:
           type: integer
         update_item_taxes_max_taxes_to_disable:
           description: >-
-            The maximum number of tax IDs to be disabled that may be included
-            in a single
+            The maximum number of tax IDs to be disabled that may be included in
+            a single
 
             `/v2/catalog/update-item-taxes` request.
           type: integer
@@ -12664,9 +12648,9 @@ components:
           type: boolean
         sort_name:
           description: >-
-            A name to sort the item by. If this name is unspecified, namely,
-            the `sort_name` field is absent, the regular `name` field is used
-            for sorting.
+            A name to sort the item by. If this name is unspecified, namely, the
+            `sort_name` field is absent, the regular `name` field is used for
+            sorting.
 
 
             It is currently supported for sellers of the Japanese locale only.
@@ -12744,8 +12728,7 @@ components:
           type: string
         name:
           description: >-
-            The item option's display name for the seller. Must be unique
-            across
+            The item option's display name for the seller. Must be unique across
 
             all item options. This is a searchable attribute for use in applicable query filters.
           type: string
@@ -12763,7 +12746,7 @@ components:
       x-is-beta: true
       x-release-status: BETA
     CatalogItemOptionForItem:
-      description: |2-
+      description: |-2
          An option that can be assigned to an item.
         For example, a t-shirt item may offer a color option or a size option.
       properties:
@@ -12811,8 +12794,7 @@ components:
       x-release-status: BETA
     CatalogItemOptionValueForItemVariation:
       description: >-
-        A `CatalogItemOptionValue` links an item variation to an item
-        option as
+        A `CatalogItemOptionValue` links an item variation to an item option as
 
         an item option value. For example, a t-shirt item may offer a color option and
 
@@ -12860,8 +12842,8 @@ components:
           x-release-status: BETA
         inventory_alert_threshold:
           description: >-
-            If the inventory quantity for the variation is less than or equal
-            to this value and `inventory_alert_type`
+            If the inventory quantity for the variation is less than or equal to
+            this value and `inventory_alert_type`
 
             is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
 
@@ -12959,8 +12941,8 @@ components:
           $ref: "#/components/schemas/CatalogStockConversion"
         team_member_ids:
           description: >-
-            Tokens of employees that can perform the service represented by
-            this variation. Only valid for
+            Tokens of employees that can perform the service represented by this
+            variation. Only valid for
 
             variations of type `APPOINTMENTS_SERVICE`.
           items:
@@ -12973,8 +12955,8 @@ components:
           type: boolean
         upc:
           description: >-
-            The universal product code (UPC) of the item variation, if any.
-            This is a searchable attribute for use in applicable query filters.
+            The universal product code (UPC) of the item variation, if any. This
+            is a searchable attribute for use in applicable query filters.
 
 
             The value of this attribute should be a number of 12-14 digits long.  This restriction is enforced on the Square Seller Dashboard,
@@ -13328,8 +13310,8 @@ components:
           $ref: "#/components/schemas/CatalogModifierList"
         present_at_all_locations:
           description: >-
-            If `true`, this object is present at all locations (including
-            future locations), except where specified in
+            If `true`, this object is present at all locations (including future
+            locations), except where specified in
 
             the `absent_at_location_ids` field. If `false`, this object is not present at any locations (including future locations),
 
@@ -13399,8 +13381,8 @@ components:
       x-release-status: PUBLIC
     CatalogObjectReference:
       description: >-
-        A reference to a Catalog object at a specific version. In general
-        this is
+        A reference to a Catalog object at a specific version. In general this
+        is
 
         used as an entry point into a graph of catalog objects, where the objects exist
 
@@ -13514,14 +13496,12 @@ components:
             [CatalogObject](https://developer.squareup.com/reference/square_2021-06-16/objects/CatalogObject).
           name: SUBSCRIPTION_PLAN
         - description: >-
-            Represents a list of item option values that can be assigned to
-            item
+            Represents a list of item option values that can be assigned to item
 
             variations. For example, a color option or size option for a t-shirt.
           name: ITEM_OPTION
         - description: >-
-            Represents an option value associated with one or more item
-            options.
+            Represents an option value associated with one or more item options.
 
             For example, an item option of "Size" may have item option values such as
 
@@ -13538,8 +13518,8 @@ components:
       x-release-status: PUBLIC
     CatalogPricingRule:
       description: >-
-        Defines how discounts are automatically applied to a set of items
-        that match the pricing rule
+        Defines how discounts are automatically applied to a set of items that
+        match the pricing rule
 
         during the active time period.
       properties:
@@ -13669,8 +13649,7 @@ components:
       x-release-status: PUBLIC
     CatalogProductSet:
       description: >-
-        Represents a collection of catalog objects for the purpose of
-        applying a
+        Represents a collection of catalog objects for the purpose of applying a
 
         `PricingRule`. Including a catalog object will include all of its subtypes.
 
@@ -13709,7 +13688,7 @@ components:
             type: string
           type: array
         product_ids_any:
-          description: >2-
+          description: >-2
              Unique IDs for any `CatalogObject` included in this product set. Any
             number of these catalog objects can be in an order for a pricing rule to apply.
 
@@ -13730,8 +13709,8 @@ components:
           type: array
         quantity_exact:
           description: >-
-            If set, there must be exactly this many items from `products_any`
-            or `products_all`
+            If set, there must be exactly this many items from `products_any` or
+            `products_all`
 
             in the cart for the discount to apply.
 
@@ -13761,9 +13740,9 @@ components:
       x-release-status: PUBLIC
     CatalogQuery:
       description: >-
-        A query composed of one or more different types of filters to
-        narrow the scope of targeted objects when calling the
-        `SearchCatalogObjects` endpoint.
+        A query composed of one or more different types of filters to narrow the
+        scope of targeted objects when calling the `SearchCatalogObjects`
+        endpoint.
 
 
         Although a query can have multiple filters, only certain query types can be combined per call to [SearchCatalogObjects](https://developer.squareup.com/reference/square_2021-06-16/catalog-api/search-catalog-objects).
@@ -13842,8 +13821,8 @@ components:
           type: string
         attribute_value:
           description: >-
-            The desired value of the search attribute. Matching of the
-            attribute value is case insensitive and can be partial.
+            The desired value of the search attribute. Matching of the attribute
+            value is case insensitive and can be partial.
 
             For example, if a specified value of "sma", objects with the named attribute value of "Small", "small" are both matched.
           type: string
@@ -13952,8 +13931,8 @@ components:
       x-release-status: PUBLIC
     CatalogQuerySet:
       description: >-
-        The query filter to return the search result(s) by exact match of
-        the specified `attribute_name` and any of
+        The query filter to return the search result(s) by exact match of the
+        specified `attribute_name` and any of
 
         the `attribute_values`.
       properties:
@@ -14191,8 +14170,8 @@ components:
       properties:
         applies_to_custom_amounts:
           description: >-
-            If `true`, the fee applies to custom amounts entered into the
-            Square Point of Sale
+            If `true`, the fee applies to custom amounts entered into the Square
+            Point of Sale
 
             app that are not associated with a particular `CatalogItem`.
           type: boolean
@@ -14466,8 +14445,8 @@ components:
         ruby: /sdk_samples/Charge/ChargeRequest.ruby
     ChargeRequestAdditionalRecipient:
       description: >-
-        Represents an additional recipient (other than the merchant)
-        entitled to a portion of the tender.
+        Represents an additional recipient (other than the merchant) entitled to
+        a portion of the tender.
 
         Support is currently limited to USD, CAD and GBP currencies
       properties:
@@ -14571,8 +14550,7 @@ components:
           x-release-status: DEPRECATED
         ask_for_shipping_address:
           description: >-
-            If `true`, Square Checkout will collect shipping information on
-            your
+            If `true`, Square Checkout will collect shipping information on your
 
             behalf and store that information with the transaction information in your
 
@@ -14670,8 +14648,7 @@ components:
             complete.
           name: FELICA_TRANSPORTATION_GROUP
         - description: >-
-            Launches a checkout screen for the buyer on the Square Terminal
-            that
+            Launches a checkout screen for the buyer on the Square Terminal that
 
             allows them to select a specific FeliCa brand or select the check balance screen.
           name: FELICA_ALL
@@ -15647,8 +15624,7 @@ components:
           $ref: "#/components/schemas/Card"
         idempotency_key:
           description: >-
-            A unique string that identifies this CreateCard request. Keys can
-            be
+            A unique string that identifies this CreateCard request. Keys can be
 
             any valid string and must be unique for every request.
 
@@ -16128,8 +16104,7 @@ components:
         ruby: /sdk_samples/CreateCustomerCard/CreateCustomerCardResponse.ruby
     CreateCustomerGroupRequest:
       description: >-
-        Defines the body parameters that can be included in a request to
-        the
+        Defines the body parameters that can be included in a request to the
 
         [CreateCustomerGroup](https://developer.squareup.com/reference/square_2021-06-16/customer-groups-api/create-customer-group) endpoint.
       example:
@@ -16479,8 +16454,8 @@ components:
       x-release-status: BETA
     CreateGiftCardResponse:
       description: >-
-        A response that contains a `GiftCard`. The response might contain a
-        set of `Error` objects if the request
+        A response that contains a `GiftCard`. The response might contain a set
+        of `Error` objects if the request
 
         resulted in errors.
       example:
@@ -17098,8 +17073,8 @@ components:
       properties:
         accept_partial_authorization:
           description: >-
-            If set to `true` and charging a Square Gift Card, a payment might
-            be returned with
+            If set to `true` and charging a Square Gift Card, a payment might be
+            returned with
 
             `amount_money` equal to less than what was requested. For example, a request for $20 when charging
 
@@ -17206,8 +17181,8 @@ components:
           type: string
         location_id:
           description: >-
-            The location ID to associate with the payment. If not specified,
-            the default location is
+            The location ID to associate with the payment. If not specified, the
+            default location is
 
             used.
           type: string
@@ -17256,8 +17231,8 @@ components:
           type: string
         statement_description_identifier:
           description: >-
-            Optional additional payment information to include on the
-            customer's card statement
+            Optional additional payment information to include on the customer's
+            card statement
 
             as part of the statement description. This can be, for example, an invoice number, ticket number,
 
@@ -17641,8 +17616,8 @@ components:
           type: string
         timezone:
           description: >-
-            The timezone that is used in date calculations for the
-            subscription. If unset, defaults to
+            The timezone that is used in date calculations for the subscription.
+            If unset, defaults to
 
             the location timezone. If a timezone is not configured for the location, defaults to "America/New_York".
 
@@ -18678,8 +18653,7 @@ components:
             through Square’s Facebook integration.
           name: MARKETING
         - description: >-
-            The customer profile was created as the result of explicitly
-            merging
+            The customer profile was created as the result of explicitly merging
 
             multiple customer profiles through the Square Seller Dashboard or the Point of
 
@@ -18818,8 +18792,8 @@ components:
       x-release-status: PUBLIC
     CustomerQuery:
       description: >-
-        Represents a query (including filtering criteria, sorting criteria,
-        or both) used to search
+        Represents a query (including filtering criteria, sorting criteria, or
+        both) used to search
 
         for customer profiles.
       properties:
@@ -18866,8 +18840,8 @@ components:
       properties:
         field:
           description: >-
-            Use one or more customer attributes as the sort key to sort
-            searched customer profiles. 
+            Use one or more customer attributes as the sort key to sort searched
+            customer profiles. 
 
             For example, use the creation date (`created_at`) of customers or default attributes as the sort key.
 
@@ -19477,8 +19451,7 @@ components:
       x-release-status: PUBLIC
     DisableCardRequest:
       description: >-
-        Disables the card, preventing any further updates or charges.
-        Disabling
+        Disables the card, preventing any further updates or charges. Disabling
 
         an already disabled card is allowed but has no effect. Accessible via
 
@@ -19772,8 +19745,8 @@ components:
             Use when uploading evidence as a file or string.
           name: GENERIC_EVIDENCE
         - description: >-
-            Server or activity logs that show proof of the cardholder’s
-            identity and that the
+            Server or activity logs that show proof of the cardholder’s identity
+            and that the
 
             cardholder successfully ordered and received the goods (digitally or otherwise).
 
@@ -19877,8 +19850,8 @@ components:
             Use when uploading evidence as a file or string.
           name: PROOF_OF_DELIVERY_DOCUMENTATION
         - description: >-
-            Evidence that shows the cardholder previously processed
-            transactions on the same card and did not dispute them.
+            Evidence that shows the cardholder previously processed transactions
+            on the same card and did not dispute them.
 
             Note: Square automatically provides up to five distinct Square receipts for related transactions, when available.
 
@@ -19966,8 +19939,8 @@ components:
             possession of the product as described or received the service as described and agreed on.
           name: NOT_AS_DESCRIBED
         - description: >-
-            The cardholder claims the product or service was not received by
-            the cardholder within the
+            The cardholder claims the product or service was not received by the
+            cardholder within the
 
             stated time frame.
 
@@ -20127,8 +20100,8 @@ components:
       x-release-status: DEPRECATED
     EmployeeWage:
       description: >-
-        The hourly wage rate that an employee will earn on a `Shift` for
-        doing the job
+        The hourly wage rate that an employee will earn on a `Shift` for doing
+        the job
 
         specified by the `title` property of this object. Deprecated at version 2020-08-26. Use `TeamMemberWage` instead.
       properties:
@@ -20148,8 +20121,7 @@ components:
       x-release-status: DEPRECATED
     Error:
       description: >-
-        Represents an error encountered during a request to the Connect
-        API.
+        Represents an error encountered during a request to the Connect API.
 
 
         See [Handling errors](https://developer.squareup.com/docs/build-basics/handling-errors) for more information.
@@ -20570,8 +20542,8 @@ components:
             A Square account can take payments only from the region where the account was created.
           name: INVALID_LOCATION
         - description: >-
-            The card issuer has determined the payment amount is either too
-            high or too low.
+            The card issuer has determined the payment amount is either too high
+            or too low.
 
             The API returns the error code mostly for credit cards (for example, the card reached
 
@@ -20608,8 +20580,8 @@ components:
             processing limit for this merchant.
           name: PAYMENT_LIMIT_EXCEEDED
         - description: >-
-            When a Gift Card is a payment source, you can allow taking a
-            partial payment 
+            When a Gift Card is a payment source, you can allow taking a partial
+            payment 
 
             by adding the `accept_partial_authorization` parameter in the request. 
 
@@ -20794,8 +20766,8 @@ components:
       x-release-status: BETA
     ExternalPaymentDetails:
       description: >-
-        Stores details about an external payment. Contains only
-        non-confidential information.
+        Stores details about an external payment. Contains only non-confidential
+        information.
 
         For more information, see 
 
@@ -21778,8 +21750,8 @@ components:
           x-read-only: true
         redeem_activity_id:
           description: >-
-            The ID for the Redeem activity that needs to be refunded. Hence,
-            the activity it
+            The ID for the Redeem activity that needs to be refunded. Hence, the
+            activity it
 
             refers to has to be of the REDEEM type.
           type: string
@@ -21835,7 +21807,7 @@ components:
             Added money to a gift card because a transaction 
             paid with this gift card was refunded.
           name: REFUND
-        - description: |2-
+        - description: |-2
              Added money to a gift card because a transaction 
             not linked to this gift card was refunded
             to this gift card.
@@ -22144,8 +22116,8 @@ components:
           x-read-only: true
         to_state:
           description: >-
-            Representative `to_state` for adjustments within group. For
-            example, for a group adjustment from `IN_STOCK` to `SOLD`,
+            Representative `to_state` for adjustments within group. For example,
+            for a group adjustment from `IN_STOCK` to `SOLD`,
 
             the two component adjustments in the group can be from `IN_STOCK` to `COMPOSED` and from `COMPOSED` to `SOLD`. 
 
@@ -22170,8 +22142,7 @@ components:
       x-release-status: PUBLIC
     InventoryChange:
       description: >-
-        Represents a single physical count, inventory, adjustment, or
-        transfer
+        Represents a single physical count, inventory, adjustment, or transfer
 
         that is part of the history of inventory changes for a particular
 
@@ -22220,8 +22191,7 @@ components:
       x-release-status: PUBLIC
     InventoryCount:
       description: >-
-        Represents Square-estimated quantity of items in a particular state
-        at a
+        Represents Square-estimated quantity of items in a particular state at a
 
         particular seller location based on the known history of physical counts and
 
@@ -22300,8 +22270,7 @@ components:
       x-release-status: PUBLIC
     InventoryPhysicalCount:
       description: >-
-        Represents the quantity of an item variation that is physically
-        present
+        Represents the quantity of an item variation that is physically present
 
         at a specific location, verified by a seller or a seller's employee. For example,
 
@@ -22429,8 +22398,7 @@ components:
             transaction. Quantities in the `SOLD` state are no longer tracked.
           name: SOLD
         - description: >-
-            The related quantity of items were returned through the Square
-            Point
+            The related quantity of items were returned through the Square Point
 
             of Sale application, but are not yet available for sale. **READ-ONLY**:
 
@@ -22446,8 +22414,7 @@ components:
             Inventory API cannot move quantities to or from this state.
           name: SOLD_ONLINE
         - description: >-
-            The related quantity of items were ordered from a vendor but not
-            yet
+            The related quantity of items were ordered from a vendor but not yet
 
             received. **READ-ONLY**: the Inventory API cannot move quantities to or
 
@@ -22597,8 +22564,8 @@ components:
       x-release-status: PUBLIC
     Invoice:
       description: >-
-        Stores information about an invoice. You use the Invoices API to
-        create and manage
+        Stores information about an invoice. You use the Invoices API to create
+        and manage
 
         invoices. For more information, see [Manage Invoices Using the Invoices API](https://developer.squareup.com/docs/invoices-api/overview).
       properties:
@@ -22787,8 +22754,8 @@ components:
         - description: An automatic payment is not configured for the payment request.
           name: NONE
         - description: >-
-            Use a card on file as the automatic payment method. On the due
-            date, Square charges the card
+            Use a card on file as the automatic payment method. On the due date,
+            Square charges the card
 
             for the amount of the payment request.
 
@@ -22816,8 +22783,8 @@ components:
       x-release-status: PUBLIC
     InvoiceCustomField:
       description: >-
-        An additional seller-defined and customer-facing field to include
-        on the invoice. For more information, 
+        An additional seller-defined and customer-facing field to include on the
+        invoice. For more information, 
 
         see [Custom fields](https://developer.squareup.com/docs/invoices-api/overview#custom-fields).
       properties:
@@ -22838,8 +22805,8 @@ components:
       x-release-status: PUBLIC
     InvoiceCustomFieldPlacement:
       description: >-
-        Indicates where to render a custom field on the Square-hosted
-        invoice page and in emailed or PDF 
+        Indicates where to render a custom field on the Square-hosted invoice
+        page and in emailed or PDF 
 
         copies of the invoice.
       enum:
@@ -23011,8 +22978,8 @@ components:
           type: string
         card_id:
           description: >-
-            The ID of the credit or debit card on file to charge for the
-            payment request. To get the cards on file for a customer,
+            The ID of the credit or debit card on file to charge for the payment
+            request. To get the cards on file for a customer,
 
             call [ListCards](https://developer.squareup.com/reference/square_2021-06-16/cards-api/list-cards) and include the `customer_id` of the invoice recipient.
           maxLength: 255
@@ -23156,8 +23123,8 @@ components:
       x-release-status: PUBLIC
     InvoiceRequestMethod:
       description: >-
-        Specifies the action for Square to take for processing the invoice.
-        For example, 
+        Specifies the action for Square to take for processing the invoice. For
+        example, 
 
         email the invoice, charge a customer's card on file, or do nothing. DEPRECATED at
 
@@ -23268,8 +23235,8 @@ components:
       type: string
       x-enum-elements:
         - description: >-
-            Identifies that the payment request is for the balance amount,
-            after accounting for any 
+            Identifies that the payment request is for the balance amount, after
+            accounting for any 
 
             other payment requests in the invoice: 
 
@@ -23374,8 +23341,8 @@ components:
         - description: The full amount that the customer paid for the invoice is refunded.
           name: REFUNDED
         - description: >-
-            The invoice is canceled. Square no longer requests payments from
-            the customer.
+            The invoice is canceled. Square no longer requests payments from the
+            customer.
 
             The `public_url` page remains and is accessible, but it displays the invoice
 
@@ -23397,8 +23364,8 @@ components:
       properties:
         inventory_alert_threshold:
           description: >-
-            If the inventory quantity for the variation is less than or equal
-            to this value and `inventory_alert_type`
+            If the inventory quantity for the variation is less than or equal to
+            this value and `inventory_alert_type`
 
             is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
 
@@ -23488,8 +23455,8 @@ components:
       x-release-status: BETA
     LinkCustomerToGiftCardResponse:
       description: >-
-        A response that contains one `GiftCard` that was linked. The
-        response might contain a set of `Error`
+        A response that contains one `GiftCard` that was linked. The response
+        might contain a set of `Error`
 
         objects if the request resulted in errors.
       example:
@@ -23950,8 +23917,8 @@ components:
           x-release-status: BETA
         cursor:
           description: >-
-            The pagination cursor returned in the previous response. Leave
-            unset for an initial request.
+            The pagination cursor returned in the previous response. Leave unset
+            for an initial request.
 
             The page size is currently set to be 100.
 
@@ -24034,8 +24001,7 @@ components:
         ruby: /sdk_samples/Catalog/ListCatalog/ListCatalogResponse.ruby
     ListCustomerGroupsRequest:
       description: >-
-        Defines the query parameters that can be included in a request to
-        the
+        Defines the query parameters that can be included in a request to the
 
         [ListCustomerGroups](https://developer.squareup.com/reference/square_2021-06-16/customer-groups-api/list-customer-groups) endpoint.
       example:
@@ -24114,8 +24080,8 @@ components:
       x-release-status: PUBLIC
     ListCustomerSegmentsResponse:
       description: >-
-        Defines the fields that are included in the response body for
-        requests to the `ListCustomerSegments` endpoint.
+        Defines the fields that are included in the response body for requests
+        to the `ListCustomerSegments` endpoint.
 
 
         Either `errors` or `segments` is present in a given response (never both).
@@ -24582,8 +24548,8 @@ components:
       x-release-status: DEPRECATED
     ListGiftCardActivitiesRequest:
       description: >-
-        Returns a list of gift card activities. You can optionally specify
-        a filter to retrieve a
+        Returns a list of gift card activities. You can optionally specify a
+        filter to retrieve a
 
         subset of activites.
       example:
@@ -24591,8 +24557,8 @@ components:
       properties:
         begin_time:
           description: >-
-            The timestamp for the beginning of the reporting period, in RFC
-            3339 format.
+            The timestamp for the beginning of the reporting period, in RFC 3339
+            format.
 
             Inclusive. Default: The current time minus one year.
           type: string
@@ -24658,8 +24624,8 @@ components:
       x-release-status: BETA
     ListGiftCardActivitiesResponse:
       description: >-
-        A response that contains one or more `GiftCardActivity`. The
-        response might contain a set of `Error` objects
+        A response that contains one or more `GiftCardActivity`. The response
+        might contain a set of `Error` objects
 
         if the request resulted in errors.
       example:
@@ -24717,8 +24683,8 @@ components:
       x-release-status: BETA
     ListGiftCardsRequest:
       description: >-
-        A request to list gift cards. You can optionally specify a filter
-        to retrieve a subset of 
+        A request to list gift cards. You can optionally specify a filter to
+        retrieve a subset of 
 
         gift cards.
       example:
@@ -24750,8 +24716,8 @@ components:
           type: integer
         state:
           description: >-
-            If the state is provided, it returns the gift cards in the
-            specified state 
+            If the state is provided, it returns the gift cards in the specified
+            state 
 
             (see [GiftCardStatus](https://developer.squareup.com/reference/square_2021-06-16/enums/GiftCardStatus)).
 
@@ -25248,8 +25214,8 @@ components:
       properties:
         begin_time:
           description: >-
-            The timestamp for the beginning of the reporting period, in RFC
-            3339 format.
+            The timestamp for the beginning of the reporting period, in RFC 3339
+            format.
 
             Inclusive. Default: The current time minus one year.
           type: string
@@ -25426,8 +25392,7 @@ components:
       properties:
         begin_time:
           description: >-
-            The beginning of the requested reporting period, in RFC 3339
-            format.
+            The beginning of the requested reporting period, in RFC 3339 format.
 
 
             See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
@@ -25770,8 +25735,7 @@ components:
       properties:
         begin_time:
           description: >-
-            The beginning of the requested reporting period, in RFC 3339
-            format.
+            The beginning of the requested reporting period, in RFC 3339 format.
 
 
             See [Date ranges](https://developer.squareup.com/docs/build-basics/working-with-dates) for details on date inclusivity/exclusivity.
@@ -26051,8 +26015,8 @@ components:
           x-read-only: true
         mcc:
           description: >-
-            The merchant category code (MCC) of the location, as standardized
-            by ISO 18245.
+            The merchant category code (MCC) of the location, as standardized by
+            ISO 18245.
 
             The MCC describes the kind of goods or services sold at the location.
           type: string
@@ -26203,8 +26167,7 @@ components:
       x-release-status: PUBLIC
     LoyaltyAccountMapping:
       description: >-
-        Represents the mapping that associates a loyalty account with a
-        buyer. 
+        Represents the mapping that associates a loyalty account with a buyer. 
 
 
         Currently, a loyalty account can only be mapped to a buyer by phone number. For more information, see 
@@ -26605,8 +26568,8 @@ components:
       x-release-status: PUBLIC
     LoyaltyProgram:
       description: >-
-        Represents a Square loyalty program. Loyalty programs define how
-        buyers can earn points and redeem points for rewards. 
+        Represents a Square loyalty program. Loyalty programs define how buyers
+        can earn points and redeem points for rewards. 
 
         Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. 
 
@@ -26778,8 +26741,8 @@ components:
       x-release-status: PUBLIC
     LoyaltyProgramRewardDefinition:
       description: >-
-        Provides details about the reward tier discount. DEPRECATED at
-        version 2020-12-16. Discount details
+        Provides details about the reward tier discount. DEPRECATED at version
+        2020-12-16. Discount details
 
         are now defined using a catalog pricing rule and other catalog objects. For more information, see
 
@@ -27026,8 +26989,7 @@ components:
       x-release-status: PUBLIC
     MeasurementUnit:
       description: >-
-        Represents a unit of measurement to use with a quantity, such as
-        ounces
+        Represents a unit of measurement to use with a quantity, such as ounces
 
         or inches. Exactly one of the following fields are required: `custom_unit`,
 
@@ -27314,8 +27276,7 @@ components:
       x-release-status: PUBLIC
     Money:
       description: >-
-        Represents an amount of money. `Money` fields can be signed or
-        unsigned.
+        Represents an amount of money. `Money` fields can be signed or unsigned.
 
         Fields that do not explicitly define whether they are signed or unsigned are
 
@@ -27392,8 +27353,7 @@ components:
           type: string
         migration_token:
           description: >-
-            Legacy OAuth access token obtained using a Connect API version
-            prior
+            Legacy OAuth access token obtained using a Connect API version prior
 
             to 2019-03-13. This parameter is required if `grant_type` is set to
 
@@ -27513,8 +27473,7 @@ components:
           type: string
         short_lived:
           description: >-
-            A boolean indicating the access token is a short-lived access
-            token.
+            A boolean indicating the access token is a short-lived access token.
 
             The short-lived access token returned in the response will expire in 24 hours.
           type: boolean
@@ -27630,8 +27589,8 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Application-defined data attached to this order. Metadata fields
-            are intended
+            Application-defined data attached to this order. Metadata fields are
+            intended
 
             to store descriptive references or associations with an entity in another system or store brief
 
@@ -28095,8 +28054,8 @@ components:
             pickup time.
           name: SCHEDULED
         - description: >-
-            Indicates that the fulfillment will be picked up as soon as
-            possible and
+            Indicates that the fulfillment will be picked up as soon as possible
+            and
 
             should be prepared immediately.
           name: ASAP
@@ -28446,8 +28405,8 @@ components:
           $ref: "#/components/schemas/Money"
         item_type:
           description: >-
-            The type of line item: an itemized sale, a non-itemized sale
-            (custom amount), or the
+            The type of line item: an itemized sale, a non-itemized sale (custom
+            amount), or the
 
             activation or reloading of a gift card.
           type: string
@@ -28457,8 +28416,8 @@ components:
           additionalProperties:
             type: string
           description: >-
-            Application-defined data attached to this line item. Metadata
-            fields are intended
+            Application-defined data attached to this line item. Metadata fields
+            are intended
 
             to store descriptive references or associations with an entity in another system or store brief
 
@@ -28547,8 +28506,7 @@ components:
       x-release-status: PUBLIC
     OrderLineItemAppliedDiscount:
       description: >-
-        Represents an applied portion of a discount to a line item in an
-        order.
+        Represents an applied portion of a discount to a line item in an order.
 
 
         Order scoped discounts have automatically applied discounts present for each line item.
@@ -28895,8 +28853,7 @@ components:
       x-release-status: BETA
     OrderLineItemPricingBlocklistsBlockedDiscount:
       description: >-
-        A discount to block from applying to a line item. The discount must
-        be 
+        A discount to block from applying to a line item. The discount must be 
 
         identified by either `discount_uid` or `discount_catalog_object_id`, but not both.
       properties:
@@ -28953,8 +28910,7 @@ components:
       x-release-status: BETA
     OrderLineItemTax:
       description: >-
-        Represents a tax that applies to one or more line item in the
-        order.
+        Represents a tax that applies to one or more line item in the order.
 
 
         Fixed-amount, order-scoped taxes are distributed across all non-zero line item totals.
@@ -29131,8 +29087,8 @@ components:
       x-release-status: BETA
     OrderPricingOptions:
       description: >-
-        Pricing options for an order. The options affect how the order's
-        price is calculated.
+        Pricing options for an order. The options affect how the order's price
+        is calculated.
 
         They can be used, for example, to apply automatic price adjustments that are based on preconfigured
 
@@ -29184,8 +29140,8 @@ components:
           $ref: "#/components/schemas/OrderMoneyAmounts"
         return_discounts:
           description: >-
-            A collection of references to discounts being returned for an
-            order, including the total
+            A collection of references to discounts being returned for an order,
+            including the total
 
             applied discount amount to be returned. The discounts must reference a top-level discount ID
 
@@ -29219,8 +29175,8 @@ components:
           $ref: "#/components/schemas/OrderRoundingAdjustment"
         source_order_id:
           description: >-
-            An order that contains the original sale of these return line
-            items. This is unset
+            An order that contains the original sale of these return line items.
+            This is unset
 
             for unlinked returns.
           type: string
@@ -29233,8 +29189,8 @@ components:
       x-release-status: BETA
     OrderReturnDiscount:
       description: >-
-        Represents a discount being returned that applies to one or more
-        return line items in an
+        Represents a discount being returned that applies to one or more return
+        line items in an
 
         order.
 
@@ -29503,8 +29459,8 @@ components:
       x-release-status: PUBLIC
     OrderReturnTax:
       description: >-
-        Represents a tax being returned that applies to one or more return
-        line items in an order.
+        Represents a tax being returned that applies to one or more return line
+        items in an order.
 
 
         Fixed-amount, order-scoped taxes are distributed across all non-zero return line item totals.
@@ -29559,8 +29515,7 @@ components:
       x-release-status: BETA
     OrderReward:
       description: >-
-        Represents a reward that can be applied to an order if the
-        necessary
+        Represents a reward that can be applied to an order if the necessary
 
         reward tier criteria are met. Rewards are created through the Loyalty API.
       properties:
@@ -29696,8 +29651,7 @@ components:
           type: string
         taxable:
           description: >-
-            Indicates whether the service charge can be taxed. If set to
-            `true`,
+            Indicates whether the service charge can be taxed. If set to `true`,
 
             order-level taxes automatically apply to the service charge. Note that
 
@@ -29858,8 +29812,8 @@ components:
       x-release-status: BETA
     PayOrderResponse:
       description: >-
-        Defines the fields that are included in the response body of a
-        request to the
+        Defines the fields that are included in the response body of a request
+        to the
 
         [PayOrder](https://developer.squareup.com/reference/square_2021-06-16/orders-api/pay-order) endpoint.
       example:
@@ -30227,8 +30181,8 @@ components:
       x-release-status: PUBLIC
     PaymentRefund:
       description: >-
-        Represents a refund of a payment made using Square. Contains
-        information about
+        Represents a refund of a payment made using Square. Contains information
+        about
 
         the original payment and the amount of money refunded.
       properties:
@@ -30357,8 +30311,8 @@ components:
       properties:
         idempotency_key:
           description: >-
-            A unique string that identifies the `PublishInvoice` request. If
-            you do not 
+            A unique string that identifies the `PublishInvoice` request. If you
+            do not 
 
             provide `idempotency_key` (or provide an empty string as the value), the endpoint 
 
@@ -30597,7 +30551,7 @@ components:
         app_fee_money:
           $ref: "#/components/schemas/Money"
         idempotency_key:
-          description: >2-
+          description: >-2
              A unique string that identifies this `RefundPayment` request. The key can be any valid string
             but must be unique for every `RefundPayment` request.
 
@@ -31313,8 +31267,8 @@ components:
       x-release-status: PUBLIC
     RetrieveCustomerSegmentResponse:
       description: >-
-        Defines the fields that are included in the response body for
-        requests to the `RetrieveCustomerSegment` endpoint.
+        Defines the fields that are included in the response body for requests
+        to the `RetrieveCustomerSegment` endpoint.
 
 
         Either `errors` or `segment` is present in a given response (never both).
@@ -31438,8 +31392,8 @@ components:
       x-release-status: BETA
     RetrieveGiftCardFromGANResponse:
       description: >-
-        A response that contains a `GiftCard`. This response might contain
-        a set of `Error` objects
+        A response that contains a `GiftCard`. This response might contain a set
+        of `Error` objects
 
         if the request resulted in errors.
       example:
@@ -31481,8 +31435,8 @@ components:
       x-release-status: BETA
     RetrieveGiftCardFromNonceResponse:
       description: >-
-        A response that contains a `GiftCard`. The response might contain a
-        set of `Error` objects
+        A response that contains a `GiftCard`. The response might contain a set
+        of `Error` objects
 
         if the request resulted in errors.
       example:
@@ -31517,8 +31471,8 @@ components:
       x-release-status: BETA
     RetrieveGiftCardResponse:
       description: >-
-        A response that contains a `GiftCard`. The response might contain a
-        set of `Error` objects
+        A response that contains a `GiftCard`. The response might contain a set
+        of `Error` objects
 
         if the request resulted in errors.
       example:
@@ -32870,8 +32824,8 @@ components:
           type: string
         cursor:
           description: >-
-            The pagination cursor returned in the previous response. Leave
-            unset for an initial request.
+            The pagination cursor returned in the previous response. Leave unset
+            for an initial request.
 
             See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
           type: string
@@ -33049,8 +33003,8 @@ components:
         ruby: /sdk_samples/Catalog/SearchCatalogObjects/SearchCatalogObjectsResponse.ruby
     SearchCustomersRequest:
       description: >-
-        Defines the fields that are included in the request body of a
-        request to the
+        Defines the fields that are included in the request body of a request to
+        the
 
         `SearchCustomers` endpoint.
       example:
@@ -33602,8 +33556,7 @@ components:
       x-release-status: PUBLIC
     SearchOrdersCustomerFilter:
       description: >-
-        A filter based on the order `customer_id` and any tender
-        `customer_id`
+        A filter based on the order `customer_id` and any tender `customer_id`
 
         associated with the order. It does not filter based on the
 
@@ -33753,8 +33706,7 @@ components:
           type: string
         limit:
           description: >-
-            The maximum number of results to be returned in a single page. It
-            is
+            The maximum number of results to be returned in a single page. It is
 
             possible to receive fewer results than the specified limit on a given page.
 
@@ -33781,8 +33733,7 @@ components:
           $ref: "#/components/schemas/SearchOrdersQuery"
         return_entries:
           description: >-
-            A Boolean that controls the format of the search results. If
-            `true`,
+            A Boolean that controls the format of the search results. If `true`,
 
             `SearchOrders` returns [OrderEntry](https://developer.squareup.com/reference/square_2021-06-16/objects/OrderEntry) objects. If `false`, `SearchOrders`
 
@@ -33898,8 +33849,8 @@ components:
             field in your `DateTimeFilter`.
           name: CREATED_AT
         - description: >-
-            The time when the order last updated, in RFC-3339 format. If you
-            are also
+            The time when the order last updated, in RFC-3339 format. If you are
+            also
 
             filtering for a time range in this query, you must set the `UPDATED_AT`
 
@@ -34191,8 +34142,8 @@ components:
       x-release-status: BETA
     SearchTeamMembersFilter:
       description: >-
-        Represents a filter used in a search for `TeamMember` objects.
-        `AND` logic is applied
+        Represents a filter used in a search for `TeamMember` objects. `AND`
+        logic is applied
 
         between the individual fields, and `OR` logic is applied within list-based fields.
 
@@ -35389,8 +35340,8 @@ components:
       type: string
       x-enum-elements:
         - description: >-
-            The team member is assigned to all current and future locations.
-            The `location_ids` field
+            The team member is assigned to all current and future locations. The
+            `location_ids` field
 
             is empty if the team member has this assignment type.
           name: ALL_CURRENT_AND_FUTURE_LOCATIONS
@@ -35456,16 +35407,16 @@ components:
             Dashboard.
           name: ACTIVE
         - description: >-
-            The team member can no longer sign in to Point of Sale or the
-            Seller Dashboard,
+            The team member can no longer sign in to Point of Sale or the Seller
+            Dashboard,
 
             but the team member's sales reports remain available.
           name: INACTIVE
       x-release-status: PUBLIC
     TeamMemberWage:
       description: >-
-        The hourly wage rate that a team member will earn on a `Shift` for
-        doing the job
+        The hourly wage rate that a team member will earn on a `Shift` for doing
+        the job
 
         specified by the `title` property of this object.
       properties:
@@ -35584,8 +35535,8 @@ components:
         - description: The card was swiped through a Square reader or Square stand.
           name: SWIPED
         - description: >-
-            The card information was keyed manually into Square Point of Sale
-            or a
+            The card information was keyed manually into Square Point of Sale or
+            a
 
             Square-hosted web form.
           name: KEYED
@@ -35771,8 +35722,8 @@ components:
           $ref: "#/components/schemas/TimeRange"
         device_id:
           description: >-
-            The `TerminalCheckout` objects associated with a specific device.
-            If no device is specified, then all
+            The `TerminalCheckout` objects associated with a specific device. If
+            no device is specified, then all
 
             `TerminalCheckout` objects for the merchant are displayed.
           type: string
@@ -36000,8 +35951,8 @@ components:
       properties:
         client_id:
           description: >-
-            If the transaction was created in the Square Point of Sale app,
-            this value
+            If the transaction was created in the Square Point of Sale app, this
+            value
 
             is the ID generated for the transaction by Square Point of Sale.
 
@@ -36128,8 +36079,8 @@ components:
       x-release-status: BETA
     UnlinkCustomerFromGiftCardResponse:
       description: >-
-        A response that contains one `GiftCard` that was unlinked. The
-        response might contain a set of `Error`
+        A response that contains one `GiftCard` that was unlinked. The response
+        might contain a set of `Error`
 
         objects if the request resulted in errors.
       example:
@@ -36249,8 +36200,7 @@ components:
       x-release-status: PUBLIC
     UpdateCustomerGroupRequest:
       description: >-
-        Defines the body parameters that can be included in a request to
-        the
+        Defines the body parameters that can be included in a request to the
 
         [UpdateCustomerGroup](https://developer.squareup.com/reference/square_2021-06-16/customer-groups-api/update-customer-group) endpoint.
       example:
@@ -37210,8 +37160,7 @@ components:
       x-release-status: PUBLIC
     UpdateWorkweekConfigResponse:
       description: >-
-        The response to a request to update a `WorkweekConfig` object.
-        Contains
+        The response to a request to update a `WorkweekConfig` object. Contains
 
         the updated `WorkweekConfig` object. May contain a set of `Error` objects if
 
@@ -37841,8 +37790,7 @@ components:
       properties:
         amount:
           description: >-
-            Amount in the lowest denominated value of this Currency. E.g. in
-            USD
+            Amount in the lowest denominated value of this Currency. E.g. in USD
 
             these are cents, in JPY they are Yen (which do not have a 'cent' concept).
           type: integer
@@ -38006,8 +37954,7 @@ components:
       x-visibility: SDK_ONLY
     V1Payment:
       description: >-
-        A payment represents a paid transaction between a Square merchant
-        and a
+        A payment represents a paid transaction between a Square merchant and a
 
         customer. Payment details are usually available from Connect API endpoints
 
@@ -38182,8 +38129,7 @@ components:
       x-release-status: DEPRECATED
     V1PaymentItemization:
       description: >-
-        Payment include an` itemizations` field that lists the items
-        purchased,
+        Payment include an` itemizations` field that lists the items purchased,
 
         along with associated fees, modifiers, and discounts. Each itemization has an
 
@@ -38657,8 +38603,7 @@ components:
       x-release-status: DEPRECATED
     V1Tender:
       description: >-
-        A tender represents a discrete monetary exchange. Square represents
-        this
+        A tender represents a discrete monetary exchange. Square represents this
 
         exchange as a money object with a specific currency and amount, where the
 
@@ -39065,6 +39010,13 @@ components:
         - start_of_day_local_time
       type: object
       x-release-status: PUBLIC
+    GANSource: {}
+    Status: {}
+    Type: {}
+    Reason: {}
+    invoice_delivery_methodInvoiceDeliveryMethod: {}
+    Info: {}
+    InfoCode: {}
   securitySchemes:
     oauth2:
       flows:
@@ -39313,3 +39265,4 @@ components:
       in: header
       name: Authorization
       type: apiKey
+

@@ -3083,7 +3083,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >-
-            RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
+            RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images'
+            \
 
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
 
@@ -3319,7 +3320,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
+            RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images'
+            \
 
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
 
@@ -3547,7 +3549,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
+            RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images'
+            \
 
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
 
@@ -4347,7 +4350,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            curl -X GET https://api.shutterstock.com/v2/editorial/images/search \
+            curl -X GET https://api.shutterstock.com/v2/editorial/images/search
+            \
 
             -H "Accept: application/json" \
 
@@ -4607,7 +4611,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            curl -X GET https://api.shutterstock.com/v2/editorial/images/updated \
+            curl -X GET https://api.shutterstock.com/v2/editorial/images/updated
+            \
 
             -H "Accept: application/json" \
 
@@ -5941,7 +5946,8 @@ paths:
       x-code-samples:
         - lang: shell
           source: >
-            curl -X GET https://api.shutterstock.com/v2/editorial/videos/search \
+            curl -X GET https://api.shutterstock.com/v2/editorial/videos/search
+            \
 
             -H "Accept: application/json" \
 
@@ -7626,7 +7632,6 @@ paths:
         - customer_accessCode:
             - licenses.create
             - purchases.view
-          ldap_accessCode: []
       summary: License images
       tags:
         - images
@@ -9316,8 +9321,7 @@ paths:
         "403":
           description: Forbidden
       security:
-        - contributor_accessCode: []
-          customer_accessCode:
+        - customer_accessCode:
             - user.view
       summary: Get user details
       tags:
@@ -15002,6 +15006,8 @@ components:
           description: Width of this video size
           type: integer
       type: object
+    AssetUploadId: {}
+    AssetId: {}
   securitySchemes:
     basic:
       scheme: basic
@@ -15044,3 +15050,4 @@ components:
     uri:
       example: https://wwww.shutterstock.com
       format: A valid URI
+
