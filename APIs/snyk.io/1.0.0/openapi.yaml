@@ -665,8 +665,8 @@ tags:
   - description: Test a package for issues with Snyk.
     name: Test
   - description: >-
-      Snyk constantly discloses new vulnerabilities. Monitor gives you a way to
-      regularly test your project for
+      Snyk constantly discloses new vulnerabilities. Monitor gives you a
+      way to regularly test your project for
 
       new vulnerabilities and be alerted when action is required in order to keep your project secure.
     name: Monitor
@@ -2028,8 +2028,8 @@ paths:
   "/org/{orgId}/integrations/{integrationId}":
     put:
       description: >-
-        + Update integration's credentials for given organization. Integration
-        must be **not brokered**
+        + Update integration's credentials for given organization.
+        Integration must be **not brokered**
 
 
         + Enable or disable brokered integration for given organization. *Credentials required for disabling brokered integration*
@@ -2369,8 +2369,8 @@ paths:
   "/org/{orgId}/integrations/{integrationId}/authentication/switch-token":
     post:
       description: >-
-        Switch the existing broker token with the provisioned token for this
-        integration and any other in the same group.
+        Switch the existing broker token with the provisioned token for
+        this integration and any other in the same group.
 
         Only perform this action when you have a Broker client running with the provisioned token.
 
@@ -2401,8 +2401,8 @@ paths:
   "/org/{orgId}/integrations/{integrationId}/clone":
     post:
       description: >-
-        Clone an integration, including all of its settings and credentials from
-        one org to another org in the same group.
+        Clone an integration, including all of its settings and credentials
+        from one org to another org in the same group.
 
         This API supports both brokered and non-brokered integrations.
 
@@ -5547,8 +5547,8 @@ paths:
                   value:
                     dependencyCount: 250
                     deprecated: >-
-                      This endpoint is deprecated, please use
-                      list-all-aggregated-issues endpoint instead.
+                      This endpoint is deprecated, please use list-all-aggregated-issues
+                      endpoint instead.
 
                       https://snyk.docs.apiary.io/#reference/projects/aggregated-project-issues/list-all-aggregated-issues
                     issues:
@@ -6717,9 +6717,9 @@ paths:
                   properties:
                     attributes:
                       description: >-
-                        When you filter by multiple values on a single
-                        attribute, you will return projects that have been
-                        assigned one or more of the values in the filter.
+                        When you filter by multiple values on a single attribute, you will
+                        return projects that have been assigned one or more of
+                        the values in the filter.
 
 
                         When you filter by multiple attributes, you will return projects which have been assigned values of both attributes in the filter.
@@ -6993,8 +6993,7 @@ paths:
                               type: object
                             pin:
                               description: >-
-                                Recommended pins to apply to the project (Python
-                                only)
+                                Recommended pins to apply to the project (Python only)
 
 
                                 (object)
@@ -10367,8 +10366,8 @@ paths:
                             username-storage-in-session)
 
                             - [GitHub
-                            PR](https://github.com/symfony/symfony/pull/18733)\\
-                            n"
+                            PR](https://github.com/symfony/symfony/pull/18733)\
+                            \n"
                           disclosureTime: 2016-05-09T21:31:02Z
                           exploitMaturity: no-known-exploit
                           from:
@@ -12606,16 +12605,16 @@ paths:
                         \\\"github.com/asaskevich/EventBus\\\"\\r\\n  packages =
                         [\\\".\\\"]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
-                        \\\"d46933a94f05c6657d7b923fcf5ac563ee37ec79\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  branch =
+                        \\\"d46933a94f05c6657d7b923fcf5ac563ee37ec79\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  branch =
                         \\\"master\\\"\\r\\n  digest =
                         \\\"1:b95c3763b72359370262246870366418c1d17446195e3c739\
                         21135c2537b9655\\\"\\r\\n  name =
                         \\\"github.com/cloudevents/sdk-go\\\"\\r\\n  packages =
                         [\\r\\n    \\\".\\\",\\r\\n    \\\"v02\\\",\\r\\n  ]\\r\
                         \\n  pruneopts = \\\"UT\\\"\\r\\n  revision =
-                        \\\"3a3d34a7231e937edfa20964dc25c29081c3ebea\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  digest =
+                        \\\"3a3d34a7231e937edfa20964dc25c29081c3ebea\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  digest =
                         \\\"1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4a\
                         ab4c9dd45c18abd\\\"\\r\\n  name =
                         \\\"github.com/fsnotify/fsnotify\\\"\\r\\n  packages =
@@ -12630,8 +12629,8 @@ paths:
                         \\\"github.com/gin-contrib/sse\\\"\\r\\n  packages =
                         [\\\".\\\"]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
-                        \\\"22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  digest =
+                        \\\"22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  digest =
                         \\\"1:d5083934eb25e45d17f72ffa86cae3814f4a9d6c073c4f16b\
                         64147169b245606\\\"\\r\\n  name =
                         \\\"github.com/gin-gonic/gin\\\"\\r\\n  packages =
@@ -12674,8 +12673,8 @@ paths:
                         \\\"hcl/parser\\\",\\r\\n    \\\"hcl/printer\\\",\\r\\n    \
                         \\\"hcl/scanner\\\",\\r\\n    \\\"hcl/strconv\\\",\\r\\\
                         n    \\\"hcl/token\\\",\\r\\n    \\\"json/parser\\\",\\r\
-                        \\n    \\\"json/scanner\\\",\\r\\n    \\\"json/token\\\\
-                        ",\\r\\n  ]\\r\\n  pruneopts =
+                        \\n    \\\"json/scanner\\\",\\r\\n    \\\"json/token\\\
+                        \",\\r\\n  ]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
                         \\\"8cb6e5b959231cc1119e43259c4a608f9c51a241\\\"\\r\\n  \
                         version =
@@ -12709,8 +12708,8 @@ paths:
                         \\\"github.com/mattn/go-isatty\\\"\\r\\n  packages =
                         [\\\".\\\"]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
-                        \\\"57fdcb988a5c543893cc61bce354a6e24ab70022\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  digest =
+                        \\\"57fdcb988a5c543893cc61bce354a6e24ab70022\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  digest =
                         \\\"1:53bc4cd4914cd7cd52139990d5170d6dc99067ae31c565306\
                         21b18b35fc30318\\\"\\r\\n  name =
                         \\\"github.com/mitchellh/mapstructure\\\"\\r\\n  packag\
@@ -12804,42 +12803,42 @@ paths:
                         \\\"github.com/ugorji/go\\\"\\r\\n  packages =
                         [\\\"codec\\\"]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
-                        \\\"c88ee250d0221a57af388746f5cf03768c21d6e2\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  branch =
+                        \\\"c88ee250d0221a57af388746f5cf03768c21d6e2\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  branch =
                         \\\"master\\\"\\r\\n  digest =
                         \\\"1:38f553aff0273ad6f367cb0a0f8b6eecbaef8dc6cb8b50e57\
                         b6a81c1d5b1e332\\\"\\r\\n  name =
                         \\\"golang.org/x/crypto\\\"\\r\\n  packages =
                         [\\\"ssh/terminal\\\"]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
-                        \\\"505ab145d0a99da450461ae2c1a9f6cd10d1f447\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  branch =
+                        \\\"505ab145d0a99da450461ae2c1a9f6cd10d1f447\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  branch =
                         \\\"master\\\"\\r\\n  digest =
                         \\\"1:89a0cb976397aa9157a45bb2b896d0bcd07ee095ac975e0f0\
                         3c53250c402265e\\\"\\r\\n  name =
                         \\\"golang.org/x/net\\\"\\r\\n  packages =
                         [\\r\\n    \\\"context\\\",\\r\\n    \\\"http/httpguts\\\
-                        \",\\r\\n    \\\"http2\\\",\\r\\n    \\\"http2/hpack\\\\
-                        ",\\r\\n    \\\"idna\\\",\\r\\n    \\\"internal/timeser\
-                        ies\\\",\\r\\n    \\\"trace\\\",\\r\\n  ]\\r\\n  pruneo\
-                        pts = \\\"UT\\\"\\r\\n  revision =
-                        \\\"e147a9138326bc0e9d4e179541ffd8af41cff8a9\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  branch =
+                        \",\\r\\n    \\\"http2\\\",\\r\\n    \\\"http2/hpack\\\
+                        \",\\r\\n    \\\"idna\\\",\\r\\n    \\\"internal/timese\
+                        ries\\\",\\r\\n    \\\"trace\\\",\\r\\n  ]\\r\\n  prune\
+                        opts = \\\"UT\\\"\\r\\n  revision =
+                        \\\"e147a9138326bc0e9d4e179541ffd8af41cff8a9\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  branch =
                         \\\"master\\\"\\r\\n  digest =
                         \\\"1:ba8cbf57cfd92d5f8592b4aca1a35d92c162363d32aeabd5b\
                         12555f8896635e7\\\"\\r\\n  name =
                         \\\"golang.org/x/sys\\\"\\r\\n  packages =
                         [\\r\\n    \\\"unix\\\",\\r\\n    \\\"windows\\\",\\r\\\
                         n  ]\\r\\n  pruneopts = \\\"UT\\\"\\r\\n  revision =
-                        \\\"4d1cda033e0619309c606fc686de3adcf599539e\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  digest =
+                        \\\"4d1cda033e0619309c606fc686de3adcf599539e\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  digest =
                         \\\"1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae\
                         746072a1dccdd18\\\"\\r\\n  name =
                         \\\"golang.org/x/text\\\"\\r\\n  packages =
                         [\\r\\n    \\\"collate\\\",\\r\\n    \\\"collate/build\\\
                         \",\\r\\n    \\\"internal/colltab\\\",\\r\\n    \\\"int\
-                        ernal/gen\\\",\\r\\n    \\\"internal/tag\\\",\\r\\n    \\
-                        \\"internal/triegen\\\",\\r\\n    \\\"internal/ucd\\\",\
+                        ernal/gen\\\",\\r\\n    \\\"internal/tag\\\",\\r\\n    \
+                        \\\"internal/triegen\\\",\\r\\n    \\\"internal/ucd\\\",\
                         \\r\\n    \\\"language\\\",\\r\\n    \\\"secure/bidirule\
                         \\\",\\r\\n    \\\"transform\\\",\\r\\n    \\\"unicode/\
                         bidi\\\",\\r\\n    \\\"unicode/cldr\\\",\\r\\n    \\\"u\
@@ -12854,29 +12853,29 @@ paths:
                         \\\"google.golang.org/genproto\\\"\\r\\n  packages =
                         [\\\"googleapis/rpc/status\\\"]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
-                        \\\"bd91e49a0898e27abb88c339b432fa53d7497ac0\\\"\\r\\n\\
-                        \r\\n[[projects]]\\r\\n  digest =
+                        \\\"bd91e49a0898e27abb88c339b432fa53d7497ac0\\\"\\r\\n\
+                        \\r\\n[[projects]]\\r\\n  digest =
                         \\\"1:9edd250a3c46675d0679d87540b30c9ed253b19bd1fd1af08\
                         f4f5fb3c79fc487\\\"\\r\\n  name =
                         \\\"google.golang.org/grpc\\\"\\r\\n  packages =
                         [\\r\\n    \\\".\\\",\\r\\n    \\\"balancer\\\",\\r\\n    \
                         \\\"balancer/base\\\",\\r\\n    \\\"balancer/roundrobin\
-                        \\\",\\r\\n    \\\"binarylog/grpc_binarylog_v1\\\",\\r\\
-                        \n    \\\"codes\\\",\\r\\n    \\\"connectivity\\\",\\r\\
-                        \n    \\\"credentials\\\",\\r\\n    \\\"credentials/int\
-                        ernal\\\",\\r\\n    \\\"encoding\\\",\\r\\n    \\\"enco\
-                        ding/proto\\\",\\r\\n    \\\"grpclog\\\",\\r\\n    \\\"\
-                        internal\\\",\\r\\n    \\\"internal/backoff\\\",\\r\\n    \
-                        \\\"internal/binarylog\\\",\\r\\n    \\\"internal/chann\
-                        elz\\\",\\r\\n    \\\"internal/envconfig\\\",\\r\\n    \\
-                        \\"internal/grpcrand\\\",\\r\\n    \\\"internal/grpcsync\
-                        \\\",\\r\\n    \\\"internal/syscall\\\",\\r\\n    \\\"i\
-                        nternal/transport\\\",\\r\\n    \\\"keepalive\\\",\\r\\\
-                        n    \\\"metadata\\\",\\r\\n    \\\"naming\\\",\\r\\n    \
-                        \\\"peer\\\",\\r\\n    \\\"resolver\\\",\\r\\n    \\\"r\
-                        esolver/dns\\\",\\r\\n    \\\"resolver/passthrough\\\",\
-                        \\r\\n    \\\"stats\\\",\\r\\n    \\\"status\\\",\\r\\n    \
-                        \\\"tap\\\",\\r\\n  ]\\r\\n  pruneopts =
+                        \\\",\\r\\n    \\\"binarylog/grpc_binarylog_v1\\\",\\r\
+                        \\n    \\\"codes\\\",\\r\\n    \\\"connectivity\\\",\\r\
+                        \\n    \\\"credentials\\\",\\r\\n    \\\"credentials/in\
+                        ternal\\\",\\r\\n    \\\"encoding\\\",\\r\\n    \\\"enc\
+                        oding/proto\\\",\\r\\n    \\\"grpclog\\\",\\r\\n    \\\
+                        \"internal\\\",\\r\\n    \\\"internal/backoff\\\",\\r\\\
+                        n    \\\"internal/binarylog\\\",\\r\\n    \\\"internal/\
+                        channelz\\\",\\r\\n    \\\"internal/envconfig\\\",\\r\\\
+                        n    \\\"internal/grpcrand\\\",\\r\\n    \\\"internal/g\
+                        rpcsync\\\",\\r\\n    \\\"internal/syscall\\\",\\r\\n    \
+                        \\\"internal/transport\\\",\\r\\n    \\\"keepalive\\\",\
+                        \\r\\n    \\\"metadata\\\",\\r\\n    \\\"naming\\\",\\r\
+                        \\n    \\\"peer\\\",\\r\\n    \\\"resolver\\\",\\r\\n    \
+                        \\\"resolver/dns\\\",\\r\\n    \\\"resolver/passthrough\
+                        \\\",\\r\\n    \\\"stats\\\",\\r\\n    \\\"status\\\",\
+                        \\r\\n    \\\"tap\\\",\\r\\n  ]\\r\\n  pruneopts =
                         \\\"UT\\\"\\r\\n  revision =
                         \\\"df014850f6dee74ba2fc94874043a9f3f75fbfd8\\\"\\r\\n  \
                         version =
@@ -12903,17 +12902,17 @@ paths:
                         n    \\\"github.com/cloudevents/sdk-go/v02\\\",\\r\\n    \
                         \\\"github.com/gin-gonic/gin\\\",\\r\\n    \\\"github.c\
                         om/golang/protobuf/proto\\\",\\r\\n    \\\"github.com/g\
-                        oph/emperror\\\",\\r\\n    \\\"github.com/goph/logur\\\\
-                        ",\\r\\n    \\\"github.com/karlseguin/ccache\\\",\\r\\n    \
-                        \\\"github.com/patrickmn/go-cache\\\",\\r\\n    \\\"git\
-                        hub.com/pkg/errors\\\",\\r\\n    \\\"github.com/satori/\
-                        go.uuid\\\",\\r\\n    \\\"github.com/sirupsen/logrus\\\\
-                        ",\\r\\n    \\\"github.com/spf13/cast\\\",\\r\\n    \\\\
-                        "github.com/spf13/pflag\\\",\\r\\n    \\\"github.com/sp\
-                        f13/viper\\\",\\r\\n    \\\"golang.org/x/net/context\\\\
-                        ",\\r\\n    \\\"google.golang.org/grpc\\\",\\r\\n    \\\
-                        \"gopkg.in/go-playground/validator.v8\\\",\\r\\n    \\\\
-                        "gopkg.in/yaml.v2\\\",\\r\\n  ]\\r\\n  solver-name =
+                        oph/emperror\\\",\\r\\n    \\\"github.com/goph/logur\\\
+                        \",\\r\\n    \\\"github.com/karlseguin/ccache\\\",\\r\\\
+                        n    \\\"github.com/patrickmn/go-cache\\\",\\r\\n    \\\
+                        \"github.com/pkg/errors\\\",\\r\\n    \\\"github.com/sa\
+                        tori/go.uuid\\\",\\r\\n    \\\"github.com/sirupsen/logr\
+                        us\\\",\\r\\n    \\\"github.com/spf13/cast\\\",\\r\\n    \
+                        \\\"github.com/spf13/pflag\\\",\\r\\n    \\\"github.com\
+                        /spf13/viper\\\",\\r\\n    \\\"golang.org/x/net/context\
+                        \\\",\\r\\n    \\\"google.golang.org/grpc\\\",\\r\\n    \
+                        \\\"gopkg.in/go-playground/validator.v8\\\",\\r\\n    \\\
+                        \"gopkg.in/yaml.v2\\\",\\r\\n  ]\\r\\n  solver-name =
                         \\\"gps-cdcl\\\"\\r\\n  solver-version = 1\""
                   target:
                     contents: '"# Gopkg.toml example\r\n#\r\n# Refer to
@@ -14177,9 +14176,9 @@ paths:
   /test/maven:
     post:
       description: >-
-        You can test your Maven packages for issues according to their manifest
-        file using this action. It takes a JSON object containing a the "target"
-        `pom.xml`.
+        You can test your Maven packages for issues according to their
+        manifest file using this action. It takes a JSON object containing a the
+        "target" `pom.xml`.
 
 
         Additional manifest files, if they are needed, like parent `pom.xml` files, child poms, etc., according the the definitions in the target `pom.xml` file, should be supplied in the `additional` body parameter.
@@ -15857,8 +15856,8 @@ paths:
                             ```bash\r
 
                             $ time node -e
-                            '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\\
-                            ")'\r
+                            '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\
+                            \")'\r
 
                             0.04s user 0.01s system
                             95% cpu 0.052 total\r
@@ -15866,8 +15865,8 @@ paths:
                             \r
 
                             $ time node -e
-                            '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\\
-                            ")'\r
+                            '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\
+                            \")'\r
 
                             1.79s user 0.02s system
                             99% cpu 1.812 total\r
@@ -21620,6 +21619,8 @@ components:
                 type: object
             type: object
   schemas:
+    ignorePath: {}
+    issueId: {}
     A_specific_entitlement_by_organization: {}
     Activate_an_individual_project: {}
     Add_member_body:
@@ -24523,6 +24524,3 @@ components:
       required:
         - files
       type: object
-    ignorePath: {}
-    issueId: {}
-
