@@ -2730,6 +2730,30 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: A string used to associate a package configuration source group with a channel output.
       description: 'This response includes only the "property" : "type" property.'
+    ScheduleAdBreak:
+      type: object
+      properties:
+        ApproximateDurationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: 'The approximate duration of the ad break, in seconds.'
+        ApproximateStartTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampUnix'
+            - description: The approximate time that the ad will start playing.
+        SourceLocationName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the source location containing the VOD source used for the ad break.
+        VodSourceName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the VOD source used for the ad break.
+      description: The schedule's ad break properties.
+    __listOfScheduleAdBreak:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScheduleAdBreak'
     ScheduleEntry:
       required:
         - VodSourceName
@@ -2759,6 +2783,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The name of the program.
+        ScheduleAdBreaks:
+          allOf:
+            - $ref: '#/components/schemas/__listOfScheduleAdBreak'
+            - description: The schedule's ad break properties.
         SourceLocationName:
           allOf:
             - $ref: '#/components/schemas/__string'

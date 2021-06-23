@@ -2089,6 +2089,554 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/accounts/{AwsAccountId}/folders/{FolderId}':
+    post:
+      operationId: CreateFolder
+      description: Creates an empty shared folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFolderResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '488':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS Account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the folder.
+                  type: string
+                  minLength: 1
+                  maxLength: 200
+                FolderType:
+                  description: 'The type of folder. By default, <code>folderType</code> is <code>SHARED</code>.'
+                  type: string
+                  enum:
+                    - SHARED
+                ParentFolderArn:
+                  description: <p>The Amazon Resource Name (ARN) for the parent folder.</p> <p> <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>
+                  type: string
+                Permissions:
+                  description: '<p>A structure that describes the principals and the resource-level permissions of a folder.</p> <p>To specify no permissions, omit <code>Permissions</code>.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  minItems: 1
+                  maxItems: 64
+                Tags:
+                  description: Tags for the folder.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteFolder
+      description: Deletes an empty folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFolderResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS Account ID for the folder.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    get:
+      operationId: DescribeFolder
+      description: Describes a folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFolderResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    put:
+      operationId: UpdateFolder
+      description: Updates the name of a folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFolderResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+              properties:
+                Name:
+                  description: The name of the folder.
+                  type: string
+                  minLength: 1
+                  maxLength: 200
+  '/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}':
+    put:
+      operationId: CreateFolderMembership
+      description: 'Adds an asset, such as a dashboard, analysis, or dataset into a folder.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFolderMembershipResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS Account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+        - name: MemberId
+          in: path
+          required: true
+          description: 'The ID of the asset (the dashboard, analysis, or dataset).'
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+        - name: MemberType
+          in: path
+          required: true
+          description: 'The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>.'
+          schema:
+            type: string
+            enum:
+              - DASHBOARD
+              - ANALYSIS
+              - DATASET
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteFolderMembership
+      description: 'Removes an asset, such as a dashboard, analysis, or dataset, from a folder.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFolderMembershipResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS Account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The Folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+        - name: MemberId
+          in: path
+          required: true
+          description: 'The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.'
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+        - name: MemberType
+          in: path
+          required: true
+          description: 'The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code> '
+          schema:
+            type: string
+            enum:
+              - DASHBOARD
+              - ANALYSIS
+              - DATASET
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups':
     post:
       operationId: CreateGroup
@@ -6380,6 +6928,246 @@ paths:
                     $ref: '#/components/schemas/ResourcePermission'
                   minItems: 1
                   maxItems: 64
+  '/accounts/{AwsAccountId}/folders/{FolderId}/permissions':
+    get:
+      operationId: DescribeFolderPermissions
+      description: Describes permissions for a folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFolderPermissionsResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS Account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateFolderPermissions
+      description: Updates permissions of a folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFolderPermissionsResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                GrantPermissions:
+                  description: The permissions that you want to grant on a resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  minItems: 1
+                  maxItems: 64
+                RevokePermissions:
+                  description: The permissions that you want to revoke from a resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  minItems: 1
+                  maxItems: 64
+  '/accounts/{AwsAccountId}/folders/{FolderId}/resolved-permissions':
+    get:
+      operationId: DescribeFolderResolvedPermissions
+      description: Describes the folder resolved permissions. Permissions consists of both folder direct permissions and the inherited permissions from the ancestor folders.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFolderResolvedPermissionsResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}':
     get:
       operationId: DescribeIAMPolicyAssignment
@@ -7402,6 +8190,185 @@ paths:
             type: string
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/folders/{FolderId}/members':
+    get:
+      operationId: ListFolderMembers
+      description: 'List all assets (<code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>) in a folder. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFolderMembersResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: FolderId
+          in: path
+          required: true
+          description: The folder ID.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+        - name: next-token
+          in: query
+          required: false
+          description: 'The token for the next set of results, or null if there are no more results.'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/folders':
+    get:
+      operationId: ListFolders
+      description: Lists all folders in an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFoldersResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: 'The token for the next set of results, or null if there are no more results.'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9258,6 +10225,100 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/search/folders':
+    post:
+      operationId: SearchFolders
+      description: Searches the subfolders in a folder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchFoldersResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The AWS account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Filters
+              properties:
+                Filters:
+                  description: 'The filters to apply to the search. Currently, you can search only by the parent folder ARN. For example, <code>"Filters": [ { "Name": "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FolderSearchFilter'
+                  maxItems: 100
+                NextToken:
+                  description: 'The token for the next set of results, or null if there are no more results.'
+                  type: string
+                MaxResults:
+                  description: The maximum number of results to be returned per request.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/resources/{ResourceArn}/tags#keys':
     delete:
       operationId: UntagResource
@@ -10149,6 +11210,40 @@ components:
       pattern: '^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+'
     Boolean:
       type: boolean
+    CreateFolderResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status of the newly created folder. If succeeded, the status is <code>SC_OK (200)</code>.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the newly created folder.
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID for the newly created folder.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID for the newly created folder.
+    CreateFolderMembershipResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status of the folder membership. If succeeded, the status is <code>SC_OK (200)</code>.'
+        FolderMember:
+          allOf:
+            - $ref: '#/components/schemas/FolderMember'
+            - description: Information about the member in the folder.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
     CreateGroupResponse:
       type: object
       properties:
@@ -10567,6 +11662,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DeleteFolderResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status of deleting the folder. If succeeded, the status is <code>SC_OK (200)</code>.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name of the deleted folder.
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
+    DeleteFolderMembershipResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status of deleting the asset. If succeeded, the status is <code>SC_OK (200)</code>.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
     DeleteGroupResponse:
       type: object
       properties:
@@ -10915,6 +12040,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DescribeFolderResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK (200)</code>.'
+        Folder:
+          allOf:
+            - $ref: '#/components/schemas/Folder'
+            - description: Information about the folder.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
+    DescribeFolderPermissionsResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code>.'
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the folder.
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: Information about the permissions on the folder.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
+    DescribeFolderResolvedPermissionsResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code> '
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN).
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: Information about the permissions on the dashboard.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
     DescribeGroupResponse:
       type: object
       properties:
@@ -11233,6 +12419,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    ListFolderMembersResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code> '
+        FolderMemberList:
+          allOf:
+            - $ref: '#/components/schemas/FolderMemberList'
+            - description: 'A structure that contains all of the folder members (dashboards, analyses, and datasets) in the folder.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
+    ListFoldersResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code> '
+        FolderSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/FolderSummaryList'
+            - description: A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
     ListGroupMembershipsResponse:
       type: object
       properties:
@@ -11624,6 +12848,41 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter, for example, <code>"Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>. '
       description: 'A filter that you apply when searching for dashboards. '
+    SearchFoldersResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code>.'
+        FolderSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/FolderSummaryList'
+            - description: A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
+    FolderSearchFilter:
+      type: object
+      properties:
+        Operator:
+          allOf:
+            - $ref: '#/components/schemas/FilterOperator'
+            - description: 'The comparison operator that you want to use as a filter. For example, <code>"Operator": "StringEquals"</code>.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FolderFilterAttribute'
+            - description: 'The name of the value that you want to use as a filter. For example, <code>"Name": "PARENT_FOLDER_ARN"</code>.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The value of the named item (in this example, <code>PARENT_FOLDER_ARN</code>), that you want to use as a filter. For example, <code>"Value": "arn:aws:quicksight:us-east-1:1:folder/folderId"</code>.'
+      description: Searches a folder by a filter.
     TagResourceResponse:
       type: object
       properties:
@@ -11891,6 +13150,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    UpdateFolderResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code>.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN).
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
+    UpdateFolderPermissionsResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status. If succeeded, the status is <code>SC_OK</code>.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN).
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: Information about the permissions on the dashboard.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request ID.
     UpdateGroupResponse:
       type: object
       properties:
@@ -13054,6 +14355,60 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.
+    MemberType:
+      type: string
+      enum:
+        - DASHBOARD
+        - ANALYSIS
+        - DATASET
+    CreateFolderMembershipRequest:
+      type: object
+      title: CreateFolderMembershipRequest
+      properties: {}
+    FolderMember:
+      type: object
+      properties:
+        MemberId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The ID of the asset.
+        MemberType:
+          allOf:
+            - $ref: '#/components/schemas/MemberType'
+            - description: The type of the asset.
+      description: 'An asset in a folder, such as a dashboard, analysis, or dataset.'
+    FolderName:
+      type: string
+      minLength: 1
+      maxLength: 200
+    FolderType:
+      type: string
+      enum:
+        - SHARED
+    CreateFolderRequest:
+      type: object
+      title: CreateFolderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FolderName'
+            - description: The name of the folder.
+        FolderType:
+          allOf:
+            - $ref: '#/components/schemas/FolderType'
+            - description: 'The type of folder. By default, <code>folderType</code> is <code>SHARED</code>.'
+        ParentFolderArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: <p>The Amazon Resource Name (ARN) for the parent folder.</p> <p> <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: '<p>A structure that describes the principals and the resource-level permissions of a folder.</p> <p>To specify no permissions, omit <code>Permissions</code>.</p>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Tags for the folder.
     GroupMemberName:
       type: string
       pattern: '[\u0020-\u00FF]+'
@@ -13872,6 +15227,14 @@ components:
       type: object
       title: DeleteDataSourceRequest
       properties: {}
+    DeleteFolderMembershipRequest:
+      type: object
+      title: DeleteFolderMembershipRequest
+      properties: {}
+    DeleteFolderRequest:
+      type: object
+      title: DeleteFolderRequest
+      properties: {}
     DeleteGroupMembershipRequest:
       type: object
       title: DeleteGroupMembershipRequest
@@ -13961,6 +15324,50 @@ components:
       type: object
       title: DescribeDataSourceRequest
       properties: {}
+    DescribeFolderPermissionsRequest:
+      type: object
+      title: DescribeFolderPermissionsRequest
+      properties: {}
+    DescribeFolderRequest:
+      type: object
+      title: DescribeFolderRequest
+      properties: {}
+    DescribeFolderResolvedPermissionsRequest:
+      type: object
+      title: DescribeFolderResolvedPermissionsRequest
+      properties: {}
+    Folder:
+      type: object
+      properties:
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The folder Amazon Resource Name (ARN).
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FolderName'
+            - description: A display name for the folder.
+        FolderType:
+          allOf:
+            - $ref: '#/components/schemas/FolderType'
+            - description: The type of the folder.
+        FolderPath:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: An array of ancestor folder ARN strings.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the folder was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the folder was last updated.
+      description: A folder.
     DescribeGroupRequest:
       type: object
       title: DescribeGroupRequest
@@ -14317,6 +15724,71 @@ components:
             - $ref: '#/components/schemas/Expression'
             - description: An expression that must evaluate to a Boolean value. Rows for which the expression evaluates to true are kept in the dataset.
       description: A transform operation that filters rows based on a condition.
+    Path:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 1
+      maxItems: 10
+    FolderFilterAttribute:
+      type: string
+      enum:
+        - PARENT_FOLDER_ARN
+    MemberIdArnPair:
+      type: object
+      properties:
+        MemberId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The ID of the member.
+        MemberArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the member.
+      description: An object that consists of the member Amazon Resource Name (ARN) and member ID.
+    FolderMemberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberIdArnPair'
+      maxItems: 100
+    FolderSearchFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FolderSearchFilter'
+      maxItems: 100
+    FolderSummary:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN).
+        FolderId:
+          allOf:
+            - $ref: '#/components/schemas/RestrictiveResourceId'
+            - description: The folder ID.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FolderName'
+            - description: The display name of the folder.
+        FolderType:
+          allOf:
+            - $ref: '#/components/schemas/FolderType'
+            - description: The type of folder.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the folder was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the folder was last updated.
+      description: 'A summary of the folder. '
+    FolderSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FolderSummary'
+      maxItems: 100
     GeoSpatialCountryCode:
       type: string
       enum:
@@ -14558,6 +16030,14 @@ components:
     ListDataSourcesRequest:
       type: object
       title: ListDataSourcesRequest
+      properties: {}
+    ListFolderMembersRequest:
+      type: object
+      title: ListFolderMembersRequest
+      properties: {}
+    ListFoldersRequest:
+      type: object
+      title: ListFoldersRequest
       properties: {}
     ListGroupMembershipsRequest:
       type: object
@@ -14807,8 +16287,8 @@ components:
         InputColumns:
           allOf:
             - $ref: '#/components/schemas/InputColumnList'
-            - description: A physical table type for as S3 data source.
-      description: A physical table type for as S3 data source.
+            - description: '<p>A physical table type for an S3 data source.</p> <note> <p>For non-JSON files, only <code>STRING</code> data types are supported in input columns.</p> </note>'
+      description: A physical table type for an S3 data source.
     PositiveInteger:
       type: integer
       minimum: 1
@@ -14983,6 +16463,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/DashboardSearchFilterList'
             - description: 'The filters to apply to the search. Currently, you can search only by user name, for example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to be returned per request.
+    SearchFoldersRequest:
+      type: object
+      required:
+        - Filters
+      title: SearchFoldersRequest
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FolderSearchFilterList'
+            - description: 'The filters to apply to the search. Currently, you can search only by the parent folder ARN. For example, <code>"Filters": [ { "Name": "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]</code>.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -15543,6 +17041,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/SslProperties'
             - description: Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying source.
+    UpdateFolderPermissionsRequest:
+      type: object
+      title: UpdateFolderPermissionsRequest
+      properties:
+        GrantPermissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: The permissions that you want to grant on a resource.
+        RevokePermissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: The permissions that you want to revoke from a resource.
+    UpdateFolderRequest:
+      type: object
+      required:
+        - Name
+      title: UpdateFolderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FolderName'
+            - description: The name of the folder.
     UpdateGroupRequest:
       type: object
       title: UpdateGroupRequest

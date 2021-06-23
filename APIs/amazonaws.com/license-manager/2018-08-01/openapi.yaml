@@ -207,36 +207,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
+        '483':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-        '483':
+        '484':
           description: AuthorizationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorizationException'
-        '484':
+        '485':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '485':
+        '486':
           description: RateLimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RateLimitExceededException'
-        '486':
+        '487':
           description: ServerInternalException
           content:
             application/json:
@@ -282,54 +288,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
+        '483':
           description: NoEntitlementsAllowedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoEntitlementsAllowedException'
-        '483':
+        '484':
           description: EntitlementNotAllowedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EntitlementNotAllowedException'
-        '484':
+        '485':
           description: UnsupportedDigitalSignatureMethodException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedDigitalSignatureMethodException'
-        '485':
+        '486':
           description: RedirectException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedirectException'
-        '486':
+        '487':
           description: AuthorizationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorizationException'
-        '487':
+        '488':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '488':
+        '489':
           description: RateLimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RateLimitExceededException'
-        '489':
+        '490':
           description: ServerInternalException
           content:
             application/json:
@@ -375,48 +387,54 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
+        '483':
           description: NoEntitlementsAllowedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoEntitlementsAllowedException'
-        '483':
+        '484':
           description: UnsupportedDigitalSignatureMethodException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedDigitalSignatureMethodException'
-        '484':
+        '485':
           description: RedirectException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedirectException'
-        '485':
+        '486':
           description: AuthorizationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorizationException'
-        '486':
+        '487':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '487':
+        '488':
           description: RateLimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RateLimitExceededException'
-        '488':
+        '489':
           description: ServerInternalException
           content:
             application/json:
@@ -3641,7 +3659,7 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ClientToken'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         GrantName:
           allOf:
@@ -3687,7 +3705,7 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ClientToken'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         GrantArn:
           allOf:
@@ -3705,6 +3723,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantStatus'
             - description: Grant status.
+        StatusReason:
+          $ref: '#/components/schemas/StatusReasonMessage'
         SourceVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3781,7 +3801,7 @@ components:
             - description: Information about the license.
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ClientToken'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     CreateLicenseConfigurationResponse:
       type: object
@@ -3950,7 +3970,7 @@ components:
             - description: License status.
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ClientToken'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         SourceVersion:
           allOf:
@@ -3996,7 +4016,7 @@ components:
             - description: Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
+            - $ref: '#/components/schemas/ClientToken'
             - description: 'Idempotency token, valid for 10 minutes.'
     DeleteGrantResponse:
       type: object
@@ -4024,6 +4044,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: Amazon Resource Name (ARN) of the grant.
+        StatusReason:
+          $ref: '#/components/schemas/StatusReasonMessage'
         Version:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4940,6 +4962,7 @@ components:
         - DELETED
         - PENDING_DELETE
         - DISABLED
+        - WORKFLOW_COMPLETED
     String:
       type: string
     AllowedOperation:
@@ -5010,8 +5033,8 @@ components:
         $ref: '#/components/schemas/Metadata'
     ClientToken:
       type: string
-      pattern: '[a-zA-Z0-9]*'
-      maxLength: 64
+      pattern: \S+
+      maxLength: 2048
     SignedToken:
       type: string
       minLength: 4096
@@ -5089,6 +5112,10 @@ components:
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 1
+    StatusReasonMessage:
+      type: string
+      pattern: '[\s\S]+'
+      maxLength: 400
     LicenseCountingType:
       type: string
       enum:
@@ -5187,10 +5214,6 @@ components:
       items:
         $ref: '#/components/schemas/String'
       maxItems: 3
-    IdempotencyToken:
-      type: string
-      pattern: \S+
-      maxLength: 60
     TokenType:
       type: string
       enum:
@@ -5415,7 +5438,7 @@ components:
             - description: Grant status.
         StatusReason:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/StatusReasonMessage'
             - description: Grant status reason.
         Version:
           allOf:
@@ -5591,6 +5614,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReceivedStatus'
             - description: Received status.
+        ReceivedStatusReason:
+          $ref: '#/components/schemas/StatusReasonMessage'
         AllowedOperations:
           allOf:
             - $ref: '#/components/schemas/AllowedOperationList'
@@ -5981,6 +6006,7 @@ components:
         - FAILED_WORKFLOW
         - DELETED
         - DISABLED
+        - WORKFLOW_COMPLETED
     ReportFrequencyType:
       type: string
       enum:

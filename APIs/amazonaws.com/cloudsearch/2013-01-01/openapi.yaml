@@ -256,6 +256,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ResourceAlreadyExistsException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '484':
+          description: ValidationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: DomainName
           in: query
@@ -318,6 +330,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ResourceAlreadyExistsException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '484':
+          description: ValidationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         content:
           text/xml:
@@ -3626,6 +3650,8 @@ components:
           $ref: '#/components/schemas/DomainStatus'
       description: The result of a <code>CreateDomainRequest</code>. Contains the status of a newly created domain.
     LimitExceededException: {}
+    ResourceAlreadyExistsException: {}
+    ValidationException: {}
     DefineAnalysisSchemeResponse:
       type: object
       required:
@@ -4210,7 +4236,6 @@ components:
             - $ref: '#/components/schemas/AvailabilityOptionsStatus'
             - description: 'The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. '
       description: 'The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain''s availability options. '
-    ValidationException: {}
     UpdateDomainEndpointOptionsResponse:
       type: object
       properties:
@@ -4251,6 +4276,10 @@ components:
         - search.large
         - search.xlarge
         - search.2xlarge
+        - search.previousgeneration.small
+        - search.previousgeneration.large
+        - search.previousgeneration.xlarge
+        - search.previousgeneration.2xlarge
       description: The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.
     UIntValue:
       type: integer
