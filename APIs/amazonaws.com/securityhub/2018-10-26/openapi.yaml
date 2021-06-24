@@ -696,7 +696,7 @@ paths:
                 - Id
               properties:
                 Name:
-                  description: The name of the custom action target.
+                  description: The name of the custom action target. Can contain up to 20 characters.
                   type: string
                   pattern: .*\S.*
                 Description:
@@ -704,7 +704,7 @@ paths:
                   type: string
                   pattern: .*\S.*
                 Id:
-                  description: The ID for the custom action target.
+                  description: The ID for the custom action target. Can contain up to 20 alphanumeric characters.
                   type: string
                   pattern: .*\S.*
     parameters:
@@ -1113,7 +1113,8 @@ paths:
                     Keyword:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
-                        - description: A keyword for a finding.
+                        - deprecated: true
+                          description: A keyword for a finding.The Keyword property is deprecated.
                     FindingProviderFieldsConfidence:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -1902,7 +1903,8 @@ paths:
                     Keyword:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
-                        - description: A keyword for a finding.
+                        - deprecated: true
+                          description: A keyword for a finding.The Keyword property is deprecated.
                     FindingProviderFieldsConfidence:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -3529,7 +3531,8 @@ paths:
                     Keyword:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
-                        - description: A keyword for a finding.
+                        - deprecated: true
+                          description: A keyword for a finding.The Keyword property is deprecated.
                     FindingProviderFieldsConfidence:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -3970,7 +3973,8 @@ paths:
                     Keyword:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
-                        - description: A keyword for a finding.
+                        - deprecated: true
+                          description: A keyword for a finding.The Keyword property is deprecated.
                     FindingProviderFieldsConfidence:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -6044,6 +6048,10 @@ components:
     AwsApiGatewayV2StageDetails:
       type: object
       properties:
+        ClientCertificateId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of a client certificate for a stage. Supported only for WebSocket API calls.
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6627,7 +6635,7 @@ components:
         EncryptionKey:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>'
+            - description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>'
         Environment:
           allOf:
             - $ref: '#/components/schemas/AwsCodeBuildProjectEnvironment'
@@ -6655,7 +6663,7 @@ components:
         Credential:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p>The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.</p> <note> <p>The credential can use the name of the credentials only if they exist in your current AWS Region. </p> </note>
+            - description: <p>The ARN or name of credentials created using AWS Secrets Manager.</p> <note> <p>The credential can use the name of the credentials only if they exist in your current AWS Region. </p> </note>
         CredentialProvider:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7043,6 +7051,10 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The private IP address that is associated with the Elastic IP address.
       description: Information about an Elastic IP address.
+    AwsEc2InstanceNetworkInterfacesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2InstanceNetworkInterfacesDetails'
     AwsEc2InstanceDetails:
       type: object
       properties:
@@ -7082,7 +7094,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
-      description: The details of an Amazon EC2 instance.
+        NetworkInterfaces:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2InstanceNetworkInterfacesList'
+            - description: The identifiers of the network interfaces for the EC2 instance. The details for each network interface are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.
+      description: The details of an EC2 instance.
+    AwsEc2InstanceNetworkInterfacesDetails:
+      type: object
+      properties:
+        NetworkInterfaceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the network interface. The details are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.
+      description: Identifies a network interface for the EC2 instance.
     AwsEc2NetworkAclAssociation:
       type: object
       properties:
@@ -7429,7 +7453,7 @@ components:
         UserId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The ID of an AWS account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another AWS. </p>'
+            - description: '<p>The ID of an AWS account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. </p>'
         VpcId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7579,6 +7603,838 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The current state of the VPC.
       description: Details about an EC2 VPC.
+    AwsEcsClusterClusterSettingsDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the setting.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value of the setting.
+      description: Indicates whether to enable CloudWatch Container Insights for the ECS cluster.
+    AwsEcsClusterClusterSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsClusterClusterSettingsDetails'
+    AwsEcsClusterConfigurationExecuteCommandConfigurationDetails:
+      type: object
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the KMS key that is used to encrypt the data between the local client and the container.
+        LogConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails'
+            - description: The log configuration for the results of the run command actions. Required if <code>Logging</code> is <code>NONE</code>.
+        Logging:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The log setting to use for redirecting logs for run command results.
+      description: Contains the run command configuration for the cluster.
+    AwsEcsClusterConfigurationDetails:
+      type: object
+      properties:
+        ExecuteCommandConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsClusterConfigurationExecuteCommandConfigurationDetails'
+            - description: Contains the run command configuration for the cluster.
+      description: The run command configuration for the cluster.
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails:
+      type: object
+      properties:
+        CloudWatchEncryptionEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to enable encryption on the CloudWatch logs.
+        CloudWatchLogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the CloudWatch log group to send the logs to.
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the S3 bucket to send logs to.
+        S3EncryptionEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to encrypt the logs that are sent to the S3 bucket.
+        S3KeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Identifies the folder in the S3 bucket to send the logs to.
+      description: The log configuration for the results of the run command actions.
+    AwsEcsClusterDefaultCapacityProviderStrategyDetails:
+      type: object
+      properties:
+        Base:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The minimum number of tasks to run on the specified capacity provider.
+        CapacityProvider:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the capacity provider.
+        Weight:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The relative percentage of the total number of tasks launched that should use the capacity provider.
+      description: The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.
+    AwsEcsClusterDefaultCapacityProviderStrategyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsClusterDefaultCapacityProviderStrategyDetails'
+    AwsEcsClusterDetails:
+      type: object
+      properties:
+        CapacityProviders:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The short name of one or more capacity providers to associate with the cluster.
+        ClusterSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsClusterClusterSettingsList'
+            - description: The setting to use to create the cluster. Specifically used to configure whether to enable CloudWatch Container Insights for the cluster.
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsClusterConfigurationDetails'
+            - description: The run command configuration for the cluster.
+        DefaultCapacityProviderStrategy:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsClusterDefaultCapacityProviderStrategyList'
+            - description: The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.
+      description: provides details about an ECS cluster.
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails:
+      type: object
+      properties:
+        Condition:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.
+        ContainerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the dependent container.
+      description: A dependency that is defined for container startup and shutdown.
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails:
+      type: object
+      properties:
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: '<p>The options to use to configure the log router.</p> <p>The valid option keys are as follows:</p> <ul> <li> <p> <code>enable-ecs-log-metadata</code>. The value can be <code>true</code> or <code>false</code>.</p> </li> <li> <p> <code>config-file-type</code>. The value can be <code>s3</code> or <code>file</code>.</p> </li> <li> <p> <code>config-file-value</code>. The value is either an S3 ARN or a file path.</p> </li> </ul>'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The log router to use. '
+      description: The FireLens configuration for the container. The configuration specifies and configures a log router for container logs.
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails:
+      type: object
+      properties:
+        Command:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The command that the container runs to determine whether it is healthy.
+        Interval:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The time period in seconds between each health check execution. The default value is 30 seconds.
+        Retries:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of times to retry a failed health check before the container is considered unhealthy. The default value is 3.
+        StartPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The optional grace period in seconds that allows containers time to bootstrap before failed health checks count towards the maximum number of retries.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The time period in seconds to wait for a health check to succeed before it is considered a failure. The default value is 5.
+      description: The container health check command and associated configuration parameters for the container.
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails:
+      type: object
+      properties:
+        Capabilities:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails'
+            - description: The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.
+        Devices:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList'
+            - description: The host devices to expose to the container.
+        InitProcessEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether to run an <code>init</code> process inside the container that forwards signals and reaps processes. '
+        MaxSwap:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total amount of swap memory (in MiB) that a container can use.
+        SharedMemorySize:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The value for the size (in MiB) of the <b>/dev/shm</b> volume.
+        Swappiness:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Configures the container''s memory swappiness behavior. Determines how aggressively pages are swapped. The higher the value, the more aggressive the swappiness. The default is 60.'
+        Tmpfs:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList'
+            - description: 'The container path, mount options, and size (in MiB) of the tmpfs mount.'
+      description: '&gt;Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.'
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails:
+      type: object
+      properties:
+        LogDriver:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The log driver to use for the container.
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: The configuration options to send to the log driver. Requires version 1.19 of the Docker Remote API or greater on your container instance.
+        SecretOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList'
+            - description: The secrets to pass to the log configuration.
+      description: The log configuration specification for the container.
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails:
+      type: object
+      properties:
+        CredentialsParameter:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the secret that contains the private repository credentials.
+      description: The private repository authentication credentials to use.
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsDetails:
+      type: object
+      properties:
+        Command:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The command that is passed to the container.
+        Cpu:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of CPU units reserved for the container.
+        DependsOn:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsDependsOnList'
+            - description: The dependencies that are defined for container startup and shutdown.
+        DisableNetworking:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to disable networking within the container.
+        DnsSearchDomains:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: A list of DNS search domains that are presented to the container.
+        DnsServers:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: A list of DNS servers that are presented to the container.
+        DockerLabels:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: A key-value map of labels to add to the container.
+        DockerSecurityOptions:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems.
+        EntryPoint:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The entry point that is passed to the container.
+        Environment:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList'
+            - description: The environment variables to pass to a container.
+        EnvironmentFiles:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList'
+            - description: A list of files containing the environment variables to pass to a container.
+        Essential:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the container is essential. All tasks must have at least one essential container.
+        ExtraHosts:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList'
+            - description: A list of hostnames and IP address mappings to append to the <b>/etc/hosts</b> file on the container.
+        FirelensConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails'
+            - description: The FireLens configuration for the container. Specifies and configures a log router for container logs.
+        HealthCheck:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails'
+            - description: The container health check command and associated configuration parameters for the container.
+        Hostname:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The hostname to use for the container.
+        Image:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The image used to start the container.
+        Interactive:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If set to true, then containerized applications can be deployed that require <code>stdin</code> or a <code>tty</code> to be allocated.'
+        Links:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: 'A list of links for the container in the form <code> <i>container_name</i>:<i>alias</i> </code>. Allows containers to communicate with each other without the need for port mappings.'
+        LinuxParameters:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails'
+            - description: 'Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.'
+        LogConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails'
+            - description: The log configuration specification for the container.
+        Memory:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The amount (in MiB) of memory to present to the container. If the container attempts to exceed the memory specified here, the container is shut down. The total amount of memory reserved for all containers within a task must be lower than the task memory value, if one is specified.'
+        MemoryReservation:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The soft limit (in MiB) of memory to reserve for the container.
+        MountPoints:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsMountPointsList'
+            - description: The mount points for the data volumes in the container.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the container.
+        PortMappings:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList'
+            - description: The list of port mappings for the container.
+        Privileged:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the container is given elevated privileges on the host container instance. The elevated privileges are similar to the root user.
+        PseudoTerminal:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allocate a TTY to the container.
+        ReadonlyRootFilesystem:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the container is given read-only access to its root file system.
+        RepositoryCredentials:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails'
+            - description: The private repository authentication credentials to use.
+        ResourceRequirements:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList'
+            - description: The type and amount of a resource to assign to a container. The only supported resource is a GPU.
+        Secrets:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsSecretsList'
+            - description: The secrets to pass to the container.
+        StartTimeout:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of seconds to wait before giving up on resolving dependencies for a container. '
+        StopTimeout:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of seconds to wait before the container is stopped if it doesn't shut down normally on its own.
+        SystemControls:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList'
+            - description: A list of namespaced kernel parameters to set in the container.
+        Ulimits:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsUlimitsList'
+            - description: 'A list of ulimits to set in the container. '
+        User:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The user to use inside the container.</p> <p>The value can use one of the following formats.</p> <ul> <li> <p> <code> <i>user</i> </code> </p> </li> <li> <p> <code> <i>user</i> </code>:<code> <i>group</i> </code> </p> </li> <li> <p> <code> <i>uid</i> </code> </p> </li> <li> <p> <code> <i>uid</i> </code>:<code> <i>gid</i> </code> </p> </li> <li> <p> <code> <i>user</i> </code>:<code> <i>gid</i> </code> </p> </li> <li> <p> <code> <i>uid</i> </code>:<code> <i>group</i> </code> </p> </li> </ul>'
+        VolumesFrom:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList'
+            - description: Data volumes to mount from another container.
+        WorkingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The working directory in which to run commands inside the container.
+      description: A container definition that describes a container in the task.
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the environment variable.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value of the environment variable.
+      description: An environment variable to pass to the container.
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of environment file.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the S3 object that contains the environment variable file.
+      description: A file that contain environment variables to pass to a container.
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails:
+      type: object
+      properties:
+        Hostname:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The hostname to use in the <b>/etc/hosts</b> entry.
+        IpAddress:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IP address to use in the <b>/etc/hosts</b> entry.
+      description: A hostname and IP address mapping to append to the <b>/etc/hosts</b> file on the container.
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails:
+      type: object
+      properties:
+        Add:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The Linux capabilities for the container that are added to the default configuration provided by Docker.
+        Drop:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The Linux capabilities for the container that are dropped from the default configuration provided by Docker.
+      description: The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails:
+      type: object
+      properties:
+        ContainerPath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path inside the container at which to expose the host device.
+        HostPath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path for the device on the host container instance.
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: 'The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and <code>mknod</code> for the device.'
+      description: A host device to expose to the container.
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails:
+      type: object
+      properties:
+        ContainerPath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The absolute file path where the tmpfs volume is to be mounted.
+        MountOptions:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The list of tmpfs volume mount options.
+        Size:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size (in MiB) of the tmpfs volume.
+      description: 'The container path, mount options, and size (in MiB) of a tmpfs mount.'
+    AwsEcsTaskDefinitionContainerDefinitionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails'
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the secret.
+        ValueFrom:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The secret to expose to the container.</p> <p>The value is either the full ARN of the Secrets Manager secret or the full ARN of the parameter in the Systems Manager Parameter Store.</p>
+      description: A secret to pass to the log configuration.
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails:
+      type: object
+      properties:
+        ContainerPath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path on the container to mount the host volume at.
+        ReadOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the container has read-only access to the volume.
+        SourceVolume:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the volume to mount. Must match the name of a volume listed in <code>VolumeDetails</code> for the task definition.
+      description: A mount point for the data volumes in the container.
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails:
+      type: object
+      properties:
+        ContainerPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port number on the container that is bound to the user-specified or automatically assigned host port.
+        HostPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port number on the container instance to reserve for the container.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The protocol used for the port mapping. The default is <code>tcp</code>.
+      description: A port mapping for the container.
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of resource to assign to a container.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The value for the specified resource type.</p> <p>For <code>GPU</code>, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container.</p> <p>For <code>InferenceAccelerator</code>, the value should match the <code>DeviceName</code> attribute of an entry in <code>InferenceAccelerators</code>.</p>'
+      description: A resource to assign to a container.
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the secret.
+        ValueFrom:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The secret to expose to the container. The value is either the full ARN of the Secrets Manager secret or the full ARN of the parameter in the Systems Manager Parameter Store.
+      description: A secret to pass to the container.
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails:
+      type: object
+      properties:
+        Namespace:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The namespaced kernel parameter for which to set a value.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value of the parameter.
+      description: A namespaced kernel parameter to set in the container.
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails:
+      type: object
+      properties:
+        HardLimit:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The hard limit for the ulimit type.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of the ulimit.
+        SoftLimit:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The soft limit for the ulimit type.
+      description: A ulimit to set in the container.
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails:
+      type: object
+      properties:
+        ReadOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the container has read-only access to the volume.
+        SourceContainer:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of another container within the same task definition from which to mount volumes.
+      description: A data volume to mount from another container.
+    AwsEcsTaskDefinitionInferenceAcceleratorsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionInferenceAcceleratorsDetails'
+    AwsEcsTaskDefinitionPlacementConstraintsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionPlacementConstraintsDetails'
+    AwsEcsTaskDefinitionProxyConfigurationDetails:
+      type: object
+      properties:
+        ContainerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the container that will serve as the App Mesh proxy.
+        ProxyConfigurationProperties:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList'
+            - description: 'The set of network configuration parameters to provide to the Container Network Interface (CNI) plugin, specified as key-value pairs.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The proxy type.
+      description: The configuration details for the App Mesh proxy.
+    AwsEcsTaskDefinitionVolumesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesDetails'
+    AwsEcsTaskDefinitionDetails:
+      type: object
+      properties:
+        ContainerDefinitions:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionContainerDefinitionsList'
+            - description: The container definitions that describe the containers that make up the task.
+        Cpu:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The number of CPU units used by the task.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the task execution role that grants the container agent permission to make API calls on behalf of the container user.
+        Family:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of a family that this task definition is registered to.
+        InferenceAccelerators:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionInferenceAcceleratorsList'
+            - description: The Elastic Inference accelerators to use for the containers in the task.
+        IpcMode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IPC resource namespace to use for the containers in the task.
+        Memory:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The amount (in MiB) of memory used by the task.
+        NetworkMode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Docker networking mode to use for the containers in the task.
+        PidMode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The process namespace to use for the containers in the task.
+        PlacementConstraints:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionPlacementConstraintsList'
+            - description: The placement constraint objects to use for tasks.
+        ProxyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionProxyConfigurationDetails'
+            - description: The configuration details for the App Mesh proxy.
+        RequiresCompatibilities:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The task launch types that the task definition was validated against.
+        TaskRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The short name or ARN of the IAM role that grants containers in the task permission to call AWS API operations on your behalf.
+        Volumes:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesList'
+            - description: The data volume definitions for the task.
+      description: details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.
+    AwsEcsTaskDefinitionInferenceAcceleratorsDetails:
+      type: object
+      properties:
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Elastic Inference accelerator device name.
+        DeviceType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Elastic Inference accelerator type to use.
+      description: An Elastic Inference accelerator to use for the containers in the task.
+    AwsEcsTaskDefinitionPlacementConstraintsDetails:
+      type: object
+      properties:
+        Expression:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A cluster query language expression to apply to the constraint.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of constraint.
+      description: A placement constraint object to use for tasks.
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails'
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the property.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value of the property.
+      description: A network configuration parameter to provide to the Container Network Interface (CNI) plugin.
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails:
+      type: object
+      properties:
+        Autoprovision:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to create the Docker volume automatically if it does not already exist.
+        Driver:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Docker volume driver to use.
+        DriverOpts:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: A map of Docker driver-specific options that are passed through.
+        Labels:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: Custom metadata to add to the Docker volume.
+        Scope:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops.
+      description: Information about a Docker volume.
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails:
+      type: object
+      properties:
+        AuthorizationConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails'
+            - description: The authorization configuration details for the Amazon EFS file system.
+        FilesystemId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon EFS file system identifier to use.
+        RootDirectory:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The directory within the Amazon EFS file system to mount as the root directory inside the host.
+        TransitEncryption:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'Whether to enable encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. '
+        TransitEncryptionPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server.
+      description: Information about the Amazon Elastic File System file system that is used for task storage.
+    AwsEcsTaskDefinitionVolumesHostDetails:
+      type: object
+      properties:
+        SourcePath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path on the host container instance that is presented to the container.
+      description: Information about a bind mount host volume.
+    AwsEcsTaskDefinitionVolumesDetails:
+      type: object
+      properties:
+        DockerVolumeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails'
+            - description: Information about a Docker volume.
+        EfsVolumeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails'
+            - description: Information about the Amazon Elastic File System file system that is used for task storage.
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesHostDetails'
+            - description: Information about a bind mount host volume.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the data volume.
+      description: A data volume to mount from another container.
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails:
+      type: object
+      properties:
+        AccessPointId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon EFS access point identifier to use.
+        Iam:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Whether to use the Amazon ECS task IAM role defined in a task definition when mounting the Amazon EFS file system.
+      description: <p/>
     AwsElasticBeanstalkEnvironmentEnvironmentLinks:
       type: array
       items:
@@ -7727,6 +8583,18 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
       description: Details about the configuration for encryption at rest.
+    AwsElasticsearchDomainLogPublishingOptions:
+      type: object
+      properties:
+        IndexSlowLogs:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticsearchDomainLogPublishingOptionsLogConfig'
+            - description: Configures the Elasticsearch index logs publishing.
+        SearchSlowLogs:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticsearchDomainLogPublishingOptionsLogConfig'
+            - description: Configures the Elasticsearch search slow log publishing.
+      description: configures the CloudWatch Logs to publish for the Elasticsearch domain.
     AwsElasticsearchDomainNodeToNodeEncryptionOptions:
       type: object
       properties:
@@ -7735,6 +8603,38 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether node-to-node encryption is enabled.
       description: Details about the configuration for node-to-node encryption.
+    AwsElasticsearchDomainServiceSoftwareOptions:
+      type: object
+      properties:
+        AutomatedUpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The epoch time when the deployment window closes for required updates. After this time, Amazon Elasticsearch Service schedules the software upgrade automatically.'
+        Cancellable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether a request to update the domain can be canceled.
+        CurrentVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version of the service software that is currently installed on the domain.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A more detailed description of the service software status.
+        NewVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The most recent version of the service software.
+        UpdateAvailable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether a service software update is available for the domain.
+        UpdateStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of the service software update.
+      description: Information about the state of the domain relative to the latest service software.
     AwsElasticsearchDomainVPCOptions:
       type: object
       properties:
@@ -7790,15 +8690,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainEncryptionAtRestOptions'
             - description: Details about the configuration for encryption at rest.
+        LogPublishingOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticsearchDomainLogPublishingOptions'
+            - description: Configures the CloudWatch Logs to publish for the Elasticsearch domain.
         NodeToNodeEncryptionOptions:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainNodeToNodeEncryptionOptions'
             - description: Details about the configuration for node-to-node encryption.
+        ServiceSoftwareOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticsearchDomainServiceSoftwareOptions'
+            - description: Information about the status of a domain relative to the latest service software.
         VPCOptions:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainVPCOptions'
             - description: Information that Amazon ES derives based on <code>VPCOptions</code> for the domain.
       description: Information about an Elasticsearch domain.
+    AwsElasticsearchDomainLogPublishingOptionsLogConfig:
+      type: object
+      properties:
+        CloudWatchLogsLogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the CloudWatch Logs group to publish the logs to.
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the log publishing is enabled.
+      description: The log configuration.
     AwsElbAppCookieStickinessPolicy:
       type: object
       properties:
@@ -8177,7 +9097,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - deprecated: true
-              description: '<p>The user associated with the IAM access key related to a finding.</p> <p>The <code>UserName</code> parameter has been replaced with the <code>PrincipalName</code> parameter because access keys can also be assigned to principals that are not IAM users.</p>This field is deprecated, use PrincipalName instead.'
+              description: '<p>The user associated with the IAM access key related to a finding.</p> <p>The <code>UserName</code> parameter has been replaced with the <code>PrincipalName</code> parameter because access keys can also be assigned to principals that are not IAM users.</p>This filter is deprecated. Instead, use PrincipalName.'
         Status:
           allOf:
             - $ref: '#/components/schemas/AwsIamAccessKeyStatus'
@@ -8612,7 +9532,7 @@ components:
         TargetArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+            - description: The ARN of an Amazon SQS queue or Amazon SNS topic.
       description: The dead-letter queue for failed asynchronous invocations.
     AwsLambdaFunctionEnvironment:
       type: object
@@ -8653,7 +9573,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ID of the VPC.
-      description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see VPC Settings.'
+      description: The VPC security groups and subnets that are attached to a Lambda function.
     AwsLambdaFunctionDetails:
       type: object
       properties:
@@ -8700,7 +9620,7 @@ components:
         MemorySize:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The memory that's allocated to the function.
+            - description: The memory that is allocated to the function.
         RevisionId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -8741,14 +9661,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The error message.
-      description: Error messages for environment variables that couldn't be applied.
+      description: Error messages for environment variables that could not be applied.
     AwsLambdaFunctionLayer:
       type: object
       properties:
         Arn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The Amazon Resource Name (ARN) of the function layer.
+            - description: The ARN of the function layer.
         CodeSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -9090,7 +10010,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
+            - description: The ARN of the IAM role that is associated with the DB instance.
         FeatureName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10150,6 +11070,182 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.
       description: provides information about the Amazon S3 Public Access Block configuration for accounts.
+    AwsS3BucketBucketLifecycleConfigurationRulesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesDetails'
+    AwsS3BucketBucketLifecycleConfigurationDetails:
+      type: object
+      properties:
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesList'
+            - description: The lifecycle rules.
+      description: The lifecycle configuration for the objects in the S3 bucket.
+    AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails:
+      type: object
+      properties:
+        DaysAfterInitiation:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of days after which Amazon S3 cancels an incomplete multipart upload.
+      description: Information about what Amazon S3 does when a multipart upload is incomplete.
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails:
+      type: object
+      properties:
+        Predicate:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails'
+            - description: The configuration for the filter.
+      description: Identifies the objects that a rule applies to.
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails'
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails'
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails:
+      type: object
+      properties:
+        AbortIncompleteMultipartUpload:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails'
+            - description: 'How Amazon S3 responds when a multipart upload is incomplete. Specifically, provides a number of days before Amazon S3 cancels the entire upload.'
+        ExpirationDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The date when objects are moved or deleted.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        ExpirationInDays:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The length in days of the lifetime for objects that are subject to the rule.
+        ExpiredObjectDeleteMarker:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether Amazon S3 removes a delete marker that has no noncurrent versions. If set to <code>true</code>, the delete marker is expired. If set to <code>false</code>, the policy takes no action.</p> <p>If you provide <code>ExpiredObjectDeleteMarker</code>, you cannot provide <code>ExpirationInDays</code> or <code>ExpirationDate</code>.</p>'
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails'
+            - description: Identifies the objects that a rule applies to.
+        ID:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The unique identifier of the rule.
+        NoncurrentVersionExpirationInDays:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of days that an object is noncurrent before Amazon S3 can perform the associated action.
+        NoncurrentVersionTransitions:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList'
+            - description: Transition rules that describe when noncurrent objects transition to a specified storage class.
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A prefix that identifies one or more objects that the rule applies to.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The current status of the rule. Indicates whether the rule is currently being applied.
+        Transitions:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList'
+            - description: Transition rules that indicate when objects transition to a specified storage class.
+      description: Configuration for a lifecycle rule.
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails:
+      type: object
+      properties:
+        Operands:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList'
+            - description: The values to use for the filter.
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A prefix filter.
+        Tag:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails'
+            - description: A tag filter.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Whether to use <code>AND</code> or <code>OR</code> to join the operands.
+      description: The configuration for the filter.
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails'
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The tag key.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The tag value
+      description: A tag filter.
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The tag key.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The tag value.
+      description: A tag that is assigned to matching objects.
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails:
+      type: object
+      properties:
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Prefix text for matching objects.
+        Tag:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails'
+            - description: A tag that is assigned to matching objects.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of filter value.
+      description: A value to use for the filter.
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails:
+      type: object
+      properties:
+        Days:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of days that an object is noncurrent before Amazon S3 can perform the associated action.
+        StorageClass:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The class of storage to change the object to after the object is noncurrent for the specified number of days.
+      description: A transition rule that describes when noncurrent objects transition to a specified storage class.
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails:
+      type: object
+      properties:
+        Date:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>A date on which to transition objects to the specified storage class. If you provide <code>Date</code>, you cannot provide <code>Days</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Days:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of days after which to transition the object to the specified storage class. If you provide <code>Days</code>, you cannot provide <code>Date</code>.'
+        StorageClass:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The storage class to transition the object to.
+      description: A rule for when objects transition to specific storage classes.
     AwsS3BucketServerSideEncryptionConfiguration:
       type: object
       properties:
@@ -10177,6 +11273,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionConfiguration'
             - description: The encryption rules that are applied to the S3 bucket.
+        BucketLifecycleConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketBucketLifecycleConfigurationDetails'
+            - description: The lifecycle configuration for objects in the S3 bucket.
         PublicAccessBlockConfiguration:
           allOf:
             - $ref: '#/components/schemas/AwsS3AccountPublicAccessBlockDetails'
@@ -10438,7 +11538,7 @@ components:
         - IN_PROGRESS
         - DEFERRED
         - RESOLVED
-      description: 'This field is deprecated, use Workflow.Status instead.'
+      description: 'This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.'
     Workflow:
       type: object
       properties:
@@ -10894,7 +11994,8 @@ components:
         Keyword:
           allOf:
             - $ref: '#/components/schemas/KeywordFilterList'
-            - description: A keyword for a finding.
+            - deprecated: true
+              description: A keyword for a finding.The Keyword property is deprecated.
         FindingProviderFieldsConfidence:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
@@ -10955,7 +12056,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The subscription's owner.
-      description: A wrapper type for the topic's Amazon Resource Name (ARN).
+      description: A wrapper type for the topic's ARN.
     AwsSnsTopicSubscription:
       type: object
       properties:
@@ -10986,7 +12087,7 @@ components:
         DeadLetterTargetArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of <code>maxReceiveCount</code> is exceeded. '
+            - description: 'The ARN of the dead-letter queue to which Amazon SQS moves messages after the value of <code>maxReceiveCount</code> is exceeded. '
       description: Data about a queue.
     AwsSsmComplianceSummary:
       type: object
@@ -11466,7 +12567,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the custom action target.
+            - description: The name of the custom action target. Can contain up to 20 characters.
         Description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -11474,7 +12575,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID for the custom action target.
+            - description: The ID for the custom action target. Can contain up to 20 alphanumeric characters.
     CreateInsightRequest:
       type: object
       required:
@@ -12422,7 +13523,7 @@ components:
         AwsEc2Instance:
           allOf:
             - $ref: '#/components/schemas/AwsEc2InstanceDetails'
-            - description: Details about an Amazon EC2 instance related to a finding.
+            - description: Details about an EC2 instance related to a finding.
         AwsEc2NetworkInterface:
           allOf:
             - $ref: '#/components/schemas/AwsEc2NetworkInterfaceDetails'
@@ -12579,6 +13680,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbClusterDetails'
             - description: Details about an Amazon RDS database cluster.
+        AwsEcsCluster:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsClusterDetails'
+            - description: Details about an ECS cluster.
+        AwsEcsTaskDefinition:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsTaskDefinitionDetails'
+            - description: Details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.
         Container:
           allOf:
             - $ref: '#/components/schemas/ContainerDetails'

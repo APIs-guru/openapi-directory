@@ -209,6 +209,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '494':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       requestBody:
         required: true
         content:
@@ -1623,6 +1629,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SSESpecification'
             - description: Represents the settings used to enable server-side encryption on the cluster.
+        ClusterEndpointEncryptionType:
+          allOf:
+            - $ref: '#/components/schemas/ClusterEndpointEncryptionType'
+            - description: '<p>The type of encryption the cluster''s endpoint should support. Values are:</p> <ul> <li> <p> <code>NONE</code> for no encryption</p> </li> <li> <p> <code>TLS</code> for Transport Layer Security</p> </li> </ul>'
     ClusterAlreadyExistsFault: {}
     InvalidClusterStateFault: {}
     InsufficientClusterCapacityFault: {}
@@ -1637,6 +1647,7 @@ components:
     ServiceLinkedRoleNotFoundFault: {}
     InvalidParameterValueException: {}
     InvalidParameterCombinationException: {}
+    ServiceQuotaExceededException: {}
     CreateParameterGroupResponse:
       type: object
       properties:
@@ -2105,7 +2116,7 @@ components:
         NotificationTopicStatus:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The current state of the topic.
+            - description: The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.
         ParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2135,7 +2146,7 @@ components:
         ParameterNameValues:
           allOf:
             - $ref: '#/components/schemas/ParameterNameValueList'
-            - description: An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.
+            - description: '<p>An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.</p> <note> <p> <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p> </note>'
     UpdateSubnetGroupResponse:
       type: object
       properties:
@@ -2186,7 +2197,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The port number that applications should use to connect to the endpoint.
-      description: 'Represents the information required for client programs to connect to the configuration endpoint for a DAX cluster, or to an individual node within the cluster.'
+        URL:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL that applications should use to connect to the endpoint. The default ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.
+      description: Represents the information required for client programs to connect to the endpoint for a DAX cluster.
     NodeIdentifierList:
       type: array
       items:
@@ -2205,7 +2220,7 @@ components:
         TopicStatus:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The current state of the topic.
+            - description: The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.
       description: Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
     SecurityGroupMembershipList:
       type: array
@@ -2235,6 +2250,11 @@ components:
             - $ref: '#/components/schemas/SSEStatus'
             - description: '<p>The current state of server-side encryption:</p> <ul> <li> <p> <code>ENABLING</code> - Server-side encryption is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Server-side encryption is enabled.</p> </li> <li> <p> <code>DISABLING</code> - Server-side encryption is being disabled.</p> </li> <li> <p> <code>DISABLED</code> - Server-side encryption is disabled.</p> </li> </ul>'
       description: The description of the server-side encryption status on the specified DAX cluster.
+    ClusterEndpointEncryptionType:
+      type: string
+      enum:
+        - NONE
+        - TLS
     Cluster:
       type: object
       properties:
@@ -2269,7 +2289,7 @@ components:
         ClusterDiscoveryEndpoint:
           allOf:
             - $ref: '#/components/schemas/Endpoint'
-            - description: 'The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
+            - description: 'The endpoint for this DAX cluster, consisting of a DNS name, a port number, and a URL. Applications should use the URL to configure the DAX client to find their cluster.'
         NodeIdsToRemove:
           allOf:
             - $ref: '#/components/schemas/NodeIdentifierList'
@@ -2306,6 +2326,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SSEDescription'
             - description: The description of the server-side encryption status on the specified DAX cluster.
+        ClusterEndpointEncryptionType:
+          allOf:
+            - $ref: '#/components/schemas/ClusterEndpointEncryptionType'
+            - description: '<p>The type of encryption supported by the cluster''s endpoint. Values are:</p> <ul> <li> <p> <code>NONE</code> for no encryption</p> <p> <code>TLS</code> for Transport Layer Security</p> </li> </ul>'
       description: Contains all of the attributes of a specific DAX cluster.
     ClusterList:
       type: array

@@ -605,7 +605,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: false
-          description: <p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p> <p/>
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -924,7 +924,7 @@ paths:
   '/accounts/{accountId}/users#operation=unsuspend':
     post:
       operationId: BatchUnsuspendUser
-      description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p> Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored. </p>'
+      description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html"> Managing Your Amazon Chime Accounts </a> in the account types, in the <i>Amazon Chime Administration Guide</i>. </p> <p> Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored. </p>'
       responses:
         '200':
           description: Success
@@ -2036,7 +2036,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAttendees
-      description: ' Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: ' Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
       responses:
         '200':
           description: Success
@@ -10905,7 +10905,7 @@ paths:
   '/accounts/{accountId}/settings':
     get:
       operationId: GetAccountSettings
-      description: 'Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+      description: 'Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>. '
       responses:
         '200':
           description: Success
@@ -11725,7 +11725,7 @@ paths:
   '/accounts/{accountId}/retention-settings':
     get:
       operationId: GetRetentionSettings
-      description: ' Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i> . '
+      description: ' Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>. '
       responses:
         '200':
           description: Success
@@ -12100,7 +12100,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateUser
-      description: ' Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action. '
+      description: 'Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action.'
       responses:
         '200':
           description: Success
@@ -19685,6 +19685,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UriType'
             - description: The turn control URL.
+        EventIngestionUrl:
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The event ingestion URL.
       description: A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.
     MeetingTagKeyList:
       type: array

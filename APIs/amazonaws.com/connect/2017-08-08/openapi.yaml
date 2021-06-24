@@ -1433,7 +1433,7 @@ paths:
   '/quick-connects/{InstanceId}':
     put:
       operationId: CreateQuickConnect
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a quick connect for the specified Amazon Connect instance.</p>
+      description: Creates a quick connect for the specified Amazon Connect instance.
       responses:
         '200':
           description: Success
@@ -1510,7 +1510,7 @@ paths:
                 Description:
                   description: The description of the quick connect.
                   type: string
-                  minLength: 0
+                  minLength: 1
                   maxLength: 250
                 QuickConnectConfig:
                   description: Contains configuration settings for a quick connect.
@@ -1549,7 +1549,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListQuickConnects
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Provides information about the quick connects for the specified Amazon Connect instance. </p>
+      description: 'Provides information about the quick connects for the specified Amazon Connect instance. '
       responses:
         '200':
           description: Success
@@ -2282,7 +2282,7 @@ paths:
   '/quick-connects/{InstanceId}/{QuickConnectId}':
     delete:
       operationId: DeleteQuickConnect
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes a quick connect.</p>
+      description: Deletes a quick connect.
       responses:
         '200':
           description: Success
@@ -2341,7 +2341,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeQuickConnect
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the quick connect.</p>
+      description: Describes the quick connect.
       responses:
         '200':
           description: Success
@@ -7329,7 +7329,7 @@ paths:
   '/quick-connects/{InstanceId}/{QuickConnectId}/config':
     post:
       operationId: UpdateQuickConnectConfig
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the configuration settings for the specified quick connect.</p>
+      description: Updates the configuration settings for the specified quick connect.
       responses:
         '200':
           description: Success
@@ -7418,7 +7418,7 @@ paths:
   '/quick-connects/{InstanceId}/{QuickConnectId}/name':
     post:
       operationId: UpdateQuickConnectName
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least <code>Name</code> or <code>Description</code> must be provided.</p>
+      description: Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least <code>Name</code> or <code>Description</code> must be provided.
       responses:
         '200':
           description: Success
@@ -8435,7 +8435,7 @@ components:
         QuickConnectId:
           allOf:
             - $ref: '#/components/schemas/QuickConnectId'
-            - description: The identifier for the quick connect.
+            - description: 'The identifier for the quick connect. '
     QuickConnectType:
       type: string
       enum:
@@ -8506,7 +8506,7 @@ components:
         Concurrency:
           allOf:
             - $ref: '#/components/schemas/Concurrency'
-            - description: '<p>The number of contacts an agent can have on a channel simultaneously.</p> <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p> <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 5.</p> <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>'
+            - description: '<p>The number of contacts an agent can have on a channel simultaneously.</p> <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p> <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p> <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>'
       description: 'Contains information about which channels are supported, and how many contacts an agent can have on a channel simultaneously.'
     CreateUseCaseResponse:
       type: object
@@ -9909,7 +9909,7 @@ components:
       maxLength: 127
     QuickConnectDescription:
       type: string
-      minLength: 0
+      minLength: 1
       maxLength: 250
     QuickConnectConfig:
       type: object
@@ -11912,6 +11912,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuickConnectConfig'
             - description: Information about the configuration settings for the quick connect.
+    UpdateQuickConnectDescription:
+      type: string
+      minLength: 0
+      maxLength: 250
     UpdateQuickConnectNameRequest:
       type: object
       title: UpdateQuickConnectNameRequest
@@ -11922,7 +11926,7 @@ components:
             - description: The name of the quick connect.
         Description:
           allOf:
-            - $ref: '#/components/schemas/QuickConnectDescription'
+            - $ref: '#/components/schemas/UpdateQuickConnectDescription'
             - description: The description of the quick connect.
     UpdateRoutingProfileConcurrencyRequest:
       type: object

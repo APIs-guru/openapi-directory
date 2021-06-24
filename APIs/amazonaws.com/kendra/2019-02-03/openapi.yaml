@@ -5118,7 +5118,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
+            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. If you use SharePoint Sever, you also need to provide the sever domain name as part of the credentials. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
         CrawlAttachments:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -5149,6 +5149,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'A Boolean value that specifies whether local groups are disabled (<code>True</code>) or enabled (<code>False</code>). '
+        SslCertificateS3Path:
+          $ref: '#/components/schemas/S3Path'
       description: Provides configuration information for connecting to a Microsoft SharePoint data source.
     DatabaseConfiguration:
       type: object
@@ -6790,6 +6792,8 @@ components:
     SharePointVersion:
       type: string
       enum:
+        - SHAREPOINT_2013
+        - SHAREPOINT_2016
         - SHAREPOINT_ONLINE
     SharePointUrlList:
       type: array
