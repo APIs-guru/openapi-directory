@@ -310,7 +310,7 @@ paths:
                   description: The name of the backend environment.
                   type: string
                 resourceConfig:
-                  description: 'The resource configuration for the data model, configured as a part of the Amplify project.'
+                  description: 'The resource config for the data model, configured as a part of the Amplify project.'
                   type: object
                   properties:
                     AdditionalAuthTypes:
@@ -324,7 +324,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: apiName
-                          description: 'The API name used to interact with the data model, configured as a part of the Amplify project.'
+                          description: 'The API name used to interact with the data model, configured as a part of the amplify project.'
                     ConflictResolution:
                       allOf:
                         - $ref: '#/components/schemas/BackendAPIConflictResolution'
@@ -431,7 +431,7 @@ paths:
                         - $ref: '#/components/schemas/CreateBackendAuthIdentityPoolConfig'
                         - xml:
                             name: identityPoolConfigs
-                          description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.'
+                          description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.'
                     Service:
                       allOf:
                         - $ref: '#/components/schemas/Service'
@@ -443,7 +443,7 @@ paths:
                         - $ref: '#/components/schemas/CreateBackendAuthUserPoolConfig'
                         - xml:
                             name: userPoolConfigs
-                          description: 'Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.'
+                          description: 'Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.'
                 resourceName:
                   description: The name of this resource.
                   type: string
@@ -679,7 +679,7 @@ paths:
                 - resourceName
               properties:
                 resourceConfig:
-                  description: 'The resource configuration for the data model, configured as a part of the Amplify project.'
+                  description: 'The resource config for the data model, configured as a part of the Amplify project.'
                   type: object
                   properties:
                     AdditionalAuthTypes:
@@ -693,7 +693,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: apiName
-                          description: 'The API name used to interact with the data model, configured as a part of the Amplify project.'
+                          description: 'The API name used to interact with the data model, configured as a part of the amplify project.'
                     ConflictResolution:
                       allOf:
                         - $ref: '#/components/schemas/BackendAPIConflictResolution'
@@ -1039,7 +1039,7 @@ paths:
                 - resourceName
               properties:
                 resourceConfig:
-                  description: 'The resource configuration for the data model, configured as a part of the Amplify project.'
+                  description: 'The resource config for the data model, configured as a part of the Amplify project.'
                   type: object
                   properties:
                     AdditionalAuthTypes:
@@ -1053,7 +1053,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: apiName
-                          description: 'The API name used to interact with the data model, configured as a part of the Amplify project.'
+                          description: 'The API name used to interact with the data model, configured as a part of the amplify project.'
                     ConflictResolution:
                       allOf:
                         - $ref: '#/components/schemas/BackendAPIConflictResolution'
@@ -1160,7 +1160,7 @@ paths:
   '/backend/{appId}/auth/{backendEnvironmentName}/details':
     post:
       operationId: GetBackendAuth
-      description: Gets backend auth details.
+      description: Gets a backend auth details.
       responses:
         '200':
           description: Success
@@ -1348,7 +1348,7 @@ paths:
               type: object
               properties:
                 operation:
-                  description: Filters the list of response objects to include only those with the specified operation name.
+                  description: Filters the list of response objects to only include those with the specified operation name.
                   type: string
                 status:
                   description: Filters the list of response objects to include only those with the specified status.
@@ -1401,6 +1401,85 @@ paths:
           description: The session ID.
           schema:
             type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/backend/{appId}/auth/{backendEnvironmentName}/import':
+    post:
+      operationId: ImportBackendAuth
+      description: Imports an existing backend authentication resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportBackendAuthResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The app ID.
+          schema:
+            type: string
+        - name: backendEnvironmentName
+          in: path
+          required: true
+          description: The name of the backend environment.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nativeClientId
+                - userPoolId
+                - webClientId
+              properties:
+                identityPoolId:
+                  description: The ID of the Amazon Cognito identity pool.
+                  type: string
+                nativeClientId:
+                  description: The ID of the Amazon Cognito native client.
+                  type: string
+                userPoolId:
+                  description: The ID of the Amazon Cognito user pool.
+                  type: string
+                webClientId:
+                  description: The ID of the Amazon Cognito web client.
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1564,7 +1643,7 @@ paths:
   '/backend/{appId}/config/remove':
     post:
       operationId: RemoveBackendConfig
-      description: Removes the AWS resources that are required to access the Amplify Admin UI.
+      description: Removes the AWS resources required to access the Amplify Admin UI.
       responses:
         '200':
           description: Success
@@ -1669,7 +1748,7 @@ paths:
                 - resourceName
               properties:
                 resourceConfig:
-                  description: 'The resource configuration for the data model, configured as a part of the Amplify project.'
+                  description: 'The resource config for the data model, configured as a part of the Amplify project.'
                   type: object
                   properties:
                     AdditionalAuthTypes:
@@ -1683,7 +1762,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: apiName
-                          description: 'The API name used to interact with the data model, configured as a part of the Amplify project.'
+                          description: 'The API name used to interact with the data model, configured as a part of the amplify project.'
                     ConflictResolution:
                       allOf:
                         - $ref: '#/components/schemas/BackendAPIConflictResolution'
@@ -1792,7 +1871,7 @@ paths:
                         - $ref: '#/components/schemas/UpdateBackendAuthIdentityPoolConfig'
                         - xml:
                             name: identityPoolConfigs
-                          description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.'
+                          description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.'
                     Service:
                       allOf:
                         - $ref: '#/components/schemas/Service'
@@ -1804,7 +1883,7 @@ paths:
                         - $ref: '#/components/schemas/UpdateBackendAuthUserPoolConfig'
                         - xml:
                             name: userPoolConfigs
-                          description: 'Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.'
+                          description: 'Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.'
                 resourceName:
                   description: The name of this resource.
                   type: string
@@ -1819,7 +1898,7 @@ paths:
   '/backend/{appId}/config/update':
     post:
       operationId: UpdateBackendConfig
-      description: Updates the AWS resources that are required to access the Amplify Admin UI.
+      description: Updates the AWS resources required to access the Amplify Admin UI.
       responses:
         '200':
           description: Success
@@ -1874,7 +1953,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: aws_cognito_identity_pool_id
-                          description: The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.
+                          description: The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.
                     AwsCognitoRegion:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -1973,7 +2052,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2016,7 +2095,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2055,7 +2134,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2089,7 +2168,7 @@ components:
             - xml:
                 name: resolutionStrategy
               description: The strategy for conflict resolution.
-      description: Describes the conflict resolution configuration for the data model configured in your Amplify project.
+      description: Describes the conflict resolution configuration for your data model configured in your Amplify project.
     BackendAPIAuthType:
       type: object
       properties:
@@ -2126,7 +2205,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2161,7 +2240,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: identityPoolName
-              description: Name of the identity pool used for authorization.
+              description: Name of the Amazon Cognito identity pool used for authorization.
         UnauthenticatedLogin:
           allOf:
             - $ref: '#/components/schemas/__boolean'
@@ -2191,7 +2270,7 @@ components:
             - $ref: '#/components/schemas/CreateBackendAuthMFAConfig'
             - xml:
                 name: mfa
-              description: Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
+              description: Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
         OAuth:
           allOf:
             - $ref: '#/components/schemas/CreateBackendAuthOAuthConfig'
@@ -2209,13 +2288,13 @@ components:
             - $ref: '#/components/schemas/ListOfRequiredSignUpAttributesElement'
             - xml:
                 name: requiredSignUpAttributes
-              description: The required attributes to sign up new users in the Amazon Cognito user pool.
+              description: The required attributes to sign up new users in the user pool.
         SignInMethod:
           allOf:
             - $ref: '#/components/schemas/SignInMethod'
             - xml:
                 name: signInMethod
-              description: Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.
+              description: 'Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.'
         UserPoolName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2297,7 +2376,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2336,7 +2415,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2375,7 +2454,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2423,7 +2502,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2450,7 +2529,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: amplifyMetaConfig
-              description: A stringified version of the current configurations for your Amplify project.
+              description: A stringified version of the current configs for your Amplify project.
         AppId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2501,7 +2580,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         ResourceConfig:
           allOf:
             - $ref: '#/components/schemas/BackendAPIResourceConfig'
@@ -2522,7 +2601,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: models
-              description: Stringified JSON of the DataStore model.
+              description: Stringified JSON of the datastore model.
         Status:
           allOf:
             - $ref: '#/components/schemas/Status'
@@ -2549,7 +2628,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         ResourceConfig:
           allOf:
             - $ref: '#/components/schemas/CreateBackendAuthResourceConfig'
@@ -2588,7 +2667,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2640,6 +2719,45 @@ components:
             - xml:
                 name: ttl
               description: The expiry time for the one-time generated token code.
+    ImportBackendAuthResponse:
+      type: object
+      properties:
+        AppId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: appId
+              description: The app ID.
+        BackendEnvironmentName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: backendEnvironmentName
+              description: The name of the backend environment.
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: error
+              description: 'If the request fails, this error is returned.'
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: jobId
+              description: The ID for the job.
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operation
+              description: The name of the operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: status
+              description: The current status of the request.
     ListBackendJobsResponse:
       type: object
       properties:
@@ -2669,7 +2787,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2696,7 +2814,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
     UpdateBackendAPIResponse:
       type: object
       properties:
@@ -2717,7 +2835,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2756,7 +2874,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2783,7 +2901,7 @@ components:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: unauthenticatedLogin
-              description: A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.
+              description: A boolean value which can be set to allow or disallow guest-level authorization into your Amplify app.
       description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.'
     UpdateBackendAuthUserPoolConfig:
       type: object
@@ -2799,7 +2917,7 @@ components:
             - $ref: '#/components/schemas/UpdateBackendAuthMFAConfig'
             - xml:
                 name: mfa
-              description: Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
+              description: Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
         OAuth:
           allOf:
             - $ref: '#/components/schemas/UpdateBackendAuthOAuthConfig'
@@ -2812,7 +2930,7 @@ components:
             - xml:
                 name: passwordPolicy
               description: 'Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.'
-      description: Describes the Amazon Cognito user pool configuration to configure the authorization resource for your Amplify project on an update.
+      description: Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.
     UpdateBackendConfigResponse:
       type: object
       properties:
@@ -2833,7 +2951,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         LoginAuthConfig:
           allOf:
             - $ref: '#/components/schemas/LoginAuthConfigReqObj'
@@ -2866,7 +2984,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2902,19 +3020,19 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: cognitoUserPoolId
-              description: 'The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.'
+              description: 'The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.'
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: description
-              description: 'The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.'
+              description: 'The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.'
         ExpirationTime:
           allOf:
             - $ref: '#/components/schemas/__double'
             - xml:
                 name: expirationTime
-              description: 'The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.'
+              description: 'The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.'
         OpenIDAuthTTL:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2926,7 +3044,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: openIDClientId
-              description: 'The clientID for openID, if openID is used as an authentication setting to access your data models.'
+              description: 'The clientID for openID, if openID was used as an authentication setting to access your data models.'
         OpenIDIatTTL:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2938,13 +3056,13 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: openIDIssueURL
-              description: 'The openID issuer URL, if openID is used as an authentication setting to access your data models.'
+              description: 'The openID issuer URL, if openID was used as an authentication setting to access your data models.'
         OpenIDProviderName:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: openIDProviderName
-              description: 'The openID provider name, if openID is used as an authentication mechanism to access your data models.'
+              description: 'The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.'
       description: The authentication settings for accessing provisioned data models in your Amplify project.
     Mode:
       type: string
@@ -2974,7 +3092,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: apiName
-              description: 'The API name used to interact with the data model, configured as a part of the Amplify project.'
+              description: 'The API name used to interact with the data model, configured as a part of the amplify project.'
         ConflictResolution:
           allOf:
             - $ref: '#/components/schemas/BackendAPIConflictResolution'
@@ -2999,7 +3117,7 @@ components:
             - xml:
                 name: transformSchema
               description: The definition of the data model in the annotated transform of the GraphQL schema.
-      description: 'The resource configuration for the data model, configured as a part of the Amplify project.'
+      description: 'The resource config for the data model, configured as a part of the Amplify project.'
     BackendAuthSocialProviderConfig:
       type: object
       properties:
@@ -3008,13 +3126,13 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: client_id
-              description: Describes the client_id that can be obtained from the third-party social federation provider.
+              description: Describes the client_id which can be obtained from the third-party social federation provider.
         ClientSecret:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: client_secret
-              description: Describes the client_secret that can be obtained from third-party social federation providers.
+              description: Describes the client_secret which can be obtained from third-party social federation providers.
       description: Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
     BackendJobRespObj:
       type: object
@@ -3045,7 +3163,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: error
-              description: 'If the request failed, this is the returned error.'
+              description: 'If the request fails, this error is returned.'
         JobId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3152,7 +3270,7 @@ components:
             - $ref: '#/components/schemas/DeliveryMethod'
             - xml:
                 name: deliveryMethod
-              description: Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.
+              description: Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
         EmailSettings:
           allOf:
             - $ref: '#/components/schemas/EmailSettings'
@@ -3198,14 +3316,14 @@ components:
         MFAMode:
           allOf:
             - $ref: '#/components/schemas/MFAMode'
-            - description: 'Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.'
+            - description: 'Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.'
         Settings:
           allOf:
             - $ref: '#/components/schemas/Settings'
             - xml:
                 name: settings
               description: Describes the configuration settings and methods for your Amplify app users to use MFA.
-      description: Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
+      description: Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
     OAuthGrantType:
       type: string
       enum:
@@ -3254,7 +3372,7 @@ components:
             - $ref: '#/components/schemas/ListOfOAuthScopesElement'
             - xml:
                 name: oAuthScopes
-              description: List of OAuth-related flows that allow your app users to authenticate from your Amplify app.
+              description: List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.
         RedirectSignInURIs:
           allOf:
             - $ref: '#/components/schemas/ListOf__string'
@@ -3266,13 +3384,13 @@ components:
             - $ref: '#/components/schemas/ListOf__string'
             - xml:
                 name: redirectSignOutURIs
-              description: Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+              description: Redirect URLs used by OAuth when a user signs out of an Amplify app.
         SocialProviderSettings:
           allOf:
             - $ref: '#/components/schemas/SocialProviderSettings'
             - xml:
                 name: socialProviderSettings
-              description: The settings for using social identity providers for access to your Amplify app.
+              description: The settings for using social providers to access your Amplify app.
       description: Creates the OAuth configuration for your Amplify project.
     ListOfAdditionalConstraintsElement:
       type: array
@@ -3295,7 +3413,7 @@ components:
             - xml:
                 name: minimumLength
               description: The minimum length of the password used to access the backend of your Amplify project.
-      description: The password policy configuration for the backend of your Amplify project.
+      description: The password policy configuration for the backend to your Amplify project.
     CreateBackendAuthResourceConfig:
       type: object
       required:
@@ -3314,7 +3432,7 @@ components:
             - $ref: '#/components/schemas/CreateBackendAuthIdentityPoolConfig'
             - xml:
                 name: identityPoolConfigs
-              description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.'
+              description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.'
         Service:
           allOf:
             - $ref: '#/components/schemas/Service'
@@ -3326,7 +3444,7 @@ components:
             - $ref: '#/components/schemas/CreateBackendAuthUserPoolConfig'
             - xml:
                 name: userPoolConfigs
-              description: 'Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.'
+              description: 'Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.'
       description: Defines the resource configuration when creating an auth resource in your Amplify project.
     CreateBackendAuthRequest:
       type: object
@@ -3412,7 +3530,7 @@ components:
             - $ref: '#/components/schemas/ResourceConfig'
             - xml:
                 name: resourceConfig
-              description: The resource configuration for the backend creation request.
+              description: The resource configuration for the create backend request.
         ResourceName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3546,6 +3664,39 @@ components:
       type: object
       title: GetTokenRequest
       properties: {}
+    ImportBackendAuthRequest:
+      type: object
+      required:
+        - UserPoolId
+        - NativeClientId
+        - WebClientId
+      title: ImportBackendAuthRequest
+      properties:
+        IdentityPoolId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: identityPoolId
+              description: The ID of the Amazon Cognito identity pool.
+        NativeClientId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nativeClientId
+              description: The ID of the Amazon Cognito native client.
+        UserPoolId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userPoolId
+              description: The ID of the Amazon Cognito user pool.
+        WebClientId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: webClientId
+              description: The ID of the Amazon Cognito web client.
+      description: The request body for ImportBackendAuth.
     __integerMin1Max25:
       type: integer
       minimum: 1
@@ -3597,7 +3748,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: aws_cognito_identity_pool_id
-              description: The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.
+              description: The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.
         AwsCognitoRegion:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3663,7 +3814,7 @@ components:
             - $ref: '#/components/schemas/DeliveryMethod'
             - xml:
                 name: deliveryMethod
-              description: Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.
+              description: Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
         EmailSettings:
           allOf:
             - $ref: '#/components/schemas/EmailSettings'
@@ -3717,13 +3868,13 @@ components:
             - $ref: '#/components/schemas/ListOf__string'
             - xml:
                 name: redirectSignInURIs
-              description: Redirect URLs that OAuth uses when a user signs in to an Amplify app.
+              description: Redirect URLs used by OAuth when a user signs in to an Amplify app.
         RedirectSignOutURIs:
           allOf:
             - $ref: '#/components/schemas/ListOf__string'
             - xml:
                 name: redirectSignOutURIs
-              description: Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+              description: Redirect URLs used by OAuth when a user signs out of an Amplify app.
         SocialProviderSettings:
           allOf:
             - $ref: '#/components/schemas/SocialProviderSettings'
@@ -3739,14 +3890,14 @@ components:
             - $ref: '#/components/schemas/ListOfAdditionalConstraintsElement'
             - xml:
                 name: additionalConstraints
-              description: 'Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.'
+              description: 'Describes additional constraints on password requirements to sign in to the auth resource, configured as a part of your Amplify project.'
         MinimumLength:
           allOf:
             - $ref: '#/components/schemas/__double'
             - xml:
                 name: minimumLength
               description: 'Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.'
-      description: Describes the password policy for your Amazon Cognito user pool that's configured as a part of your Amplify project.
+      description: Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.
     UpdateBackendAuthResourceConfig:
       type: object
       required:
@@ -3765,7 +3916,7 @@ components:
             - $ref: '#/components/schemas/UpdateBackendAuthIdentityPoolConfig'
             - xml:
                 name: identityPoolConfigs
-              description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.'
+              description: 'Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.'
         Service:
           allOf:
             - $ref: '#/components/schemas/Service'
@@ -3777,7 +3928,7 @@ components:
             - $ref: '#/components/schemas/UpdateBackendAuthUserPoolConfig'
             - xml:
                 name: userPoolConfigs
-              description: 'Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.'
+              description: 'Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.'
       description: Defines the resource configuration when updating an authentication resource in your Amplify project.
     UpdateBackendAuthRequest:
       type: object
@@ -3819,7 +3970,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: operation
-              description: Filters the list of response objects to include only those with the specified operation name.
+              description: Filters the list of response objects to only include those with the specified operation name.
         Status:
           allOf:
             - $ref: '#/components/schemas/__string'
