@@ -9937,6 +9937,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -9984,6 +9990,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       requestBody:
         content:
           text/xml:

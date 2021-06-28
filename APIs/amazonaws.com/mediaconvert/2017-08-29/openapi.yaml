@@ -2873,7 +2873,7 @@ components:
             - $ref: '#/components/schemas/VideoCodecSettings'
             - xml:
                 name: codecSettings
-              description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings'
+              description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings'
         ColorMetadata:
           allOf:
             - $ref: '#/components/schemas/ColorMetadata'
@@ -3554,12 +3554,10 @@ components:
       properties:
         Bitrate:
           allOf:
-            - $ref: '#/components/schemas/__integerMin384000Max768000'
+            - $ref: '#/components/schemas/__integerMin384000Max1024000'
             - xml:
                 name: bitrate
-              description: |-
-                Specify the average bitrate in bits per second.
-                Valid values: 384k, 448k, 640k, 768k
+              description: 'Specify the average bitrate for this output in bits per second. Valid values: 384k, 448k, 576k, 640k, 768k, 1024k Default value: 448k Note that MediaConvert supports 384k only with channel-based immersive (CBI) 7.1.4 and 5.1.4 inputs. For CBI 9.1.6 and other input types, MediaConvert automatically increases your output bitrate to 448k.'
         BitstreamMode:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosBitstreamMode'
@@ -3571,53 +3569,61 @@ components:
             - $ref: '#/components/schemas/Eac3AtmosCodingMode'
             - xml:
                 name: codingMode
-              description: The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6).
+              description: The coding mode for Dolby Digital Plus JOC (Atmos).
         DialogueIntelligence:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosDialogueIntelligence'
             - xml:
                 name: dialogueIntelligence
               description: Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.
+        DownmixControl:
+          allOf:
+            - $ref: '#/components/schemas/Eac3AtmosDownmixControl'
+            - xml:
+                name: downmixControl
+              description: 'Specify whether MediaConvert should use any downmix metadata from your input file. Keep the default value, Custom (SPECIFIED) to provide downmix values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your downmix values: Left only/Right only surround (LoRoSurroundMixLevel), Left total/Right total surround (LtRtSurroundMixLevel), Left total/Right total center (LtRtCenterMixLevel), Left only/Right only center (LoRoCenterMixLevel),  and Stereo downmix (StereoDownmix). When you keep Custom (SPECIFIED) for Downmix control (DownmixControl) and you don''t specify values for the related settings, MediaConvert uses default values for those settings.'
         DynamicRangeCompressionLine:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosDynamicRangeCompressionLine'
             - xml:
                 name: dynamicRangeCompressionLine
-              description: Specify the absolute peak level for a signal with dynamic range compression.
+              description: 'Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the line operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression line (DynamicRangeCompressionLine). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
         DynamicRangeCompressionRf:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosDynamicRangeCompressionRf'
             - xml:
                 name: dynamicRangeCompressionRf
-              description: Specify how the service limits the audio dynamic range when compressing the audio.
+              description: 'Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the RF operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression RF (DynamicRangeCompressionRf). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
+        DynamicRangeControl:
+          allOf:
+            - $ref: '#/components/schemas/Eac3AtmosDynamicRangeControl'
+            - xml:
+                name: dynamicRangeControl
+              description: 'Specify whether MediaConvert should use any dynamic range control metadata from your input file. Keep the default value, Custom (SPECIFIED), to provide dynamic range control values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your dynamic range control values: Dynamic range compression line (DynamicRangeCompressionLine) and Dynamic range compression RF (DynamicRangeCompressionRf). When you keep the value Custom (SPECIFIED) for Dynamic range control (DynamicRangeControl) and you don''t specify values for the related settings, MediaConvert uses default values for those settings.'
         LoRoCenterMixLevel:
           allOf:
             - $ref: '#/components/schemas/__doubleMinNegative6Max3'
             - xml:
                 name: loRoCenterMixLevel
-              description: |-
-                Specify a value for the following Dolby Atmos setting: Left only/Right only center mix
-                (Lo/Ro center). MediaConvert uses this value for downmixing. How the service uses this
-                value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix).
-                Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
+              description: 'Specify a value for the following Dolby Atmos setting: Left only/Right only center mix (Lo/Ro center). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Left only/Right only center (LoRoCenterMixLevel).'
         LoRoSurroundMixLevel:
           allOf:
             - $ref: '#/components/schemas/__doubleMinNegative60MaxNegative1'
             - xml:
                 name: loRoSurroundMixLevel
-              description: 'Specify a value for the following Dolby Atmos setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel.'
+              description: 'Specify a value for the following Dolby Atmos setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Left only/Right only surround (LoRoSurroundMixLevel).'
         LtRtCenterMixLevel:
           allOf:
             - $ref: '#/components/schemas/__doubleMinNegative6Max3'
             - xml:
                 name: ltRtCenterMixLevel
-              description: 'Specify a value for the following Dolby Atmos setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.'
+              description: 'Specify a value for the following Dolby Atmos setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB) Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Left total/Right total center (LtRtCenterMixLevel).'
         LtRtSurroundMixLevel:
           allOf:
             - $ref: '#/components/schemas/__doubleMinNegative60MaxNegative1'
             - xml:
                 name: ltRtSurroundMixLevel
-              description: 'Specify a value for the following Dolby Atmos setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel.'
+              description: 'Specify a value for the following Dolby Atmos setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB) Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, the service ignores Left total/Right total surround (LtRtSurroundMixLevel).'
         MeteringMode:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosMeteringMode'
@@ -3632,16 +3638,16 @@ components:
               description: This value is always 48000. It represents the sample rate in Hz.
         SpeechThreshold:
           allOf:
-            - $ref: '#/components/schemas/__integerMin1Max100'
+            - $ref: '#/components/schemas/__integerMin0Max100'
             - xml:
                 name: speechThreshold
-              description: Specify the percentage of audio content that must be speech before the encoder uses the measured speech loudness as the overall program loudness.
+              description: 'Specify the percentage of audio content, from 0% to 100%, that must be speech in order for the encoder to use the measured speech loudness as the overall program loudness. Default value: 15%'
         StereoDownmix:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosStereoDownmix'
             - xml:
                 name: stereoDownmix
-              description: Choose how the service does stereo downmixing.
+              description: 'Choose how the service does stereo downmixing. Default value: Not indicated (ATMOS_STORAGE_DDP_DMIXMOD_NOT_INDICATED) Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Stereo downmix (StereoDownmix).'
         SurroundExMode:
           allOf:
             - $ref: '#/components/schemas/Eac3AtmosSurroundExMode'
@@ -4370,9 +4376,31 @@ components:
       pattern: '^[A-Za-z]{3}$'
       minLength: 3
       maxLength: 3
-    __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE:
+    __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS:
       type: string
-      pattern: '^((s3://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[pP]|[wW][eE][bB][mM]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]))))|(https?://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
+      pattern: '^((s3://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[pP]|[wW][eE][bB][mM]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]|[aA][tT][mM][oO][sS]))))|(https?://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]|[aA][tT][mM][oO][sS])))(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
+    HlsRenditionGroupSettings:
+      type: object
+      properties:
+        RenditionGroupId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: renditionGroupId
+              description: Optional. Specify alternative group ID
+        RenditionLanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - xml:
+                name: renditionLanguageCode
+              description: Optional. Specify ISO 639-2 or ISO 639-3 code in the language property
+        RenditionName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: renditionName
+              description: Optional. Specify media name
+      description: 'Settings specific to audio sources in an HLS alternate rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique audio track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the properties provided, the job fails. If no properties in hlsRenditionGroupSettings are specified, the default audio track within the video segment is chosen. If there is no audio within video segment, the alternative audio with DEFAULT=YES is chosen instead.'
     __integerMinNegative2147483648Max2147483647:
       type: integer
       minimum: -2147483648
@@ -4391,6 +4419,7 @@ components:
         - PID
         - TRACK
         - LANGUAGE_CODE
+        - HLS_RENDITION_GROUP
       description: Specifies the type of the audio selector.
     AudioSelector:
       type: object
@@ -4409,10 +4438,16 @@ components:
               description: 'Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can''t find the specified input audio. If you don''t set a default, those outputs have no audio.'
         ExternalAudioFileInput:
           allOf:
-            - $ref: '#/components/schemas/__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE'
+            - $ref: '#/components/schemas/__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS'
             - xml:
                 name: externalAudioFileInput
               description: Specifies audio data from an external file source.
+        HlsRenditionGroupSettings:
+          allOf:
+            - $ref: '#/components/schemas/HlsRenditionGroupSettings'
+            - xml:
+                name: hlsRenditionGroupSettings
+              description: 'Settings specific to audio sources in an HLS alternate rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique audio track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the properties provided, the job fails. If no properties in hlsRenditionGroupSettings are specified, the default audio track within the video segment is chosen. If there is no audio within video segment, the alternative audio with DEFAULT=YES is chosen instead.'
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
@@ -5407,6 +5442,12 @@ components:
             - xml:
                 name: trackSourceSettings
               description: 'Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings.'
+        WebvttHlsSourceSettings:
+          allOf:
+            - $ref: '#/components/schemas/WebvttHlsSourceSettings'
+            - xml:
+                name: webvttHlsSourceSettings
+              description: 'Settings specific to WebVTT sources in HLS alternative rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique subtitle track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the specified properties, the job fails. If there is only one subtitle track in the rendition group, the settings can be left empty and the default subtitle track will be chosen. If your caption source is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings.'
       description: 'If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
     CaptionSelector:
       type: object
@@ -5505,10 +5546,10 @@ components:
               description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
         SourceFile:
           allOf:
-            - $ref: '#/components/schemas/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT'
+            - $ref: '#/components/schemas/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT'
             - xml:
                 name: sourceFile
-              description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', ''smi'', and ''vtt''.'
+              description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', ''smi'', ''webvtt'', and ''vtt''.'
         TimeDelta:
           allOf:
             - $ref: '#/components/schemas/__integerMinNegative2147483648Max2147483647'
@@ -5554,6 +5595,28 @@ components:
                 name: trackNumber
               description: 'Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.'
       description: 'Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings.'
+    WebvttHlsSourceSettings:
+      type: object
+      properties:
+        RenditionGroupId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: renditionGroupId
+              description: Optional. Specify alternative group ID
+        RenditionLanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - xml:
+                name: renditionLanguageCode
+              description: Optional. Specify ISO 639-2 or ISO 639-3 code in the language property
+        RenditionName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: renditionName
+              description: Optional. Specify media name
+      description: 'Settings specific to WebVTT sources in HLS alternative rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique subtitle track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the specified properties, the job fails. If there is only one subtitle track in the rendition group, the settings can be left empty and the default subtitle track will be chosen. If your caption source is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings.'
     __listOfOutputChannelMapping:
       type: array
       items:
@@ -5738,6 +5801,13 @@ components:
                 name: s3Settings
               description: Settings associated with S3 destination
       description: Settings associated with the destination. Will vary based on the type of destination
+    CmafImageBasedTrickPlay:
+      type: string
+      enum:
+        - NONE
+        - THUMBNAIL
+        - THUMBNAIL_AND_FULLFRAME
+      description: 'Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest (WriteHlsManifest), MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest (WriteDashManifest), MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md'
     CmafManifestCompression:
       type: string
       enum:
@@ -5846,6 +5916,12 @@ components:
             - xml:
                 name: fragmentLength
               description: 'Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.'
+        ImageBasedTrickPlay:
+          allOf:
+            - $ref: '#/components/schemas/CmafImageBasedTrickPlay'
+            - xml:
+                name: imageBasedTrickPlay
+              description: 'Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest (WriteHlsManifest), MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest (WriteDashManifest), MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md'
         ManifestCompression:
           allOf:
             - $ref: '#/components/schemas/CmafManifestCompression'
@@ -6101,6 +6177,12 @@ components:
       type: integer
       minimum: -180
       maximum: 180
+    SampleRangeConversion:
+      type: string
+      enum:
+        - LIMITED_RANGE_SQUEEZE
+        - NONE
+      description: 'Specify the video color sample range for this output. To create a full range output, you must start with a full range YUV input and keep the default value, None (NONE). To create a limited range output from a full range input, choose Limited range (LIMITED_RANGE_SQUEEZE). With RGB inputs, your output is always limited range, regardless of your choice here. When you create a limited range output from a full range input, MediaConvert limits the active pixel values in a way that depends on the output''s bit depth: 8-bit outputs contain only values from 16 through 235 and 10-bit outputs contain only values from 64 through 940. With this conversion, MediaConvert also changes the output metadata to note the limited range.'
     ColorCorrector:
       type: object
       properties:
@@ -6134,6 +6216,12 @@ components:
             - xml:
                 name: hue
               description: Hue in degrees.
+        SampleRangeConversion:
+          allOf:
+            - $ref: '#/components/schemas/SampleRangeConversion'
+            - xml:
+                name: sampleRangeConversion
+              description: 'Specify the video color sample range for this output. To create a full range output, you must start with a full range YUV input and keep the default value, None (NONE). To create a limited range output from a full range input, choose Limited range (LIMITED_RANGE_SQUEEZE). With RGB inputs, your output is always limited range, regardless of your choice here. When you create a limited range output from a full range input, MediaConvert limits the active pixel values in a way that depends on the output''s bit depth: 8-bit outputs contain only values from 16 through 235 and 10-bit outputs contain only values from 64 through 940. With this conversion, MediaConvert also changes the output metadata to note the limited range.'
         Saturation:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max100'
@@ -6648,6 +6736,12 @@ components:
             - xml:
                 name: profile
               description: 'Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
+        XavcProfileSettings:
+          allOf:
+            - $ref: '#/components/schemas/MxfXavcProfileSettings'
+            - xml:
+                name: xavcProfileSettings
+              description: Specify the XAVC profile settings for MXF outputs when you set your MXF profile to XAVC.
       description: These settings relate to your MXF output container.
     __listOfHopDestination:
       type: array
@@ -7576,6 +7670,13 @@ components:
         - HBBTV_1_5
         - NONE
       description: Supports HbbTV specification as indicated
+    DashIsoImageBasedTrickPlay:
+      type: string
+      enum:
+        - NONE
+        - THUMBNAIL
+        - THUMBNAIL_AND_FULLFRAME
+      description: 'Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md'
     DashIsoMpdProfile:
       type: string
       enum:
@@ -7651,6 +7752,12 @@ components:
             - xml:
                 name: hbbtvCompliance
               description: Supports HbbTV specification as indicated
+        ImageBasedTrickPlay:
+          allOf:
+            - $ref: '#/components/schemas/DashIsoImageBasedTrickPlay'
+            - xml:
+                name: imageBasedTrickPlay
+              description: 'Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md'
         MinBufferTime:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max2147483647'
@@ -8024,14 +8131,23 @@ components:
     Eac3AtmosCodingMode:
       type: string
       enum:
+        - CODING_MODE_AUTO
+        - CODING_MODE_5_1_4
+        - CODING_MODE_7_1_4
         - CODING_MODE_9_1_6
-      description: The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6).
+      description: The coding mode for Dolby Digital Plus JOC (Atmos).
     Eac3AtmosDialogueIntelligence:
       type: string
       enum:
         - ENABLED
         - DISABLED
       description: Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.
+    Eac3AtmosDownmixControl:
+      type: string
+      enum:
+        - SPECIFIED
+        - INITIALIZE_FROM_SOURCE
+      description: 'Specify whether MediaConvert should use any downmix metadata from your input file. Keep the default value, Custom (SPECIFIED) to provide downmix values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your downmix values: Left only/Right only surround (LoRoSurroundMixLevel), Left total/Right total surround (LtRtSurroundMixLevel), Left total/Right total center (LtRtCenterMixLevel), Left only/Right only center (LoRoCenterMixLevel),  and Stereo downmix (StereoDownmix). When you keep Custom (SPECIFIED) for Downmix control (DownmixControl) and you don''t specify values for the related settings, MediaConvert uses default values for those settings.'
     Eac3AtmosDynamicRangeCompressionLine:
       type: string
       enum:
@@ -8041,7 +8157,7 @@ components:
         - MUSIC_STANDARD
         - MUSIC_LIGHT
         - SPEECH
-      description: Specify the absolute peak level for a signal with dynamic range compression.
+      description: 'Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the line operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression line (DynamicRangeCompressionLine). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
     Eac3AtmosDynamicRangeCompressionRf:
       type: string
       enum:
@@ -8051,7 +8167,13 @@ components:
         - MUSIC_STANDARD
         - MUSIC_LIGHT
         - SPEECH
-      description: Specify how the service limits the audio dynamic range when compressing the audio.
+      description: 'Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the RF operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression RF (DynamicRangeCompressionRf). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
+    Eac3AtmosDynamicRangeControl:
+      type: string
+      enum:
+        - SPECIFIED
+        - INITIALIZE_FROM_SOURCE
+      description: 'Specify whether MediaConvert should use any dynamic range control metadata from your input file. Keep the default value, Custom (SPECIFIED), to provide dynamic range control values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your dynamic range control values: Dynamic range compression line (DynamicRangeCompressionLine) and Dynamic range compression RF (DynamicRangeCompressionRf). When you keep the value Custom (SPECIFIED) for Dynamic range control (DynamicRangeControl) and you don''t specify values for the related settings, MediaConvert uses default values for those settings.'
     Eac3AtmosMeteringMode:
       type: string
       enum:
@@ -8061,16 +8183,20 @@ components:
         - ITU_BS_1770_3
         - ITU_BS_1770_4
       description: Choose how the service meters the loudness of your audio.
-    __integerMin384000Max768000:
+    __integerMin384000Max1024000:
       type: integer
       minimum: 384000
-      maximum: 768000
+      maximum: 1024000
     __doubleMinNegative6Max3:
       type: number
       format: double
     __doubleMinNegative60MaxNegative1:
       type: number
       format: double
+    __integerMin0Max100:
+      type: integer
+      minimum: 0
+      maximum: 100
     Eac3AtmosStereoDownmix:
       type: string
       enum:
@@ -8078,7 +8204,7 @@ components:
         - STEREO
         - SURROUND
         - DPL2
-      description: Choose how the service does stereo downmixing.
+      description: 'Choose how the service does stereo downmixing. Default value: Not indicated (ATMOS_STORAGE_DDP_DMIXMOD_NOT_INDICATED) Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Stereo downmix (StereoDownmix).'
     Eac3AtmosSurroundExMode:
       type: string
       enum:
@@ -8277,9 +8403,9 @@ components:
         - UPCONVERT
         - DISABLED
       description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
-    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT:
+    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT:
       type: string
-      pattern: '^((s3://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT))|(https?://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT)(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
+      pattern: '^((s3://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT|webvtt|WEBVTT))|(https?://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT|webvtt|WEBVTT)(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
       minLength: 14
     __integerMin1Max10000000:
       type: integer
@@ -8490,10 +8616,6 @@ components:
         - ENABLED
         - TRANSITION_DETECTION
       description: 'Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.'
-    __integerMin0Max100:
-      type: integer
-      minimum: 0
-      maximum: 100
     __integerMin0Max1152000000:
       type: integer
       minimum: 0
@@ -9250,6 +9372,26 @@ components:
       type: integer
       minimum: 0
       maximum: 50000
+    __integerMin0Max4000:
+      type: integer
+      minimum: 0
+      maximum: 4000
+    Hdr10Plus:
+      type: object
+      properties:
+        MasteringMonitorNits:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max4000'
+            - xml:
+                name: masteringMonitorNits
+              description: 'Specify the HDR10+ mastering display normalized peak luminance, in nits. This is the normalized actual peak luminance of the mastering display, as defined by ST 2094-40.'
+        TargetMonitorNits:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max4000'
+            - xml:
+                name: targetMonitorNits
+              description: 'Specify the HDR10+ target display nominal peak luminance, in nits. This is the nominal maximum luminance of the target display as defined by ST 2094-40.'
+      description: Setting for HDR10+ metadata insertion
     HlsAdMarkers:
       type: string
       enum:
@@ -9432,6 +9574,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HlsCaptionLanguageMapping'
+    HlsImageBasedTrickPlay:
+      type: string
+      enum:
+        - NONE
+        - THUMBNAIL
+        - THUMBNAIL_AND_FULLFRAME
+      description: 'Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md'
     HlsManifestCompression:
       type: string
       enum:
@@ -9554,6 +9703,12 @@ components:
             - xml:
                 name: encryption
               description: DRM settings.
+        ImageBasedTrickPlay:
+          allOf:
+            - $ref: '#/components/schemas/HlsImageBasedTrickPlay'
+            - xml:
+                name: imageBasedTrickPlay
+              description: 'Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md'
         ManifestCompression:
           allOf:
             - $ref: '#/components/schemas/HlsManifestCompression'
@@ -9813,9 +9968,9 @@ components:
         - ENABLED
         - DISABLED
       description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
-    __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA:
+    __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS:
       type: string
-      pattern: '^((s3://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[pP]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA]))))|(https?://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA])))(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
+      pattern: '^((s3://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[pP]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA]|[aA][tT][mM][oO][sS]))))|(https?://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA]|[aA][tT][mM][oO][sS])))(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
     InputFilterEnable:
       type: string
       enum:
@@ -9958,7 +10113,7 @@ components:
               description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
         FileInput:
           allOf:
-            - $ref: '#/components/schemas/__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA'
+            - $ref: '#/components/schemas/__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS'
             - xml:
                 name: fileInput
               description: 'Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.'
@@ -11191,7 +11346,30 @@ components:
         - D_10
         - XDCAM
         - OP1A
+        - XAVC
       description: 'Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
+    MxfXavcProfileSettings:
+      type: object
+      properties:
+        DurationMode:
+          allOf:
+            - $ref: '#/components/schemas/MxfXavcDurationMode'
+            - xml:
+                name: durationMode
+              description: 'To create an output that complies with the XAVC file format guidelines for interoperability, keep the default value, Drop frames for compliance (DROP_FRAMES_FOR_COMPLIANCE). To include all frames from your input in this output, keep the default setting, Allow any duration (ALLOW_ANY_DURATION). The number of frames that MediaConvert excludes when you set this to Drop frames for compliance depends on the output frame rate and duration.'
+        MaxAncDataSize:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max2147483647'
+            - xml:
+                name: maxAncDataSize
+              description: 'Specify a value for this setting only for outputs that you set up with one of these two XAVC profiles: XAVC HD Intra CBG (XAVC_HD_INTRA_CBG) or XAVC 4K Intra CBG (XAVC_4K_INTRA_CBG). Specify the amount of space in each frame that the service reserves for ancillary data, such as teletext captions. The default value for this setting is 1492 bytes per frame. This should be sufficient to prevent overflow unless you have multiple pages of teletext captions data. If you have a large amount of teletext data, specify a larger number.'
+      description: Specify the XAVC profile settings for MXF outputs when you set your MXF profile to XAVC.
+    MxfXavcDurationMode:
+      type: string
+      enum:
+        - ALLOW_ANY_DURATION
+        - DROP_FRAMES_FOR_COMPLIANCE
+      description: 'To create an output that complies with the XAVC file format guidelines for interoperability, keep the default value, Drop frames for compliance (DROP_FRAMES_FOR_COMPLIANCE). To include all frames from your input in this output, keep the default setting, Allow any duration (ALLOW_ANY_DURATION). The number of frames that MediaConvert excludes when you set this to Drop frames for compliance depends on the output frame rate and duration.'
     __stringMin1Max100000:
       type: string
       minLength: 1
@@ -11641,6 +11819,12 @@ components:
                 name: nexguardFileMarkerSettings
               description: 'For forensic video watermarking, MediaConvert supports Nagra NexGuard File Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2) and OTT Streaming workflows.'
       description: 'If you work with a third party video watermarking partner, use the group of settings that correspond with your watermarking partner to include watermarks in your output.'
+    ProresChromaSampling:
+      type: string
+      enum:
+        - PRESERVE_444_SAMPLING
+        - SUBSAMPLE_TO_422
+      description: 'This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs that you create from inputs that use 4:4:4 chroma sampling. Set Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING) to allow outputs to also use 4:4:4 chroma sampling. You must specify a value for this setting when your output codec profile supports 4:4:4 chroma sampling. Related Settings: When you set Chroma sampling to Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING), you must choose an output codec profile that supports 4:4:4 chroma sampling. These values for Profile (CodecProfile) support 4:4:4 chroma sampling: Apple ProRes 4444 (APPLE_PRORES_4444) or Apple ProRes 4444 XQ (APPLE_PRORES_4444_XQ). When you set Chroma sampling to Preserve 4:4:4 sampling, you must disable all video preprocessors except for Nexguard file marker (PartnerWatermarking). When you set Chroma sampling to Preserve 4:4:4 sampling and use framerate conversion, you must set Frame rate conversion algorithm (FramerateConversionAlgorithm) to Drop duplicate (DUPLICATE_DROP).'
     ProresCodecProfile:
       type: string
       enum:
@@ -11648,6 +11832,8 @@ components:
         - APPLE_PRORES_422_HQ
         - APPLE_PRORES_422_LT
         - APPLE_PRORES_422_PROXY
+        - APPLE_PRORES_4444
+        - APPLE_PRORES_4444_XQ
       description: Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output.
     ProresFramerateControl:
       type: string
@@ -11698,6 +11884,12 @@ components:
     ProresSettings:
       type: object
       properties:
+        ChromaSampling:
+          allOf:
+            - $ref: '#/components/schemas/ProresChromaSampling'
+            - xml:
+                name: chromaSampling
+              description: 'This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs that you create from inputs that use 4:4:4 chroma sampling. Set Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING) to allow outputs to also use 4:4:4 chroma sampling. You must specify a value for this setting when your output codec profile supports 4:4:4 chroma sampling. Related Settings: When you set Chroma sampling to Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING), you must choose an output codec profile that supports 4:4:4 chroma sampling. These values for Profile (CodecProfile) support 4:4:4 chroma sampling: Apple ProRes 4444 (APPLE_PRORES_4444) or Apple ProRes 4444 XQ (APPLE_PRORES_4444_XQ). When you set Chroma sampling to Preserve 4:4:4 sampling, you must disable all video preprocessors except for Nexguard file marker (PartnerWatermarking). When you set Chroma sampling to Preserve 4:4:4 sampling and use framerate conversion, you must set Frame rate conversion algorithm (FramerateConversionAlgorithm) to Drop duplicate (DUPLICATE_DROP).'
         CodecProfile:
           allOf:
             - $ref: '#/components/schemas/ProresCodecProfile'
@@ -12251,6 +12443,7 @@ components:
         - VC3
         - VP8
         - VP9
+        - XAVC
       description: Type of video codec
     Vp8Settings:
       type: object
@@ -12416,6 +12609,106 @@ components:
                 name: rateControlMode
               description: 'With the VP9 codec, you can use only the variable bitrate (VBR) rate control mode.'
       description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP9.
+    XavcSettings:
+      type: object
+      properties:
+        AdaptiveQuantization:
+          allOf:
+            - $ref: '#/components/schemas/XavcAdaptiveQuantization'
+            - xml:
+                name: adaptiveQuantization
+              description: 'Keep the default value, Auto (AUTO), for this setting to have MediaConvert automatically apply the best types of quantization for your video content. When you want to apply your quantization settings manually, you must set Adaptive quantization (adaptiveQuantization) to a value other than Auto (AUTO). Use this setting to specify the strength of any adaptive quantization filters that you enable. If you don''t want MediaConvert to do any adaptive quantization in this transcode, set Adaptive quantization to Off (OFF). Related settings: The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
+        EntropyEncoding:
+          allOf:
+            - $ref: '#/components/schemas/XavcEntropyEncoding'
+            - xml:
+                name: entropyEncoding
+              description: 'Optional. Choose a specific entropy encoding mode only when you want to override XAVC recommendations. If you choose the value auto, MediaConvert uses the mode that the XAVC file format specifies given this output''s operating point.'
+        FramerateControl:
+          allOf:
+            - $ref: '#/components/schemas/XavcFramerateControl'
+            - xml:
+                name: framerateControl
+              description: 'If you are using the console, use the Frame rate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list. The framerates shown in the dropdown list are decimal approximations of fractions. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate that you specify in the settings FramerateNumerator and FramerateDenominator.'
+        FramerateConversionAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/XavcFramerateConversionAlgorithm'
+            - xml:
+                name: framerateConversionAlgorithm
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
+        FramerateDenominator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max1001'
+            - xml:
+                name: framerateDenominator
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Frame rate. In this example, specify 23.976.'
+        FramerateNumerator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin24Max60000'
+            - xml:
+                name: framerateNumerator
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        Profile:
+          allOf:
+            - $ref: '#/components/schemas/XavcProfile'
+            - xml:
+                name: profile
+              description: 'Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that MediaConvert doesn''t support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To create an interlaced XAVC output, choose the profile XAVC_HD.'
+        SlowPal:
+          allOf:
+            - $ref: '#/components/schemas/XavcSlowPal'
+            - xml:
+                name: slowPal
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Frame rate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
+        Softness:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max128'
+            - xml:
+                name: softness
+              description: 'Ignore this setting unless your downstream workflow requires that you specify it explicitly. Otherwise, we recommend that you adjust the softness of your output by using a lower value for the setting Sharpness (sharpness) or by enabling a noise reducer filter (noiseReducerFilter). The Softness (softness) setting specifies the quantization matrices that the encoder uses. Keep the default value, 0, for flat quantization. Choose the value 1 or 16 to use the default JVT softening quantization matricies from the H.264 specification. Choose a value from 17 to 128 to use planar interpolation. Increasing values from 17 to 128 result in increasing reduction of high-frequency data. The value 128 results in the softest video.'
+        SpatialAdaptiveQuantization:
+          allOf:
+            - $ref: '#/components/schemas/XavcSpatialAdaptiveQuantization'
+            - xml:
+                name: spatialAdaptiveQuantization
+              description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
+        TemporalAdaptiveQuantization:
+          allOf:
+            - $ref: '#/components/schemas/XavcTemporalAdaptiveQuantization'
+            - xml:
+                name: temporalAdaptiveQuantization
+              description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal adaptive quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
+        Xavc4kIntraCbgProfileSettings:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kIntraCbgProfileSettings'
+            - xml:
+                name: xavc4kIntraCbgProfileSettings
+              description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_CBG.
+        Xavc4kIntraVbrProfileSettings:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kIntraVbrProfileSettings'
+            - xml:
+                name: xavc4kIntraVbrProfileSettings
+              description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_VBR.
+        Xavc4kProfileSettings:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kProfileSettings'
+            - xml:
+                name: xavc4kProfileSettings
+              description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K.
+        XavcHdIntraCbgProfileSettings:
+          allOf:
+            - $ref: '#/components/schemas/XavcHdIntraCbgProfileSettings'
+            - xml:
+                name: xavcHdIntraCbgProfileSettings
+              description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD_INTRA_CBG.
+        XavcHdProfileSettings:
+          allOf:
+            - $ref: '#/components/schemas/XavcHdProfileSettings'
+            - xml:
+                name: xavcHdProfileSettings
+              description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD.
+      description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value XAVC.
     VideoCodecSettings:
       type: object
       properties:
@@ -12485,7 +12778,13 @@ components:
             - xml:
                 name: vp9Settings
               description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP9.
-      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings'
+        XavcSettings:
+          allOf:
+            - $ref: '#/components/schemas/XavcSettings'
+            - xml:
+                name: xavcSettings
+              description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value XAVC.
+      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings'
     __integerMin32Max8192:
       type: integer
       minimum: 32
@@ -12517,6 +12816,12 @@ components:
             - xml:
                 name: dolbyVision
               description: Enable Dolby Vision feature to produce Dolby Vision compatible video output.
+        Hdr10Plus:
+          allOf:
+            - $ref: '#/components/schemas/Hdr10Plus'
+            - xml:
+                name: hdr10Plus
+              description: Enable HDR10+ analyis and metadata injection. Compatible with HEVC only.
         ImageInserter:
           allOf:
             - $ref: '#/components/schemas/ImageInserter'
@@ -12622,6 +12927,294 @@ components:
         - ENABLED
         - DISABLED
       description: 'Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions.'
+    Xavc4kIntraCbgProfileClass:
+      type: string
+      enum:
+        - CLASS_100
+        - CLASS_300
+        - CLASS_480
+      description: Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+    Xavc4kIntraCbgProfileSettings:
+      type: object
+      properties:
+        XavcClass:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kIntraCbgProfileClass'
+            - xml:
+                name: xavcClass
+              description: Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+      description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_CBG.
+    Xavc4kIntraVbrProfileClass:
+      type: string
+      enum:
+        - CLASS_100
+        - CLASS_300
+        - CLASS_480
+      description: Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+    Xavc4kIntraVbrProfileSettings:
+      type: object
+      properties:
+        XavcClass:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kIntraVbrProfileClass'
+            - xml:
+                name: xavcClass
+              description: Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+      description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_VBR.
+    Xavc4kProfileBitrateClass:
+      type: string
+      enum:
+        - BITRATE_CLASS_100
+        - BITRATE_CLASS_140
+        - BITRATE_CLASS_200
+      description: Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+    Xavc4kProfileCodecProfile:
+      type: string
+      enum:
+        - HIGH
+        - HIGH_422
+      description: 'Specify the codec profile for this output. Choose High, 8-bit, 4:2:0 (HIGH) or High, 10-bit, 4:2:2 (HIGH_422). These profiles are specified in ITU-T H.264.'
+    Xavc4kProfileQualityTuningLevel:
+      type: string
+      enum:
+        - SINGLE_PASS
+        - SINGLE_PASS_HQ
+        - MULTI_PASS_HQ
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
+    XavcFlickerAdaptiveQuantization:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that Flicker adaptive quantization provides.'
+    XavcGopBReference:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: Specify whether the encoder uses B-frames as reference frames for other pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the encoder from using B-frames as reference frames.
+    __integerMin8Max12:
+      type: integer
+      minimum: 8
+      maximum: 12
+    Xavc4kProfileSettings:
+      type: object
+      properties:
+        BitrateClass:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kProfileBitrateClass'
+            - xml:
+                name: bitrateClass
+              description: Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+        CodecProfile:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kProfileCodecProfile'
+            - xml:
+                name: codecProfile
+              description: 'Specify the codec profile for this output. Choose High, 8-bit, 4:2:0 (HIGH) or High, 10-bit, 4:2:2 (HIGH_422). These profiles are specified in ITU-T H.264.'
+        FlickerAdaptiveQuantization:
+          allOf:
+            - $ref: '#/components/schemas/XavcFlickerAdaptiveQuantization'
+            - xml:
+                name: flickerAdaptiveQuantization
+              description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that Flicker adaptive quantization provides.'
+        GopBReference:
+          allOf:
+            - $ref: '#/components/schemas/XavcGopBReference'
+            - xml:
+                name: gopBReference
+              description: Specify whether the encoder uses B-frames as reference frames for other pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the encoder from using B-frames as reference frames.
+        GopClosedCadence:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max2147483647'
+            - xml:
+                name: gopClosedCadence
+              description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
+        HrdBufferSize:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max1152000000'
+            - xml:
+                name: hrdBufferSize
+              description: 'Specify the size of the buffer that MediaConvert uses in the HRD buffer model for this output. Specify this value in bits; for example, enter five megabits as 5000000. When you don''t set this value, or you set it to zero, MediaConvert calculates the default by doubling the bitrate of this output point.'
+        QualityTuningLevel:
+          allOf:
+            - $ref: '#/components/schemas/Xavc4kProfileQualityTuningLevel'
+            - xml:
+                name: qualityTuningLevel
+              description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
+        Slices:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin8Max12'
+            - xml:
+                name: slices
+              description: 'Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.'
+      description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K.
+    XavcAdaptiveQuantization:
+      type: string
+      enum:
+        - 'OFF'
+        - AUTO
+        - LOW
+        - MEDIUM
+        - HIGH
+        - HIGHER
+        - MAX
+      description: 'Keep the default value, Auto (AUTO), for this setting to have MediaConvert automatically apply the best types of quantization for your video content. When you want to apply your quantization settings manually, you must set Adaptive quantization (adaptiveQuantization) to a value other than Auto (AUTO). Use this setting to specify the strength of any adaptive quantization filters that you enable. If you don''t want MediaConvert to do any adaptive quantization in this transcode, set Adaptive quantization to Off (OFF). Related settings: The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
+    XavcEntropyEncoding:
+      type: string
+      enum:
+        - AUTO
+        - CABAC
+        - CAVLC
+      description: 'Optional. Choose a specific entropy encoding mode only when you want to override XAVC recommendations. If you choose the value auto, MediaConvert uses the mode that the XAVC file format specifies given this output''s operating point.'
+    XavcFramerateControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'If you are using the console, use the Frame rate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list. The framerates shown in the dropdown list are decimal approximations of fractions. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate that you specify in the settings FramerateNumerator and FramerateDenominator.'
+    XavcFramerateConversionAlgorithm:
+      type: string
+      enum:
+        - DUPLICATE_DROP
+        - INTERPOLATE
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
+    XavcHdIntraCbgProfileClass:
+      type: string
+      enum:
+        - CLASS_50
+        - CLASS_100
+        - CLASS_200
+      description: Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+    XavcHdIntraCbgProfileSettings:
+      type: object
+      properties:
+        XavcClass:
+          allOf:
+            - $ref: '#/components/schemas/XavcHdIntraCbgProfileClass'
+            - xml:
+                name: xavcClass
+              description: Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+      description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD_INTRA_CBG.
+    XavcHdProfileBitrateClass:
+      type: string
+      enum:
+        - BITRATE_CLASS_25
+        - BITRATE_CLASS_35
+        - BITRATE_CLASS_50
+      description: Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+    XavcHdProfileQualityTuningLevel:
+      type: string
+      enum:
+        - SINGLE_PASS
+        - SINGLE_PASS_HQ
+        - MULTI_PASS_HQ
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
+    XavcInterlaceMode:
+      type: string
+      enum:
+        - PROGRESSIVE
+        - TOP_FIELD
+        - BOTTOM_FIELD
+        - FOLLOW_TOP_FIELD
+        - FOLLOW_BOTTOM_FIELD
+      description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
+    __integerMin4Max12:
+      type: integer
+      minimum: 4
+      maximum: 12
+    XavcHdProfileTelecine:
+      type: string
+      enum:
+        - NONE
+        - HARD
+      description: 'Ignore this setting unless you set Frame rate (framerateNumerator divided by framerateDenominator) to 29.970. If your input framerate is 23.976, choose Hard (HARD). Otherwise, keep the default value None (NONE). For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html.'
+    XavcHdProfileSettings:
+      type: object
+      properties:
+        BitrateClass:
+          allOf:
+            - $ref: '#/components/schemas/XavcHdProfileBitrateClass'
+            - xml:
+                name: bitrateClass
+              description: Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
+        FlickerAdaptiveQuantization:
+          allOf:
+            - $ref: '#/components/schemas/XavcFlickerAdaptiveQuantization'
+            - xml:
+                name: flickerAdaptiveQuantization
+              description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that Flicker adaptive quantization provides.'
+        GopBReference:
+          allOf:
+            - $ref: '#/components/schemas/XavcGopBReference'
+            - xml:
+                name: gopBReference
+              description: Specify whether the encoder uses B-frames as reference frames for other pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the encoder from using B-frames as reference frames.
+        GopClosedCadence:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max2147483647'
+            - xml:
+                name: gopClosedCadence
+              description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
+        HrdBufferSize:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max1152000000'
+            - xml:
+                name: hrdBufferSize
+              description: 'Specify the size of the buffer that MediaConvert uses in the HRD buffer model for this output. Specify this value in bits; for example, enter five megabits as 5000000. When you don''t set this value, or you set it to zero, MediaConvert calculates the default by doubling the bitrate of this output point.'
+        InterlaceMode:
+          allOf:
+            - $ref: '#/components/schemas/XavcInterlaceMode'
+            - xml:
+                name: interlaceMode
+              description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
+        QualityTuningLevel:
+          allOf:
+            - $ref: '#/components/schemas/XavcHdProfileQualityTuningLevel'
+            - xml:
+                name: qualityTuningLevel
+              description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
+        Slices:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin4Max12'
+            - xml:
+                name: slices
+              description: 'Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.'
+        Telecine:
+          allOf:
+            - $ref: '#/components/schemas/XavcHdProfileTelecine'
+            - xml:
+                name: telecine
+              description: 'Ignore this setting unless you set Frame rate (framerateNumerator divided by framerateDenominator) to 29.970. If your input framerate is 23.976, choose Hard (HARD). Otherwise, keep the default value None (NONE). For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html.'
+      description: Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD.
+    XavcProfile:
+      type: string
+      enum:
+        - XAVC_HD_INTRA_CBG
+        - XAVC_4K_INTRA_CBG
+        - XAVC_4K_INTRA_VBR
+        - XAVC_HD
+        - XAVC_4K
+      description: 'Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that MediaConvert doesn''t support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To create an interlaced XAVC output, choose the profile XAVC_HD.'
+    XavcSlowPal:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Frame rate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
+    XavcSpatialAdaptiveQuantization:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
+    XavcTemporalAdaptiveQuantization:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: 'The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal adaptive quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
     __doubleMinNegative60Max6:
       type: number
       format: double

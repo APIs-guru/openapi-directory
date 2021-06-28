@@ -3,7 +3,7 @@ info:
   version: '2017-03-31'
   x-release: v4
   title: AWS Glue
-  description: <fullname>AWS Glue</fullname> <p>Defines the public endpoint for the AWS Glue service.</p>
+  description: <fullname>Glue</fullname> <p>Defines the public endpoint for the Glue service.</p>
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -294,7 +294,7 @@ paths:
   /#X-Amz-Target=AWSGlue.BatchDeleteTable:
     post:
       operationId: BatchDeleteTable
-      description: '<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
+      description: '<p>Deletes multiple tables at once.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>BatchDeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
       responses:
         '200':
           description: Success
@@ -840,7 +840,7 @@ paths:
   /#X-Amz-Target=AWSGlue.CancelMLTaskRun:
     post:
       operationId: CancelMLTaskRun
-      description: 'Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling <code>CancelMLTaskRun</code> with a task run''s parent transform''s <code>TransformID</code> and the task run''s <code>TaskRunId</code>. '
+      description: 'Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling <code>CancelMLTaskRun</code> with a task run''s parent transform''s <code>TransformID</code> and the task run''s <code>TaskRunId</code>. '
       responses:
         '200':
           description: Success
@@ -1344,7 +1344,7 @@ paths:
   /#X-Amz-Target=AWSGlue.CreateMLTransform:
     post:
       operationId: CreateMLTransform
-      description: '<p>Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it.</p> <p>Call this operation as the first step in the process of using a machine learning transform (such as the <code>FindMatches</code> transform) for deduplicating data. You can provide an optional <code>Description</code>, in addition to the parameters that you want to use for your algorithm.</p> <p>You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include <code>Role</code>, and optionally, <code>AllocatedCapacity</code>, <code>Timeout</code>, and <code>MaxRetries</code>. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html">Jobs</a>.</p>'
+      description: '<p>Creates an Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it.</p> <p>Call this operation as the first step in the process of using a machine learning transform (such as the <code>FindMatches</code> transform) for deduplicating data. You can provide an optional <code>Description</code>, in addition to the parameters that you want to use for your algorithm.</p> <p>You must also specify certain parameters for the tasks that Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include <code>Role</code>, and optionally, <code>AllocatedCapacity</code>, <code>Timeout</code>, and <code>MaxRetries</code>. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html">Jobs</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1752,7 +1752,7 @@ paths:
   /#X-Amz-Target=AWSGlue.CreateSecurityConfiguration:
     post:
       operationId: CreateSecurityConfiguration
-      description: 'Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html">Encrypting Data Written by Crawlers, Jobs, and Development Endpoints</a>.'
+      description: 'Creates a new security configuration. A security configuration is a set of security properties that can be used by Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/encryption-security-configuration.html">Encrypting Data Written by Crawlers, Jobs, and Development Endpoints</a>.'
       responses:
         '200':
           description: Success
@@ -2331,7 +2331,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteCrawler:
     post:
       operationId: DeleteCrawler
-      description: 'Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is <code>RUNNING</code>.'
+      description: 'Removes a specified crawler from the Glue Data Catalog, unless the crawler state is <code>RUNNING</code>.'
       responses:
         '200':
           description: Success
@@ -2388,7 +2388,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteDatabase:
     post:
       operationId: DeleteDatabase
-      description: '<p>Removes a specified database from a Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>'
+      description: '<p>Removes a specified database from a Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteDatabase</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, <code>DeletePartition</code> or <code>BatchDeletePartition</code>, <code>DeleteUserDefinedFunction</code>, and <code>DeleteTable</code> or <code>BatchDeleteTable</code>, to delete any resources that belong to the database.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2553,7 +2553,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteMLTransform:
     post:
       operationId: DeleteMLTransform
-      description: 'Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling <code>DeleteMLTransforms</code>. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.'
+      description: 'Deletes an Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue. If you no longer need a transform, you can delete it by calling <code>DeleteMLTransforms</code>. However, any Glue jobs that still reference the deleted transform will no longer succeed.'
       responses:
         '200':
           description: Success
@@ -2736,7 +2736,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteRegistry:
     post:
       operationId: DeleteRegistry
-      description: 'Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the <code>GetRegistry</code> API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the <code>UpdateRegistry</code>, <code>CreateSchema</code>, <code>UpdateSchema</code>, and <code>RegisterSchemaVersion</code> APIs. '
+      description: 'Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the <code>GetRegistry</code> API after the asynchronous call. Deleting a registry will deactivate all online operations for the registry such as the <code>UpdateRegistry</code>, <code>CreateSchema</code>, <code>UpdateSchema</code>, and <code>RegisterSchemaVersion</code> APIs. '
       responses:
         '200':
           description: Success
@@ -2856,7 +2856,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteSchema:
     post:
       operationId: DeleteSchema
-      description: 'Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call <code>GetSchema</code> API after the asynchronous call. Deleting a registry will disable all online operations for the schema, such as the <code>GetSchemaByDefinition</code>, and <code>RegisterSchemaVersion</code> APIs.'
+      description: 'Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call <code>GetSchema</code> API after the asynchronous call. Deleting a registry will deactivate all online operations for the schema, such as the <code>GetSchemaByDefinition</code>, and <code>RegisterSchemaVersion</code> APIs.'
       responses:
         '200':
           description: Success
@@ -3027,7 +3027,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteTable:
     post:
       operationId: DeleteTable
-      description: '<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
+      description: '<p>Removes a table definition from the Data Catalog.</p> <note> <p>After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service.</p> <p>To ensure the immediate deletion of all related resources, before calling <code>DeleteTable</code>, use <code>DeleteTableVersion</code> or <code>BatchDeleteTableVersion</code>, and <code>DeletePartition</code> or <code>BatchDeletePartition</code>, to delete any resources that belong to the table.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4086,7 +4086,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetDevEndpoint:
     post:
       operationId: GetDevEndpoint
-      description: '<p>Retrieves information about a specified development endpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
+      description: '<p>Retrieves information about a specified development endpoint.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, Glue returns only a public IP address.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4143,7 +4143,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetDevEndpoints:
     post:
       operationId: GetDevEndpoints
-      description: '<p>Retrieves all the development endpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address.</p> </note>'
+      description: '<p>Retrieves all the development endpoints in this AWS account.</p> <note> <p>When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, Glue returns only a public IP address.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4527,7 +4527,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetMLTaskRun:
     post:
       operationId: GetMLTaskRun
-      description: Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling <code>GetMLTaskRun</code> with the <code>TaskRunID</code> and its parent transform's <code>TransformID</code>.
+      description: Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling <code>GetMLTaskRun</code> with the <code>TaskRunID</code> and its parent transform's <code>TransformID</code>.
       responses:
         '200':
           description: Success
@@ -4584,7 +4584,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetMLTaskRuns:
     post:
       operationId: GetMLTaskRuns
-      description: '<p>Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling <code>GetMLTaskRuns</code> with their parent transform''s <code>TransformID</code> and other optional parameters as documented in this section.</p> <p>This operation returns a list of historic runs and must be paginated.</p>'
+      description: '<p>Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling <code>GetMLTaskRuns</code> with their parent transform''s <code>TransformID</code> and other optional parameters as documented in this section.</p> <p>This operation returns a list of historic runs and must be paginated.</p>'
       responses:
         '200':
           description: Success
@@ -4653,7 +4653,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetMLTransform:
     post:
       operationId: GetMLTransform
-      description: Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling <code>GetMLTransform</code>.
+      description: Gets an Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue. You can retrieve their metadata by calling <code>GetMLTransform</code>.
       responses:
         '200':
           description: Success
@@ -4710,7 +4710,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetMLTransforms:
     post:
       operationId: GetMLTransforms
-      description: 'Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling <code>GetMLTransforms</code>.'
+      description: 'Gets a sortable, filterable list of existing Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue, and you can retrieve their metadata by calling <code>GetMLTransforms</code>.'
       responses:
         '200':
           description: Success
@@ -5151,7 +5151,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetResourcePolicies:
     post:
       operationId: GetResourcePolicies
-      description: '<p>Retrieves the resource policies set on individual resources by AWS Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy.</p> <p>If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can''t return the Data Catalog resource policy.</p>'
+      description: '<p>Retrieves the resource policies set on individual resources by Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy.</p> <p>If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the KMS key, the operation can''t return the Data Catalog resource policy.</p>'
       responses:
         '200':
           description: Success
@@ -6468,7 +6468,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ImportCatalogToGlue:
     post:
       operationId: ImportCatalogToGlue
-      description: Imports an existing Amazon Athena Data Catalog to AWS Glue
+      description: Imports an existing Amazon Athena Data Catalog to Glue.
       responses:
         '200':
           description: Success
@@ -6513,7 +6513,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ListCrawlers:
     post:
       operationId: ListCrawlers
-      description: '<p>Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
+      description: '<p>Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
       responses:
         '200':
           description: Success
@@ -6564,7 +6564,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ListDevEndpoints:
     post:
       operationId: ListDevEndpoints
-      description: '<p>Retrieves the names of all <code>DevEndpoint</code> resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
+      description: '<p>Retrieves the names of all <code>DevEndpoint</code> resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
       responses:
         '200':
           description: Success
@@ -6633,7 +6633,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ListJobs:
     post:
       operationId: ListJobs
-      description: '<p>Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
+      description: '<p>Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
       responses:
         '200':
           description: Success
@@ -6702,7 +6702,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ListMLTransforms:
     post:
       operationId: ListMLTransforms
-      description: ' Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional <code>Tags</code> field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. '
+      description: ' Retrieves a sortable, filterable list of existing Glue machine learning transforms in this Amazon Web Services account, or the resources with the specified tag. This operation takes the optional <code>Tags</code> field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. '
       responses:
         '200':
           description: Success
@@ -6972,7 +6972,7 @@ paths:
   /#X-Amz-Target=AWSGlue.ListTriggers:
     post:
       operationId: ListTriggers
-      description: '<p>Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
+      description: '<p>Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>'
       responses:
         '200':
           description: Success
@@ -7887,7 +7887,7 @@ paths:
   /#X-Amz-Target=AWSGlue.StartImportLabelsTaskRun:
     post:
       operationId: StartImportLabelsTaskRun
-      description: '<p>Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in improving the quality of your machine learning transform. </p> <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called ''labeling'' in the machine learning workflows). In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation.</p> <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and combines all labels that you upload unless you set <code>Replace</code> to true. If you set <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality.</p> <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code> operation. </p>'
+      description: '<p>Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in improving the quality of your machine learning transform. </p> <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called ''labeling'' in the machine learning workflows). In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation.</p> <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and combines all labels that you upload unless you set <code>Replace</code> to true. If you set <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality.</p> <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code> operation. </p>'
       responses:
         '200':
           description: Success
@@ -8019,7 +8019,7 @@ paths:
   /#X-Amz-Target=AWSGlue.StartMLEvaluationTaskRun:
     post:
       operationId: StartMLEvaluationTaskRun
-      description: '<p>Starts a task to estimate the quality of the transform. </p> <p>When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality.</p> <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more information about the stats of the <code>EvaluationTaskRun</code>.</p>'
+      description: '<p>Starts a task to estimate the quality of the transform. </p> <p>When you provide label sets as examples of truth, Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality.</p> <p>Returns a unique identifier for the run. You can call <code>GetMLTaskRun</code> to get more information about the stats of the <code>EvaluationTaskRun</code>.</p>'
       responses:
         '200':
           description: Success
@@ -8088,7 +8088,7 @@ paths:
   /#X-Amz-Target=AWSGlue.StartMLLabelingSetGenerationTaskRun:
     post:
       operationId: StartMLLabelingSetGenerationTaskRun
-      description: '<p>Starts the active learning workflow for your machine learning transform to improve the transform''s quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue will have generated a "labeling set" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p>'
+      description: '<p>Starts the active learning workflow for your machine learning transform to improve the transform''s quality by generating label sets and adding labels.</p> <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue will have generated a "labeling set" or a set of questions for humans to answer.</p> <p>In the case of the <code>FindMatches</code> transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” </p> <p>After the labeling process is finished, you can upload your labels with a call to <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.</p>'
       responses:
         '200':
           description: Success
@@ -8529,7 +8529,7 @@ paths:
   /#X-Amz-Target=AWSGlue.TagResource:
     post:
       operationId: TagResource
-      description: 'Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a>.'
+      description: 'Adds tags to a resource. A tag is a label you can assign to an Amazon Web Services resource. In Glue, you can tag only certain resources. For information about what resources you can tag, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a>.'
       responses:
         '200':
           description: Success
@@ -9787,7 +9787,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the catalog in which the partition is to be created. Currently, this should be the AWS account ID.'
+            - description: 'The ID of the catalog in which the partition is to be created. Currently, this should be the Amazon Web Services account ID.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -9827,7 +9827,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the connections reside. If none is provided, the Amazon Web Services account ID is used by default.'
         ConnectionNameList:
           allOf:
             - $ref: '#/components/schemas/DeleteConnectionNameList'
@@ -9850,7 +9850,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -9880,7 +9880,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -9907,7 +9907,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -10006,7 +10006,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -10109,7 +10109,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the catalog in which the partition is to be updated. Currently, this should be the AWS account ID.'
+            - description: 'The ID of the catalog in which the partition is to be updated. Currently, this should be the Amazon Web Services account ID.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -10173,7 +10173,7 @@ components:
         DataFormat:
           allOf:
             - $ref: '#/components/schemas/DataFormat'
-            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+            - description: The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.
         SchemaDefinition:
           allOf:
             - $ref: '#/components/schemas/SchemaDefinitionString'
@@ -10213,7 +10213,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which to create the connection. If none is provided, the Amazon Web Services account ID is used by default.'
         ConnectionInput:
           allOf:
             - $ref: '#/components/schemas/ConnectionInput'
@@ -10240,7 +10240,7 @@ components:
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/DatabaseName'
-            - description: 'The AWS Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
+            - description: 'The Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/DescriptionString'
@@ -10284,7 +10284,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+            - description: 'The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide.'
     CreateDatabaseResponse:
       type: object
       properties: {}
@@ -10297,7 +10297,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which to create the database. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which to create the database. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseInput:
           allOf:
             - $ref: '#/components/schemas/DatabaseInput'
@@ -10336,7 +10336,7 @@ components:
         NumberOfNodes:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
-            - description: The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
+            - description: The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -10344,7 +10344,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: 'Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. '
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p>'
         NumberOfWorkers:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
@@ -10380,7 +10380,7 @@ components:
         Arguments:
           allOf:
             - $ref: '#/components/schemas/MapValue'
-            - description: '<p>The map of arguments used to configure this <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li> <li> <p> <code>"GLUE_PYTHON_VERSION": "3"</code> </p> </li> <li> <p> <code>"GLUE_PYTHON_VERSION": "2"</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
+            - description: '<p>The map of arguments used to configure this <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
     CreateDevEndpointRequest:
       type: object
       required:
@@ -10415,7 +10415,7 @@ components:
         NumberOfNodes:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
-            - description: The number of AWS Glue Data Processing Units (DPUs) to allocate to this <code>DevEndpoint</code>.
+            - description: The number of Glue Data Processing Units (DPUs) to allocate to this <code>DevEndpoint</code>.
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -10423,7 +10423,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
         NumberOfWorkers:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
@@ -10443,7 +10443,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+            - description: 'The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide.'
         Arguments:
           allOf:
             - $ref: '#/components/schemas/MapValue'
@@ -10488,11 +10488,11 @@ components:
         Command:
           allOf:
             - $ref: '#/components/schemas/JobCommand'
-            - description: The <code>JobCommand</code> that executes this job.
+            - description: The <code>JobCommand</code> that runs this job.
         DefaultArguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
-            - description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+            - description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by Glue</a> topic in the developer guide.</p>'
         NonOverridableArguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
@@ -10509,7 +10509,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
             - deprecated: true
-              description: '<p>This parameter is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of AWS Glue data processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
+              description: '<p>This parameter is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of Glue data processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -10517,7 +10517,7 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>'
         SecurityConfiguration:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -10525,7 +10525,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+            - description: 'The tags to use with this job. You may use tags to limit access to the job. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide.'
         NotificationProperty:
           allOf:
             - $ref: '#/components/schemas/NotificationProperty'
@@ -10533,7 +10533,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>'
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>'
         NumberOfWorkers:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
@@ -10570,7 +10570,7 @@ components:
         InputRecordTables:
           allOf:
             - $ref: '#/components/schemas/GlueTables'
-            - description: A list of AWS Glue table definitions used by the transform.
+            - description: A list of Glue table definitions used by the transform.
         Parameters:
           allOf:
             - $ref: '#/components/schemas/TransformParameters'
@@ -10578,15 +10578,15 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/RoleString'
-            - description: '<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform. </p> <ul> <li> <p>This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See <a href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach a Policy to IAM Users That Access AWS Glue</a>.</p> </li> <li> <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p> </li> </ul>'
+            - description: '<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform. </p> <ul> <li> <p>This role needs Glue service role permissions to allow access to resources in Glue. See <a href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach a Policy to IAM Users That Access Glue</a>.</p> </li> <li> <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p> </li> </ul>'
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: 'This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">AWS Glue Versions</a> in the developer guide.'
+            - description: 'This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">Glue Versions</a> in the developer guide.'
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>. </p> <p> <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
+            - description: '<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>. </p> <p> <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -10606,7 +10606,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+            - description: 'The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide.'
         TransformEncryption:
           allOf:
             - $ref: '#/components/schemas/TransformEncryption'
@@ -10625,7 +10625,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: The AWS account ID of the catalog in which the partition is to be created.
+            - description: The Amazon Web Services account ID of the catalog in which the partition is to be created.
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -10701,7 +10701,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'AWS tags that contain a key value pair and may be searched by console, command line, or API.'
+            - description: 'Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API.'
     CreateSchemaResponse:
       type: object
       properties:
@@ -10728,7 +10728,7 @@ components:
         DataFormat:
           allOf:
             - $ref: '#/components/schemas/DataFormat'
-            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+            - description: The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.
         Compatibility:
           allOf:
             - $ref: '#/components/schemas/Compatibility'
@@ -10779,7 +10779,7 @@ components:
         DataFormat:
           allOf:
             - $ref: '#/components/schemas/DataFormat'
-            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+            - description: The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.
         Compatibility:
           allOf:
             - $ref: '#/components/schemas/Compatibility'
@@ -10791,7 +10791,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'AWS tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the AWS tags-on-create pattern.'
+            - description: 'Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the Amazon Web Services tags-on-create pattern.'
         SchemaDefinition:
           allOf:
             - $ref: '#/components/schemas/SchemaDefinitionString'
@@ -10862,7 +10862,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which to create the <code>Table</code>. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which to create the <code>Table</code>. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -10925,7 +10925,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide. '
+            - description: 'The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide. '
     CreateUserDefinedFunctionResponse:
       type: object
       properties: {}
@@ -10939,7 +10939,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which to create the function. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which to create the function. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11009,7 +11009,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11040,7 +11040,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11065,7 +11065,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.'
         ConnectionName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11097,7 +11097,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services account ID is used by default.'
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11163,7 +11163,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11243,7 +11243,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
-            - description: The ARN of the AWS Glue resource for the resource policy to be deleted.
+            - description: The ARN of the Glue resource for the resource policy to be deleted.
     ConditionCheckFailureException: {}
     DeleteSchemaResponse:
       type: object
@@ -11318,7 +11318,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11341,7 +11341,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11384,7 +11384,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the function to be deleted is located. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the function to be deleted is located. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11424,7 +11424,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the catalog to migrate. Currently, this should be the AWS account ID.'
+            - description: 'The ID of the catalog to migrate. Currently, this should be the Amazon Web Services account ID.'
     GetClassifierResponse:
       type: object
       properties:
@@ -11488,7 +11488,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11527,7 +11527,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11556,7 +11556,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.'
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11564,7 +11564,7 @@ components:
         HidePassword:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.'
+            - description: 'Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.'
     GetConnectionsResponse:
       type: object
       properties:
@@ -11583,7 +11583,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the connections reside. If none is provided, the Amazon Web Services account ID is used by default.'
         Filter:
           allOf:
             - $ref: '#/components/schemas/GetConnectionsFilter'
@@ -11591,7 +11591,7 @@ components:
         HidePassword:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.'
+            - description: 'Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -11681,7 +11681,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog to retrieve the security configuration for. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog to retrieve the security configuration for. If none is provided, the Amazon Web Services account ID is used by default.'
     GetDatabaseResponse:
       type: object
       properties:
@@ -11698,7 +11698,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services account ID is used by default.'
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -11723,7 +11723,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog from which to retrieve <code>Databases</code>. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog from which to retrieve <code>Databases</code>. If none is provided, the Amazon Web Services account ID is used by default.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -12036,7 +12036,7 @@ components:
         InputRecordTables:
           allOf:
             - $ref: '#/components/schemas/GlueTables'
-            - description: A list of AWS Glue table definitions used by the transform.
+            - description: A list of Glue table definitions used by the transform.
         Parameters:
           allOf:
             - $ref: '#/components/schemas/TransformParameters'
@@ -12060,11 +12060,11 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: 'This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">AWS Glue Versions</a> in the developer guide.'
+            - description: 'This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">Glue Versions</a> in the developer guide.'
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
+            - description: '<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -12173,7 +12173,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partition in question resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12241,7 +12241,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12253,7 +12253,7 @@ components:
         Expression:
           allOf:
             - $ref: '#/components/schemas/PredicateString'
-            - description: '<p>An expression that filters the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href="http://jsqlparser.sourceforge.net/home.php">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks whether the values of the two operands are equal; if yes, then the condition becomes true.</p> <p>Example: Assume ''variable a'' holds 10 and ''variable b'' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an invalid type is encountered, an exception is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>'
+            - description: '<p>An expression that filters the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href="http://jsqlparser.sourceforge.net/home.php">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks whether the values of the two operands are equal; if yes, then the condition becomes true.</p> <p>Example: Assume ''variable a'' holds 10 and ''variable b'' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an type is encountered that is not valid, an exception is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -12309,7 +12309,7 @@ components:
         AdditionalPlanOptionsMap:
           allOf:
             - $ref: '#/components/schemas/AdditionalPlanOptionsMap'
-            - description: "<p>A map to hold additional optional key-value parameters.</p> <p>Currently, these key-value pairs are supported:</p> <ul> <li> <p> <code>inferSchema</code>\_ — \_Specifies whether to set <code>inferSchema</code> to true or false for the default script generated by an AWS Glue job. For example, to set <code>inferSchema</code> to true, pass the following key value pair:</p> <p> <code>--additional-plan-options-map '{\"inferSchema\":\"true\"}'</code> </p> </li> </ul>"
+            - description: "<p>A map to hold additional optional key-value parameters.</p> <p>Currently, these key-value pairs are supported:</p> <ul> <li> <p> <code>inferSchema</code>\_ — \_Specifies whether to set <code>inferSchema</code> to true or false for the default script generated by an Glue job. For example, to set <code>inferSchema</code> to true, pass the following key value pair:</p> <p> <code>--additional-plan-options-map '{\"inferSchema\":\"true\"}'</code> </p> </li> </ul>"
     GetRegistryResponse:
       type: object
       properties:
@@ -12396,7 +12396,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
-            - description: 'The ARN of the AWS Glue resource for which to retrieve the resource policy. If not supplied, the Data Catalog resource policy is returned. Use <code>GetResourcePolicies</code> to view all existing resource policies. For more information see <a href="https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html">Specifying AWS Glue Resource ARNs</a>. '
+            - description: 'The ARN of the Glue resource for which to retrieve the resource policy. If not supplied, the Data Catalog resource policy is returned. Use <code>GetResourcePolicies</code> to view all existing resource policies. For more information see <a href="https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html">Specifying Glue Resource ARNs</a>. '
     GetSchemaResponse:
       type: object
       properties:
@@ -12423,7 +12423,7 @@ components:
         DataFormat:
           allOf:
             - $ref: '#/components/schemas/DataFormat'
-            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+            - description: The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.
         Compatibility:
           allOf:
             - $ref: '#/components/schemas/Compatibility'
@@ -12476,7 +12476,7 @@ components:
         DataFormat:
           allOf:
             - $ref: '#/components/schemas/DataFormat'
-            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> and <code>JSON</code> are supported.
         Status:
           allOf:
             - $ref: '#/components/schemas/SchemaVersionStatus'
@@ -12514,7 +12514,7 @@ components:
         DataFormat:
           allOf:
             - $ref: '#/components/schemas/DataFormat'
-            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+            - description: The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.
         SchemaArn:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
@@ -12636,7 +12636,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12662,7 +12662,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12696,7 +12696,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12733,7 +12733,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12828,7 +12828,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12857,7 +12857,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the functions to be retrieved are located. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the functions to be retrieved are located. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -12986,7 +12986,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the catalog to import. Currently, this should be the AWS account ID.'
+            - description: 'The ID of the catalog to import. Currently, this should be the Amazon Web Services account ID.'
     ListCrawlersResponse:
       type: object
       properties:
@@ -13250,7 +13250,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog to set the security configuration for. If none is provided, the Amazon Web Services account ID is used by default.'
         DataCatalogEncryptionSettings:
           allOf:
             - $ref: '#/components/schemas/DataCatalogEncryptionSettings'
@@ -13287,7 +13287,7 @@ components:
         EnableHybrid:
           allOf:
             - $ref: '#/components/schemas/EnableHybridValues'
-            - description: '<p>If <code>''TRUE''</code>, indicates that you are using both methods to grant cross-account access to Data Catalog resources:</p> <ul> <li> <p>By directly updating the resource policy with <code>PutResourePolicy</code> </p> </li> <li> <p>By using the <b>Grant permissions</b> command on the AWS Management Console.</p> </li> </ul> <p>Must be set to <code>''TRUE''</code> if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is ''FALSE''.</p>'
+            - description: '<p>If <code>''TRUE''</code>, indicates that you are using both methods to grant cross-account access to Data Catalog resources:</p> <ul> <li> <p>By directly updating the resource policy with <code>PutResourePolicy</code> </p> </li> <li> <p>By using the <b>Grant permissions</b> command on the Management Console.</p> </li> </ul> <p>Must be set to <code>''TRUE''</code> if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is ''FALSE''.</p>'
     PutSchemaVersionMetadataResponse:
       type: object
       properties:
@@ -13695,12 +13695,12 @@ components:
         Arguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
-            - description: '<p>The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+            - description: '<p>The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by Glue</a> topic in the developer guide.</p>'
         AllocatedCapacity:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
             - deprecated: true
-              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
+              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -13708,7 +13708,7 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+            - description: '<p>The number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
         SecurityConfiguration:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -13876,7 +13876,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
-            - description: 'The ARN of the AWS Glue resource to which to add the tags. For more information about AWS Glue resource ARNs, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id">AWS Glue ARN string pattern</a>.'
+            - description: 'The ARN of the Glue resource to which to add the tags. For more information about Glue resource ARNs, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id">Glue ARN string pattern</a>.'
         TagsToAdd:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
@@ -13942,7 +13942,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -13977,7 +13977,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -14003,7 +14003,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.'
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -14032,7 +14032,7 @@ components:
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/DatabaseName'
-            - description: 'The AWS Glue database where results are stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
+            - description: 'The Glue database where results are stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/DescriptionStringRemovable'
@@ -14103,7 +14103,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog in which the metadata database resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog in which the metadata database resides. If none is provided, the Amazon Web Services account ID is used by default.'
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -14152,7 +14152,7 @@ components:
         AddArguments:
           allOf:
             - $ref: '#/components/schemas/MapValue'
-            - description: '<p>The map of arguments to add the map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li> <li> <p> <code>"GLUE_PYTHON_VERSION": "3"</code> </p> </li> <li> <p> <code>"GLUE_PYTHON_VERSION": "2"</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
+            - description: '<p>The map of arguments to add the map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
     UpdateJobResponse:
       type: object
       properties:
@@ -14211,11 +14211,11 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: 'This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">AWS Glue Versions</a> in the developer guide.'
+            - description: 'This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">Glue Versions</a> in the developer guide.'
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
+            - description: '<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>. </p> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -14247,7 +14247,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the partition to be updated resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the partition to be updated resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -14340,7 +14340,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -14389,7 +14389,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
-            - description: 'The ID of the Data Catalog where the function to be updated is located. If none is provided, the AWS account ID is used by default.'
+            - description: 'The ID of the Data Catalog where the function to be updated is located. If none is provided, the Amazon Web Services account ID is used by default.'
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -14457,11 +14457,11 @@ components:
         JobName:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The name of a job to be executed.
+            - description: The name of a job to be run.
         Arguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
-            - description: '<p>The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+            - description: '<p>The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by Glue</a> topic in the developer guide.</p>'
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -14742,7 +14742,7 @@ components:
         Values:
           allOf:
             - $ref: '#/components/schemas/ValueStringList'
-            - description: '<p>The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input.</p> <p>The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise AWS Glue will add the values to the wrong keys.</p>'
+            - description: '<p>The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input.</p> <p>The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise Glue will add the values to the wrong keys.</p>'
         LastAccessTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -14867,7 +14867,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameString'
             - description: The name of the table in question.
-      description: Specifies a table definition in the AWS Glue Data Catalog.
+      description: Specifies a table definition in the Glue Data Catalog.
     CatalogEntries:
       type: array
       items:
@@ -14914,7 +14914,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CatalogTablesList'
             - description: A list of the tables to be synchronized.
-      description: Specifies an AWS Glue Data Catalog target.
+      description: Specifies an Glue Data Catalog target.
     CatalogTargetList:
       type: array
       items:
@@ -14923,6 +14923,7 @@ components:
       type: string
       enum:
         - AVRO
+        - JSON
     SchemaDefinitionString:
       type: string
       pattern: .*\S.*
@@ -15028,7 +15029,7 @@ components:
         JsonPath:
           allOf:
             - $ref: '#/components/schemas/JsonPath'
-            - description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+            - description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
       description: A classifier for <code>JSON</code> content.
     CsvClassifier:
       type: object
@@ -15095,7 +15096,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CsvClassifier'
             - description: A classifier for comma-separated values (CSV).
-      description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle. If it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue provides, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>'
+      description: '<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle. If it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that Glue provides, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>'
     ClassifierList:
       type: array
       items:
@@ -15666,7 +15667,7 @@ components:
         ConnectionProperties:
           allOf:
             - $ref: '#/components/schemas/ConnectionProperties'
-            - description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is "<code>USERNAME</code>".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for connecting to a JDBC data source.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer''s root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p> </li> <li> <p> <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.</p> </li> <li> <p> <code>CONNECTION_URL</code> - The URL for connecting to a general (non-JDBC) data source.</p> </li> <li> <p> <code>KAFKA_BOOTSTRAP_SERVERS</code> - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.</p> </li> <li> <p> <code>KAFKA_SSL_ENABLED</code> - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".</p> </li> <li> <p> <code>KAFKA_CUSTOM_CERT</code> - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.</p> </li> <li> <p> <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code> - Whether to skip the validation of the CA cert file or not. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".</p> </li> <li> <p> <code>SECRET_ID</code> - The secret ID used for the secret manager of credentials.</p> </li> <li> <p> <code>CONNECTOR_URL</code> - The connector URL for a MARKETPLACE or CUSTOM connection.</p> </li> <li> <p> <code>CONNECTOR_TYPE</code> - The connector type for a MARKETPLACE or CUSTOM connection.</p> </li> <li> <p> <code>CONNECTOR_CLASS_NAME</code> - The connector class name for a MARKETPLACE or CUSTOM connection.</p> </li> <li> <p> <code>KAFKA_CLIENT_KEYSTORE</code> - The Amazon S3 location of the client keystore file for Kafka client side authentication (Optional).</p> </li> <li> <p> <code>KAFKA_CLIENT_KEYSTORE_PASSWORD</code> - The password to access the provided keystore (Optional).</p> </li> <li> <p> <code>KAFKA_CLIENT_KEY_PASSWORD</code> - A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key (Optional).</p> </li> <li> <p> <code>ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD</code> - The encrypted version of the Kafka client keystore password (if the user has the AWS Glue encrypt passwords setting selected).</p> </li> <li> <p> <code>ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD</code> - The encrypted version of the Kafka client key password (if the user has the AWS Glue encrypt passwords setting selected).</p> </li> </ul>'
+            - description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is "<code>USERNAME</code>".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for connecting to a JDBC data source.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer''s root certificate. Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p> </li> <li> <p> <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip Glue’s validation of the customer certificate.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.</p> </li> <li> <p> <code>CONNECTION_URL</code> - The URL for connecting to a general (non-JDBC) data source.</p> </li> <li> <p> <code>KAFKA_BOOTSTRAP_SERVERS</code> - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.</p> </li> <li> <p> <code>KAFKA_SSL_ENABLED</code> - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".</p> </li> <li> <p> <code>KAFKA_CUSTOM_CERT</code> - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.</p> </li> <li> <p> <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code> - Whether to skip the validation of the CA cert file or not. Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".</p> </li> <li> <p> <code>SECRET_ID</code> - The secret ID used for the secret manager of credentials.</p> </li> <li> <p> <code>CONNECTOR_URL</code> - The connector URL for a MARKETPLACE or CUSTOM connection.</p> </li> <li> <p> <code>CONNECTOR_TYPE</code> - The connector type for a MARKETPLACE or CUSTOM connection.</p> </li> <li> <p> <code>CONNECTOR_CLASS_NAME</code> - The connector class name for a MARKETPLACE or CUSTOM connection.</p> </li> <li> <p> <code>KAFKA_CLIENT_KEYSTORE</code> - The Amazon S3 location of the client keystore file for Kafka client side authentication (Optional).</p> </li> <li> <p> <code>KAFKA_CLIENT_KEYSTORE_PASSWORD</code> - The password to access the provided keystore (Optional).</p> </li> <li> <p> <code>KAFKA_CLIENT_KEY_PASSWORD</code> - A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key (Optional).</p> </li> <li> <p> <code>ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD</code> - The encrypted version of the Kafka client keystore password (if the user has the Glue encrypt passwords setting selected).</p> </li> <li> <p> <code>ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD</code> - The encrypted version of the Kafka client key password (if the user has the Glue encrypt passwords setting selected).</p> </li> </ul>'
         PhysicalConnectionRequirements:
           allOf:
             - $ref: '#/components/schemas/PhysicalConnectionRequirements'
@@ -15702,7 +15703,7 @@ components:
         ConnectionType:
           allOf:
             - $ref: '#/components/schemas/ConnectionType'
-            - description: '<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> <li> <p> <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from AWS Marketplace to read from and write to data stores that are not natively supported by AWS Glue.</p> </li> <li> <p> <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by AWS Glue.</p> </li> </ul> <p>SFTP is not supported.</p>'
+            - description: '<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> <li> <p> <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Marketplace to read from and write to data stores that are not natively supported by Glue.</p> </li> <li> <p> <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p> </li> </ul> <p>SFTP is not supported.</p>'
         MatchCriteria:
           allOf:
             - $ref: '#/components/schemas/MatchCriteria'
@@ -15734,8 +15735,8 @@ components:
         AwsKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: '<p>An AWS KMS key that is used to encrypt the connection password. </p> <p>If connection password protection is enabled, the caller of <code>CreateConnection</code> and <code>UpdateConnection</code> needs at least <code>kms:Encrypt</code> permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog. </p> <p>You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.</p>'
-      description: '<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your AWS KMS key. It then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you might want only administrators to have decrypt permission on the password key.</p>'
+            - description: '<p>An KMS key that is used to encrypt the connection password. </p> <p>If connection password protection is enabled, the caller of <code>CreateConnection</code> and <code>UpdateConnection</code> needs at least <code>kms:Encrypt</code> permission on the specified KMS key, to encrypt passwords before storing them in the Data Catalog. </p> <p>You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.</p>'
+      description: '<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your KMS key. It then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you might want only administrators to have decrypt permission on the password key.</p>'
     ConnectionPropertyKey:
       type: string
       enum:
@@ -15850,7 +15851,7 @@ components:
         CatalogTargets:
           allOf:
             - $ref: '#/components/schemas/CatalogTargetList'
-            - description: Specifies AWS Glue Data Catalog targets.
+            - description: Specifies Glue Data Catalog targets.
       description: Specifies data stores to crawl.
     DatabaseName:
       type: string
@@ -15861,7 +15862,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecrawlBehavior'
             - description: <p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p> <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p> <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>
-      description: 'When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html">Incremental Crawls in AWS Glue</a> in the developer guide.'
+      description: 'When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html">Incremental Crawls in Glue</a> in the developer guide.'
     SchemaChangePolicy:
       type: object
       properties:
@@ -16021,7 +16022,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CrawlerSecurityConfiguration'
             - description: The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.
-      description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
+      description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the Glue Data Catalog.'
     CrawlerLineageSettings:
       type: string
       enum:
@@ -16150,7 +16151,7 @@ components:
         JsonPath:
           allOf:
             - $ref: '#/components/schemas/JsonPath'
-            - description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+            - description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
       description: Specifies a JSON classifier for <code>CreateClassifier</code> to create.
     CreateCsvClassifierRequest:
       type: object
@@ -16309,12 +16310,12 @@ components:
         ScriptLocation:
           allOf:
             - $ref: '#/components/schemas/ScriptLocationString'
-            - description: Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.
+            - description: Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that runs a job.
         PythonVersion:
           allOf:
             - $ref: '#/components/schemas/PythonVersionString'
-            - description: The Python version being used to execute a Python shell job. Allowed values are 2 or 3.
-      description: Specifies code executed when a job is run.
+            - description: The Python version being used to run a Python shell job. Allowed values are 2 or 3.
+      description: Specifies code that runs when a job is run.
     MaxRetries:
       type: integer
     NullableDouble:
@@ -16575,7 +16576,7 @@ components:
         SseAwsKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The ID of the AWS KMS key to use for encryption at rest.
+            - description: The ID of the KMS key to use for encryption at rest.
       description: Specifies the encryption-at-rest configuration for the Data Catalog.
     DataCatalogEncryptionSettings:
       type: object
@@ -16599,8 +16600,8 @@ components:
         DataLakePrincipalIdentifier:
           allOf:
             - $ref: '#/components/schemas/DataLakePrincipalString'
-            - description: An identifier for the AWS Lake Formation principal.
-      description: The AWS Lake Formation principal.
+            - description: An identifier for the Lake Formation principal.
+      description: The Lake Formation principal.
     URI:
       type: string
       minLength: 1
@@ -16709,7 +16710,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchemaRegistryNameString'
             - description: The name of the schema registry that contains the schema.
-      description: The unique ID of the schema in the AWS Glue schema registry.
+      description: The unique ID of the schema in the Glue schema registry.
     VersionsString:
       type: string
       pattern: '[1-9][0-9]*|[1-9][0-9]*-[1-9][0-9]*'
@@ -16770,7 +16771,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
         NumberOfWorkers:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
@@ -16778,7 +16779,7 @@ components:
         NumberOfNodes:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
-            - description: The number of AWS Glue Data Processing Units (DPUs) allocated to this <code>DevEndpoint</code>.
+            - description: The number of Glue Data Processing Units (DPUs) allocated to this <code>DevEndpoint</code>.
         AvailabilityZone:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -16826,7 +16827,7 @@ components:
         Arguments:
           allOf:
             - $ref: '#/components/schemas/MapValue'
-            - description: '<p>A map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li> <li> <p> <code>"GLUE_PYTHON_VERSION": "3"</code> </p> </li> <li> <p> <code>"GLUE_PYTHON_VERSION": "2"</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
+            - description: '<p>A map of arguments used to configure the <code>DevEndpoint</code>.</p> <p>Valid arguments are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li> </ul> <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>'
       description: 'A development endpoint where a developer can remotely debug extract, transform, and load (ETL) scripts.'
     DevEndpointCustomLibraries:
       type: object
@@ -16863,7 +16864,7 @@ components:
         scanRate:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.</p> <p>The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).</p>'
+            - description: '<p>The percentage of the configured read capacity units to use by the Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.</p> <p>The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).</p>'
       description: Specifies an Amazon DynamoDB table to crawl.
     Edge:
       type: object
@@ -16876,7 +16877,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameString'
             - description: The unique of the node within the workflow where the edge ends.
-      description: An edge represents a directed connection between two AWS Glue components that are part of the workflow the edge belongs to.
+      description: An edge represents a directed connection between two Glue components that are part of the workflow the edge belongs to.
     EdgeList:
       type: array
       items:
@@ -17130,11 +17131,11 @@ components:
         Command:
           allOf:
             - $ref: '#/components/schemas/JobCommand'
-            - description: The <code>JobCommand</code> that executes this job.
+            - description: The <code>JobCommand</code> that runs this job.
         DefaultArguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
-            - description: '<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+            - description: '<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by Glue</a> topic in the developer guide.</p>'
         NonOverridableArguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
@@ -17151,7 +17152,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
             - deprecated: true
-              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of AWS Glue data processing units (DPUs) allocated to runs of this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p/>This property is deprecated, use MaxCapacity instead.'
+              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of Glue data processing units (DPUs) allocated to runs of this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p/>This property is deprecated, use MaxCapacity instead.'
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -17159,7 +17160,7 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -17179,7 +17180,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>'
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>'
       description: Specifies a job definition.
     JobRun:
       type: object
@@ -17219,11 +17220,11 @@ components:
         JobRunState:
           allOf:
             - $ref: '#/components/schemas/JobRunState'
-            - description: 'The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href="https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html">AWS Glue Job Run Statuses</a>.'
+            - description: 'The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href="https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html">Glue Job Run Statuses</a>.'
         Arguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
-            - description: '<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+            - description: '<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by Glue</a> topic in the developer guide.</p>'
         ErrorMessage:
           allOf:
             - $ref: '#/components/schemas/ErrorString'
@@ -17236,7 +17237,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
             - deprecated: true
-              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
+              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
         ExecutionTime:
           allOf:
             - $ref: '#/components/schemas/ExecutionTime'
@@ -17248,7 +17249,7 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+            - description: '<p>The number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -17264,7 +17265,7 @@ components:
         LogGroupName:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: 'The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the default encryption is <code>NONE</code>. If you add a role name and <code>SecurityConfiguration</code> name (in other words, <code>/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/</code>), then that security configuration is used to encrypt the log group.'
+            - description: 'The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the default encryption is <code>NONE</code>. If you add a role name and <code>SecurityConfiguration</code> name (in other words, <code>/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/</code>), then that security configuration is used to encrypt the log group.'
         NotificationProperty:
           allOf:
             - $ref: '#/components/schemas/NotificationProperty'
@@ -17272,7 +17273,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>'
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p> <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>'
       description: Contains information about a job run.
     JobRunList:
       type: array
@@ -17374,7 +17375,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: 'This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">AWS Glue Versions</a> in the developer guide.'
+            - description: 'This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">Glue Versions</a> in the developer guide.'
         CreatedBefore:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -17498,7 +17499,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TotalSegmentsInteger'
             - description: The total number of segments.
-      description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be executed in parallel.'
+      description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be run in parallel.'
     UpdatedTimestamp:
       type: string
     GetResourcePoliciesResponseList:
@@ -17642,7 +17643,7 @@ components:
         IsRegisteredWithLakeFormation:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the table has been registered with AWS Lake Formation.
+            - description: Indicates whether the table has been registered with Lake Formation.
         TargetTable:
           allOf:
             - $ref: '#/components/schemas/TableIdentifier'
@@ -17782,19 +17783,19 @@ components:
         Graph:
           allOf:
             - $ref: '#/components/schemas/WorkflowGraph'
-            - description: The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+            - description: The graph representing all the Glue components that belong to the workflow as nodes and directed connections between them as edges.
         MaxConcurrentRuns:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
             - description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
-      description: A workflow represents a flow in which AWS Glue components should be executed to complete a logical task.
+      description: A workflow represents a flow in which Glue components should be run to complete a logical task.
     WorkflowRun:
       type: object
       properties:
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: Name of the workflow that was executed.
+            - description: Name of the workflow that was run.
         WorkflowRunId:
           allOf:
             - $ref: '#/components/schemas/IdString'
@@ -17830,7 +17831,7 @@ components:
         Graph:
           allOf:
             - $ref: '#/components/schemas/WorkflowGraph'
-            - description: The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+            - description: The graph representing all the Glue components that belong to the workflow as nodes and directed connections between them as edges.
       description: A workflow run is an execution of a workflow providing all the runtime information.
     WorkflowRuns:
       type: array
@@ -17847,20 +17848,20 @@ components:
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: A database name in the AWS Glue Data Catalog.
+            - description: A database name in the Glue Data Catalog.
         TableName:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: A table name in the AWS Glue Data Catalog.
+            - description: A table name in the Glue Data Catalog.
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: A unique identifier for the AWS Glue Data Catalog.
+            - description: A unique identifier for the Glue Data Catalog.
         ConnectionName:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The name of the connection to the AWS Glue Data Catalog.
-      description: The database and table in the AWS Glue Data Catalog that is used for input or output data.
+            - description: The name of the connection to the Glue Data Catalog.
+      description: The database and table in the Glue Data Catalog that is used for input or output data.
     ReplaceBoolean:
       type: boolean
     ImportLabelsTaskRunProperties:
@@ -17945,11 +17946,11 @@ components:
         Command:
           allOf:
             - $ref: '#/components/schemas/JobCommand'
-            - description: The <code>JobCommand</code> that executes this job (required).
+            - description: The <code>JobCommand</code> that runs this job (required).
         DefaultArguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
-            - description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+            - description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by Glue</a> topic in the developer guide.</p>'
         NonOverridableArguments:
           allOf:
             - $ref: '#/components/schemas/GenericMap'
@@ -17966,7 +17967,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerValue'
             - deprecated: true
-              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of AWS Glue data processing units (DPUs) to allocate to this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
+              description: '<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p> <p>The number of Glue data processing units (DPUs) to allocate to this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p>This property is deprecated, use MaxCapacity instead.'
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -17974,7 +17975,7 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
+            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -17994,7 +17995,7 @@ components:
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p>'
+            - description: '<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p>'
       description: Specifies information used to update an existing job definition. The previous job definition is completely overwritten by this information.
     KeyList:
       type: array
@@ -18114,7 +18115,7 @@ components:
         InputRecordTables:
           allOf:
             - $ref: '#/components/schemas/GlueTables'
-            - description: A list of AWS Glue table definitions used by the transform.
+            - description: A list of Glue table definitions used by the transform.
         Parameters:
           allOf:
             - $ref: '#/components/schemas/TransformParameters'
@@ -18126,7 +18127,7 @@ components:
         LabelCount:
           allOf:
             - $ref: '#/components/schemas/LabelCount'
-            - description: 'A count identifier for the labeling files generated by AWS Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.'
+            - description: 'A count identifier for the labeling files generated by Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.'
         Schema:
           allOf:
             - $ref: '#/components/schemas/TransformSchema'
@@ -18134,15 +18135,15 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/RoleString'
-            - description: '<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform. </p> <ul> <li> <p>This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See <a href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach a Policy to IAM Users That Access AWS Glue</a>.</p> </li> <li> <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p> </li> </ul>'
+            - description: '<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform. </p> <ul> <li> <p>This role needs Glue service role permissions to allow access to resources in Glue. See <a href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach a Policy to IAM Users That Access Glue</a>.</p> </li> <li> <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p> </li> </ul>'
         GlueVersion:
           allOf:
             - $ref: '#/components/schemas/GlueVersionString'
-            - description: 'This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">AWS Glue Versions</a> in the developer guide.'
+            - description: 'This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions">Glue Versions</a> in the developer guide.'
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="http://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>. </p> <p> <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
+            - description: '<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="http://aws.amazon.com/glue/pricing/">Glue pricing page</a>. </p> <p> <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -18177,7 +18178,7 @@ components:
         MlUserDataEncryptionMode:
           allOf:
             - $ref: '#/components/schemas/MLUserDataEncryptionModeString'
-            - description: '<p>The encryption mode applied to user data. Valid values are:</p> <ul> <li> <p>DISABLED: encryption is disabled</p> </li> <li> <p>SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode applied to user data. Valid values are:</p> <ul> <li> <p>DISABLED: encryption is disabled</p> </li> <li> <p>SSEKMS: use of server-side encryption with Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p> </li> </ul>'
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -18301,11 +18302,11 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/NodeType'
-            - description: The type of AWS Glue component represented by the node.
+            - description: The type of Glue component represented by the node.
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The name of the AWS Glue component represented by the node.
+            - description: The name of the Glue component represented by the node.
         UniqueId:
           allOf:
             - $ref: '#/components/schemas/NameString'
@@ -18322,7 +18323,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CrawlerNodeDetails'
             - description: Details of the crawler when the node represents a crawler.
-      description: 'A node represents an AWS Glue component such as a trigger, or job, etc., that is part of a workflow.'
+      description: 'A node represents an Glue component such as a trigger, or job, etc., that is part of a workflow.'
     NodeIdList:
       type: array
       items:
@@ -18422,7 +18423,7 @@ components:
         SchemaReference:
           allOf:
             - $ref: '#/components/schemas/SchemaReference'
-            - description: '<p>An object that references a schema stored in the AWS Glue Schema Registry.</p> <p>When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.</p>'
+            - description: '<p>An object that references a schema stored in the Glue Schema Registry.</p> <p>When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.</p>'
       description: Describes the physical storage of table data.
     PartitionError:
       type: object
@@ -18704,7 +18705,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VersionLongNumber'
             - description: The version number of the schema.
-      description: An object that references a schema stored in the AWS Glue Schema Registry.
+      description: An object that references a schema stored in the Glue Schema Registry.
     SchemaVersionErrorItem:
       type: object
       properties:
@@ -19026,7 +19027,7 @@ components:
         JsonPath:
           allOf:
             - $ref: '#/components/schemas/JsonPath'
-            - description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+            - description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
       description: Specifies a JSON classifier to be updated.
     UpdateCsvClassifierRequest:
       type: object
@@ -19074,12 +19075,12 @@ components:
         Nodes:
           allOf:
             - $ref: '#/components/schemas/NodeList'
-            - description: A list of the the AWS Glue components belong to the workflow represented as nodes.
+            - description: A list of the the Glue components belong to the workflow represented as nodes.
         Edges:
           allOf:
             - $ref: '#/components/schemas/EdgeList'
             - description: A list of all the directed connections between the nodes belonging to the workflow.
-      description: A workflow graph represents the complete workflow containing all the AWS Glue components present in the workflow and all the directed connections between them.
+      description: A workflow graph represents the complete workflow containing all the Glue components present in the workflow and all the directed connections between them.
     WorkflowRunStatus:
       type: string
       enum:
