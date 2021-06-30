@@ -782,7 +782,7 @@ paths:
           name: daysBack
           required: false
           schema:
-            default: 45
+            default: 10
             title: Daysback
             type: integer
         - in: query
@@ -888,6 +888,128 @@ paths:
                 $ref: "#/components/schemas/HTTPValidationError"
           description: Validation Error
       summary: Listings by Region and Date
+      tags:
+        - Vehicle Data
+        - Ultra Plan Or Greater
+  /listingsByZipCode:
+    get:
+      description: >-
+        Returns a dealer's listings over up to the last 45 days in the
+        provided dealerhip's zip code. For example 92701.
+
+        Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
+
+        Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
+      operationId: listingsByZipCode_listingsByZipCode_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: zipCode
+          required: true
+          schema:
+            title: Zipcode
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+        - in: query
+          name: newCars
+          required: false
+          schema:
+            default: true
+            title: Newcars
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingResp"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Listings by ZipCode
+      tags:
+        - Vehicle Data
+        - Ultra Plan Or Greater
+  /listingsByZipCodeAndDate:
+    get:
+      description: >-
+        Returns a dealer's listings over up to the last 45 days in the
+        provided dealership's zip code. For example 92701.
+
+        Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
+
+        Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
+      operationId: listingsByZipCodeAndDate_listingsByZipCodeAndDate_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: zipCode
+          required: true
+          schema:
+            title: Zipcode
+            type: integer
+        - in: query
+          name: startDate
+          required: true
+          schema:
+            format: date
+            title: Startdate
+            type: string
+        - in: query
+          name: endDate
+          required: true
+          schema:
+            format: date
+            title: Enddate
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+        - in: query
+          name: newCars
+          required: false
+          schema:
+            default: true
+            title: Newcars
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingResp"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Listings by ZipCode and Date
       tags:
         - Vehicle Data
         - Ultra Plan Or Greater

@@ -1538,6 +1538,47 @@ paths:
       summary: Search channels
       tags:
         - Search
+  /search/video-playlists:
+    get:
+      callbacks:
+        searchTarget === search-index:
+          $ref: "#/components/callbacks/searchIndex"
+      operationId: searchPlaylists
+      parameters:
+        - description: >
+            String to search. If the user can make a remote URI search, and the
+            string is an URI then the PeerTube instance will fetch the remote
+            object and add it to its database. Then, you can use the REST API to
+            fetch the complete playlist information and interact with it.
+          in: query
+          name: search
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/count"
+        - $ref: "#/components/parameters/searchTarget"
+        - $ref: "#/components/parameters/sort"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/VideoPlaylist"
+                    type: array
+                  total:
+                    example: 1
+                    type: integer
+                type: object
+          description: successful operation
+        "500":
+          description: search index unavailable
+      summary: Search playlists
+      tags:
+        - Search
   /search/videos:
     get:
       callbacks:
@@ -3071,6 +3112,8 @@ paths:
                     properties:
                       id:
                         $ref: "#/components/schemas/VideoPlaylist/properties/id"
+                      shortUUID:
+                        $ref: "#/components/schemas/VideoPlaylist/properties/shortUUID"
                       uuid:
                         $ref: "#/components/schemas/VideoPlaylist/properties/uuid"
                     type: object
@@ -3487,7 +3530,7 @@ paths:
                   description: Live video/replay description
                   type: string
                 downloadEnabled:
-                  description: Enable or disable downloading for the replay of this live
+                  description: Enable or disable downloading for the replay of this live video
                   type: boolean
                 language:
                   $ref: "#/components/schemas/VideoLanguageSet"
@@ -4002,6 +4045,9 @@ paths:
                 description:
                   description: Video description
                   type: string
+                downloadEnabled:
+                  description: Enable or disable downloading for this video
+                  type: boolean
                 language:
                   $ref: "#/components/schemas/VideoLanguageSet"
                 licence:
@@ -4527,7 +4573,7 @@ components:
       schema:
         $ref: "#/components/schemas/id"
     idOrUUID:
-      description: The object id or uuid
+      description: The object id, uuid or short uuid
       in: path
       name: id
       required: true
@@ -4535,6 +4581,7 @@ components:
         oneOf:
           - $ref: "#/components/schemas/id"
           - $ref: "#/components/schemas/UUIDv4"
+          - $ref: "#/components/schemas/shortUUID"
     isLive:
       description: whether or not the video is a live
       in: query
@@ -6195,6 +6242,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/VideoScheduledUpdate"
           nullable: true
+        shortUUID:
+          allOf:
+            - $ref: "#/components/schemas/shortUUID"
         state:
           allOf:
             - $ref: "#/components/schemas/VideoStateConstant"
@@ -6691,6 +6741,9 @@ components:
           $ref: "#/components/schemas/AccountSummary"
         privacy:
           $ref: "#/components/schemas/VideoPlaylistPrivacyConstant"
+        shortUUID:
+          allOf:
+            - $ref: "#/components/schemas/shortUUID"
         thumbnailPath:
           type: string
         type:
@@ -6971,6 +7024,8 @@ components:
           properties:
             id:
               $ref: "#/components/schemas/Video/properties/id"
+            shortUUID:
+              $ref: "#/components/schemas/Video/properties/shortUUID"
             uuid:
               $ref: "#/components/schemas/Video/properties/uuid"
           type: object
@@ -7105,6 +7160,10 @@ components:
       format: password
       maxLength: 255
       minLength: 6
+      type: string
+    shortUUID:
+      description: translation of a uuid v4 with a bigger alphabet to have a shorter uuid
+      example: 2y84q2MQUMWPbiEcxNXMgC
       type: string
     username:
       description: immutable name of the user, used to find or mention its actor

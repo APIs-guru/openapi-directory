@@ -64,7 +64,7 @@ info:
      
     For anonymous users:  
 
-    * The API requests are restricted to a subset of all the available endpoints and/or endpoints features	
+    * The API requests are restricted to a subset of all the available endpoints and/or endpoints features  
 
     * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected 
 
@@ -77,7 +77,7 @@ info:
 
     * The API requests have access to all the available endpoints and endpoints features
 
-    * The API requests are limited to 8640 requests per 24 hour per API key, with concurrent requests queued
+    * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued
 
     * The API requests are limited to 2.5 seconds of execution time
 
@@ -180,9 +180,9 @@ paths:
       description: >
         Compute the Pearson correlation matrix of assets from either:  
 
-        * Their covariance matrix
+        * The assets returns
 
-        * Their returns
+        * The assets covariance matrix
 
 
         References
@@ -206,66 +206,71 @@ paths:
                 description: Computes the correlation matrix of 2 assets based on 4 returns per
                   asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
             schema:
-              properties:
-                assets:
-                  minimum: 2
-                  type: integer
-                assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j; required if assetsReturns is not provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1; required if assetsCorrelationMatrix is not
-                    provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-              required:
-                - assets
-              type: object
+              oneOf:
+                - properties:
+                    assets:
+                      items:
+                        properties:
+                          assetReturns:
+                            description: assetReturns[t] is the return of the asset from the time t to the
+                              time t+1, in percentage; all the assetReturns
+                              arrays must have the same length
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - assetReturns
+                        type: object
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCovarianceMatrix:
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
+                        and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                    - assetsCovarianceMatrix
+                  type: object
         required: true
       responses:
         "200":
           content:
             application/json:
               examples:
-                From covariance matrix:
+                Example:
                   description: Computed correlation matrix
                   value:
                     assetsCorrelationMatrix:
                       - - 1
-                        - -0.4999999999999999
-                      - - -0.4999999999999999
-                        - 1
-                From returns:
-                  description: Computed correlation matrix
-                  value:
-                    assetsCorrelationMatrix:
-                      - - 1
-                        - 0.9999999999999999
-                      - - 0.9999999999999999
+                        - 0.5
+                      - - 0.5
                         - 1
               schema:
                 properties:
@@ -495,11 +500,11 @@ paths:
       description: >
         Compute the covariance matrix of assets from either:  
 
-        * Their correlation matrix and their volatilities (i.e., standard deviations)
+        * The assets correlation matrix and their volatilities (i.e., standard deviations)
 
-        * Their correlation matrix and their variances
+        * The assets correlation matrix and their variances
 
-        * Their returns
+        * The assets returns
 
 
         References
@@ -539,63 +544,93 @@ paths:
                 description: Compute the covariance matrix of 2 assets based on 4 returns per
                   asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
             schema:
-              properties:
-                assets:
-                  minimum: 2
-                  type: integer
-                assetsCorrelationMatrix:
-                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                    i and the asset j; required if assetsReturns is not provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1; required if assetsCorrelationMatrix is not
-                    provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsVariances:
-                  description: assetsVariances[i] is the variance of the asset i; required if
-                    assetsCorrelationMatrix is provided and assetsVolatilities
-                    is not provided
-                  items:
-                    minimum: 0
-                    type: number
-                  minItems: 2
-                  type: array
-                assetsVolatilities:
-                  description: assetsVariances[i] is the volatility of the asset i; required if
-                    assetsCorrelationMatrix is provided and assetsVariances is
-                    not provided
-                  items:
-                    minimum: 0
-                    type: number
-                  minItems: 2
-                  type: array
-              required:
-                - assets
-              type: object
+              oneOf:
+                - properties:
+                    assets:
+                      items:
+                        properties:
+                          assetReturns:
+                            description: assetReturns[t] is the return of the asset from the time t to the
+                              time t+1, in percentage; all the assetReturns
+                              arrays must have the same length
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - assetReturns
+                        type: object
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCorrelationMatrix:
+                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset
+                        i and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                    assetsVariances:
+                      description: assetsVariances[i] is the variance of the asset i
+                      items:
+                        minimum: 0
+                        type: number
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                    - assetsCorrelationMatrix
+                    - assetsVariances
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCorrelationMatrix:
+                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset
+                        i and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                    assetsVolatilities:
+                      description: assetsVolatilities[i] is the volatility of the asset i
+                      items:
+                        minimum: 0
+                        type: number
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                    - assetsCorrelationMatrix
+                    - assetsVolatilities
+                  type: object
         required: true
       responses:
         "200":
@@ -666,34 +701,37 @@ paths:
                 description: Computes the sample covariance matrix of 2 assets based on 4
                   returns per asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0.01
-                      - 0.02
-                      - 0.01
-                    - - -0.02
-                      - -0.02
-                      - -0.04
-                      - -0.02
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0.01
+                        - 0.02
+                        - 0.01
+                    - assetReturns:
+                        - -0.02
+                        - -0.02
+                        - -0.04
+                        - -0.02
             schema:
               properties:
                 assets:
-                  minimum: 2
-                  type: integer
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1
                   items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
+                    properties:
+                      assetReturns:
+                        description: assetReturns[t] is the return of the asset from the time t to the
+                          time t+1, in percentage; all the assetReturns arrays
+                          must have the same length
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetReturns
+                    type: object
                   minItems: 2
                   type: array
               required:
                 - assets
-                - assetsReturns
               type: object
         required: true
       responses:
@@ -754,6 +792,7 @@ paths:
             schema:
               properties:
                 assets:
+                  description: The number of assets
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
@@ -818,33 +857,34 @@ paths:
                 description: Compute the arithmetic returns of 2 assets, one with prices 1,2 and
                   the other with prices 2,3,6
                 value:
-                  assets: 2
-                  assetsPrices:
-                    - - 1
-                      - 2
-                    - - 2
-                      - 3
-                      - 6
+                  assets:
+                    - assetPrices:
+                        - 1
+                        - 2
+                    - assetPrices:
+                        - 2
+                        - 3
+                        - 6
             schema:
               properties:
                 assets:
-                  description: The number of assets
-                  minimum: 1
-                  type: integer
-                assetsPrices:
-                  description: assetsPrices[i][t] is the price of the asset i at the time t
                   items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 2
-                    type: array
+                    properties:
+                      assetPrices:
+                        description: assetPrices[t] is the price of the asset at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetPrices
+                    type: object
                   minItems: 1
                   type: array
               required:
                 - assets
-                - assetsPrices
               type: object
         required: true
       responses:
@@ -869,8 +909,8 @@ paths:
                     items:
                       properties:
                         assetReturns:
-                          description: assetReturns[t] is the return of the asset from the time t to the
-                            time t+1, in percentage
+                          description: assetReturns[t] is the arithmetic return of the asset from the time
+                            t to the time t+1, in percentage
                           items:
                             type: number
                           type: array
@@ -889,7 +929,8 @@ paths:
   /assets/returns/average:
     post:
       description: >
-        Compute the arithmetic average return of one or several asset(s).
+        Compute the arithmetic average of the return(s) of one or several
+        asset(s).
 
 
         References
@@ -903,32 +944,33 @@ paths:
                 description: Compute the arithmetic average return of 2 assets, one with returns
                   10%, -5% and the other with returns 0%,-1%,1%
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.1
-                      - -0.05
-                    - - 0
-                      - -0.01
-                      - 0.01
+                  assets:
+                    - assetReturns:
+                        - 0.1
+                        - -0.05
+                    - assetReturns:
+                        - 0
+                        - -0.01
+                        - 0.01
             schema:
               properties:
                 assets:
-                  description: The number of assets
-                  minimum: 1
-                  type: integer
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1
                   items:
-                    items:
-                      type: number
-                    minItems: 1
-                    type: array
+                    properties:
+                      assetReturns:
+                        description: assetReturns[t] is the return of the asset from the time t to the
+                          time t+1, in percentage
+                        items:
+                          type: number
+                        minItems: 1
+                        type: array
+                    required:
+                      - assetReturns
+                    type: object
                   minItems: 1
                   type: array
               required:
                 - assets
-                - assetsReturns
               type: object
         required: true
       responses:
@@ -967,9 +1009,9 @@ paths:
     post:
       description: |
         Compute the variances of assets from either:  
-        * Their returns
-        * Their covariance matrix
-        * Their volatilities
+        * The assets returns
+        * The assets covariance matrix
+        * The assets volatilities
 
         References
         * [Wikipedia, Variance](https://en.wikipedia.org/wiki/Variance)        
@@ -990,16 +1032,17 @@ paths:
               From returns:
                 description: Compute the variances of 2 assets based on 4 returns per asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
               From volatilities:
                 description: Compute the volatilities of 2 assets based on their volatilities
                 value:
@@ -1008,44 +1051,62 @@ paths:
                     - 0.1
                     - 0.05
             schema:
-              properties:
-                assets:
-                  minimum: 1
-                  type: integer
-                assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j; required if assetsReturns is not provided
-                    and assetsVolatilities is not provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1; required if assetsCovarianceMatrix is not provided
-                    and assetsVolatilities is not provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 1
-                  type: array
-                assetsVolatilities:
-                  description: assetsVolatilities[i] is the volatility of the asset i; required if
-                    assetsReturns is not provided and assetsCovarianceMatrix is
-                    not provided
-                  items:
-                    minimum: 0
-                    type: number
-                  minItems: 1
-                  type: array
-              required:
-                - assets
-              type: object
+              oneOf:
+                - properties:
+                    assets:
+                      items:
+                        properties:
+                          assetReturns:
+                            description: assetReturns[t] is the return of the asset from the time t to the
+                              time t+1, in percentage; all the assetReturns
+                              arrays must have the same length
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - assetReturns
+                        type: object
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCovarianceMatrix:
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
+                        and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                    - assetsCovarianceMatrix
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 1
+                      type: integer
+                    assetsVolatilities:
+                      description: assetsVolatilities[i] is the volatility of the asset i
+                      items:
+                        minimum: 0
+                        type: number
+                      minItems: 1
+                      type: array
+                  required:
+                    - assets
+                    - assetsVolatilities
+                  type: object
         required: true
       responses:
         "200":
@@ -1094,7 +1155,7 @@ paths:
   /assets/variances/sample:
     post:
       description: >
-        Compute the sample variances of assets from their returns.
+        Compute the sample variances of assets from the assets returns.
                 
         > This endpoint is similar to the endpoint [`/assets/variances`](#post-/assets/variances), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the variances.
 
@@ -1110,31 +1171,34 @@ paths:
                 description: Compute the sample variances of 2 assets based on 4 returns per
                   asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0.01
-                      - 0.02
-                      - 0.01
-                    - - -0.02
-                      - -0.02
-                      - -0.04
-                      - -0.02
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0.01
+                        - 0.02
+                        - 0.01
+                    - assetReturns:
+                        - -0.02
+                        - -0.02
+                        - -0.04
+                        - -0.02
             schema:
               properties:
                 assets:
-                  minimum: 1
-                  type: integer
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1; required if assetsCovarianceMatrix is not provided
-                    and assetsVolatilities is not provided
                   items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 1
+                    properties:
+                      assetReturns:
+                        description: assetReturns[t] is the return of the asset from the time t to the
+                          time t+1, in percentage; all the assetReturns arrays
+                          must have the same length
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetReturns
+                    type: object
+                  minItems: 2
                   type: array
               required:
                 - assets
@@ -1178,11 +1242,11 @@ paths:
         Compute the volatilities (i.e., standard deviations) of assets from
         either:  
 
-        * Their returns
+        * The assets returns
 
-        * Their covariance matrix
+        * The assets covariance matrix
 
-        * Their variances matrix
+        * The assets variances
 
 
         References
@@ -1205,16 +1269,17 @@ paths:
               From returns:
                 description: Compute the volatilities of 2 assets based on 4 returns per asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
-                    - - 0.01
-                      - 0
-                      - 0.02
-                      - -0.03
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
+                    - assetReturns:
+                        - 0.01
+                        - 0
+                        - 0.02
+                        - -0.03
               From variances:
                 description: Compute the volatilities of 2 assets based on their variances
                 value:
@@ -1223,44 +1288,62 @@ paths:
                     - 0.01
                     - 0.0025
             schema:
-              properties:
-                assets:
-                  minimum: 1
-                  type: integer
-                assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j; required if assetsReturns is not provided
-                    and assetsVariances is not provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1; required if assetsCovarianceMatrix is not provided
-                    and assetsVariances is not provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 1
-                  type: array
-                assetsVariances:
-                  description: assetsVariances[i] is the variance of the asset i; required if
-                    assetsReturns is not provided and assetsCovarianceMatrix is
-                    not provided
-                  items:
-                    minimum: 0
-                    type: number
-                  minItems: 1
-                  type: array
-              required:
-                - assets
-              type: object
+              oneOf:
+                - properties:
+                    assets:
+                      items:
+                        properties:
+                          assetReturns:
+                            description: assetReturns[t] is the return of the asset from the time t to the
+                              time t+1, in percentage; all the assetReturns
+                              arrays must have the same length
+                            items:
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - assetReturns
+                        type: object
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCovarianceMatrix:
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
+                        and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                  required:
+                    - assets
+                    - assetsCovarianceMatrix
+                  type: object
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 1
+                      type: integer
+                    assetsVariances:
+                      description: assetsVariances[i] is the variance of the asset i
+                      items:
+                        minimum: 0
+                        type: number
+                      minItems: 1
+                      type: array
+                  required:
+                    - assets
+                    - assetsVariances
+                  type: object
         required: true
       responses:
         "200":
@@ -1310,7 +1393,7 @@ paths:
     post:
       description: >
         Compute the sample volatilities (i.e., sample standard deviations)
-        of assets from their returns.
+        of assets from the assets returns.
 
 
         > This endpoint is similar to the endpoint [`/assets/volatilities`](#post-/assets/volatilities), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the volatilities.
@@ -1327,30 +1410,34 @@ paths:
                 description: Compute the sample volatilities of 2 assets based on 4 returns per
                   asset
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0.01
-                      - 0.02
-                      - 0.01
-                    - - -0.02
-                      - -0.02
-                      - -0.04
-                      - -0.02
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0.01
+                        - 0.02
+                        - 0.01
+                    - assetReturns:
+                        - -0.02
+                        - -0.02
+                        - -0.04
+                        - -0.02
             schema:
               properties:
                 assets:
-                  minimum: 1
-                  type: integer
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1
                   items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 1
+                    properties:
+                      assetReturns:
+                        description: assetReturns[t] is the return of the asset from the time t to the
+                          time t+1, in percentage; all the assetReturns arrays
+                          must have the same length
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetReturns
+                    type: object
+                  minItems: 2
                   type: array
               required:
                 - assets
@@ -1666,9 +1753,10 @@ paths:
                       - 0.0005
                     - - 0.0005
                       - 0.01
-                  assetsWeights:
-                    - - 0.5
-                      - 0.5
+                  portfolios:
+                    - assetsWeights:
+                        - 0.5
+                        - 0.5
             schema:
               properties:
                 assets:
@@ -1685,20 +1773,27 @@ paths:
                     type: array
                   minItems: 2
                   type: array
-                assetsWeights:
-                  description: assetsWeights[p][i] is the weight of the asset i in the portfolio
-                    p, in percentage
+                portfolios:
                   items:
-                    items:
-                      maximum: 1
-                      minimum: 0
-                      type: number
-                    type: array
+                    properties:
+                      assetsWeights:
+                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in
+                          percentage
+                        items:
+                          maximum: 1
+                          minimum: 0
+                          type: number
+                        minItems: 1
+                        type: array
+                    required:
+                      - assetsWeights
+                    type: object
+                  minItems: 1
                   type: array
               required:
                 - assets
                 - assetsCovarianceMatrix
-                - assetsWeights
+                - portfolios
               type: object
         required: true
       responses:
@@ -1751,29 +1846,33 @@ paths:
                 description: Computes the drawdown (underwater) curve and the worst 10 drawdowns
                   of 1 portfolio
                 value:
-                  portfoliosValues:
-                    - - 100
-                      - 95
-                      - 100
-                      - 90
-                      - 85
-                      - 70
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
             schema:
               properties:
-                portfoliosValues:
-                  description: portfoliosValues[p][t] is the value of the portfolio p at the time
-                    t
+                portfolios:
                   items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 1
-                    type: array
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
                   minItems: 1
                   type: array
               required:
-                - portfoliosValues
+                - portfolios
               type: object
         required: true
       responses:
@@ -2276,58 +2375,80 @@ paths:
                   assetsReturns:
                     - 0.01
                     - 0.05
-                  assetsWeights:
-                    - - 1
-                      - 0
-                    - - 0
-                      - 1
+                  portfolios:
+                    - assetsWeights:
+                        - 1
+                        - 0
+                    - assetsWeights:
+                        - 0
+                        - 1
               From portfolio values:
                 description: Compute the arithmetic return of 1 portfolio based on portfolio
                   values
                 value:
-                  portfoliosValues:
-                    - - 100
-                      - 95
-                      - 100
-                      - 90
-                      - 85
-                      - 70
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
             schema:
-              properties:
-                assets:
-                  description: The number of assets; required if assetsReturns is provided
-                  minimum: 1
-                  type: integer
-                assetsReturns:
-                  description: assetsReturns[i] is the arithmetic return of asset i; required if
-                    portfoliosValues is not provided
-                  items:
-                    type: number
-                  minItems: 1
-                  type: array
-                assetsWeights:
-                  description: assetsWeights[p][i] is the weight of the asset i in the portfolio
-                    p, in percentage; required if assetsReturns is provided
-                  items:
-                    items:
-                      maximum: 1
-                      minimum: 0
-                      type: number
-                    type: array
-                  minItems: 1
-                  type: array
-                portfoliosValues:
-                  description: portfoliosValues[p][t] is the value of the portfolio p at the time
-                    t; required if assetsReturns is not provided
-                  items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 1
-                    type: array
-                  minItems: 1
-                  type: array
+              oneOf:
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 1
+                      type: integer
+                    assetsReturns:
+                      description: assetsReturns[i] is the arithmetic return of asset i
+                      items:
+                        type: number
+                      minItems: 1
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          assetsWeights:
+                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in
+                              percentage
+                            items:
+                              maximum: 1
+                              minimum: 0
+                              type: number
+                            minItems: 1
+                            type: array
+                        required:
+                          - assetsWeights
+                        type: object
+                      minItems: 1
+                      type: array
+                  required:
+                    - portfolios
+                    - assets
+                    - assetsReturns
+                  type: object
+                - properties:
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioValues:
+                            description: portfolioValues[t] is the value of the portfolio at the time t
+                            items:
+                              exclusiveMinimum: true
+                              minimum: 0
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioValues
+                        type: object
+                      minItems: 1
+                      type: array
+                  required:
+                    - portfolios
+                  type: object
               type: object
         required: true
       responses:
@@ -2365,8 +2486,8 @@ paths:
   /portfolio/analysis/returns/average:
     post:
       description: >
-        Compute the arithmetic average return of one or several
-        portfolio(s).
+        Compute the arithmetic average of the arithmetic return(s) of one
+        or several portfolio(s).
 
 
         References
@@ -2379,29 +2500,33 @@ paths:
               From portfolio values:
                 description: Compute the arithmetic average return of 1 portfolio
                 value:
-                  portfoliosValues:
-                    - - 100
-                      - 95
-                      - 100
-                      - 90
-                      - 85
-                      - 70
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
             schema:
               properties:
-                portfoliosValues:
-                  description: portfoliosValues[p][t] is the value of the portfolio p at the time
-                    t
+                portfolios:
                   items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 1
-                    type: array
+                    properties:
+                      portfolioValues:
+                        description: portfolioValues[t] is the value of the portfolio at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        type: array
+                    required:
+                      - portfolioValues
+                    type: object
                   minItems: 1
                   type: array
               required:
-                - portfoliosValues
+                - portfolios
               type: object
         required: true
       responses:
@@ -2467,75 +2592,100 @@ paths:
                   assetsReturns:
                     - 0.01
                     - 0.05
-                  assetsWeights:
-                    - - 1
-                      - 0
-                    - - 0
-                      - 1
+                  portfolios:
+                    - assetsWeights:
+                        - 1
+                        - 0
+                    - assetsWeights:
+                        - 0
+                        - 1
                   riskFreeRate: 0
               From portfolio values:
                 description: Compute the Sharpe ratio of 1 portfolio based on portfolio values
                 value:
-                  portfoliosValues:
-                    - - 100
-                      - 95
-                      - 100
-                      - 90
-                      - 85
-                      - 70
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
                   riskFreeRate: 0
             schema:
-              properties:
-                assets:
-                  description: The number of assets; required if assetsReturns is provided
-                  minimum: 2
-                  type: integer
-                assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j; required if assetsReturns is provided
-                  items:
-                    items:
+              oneOf:
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCovarianceMatrix:
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
+                        and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                    assetsReturns:
+                      description: assetsReturns[i] is the arithmetic return of asset i
+                      items:
+                        type: number
+                      minItems: 2
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          assetsWeights:
+                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in
+                              percentage
+                            items:
+                              maximum: 1
+                              minimum: 0
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - assetsWeights
+                        type: object
+                      minItems: 1
+                      type: array
+                    riskFreeRate:
+                      description: The risk free rate
                       type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsReturns:
-                  description: assetsReturns[i] is the arithmetic return of asset i; required if
-                    portfoliosValues is not provided
-                  items:
-                    type: number
-                  minItems: 1
-                  type: array
-                assetsWeights:
-                  description: assetsWeights[p][i] is the weight of the asset i in the portfolio
-                    p, in percentage; required if assetsReturns is provided
-                  items:
-                    items:
-                      maximum: 1
-                      minimum: 0
+                  required:
+                    - portfolios
+                    - riskFreeRate
+                    - assets
+                    - assetsReturns
+                    - assetsCovarianceMatrix
+                  type: object
+                - properties:
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioValues:
+                            description: portfolioValues[t] is the value of the portfolio at the time t
+                            items:
+                              exclusiveMinimum: true
+                              minimum: 0
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioValues
+                        type: object
+                      minItems: 1
+                      type: array
+                    riskFreeRate:
+                      description: The risk free rate
                       type: number
-                    type: array
-                  minItems: 1
-                  type: array
-                portfoliosValues:
-                  description: portfoliosValues[p][t] is the value of the portfolio p at the time
-                    t; required if assetsReturns is not provided
-                  items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 1
-                    type: array
-                  minItems: 1
-                  type: array
-                riskFreeRate:
-                  description: The risk free rate
-                  type: number
-              required:
-                - assets
-                - riskFreeRate
+                  required:
+                    - portfolios
+                    - riskFreeRate
+                  type: object
               type: object
         required: true
       responses:
@@ -2600,63 +2750,83 @@ paths:
                       - 0.0005
                     - - 0.0005
                       - 0.01
-                  assetsWeights:
-                    - - 1
-                      - 0
-                    - - 0
-                      - 1
+                  portfolios:
+                    - assetsWeights:
+                        - 1
+                        - 0
+                    - assetsWeights:
+                        - 0
+                        - 1
               From portfolio values:
                 description: Compute the volatility of 1 portfolio based on portfolio values
                 value:
-                  portfoliosValues:
-                    - - 100
-                      - 95
-                      - 100
-                      - 90
-                      - 85
-                      - 70
+                  portfolios:
+                    - portfolioValues:
+                        - 100
+                        - 95
+                        - 100
+                        - 90
+                        - 85
+                        - 70
             schema:
-              properties:
-                assets:
-                  description: The number of assets; required if assetsCovarianceMatrix is
-                    provided
-                  minimum: 2
-                  type: integer
-                assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j; required if portfoliosValues is not
-                    provided
-                  items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
-                  minItems: 2
-                  type: array
-                assetsWeights:
-                  description: assetsWeights[p][i] is the weight of the asset i in the portfolio
-                    p, in percentage; required if assetsCovarianceMatrix is
-                    provided
-                  items:
-                    items:
-                      maximum: 1
-                      minimum: 0
-                      type: number
-                    type: array
-                  minItems: 1
-                  type: array
-                portfoliosValues:
-                  description: portfoliosValues[p][t] is the value of the portfolio p at the time
-                    t; required if assetsCovarianceMatrix is not provided
-                  items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 1
-                    type: array
-                  minItems: 1
-                  type: array
+              oneOf:
+                - properties:
+                    assets:
+                      description: The number of assets
+                      minimum: 2
+                      type: integer
+                    assetsCovarianceMatrix:
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
+                        and the asset j
+                      items:
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                      minItems: 2
+                      type: array
+                    portfolios:
+                      items:
+                        properties:
+                          assetsWeights:
+                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in
+                              percentage
+                            items:
+                              maximum: 1
+                              minimum: 0
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - assetsWeights
+                        type: object
+                      minItems: 1
+                      type: array
+                  required:
+                    - portfolios
+                    - assets
+                    - assetsCovarianceMatrix
+                  type: object
+                - properties:
+                    portfolios:
+                      items:
+                        properties:
+                          portfolioValues:
+                            description: portfolioValues[t] is the value of the portfolio at the time t
+                            items:
+                              exclusiveMinimum: true
+                              minimum: 0
+                              type: number
+                            minItems: 2
+                            type: array
+                        required:
+                          - portfolioValues
+                        type: object
+                      minItems: 1
+                      type: array
+                  required:
+                    - portfolios
+                  type: object
               type: object
         required: true
       responses:
@@ -2698,21 +2868,21 @@ paths:
         Compute an investable portfolio as close as possible, in terms of
         assets weights, to a desired portfolio, taking into account:
 
-        * The assets weights in the desired portfolio 
+        * The desired assets weights
 
-        * The assets groups weights in the desired portfolio 
+        * The desired assets groups weights
 
-        * The maximum assets groups weights in the desired portfolio 
+        * The desired maximum assets groups weights
 
-        * The monetary value of the investable portfolio
+        * The prices of the assets
 
-        * The prices of the assets in the investable portfolio
+        * The portfolio value
 
-        * The possibility to buy fractional shares for some assets in the investable portfolio
+        * The requirement to purchase some assets by round lots or by odd lots
 
-        * The requirement to buy shares by round lots for some assets in the investable portfolio, with a possible minimum quantity of such lots
+        * The possibility to purchase some assets by a fractional quantity of shares
 
-        * The requirement to invest a minimum monetary amount for some assets in the investable portfolio
+        * The requirement to purchase a minimum number of shares, or a minimum monetary value, for some assets
 
 
         References
@@ -2779,8 +2949,9 @@ paths:
                   minItems: 1
                   type: array
                 assetsGroupsWeights:
-                  description: assetsGroupsWeights[i] is the (possibly null) weight of the assets
-                    group k in the portfolio, in percentage
+                  description: assetsGroupsWeights[i] is the desired weight of the assets group k
+                    in the portfolio, in percentage (can be null to indicate no
+                    specific desire)
                   items:
                     maximum: 1
                     minimum: 0
@@ -2788,8 +2959,9 @@ paths:
                   minItems: 1
                   type: array
                 assetsMinimumNotionalValues:
-                  description: assetsMinimumNotionalValues[i] is the minimum monetary amount to
-                    purchase for the asset i when included in the portfolio
+                  description: assetsMinimumNotionalValues[i] is the minimum monetary value that
+                    the position in the asset i is required to represent when
+                    the asset i is included in the portfolio
                   items:
                     default: 0
                     minimum: 0
@@ -2797,8 +2969,11 @@ paths:
                   minItems: 2
                   type: array
                 assetsMinimumPositions:
-                  description: assetsMinimumPositions[i] is the minimum number of shares to
-                    purchase for the asset i when included in the portfolio
+                  description: assetsMinimumPositions[i] is the minimum number of shares of the
+                    asset i that is required to purchase when the asset i is
+                    included in the portfolio (usual values are the same as for
+                    assetsSizeLots, because these two values are most of the
+                    time identical)
                   items:
                     default: 1
                     exclusiveMinimum: true
@@ -2815,8 +2990,12 @@ paths:
                   minItems: 2
                   type: array
                 assetsSizeLots:
-                  description: assetsSizeLots[i] is the number of shares by which to purchase the
-                    asset i
+                  description: assetsSizeLots[i] is the number of shares by which it is required
+                    to purchase the asset i (usual values are 1 if the asset
+                    needs to be purchased share by share, 100 if the asset needs
+                    to be purchased by an integer multiple of 100 shares, and
+                    1/1000000 - e.g. for Robinhood broker - if the asset can be
+                    purchased by fractional shares)
                   items:
                     default: 1
                     exclusiveMinimum: true
@@ -2825,8 +3004,9 @@ paths:
                   minItems: 2
                   type: array
                 assetsWeights:
-                  description: assetsWeights[i] is the (possibly null) weight of the asset i in
-                    the portfolio, in percentage
+                  description: assetsWeights[i] is the desired weight of the asset i in the
+                    portfolio, in percentage (can be null to indicate no
+                    specific desire)
                   items:
                     maximum: 1
                     minimum: 0
@@ -2834,9 +3014,9 @@ paths:
                   minItems: 2
                   type: array
                 maximumAssetsGroupsWeights:
-                  description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                    group k in the portfolio, in percentage between 0 and 1 if
-                    assetsGroups is provided
+                  description: maximumAssetsGroupsWeights[k] is the maximum desired weight of the
+                    assets group k in the portfolio, in percentage between 0 and
+                    1 if assetsGroups is provided
                   items:
                     maximum: 1
                     minimum: 0
@@ -2935,14 +3115,15 @@ paths:
                 description: Construct a portfolio mimicking a benchmark with null returns,
                   using 2 assets with opposite returns
                 value:
-                  assets: 2
-                  assetsReturns:
-                    - - 0.01
-                      - 0.02
-                      - 0.03
-                    - - -0.01
-                      - -0.02
-                      - -0.03
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0.02
+                        - 0.03
+                    - assetReturns:
+                        - -0.01
+                        - -0.02
+                        - -0.03
                   benchmarkReturns:
                     - 0
                     - 0
@@ -2950,22 +3131,25 @@ paths:
             schema:
               properties:
                 assets:
-                  description: The number of assets
-                  minimum: 2
-                  type: integer
-                assetsReturns:
-                  description: assetsReturns[i][t] is the return of asset i from the time t to the
-                    time t+1
                   items:
-                    items:
-                      type: number
-                    minItems: 2
-                    type: array
+                    properties:
+                      assetReturns:
+                        description: assetReturns[t] is the return of the asset from the time t to the
+                          time t+1, in percentage; all the assetReturns arrays
+                          must have the same length
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetReturns
+                    type: object
                   minItems: 2
                   type: array
                 benchmarkReturns:
                   description: benchmarkReturns[t] is the return of the benchmark from the time t
-                    to the time t+1
+                    to the time t+1; the benchmarkReturns array must have the
+                    same length as all the assetReturns arrays
                   items:
                     type: number
                   minItems: 2
@@ -3035,7 +3219,6 @@ paths:
                   type: object
               required:
                 - assets
-                - assetsReturns
                 - benchmarkReturns
               type: object
         required: true

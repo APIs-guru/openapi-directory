@@ -396,6 +396,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    boleto_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     card_issuing:
                       properties:
                         requested:
@@ -4029,6 +4035,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    boleto_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     card_issuing:
                       properties:
                         requested:
@@ -4990,6 +5002,12 @@ paths:
                       title: capability_param
                       type: object
                     bancontact_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    boleto_payments:
                       properties:
                         requested:
                           type: boolean
@@ -12700,6 +12718,34 @@ paths:
                           x-stripeBypassValidation: true
                       title: payment_method_options_param
                       type: object
+                    boleto:
+                      properties:
+                        expires_after_days:
+                          type: integer
+                      title: payment_method_options_param
+                      type: object
+                    oxxo:
+                      properties:
+                        expires_after_days:
+                          type: integer
+                      title: payment_method_options_param
+                      type: object
+                    wechat_pay:
+                      properties:
+                        app_id:
+                          maxLength: 5000
+                          type: string
+                        client:
+                          enum:
+                            - android
+                            - ios
+                            - web
+                          type: string
+                          x-stripeBypassValidation: true
+                      required:
+                        - client
+                      title: payment_method_options_param
+                      type: object
                   title: payment_method_options_param
                   type: object
                 payment_method_types:
@@ -12725,15 +12771,18 @@ paths:
                       - alipay
                       - bacs_debit
                       - bancontact
+                      - boleto
                       - card
                       - eps
                       - fpx
                       - giropay
                       - grabpay
                       - ideal
+                      - oxxo
                       - p24
                       - sepa_debit
                       - sofort
+                      - wechat_pay
                     type: string
                     x-stripeBypassValidation: true
                   type: array
@@ -15105,6 +15154,7 @@ paths:
                           - gb_vat
                           - hk_br
                           - id_npwp
+                          - il_vat
                           - in_gst
                           - jp_cn
                           - jp_rn
@@ -19181,11 +19231,11 @@ paths:
                   description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`,
                     `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`,
                     `ca_pst_sk`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`,
-                    `eu_vat`, `gb_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`,
-                    `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`,
-                    `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`,
-                    `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or
-                    `za_vat`
+                    `eu_vat`, `gb_vat`, `hk_br`, `id_npwp`, `il_vat`, `in_gst`,
+                    `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`,
+                    `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`,
+                    `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`,
+                    or `za_vat`
                   enum:
                     - ae_trn
                     - au_abn
@@ -19204,6 +19254,7 @@ paths:
                     - gb_vat
                     - hk_br
                     - id_npwp
+                    - il_vat
                     - in_gst
                     - jp_cn
                     - jp_rn
@@ -22490,6 +22541,7 @@ paths:
                               - ideal
                               - sepa_debit
                               - sofort
+                              - wechat_pay
                             type: string
                             x-stripeBypassValidation: true
                           type: array
@@ -22711,6 +22763,7 @@ paths:
                         - gb_vat
                         - hk_br
                         - id_npwp
+                        - il_vat
                         - in_gst
                         - jp_cn
                         - jp_rn
@@ -23322,6 +23375,7 @@ paths:
                         - gb_vat
                         - hk_br
                         - id_npwp
+                        - il_vat
                         - in_gst
                         - jp_cn
                         - jp_rn
@@ -24188,6 +24242,7 @@ paths:
                               - ideal
                               - sepa_debit
                               - sofort
+                              - wechat_pay
                             type: string
                             x-stripeBypassValidation: true
                           type: array
@@ -32546,6 +32601,15 @@ paths:
                           type: string
                       title: billing_details_inner_params
                       type: object
+                    boleto:
+                      properties:
+                        tax_id:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - tax_id
+                      title: param
+                      type: object
                     eps:
                       properties:
                         bank:
@@ -32718,6 +32782,7 @@ paths:
                         - au_becs_debit
                         - bacs_debit
                         - bancontact
+                        - boleto
                         - eps
                         - fpx
                         - giropay
@@ -32727,8 +32792,13 @@ paths:
                         - p24
                         - sepa_debit
                         - sofort
+                        - wechat_pay
                       type: string
                       x-stripeBypassValidation: true
+                    wechat_pay:
+                      properties: {}
+                      title: param
+                      type: object
                   required:
                     - type
                   title: payment_method_data_params
@@ -32804,6 +32874,16 @@ paths:
                                 - fr
                                 - nl
                               type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    boleto:
+                      anyOf:
+                        - properties:
+                            expires_after_days:
+                              type: integer
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -32923,6 +33003,26 @@ paths:
                                 - nl
                                 - pl
                               type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    wechat_pay:
+                      anyOf:
+                        - properties:
+                            app_id:
+                              maxLength: 5000
+                              type: string
+                            client:
+                              enum:
+                                - android
+                                - ios
+                                - web
+                              type: string
+                              x-stripeBypassValidation: true
+                          required:
+                            - client
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -33359,6 +33459,15 @@ paths:
                           type: string
                       title: billing_details_inner_params
                       type: object
+                    boleto:
+                      properties:
+                        tax_id:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - tax_id
+                      title: param
+                      type: object
                     eps:
                       properties:
                         bank:
@@ -33531,6 +33640,7 @@ paths:
                         - au_becs_debit
                         - bacs_debit
                         - bancontact
+                        - boleto
                         - eps
                         - fpx
                         - giropay
@@ -33540,8 +33650,13 @@ paths:
                         - p24
                         - sepa_debit
                         - sofort
+                        - wechat_pay
                       type: string
                       x-stripeBypassValidation: true
+                    wechat_pay:
+                      properties: {}
+                      title: param
+                      type: object
                   required:
                     - type
                   title: payment_method_data_params
@@ -33617,6 +33732,16 @@ paths:
                                 - fr
                                 - nl
                               type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    boleto:
+                      anyOf:
+                        - properties:
+                            expires_after_days:
+                              type: integer
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -33736,6 +33861,26 @@ paths:
                                 - nl
                                 - pl
                               type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    wechat_pay:
+                      anyOf:
+                        - properties:
+                            app_id:
+                              maxLength: 5000
+                              type: string
+                            client:
+                              enum:
+                                - android
+                                - ios
+                                - web
+                              type: string
+                              x-stripeBypassValidation: true
+                          required:
+                            - client
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -34322,6 +34467,15 @@ paths:
                           type: string
                       title: billing_details_inner_params
                       type: object
+                    boleto:
+                      properties:
+                        tax_id:
+                          maxLength: 5000
+                          type: string
+                      required:
+                        - tax_id
+                      title: param
+                      type: object
                     eps:
                       properties:
                         bank:
@@ -34494,6 +34648,7 @@ paths:
                         - au_becs_debit
                         - bacs_debit
                         - bancontact
+                        - boleto
                         - eps
                         - fpx
                         - giropay
@@ -34503,8 +34658,13 @@ paths:
                         - p24
                         - sepa_debit
                         - sofort
+                        - wechat_pay
                       type: string
                       x-stripeBypassValidation: true
+                    wechat_pay:
+                      properties: {}
+                      title: param
+                      type: object
                   required:
                     - type
                   title: payment_method_data_params
@@ -34580,6 +34740,16 @@ paths:
                                 - fr
                                 - nl
                               type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    boleto:
+                      anyOf:
+                        - properties:
+                            expires_after_days:
+                              type: integer
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -34699,6 +34869,26 @@ paths:
                                 - nl
                                 - pl
                               type: string
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    wechat_pay:
+                      anyOf:
+                        - properties:
+                            app_id:
+                              maxLength: 5000
+                              type: string
+                            client:
+                              enum:
+                                - android
+                                - ios
+                                - web
+                              type: string
+                              x-stripeBypassValidation: true
+                          required:
+                            - client
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -34883,6 +35073,7 @@ paths:
               - au_becs_debit
               - bacs_debit
               - bancontact
+              - boleto
               - card
               - eps
               - fpx
@@ -34893,6 +35084,7 @@ paths:
               - p24
               - sepa_debit
               - sofort
+              - wechat_pay
             type: string
             x-stripeBypassValidation: true
           style: form
@@ -34977,6 +35169,9 @@ paths:
               billing_details:
                 explode: true
                 style: deepObject
+              boleto:
+                explode: true
+                style: deepObject
               card:
                 explode: true
                 style: deepObject
@@ -35014,6 +35209,9 @@ paths:
                 explode: true
                 style: deepObject
               sofort:
+                explode: true
+                style: deepObject
+              wechat_pay:
                 explode: true
                 style: deepObject
             schema:
@@ -35122,6 +35320,17 @@ paths:
                       maxLength: 5000
                       type: string
                   title: billing_details_inner_params
+                  type: object
+                boleto:
+                  description: If this is a `boleto` PaymentMethod, this hash contains details
+                    about the Boleto payment method.
+                  properties:
+                    tax_id:
+                      maxLength: 5000
+                      type: string
+                  required:
+                    - tax_id
+                  title: param
                   type: object
                 card:
                   anyOf:
@@ -35377,6 +35586,7 @@ paths:
                     - au_becs_debit
                     - bacs_debit
                     - bancontact
+                    - boleto
                     - card
                     - eps
                     - fpx
@@ -35387,8 +35597,15 @@ paths:
                     - p24
                     - sepa_debit
                     - sofort
+                    - wechat_pay
                   type: string
                   x-stripeBypassValidation: true
+                wechat_pay:
+                  description: If this is an `wechat_pay` PaymentMethod, this hash contains
+                    details about the wechat_pay payment method.
+                  properties: {}
+                  title: param
+                  type: object
               type: object
         required: false
       responses:
@@ -50802,6 +51019,14 @@ components:
             - inactive
             - pending
           type: string
+        boleto_payments:
+          description: The status of the boleto payments capability of the account, or
+            whether the account can directly process boleto charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         card_issuing:
           description: The status of the card issuing capability of the account, or
             whether you can use Issuing to distribute funds on cards
@@ -53917,10 +54142,16 @@ components:
       properties:
         acss_debit:
           $ref: "#/components/schemas/checkout_acss_debit_payment_method_options"
+        boleto:
+          $ref: "#/components/schemas/payment_method_options_boleto"
+        oxxo:
+          $ref: "#/components/schemas/payment_method_options_oxxo"
       title: CheckoutSessionPaymentMethodOptions
       type: object
       x-expandableFields:
         - acss_debit
+        - boleto
+        - oxxo
     connect_collection_transfer:
       description: ""
       properties:
@@ -58615,6 +58846,7 @@ components:
               - ideal
               - sepa_debit
               - sofort
+              - wechat_pay
             type: string
             x-stripeBypassValidation: true
           nullable: true
@@ -58633,7 +58865,7 @@ components:
             `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`,
             `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`,
             `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`,
-            `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
+            `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, or `unknown`
           enum:
             - ae_trn
             - au_abn
@@ -58652,6 +58884,7 @@ components:
             - gb_vat
             - hk_br
             - id_npwp
+            - il_vat
             - in_gst
             - jp_cn
             - jp_rn
@@ -64030,6 +64263,8 @@ components:
       properties:
         alipay_handle_redirect:
           $ref: "#/components/schemas/payment_intent_next_action_alipay_handle_redirect"
+        boleto_display_details:
+          $ref: "#/components/schemas/payment_intent_next_action_boleto"
         oxxo_display_details:
           $ref: "#/components/schemas/payment_intent_next_action_display_oxxo_details"
         redirect_to_url:
@@ -64049,15 +64284,28 @@ components:
         verify_with_microdeposits:
           $ref: "#/components/schemas/payment_intent_next_action_verify_with_microdeposit\
             s"
+        wechat_pay_display_qr_code:
+          $ref: "#/components/schemas/payment_intent_next_action_wechat_pay_display_qr_co\
+            de"
+        wechat_pay_redirect_to_android_app:
+          $ref: "#/components/schemas/payment_intent_next_action_wechat_pay_redirect_to_a\
+            ndroid_app"
+        wechat_pay_redirect_to_ios_app:
+          $ref: "#/components/schemas/payment_intent_next_action_wechat_pay_redirect_to_i\
+            os_app"
       required:
         - type
       title: PaymentIntentNextAction
       type: object
       x-expandableFields:
         - alipay_handle_redirect
+        - boleto_display_details
         - oxxo_display_details
         - redirect_to_url
         - verify_with_microdeposits
+        - wechat_pay_display_qr_code
+        - wechat_pay_redirect_to_android_app
+        - wechat_pay_redirect_to_ios_app
     payment_intent_next_action_alipay_handle_redirect:
       description: ""
       properties:
@@ -64086,6 +64334,33 @@ components:
           nullable: true
           type: string
       title: PaymentIntentNextActionAlipayHandleRedirect
+      type: object
+      x-expandableFields: []
+    payment_intent_next_action_boleto:
+      description: ""
+      properties:
+        expires_at:
+          description: The timestamp after which the boleto expires.
+          format: unix-time
+          nullable: true
+          type: integer
+        hosted_voucher_url:
+          description: The URL to the hosted boleto voucher page, which allows customers
+            to view the boleto voucher.
+          maxLength: 5000
+          nullable: true
+          type: string
+        number:
+          description: The boleto number.
+          maxLength: 5000
+          nullable: true
+          type: string
+        pdf:
+          description: The URL to the downloadable boleto voucher PDF.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_intent_next_action_boleto
       type: object
       x-expandableFields: []
     payment_intent_next_action_display_oxxo_details:
@@ -64146,6 +64421,77 @@ components:
       title: PaymentIntentNextActionVerifyWithMicrodeposits
       type: object
       x-expandableFields: []
+    payment_intent_next_action_wechat_pay_display_qr_code:
+      description: ""
+      properties:
+        data:
+          description: The data being used to generate QR code
+          maxLength: 5000
+          type: string
+        image_data_url:
+          description: The base64 image data for a pre-generated QR code
+          maxLength: 5000
+          type: string
+      required:
+        - data
+        - image_data_url
+      title: PaymentIntentNextActionWechatPayDisplayQrCode
+      type: object
+      x-expandableFields: []
+    payment_intent_next_action_wechat_pay_redirect_to_android_app:
+      description: ""
+      properties:
+        app_id:
+          description: app_id is the APP ID registered on WeChat open platform
+          maxLength: 5000
+          type: string
+        nonce_str:
+          description: nonce_str is a random string
+          maxLength: 5000
+          type: string
+        package:
+          description: package is static value
+          maxLength: 5000
+          type: string
+        partner_id:
+          description: an unique merchant ID assigned by Wechat Pay
+          maxLength: 5000
+          type: string
+        prepay_id:
+          description: an unique trading ID assigned by Wechat Pay
+          maxLength: 5000
+          type: string
+        sign:
+          description: A signature
+          maxLength: 5000
+          type: string
+        timestamp:
+          description: Specifies the current time in epoch format
+          maxLength: 5000
+          type: string
+      required:
+        - app_id
+        - nonce_str
+        - package
+        - partner_id
+        - prepay_id
+        - sign
+        - timestamp
+      title: PaymentIntentNextActionWechatPayRedirectToAndroidApp
+      type: object
+      x-expandableFields: []
+    payment_intent_next_action_wechat_pay_redirect_to_ios_app:
+      description: ""
+      properties:
+        native_url:
+          description: An universal link that redirect to Wechat Pay APP
+          maxLength: 5000
+          type: string
+      required:
+        - native_url
+      title: PaymentIntentNextActionWechatPayRedirectToIOSApp
+      type: object
+      x-expandableFields: []
     payment_intent_payment_method_options:
       description: ""
       properties:
@@ -64157,6 +64503,8 @@ components:
           $ref: "#/components/schemas/payment_method_options_alipay"
         bancontact:
           $ref: "#/components/schemas/payment_method_options_bancontact"
+        boleto:
+          $ref: "#/components/schemas/payment_method_options_boleto"
         card:
           $ref: "#/components/schemas/payment_intent_payment_method_options_card"
         card_present:
@@ -64169,6 +64517,8 @@ components:
           $ref: "#/components/schemas/payment_intent_payment_method_options_sepa_debit"
         sofort:
           $ref: "#/components/schemas/payment_method_options_sofort"
+        wechat_pay:
+          $ref: "#/components/schemas/payment_method_options_wechat_pay"
       title: PaymentIntentPaymentMethodOptions
       type: object
       x-expandableFields:
@@ -64176,12 +64526,14 @@ components:
         - afterpay_clearpay
         - alipay
         - bancontact
+        - boleto
         - card
         - card_present
         - oxxo
         - p24
         - sepa_debit
         - sofort
+        - wechat_pay
     payment_intent_payment_method_options_acss_debit:
       description: ""
       properties:
@@ -64324,6 +64676,8 @@ components:
           $ref: "#/components/schemas/payment_method_bancontact"
         billing_details:
           $ref: "#/components/schemas/billing_details"
+        boleto:
+          $ref: "#/components/schemas/payment_method_boleto"
         card:
           $ref: "#/components/schemas/payment_method_card"
         card_present:
@@ -64399,6 +64753,7 @@ components:
             - au_becs_debit
             - bacs_debit
             - bancontact
+            - boleto
             - card
             - card_present
             - eps
@@ -64411,8 +64766,11 @@ components:
             - p24
             - sepa_debit
             - sofort
+            - wechat_pay
           type: string
           x-stripeBypassValidation: true
+        wechat_pay:
+          $ref: "#/components/schemas/payment_method_wechat_pay"
       required:
         - billing_details
         - created
@@ -64430,6 +64788,7 @@ components:
         - bacs_debit
         - bancontact
         - billing_details
+        - boleto
         - card
         - card_present
         - customer
@@ -64443,6 +64802,7 @@ components:
         - p24
         - sepa_debit
         - sofort
+        - wechat_pay
       x-resourceId: payment_method
     payment_method_acss_debit:
       description: ""
@@ -64531,6 +64891,18 @@ components:
       description: ""
       properties: {}
       title: payment_method_bancontact
+      type: object
+      x-expandableFields: []
+    payment_method_boleto:
+      description: ""
+      properties:
+        tax_id:
+          description: Uniquely identifies the customer tax id (CNPJ or CPF)
+          maxLength: 5000
+          type: string
+      required:
+        - tax_id
+      title: payment_method_boleto
       type: object
       x-expandableFields: []
     payment_method_card:
@@ -64839,6 +65211,8 @@ components:
           $ref: "#/components/schemas/payment_method_details_bacs_debit"
         bancontact:
           $ref: "#/components/schemas/payment_method_details_bancontact"
+        boleto:
+          $ref: "#/components/schemas/payment_method_details_boleto"
         card:
           $ref: "#/components/schemas/payment_method_details_card"
         card_present:
@@ -64884,6 +65258,8 @@ components:
           type: string
         wechat:
           $ref: "#/components/schemas/payment_method_details_wechat"
+        wechat_pay:
+          $ref: "#/components/schemas/payment_method_details_wechat_pay"
       required:
         - type
       title: payment_method_details
@@ -64897,6 +65273,7 @@ components:
         - au_becs_debit
         - bacs_debit
         - bancontact
+        - boleto
         - card
         - card_present
         - eps
@@ -64913,6 +65290,7 @@ components:
         - sofort
         - stripe_account
         - wechat
+        - wechat_pay
     payment_method_details_ach_credit_transfer:
       description: ""
       properties:
@@ -65152,6 +65530,18 @@ components:
       x-expandableFields:
         - generated_sepa_debit
         - generated_sepa_debit_mandate
+    payment_method_details_boleto:
+      description: ""
+      properties:
+        tax_id:
+          description: Uniquely identifies this customer tax_id (CNPJ or CPF)
+          maxLength: 5000
+          type: string
+      required:
+        - tax_id
+      title: payment_method_details_boleto
+      type: object
+      x-expandableFields: []
     payment_method_details_card:
       description: ""
       properties:
@@ -66214,6 +66604,23 @@ components:
       title: payment_method_details_wechat
       type: object
       x-expandableFields: []
+    payment_method_details_wechat_pay:
+      description: ""
+      properties:
+        fingerprint:
+          description: Uniquely identifies this particular WeChat Pay account. You can use
+            this attribute to check whether two WeChat accounts are the same.
+          maxLength: 5000
+          nullable: true
+          type: string
+        transaction_id:
+          description: Transaction ID of this particular WeChat Pay transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_details_wechat_pay
+      type: object
+      x-expandableFields: []
     payment_method_eps:
       description: ""
       properties:
@@ -66403,6 +66810,20 @@ components:
       title: payment_method_options_bancontact
       type: object
       x-expandableFields: []
+    payment_method_options_boleto:
+      description: ""
+      properties:
+        expires_after_days:
+          description: The number of calendar days before a Boleto voucher expires. For
+            example, if you create a Boleto voucher on Monday and you set
+            expires_after_days to 2, the Boleto voucher will expire on Wednesday
+            at 23:59 America/Sao_Paulo time.
+          type: integer
+      required:
+        - expires_after_days
+      title: payment_method_options_boleto
+      type: object
+      x-expandableFields: []
     payment_method_options_card_installments:
       description: ""
       properties:
@@ -66470,6 +66891,27 @@ components:
           nullable: true
           type: string
       title: payment_method_options_sofort
+      type: object
+      x-expandableFields: []
+    payment_method_options_wechat_pay:
+      description: ""
+      properties:
+        app_id:
+          description: The app ID registered with WeChat Pay. Only required when client is
+            ios or android.
+          maxLength: 5000
+          nullable: true
+          type: string
+        client:
+          description: The client type that the end customer will pay from
+          enum:
+            - android
+            - ios
+            - web
+          nullable: true
+          type: string
+          x-stripeBypassValidation: true
+      title: payment_method_options_wechat_pay
       type: object
       x-expandableFields: []
     payment_method_oxxo:
@@ -66565,6 +67007,12 @@ components:
       title: payment_method_sofort
       type: object
       x-expandableFields: []
+    payment_method_wechat_pay:
+      description: ""
+      properties: {}
+      title: payment_method_wechat_pay
+      type: object
+      x-expandableFields: []
     payment_pages_checkout_session_automatic_tax:
       description: ""
       properties:
@@ -66621,7 +67069,7 @@ components:
             `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`,
             `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`,
             `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`,
-            `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
+            `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, or `unknown`
           enum:
             - ae_trn
             - au_abn
@@ -66640,6 +67088,7 @@ components:
             - gb_vat
             - hk_br
             - id_npwp
+            - il_vat
             - in_gst
             - jp_cn
             - jp_rn
@@ -72898,11 +73347,11 @@ components:
           description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`,
             `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`,
             `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `gb_vat`, `hk_br`,
-            `id_npwp`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`,
-            `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`,
-            `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`,
-            `us_ein`, or `za_vat`. Note that some legacy tax IDs have type
-            `unknown`
+            `id_npwp`, `il_vat`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`,
+            `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`,
+            `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`,
+            `tw_vat`, `us_ein`, or `za_vat`. Note that some legacy tax IDs have
+            type `unknown`
           enum:
             - ae_trn
             - au_abn
@@ -72921,6 +73370,7 @@ components:
             - gb_vat
             - hk_br
             - id_npwp
+            - il_vat
             - in_gst
             - jp_cn
             - jp_rn

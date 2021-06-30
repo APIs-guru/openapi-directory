@@ -175,6 +175,18 @@ paths:
           required: false
           schema:
             type: string
+        - description: 3DCart Private Key
+          in: query
+          name: 3dcart_private_key
+          required: false
+          schema:
+            type: string
+        - description: 3DCart Token
+          in: query
+          name: 3dcart_access_token
+          required: false
+          schema:
+            type: string
         - description: 3DCart API Key
           in: query
           name: 3dcartapi_api_key
@@ -2398,6 +2410,7 @@ paths:
           required: true
           schema:
             enum:
+              - 3DCart
               - 3DCartApi
               - AceShop
               - AmazonSP
@@ -2878,6 +2891,18 @@ paths:
         - description: CommerceHQ api password
           in: query
           name: commercehq_api_password
+          required: false
+          schema:
+            type: string
+        - description: 3DCart Private Key
+          in: query
+          name: 3dcart_private_key
+          required: false
+          schema:
+            type: string
+        - description: 3DCart Token
+          in: query
+          name: 3dcart_access_token
           required: false
           schema:
             type: string
@@ -5212,6 +5237,12 @@ paths:
           required: false
           schema:
             type: string
+        - description: Retrieves order with ship node type
+          in: query
+          name: ship_node_type
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -5670,6 +5701,12 @@ paths:
         - description: Retrieves order with delivery method
           in: query
           name: delivery_method
+          required: false
+          schema:
+            type: string
+        - description: Retrieves order with ship node type
+          in: query
+          name: ship_node_type
           required: false
           schema:
             type: string
@@ -9776,6 +9813,12 @@ components:
       type: object
     AccountCartAdd:
       properties:
+        3dcart_access_token:
+          description: 3DCart Token
+          type: string
+        3dcart_private_key:
+          description: 3DCart Private Key
+          type: string
         3dcartapi_api_key:
           description: 3DCart API Key
           type: string
@@ -9857,6 +9900,7 @@ components:
         cart_id:
           description: Store’s identifier which you can get from cart_list method
           enum:
+            - 3DCart
             - 3DCartApi
             - AceShop
             - AmazonSP

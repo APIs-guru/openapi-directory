@@ -172,6 +172,22 @@ paths:
       x-cli-cmd-group: commissions
     x-internal: true
   /continuous_projects:
+    get:
+      description: Get a list of continuous projects
+      operationId: getContinuousProjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectsList"
+          description: Newly created continuous project
+      summary: Get a list of continuous projects
+      tags:
+        - ContinuousProject
+      x-cli-aliases:
+        - list
+      x-cli-cmd-group: continuous-projects
     post:
       description: Create a new continuous project
       operationId: createContinuousProject
@@ -254,6 +270,59 @@ paths:
       x-cli-aliases:
         - get
       x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{id}/analytics-token":
+    get:
+      description: Get JWT token to be used in analytics dashboards
+      operationId: getAnalyticsToken
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsToken"
+          description: JWT token result
+      summary: Get JWT token to be used in analytics dashboards
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/collect-analytics":
+    post:
+      description: Save/collect analytics data from Active widget
+      operationId: collectAnalytics
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsCollection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Analytics data collection result
+      summary: Save/collect analytics data from Active widget
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
   "/continuous_projects/{id}/translate/{targetLanguage}":
     post:
       description: Instantly translate your content with your existing TM and MT resources.
@@ -942,14 +1011,11 @@ paths:
       operationId: getInvitationVendors
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                "needs[]":
-                  items:
-                    $ref: "#/components/schemas/FileNeedsVendor"
-                  type: array
-              type: object
+              items:
+                $ref: "#/components/schemas/FileNeedsVendor"
+              type: array
       responses:
         "200":
           content:
@@ -5770,6 +5836,26 @@ components:
         zip:
           type: string
       type: object
+    AnalyticsCollection:
+      properties:
+        anonymousId:
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          type: object
+        sessionId:
+          type: string
+        type:
+          type: string
+        userId:
+          type: string
+      type: object
+    AnalyticsToken:
+      properties:
+        jwt:
+          type: string
+      type: object
     AsyncOperationStatus:
       properties:
         duration:
@@ -6177,6 +6263,14 @@ components:
       type: object
     ContinuousProject:
       properties:
+        analytics_enabled:
+          description: Should we collect analytics data from Active for this continuous
+            project?
+          type: boolean
+        auto_start_postedit:
+          description: Immediately start post-editing project for translation requests
+            that are applied MT.
+          type: boolean
         created_at:
           description: the date-time notation as defined by RFC 3339, section 5.6, for
             example, 2017-07-21T17:32:28Z
@@ -6185,13 +6279,33 @@ components:
         id:
           format: int64
           type: integer
+        mt_enabled:
+          description: Immediately apply MT on translation requests if they are missing
+            from TM.
+          type: boolean
         name:
           type: string
+        postedit_enabled:
+          description: Get an instant quote for translation requests that are applied MT.
+          type: boolean
         source_language:
           type: string
         target_languages:
           items:
             type: string
+          type: array
+        type:
+          description: Continuous project type. We currently have only 2 types, NULL and
+            "active".
+          type: string
+      type: object
+    ContinuousProjectsList:
+      properties:
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+        projects:
+          items:
+            $ref: "#/components/schemas/ContinuousProject"
           type: array
       type: object
     CorporateAccount:
@@ -6405,9 +6519,13 @@ components:
         reason:
           type: string
         targetLanguage:
-          type: string
+          items:
+            type: string
+          type: array
         taskType:
-          type: string
+          items:
+            type: string
+          type: array
       type: object
     Formats:
       properties:

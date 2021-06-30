@@ -2860,13 +2860,13 @@ paths:
               50).
             format: int32
             type: integer
-        - description: Request number of images to return in each page. Default is 30,
+        - description: Request number of events to return in each page. Default is 30,
             maximum page_size is 100.
           in: query
           name: page_size
           schema:
             default: 30
-            description: Request number of images to return in each page. Default is 30,
+            description: Request number of events to return in each page. Default is 30,
               maximum page_size is 100.
             format: int32
             type: integer
@@ -4005,6 +4005,8 @@ paths:
           description: AuthorizationTokenRequired
         "403":
           description: UnauthorizedDisplaySize
+        "404":
+          description: AssetNotFound
         "500":
           description: InvalidIStockCollection
       summary: Search for creative images based on url
@@ -4849,17 +4851,17 @@ paths:
             description: Specifies whether or not to include related searches in the
               response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a
+        - description: Return only videos tagged with specific keyword(s). Specify using a
             comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
+            both specified, only those videos matching the query phrase which
             also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a
+            description: Return only videos tagged with specific keyword(s). Specify using a
               comma-separated list of keyword Ids. If keyword Ids and phrase are
-              both specified, only those images matching the query phrase which
+              both specified, only those videos matching the query phrase which
               also contain the requested keyword(s) are returned.
             items:
               format: int32
@@ -4875,6 +4877,17 @@ paths:
             description: Specifies the video licensing model(s).
             items:
               $ref: "#/components/schemas/LicenseModelVideoRequest"
+            nullable: true
+            type: array
+          style: form
+        - description: Return only videos with selected orientations.
+          explode: false
+          in: query
+          name: orientations
+          schema:
+            description: Return only videos with selected orientations.
+            items:
+              $ref: "#/components/schemas/VideoOrientationRequest"
             nullable: true
             type: array
           style: form
@@ -4990,6 +5003,203 @@ paths:
         "500":
           description: InvalidIStockCollection
       summary: Search for creative videos
+      tags:
+        - Search
+  /v3/search/videos/creative/by-image:
+    get:
+      description: >-
+        Search for **similar creative videos** by passing an `asset_id` to
+        an asset in our catalog OR `image_url` to any image or a frame grab from
+        a video. All responses will have the exclude_nudity filter automatically
+        applied.
+
+
+        ## Searching by URL
+
+
+        When searching by `image_url`, an image or frame grab in JPEG format must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
+
+        Example using cURL:
+
+        ```sh
+
+        curl -i -X PUT https://search-by-image.s3.amazonaws.com/my-test-image.jpg -H "Content-Type: image/jpeg" --data-binary "@testimage.jpg"
+
+        ```
+
+
+        Uploads will be overwritten if the names are the same, so using a prefix like the API Key, application name or company name is recommended. Uploads will expire from the bucket after 24 hours.
+
+
+        Once the JPEG has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://search-by-image.s3.amazonaws.com/my-test-image.jpg`.
+
+
+        ## Searching by asset id
+
+
+        When searching by `asset_id`, any image or video asset id in the Getty/iStock catalog can be used. 
+      parameters:
+        - description: "Provide a header to specify the language of result values.
+            Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+            ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+            (creative assets only), zh-TW (creative assets only), ru (creative
+            assets only), tr, cs (iStock only), id (iStock only), th (iStock
+            only), vi (iStock only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values.
+              Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv,
+              ko (creative assets only), pl (creative assets only), pt-BR, zh-HK
+              (creative assets only), zh-TW (creative assets only), ru (creative
+              assets only), tr, cs (iStock only), id (iStock only), th (iStock
+              only), vi (iStock only)."
+            type: string
+        - description: Use of this parameter requires configuration changes to your API
+            key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API
+              key. Please contact your sales representative to learn more.
+            type: string
+        - description: Specifies the location of the image to use in the search.
+          in: query
+          name: image_url
+          schema:
+            description: Specifies the location of the image to use in the search.
+            nullable: true
+            type: string
+        - description: Specifies the Getty video id to use in the search.
+          in: query
+          name: asset_id
+          schema:
+            description: Specifies the Getty video id to use in the search.
+            nullable: true
+            type: string
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          explode: false
+          in: query
+          name: fields
+          schema:
+            description: Specifies fields to return. Defaults to 'summary_set'.
+            items:
+              $ref: "#/components/schemas/CreativeVideosFieldValues"
+            nullable: true
+            type: array
+          style: form
+        - description: "Filter images to those from one of your product types. \r
+
+            \                    Allowed values are easyaccess,
+            imagepack, premiumaccess and royaltyfreesubscription. \r
+
+            \                    If you have more than one instance
+            of a product, you may also include the ID of the product instance
+            you wish to filter on. \r
+
+            \                    For example, some users may have
+            more than one premiumaccess product, so the product_types value
+            would be premiumaccess:1234. \r
+
+            \                    Product ID can be obtained from the
+            GET /products response."
+          explode: false
+          in: query
+          name: product_types
+          schema:
+            description: "Filter images to those from one of your product types. \r
+
+              \                    Allowed values are easyaccess,
+              imagepack, premiumaccess and royaltyfreesubscription. \r
+
+              \                    If you have more than one
+              instance of a product, you may also include the ID of the product
+              instance you wish to filter on. \r
+
+              \                    For example, some users may
+              have more than one premiumaccess product, so the product_types
+              value would be premiumaccess:1234. \r
+
+              \                    Product ID can be obtained from
+              the GET /products response."
+            items:
+              type: string
+            nullable: true
+            type: array
+          style: form
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          schema:
+            default: 1
+            description: Request results starting at a page number (default is 1).
+            format: int32
+            type: integer
+        - description: Request number of images to return in each page. Default is 30,
+            maximum page_size is 100.
+          in: query
+          name: page_size
+          schema:
+            default: 30
+            description: Request number of images to return in each page. Default is 30,
+              maximum page_size is 100.
+            format: int32
+            type: integer
+        - description: "Specifies the facets to return in the response. Facets provide
+            additional search parameters to refine your results.\r
+
+            \                    The include_facets parameter must
+            be set to \"true\" for facets to be returned."
+          explode: false
+          in: query
+          name: facet_fields
+          schema:
+            description: "Specifies the facets to return in the response. Facets provide
+              additional search parameters to refine your results.\r
+
+              \                    The include_facets parameter
+              must be set to \"true\" for facets to be returned."
+            items:
+              $ref: "#/components/schemas/CreateVideoSearchFacetsFields"
+            nullable: true
+            type: array
+          style: form
+        - description: Specifies the maximum number of facets to return per type. Default
+            is 300.
+          in: query
+          name: facet_max_count
+          schema:
+            description: Specifies the maximum number of facets to return per type. Default
+              is 300.
+            format: int32
+            type: integer
+        - description: Specifies whether or not to include facets in the result set.
+            Default is "false".
+          in: query
+          name: include_facets
+          schema:
+            description: Specifies whether or not to include facets in the result set.
+              Default is "false".
+            nullable: true
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreativeVideoSearchResults"
+          description: Success
+        "400":
+          description: InvalidParameterValue
+        "401":
+          description: AuthorizationTokenRequired
+        "403":
+          description: UnauthorizedDisplaySize
+        "404":
+          description: AssetNotFound
+        "500":
+          description: InvalidIStockCollection
+      summary: Search for creative videos based on url
       tags:
         - Search
   /v3/search/videos/editorial:
@@ -5168,12 +5378,12 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Search for images by specific artists (free-text, comma-separated
+        - description: Search for videos by specific artists (free-text, comma-separated
             list of artists).
           in: query
           name: artists
           schema:
-            description: Search for images by specific artists (free-text, comma-separated
+            description: Search for videos by specific artists (free-text, comma-separated
               list of artists).
             nullable: true
             type: string
@@ -5262,12 +5472,12 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: specify link data entity uri.
+        - description: Specify link data entity uri.
           explode: false
           in: query
           name: entity_uris
           schema:
-            description: specify link data entity uri.
+            description: Specify link data entity uri.
             items:
               type: string
             nullable: true
@@ -5319,17 +5529,17 @@ paths:
             description: Specifies whether or not to include related searches in the
               response. The default is false.
             type: boolean
-        - description: Return only images tagged with specific keyword(s). Specify using a
+        - description: Return only videos tagged with specific keyword(s). Specify using a
             comma-separated list of keyword Ids. If keyword Ids and phrase are
-            both specified, only those images matching the query phrase which
+            both specified, only those videos matching the query phrase which
             also contain the requested keyword(s) are returned.
           explode: false
           in: query
           name: keyword_ids
           schema:
-            description: Return only images tagged with specific keyword(s). Specify using a
+            description: Return only videos tagged with specific keyword(s). Specify using a
               comma-separated list of keyword Ids. If keyword Ids and phrase are
-              both specified, only those images matching the query phrase which
+              both specified, only those videos matching the query phrase which
               also contain the requested keyword(s) are returned.
             items:
               format: int32
@@ -5353,6 +5563,17 @@ paths:
             description: Provides filtering by maximum length of video clip, in seconds
             format: int32
             type: integer
+        - description: Return only videos with selected orientations.
+          explode: false
+          in: query
+          name: orientations
+          schema:
+            description: Return only videos with selected orientations.
+            items:
+              $ref: "#/components/schemas/VideoOrientationRequest"
+            nullable: true
+            type: array
+          style: form
         - description: Identifies page to return. Default is 1.
           in: query
           name: page
@@ -5934,15 +6155,15 @@ paths:
               assets only), tr, cs (iStock only), id (iStock only), th (iStock
               only), vi (iStock only)."
             type: string
-        - description: An image id.
+        - description: A video id.
           in: path
           name: id
           required: true
           schema:
-            description: An image id.
+            description: A video id.
             nullable: true
             type: string
-        - description: "If specified, returns the list of previously downloaded images for
+        - description: "If specified, returns the list of previously downloaded videos for
             all users in your company.\r
 
             \            Your account must be enabled for this
@@ -5951,7 +6172,7 @@ paths:
           in: query
           name: company_downloads
           schema:
-            description: "If specified, returns the list of previously downloaded images for
+            description: "If specified, returns the list of previously downloaded videos for
               all users in your company.\r
 
               \            Your account must be enabled for this
@@ -6333,12 +6554,12 @@ paths:
             description: A video id.
             nullable: true
             type: string
-        - description: comma delimited list of fields to retrive for the videos
+        - description: Comma delimited list of fields to retrieve for the videos
           explode: false
           in: query
           name: fields
           schema:
-            description: comma delimited list of fields to retrive for the videos
+            description: Comma delimited list of fields to retrieve for the videos
             items:
               $ref: "#/components/schemas/VideosFieldValues"
             nullable: true
@@ -6702,9 +6923,7 @@ components:
       additionalProperties: false
       properties:
         downloads:
-          additionalProperties: false
           nullable: true
-          type: object
         id:
           nullable: true
           type: string
@@ -7228,8 +7447,9 @@ components:
         - largest_downloads
         - license_model
         - mastered_to
-        - originally_shot_on
         - object_name
+        - orientation
+        - originally_shot_on
         - preview
         - product_types
         - quality_rank
@@ -8101,9 +8321,7 @@ components:
       additionalProperties: false
       properties:
         images:
-          additionalProperties: false
           nullable: true
-          type: object
         images_not_found:
           items:
             type: string
@@ -8553,9 +8771,7 @@ components:
           nullable: true
           type: string
         images:
-          additionalProperties: false
           nullable: true
-          type: object
         related_searches:
           deprecated: true
           items:
@@ -8713,6 +8929,7 @@ components:
         - license_model
         - mastered_to
         - object_name
+        - orientation
         - originally_shot_on
         - preview
         - product_types
@@ -8741,6 +8958,11 @@ components:
         - "50"
         - "59.94"
         - "60"
+      type: string
+    VideoOrientationRequest:
+      enum:
+        - horizontal
+        - vertical
       type: string
     VideoSearchItem:
       additionalProperties: false
@@ -8908,8 +9130,9 @@ components:
         - largest_downloads
         - license_model
         - mastered_to
-        - originally_shot_on
         - object_name
+        - orientation
+        - originally_shot_on
         - preview
         - product_types
         - quality_rank

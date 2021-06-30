@@ -700,9 +700,11 @@ tags:
 
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),
 
-      [Redis](https://www.digitalocean.com/docs/databases/redis/), and
+      [Redis](https://www.digitalocean.com/docs/databases/redis/),
 
-      [MySQL](https://www.digitalocean.com/docs/databases/mysql/).
+      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and 
+
+      [MongoDB](https://www.digitalocean.com/docs/databases/mongodb/).
 
 
       By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
@@ -3728,6 +3730,39 @@ paths:
                                   - properties:
                                       cors:
                                         properties:
+                                          allow_credentials:
+                                            description: Whether browsers should expose the response to the client-side
+                                              JavaScript code when the request’s
+                                              credentials mode is include. This
+                                              configures the
+                                              `Access-Control-Allow-Credentials`
+                                              header.
+                                            example: false
+                                            type: boolean
+                                          allow_headers:
+                                            description: The set of allowed HTTP request headers. This configures the
+                                              `Access-Control-Allow-Headers`
+                                              header.
+                                            example:
+                                              - Content-Type
+                                              - X-Custom-Header
+                                            items:
+                                              type: string
+                                            type: array
+                                          allow_methods:
+                                            description: The set of allowed HTTP methods. This configures the
+                                              `Access-Control-Allow-Methods`
+                                              header.
+                                            example:
+                                              - GET
+                                              - OPTIONS
+                                              - POST
+                                              - PUT
+                                              - PATCH
+                                              - DELETE
+                                            items:
+                                              type: string
+                                            type: array
                                           allow_origins:
                                             description: The set of allowed CORS origins.
                                             example:
@@ -3762,6 +3797,24 @@ paths:
                                                   type: string
                                               type: object
                                             type: array
+                                          expose_headers:
+                                            description: The set of HTTP response headers that browsers are allowed to
+                                              access. This configures the
+                                              `Access-Control-Expose-Headers`
+                                              header.
+                                            example:
+                                              - Content-Encoding
+                                              - X-Custom-Header
+                                            items:
+                                              type: string
+                                            type: array
+                                          max_age:
+                                            description: An optional duration specifying how long browsers can cache the
+                                              results of a preflight request.
+                                              This configures the
+                                              `Access-Control-Max-Age` header.
+                                            example: 5h30m
+                                            type: string
                                         type: object
                                       health_check:
                                         properties:
@@ -6752,11 +6805,13 @@ paths:
                         engine:
                           description: 'A slug representing the database engine used for the cluster. The
                             possible values are: "pg" for PostgreSQL, "mysql"
-                            for MySQL, and "redis" for Redis.'
+                            for MySQL, "redis" for Redis, and "mongodb" for
+                            MongoDB.'
                           enum:
                             - pg
                             - mysql
                             - redis
+                            - mongodb
                           example: pg
                           type: string
                         id:

@@ -25,8 +25,8 @@ externalDocs:
   url: https://docs.docusign.com/esign
 tags:
   - description: >-
-      The AcccountBrands resource provides methods that enable you to create and
-      manage brands for an account.
+      The AcccountBrands resource provides methods that enable you to
+      create and manage brands for an account.
 
 
       Branding enables you to add the look and feel of your organization's brand to the sending, signing, and email processes, making it easier for recipients to identify envelopes coming from your organization.
@@ -38,15 +38,15 @@ tags:
       **Note**: To use this resource, branding for either signing or sending must be enabled for the account (either `canSelfBrandSend`, `canSelfBrandSign`, or both of these account settings must be set to **true**). 
     name: AccountBrands
   - description: >-
-      The `AccountConsumerDisclosures` resource provides methods that enable you
-      to enable, retrieve, and manage the Electronic Record and Signature
-      Consent Disclosure (ERSD) options for your account. This is the disclosure
-      that displays to each new recipient who is going to sign or add other
-      information, or who is required to view the documents you send to them.
-      The recipient must read and agree to the terms of the disclosure before
-      they can access and take action on the documents you send. The ERSD does
-      not apply to copy-only recipients, but does apply to recipients who must
-      sign or view your documents.
+      The `AccountConsumerDisclosures` resource provides methods that
+      enable you to enable, retrieve, and manage the Electronic Record and
+      Signature Consent Disclosure (ERSD) options for your account. This is the
+      disclosure that displays to each new recipient who is going to sign or add
+      other information, or who is required to view the documents you send to
+      them. The recipient must read and agree to the terms of the disclosure
+      before they can access and take action on the documents you send. The ERSD
+      does not apply to copy-only recipients, but does apply to recipients who
+      must sign or view your documents.
 
 
       You can use either the default ERSD that DocuSign provides for U.S.-based transactions, or a custom ERSD. 
@@ -66,9 +66,9 @@ tags:
       For more information, see [Legal Disclosure](https://support.docusign.com/en/guides/ndse-admin-guide-legal-disclosure).
     name: AccountConsumerDisclosures
   - description: >-
-      Custom fields enable you to record custom information about envelopes that
-      you can then use for sorting, organizing, searching, and other downstream
-      processes. 
+      Custom fields enable you to record custom information about
+      envelopes that you can then use for sorting, organizing, searching, and
+      other downstream processes. 
 
 
       For example, you can use custom fields to copy envelopes or data to multiple areas in Salesforce. eOriginal customers can eVault all of their documents from the web app by setting an account custom field with a name like `eVault with eOriginal` to **true**.
@@ -113,8 +113,8 @@ tags:
       - `list`: Enables the sender to select the value of the field from a predetermined list.
     name: AccountCustomFields
   - description: >-
-      The EnvelopeCustomFields resource provides methods that allow you manage
-      custom fields in an envelope. 
+      The EnvelopeCustomFields resource provides methods that allow you
+      manage custom fields in an envelope. 
 
 
       Custom fields can be used in the envelopes for your account to record information about the envelope, help search for envelopes and track information. The envelope custom fields are shown in the Envelope Settings section when a user is creating an envelope in the DocuSign member console. The envelope custom fields are not seen by the envelope recipients.
@@ -131,8 +131,8 @@ tags:
       You may assign up to three envelope custom fields to an envelope. This limit does not include account (document) custom fields.
     name: EnvelopeCustomFields
   - description: >-
-      The EnvelopeDocumentFields resource provides methods that allow you to
-      manage custom fields on a document.
+      The EnvelopeDocumentFields resource provides methods that allow you
+      to manage custom fields on a document.
 
 
       You can create custom versions of standard fields that combine of field properties, such as font type or size, or a validation setting. 
@@ -166,8 +166,8 @@ tags:
       **Note**: To use envelope locks, the user must have envelope locking capability enabled.
     name: EnvelopeLocks
   - description: >
-      The EnvelopeRecipients resource enables you manage the recipients of an
-      envelope. All recipient types share a set of [core
+      The EnvelopeRecipients resource enables you manage the recipients
+      of an envelope. All recipient types share a set of [core
       parameters](#core-recipient-parameters), but some recipient types have
       additional parameters. You specify the recipient type using the
       `recipientType` parameter. The recipient types are as follows:
@@ -1494,8 +1494,8 @@ tags:
       to manage tabs in a template.
     name: TemplateDocumentTabs
   - description: >-
-      The `EnvelopeViews` resource provides methods that return URLs that you
-      can embed into your application to provide access to the DocuSign UI.
+      The `EnvelopeViews` resource provides methods that return URLs that
+      you can embed into your application to provide access to the DocuSign UI.
 
 
       The following Envelope Views are available:
@@ -1519,10 +1519,10 @@ tags:
       delete, and manage your accounts.
     name: Accounts
   - description: >-
-      Standards-Based Signatures (SBS) is the label used to describe DocuSign's
-      suite of signatures that comply with regional and industry regulations,
-      such as the electronic IDentification, Authentication and trust Services
-      (eIDAS) regulation in Europe.
+      Standards-Based Signatures (SBS) is the label used to describe
+      DocuSign's suite of signatures that comply with regional and industry
+      regulations, such as the electronic IDentification, Authentication and
+      trust Services (eIDAS) regulation in Europe.
 
 
       ## Feature Differences When Using Standards-Based Signatures
@@ -1571,8 +1571,8 @@ tags:
       invoices for an account.
     name: Invoices
   - description: >-
-      The Payments resource provides methods that allow you to manage payments
-      for an account.
+      The Payments resource provides methods that allow you to manage
+      payments for an account.
 
 
       These calls can only be used by users with account administrator privileges.
@@ -1598,8 +1598,8 @@ tags:
       To use cloud storage files, you must first give DocuSign access to your cloud storage provider. You can disconnect authorized a cloud storage provider at any time.
     name: CloudStorageProviders
   - description: >-
-      The `ConnectConfigurations` resource enables you to configure the DocuSign
-      Connect service for your account.
+      The `ConnectConfigurations` resource enables you to configure the
+      DocuSign Connect service for your account.
 
 
       You can use this resource to configure account-level webhooks that send notifications about every envelope sent from your account. You can set account-level webhooks to listen for events for envelopes sent by a specific user on your account, by multiple specific users, or from any of the users on your account. These events will be tracked, and can be delivered to a listening application.
@@ -1629,8 +1629,8 @@ tags:
       delete, and republish the connect logs associated with an envelope.
     name: ConnectEvents
   - description: >-
-      The CustomTabs resource provides methods that allow you create and manage
-      custom tabs based on the existing DocuSign tabs.
+      The CustomTabs resource provides methods that allow you create and
+      manage custom tabs based on the existing DocuSign tabs.
 
 
       You can create a tab with pre-defined properties, such as a text tab with a certain font type and validation pattern. Users can access the custom tabs when sending documents through the DocuSign web application.
@@ -1639,8 +1639,8 @@ tags:
       Custom tabs can be created based on the  approve, checkbox, company, date, date signed, decline, email, email address, envelope ID, first name, formula, full name, initial here, last name, list, note, number, radio, sign here, signer attachment, SSN, text, title, and zip tabs.
     name: CustomTabs
   - description: >-
-      The RequestLogs resource provide methods that allow you to retrieve and
-      delete the API request log files.
+      The RequestLogs resource provide methods that allow you to retrieve
+      and delete the API request log files.
 
 
       The log files contain the API requests associated with your integration. They can aid you in troubleshooting specific issues within an integration, or if DocuSign Support requests an API trace log. 
@@ -1652,15 +1652,15 @@ tags:
       the available service versions.
     name: Services
   - description: >-
-      The `EnvelopeConsumerDisclosures` resource provides methods that enable
-      you to retrieve the Electronic Record and Signature Disclosure (ERSD) for
-      an envelope recipient. This is the disclosure that displays to each new
-      recipient who is going to sign or add other information, or who is
-      required to view the documents you send to them. The recipient must read
-      and agree to the terms of the disclosure before they can access and take
-      action on the documents you send. The ERSD does not apply to copy-only
-      recipients, but does apply to recipients who must sign or view your
-      documents.
+      The `EnvelopeConsumerDisclosures` resource provides methods that
+      enable you to retrieve the Electronic Record and Signature Disclosure
+      (ERSD) for an envelope recipient. This is the disclosure that displays to
+      each new recipient who is going to sign or add other information, or who
+      is required to view the documents you send to them. The recipient must
+      read and agree to the terms of the disclosure before they can access and
+      take action on the documents you send. The ERSD does not apply to
+      copy-only recipients, but does apply to recipients who must sign or view
+      your documents.
 
 
       You can retrieve either the default ERSD that DocuSign provides for U.S.-based transactions, or a custom ERSD.
@@ -1721,8 +1721,8 @@ tags:
 
     name: EnvelopeDocuments
   - description: >-
-      The EnvelopeEmailSettings provide methods that allow you to manage the
-      email override settings for an envelope.
+      The EnvelopeEmailSettings provide methods that allow you to manage
+      the email override settings for an envelope.
 
 
       Email override settings change the reply to email address, name, or the BCC for email archive information, for the envelope. Note that changing email settings will only affect email communications that occur after the addition was made.
@@ -1731,8 +1731,8 @@ tags:
       The BCC Email address feature is designed to provide a copy of all email communications for external archiving purposes. DocuSign recommends that envelopes sent using the BCC for Email Archive feature, including the BCC Email Override option, include additional signer authentication options. To send a copy of the envelope to a recipient who does not need to sign, use a Carbon Copies or Certified Deliveries Recipient Type.
     name: EnvelopeEmailSettings
   - description: >-
-      The Envelope resource provides methods that allow you to manipulate and
-      monitor envelopes. 
+      The Envelope resource provides methods that allow you to manipulate
+      and monitor envelopes. 
 
 
       Once you have authenticated the user you can use the Envelopes: createEnvelope method to create an envelope. You can call the EnvelopeDocuments: update or EnvelopeDocuments: updateList method to add additional documents.
@@ -1774,8 +1774,8 @@ tags:
       Groups](https://support.docusign.com/en/guides/ndse-admin-guide-assign-brands-to-groups).
     name: GroupBrands
   - description: >-
-      The Groups resource provides methods that allow you to manage groups for
-      the account.
+      The Groups resource provides methods that allow you to manage
+      groups for the account.
 
 
       Groups can be used to help manage users by associating users with a group. A group can be associated with a Permission Profile, which sets the user permissions for users in that group without having to set the `userSettings` property for each user. You are not required to set Permission Profiles for a group, but this makes it easier to manage user permissions for a large number of users. Groups can also be used with template sharing to limit user access to templates.
@@ -1784,8 +1784,8 @@ tags:
       the users in a group.
     name: GroupUsers
   - description: >-
-      The SigningGroups resource provides methods that allow you manage signing
-      groups.
+      The SigningGroups resource provides methods that allow you manage
+      signing groups.
 
 
       Signing Groups allow you to create a group of people to which an envelope is sent. Any member of that group can open an envelope and sign the documents in the envelope with their own signature, even though a signature field was not directly assigned to them. When the Signing Group option is used, group members that open and sign the envelope are tracked in the envelope history and certificate.
@@ -1811,8 +1811,8 @@ tags:
       manage users in Signing Groups.
     name: SigningGroupUsers
   - description: >
-      The TemplateRecipients resource allows you manage the recipients of an
-      template.
+      The TemplateRecipients resource allows you manage the recipients of
+      an template.
 
 
       The exact parameters associated with a recipient depend on the recipient type. There are seven recipient types: Agents, Carbon Copies, Certified Deliveries, Editors, In Person Signers, Intermediaries, and Signers.
@@ -2300,8 +2300,8 @@ tags:
       | offlineAttributes | No | &nbsp; | Reserved: For DocuSign use only.|
     name: TemplateRecipients
   - description: >-
-      The TemplateBulkRecipients resource provide methods that allow you manage
-      the bulk recipient file for an template.
+      The TemplateBulkRecipients resource provide methods that allow you
+      manage the bulk recipient file for an template.
 
 
       The bulk recipient CSV (Comma Separated Value) file contains the list of recipient names and email addresses that you can add to an template to send the same document to a large number of recipients.
@@ -2309,8 +2309,8 @@ tags:
       The required and optional information that can be included the file is described in the BulkEnvelope: updateRecipients method
     name: TemplateBulkRecipients
   - description: >-
-      The TemplateCustomFields resource provides methods that allow you manage
-      custom fields in an template. 
+      The TemplateCustomFields resource provides methods that allow you
+      manage custom fields in an template. 
 
 
       Custom fields can be used in the templates for your account to record information about the template, help search for templates and track information. The template custom fields are shown in the Template Settings section when a user is creating an template in the DocuSign member console. The template custom fields are not seen by the template recipients.
@@ -2324,8 +2324,8 @@ tags:
       - `list`: Enables the sender to select the value of the field from a predetermined list.
     name: TemplateCustomFields
   - description: >-
-      The TemplateDocumentFields resource provides methods that allow you to
-      manage custom fields on a document.
+      The TemplateDocumentFields resource provides methods that allow you
+      to manage custom fields on a document.
 
 
       You can create custom versions of standard fields that combine of field properties, such as font type or size, or a validation setting. 
@@ -2400,8 +2400,8 @@ tags:
       **Note**: To use template locks, the user must have envelope locking capability enabled.
     name: TemplateLocks
   - description: >-
-      The Template resource provides methods that allow you to manipulate and
-      monitor templates. 
+      The Template resource provides methods that allow you to manipulate
+      and monitor templates. 
 
 
       Once you have authenticated the user you can use the Templates: createTemplate method to create a template. You can call the TemplateDocuments: update or TemplateDocuments: updateList method to add more documents.
@@ -2722,8 +2722,8 @@ tags:
       [envelopeviews]: https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeViews/
     name: TemplateViews
   - description: >-
-      The UserCustomSettings resource provides methods that allow you to manage
-      the custom settings for a user.
+      The UserCustomSettings resource provides methods that allow you to
+      manage the custom settings for a user.
 
 
       Custom settings are a flexible way to store and retrieve custom user information that can be used in your own system.
@@ -2735,8 +2735,8 @@ tags:
       a user's profile.
     name: UserProfiles
   - description: >-
-      The Users resource provides methods that enable you to manage users for an
-      account.
+      The Users resource provides methods that enable you to manage users
+      for an account.
 
 
       The following User methods do not use the `title` property in the Users object:
@@ -2771,23 +2771,24 @@ tags:
       the  intials and signature images for a user.
     name: UserSignatures
   - description: >+
-      DocuSign eSignature includes a contacts list (also referred to as an
-      address book) to help make sending envelopes even easier. When you send an
-      envelope, the recipients' names and email addresses are automatically
+      DocuSign eSignature includes a contacts list (also referred to as
+      an address book) to help make sending envelopes even easier. When you send
+      an envelope, the recipients' names and email addresses are automatically
       added to your contacts list. You can use the contacts list to quickly add
       recipients to the envelopes you send. The `Contacts` resource provides
       methods that enable you to manage your contacts.
 
     name: Contacts
   - description: >
-      The EnvelopeAttachments resource provides methods that allow you to manage
-      attachments.
+      The EnvelopeAttachments resource provides methods that allow you to
+      manage attachments.
     name: EnvelopeAttachments
   - description: >
-      An account permission profile is assigned to a group of users, enabling
-      you to set permissions for all of the users in the group at the same time.
-      You are not required to set Permission Profiles for a group, but it makes
-      it easier to manage user permissions for a large number of users. 
+      An account permission profile is assigned to a group of users,
+      enabling you to set permissions for all of the users in the group at the
+      same time. You are not required to set Permission Profiles for a group,
+      but it makes it easier to manage user permissions for a large number of
+      users. 
 
 
       DocuSign offers the following account permission profiles:
@@ -2803,11 +2804,12 @@ tags:
       You can also create your own custom account permission profiles.
     name: AccountPermissionProfiles
   - description: >
-      PowerForms enable you to create self-service documents for signature. A
-      PowerForm is an envelope initiated from a URL that you make available for
-      signers to complete. You can either add a PowerForm to your website or
-      email the URL to recipients. DocuSign saves the data that recipients enter
-      so  you can easily integrate it with your other applications.
+      PowerForms enable you to create self-service documents for
+      signature. A PowerForm is an envelope initiated from a URL that you make
+      available for signers to complete. You can either add a PowerForm to your
+      website or email the URL to recipients. DocuSign saves the data that
+      recipients enter so  you can easily integrate it with your other
+      applications.
 
 
       For more information, see [Using PowerForms](https://support.docusign.com/en/guides/ndse-user-guide-using-powerforms).
@@ -2863,11 +2865,11 @@ tags:
       workspace items.
     name: WorkspaceItems
   - description: >-
-      A workspace is a collaborative space for sharing documents and managing
-      workflows. A workspace has a single owner who must be a DocuSign user. The
-      owner can invite others to the workspace as collaborators. Individuals who
-      are not DocuSign users must create a DocuSign account to join a workspace
-      as a collaborator.
+      A workspace is a collaborative space for sharing documents and
+      managing workflows. A workspace has a single owner who must be a DocuSign
+      user. The owner can invite others to the workspace as collaborators.
+      Individuals who are not DocuSign users must create a DocuSign account to
+      join a workspace as a collaborator.
        
       You can create an envelope directly from a workspace.
 
@@ -2887,10 +2889,10 @@ tags:
       **Note**: Documents in a template are not individually listed as files.
     name: Workspaces
   - description: >
-      A chunked upload is a temporary file that you upload in parts and stage at
-      DocuSign, then refer to as the content for other API calls. For example,
-      you might use it for document content when assembling an envelope or
-      template. 
+      A chunked upload is a temporary file that you upload in parts and
+      stage at DocuSign, then refer to as the content for other API calls. For
+      example, you might use it for document content when assembling an envelope
+      or template. 
 
 
       A chunked upload is linked to the DocuSign account member who initiated the API call. This user is the only user who is able to reference the chunked upload.
@@ -2936,12 +2938,12 @@ tags:
       data that users have entered into a form associated with an envelope.
     name: EnvelopeFormData
   - description: >
-      The Envelope Document Visibility resource provides methods for managing
-      document visibility by recipient.
+      The Envelope Document Visibility resource provides methods for
+      managing document visibility by recipient.
     name: EnvelopeDocumentVisibility
   - description: >
-      The Template Document Visibility resource provides methods for managing
-      template document visibility by recipient.
+      The Template Document Visibility resource provides methods for
+      managing template document visibility by recipient.
     name: TemplateDocumentVisibility
   - description: The AccountPasswordRules resource provides methods that allow you
       to obtain and update account password rules, as well as membership and
@@ -2955,9 +2957,9 @@ tags:
   - description: ""
     name: NotaryJournals
   - description: >-
-      The DocuSign Identity Verification process requires a signer to submit an
-      image of their valid government ID and wait for the image to be uploaded
-      and verified before they can access a document. 
+      The DocuSign Identity Verification process requires a signer to
+      submit an image of their valid government ID and wait for the image to be
+      uploaded and verified before they can access a document. 
 
 
       Identity Verification supports government photo IDs and European eIDs, analyzing the document security features and matching the name on the agreement against the name on the ID. After a successful verification, the signer can view the agreement and sign as usual.
@@ -3005,8 +3007,8 @@ tags:
   - description: ""
     name: TemplateHtmlDefinitions
   - description: >-
-      Envelope transfer rules enable administrators to transfer envelopes and
-      templates from user to another. For example, you might do this when an
+      Envelope transfer rules enable administrators to transfer envelopes
+      and templates from user to another. For example, you might do this when an
       employee leaves the company. To transfer ownership of envelopes and
       templates, the **Transfer Custody** feature must be enabled for your
       account.
@@ -3021,8 +3023,8 @@ tags:
       Notifications](https://support.docusign.com/en/guides/ndse-user-guide-manage-notifications).
     name: NotificationDefaults
   - description: >
-      You can use bulk send lists for anything that you need to send to a large
-      number of recipients on a
+      You can use bulk send lists for anything that you need to send to a
+      large number of recipients on a
 
       recurring basis, such as:
 
@@ -3124,8 +3126,8 @@ tags:
       For more information about using bulk send, see [Bulk Sending Envelopes](https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/envelopes/bulk-send/).
     name: BulkSend
   - description: >-
-      You can configure automatic archiving of emails sent from all of your
-      DocuSign accounts.
+      You can configure automatic archiving of emails sent from all of
+      your DocuSign accounts.
 
 
       For more information, see [Email Archive Configuration](https://support.docusign.com/en/guides/ndse-admin-guide-email-archive-configuration).
@@ -3136,9 +3138,9 @@ tags:
   - description: ""
     name: TabsBlob
   - description: >-
-      The comments resource provides a method that enables you to download a PDF
-      file containing all of the comments that recipients and the sender have
-      added to the documents in an envelope.
+      The comments resource provides a method that enables you to
+      download a PDF file containing all of the comments that recipients and the
+      sender have added to the documents in an envelope.
 
 
       Comments are disabled by default. To use the comments feature, an account administrator must enable comments on the account (in the `accountSettingsInformation` object, set the `enableSigningExtensionComments` property to **true**). 
@@ -3560,9 +3562,9 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the list of recurring and usage charges for the account. This
-        can be used to determine the charge structure and usage of charge plan
-        items. 
+        Retrieves the list of recurring and usage charges for the account.
+        This can be used to determine the charge structure and usage of charge
+        plan items. 
 
 
         Privileges required: account administrator 
@@ -3610,8 +3612,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves a list of invoices for the account. If the from date or to
-        date queries are not specified, the response returns invoices for the
+        Retrieves a list of invoices for the account. If the from date or
+        to date queries are not specified, the response returns invoices for the
         last 365 days.
 
 
@@ -3764,8 +3766,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Returns a list past due invoices for the account and notes if payment
-        can be made through the REST API. 
+        Returns a list past due invoices for the account and notes if
+        payment can be made through the REST API. 
 
 
         Privileges Required: account administrator
@@ -3802,8 +3804,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves a list containing information about one or more payments. If
-        the from date or to date queries are not used, the response returns
+        Retrieves a list containing information about one or more payments.
+        If the from date or to date queries are not used, the response returns
         payment information for the last 365 days. 
 
 
@@ -4197,8 +4199,8 @@ paths:
     delete:
       deprecated: false
       description: >-
-        This method deletes one or more brand profiles from an account, based on
-        the brand ids that you include in the `brandsRequest`.
+        This method deletes one or more brand profiles from an account,
+        based on the brand ids that you include in the `brandsRequest`.
 
 
         **Note**: Branding for either signing or sending must be enabled for the account (`canSelfBrandSend` , `canSelfBrandSign`, or both of these account settings must be **true**).
@@ -4235,8 +4237,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        This method returns details about all of the brands associated with an
-        account, including the default brand profiles. 
+        This method returns details about all of the brands associated with
+        an account, including the default brand profiles. 
 
 
         **Note**: Branding for either signing or sending must be enabled for the account (`canSelfBrandSend` , `canSelfBrandSign`, or both of these account settings must be **true**).
@@ -5273,8 +5275,8 @@ paths:
     post:
       deprecated: false
       description: >+
-        This method initiates the bulk send process. It generates a bulk send
-        request based on an [existing bulk send list][create_list] and an
+        This method initiates the bulk send process. It generates a bulk
+        send request based on an [existing bulk send list][create_list] and an
         envelope or template.
 
 
@@ -5383,10 +5385,11 @@ paths:
     post:
       deprecated: false
       description: >+
-        This method tests a bulk send list for compatibility with the envelope
-        or template that you want to send. For example, a template that has
-        three roles is not compatible with a bulk send list that has only two
-        recipients. For this reason, you might want to test compatibility first.
+        This method tests a bulk send list for compatibility with the
+        envelope or template that you want to send. For example, a template that
+        has three roles is not compatible with a bulk send list that has only
+        two recipients. For this reason, you might want to test compatibility
+        first.
 
 
         A successful test result returns `true` for the `canBeSent` property. An unsuccessful test returns a JSON response that contains information about the errors that occurred.
@@ -5565,7 +5568,8 @@ paths:
     delete:
       deprecated: false
       description: >-
-        Deletes a chunked upload that has been committed but not yet consumed.
+        Deletes a chunked upload that has been committed but not yet
+        consumed.
 
 
         This method cannot be used to delete the following types of chunked uploads, which the system deletes automatically:
@@ -5671,9 +5675,9 @@ paths:
     put:
       deprecated: false
       description: >-
-        This method checks the integrity of a chunked upload and then commits
-        it. When this request is successful, the chunked upload is then ready to
-        be referenced in other API calls.
+        This method checks the integrity of a chunked upload and then
+        commits it. When this request is successful, the chunked upload is then
+        ready to be referenced in other API calls.
 
 
         If the request is unsuccessful, ensure that you have uploaded all of the parts by using the Update method.
@@ -5728,8 +5732,8 @@ paths:
     put:
       deprecated: false
       description: >-
-        Adds a chunk or part to an existing chunked upload. After you use the
-        Create method to initiate a new chunked upload and upload the first
+        Adds a chunk or part to an existing chunked upload. After you use
+        the Create method to initiate a new chunked upload and upload the first
         part, 
 
         use this method to upload subsequent parts.
@@ -5769,9 +5773,9 @@ paths:
           schema:
             type: string
         - description: >-
-            The sequence or order of the part in the chunked upload. By default,
-            the sequence of the first part that is uploaded as part of the
-            Create request is `0`.
+            The sequence or order of the part in the chunked upload. By
+            default, the sequence of the first part that is uploaded as part of
+            the Create request is `0`.
 
 
             **Note**: You can add parts out of order. However, the chunked upload must consist of a contiguous series of one or more parts before you can successfully commit it.
@@ -5807,8 +5811,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves all the DocuSign Custom Connect definitions for the specified
-        account.
+        Retrieves all the DocuSign Custom Connect definitions for the
+        specified account.
 
 
         **Note**: Connect must be enabled for your account to use this function. This does not retrieve information for Connect configurations for Box, eOriginal, or Salesforce.
@@ -5844,14 +5848,15 @@ paths:
     post:
       deprecated: false
       description: >
-        Creates a DocuSign Custom Connect definition for your account. DocuSign
-        Connect enables the sending of real-time data updates to external
-        applications. These updates are generated by user transactions as the
-        envelope progresses through actions to completion. The Connect Service
-        provides updated information about the status of these transactions and
-        returns updates that include the actual content of document form fields.
-        Be aware that, these updates might or might not include the document
-        itself. For more information about Connect, see the [DocuSign
+        Creates a DocuSign Custom Connect definition for your account.
+        DocuSign Connect enables the sending of real-time data updates to
+        external applications. These updates are generated by user transactions
+        as the envelope progresses through actions to completion. The Connect
+        Service provides updated information about the status of these
+        transactions and returns updates that include the actual content of
+        document form fields. Be aware that, these updates might or might not
+        include the document itself. For more information about Connect, see the
+        [DocuSign
         Connect](https://developers.docusign.com/esign-rest-api/guides/connect).
 
 
@@ -5889,7 +5894,8 @@ paths:
     put:
       deprecated: false
       description: >-
-        Updates the specified DocuSign Connect configuration in your account.
+        Updates the specified DocuSign Connect configuration in your
+        account.
 
 
         **Note**: Connect must be enabled for your account to use this function. This cannot be used to update Connect configurations for Box, eOriginal, or Salesforce.
@@ -5928,11 +5934,11 @@ paths:
     put:
       deprecated: false
       description: >
-        Republishes Connect information for the  specified set of envelopes. The
-        primary use is to republish Connect post failures by including envelope
-        IDs for the envelopes that failed to post in the request. The list of
-        envelope IDs that failed to post correctly can be retrieved by calling
-        to
+        Republishes Connect information for the  specified set of
+        envelopes. The primary use is to republish Connect post failures by
+        including envelope IDs for the envelopes that failed to post in the
+        request. The list of envelope IDs that failed to post correctly can be
+        retrieved by calling to
         [Connect::listEventLogs](https://developers.docusign.com/docs/esign-rest-api/reference/Connect/ConnectEvents/list)
         retrieve the failure log.
       operationId: ConnectPublish_PutConnectRetry
@@ -6483,8 +6489,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the default, HTML-formatted Electronic Record and Signature
-        Disclosure (ERSD) associated with the account. 
+        Retrieves the default, HTML-formatted Electronic Record and
+        Signature Disclosure (ERSD) associated with the account. 
 
 
         This is the default ERSD disclosure that DocuSign provides for the convenience of U.S.-based customers only. This default disclosure is only valid for transactions between U.S.-based parties.
@@ -6624,8 +6630,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the HTML-formatted Electronic Record and Signature Disclosure
-        (ERSD) associated with the account. 
+        Retrieves the HTML-formatted Electronic Record and Signature
+        Disclosure (ERSD) associated with the account. 
 
 
         To set the language of the disclosure that you want to retrieve, use the optional `langCode` query parameter.
@@ -7019,8 +7025,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        This method imports multiple new contacts into a contact list from a
-        CSV, JSON, or XML file.
+        This method imports multiple new contacts into a contact list from
+        a CSV, JSON, or XML file.
 
 
         To use this method, you must provide a request body in one of the supported formats and include a `content-type` header with the appropriate value.
@@ -7818,8 +7824,8 @@ paths:
           schema:
             type: string
         - description: >-
-            Returns envelopes that were modified prior to the specified date and
-            time. 
+            Returns envelopes that were modified prior to the specified date
+            and time. 
 
 
             Example: `2020-05-09T21:56:12.2500000Z`
@@ -8841,8 +8847,8 @@ paths:
           schema:
             type: string
         - description: >-
-            The transaction IDs to include in the results. Note that transaction
-            IDs are valid for seven days.
+            The transaction IDs to include in the results. Note that
+            transaction IDs are valid for seven days.
 
 
             The value of this property can be:
@@ -8897,8 +8903,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        This method retrieves a list of envelope transfer rules associated with
-        an account.
+        This method retrieves a list of envelope transfer rules associated
+        with an account.
 
 
         **Note**: Only Administrators can create and use envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
@@ -9004,9 +9010,9 @@ paths:
     put:
       deprecated: false
       description: >-
-        This method changes the status for one or more envelope transfer rules
-        based on the `envelopeTransferRuleId`s in the request body. You use this
-        method to change whether or not the rules are enabled.
+        This method changes the status for one or more envelope transfer
+        rules based on the `envelopeTransferRuleId`s in the request body. You
+        use this method to change whether or not the rules are enabled.
 
 
         **Note**: You cannot change any other information about the envelope transfer rule. Only Administrators can update envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
@@ -9086,8 +9092,8 @@ paths:
     put:
       deprecated: false
       description: >-
-        This method changes the status of an envelope transfer rule. You use
-        this method to change whether or not the rule is enabled.
+        This method changes the status of an envelope transfer rule. You
+        use this method to change whether or not the rule is enabled.
 
 
         You must include the `envelopeTransferRuleId` both as a query parameter, and in the request body.
@@ -9167,8 +9173,9 @@ paths:
           schema:
             type: string
         - description: >
-            Specifies additional information about the envelope to return. Enter
-            a comma-separated list, such as `tabs,recipients`. Valid values are:
+            Specifies additional information about the envelope to return.
+            Enter a comma-separated list, such as `tabs,recipients`. Valid
+            values are:
 
 
             - `custom_fields`: The custom fields associated with the envelope.
@@ -9916,8 +9923,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves a PDF file containing all of the comments that senders and
-        recipients have added to the documents in an envelope.
+        Retrieves a PDF file containing all of the comments that senders
+        and recipients have added to the documents in an envelope.
 
 
         **Note**: Comments are disabled by default. To use the comments feature, an account administrator must enable comments on the account (in the `accountSettingsInformation` object, set the `enableSigningExtensionComments` property to **true**). 
@@ -10012,8 +10019,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the custom field information for the specified envelope. You
-        can use these fields in the envelopes for your account to record
+        Retrieves the custom field information for the specified envelope.
+        You can use these fields in the envelopes for your account to record
         information about the envelope, help search for envelopes, and track
         information. The envelope custom fields are shown in the Envelope
         Settings section when a user is creating an envelope in the DocuSign
@@ -10063,7 +10070,8 @@ paths:
     post:
       deprecated: false
       description: >
-        Updates the envelope custom fields for draft and in-process envelopes.
+        Updates the envelope custom fields for draft and in-process
+        envelopes.
 
 
         You may assign up to three envelope custom fields to an envelope. This limit does not include account (document) custom fields. Each custom field used in an envelope must have a unique name.
@@ -11069,8 +11077,8 @@ paths:
     delete:
       deprecated: false
       description: >+
-        Deletes one or more documents from an existing envelope that has not yet
-        been completed.
+        Deletes one or more documents from an existing envelope that has
+        not yet been completed.
 
 
         To delete a document, use only the relevant parts of the [`envelopeDefinition`](#envelopeDefinition).
@@ -11623,8 +11631,8 @@ paths:
     put:
       deprecated: false
       description: >
-        Adds a document to an existing draft envelope. The bytes of the document
-        make up the body of the request. 
+        Adds a document to an existing draft envelope. The bytes of the
+        document make up the body of the request. 
 
 
 
@@ -12884,9 +12892,9 @@ paths:
     post:
       deprecated: false
       description: >-
-        Adds email override settings, changing the email address to reply to an
-        email address, name, or the BCC for email archive information, for the
-        envelope. Note that adding email settings will only affect email
+        Adds email override settings, changing the email address to reply
+        to an email address, name, or the BCC for email archive information, for
+        the envelope. Note that adding email settings will only affect email
         communications that occur after the addition was made.
 
 
@@ -12933,9 +12941,9 @@ paths:
     put:
       deprecated: false
       description: >-
-        Updates the existing email override settings for the specified envelope.
-        Note that modifying email settings will only affect email communications
-        that occur after the modification was made.
+        Updates the existing email override settings for the specified
+        envelope. Note that modifying email settings will only affect email
+        communications that occur after the modification was made.
 
 
         This can also be used to delete an individual email override setting by using an empty string for the value to be deleted.
@@ -12982,11 +12990,11 @@ paths:
     get:
       deprecated: false
       description: >-
-        This method downloads the envelope and field data from any in-process,
-        completed, or canceled envelope that you sent or that is shared with
-        you. Recipients who are also full administrators on an account can view
-        form data for any envelopes that another user on the account has sent to
-        them.
+        This method downloads the envelope and field data from any
+        in-process, completed, or canceled envelope that you sent or that is
+        shared with you. Recipients who are also full administrators on an
+        account can view form data for any envelopes that another user on the
+        account has sent to them.
 
 
         **Note**: To use this feature, the Sending Setting "Allow sender to download form data" must be enabled for the account.
@@ -13452,8 +13460,8 @@ paths:
     put:
       deprecated: false
       description: >-
-        This method sets the notifications (reminders and expirations) for an
-        existing envelope. The request body sends a structure containing
+        This method sets the notifications (reminders and expirations) for
+        an existing envelope. The request body sends a structure containing
         reminders and expirations settings. It also specifies whether to use the
         settings specified in the request, or the account default notification
         settings for the envelope.
@@ -13506,8 +13514,8 @@ paths:
     delete:
       deprecated: false
       description: >-
-        Deletes one or more recipients from a draft or sent envelope. List the
-        recipients that you want to delete in the body of the request. This
+        Deletes one or more recipients from a draft or sent envelope. List
+        the recipients that you want to delete in the body of the request. This
         method uses the `recipientId` as the key for deleting recipients.
 
 
@@ -13905,8 +13913,8 @@ paths:
     put:
       deprecated: false
       description: >-
-        This method updates document visibility for one or more recipients based
-        on the `recipientId` and `visible` values that you include in the
+        This method updates document visibility for one or more recipients
+        based on the `recipientId` and `visible` values that you include in the
         request body.
 
 
@@ -14010,8 +14018,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the default, HTML-formatted Electronic Record and Signature
-        Disclosure (ERSD) for the envelope that you specify. 
+        Retrieves the default, HTML-formatted Electronic Record and
+        Signature Disclosure (ERSD) for the envelope that you specify. 
 
 
         This is the default ERSD disclosure that DocuSign provides for the convenience of U.S.-based customers only. This default disclosure is only valid for transactions between U.S.-based parties.
@@ -14170,10 +14178,11 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the HTML-formatted Electronic Record and Signature Disclosure
-        (ERSD) for the envelope recipient that you specify. This disclosure
-        might differ from the account-level disclosure, based on the signing
-        brand applied to the envelope and the recipient's language settings.
+        Retrieves the HTML-formatted Electronic Record and Signature
+        Disclosure (ERSD) for the envelope recipient that you specify. This
+        disclosure might differ from the account-level disclosure, based on the
+        signing brand applied to the envelope and the recipient's language
+        settings.
 
 
         To set the language of the disclosure that you want to retrieve, specify the `langCode` as either a path or query parameter.
@@ -14664,9 +14673,9 @@ paths:
     put:
       deprecated: false
       description: >-
-        Updates the initials image for a signer that does not have a DocuSign
-        account. The supported image formats for this file are: gif, png, jpeg,
-        and bmp. The file size must be less than 200K.
+        Updates the initials image for a signer that does not have a
+        DocuSign account. The supported image formats for this file are: gif,
+        png, jpeg, and bmp. The file size must be less than 200K.
 
 
         For the Authentication/Authorization for this call, the credentials must match the sender of the envelope, the recipient must be an accountless signer or in person signer. The account must have the `CanSendEnvelope` property set to **true** and the `ExpressSendOnly` property in `SendingUser` structure must be set to **false**.
@@ -14769,8 +14778,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the specified user signature image. The image is returned in
-        the same format as uploaded. In the request you can specify if the
+        Retrieves the specified user signature image. The image is returned
+        in the same format as uploaded. In the request you can specify if the
         chrome (the added line and identifier around the initial image) is
         returned with the image.
 
@@ -14845,9 +14854,9 @@ paths:
     put:
       deprecated: false
       description: >-
-        Updates the signature image for an accountless signer. The supported
-        image formats for this file are: gif, png, jpeg, and bmp. The file size
-        must be less than 200K.
+        Updates the signature image for an accountless signer. The
+        supported image formats for this file are: gif, png, jpeg, and bmp. The
+        file size must be less than 200K.
 
 
         For the Authentication/Authorization for this call, the credentials must match the sender of the envelope, the recipient must be an accountless signer or in person signer. The account must have the `CanSendEnvelope` property set to **true** and the `ExpressSendOnly` property in `SendingUser` structure must be set to **false**.
@@ -15353,8 +15362,8 @@ paths:
     get:
       deprecated: false
       description: >
-        This returns a list of the server-side templates, their name and ID,
-        used in an envelope.
+        This returns a list of the server-side templates, their name and
+        ID, used in an envelope.
       operationId: Templates_GetEnvelopeTemplates
       parameters:
         - description: The external account number (int) or account ID GUID.
@@ -15491,8 +15500,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        Returns a URL that allows you to embed the envelope correction view of
-        the DocuSign UI in your applications.
+        Returns a URL that allows you to embed the envelope correction view
+        of the DocuSign UI in your applications.
 
 
         **Important**: Due to screen space issues, iFrames should not be used for embedded operations on mobile devices. For iOS devices, DocuSign recommends using a WebView. 
@@ -15562,9 +15571,9 @@ paths:
     post:
       deprecated: false
       description: >-
-        Returns a URL that enables you to embed the edit view of the DocuSign UI
-        in your applications. This is a one-time use login token that allows the
-        user to be placed into the DocuSign editing view. 
+        Returns a URL that enables you to embed the edit view of the
+        DocuSign UI in your applications. This is a one-time use login token
+        that allows the user to be placed into the DocuSign editing view. 
 
 
         Upon sending completion, the user is returned to the return URL provided by the API application.
@@ -15796,8 +15805,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        Returns a URL that enables you to embed the sender view of the DocuSign
-        UI in your applications.
+        Returns a URL that enables you to embed the sender view of the
+        DocuSign UI in your applications.
 
 
         The returned URL can only be redirected to immediately after it is generated. It can only be used once.
@@ -15888,8 +15897,8 @@ paths:
     post:
       deprecated: false
       description: >
-        Returns a URL that enables you to embed the DocuSign UI recipient view
-        of a [shared
+        Returns a URL that enables you to embed the DocuSign UI recipient
+        view of a [shared
         envelope](https://support.docusign.com/en/guides/ndse-admin-guide-share-envelopes)
         in your applications. This is the view that a user sees of an envelope
         that a recipient on the same account has shared with them.
@@ -16835,8 +16844,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        This method returns a list of Identity Verification workflows that are
-        available to an account.
+        This method returns a list of Identity Verification workflows that
+        are available to an account.
 
 
         **Note**: To use this method, you must either be an account administrator or a sender.
@@ -18160,9 +18169,9 @@ paths:
     post:
       deprecated: false
       description: >
-        This method creates a BCC email archive configuration for an account
-        (adds a BCC email address to the account for archiving the emails that
-        DocuSign generates).
+        This method creates a BCC email archive configuration for an
+        account (adds a BCC email address to the account for archiving the
+        emails that DocuSign generates).
 
 
         The only property that you must set in the request body is the BCC email address that you want to use.
@@ -18210,7 +18219,8 @@ paths:
     delete:
       deprecated: false
       description: >
-        This method deletes a BCC email archive configuration from an account.
+        This method deletes a BCC email archive configuration from an
+        account.
 
 
         When you use this method, the status of the BCC email archive configuration switches to `closed` and the BCC email address is no longer used to archive DocuSign-generated email messages.
@@ -18705,7 +18715,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves shared item status for one or more users and types of items.
+        Retrieves shared item status for one or more users and types of
+        items.
 
 
         Users with account administration privileges can retrieve shared access information for all account users. Users without account administrator privileges can only retrieve shared access information for themselves, and the returned information is limited to retrieving the status of the members of the account that are sharing their folders to the user. This is equivalent to setting the `shared` parameter to `shared_from`.
@@ -18774,8 +18785,8 @@ paths:
           schema:
             type: string
         - description: >-
-            A comma-separated list of sharing filters that specifies which users
-            appear in the response. 
+            A comma-separated list of sharing filters that specifies which
+            users appear in the response. 
 
 
             - `not_shared`: The response lists users who do not share items of `item_type` with the current user.
@@ -18835,7 +18846,8 @@ paths:
     put:
       deprecated: false
       description: >+
-        This sets the shared access status for one or more users or templates.
+        This sets the shared access status for one or more users or
+        templates.
 
 
         When setting user shared access, only users with account administration privileges can set shared access status for envelopes.
@@ -19817,8 +19829,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        Creates a tab with pre-defined properties, such as a text tab with a
-        certain font type and validation pattern. Users can access the custom
+        Creates a tab with pre-defined properties, such as a text tab with
+        a certain font type and validation pattern. Users can access the custom
         tabs when sending documents through the DocuSign web application.
 
 
@@ -20234,8 +20246,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        Creates one or more template definitions, using a multipart request for
-        each template.
+        Creates one or more template definitions, using a multipart request
+        for each template.
 
 
         Templates help streamline the sending process when you frequently send the same or similar documents, or send different documents to the same group of people.
@@ -20606,7 +20618,8 @@ paths:
     delete:
       deprecated: false
       description: >-
-        This method deletes one or more documents from an existing template.
+        This method deletes one or more documents from an existing
+        template.
 
 
         To delete a document, use only the relevant parts of the [`envelopeDefinition`](#envelopeDefinition).
@@ -20749,8 +20762,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        This method retrieves one or more PDF documents from the template that
-        you specify.
+        This method retrieves one or more PDF documents from the template
+        that you specify.
 
 
         You can specify the ID of the document to retrieve, or pass in the value `combined` to retrieve all documents in the template as a single PDF file.
@@ -22728,7 +22741,8 @@ paths:
     put:
       deprecated: false
       description: >-
-        This method updates the document visibility for a template recipient.
+        This method updates the document visibility for a template
+        recipient.
 
 
         **Note**: A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document. Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all documents.
@@ -23387,9 +23401,9 @@ paths:
     delete:
       deprecated: false
       description: >-
-        Closes one or more user records in the account. Users are never deleted
-        from an account, but closing a user prevents them from using account
-        functions.
+        Closes one or more user records in the account. Users are never
+        deleted from an account, but closing a user prevents them from using
+        account functions.
 
 
         The response specifies whether the API execution succeeded (200 - OK) or failed (400 - Error). The response contains a user structure similar to the request and includes the user changes. If an error occurred during the DELETE operation for any of the users, the response for that user contains an `errorDetails` property with `errorCode` and `message` properties.
@@ -23861,8 +23875,8 @@ paths:
     get:
       deprecated: false
       description: >
-        Retrieves the list of cloud storage providers enabled for the account
-        and the configuration information for the user.
+        Retrieves the list of cloud storage providers enabled for the
+        account and the configuration information for the user.
       operationId: CloudStorage_GetCloudStorageProviders
       parameters:
         - description: The external account number (int) or account ID GUID.
@@ -24200,8 +24214,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves a list of the user's items from the specified cloud storage
-        provider. 
+        Retrieves a list of the user's items from the specified cloud
+        storage provider. 
 
 
         To limit the scope of the items returned, provide a comma-separated list of folder ids in the request.
@@ -24662,8 +24676,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the user profile picture for the specified user. The image is
-        returned in the same format as uploaded.
+        Retrieves the user profile picture for the specified user. The
+        image is returned in the same format as uploaded.
 
 
         The userId parameter specified in the endpoint must match the authenticated user's user ID and the user must be a member of the specified account.
@@ -24864,8 +24878,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        This method retrieves the signature definitions for the user that you
-        specify.
+        This method retrieves the signature definitions for the user that
+        you specify.
 
 
         The `userId` parameter specified in the endpoint must match the authenticated user's user ID, and the user must be a member of the account.
@@ -24931,8 +24945,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        Adds a user signature image and/or user initials image to the specified
-        user. 
+        Adds a user signature image and/or user initials image to the
+        specified user. 
 
 
         The userId property specified in the endpoint must match the authenticated user's `userId` and the user must be a member of the account.
@@ -25101,8 +25115,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves the structure of a single signature with a known signature
-        name.
+        Retrieves the structure of a single signature with a known
+        signature name.
 
 
         The userId specified in the endpoint must match the authenticated user's user ID and the user must be a member of the account.
@@ -25160,10 +25174,10 @@ paths:
     put:
       deprecated: false
       description: >-
-        Creates, or updates, the signature font and initials for the specified
-        user. When creating a signature, you use this resource to create the
-        signature name and then add the signature and initials images into the
-        signature.
+        Creates, or updates, the signature font and initials for the
+        specified user. When creating a signature, you use this resource to
+        create the signature name and then add the signature and initials images
+        into the signature.
 
 
         **Note**: This will also create a default signature for the user when one does not exist.
@@ -25468,8 +25482,8 @@ paths:
     post:
       deprecated: false
       description: >-
-        Returns a URL that enables you to embed the authentication view of the
-        DocuSign UI in your applications.
+        Returns a URL that enables you to embed the authentication view of
+        the DocuSign UI in your applications.
 
 
         **Note**: You can revoke this URL by making the DELETE call to the same URL with no request body. 
@@ -25817,8 +25831,8 @@ paths:
     delete:
       deprecated: false
       description: >-
-        This method deletes one or more files or sub-folders from a workspace
-        folder or root.
+        This method deletes one or more files or sub-folders from a
+        workspace folder or root.
 
 
         Note: To delete items from a workspace, the `status` of the workspace must be `active`.
@@ -26752,8 +26766,8 @@ paths:
     get:
       deprecated: false
       description: >-
-        Retrieves a list of log entries as a JSON or xml object or as a zip file
-        containing the entries.
+        Retrieves a list of log entries as a JSON or xml object or as a zip
+        file containing the entries.
 
 
         If the Accept header is set to application/zip, the response is a zip file containing individual text files, each representing an API request.
@@ -27287,8 +27301,8 @@ components:
           type: string
         allowCDWithdraw:
           description: >-
-            When set to **true**, indicates that the customer can withdraw their
-            consent to the consumer disclosure when they decline to sign
+            When set to **true**, indicates that the customer can withdraw
+            their consent to the consumer disclosure when they decline to sign
             documents. If these recipients sign documents sent to them from your
             account in the future, they will be required to agree to the terms
             in the disclosure. The default value is **false**.
@@ -27321,8 +27335,8 @@ components:
           type: string
         companyName:
           description: >-
-            Specifies the company name used in the disclosure. The default value
-            is the account name.
+            Specifies the company name used in the disclosure. The default
+            value is the account name.
 
 
             However, if your account uses signing brands that specify a company name, you can substitute the brand's company name by setting the `useBrand` property to **true**. Whenever an envelope is sent from the account that uses a signing brand with a specified `companyName`, that value is used in email notifications and in the signing experience.
@@ -27495,11 +27509,11 @@ components:
           type: string
         useBrand:
           description: >-
-            When set to **true**, specifies that the company name in the signing
-            brand is used for the disclosure. Whenever an envelope is sent from
-            the account that uses a signing brand with a specified company name,
-            that value is used in email notifications and in the signing
-            experience.  
+            When set to **true**, specifies that the company name in the
+            signing brand is used for the disclosure. Whenever an envelope is
+            sent from the account that uses a signing brand with a specified
+            company name, that value is used in email notifications and in the
+            signing experience.  
 
 
             When set to **false** (default), or if the signing brand does not specify a company name, the account name is used instead.
@@ -27544,8 +27558,8 @@ components:
           type: string
         withdrawCity:
           description: >-
-            Contains the city of the postal address to which a customer can send
-            a consent withdrawal notification.
+            Contains the city of the postal address to which a customer can
+            send a consent withdrawal notification.
 
 
             Maximum length: 50 characters. 
@@ -27813,8 +27827,8 @@ components:
       x-ds-definition-name: accountSignatureProviders
       x-ds-order: "30"
       x-ms-summary: >
-        This resource provides information on the Standards Based Signature
-        providers that have been provisioned for an account.
+        This resource provides information on the Standards Based
+        Signature providers that have been provisioned for an account.
     AccountSignatures:
       description: ""
       properties:
@@ -28423,8 +28437,8 @@ components:
       x-ms-summary: ""
     BCCEmailArchive:
       description: >
-        The `EmailArchive` resource provides methods for managing your email
-        archive configuration, which consists of the BCC email address or
+        The `EmailArchive` resource provides methods for managing your
+        email archive configuration, which consists of the BCC email address or
         addresses that you want to use to archive DocuSign emails. Each account
         can use up to five BCC email addresses for archiving purposes.
       properties:
@@ -28462,8 +28476,8 @@ components:
       x-ds-definition-name: bccEmailArchiveHistoryList
       x-ds-order: "120"
       x-ms-summary: >
-        The `EmailArchive` resource provides methods for managing your email
-        archive configuration, which consists of the BCC email address or
+        The `EmailArchive` resource provides methods for managing your
+        email archive configuration, which consists of the BCC email address or
         addresses that you want to use to archive DocuSign emails. Each account
         can use up to five BCC email addresses for archiving purposes.
     BillingPlans:
@@ -28516,9 +28530,9 @@ components:
       x-ms-summary: Billing plans
     BulkSend:
       description: >-
-        The bulk send list resource provides methods that enable you to create
-        and manage bulk sending lists, which you can use to send multiple copies
-        of an envelope in a single batch. 
+        The bulk send list resource provides methods that enable you to
+        create and manage bulk sending lists, which you can use to send multiple
+        copies of an envelope in a single batch. 
 
 
         **Note**: The Bulk Send feature is only available on Business Pro plans that are using EasySign.
@@ -28542,9 +28556,9 @@ components:
       x-ds-definition-name: bulkSendingList
       x-ds-order: "120"
       x-ms-summary: >-
-        The bulk send list resource provides methods that enable you to create
-        and manage bulk sending lists, which you can use to send multiple copies
-        of an envelope in a single batch. 
+        The bulk send list resource provides methods that enable you to
+        create and manage bulk sending lists, which you can use to send multiple
+        copies of an envelope in a single batch. 
 
 
         **Note**: The Bulk Send feature is only available on Business Pro plans that are using EasySign.
@@ -28591,9 +28605,10 @@ components:
           type: string
         maxChunkedUploadParts:
           description: >
-            The maximum number of parts allowed for a chunked upload. This value
-            is configurable per DocuSign environment, account, or integrator.
-            The default value is 128. The maximum possible value is 256.  
+            The maximum number of parts allowed for a chunked upload. This
+            value is configurable per DocuSign environment, account, or
+            integrator. The default value is 128. The maximum possible value is
+            256.  
           type: string
         maxTotalSize:
           description: The maximum total size allowed for a chunked upload. This value is
@@ -28842,8 +28857,8 @@ components:
           type: string
         includeDocuments:
           description: >-
-            When set to **true**, Connect attaches the envelope documents to the
-            XML payloads of your event notification messages.
+            When set to **true**, Connect attaches the envelope documents to
+            the XML payloads of your event notification messages.
 
 
             **Note**: Consider resources and scaling when adding documents to your event payloads. Documents attached to these messages are sent in base64 XML element nodes, which are larger than binary document data. This can significantly increase your payload size, opening up windows for failure. If you include documents, you must build your application to scale in these situations. 
@@ -29307,10 +29322,10 @@ components:
           type: string
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -29680,8 +29695,8 @@ components:
           type: string
         allowCDWithdraw:
           description: >-
-            When set to **true**, indicates that the customer can withdraw their
-            consent to the consumer disclosure when they decline to sign
+            When set to **true**, indicates that the customer can withdraw
+            their consent to the consumer disclosure when they decline to sign
             documents. If these recipients sign documents sent to them from your
             account in the future, they will be required to agree to the terms
             in the disclosure. The default value is **false**.
@@ -29707,8 +29722,8 @@ components:
           type: string
         companyName:
           description: >
-            Specifies the company name used in the disclosure. The default value
-            is the account name.
+            Specifies the company name used in the disclosure. The default
+            value is the account name.
 
 
             However, if your account uses signing brands that specify a company name, you can substitute the brand's company name by setting the `useBrand` property to **true**. Whenever an envelope is sent from the account that uses a signing brand with a specified `companyName`, that value is used in email notifications and in the signing experience.
@@ -29881,11 +29896,11 @@ components:
           type: string
         useBrand:
           description: >-
-            When set to **true**, specifies that the company name in the signing
-            brand is used for the disclosure. Whenever an envelope is sent from
-            the account that uses a signing brand with a specified company name,
-            that value is used in email notifications and in the signing
-            experience.  
+            When set to **true**, specifies that the company name in the
+            signing brand is used for the disclosure. Whenever an envelope is
+            sent from the account that uses a signing brand with a specified
+            company name, that value is used in email notifications and in the
+            signing experience.  
 
 
             When set to **false** (default), or if the signing brand does not specify a company name, the account name is used instead.
@@ -29930,8 +29945,8 @@ components:
           type: string
         withdrawCity:
           description: >-
-            Contains the city of the postal address to which a customer can send
-            a consent withdrawal notification.
+            Contains the city of the postal address to which a customer can
+            send a consent withdrawal notification.
 
 
             Maximum length: 50 characters. 
@@ -30590,8 +30605,8 @@ components:
       x-ms-summary: "Envelope Document Tabs resource "
     EnvelopeDocumentVisibility:
       description: >-
-        Document Visibility enables senders to control the visibility of the
-        documents in an envelope at the recipient level. For example, if the
+        Document Visibility enables senders to control the visibility of
+        the documents in an envelope at the recipient level. For example, if the
         parties associated with a legal proceeding should have access to
         different documents, the Document Visibility feature enables you to keep
         all of the documents in the same envelope and set view permissions for
@@ -30624,8 +30639,8 @@ components:
       x-ds-definition-name: documentVisibilityList
       x-ds-order: "170"
       x-ms-summary: >-
-        Document Visibility enables senders to control the visibility of the
-        documents in an envelope at the recipient level. For example, if the
+        Document Visibility enables senders to control the visibility of
+        the documents in an envelope at the recipient level. For example, if the
         parties associated with a legal proceeding should have access to
         different documents, the Document Visibility feature enables you to keep
         all of the documents in the same envelope and set view permissions for
@@ -30819,8 +30834,8 @@ components:
       x-ms-summary: This section provides information about envelope locks.
     EnvelopeRecipientTabs:
       description: >
-        All of the tabs associated with a recipient. Each property is a list of
-        a type of tab.
+        All of the tabs associated with a recipient. Each property is a
+        list of a type of tab.
       properties:
         approveTabs:
           description: >
@@ -31341,8 +31356,8 @@ components:
       x-ds-definition-name: tabs
       x-ds-order: "50"
       x-ms-summary: >
-        All of the tabs associated with a recipient. Each property is a list of
-        a type of tab.
+        All of the tabs associated with a recipient. Each property is a
+        list of a type of tab.
     EnvelopeRecipients:
       description: Envelope recipients
       properties:
@@ -31767,8 +31782,8 @@ components:
           $ref: "#/components/schemas/EnvelopeLocks"
         messageLock:
           description: >-
-            When set to **true**, prevents senders from changing the contents of
-            `emailBlurb` and `emailSubject` properties for the envelope. 
+            When set to **true**, prevents senders from changing the contents
+            of `emailBlurb` and `emailSubject` properties for the envelope. 
 
 
             Additionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes. 
@@ -32221,8 +32236,8 @@ components:
       properties:
         allowCustomMetadata:
           description: >-
-            When **true**, the sender can pass custom metadata about the payment
-            to the payment gateway. You pass in this metadata on an
+            When **true**, the sender can pass custom metadata about the
+            payment to the payment gateway. You pass in this metadata on an
             EnvelopeRecipientTab, in the `customMetadata` property under
             `paymentDetails`. 
 
@@ -32388,8 +32403,8 @@ components:
           type: string
         emailBody:
           description: >-
-            For a PowerForm that is sent by email, this is the body of the email
-            message sent to the recipients.
+            For a PowerForm that is sent by email, this is the body of the
+            email message sent to the recipients.
 
 
             Maximum length: 10000 characters.
@@ -33459,8 +33474,8 @@ components:
       x-ms-summary: ""
     TemplateDocumentVisibility:
       description: >-
-        Document Visibility enables senders to control the visibility of the
-        documents in an envelope at the recipient level. For example, if the
+        Document Visibility enables senders to control the visibility of
+        the documents in an envelope at the recipient level. For example, if the
         parties associated with a legal proceeding should have access to
         different documents, the Document Visibility feature enables you to keep
         all of the documents in the same envelope and set view permissions for
@@ -33493,8 +33508,8 @@ components:
       x-ds-definition-name: templateDocumentVisibilityList
       x-ds-order: "180"
       x-ms-summary: >-
-        Document Visibility enables senders to control the visibility of the
-        documents in an envelope at the recipient level. For example, if the
+        Document Visibility enables senders to control the visibility of
+        the documents in an envelope at the recipient level. For example, if the
         parties associated with a legal proceeding should have access to
         different documents, the Document Visibility feature enables you to keep
         all of the documents in the same envelope and set view permissions for
@@ -34549,8 +34564,8 @@ components:
           $ref: "#/components/schemas/EnvelopeLocks"
         messageLock:
           description: >-
-            When set to **true**, prevents senders from changing the contents of
-            `emailBlurb` and `emailSubject` properties for the envelope. 
+            When set to **true**, prevents senders from changing the contents
+            of `emailBlurb` and `emailSubject` properties for the envelope. 
 
 
             Additionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes. 
@@ -34881,9 +34896,10 @@ components:
           type: string
         signatureId:
           description: >-
-            The ID associated with the signature name. You can use this property
-            in the URI in place of the signature name. This enables the use of
-            special characters (such as "&", "<", and ">") in a signature name.
+            The ID associated with the signature name. You can use this
+            property in the URI in place of the signature name. This enables the
+            use of special characters (such as "&", "<", and ">") in a signature
+            name.
 
 
             **Note**: When you update a signature, its signature ID might change. In that case you need to use `signatureName` to get the new `signatureId`.
@@ -36401,8 +36417,8 @@ components:
           $ref: "#/components/schemas/settingsMetadata"
         allowCDWithdraw:
           description: >-
-            When set to **true**, indicates that the customer can withdraw their
-            consent to the consumer disclosure when they decline to sign
+            When set to **true**, indicates that the customer can withdraw
+            their consent to the consumer disclosure when they decline to sign
             documents. If these recipients sign documents sent to them from your
             account in the future, they will be required to agree to the terms
             in the disclosure. The default value is **false**.
@@ -36538,8 +36554,8 @@ components:
           $ref: "#/components/schemas/settingsMetadata"
         allowExpression:
           description: >+
-            If the account plan does not include calculated fields, this setting
-            allows an account to use them.
+            If the account plan does not include calculated fields, this
+            setting allows an account to use them.
 
           type: string
         allowExpressionMetadata:
@@ -36582,8 +36598,8 @@ components:
           $ref: "#/components/schemas/settingsMetadata"
         allowInPerson:
           description: >+
-            When set to **true**, the account administrator can enable in-person
-            signing.
+            When set to **true**, the account administrator can enable
+            in-person signing.
 
 
             **Note**: Only SysAdmin users can change this setting.
@@ -37237,9 +37253,9 @@ components:
           $ref: "#/components/schemas/settingsMetadata"
         documentRetentionPurgeTabs:
           description: >-
-            When set to **true** and `documentRetention` is set, document fields
-            and metadata are also purged after the document retention period
-            ends. The default value is **false**.
+            When set to **true** and `documentRetention` is set, document
+            fields and metadata are also purged after the document retention
+            period ends. The default value is **false**.
 
 
             **Note**: Only Admins can change this setting.
@@ -37626,9 +37642,9 @@ components:
           $ref: "#/components/schemas/settingsMetadata"
         envelopeIntegrationAllowed:
           description: >-
-            Shows the envelope integration rule for the account, which indicates
-            whether custom admins can enable Connect for their accounts.
-            Enumeration values are: 
+            Shows the envelope integration rule for the account, which
+            indicates whether custom admins can enable Connect for their
+            accounts. Enumeration values are: 
 
 
             - `not_allowed`
@@ -39214,8 +39230,8 @@ components:
       x-ms-summary: ""
     accountSignatureProvider:
       description: >
-        Contains information abotu the signature provider associated with the
-        Identity Verification workflow. 
+        Contains information abotu the signature provider associated with
+        the Identity Verification workflow. 
 
         If empty, then this specific workflow is not intended for signers.
       properties:
@@ -39258,8 +39274,8 @@ components:
       type: object
       x-ds-definition-name: accountSignatureProvider
       x-ms-summary: >
-        Contains information abotu the signature provider associated with the
-        Identity Verification workflow. 
+        Contains information abotu the signature provider associated with
+        the Identity Verification workflow. 
 
         If empty, then this specific workflow is not intended for signers.
     accountSignatureProviderOption:
@@ -41778,8 +41794,8 @@ components:
           type: string
         bulkStatus:
           description: >-
-            Indicates the status of the bulk send operation. Returned values can
-            be:
+            Indicates the status of the bulk send operation. Returned values
+            can be:
 
             - `queued`
 
@@ -41939,8 +41955,8 @@ components:
           type: string
         phoneNumber:
           description: >-
-            This is only used if the Identification field value is Phone or SMS.
-            The value for this field can be a valid telephone number or, if
+            This is only used if the Identification field value is Phone or
+            SMS. The value for this field can be a valid telephone number or, if
             Phone, usersupplied (SMS authentication cannot use a user supplied
             number). Parenthesis and dashes can be used in the telephone number.
 
@@ -42108,8 +42124,8 @@ components:
           type: array
         envelopeIdOrTemplateId:
           description: >
-            The ID of the draft envelope or template that was used to create the
-            batch.
+            The ID of the draft envelope or template that was used to create
+            the batch.
           type: string
         envelopesUri:
           description: |
@@ -42588,11 +42604,11 @@ components:
       x-ms-summary: This object contains details about a bulk send recipient.
     bulkSendingCopyTab:
       description: >-
-        A tab associated with the bulk send recipient. In a bulk send request,
-        each recipient tab must match a recipient tab on the envelope or
-        template that you want to send. To match up, the `tabLabel` for this tab
-        and the `tabLabel` for the corresponding tab on the envelope or template
-        must be the same.
+        A tab associated with the bulk send recipient. In a bulk send
+        request, each recipient tab must match a recipient tab on the envelope
+        or template that you want to send. To match up, the `tabLabel` for this
+        tab and the `tabLabel` for the corresponding tab on the envelope or
+        template must be the same.
 
 
         For example, if the envelope has a placeholder text tab with the `tabLabel` `childName`, you must assign the same `tabLabel` `childName` to the tab here that you are populating with that information.
@@ -42602,9 +42618,9 @@ components:
           type: string
         tabLabel:
           description: >-
-            The label associated with the recipient tab. In a bulk send request,
-            the `tabLabel` for this tab and the `tabLabel` for the corresponding
-            tab on the envelope or template must be the same.
+            The label associated with the recipient tab. In a bulk send
+            request, the `tabLabel` for this tab and the `tabLabel` for the
+            corresponding tab on the envelope or template must be the same.
 
 
             Maximum Length: 500 characters.
@@ -42612,11 +42628,11 @@ components:
       type: object
       x-ds-definition-name: bulkSendingCopyTab
       x-ms-summary: >-
-        A tab associated with the bulk send recipient. In a bulk send request,
-        each recipient tab must match a recipient tab on the envelope or
-        template that you want to send. To match up, the `tabLabel` for this tab
-        and the `tabLabel` for the corresponding tab on the envelope or template
-        must be the same.
+        A tab associated with the bulk send recipient. In a bulk send
+        request, each recipient tab must match a recipient tab on the envelope
+        or template that you want to send. To match up, the `tabLabel` for this
+        tab and the `tabLabel` for the corresponding tab on the envelope or
+        template must be the same.
 
 
         For example, if the envelope has a placeholder text tab with the `tabLabel` `childName`, you must assign the same `tabLabel` `childName` to the tab here that you are populating with that information.
@@ -44024,8 +44040,8 @@ components:
           type: string
         data:
           description: >-
-            A Base64-encoded representation of the content hat is used to upload
-            the file. 
+            A Base64-encoded representation of the content hat is used to
+            upload the file. 
 
 
             Maximum size: 50 MB. However, data is also subject to REST API limits regarding request sizes, and Internet Information Systems (IIS) might place further constraints on file size.
@@ -44917,10 +44933,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -45425,10 +45441,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -45933,10 +45949,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -46441,10 +46457,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -46950,10 +46966,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -47519,8 +47535,8 @@ components:
           type: string
         envelopeEvents:
           description: >-
-            A list of envelope-level event statuses that will trigger Connect to
-            send updates to the endpoint specified in the `url` property. 
+            A list of envelope-level event statuses that will trigger Connect
+            to send updates to the endpoint specified in the `url` property. 
 
 
             To receive notifications, you must include either an `envelopeEvents` node or a `recipientEvents` node. You do not need to specify both.
@@ -47721,7 +47737,8 @@ components:
       x-ms-summary: ""
     connectEventData:
       description: >-
-        This object lets you choose the data format of your Connect response.
+        This object lets you choose the data format of your Connect
+        response.
 
         For  more information about using this object, see [Connect webhooks with JSON notifications](https://www.docusign.com/blog/developers/connect-webhooks-json-notifications). 
       properties:
@@ -47784,7 +47801,8 @@ components:
       type: object
       x-ds-definition-name: connectEventData
       x-ms-summary: >-
-        This object lets you choose the data format of your Connect response.
+        This object lets you choose the data format of your Connect
+        response.
 
         For  more information about using this object, see [Connect webhooks with JSON notifications](https://www.docusign.com/blog/developers/connect-webhooks-json-notifications). 
     connectFailureFilter:
@@ -48103,8 +48121,8 @@ components:
           type: string
         allowCDWithdraw:
           description: >-
-            When set to **true**, indicates that the customer can withdraw their
-            consent to the consumer disclosure when they decline to sign
+            When set to **true**, indicates that the customer can withdraw
+            their consent to the consumer disclosure when they decline to sign
             documents. If these recipients sign documents sent to them from your
             account in the future, they will be required to agree to the terms
             in the disclosure. The default value is **false**.
@@ -48137,8 +48155,8 @@ components:
           type: string
         companyName:
           description: >-
-            Specifies the company name used in the disclosure. The default value
-            is the account name.
+            Specifies the company name used in the disclosure. The default
+            value is the account name.
 
 
             However, if your account uses signing brands that specify a company name, you can substitute the brand's company name by setting the `useBrand` property to **true**. Whenever an envelope is sent from the account that uses a signing brand with a specified `companyName`, that value is used in email notifications and in the signing experience.
@@ -48311,11 +48329,11 @@ components:
           type: string
         useBrand:
           description: >-
-            When set to **true**, specifies that the company name in the signing
-            brand is used for the disclosure. Whenever an envelope is sent from
-            the account that uses a signing brand with a specified company name,
-            that value is used in email notifications and in the signing
-            experience.  
+            When set to **true**, specifies that the company name in the
+            signing brand is used for the disclosure. Whenever an envelope is
+            sent from the account that uses a signing brand with a specified
+            company name, that value is used in email notifications and in the
+            signing experience.  
 
 
             When set to **false** (default), or if the signing brand does not specify a company name, the account name is used instead.
@@ -48360,8 +48378,8 @@ components:
           type: string
         withdrawCity:
           description: >-
-            Contains the city of the postal address to which a customer can send
-            a consent withdrawal notification.
+            Contains the city of the postal address to which a customer can
+            send a consent withdrawal notification.
 
 
             Maximum length: 50 characters. 
@@ -48849,10 +48867,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -49541,10 +49559,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -50462,9 +50480,9 @@ components:
         document.
     dateStampProperties:
       description: >-
-        Specifies the area in which a date stamp is placed. This parameter uses
-        pixel positioning to draw a rectangle at the center of the stamp area.
-        The stamp is superimposed on top of this central area.
+        Specifies the area in which a date stamp is placed. This parameter
+        uses pixel positioning to draw a rectangle at the center of the stamp
+        area. The stamp is superimposed on top of this central area.
 
 
         This property contains the following information about the central rectangle:
@@ -50493,9 +50511,9 @@ components:
       type: object
       x-ds-definition-name: dateStampProperties
       x-ms-summary: >-
-        Specifies the area in which a date stamp is placed. This parameter uses
-        pixel positioning to draw a rectangle at the center of the stamp area.
-        The stamp is superimposed on top of this central area.
+        Specifies the area in which a date stamp is placed. This parameter
+        uses pixel positioning to draw a rectangle at the center of the stamp
+        area. The stamp is superimposed on top of this central area.
 
 
         This property contains the following information about the central rectangle:
@@ -51076,9 +51094,9 @@ components:
           type: string
         bankTransferType:
           description: >-
-            Specifies the type of direct debit transfer. The value of this field
-            is dependent on the user's country. This field is required for POST
-            and PUT requests. Possible values are:
+            Specifies the type of direct debit transfer. The value of this
+            field is dependent on the user's country. This field is required for
+            POST and PUT requests. Possible values are:
 
 
             - `DirectDebitUK`
@@ -51301,9 +51319,9 @@ components:
           type: string
         matchBoxes:
           description: >
-            Matchboxes define areas in a document for document matching when you
-            are creating envelopes. They are only used when you upload and edit
-            a template. 
+            Matchboxes define areas in a document for document matching when
+            you are creating envelopes. They are only used when you upload and
+            edit a template. 
 
 
             A matchbox consists of 5 elements:
@@ -51371,7 +51389,8 @@ components:
             *	`accept`<br>
               The recipient is required to accept the document by selecting accept during signing, but is not required to view the document. 
 
-            *	`view_accept`<br>   The recipient is required to view and accept the document.  
+            *	`view_accept`<br>
+              The recipient is required to view and accept the document.  
 
           type: string
         signerMustAcknowledgeUseAccountDefault:
@@ -51578,9 +51597,9 @@ components:
           $ref: "#/components/schemas/documentHtmlDisplaySettings"
         endAnchor:
           description: >-
-            Specifies the end of the area in the HTML where the display settings
-            will be applied. If you do not specify an end anchor, the end of the
-            document will be used by default.
+            Specifies the end of the area in the HTML where the display
+            settings will be applied. If you do not specify an end anchor, the
+            end of the document will be used by default.
 
 
             **Note**: A start anchor, an end anchor, or both are required.
@@ -52761,10 +52780,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -53743,10 +53762,10 @@ components:
       type: object
       x-ds-definition-name: emailSettings
       x-ms-summary: >-
-        A complex element that allows  the sender to override some envelope
-        email setting information. This can be used to override the Reply To
-        email address and name associated with the envelope and to override the
-        BCC email addresses to which an envelope is sent. 
+        A complex element that allows  the sender to override some
+        envelope email setting information. This can be used to override the
+        Reply To email address and name associated with the envelope and to
+        override the BCC email addresses to which an envelope is sent. 
 
 
         When the emailSettings information is used for an envelope, it only applies to that envelope. 
@@ -54030,8 +54049,8 @@ components:
           $ref: "#/components/schemas/EnvelopeLocks"
         messageLock:
           description: >-
-            When set to **true**, prevents senders from changing the contents of
-            `emailBlurb` and `emailSubject` properties for the envelope. 
+            When set to **true**, prevents senders from changing the contents
+            of `emailBlurb` and `emailSubject` properties for the envelope. 
 
 
             Additionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes. 
@@ -54529,8 +54548,8 @@ components:
           $ref: "#/components/schemas/EnvelopeLocks"
         messageLock:
           description: >-
-            When set to **true**, prevents senders from changing the contents of
-            `emailBlurb` and `emailSubject` properties for the envelope. 
+            When set to **true**, prevents senders from changing the contents
+            of `emailBlurb` and `emailSubject` properties for the envelope. 
 
 
             Additionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes. 
@@ -54807,7 +54826,8 @@ components:
             *	`accept`<br>
               The recipient is required to accept the document by selecting accept during signing, but is not required to view the document. 
 
-            *	`view_accept`<br>   The recipient is required to view and accept the document.  
+            *	`view_accept`<br>
+              The recipient is required to view and accept the document.  
 
           type: string
         signerMustAcknowledgeMetadata:
@@ -55820,8 +55840,8 @@ components:
           $ref: "#/components/schemas/EnvelopeLocks"
         messageLock:
           description: >-
-            When set to **true**, prevents senders from changing the contents of
-            `emailBlurb` and `emailSubject` properties for the envelope. 
+            When set to **true**, prevents senders from changing the contents
+            of `emailBlurb` and `emailSubject` properties for the envelope. 
 
 
             Additionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes. 
@@ -56298,8 +56318,8 @@ components:
       properties:
         envelopeEvents:
           description: >-
-            A list of envelope-level event statuses that will trigger Connect to
-            send updates to the endpoint specified in the `url` property. 
+            A list of envelope-level event statuses that will trigger Connect
+            to send updates to the endpoint specified in the `url` property. 
 
 
             To receive notifications, you must include either an `envelopeEvents` node or a `recipientEvents` node. You do not need to specify both.
@@ -56335,8 +56355,8 @@ components:
           type: string
         includeHMAC:
           description: >-
-            When set to **true**, HMAC headers will be included with the webhook
-            notifications.
+            When set to **true**, HMAC headers will be included with the
+            webhook notifications.
 
 
             **Note**: [HMAC must enabled](https://developers.docusign.com/platform/webhooks/connect/hmac/) at the account level with [one or more HMAC secrets](https://developers.docusign.com/platform/webhooks/connect/setting-up-hmac/).
@@ -56358,8 +56378,8 @@ components:
           type: string
         recipientEvents:
           description: >-
-            A list of recipient event statuses that will trigger Connect to send
-            updates to   the endpoint specified in the url property.
+            A list of recipient event statuses that will trigger Connect to
+            send updates to   the endpoint specified in the url property.
 
 
             To receive notifications, you must include either an `envelopeEvents` node or a `recipientEvents` node. You do not need to specify both.
@@ -57858,10 +57878,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -58926,8 +58946,8 @@ components:
           type: string
         permissionProfileId:
           description: >-
-            The ID of the permission profile associated with the group. Possible
-            values include:
+            The ID of the permission profile associated with the group.
+            Possible values include:
 
 
             - `2301416` (for the `DocuSign Viewer` profile)
@@ -59028,8 +59048,8 @@ components:
       x-ms-summary: ""
     inPersonSigner:
       description: >
-        Contains information about an in-person recipient. This is a DocuSign
-        user,
+        Contains information about an in-person recipient. This is a
+        DocuSign user,
 
         acting as a Signing Host,
 
@@ -59532,8 +59552,8 @@ components:
       type: object
       x-ds-definition-name: inPersonSigner
       x-ms-summary: >
-        Contains information about an in-person recipient. This is a DocuSign
-        user,
+        Contains information about an in-person recipient. This is a
+        DocuSign user,
 
         acting as a Signing Host,
 
@@ -64751,10 +64771,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -65596,8 +65616,8 @@ components:
       properties:
         allowCustomMetadata:
           description: >-
-            When **true**, the sender can pass custom metadata about the payment
-            to the payment gateway. You pass in this metadata on an
+            When **true**, the sender can pass custom metadata about the
+            payment to the payment gateway. You pass in this metadata on an
             EnvelopeRecipientTab, in the `customMetadata` property under
             `paymentDetails`. 
 
@@ -66068,10 +66088,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -68409,8 +68429,9 @@ components:
         phone numbers the recipient can use for SMS text authentication.
     recipientSignatureInformation:
       description: >-
-        Allows the sender to pre-specify the signature name, signature initials
-        and signature font used in the signature stamp for the recipient.
+        Allows the sender to pre-specify the signature name, signature
+        initials and signature font used in the signature stamp for the
+        recipient.
 
 
         Used only with recipient types In Person Signers and Signers.
@@ -68451,15 +68472,16 @@ components:
       type: object
       x-ds-definition-name: recipientSignatureInformation
       x-ms-summary: >-
-        Allows the sender to pre-specify the signature name, signature initials
-        and signature font used in the signature stamp for the recipient.
+        Allows the sender to pre-specify the signature name, signature
+        initials and signature font used in the signature stamp for the
+        recipient.
 
 
         Used only with recipient types In Person Signers and Signers.
     recipientSignatureProvider:
       description: >
-        An Electronic or Standards Based Signature (digital signature) provider
-        for the signer to use. [More
+        An Electronic or Standards Based Signature (digital signature)
+        provider for the signer to use. [More
         information](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures).
       properties:
         sealDocumentsWithTabsOnly:
@@ -68498,8 +68520,8 @@ components:
       type: object
       x-ds-definition-name: recipientSignatureProvider
       x-ms-summary: >
-        An Electronic or Standards Based Signature (digital signature) provider
-        for the signer to use. [More
+        An Electronic or Standards Based Signature (digital signature)
+        provider for the signer to use. [More
         information](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures).
     recipientSignatureProviderOptions:
       description: Option settings for the signature provider. Different providers
@@ -68932,10 +68954,10 @@ components:
       type: object
       x-ds-definition-name: referralInformation
       x-ms-summary: >-
-        A complex type that contains the following information for entering
-        referral and discount information. The following items are included in
-        the referral information (all string content): enableSupport,
-        includedSeats, saleDiscountPercent, saleDiscountAmount,
+        A complex type that contains the following information for
+        entering referral and discount information. The following items are
+        included in the referral information (all string content):
+        enableSupport, includedSeats, saleDiscountPercent, saleDiscountAmount,
         saleDiscountFixedAmount, saleDiscountPeriods,
         saleDiscountSeatPriceOverride, planStartMonth, referralCode,
         referrerName, advertisementId, publisherId, shopperId, promoCode,
@@ -72094,9 +72116,9 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         endAnchor:
           description: >-
-            Specifies the end of the area in the HTML where the display settings
-            will be applied. If you do not specify an end anchor, the end of the
-            document will be used by default.
+            Specifies the end of the area in the HTML where the display
+            settings will be applied. If you do not specify an end anchor, the
+            end of the document will be used by default.
 
 
             **Note**: A start anchor, an end anchor, or both are required.
@@ -72641,10 +72663,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -73864,10 +73886,10 @@ components:
           type: string
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -75754,10 +75776,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -76421,10 +76443,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -77247,8 +77269,8 @@ components:
       x-ms-summary: ""
     userSettingsInformation:
       description: >-
-        Properties that configure the settings for a user. Some elements of this
-        object have a `metadata` property, which includes the following:
+        Properties that configure the settings for a user. Some elements of
+        this object have a `metadata` property, which includes the following:
 
         - `rights`: The calling users permissions to edit this setting (can be `editable` or `read_only`)
 
@@ -77733,8 +77755,8 @@ components:
       type: object
       x-ds-definition-name: userSettingsInformation
       x-ms-summary: >-
-        Properties that configure the settings for a user. Some elements of this
-        object have a `metadata` property, which includes the following:
+        Properties that configure the settings for a user. Some elements
+        of this object have a `metadata` property, which includes the following:
 
         - `rights`: The calling users permissions to edit this setting (can be `editable` or `read_only`)
 
@@ -79715,10 +79737,10 @@ components:
           $ref: "#/components/schemas/propertyMetadata"
         concealValueOnDocument:
           description: >-
-            When set to **true**, the field appears normally while the recipient
-            is adding or modifying the information in the field, but the data is
-            not visible (the characters are hidden by asterisks) to any other
-            signer or the sender.
+            When set to **true**, the field appears normally while the
+            recipient is adding or modifying the information in the field, but
+            the data is not visible (the characters are hidden by asterisks) to
+            any other signer or the sender.
 
 
             When an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.
@@ -80137,13 +80159,11 @@ components:
         The zip code can be typed with or without dashes. It uses
         the same parameters as a Text tab, with the validation
         message and pattern set for ZIP code information.
-    signHashDocument: {}
-    offlineAttributes: {}
 x-ds-allow-editing: false
 x-ds-categories:
   - description: >
-      The eSignature API Envelope category includes the resources and methods
-      for sending and managing envelopes and envelope data.
+      The eSignature API Envelope category includes the resources and
+      methods for sending and managing envelopes and envelope data.
 
 
       Envelopes are the key objects in the DocuSign platform. As a result, they are complex data structures with few required fields. See the [How-to guides](https://developers.docusign.com/docs/esign-rest-api/how-to/) for examples and solutions.
@@ -80153,8 +80173,8 @@ x-ds-categories:
     name: Envelopes
     summary: This section shows you how to create and send envelopes.
   - description: >-
-      The Connect service enables your application to be called via HTTPS when
-      an event of interest occurs.
+      The Connect service enables your application to be called via HTTPS
+      when an event of interest occurs.
 
 
       Use the Connect service to "end the polling madness." With Connect, there is no need for your application to poll DocuSign every 15 minutes to learn the latest about your envelopes.
@@ -80222,9 +80242,9 @@ x-ds-categories:
     name: Templates
     summary: Template creation and management
   - description: >-
-      Use the Signing Group category to manage signing groups that allow anyone
-      in the group to sign a document. When you send an envelope to a signing
-      group, anyone in the group can open it and sign it with their own
+      Use the Signing Group category to manage signing groups that allow
+      anyone in the group to sign a document. When you send an envelope to a
+      signing group, anyone in the group can open it and sign it with their own
       signature.
 
 
@@ -80244,17 +80264,17 @@ x-ds-categories:
     name: Folders
     summary: Folders for completed envelopes
   - description: >
-      Custom Tabs enable accounts to have one or more pre-configured (custom)
-      tabs. Custom tabs save time when users are tagging documents since the
-      users don't have to manually set the tabs' parameters.
+      Custom Tabs enable accounts to have one or more pre-configured
+      (custom) tabs. Custom tabs save time when users are tagging documents
+      since the users don't have to manually set the tabs' parameters.
 
 
       This category enables custom tabs to be managed programmatically, including creation, deletion, etc. 
     name: CustomTabs
     summary: Custom tabs
   - description: >-
-      Use the Cloud Storage category to list the user's cloud storage document
-      contents.
+      Use the Cloud Storage category to list the user's cloud storage
+      document contents.
 
 
       It is also used to manage the user's authentication/accounts with cloud storage service providers.
@@ -80287,7 +80307,8 @@ x-ds-categories:
     name: BulkEnvelopes
     summary: Bulk envelopes
   - description: >+
-      Use the Account category for various account management tasks including:
+      Use the Account category for various account management tasks
+      including:
 
 
       * Programmatically creating and deleting accounts.
@@ -80329,11 +80350,11 @@ x-ds-categories:
     summary: The PowerForms category provides methods that enable you to create and
       manage fillable forms.
   - description: >-
-      A workspace is a collaborative space for sharing documents and managing
-      workflows. A workspace has a single owner who must be a DocuSign user. The
-      owner can invite others to the workspace as collaborators. Individuals who
-      are not DocuSign users must create a DocuSign account to join a workspace
-      as a collaborator.
+      A workspace is a collaborative space for sharing documents and
+      managing workflows. A workspace has a single owner who must be a DocuSign
+      user. The owner can invite others to the workspace as collaborators.
+      Individuals who are not DocuSign users must create a DocuSign account to
+      join a workspace as a collaborator.
        
       You can create an envelope directly from a workspace.
 
@@ -80359,12 +80380,12 @@ x-ds-categories:
     name: Payments
     summary: Manage Payments
   - description: >-
-      Email archives enable DocuSign partners and other multi-account customers
-      to easily archive emails sent through DocuSign. The `EmailArchive`
-      resource provides methods for managing your email archive configuration,
-      which consists of the BCC email address or addresses that you want to use
-      to archive DocuSign emails. Each account can use up to five BCC email
-      addresses for archiving purposes.
+      Email archives enable DocuSign partners and other multi-account
+      customers to easily archive emails sent through DocuSign. The
+      `EmailArchive` resource provides methods for managing your email archive
+      configuration, which consists of the BCC email address or addresses that
+      you want to use to archive DocuSign emails. Each account can use up to
+      five BCC email addresses for archiving purposes.
 
 
       For more information, see [Email Archive Configuration](https://support.docusign.com/en/guides/ndse-admin-guide-email-archive-configuration).
@@ -80385,4 +80406,3 @@ x-ds-categories:
       for senders, signers, and notaries.
       It enables a notary public to act as an in-person witness
       to electronic signing of documents.
-

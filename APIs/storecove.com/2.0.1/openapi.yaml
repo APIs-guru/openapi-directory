@@ -923,6 +923,16 @@ components:
           type: string
         tax:
           $ref: "#/components/schemas/Tax"
+        taxes_duties_fees:
+          description: An array of taxes, duties and fees for this allowance or charge. At
+            this moment, only a single Tax item is allowed. When used, the 'tax'
+            element must be empty.
+          items:
+            $ref: "#/components/schemas/Tax"
+          maxItems: 1
+          minItems: 0
+          title: Taxes, Duties and Fees
+          type: array
       required:
         - amountExcludingVat
         - tax
@@ -4514,6 +4524,16 @@ components:
           type: string
         tax:
           $ref: "#/components/schemas/Tax"
+        taxes_duties_fees:
+          description: An array of taxes, duties and fees for this invoice line. At this
+            moment, only a single Tax item is allowed. When used, the 'tax'
+            element must be empty.
+          items:
+            $ref: "#/components/schemas/Tax"
+          maxItems: 1
+          minItems: 0
+          title: Taxes, Duties and Fees
+          type: array
       required:
         - amountExcludingVat
       title: Invoice line
@@ -5700,11 +5720,11 @@ components:
     Tax:
       properties:
         amount:
-          description: The amount of VAT. Mandatory if taxSystem == 'tax_line_amounts'.
+          description: The amount of tax. Mandatory if taxSystem == 'tax_line_amounts'.
             However, it is best to use taxSystem tax_line_percentages and
             provide only the percentage, not the actual amount. The amount is
             then provided at the invoice level, in the taxSubtotals element.
-          title: Amount of VAT
+          title: Amount of Tax
           type: number
         category:
           description: >-

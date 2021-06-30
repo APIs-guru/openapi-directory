@@ -556,6 +556,11 @@ tags:
 
 
       These are billed at 20% of your instance price for 7 backup slots.
+
+
+      ### App Images
+
+      Prebuild images with specific software configurations, e.g. “Wordpress”. All app images are created by us.
     name: Images
   - name: Image Actions
   - description: >
@@ -6451,6 +6456,7 @@ paths:
               - system
               - snapshot
               - backup
+              - app
             type: string
         - description: Can be used multiple times. The response will only contain Images
             matching the status.
@@ -6504,6 +6510,11 @@ paths:
                           example: null
                           nullable: true
                           type: integer
+                        build_id:
+                          description: Build ID of the Image
+                          example: c313fe40383af26094a5a92026054320ab55abc7
+                          nullable: true
+                          type: string
                         created:
                           description: Point in time when the Resource was created (in ISO-8601 format)
                           example: 2016-01-30T23:55:00+00:00
@@ -6607,6 +6618,7 @@ paths:
                           description: Type of the Image
                           enum:
                             - system
+                            - app
                             - snapshot
                             - backup
                             - temporary
@@ -6726,6 +6738,11 @@ paths:
                         example: null
                         nullable: true
                         type: integer
+                      build_id:
+                        description: Build ID of the Image
+                        example: c313fe40383af26094a5a92026054320ab55abc7
+                        nullable: true
+                        type: string
                       created:
                         description: Point in time when the Resource was created (in ISO-8601 format)
                         example: 2016-01-30T23:55:00+00:00
@@ -6829,6 +6846,7 @@ paths:
                         description: Type of the Image
                         enum:
                           - system
+                          - app
                           - snapshot
                           - backup
                           - temporary
@@ -6902,6 +6920,7 @@ paths:
               example:
                 image:
                   bound_to: null
+                  build_id: c313fe40383af26094a5a92026054320ab55abc7
                   created: 2016-01-30T23:50:00+00:00
                   created_from:
                     id: 1
@@ -6932,6 +6951,11 @@ paths:
                         example: null
                         nullable: true
                         type: integer
+                      build_id:
+                        description: Build ID of the Image
+                        example: c313fe40383af26094a5a92026054320ab55abc7
+                        nullable: true
+                        type: string
                       created:
                         description: Point in time when the Resource was created (in ISO-8601 format)
                         example: 2016-01-30T23:55:00+00:00
@@ -7035,6 +7059,7 @@ paths:
                         description: Type of the Image
                         enum:
                           - system
+                          - app
                           - snapshot
                           - backup
                           - temporary
@@ -15879,6 +15904,11 @@ paths:
                               example: null
                               nullable: true
                               type: integer
+                            build_id:
+                              description: Build ID of the Image
+                              example: c313fe40383af26094a5a92026054320ab55abc7
+                              nullable: true
+                              type: string
                             created:
                               description: Point in time when the Resource was created (in ISO-8601 format)
                               example: 2016-01-30T23:55:00+00:00
@@ -15982,6 +16012,7 @@ paths:
                               description: Type of the Image
                               enum:
                                 - system
+                                - app
                                 - snapshot
                                 - backup
                                 - temporary
@@ -16411,7 +16442,10 @@ paths:
                 networks:
                   description: Network IDs which should be attached to the Server private network
                     interface at the creation time
-                  items: {}
+                  example:
+                    - 456
+                  items:
+                    type: integer
                   type: array
                 server_type:
                   description: ID or name of the Server type this Server should be created with
@@ -16440,7 +16474,10 @@ paths:
                 volumes:
                   description: Volume IDs which should be attached to the Server at the creation
                     time. Volumes must be in the same Location.
-                  items: {}
+                  example:
+                    - 123
+                  items:
+                    type: integer
                   type: array
               required:
                 - name
@@ -16909,6 +16946,11 @@ paths:
                             example: null
                             nullable: true
                             type: integer
+                          build_id:
+                            description: Build ID of the Image
+                            example: c313fe40383af26094a5a92026054320ab55abc7
+                            nullable: true
+                            type: string
                           created:
                             description: Point in time when the Resource was created (in ISO-8601 format)
                             example: 2016-01-30T23:55:00+00:00
@@ -17012,6 +17054,7 @@ paths:
                             description: Type of the Image
                             enum:
                               - system
+                              - app
                               - snapshot
                               - backup
                               - temporary
@@ -17632,6 +17675,11 @@ paths:
                             example: null
                             nullable: true
                             type: integer
+                          build_id:
+                            description: Build ID of the Image
+                            example: c313fe40383af26094a5a92026054320ab55abc7
+                            nullable: true
+                            type: string
                           created:
                             description: Point in time when the Resource was created (in ISO-8601 format)
                             example: 2016-01-30T23:55:00+00:00
@@ -17735,6 +17783,7 @@ paths:
                             description: Type of the Image
                             enum:
                               - system
+                              - app
                               - snapshot
                               - backup
                               - temporary
@@ -18273,6 +18322,11 @@ paths:
                             example: null
                             nullable: true
                             type: integer
+                          build_id:
+                            description: Build ID of the Image
+                            example: c313fe40383af26094a5a92026054320ab55abc7
+                            nullable: true
+                            type: string
                           created:
                             description: Point in time when the Resource was created (in ISO-8601 format)
                             example: 2016-01-30T23:55:00+00:00
@@ -18376,6 +18430,7 @@ paths:
                             description: Type of the Image
                             enum:
                               - system
+                              - app
                               - snapshot
                               - backup
                               - temporary
@@ -19986,6 +20041,11 @@ paths:
                         example: null
                         nullable: true
                         type: integer
+                      build_id:
+                        description: Build ID of the Image
+                        example: c313fe40383af26094a5a92026054320ab55abc7
+                        nullable: true
+                        type: string
                       created:
                         description: Point in time when the Resource was created (in ISO-8601 format)
                         example: 2016-01-30T23:55:00+00:00
@@ -20089,6 +20149,7 @@ paths:
                         description: Type of the Image
                         enum:
                           - system
+                          - app
                           - snapshot
                           - backup
                           - temporary

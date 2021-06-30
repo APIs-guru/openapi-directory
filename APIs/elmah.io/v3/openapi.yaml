@@ -953,6 +953,21 @@ components:
           items:
             $ref: "#/components/schemas/Breadcrumb"
           type: array
+        code:
+          description: "Code can be used to include source code related to the log
+            message. The code will typically span from a few lines before the
+            line causing the log message\r
+
+            to a few lines after. For now, all lines above 21 will
+            be removed. This makes room for showing 10 lines before the logging
+            line, the logging line, and\r
+
+            10 lines after the logging line. Don't include a very
+            large string in this property since that will quickly make the
+            entire messages exceed the max limit\r
+
+            of 256 kb."
+          type: string
         cookies:
           description: A key/value pair of cookies. This property only makes sense for
             logging messages related to web requests.
@@ -1169,6 +1184,21 @@ components:
           items:
             $ref: "#/components/schemas/Breadcrumb"
           type: array
+        code:
+          description: "Code can be used to include source code related to the log
+            message. The code will typically span from a few lines before the
+            line causing the log message\r
+
+            to a few lines after. For now, all lines above 21 will
+            be removed. This makes room for showing 10 lines before the logging
+            line, the logging line, and\r
+
+            10 lines after the logging line. Don't include a very
+            large string in this property since that will quickly make the
+            entire messages exceed the max limit\r
+
+            of 256 kb."
+          type: string
         cookies:
           description: A key/value pair of cookies. This property only makes sense for
             logging messages related to web requests.
@@ -1302,6 +1332,21 @@ components:
           items:
             $ref: "#/components/schemas/Breadcrumb"
           type: array
+        code:
+          description: "Code can be used to include source code related to the log
+            message. The code will typically span from a few lines before the
+            line causing the log message\r
+
+            to a few lines after. For now, all lines above 21 will
+            be removed. This makes room for showing 10 lines before the logging
+            line, the logging line, and\r
+
+            10 lines after the logging line. Don't include a very
+            large string in this property since that will quickly make the
+            entire messages exceed the max limit\r
+
+            of 256 kb."
+          type: string
         cookies:
           description: A key/value pair of cookies. This property only makes sense for
             logging messages related to web requests.

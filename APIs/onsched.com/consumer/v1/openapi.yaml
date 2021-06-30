@@ -1049,11 +1049,11 @@ paths:
         - Availability
   "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/times":
     get:
-      description: "This end point is currently in beta. It is used for server based
-        availability from UnavailableTimes.\r
+      description: "<b>Deprecation Notice</b> : This endpoint is no longer being
+        maintained and will be deprecated in a future release.        \r
 
-        Use the
-        v1/consumer/availability{serviceId}/{startDate}/{endDate} endpoint
+        \            Use the
+        /consumer/v1/availability{serviceId}/{startDate}/{endDate} endpoint
         instead."
       parameters:
         - description: Service Id for availability search.
@@ -2250,14 +2250,11 @@ paths:
         - ServiceGroups
   /consumer/v1/services:
     get:
-      description: "The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is 0, and
-        limit is 20. \r
-
-        You will get a Validation error if any other parameter is
-        selected to avoid confusion.        ///"
+      description: The results are returned in pages. Use the offset and limit
+        parameters to control the page start and size. Default offset is
+        <b>0</b>, and limit is <b>20</b>.
       parameters:
-        - description: The id of the business location. Defaults to first business location.
+        - description: The id of the business location. defaults to first business location.
           in: query
           name: locationId
           schema:
@@ -2274,7 +2271,14 @@ paths:
           name: defaultService
           schema:
             type: boolean
-        - description: Filter Services by Company Scope or Location Scope
+        - description: Search on all Locations, default is <b>false</b>
+          in: query
+          name: allLocations
+          schema:
+            nullable: true
+            type: boolean
+        - description: Filter Services by Scope, company, location or all, default is
+            <b>all</b>.
           in: query
           name: scope
           schema:
@@ -2291,32 +2295,27 @@ paths:
           schema:
             default: ""
             type: string
-        - description: Filter based on ServiceId
+        - description: Filter based on ServiceId. Using this parameter would ignore all
+            other parameters
           in: query
           name: serviceId
           schema:
             default: ""
             type: string
-        - description: Search on all Locations
-          in: query
-          name: allLocations
-          schema:
-            nullable: true
-            type: boolean
-        - description: Starting row of page, default 0
+        - description: Starting row of page, default <b>0</b>
           in: query
           name: offset
           schema:
             format: int32
             type: integer
-        - description: Page limit, default 20. Maximum 100.
+        - description: Page limit, default <b>20</b>. Maximum <b>500</b>.
           in: query
           name: limit
           schema:
             format: int32
             type: integer
         - description: Sort Results using Natural Sort or Sorted alphabetically along
-            Service Names
+            Service Names, default is <b>natural</b>
           in: query
           name: sortOrder
           schema:
@@ -2326,7 +2325,7 @@ paths:
               - name
             nullable: true
             type: string
-        - description: Sort Result in Descending Order. Default Ascending
+        - description: Sort Result in Descending Order. default <b>true</b>
           in: query
           name: sortDescending
           schema:

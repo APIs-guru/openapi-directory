@@ -96,6 +96,10 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiTransactionRequest"
+          x-display-fields:
+            - amt_tran
+            - card_number
+            - exp_date
       produces:
         - application/json
       responses:
@@ -144,6 +148,10 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiBatchCloseRequest"
+          x-display-fields:
+            - merchant_id
+            - retry_attempt
+            - retry_id
       produces:
         - application/json
       responses:
@@ -190,6 +198,10 @@ paths:
           name: pgIdOrig
           required: true
           type: string
+          x-display-fields:
+            - amt_tran
+            - card_number
+            - exp_date
         - description: Payment Gateway Capture Request
           in: body
           name: body
@@ -247,6 +259,12 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiTransactionRequest"
+          x-display-fields:
+            - amt_tran
+            - card_number
+            - exp_date
+            - cvv2
+            - avs_zip
       produces:
         - application/json
       responses:
@@ -298,6 +316,9 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiEmailReceiptRequest"
+          x-display-fields:
+            - email_address
+            - logo_url
       produces:
         - application/json
       responses:
@@ -394,6 +415,11 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiTransactionRequest"
+          x-display-fields:
+            - merchant_id
+            - auth_code
+            - amt_tran
+            - card_number
       produces:
         - application/json
       responses:
@@ -445,6 +471,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiRechargeRequest"
+          x-display-fields:
+            - amt_tran
       produces:
         - application/json
       responses:
@@ -499,6 +527,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiRefundRequest"
+          x-display-fields:
+            - amt_tran
       produces:
         - application/json
       responses:
@@ -547,6 +577,16 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiTransactionRequest"
+          x-display-fields:
+            - cardholder_name
+            - amt_tran
+            - card_number
+            - exp_date
+            - avs_zip
+            - moto_ecomm_ind
+            - cvv2
+            - developer_id
+            - client_ip
       produces:
         - application/json
       responses:
@@ -595,6 +635,13 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiTokenizeRequest"
+          x-display-fields:
+            - card_number
+            - cvv2
+            - avs_address
+            - exp_date
+            - avs_zip
+            - email_address
       produces:
         - application/json
       responses:
@@ -645,6 +692,15 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiVerifyRequest"
+          x-display-fields:
+            - card_number
+            - merchant_id
+            - exp_date
+            - avs_zip
+            - cvv2
+            - avs_address
+            - developer_id
+            - client_ip
       produces:
         - application/json
       responses:
@@ -698,6 +754,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/PGApiVoidRequest"
+          x-display-fields:
+            - merchant_id
       produces:
         - application/json
       responses:
@@ -1215,7 +1273,9 @@ definitions:
       email_address:
         description: " AN<br><strong>Description: </strong>An array of email addresses
           to which the transaction receipt should be sent to. "
-        example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
+        example:
+          - jdoe@qualpay.com
+          - john.doe@qualpay.com
         items:
           type: string
         type: array
@@ -1422,7 +1482,7 @@ definitions:
         description: "<strong>Format: </strong>Variable length, up to 12,2
           N<br><strong>Description: </strong>Amount to recharge using the
           payment data from a previous transaction."
-        example: 12.57
+        example: 1139.5
         format: double
         type: number
       developer_id:
@@ -1817,7 +1877,9 @@ definitions:
       email_address:
         description: " AN<br><strong>Description: </strong>An array of account holder
           email addresses."
-        example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
+        example:
+          - jdoe@qualpay.com
+          - john.doe@qualpay.com
         items:
           type: string
         type: array
@@ -1846,6 +1908,11 @@ definitions:
         example: <Provide merchant id that links to API Key>
         format: int64
         type: integer
+      payload_apple_pay:
+        description: "<strong>Format: </strong>Variable length<br><strong>Description:
+          </strong>Apple Pay payload"
+        example: xxxxxxx
+        type: string
       payload_google_pay:
         description: "<strong>Format: </strong>Variable length<br><strong>Description:
           </strong>Google Pay payload"
@@ -2195,7 +2262,9 @@ definitions:
       email_address:
         description: " AN<br><strong>Description: </strong>An array of email addresses
           to which the transaction receipt should be sent to. "
-        example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
+        example:
+          - jdoe@qualpay.com
+          - john.doe@qualpay.com
         items:
           type: string
         type: array
@@ -2309,6 +2378,11 @@ definitions:
           amount. Applicable to auth and sale request types."
         example: true
         type: boolean
+      payload_apple_pay:
+        description: "<strong>Format: </strong>Variable length<br><strong>Description:
+          </strong>Apple Pay payload"
+        example: xxxxxxx
+        type: string
       payload_google_pay:
         description: "<strong>Format: </strong>Variable length<br><strong>Description:
           </strong>Google Pay payload"
@@ -2660,7 +2734,9 @@ definitions:
       email_address:
         description: " AN<br><strong>Description: </strong>An array of account holder
           email addresses."
-        example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
+        example:
+          - jdoe@qualpay.com
+          - john.doe@qualpay.com
         items:
           type: string
         type: array
@@ -2700,6 +2776,11 @@ definitions:
         example: <Provide merchant id that links to API Key>
         format: int64
         type: integer
+      payload_apple_pay:
+        description: "<strong>Format: </strong>Variable length<br><strong>Description:
+          </strong>Apple Pay payload"
+        example: xxxxxxx
+        type: string
       payload_google_pay:
         description: "<strong>Format: </strong>Variable length<br><strong>Description:
           </strong>Google Pay payload"

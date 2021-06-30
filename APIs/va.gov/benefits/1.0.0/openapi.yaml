@@ -104,7 +104,7 @@ info:
 
     ### Test data
 
-    We use mock test data in the sandbox environment. Data is not sent upstream and does not necessary to align with any other systems' data. 
+    We use mock test data in the sandbox environment. Data is not sent upstream and it is not necessary to align submitted test data with any other systems' data.
 
 
     ### Upload operation
@@ -246,7 +246,21 @@ paths:
 
         Note that the Content-Disposition parameter "name" in each part must be the expected values
 
-        "metadata", "content", "attachment1"..."attachmentN"
+        "metadata", "content", "attachment1"..."attachmentN". The attachment attributes must be named 
+
+        exactly as they are listed here (case sensitive), for example: "attachment_1" or "Attachment2"
+
+        are invalid.
+
+
+        This is an example curl command:
+
+
+        ```
+
+        curl -v -L -X PUT '<Location from \uploads>' -F 'metadata="{\"veteranFirstName\": \"Jane\",\"veteranLastName\": \"Doe\",\"fileNumber\": \"012345678\",\"zipCode\": \"97202\",\"source\": \"MyVSO\",\"docType\": \"21-22\",\"businessLine\": \"CMP\"}";type=application/json' -F 'content=@"content.pdf"' -F 'attachment1=@"file1.pdf"' -F 'attachment2=@"another_file.pdf"'
+
+        ```
       operationId: putBenefitsDocumentUpload
       parameters:
         - description: Base64-encoded 128-bit MD5 digest of the message. Use for integrity

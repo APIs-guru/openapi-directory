@@ -1885,6 +1885,63 @@ paths:
           description: Not Found
       tags:
         - Plans
+  "/api/v1/Prebuilds/pools/{poolId}/instances":
+    put:
+      parameters:
+        - in: path
+          name: poolId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: correlationId
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+      responses:
+        "201":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Prebuilds
   /api/v1/Prebuilds/template:
     post:
       requestBody:
@@ -4681,6 +4738,15 @@ components:
       required:
         - friendlyName
         - type
+      type: object
+    CreateEnvironmentPoolResourceBody:
+      additionalProperties: false
+      properties:
+        secrets:
+          items:
+            $ref: "#/components/schemas/SecretDataBody"
+          nullable: true
+          type: array
       type: object
     CreateEnvironmentStateChangeBody:
       additionalProperties: false

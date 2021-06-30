@@ -918,6 +918,60 @@ paths:
       summary: Add a member to an organization within a group
       tags:
         - Groups
+  "/group/{groupId}/orgs":
+    get:
+      description: ""
+      operationId: List all organizations in a group
+      parameters:
+        - description: The group ID. The `API_KEY` must have READ access to this group and
+            LIST organizations access in this group.
+          example: a060a49f-636e-480f-9e14-38e773b2a97f
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+        - description: The number of results to return (maximum/default is 100).
+          example: "100"
+          in: query
+          name: perPage
+          required: false
+          schema:
+            type: number
+        - description: For pagination - offset (from which to start returning results).
+          example: "1"
+          in: query
+          name: page
+          required: false
+          schema:
+            type: number
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              examples:
+                response:
+                  value:
+                    created: 2021-06-07T00:00:00.000Z
+                    id: a060a49f-636e-480f-9e14-38e773b2a97f
+                    name: ACME Inc.
+                    orgs:
+                      - created: 2021-06-07T00:00:00.000Z
+                        id: 689ce7f9-7943-4a71-b704-2ba575f01089
+                        name: defaultOrg
+                        slug: default-org
+                        url: https://api.snyk.io/org/default-org
+                      - created: 2021-06-07T00:00:00.000Z
+                        id: a04d9cbd-ae6e-44af-b573-0556b0ad4bd2
+                        name: My Other Org
+                        slug: my-other-org
+                        url: https://api.snyk.io/org/my-other-org
+                    url: https://api.snyk.io/group/0dfc509a-e7a9-48ef-9d39-649d6468fc09
+          description: OK
+          headers: {}
+      summary: List all organizations in a group
+      tags:
+        - Groups
   "/group/{groupId}/settings":
     get:
       description: ""
@@ -21619,8 +21673,6 @@ components:
                 type: object
             type: object
   schemas:
-    ignorePath: {}
-    issueId: {}
     A_specific_entitlement_by_organization: {}
     Activate_an_individual_project: {}
     Add_member_body:
@@ -22925,6 +22977,7 @@ components:
               type: array
           type: object
       type: object
+    List_all_organizations_in_a_group: {}
     List_all_projects:
       properties:
         org:
