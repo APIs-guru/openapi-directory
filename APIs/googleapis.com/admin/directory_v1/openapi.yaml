@@ -797,11 +797,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Parses org unit path without url decode to allow for plus in ou name
-          in: query
-          name: allowPlus
-          schema:
-            type: boolean
       responses:
         "200":
           description: Successful response
@@ -828,11 +823,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Parses org unit path without url decode to allow for plus in ou name
-          in: query
-          name: allowPlus
-          schema:
-            type: boolean
       responses:
         "200":
           content:
@@ -879,11 +869,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Parses org unit path without url decode to allow for plus in ou name
-          in: query
-          name: allowPlus
-          schema:
-            type: boolean
       requestBody:
         content:
           application/json:
@@ -919,11 +904,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Parses org unit path without url decode to allow for plus in ou name
-          in: query
-          name: allowPlus
-          schema:
-            type: boolean
       requestBody:
         content:
           application/json:

@@ -736,15 +736,15 @@ components:
         content or the metadata of the object is updated.
       properties:
         bucketName:
-          description: Required. Cloud Storage bucket name (see [Bucket Name
-            Requirements](https://cloud.google.com/storage/docs/naming#requirements)).
+          description: Required. Cloud Storage bucket name. Must meet [Bucket Name
+            Requirements](/storage/docs/naming#requirements).
           type: string
         path:
           description: Root path to transfer objects. Must be an empty string or full path
             name that ends with a '/'. This field is treated as an object
-            prefix. As such, it should generally not begin with a '/'. (must
-            meet Object Name
-            Requirements](https://cloud.google.com/storage/docs/naming#objectnames)).
+            prefix. As such, it should generally not begin with a '/'. The root
+            path value must meet [Object Name
+            Requirements](/storage/docs/naming#objectnames).
           type: string
       type: object
     GoogleServiceAccount:
@@ -774,12 +774,11 @@ components:
         not match the MD5 computed from the transferred bytes, the object
         transfer will fail. * Ensure that each URL you specify is publicly
         accessible. For example, in Cloud Storage you can [share an object
-        publicly]
-        (https://cloud.google.com/storage/docs/cloud-console#_sharingdata) and
-        get a link to it. * Storage Transfer Service obeys `robots.txt` rules
-        and requires the source HTTP server to support `Range` requests and to
-        return a `Content-Length` header in each response. * ObjectConditions
-        have no effect when filtering objects to transfer.'
+        publicly] (/storage/docs/cloud-console#_sharingdata) and get a link to
+        it. * Storage Transfer Service obeys `robots.txt` rules and requires the
+        source HTTP server to support `Range` requests and to return a
+        `Content-Length` header in each response. * ObjectConditions have no
+        effect when filtering objects to transfer.'
       properties:
         listUrl:
           description: Required. The URL that points to the file that stores the object
@@ -1355,7 +1354,7 @@ components:
             only four fields: description, transfer_spec, notification_config,
             and status. An `UpdateTransferJobRequest` that specifies other
             fields are rejected with the error INVALID_ARGUMENT. Updating a job
-            satus to DELETED requires `storagetransfer.jobs.delete`
+            status to DELETED requires `storagetransfer.jobs.delete`
             permissions."
         updateTransferJobFieldMask:
           description: "The field mask of the fields in `transferJob` that are to be

@@ -50,7 +50,17 @@ paths:
           name: creator.platformId
           schema:
             type: string
-        - description: Filter semantics described below.
+        - description: "Allows filtering. Supported syntax: * Filter expressions are made
+            up of one or more restrictions. * Restrictions are implicitly
+            combined, as if the `AND` operator was always used. The `OR`
+            operator is currently unsupported. * Supported functions: -
+            `saved(bool)`: If set to true, fetches only saved ideas. If set to
+            false, fetches all except saved ideas. Can't be simultaneously used
+            with `dismissed(bool)`. - `dismissed(bool)`: If set to true, fetches
+            only dismissed ideas. Can't be simultaneously used with
+            `saved(bool)`. The `false` value is currently unsupported. Examples:
+            * `saved(true)` * `saved(false)` * `dismissed(true)` The length of
+            this field should be no more than 500 characters."
           in: query
           name: filter
           schema:
@@ -113,11 +123,12 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Update an idea state resource.
-      operationId: ideahub.platforms.properties.ideaStates.patch
+      description: Update a topic state resource.
+      operationId: ideahub.platforms.properties.topicStates.patch
       parameters:
-        - description: "Unique identifier for the idea state. Format:
-            platforms/{platform}/properties/{property}/ideaStates/{idea_state}"
+        - description: "Unique identifier for the topic state. Format:
+            platforms/{platform}/properties/{property}/topicStates/{topic_state\
+            }"
           in: path
           name: name
           required: true
@@ -132,13 +143,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleSearchIdeahubV1alphaIdeaState"
+              $ref: "#/components/schemas/GoogleSearchIdeahubV1alphaTopicState"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleSearchIdeahubV1alphaIdeaState"
+                $ref: "#/components/schemas/GoogleSearchIdeahubV1alphaTopicState"
           description: Successful response
       tags:
         - platforms
@@ -169,7 +180,17 @@ paths:
           name: creator.platformId
           schema:
             type: string
-        - description: Filter semantics described below.
+        - description: "Allows filtering. Supported syntax: * Filter expressions are made
+            up of one or more restrictions. * Restrictions are implicitly
+            combined, as if the `AND` operator was always used. The `OR`
+            operator is currently unsupported. * Supported functions: -
+            `saved(bool)`: If set to true, fetches only saved ideas. If set to
+            false, fetches all except saved ideas. Can't be simultaneously used
+            with `dismissed(bool)`. - `dismissed(bool)`: If set to true, fetches
+            only dismissed ideas. Can't be simultaneously used with
+            `saved(bool)`. The `false` value is currently unsupported. Examples:
+            * `saved(true)` * `saved(false)` * `dismissed(true)` The length of
+            this field should be no more than 500 characters."
           in: query
           name: filter
           schema:
@@ -418,4 +439,19 @@ components:
         mid:
           description: The mID of the topic.
           type: string
+      type: object
+    GoogleSearchIdeahubV1alphaTopicState:
+      description: Represents topic state specific to a web property.
+      properties:
+        dismissed:
+          description: Whether the topic is dismissed.
+          type: boolean
+        name:
+          description: "Unique identifier for the topic state. Format:
+            platforms/{platform}/properties/{property}/topicStates/{topic_state\
+            }"
+          type: string
+        saved:
+          description: Whether the topic is saved.
+          type: boolean
       type: object

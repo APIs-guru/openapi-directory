@@ -1,6 +1,7 @@
 openapi: 3.0.0
 servers:
   - url: https://cloudbuild.googleapis.com/
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -292,6 +293,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: "The parent of the collection of `Triggers`. Format: `projects/{project}/locations/{location}`"
+          in: query
+          name: parent
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -326,6 +332,11 @@ paths:
           in: path
           name: projectId
           required: true
+          schema:
+            type: string
+        - description: "The parent resource where this trigger will be created. Format: `projects/{project}/locations/{location}`"
+          in: query
+          name: parent
           schema:
             type: string
       requestBody:
@@ -364,6 +375,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: "The name of the `Trigger` to delete. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: query
+          name: name
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -392,6 +408,11 @@ paths:
           in: path
           name: triggerId
           required: true
+          schema:
+            type: string
+        - description: "The name of the `Trigger` to retrieve. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: query
+          name: name
           schema:
             type: string
       responses:
@@ -484,6 +505,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: "The name of the `Trigger` to run. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: query
+          name: name
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -532,6 +558,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: "The name of the `ReceiveTriggerWebhook` to retrieve. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: query
+          name: name
+          schema:
+            type: string
         - description: Secret token used for authorization if an OAuth token isn't provided.
           in: query
           name: secret
@@ -552,24 +583,24 @@ paths:
       tags:
         - projects
   "/v1/{name}":
-    get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: cloudbuild.projects.locations.operations.get
+    delete:
+      description: Deletes a `BuildTrigger` by its project ID and trigger ID. This API is experimental.
+      operationId: cloudbuild.projects.locations.triggers.delete
       parameters:
-        - description: The name of the operation resource.
+        - description: "The name of the `Trigger` to delete. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. ID of the build.
-          in: query
-          name: id
-          schema:
-            type: string
-        - description: Required. ID of the project.
+        - description: Required. ID of the project that owns the trigger.
           in: query
           name: projectId
+          schema:
+            type: string
+        - description: Required. ID of the `BuildTrigger` to delete.
+          in: query
+          name: triggerId
           schema:
             type: string
       responses:
@@ -577,7 +608,41 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Returns information about a `BuildTrigger`. This API is experimental.
+      operationId: cloudbuild.projects.locations.triggers.get
+      parameters:
+        - description: "The name of the `Trigger` to retrieve. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. ID of the project that owns the trigger.
+          in: query
+          name: projectId
+          schema:
+            type: string
+        - description: Required. Identifier (`id` or `name`) of the `BuildTrigger` to get.
+          in: query
+          name: triggerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildTrigger"
           description: Successful response
       security:
         - Oauth2:
@@ -682,6 +747,100 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Runs a `BuildTrigger` at a particular source revision.
+      operationId: cloudbuild.projects.locations.triggers.run
+      parameters:
+        - description: "The name of the `Trigger` to run. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunBuildTriggerRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:webhook":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: ReceiveTriggerWebhook [Experimental] is called when the API receives a webhook request targeted at a specific trigger.
+      operationId: cloudbuild.projects.locations.triggers.webhook
+      parameters:
+        - description: "The name of the `ReceiveTriggerWebhook` to retrieve. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Project in which the specified trigger lives
+          in: query
+          name: projectId
+          schema:
+            type: string
+        - description: Secret token used for authorization if an OAuth token isn't provided.
+          in: query
+          name: secret
+          schema:
+            type: string
+        - description: Name of the trigger to run the payload against
+          in: query
+          name: trigger
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HttpBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReceiveTriggerWebhookResponse"
+          description: Successful response
+      tags:
+        - projects
   "/v1/{parent}/builds":
     get:
       description: Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.
@@ -765,6 +924,144 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/triggers":
+    get:
+      description: Lists existing `BuildTrigger`s. This API is experimental.
+      operationId: cloudbuild.projects.locations.triggers.list
+      parameters:
+        - description: "The parent of the collection of `Triggers`. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Number of results to return in the list.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to provide to skip to a particular spot in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Required. ID of the project for which to list BuildTriggers.
+          in: query
+          name: projectId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBuildTriggersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new `BuildTrigger`. This API is experimental.
+      operationId: cloudbuild.projects.locations.triggers.create
+      parameters:
+        - description: "The parent resource where this trigger will be created. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. ID of the project for which to configure automatic builds.
+          in: query
+          name: projectId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BuildTrigger"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildTrigger"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{resourceName}":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a `BuildTrigger` by its project ID and trigger ID. This API is experimental.
+      operationId: cloudbuild.projects.locations.triggers.patch
+      parameters:
+        - description: "The `Trigger` name with format: `projects/{project}/locations/{location}/triggers/{trigger}`, where {trigger} is a unique identifier generated by the service."
+          in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - description: Required. ID of the project that owns the trigger.
+          in: query
+          name: projectId
+          schema:
+            type: string
+        - description: Required. ID of the `BuildTrigger` to update.
+          in: query
+          name: triggerId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BuildTrigger"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildTrigger"
           description: Successful response
       security:
         - Oauth2:
@@ -1212,7 +1509,10 @@ components:
           type: string
         pubsubConfig:
           $ref: "#/components/schemas/PubsubConfig"
-          description: Optional. PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub/Sub message is published.
+          description: PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub/Sub message is published.
+        resourceName:
+          description: "The `Trigger` name with format: `projects/{project}/locations/{location}/triggers/{trigger}`, where {trigger} is a unique identifier generated by the service."
+          type: string
         substitutions:
           additionalProperties:
             type: string
@@ -1226,6 +1526,9 @@ components:
         triggerTemplate:
           $ref: "#/components/schemas/RepoSource"
           description: Template describing the types of source changes to trigger a build. Branch and tag names in trigger templates are interpreted as regular expressions. Any branch or tag change that matches that regular expression will trigger a build. Mutually exclusive with `github`.
+        webhookConfig:
+          $ref: "#/components/schemas/WebhookConfig"
+          description: WebhookConfig describes the configuration of a trigger that creates a build whenever a webhook is sent to a trigger's webhook URL.
       type: object
     BuiltImage:
       description: An image built by the pipeline.
@@ -1597,6 +1900,19 @@ components:
           description: Required. ID of the project.
           type: string
       type: object
+    RunBuildTriggerRequest:
+      description: Specifies a build trigger to run and the source to use.
+      properties:
+        projectId:
+          description: Required. ID of the project.
+          type: string
+        source:
+          $ref: "#/components/schemas/RepoSource"
+          description: Source to build against this trigger.
+        triggerId:
+          description: Required. ID of the trigger.
+          type: string
+      type: object
     SMTPDelivery:
       description: SMTPDelivery is the delivery configuration for an SMTP (email) notification.
       properties:
@@ -1778,6 +2094,20 @@ components:
           type: string
         text:
           description: Explanation of the warning generated.
+          type: string
+      type: object
+    WebhookConfig:
+      description: WebhookConfig describes the configuration of a trigger that creates a build whenever a webhook is sent to a trigger's webhook URL.
+      properties:
+        secret:
+          description: Required. Resource name for the secret required as a URL parameter.
+          type: string
+        state:
+          description: Potential issues with the underlying Pub/Sub subscription configuration. Only populated on get requests.
+          enum:
+            - STATE_UNSPECIFIED
+            - OK
+            - SECRET_DELETED
           type: string
       type: object
   securitySchemes:

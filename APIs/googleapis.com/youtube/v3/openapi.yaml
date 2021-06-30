@@ -59,6 +59,7 @@ tags:
   - name: videoCategories
   - name: videos
   - name: watermarks
+  - name: youtube
 paths:
   /youtube/v3/abuseReports:
     parameters:
@@ -1276,7 +1277,7 @@ paths:
         - commentThreads
     put:
       description: Updates an existing resource.
-      operationId: youtube.commentThreads.update
+      operationId: youtube.youtube.v3.updateCommentThreads
       parameters:
         - description: The *part* parameter specifies a comma-separated list of
             commentThread resource properties that the API response will
@@ -1286,7 +1287,6 @@ paths:
           explode: true
           in: query
           name: part
-          required: true
           schema:
             items:
               type: string
@@ -1304,13 +1304,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/CommentThread"
           description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
       tags:
-        - commentThreads
+        - youtube
   /youtube/v3/comments:
     delete:
       description: Deletes a resource.
@@ -4195,8 +4190,8 @@ paths:
       operationId: youtube.superChatEvents.list
       parameters:
         - description: The *part* parameter specifies the superChatEvent resource parts
-            that the API response will include. Supported values are id and
-            snippet.
+            that the API response will include. This parameter is currently not
+            supported.
           explode: true
           in: query
           name: part

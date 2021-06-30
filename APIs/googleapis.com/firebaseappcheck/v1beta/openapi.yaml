@@ -41,6 +41,110 @@ tags:
   - name: jwks
   - name: projects
 paths:
+  "/v1beta/{app}:exchangeAppAttestAssertion":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Accepts a AppAttest Artifact and Assertion, and uses the
+        developer's preconfigured auth token to verify the token with Apple.
+        Returns an AttestationToken with the App ID as specified by the `app`
+        field included as attested claims.
+      operationId: firebaseappcheck.projects.apps.exchangeAppAttestAssertion
+      parameters:
+        - description: 'Required. The full resource name to the iOS App. Format:
+            "projects/{project_id}/apps/{app_id}"'
+          in: path
+          name: app
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAssert\
+                ionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
+                  e"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v1beta/{app}:exchangeAppAttestAttestation":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Accepts a AppAttest CBOR Attestation, and uses the developer's
+        preconfigured team and bundle IDs to verify the token with Apple.
+        Returns an Attestation Artifact that can later be exchanged for an
+        AttestationToken in ExchangeAppAttestAssertion.
+      operationId: firebaseappcheck.projects.apps.exchangeAppAttestAttestation
+      parameters:
+        - description: 'Required. The full resource name to the iOS App. Format:
+            "projects/{project_id}/apps/{app_id}"'
+          in: path
+          name: app
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAttest\
+                ationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAttest\
+                  ationResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
   "/v1beta/{app}:exchangeCustomToken":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -306,6 +410,56 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
                   e"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+  "/v1beta/{app}:generateAppAttestChallenge":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Initiates the App Attest flow by generating a challenge which will
+        be used as a type of nonce for this attestation.
+      operationId: firebaseappcheck.projects.apps.generateAppAttestChallenge
+      parameters:
+        - description: 'Required. The full resource name to the iOS App. Format:
+            "projects/{project_id}/apps/{app_id}"'
+          in: path
+          name: app
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaGenerateAppAttestChalle\
+                ngeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAppAttestChallengeRespo\
+                  nse"
           description: Successful response
       security:
         - Oauth2:
@@ -856,6 +1010,24 @@ components:
       schema:
         type: string
   schemas:
+    GoogleFirebaseAppcheckV1betaAppAttestChallengeResponse:
+      description: Response object for GenerateAppAttestChallenge
+      properties:
+        challenge:
+          description: A one time use challenge for the client to pass to Apple's App
+            Attest API.
+          format: byte
+          type: string
+        ttl:
+          description: The duration from the time this challenge is minted until it is
+            expired. This field is intended to ease client-side token
+            management, since the device may have clock skew, but is still able
+            to accurately measure a duration. This expiration is intended to
+            minimize the replay window within which a single challenge may be
+            reused. See AIP 142 for naming of this field.
+          format: google-duration
+          type: string
+      type: object
     GoogleFirebaseAppcheckV1betaAttestationTokenResponse:
       description: Encapsulates an *App Check token*, which are used to access
         Firebase services protected by App Check.
@@ -969,6 +1141,52 @@ components:
           readOnly: true
           type: boolean
       type: object
+    GoogleFirebaseAppcheckV1betaExchangeAppAttestAssertionRequest:
+      description: Request message for ExchangeAppAttestAssertion
+      properties:
+        artifact:
+          description: The artifact previously returned by ExchangeAppAttestAttestation.
+          format: byte
+          type: string
+        assertion:
+          description: The CBOR encoded assertion provided by the Apple App Attest SDK.
+          format: byte
+          type: string
+        challenge:
+          description: A one time challenge returned by GenerateAppAttestChallenge.
+          format: byte
+          type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationRequest:
+      description: Request message for ExchangeAppAttestAttestation
+      properties:
+        attestationStatement:
+          description: The App Attest statement as returned by Apple's client-side App
+            Attest API. This is the CBOR object returned by Apple, which will be
+            Base64 encoded in the JSON API.
+          format: byte
+          type: string
+        challenge:
+          description: The challenge previously generated by the FAC backend.
+          format: byte
+          type: string
+        keyId:
+          description: The key ID generated by App Attest for the client app.
+          format: byte
+          type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse:
+      description: Response message for ExchangeAppAttestAttestation
+      properties:
+        artifact:
+          description: An artifact that should be passed back during the Assertion flow.
+          format: byte
+          type: string
+        attestationToken:
+          $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
+            e"
+          description: An attestation token which can be used to access Firebase APIs.
+      type: object
     GoogleFirebaseAppcheckV1betaExchangeCustomTokenRequest:
       description: Request message for the ExchangeCustomToken method.
       properties:
@@ -1010,6 +1228,10 @@ components:
             response](https://developer.android.com/training/safetynet/attestation#request-attestation-step)
             issued to your app.
           type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaGenerateAppAttestChallengeRequest:
+      description: Request message for GenerateAppAttestChallenge
+      properties: {}
       type: object
     GoogleFirebaseAppcheckV1betaListDebugTokensResponse:
       description: Response message for the ListDebugTokens method.

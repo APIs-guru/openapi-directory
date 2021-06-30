@@ -1995,15 +1995,15 @@ components:
             may be created per property.
           readOnly: true
           type: boolean
-        eventName:
-          description: "Immutable. The event name for this conversion event. Examples:
-            'click', 'purchase'"
-          type: string
-        isDeletable:
+        deletable:
           description: Output only. If set, this event can currently be deleted via
             DeleteConversionEvent.
           readOnly: true
           type: boolean
+        eventName:
+          description: "Immutable. The event name for this conversion event. Examples:
+            'click', 'purchase'"
+          type: string
         name:
           description: "Output only. Resource name of this conversion event. Format:
             properties/{property}/conversionEvents/{conversion_event}"

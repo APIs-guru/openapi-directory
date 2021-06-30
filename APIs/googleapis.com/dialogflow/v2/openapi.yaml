@@ -422,7 +422,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates/updates the specified agent.
+      description: "Creates/updates the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.setAgent
       parameters:
         - description: "Required. The project of this agent. Format: `projects/`."
@@ -519,7 +519,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Exports the specified agent to a ZIP file. Operation "
+      description: Exports the specified agent to a ZIP file.
       operationId: dialogflow.projects.locations.agent.export
       parameters:
         - description: "Required. The project that the agent to export is associated with. Format: `projects/`."
@@ -565,7 +565,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Imports the specified agent from a ZIP file. Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest. After the import, the imported draft agent will be trained automatically (unless disabled in agent settings). However, once the import is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when importing is complete. It only tracks when the draft agent is updated not when it is done training.
+      description: "Imports the specified agent from a ZIP file. Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest. After the import, the imported draft agent will be trained automatically (unless disabled in agent settings). However, once the import is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. An operation which tracks when importing is complete. It only tracks when the draft agent is updated not when it is done training. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.import
       parameters:
         - description: "Required. The project that the agent to import is associated with. Format: `projects/`."
@@ -611,7 +611,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Restores the specified agent from a ZIP file. Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. After the restore, the restored draft agent will be trained automatically (unless disabled in agent settings). However, once the restore is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when restoring is complete. It only tracks when the draft agent is updated not when it is done training.
+      description: "Restores the specified agent from a ZIP file. Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. After the restore, the restored draft agent will be trained automatically (unless disabled in agent settings). However, once the restore is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. An operation which tracks when restoring is complete. It only tracks when the draft agent is updated not when it is done training. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.restore
       parameters:
         - description: "Required. The project that the agent to restore is associated with. Format: `projects/`."
@@ -708,7 +708,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Trains the specified agent. Operation "
+      description: "Trains the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.train
       parameters:
         - description: "Required. The project that the agent to train is associated with. Format: `projects/`."
@@ -1184,7 +1184,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Creates multiple new entities in the specified entity type. Operation "
+      description: "Creates multiple new entities in the specified entity type. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchCreate
       parameters:
         - description: "Required. The name of the entity type to create entities in. Format: `projects//agent/entityTypes/`."
@@ -1230,7 +1230,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Deletes entities in the specified entity type. Operation "
+      description: "Deletes entities in the specified entity type. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchDelete
       parameters:
         - description: "Required. The name of the entity type to delete entries for. Format: `projects//agent/entityTypes/`."
@@ -1276,7 +1276,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Updates or creates multiple entities in the specified entity type. This method does not affect entities in the entity type that aren't explicitly specified in the request. Operation "
+      description: "Updates or creates multiple entities in the specified entity type. This method does not affect entities in the entity type that aren't explicitly specified in the request. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchUpdate
       parameters:
         - description: "Required. The name of the entity type to update or create entities in. Format: `projects//agent/entityTypes/`."
@@ -1411,7 +1411,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Deletes entity types in the specified agent. Operation "
+      description: "Deletes entity types in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.entityTypes.batchDelete
       parameters:
         - description: "Required. The name of the agent to delete all entities types for. Format: `projects//agent`."
@@ -1457,7 +1457,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Updates/Creates multiple entity types in the specified agent. Operation "
+      description: "Updates/Creates multiple entity types in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.entityTypes.batchUpdate
       parameters:
         - description: "Required. The name of the agent to update or create entity types in. Format: `projects//agent`."
@@ -1694,7 +1694,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an intent in the specified agent.
+      description: "Creates an intent in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.intents.create
       parameters:
         - description: "Required. The agent to create a intent for. Format: `projects//agent`."
@@ -1753,7 +1753,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Deletes intents in the specified agent. Operation "
+      description: "Deletes intents in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.intents.batchDelete
       parameters:
         - description: "Required. The name of the agent to delete all entities types for. Format: `projects//agent`."
@@ -1799,7 +1799,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Updates/Creates multiple intents in the specified agent. Operation "
+      description: "Updates/Creates multiple intents in the specified agent. Note: You should always train an agent prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/es/docs/training)."
       operationId: dialogflow.projects.locations.agent.intents.batchUpdate
       parameters:
         - description: "Required. The name of the agent to update or create intents in. Format: `projects//agent`."
@@ -2832,7 +2832,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: "The key/value metadata to label an intent. Labels can contain lowercase letters, digits and the symbols '-' and '_'. International characters are allowed, including letters from unicase alphabets. Keys must start with a letter. Keys and values can be no longer than 63 characters and no more than 128 bytes. Prefix \"sys.\" is reserved for Dialogflow defined labels. Currently allowed Dialogflow defined labels include: * sys.head * sys.contextual The above labels do not require value. \"sys.head\" means the intent is a head intent. \"sys.contextual\" means the intent is a contextual intent."
+          description: "The key/value metadata to label an intent. Labels can contain lowercase letters, digits and the symbols '-' and '_'. International characters are allowed, including letters from unicase alphabets. Keys must start with a letter. Keys and values can be no longer than 63 characters and no more than 128 bytes. Prefix \"sys-\" is reserved for Dialogflow defined labels. Currently allowed Dialogflow defined labels include: * sys-head * sys-contextual The above labels do not require value. \"sys-head\" means the intent is a head intent. \"sys.contextual\" means the intent is a contextual intent."
           type: object
         name:
           description: "The unique identifier of the intent. Required for the Intents.UpdateIntent method. Intents.CreateIntent populates the name automatically. Format: `projects//locations//agents//intents/`."
@@ -5137,7 +5137,7 @@ components:
       description: "You can create multiple versions of your agent and publish them to separate environments. When you edit an agent, you are editing the draft agent. At any point, you can save the draft agent as an agent version, which is an immutable snapshot of your agent. When you save the draft agent, it is published to the default environment. When you create agent versions, you can publish them to custom environments. You can create a variety of custom environments for: - testing - development - production - etc. For more information, see the [versions and environments guide](https://cloud.google.com/dialogflow/docs/agents-versions)."
       properties:
         agentVersion:
-          description: "Optional. The agent version loaded into this environment. Supported formats: - `projects//agent/versions/` - `projects//locations//agent/versions/`"
+          description: "Required. The agent version loaded into this environment. Supported formats: - `projects//agent/versions/` - `projects//locations//agent/versions/`"
           type: string
         description:
           description: Optional. The developer-provided description for this environment. The maximum length is 500 characters. If exceeded, the request is rejected.

@@ -2167,6 +2167,13 @@ components:
         trialId:
           description: The trial id for these results.
           type: string
+        webAccessUris:
+          additionalProperties:
+            type: string
+          description: The web URIs for the training job. Currently for debug terminal
+            access to the job. Only set for in-progress hyperparameter tuning
+            trials with web access enabled.
+          type: object
       type: object
     GoogleCloudMlV1__HyperparameterSpec:
       description: Represents a set of hyperparameters to optimize.
@@ -3071,6 +3078,9 @@ components:
           items:
             type: string
           type: array
+        enableWebAccess:
+          description: Optional. Whether to enable web access for the training job.
+          type: boolean
         encryptionConfig:
           $ref: "#/components/schemas/GoogleCloudMlV1__EncryptionConfig"
           description: Optional. Options for using customer-managed encryption keys (CMEK)
@@ -3320,6 +3330,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudMlV1__HyperparameterOutput"
           type: array
+        webAccessUris:
+          additionalProperties:
+            type: string
+          description: Output only. The web URIs for the training job. Currently for debug
+            terminal access to the job.
+          readOnly: true
+          type: object
       type: object
     GoogleCloudMlV1__Trial:
       description: A message representing a trial.

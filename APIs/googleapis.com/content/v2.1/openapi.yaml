@@ -7192,13 +7192,13 @@ components:
           description: 'Action to perform for this link. The `"request"` action is only available to select merchants. Acceptable values are: - "`approve`" - "`remove`" - "`request`" '
           type: string
         linkType:
-          description: 'Type of the link between the two accounts. Acceptable values are: - "`channelPartner`" - "`eCommercePlatform`" '
+          description: 'Type of the link between the two accounts. Acceptable values are: - "`channelPartner`" - "`eCommercePlatform`" - "`paymentServiceProvider`" '
           type: string
         linkedAccountId:
           description: The ID of the linked account.
           type: string
         services:
-          description: 'Provided services. Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" '
+          description: 'Provided services. Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" - "`paymentProcessing`" '
           items:
             type: string
           type: array

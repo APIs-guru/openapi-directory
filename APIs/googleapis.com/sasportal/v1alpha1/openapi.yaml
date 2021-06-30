@@ -1125,7 +1125,11 @@ components:
       type: object
     SasPortalDeviceMetadata:
       description: Device data overridable by both SAS Portal and registration requests.
-      properties: {}
+      properties:
+        antennaModel:
+          description: "If populated, the Antenna Model Pattern to use. Format is:
+            RecordCreatorId:PatternId"
+          type: string
       type: object
     SasPortalDeviceModel:
       description: Information about the model of the device.

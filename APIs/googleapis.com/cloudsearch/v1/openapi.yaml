@@ -6,9 +6,9 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Cloud Search provides cloud-based search capabilities over G Suite
-    data. The Cloud Search API allows indexing of non-G Suite data into Cloud
-    Search.
+  description: Cloud Search provides cloud-based search capabilities over Google
+    Workspace data. The Cloud Search API allows indexing of non-Google Workspace
+    data into Cloud Search.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -2973,7 +2973,11 @@ components:
       properties:
         count:
           description: Number of results that match the bucket value. Counts are only
-            returned for searches when count accuracy is ensured. Can be empty.
+            returned for searches when count accuracy is ensured. Cloud Search
+            does not guarantee facet counts for any query and facet counts might
+            be present only intermittently, even for identical queries. Do not
+            build dependencies on facet count existence; instead use facet ount
+            percentages which are always returned.
           format: int32
           type: integer
         percentage:

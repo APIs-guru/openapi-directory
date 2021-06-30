@@ -96,6 +96,7 @@ tags:
   - name: routers
   - name: routes
   - name: securityPolicies
+  - name: serviceAttachments
   - name: snapshots
   - name: sslCertificates
   - name: sslPolicies
@@ -1516,7 +1517,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/projects/{project}/aggregated/commitments":
     get:
-      description: Retrieves an aggregated list of commitments.
+      description: Retrieves an aggregated list of commitments by region.
       operationId: compute.regionCommitments.aggregatedList
       parameters:
         - description: Project ID for this request.
@@ -3041,6 +3042,83 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - routers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/aggregated/serviceAttachments":
+    get:
+      description: Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project.
+      operationId: compute.serviceAttachments.aggregatedList
+      parameters:
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+          in: query
+          name: includeAllScopes
+          schema:
+            type: boolean
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceAttachmentAggregatedList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -22159,6 +22237,466 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - routers
+  "/projects/{project}/regions/{region}/serviceAttachments":
+    get:
+      description: Lists the ServiceAttachments for a project in the given scope.
+      operationId: compute.serviceAttachments.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: 'A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceAttachmentList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates a ServiceAttachment in the specified project in the given scope using the parameters that are included in the request.
+      operationId: compute.serviceAttachments.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder"
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+  "/projects/{project}/regions/{region}/serviceAttachments/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.serviceAttachments.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/serviceAttachments/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.serviceAttachments.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+  "/projects/{project}/regions/{region}/serviceAttachments/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.serviceAttachments.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+  "/projects/{project}/regions/{region}/serviceAttachments/{serviceAttachment}":
+    delete:
+      description: Deletes the specified ServiceAttachment in the given scope
+      operationId: compute.serviceAttachments.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the ServiceAttachment resource to delete.
+          in: path
+          name: serviceAttachment
+          required: true
+          schema:
+            type: string
+        - description: "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder"
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+    get:
+      description: Returns the specified ServiceAttachment resource in the given scope.
+      operationId: compute.serviceAttachments.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the ServiceAttachment resource to return.
+          in: path
+          name: serviceAttachment
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceAttachment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Patches the specified ServiceAttachment resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+      operationId: compute.serviceAttachments.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The region scoping this request and should conform to RFC1035.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The resource id of the ServiceAttachment to patch. It should conform to RFC1035 resource name or be a string form on an unsigned long number.
+          in: path
+          name: serviceAttachment
+          required: true
+          schema:
+            type: string
+        - description: "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder"
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
   "/projects/{project}/regions/{region}/sslCertificates":
     get:
       description: Retrieves the list of SslCertificate resources available to the specified project in the specified region.
@@ -34445,7 +34983,7 @@ components:
           type: string
       type: object
     Address:
-      description: "Use global external addresses for GFE-based external HTTP(S) load balancers in Premium Tier. Use global internal addresses for reserved peering network range. Use regional external addresses for the following resources: - External IP addresses for VM instances - Regional external forwarding rules - Cloud NAT external IP addresses - GFE based LBs in Standard Tier - Network LBs in Premium or Standard Tier - Cloud VPN gateways (both Classic and HA) Use regional internal IP addresses for subnet IP ranges (primary and secondary). This includes: - Internal IP addresses for VM instances - Alias IP ranges of VM instances (/32 only) - Regional internal forwarding rules - Internal TCP/UDP load balancer addresses - Internal HTTP(S) load balancer addresses - Cloud DNS inbound forwarding IP addresses For more information, read reserved IP address."
+      description: "Use global external addresses for GFE-based external HTTP(S) load balancers in Premium Tier. Use global internal addresses for reserved peering network range. Use regional external addresses for the following resources: - External IP addresses for VM instances - Regional external forwarding rules - Cloud NAT external IP addresses - GFE based LBs in Standard Tier - Network LBs in Premium or Standard Tier - Cloud VPN gateways (both Classic and HA) Use regional internal IP addresses for subnet IP ranges (primary and secondary). This includes: - Internal IP addresses for VM instances - Alias IP ranges of VM instances (/32 only) - Regional internal forwarding rules - Internal TCP/UDP load balancer addresses - Internal HTTP(S) load balancer addresses - Cloud DNS inbound forwarding IP addresses For more information, see Reserving a static external IP address."
       properties:
         address:
           description: The static IP address represented by this resource.
@@ -34880,7 +35418,7 @@ components:
           format: int64
           type: string
         diskType:
-          description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example: https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/pd-standard Other values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/diskType - projects/project/zones/zone/diskTypes/diskType - zones/zone/diskTypes/diskType Note that for InstanceTemplate, this is the name of the disk type, not URL."
+          description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example: https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/pd-standard For a full list of acceptable values, see Persistent disk types. If you define this field, you can provide either the full or partial URL. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/diskType - projects/project/zones/zone/diskTypes/diskType - zones/zone/diskTypes/diskType Note that for InstanceTemplate, this is the name of the disk type, not URL."
           type: string
         labels:
           additionalProperties:
@@ -34895,7 +35433,7 @@ components:
             - USE_EXISTING_DISK
           type: string
         provisionedIops:
-          description: Indicates how many IOPS must be provisioned for the disk.
+          description: Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
           format: int64
           type: string
         resourcePolicies:
@@ -35391,7 +35929,7 @@ components:
             - UTILIZATION
           type: string
         capacityScaler:
-          description: "A multiplier applied to the backend's target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service. Not supported by: - Internal TCP/UDP Load Balancing - Network Load Balancing"
+          description: A multiplier applied to the backend's target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service.
           format: float
           type: number
         description:
@@ -35401,18 +35939,18 @@ components:
           description: This field designates whether this is a failover backend. More than one failover backend can be configured for a given BackendService.
           type: boolean
         group:
-          description: The fully-qualified URL of an instance group or network endpoint group (NEG) resource. The type of backend that a backend service supports depends on the backend service's loadBalancingScheme. - When the loadBalancingScheme for the backend service is EXTERNAL (except Network Load Balancing), INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED , the backend can be either an instance group or a NEG. The backends on the backend service must be either all instance groups or all NEGs. You cannot mix instance group and NEG backends on the same backend service. - When the loadBalancingScheme for the backend service is EXTERNAL for Network Load Balancing or INTERNAL for Internal TCP/UDP Load Balancing, the backend must be an instance group. NEGs are not supported. For regional services, the backend must be in the same region as the backend service. You must use the *fully-qualified* URL (starting with https://www.googleapis.com/) to specify the instance group or NEG. Partial URLs are not supported.
+          description: The fully-qualified URL of an instance group or network endpoint group (NEG) resource. To determine what types of backends a load balancer supports, see the [Backend services overview](https://cloud.google.com/load-balancing/docs/backend-service#backends). You must use the *fully-qualified* URL (starting with https://www.googleapis.com/) to specify the instance group or NEG. Partial URLs are not supported.
           type: string
         maxConnections:
-          description: "Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE. Not supported by: - Internal TCP/UDP Load Balancing - Network Load Balancing"
+          description: Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE.
           format: int32
           type: integer
         maxConnectionsPerEndpoint:
-          description: "Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE. Not supported by: - Internal TCP/UDP Load Balancing - Network Load Balancing."
+          description: Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE.
           format: int32
           type: integer
         maxConnectionsPerInstance:
-          description: "Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE. Not supported by: - Internal TCP/UDP Load Balancing - Network Load Balancing."
+          description: Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE.
           format: int32
           type: integer
         maxRate:
@@ -35613,10 +36151,10 @@ components:
           type: object
       type: object
     BackendService:
-      description: Represents a Backend Service resource. A backend service defines how Google Cloud load balancers distribute traffic. The backend service configuration contains a set of values, such as the protocol used to connect to backends, various distribution and session settings, health checks, and timeouts. These settings provide fine-grained control over how your load balancer behaves. Most of the settings have default values that allow for easy configuration if you need to get started quickly. Backend services in Google Compute Engine can be either regionally or globally scoped. * [Global](/compute/docs/reference/rest/v1/backendServices) * [Regional](/compute/docs/reference/rest/v1/regionBackendServices) For more information, see Backend Services.
+      description: Represents a Backend Service resource. A backend service defines how Google Cloud load balancers distribute traffic. The backend service configuration contains a set of values, such as the protocol used to connect to backends, various distribution and session settings, health checks, and timeouts. These settings provide fine-grained control over how your load balancer behaves. Most of the settings have default values that allow for easy configuration if you need to get started quickly. Backend services in Google Compute Engine can be either regionally or globally scoped. * [Global](https://cloud.google.com/compute/docs/reference/rest/v1/backendServices) * [Regional](https://cloud.google.com/compute/docs/reference/rest/v1/regionBackendServices) For more information, see Backend Services.
       properties:
         affinityCookieTtlSec:
-          description: Lifetime of cookies in seconds. Only applicable if the loadBalancingScheme is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED, the protocol is HTTP or HTTPS, and the sessionAffinity is GENERATED_COOKIE, or HTTP_COOKIE. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day ( 86,400). Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+          description: Lifetime of cookies in seconds. This setting is applicable to external and internal HTTP(S) load balancers and Traffic Director and requires GENERATED_COOKIE or HTTP_COOKIE session affinity. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day (86,400). Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         backends:
@@ -35626,7 +36164,7 @@ components:
           type: array
         cdnPolicy:
           $ref: "#/components/schemas/BackendServiceCdnPolicy"
-          description: Cloud CDN configuration for this BackendService. Only available for external HTTP(S) Load Balancing.
+          description: Cloud CDN configuration for this BackendService. Only available for specified load balancer types.
         circuitBreakers:
           $ref: "#/components/schemas/CircuitBreakers"
         connectionDraining:
@@ -35638,12 +36176,12 @@ components:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
         customRequestHeaders:
-          description: Headers that the HTTP/S load balancer should add to proxied requests.
+          description: Headers that the load balancer adds to proxied requests. See [Creating custom headers](https://cloud.google.com/load-balancing/docs/custom-headers).
           items:
             type: string
           type: array
         customResponseHeaders:
-          description: Headers that the HTTP/S load balancer should add to proxied responses.
+          description: Headers that the load balancer adds to proxied responses. See [Creating custom headers](https://cloud.google.com/load-balancing/docs/custom-headers).
           items:
             type: string
           type: array
@@ -35651,11 +36189,11 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         enableCDN:
-          description: If true, enables Cloud CDN for the backend service. Only applicable if the loadBalancingScheme is EXTERNAL and the protocol is HTTP or HTTPS.
+          description: If true, enables Cloud CDN for the backend service of an external HTTP(S) load balancer.
           type: boolean
         failoverPolicy:
           $ref: "#/components/schemas/BackendServiceFailoverPolicy"
-          description: Applicable only to Failover for Internal TCP/UDP Load Balancing and Network Load Balancing. Requires at least one backend instance group to be defined as a backup (failover) backend.
+          description: "Requires at least one backend instance group to be defined as a backup (failover) backend. For load balancers that have configurable failover: [Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal/failover-overview) and [external TCP/UDP Load Balancing](/network/networklb-failover-overview)."
         fingerprint:
           description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a BackendService.
           format: byte
@@ -35677,7 +36215,7 @@ components:
           description: "[Output Only] Type of resource. Always compute#backendService for backend services."
           type: string
         loadBalancingScheme:
-          description: Specifies the load balancer type. Choose EXTERNAL for external HTTP(S), SSL Proxy, TCP Proxy and Network Load Balancing. Choose INTERNAL for Internal TCP/UDP Load Balancing. Choose INTERNAL_MANAGED for Internal HTTP(S) Load Balancing. INTERNAL_SELF_MANAGED for Traffic Director. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
+          description: Specifies the load balancer type. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
           enum:
             - EXTERNAL
             - INTERNAL
@@ -35713,14 +36251,14 @@ components:
           $ref: "#/components/schemas/OutlierDetection"
           description: "Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service. If not set, this feature is considered disabled. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true."
         port:
-          description: Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80. Backend services for Internal TCP/UDP Load Balancing and Network Load Balancing require you omit port.
+          description: Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80. For Internal TCP/UDP Load Balancing and Network Load Balancing, omit port.
           format: int32
           type: integer
         portName:
-          description: A named port on a backend instance group representing the port for communication to the backend VMs in that group. Required when the loadBalancingScheme is EXTERNAL (except Network Load Balancing), INTERNAL_MANAGED, or INTERNAL_SELF_MANAGED and the backends are instance groups. The named port must be defined on each backend instance group. This parameter has no meaning if the backends are NEGs. Backend services for Internal TCP/UDP Load Balancing and Network Load Balancing require you omit port_name.
+          description: A named port on a backend instance group representing the port for communication to the backend VMs in that group. The named port must be [defined on each backend instance group](https://cloud.google.com/load-balancing/docs/backend-service#named_ports). This parameter has no meaning if the backends are NEGs. For Internal TCP/UDP Load Balancing and Network Load Balancing, omit port_name.
           type: string
         protocol:
-          description: The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancer or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
+          description: The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancers or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
           enum:
             - GRPC
             - HTTP
@@ -35743,7 +36281,7 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         sessionAffinity:
-          description: "Type of session affinity to use. The default is NONE. When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS. When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. When the loadBalancingScheme is INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED, possible values are NONE, CLIENT_IP, GENERATED_COOKIE, HEADER_FIELD, or HTTP_COOKIE. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true."
+          description: "Type of session affinity to use. The default is NONE. For a detailed description of session affinity options, see: [Session affinity](https://cloud.google.com/load-balancing/docs/backend-service#session_affinity). Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true."
           enum:
             - CLIENT_IP
             - CLIENT_IP_NO_DESTINATION
@@ -35911,16 +36449,16 @@ components:
           type: integer
       type: object
     BackendServiceFailoverPolicy:
-      description: Applicable only to Failover for Internal TCP/UDP Load Balancing and Network Load Balancing. On failover or failback, this field indicates whether connection draining will be honored. GCP has a fixed connection draining timeout of 10 minutes. A setting of true terminates existing TCP connections to the active pool during failover and failback, immediately draining traffic. A setting of false allows existing TCP connections to persist, even on VMs no longer in the active pool, for up to the duration of the connection draining timeout (10 minutes).
+      description: "For load balancers that have configurable failover: [Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal/failover-overview) and [external TCP/UDP Load Balancing](/network/networklb-failover-overview). On failover or failback, this field indicates whether connection draining will be honored. Google Cloud has a fixed connection draining timeout of 10 minutes. A setting of true terminates existing TCP connections to the active pool during failover and failback, immediately draining traffic. A setting of false allows existing TCP connections to persist, even on VMs no longer in the active pool, for up to the duration of the connection draining timeout (10 minutes)."
       properties:
         disableConnectionDrainOnFailover:
           description: This can be set to true only if the protocol is TCP. The default is false.
           type: boolean
         dropTrafficIfUnhealthy:
-          description: Applicable only to Failover for Internal TCP/UDP Load Balancing and Network Load Balancing, If set to true, connections to the load balancer are dropped when all primary and all backup backend VMs are unhealthy.If set to false, connections are distributed among all primary VMs when all primary and all backup backend VMs are unhealthy. The default is false.
+          description: "If set to true, connections to the load balancer are dropped when all primary and all backup backend VMs are unhealthy.If set to false, connections are distributed among all primary VMs when all primary and all backup backend VMs are unhealthy. For load balancers that have configurable failover: [Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal/failover-overview) and [external TCP/UDP Load Balancing](/network/networklb-failover-overview). The default is false."
           type: boolean
         failoverRatio:
-          description: Applicable only to Failover for Internal TCP/UDP Load Balancing and Network Load Balancing. The value of the field must be in the range [0, 1]. If the value is 0, the load balancer performs a failover when the number of healthy primary VMs equals zero. For all other values, the load balancer performs a failover when the total number of healthy primary VMs is less than this ratio.
+          description: "The value of the field must be in the range [0, 1]. If the value is 0, the load balancer performs a failover when the number of healthy primary VMs equals zero. For all other values, the load balancer performs a failover when the total number of healthy primary VMs is less than this ratio. For load balancers that have configurable failover: [Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal/failover-overview) and [external TCP/UDP Load Balancing](/network/networklb-failover-overview)."
           format: float
           type: number
       type: object
@@ -36118,7 +36656,7 @@ components:
           type: string
       type: object
     BulkInsertInstanceResource:
-      description: A transient resource used in compute.instances.bulkInsert and compute.regionInstances.bulkInsert and compute.regionInstances.recommendLocations. This resource is not persisted anywhere, it is used only for processing the requests.
+      description: A transient resource used in compute.instances.bulkInsert and compute.regionInstances.bulkInsert . This resource is not persisted anywhere, it is used only for processing the requests.
       properties:
         count:
           description: The maximum number of instances to create.
@@ -36135,7 +36673,7 @@ components:
           format: int64
           type: string
         namePattern:
-          description: "The string pattern used for the names of the VMs. Either name_pattern or per_instance_properties must be set. The pattern should contain one continuous sequence of placeholder hash characters (#) with each character corresponding to one digit of the generated instance name. Example: name_pattern of inst-#### will generate instance names such as inst-0001, inst-0002, ... . If there already exist instance(s) whose names match the name pattern in the same project and zone, then the generated instance numbers will start after the biggest existing number. For example, if there exists an instance with name inst-0050, then instance names generated using the pattern inst-#### will be inst-0051, inst-0052, etc. The name pattern placeholder # ...# can contain up to 18 characters."
+          description: "The string pattern used for the names of the VMs. Either name_pattern or per_instance_properties must be set. The pattern must contain one continuous sequence of placeholder hash characters (#) with each character corresponding to one digit of the generated instance name. Example: a name_pattern of inst-#### generates instance names such as inst-0001 and inst-0002. If existing instances in the same project and zone have names that match the name pattern then the generated instance numbers start after the biggest existing number. For example, if there exists an instance with name inst-0050, then instance names generated using the pattern inst-#### begin with inst-0051. The name pattern placeholder #...# can contain up to 18 characters."
           type: string
         perInstanceProperties:
           additionalProperties:
@@ -36185,7 +36723,7 @@ components:
           type: array
       type: object
     CircuitBreakers:
-      description: Settings controlling the volume of connections to a backend service.
+      description: Settings controlling the volume of requests, connections and retries to this backend service.
       properties:
         maxConnections:
           description: Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
@@ -36719,7 +37257,7 @@ components:
           format: int64
           type: string
         provisionedIops:
-          description: Indicates how many IOPS must be provisioned for the disk.
+          description: Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
           format: int64
           type: string
         region:
@@ -36782,7 +37320,7 @@ components:
             - RESTORING
           type: string
         type:
-          description: "URL of the disk type resource describing which disk type to use to create the disk. Provide this when creating the disk. For example: projects/project /zones/zone/diskTypes/pd-standard or pd-ssd"
+          description: "URL of the disk type resource describing which disk type to use to create the disk. Provide this when creating the disk. For example: projects/project /zones/zone/diskTypes/pd-ssd . See Persistent disk types."
           type: string
         users:
           description: "[Output Only] Links to the users of the disk (attached instances) in form: projects/project/zones/zone/instances/instance"
@@ -37216,7 +37754,7 @@ components:
     DisksAddResourcePoliciesRequest:
       properties:
         resourcePolicies:
-          description: Resource policies to be added to this disk. Currently you can only specify one policy here.
+          description: Full or relative path to the resource policy to be added to this disk. You can only specify one resource policy.
           items:
             type: string
           type: array
@@ -37454,7 +37992,7 @@ components:
           format: uint64
           type: string
         interfaces:
-          description: List of interfaces for this external VPN gateway. If your peer-side gateway is an on-premises gateway and non-AWS cloud providers’ gateway, at most two interfaces can be provided for an external VPN gateway. If your peer side is an AWS virtual private gateway, four interfaces should be provided for an external VPN gateway.
+          description: List of interfaces for this external VPN gateway. If your peer-side gateway is an on-premises gateway and non-AWS cloud providers' gateway, at most two interfaces can be provided for an external VPN gateway. If your peer side is an AWS virtual private gateway, four interfaces should be provided for an external VPN gateway.
           items:
             $ref: "#/components/schemas/ExternalVpnGatewayInterface"
           type: array
@@ -38443,7 +38981,7 @@ components:
           description: "[Output Only] Type of the resource. Always compute#guestAttributes for guest attributes entry."
           type: string
         queryPath:
-          description: The path to be queried. This can be the default namespace ('/') or a nested namespace ('/\/') or a specified key ('/\/\')
+          description: The path to be queried. This can be the default namespace ('') or a nested namespace ('\/') or a specified key ('\/\').
           type: string
         queryValue:
           $ref: "#/components/schemas/GuestAttributesValue"
@@ -38763,7 +39301,7 @@ components:
             type: string
           type: array
         healthStatusAggregationPolicy:
-          description: Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each backend in the health check service. - AND. If any backend's health check reports UNHEALTHY, then UNHEALTHY is the HealthState of the entire health check service. If all backend's are healthy, the HealthState of the health check service is HEALTHY. .
+          description: Optional. Policy for how the results from multiple health checks for the same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified. - NO_AGGREGATION. An EndpointHealth message is returned for each pair in the health check service. - AND. If any health check of an endpoint reports UNHEALTHY, then UNHEALTHY is the HealthState of the endpoint. If all health checks report HEALTHY, the HealthState of the endpoint is HEALTHY. .
           enum:
             - AND
             - NO_AGGREGATION
@@ -39354,7 +39892,7 @@ components:
           $ref: "#/components/schemas/Duration"
           description: Specifies a non-zero timeout per retry attempt. If not specified, will use the timeout set in HttpRouteAction. If timeout in HttpRouteAction is not set, will use the largest timeout among all backend services associated with the route.
         retryConditions:
-          description: "Specifies one or more conditions when this retry rule applies. Valid values are: - 5xx: Loadbalancer will attempt a retry if the backend service responds with any 5xx response code, or if the backend service does not respond at all, example: disconnects, reset, read timeout, connection failure, and refused streams. - gateway-error: Similar to 5xx, but only applies to response codes 502, 503 or 504. - - connect-failure: Loadbalancer will retry on failures connecting to backend services, for example due to connection timeouts. - retriable-4xx: Loadbalancer will retry for retriable 4xx response codes. Currently the only retriable error supported is 409. - refused-stream:Loadbalancer will retry if the backend service resets the stream with a REFUSED_STREAM error code. This reset type indicates that it is safe to retry. - cancelledLoadbalancer will retry if the gRPC status code in the response header is set to cancelled - deadline-exceeded: Loadbalancer will retry if the gRPC status code in the response header is set to deadline-exceeded - resource-exhausted: Loadbalancer will retry if the gRPC status code in the response header is set to resource-exhausted - unavailable: Loadbalancer will retry if the gRPC status code in the response header is set to unavailable "
+          description: "Specifies one or more conditions when this retry policy applies. Valid values are: - 5xx: Retry will be attempted if the instance or endpoint responds with any 5xx response code, or if the instance or endpoint does not respond at all, example: disconnects, reset, read timeout, connection failure, and refused streams. - gateway-error: Similar to 5xx, but only applies to response codes 502, 503 or 504. - - connect-failure: A retry will be attempted on failures connecting to the instance or endpoint, for example due to connection timeouts. - retriable-4xx: A retry will be attempted if the instance or endpoint responds with a retriable 4xx response code. Currently the only retriable error supported is 409. - refused-stream: A retry will be attempted if the instance or endpoint resets the stream with a REFUSED_STREAM error code. This reset type indicates that it is safe to retry. - cancelled: A retry will be attempted if the gRPC status code in the response header is set to cancelled. - deadline-exceeded: A retry will be attempted if the gRPC status code in the response header is set to deadline-exceeded. - internal: A retry will be attempted if the gRPC status code in the response header is set to internal. - resource-exhausted: A retry will be attempted if the gRPC status code in the response header is set to resource-exhausted. - unavailable: A retry will be attempted if the gRPC status code in the response header is set to unavailable. "
           items:
             type: string
           type: array
@@ -40213,7 +40751,7 @@ components:
           type: object
       type: object
     InstanceGroupManager:
-      description: "Whether the instance is a standby. # Properties of a standby instance comparing to the regular instance: # | regular | standby managed by IGM? | yes | yes added to the IG? | yes | yes counts towards IGM's target size? | yes | no taken into account by Autoscaler? | yes | no # receives traffic from LB? | yes | no Represents a Managed Instance Group resource. An instance group is a collection of VM instances that you can manage as a single entity. For more information, read Instance groups. For zonal Managed Instance Group, use the instanceGroupManagers resource. For regional Managed Instance Group, use the regionInstanceGroupManagers resource."
+      description: Represents a Managed Instance Group resource. An instance group is a collection of VM instances that you can manage as a single entity. For more information, read Instance groups. For zonal Managed Instance Group, use the instanceGroupManagers resource. For regional Managed Instance Group, use the regionInstanceGroupManagers resource.
       properties:
         autoHealingPolicies:
           description: The autohealing policy for this managed instance group. You can specify only one value.
@@ -48823,6 +49361,8 @@ components:
     SecurityPolicy:
       description: Represents a Google Cloud Armor security policy resource. Only external backend services that use load balancers can reference a security policy. For more information, see Google Cloud Armor security policy overview.
       properties:
+        adaptiveProtectionConfig:
+          $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfig"
         advancedOptionsConfig:
           $ref: "#/components/schemas/SecurityPolicyAdvancedOptionsConfig"
         creationTimestamp:
@@ -48854,6 +49394,26 @@ components:
           type: array
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
+          type: string
+      type: object
+    SecurityPolicyAdaptiveProtectionConfig:
+      description: Configuration options for Cloud Armor Adaptive Protection (CAAP).
+      properties:
+        layer7DdosDefenseConfig:
+          $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig"
+          description: If set to true, enables Cloud Armor Machine Learning.
+      type: object
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig:
+      description: Configuration options for L7 DDoS detection.
+      properties:
+        enable:
+          description: If set to true, enables CAAP for L7 DDoS detection.
+          type: boolean
+        ruleVisibility:
+          description: "Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules."
+          enum:
+            - PREMIUM
+            - STANDARD
           type: string
       type: object
     SecurityPolicyAdvancedOptionsConfig:
@@ -49041,6 +49601,308 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ServiceAttachment:
+      description: Represents a ServiceAttachment resource. A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service. next tag = 19
+      properties:
+        connectedEndpoints:
+          description: "[Output Only] An array of connections for all the consumers connected to this service attachment."
+          items:
+            $ref: "#/components/schemas/ServiceAttachmentConnectedEndpoint"
+          type: array
+        connectionPreference:
+          description: The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
+          enum:
+            - ACCEPT_AUTOMATIC
+            - ACCEPT_MANUAL
+            - CONNECTION_PREFERENCE_UNSPECIFIED
+          type: string
+        consumerAcceptLists:
+          description: Projects that are allowed to connect to this service attachment.
+          items:
+            $ref: "#/components/schemas/ServiceAttachmentConsumerProjectLimit"
+          type: array
+        consumerRejectLists:
+          description: Projects that are not allowed to connect to this service attachment. The project can be specified using its id or number.
+          items:
+            type: string
+          type: array
+        creationTimestamp:
+          description: "[Output Only] Creation timestamp in RFC3339 text format."
+          type: string
+        description:
+          description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        enableProxyProtocol:
+          description: If true, enable the proxy protocol which is for supplying client TCP/IP address data in TCP connections that traverse proxies on their way to destination servers.
+          type: boolean
+        fingerprint:
+          description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a ServiceAttachment. An up-to-date fingerprint must be provided in order to patch/update the ServiceAttachment; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the ServiceAttachment.
+          format: byte
+          type: string
+        id:
+          description: "[Output Only] The unique identifier for the resource type. The server generates this identifier."
+          format: uint64
+          type: string
+        kind:
+          default: compute#serviceAttachment
+          description: "[Output Only] Type of the resource. Always compute#serviceAttachment for service attachments."
+          type: string
+        name:
+          description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        natSubnets:
+          description: An array of URLs where each entry is the URL of a subnet provided by the service producer to use for NAT in this service attachment.
+          items:
+            type: string
+          type: array
+        producerForwardingRule:
+          description: The URL of a forwarding rule with loadBalancingScheme INTERNAL* that is serving the endpoint identified by this service attachment.
+          type: string
+        pscServiceAttachmentId:
+          $ref: "#/components/schemas/Uint128"
+          description: "[Output Only] An 128-bit global unique ID of the PSC service attachment."
+        region:
+          description: "[Output Only] URL of the region where the service attachment resides. This field applies only to the region resource. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for the resource."
+          type: string
+        targetService:
+          description: The URL of a service serving the endpoint identified by this service attachment.
+          type: string
+      type: object
+    ServiceAttachmentAggregatedList:
+      description: Contains a list of ServiceAttachmentsScopedList.
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          additionalProperties:
+            $ref: "#/components/schemas/ServiceAttachmentsScopedList"
+            description: Name of the scope containing this set of ServiceAttachments.
+          description: A list of ServiceAttachmentsScopedList resources.
+          type: object
+        kind:
+          default: compute#serviceAttachmentAggregatedList
+          description: Type of resource.
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        unreachables:
+          description: "[Output Only] Unreachable resources."
+          items:
+            type: string
+          type: array
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
+    ServiceAttachmentConnectedEndpoint:
+      description: "[Output Only] A connection connected to this service attachment."
+      properties:
+        endpoint:
+          description: The url of a connected endpoint.
+          type: string
+        pscConnectionId:
+          description: The PSC connection id of the connected endpoint.
+          format: uint64
+          type: string
+        status:
+          description: The status of a connected endpoint to this service attachment.
+          enum:
+            - ACCEPTED
+            - CLOSED
+            - PENDING
+            - REJECTED
+            - STATUS_UNSPECIFIED
+          type: string
+      type: object
+    ServiceAttachmentConsumerProjectLimit:
+      properties:
+        connectionLimit:
+          description: The value of the limit to set.
+          format: uint32
+          type: integer
+        projectIdOrNum:
+          description: The project id or number for the project to set the limit for.
+          type: string
+      type: object
+    ServiceAttachmentList:
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          description: A list of ServiceAttachment resources.
+          items:
+            $ref: "#/components/schemas/ServiceAttachment"
+          type: array
+        kind:
+          default: compute#serviceAttachmentList
+          description: "[Output Only] Type of the resource. Always compute#serviceAttachment for service attachments."
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
+    ServiceAttachmentsScopedList:
+      properties:
+        serviceAttachments:
+          description: A list of ServiceAttachments contained in this scope.
+          items:
+            $ref: "#/components/schemas/ServiceAttachment"
+          type: array
+        warning:
+          description: Informational warning which replaces the list of service attachments when the list is empty.
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
       type: object
     ShieldedInstanceConfig:
       description: A set of Shielded Instance options.
@@ -49852,6 +50714,7 @@ components:
             - INTERNAL_HTTPS_LOAD_BALANCER
             - PRIVATE
             - PRIVATE_RFC_1918
+            - PRIVATE_SERVICE_CONNECT
           type: string
         region:
           description: URL of the region where the Subnetwork resides. This field can be set only at resource creation time.
@@ -51860,6 +52723,15 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Uint128:
+      properties:
+        high:
+          format: uint64
+          type: string
+        low:
+          format: uint64
+          type: string
       type: object
     UrlMap:
       description: "Represents a URL Map resource. Google Compute Engine has two URL Map resources: * [Global](/compute/docs/reference/rest/v1/urlMaps) * [Regional](/compute/docs/reference/rest/v1/regionUrlMaps) A URL map resource is a component of certain types of GCP load balancers and Traffic Director. * urlMaps are used by external HTTP(S) load balancers and Traffic Director. * regionUrlMaps are used by internal HTTP(S) load balancers. For a list of supported URL map features by load balancer type, see the Load balancing features: Routing and traffic management table. For a list of supported URL map features for Traffic Director, see the Traffic Director features: Routing and traffic management table. This resource defines mappings from host names and URL paths to either a backend service or a backend bucket. To use the global urlMaps resource, the backend service must have a loadBalancingScheme of either EXTERNAL or INTERNAL_SELF_MANAGED. To use the regionUrlMaps resource, the backend service must have a loadBalancingScheme of INTERNAL_MANAGED. For more information, read URL Map Concepts."
