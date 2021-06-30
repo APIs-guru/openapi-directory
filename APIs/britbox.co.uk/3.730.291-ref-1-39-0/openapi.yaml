@@ -3,8 +3,8 @@ servers:
   - url: /api
 info:
   description: >
-    An Orchestration Layer that takes ISL services and packages them in
-    a more targeted way for front-end applications.
+    An Orchestration Layer that takes ISL services and packages them in a more
+    targeted way for front-end applications.
 
     This in turn makes client integration easier and reduces the complexity and size of front-end applications.
 
@@ -624,8 +624,8 @@ paths:
         - account
     put:
       description: >
-        Renew a cancelled subscription or switch subscription to a
-        different plan.
+        Renew a cancelled subscription or switch subscription to a different
+        plan.
 
 
         When renewing a cancelled subscription membership, hit this endpoint with
@@ -1196,8 +1196,8 @@ paths:
   "/account/items/{id}/videos":
     get:
       description: >
-        Get the video files associated with an item given maximum
-        resolution, device type
+        Get the video files associated with an item given maximum resolution,
+        device type
 
         and one or more delivery types.
 
@@ -1318,8 +1318,8 @@ paths:
   "/account/items/{id}/videos-guarded":
     get:
       description: >
-        Get the video files associated with an item given maximum
-        resolution, device type
+        Get the video files associated with an item given maximum resolution,
+        device type
 
         and one or more delivery types.
 
@@ -2051,8 +2051,8 @@ paths:
   /account/profile/continue-watching/list:
     get:
       description: >
-        Returns a list of items which have been watched but not completed
-        under the active
+        Returns a list of items which have been watched but not completed under
+        the active
 
         profile.
 
@@ -2662,8 +2662,7 @@ paths:
   /account/profile/watched:
     delete:
       description: >
-        Remove the watched status of items under the active profile.
-        Passing in
+        Remove the watched status of items under the active profile. Passing in
 
         specific `itemId`s to the `item_ids` query parameter will cause only these
 
@@ -2824,8 +2823,7 @@ paths:
             minimum: 1
             type: integer
         - description: >
-            Filter by whether an item has been fully watched (completed) or
-            not.
+            Filter by whether an item has been fully watched (completed) or not.
 
 
             If `undefined` then both partially and fully watched items are returned.
@@ -3458,8 +3456,8 @@ paths:
         - authorization
     post:
       description: >
-        Request one or more `Account` level authorization tokens each with
-        a chosen scope.
+        Request one or more `Account` level authorization tokens each with a
+        chosen scope.
 
 
         Tokens are used to access restricted service endpoints. These restricted endpoints
@@ -3544,8 +3542,7 @@ paths:
   /authorization/device:
     post:
       description: >
-        Get Catalog tokens for an account using a device authorization
-        code.
+        Get Catalog tokens for an account using a device authorization code.
 
         Where a Profile level token of Catalog scope exists it will also be returned.
 
@@ -3715,8 +3712,8 @@ paths:
   /authorization/profile:
     post:
       description: >
-        Request one or more `Profile` level authorization tokens each with
-        a chosen scope.
+        Request one or more `Profile` level authorization tokens each with a
+        chosen scope.
 
 
         Tokens are used to access restricted service endpoints. These restriced endpoints
@@ -4163,8 +4160,8 @@ paths:
   /config:
     get:
       description: >
-        Get the global configuration for an application. Should be called
-        during app statup.
+        Get the global configuration for an application. Should be called during
+        app statup.
 
 
         This includes things like device and playback rules, classifications,
@@ -4305,8 +4302,8 @@ paths:
   /ee/offers:
     post:
       description: >
-        Returns eligible partner specific offers for the querying partner
-        for an EE MSISDN.
+        Returns eligible partner specific offers for the querying partner for an
+        EE MSISDN.
 
         This call is supposed to be called after we have MSISDN accired.
 
@@ -4925,8 +4922,8 @@ paths:
   "/items/{id}/videos":
     get:
       description: >
-        Get the free / public video files associated with an item given
-        maximum resolution,
+        Get the free / public video files associated with an item given maximum
+        resolution,
 
         device type and one or more delivery types.
 
@@ -5861,8 +5858,8 @@ paths:
           description: The page requested.
         "301":
           description: >
-            Returned if feature flag `cd` is set and item detail is requested
-            of an item that has
+            Returned if feature flag `cd` is set and item detail is requested of
+            an item that has
 
             Custom Destination set to an External URL. The `Location` response header contains the URL.
         "400":
@@ -6762,26 +6759,6 @@ paths:
     x-serviceId: itvSubscription
   /itv/subscription/fullpricerenewal:
     get:
-      "400":
-        description: Bad request.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      "404":
-        description: Not found.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      "415":
-        description: Unsupported Media Type
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      "500":
-        description: Internal server error.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      default:
-        description: Service error.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
       description: Returns full price renewal state and reason for specific user.
       operationId: getFullPriceRenewal
       parameters:
@@ -6793,6 +6770,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/ItvSubscriptionFullPriceRenewal"
           description: full price renewal state and reason for specific user.
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        404:
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        415:
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        default:
+          description: Service error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
       security:
         - accountAuth:
             - Catalog
@@ -6801,26 +6808,6 @@ paths:
     x-serviceId: itvSubscription
   "/itv/subscription/status/{platform}":
     get:
-      "400":
-        description: Bad request.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      "404":
-        description: Not found.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      "415":
-        description: Unsupported Media Type
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      "500":
-        description: Internal server error.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
-      default:
-        description: Service error.
-        schema:
-          $ref: "#/components/schemas/ServiceError"
       description: Returns status of latest payment intent.
       operationId: getSubscriptionStatus
       parameters:
@@ -6838,6 +6825,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/ItvSubscriptionStatusResponse"
           description: Status of the latest payment intent
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        404:
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        415:
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+        default:
+          description: Service error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
       security:
         - accountAuth:
             - Catalog
@@ -7537,8 +7554,8 @@ paths:
           description: The page requested.
         "301":
           description: >
-            Returned if feature flag `cd` is set and item detail is requested
-            of an item that has
+            Returned if feature flag `cd` is set and item detail is requested of
+            an item that has
 
             Custom Destination set to an External URL. The `Location` response header contains the URL.
         "400":
@@ -7878,8 +7895,8 @@ paths:
   /samsung-preview:
     get:
       description: >
-        Returns public preview for Samsung based on the page
-        '/samsung-preview' configured in PresentationManager.
+        Returns public preview for Samsung based on the page '/samsung-preview'
+        configured in PresentationManager.
 
         There is a hard limit of max 40 items to be returned. It splits evenly items count into the page rows, remaining items are added into the first row.
       operationId: getPublicPreview
@@ -7926,8 +7943,7 @@ paths:
   /schedules:
     get:
       description: >
-        Returns schedules for a defined set of channels over a requested
-        period.
+        Returns schedules for a defined set of channels over a requested period.
 
 
         Schedules are requested in hour blocks and returned grouped by the channel
@@ -8107,8 +8123,7 @@ paths:
           schema:
             type: string
         - description: >
-            By default people, movies and tv (shows + programs) will be
-            included
+            By default people, movies and tv (shows + programs) will be included
 
             in the search results.
 
@@ -8218,8 +8233,8 @@ paths:
   /verify-email:
     post:
       description: >
-        When an account is created an email is sent to the email address of
-        the new account.
+        When an account is created an email is sent to the email address of the
+        new account.
 
         This contains a link, which once clicked, verifies the email address of the account is correct.
 
@@ -8378,8 +8393,7 @@ components:
         trailer: 🖥
     Language:
       description: >
-        Language code for the preferred language to be returned in the
-        response.
+        Language code for the preferred language to be returned in the response.
 
 
         Parameter value is case-insensitive and should be
@@ -8433,8 +8447,8 @@ components:
       style: form
     MediaFileFormats:
       description: >
-        The set of media file formats that the device supports, in the
-        order of preference.
+        The set of media file formats that the device supports, in the order of
+        preference.
 
 
         When provided, Rocket API returns only media files in formats specified in this parameter. For each resolution, only the first media file of matching supported format is returned. Files of different resolutions may be of different supported media file formats.
@@ -9155,7 +9169,8 @@ components:
               type: object
             level:
               description: >
-                The level of this classification when compared with its siblings.
+                The level of this classification when compared with its
+                siblings.
 
                 A higher level means a greater restriction.
 
@@ -9848,8 +9863,8 @@ components:
               type: string
             genrePaths:
               description: >
-                An array of genre paths mapping to the values within the `genres`
-                array from ItemSummary.
+                An array of genre paths mapping to the values within the
+                `genres` array from ItemSummary.
               items:
                 type: string
               type: array
@@ -11150,8 +11165,8 @@ components:
     ListData:
       additionalProperties: false
       description: >
-        Extra data to accompany ItemList content. The (single) key in the
-        object is
+        Extra data to accompany ItemList content. The (single) key in the object
+        is
 
         the list name and the data changes depending on the list
       properties:
@@ -12462,8 +12477,8 @@ components:
           type: string
         linkAccounts:
           description: >
-            When a user attempts to sign in using single-sign-on, we may find
-            an account created
+            When a user attempts to sign in using single-sign-on, we may find an
+            account created
 
             previously through the manual sign up flow with the same email. If this is the
 
@@ -12717,3 +12732,4 @@ components:
       in: header
       name: authorization
       type: apiKey
+
