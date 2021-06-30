@@ -58,9 +58,7 @@ paths:
                           createDate: "1451710797"
                           editorsSelection: 0
                           lft: 42
-                          parentID:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          parentID: null
                           recommendationCount: 0
                           replies: []
                           replyCount: 0
@@ -224,9 +222,7 @@ paths:
                           display_name: DD
                           editorsSelection: 0
                           location: Cincinnati, OH
-                          parentID:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          parentID: null
                           recommendationCount: 0
                           replies: []
                           status: approved
@@ -433,23 +429,15 @@ paths:
                           createDate: "1199309173"
                           depth: 1
                           editorsSelection: false
-                          parentID:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
-                          parentUserDisplayName:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          parentID: null
+                          parentUserDisplayName: null
                           permID: "138"
                           picURL: http://graphics8.nytimes.com/images/apps/timespeople/none.png
                           recommendations: 5
-                          recommendedFlag:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          recommendedFlag: null
                           replies: []
                           replyCount: 0
-                          reportAbuseFlag:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          reportAbuseFlag: null
                           sharing: 0
                           status: approved
                           timespeople: 1
@@ -458,12 +446,8 @@ paths:
                           userDisplayName: byakushi
                           userID: 44150303
                           userLocation: US
-                          userTitle:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
-                          userURL:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          userTitle: null
+                          userURL: null
                       depthLimit: 0
                       filter: ""
                       page: 1
@@ -599,10 +583,6 @@ paths:
                     type: string
                 type: object
           description: ""
-          x-examples:
-            application/json:
-              results:
-                callerID: {}
       security:
         - api-key: []
       summary: Comments by URL
@@ -668,9 +648,7 @@ paths:
                           createDate: "1316723787"
                           editorsSelection: false
                           labels: []
-                          parentID:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          parentID: null
                           permid: 10
                           picURL: http://pimage.timespeople.nytimes.com/2364/811/cropped-2364811.jpg?0.8428952772024576
                           recommendations: 11
@@ -678,27 +656,15 @@ paths:
                           replyCount: 0
                           status: approved
                           updateDate: "1316728099"
-                          userDisplayName:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          userDisplayName: null
                           userID: 2364811
-                          userLocation:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          userLocation: null
                           userSubmittedDisplayName: Jim
                           userSubmittedLocation: NYC
-                          userSubmittedTitle:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
-                          userSubmittedURL:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
-                          userTitle:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
-                          userURL:
-                            $ref: "#/paths/~1user-content~1url.json/get/responses/200/examples/application~\
-                              1json/results/callerID"
+                          userSubmittedTitle: null
+                          userSubmittedURL: null
+                          userTitle: null
+                          userURL: null
                       totalCommentsFound: 2
                       totalCommentsReturned: 2
                     status: OK

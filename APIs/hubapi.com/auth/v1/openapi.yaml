@@ -12,6 +12,10 @@ info:
       version: "3.0"
   x-providerName: hubapi.com
   x-serviceName: auth
+tags:
+  - name: Access_Tokens
+  - name: Refresh_Tokens
+  - name: Tokens
 paths:
   "/oauth/v1/access-tokens/{token}":
     get:
@@ -34,6 +38,8 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security: []
+      tags:
+        - Access_Tokens
   "/oauth/v1/refresh-tokens/{token}":
     delete:
       operationId: delete-/oauth/v1/refresh-tokens/{token}_archiveRefreshToken
@@ -49,6 +55,8 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security: []
+      tags:
+        - Refresh_Tokens
     get:
       operationId: get-/oauth/v1/refresh-tokens/{token}_getRefreshToken
       parameters:
@@ -69,6 +77,8 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security: []
+      tags:
+        - Refresh_Tokens
   /oauth/v1/token:
     post:
       operationId: post-/oauth/v1/token_createToken
@@ -99,6 +109,8 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security: []
+      tags:
+        - Tokens
 components:
   responses:
     Error:

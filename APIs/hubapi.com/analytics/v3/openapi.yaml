@@ -13,6 +13,8 @@ info:
       version: "3.0"
   x-providerName: hubapi.com
   x-serviceName: analytics
+tags:
+  - name: Behavioral_Events_Tracking
 paths:
   /events/v3/send:
     post:
@@ -33,7 +35,8 @@ paths:
       security:
         - hapikey: []
       summary: Sends Custom Behavioral Event
-      tags: []
+      tags:
+        - Behavioral_Events_Tracking
 components:
   responses:
     Error:

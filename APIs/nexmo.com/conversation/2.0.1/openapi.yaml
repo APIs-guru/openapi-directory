@@ -50,14 +50,12 @@ paths:
   /conversations:
     get:
       deprecated: true
-      description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
-        class="Vlt-callout__content"> <p><strong>This API endpoint is
-        deprecated. Please use <a
-        href="/api/conversation.v2#get-conversations">/v0.2/conversations</a></strong>.<br
-        />This endpoint will return a maximum of 100 items.</p> </div> </div>
+      description: >-
+        This endpoint is **DEPRECATED**. Please use
+        [/v0.2/conversations](/api/conversation.v2#get-conversations).
 
-        List all conversations associated with your application.  This endpoint required an admin JWT. To find all conversations for the currently logged in user, see [GET /users/:id/conversations](#getuserConversations)
+
+        List all conversations associated with your application. This endpoint required an admin JWT. To find all conversations for the currently logged in user, see [GET /users/:id/conversations](#getuserConversations)
       operationId: listConversations
       parameters:
         - $ref: "#/components/parameters/date_start"
@@ -218,12 +216,8 @@ paths:
   "/conversations/{conversation_id}/events":
     get:
       deprecated: true
-      description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
-        class="Vlt-callout__content"> <p><strong>This API endpoint is
-        deprecated. Please use <a
-        href="/api/conversation.v2#get-events">/v0.2/events</a></strong><br
-        />This endpoint will return a maximum of 100 items.</p> </div> </div>
+      description: This endpoint is **DEPRECATED**. Please use
+        [/v0.2/events](/api/conversation.v2#get-events).
       operationId: getEvents
       responses:
         "200":
@@ -304,12 +298,8 @@ paths:
   "/conversations/{conversation_id}/members":
     get:
       deprecated: true
-      description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
-        class="Vlt-callout__content"> <p><strong>This API endpoint is
-        deprecated. Please use <a
-        href="/api/conversation.v2#get-members">/v0.2/members</a></strong><br
-        />This endpoint will return a maximum of 100 items.</p> </div> </div>
+      description: This endpoint is **DEPRECATED**. Please use
+        [/v0.2/members](/api/conversation.v2#get-members).
       operationId: getMembers
       responses:
         "200":
@@ -579,12 +569,8 @@ paths:
   /users:
     get:
       deprecated: true
-      description: >
-        <div class="Vlt-callout Vlt-callout--warning"> <i></i> <div
-        class="Vlt-callout__content"> <strong>This API endpoint is deprecated.
-        Please use <a href="/api/conversation.v2#get-users">/v0.2/users</a><br
-        />This endpoint will return a maximum of 100 items.</strong> </div>
-        </div>
+      description: This endpoint is **DEPRECATED**. Please use
+        [/v0.2/users](/api/conversation.v2#get-users).
       operationId: getUsers
       responses:
         "200":
