@@ -20878,6 +20878,7 @@ components:
       type: object
       x-is-beta: true
       x-release-status: BETA
+    GANSource: {}
     GetBankAccountByV1IdRequest:
       description: |-
         Request object for fetching a specific `BankAccount`
@@ -21964,6 +21965,8 @@ components:
           name: DIGITAL
       x-is-beta: true
       x-release-status: BETA
+    Info: {}
+    InfoCode: {}
     InlineTypes:
       description: Object types to inline under their respective parent object in
         certain connect v2 responses
@@ -30473,6 +30476,7 @@ components:
       type: object
       x-is-beta: true
       x-release-status: BETA
+    Reason: {}
     RedeemLoyaltyRewardRequest:
       description: A request to redeem a loyalty reward.
       example:
@@ -34935,6 +34939,7 @@ components:
           type: array
       type: object
       x-release-status: PUBLIC
+    Status: {}
     SubmitEvidenceRequest:
       description: Defines the parameters for a `SubmitEvidence` request.
       example:
@@ -36109,6 +36114,7 @@ components:
         - description: ""
           name: CREDIT
       x-release-status: PUBLIC
+    Type: {}
     UnlinkCustomerFromGiftCardRequest:
       description: A request to unlink a customer to a gift card
       example:
@@ -39065,6 +39071,7 @@ components:
         - start_of_day_local_time
       type: object
       x-release-status: PUBLIC
+    invoice_delivery_methodInvoiceDeliveryMethod: {}
   securitySchemes:
     oauth2:
       flows:
