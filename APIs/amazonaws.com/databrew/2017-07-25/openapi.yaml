@@ -3,7 +3,7 @@ info:
   version: '2017-07-25'
   x-release: v4
   title: AWS Glue DataBrew
-  description: 'AWS Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew simplifies data preparation tasks, targeting data issues that are hard to spot and time-consuming to fix. DataBrew empowers users of all technical levels to visualize the data and perform one-click data transformations, with no coding required.'
+  description: 'Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew simplifies data preparation tasks, targeting data issues that are hard to spot and time-consuming to fix. DataBrew empowers users of all technical levels to visualize the data and perform one-click data transformations, with no coding required.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -229,7 +229,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 Format:
-                  description: The file format of a dataset that is created from an S3 file or folder.
+                  description: The file format of a dataset that is created from an Amazon S3 file or folder.
                   type: string
                   enum:
                     - CSV
@@ -253,7 +253,7 @@ paths:
                         - $ref: '#/components/schemas/CsvOptions'
                         - description: Options that define how CSV input is to be interpreted by DataBrew.
                 Input:
-                  description: 'Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+                  description: 'Represents information on how DataBrew can find data, in either the Glue Data Catalog or Amazon S3.'
                   type: object
                   properties:
                     S3InputDefinition:
@@ -263,19 +263,19 @@ paths:
                     DataCatalogInputDefinition:
                       allOf:
                         - $ref: '#/components/schemas/DataCatalogInputDefinition'
-                        - description: The AWS Glue Data Catalog parameters for the data.
+                        - description: The Glue Data Catalog parameters for the data.
                     DatabaseInputDefinition:
                       allOf:
                         - $ref: '#/components/schemas/DatabaseInputDefinition'
                         - description: Connection information for dataset input files stored in a database.
                 PathOptions:
-                  description: Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.
+                  description: Represents a set of options that define how DataBrew selects files for a given Amazon S3 path in a dataset.
                   type: object
                   properties:
                     LastModifiedDateCondition:
                       allOf:
                         - $ref: '#/components/schemas/FilterExpression'
-                        - description: 'If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.'
+                        - description: 'If provided, this structure defines a date range for matching Amazon S3 objects based on their LastModifiedDate attribute in Amazon S3.'
                     FilesLimit:
                       allOf:
                         - $ref: '#/components/schemas/FilesLimit'
@@ -283,7 +283,7 @@ paths:
                     Parameters:
                       allOf:
                         - $ref: '#/components/schemas/PathParametersMap'
-                        - description: A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
+                        - description: A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.
                 Tags:
                   description: Metadata tags to apply to this dataset.
                   type: object
@@ -409,7 +409,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -439,13 +439,13 @@ paths:
                     Bucket:
                       allOf:
                         - $ref: '#/components/schemas/Bucket'
-                        - description: The S3 bucket name.
+                        - description: The Amazon S3 bucket name.
                     Key:
                       allOf:
                         - $ref: '#/components/schemas/Key'
                         - description: The unique name of the object in the bucket.
                 RoleArn:
-                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+                  description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -556,7 +556,7 @@ paths:
                         - $ref: '#/components/schemas/SampleType'
                         - description: The way in which DataBrew obtains rows from a dataset.
                 RoleArn:
-                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+                  description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed for this request.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -745,7 +745,7 @@ paths:
   /recipeJobs:
     post:
       operationId: CreateRecipeJob
-      description: 'Creates a new job to transform input data, using steps defined in an existing AWS Glue DataBrew recipe'
+      description: 'Creates a new job to transform input data, using steps defined in an existing Glue DataBrew recipe'
       responses:
         '200':
           description: Success
@@ -792,7 +792,6 @@ paths:
               type: object
               required:
                 - Name
-                - Outputs
                 - RoleArn
               properties:
                 DatasetName:
@@ -806,7 +805,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -835,6 +834,12 @@ paths:
                   items:
                     $ref: '#/components/schemas/Output'
                   minItems: 1
+                DataCatalogOutputs:
+                  description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataCatalogOutput'
+                  minItems: 1
                 ProjectName:
                   description: 'Either the name of an existing project, or a combination of a recipe and a dataset to associate with the recipe.'
                   type: string
@@ -853,7 +858,7 @@ paths:
                         - $ref: '#/components/schemas/RecipeVersion'
                         - description: 'The identifier for the version for the recipe. '
                 RoleArn:
-                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+                  description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -923,7 +928,7 @@ paths:
                     $ref: '#/components/schemas/JobName'
                   maxItems: 50
                 CronExpression:
-                  description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+                  description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
                   type: string
                   minLength: 1
                   maxLength: 512
@@ -1124,7 +1129,7 @@ paths:
                 - Input
               properties:
                 Format:
-                  description: The file format of a dataset that is created from an S3 file or folder.
+                  description: The file format of a dataset that is created from an Amazon S3 file or folder.
                   type: string
                   enum:
                     - CSV
@@ -1148,7 +1153,7 @@ paths:
                         - $ref: '#/components/schemas/CsvOptions'
                         - description: Options that define how CSV input is to be interpreted by DataBrew.
                 Input:
-                  description: 'Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+                  description: 'Represents information on how DataBrew can find data, in either the Glue Data Catalog or Amazon S3.'
                   type: object
                   properties:
                     S3InputDefinition:
@@ -1158,19 +1163,19 @@ paths:
                     DataCatalogInputDefinition:
                       allOf:
                         - $ref: '#/components/schemas/DataCatalogInputDefinition'
-                        - description: The AWS Glue Data Catalog parameters for the data.
+                        - description: The Glue Data Catalog parameters for the data.
                     DatabaseInputDefinition:
                       allOf:
                         - $ref: '#/components/schemas/DatabaseInputDefinition'
                         - description: Connection information for dataset input files stored in a database.
                 PathOptions:
-                  description: Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.
+                  description: Represents a set of options that define how DataBrew selects files for a given Amazon S3 path in a dataset.
                   type: object
                   properties:
                     LastModifiedDateCondition:
                       allOf:
                         - $ref: '#/components/schemas/FilterExpression'
-                        - description: 'If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.'
+                        - description: 'If provided, this structure defines a date range for matching Amazon S3 objects based on their LastModifiedDate attribute in Amazon S3.'
                     FilesLimit:
                       allOf:
                         - $ref: '#/components/schemas/FilesLimit'
@@ -1178,7 +1183,7 @@ paths:
                     Parameters:
                       allOf:
                         - $ref: '#/components/schemas/PathParametersMap'
-                        - description: A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
+                        - description: A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.
   '/jobs/{name}':
     delete:
       operationId: DeleteJob
@@ -1568,7 +1573,7 @@ paths:
                     $ref: '#/components/schemas/JobName'
                   maxItems: 50
                 CronExpression:
-                  description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+                  description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
                   type: string
                   minLength: 1
                   maxLength: 512
@@ -2437,7 +2442,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -2462,13 +2467,13 @@ paths:
                     Bucket:
                       allOf:
                         - $ref: '#/components/schemas/Bucket'
-                        - description: The S3 bucket name.
+                        - description: The Amazon S3 bucket name.
                     Key:
                       allOf:
                         - $ref: '#/components/schemas/Key'
                         - description: The unique name of the object in the bucket.
                 RoleArn:
-                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+                  description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -2541,7 +2546,6 @@ paths:
             schema:
               type: object
               required:
-                - Outputs
                 - RoleArn
               properties:
                 EncryptionKeyArn:
@@ -2550,7 +2554,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -2574,8 +2578,14 @@ paths:
                   items:
                     $ref: '#/components/schemas/Output'
                   minItems: 1
+                DataCatalogOutputs:
+                  description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataCatalogOutput'
+                  minItems: 1
                 RoleArn:
-                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+                  description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -2679,7 +2689,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MultiLine'
             - description: A value that specifies whether JSON input contains embedded new line characters.
-      description: Represents the JSON-specific options that define how input is to be interpreted by AWS Glue DataBrew.
+      description: Represents the JSON-specific options that define how input is to be interpreted by Glue DataBrew.
     ExcelOptions:
       type: object
       properties:
@@ -2716,7 +2726,7 @@ components:
         Bucket:
           allOf:
             - $ref: '#/components/schemas/Bucket'
-            - description: The S3 bucket name.
+            - description: The Amazon S3 bucket name.
         Key:
           allOf:
             - $ref: '#/components/schemas/Key'
@@ -2731,7 +2741,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogId'
-            - description: The unique identifier of the AWS account that holds the Data Catalog that stores the data.
+            - description: The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the data.
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/DatabaseName'
@@ -2743,8 +2753,8 @@ components:
         TempDirectory:
           allOf:
             - $ref: '#/components/schemas/S3Location'
-            - description: An Amazon location that AWS Glue Data Catalog can use as a temporary directory.
-      description: 'Represents how metadata stored in the AWS Glue Data Catalog is defined in a DataBrew dataset. '
+            - description: Represents an Amazon location where DataBrew can store intermediate results.
+      description: 'Represents how metadata stored in the Glue Data Catalog is defined in a DataBrew dataset. '
     DatabaseInputDefinition:
       type: object
       required:
@@ -2754,7 +2764,7 @@ components:
         GlueConnectionName:
           allOf:
             - $ref: '#/components/schemas/GlueConnectionName'
-            - description: The AWS Glue Connection that stores the connection information for the target database.
+            - description: The Glue Connection that stores the connection information for the target database.
         DatabaseTableName:
           allOf:
             - $ref: '#/components/schemas/DatabaseTableName'
@@ -2776,7 +2786,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValuesMap'
             - description: The map of substitution variable names to their values used in this filter expression.
-      description: Represents a structure for defining parameter conditions.
+      description: 'Represents a structure for defining parameter conditions. Supported conditions are described here: <a href="https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets">Supported conditions for dynamic datasets</a> in the <i>Glue DataBrew Developer Guide</i>.'
     FilesLimit:
       type: object
       required:
@@ -2785,19 +2795,19 @@ components:
         MaxFiles:
           allOf:
             - $ref: '#/components/schemas/MaxFiles'
-            - description: The number of S3 files to select.
+            - description: The number of Amazon S3 files to select.
         OrderedBy:
           allOf:
             - $ref: '#/components/schemas/OrderedBy'
-            - description: A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
+            - description: A criteria to use for Amazon S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
         Order:
           allOf:
             - $ref: '#/components/schemas/Order'
-            - description: 'A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.'
-      description: Represents a limit imposed on number of S3 files that should be selected for a dataset from a connected S3 path.
+            - description: 'A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.'
+      description: Represents a limit imposed on number of Amazon S3 files that should be selected for a dataset from a connected Amazon S3 path.
     PathParametersMap:
       type: object
-      description: A structure that map names of parameters used in the S3 path of a dataset to their definitions. A definition includes parameter type and conditions.
+      description: A structure that map names of parameters used in the Amazon S3 path of a dataset to their definitions. A definition includes parameter type and conditions.
       minProperties: 1
       maxProperties: 10
       additionalProperties:
@@ -2913,6 +2923,37 @@ components:
             - $ref: '#/components/schemas/OutputFormatOptions'
             - description: Represents options that define how DataBrew formats job output files.
       description: Represents options that specify how and where DataBrew writes the output generated by recipe jobs or profile jobs.
+    DataCatalogOutput:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+      properties:
+        CatalogId:
+          allOf:
+            - $ref: '#/components/schemas/CatalogId'
+            - description: The unique identifier of the AWS account that holds the Data Catalog that stores the data.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseName'
+            - description: The name of a database in the Data Catalog.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of a table in the Data Catalog.
+        S3Options:
+          allOf:
+            - $ref: '#/components/schemas/S3TableOutputOptions'
+            - description: Represents options that specify how and where DataBrew writes the S3 output generated by recipe jobs.
+        DatabaseOptions:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseTableOutputOptions'
+            - description: Represents options that specify how and where DataBrew writes the database output generated by recipe jobs.
+        Overwrite:
+          allOf:
+            - $ref: '#/components/schemas/OverwriteOutput'
+            - description: 'A value that, if true, means that any data in the location specified for output is overwritten with new output. Not supported with DatabaseOptions.'
+      description: Represents options that specify how and where DataBrew writes the output generated by recipe jobs.
     RecipeName:
       type: string
       minLength: 1
@@ -3001,7 +3042,7 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: The file format of a dataset that is created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an Amazon S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
@@ -3017,11 +3058,11 @@ components:
         Source:
           allOf:
             - $ref: '#/components/schemas/Source'
-            - description: 'The location of the data for this dataset, Amazon S3 or the AWS Glue Data Catalog.'
+            - description: 'The location of the data for this dataset, Amazon S3 or the Glue Data Catalog.'
         PathOptions:
           allOf:
             - $ref: '#/components/schemas/PathOptions'
-            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
+            - description: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3054,7 +3095,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -3087,6 +3128,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputList'
             - description: One or more artifacts that represent the output from running the job.
+        DataCatalogOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogOutputList'
+            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
         ProjectName:
           allOf:
             - $ref: '#/components/schemas/ProjectName'
@@ -3100,7 +3145,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+            - description: The ARN of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3162,6 +3207,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputList'
             - description: One or more output artifacts from a job run.
+        DataCatalogOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogOutputList'
+            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
         RecipeReference:
           $ref: '#/components/schemas/RecipeReference'
         StartedBy:
@@ -3218,7 +3267,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+            - description: The ARN of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3324,7 +3373,7 @@ components:
         CronExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: 'The date or dates and time or times when the jobs are to be run for the schedule. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+            - description: 'The date or dates and time or times when the jobs are to be run for the schedule. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3470,7 +3519,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParameterMap'
             - description: Contextual parameters for the transformation.
-      description: 'Represents a transformation and associated parameters that are used to apply a change to a DataBrew dataset. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html">Recipe structure</a> and <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html">Recipe actions reference</a>.'
+      description: 'Represents a transformation and associated parameters that are used to apply a change to a DataBrew dataset. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html">Recipe actions reference</a>.'
     ConditionExpressionList:
       type: array
       items:
@@ -3669,7 +3718,7 @@ components:
         Condition:
           allOf:
             - $ref: '#/components/schemas/Condition'
-            - description: 'A specific condition to apply to a recipe action. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure">Recipe structure</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+            - description: 'A specific condition to apply to a recipe action. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure">Recipe structure</a> in the <i>Glue DataBrew Developer Guide</i>.'
         Value:
           allOf:
             - $ref: '#/components/schemas/ConditionValue'
@@ -3718,19 +3767,19 @@ components:
         DataCatalogInputDefinition:
           allOf:
             - $ref: '#/components/schemas/DataCatalogInputDefinition'
-            - description: The AWS Glue Data Catalog parameters for the data.
+            - description: The Glue Data Catalog parameters for the data.
         DatabaseInputDefinition:
           allOf:
             - $ref: '#/components/schemas/DatabaseInputDefinition'
             - description: Connection information for dataset input files stored in a database.
-      description: 'Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+      description: 'Represents information on how DataBrew can find data, in either the Glue Data Catalog or Amazon S3.'
     PathOptions:
       type: object
       properties:
         LastModifiedDateCondition:
           allOf:
             - $ref: '#/components/schemas/FilterExpression'
-            - description: 'If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.'
+            - description: 'If provided, this structure defines a date range for matching Amazon S3 objects based on their LastModifiedDate attribute in Amazon S3.'
         FilesLimit:
           allOf:
             - $ref: '#/components/schemas/FilesLimit'
@@ -3738,8 +3787,8 @@ components:
         Parameters:
           allOf:
             - $ref: '#/components/schemas/PathParametersMap'
-            - description: A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
-      description: Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.
+            - description: A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.
+      description: Represents a set of options that define how DataBrew selects files for a given Amazon S3 path in a dataset.
     TagMap:
       type: object
       minProperties: 1
@@ -3760,7 +3809,7 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: The file format of a dataset that is created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an Amazon S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
@@ -3768,7 +3817,7 @@ components:
         PathOptions:
           allOf:
             - $ref: '#/components/schemas/PathOptions'
-            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
+            - description: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3827,7 +3876,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -3849,7 +3898,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+            - description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3906,7 +3955,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+            - description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed for this request.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3915,6 +3964,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Output'
+      minItems: 1
+    DataCatalogOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataCatalogOutput'
       minItems: 1
     RecipeReference:
       type: object
@@ -3934,7 +3988,6 @@ components:
       type: object
       required:
         - Name
-        - Outputs
         - RoleArn
       title: CreateRecipeJobRequest
       properties:
@@ -3949,7 +4002,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -3970,6 +4023,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputList'
             - description: One or more artifacts that represent the output from running the job.
+        DataCatalogOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogOutputList'
+            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
         ProjectName:
           allOf:
             - $ref: '#/components/schemas/ProjectName'
@@ -3979,7 +4036,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+            - description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4045,7 +4102,7 @@ components:
         CronExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+            - description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4078,6 +4135,32 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    S3TableOutputOptions:
+      type: object
+      required:
+        - Location
+      properties:
+        Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: Represents an Amazon S3 location (bucket name and object key) where DataBrew can write output from a job.
+      description: Represents options that specify how and where DataBrew writes the S3 output generated by recipe jobs.
+    DatabaseTableOutputOptions:
+      type: object
+      required:
+        - TableName
+      properties:
+        TempDirectory:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: Represents an Amazon S3 location (bucket name and object key) where DataBrew can store intermediate results.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseTableName'
+            - description: A prefix for the name of a table DataBrew will create in the database.
+      description: Represents options that specify how and where DataBrew writes the database output generated by recipe jobs.
+    OverwriteOutput:
+      type: boolean
     GlueConnectionName:
       type: string
       minLength: 1
@@ -4106,7 +4189,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The ID of the AWS account that owns the dataset.
+            - description: The ID of the Amazon Web Services account that owns the dataset.
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/CreatedBy'
@@ -4122,7 +4205,7 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: The file format of a dataset that is created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an Amazon S3 file or folder.
         FormatOptions:
           allOf:
             - $ref: '#/components/schemas/FormatOptions'
@@ -4130,7 +4213,7 @@ components:
         Input:
           allOf:
             - $ref: '#/components/schemas/Input'
-            - description: 'Information on how DataBrew can find the dataset, in either the AWS Glue Data Catalog or Amazon S3.'
+            - description: 'Information on how DataBrew can find the dataset, in either the Glue Data Catalog or Amazon S3.'
         LastModifiedDate:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -4142,11 +4225,11 @@ components:
         Source:
           allOf:
             - $ref: '#/components/schemas/Source'
-            - description: 'The location of the data for the dataset, either Amazon S3 or the AWS Glue Data Catalog.'
+            - description: 'The location of the data for the dataset, either Amazon S3 or the Glue Data Catalog.'
         PathOptions:
           allOf:
             - $ref: '#/components/schemas/PathOptions'
-            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
+            - description: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4178,16 +4261,16 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/DatetimeFormat'
-            - description: 'Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all litera a-z or A-Z character should be escaped with single quotes. E.g. "MM.dd.yyyy-''at''-HH:mm".'
+            - description: 'Required option, that defines the datetime format used for a date parameter in the Amazon S3 path. Should use only supported datetime specifiers and separation characters, all literal a-z or A-Z characters should be escaped with single quotes. E.g. "MM.dd.yyyy-''at''-HH:mm".'
         TimezoneOffset:
           allOf:
             - $ref: '#/components/schemas/TimezoneOffset'
-            - description: 'Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn''t be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.'
+            - description: 'Optional value for a timezone offset of the datetime parameter value in the Amazon S3 path. Shouldn''t be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.'
         LocaleCode:
           allOf:
             - $ref: '#/components/schemas/LocaleCode'
             - description: 'Optional value for a non-US locale code, needed for correct interpretation of some date formats.'
-      description: Represents additional options for correct interpretation of datetime parameters used in the S3 path of a dataset.
+      description: Represents additional options for correct interpretation of datetime parameters used in the Amazon S3 path of a dataset.
     DatasetParameter:
       type: object
       required:
@@ -4197,7 +4280,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/PathParameterName'
-            - description: The name of the parameter that is used in the dataset's S3 path.
+            - description: The name of the parameter that is used in the dataset's Amazon S3 path.
         Type:
           allOf:
             - $ref: '#/components/schemas/ParameterType'
@@ -4209,12 +4292,12 @@ components:
         CreateColumn:
           allOf:
             - $ref: '#/components/schemas/CreateColumn'
-            - description: Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.
+            - description: Optional boolean value that defines whether the captured value of this parameter should be used to create a new column in a dataset.
         Filter:
           allOf:
             - $ref: '#/components/schemas/FilterExpression'
             - description: The optional filter expression structure to apply additional matching criteria to the parameter.
-      description: Represents a dataset paramater that defines type and conditions for a parameter in the S3 path of the dataset.
+      description: Represents a dataset paramater that defines type and conditions for a parameter in the Amazon S3 path of the dataset.
     DatetimeFormat:
       type: string
       minLength: 2
@@ -4363,7 +4446,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The ID of the AWS account that owns the job.
+            - description: The ID of the Amazon Web Services account that owns the job.
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/CreatedBy'
@@ -4383,7 +4466,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -4416,6 +4499,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputList'
             - description: One or more artifacts that represent output from running the job.
+        DataCatalogOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogOutputList'
+            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
         ProjectName:
           allOf:
             - $ref: '#/components/schemas/ProjectName'
@@ -4496,6 +4583,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputList'
             - description: One or more output artifacts from a job run.
+        DataCatalogOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogOutputList'
+            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
         RecipeReference:
           allOf:
             - $ref: '#/components/schemas/RecipeReference'
@@ -4586,8 +4677,6 @@ components:
         - AVRO
         - ORC
         - XML
-    OverwriteOutput:
-      type: boolean
     OutputFormatOptions:
       type: object
       properties:
@@ -4620,7 +4709,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The ID of the AWS account that owns the project.
+            - description: The ID of the Amazon Web Services account that owns the project.
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -4768,7 +4857,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The ID of the AWS account that owns the schedule.
+            - description: The ID of the Amazon Web Services account that owns the schedule.
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/CreatedBy'
@@ -4796,7 +4885,7 @@ components:
         CronExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: 'The dates and times when the job is to run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+            - description: 'The dates and times when the job is to run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4900,7 +4989,7 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: The file format of a dataset that is created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an Amazon S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
@@ -4908,7 +4997,7 @@ components:
         PathOptions:
           allOf:
             - $ref: '#/components/schemas/PathOptions'
-            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
+            - description: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
     UpdateProfileJobRequest:
       type: object
       required:
@@ -4923,7 +5012,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         LogSubscription:
           allOf:
             - $ref: '#/components/schemas/LogSubscription'
@@ -4941,7 +5030,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+            - description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -4965,7 +5054,6 @@ components:
     UpdateRecipeJobRequest:
       type: object
       required:
-        - Outputs
         - RoleArn
       title: UpdateRecipeJobRequest
       properties:
@@ -4976,7 +5064,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         LogSubscription:
           allOf:
             - $ref: '#/components/schemas/LogSubscription'
@@ -4993,10 +5081,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputList'
             - description: 'One or more artifacts that represent the output from running the job. '
+        DataCatalogOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogOutputList'
+            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+            - description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -5026,7 +5118,7 @@ components:
         CronExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+            - description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
     ValueReference:
       type: string
       pattern: '^:[A-Za-z0-9_]+$'

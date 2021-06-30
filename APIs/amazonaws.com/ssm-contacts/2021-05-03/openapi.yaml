@@ -1387,6 +1387,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -1657,6 +1663,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -1783,6 +1795,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -2835,7 +2853,7 @@ components:
       maxLength: 1011
     ChannelName:
       type: string
-      pattern: '^[a-zA-Z0-9_\-\s\.]*$'
+      pattern: '^[\p{L}\p{Z}\p{N}_.\-]*$'
       minLength: 1
       maxLength: 255
     RetryIntervalInMinutes:
@@ -2869,8 +2887,8 @@ components:
       maxLength: 255
     ContactName:
       type: string
-      pattern: '^[a-zA-Z0-9_\-\s\.]*$'
-      minLength: 1
+      pattern: '^[\p{L}\p{Z}\p{N}_.\-]*$'
+      minLength: 0
       maxLength: 255
     ContactType:
       type: string
@@ -3200,12 +3218,12 @@ components:
       type: string
       pattern: '^[\\\/a-zA-Z0-9_+=\-]*$'
       minLength: 1
-      maxLength: 255
+      maxLength: 128
     TagValue:
       type: string
       pattern: '^[\p{L}\p{Z}\p{N}_.:\/=+\-@]*$'
       minLength: 1
-      maxLength: 255
+      maxLength: 256
     Tag:
       type: object
       properties:
