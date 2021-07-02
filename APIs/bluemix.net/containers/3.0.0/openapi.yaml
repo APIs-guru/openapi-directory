@@ -1,8 +1,6 @@
-swagger: "2.0"
-schemes:
-  - https
-host: containers-api.ng.bluemix.net
-basePath: /v3
+openapi: 3.0.0
+servers:
+  - url: https://containers-api.ng.bluemix.net/v3
 info:
   description: >-
     Containers are virtual software objects that include all the
@@ -46,18 +44,14 @@ info:
   x-logo:
     url: https://twitter.com/IBMCloud/profile_image?size=original
   x-origin:
-    - format: swagger
+    - format: openapi
       url: http://ccsapi-doc.mybluemix.net/swagger.json
-      version: "2.0"
+      version: "3.0"
   x-providerName: bluemix.net
   x-serviceName: containers
-produces:
-  - application/json
 paths:
   /build:
     post:
-      consumes:
-        - application/tar
       description: >-
         This API builds a new container image from a Dockerfile that is
         stored on your local machine and pushes the image to the private Bluemix
@@ -70,7 +64,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -78,7 +73,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: "Tag the image with the full path to your private Bluemix registry
             in the following format:
             `t=registry.ng.bluemix.net/<namespace>/<image_name>:<tag>`. This
@@ -87,7 +83,8 @@ paths:
           in: query
           name: t
           required: true
-          type: string
+          schema:
+            type: string
         - description: You can choose whether or not to show the verbose build output to
             review every step during the container image build. If you set the
             query parameter to `q=false`, `q=False`, or `q=0`, the verbose build
@@ -96,7 +93,8 @@ paths:
           in: query
           name: q
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - description: If you set the query parameter to `nocache=true`, `nocache=True`,
             or `nocache=1`, the cache will not be used to build your image. To
             use the cache, enter `nocache=false`, `nocache=False`, or
@@ -104,7 +102,8 @@ paths:
           in: query
           name: nocache
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - description: If set to pull=true, pull=True, or pull=1, then a newer version of
             the image is always attempted to be pulled even though an older
             version of the image exists locally. If set to pull=false,
@@ -113,15 +112,19 @@ paths:
           in: query
           name: pull
           required: false
-          type: boolean
-        - description: Must be the content of a tar archive compressed with gzip. The
-            archive must include a file called 'Dockerfile' at its root. It may
-            include any number of other files which will be accessible in the
-            build context.
-          in: body
-          name: file
-          required: true
-          type: file
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/tar:
+            schema:
+              format: binary
+              type: string
+        description: Must be the content of a tar archive compressed with gzip. The
+          archive must include a file called 'Dockerfile' at its root. It may
+          include any number of other files which will be accessible in the
+          build context.
+        required: true
       responses:
         "200":
           description: OK. The container image was built successfully and pushed to your
@@ -147,8 +150,6 @@ paths:
         - Images
   /containers/create:
     post:
-      consumes:
-        - application/json
       description: >-
         This endpoint creates and starts a single container in your space
         based on the Docker image that is specified in the Image field of the
@@ -170,7 +171,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -178,13 +180,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
-        - description: Summary of input parameter to create a container in IBM Containers.
-          in: body
-          name: Param
-          required: true
           schema:
-            $ref: "#/definitions/CreateContainer"
+            type: string
         - description: Choose a name for your container. The characters in the name can
             include uppercase letters, lowercase letters, numbers, periods (.),
             underscores (_), or hyphens (-), but the name must start with a
@@ -192,13 +189,23 @@ paths:
           in: query
           name: name
           required: false
-          type: string
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateContainer"
+        description: Summary of input parameter to create a container in IBM Containers.
+        required: true
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainerId"
           description: OK. The creation of a single container with the specified
             attributes has been initiated.
-          schema:
-            $ref: "#/definitions/ContainerId"
         "400":
           description: Bad request. The data that you entered in the request body are
             either incomplete or in the wrong format. Be sure to include at
@@ -234,7 +241,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -242,7 +250,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: If this option is set to `all=1`, `all=True`, or `all=true`, all
             public IP addresses that are allocated to a space are returned. If
             this option is set to `all=0`, `all=False`, or `all=false`, only
@@ -252,15 +261,18 @@ paths:
           in: query
           name: all
           required: false
-          type: boolean
+          schema:
+            type: boolean
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/FloatingIP"
+                type: array
           description: OK. A list of public IP addresses that are allocated to the space
             is returned.
-          schema:
-            items:
-              $ref: "#/definitions/FloatingIP"
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -291,7 +303,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -299,13 +312,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                description: New public IP address that is allocated to your space.
+                type: string
           description: OK. A new public IP address is allocated to your space.
-          schema:
-            description: New public IP address that is allocated to your space.
-            type: string
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -345,7 +361,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -353,7 +370,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The public IP address that you want to release. Run `cf ic ip list`
             or call the `GET /containers/floating-ips?all=true` endpoint to
             review all public IP address that are allocated to your space. After
@@ -362,7 +380,8 @@ paths:
           in: path
           name: ip
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The public IP address has been released from your space.
@@ -397,7 +416,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -405,14 +425,17 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ContainersGroupsGetListItem"
+                type: array
           description: OK. A list of container groups is returned.
-          schema:
-            items:
-              $ref: "#/definitions/ContainersGroupsGetListItem"
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -465,7 +488,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -473,19 +497,22 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
-        - description: Attributes that are required to create a container group in your
-            space.
-          in: body
-          name: RequiredAttributes
-          required: true
           schema:
-            $ref: "#/definitions/ContainersGroupsPostRequiredAttributes"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContainersGroupsPostRequiredAttributes"
+        description: Attributes that are required to create a container group in your space.
+        required: true
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersGroupsPostCreatedInfo"
           description: Created. Your container group was successfully created.
-          schema:
-            $ref: "#/definitions/ContainersGroupsPostCreatedInfo"
         "400":
           description: Bad request. The information that you entered in the request body
             are either incomplete or in the wrong format to process your
@@ -520,7 +547,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -528,14 +556,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or unique ID of the container group that you want to
             delete. Run `cf ic group list` or call the `GET /containers/groups`
             endpoint to retrieve a list of container groups in your space.
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: "If you want to force the deletion of a container group that has
             running container instances, use the force option. This parameter
             needs to be set to either true or false. If set to `force=true`,
@@ -546,7 +576,8 @@ paths:
           in: query
           name: force
           required: false
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: OK. No content. The deletion of the container group was
@@ -585,7 +616,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -593,20 +625,24 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or unique ID of the container group that you want to
             inspect. Run `cf ic group list` or call the `GET /containers/groups`
             endpoint to retrieve a list of container groups in your space.
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersGroupsNameOrIdGetDetails"
           description: OK. A detailed list of information about a container group is
             retrieved.
-          schema:
-            $ref: "#/definitions/ContainersGroupsNameOrIdGetDetails"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -643,7 +679,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -651,18 +688,21 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or unique ID of the container group that you want to update.
           in: path
           name: name_or_id
           required: true
-          type: string
-        - description: The container group parameter that you want to update.
-          in: body
-          name: Updates
-          required: true
           schema:
-            $ref: "#/definitions/ContainersGroupsNameOrIdPatchUpdatedInfo"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContainersGroupsNameOrIdPatchUpdatedInfo"
+        description: The container group parameter that you want to update.
+        required: true
       responses:
         "204":
           description: No content. The update has successfully been processed.
@@ -704,7 +744,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -712,7 +753,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or unique ID of the container group to which you want to
             map a public route. Run `cf ic group list` or call the `GET
             /containers/groups` endpoint to retrieve a list of container groups
@@ -720,20 +762,24 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
-        - description: The public route that is mapped to the container group. A public
-            route consists of the host name and domain.
-          in: body
-          name: Route
-          required: true
           schema:
-            $ref: "#/definitions/Route"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Route"
+        description: The public route that is mapped to the container group. A public
+          route consists of the host name and domain.
+        required: true
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersGroupsNameOrIdMaproutePostInfo"
           description: OK. The route that you specified was successfully mapped to the
             container group.
-          schema:
-            $ref: "#/definitions/ContainersGroupsNameOrIdMaproutePostInfo"
         "400":
           description: Bad request. The information that you entered in the body request
             is either incomplete or in the wrong format. To map a route enter
@@ -776,7 +822,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -784,26 +831,31 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or unique ID (UUID) of the container group that you want
             to inspect.
           in: path
           name: name_or_id
           required: true
-          type: string
-        - description: The public route that is unmapped from the container group. A
-            public route consists of the host name and domain.
-          in: body
-          name: Route
-          required: true
           schema:
-            $ref: "#/definitions/Route"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Route"
+        description: The public route that is unmapped from the container group. A
+          public route consists of the host name and domain.
+        required: true
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersGroupsNameOrIdMaproutePostInfo"
           description: OK. The route that you specified was successfully unmapped from the
             container group.
-          schema:
-            $ref: "#/definitions/ContainersGroupsNameOrIdMaproutePostInfo"
         "400":
           description: Bad request. The information that you entered in the body of your
             request is either incomplete or in the wrong format. To unmap a
@@ -839,7 +891,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -847,7 +900,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: "By default, the `GET /containers/json` endpoint returns a list of
             all single containers in a space that are in a running state. To
             request a list of all containers independent of their current state,
@@ -856,7 +910,8 @@ paths:
           in: query
           name: all
           required: false
-          type: string
+          schema:
+            type: string
         - description: You can filter your containers by any environment variable key or
             value that is listed in the `Env` section of your CLI/ API response
             when you run the `cf ic inspect <container>` command, or call the
@@ -868,15 +923,18 @@ paths:
           in: query
           name: filters
           required: false
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Container"
+                type: array
           description: OK. A list of single containers that match the search criteria is
             returned.
-          schema:
-            items:
-              $ref: "#/definitions/Container"
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -900,7 +958,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: "The unique ID of your organization space where you want to create
             or work with your containers. To retrieve your space ID, run `cf
             space <space_name> --guid` and replace `<space_name>` with the name
@@ -908,19 +967,22 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  created_date:
+                    description: Timestamp when the message was created.
+                    type: string
+                  message:
+                    description: Important information for the IBM Containers user.
+                    type: string
+                type: object
           description: OK. A list of messages is returned.
-          schema:
-            properties:
-              created_date:
-                description: Timestamp when the message was created.
-                type: string
-              message:
-                description: Important information for the IBM Containers user.
-                type: string
-            type: object
         "500":
           description: Internal Server Error. The IBM Containers service is currently
             unavailable. Your request could not be processed. Please wait a few
@@ -938,7 +1000,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -946,13 +1009,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersQuotaInfo"
           description: "OK. The current quota that is assigned to the organization and
             space is returned. "
-          schema:
-            $ref: "#/definitions/ContainersQuotaInfo"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -979,7 +1045,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -987,13 +1054,15 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
-        - description: The space quota details that you want to update.
-          in: body
-          name: ContainersQuotaList
-          required: true
           schema:
-            $ref: "#/definitions/ContainersQuotaList"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContainersQuotaList"
+        description: The space quota details that you want to update.
+        required: true
       responses:
         "204":
           description: "No content. The request to update the organization and/ or space
@@ -1032,7 +1101,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1040,13 +1110,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersUsageInfo"
           description: "OK. A list of available container sizes as well as the quota limit
             and usage for a space is returned. "
-          schema:
-            $ref: "#/definitions/ContainersUsageInfo"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1068,9 +1141,11 @@ paths:
         method does not require authentication.
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainersVersionGetInfo"
           description: OK. A list of the current API and microservices versions is returend.
-          schema:
-            $ref: "#/definitions/ContainersVersionGetInfo"
         "500":
           description: Internal Server Error. The IBM Containers service is currently
             unavailable. Your request could not be processed. Please wait a few
@@ -1081,8 +1156,6 @@ paths:
         - API info
   "/containers/{id}/status":
     get:
-      consumes:
-        - application/json
       description: This endpoint returns the current state of a container. This state
         can either be a transient state, such as BUILDING and NETWORKING, or a
         non-transient state, such as RUNNING, SHUTDOWN, CRASHED, or SUSPENDED.
@@ -1092,7 +1165,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1100,19 +1174,23 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier that represents the container. Run `cf ic
             ps`, or call the `GET /containers/json` endpoint to retrieve the ID
             of the container.
           in: path
           name: id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getContainerStatus"
           description: OK. The current status of a container is returned.
-          schema:
-            $ref: "#/definitions/getContainerStatus"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1143,7 +1221,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1151,7 +1230,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             delete. Run `cf ic ps -a` or call the `GET
             /containers/json?all=true` endpoint to review all containers in your
@@ -1159,7 +1239,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: Use the `force` query parameter if you want to delete the container
             independent of their current state. The container does not need to
             be stopped first. To force the deletion of a container, enter
@@ -1170,7 +1251,8 @@ paths:
           in: query
           name: force
           required: false
-          type: boolean
+          schema:
+            type: boolean
       responses:
         "204":
           description: No Content. The deletion of your container has been initiated.
@@ -1205,7 +1287,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1213,7 +1296,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or ID of the container that you want to bind to the public
             IP address. Run the `cf ic ps` command or call the `GET
             /containers/json` endpoint to retrieve a list of containers in your
@@ -1221,7 +1305,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: >-
             The public IP address that you want to bind to your container. 
 
@@ -1230,7 +1315,8 @@ paths:
           in: path
           name: ip
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. Your request to bind a public IP address to a container
@@ -1277,7 +1363,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1285,7 +1372,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: "The name or ID of the container that you want to bind to the
             public IP address. Run the `cf ic ps` command or call the `GET
             /containers/json` endpoint to retrieve a list of containers in your
@@ -1293,7 +1381,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: >-
             The public IP address that you want to unbind from your container. 
 
@@ -1301,7 +1390,8 @@ paths:
           in: path
           name: ip
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. Your request to unbind a public IP address from a
@@ -1340,7 +1430,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1348,20 +1439,24 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name or ID of the container that you want to inspect. Run the
             `cf ic ps` command or call the `GET /containers/json` endpoint to
             retrieve a list of containers in your space.
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContainerInfo"
           description: "OK. A list with detailed information about the container is
             returned. "
-          schema:
-            $ref: "#/definitions/ContainerInfo"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1391,7 +1486,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1399,7 +1495,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             pause. Run `cf ic ps` or call the `GET /containers/json` endpoint to
             review all containers in your space that are currently in a running
@@ -1407,7 +1504,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The pausing of all processes inside the container has
@@ -1441,7 +1539,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1449,7 +1548,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             rename. Run `cf ic ps -a` or call the `GET
             /containers/json?all=true` endpoint to review all containers in your
@@ -1457,7 +1557,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The new name for the container. The characters in the name can
             include uppercase letters, lowercase letters, numbers, periods (.),
             underscores (_), or hyphens (-), but the name must start with a
@@ -1465,7 +1566,8 @@ paths:
           in: query
           name: name
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The request to rename the container has been initiated.
@@ -1500,7 +1602,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1508,21 +1611,24 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             restart. Run `cf ic ps` or call the `GET /containers/json` endpoint
             to review all containers in your space.
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The number of seconds to wait before the container is restarted.
             For example, if you want a container to restart after 10 seconds,
             enter `t=10`.
           in: query
           name: t
           required: false
-          type: integer
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content. The restart of the container has been initiated.
@@ -1559,7 +1665,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1567,7 +1674,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             start. Run `cf ic ps -a` or call the `GET /containers/json?all=true`
             endpoint to review the containers in your space that are currently
@@ -1575,7 +1683,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The start of the container has been initiated.
@@ -1612,7 +1721,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1620,7 +1730,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             stop. Run `cf ic ps` or call the `GET /containers/json` endpoint to
             review the containers in your space that are currently in a running
@@ -1628,14 +1739,16 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The number of seconds to wait before the container is stopped. For
             example, if you want a container to stop after 10 seconds, enter
             `t=10`.
           in: query
           name: t
           required: false
-          type: integer
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content. The stop of the container has been initiated.
@@ -1673,7 +1786,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1681,7 +1795,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier or name of the container that you want to
             unpause. Run `cf ic ps -a` or call the `GET
             /containers/json?all=true` endpoint to review all containers in your
@@ -1689,7 +1804,8 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The unpausing of all processes inside the container has
@@ -1723,7 +1839,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1731,13 +1848,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImageInfo"
           description: OK. A list of all available Docker images in the private Bluemix
             registry is returned.
-          schema:
-            $ref: "#/definitions/ImageInfo"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1764,7 +1884,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1772,14 +1893,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique identifier representing a Docker image. Run `cf ic
             images`, or call the `GET /images/json` endpoint to review the
             Docker images that are available in your private Bluemix registry.
           in: path
           name: id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The image was successfully removed from your private
@@ -1815,7 +1938,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1823,7 +1947,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: "The full private Bluemix registry path to your image or the unique
             ID of the image that you want to inspect. Run `cf ic images` or call
             the `GET /images/json` endpoint to review the images in your private
@@ -1831,12 +1956,15 @@ paths:
           in: path
           name: name_or_id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImageDetail"
           description: OK. A list of details about the container image is returned.
-          schema:
-            $ref: "#/definitions/ImageDetail"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1866,7 +1994,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1874,12 +2003,15 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
           description: OK. The namespace of the organization is returned.
-          schema:
-            $ref: "#/definitions/Namespace"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1925,7 +2057,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -1933,20 +2066,24 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the namespace that you would like to use for your
             organization and for which you would like to check availability in
             Bluemix.
           in: path
           name: namespace
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
           description: OK. The namespace that you chose is already used in Bluemix. Choose
             another namespace and re-run the API call.
-          schema:
-            $ref: "#/definitions/Namespace"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -1993,7 +2130,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2001,7 +2139,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: "The name for your namespace to create your private Docker images
             registry in Bluemix. You cannot change the name afterward. The
             namespace can be 4-30 characters long, must start with at least one
@@ -2013,12 +2152,15 @@ paths:
           in: path
           name: namespace
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
           description: OK. The namespace is successfully set for your organization.
-          schema:
-            $ref: "#/definitions/Namespace"
         "400":
           description: Bad request. The specified namespace does not meet the Bluemix
             namespace requirements. The namespace can be 4-30 characters long,
@@ -2061,7 +2203,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2069,12 +2212,15 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Certificate"
           description: Ok. A list of certificates is returned
-          schema:
-            $ref: "#/definitions/Certificate"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2100,7 +2246,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2108,12 +2255,15 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CertificateRefresh"
           description: Ok. A list of updated certificates is returned.
-          schema:
-            $ref: "#/definitions/CertificateRefresh"
         "401":
           description: Authentication failed. The Access Token is invalid or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2147,7 +2297,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2155,14 +2306,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the volume. The name must be unique for a space and can
             contain uppercase letters, lowercase letters, numbers, underscores
             (_), and hyphens (-).
           in: query
           name: name
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the file share that the volume is hosted on. File
             shares can have different storage sizes and IOPS based on the
             required workload. If this field is left blank, the volume is hosted
@@ -2170,12 +2323,15 @@ paths:
           in: query
           name: fsName
           required: false
-          type: string
+          schema:
+            type: string
       responses:
         "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volume"
           description: Created. Your volume was successfully created in your space.
-          schema:
-            $ref: "#/definitions/Volume"
         "400":
           description: Bad request. Your request could not be processed due to missing
             parameter. Make sure to enter a name for your volume as part of your
@@ -2214,7 +2370,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2222,13 +2379,15 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
-        - description: The input parameter to create a new file share in a space.
-          in: body
-          name: FileshareParam
-          required: true
           schema:
-            $ref: "#/definitions/FileshareParam"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileshareParam"
+        description: The input parameter to create a new file share in a space.
+        required: true
       responses:
         "202":
           description: "Accepted. A new fileshare has been created. "
@@ -2268,7 +2427,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2276,14 +2436,17 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: integer
+                type: array
           description: OK. A list of available file share sizes in gigabyte is returned.
-          schema:
-            items:
-              type: integer
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2309,7 +2472,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2317,14 +2481,17 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Fileshare"
+                type: array
           description: OK. A list of available file shares is returned.
-          schema:
-            items:
-              $ref: "#/definitions/Fileshare"
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2354,7 +2521,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2362,14 +2530,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the file share that you want to delete. Run `cf ic
             volume fs-list` or call the `GET /volumes/fs/json` API endpoint to
             retrieve a list of available file shares in your space.
           in: path
           name: name
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: No Content. The file share was successfully deleted.
@@ -2408,7 +2578,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2416,21 +2587,25 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the file share that you want to inspect. Run `cf ic
             volume fs-list` or call the `GET /volumes/fs/json` endpoint to
             retrieve a list of available file shares in your space.
           in: path
           name: name
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GetFileshareDetails"
+                type: array
           description: OK. Detailed information about a file share is returned.
-          schema:
-            items:
-              $ref: "#/definitions/GetFileshareDetails"
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2461,7 +2636,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2469,14 +2645,17 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Volume"
+                type: array
           description: OK. A list containing all volumes of a given space is returned.
-          schema:
-            items:
-              $ref: "#/definitions/Volume"
-            type: array
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2503,7 +2682,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2511,14 +2691,16 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the volume that you want to delete. Run `cf ic volume
             list` or call the `GET /volumes/json` endpoint to retrieve a list of
             all volumes that are available in your space.
           in: path
           name: name
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "204":
           description: "No Content. Your request to delete the volume has successfully
@@ -2555,7 +2737,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2563,26 +2746,31 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the volume that you want to share with another space in
             your organization.
           in: path
           name: name
           required: true
-          type: string
-        - description: Input parameter that are required to provision an existing volume
-            to a new space and to unprovision it from a space.
-          in: body
-          name: volumeParam
-          required: true
           schema:
-            $ref: "#/definitions/UpdateVolume"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateVolume"
+        description: Input parameter that are required to provision an existing volume
+          to a new space and to unprovision it from a space.
+        required: true
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volume"
           description: Ok. A list with detailed information about the volume is returned.
             Review the changes in the `otherSpaceVisibility` property.
-          schema:
-            $ref: "#/definitions/Volume"
         "400":
           description: "Bad request. The data that you entered in the request body are
             either incomplete or in the wrong format. Be sure to include either
@@ -2618,7 +2806,8 @@ paths:
           in: header
           name: X-Auth-Token
           required: true
-          type: string
+          schema:
+            type: string
         - description: The unique ID of your organization space where you want to create
             or work with your containers. Run `cf space <space_name> --guid`,
             where `<space_name>` is the name of your space, to retrieve your
@@ -2626,7 +2815,8 @@ paths:
           in: header
           name: X-Auth-Project-Id
           required: true
-          type: string
+          schema:
+            type: string
         - description: The name of the volume, for which you want to retrieve detailed
             information. Run `cf ic volume list` or call the `GET /volumes/json`
             endpoint to retrieve a list of all volumes that are available in
@@ -2634,12 +2824,15 @@ paths:
           in: path
           name: name
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volume"
           description: "Ok. A list with detailed information about the volume is returned. "
-          schema:
-            $ref: "#/definitions/Volume"
         "401":
           description: Authentication failed. The Access Token is invalid, or the Space ID
             that you entered could not be found. Run `cf oauth-token` to
@@ -2659,1430 +2852,1436 @@ paths:
       summary: "Retrieve detailed information about a volume. "
       tags:
         - Volumes
-definitions:
-  Binding:
-    properties:
-      ContainerId:
-        description: Unique identifier representing a container
-        type: string
-  Certificate:
-    properties:
-      ca_cert:
-        description: Certificate Authority (CA) certificate including the CA public key.
-        type: string
-      server_cert:
-        description: Server certificate including the server's public key.
-        type: string
-      user_cert:
-        description: User certificate including the user's public key.
-        type: string
-      user_key:
-        description: User's private key.
-        type: string
-    required:
-      - ca_cert
-      - server_cert
-      - user_cert
-      - user_key
-    type: object
-  CertificateRefresh:
-    properties:
-      ca_cert:
-        description: Certificate Authority (CA) certificate including the CA public key.
-        type: string
-      reg_host:
-        description: Full URL to the IBM Bluemix registry.
-        type: string
-      server_cert:
-        description: Server certificate including the server's public key.
-        type: string
-      user_cert:
-        description: User certificate including the user's public key.
-        type: string
-      user_key:
-        description: User's private key.
-        type: string
-  Container:
-    properties:
-      Command:
-        description: The command and arguments that were passed to the container during
-          container creation. This command is executed when the container is
-          started.
-        type: string
-      ContainerState:
-        description: "The current status of the container. The status can either be a
-          transient state, such as BUILDING, and NETWORKING or a non-transient
-          state, such as RUNNING, SHUTDOWN, CRASHED, PAUSED, or SUSPENDED. "
-        type: string
-      Created:
-        description: The time when the container was created.
-        format: float
-        type: number
-      Env:
-        description: A list of all the environment variables of the container.
-        items:
+components:
+  schemas:
+    Binding:
+      properties:
+        ContainerId:
+          description: Unique identifier representing a container
           type: string
-        type: array
-      Group:
-        $ref: "#/definitions/Group"
-      Id:
-        description: Unique identifier representing a container.
-        type: string
-      Image:
-        description: Full path to the container image in your private Bluemix registry.
-        type: string
-      ImageId:
-        description: Unique identifier representing a container image.
-        type: string
-      Labels:
-        description: List of custom metadata that was added to the container. Labels
-          serve a wide range of uses, such as adding notes to a container. Every
-          label is a key/ value pair.
-        type: object
-      Memory:
-        description: The amount of container memory in Megabyte that was assigned to
-          your container. The memory is counted towards the quota that is
-          allocated for the space.
-        format: int32
-        type: integer
-      Name:
-        description: "The name of the container. "
-        type: string
-      Names:
-        description: The name of the container.
-        items:
+    Certificate:
+      properties:
+        ca_cert:
+          description: Certificate Authority (CA) certificate including the CA public key.
           type: string
-        type: array
-      NetworkSettings:
-        $ref: "#/definitions/NetworkSetting"
-      Ports:
-        $ref: "#/definitions/Port"
-      SizeRootFs:
-        description: "Total size of all the files in the container, in bytes. "
-        type: integer
-      SizeRw:
-        description: The size of the files which have been created or changed, if you
-          compare the container to its base image. Just after creation, this
-          should be zero. Ass you modify (or create) files, this size will
-          increase.
-        type: integer
-      Started:
-        description: Time when the container was started.
-        format: float
-        type: number
-      Status:
-        description: The current status of the container. The status can either be a
-          transient state, such as BUILDING, and NETWORKING or a non-transient
-          state, such as RUNNING, SHUTDOWN, CRASHED, PAUSED, or SUSPENDED
-        type: string
-      VCPU:
-        description: Number of virtual CPUs that are assigned to the container.
-        type: integer
-  ContainerConfig:
-    properties:
-      ArgsEscaped:
-        description: ""
-        type: boolean
-      AttachStderr:
-        description: Attaches the container to stderr.
-        type: string
-      AttachStdin:
-        description: Attaches the container to sdtin.
-        type: string
-      AttachStdout:
-        description: Attaches the container to stdout.
-        type: string
-      Cmd:
-        description: >
-          The command and arguments in this list are passed to the container
-          to be executed when the container is started. This command must be a
-          long-running command. Do not use a short-lived command, for example,
-          /bin/date, because it might cause the container to crash. <br>Sample
-          long-running
-          commands:<br>["ping","localhost"]<br>["tail","-f","/dev/null"]<br>["sh","-c","while
-          true; do date; sleep 20; done"]
-        items:
+        server_cert:
+          description: Server certificate including the server's public key.
           type: string
-        type: array
-      Domainname:
-        description: The domain name to be used for the container.
-        type: string
-      Env:
-        description: A list of environment variables in the form of key=value pairs. All
-          keys in this list have to be unique. List multiple keys separately and
-          if you include quotation marks, include them around both the
-          environment variable name and the value.
-        items:
+        user_cert:
+          description: User certificate including the user's public key.
           type: string
-        type: array
-      ExposedPorts:
-        description: "List of public ports that were exposed during container creation. "
-        items:
+        user_key:
+          description: User's private key.
           type: string
-        type: array
-      Hostname:
-        description: The host name to be used for the container.
-        type: string
-      Image:
-        description: Full path to the image that the container is based on in your
-          private Bluemix registry.
-        type: string
-      ImageArchitecture:
-        description: The hardware architecture the image is based on. It can either be
-          'amd64' indicating an Intel-based architecture, or 'ppc64le'
-          representing a Power-based architecture.
-        type: string
-      Labels:
-        description: List of custom metadata that was added to the container. Labels
-          serve a wide range of uses, such as adding notes to a container. Every
-          label is a key/ value pair.
-        items:
+      required:
+        - ca_cert
+        - server_cert
+        - user_cert
+        - user_key
+      type: object
+    CertificateRefresh:
+      properties:
+        ca_cert:
+          description: Certificate Authority (CA) certificate including the CA public key.
           type: string
-        type: array
-      Memory:
-        description: The amount of container memory that is assigned to the container in
-          Megabyte.
-        format: int32
-        type: integer
-      MemorySwap:
-        description: The total container memory limit (memory + swap)
-        type: string
-      OpenStdin:
-        description: "When set to true, it opens stdin. "
-        type: string
-      PortSpecs:
-        description: Not supported by IBM Containers, empty string.
-        type: string
-      StdinOnce:
-        description: When set to true it closes stdin after the attached client disconnects.
-        type: string
-      Tty:
-        description: When set to true, attach standard streams to a tty, including stdin
-          if it is not closed.
-        type: string
-      User:
-        description: User to be used inside the container.
-        type: string
-      VCPU:
-        description: Number of virtual CPUs that are assigned to the container.
-        format: int32
-        type: integer
-      VolumesFrom:
-        description: List of volumes to inherit from another container. This feature is
-          not supported in IBM Containers.
-        type: string
-      WorkingDir:
-        description: "The working directory inside the container where specified
-          commands are executed. "
-        type: string
-  ContainerId:
-    properties:
-      Id:
-        description: Unique ID representing a container.
-        type: string
-      flavor_id:
-        description: The ID of the container size.
-        type: integer
-      mem:
-        description: The amount of container memory that has been assigned to the
-          container. If the container memory was not specified in the API
-          request, a container with 64 Megabyte container memory is created by
-          default.
-        type: integer
-      vcpu:
-        description: Number of virtual CPUs that are assigned to the container.
-        type: integer
-  ContainerInfo:
-    properties:
-      BluemixApp:
-        description: The name of the Cloud Foundry app that was bound to the container
-          during creation.
-        type: string
-      BluemixServices:
-        description: The name of the Bluemix service instance that was bound to the
-          container during creation.
-        type: string
-      Config:
-        $ref: "#/definitions/ContainerConfig"
-      ContainerState:
-        description: The current status of the container. This state can either be
-          transient, such as BUILDING or NETWORKING, or non-transient, such as
-          RUNNING, SHUTDOWN, CRASHED, or SUSPENDED.
-        type: string
-      Created:
-        description: The date and time the container was created.
-        format: date-time
-        type: string
-      Group:
-        $ref: "#/definitions/Group"
-      HostConfig:
-        $ref: "#/definitions/HostConfig"
-      HostId:
-        description: The ID representing the physical compute host.
-        type: string
-      Human_Id:
-        description: "The name of the container. "
-        type: string
-      Id:
-        description: Unique identifier representing a container.
-        type: string
-      Image:
-        description: Unique identifier representing a container image.
-        type: string
-      Mounts:
-        description: A list of volumes that are mounted to the container.
-        items:
+        reg_host:
+          description: Full URL to the IBM Bluemix registry.
           type: string
-        type: array
-      Name:
-        description: The name of the container.
-        type: string
-      NetworkSettings:
-        $ref: "#/definitions/NetworkSetting"
-      Path:
-        description: The environment variable indicating the binary location.
-        type: string
-      ResolveConfPath:
-        description: Path to the resolve.conf file inside the container. The
-          resolve.conf file is used to resolve the DNS servers.
-        type: string
-      State:
-        $ref: "#/definitions/ContainerState"
-      Volumes:
-        $ref: "#/definitions/Volume"
-      VolumesRW:
-        description: LIst of volumes that is mounted to the container.
-        items:
+        server_cert:
+          description: Server certificate including the server's public key.
           type: string
-        type: array
-  ContainerState:
-    properties:
-      ExitCode:
-        description: "The exit code indicating the root cause of why the container
-          exited. Review the Docker API documentation to find a list of exit
-          codes and their meaning. "
-        type: string
-      FinishedAt:
-        description: Time when the container stopped.
-        type: string
-      Ghost:
-        description: Not supported by IBM Containers, empty string
-        type: string
-      Pid:
-        description: The process ID on the compute host that runs the container process.
-        type: integer
-      Running:
-        description: "If set to true, the container is in a RUNNING state. If set to
-          false, the container has stopped or crashed. "
-        type: boolean
-      StartedAt:
-        description: Time when the container started.
-        type: string
-      Status:
-        description: The current status of the container. This state can either be
-          transient, such as BUILDING or NETWORKING, or non-transient, such as
-          RUNNING, SHUTDOWN, CRASHED, or SUSPENDED.
-        type: string
-  ContainersGroupsGetListItem:
-    properties:
-      Creation_time:
-        description: Time when the container group is created.
-        type: string
-      Id:
-        description: Unique identifier of the container group.
-        type: string
-      Name:
-        description: Name of the container group.
-        type: string
-      Port:
-        description: The port number that is exposed to the public during container
-          group creation.
-        format: int32
-        type: integer
-      Routes:
-        description: The public route that is mapped to the container group. You can use
-          this route to access your container group from the Internet.
-        items:
+        user_cert:
+          description: User certificate including the user's public key.
           type: string
-        type: array
-      Status:
-        description: Current status of the container group. The container group status
-          is a composite of ACTION and STATUS:<br><br> ACTIONS = (CREATE,
-          DELETE, UPDATE, ROLLBACK, SUSPEND, RESUME, ADOPT, SNAPSHOT, CHECK,
-          RESTORE)<br><br> STATUSES = (IN_PROGRESS, FAILED, COMPLETE)
-        type: string
-      Updated_time:
-        description: Time when the container group is changed and updated.
-        type: string
-  ContainersGroupsNameOrIdGetDetails:
-    properties:
-      Anti-affinity:
-        description: "If set to `true` the container instances in the group are spread
-          across separate physical compute nodes, which reduces the likelihood
-          of containers crashing due to hardware failures. If set to `false`,
-          the container instances in the group share the same physical compute
-          node. "
-        type: string
-      Autorecovery:
-        description: Can be either true or false. If set to true, the Autorecovery mode
-          is enabled for your container group. In case a container instance
-          crashes or stops, this instance is removed and a new one is
-          automatically recreated. If set to false, the Autorecovery mode is
-          disabled. In case a container instances crashes or stops, it is not
-          automatically recreated by IBM Containers.
-        type: string
-      AvailabilityZone:
-        description: "Current IBM Containers availability zone on Openstack. "
-        type: string
-      Cmd:
-        description: "The Docker command that was specified to be run when the container
-          instances are started. "
-        items:
+        user_key:
+          description: User's private key.
           type: string
-        type: array
-      Creation_time:
-        description: Timestamp when the container group was created.
-        type: string
-      Env:
-        description: The list of environmental variables that were defined for the
-          container group. Each environment variable consists of a unique key
-          and a value.
-        items:
+    Container:
+      properties:
+        Command:
+          description: The command and arguments that were passed to the container during
+            container creation. This command is executed when the container is
+            started.
           type: string
-        type: array
-      Id:
-        description: Unique identifier representing a specific container group.
-        type: string
-      Image:
-        description: The unique ID of the container image your container group instances
-          are based on.
-        type: string
-      ImageName:
-        description: The full path to the container image in your private Bluemix
-          repository.
-        type: string
-      Memory:
-        description: The size of each container instance that runs in the container
-          group in MegaByte.
-        format: int32
-        type: integer
-      Name:
-        description: The name of the container group.
-        type: string
-      NumberInstances:
-        properties:
-          CurrentSize:
-            description: "The current number of container instances that are running in your
-              container group. "
-            format: int32
-            type: integer
-          Desired:
-            description: The number of container instances that you require.
-            format: int32
-            type: integer
-          Max:
-            description: The maximum number of container instance that you want to run in
-              your container group.
-            format: int32
-            type: integer
-          Min:
-            description: The minimum number of container instances that you want to run in
-              your container group.
-            format: int32
-            type: integer
-        type: object
-      Port:
-        description: "The public port that has been exposed. If you specified a route,
-          your container group is accessible from the Internet. "
-        format: int32
-        type: integer
-      Route_Status:
-        properties:
-          in_progress:
-            description: Can be either true or false. If set to true, then the route is in
-              the process of being mapped to the container group and set up in
-              the GoRouter. Is set to false, then the set up of the route is
-              completed.
-            type: boolean
-          message:
-            description: Info message for the user.
+        ContainerState:
+          description: "The current status of the container. The status can either be a
+            transient state, such as BUILDING, and NETWORKING or a non-transient
+            state, such as RUNNING, SHUTDOWN, CRASHED, PAUSED, or SUSPENDED. "
+          type: string
+        Created:
+          description: The time when the container was created.
+          format: float
+          type: number
+        Env:
+          description: A list of all the environment variables of the container.
+          items:
             type: string
-          successful:
-            description: Can be either true or false. If set to true, then the route is
-              successfully registrered with the GoRouter. If set to false, then
-              the route registration has not yet finished yet or could not be
-              completed without errors.
-            type: boolean
-        type: object
-      Routes:
-        description: The public route that is mapped to the container group. When you
-          expose a public port, you can use the route to access your container
-          group from the Internet.
-        items:
+          type: array
+        Group:
+          $ref: "#/components/schemas/Group"
+        Id:
+          description: Unique identifier representing a container.
           type: string
-        type: array
-      Status:
-        description: The current status of the container group. The container group
-          status is a composite of ACTION and STATUS:<br><br> ACTIONS = (CREATE,
-          DELETE, UPDATE, ROLLBACK, SUSPEND, RESUME, ADOPT, SNAPSHOT, CHECK,
-          RESTORE)<br><br> STATUSES = (IN_PROGRESS, FAILED, COMPLETE)
-        type: string
-      UpdatedTime:
-        description: Timestamp when the container group was updated. If the container
-          group was not updated before, `null` is returned.
-        type: string
-      Volumes:
-        description: List of volumes to be associated with the container, in the format
-          of volume name:path:mode where mode can be ro or rw.
-        items:
+        Image:
+          description: Full path to the container image in your private Bluemix registry.
           type: string
-        type: array
-  ContainersGroupsNameOrIdMaproutePostInfo:
-    allOf:
-      - $ref: "#/definitions/ContainersGroupsPostCreatedInfo"
-      - type: object
-  ContainersGroupsNameOrIdPatchUpdatedInfo:
-    properties:
-      Autorecovery:
-        description: "Enable or disable the Autorecovery mode for your container group.
-          To enable it, enter true. If you want to disable it, enter false.
-          Note: You can only enable/ disable Autorecovery mode if your container
-          group was initially created with Autorecovery mode enabled."
-        type: string
-      Environment:
-        description: A list of environment variables that you want to add to your
-          container group. Every environment variable needs to be a key=value
-          pair. Every key that you use needs to be unique for this container
-          group. Multiple environment variables are separated with comma (,)
-        items:
+        ImageId:
+          description: Unique identifier representing a container image.
           type: string
-        type: array
-      NumberInstances:
-        properties:
-          Desired:
-            description: The number of container instances that you require.
-            format: int32
-            type: integer
-          Max:
-            description: The maximum number of container instances that you want to run in
-              your container group.
-            format: int32
-            type: integer
-          Min:
-            description: The minimum number of container instances that you want to run in
-              your container group.
-            format: int32
-            type: integer
-        type: object
-  ContainersGroupsPostCreatedInfo:
-    properties:
-      Id:
-        description: Unique identifier representing a specific container group.
-        type: string
-      Warnings:
-        description: Warning information (Initial warning is empty).
-        items:
+        Labels:
+          description: List of custom metadata that was added to the container. Labels
+            serve a wide range of uses, such as adding notes to a container.
+            Every label is a key/ value pair.
+          type: object
+        Memory:
+          description: The amount of container memory in Megabyte that was assigned to
+            your container. The memory is counted towards the quota that is
+            allocated for the space.
+          format: int32
+          type: integer
+        Name:
+          description: "The name of the container. "
           type: string
-        type: array
-    type: object
-  ContainersGroupsPostRequiredAttributes:
-    properties:
-      Autorecovery:
-        description: (Optional) Enable the Auto-recovery mode for your container group.
-          If set to true, IBM Containers checks the health of each instance with
-          an HTTP request to the port that is assigned. If the health check does
-          not receive a TCP response from a container instance in two subsequent
-          90-second intervals, the instance is removed and replaced with a new
-          instance. If set to false and container instances crash, they are not
-          recovered by IBM Containers.
-        type: string
-      BluemixApp:
-        description: (Optional) The name of the Cloud Foundry app that you created in
-          your organization space.
-        type: string
-      Cmd:
-        description: (Optional) Docker command that is passed to the container group to
-          be run when the container instances are started. This command must be
-          a long-running command. Do not use a short-lived command, for example,
-          /bin/date, because it might cause the container to crash.
-        items:
+        Names:
+          description: The name of the container.
+          items:
+            type: string
+          type: array
+        NetworkSettings:
+          $ref: "#/components/schemas/NetworkSetting"
+        Ports:
+          $ref: "#/components/schemas/Port"
+        SizeRootFs:
+          description: "Total size of all the files in the container, in bytes. "
+          type: integer
+        SizeRw:
+          description: The size of the files which have been created or changed, if you
+            compare the container to its base image. Just after creation, this
+            should be zero. Ass you modify (or create) files, this size will
+            increase.
+          type: integer
+        Started:
+          description: Time when the container was started.
+          format: float
+          type: number
+        Status:
+          description: The current status of the container. The status can either be a
+            transient state, such as BUILDING, and NETWORKING or a non-transient
+            state, such as RUNNING, SHUTDOWN, CRASHED, PAUSED, or SUSPENDED
           type: string
-        type: array
-      Env:
-        description: (Optional) List of environmental variables. Every environment
-          variable that is listed here needs to be a key=value pair. Every key
-          that you use needs to be unique for this container group. Multiple
-          environment variables are separated with comma (,).
-        items:
+        VCPU:
+          description: Number of virtual CPUs that are assigned to the container.
+          type: integer
+    ContainerConfig:
+      properties:
+        ArgsEscaped:
+          description: ""
+          type: boolean
+        AttachStderr:
+          description: Attaches the container to stderr.
           type: string
-        type: array
-      Image:
-        description: "(Required) The full path to your private Bluemix repository. If
-          you want to use an image in your private Bluemix repository, specify
-          the image in the following format:
-          registry.ng.bluemix.net/NAMESPACE/IMAGE. If you want to use an IBM
-          Containers provided image, do not include your organization's
-          namespace. Specify the image in the following format:
-          registry.ng.bluemix.net/IMAGE"
-        type: string
-      Memory:
-        description: "(Optional) The size of each container instance in the container
-          group. The size of each container instance in the group. Choose one of
-          the following sizes and enter the size in MegaBytes: Pico 64 MB, Nano
-          128 MB, Micro 256 MB, Tiny 512 MB, Small 1 GB (1024 MB), Medium 2 GB
-          (2048 MB), Large 4 GB (4096 MB) XLarge 8GB (8192 MB) and 2XLarge 16 GB
-          (16384 MB). If you do not specify a size, all container instances in
-          this group are created with 256 MB."
-        format: int32
-        type: integer
-      Name:
-        description: (Required) Name of the container group that you want to create. The
-          name needs to be unique in your organization space and must start with
-          a letter. Then, you can include uppercase letters, lowercase letters,
-          numbers, periods (.), underscores (_), or hyphens (-).
-        type: string
-      NumberInstances:
-        properties:
-          Desired:
-            description: (Optional) The number of container instances that you require.
-            format: int32
-            type: integer
-          Max:
-            description: (Optional) The maximum number of container instances that you want
-              to run in your container group.
-            format: int32
-            type: integer
-          Min:
-            description: (Optional) The minimum number of container instances that need to
-              run in your container group.
-            format: int32
-            type: integer
-        type: object
-      Port:
-        description: '(Optional) Expose a port for HTTP traffic to make your container
-          group available from the Internet. Every container instance that is
-          started for this group, listens on this port. Container groups cannot
-          expose multiple ports. Note: You need to expose a port, when
-          "Autorecovery" is set to true.'
-        format: int32
-        type: integer
-      Route:
-        properties:
-          domain:
-            description: The default system domain is mybluemix.net and already provides a
-              SSL certificate, so you can access your container groups with
-              HTTPS without any additional configuration.
-            type: string
-          host:
-            description: "The host name of your container group, such as mycontainerhost. Do
-              not include underscores (_) in the host name. The host and the
-              domain combined form the full public route URL, such as
-              http://mycontainerhost.mybluemix.net. "
-            type: string
-        type: object
-      Volumes:
-        description: "(Optional) List of volumes to be mounted to the container
-          instances of your container group. You need to create the volume first
-          by using the cf ic volume-create command before you can mount a volume
-          to a container group. When you specify a volume, use the following
-          format: NAME:PATH:MODE. For NAME, use either the name or ID of the
-          volume. For the PATH, enter the absolute path to the volume directory
-          in the container. For MODE, enter either ro (read-only) or rw
-          (read-write)."
-        items:
+        AttachStdin:
+          description: Attaches the container to sdtin.
           type: string
-        type: array
-    required:
-      - Name
-      - Image
-  ContainersQuotaInfo:
-    properties:
-      account_type:
-        description: The Bluemix account type indicating the quota limits and how the
-          organization is billed.
-        type: string
-      country_code:
-        description: The country in which the account was opened.
-        type: string
-      org_quota:
-        properties:
-          floating_ips_max:
-            description: The number of public IP addresses that can be assigned across all
-              spaces of the organization.
-            type: string
-          floating_ips_space_default:
-            description: "The number of public IP addresses that are required for one space.
-              If the number of public IP addresses is not available, then a new
-              space cannot be created to be used with IBM Containers. "
-            type: string
-          floating_ips_usage:
-            description: The number of public IP addresses that are currently assigned to
-              the spaces of the organization.
-            format: int32
-            type: integer
-          ram_max:
-            description: The maximum amount of container memory on the compute host that can
-              be assigned across the spaces of the organization.
-            format: int32
-            type: integer
-          ram_space_default:
-            description: "The amount of container memory that is required to be used for one
-              space. If this amount is not available, then a new space cannot be
-              created to be used with IBM Containers. "
-            format: int32
-            type: integer
-          ram_usage:
-            description: The amount of container memory that is currently used across all
-              spaces of the organization.
-            format: int32
-            type: integer
-          subnet_usage:
-            description: The number of subnets that were created across all spaces of the
-              organization.
-            format: int32
-            type: integer
-          subnets_default:
-            description: The number of subnets that is required to create a new space. If
-              this number is not available, then a new space cannot be created
-              to be used with IBM Containers.
-            format: int32
-            type: integer
-          subnets_max:
-            description: The maximum number of container private subnet that can be created
-              across all spaces of the organization.
-            format: int32
-            type: integer
-        type: object
-      space_quota:
-        properties:
-          floating_ips_max:
-            description: The maximum number of public IP addresses that can be allocated to
-              a space.
-            type: string
-          ram_max:
-            description: The maximum amount of container memory that can be shared across
-              all containers that are created in a space.
-            format: int32
-            type: integer
-          subnets_max:
-            description: The maximum number of private subnets that can be created in one
-              space.
-            format: int32
-            type: integer
-        type: object
-  ContainersQuotaList:
-    properties:
-      floating_ips:
-        description: The new number of public IP addresses that you want to assign to
-          your space.
-        format: int32
-        type: integer
-      ram:
-        description: The amount of container memory that you want to assign to your space.
-        format: int32
-        type: integer
-  ContainersUsageInfo:
-    properties:
-      AvailableSizes:
-        items:
-          $ref: "#/definitions/ContainersUsageInfoAvailableSizes"
-        type: array
-      Environment:
-        description: The IBM Containers machine where the space is located
-        type: string
-      Limits:
-        properties:
-          containers:
-            description: "The number of containers that can be created in the space. If -1
-              is returned, then an unlimited number of containers can be
-              created. The number however is counted towards and limited by the
-              container memory. "
-            format: int32
-            type: integer
-          floating_ips:
-            description: The number of public IP addresses that can be allocated to the
-              space.
-            format: int32
-            type: integer
-          memory_MB:
-            description: The amount of container memory that can be used in the space in
-              megabyte.
-            format: int32
-            type: integer
-          vcpu:
-            description: The number of virtual CPUs that are assigned to the space.
-            format: int32
-            type: integer
-        type: object
-      Usage:
-        properties:
-          containers:
-            description: The number of containers that were created in the space. All
-              containers that count towards the quota limit are listed
-              independent on their current state.
-            format: int32
-            type: integer
-          floating_ips:
-            description: The number of public IP addresses that are allocated to the space.
-            format: int32
-            type: integer
-          floating_ips_bound:
-            description: The number of public IP addresses that are bound to a container in
-              the space.
-            format: int32
-            type: integer
-          images:
-            description: The number of private images that were added to the private Bluemix
-              registry.
-            format: int32
-            type: integer
-          memory_MB:
-            description: The amount of container memory that is already used by the
-              containers that were created in the space in megabyte.
-            format: int32
-            type: integer
-          running:
-            description: The number of containers that are currently in a running state.
-            format: int32
-            type: integer
-          vcpu:
-            description: The number of virtual CPUs that are allocated to the space.
-            format: int32
-            type: integer
-        type: object
-  ContainersUsageInfoAvailableSizes:
-    properties:
-      disk:
-        description: The amount of disk space on the compute host that is assigned to
-          the container in gigabyte
-        format: int32
-        type: integer
-      id:
-        description: The ID of the container size.
-        type: string
-      memory_MB:
-        description: The amount of container memory on the compute host that is assigned
-          to the container in megabyte.
-        format: int32
-        type: integer
-      name:
-        description: The IBM Containers name of the container size.
-        type: string
-      vcpus:
-        description: The number of virtual CPUs that can be assigned to the container.
-        format: int32
-        type: integer
-  ContainersVersionGetInfo:
-    properties:
-      ApiVersion:
-        description: The current API version.
-        type: string
-      Arch:
-        description: The current Arch version.
-        type: string
-      BuildDetail:
-        properties:
-          api:
-            description: The build ID of the current API version.
-            type: string
-          automount:
-            description: The build ID of the current automount microservice version.
-            type: string
-          grupdater:
-            description: The build ID of the current grupdater microservice version.
-            type: string
-          harmony:
-            description: The build ID of the current harmony microservice version.
-            type: string
-          health-monitor:
-            description: The build ID of the current health-monitor microservice version.
-            type: string
-          hijack:
-            description: The build ID of the current hijack microservice version.
-            type: string
-          ldap:
-            description: The build ID of the current ldap microservice version.
-            type: string
-          logmet:
-            description: The build ID of the current logmet microservice version.
-            type: string
-          lumberjack:
-            description: The build ID of the current lumberjack microservice version.
-            type: string
-          redis-cluster:
-            description: The build ID of the current redis-cluster version.
-            type: string
-          sgwatcher:
-            description: The build ID of the current sgwatcher microservice version.
-            type: string
-          volmgr:
-            description: The build ID of the current volumes manager microservice version.
-            type: string
-        type: object
-      BuildID:
-        description: ""
-        type: string
-      BuildNumber:
-        description: ""
-        type: string
-      BuildTime:
-        description: Timestamp when the API version and all attached microservices were
-          built.
-        type: string
-      GitCommit:
-        description: ""
-        type: string
-      GoVersion:
-        description: The latest Go version.
-        type: string
-      KernelVersion:
-        description: The latest Kernel version.
-        type: string
-      Os:
-        description: Bluemix Containers
-        type: string
-      Version:
-        description: The latest API version.
-        type: string
-  CreateContainer:
-    properties:
-      BluemixApp:
-        description: The name of the Cloud Foundry app that you want to bind to your
-          container. The Cloud Foundry app must be created in the same space
-          where you want to create your container.
-        type: string
-      Cmd:
-        description: >
-          The command and arguments in this list are passed to the container
-          to be executed when the container is started. This command must be a
-          long-running command. Do not use a short-lived command, for example,
-          /bin/date, because it might cause the container to crash. <br>Sample
-          long-running
-          commands:<br>["ping","localhost"]<br>["tail","-f","/dev/null"]<br>["sh","-c","while
-          true; do date; sleep 20; done"]
-        items:
+        AttachStdout:
+          description: Attaches the container to stdout.
           type: string
-        type: array
-      Cpuset:
-        description: "Pins the container processes to a specific CPU core on the compute
-          host. For example: 0 means that processes are executed on the first
-          core only."
-        type: string
-      Env:
-        description: A list of environment variables in the form of key=value pairs. All
-          keys in this list have to be unique. List multiple keys separately and
-          if you include quotation marks, include them around both the
-          environment variable name and the value.
-        items:
+        Cmd:
+          description: >
+            The command and arguments in this list are passed to the container
+            to be executed when the container is started. This command must be a
+            long-running command. Do not use a short-lived command, for example,
+            /bin/date, because it might cause the container to crash. <br>Sample
+            long-running
+            commands:<br>["ping","localhost"]<br>["tail","-f","/dev/null"]<br>["sh","-c","while
+            true; do date; sleep 20; done"]
+          items:
+            type: string
+          type: array
+        Domainname:
+          description: The domain name to be used for the container.
           type: string
-        type: array
-      ExposedPorts:
-        description: All public ports that need to be exposed for the container, so the
-          container can be accessed from the Internet.
-        items:
+        Env:
+          description: A list of environment variables in the form of key=value pairs. All
+            keys in this list have to be unique. List multiple keys separately
+            and if you include quotation marks, include them around both the
+            environment variable name and the value.
+          items:
+            type: string
+          type: array
+        ExposedPorts:
+          description: "List of public ports that were exposed during container creation. "
+          items:
+            type: string
+          type: array
+        Hostname:
+          description: The host name to be used for the container.
           type: string
-        type: array
-      HostConfig:
-        $ref: "#/definitions/HostConfig"
-      Image:
-        description: "Full path to the image in your private Bluemix registry in the
-          format `registry.ng.bluemix.net/namespace/image`. "
-        type: string
-      Memory:
-        description: "The container memory that is set for the container in Megabyte.
-          Choose one of the following sizes: Pico 64 MB, Nano 128 MB, Micro 256
-          MB, Tiny 512 MB, Small 1 GB (1024 MB), Medium 2 GB (2048 MB), Large 4
-          GB (4096 MB) XLarge 8GB (8192 MB) and 2XLarge 16 GB (16384 MB)."
-        format: int32
-        type: integer
-      NumberCpus:
-        description: Number of virtual CPUs that are allocated to the container.
-        format: int32
-        type: integer
-      Volumes:
-        description: "Mount a volume to a container by specifying the details in the
-          following format: `VOLUME_NAME:/DIRECTORY_PATH[:ro]`. Example:
-          testvolume:/volumedata/temp:rw. By default, all volumes will be set up
-          with read-write access inside the container (rw). If you wish to set
-          up your volume with read-only access, enter `ro`.  Note: To mount a
-          volume to a container, you must create the volume in your space first
-          by using the `cf ic volume-create` command, or calling the `POST
-          /volumes/create endpoint`."
-        type: string
-    required:
-      - Image
-  Fileshare:
-    properties:
-      capacity:
-        description: The size of the file share in gigabyte.
-        type: integer
-      created_date:
-        description: The timestamp when the file share was created.
-        type: string
-      fsName:
-        description: The name of the file share.
-        type: string
-      hostPath:
-        description: The path to the volume on the host node.
-        type: string
-      iops:
-        description: "The number of Input/Output operations per second. "
-        format: double
-        type: number
-      iopsTotal:
-        description: The total number of IOPS considering the size of the file share.
-          The size of your file share in gigabyte multiplied with the number of
-          IOPS indicates the total number of IOPS. The higher the number of IOPS
-          the faster you can read from and write to your volumes.
-        type: integer
-      orderId:
-        description: The ID received from softlayer when the file share was ordered to
-          be set up in softlayer.
-        type: string
-      provider:
-        description: The provider of the file share.
-        type: string
-      spaceGuid:
-        description: The unique ID representing a Bluemix space in which the file share
-          was created.
-        type: string
-      state:
-        description: The current state of the file share. When the file share is ready
-          to be used, this attribute is set to `READY`.
-        type: string
-      updated_date:
-        description: The timestamp when the file share last was updated.
-        type: string
-    type: object
-  FileshareParam:
-    properties:
-      fsIOPS:
-        description: The number of input/output transactions per second. Available
-          values are 0.25, 2 or 4.
-        format: double
-        type: number
-      fsName:
-        description: The name of the new file share that you want to create. The name
-          can contain uppercase letters, lowercase letters, numbers, underscores
-          (_), and hyphens (-).
-        type: string
-      fsSize:
-        description: "The size of the file share in gigabyte. Run `cf ic volume
-          fs-flavor-list` or call the GET /volumes/fs/flavors/json API endpoint
-          to retrieve a list of available file share sizes. "
-        type: integer
-    required:
-      - fsName
-      - fsSize
-      - fsIOPS
-    type: object
-  FileshareUsage:
-    properties:
-      available_space:
-        description: The amount of space that is available in the file share in gigabytes.
-        type: string
-      total_space:
-        description: The total size of the file share in gigabytes.
-        type: string
-      used_space:
-        description: "The amount of space that is currently used from the file share. "
-        type: string
-      used_space_percentage:
-        description: The amount of space that is currently used from the file share in
-          percentage.
-        type: string
-    type: object
-  FloatingIP:
-    properties:
-      Bindings:
-        $ref: "#/definitions/Binding"
-      IpAddress:
-        description: The public IP address that is allocated to the organization space.
-        type: string
-  GetFileshareDetails:
-    properties:
-      fs:
-        items:
-          $ref: "#/definitions/Fileshare"
-        type: array
-      fsUsage:
-        items:
-          $ref: "#/definitions/FileshareUsage"
-        type: array
-      volnames:
-        description: A list of volume names that are mounted to the file share.
-        items:
+        Image:
+          description: Full path to the image that the container is based on in your
+            private Bluemix registry.
           type: string
-        type: array
-    type: object
-  Group:
-    properties:
-      Id:
-        description: Unique identifier representing a group.
-        type: string
-      Name:
-        description: Name of the group.
-        type: string
-  HostConfig:
-    properties:
-      Binds:
-        description: "A list of volumes to be bound to the container. Each volume must
-          be listed in the following format: VOLNAME:/CONTAINER_PATH:rw [ro]. "
-        items:
+        ImageArchitecture:
+          description: The hardware architecture the image is based on. It can either be
+            'amd64' indicating an Intel-based architecture, or 'ppc64le'
+            representing a Power-based architecture.
           type: string
-        type: array
-      ExtraHosts:
-        description: >
-          A list of hostnames/IP mappings to be added to the container’s
-          /etc/hosts file. Specified in the form ["hostname:IP"]
-        items:
+        Labels:
+          description: List of custom metadata that was added to the container. Labels
+            serve a wide range of uses, such as adding notes to a container.
+            Every label is a key/ value pair.
+          items:
+            type: string
+          type: array
+        Memory:
+          description: The amount of container memory that is assigned to the container in
+            Megabyte.
+          format: int32
+          type: integer
+        MemorySwap:
+          description: The total container memory limit (memory + swap)
           type: string
-        type: array
-      Links:
-        description: A list of containers that need to be linked.
-        items:
+        OpenStdin:
+          description: "When set to true, it opens stdin. "
           type: string
-        type: array
-      PortBindings:
-        description: >
-          The container ports that you want to expose to the public. Ports
-          need to be specified in the form of &lt;port&gt;/&lt;protocol&gt;: [{
-          "HostIp": "&lt;IP&gt;", "HostPort": "&lt;port&gt;" }]
-        items:
+        PortSpecs:
+          description: Not supported by IBM Containers, empty string.
           type: string
-        type: array
-    type: object
-  ImageDetail:
-    properties:
-      Architecture:
-        description: "The hardware architecture for which the image was built for. The
-          architecture can either be Intel (amd64) or Power (ppc64le). "
-        type: string
-      Config:
-        properties:
-          ArgsEscaped:
-            description: ""
-            type: boolean
-          AttachStderr:
-            description: Attaches the container to stderr.
-            type: boolean
-          AttachStdin:
-            description: Attaches the container to stdin.
-            type: boolean
-          AttachStdout:
-            description: Attaches the container to stdout.
-            type: boolean
-          Cmd:
-            description: >
-              The command and arguments in this list are passed to the container
-              to be executed when the container is started. This command must be
-              a long-running command. Do not use a short-lived command, for
-              example, /bin/date, because it might cause the container to crash.
-              <br>Sample long-running
-              commands:<br>["ping","localhost"]<br>["tail","-f","/dev/null"]<br>["sh","-c","while
-              true; do date; sleep 20; done"]
-            items:
+        StdinOnce:
+          description: When set to true it closes stdin after the attached client
+            disconnects.
+          type: string
+        Tty:
+          description: When set to true, attach standard streams to a tty, including stdin
+            if it is not closed.
+          type: string
+        User:
+          description: User to be used inside the container.
+          type: string
+        VCPU:
+          description: Number of virtual CPUs that are assigned to the container.
+          format: int32
+          type: integer
+        VolumesFrom:
+          description: List of volumes to inherit from another container. This feature is
+            not supported in IBM Containers.
+          type: string
+        WorkingDir:
+          description: "The working directory inside the container where specified
+            commands are executed. "
+          type: string
+    ContainerId:
+      properties:
+        Id:
+          description: Unique ID representing a container.
+          type: string
+        flavor_id:
+          description: The ID of the container size.
+          type: integer
+        mem:
+          description: The amount of container memory that has been assigned to the
+            container. If the container memory was not specified in the API
+            request, a container with 64 Megabyte container memory is created by
+            default.
+          type: integer
+        vcpu:
+          description: Number of virtual CPUs that are assigned to the container.
+          type: integer
+    ContainerInfo:
+      properties:
+        BluemixApp:
+          description: The name of the Cloud Foundry app that was bound to the container
+            during creation.
+          type: string
+        BluemixServices:
+          description: The name of the Bluemix service instance that was bound to the
+            container during creation.
+          type: string
+        Config:
+          $ref: "#/components/schemas/ContainerConfig"
+        ContainerState:
+          description: The current status of the container. This state can either be
+            transient, such as BUILDING or NETWORKING, or non-transient, such as
+            RUNNING, SHUTDOWN, CRASHED, or SUSPENDED.
+          type: string
+        Created:
+          description: The date and time the container was created.
+          format: date-time
+          type: string
+        Group:
+          $ref: "#/components/schemas/Group"
+        HostConfig:
+          $ref: "#/components/schemas/HostConfig"
+        HostId:
+          description: The ID representing the physical compute host.
+          type: string
+        Human_Id:
+          description: "The name of the container. "
+          type: string
+        Id:
+          description: Unique identifier representing a container.
+          type: string
+        Image:
+          description: Unique identifier representing a container image.
+          type: string
+        Mounts:
+          description: A list of volumes that are mounted to the container.
+          items:
+            type: string
+          type: array
+        Name:
+          description: The name of the container.
+          type: string
+        NetworkSettings:
+          $ref: "#/components/schemas/NetworkSetting"
+        Path:
+          description: The environment variable indicating the binary location.
+          type: string
+        ResolveConfPath:
+          description: Path to the resolve.conf file inside the container. The
+            resolve.conf file is used to resolve the DNS servers.
+          type: string
+        State:
+          $ref: "#/components/schemas/ContainerState"
+        Volumes:
+          $ref: "#/components/schemas/Volume"
+        VolumesRW:
+          description: LIst of volumes that is mounted to the container.
+          items:
+            type: string
+          type: array
+    ContainerState:
+      properties:
+        ExitCode:
+          description: "The exit code indicating the root cause of why the container
+            exited. Review the Docker API documentation to find a list of exit
+            codes and their meaning. "
+          type: string
+        FinishedAt:
+          description: Time when the container stopped.
+          type: string
+        Ghost:
+          description: Not supported by IBM Containers, empty string
+          type: string
+        Pid:
+          description: The process ID on the compute host that runs the container process.
+          type: integer
+        Running:
+          description: "If set to true, the container is in a RUNNING state. If set to
+            false, the container has stopped or crashed. "
+          type: boolean
+        StartedAt:
+          description: Time when the container started.
+          type: string
+        Status:
+          description: The current status of the container. This state can either be
+            transient, such as BUILDING or NETWORKING, or non-transient, such as
+            RUNNING, SHUTDOWN, CRASHED, or SUSPENDED.
+          type: string
+    ContainersGroupsGetListItem:
+      properties:
+        Creation_time:
+          description: Time when the container group is created.
+          type: string
+        Id:
+          description: Unique identifier of the container group.
+          type: string
+        Name:
+          description: Name of the container group.
+          type: string
+        Port:
+          description: The port number that is exposed to the public during container
+            group creation.
+          format: int32
+          type: integer
+        Routes:
+          description: The public route that is mapped to the container group. You can use
+            this route to access your container group from the Internet.
+          items:
+            type: string
+          type: array
+        Status:
+          description: Current status of the container group. The container group status
+            is a composite of ACTION and STATUS:<br><br> ACTIONS = (CREATE,
+            DELETE, UPDATE, ROLLBACK, SUSPEND, RESUME, ADOPT, SNAPSHOT, CHECK,
+            RESTORE)<br><br> STATUSES = (IN_PROGRESS, FAILED, COMPLETE)
+          type: string
+        Updated_time:
+          description: Time when the container group is changed and updated.
+          type: string
+    ContainersGroupsNameOrIdGetDetails:
+      properties:
+        Anti-affinity:
+          description: "If set to `true` the container instances in the group are spread
+            across separate physical compute nodes, which reduces the likelihood
+            of containers crashing due to hardware failures. If set to `false`,
+            the container instances in the group share the same physical compute
+            node. "
+          type: string
+        Autorecovery:
+          description: Can be either true or false. If set to true, the Autorecovery mode
+            is enabled for your container group. In case a container instance
+            crashes or stops, this instance is removed and a new one is
+            automatically recreated. If set to false, the Autorecovery mode is
+            disabled. In case a container instances crashes or stops, it is not
+            automatically recreated by IBM Containers.
+          type: string
+        AvailabilityZone:
+          description: "Current IBM Containers availability zone on Openstack. "
+          type: string
+        Cmd:
+          description: "The Docker command that was specified to be run when the container
+            instances are started. "
+          items:
+            type: string
+          type: array
+        Creation_time:
+          description: Timestamp when the container group was created.
+          type: string
+        Env:
+          description: The list of environmental variables that were defined for the
+            container group. Each environment variable consists of a unique key
+            and a value.
+          items:
+            type: string
+          type: array
+        Id:
+          description: Unique identifier representing a specific container group.
+          type: string
+        Image:
+          description: The unique ID of the container image your container group instances
+            are based on.
+          type: string
+        ImageName:
+          description: The full path to the container image in your private Bluemix
+            repository.
+          type: string
+        Memory:
+          description: The size of each container instance that runs in the container
+            group in MegaByte.
+          format: int32
+          type: integer
+        Name:
+          description: The name of the container group.
+          type: string
+        NumberInstances:
+          properties:
+            CurrentSize:
+              description: "The current number of container instances that are running in your
+                container group. "
+              format: int32
+              type: integer
+            Desired:
+              description: The number of container instances that you require.
+              format: int32
+              type: integer
+            Max:
+              description: The maximum number of container instance that you want to run in
+                your container group.
+              format: int32
+              type: integer
+            Min:
+              description: The minimum number of container instances that you want to run in
+                your container group.
+              format: int32
+              type: integer
+          type: object
+        Port:
+          description: "The public port that has been exposed. If you specified a route,
+            your container group is accessible from the Internet. "
+          format: int32
+          type: integer
+        Route_Status:
+          properties:
+            in_progress:
+              description: Can be either true or false. If set to true, then the route is in
+                the process of being mapped to the container group and set up in
+                the GoRouter. Is set to false, then the set up of the route is
+                completed.
+              type: boolean
+            message:
+              description: Info message for the user.
               type: string
-            type: array
-          Domainmame:
-            description: The domain name to be used for the container.
+            successful:
+              description: Can be either true or false. If set to true, then the route is
+                successfully registrered with the GoRouter. If set to false,
+                then the route registration has not yet finished yet or could
+                not be completed without errors.
+              type: boolean
+          type: object
+        Routes:
+          description: The public route that is mapped to the container group. When you
+            expose a public port, you can use the route to access your container
+            group from the Internet.
+          items:
             type: string
-          Entrypoint:
-            description: The entrypoint specifies a command that will always be executed
-              when the container starts.
+          type: array
+        Status:
+          description: The current status of the container group. The container group
+            status is a composite of ACTION and STATUS:<br><br> ACTIONS =
+            (CREATE, DELETE, UPDATE, ROLLBACK, SUSPEND, RESUME, ADOPT, SNAPSHOT,
+            CHECK, RESTORE)<br><br> STATUSES = (IN_PROGRESS, FAILED, COMPLETE)
+          type: string
+        UpdatedTime:
+          description: Timestamp when the container group was updated. If the container
+            group was not updated before, `null` is returned.
+          type: string
+        Volumes:
+          description: List of volumes to be associated with the container, in the format
+            of volume name:path:mode where mode can be ro or rw.
+          items:
             type: string
-          Env:
-            description: A list of environment variables in the form of key=value pairs. All
-              keys in this list have to be unique. List multiple keys separately
-              and if you include quotation marks, include them around both the
-              environment variable name and the value.
-            items:
+          type: array
+    ContainersGroupsNameOrIdMaproutePostInfo:
+      allOf:
+        - $ref: "#/components/schemas/ContainersGroupsPostCreatedInfo"
+        - type: object
+    ContainersGroupsNameOrIdPatchUpdatedInfo:
+      properties:
+        Autorecovery:
+          description: "Enable or disable the Autorecovery mode for your container group.
+            To enable it, enter true. If you want to disable it, enter false.
+            Note: You can only enable/ disable Autorecovery mode if your
+            container group was initially created with Autorecovery mode
+            enabled."
+          type: string
+        Environment:
+          description: A list of environment variables that you want to add to your
+            container group. Every environment variable needs to be a key=value
+            pair. Every key that you use needs to be unique for this container
+            group. Multiple environment variables are separated with comma (,)
+          items:
+            type: string
+          type: array
+        NumberInstances:
+          properties:
+            Desired:
+              description: The number of container instances that you require.
+              format: int32
+              type: integer
+            Max:
+              description: The maximum number of container instances that you want to run in
+                your container group.
+              format: int32
+              type: integer
+            Min:
+              description: The minimum number of container instances that you want to run in
+                your container group.
+              format: int32
+              type: integer
+          type: object
+    ContainersGroupsPostCreatedInfo:
+      properties:
+        Id:
+          description: Unique identifier representing a specific container group.
+          type: string
+        Warnings:
+          description: Warning information (Initial warning is empty).
+          items:
+            type: string
+          type: array
+      type: object
+    ContainersGroupsPostRequiredAttributes:
+      properties:
+        Autorecovery:
+          description: (Optional) Enable the Auto-recovery mode for your container group.
+            If set to true, IBM Containers checks the health of each instance
+            with an HTTP request to the port that is assigned. If the health
+            check does not receive a TCP response from a container instance in
+            two subsequent 90-second intervals, the instance is removed and
+            replaced with a new instance. If set to false and container
+            instances crash, they are not recovered by IBM Containers.
+          type: string
+        BluemixApp:
+          description: (Optional) The name of the Cloud Foundry app that you created in
+            your organization space.
+          type: string
+        Cmd:
+          description: (Optional) Docker command that is passed to the container group to
+            be run when the container instances are started. This command must
+            be a long-running command. Do not use a short-lived command, for
+            example, /bin/date, because it might cause the container to crash.
+          items:
+            type: string
+          type: array
+        Env:
+          description: (Optional) List of environmental variables. Every environment
+            variable that is listed here needs to be a key=value pair. Every key
+            that you use needs to be unique for this container group. Multiple
+            environment variables are separated with comma (,).
+          items:
+            type: string
+          type: array
+        Image:
+          description: "(Required) The full path to your private Bluemix repository. If
+            you want to use an image in your private Bluemix repository, specify
+            the image in the following format:
+            registry.ng.bluemix.net/NAMESPACE/IMAGE. If you want to use an IBM
+            Containers provided image, do not include your organization's
+            namespace. Specify the image in the following format:
+            registry.ng.bluemix.net/IMAGE"
+          type: string
+        Memory:
+          description: "(Optional) The size of each container instance in the container
+            group. The size of each container instance in the group. Choose one
+            of the following sizes and enter the size in MegaBytes: Pico 64 MB,
+            Nano 128 MB, Micro 256 MB, Tiny 512 MB, Small 1 GB (1024 MB), Medium
+            2 GB (2048 MB), Large 4 GB (4096 MB) XLarge 8GB (8192 MB) and
+            2XLarge 16 GB (16384 MB). If you do not specify a size, all
+            container instances in this group are created with 256 MB."
+          format: int32
+          type: integer
+        Name:
+          description: (Required) Name of the container group that you want to create. The
+            name needs to be unique in your organization space and must start
+            with a letter. Then, you can include uppercase letters, lowercase
+            letters, numbers, periods (.), underscores (_), or hyphens (-).
+          type: string
+        NumberInstances:
+          properties:
+            Desired:
+              description: (Optional) The number of container instances that you require.
+              format: int32
+              type: integer
+            Max:
+              description: (Optional) The maximum number of container instances that you want
+                to run in your container group.
+              format: int32
+              type: integer
+            Min:
+              description: (Optional) The minimum number of container instances that need to
+                run in your container group.
+              format: int32
+              type: integer
+          type: object
+        Port:
+          description: '(Optional) Expose a port for HTTP traffic to make your container
+            group available from the Internet. Every container instance that is
+            started for this group, listens on this port. Container groups
+            cannot expose multiple ports. Note: You need to expose a port, when
+            "Autorecovery" is set to true.'
+          format: int32
+          type: integer
+        Route:
+          properties:
+            domain:
+              description: The default system domain is mybluemix.net and already provides a
+                SSL certificate, so you can access your container groups with
+                HTTPS without any additional configuration.
               type: string
-            type: array
-          ExposedPorts:
-            description: A list of all udp and tcp ports that have been publicly exposed
-              during the container creation.
-            items:
+            host:
+              description: "The host name of your container group, such as mycontainerhost. Do
+                not include underscores (_) in the host name. The host and the
+                domain combined form the full public route URL, such as
+                http://mycontainerhost.mybluemix.net. "
               type: string
-            type: array
-          Hostname:
-            description: "The host name of the container provided by Openstack. "
+          type: object
+        Volumes:
+          description: "(Optional) List of volumes to be mounted to the container
+            instances of your container group. You need to create the volume
+            first by using the cf ic volume-create command before you can mount
+            a volume to a container group. When you specify a volume, use the
+            following format: NAME:PATH:MODE. For NAME, use either the name or
+            ID of the volume. For the PATH, enter the absolute path to the
+            volume directory in the container. For MODE, enter either ro
+            (read-only) or rw (read-write)."
+          items:
             type: string
-          Image:
-            description: "The unique ID of the image. "
-            type: string
-          Labels:
-            description: List of custom metadata that was added to the image. Labels serve a
-              wide range of uses, such as adding notes or license requirements
-              to an image. Every label is a key/ value pair.
-            items:
+          type: array
+      required:
+        - Name
+        - Image
+    ContainersQuotaInfo:
+      properties:
+        account_type:
+          description: The Bluemix account type indicating the quota limits and how the
+            organization is billed.
+          type: string
+        country_code:
+          description: The country in which the account was opened.
+          type: string
+        org_quota:
+          properties:
+            floating_ips_max:
+              description: The number of public IP addresses that can be assigned across all
+                spaces of the organization.
               type: string
-            type: array
-          OnBuild:
-            description: ???
-            items:
+            floating_ips_space_default:
+              description: "The number of public IP addresses that are required for one space.
+                If the number of public IP addresses is not available, then a
+                new space cannot be created to be used with IBM Containers. "
               type: string
-            type: array
-          OpenStdin:
-            description: When set to true, it opens stdin.
-            type: boolean
-          StdinOnce:
-            description: When set to true it closes stdin after the attached client
-              disconnects.
-            type: boolean
-          Tty:
-            description: When set to true, attach standard streams to a tty, including stdin
-              if it is not closed.
-            type: boolean
-          User:
-            description: The user to be used inside the container.
+            floating_ips_usage:
+              description: The number of public IP addresses that are currently assigned to
+                the spaces of the organization.
+              format: int32
+              type: integer
+            ram_max:
+              description: The maximum amount of container memory on the compute host that can
+                be assigned across the spaces of the organization.
+              format: int32
+              type: integer
+            ram_space_default:
+              description: "The amount of container memory that is required to be used for one
+                space. If this amount is not available, then a new space cannot
+                be created to be used with IBM Containers. "
+              format: int32
+              type: integer
+            ram_usage:
+              description: The amount of container memory that is currently used across all
+                spaces of the organization.
+              format: int32
+              type: integer
+            subnet_usage:
+              description: The number of subnets that were created across all spaces of the
+                organization.
+              format: int32
+              type: integer
+            subnets_default:
+              description: The number of subnets that is required to create a new space. If
+                this number is not available, then a new space cannot be created
+                to be used with IBM Containers.
+              format: int32
+              type: integer
+            subnets_max:
+              description: The maximum number of container private subnet that can be created
+                across all spaces of the organization.
+              format: int32
+              type: integer
+          type: object
+        space_quota:
+          properties:
+            floating_ips_max:
+              description: The maximum number of public IP addresses that can be allocated to
+                a space.
+              type: string
+            ram_max:
+              description: The maximum amount of container memory that can be shared across
+                all containers that are created in a space.
+              format: int32
+              type: integer
+            subnets_max:
+              description: The maximum number of private subnets that can be created in one
+                space.
+              format: int32
+              type: integer
+          type: object
+    ContainersQuotaList:
+      properties:
+        floating_ips:
+          description: The new number of public IP addresses that you want to assign to
+            your space.
+          format: int32
+          type: integer
+        ram:
+          description: The amount of container memory that you want to assign to your space.
+          format: int32
+          type: integer
+    ContainersUsageInfo:
+      properties:
+        AvailableSizes:
+          items:
+            $ref: "#/components/schemas/ContainersUsageInfoAvailableSizes"
+          type: array
+        Environment:
+          description: The IBM Containers machine where the space is located
+          type: string
+        Limits:
+          properties:
+            containers:
+              description: "The number of containers that can be created in the space. If -1
+                is returned, then an unlimited number of containers can be
+                created. The number however is counted towards and limited by
+                the container memory. "
+              format: int32
+              type: integer
+            floating_ips:
+              description: The number of public IP addresses that can be allocated to the
+                space.
+              format: int32
+              type: integer
+            memory_MB:
+              description: The amount of container memory that can be used in the space in
+                megabyte.
+              format: int32
+              type: integer
+            vcpu:
+              description: The number of virtual CPUs that are assigned to the space.
+              format: int32
+              type: integer
+          type: object
+        Usage:
+          properties:
+            containers:
+              description: The number of containers that were created in the space. All
+                containers that count towards the quota limit are listed
+                independent on their current state.
+              format: int32
+              type: integer
+            floating_ips:
+              description: The number of public IP addresses that are allocated to the space.
+              format: int32
+              type: integer
+            floating_ips_bound:
+              description: The number of public IP addresses that are bound to a container in
+                the space.
+              format: int32
+              type: integer
+            images:
+              description: The number of private images that were added to the private Bluemix
+                registry.
+              format: int32
+              type: integer
+            memory_MB:
+              description: The amount of container memory that is already used by the
+                containers that were created in the space in megabyte.
+              format: int32
+              type: integer
+            running:
+              description: The number of containers that are currently in a running state.
+              format: int32
+              type: integer
+            vcpu:
+              description: The number of virtual CPUs that are allocated to the space.
+              format: int32
+              type: integer
+          type: object
+    ContainersUsageInfoAvailableSizes:
+      properties:
+        disk:
+          description: The amount of disk space on the compute host that is assigned to
+            the container in gigabyte
+          format: int32
+          type: integer
+        id:
+          description: The ID of the container size.
+          type: string
+        memory_MB:
+          description: The amount of container memory on the compute host that is assigned
+            to the container in megabyte.
+          format: int32
+          type: integer
+        name:
+          description: The IBM Containers name of the container size.
+          type: string
+        vcpus:
+          description: The number of virtual CPUs that can be assigned to the container.
+          format: int32
+          type: integer
+    ContainersVersionGetInfo:
+      properties:
+        ApiVersion:
+          description: The current API version.
+          type: string
+        Arch:
+          description: The current Arch version.
+          type: string
+        BuildDetail:
+          properties:
+            api:
+              description: The build ID of the current API version.
+              type: string
+            automount:
+              description: The build ID of the current automount microservice version.
+              type: string
+            grupdater:
+              description: The build ID of the current grupdater microservice version.
+              type: string
+            harmony:
+              description: The build ID of the current harmony microservice version.
+              type: string
+            health-monitor:
+              description: The build ID of the current health-monitor microservice version.
+              type: string
+            hijack:
+              description: The build ID of the current hijack microservice version.
+              type: string
+            ldap:
+              description: The build ID of the current ldap microservice version.
+              type: string
+            logmet:
+              description: The build ID of the current logmet microservice version.
+              type: string
+            lumberjack:
+              description: The build ID of the current lumberjack microservice version.
+              type: string
+            redis-cluster:
+              description: The build ID of the current redis-cluster version.
+              type: string
+            sgwatcher:
+              description: The build ID of the current sgwatcher microservice version.
+              type: string
+            volmgr:
+              description: The build ID of the current volumes manager microservice version.
+              type: string
+          type: object
+        BuildID:
+          description: ""
+          type: string
+        BuildNumber:
+          description: ""
+          type: string
+        BuildTime:
+          description: Timestamp when the API version and all attached microservices were
+            built.
+          type: string
+        GitCommit:
+          description: ""
+          type: string
+        GoVersion:
+          description: The latest Go version.
+          type: string
+        KernelVersion:
+          description: The latest Kernel version.
+          type: string
+        Os:
+          description: Bluemix Containers
+          type: string
+        Version:
+          description: The latest API version.
+          type: string
+    CreateContainer:
+      properties:
+        BluemixApp:
+          description: The name of the Cloud Foundry app that you want to bind to your
+            container. The Cloud Foundry app must be created in the same space
+            where you want to create your container.
+          type: string
+        Cmd:
+          description: >
+            The command and arguments in this list are passed to the container
+            to be executed when the container is started. This command must be a
+            long-running command. Do not use a short-lived command, for example,
+            /bin/date, because it might cause the container to crash. <br>Sample
+            long-running
+            commands:<br>["ping","localhost"]<br>["tail","-f","/dev/null"]<br>["sh","-c","while
+            true; do date; sleep 20; done"]
+          items:
             type: string
-          Volumes:
-            description: Docker specific. Not supported by IBM Containers. The path to the
-              volume that is created when deploying a container from the image.
-              To use a volume in IBM Containers, you must first create a volume
-              and then mount it to your container during creation.
+          type: array
+        Cpuset:
+          description: "Pins the container processes to a specific CPU core on the compute
+            host. For example: 0 means that processes are executed on the first
+            core only."
+          type: string
+        Env:
+          description: A list of environment variables in the form of key=value pairs. All
+            keys in this list have to be unique. List multiple keys separately
+            and if you include quotation marks, include them around both the
+            environment variable name and the value.
+          items:
             type: string
-          WorkingDir:
-            description: The working directory inside the container where specified commands
-              are executed.
+          type: array
+        ExposedPorts:
+          description: All public ports that need to be exposed for the container, so the
+            container can be accessed from the Internet.
+          items:
             type: string
-        type: object
-      Container:
-        description: ???
-        type: string
-      ContainerConfig:
-        $ref: "#/definitions/ContainerConfig"
-      Created:
-        description: The time when the image was created.
-        type: string
-      DockerVersion:
-        description: ???
-        type: string
-      Id:
-        description: "Unique ID of the image that you inspected. "
-        type: string
-      Os:
-        description: ???
-        type: string
-      Parent:
-        description: The ID of the parent image that was used to build this image.
-        type: string
-      Size:
-        description: "The real size of the image. "
-        format: int32
-        type: integer
-      Tag:
-        description: "The version of the image "
-        type: string
-      Throwaway:
-        description: ???
-        type: string
-      VirtualSize:
-        description: The virtual size of the image.
-        format: int32
-        type: integer
-    type: object
-  ImageInfo:
-    properties:
-      Created:
-        description: "The time when your container image was created. "
-        format: float
-        type: number
-      Id:
-        description: "The unique identifier representing a container image. "
-        type: string
-      Image:
-        description: The name of your container image.
-        type: string
-      RepoTags:
-        description: The full path to the private Bluemix registry where the image is
-          stored including the registry name, the organization namespace, and
-          image tag.
-        items:
+          type: array
+        HostConfig:
+          $ref: "#/components/schemas/HostConfig"
+        Image:
+          description: "Full path to the image in your private Bluemix registry in the
+            format `registry.ng.bluemix.net/namespace/image`. "
           type: string
-        type: array
-      Size:
-        description: The real size of the container image.
-        format: int32
-        type: integer
-      VirtualSize:
-        description: The virtual size of the container image.
-        format: int32
-        type: integer
-  Namespace:
-    properties:
-      namespace:
-        description: The namespace that is either set for an organization, or a
-          namespace that is not available to be used in Bluemix.
-        type: string
-    type: object
-  Network:
-    properties:
-      Aliases:
-        description: Alternative name of the private container network the container is
-          connected to.
-        type: string
-      EndpointID:
-        description: Unique ID representing a container.
-        type: string
-      Gateway:
-        description: The private IP address of the network gateway in IPv4 format.
-        type: string
-      GlobalIPv6Address:
-        description: Private IP address of the container in IPv6 format. IBM Containers
-          only supports IPv4 format. This attribute is returned as empty.
-        type: string
-      GlobalIPv6PrefixLen:
-        description: Not supported by IBM Containers, empty string.
-        type: integer
-      IPAMConfig:
-        description: Specific configurations for the network driver.
-        type: string
-      IPPrefixLen:
-        description: "The prefix of the subnet in the private container network. The
-          prefix indicates that 16 bits out of 32 bits are used to address the
-          network. As every IPv4 IP adress consists of 32 bits, the last 16 bits
-          are used to assign private IP addresses to the container. "
-        type: string
-      IPv6Gateway:
-        description: The private IP address of the network gateway in IPv6 format. IBM
-          Containers only supports IPv4 format. This attribute is returned as
-          empty.
-        type: string
-      Links:
-        description: "List of container names that are linked to the container. "
-        type: string
-      MacAddress:
-        description: The MAC address that is assigned to the container.
-        type: string
-      NetworkID:
-        description: Unique identifier representing the private container network.
-        type: string
-  NetworkSetting:
-    properties:
-      Bridge:
-        description: The name of the private network bridge.
-        type: string
-      Gateway:
-        description: The IP address of the private network gateway in IPv4 format.
-        type: string
-      IpAddress:
-        description: The private IP address that is assigned to the container.
-        type: string
-      IpPrefixLen:
-        description: ""
-        format: int32
-        type: integer
-      MacAddress:
-        description: "The MAC address that was assigned to the container. "
-        type: string
-      Network:
-        $ref: "#/definitions/Network"
-      PortMapping:
-        description: "Specific to Docker. List of private container ports and their
-          mapping to the host ports. In IBM Containers all container ports are
-          exposed on the host by default. This attribute is returned as an empty
-          list. "
-        type: string
-      Ports:
-        description: All ports of the container that were exposed to the public.
-        items:
+        Memory:
+          description: "The container memory that is set for the container in Megabyte.
+            Choose one of the following sizes: Pico 64 MB, Nano 128 MB, Micro
+            256 MB, Tiny 512 MB, Small 1 GB (1024 MB), Medium 2 GB (2048 MB),
+            Large 4 GB (4096 MB) XLarge 8GB (8192 MB) and 2XLarge 16 GB (16384
+            MB)."
+          format: int32
+          type: integer
+        NumberCpus:
+          description: Number of virtual CPUs that are allocated to the container.
+          format: int32
+          type: integer
+        Volumes:
+          description: "Mount a volume to a container by specifying the details in the
+            following format: `VOLUME_NAME:/DIRECTORY_PATH[:ro]`. Example:
+            testvolume:/volumedata/temp:rw. By default, all volumes will be set
+            up with read-write access inside the container (rw). If you wish to
+            set up your volume with read-only access, enter `ro`.  Note: To
+            mount a volume to a container, you must create the volume in your
+            space first by using the `cf ic volume-create` command, or calling
+            the `POST /volumes/create endpoint`."
           type: string
-        type: array
-      PublicIpAddress:
-        description: The Public IP address that was bound to the container.
-        type: string
-    required:
-      - IpAddress
-      - PublicIpAddress
-  Port:
-    properties:
-      IP:
-        description: Public IP address that was bound to the container in IPv4 format.
-        type: string
-      PrivatePort:
-        description: The private port of the container on which the container listens
-          during run time.
-        type: string
-      PublicPort:
-        description: The public port that was exposed during container creation. When a
-          public port is exposed, a public IP address can be bound to the
-          container which makes the container accessible from the internet.
-        type: string
-      Type:
-        description: "The type of IP protocol that is used for the port. It can either
-          be `udp` or `tcp`.  "
-        type: string
-  Route:
-    description: The public route that is mapped to the container group. You can use
-      this route to access your container group from the Internet.
-    properties:
-      domain:
-        description: The default system domain is mybluemix.net and already provides a
-          SSL certificate, so you can access your container groups with HTTPS
-          without any additional configuration.
-        type: string
-      host:
-        description: The host name of your container group, such as mycontainerhost. Do
-          not include underscores (_) in the host name. The host and the domain
-          combined form the full public route URL, such as
-          http://mycontainerhost.mybluemix.net.
-        type: string
-    type: object
-  UpdateVolume:
-    properties:
-      addSpaces:
-        description: "The name or ID of the space where you want to provision your
-          existing volume. Run `cf spaces` to retrieve the name, or `cf space
-          <space_name> --guid` to retrieve the space ID. "
-        items:
+      required:
+        - Image
+    Fileshare:
+      properties:
+        capacity:
+          description: The size of the file share in gigabyte.
+          type: integer
+        created_date:
+          description: The timestamp when the file share was created.
           type: string
-        type: array
-      removeSpaces:
-        description: The name or ID of the space from which you want to unprovision your
-          existing volume. Run `cf spaces` to retrieve the name, or `cf space
-          <space_name> --guid` to retrieve the space ID.
-        items:
+        fsName:
+          description: The name of the file share.
           type: string
-        type: array
-  Volume:
-    properties:
-      fsID:
-        description: " Unique identifier representing the file share on which the volume
-          is hosted. "
-        type: string
-      hostPath:
-        description: Full path to the mounted volume inside the container.
-        type: string
-      otherSpaceVisibility:
-        description: "List of space IDs in which the volume is visible and can be used
-          by all the single containers and container groups. "
-        items:
+        hostPath:
+          description: The path to the volume on the host node.
           type: string
-        type: array
-      spaceGuid:
-        description: Unique identifier representing the space where the volume got created.
-        type: string
-      volName:
-        description: The name of the volume.
-        type: string
-  getContainerStatus:
-    properties:
-      NameOrId:
-        description: "The unique identifier of the container. "
-        type: string
-      Status:
-        description: "The current status of the container. The status can either be a
-          transient one, such as BUILDING or NETWORKING, or a non-transient one,
-          such as RUNNING, SHUTDOWN, CRASHED, or SUSPENDED. "
-        type: string
-      Transient:
-        description: When set to true, the current container state is temporary and will
-          change soon. An example for a transient state is the BUILDING state. A
-          container that is created will be set to the BUILDING state until all
-          container layers are created and the container is started. When set to
-          false, the container state is permanent, such as CRASHED.
-        type: boolean
-    required:
-      - NameOrId
+        iops:
+          description: "The number of Input/Output operations per second. "
+          format: double
+          type: number
+        iopsTotal:
+          description: The total number of IOPS considering the size of the file share.
+            The size of your file share in gigabyte multiplied with the number
+            of IOPS indicates the total number of IOPS. The higher the number of
+            IOPS the faster you can read from and write to your volumes.
+          type: integer
+        orderId:
+          description: The ID received from softlayer when the file share was ordered to
+            be set up in softlayer.
+          type: string
+        provider:
+          description: The provider of the file share.
+          type: string
+        spaceGuid:
+          description: The unique ID representing a Bluemix space in which the file share
+            was created.
+          type: string
+        state:
+          description: The current state of the file share. When the file share is ready
+            to be used, this attribute is set to `READY`.
+          type: string
+        updated_date:
+          description: The timestamp when the file share last was updated.
+          type: string
+      type: object
+    FileshareParam:
+      properties:
+        fsIOPS:
+          description: The number of input/output transactions per second. Available
+            values are 0.25, 2 or 4.
+          format: double
+          type: number
+        fsName:
+          description: The name of the new file share that you want to create. The name
+            can contain uppercase letters, lowercase letters, numbers,
+            underscores (_), and hyphens (-).
+          type: string
+        fsSize:
+          description: "The size of the file share in gigabyte. Run `cf ic volume
+            fs-flavor-list` or call the GET /volumes/fs/flavors/json API
+            endpoint to retrieve a list of available file share sizes. "
+          type: integer
+      required:
+        - fsName
+        - fsSize
+        - fsIOPS
+      type: object
+    FileshareUsage:
+      properties:
+        available_space:
+          description: The amount of space that is available in the file share in gigabytes.
+          type: string
+        total_space:
+          description: The total size of the file share in gigabytes.
+          type: string
+        used_space:
+          description: "The amount of space that is currently used from the file share. "
+          type: string
+        used_space_percentage:
+          description: The amount of space that is currently used from the file share in
+            percentage.
+          type: string
+      type: object
+    FloatingIP:
+      properties:
+        Bindings:
+          $ref: "#/components/schemas/Binding"
+        IpAddress:
+          description: The public IP address that is allocated to the organization space.
+          type: string
+    GetFileshareDetails:
+      properties:
+        fs:
+          items:
+            $ref: "#/components/schemas/Fileshare"
+          type: array
+        fsUsage:
+          items:
+            $ref: "#/components/schemas/FileshareUsage"
+          type: array
+        volnames:
+          description: A list of volume names that are mounted to the file share.
+          items:
+            type: string
+          type: array
+      type: object
+    Group:
+      properties:
+        Id:
+          description: Unique identifier representing a group.
+          type: string
+        Name:
+          description: Name of the group.
+          type: string
+    HostConfig:
+      properties:
+        Binds:
+          description: "A list of volumes to be bound to the container. Each volume must
+            be listed in the following format: VOLNAME:/CONTAINER_PATH:rw [ro].
+            "
+          items:
+            type: string
+          type: array
+        ExtraHosts:
+          description: >
+            A list of hostnames/IP mappings to be added to the container’s
+            /etc/hosts file. Specified in the form ["hostname:IP"]
+          items:
+            type: string
+          type: array
+        Links:
+          description: A list of containers that need to be linked.
+          items:
+            type: string
+          type: array
+        PortBindings:
+          description: >
+            The container ports that you want to expose to the public. Ports
+            need to be specified in the form of &lt;port&gt;/&lt;protocol&gt;:
+            [{ "HostIp": "&lt;IP&gt;", "HostPort": "&lt;port&gt;" }]
+          items:
+            type: string
+          type: array
+      type: object
+    ImageDetail:
+      properties:
+        Architecture:
+          description: "The hardware architecture for which the image was built for. The
+            architecture can either be Intel (amd64) or Power (ppc64le). "
+          type: string
+        Config:
+          properties:
+            ArgsEscaped:
+              description: ""
+              type: boolean
+            AttachStderr:
+              description: Attaches the container to stderr.
+              type: boolean
+            AttachStdin:
+              description: Attaches the container to stdin.
+              type: boolean
+            AttachStdout:
+              description: Attaches the container to stdout.
+              type: boolean
+            Cmd:
+              description: >
+                The command and arguments in this list are passed to the container
+                to be executed when the container is started. This command must
+                be a long-running command. Do not use a short-lived command, for
+                example, /bin/date, because it might cause the container to
+                crash. <br>Sample long-running
+                commands:<br>["ping","localhost"]<br>["tail","-f","/dev/null"]<br>["sh","-c","while
+                true; do date; sleep 20; done"]
+              items:
+                type: string
+              type: array
+            Domainmame:
+              description: The domain name to be used for the container.
+              type: string
+            Entrypoint:
+              description: The entrypoint specifies a command that will always be executed
+                when the container starts.
+              type: string
+            Env:
+              description: A list of environment variables in the form of key=value pairs. All
+                keys in this list have to be unique. List multiple keys
+                separately and if you include quotation marks, include them
+                around both the environment variable name and the value.
+              items:
+                type: string
+              type: array
+            ExposedPorts:
+              description: A list of all udp and tcp ports that have been publicly exposed
+                during the container creation.
+              items:
+                type: string
+              type: array
+            Hostname:
+              description: "The host name of the container provided by Openstack. "
+              type: string
+            Image:
+              description: "The unique ID of the image. "
+              type: string
+            Labels:
+              description: List of custom metadata that was added to the image. Labels serve a
+                wide range of uses, such as adding notes or license requirements
+                to an image. Every label is a key/ value pair.
+              items:
+                type: string
+              type: array
+            OnBuild:
+              description: ???
+              items:
+                type: string
+              type: array
+            OpenStdin:
+              description: When set to true, it opens stdin.
+              type: boolean
+            StdinOnce:
+              description: When set to true it closes stdin after the attached client
+                disconnects.
+              type: boolean
+            Tty:
+              description: When set to true, attach standard streams to a tty, including stdin
+                if it is not closed.
+              type: boolean
+            User:
+              description: The user to be used inside the container.
+              type: string
+            Volumes:
+              description: Docker specific. Not supported by IBM Containers. The path to the
+                volume that is created when deploying a container from the
+                image. To use a volume in IBM Containers, you must first create
+                a volume and then mount it to your container during creation.
+              type: string
+            WorkingDir:
+              description: The working directory inside the container where specified commands
+                are executed.
+              type: string
+          type: object
+        Container:
+          description: ???
+          type: string
+        ContainerConfig:
+          $ref: "#/components/schemas/ContainerConfig"
+        Created:
+          description: The time when the image was created.
+          type: string
+        DockerVersion:
+          description: ???
+          type: string
+        Id:
+          description: "Unique ID of the image that you inspected. "
+          type: string
+        Os:
+          description: ???
+          type: string
+        Parent:
+          description: The ID of the parent image that was used to build this image.
+          type: string
+        Size:
+          description: "The real size of the image. "
+          format: int32
+          type: integer
+        Tag:
+          description: "The version of the image "
+          type: string
+        Throwaway:
+          description: ???
+          type: string
+        VirtualSize:
+          description: The virtual size of the image.
+          format: int32
+          type: integer
+      type: object
+    ImageInfo:
+      properties:
+        Created:
+          description: "The time when your container image was created. "
+          format: float
+          type: number
+        Id:
+          description: "The unique identifier representing a container image. "
+          type: string
+        Image:
+          description: The name of your container image.
+          type: string
+        RepoTags:
+          description: The full path to the private Bluemix registry where the image is
+            stored including the registry name, the organization namespace, and
+            image tag.
+          items:
+            type: string
+          type: array
+        Size:
+          description: The real size of the container image.
+          format: int32
+          type: integer
+        VirtualSize:
+          description: The virtual size of the container image.
+          format: int32
+          type: integer
+    Namespace:
+      properties:
+        namespace:
+          description: The namespace that is either set for an organization, or a
+            namespace that is not available to be used in Bluemix.
+          type: string
+      type: object
+    Network:
+      properties:
+        Aliases:
+          description: Alternative name of the private container network the container is
+            connected to.
+          type: string
+        EndpointID:
+          description: Unique ID representing a container.
+          type: string
+        Gateway:
+          description: The private IP address of the network gateway in IPv4 format.
+          type: string
+        GlobalIPv6Address:
+          description: Private IP address of the container in IPv6 format. IBM Containers
+            only supports IPv4 format. This attribute is returned as empty.
+          type: string
+        GlobalIPv6PrefixLen:
+          description: Not supported by IBM Containers, empty string.
+          type: integer
+        IPAMConfig:
+          description: Specific configurations for the network driver.
+          type: string
+        IPPrefixLen:
+          description: "The prefix of the subnet in the private container network. The
+            prefix indicates that 16 bits out of 32 bits are used to address the
+            network. As every IPv4 IP adress consists of 32 bits, the last 16
+            bits are used to assign private IP addresses to the container. "
+          type: string
+        IPv6Gateway:
+          description: The private IP address of the network gateway in IPv6 format. IBM
+            Containers only supports IPv4 format. This attribute is returned as
+            empty.
+          type: string
+        Links:
+          description: "List of container names that are linked to the container. "
+          type: string
+        MacAddress:
+          description: The MAC address that is assigned to the container.
+          type: string
+        NetworkID:
+          description: Unique identifier representing the private container network.
+          type: string
+    NetworkSetting:
+      properties:
+        Bridge:
+          description: The name of the private network bridge.
+          type: string
+        Gateway:
+          description: The IP address of the private network gateway in IPv4 format.
+          type: string
+        IpAddress:
+          description: The private IP address that is assigned to the container.
+          type: string
+        IpPrefixLen:
+          description: ""
+          format: int32
+          type: integer
+        MacAddress:
+          description: "The MAC address that was assigned to the container. "
+          type: string
+        Network:
+          $ref: "#/components/schemas/Network"
+        PortMapping:
+          description: "Specific to Docker. List of private container ports and their
+            mapping to the host ports. In IBM Containers all container ports are
+            exposed on the host by default. This attribute is returned as an
+            empty list. "
+          type: string
+        Ports:
+          description: All ports of the container that were exposed to the public.
+          items:
+            type: string
+          type: array
+        PublicIpAddress:
+          description: The Public IP address that was bound to the container.
+          type: string
+      required:
+        - IpAddress
+        - PublicIpAddress
+    Port:
+      properties:
+        IP:
+          description: Public IP address that was bound to the container in IPv4 format.
+          type: string
+        PrivatePort:
+          description: The private port of the container on which the container listens
+            during run time.
+          type: string
+        PublicPort:
+          description: The public port that was exposed during container creation. When a
+            public port is exposed, a public IP address can be bound to the
+            container which makes the container accessible from the internet.
+          type: string
+        Type:
+          description: "The type of IP protocol that is used for the port. It can either
+            be `udp` or `tcp`.  "
+          type: string
+    Route:
+      description: The public route that is mapped to the container group. You can use
+        this route to access your container group from the Internet.
+      properties:
+        domain:
+          description: The default system domain is mybluemix.net and already provides a
+            SSL certificate, so you can access your container groups with HTTPS
+            without any additional configuration.
+          type: string
+        host:
+          description: The host name of your container group, such as mycontainerhost. Do
+            not include underscores (_) in the host name. The host and the
+            domain combined form the full public route URL, such as
+            http://mycontainerhost.mybluemix.net.
+          type: string
+      type: object
+    UpdateVolume:
+      properties:
+        addSpaces:
+          description: "The name or ID of the space where you want to provision your
+            existing volume. Run `cf spaces` to retrieve the name, or `cf space
+            <space_name> --guid` to retrieve the space ID. "
+          items:
+            type: string
+          type: array
+        removeSpaces:
+          description: The name or ID of the space from which you want to unprovision your
+            existing volume. Run `cf spaces` to retrieve the name, or `cf space
+            <space_name> --guid` to retrieve the space ID.
+          items:
+            type: string
+          type: array
+    Volume:
+      properties:
+        fsID:
+          description: " Unique identifier representing the file share on which the volume
+            is hosted. "
+          type: string
+        hostPath:
+          description: Full path to the mounted volume inside the container.
+          type: string
+        otherSpaceVisibility:
+          description: "List of space IDs in which the volume is visible and can be used
+            by all the single containers and container groups. "
+          items:
+            type: string
+          type: array
+        spaceGuid:
+          description: Unique identifier representing the space where the volume got
+            created.
+          type: string
+        volName:
+          description: The name of the volume.
+          type: string
+    getContainerStatus:
+      properties:
+        NameOrId:
+          description: "The unique identifier of the container. "
+          type: string
+        Status:
+          description: "The current status of the container. The status can either be a
+            transient one, such as BUILDING or NETWORKING, or a non-transient
+            one, such as RUNNING, SHUTDOWN, CRASHED, or SUSPENDED. "
+          type: string
+        Transient:
+          description: When set to true, the current container state is temporary and will
+            change soon. An example for a transient state is the BUILDING state.
+            A container that is created will be set to the BUILDING state until
+            all container layers are created and the container is started. When
+            set to false, the container state is permanent, such as CRASHED.
+          type: boolean
+      required:
+        - NameOrId
