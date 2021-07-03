@@ -106,7 +106,7 @@ Definition sources
 --------------------------
 Some definitions are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI description for Instagram API
- - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI definitions for the BBC Nitro and iBL APIs
+ - [Mermade/bbcapis](https://github.com/Mermade/bbcapis) - OpenAPI definitions for the BBC Nitro and iBL APIs
  - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI 2.0 description for Medium API
  - [faragorn/open-api-specs](https://github.com/faragorn/open-api-specs) - OpenAPI definition for the Giphy API
 
@@ -128,7 +128,7 @@ Some definitions are taken from Open Source projects:
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [Contribute](CONTRIBUTING.md).
+This project exists thanks to all the people who [contribute](CONTRIBUTING.md).
 <a href="https://github.com/APIs-guru/openapi-directory/graphs/contributors"><img src="https://opencollective.com/openapi-directory/contributors.svg?width=890&button=false" /></a>
 
 ## Asynchronous APIs
