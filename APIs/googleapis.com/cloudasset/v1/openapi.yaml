@@ -681,6 +681,11 @@ paths:
           name: query
           schema:
             type: string
+        - description: "Optional. A comma-separated list of fields specifying which fields to be returned in ResourceSearchResult. Only '*' or combination of top level fields can be specified. Field names of both snake_case and camelCase are supported. Examples: `\"*\"`, `\"name,location\"`, `\"name,versionedResources\"`. The read_mask paths must be valid field paths listed but not limited to (both snake_case and camelCase are supported): * name * asset_type or assetType * project * display_name or displayName * description * location * labels * network_tags or networkTags * kms_key or kmsKey * create_time or createTime * update_time or updateTime * state * additional_attributes or additionalAttributes * versioned_resources or versionedResources If read_mask is not specified, all fields except versionedResources will be returned. If only '*' is specified, all fields including versionedResources will be returned. Any invalid field path will trigger INVALID_ARGUMENT error."
+          in: query
+          name: readMask
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -2166,6 +2171,11 @@ components:
           description: "The last update timestamp of this resource, at which the resource was last modified or deleted. The granularity is in seconds. Timestamp.nanos will always be 0. This field is available only when the resource's proto contains it. To search against `update_time`: * use a field query. - value in seconds since unix epoch. Example: `updateTime < 1609459200` - value in date string. Example: `updateTime < 2021-01-01` - value in date-time string (must be quoted). Example: `updateTime < \"2021-01-01T00:00:00\"`"
           format: google-datetime
           type: string
+        versionedResources:
+          description: Versioned resource representations of this resource. This is repeated because there could be multiple versions of resource representations during version migration. This `versioned_resources` field is not searchable. Some attributes of the resource representations are exposed in `additional_attributes` field, so as to allow users to search on them.
+          items:
+            $ref: "#/components/schemas/VersionedResource"
+          type: array
       type: object
     ResourceSelector:
       description: Specifies the resource to analyze for access policies, which may be set directly on the resource, or on ancestors such as organizations, folders or projects.
@@ -2303,6 +2313,18 @@ components:
           type: string
         version:
           description: The version of the package.
+          type: string
+      type: object
+    VersionedResource:
+      description: Resource representation as defined by the corresponding service providing the resource for a given API version.
+      properties:
+        resource:
+          additionalProperties:
+            description: Properties of the object.
+          description: "JSON representation of the resource as defined by the corresponding service providing this resource. Example: If the resource is an instance provided by Compute Engine, this field will contain the JSON representation of the instance as defined by Compute Engine: `https://cloud.google.com/compute/docs/reference/rest/v1/instances`. You can find the resource definition for each supported resource type in this table: `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`"
+          type: object
+        version:
+          description: 'API version of the resource. Example: If the resource is an instance provided by Compute Engine v1 API as defined in `https://cloud.google.com/compute/docs/reference/rest/v1/instances`, version will be "v1".'
           type: string
       type: object
     WindowsQuickFixEngineeringPackage:

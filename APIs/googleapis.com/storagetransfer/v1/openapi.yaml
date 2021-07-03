@@ -600,6 +600,13 @@ components:
             name that ends with a '/'. This field is treated as an object
             prefix. As such, it should generally not begin with a '/'.
           type: string
+        roleArn:
+          description: Input only. Role arn to support temporary credentials via
+            AssumeRoleWithWebIdentity. When role arn is provided, transfer
+            service will fetch temporary credentials for the session using
+            AssumeRoleWithWebIdentity call for the provided role using the
+            [GoogleServiceAccount] for this project.
+          type: string
       type: object
     AzureBlobStorageData:
       description: An AzureBlobStorageData resource can be a data source, but not a
@@ -634,9 +641,13 @@ components:
         credentials](/storage-transfer/docs/data-retention#user-credentials).
       properties:
         sasToken:
-          description: Required. Azure shared access signature. (see [Grant limited access
-            to Azure Storage resources using shared access signatures
-            (SAS)](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)).
+          description: Required. Azure shared access signature (SAS). *Note:*Copying data
+            from Azure Data Lake Storage (ADLS) Gen 2 is in
+            [Preview](/products/#product-launch-stages). During Preview, if you
+            are copying data from ADLS Gen 2, you must use an account SAS. For
+            more information about SAS, see [Grant limited access to Azure
+            Storage resources using shared access signatures
+            (SAS)](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
           type: string
       type: object
     CancelOperationRequest:
@@ -752,6 +763,9 @@ components:
       properties:
         accountEmail:
           description: Email address of the service account.
+          type: string
+        subjectId:
+          description: Unique identifier for the service account.
           type: string
       type: object
     HttpData:

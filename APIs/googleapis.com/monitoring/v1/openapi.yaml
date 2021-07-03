@@ -381,6 +381,13 @@ components:
             - ALIGN_PERCENT_CHANGE
           type: string
       type: object
+    AlertChart:
+      description: A chart that displays alert policy data.
+      properties:
+        name:
+          description: "Required. The resource name of the alert policy. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] "
+          type: string
+      type: object
     Axis:
       description: A chart axis.
       properties:
@@ -904,6 +911,9 @@ components:
     Widget:
       description: Widget contains a single dashboard component and configuration of how to present the component in the dashboard.
       properties:
+        alertChart:
+          $ref: "#/components/schemas/AlertChart"
+          description: A chart of alert policy data.
         blank:
           $ref: "#/components/schemas/Empty"
           description: A blank space.

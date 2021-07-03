@@ -3271,6 +3271,9 @@ components:
         desiredAddonsConfig:
           $ref: "#/components/schemas/AddonsConfig"
           description: Configurations for the various addons available to run in the cluster.
+        desiredAuthenticatorGroupsConfig:
+          $ref: "#/components/schemas/AuthenticatorGroupsConfig"
+          description: The desired authenticator groups config for the cluster.
         desiredAutopilot:
           $ref: "#/components/schemas/Autopilot"
           description: The desired Autopilot configuration for the cluster.

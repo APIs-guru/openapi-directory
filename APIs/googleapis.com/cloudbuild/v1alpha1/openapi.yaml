@@ -525,6 +525,9 @@ components:
             - E2_HIGHCPU_8
             - E2_HIGHCPU_32
           type: string
+        pool:
+          $ref: "#/components/schemas/PoolOption"
+          description: Optional. Specification for execution on a `WorkerPool`. See [running builds in a custom worker pool](https://cloud.google.com/build/docs/custom-workers/run-builds-in-custom-worker-pool) for more information.
         requestedVerifyOption:
           description: Requested verifiability options.
           enum:
@@ -557,7 +560,7 @@ components:
             $ref: "#/components/schemas/Volume"
           type: array
         workerPool:
-          description: "Option to specify a `WorkerPool` for the build. Format: projects/{project}/locations/{location}/workerPools/{workerPool} This field is in beta and is available only to restricted users."
+          description: This field deprecated; please use `pool.name` instead.
           type: string
       type: object
     BuildStep:
@@ -644,6 +647,36 @@ components:
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
+      type: object
+    CreateWorkerPoolOperationMetadata:
+      description: Metadata for the `CreateWorkerPool` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        workerPool:
+          description: "The resource name of the `WorkerPool` to create. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`."
+          type: string
+      type: object
+    DeleteWorkerPoolOperationMetadata:
+      description: Metadata for the `DeleteWorkerPool` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        workerPool:
+          description: "The resource name of the `WorkerPool` being deleted. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`."
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -814,6 +847,13 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    PoolOption:
+      description: Details about how a build should be executed on a `WorkerPool`. See [running builds in a custom worker pool](https://cloud.google.com/build/docs/custom-workers/run-builds-in-custom-worker-pool) for more information.
+      properties:
+        name:
+          description: The `WorkerPool` resource to execute the build on. You must have `cloudbuild.workerpools.use` on the project hosting the WorkerPool. Format projects/{project}/locations/{location}/workerPools/{workerPoolId}
+          type: string
+      type: object
     RepoSource:
       description: Location of the source in a Google Cloud Source Repository.
       properties:
@@ -953,7 +993,7 @@ components:
           description: If provided, get the source from this location in Google Cloud Storage.
         storageSourceManifest:
           $ref: "#/components/schemas/StorageSourceManifest"
-          description: If provided, get the source from this manifest in Google Cloud Storage. This feature is in Preview.
+          description: If provided, get the source from this manifest in Google Cloud Storage. This feature is in Preview; see description [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
       type: object
     SourceProvenance:
       description: Provenance of the source. Ways to find the original source, or verify that some source was used for this build.
@@ -1007,7 +1047,7 @@ components:
           type: string
       type: object
     StorageSourceManifest:
-      description: Location of the source manifest in Google Cloud Storage. This feature is in Preview.
+      description: Location of the source manifest in Google Cloud Storage. This feature is in Preview; see description [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
       properties:
         bucket:
           description: Google Cloud Storage bucket containing the source manifest (see [Bucket Name Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
@@ -1030,6 +1070,21 @@ components:
         startTime:
           description: Start of time span.
           format: google-datetime
+          type: string
+      type: object
+    UpdateWorkerPoolOperationMetadata:
+      description: Metadata for the `UpdateWorkerPool` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        workerPool:
+          description: "The resource name of the `WorkerPool` being updated. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`."
           type: string
       type: object
     Volume:

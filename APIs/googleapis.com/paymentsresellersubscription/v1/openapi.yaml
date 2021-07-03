@@ -79,9 +79,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Used by partners to cancel a subscription service by the end of the
-        current billing cycle for their customers. It should be called directly
-        by the partner using service accounts.
+      description: Used by partners to cancel a subscription service either
+        immediately or by the end of the current billing cycle for their
+        customers. It should be called directly by the partner using service
+        accounts.
       operationId: paymentsresellersubscription.partners.subscriptions.cancel
       parameters:
         - description: Required. The name of the subscription resource to be cancelled. It
@@ -791,6 +792,16 @@ components:
           description: Required. Identifier of the end-user in partner’s system. The value
             is restricted to 63 ASCII characters at the maximum.
           type: string
+        processingState:
+          description: Output only. Describes the processing state of the subscription.
+            See more details at [the lifecycle of a
+            subscription](/payments/reseller/subscription/reference/index/Receive.Notifications#payments-subscription-lifecycle).
+          enum:
+            - PROCESSING_STATE_UNSPECIFIED
+            - PROCESSING_STATE_CANCELLING
+            - PROCESSING_STATE_RECURRING
+          readOnly: true
+          type: string
         products:
           description: Required. Resource name that identifies one or more subscription
             products. The format will be
@@ -818,7 +829,7 @@ components:
           description: Required. The location that the service is provided as indicated by
             the partner.
         state:
-          description: Output only. Descibes the state of the subscription. See more
+          description: Output only. Describes the state of the subscription. See more
             details at [the lifecycle of a
             subscription](/payments/reseller/subscription/reference/index/Receive.Notifications#payments-subscription-lifecycle).
           enum:
@@ -844,7 +855,7 @@ components:
             subscription is an upgrade/downgrade from another subscription.
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails:
-      description: Describes the details of a cancelled subscription.
+      description: Describes the details of a cancelled or cancelling subscription.
       properties:
         reason:
           description: The reason of the cancellation.

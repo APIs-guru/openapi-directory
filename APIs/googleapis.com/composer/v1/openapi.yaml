@@ -411,10 +411,18 @@ components:
             - NO_CONFLICT
           readOnly: true
           type: string
+        imageVersion:
+          description: Composer image for which the build was happening.
+          type: string
         pypiConflictBuildLogExtract:
           description: Output only. Extract from a docker image build log containing information about pypi modules conflicts.
           readOnly: true
           type: string
+        pypiDependencies:
+          additionalProperties:
+            type: string
+          description: Pypi dependencies specified in the environment configuration, at the time when the build was triggered.
+          type: object
       type: object
     DatabaseConfig:
       description: The configuration of Cloud SQL instance that is used by the Apache Airflow software.

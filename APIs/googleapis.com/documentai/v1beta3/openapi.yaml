@@ -657,6 +657,17 @@ components:
           description: The resource name of the created evaluation.
           type: string
       type: object
+    GoogleCloudDocumentaiUiv1beta3ExportProcessorVersionMetadata:
+      description: Metadata message associated with the ExportProcessorVersion operation.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The common metadata about the operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ExportProcessorVersionResponse:
+      description: Response message associated with the ExportProcessorVersion operation.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiUiv1beta3SetDefaultProcessorVersionMetadata:
       description: The long running operation metadata for set default processor version method.
       properties:
