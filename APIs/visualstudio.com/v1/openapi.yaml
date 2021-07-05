@@ -4675,6 +4675,12 @@ components:
         autoShutdownDelayMinutes:
           format: int32
           type: integer
+        branchName:
+          nullable: true
+          type: string
+        commitId:
+          nullable: true
+          type: string
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
         containerImage:

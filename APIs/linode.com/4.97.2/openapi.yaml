@@ -569,7 +569,7 @@ info:
 
     can be accessed via other methods such as Shell commands and other third-party applications.
   title: Linode API
-  version: 4.97.1
+  version: 4.97.2
   x-apisguru-categories:
     - cloud
   x-origin:
@@ -14597,7 +14597,7 @@ paths:
                   expiry:
                     description: |
                       When this Two Factor secret expires.
-                    example: 2021-06-30T10:12:40.760Z
+                    example: {}
                     format: date-time
                     type: string
                   secret:
@@ -19945,7 +19945,7 @@ components:
         created:
           description: |
             When this Longview Client was created.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           readOnly: true
           type: string
@@ -19983,7 +19983,7 @@ components:
         updated:
           description: |
             When this Longview Client was last updated.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           readOnly: true
           type: string
@@ -20104,9 +20104,7 @@ components:
             The maintenance status.
           enum:
             - pending
-            - ready
             - started
-            - completed
           example: started
           type: string
           x-linode-filterable: true
@@ -20136,7 +20134,7 @@ components:
             or "+neq") and single date-time string format values ("%Y-%m-%dT%H:%M:%S"). "+or" accepts an array of values that
 
             may consist of single date-time strings or dictionaries of inequality operator pairs.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           type: string
           x-linode-filterable: true
@@ -20509,7 +20507,7 @@ components:
         created:
           description: |
             When this NodeBalancer was created.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           readOnly: true
           type: string
@@ -20607,7 +20605,7 @@ components:
         updated:
           description: |
             When this NodeBalancer was last updated.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           readOnly: true
           type: string
@@ -21239,7 +21237,7 @@ components:
           type: string
         created:
           description: When this bucket was created.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           type: string
         hostname:
@@ -21380,7 +21378,7 @@ components:
           description: >
             The date and time this object was last modified. `null` if this
             object represents a prefix.
-          example: 2021-06-30T10:12:40.763Z
+          example: {}
           format: date-time
           type: string
         name:
@@ -21618,7 +21616,7 @@ components:
         created:
           description: |
             The date and time this token was created.
-          example: 2021-06-30T10:12:40.764Z
+          example: {}
           format: date-time
           readOnly: true
           type: string

@@ -330,7 +330,7 @@ paths:
                 $ref: "#/components/schemas/Account"
           description: Rev.ai Account
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs~1{id}/get/responses/401"
       summary: Get Account
       tags:
         - Account
@@ -435,7 +435,7 @@ paths:
                     type: object
           description: Bad Request
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs~1{id}/get/responses/401"
       summary: Get List of Jobs
       tags:
         - Jobs
@@ -562,8 +562,18 @@ paths:
                 type: https://www.rev.ai/api/v1/errors/invalid-parameters
               schema:
                 allOf:
-                  - $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-                      ema/allOf/0"
+                  - description: Problem details object returned on errors
+                    properties:
+                      status:
+                        description: HTTP status code of the error
+                        type: integer
+                      title:
+                        description: Short, human-readable summary of the problem type
+                        type: string
+                      type:
+                        description: URI that identifies the problem
+                        type: string
+                    type: object
                   - properties:
                       parameters:
                         description: Invalid properties object where each property is the key, mapped to
@@ -572,7 +582,7 @@ paths:
                     type: object
           description: Bad Request
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs~1{id}/get/responses/401"
         "413":
           $ref: "#/components/responses/PayloadTooLarge"
       summary: Submit Transcription Job
@@ -706,7 +716,7 @@ paths:
         "204":
           description: Job was successfully deleted
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs~1{id}/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
         "409":
@@ -918,7 +928,7 @@ paths:
 
             ([SRT](https://en.wikipedia.org/wiki/SubRip))
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs~1{id}/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
         "405":
@@ -1256,7 +1266,7 @@ paths:
 
             Note: Transcript output format is required in the Accept header. Output can either be in Rev's JSON format or plaintext.
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs~1{id}/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
         "406":
@@ -1387,8 +1397,18 @@ components:
             type: https://www.rev.ai/api/v1/errors/unsupported-output-format
           schema:
             allOf:
-              - $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-                  ema/allOf/0"
+              - description: Problem details object returned on errors
+                properties:
+                  status:
+                    description: HTTP status code of the error
+                    type: integer
+                  title:
+                    description: Short, human-readable summary of the problem type
+                    type: string
+                  type:
+                    description: URI that identifies the problem
+                    type: string
+                type: object
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1418,8 +1438,18 @@ components:
             type: https://rev.ai/api/v1/errors/invalid-job-state
           schema:
             allOf:
-              - $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-                  ema/allOf/0"
+              - description: Problem details object returned on errors
+                properties:
+                  status:
+                    description: HTTP status code of the error
+                    type: integer
+                  title:
+                    description: Short, human-readable summary of the problem type
+                    type: string
+                  type:
+                    description: URI that identifies the problem
+                    type: string
+                type: object
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1447,8 +1477,18 @@ components:
             type: https://rev.ai/api/v1/errors/invalid-job-properties
           schema:
             allOf:
-              - $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-                  ema/allOf/0"
+              - description: Problem details object returned on errors
+                properties:
+                  status:
+                    description: HTTP status code of the error
+                    type: integer
+                  title:
+                    description: Short, human-readable summary of the problem type
+                    type: string
+                  type:
+                    description: URI that identifies the problem
+                    type: string
+                type: object
               - properties:
                   detail:
                     description: Human-readable explanation specific to this occurrence of the
@@ -1469,8 +1509,18 @@ components:
             type: https://rev.ai/api/v1/errors/invalid-job-state
           schema:
             allOf:
-              - $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-                  ema/allOf/0"
+              - description: Problem details object returned on errors
+                properties:
+                  status:
+                    description: HTTP status code of the error
+                    type: integer
+                  title:
+                    description: Short, human-readable summary of the problem type
+                    type: string
+                  type:
+                    description: URI that identifies the problem
+                    type: string
+                type: object
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1505,8 +1555,18 @@ components:
             type: https://www.rev.ai/api/v1/errors/unsupported-output-format
           schema:
             allOf:
-              - $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-                  ema/allOf/0"
+              - description: Problem details object returned on errors
+                properties:
+                  status:
+                    description: HTTP status code of the error
+                    type: integer
+                  title:
+                    description: Short, human-readable summary of the problem type
+                    type: string
+                  type:
+                    description: URI that identifies the problem
+                    type: string
+                type: object
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1530,8 +1590,18 @@ components:
             title: could not find job
             type: https://www.rev.ai/api/v1/errors/job-not-found
           schema:
-            $ref: "#/paths/~1jobs/get/responses/400/content/application~1problem%2Bjson/sch\
-              ema/allOf/0"
+            description: Problem details object returned on errors
+            properties:
+              status:
+                description: HTTP status code of the error
+                type: integer
+              title:
+                description: Short, human-readable summary of the problem type
+                type: string
+              type:
+                description: URI that identifies the problem
+                type: string
+            type: object
       description: Job Not Found
     PayloadTooLarge:
       content:
@@ -1835,7 +1905,7 @@ components:
             language:
               description: >
                 You can provide a language parameter for transcribing audio in
-                Arabic, Bulgarian, Catalan, Croation, Czech, Danish, Dutch,
+                Arabic, Bulgarian, Catalan, Croatian, Czech, Danish, Dutch,
                 Finnish, French, German, Greek, Hindi, Hungarian, Italian,
                 Japanese, Korean, Lithuanian, Latvian, Malay, Mandarin,
                 Norwegian, Polish, Portuguese, Romanian, Russian, Slovak,

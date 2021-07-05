@@ -53,8 +53,8 @@ paths:
                     example: The request failed due to validation errors
                     type: string
                   instance:
-                    example: 797a8f199c45014ab7b08bfe9cc1c12c
-                    type: string
+                    $ref: "#/components/responses/InvalidPayloadError/content/application~1json/sch\
+                      ema/properties/instance"
                   invalid_parameters:
                     items:
                       properties:
@@ -82,8 +82,8 @@ paths:
                     example: You did not provide correct credentials.
                     type: string
                   instance:
-                    $ref: "#/paths/~1/get/responses/400/content/application~1json/schema/properties\
-                      /instance"
+                    $ref: "#/components/responses/InvalidPayloadError/content/application~1json/sch\
+                      ema/properties/instance"
                   title:
                     example: Invalid credentials supplied
                     type: string
@@ -100,8 +100,8 @@ paths:
                     example: Request method 'TRACE' not supported
                     type: string
                   instance:
-                    $ref: "#/paths/~1/get/responses/400/content/application~1json/schema/properties\
-                      /instance"
+                    $ref: "#/components/responses/InvalidPayloadError/content/application~1json/sch\
+                      ema/properties/instance"
                   title:
                     example: Request method not allowed
                     type: string
@@ -119,8 +119,8 @@ paths:
                       'application/json'"
                     type: string
                   instance:
-                    $ref: "#/paths/~1/get/responses/400/content/application~1json/schema/properties\
-                      /instance"
+                    $ref: "#/components/responses/InvalidPayloadError/content/application~1json/sch\
+                      ema/properties/instance"
                   title:
                     example: Invalid Accept header
                     type: string
@@ -418,8 +418,8 @@ paths:
                       following: 'application/json'"
                     type: string
                   instance:
-                    $ref: "#/paths/~1/get/responses/400/content/application~1json/schema/properties\
-                      /instance"
+                    $ref: "#/components/responses/InvalidPayloadError/content/application~1json/sch\
+                      ema/properties/instance"
                   title:
                     example: Unsupported Content-Type header
                     type: string
@@ -438,7 +438,7 @@ paths:
         "401":
           $ref: "#/paths/~1/get/responses/401"
         "404":
-          $ref: "#/paths/~1%7Bid%7D/get/responses/404"
+          $ref: "#/paths/~1{id}/get/responses/404"
         "405":
           $ref: "#/paths/~1/get/responses/405"
         "406":
@@ -464,8 +464,8 @@ paths:
                     example: ID 'ABC123' does not exist, or you do not have access
                     type: string
                   instance:
-                    $ref: "#/paths/~1/get/responses/400/content/application~1json/schema/properties\
-                      /instance"
+                    $ref: "#/components/responses/InvalidPayloadError/content/application~1json/sch\
+                      ema/properties/instance"
                   title:
                     example: Not Found
                     type: string
@@ -761,7 +761,7 @@ paths:
         "401":
           $ref: "#/paths/~1/get/responses/401"
         "404":
-          $ref: "#/paths/~1%7Bid%7D/get/responses/404"
+          $ref: "#/paths/~1{id}/get/responses/404"
         "405":
           $ref: "#/paths/~1/get/responses/405"
         "406":
@@ -780,8 +780,8 @@ components:
                 example: The request failed due to validation errors
                 type: string
               instance:
-                $ref: "#/paths/~1/get/responses/400/content/application~1json/schema/properties\
-                  /instance"
+                example: 797a8f199c45014ab7b08bfe9cc1c12c
+                type: string
               invalid_parameters:
                 items:
                   properties:

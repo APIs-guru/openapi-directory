@@ -9,7 +9,7 @@ info:
     url: https://brex.io
   description: API Interface to retrieve company data and products from business registers
   title: KYC API Documentation
-  version: "2020.46"
+  version: "2021.12"
   x-apisguru-categories:
     - financial
   x-logo:
@@ -30,6 +30,8 @@ tags:
     name: v1-company
   - description: Product Search, Order and Retrieve methods
     name: v1-product
+  - description: Blockchain proof related methods
+    name: v1-proof
   - description: Pep Sanction Check methods
     name: v1-pepsanction
   - description: VAT Verification methods
@@ -264,10 +266,16 @@ paths:
           schema:
             format: string
             type: string
+        - description: Create a proof of request. (Requires plan feature)
+          in: query
+          name: create_proof
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
-            responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1{country}~1{name}/get/response\
+            s/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -295,15 +303,138 @@ paths:
           schema:
             format: string
             type: string
+        - description: Create a proof of request. (Requires plan feature)
+          in: query
+          name: create_proof
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
-            responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1{country}~1{name}/get/response\
+            s/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
       summary: Retrieves a list of companies from the official business register
+      tags:
+        - v1-company
+  /api/v1/company/monitoring/changeTypes:
+    get:
+      description: Get current list of available ChangeTypes to subscribe to
+      operationId: CompanyMonitorChangeTypesList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: List of ChangeTypes
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Get available ChangeTypes
+      tags:
+        - v1-company
+  /api/v1/company/monitoring/list:
+    get:
+      description: Query list of all registered monitors for logged in user
+      operationId: CompanyMonitorList
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1company~1notification~1list~1{id}/get/responses/200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Retrieves a list of registered monitors
+      tags:
+        - v1-company
+  "/api/v1/company/monitoring/list/{id}":
+    get:
+      description: Query status of registered monitors for a specific company
+        identified by a company id
+      operationId: CompanyMonitorId
+      parameters:
+        - description: Company Hex ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: string
+            type: string
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1company~1notification~1list~1{id}/get/responses/200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Get monitor status for specific company id
+      tags:
+        - v1-company
+  "/api/v1/company/monitoring/register/{id}":
+    post:
+      description: Add a company to your perpetual monitoring list and register a
+        callback URL to get monitoring alerts.
+      operationId: CompanyMonitorRegister
+      parameters:
+        - description: Company Hex ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: string
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                callbackUrl:
+                  description: Callback URL
+                  type: string
+                changeType:
+                  description: ChangeType to monitor
+                  type: string
+              type: object
+        description: Callback URL where the notifications will be sent to
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1company~1notification~1register~1{id}/post/responses/\
+            200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Register a Company for monitoring
+      tags:
+        - v1-company
+  "/api/v1/company/monitoring/unregister/{id}":
+    post:
+      description: Deactivate a previously registered company monitor identified by
+        the notifier id
+      operationId: CompanyMonitorUnregister
+      parameters:
+        - description: Registration id of monitoring request record
+          in: path
+          name: id
+          required: true
+          schema:
+            format: string
+            type: string
+      responses:
+        "200":
+          description: Empty response body
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Deactivates an active notification
       tags:
         - v1-company
   /api/v1/company/notification/list:
@@ -312,8 +443,7 @@ paths:
       operationId: CompanyNotificationList
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1notification~1list~1%7Bid%7D/get/responses/2\
-            00"
+          $ref: "#/paths/~1api~1v1~1company~1notification~1list~1{id}/get/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -347,8 +477,8 @@ paths:
                     callbackUrl:
                       type: string
                     created:
-                      $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
-                        tent/application~1json/schema/items/properties/time"
+                      $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200/content\
+                        /application~1json/schema/items/properties/time"
                     monitorStatus:
                       type: string
                     notificationId:
@@ -409,7 +539,7 @@ paths:
         - v1-company
   "/api/v1/company/notification/unregister/{id}":
     post:
-      description: Deactive a previously registered company notification identified by
+      description: Deactivate a previously registered company monitor identified by
         the notifier id
       operationId: CompanyNotificationUnregister
       parameters:
@@ -427,7 +557,7 @@ paths:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
         - user_key: []
-      summary: Deactivates an active notification
+      summary: Unregister a company from Monitoring
       tags:
         - v1-company
   "/api/v1/company/search/name/{country}/{name}":
@@ -540,8 +670,8 @@ paths:
             type: integer
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
-            responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1{country}~1{name}/get/response\
+            s/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -589,8 +719,8 @@ paths:
         description: VAT number and the company details
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
-            responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1{country}~1{name}/get/response\
+            s/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -636,7 +766,7 @@ paths:
             type: boolean
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -676,8 +806,8 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
-            responses/200"
+          $ref: "#/paths/~1api~1v1~1company~1search~1name~1{country}~1{name}/get/response\
+            s/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -705,6 +835,12 @@ paths:
           required: false
           schema:
             type: boolean
+        - description: Create a proof of request. (Requires plan feature)
+          in: query
+          name: create_proof
+          required: false
+          schema:
+            type: boolean
         - description: company master data by id
           in: path
           name: dataset
@@ -723,8 +859,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/\
-                  200/content/application~1json/schema/properties/company"
+                $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1{number}/get/responses/200/\
+                  content/application~1json/schema/properties/company"
           description: ""
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
@@ -1158,8 +1294,8 @@ paths:
                     caseId:
                       type: string
                     created:
-                      $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
-                        tent/application~1json/schema/items/properties/time"
+                      $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200/content\
+                        /application~1json/schema/items/properties/time"
                     identifier:
                       type: string
                     structured:
@@ -1191,8 +1327,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1pepsanction~1monitor~1update~1%7Bid%7D/post/responses\
-            /200"
+          $ref: "#/paths/~1api~1v1~1pepsanction~1monitor~1update~1{id}/post/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1235,8 +1370,8 @@ paths:
                   caseId:
                     type: string
                   created:
-                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
-                      tent/application~1json/schema/items/properties/time"
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200/content\
+                      /application~1json/schema/items/properties/time"
                   identifier:
                     type: string
                   structured:
@@ -1361,8 +1496,8 @@ paths:
         description: Optional parameters to enhance search
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1availability~1%7Bsku%7D~1%7BsubjectId%7D/get\
-            /responses/200"
+          $ref: "#/paths/~1api~1v1~1product~1availability~1{sku}~1{subjectId}/get/respons\
+            es/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1427,8 +1562,8 @@ paths:
                   status:
                     type: string
                   timestamp:
-                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
-                      tent/application~1json/schema/items/properties/time"
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200/content\
+                      /application~1json/schema/items/properties/time"
                   type:
                     type: string
                 required:
@@ -1575,8 +1710,8 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1notifier~1%7BorderId%7D~1%7Btype%7D~1%7Buri%\
-            7D/post/responses/200"
+          $ref: "#/paths/~1api~1v1~1product~1notifier~1{orderId}~1{type}~1{uri}/post/resp\
+            onses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1629,8 +1764,8 @@ paths:
                   identity:
                     type: string
                   lastCallTime:
-                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
-                      tent/application~1json/schema/items/properties/time"
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200/content\
+                      /application~1json/schema/items/properties/time"
                   lastResponseCode:
                     type: integer
                   notifierType:
@@ -1723,8 +1858,7 @@ paths:
         description: Parameters for the concierge order
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
-            nses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1{sku}~1{subjectId}/post/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1775,8 +1909,7 @@ paths:
         description: Parameters for the UBO order
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
-            nses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1{sku}~1{subjectId}/post/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1811,10 +1944,15 @@ paths:
           schema:
             format: string
             type: string
+        - description: Create a proof of request. (Requires plan feature)
+          in: query
+          name: create_proof
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
-            nses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1{sku}~1{subjectId}/post/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1842,6 +1980,12 @@ paths:
           schema:
             format: string
             type: string
+        - description: Create a proof of request. (Requires plan feature)
+          in: query
+          name: create_proof
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -1853,8 +1997,8 @@ paths:
                   option:
                     type: string
                   ordered:
-                    $ref: "#/paths/~1api~1v1~1company~1announcement~1%7Bid%7D/get/responses/200/con\
-                      tent/application~1json/schema/items/properties/time"
+                    $ref: "#/paths/~1api~1v1~1company~1announcement~1{id}/get/responses/200/content\
+                      /application~1json/schema/items/properties/time"
                   owner:
                     type: string
                   price:
@@ -1953,8 +2097,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
-            nses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1{sku}~1{subjectId}/post/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -1995,8 +2138,7 @@ paths:
         description: Parameters for the update order endpoint
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7BsubjectId%7D/post/respo\
-            nses/200"
+          $ref: "#/paths/~1api~1v1~1product~1order~1{sku}~1{subjectId}/post/responses/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -2063,6 +2205,61 @@ paths:
       summary: Retrieves the result of an order
       tags:
         - v1-product
+  "/api/v1/proof/{proofId}":
+    get:
+      description: Retrieve all details attached with a proof of request
+      operationId: ProofRetrieve
+      parameters:
+        - description: The proofId that was returned during the request
+          in: path
+          name: proofId
+          required: true
+          schema:
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  blockchainData:
+                    properties:
+                      digest:
+                        type: string
+                      digestCalculation:
+                        type: string
+                      link:
+                        type: string
+                      recordedAt:
+                        type: string
+                      salt:
+                        type: string
+                      txId:
+                        type: string
+                  children:
+                    items:
+                      $ref: "#/paths/~1api~1v1~1proof~1{proofId}/get/responses/200/content/applicatio\
+                        n~1json/schema"
+                    type: array
+                  data:
+                    type: object
+                  encData:
+                    type: string
+                  encKey:
+                    type: string
+                  proofId:
+                    type: string
+                  recordType:
+                    type: string
+          description: Details attached to a proof of request
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: Retrieves the blockchain proof attached with a request
+      tags:
+        - v1-proof
   /api/v1/system/countries:
     get:
       description: Retrieve the list of all currently enabled countries
@@ -2247,8 +2444,8 @@ paths:
                   einResult:
                     type: string
                   matchedCompanies:
-                    $ref: "#/paths/~1api~1v1~1company~1search~1name~1%7Bcountry%7D~1%7Bname%7D/get/\
-                      responses/200/content/application~1json/schema"
+                    $ref: "#/paths/~1api~1v1~1company~1search~1name~1{country}~1{name}/get/response\
+                      s/200/content/application~1json/schema"
                   tinResult:
                     type: string
                 required:
@@ -2342,8 +2539,8 @@ paths:
               schema:
                 properties:
                   company:
-                    $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/\
-                      200/content/application~1json/schema/properties/company"
+                    $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1{number}/get/responses/200/\
+                      content/application~1json/schema/properties/company"
                   confidenceScore:
                     type: number
                   validationStatus:
@@ -2396,8 +2593,8 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1%7Bcountry%7D/post/res\
-            ponses/200"
+          $ref: "#/paths/~1api~1v1~1vat-verification~1basic-check~1{country}/post/respons\
+            es/200"
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
       security:
@@ -2503,9 +2700,8 @@ paths:
                     items:
                       properties:
                         company:
-                          $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/\
-                            200/content/application~1json/schema/properties/com\
-                            pany"
+                          $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1{number}/get/responses/200/\
+                            content/application~1json/schema/properties/company"
                         vat:
                           type: string
                     type: array

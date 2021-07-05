@@ -2748,6 +2748,8 @@ definitions:
         format: int32
         type: integer
       VatId:
+        description: The vat-id, that should be saved at the customer. Only used if
+          CustomerVatId is not set on the order.
         type: string
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.CreateShipmentApiModel:
@@ -2907,6 +2909,8 @@ definitions:
         format: int32
         type: integer
       VatId:
+        description: The vat-id, that should be saved at the customer. Only used if
+          CustomerVatId is not set on the order.
         type: string
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.DeletedImagesModel:
@@ -2983,6 +2987,9 @@ definitions:
       CustomerNumber:
         description: The customer number (not to be confused with the id of the customer)
         type: string
+      CustomerVatId:
+        description: The vat-id, that was given by the customer to fulfill this order
+        type: string
       DeliverySourceCountryCode:
         description: An optional Country ISO2 Code of the country where order is shipped
           from (FBA)
@@ -3024,6 +3031,10 @@ definitions:
       LastModifiedAt:
         description: Date of the last update, the order got
         format: date-time
+        type: string
+      MerchantVatId:
+        description: The vat-id, that should be displayed on the invoice and other order
+          documents
         type: string
       OrderItems:
         description: The list of items purchased like shirt, pant, toys etc

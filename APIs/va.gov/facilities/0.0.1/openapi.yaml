@@ -1084,6 +1084,11 @@ components:
           $ref: "#/components/schemas/Satisfaction"
         services:
           $ref: "#/components/schemas/Services"
+        time_zone:
+          description: Facility time zone
+          example: America/New_York
+          format: String
+          type: string
         visn:
           example: "20"
           nullable: true
@@ -1510,6 +1515,11 @@ components:
           $ref: "#/components/schemas/Satisfaction"
         services:
           $ref: "#/components/schemas/Services"
+        time_zone:
+          description: Facility time zone
+          example: America/New_York
+          format: String
+          type: string
         visn:
           example: "20"
           nullable: true

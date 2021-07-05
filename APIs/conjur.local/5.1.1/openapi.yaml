@@ -139,8 +139,8 @@ paths:
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
-              s/1/schema"
+            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
+              ma"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -166,8 +166,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
-            /200"
+          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -223,7 +222,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200"
+          $ref: "#/paths/~1authn~1{account}~1login/get/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -264,8 +263,8 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
-            et/responses/200"
+          $ref: "#/paths/~1{authenticator}~1{service_id}~1{account}~1status/get/responses\
+            /200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -273,11 +272,11 @@ paths:
         "404":
           description: The service was not found
         "500":
-          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
-            et/responses/200"
+          $ref: "#/paths/~1{authenticator}~1{service_id}~1{account}~1status/get/responses\
+            /200"
         "501":
-          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
-            et/responses/200"
+          $ref: "#/paths/~1{authenticator}~1{service_id}~1{account}~1status/get/responses\
+            /200"
       security:
         - conjurAuth: []
       summary: Details whether an authentication service has been configured properly
@@ -333,8 +332,8 @@ paths:
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
-              s/1/schema"
+            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
+              ma"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -355,8 +354,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
-            /200"
+          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -399,8 +397,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
-            /200"
+          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -517,8 +514,8 @@ paths:
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
-              s/1/schema"
+            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
+              ma"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -531,8 +528,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
-            /200"
+          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -581,7 +577,7 @@ paths:
             $ref: "#/components/schemas/AccountName"
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200"
+          $ref: "#/paths/~1authn~1{account}~1login/get/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -653,8 +649,8 @@ paths:
           name: login
           required: true
           schema:
-            $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/parameter\
-              s/1/schema"
+            $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/parameters/1/sche\
+              ma"
         - description: Setting the Accept-Encoding header to base64 will return a
             pre-encoded access token
           in: header
@@ -669,14 +665,13 @@ paths:
         content:
           text/plain:
             schema:
-              $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200/content/text~1pl\
-                ain/schema"
+              $ref: "#/paths/~1authn~1{account}~1login/get/responses/200/content/text~1plain/\
+                schema"
         description: API key
         required: false
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
-            /200"
+          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -726,8 +721,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1%7Blogin%7D~1authenticate/post/responses\
-            /200"
+          $ref: "#/paths/~1authn~1{account}~1{login}~1authenticate/post/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -803,7 +797,7 @@ paths:
             $ref: "#/components/schemas/RoleType"
       responses:
         "200":
-          $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200"
+          $ref: "#/paths/~1authn~1{account}~1login/get/responses/200"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1022,8 +1016,8 @@ paths:
         content:
           text/plain:
             schema:
-              $ref: "#/paths/~1authn~1%7Baccount%7D~1login/get/responses/200/content/text~1pl\
-                ain/schema"
+              $ref: "#/paths/~1authn~1{account}~1login/get/responses/200/content/text~1plain/\
+                schema"
         description: API Key
         required: true
       responses:
@@ -1470,26 +1464,25 @@ paths:
         content:
           application/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/plain:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
         description: Policy
         required: true
       responses:
         "201":
-          $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/response\
-            s/201"
+          $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/responses/201"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1539,26 +1532,25 @@ paths:
         content:
           application/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/plain:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
         description: Policy
         required: true
       responses:
         "201":
-          $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/response\
-            s/201"
+          $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/responses/201"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1601,16 +1593,16 @@ paths:
         content:
           application/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/plain:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/x-yaml:
             schema:
-              $ref: "#/paths/~1policies~1%7Baccount%7D~1policy~1%7Bidentifier%7D/put/requestB\
-                ody/content/text~1yaml/schema"
+              $ref: "#/paths/~1policies~1{account}~1policy~1{identifier}/put/requestBody/cont\
+                ent/text~1yaml/schema"
           text/yaml:
             schema:
               example: |
@@ -2927,11 +2919,11 @@ paths:
         "404":
           description: The service was not found
         "500":
-          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
-            et/responses/200"
+          $ref: "#/paths/~1{authenticator}~1{service_id}~1{account}~1status/get/responses\
+            /200"
         "501":
-          $ref: "#/paths/~1%7Bauthenticator%7D~1%7Bservice_id%7D~1%7Baccount%7D~1status/g\
-            et/responses/200"
+          $ref: "#/paths/~1{authenticator}~1{service_id}~1{account}~1status/get/responses\
+            /200"
       security:
         - conjurAuth: []
       summary: Details whether an authentication service has been configured properly

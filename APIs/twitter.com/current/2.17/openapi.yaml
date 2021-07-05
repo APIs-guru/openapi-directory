@@ -13,7 +13,7 @@ info:
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   title: Twitter API v2
-  version: "2.15"
+  version: "2.17"
   x-apisguru-categories:
     - social
   x-logo:
@@ -1164,6 +1164,43 @@ paths:
       summary: User mention timeline by User ID
       tags:
         - Tweets
+  "/2/users/{id}/muting":
+    post:
+      description: Causes the user (in the path) to mute the target user. The user (in
+        the path) must match the user context authorizing the request
+      operationId: usersIdMute
+      parameters:
+        - description: The ID of the user that is requesting to mute the target user
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                target_user_id:
+                  pattern: ^[0-9]{1,19}$
+                  type: string
+              required:
+                - target_user_id
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersMutingMutationResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - UserToken: []
+      summary: Mute User by User ID
+      tags:
+        - Users
   "/2/users/{id}/tweets":
     get:
       description: Returns a list of Tweets authored by the provided User ID
@@ -1265,6 +1302,38 @@ paths:
       security:
         - UserToken: []
       summary: Unfollow User
+      tags:
+        - Users
+  "/2/users/{source_user_id}/muting/{target_user_id}":
+    delete:
+      description: Causes the source user to unmute the target user. The source user
+        must match the user context authorizing the request
+      operationId: usersIdUnmute
+      parameters:
+        - description: The ID of the user that is requesting to unmute the target user
+          in: path
+          name: source_user_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - description: The ID of the user that the source user is requesting to unmute
+          in: path
+          name: target_user_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersMutingMutationResponse"
+          description: The request was successful
+        default:
+          $ref: "#/components/responses/HttpErrorResponse"
+      security:
+        - UserToken: []
+      summary: Unmute User by User ID
       tags:
         - Users
 components:
@@ -3304,6 +3373,19 @@ components:
         data:
           properties:
             liked:
+              type: boolean
+          type: object
+        errors:
+          items:
+            $ref: "#/components/schemas/Problem"
+          minItems: 1
+          type: array
+      type: object
+    UsersMutingMutationResponse:
+      properties:
+        data:
+          properties:
+            muting:
               type: boolean
           type: object
         errors:

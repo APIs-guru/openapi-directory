@@ -581,9 +581,9 @@ paths:
   "/customers/{account}/announcements/{announcement_id}":
     delete:
       parameters:
-        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements/get/parameters/0"
-        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements~1%7Bannouncement_id%7D\
-            /get/parameters/1"
+        - $ref: "#/paths/~1customers~1{account}~1announcements/get/parameters/0"
+        - $ref: "#/paths/~1customers~1{account}~1announcements~1{announcement_id}/get/par\
+            ameters/1"
       responses:
         "404":
           content:
@@ -604,7 +604,7 @@ paths:
         - announcements
     get:
       parameters:
-        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements/get/parameters/0"
+        - $ref: "#/paths/~1customers~1{account}~1announcements/get/parameters/0"
         - description: Announcement ID of audio file
           in: path
           name: announcement_id

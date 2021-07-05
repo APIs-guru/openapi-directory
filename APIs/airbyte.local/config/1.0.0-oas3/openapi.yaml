@@ -1646,6 +1646,8 @@ components:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
           type: string
+        resourceRequirements:
+          $ref: "#/components/schemas/ResourceRequirements"
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
         sourceId:
@@ -1695,6 +1697,8 @@ components:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
           type: string
+        resourceRequirements:
+          $ref: "#/components/schemas/ResourceRequirements"
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
         sourceId:
@@ -1781,6 +1785,8 @@ components:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
           type: string
+        resourceRequirements:
+          $ref: "#/components/schemas/ResourceRequirements"
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
         status:
@@ -2359,6 +2365,19 @@ components:
         rowOffset:
           type: integer
       type: object
+    ResourceRequirements:
+      description: optional resource requirements to run workers (blank for unbounded
+        allocations)
+      properties:
+        cpu_limit:
+          type: string
+        cpu_request:
+          type: string
+        memory_limit:
+          type: string
+        memory_request:
+          type: string
+      type: object
     SlackNotificationConfiguration:
       properties:
         webhook:
@@ -2663,6 +2682,8 @@ components:
           description: Prefix that will be prepended to the name of each stream when it is
             written to the destination.
           type: string
+        resourceRequirements:
+          $ref: "#/components/schemas/ResourceRequirements"
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
         source:

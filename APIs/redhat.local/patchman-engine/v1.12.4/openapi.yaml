@@ -705,23 +705,18 @@ paths:
           name: filter[severity]
           schema:
             type: string
-        - description: Filter
-          in: query
-          name: filter[applicable_systems]
-          schema:
-            type: string
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/controllers.AdvisoryInlineItem"
+                  $ref: "#/components/schemas/controllers.SystemAdvisoriesDBLookup"
                 type: array
             text/csv:
               schema:
                 items:
-                  $ref: "#/components/schemas/controllers.AdvisoryInlineItem"
+                  $ref: "#/components/schemas/controllers.SystemAdvisoriesDBLookup"
                 type: array
           description: OK
       security:
@@ -1546,6 +1541,23 @@ components:
           $ref: "#/components/schemas/controllers.Links"
         meta:
           $ref: "#/components/schemas/controllers.ListMeta"
+      type: object
+    controllers.SystemAdvisoriesDBLookup:
+      properties:
+        advisory_type:
+          type: integer
+        cve_count:
+          type: integer
+        description:
+          type: string
+        id:
+          type: string
+        public_date:
+          type: string
+        severity:
+          type: integer
+        synopsis:
+          type: string
       type: object
     controllers.SystemAdvisoriesResponse:
       properties:

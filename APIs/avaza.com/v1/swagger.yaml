@@ -2927,6 +2927,31 @@ paths:
       summary: Delete Webhook Subscription by ID
       tags:
         - Webhook
+    get:
+      consumes: []
+      operationId: Webhook_GetByID
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WebhookList"
+      security:
+        - oauth2:
+            - webhook_notifications
+      summary: Get Webhook Subscription by SubscriptionID
+      tags:
+        - Webhook
 definitions:
   AccountDetails:
     properties:

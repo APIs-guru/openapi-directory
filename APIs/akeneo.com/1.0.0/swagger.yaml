@@ -25527,6 +25527,59 @@ paths:
         - "4.0"
         - "5.0"
         - SaaS
+  /api/rest/v1/system-information:
+    post:
+      description: This endpoint allows you to get the version and the edition of the
+        PIM. Example of what you can get <table class="description-table">
+        <thead> <tr> <th align="center">Environment</th> <th
+        align="center">Edition</th> <th align="center">Version</th> </tr>
+        </thead> <tbody> <tr> <td align="center">SaaS EE</td> <td
+        align="center">Serenity</td> <td align="center">20210531021241</td>
+        </tr> <tr> <td align="center">SaaS CE</td> <td align="center">GE</td>
+        <td align="center">growth-v20210526040645</td> </tr> <tr> <td
+        align="center">PaaS or onPrem EE</td> <td align="center">EE</td> <td
+        align="center">5.0.28</td> </tr> <tr> <td align="center">PaaS or onPrem
+        CE</td> <td align="center">CE</td> <td align="center">5.0.28</td> </tr>
+        </tbody> </table>
+      operationId: get_system_information
+      responses:
+        "200":
+          description: Return the version and the edition of the PIM.
+          examples:
+            edition: Serenity
+            version: "20210521041041"
+          schema:
+            properties:
+              edition:
+                description: Edition of the PIM
+                type: string
+              version:
+                description: Version of the PIM
+                type: string
+            type: object
+          x-no-entity: true
+        "406":
+          description: Not Acceptable
+          examples:
+            code: 406
+            message: ‘xxx’ in ‘Accept‘ header is not valid. Only ‘application/json‘ is
+              allowed.
+          schema:
+            properties:
+              code:
+                description: HTTP status code
+                type: integer
+              message:
+                description: Message explaining the error
+                type: string
+            type: object
+          x-details: The `Accept` header is not `application/json` but it should
+      summary: Get system information
+      tags:
+        - System
+      x-no-token: true
+      x-versions:
+        - SaaS
 definitions:
   AssetAttributeList:
     items:

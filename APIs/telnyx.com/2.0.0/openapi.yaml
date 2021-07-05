@@ -68,7 +68,7 @@ tags:
   - description: Inbound channels operations
     name: Inbound Channels
   - description: Search messaging detail records
-    name: MDR Search
+    name: MDR Search (Beta)
   - description: Managed Accounts operations
     name: Managed Accounts
   - description: Messages
@@ -4510,7 +4510,7 @@ paths:
         - bearerAuth: []
       summary: Fetch messaging detail records.
       tags:
-        - MDR Search
+        - MDR Search (Beta)
       x-latency-category: interactive
   "/message_detail_records/{id}/message_body":
     get:
@@ -4533,7 +4533,7 @@ paths:
           description: Successful
       summary: Fetch message body by id.
       tags:
-        - MDR Search
+        - MDR Search (Beta)
       x-latency-category: interactive
   /messages:
     post:

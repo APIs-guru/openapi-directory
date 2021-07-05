@@ -11,7 +11,7 @@ info:
     digital form.
   termsOfService: https://www.taggun.io/terms
   title: TAGGUN Receipt OCR Scanning API
-  version: 1.5.58
+  version: 1.5.59
   x-apisguru-categories:
     - text
   x-logo:
@@ -1764,7 +1764,8 @@ definitions:
         maxLength: 50
         type: string
       url:
-        description: The target URL that contains a receipt file
+        description: The target URL that contains a receipt file. Only https protocol is
+          accepted.
         example: https://www.taggun.io/api/receipt/v1/benchmark/download/be17cfba5acae69032b7856fd89f4286
         pattern: ^\w*:\/\/((127\.)|(192\.168\.)|(10\.)|(172\.1[6-9]\.)|(172\.2[0-9]\.)|(172\.3[0-1]\.)|(localhost)|(0.0.0.0)|(kong)|(mongo)|(nginx)|(\d{4,}\/))
         type: string

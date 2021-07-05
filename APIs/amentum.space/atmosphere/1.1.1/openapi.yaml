@@ -9,17 +9,15 @@ info:
     and  composition that are recommended by the Committee on Space Research
     (COSPAR) for  satellite drag calculations. <br><br>
 
-    The APIs are rate limited to 10,000 calls per month. <br><br>
-
-    Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to discuss commercial use. <br><br>
+    API requests must contain a key "API-Key" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> 
 
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
 
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
 
-    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.
   title: Atmosphere API
-  version: 1.0.1
+  version: 1.1.1
   x-apisguru-categories:
     - location
   x-logo:
@@ -43,7 +41,7 @@ tags:
       (COSPAR) as the standard for atmospheric  composition. <br><br> The API
       now automatically updates the Ap and F10.7 cm radio flux  indices unless
       provided by the user.
-    name: nrlsmsie00
+    name: nrlmsise00
     x-displayName: NRLMSISE-00
   - description: >
       The <a href='https://sol.spacenvironment.net/jb2008/'>JB2008</a>
@@ -120,16 +118,16 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://atmosphere.amentum.space/jb2008?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2"
-            -H  "accept: application/json"
+            "https://atmosphere.amentum.io/jb2008?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2"
+            -H "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: |
             import json
             import requests
 
-            url = "https://atmosphere.amentum.space/jb2008"
+            url = "https://atmosphere.amentum.io/jb2008"
 
-            payload = {
+            params = {
                 'year' : 2020,
                 'month' : 5,
                 'day' : 21,
@@ -138,8 +136,9 @@ paths:
                 'altitude' : 300, # km
                 'utc' : 2, # hours
             }
+            headers = {"API-Key" : "<add_your_key>"}
             # handle exceptions
-            response = requests.get(url, params=payload)
+            response = requests.get(url, params=params, headers=headers)
             json_payload = response.json()
 
             print(json.dumps(json_payload, indent=4, sort_keys=True))
@@ -308,21 +307,23 @@ paths:
       summary: |
         Compute atmospheric composition, density, and temperatures
       tags:
-        - nrlsmsie00
+        - nrlmsise00
       x-codeSamples:
         - lang: Shell
           source: >
             curl -X GET
-            "https://atmosphere.amentum.space/nrlmsise00?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2"
-            -H  "accept: application/json"
+            "https://atmosphere.amentum.io/nrlmsise00?year=2020&month=5&day=21&altitude=300&geodetic_latitude=42&geodetic_longitude=42&utc=2"
+            -H "API-Key: <your_key>" -H "accept: application/json"
         - lang: Python
           source: |
             import json
             import requests
 
-            url = "https://atmosphere.amentum.space/nrlmsise00"
+            url = "https://atmosphere.amentum.io/nrlmsise00"
 
-            payload = {
+            headers = {"API-Key" : "<add_your_key>"}
+
+            params = {
                 'year' : 2020,
                 'month' : 5,
                 'day' : 21,
@@ -332,7 +333,7 @@ paths:
                 'utc' : 2, # hours
             }
             # handle exceptions
-            response = requests.get(url, params=payload)
+            response = requests.get(url, params=params, headers=headers)
             json_payload = response.json()
 
             print(json.dumps(json_payload, indent=4, sort_keys=True))
@@ -438,5 +439,5 @@ components:
 x-tagGroups:
   - name: Density and composition
     tags:
-      - nrlsmsie00
+      - nrlmsise00
       - jb2008

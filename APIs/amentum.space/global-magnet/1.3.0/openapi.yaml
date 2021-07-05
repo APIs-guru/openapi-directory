@@ -12,17 +12,15 @@ info:
 
     We provide a RESTful API to access the out-of-cycle  World Magnetic Model (WMM2015v2) valid for years 2015.0 - 2020.0 and WMM2020 valid for years 2020.0 - 2025.0<br><br>
 
-    The APIs are rate limited to 10,000 calls per month. <br><br>
-
-    Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to discuss commercial use. <br><br>
-
-    Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
+    API requests must contain a key "API-Key" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> 
 
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
 
-    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
+    Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
+
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.
   title: Geomag API
-  version: 1.2.0
+  version: 1.3.0
   x-apisguru-categories:
     - location
   x-logo:
@@ -92,7 +90,7 @@ paths:
                     description: >
                       Also known as 'dip', is the angle made between the horizontal plane
                       and the magnetic field vector at some position. Positive
-                      inclination corresponds to a downward pointing 
+                      inclination corresponds to a downward pointing. 
                     properties:
                       units:
                         type: string
@@ -101,7 +99,7 @@ paths:
                     type: object
                   total_intensity:
                     description: |
-                      Total magnetic field intensity in nano Teslas
+                      Total magnetic field intensity in nano Teslas.
                     properties:
                       units:
                         type: string
@@ -117,8 +115,8 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://globalmagnet.amentum.space/wmm/magnetic_field?altitude=10&latitude=80&longitude=100&year=2020.5"
-            -H  "accept: application/json"
+            "https://geomag.amentum.io/wmm/magnetic_field?altitude=10&latitude=80&longitude=100&year=2020.5"
+            -H "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: >
             import json
@@ -126,10 +124,13 @@ paths:
             import requests
 
 
-            hostname = "https://globalmagnet.amentum.space/wmm/magnetic_field"
+            headers = {"API-Key" : "<add_your_key>"}
 
 
-            payload = dict(
+            hostname = "https://geomag.amentum.io/wmm/magnetic_field"
+
+
+            params = dict(
                 altitude = 10, # [km]
                 longitude = 100, # [deg]
                 latitude = 80, 
@@ -138,7 +139,7 @@ paths:
 
 
             try: 
-              response = requests.get(hostname, params=payload)
+              response = requests.get(hostname, params=params, headers=headers)
               # extract JSON payload of response as Python dictionary
               json_payload = response.json()
               # raise an Exception if we encoutnered any HTTP error codes like 404 

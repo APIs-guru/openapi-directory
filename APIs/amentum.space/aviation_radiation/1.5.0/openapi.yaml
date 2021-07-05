@@ -23,11 +23,11 @@ info:
     radiation in the atmosphere are important to mitigate the radiation risk
     crew. <br><br>
 
-    We host a RESTful API to models of cosmic ray induced ionising radiation in the atmosphere. The PARMA or CARI7 endpoints can be used to  calculate Effective Dose or Ambient Dose Equivalent at a point.  The APIs are rate limited to 10,000 calls per month. <br><br>
+    We host a RESTful API to models of cosmic ray induced ionising radiation in the atmosphere. The PARMA or CARI7 endpoints can be used to  calculate Effective Dose or Ambient Dose Equivalent at a point. 
 
-    The Route Dose API calculates the same quantities along a great circle route between two airports using CARI7. The API is rate limited to 100 calls per month. <br><br>
+    The Route Dose API calculates the same quantities along a great circle route between two airports using CARI7. <br><br>
 
-    Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to discuss commercial use. <br><br>
+    API requests must contain a key "API-Key" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> 
 
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
 
@@ -35,7 +35,7 @@ info:
 
     Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.
   title: Aviation Radiation API
-  version: 1.4.0
+  version: 1.5.0
   x-apisguru-categories:
     - location
     - open_data
@@ -76,8 +76,8 @@ tags:
       ignored. The calculation relies on HP data from the US Federal Aviation
       Administration that is released monthly. Doses can be calculated on the
       current date and short-range forecasting  of several weeks is supported
-      (the exact forecast horizon is dependent on release date of FAA data).
-    name: icaro
+      (the exact forecast horizon depends on the release date of the FAA data).
+    name: routedose
     x-displayName: Route Dose API
   - description: >
       The PARMA model was developed by the Japan Atomic Energy Agency
@@ -87,8 +87,8 @@ tags:
       href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160390">here</a>
       and <a
       href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144679">here</a>.<br><br>
-      <br><br> Note: accounts for heliocentric potential modulation only, minor
-      geomagnetic storm and forbush decreases are ignored.
+      <br><br> Note: the PARMA API only accounts for heliocentric potential
+      modulation, minor geomagnetic storm and forbush decreases are ignored.
     name: parma
     x-displayName: PARMA API
 paths:
@@ -217,7 +217,7 @@ paths:
                       units:
                         type: string
                       value:
-                        type: string
+                        type: number
                     type: object
                 type: object
           description: Successful dose calculation
@@ -230,13 +230,13 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/cari7/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total"
-            -H  "accept: application/json"
+            "https://avrad.amentum.io/cari7/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total"
+            -H "API-Key: <your_key>" -H "accept: application/json"
         - lang: Python
           source: |
             import requests
 
-            parameters = {
+            params = {
                 "altitude" : 11, #km 
                 "latitude" : 30, #degrees (N)
                 "longitude" : 30, #degrees (E)
@@ -246,9 +246,10 @@ paths:
                 "particle" : "total",
                 "utc" : 3
             }
-            url = "https://cosmicrays.amentum.space/cari7/ambient_dose"
+            headers = {"API-Key" : "<add_your_key>"}
+            url = "https://avrad.amentum.io/cari7/ambient_dose"
             try:
-                response = requests.get(url, params=parameters) 
+                response = requests.get(url, params=params, headers=headers) 
                 response.raise_for_status()
             except requests.exceptions.HTTPError as e: 
                 print("HTTP error", e)
@@ -260,7 +261,7 @@ paths:
                 dose_rate_val = dose_rate['dose rate']['value']
                 units = dose_rate['dose rate']['units']
 
-            print(f"Dose rate is {dose_rate_val} {units}")
+                print(f"Dose rate is {dose_rate_val} {units}")
   /cari7/effective_dose:
     get:
       description: >
@@ -386,7 +387,7 @@ paths:
                       units:
                         type: string
                       value:
-                        type: string
+                        type: number
                     type: object
                 type: object
           description: Successful dose calculation
@@ -399,13 +400,13 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/cari7/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total"
-            -H  "accept: application/json"
+            "https://avrad.amentum.io/cari7/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&utc=3&particle=total"
+            -H "API-Key: <your_key>" -H "accept: application/json"
         - lang: Python
           source: |
             import requests
 
-            parameters = {
+            params = {
                 "altitude" : 11, #km 
                 "latitude" : 30, #degrees (N)
                 "longitude" : 30, #degrees (E)
@@ -415,9 +416,10 @@ paths:
                 "particle" : "total",
                 "utc" : 3
             }
-            url = "https://cosmicrays.amentum.space/cari7/effective_dose"
+            headers = {"API-Key" : "<add_your_key>"}
+            url = "https://avrad.amentum.io/cari7/effective_dose"
             try:
-                response = requests.get(url, params=parameters) 
+                response = requests.get(url, params=params, headers=headers) 
                 response.raise_for_status()
             except requests.exceptions.HTTPError as e: 
                 print("HTTP error", e)
@@ -429,7 +431,7 @@ paths:
                 dose_rate_val = dose_rate['dose rate']['value']
                 units = dose_rate['dose rate']['units']
 
-            print(f"Dose rate is {dose_rate_val} {units}")
+                print(f"Dose rate is {dose_rate_val} {units}")
   /parma/ambient_dose:
     get:
       description: >
@@ -530,7 +532,7 @@ paths:
                       units:
                         type: string
                       value:
-                        type: string
+                        type: number
                     type: object
                 type: object
           description: Successful dose read operation
@@ -543,13 +545,13 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/parma/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton"  -H  "accept:
-            application/json"
+            "https://avrad.amentum.io/parma/ambient_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton"
+            -H "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: |
             import requests
 
-            parameters = {
+            params = {
                 "altitude" : 11, #km 
                 "latitude" : 30, #degrees (N)
                 "longitude" : 30, #degrees (E)
@@ -558,9 +560,10 @@ paths:
                 "day" : 1,
                 "particle" : "proton"
             }
-            url = "https://cosmicrays.amentum.space/parma/ambient_dose"
+            headers = {"API-Key" : "<add_your_key>"}
+            url = "https://avrad.amentum.io/parma/ambient_dose"
             try:
-                response = requests.get(url, params=parameters) 
+                response = requests.get(url, params=params, headers=headers) 
                 response.raise_for_status()
             except requests.exceptions.HTTPError as e: 
                 print("HTTP error", e)
@@ -572,7 +575,7 @@ paths:
                 dose_rate_val = dose_rate['dose rate']['value']
                 units = dose_rate['dose rate']['units']
 
-            print(f"Dose rate is {dose_rate_val} {units}")
+                print(f"Dose rate is {dose_rate_val} {units}")
   /parma/differential_intensity:
     get:
       description: >
@@ -863,14 +866,13 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/parma/differential_intensity?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton&angle=1.0"
-            -H  "accept: application/json"
+            "https://avrad.amentum.io/parma/differential_intensity?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=proton&angle=1.0"
+            -H "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
-          source: >
+          source: |
             import requests
 
-
-            parameters = {
+            params = {
                 "altitude" : 11, # km 
                 "latitude" : 30, # degrees (N)
                 "longitude" : 30, # degrees (E)
@@ -880,34 +882,27 @@ paths:
                 "particle" : "proton",
                 "angle" : 1.0
             }
+            headers = {"API-Key" : "<add_your_key>"}
 
-
-            url = "https://cosmicrays.amentum.space/parma/differential_intensity"
-
+            url = "https://avrad.amentum.io/parma/differential_intensity"
 
             # make the call and handle errors
-
             try:
-                response = requests.get(url, params=parameters) 
+                response = requests.get(url, params=params, headers=headers) 
                 response.raise_for_status()
             except requests.exceptions.HTTPError as e: 
                 print("HTTP error", e)
             except requests.exceptions.RequestException as e: 
                 print("Request error", e)
+            else:
+                # retrieve and return the flux
+                json_payload = response.json()
 
-            # retrieve and return the flux
+                kes = json_payload["energies"]["data"] # MeV
+                flux = json_payload["intensities"]["data"] # /cm2/s/sr/MeV
 
-            json_payload = response.json()
-
-
-            kes = json_payload["energies"]["data"] # MeV
-
-            flux = json_payload["intensities"]["data"] # /cm2/s/sr/MeV
-
-
-            print(f"Kinetic energies: {kes} MeV")
-
-            print(f"Intensities: {flux} /cm2/s/sr/MeV")
+                print(f"Kinetic energies: {kes} MeV")
+                print(f"Intensities: {flux} /cm2/s/sr/MeV")
   /parma/effective_dose:
     get:
       description: >
@@ -1009,7 +1004,7 @@ paths:
                       units:
                         type: string
                       value:
-                        type: string
+                        type: number
                     type: object
                 type: object
           description: Successful dose read operation
@@ -1022,13 +1017,12 @@ paths:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/parma/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=total"
-            -H  "accept: application/json" 
+            "https://avrad.amentum.io/parma/effective_dose?altitude=11&latitude=30&longitude=30&year=2019&month=12&day=1&particle=total"
+            -H "API-Key: <your_key>" -H  "accept: application/json" 
         - lang: Python
           source: |
             import requests
-
-            parameters = {
+            params = {
                 "altitude" : 11, #km 
                 "latitude" : 30, #degrees (N)
                 "longitude" : 30, #degrees (E)
@@ -1037,9 +1031,10 @@ paths:
                 "day" : 1,
                 "particle" : "total"
             }
-            url = "https://cosmicrays.amentum.space/parma/effective_dose"
+            headers = {"API-Key" : "<add_your_key>"}
+            url = "https://avrad.amentum.io/parma/effective_dose"
             try:
-                response = requests.get(url, params=parameters) 
+                response = requests.get(url, params=params, headers=headers) 
                 response.raise_for_status()
             except requests.exceptions.HTTPError as e: 
                 print("HTTP error", e)
@@ -1051,7 +1046,7 @@ paths:
                 dose_rate_val = dose_rate['dose rate']['value']
                 units = dose_rate['dose rate']['units']
 
-            print(f"Dose rate is {dose_rate_val} {units}")
+                print(f"Dose rate is {dose_rate_val} {units}")
   /route/ambient_dose:
     get:
       description: >
@@ -1142,20 +1137,20 @@ paths:
                       units:
                         type: string
                       value:
-                        type: string
+                        type: number
                     type: object
                 type: object
           description: Successful dose calculation
-      summary: >
-        Calculates the ambient equivalent dose along a great circle flight route.
+      summary: |
+        Calculate the ambient equivalent dose along a great circle flight route.
       tags:
-        - icaro
+        - routedose
       x-codeSamples:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/route/ambient_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21"
-            -H  "accept: application/json"
+            "https://avrad.amentum.io/route/ambient_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21"
+            -H "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: >
             import requests
@@ -1171,10 +1166,11 @@ paths:
               "day" : 21
             }
 
+            headers = {"API-Key" : "<add_your_key>"}
 
             try:
-              response = requests.get("https://cosmicrays.amentum.space/route/ambient_dose",
-                params=params)
+              response = requests.get("https://avrad.amentum.io/route/ambient_dose",
+                params=params, headers=headers)
               response_json = response.json()
               response.raise_for_status()
             except requests.exceptions.HTTPError as e:
@@ -1268,20 +1264,20 @@ paths:
                       units:
                         type: string
                       value:
-                        type: string
+                        type: number
                     type: object
                 type: object
           description: Successful dose calculation
       summary: |
-        Calculates the total effective dose along a great circle flight route.
+        Calculate the total effective dose along a great circle flight route.
       tags:
-        - icaro
+        - routedose
       x-codeSamples:
         - lang: Shell
           source: >
             curl -X GET
-            "https://cosmicrays.amentum.space/route/effective_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21"
-            -H  "accept: application/json"
+            "https://avrad.amentum.io/route/effective_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21"
+            -H "API-Key: <your_key>" -H "accept: application/json"
         - lang: Python
           source: >
             import requests
@@ -1297,9 +1293,11 @@ paths:
               "day" : 21
             } 
 
+            headers = {"API-Key" : "<add_your_key>"}
+
             try:
-              response = requests.get("https://cosmicrays.amentum.space/route/effective_dose",
-                params=params)
+              response = requests.get("https://avrad.amentum.io/route/effective_dose",
+                params=params, headers=headers)
               response_json = response.json()
               response.raise_for_status()
             except requests.exceptions.HTTPError as e:
@@ -1311,7 +1309,7 @@ paths:
 x-tagGroups:
   - name: Calculate radiation dose along a great circle flight route
     tags:
-      - icaro
+      - routedose
   - name: Calculate radiation intensity or dose at a point
     tags:
       - cari7

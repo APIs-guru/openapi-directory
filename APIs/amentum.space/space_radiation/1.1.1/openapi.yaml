@@ -26,15 +26,15 @@ info:
 
     Understanding the space radiation environment for a particular mission profile is becoming increasingly important. Commercial off-the-shelf electronic components  that aren't resilient to space radiation are now prevalent. Longer duration  missions to cislunar space, Mars, and beyond are placing astronauts at greater  risk of radiation exposure. <br><br>
 
-    The API is rate limited to 10,000 calls per month for non commercial use.  Contact <a href="mailto:team@amentum.space">team@amentum.space</a> to  discuss commercial use. <br><br>
+    API requests must contain a key "API-Key" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> 
 
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
 
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
 
-    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2020.
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.
   title: Space Radiation API
-  version: 1.0.1
+  version: 1.1.1
   x-apisguru-categories:
     - location
     - open_data
@@ -59,7 +59,7 @@ tags:
       A description of the AE9/AP9/SPM models, including energy ranges for which the respective models are valid, can be found <a href='https://www.vdl.afrl.af.mil/programs/ae9ap9/'>here</a>. The model is valid for dates between decimal years 2015.0 and 2020.0<br><br>
 
       The following endpoints wrap the original Ae9Ap9 code (version 1.50.001) which is available <a href='https://www.vdl.afrl.af.mil/programs/ae9ap9/downloads.php'>here</a>.  <br><br>
-    name: ae9ap9spm
+    name: trapped
     x-displayName: AE9/AP9/SPM trapped radiation models
   - description: >
       This endpoint provides access to Amentum's implementation of
@@ -76,7 +76,7 @@ tags:
       W = -0.093 cr + 638.7 <br> Our implementation uses Oulu station count
       rates as input,  calculating galactic cosmic ray flux on a particular
       date. 
-    name: dlr
+    name: gcr
     x-displayName: DLR galactic cosmic radiation model
 paths:
   /gcr/flux_dlr:
@@ -104,13 +104,13 @@ paths:
       summary: |
         Calculate particle flux 
       tags:
-        - dlr
+        - gcr
       x-codeSamples:
         - lang: Shell
           source: >
             curl -X GET
-            "https://spaceradiation.amentum.space/gcr/flux_dlr?year=2017&month=1&day=1&z=6&energy=100"
-            -H  "accept: application/json"
+            "https://spacerad.amentum.io/gcr/flux_dlr?year=2017&month=1&day=1&z=6&energy=100"  -H
+            "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: >
             import requests
@@ -124,11 +124,12 @@ paths:
               energy=100
             )
 
+            headers = {"API-Key" : "<add_your_key>"}
 
             # Make the API call
 
             try:
-              response = requests.get("https://spaceradiation.amentum.space/gcr/flux_dlr",params=params)
+              response = requests.get("https://spacerad.amentum.io/gcr/flux_dlr", params=params, headers=headers)
               response_json = response.json()
               response.raise_for_status()
             except requests.exceptions.HTTPError as e:
@@ -215,13 +216,13 @@ paths:
       summary: |
         Calculate mean particle flux
       tags:
-        - ae9ap9spm
+        - trapped
       x-codeSamples:
         - lang: Shell
           source: >
             curl -X GET
-            "https://spaceradiation.amentum.space/trapped/flux_mean?model=AE9&coord_sys=GEI&coord_units=KM&coord1=3216.6&coord2=35426&coord3=603.4&year=2017&month=1&day=1&hour=0&minute=0&second=0"
-            -H  "accept: application/json"
+            "https://spacerad.amentum.io/trapped/flux_mean?model=AE9&coord_sys=GEI&coord_units=KM&coord1=3216.6&coord2=35426&coord3=603.4&year=2017&month=1&day=1&hour=0&minute=0&second=0"  -H
+            "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: >
             import requests
@@ -242,11 +243,12 @@ paths:
               second=0,
             )
 
+            headers = {"API-Key" : "<add_your_key>"}
 
             # Make the API call
 
             try:
-              response = requests.get("https://spaceradiation.amentum.space/trapped/flux_mean",params=params)
+              response = requests.get("https://spacerad.amentum.io/trapped/flux_mean", params=params, headers=headers)
               response_json = response.json()
               response.raise_for_status()
             except requests.exceptions.HTTPError as e:
@@ -337,13 +339,13 @@ paths:
       summary: |
         Calculate percentile particle flux
       tags:
-        - ae9ap9spm
+        - trapped
       x-codeSamples:
         - lang: Shell
           source: >
             curl -X GET
-            "https://spaceradiation.amentum.space/trapped/flux_percentile?model=AE9&coord_sys=GEI&coord_units=KM&coord1=3216.6&coord2=35426&coord3=603.4&year=2017&month=1&day=1&hour=0&minute=0&second=0&percentile=50"
-            -H  "accept: application/json"
+            "https://spacerad.amentum.io/trapped/flux_percentile?model=AE9&coord_sys=GEI&coord_units=KM&coord1=3216.6&coord2=35426&coord3=603.4&year=2017&month=1&day=1&hour=0&minute=0&second=0&percentile=50"  -H
+            "API-Key: <your_key>" -H  "accept: application/json"
         - lang: Python
           source: >+
             import requests
@@ -366,10 +368,13 @@ paths:
             )
 
 
+            headers = {"API-Key" : "<add_your_key>"}
+
+
             # Make the API call
 
             try:
-              response = requests.get("https://spaceradiation.amentum.space/trapped/flux_percentile",params=params)
+              response = requests.get("https://spacerad.amentum.io/trapped/flux_percentile", params=params, headers=headers)
               response_json = response.json()
               response.raise_for_status()
             except requests.exceptions.HTTPError as e:
@@ -584,7 +589,7 @@ components:
 x-tagGroups:
   - name: Trapped Radiation
     tags:
-      - ae9ap9spm
+      - trapped
   - name: Galactic Cosmic Radiation
     tags:
-      - dlr
+      - gcr

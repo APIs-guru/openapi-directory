@@ -6,7 +6,7 @@ info:
     name: sonallux
     url: https://github.com/sonallux/spotify-web-api
   title: Spotify Web API
-  version: 2021.6.18
+  version: 2021.6.30
   x-apisguru-categories:
     - media
   x-logo:
@@ -7662,11 +7662,11 @@ components:
             $ref: "#/components/schemas/RecommendationSeedObject"
           type: array
         tracks:
-          description: An array of [track object
-            (simplified)](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedtrackobject)
+          description: An array of [track
+            object](https://developer.spotify.com/documentation/web-api/reference/#object-trackobject)
             ordered according to the parameters supplied.
           items:
-            $ref: "#/components/schemas/SimplifiedTrackObject"
+            $ref: "#/components/schemas/TrackObject"
           type: array
       type: object
     ResumePointObject:

@@ -32,24 +32,29 @@ info:
 
     ## API Headers 
 
-    The following HTTP header(s) are required when using Portfolio Optimizer:
+    The following HTTP header(s) are required when calling Portfolio Optimizer endpoints:
 
-    * N/A
+    * `Content-type: application/json`  
+      This header specifies that the data provided in input to the endpoint is in JSON format
 
+    The following HTTP header(s) are optional when calling Portfolio Optimizer endpoints:
 
-    The following HTTP header(s) are optional when using Portfolio Optimizer:
-
-    * `X-API-Key`, to convey the [API key](#overview--api-key) to use Portfolio Optimizer as an [authenticated user](#auth) and [benefit from higher API limits](#overview--api-limits)
-
+    * `X-API-Key: <private API key>`  
+      This header enables [authenticated users](#auth) to provide their private [API key](#overview--api-key) in order to [benefit from higher API limits](#overview--api-limits)
 
     ## API Key
 
     Portfolio Optimizer is free to use, but not free to run.
 
 
-    In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), please participate to the monthly running costs through a monthly coffee.
+    In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), a *small* participation to Portfolio Optimizer running costs is required.
+
+
+    This participation takes the form of coffee(s), with one coffee = one month of usage.
+
 
     <p><a href="https://www.buymeacoffee.com/portfolioopt"><img alt='Buy a Coffee at buymeacoffee.com' src="https://img.buymeacoffee.com/button-api/?text=Buymeacoffee.com&emoji=&slug=portfolioopt&button_colour=000000&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00"></a></p>
+
 
 
     > **Notes:** 
@@ -60,8 +65,9 @@ info:
     ## API Limits 
 
 
-    Different API limits are applied depending on [the authentication status of the user](#auth).
-     
+    Portfolio Optimizer comes with *fairly reasonable* API limits.
+
+
     For anonymous users:  
 
     * The API requests are restricted to a subset of all the available endpoints and/or endpoints features  
@@ -73,7 +79,7 @@ info:
     * The API requests are limited to 20 assets, 100 portfolios, 500 series data points
 
 
-    For authenticated users with an [API Key](#overview--api-key):  
+    For authenticated users with an [API key](#overview--api-key):  
 
     * The API requests have access to all the available endpoints and endpoints features
 
@@ -86,7 +92,7 @@ info:
 
     > **Notes:** 
 
-    > * If custom API limits are required, please [contact the support](https://portfoliooptimizer.io/contact/) to discuss the exact needs.
+    > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.
 
     > * Information on the API rate limits are provided in response messages HTTP headers `x-ratelimit-*`:  
 
@@ -106,7 +112,7 @@ info:
 
     > **Notes:** 
 
-    > * If accessing Portfolio Optimizer from another geographical region is required, for instance to benefit from a better latency, please [contact the support](https://portfoliooptimizer.io/contact/) to discuss the exact needs.    
+    > * It is possible to deploy Portfolio Optimizer in other geographical regions, for example to improve the API latency; please [contact the support](https://portfoliooptimizer.io/contact/) for more details. 
 
 
     ## API Response Codes       
@@ -137,13 +143,13 @@ info:
     ## API Status  
 
 
-    Portfolio Optimizer service status is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).
+    Portfolio Optimizer is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).
 
 
     # Support
 
 
-    If you encounter any issues with Portfolio Optimizer, or if you have any questions, feel free to [contact the support](https://portfoliooptimizer.io/contact/).
+    For any issue or question about Portfolio Optimizer, please do not hesitate to [contact the support](https://portfoliooptimizer.io/contact/).
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -1005,13 +1011,13 @@ paths:
       tags:
         - Assets Returns
       x-codegen-request-body-name: body
-  /assets/variances:
+  /assets/variance:
     post:
       description: |
-        Compute the variances of assets from either:  
-        * The assets returns
+        Compute the variance of one or several asset(s) from either:  
+        * The asset(s) returns
         * The assets covariance matrix
-        * The assets volatilities
+        * The asset(s) volatility
 
         References
         * [Wikipedia, Variance](https://en.wikipedia.org/wiki/Variance)        
@@ -1019,9 +1025,8 @@ paths:
         content:
           application/json:
             examples:
-              From covariance matrix:
-                description: Compute the volatilities of 2 assets based on their covariance
-                  matrix
+              From assets covariance matrix:
+                description: Compute the variance of 2 assets based on their covariance matrix
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -1029,8 +1034,8 @@ paths:
                       - -0.0025
                     - - -0.0025
                       - 0.0025
-              From returns:
-                description: Compute the variances of 2 assets based on 4 returns per asset
+              From assets returns:
+                description: Compute the variance of 2 assets based on 4 returns per asset
                 value:
                   assets:
                     - assetReturns:
@@ -1043,13 +1048,12 @@ paths:
                         - 0
                         - 0.02
                         - -0.03
-              From volatilities:
-                description: Compute the volatilities of 2 assets based on their volatilities
+              From assets volatility:
+                description: Compute the variance of 2 assets based on their volatility
                 value:
-                  assets: 2
-                  assetsVolatilities:
-                    - 0.1
-                    - 0.05
+                  assets:
+                    - assetVolatility: 1
+                    - assetVolatility: 0.05
             schema:
               oneOf:
                 - properties:
@@ -1058,8 +1062,7 @@ paths:
                         properties:
                           assetReturns:
                             description: assetReturns[t] is the return of the asset from the time t to the
-                              time t+1, in percentage; all the assetReturns
-                              arrays must have the same length
+                              time t+1, in percentage
                             items:
                               type: number
                             minItems: 2
@@ -1067,7 +1070,7 @@ paths:
                         required:
                           - assetReturns
                         type: object
-                      minItems: 2
+                      minItems: 1
                       type: array
                   required:
                     - assets
@@ -1093,19 +1096,19 @@ paths:
                   type: object
                 - properties:
                     assets:
-                      description: The number of assets
-                      minimum: 1
-                      type: integer
-                    assetsVolatilities:
-                      description: assetsVolatilities[i] is the volatility of the asset i
                       items:
-                        minimum: 0
-                        type: number
+                        properties:
+                          assetVolatility:
+                            description: The asset volatility
+                            minimum: 0
+                            type: number
+                        required:
+                          - assetVolatility
+                        type: object
                       minItems: 1
                       type: array
                   required:
                     - assets
-                    - assetsVolatilities
                   type: object
         required: true
       responses:
@@ -1114,19 +1117,19 @@ paths:
             application/json:
               examples:
                 From covariance matrix:
-                  description: Computed variances of 2 assets
+                  description: Computed variance of 2 assets
                   value:
                     assets:
                       - assetVariance: 0.01
                       - assetVariance: 0.0025
                 From returns:
-                  description: Computed variances of 2 assets
+                  description: Computed variance of 2 assets
                   value:
                     assets:
                       - assetVariance: 0.00035
                       - assetVariance: 0.00035
                 From volatilities:
-                  description: Computed variances of 2 assets
+                  description: Computed variance of 2 assets
                   value:
                     assets:
                       - assetVariance: 0.010000000000000002
@@ -1148,16 +1151,17 @@ paths:
                   - assets
                 type: object
           description: OK
-      summary: Variances
+      summary: Variance
       tags:
-        - Assets Variances
+        - Assets Variance
       x-codegen-request-body-name: body
-  /assets/variances/sample:
+  /assets/variance/sample:
     post:
       description: >
-        Compute the sample variances of assets from the assets returns.
+        Compute the sample variance of one or several asset(s) from the
+        asset(s) returns.
                 
-        > This endpoint is similar to the endpoint [`/assets/variances`](#post-/assets/variances), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the variances.
+        > This endpoint is similar to the endpoint [`/assets/variance`](#post-/assets/variance), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the variance.
 
 
         References
@@ -1168,8 +1172,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the sample variances of 2 assets based on 4 returns per
-                  asset
+                description: Compute the sample variance of 2 assets based on 4 and 3 returns
                 value:
                   assets:
                     - assetReturns:
@@ -1181,7 +1184,6 @@ paths:
                         - -0.02
                         - -0.02
                         - -0.04
-                        - -0.02
             schema:
               properties:
                 assets:
@@ -1189,8 +1191,7 @@ paths:
                     properties:
                       assetReturns:
                         description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage; all the assetReturns arrays
-                          must have the same length
+                          time t+1, in percentage
                         items:
                           type: number
                         minItems: 2
@@ -1198,7 +1199,7 @@ paths:
                     required:
                       - assetReturns
                     type: object
-                  minItems: 2
+                  minItems: 1
                   type: array
               required:
                 - assets
@@ -1232,21 +1233,21 @@ paths:
                   - assets
                 type: object
           description: OK
-      summary: Sample variances
+      summary: Sample variance
       tags:
-        - Assets Variances
+        - Assets Variance
       x-codegen-request-body-name: body
-  /assets/volatilities:
+  /assets/volatility:
     post:
       description: >
-        Compute the volatilities (i.e., standard deviations) of assets from
-        either:  
+        Compute the volatility (i.e., standard deviation) of one or several
+        asset(s) from either:  
 
-        * The assets returns
+        * The asset(s) returns
 
         * The assets covariance matrix
 
-        * The assets variances
+        * The asset(s) variance
 
 
         References
@@ -1256,9 +1257,8 @@ paths:
         content:
           application/json:
             examples:
-              From covariance matrix:
-                description: Compute the volatilities of 2 assets based on their covariance
-                  matrix
+              From assets covariance matrix:
+                description: Compute the volatility of 2 assets based on their covariance matrix
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -1266,8 +1266,14 @@ paths:
                       - -0.0025
                     - - -0.0025
                       - 0.0025
+              From assets variance:
+                description: Compute the volatility of 2 assets based on their variance
+                value:
+                  assets:
+                    - assetVariance: 0.01
+                    - assetVariance: 0.0025
               From returns:
-                description: Compute the volatilities of 2 assets based on 4 returns per asset
+                description: Compute the volatility of 2 assets based on 4 returns per asset
                 value:
                   assets:
                     - assetReturns:
@@ -1280,13 +1286,6 @@ paths:
                         - 0
                         - 0.02
                         - -0.03
-              From variances:
-                description: Compute the volatilities of 2 assets based on their variances
-                value:
-                  assets: 2
-                  assetsVariances:
-                    - 0.01
-                    - 0.0025
             schema:
               oneOf:
                 - properties:
@@ -1295,8 +1294,7 @@ paths:
                         properties:
                           assetReturns:
                             description: assetReturns[t] is the return of the asset from the time t to the
-                              time t+1, in percentage; all the assetReturns
-                              arrays must have the same length
+                              time t+1, in percentage
                             items:
                               type: number
                             minItems: 2
@@ -1304,7 +1302,7 @@ paths:
                         required:
                           - assetReturns
                         type: object
-                      minItems: 2
+                      minItems: 1
                       type: array
                   required:
                     - assets
@@ -1330,19 +1328,19 @@ paths:
                   type: object
                 - properties:
                     assets:
-                      description: The number of assets
-                      minimum: 1
-                      type: integer
-                    assetsVariances:
-                      description: assetsVariances[i] is the variance of the asset i
                       items:
-                        minimum: 0
-                        type: number
+                        properties:
+                          assetVariance:
+                            description: The asset variance
+                            minimum: 0
+                            type: number
+                        required:
+                          - assetVariance
+                        type: object
                       minItems: 1
                       type: array
                   required:
                     - assets
-                    - assetsVariances
                   type: object
         required: true
       responses:
@@ -1351,19 +1349,19 @@ paths:
             application/json:
               examples:
                 From covariance matrix:
-                  description: Computed volatilities of 2 assets
+                  description: Computed volatility of 2 assets
                   value:
                     assets:
                       - assetVolatility: 0.1
                       - assetVolatility: 0.05
                 From returns:
-                  description: Computed volatilities of 2 assets
+                  description: Computed volatility of 2 assets
                   value:
                     assets:
                       - assetVolatility: 0.01870828693386971
                       - assetVolatility: 0.01870828693386971
                 From variances:
-                  description: Computed volatilities of 2 assets
+                  description: Computed volatility of 2 assets
                   value:
                     assets:
                       - assetVolatility: 0.1
@@ -1385,18 +1383,18 @@ paths:
                   - assets
                 type: object
           description: OK
-      summary: Volatilities
+      summary: Volatility
       tags:
-        - Assets Volatilities
+        - Assets Volatility
       x-codegen-request-body-name: body
-  /assets/volatilities/sample:
+  /assets/volatility/sample:
     post:
       description: >
-        Compute the sample volatilities (i.e., sample standard deviations)
-        of assets from the assets returns.
+        Compute the sample volatility (i.e., sample standard deviation) of
+        one or several asset(s) from the asset(s) returns.
 
 
-        > This endpoint is similar to the endpoint [`/assets/volatilities`](#post-/assets/volatilities), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the volatilities.
+        > This endpoint is similar to the endpoint [`/assets/volatility`](#post-/assets/volatility), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the volatility.
 
 
         References
@@ -1407,8 +1405,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the sample volatilities of 2 assets based on 4 returns per
-                  asset
+                description: Compute the sample volatility of 2 assets based on 4 and 3 returns
                 value:
                   assets:
                     - assetReturns:
@@ -1420,7 +1417,6 @@ paths:
                         - -0.02
                         - -0.02
                         - -0.04
-                        - -0.02
             schema:
               properties:
                 assets:
@@ -1428,8 +1424,7 @@ paths:
                     properties:
                       assetReturns:
                         description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage; all the assetReturns arrays
-                          must have the same length
+                          time t+1, in percentage
                         items:
                           type: number
                         minItems: 2
@@ -1450,7 +1445,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed sample volatilities of 2 assets
+                  description: Computed sample volatility of 2 assets
                   value:
                     assets:
                       - assetVolatility: 0.005
@@ -1472,9 +1467,9 @@ paths:
                   - assets
                 type: object
           description: OK
-      summary: Sample volatilities
+      summary: Sample volatility
       tags:
-        - Assets Volatilities
+        - Assets Volatility
       x-codegen-request-body-name: body
   /portfolio/analysis/contributions/return:
     post:
@@ -2718,6 +2713,139 @@ paths:
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
+  /portfolio/analysis/tracking-error:
+    post:
+      description: >
+        Compute the tracking error between a benchmark and one or several
+        portfolio(s).
+
+
+        References
+
+        * [Wikipedia, Tracking error](https://en.wikipedia.org/wiki/Tracking_error) 
+
+        * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution 
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Computes the tracking error using the example in Bacon's book
+                value:
+                  benchmarkReturns:
+                    - 0.002
+                    - 0.025
+                    - 0.018
+                    - -0.011
+                    - 0.014
+                    - 0.018
+                    - 0.014
+                    - 0.065
+                    - -0.015
+                    - 0.042
+                    - -0.006
+                    - 0.083
+                    - 0.039
+                    - -0.038
+                    - -0.062
+                    - 0.015
+                    - -0.048
+                    - 0.021
+                    - 0.06
+                    - 0.056
+                    - -0.067
+                    - 0.019
+                    - -0.003
+                    - 0
+                  portfolios:
+                    - portfolioReturns:
+                        - 0.003
+                        - 0.026
+                        - 0.011
+                        - -0.01
+                        - 0.015
+                        - 0.025
+                        - 0.016
+                        - 0.067
+                        - -0.014
+                        - 0.04
+                        - -0.005
+                        - 0.081
+                        - 0.04
+                        - -0.037
+                        - -0.061
+                        - 0.017
+                        - -0.049
+                        - -0.022
+                        - 0.07
+                        - 0.058
+                        - -0.065
+                        - 0.024
+                        - -0.005
+                        - -0.009
+            schema:
+              properties:
+                benchmarkReturns:
+                  description: benchmarkReturns[t] is the return of the benchmark from the time t
+                    to the time t+1; the benchmarkReturns array must have the
+                    same length as all the portfolioReturns arrays
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                portfolios:
+                  items:
+                    properties:
+                      portfolioReturns:
+                        description: portfolioReturns[t] is the return of the portfolio from the time t
+                          to the time t+1, the portfolioReturns must have the
+                          same length as the benchmarkReturns array
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - portfolioReturns
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - benchmarkReturns
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: The computed tracking error using the example in Bacon's book
+                  value:
+                    portfolios:
+                      - portfolioTrackingError: 0.00950648535942116
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioTrackingError:
+                          description: The tracking error of the portfolio
+                          minimum: 0
+                          type: number
+                      required:
+                        - portfolioTrackingError
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Tracking Error
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
   /portfolio/analysis/volatility:
     post:
       description: >
@@ -2938,8 +3066,9 @@ paths:
                 assetsGroups:
                   items:
                     description: assetsGroups[k] is the indexes of the assets belonging to the
-                      assets group k in the portfolio; exclusive with
-                      assetsGroupsMatrix
+                      assets group k in the portfolio; requires either
+                      assetsGroupsWeights or maximumAssetsGroupsWeights to be
+                      present
                     items:
                       minimum: 1
                       type: integer
@@ -2951,7 +3080,7 @@ paths:
                 assetsGroupsWeights:
                   description: assetsGroupsWeights[i] is the desired weight of the assets group k
                     in the portfolio, in percentage (can be null to indicate no
-                    specific desire)
+                    specific desire); requires assetsGroups to be present
                   items:
                     maximum: 1
                     minimum: 0
@@ -2972,8 +3101,7 @@ paths:
                   description: assetsMinimumPositions[i] is the minimum number of shares of the
                     asset i that is required to purchase when the asset i is
                     included in the portfolio (usual values are the same as for
-                    assetsSizeLots, because these two values are most of the
-                    time identical)
+                    assetsSizeLots)
                   items:
                     default: 1
                     exclusiveMinimum: true
@@ -3015,8 +3143,9 @@ paths:
                   type: array
                 maximumAssetsGroupsWeights:
                   description: maximumAssetsGroupsWeights[k] is the maximum desired weight of the
-                    assets group k in the portfolio, in percentage between 0 and
-                    1 if assetsGroups is provided
+                    assets group k in the portfolio, in percentage (can be null
+                    to indicate no specific desire); requires assetsGroups to be
+                    present
                   items:
                     maximum: 1
                     minimum: 0
@@ -3128,6 +3257,34 @@ paths:
                     - 0
                     - 0
                     - 0
+              Example with group constraints:
+                description: Construct a portfolio mimicking a benchmark using 3 assets and the
+                  constraint that the first two assets taken together cannot
+                  represent more than 35% of the portfolio
+                value:
+                  assets:
+                    - assetReturns:
+                        - 0.01
+                        - 0.02
+                        - 0.03
+                    - assetReturns:
+                        - -0.01
+                        - 0.04
+                        - 0.01
+                    - assetReturns:
+                        - 0.05
+                        - -0.01
+                        - 0
+                  benchmarkReturns:
+                    - 0.02
+                    - 0.01
+                    - 0.06
+                  constraints:
+                    assetsGroups:
+                      - - 1
+                        - 2
+                    maximumAssetsGroupsWeights:
+                      - 0.35
             schema:
               properties:
                 assets:
@@ -3686,7 +3843,7 @@ paths:
     post:
       description: >
         Compute the assets weights of the inverse volatility-weighted
-        portfolio.
+        portfolio, also known as the naive-risk parity portfolio.
 
 
         References

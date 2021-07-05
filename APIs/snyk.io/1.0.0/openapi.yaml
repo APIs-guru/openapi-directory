@@ -945,6 +945,14 @@ paths:
           required: false
           schema:
             type: number
+        - description: Only organizations that have a name that **starts with** this value
+            (case insensitive) will be returned.
+          example: my
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -958,8 +966,8 @@ paths:
                     orgs:
                       - created: 2021-06-07T00:00:00.000Z
                         id: 689ce7f9-7943-4a71-b704-2ba575f01089
-                        name: defaultOrg
-                        slug: default-org
+                        name: myDefaultOrg
+                        slug: my-default-org
                         url: https://api.snyk.io/org/default-org
                       - created: 2021-06-07T00:00:00.000Z
                         id: a04d9cbd-ae6e-44af-b573-0556b0ad4bd2

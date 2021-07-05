@@ -2250,9 +2250,15 @@ paths:
         - ServiceGroups
   /consumer/v1/services:
     get:
-      description: The results are returned in pages. Use the offset and limit
-        parameters to control the page start and size. Default offset is
-        <b>0</b>, and limit is <b>20</b>.
+      description: "Use this endpoint to get services available at your business
+        location and/or company. If no locationId is provided the primary
+        company will be queried. \r
+
+        The results are returned in pages. Use the offset and limit
+        parameters to control the page start and size.\r
+
+        Default offset is <b>0</b>, and limit is <b>20</b>. Use the
+        other query parameters to optionally filter the results list."
       parameters:
         - description: The id of the business location. defaults to first business location.
           in: query

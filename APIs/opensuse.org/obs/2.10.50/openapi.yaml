@@ -324,8 +324,8 @@ paths:
                 code: unknown_architecture
                 summary: "Architecture does not exist: x999"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -345,8 +345,8 @@ paths:
                   - name: OBS
                   - name: openSUSE
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -367,7 +367,7 @@ paths:
 
         This operation is the same as the one defined with [DELETE /attribute/{namespace}/_meta](#/Attributes/delete_attribute__namespace___meta).
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
       responses:
         "200":
           content:
@@ -376,8 +376,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -410,8 +410,8 @@ paths:
                   - name: AutoCleanup
                   - name: OwnerRootProject
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -426,8 +426,8 @@ paths:
                 code: not_found
                 summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -442,10 +442,10 @@ paths:
 
         This operation is the same as the one defined with [DELETE /attribute/{namespace}](#/Attributes/delete_attribute__namespace_).
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
       security:
@@ -456,7 +456,7 @@ paths:
     get:
       description: Shows attribute namespace.
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
       responses:
         "200":
           content:
@@ -495,8 +495,8 @@ paths:
                 code: not_found
                 summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -512,13 +512,13 @@ paths:
 
         This operation is the same as the one defined with [PUT](#/Attributes/put_attribute__namespace___meta).
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1_meta/get/responses/200/content/ap\
-                plication~1xml%3B%20charset%3Dutf-8/schema"
+              $ref: "#/paths/~1attribute~1{namespace}~1_meta/get/responses/200/content/applic\
+                ation~1xml; charset=utf-8/schema"
         description: >
           Attribute namespace definition.
 
@@ -527,7 +527,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -545,8 +545,8 @@ paths:
                       No matching global declaration available for the
                       validation root."
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -565,8 +565,8 @@ paths:
                     code: not_found
                     summary: Couldn't find User with login = user_login_name
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -583,13 +583,13 @@ paths:
 
         This operation is the same as the one defined with [POST](#/Attributes/post_attribute__namespace___meta).
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1_meta/get/responses/200/content/ap\
-                plication~1xml%3B%20charset%3Dutf-8/schema"
+              $ref: "#/paths/~1attribute~1{namespace}~1_meta/get/responses/200/content/applic\
+                ation~1xml; charset=utf-8/schema"
         description: >
           Attribute namespace definition.
 
@@ -598,7 +598,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -616,8 +616,8 @@ paths:
                       No matching global declaration available for the
                       validation root."
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -636,8 +636,8 @@ paths:
                     code: not_found
                     summary: Couldn't find User with login = user_login_name
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -653,7 +653,7 @@ paths:
 
         This operation is the same as the one defined with [DELETE /attribute/{namespace}/{attribute_name}/_meta](#/Attributes/delete_attribute__namespace___attribute_name___meta)
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
         - description: The name of the attribute
           example: OwnerRootProjectTest
           in: path
@@ -663,7 +663,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
@@ -676,8 +676,8 @@ paths:
                     code: not_found
                     summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -692,12 +692,11 @@ paths:
 
         This operation is the same as the one defined with [DELETE /attribute/{namespace}/{attribute_name}](#/Attributes/delete_attribute__namespace___attribute_name_)
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parame\
-            ters/1"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}/delete/parameters/1"
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
@@ -710,8 +709,8 @@ paths:
                     code: not_found
                     summary: Couldn't find AttribNamespace
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -721,9 +720,8 @@ paths:
     get:
       description: Shows attribute.
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parame\
-            ters/1"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}/delete/parameters/1"
       responses:
         "200":
           content:
@@ -787,8 +785,8 @@ paths:
                     code: unknown_attribute
                     summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -804,21 +802,19 @@ paths:
 
         This operation is the same as the one defined with [PUT](#/Attributes/put_attribute__namespace___attribute_name___meta).
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parame\
-            ters/1"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}/delete/parameters/1"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D~1_meta/get/re\
-                sponses/200/content/application~1xml%3B%20charset%3Dutf-8/schem\
-                a"
+              $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}~1_meta/get/responses/\
+                200/content/application~1xml; charset=utf-8/schema"
         description: Attribute definition.
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -842,8 +838,8 @@ paths:
                     summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to
                       validate attributes"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -862,8 +858,8 @@ paths:
                     code: unknown_attribute
                     summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -879,21 +875,19 @@ paths:
 
         This operation is the same as the one defined with [POST](#/Attributes/post_attribute__namespace___attribute_name___meta).
       parameters:
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
-        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parame\
-            ters/1"
+        - $ref: "#/paths/~1attribute~1{namespace}/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}/delete/parameters/1"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D~1_meta/get/re\
-                sponses/200/content/application~1xml%3B%20charset%3Dutf-8/schem\
-                a"
+              $ref: "#/paths/~1attribute~1{namespace}~1{attribute_name}~1_meta/get/responses/\
+                200/content/application~1xml; charset=utf-8/schema"
         description: Attribute definition.
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -917,8 +911,8 @@ paths:
                     summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to
                       validate attributes"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Validation Failed.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -937,8 +931,8 @@ paths:
                     code: unknown_attribute
                     summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -957,8 +951,8 @@ paths:
                   - name: openSUSE:Leap:15.1
                   - name: openSUSE:Leap:15.2
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK
 
@@ -992,8 +986,8 @@ paths:
                   - name: openSUSE_Tumbleweed
                   - name: openSUSE_Leap_15.3
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK
 
@@ -1010,8 +1004,8 @@ paths:
                     code: unknown_project
                     summary: "Project not found: <some project>."
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Unknown project.
 
@@ -1027,7 +1021,7 @@ paths:
       description: Apply different actions on builds/build processes of the specified
         project
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
         - description: Name of the package. Scope the commands to the specified package.
           example: firefox
           in: query
@@ -1084,7 +1078,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -1094,8 +1088,8 @@ paths:
                     code: illegal_request
                     summary: unsupported POST command '<some command>' to <some url>.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Illegal request.
 
@@ -1111,15 +1105,15 @@ paths:
                     summary: No permission to execute command on package <some package> in project
                       <some project>
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Execute command no permission.
 
 
             XML Schema used for body validation: [status.xsd](../schema/status.xsd)
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Apply different actions on builds/build processes of the specified
@@ -1131,7 +1125,7 @@ paths:
       description: Get the build results for packages, architectures and repositories
         of the specified project.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
         - description: >
             Specify which sections should be included in the result list.
 
@@ -1304,7 +1298,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Get the build results for packages, architectures and repositories of
@@ -1316,7 +1310,7 @@ paths:
       description: List of all architectures the specified project builds against a
         given repository.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
         - description: Repository name
           example: openSUSE_Tumbleweed
           in: path
@@ -1333,8 +1327,8 @@ paths:
                   - name: x86_64
                   - name: i586
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK
 
@@ -1350,8 +1344,8 @@ paths:
                 details: 404 project '<project_name>' has no repository '<repository_name>'
                 summary: project '<project_name>' has no repository '<repository_name>'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -1365,9 +1359,8 @@ paths:
         Show the build configuration for the specified repository. Includes
         all base package requirements, mappings and macros.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
       responses:
         "200":
           content:
@@ -1424,7 +1417,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Show the build configuration for the specified repository.
@@ -1436,10 +1429,9 @@ paths:
         Show the build dependencies of packages that are part of the
         project, for a given repository and architecture.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
         - description: Name of the package. Limit results to the specified package.
           example: obs-server
           in: query
@@ -1501,7 +1493,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Show the build dependencies of packages that are part of the project.
@@ -1513,10 +1505,9 @@ paths:
         List all binaries (produced by all packages of the given project)
         for the specified repository and architecture.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
       responses:
         "200":
           content:
@@ -1550,7 +1541,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: List all binaries (produced by all packages of the given project).
@@ -1560,10 +1551,9 @@ paths:
     get:
       description: List binaries built by the sources of the specified package.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
         - description: Package name
           example: ctris
           in: path
@@ -1576,14 +1566,14 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-                  ure_name%7D~1_repository/get/responses/200/content/applicatio\
-                  n~1xml%3B%20charset%3Dutf-8/schema"
+                $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+                  1_repository/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: List binaries built by the sources of the specified package.
@@ -1594,12 +1584,11 @@ paths:
       description: This endpoint returns information about some specific artifact
       operationId: getBuildProjectRepositoryArchPackageBuildinfo
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
       responses:
         "200":
           content:
@@ -1721,8 +1710,8 @@ paths:
                 code: unknown_project
                 summary: "Project not found: 1"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -1737,12 +1726,11 @@ paths:
       description: This endpoint returns the build history for a specific artifact
       operationId: getBuildProjectRepositoryArchPackageHistory
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
       responses:
         "200":
           content:
@@ -1795,8 +1783,8 @@ paths:
                 code: unknown_project
                 summary: "Project not found: 1"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -1812,12 +1800,11 @@ paths:
         Show the build status of a currently running build job. Shows an
         empty result if no build job is running.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
       responses:
         "200":
           content:
@@ -1855,7 +1842,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Show the build status of a currently running build job.
@@ -1866,12 +1853,11 @@ paths:
       description: This endpoint returns the last log file for a specific build artifact
       operationId: getBuildProjectRepositoryArchPackageLog
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
       responses:
         "200":
           content:
@@ -1904,8 +1890,8 @@ paths:
                 summary: No permission to download binaries from package ctris, project
                   home:Admin
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Acceptable
 
@@ -1918,8 +1904,8 @@ paths:
                 code: unknown_project
                 summary: "Project not found: 1"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -1933,12 +1919,11 @@ paths:
     get:
       description: Details about the reason of the lastly triggered build.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
       responses:
         "200":
           content:
@@ -1961,7 +1946,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
-          $ref: "#/paths/~1build~1%7Bproject_name%7D/get/responses/404"
+          $ref: "#/paths/~1build~1{project_name}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Show the reason for the lastly triggered build.
@@ -1972,12 +1957,11 @@ paths:
       description: This endpoint returns the building status for a specific artifact
       operationId: getBuildProjectRepositoryArchPackageStatus
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
       responses:
         "200":
           content:
@@ -2007,8 +1991,8 @@ paths:
                 code: unknown_project
                 summary: "Project not found: 1"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -2025,12 +2009,11 @@ paths:
         given file's content.
       operationId: getBuildProjectRepositoryArchitecturePackageFile
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
         - description: The file name
           example: ctris-0.42.1-4.1.x86_64.rpm
           in: path
@@ -2056,8 +2039,8 @@ paths:
                 details: 404 project 'home:Admin' has no repository '4'
                 summary: project 'home:Admin' has no repository '4'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -2077,10 +2060,9 @@ paths:
         This is for Admins only.
       operationId: putBuildProjectRepositoryArchitecturePackageFile
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
         - description: Package name
           in: path
           name: package_name
@@ -2091,8 +2073,8 @@ paths:
                 - _repository
               type: string
             type: array
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D~1%7Bfile_name%7D/get/parameters/4"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}~1{file_name}/get/parameters/4"
       requestBody:
         content:
           plain/text:
@@ -2109,8 +2091,8 @@ paths:
               example:
                 code: ok
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Updates the artifact's file contents
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -2121,8 +2103,8 @@ paths:
                 code: upload_binary_no_permission
                 summary: No permission to upload binaries.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: |
             No permission to upload binaries for this project
         "404":
@@ -2133,8 +2115,8 @@ paths:
                 details: 404 project 'home:Admin' has no repository '4'
                 summary: project 'home:Admin' has no repository '4'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -2152,14 +2134,13 @@ paths:
         given artifact's details.
       operationId: getBuildProjectRepositoryArchitecturePackageFileViewFileinfo
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D/get/parameters/3"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchitect\
-            ure_name%7D~1%7Bpackage_name%7D~1%7Bfile_name%7D/get/parameters/4"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}~1{architecture_name}~\
+            1{package_name}~1{file_name}/get/parameters/4"
         - in: query
           name: view
           required: true
@@ -2316,8 +2297,8 @@ paths:
                 details: 404 project 'home:Admin' has no repository '4'
                 summary: project 'home:Admin' has no repository '4'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Error: Not Found
 
@@ -2428,16 +2409,16 @@ paths:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1configuration/get/responses/200/content/application~1xml%3B%20\
-                charset%3Dutf-8/schema"
+              $ref: "#/paths/~1configuration/get/responses/200/content/application~1xml;
+                charset=utf-8/schema"
         description: Configuration definition.
       responses:
         "200":
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1configuration/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1configuration/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: |
             OK. The request has succeeded.
         "401":
@@ -2450,8 +2431,8 @@ paths:
                 summary: The api has a different value for default_access_disabled configured in
                   options.yml file. Remove it there first
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -2711,8 +2692,8 @@ paths:
                     vendor: opensuse
                     version: Tumbleweed
               schema:
-                $ref: "#/paths/~1distributions/post/requestBody/content/application~1xml%3B%20c\
-                  harset%3Dutf-8/schema"
+                $ref: "#/paths/~1distributions/post/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -2735,8 +2716,8 @@ paths:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1distributions/get/responses/200/content/application~1xml%3B%20\
-                charset%3Dutf-8/schema"
+              $ref: "#/paths/~1distributions/get/responses/200/content/application~1xml;
+                charset=utf-8/schema"
         description: Distributions definition
       responses:
         "200":
@@ -2746,8 +2727,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The Request has succeeded.
 
@@ -2761,8 +2742,8 @@ paths:
                 summary: "distributions validation error: 40:0: ERROR: Expecting an element
                   name, got nothing"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -2793,7 +2774,7 @@ paths:
 
         This is only for admins.
       parameters:
-        - $ref: "#/paths/~1distributions~1%7Bdistribution_id%7D/get/parameters/0"
+        - $ref: "#/paths/~1distributions~1{distribution_id}/get/parameters/0"
       responses:
         "200":
           content:
@@ -2802,8 +2783,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: |
             OK. The request has succeded.
         "401":
@@ -2815,8 +2796,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Distribution with 'id'=0
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not found.
       security:
         - basic_authentication: []
@@ -2839,8 +2820,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1distributions/post/requestBody/content/application~1xml%3B%20c\
-                  harset%3Dutf-8/schema"
+                $ref: "#/paths/~1distributions/post/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: |
             OK. The request has succeded.
         "401":
@@ -2852,8 +2833,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Distribution with 'id'=0
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not found.
       security:
         - basic_authentication: []
@@ -2863,13 +2844,13 @@ paths:
     put:
       description: Update the data of a distribution.
       parameters:
-        - $ref: "#/paths/~1distributions~1%7Bdistribution_id%7D/get/parameters/0"
+        - $ref: "#/paths/~1distributions~1{distribution_id}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1distributions/post/requestBody/content/application~1xml%3B%20c\
-                harset%3Dutf-8/schema"
+              $ref: "#/paths/~1distributions/post/requestBody/content/application~1xml;
+                charset=utf-8/schema"
         description: Distribution definition
       responses:
         "200":
@@ -2887,8 +2868,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Distribution with 'id'=0
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not found.
       security:
         - basic_authentication: []
@@ -2908,8 +2889,8 @@ paths:
                   - name: group-admin
                   - name: group-test
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -2926,10 +2907,10 @@ paths:
     delete:
       description: Delete a group.
       parameters:
-        - $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/parameters/0"
+        - $ref: "#/paths/~1group~1{group_title}/get/parameters/0"
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
@@ -2939,8 +2920,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Group 'group-testd'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -3005,8 +2986,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Group 'group-testd'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -3016,7 +2997,7 @@ paths:
     post:
       description: Modify group data.
       parameters:
-        - $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/parameters/0"
+        - $ref: "#/paths/~1group~1{group_title}/get/parameters/0"
         - description: >
             Command to be executed. It takes one of these available values:
 
@@ -3045,7 +3026,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -3053,8 +3034,8 @@ paths:
                 code: bad_request
                 summary: cmd must be set to add_user or remove_user
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -3073,8 +3054,8 @@ paths:
                     code: not_found
                     summary: Couldn't find User with login = user_test
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -3084,13 +3065,13 @@ paths:
     put:
       description: Write group data.
       parameters:
-        - $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/parameters/0"
+        - $ref: "#/paths/~1group~1{group_title}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/responses/200/content/application\
-                ~1xml%3B%20charset%3Dutf-8/schema"
+              $ref: "#/paths/~1group~1{group_title}/get/responses/200/content/application~1xm\
+                l; charset=utf-8/schema"
         description: |
           Group definition.
 
@@ -3098,7 +3079,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
@@ -3108,8 +3089,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Group 'group-testd'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -3175,8 +3156,8 @@ paths:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1issue_trackers/get/responses/200/content/application~1xml%3B%2\
-                0charset%3Dutf-8/schema/items"
+              $ref: "#/paths/~1issue_trackers/get/responses/200/content/application~1xml;
+                charset=utf-8/schema/items"
         description: >
           Issue tracker definition.
 
@@ -3185,7 +3166,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -3202,8 +3183,8 @@ paths:
                     summary: "issue_tracker validation error: 1:0: ERROR: Expecting element
                       issue-tracker, got foo"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Validation failed.
 
@@ -3220,10 +3201,10 @@ paths:
     delete:
       description: Delete an issue tracker.
       parameters:
-        - $ref: "#/paths/~1issue_trackers~1%7Bissue_tracker_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1issue_trackers~1{issue_tracker_name}/get/parameters/0"
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
@@ -3233,8 +3214,8 @@ paths:
                 code: not_found
                 summary: Unable to find issue tracker 'foo'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -3260,8 +3241,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1issue_trackers/get/responses/200/content/application~1xml%3B%2\
-                  0charset%3Dutf-8/schema/items"
+                $ref: "#/paths/~1issue_trackers/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema/items"
           description: >
             Issue tracker definition.
 
@@ -3276,8 +3257,8 @@ paths:
                 code: not_found
                 summary: Unable to find issue tracker 'foo'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -3292,13 +3273,13 @@ paths:
       description: Update the issue tracker given as path parameter. If it is not
         found, create it.
       parameters:
-        - $ref: "#/paths/~1issue_trackers~1%7Bissue_tracker_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1issue_trackers~1{issue_tracker_name}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1issue_trackers/get/responses/200/content/application~1xml%3B%2\
-                0charset%3Dutf-8/schema/items"
+              $ref: "#/paths/~1issue_trackers/get/responses/200/content/application~1xml;
+                charset=utf-8/schema/items"
         description: >
           Issue tracker definition.
 
@@ -3307,7 +3288,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -3324,8 +3305,8 @@ paths:
                     summary: "issue_tracker validation error: 1:0: ERROR: Expecting element
                       issue-tracker, got foo"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Validation failed.
 
@@ -3342,7 +3323,7 @@ paths:
     get:
       description: Show an issue of an issue tracker.
       parameters:
-        - $ref: "#/paths/~1issue_trackers~1%7Bissue_tracker_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1issue_trackers~1{issue_tracker_name}/get/parameters/0"
         - description: Issue name.
           example: 12345
           in: path
@@ -3391,8 +3372,8 @@ paths:
                 code: issue_tracker_not_found
                 summary: "Error: Issue Tracker 'foo' not found."
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -3432,8 +3413,8 @@ paths:
                   - name: user_3
                   - name: Requestor
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -3488,7 +3469,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -3503,8 +3484,8 @@ paths:
                     code: unknown_command
                     summary: Allowed command is 'register'.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Bad request.
 
@@ -3524,7 +3505,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "403":
@@ -3538,8 +3519,8 @@ paths:
 
                   to your LDAP server to create new users.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Forbidden
       summary: Registers a new person
       tags:
@@ -3615,8 +3596,8 @@ paths:
                 code: not_found
                 summary: Couldn't find User with login = <login>
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not found.
 
@@ -3629,7 +3610,7 @@ paths:
         - Person
     post:
       parameters:
-        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - $ref: "#/paths/~1person~1{login}/get/parameters/0"
         - description: The command to execute against the provided person.
           example: change_password
           in: query
@@ -3653,8 +3634,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -3673,8 +3654,8 @@ paths:
                     code: unknown_command
                     summary: Allowed commands are '<some command>'.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Bad request.
 
@@ -3690,15 +3671,15 @@ paths:
                     code: update_user_not_authorized
                     summary: You are not authorized to update this User.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
 
             XML Schema used for body validation: [status.xsd](../schema/status.xsd)
         "404":
-          $ref: "#/paths/~1person~1%7Blogin%7D/get/responses/404"
+          $ref: "#/paths/~1person~1{login}/get/responses/404"
       security:
         - basic_authentication: []
       summary: Perform changes on a registered person
@@ -3706,7 +3687,7 @@ paths:
         - Person
     put:
       parameters:
-        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - $ref: "#/paths/~1person~1{login}/get/parameters/0"
       requestBody:
         content:
           application/xml:
@@ -3716,7 +3697,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -3726,8 +3707,8 @@ paths:
                     code: subaccount_chaining
                     summary: A subaccount can not be assigned to subaccount <login>
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Bad request.
 
@@ -3744,8 +3725,8 @@ paths:
                     code: change_userinfo_no_permission
                     summary: no permission to change userinfo for user <login>
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Unauthorized.
 
@@ -3758,8 +3739,8 @@ paths:
                 code: password_empty
                 summary: Requested non-existing user
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not found.
 
@@ -3774,7 +3755,7 @@ paths:
     get:
       description: List the groups the person belongs to.
       parameters:
-        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - $ref: "#/paths/~1person~1{login}/get/parameters/0"
       responses:
         "200":
           content:
@@ -3785,8 +3766,8 @@ paths:
                   - name: factory-maintainers
                   - name: obs-developers
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -3800,8 +3781,8 @@ paths:
                 code: not_found
                 summary: Couldn't find User with login = fake
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -3816,7 +3797,7 @@ paths:
     get:
       description: List the authentication tokens of a person.
       parameters:
-        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - $ref: "#/paths/~1person~1{login}/get/parameters/0"
       responses:
         "200":
           content:
@@ -3880,8 +3861,8 @@ paths:
                 code: view_user_not_authorized
                 summary: You are not authorized to view this User.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -3904,7 +3885,7 @@ paths:
 
         With an empty request body, a token of the default kind 'runservice' is created.
       parameters:
-        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - $ref: "#/paths/~1person~1{login}/get/parameters/0"
         - description: >
             Project name. Should be provided, together with the package query
             parameter,
@@ -3962,8 +3943,8 @@ paths:
                   - 5
                 summary: Ok
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -3991,8 +3972,8 @@ paths:
                 code: update_user_not_authorized
                 summary: You are not authorized to update this User.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -4007,7 +3988,7 @@ paths:
     delete:
       description: Delete a token of the specified person.
       parameters:
-        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - $ref: "#/paths/~1person~1{login}/get/parameters/0"
         - description: Id of the token to be removed.
           example: 3
           in: path
@@ -4023,8 +4004,8 @@ paths:
                 code: ok
                 summary: Ok
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK. The request has succeeded.
 
@@ -4039,8 +4020,8 @@ paths:
                 code: update_user_not_authorized
                 summary: You are not authorized to update this User.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -4053,8 +4034,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Token with 'id'=33 [WHERE `tokens`.`user_id` = ?]
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Not Found.
 
@@ -4078,8 +4059,8 @@ paths:
                   - name: openSUSE:Maintenance:9810
                   - name: zypp:plugins
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -4094,7 +4075,7 @@ paths:
         Get a list of the repositories of the project that already have
         published binaries.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
       responses:
         "200":
           content:
@@ -4106,8 +4087,8 @@ paths:
                   - name: images
                   - name: openSUSE_15.2
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -4118,8 +4099,8 @@ paths:
                 code: download_binary_no_permission
                 summary: No permission for binaries from project home:Admin
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             Forbidden.
 
@@ -4132,8 +4113,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Project
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -4147,9 +4128,8 @@ paths:
         .ymp, etc.) present at the level project/repository of the directory
         tree where the published binaries are stored.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
       responses:
         "200":
           content:
@@ -4161,13 +4141,13 @@ paths:
                   - name: aarch64
                   - name: x86_64
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "403":
-          $ref: "#/paths/~1published~1%7Bproject_name%7D/get/responses/403"
+          $ref: "#/paths/~1published~1{project_name}/get/responses/403"
         "404":
           content:
             application/xml; charset=utf-8:
@@ -4175,8 +4155,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Project
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -4191,10 +4171,9 @@ paths:
         project/repository/architecture of the directory tree as a result of
         successful building and publishing processes.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
       responses:
         "200":
           content:
@@ -4204,13 +4183,13 @@ paths:
                   - name: apache2-mod_auth_memcookie-1.1.1-lp152.2.1.x86_64.rpm
                   - name: obs-api-testsuite-rspec-2.11~alpha.20200618T200341.d42d8310aa-lp152.10515.1.x86_64.rpm
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK. The request has succeeded.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "403":
-          $ref: "#/paths/~1published~1%7Bproject_name%7D/get/responses/403"
+          $ref: "#/paths/~1published~1{project_name}/get/responses/403"
         "404":
           content:
             application/xml; charset=utf-8:
@@ -4218,8 +4197,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Project
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -4237,10 +4216,9 @@ paths:
 
         NOTE: Use this only if you absolutely have to, as it doesn't use the redirector.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
         - description: Binary filename
           example: ctris-0.42.1-8.1.x86_64.rpm
           in: path
@@ -4263,7 +4241,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "403":
-          $ref: "#/paths/~1published~1%7Bproject_name%7D/get/responses/403"
+          $ref: "#/paths/~1published~1{project_name}/get/responses/403"
         "404":
           content:
             application/xml; charset=utf-8:
@@ -4278,8 +4256,8 @@ paths:
                     code: not_found
                     summary: Couldn't find Project
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -4295,12 +4273,11 @@ paths:
 
         Read more about patterns [in this tutorial](https://en.opensuse.org/openSUSE:Build_Service_Tutorial#Create_Patterns).
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1published~1%7Bproject_name%7D~1%7Brepository_name%7D~1%7Barchi\
-            tecture_name%7D~1%7Bbinary_filename%7D/get/parameters/3"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
+        - $ref: "#/paths/~1published~1{project_name}~1{repository_name}~1{architecture_na\
+            me}~1{binary_filename}/get/parameters/3"
       responses:
         "200":
           content:
@@ -4386,7 +4363,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "403":
-          $ref: "#/paths/~1published~1%7Bproject_name%7D/get/responses/403"
+          $ref: "#/paths/~1published~1{project_name}/get/responses/403"
         "404":
           content:
             application/xml; charset=utf-8:
@@ -4394,8 +4371,8 @@ paths:
                 code: not_found
                 summary: Couldn't find Project
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -4409,9 +4386,8 @@ paths:
         Get information about the build process (build id, start time,
         etc.) for the pair project and repository.
       parameters:
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D/get/parameters/0"
-        - $ref: "#/paths/~1build~1%7Bproject_name%7D~1%7Brepository_name%7D/get/parameter\
-            s/1"
+        - $ref: "#/paths/~1build~1{project_name}/get/parameters/0"
+        - $ref: "#/paths/~1build~1{project_name}~1{repository_name}/get/parameters/1"
         - description: Set this parameter to status in order to get details about the last
             publication.
           example: status
@@ -4448,7 +4424,7 @@ paths:
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "403":
-          $ref: "#/paths/~1published~1%7Bproject_name%7D/get/responses/403"
+          $ref: "#/paths/~1published~1{project_name}/get/responses/403"
         "404":
           content:
             application/xml; charset=utf-8:
@@ -4460,8 +4436,8 @@ paths:
                   value:
                     code: unknown
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -4481,8 +4457,8 @@ paths:
                   - name: 122
                   - name: 123
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK
 
@@ -4741,8 +4717,8 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                $ref: "#/paths/~1request/post/requestBody/content/application~1xml%3B%20charset\
-                  %3Dutf-8/schema"
+                $ref: "#/paths/~1request/post/requestBody/content/application~1xml;
+                  charset=utf-8/schema"
           description: >
             OK.
 
@@ -4756,8 +4732,8 @@ paths:
                 summary: The source of package test-project/test-package for revision 2 is
                   broken
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -4768,8 +4744,8 @@ paths:
                 code: create_bs_request_not_authorized
                 summary: You are not authorized to create this Bs request.
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Forbidden
       security:
         - basic_authentication: []
@@ -4780,10 +4756,10 @@ paths:
     delete:
       description: Delete a given request.
       parameters:
-        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+        - $ref: "#/paths/~1request~1{id}/get/parameters/0"
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
         "404":
@@ -4793,8 +4769,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '10'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -4811,8 +4787,8 @@ paths:
           required: true
           schema:
             type: integer
-        - $ref: "#/paths/~1request%3Fview%3Dcollection/get/parameters/6"
-        - $ref: "#/paths/~1request%3Fview%3Dcollection/get/parameters/7"
+        - $ref: "#/paths/~1request?view=collection/get/parameters/6"
+        - $ref: "#/paths/~1request?view=collection/get/parameters/7"
       responses:
         "200":
           $ref: "#/paths/~1request/post/responses/200"
@@ -4825,8 +4801,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '5'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -4836,7 +4812,7 @@ paths:
     post:
       description: Apply certain actions on a specified request.
       parameters:
-        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+        - $ref: "#/paths/~1request~1{id}/get/parameters/0"
         - description: >
             - `addreview`:
               Add a review to a request. **NOTE:** You need to specify who has to address
@@ -4949,7 +4925,7 @@ paths:
             type: string
       responses:
         "200":
-          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+          $ref: "#/paths/~1attribute~1{namespace}/delete/responses/200"
         "400":
           content:
             application/xml; charset=utf-8:
@@ -4961,8 +4937,8 @@ paths:
 
                   invalid project kind "standard" (should be "maintenance_release") for package package01
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -4979,8 +4955,8 @@ paths:
                     code: request_not_modifiable
                     summary: request is not in review state
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -4993,13 +4969,13 @@ paths:
 
         **NOTE:** Certain parts of a request can only be changed by admins.
       parameters:
-        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+        - $ref: "#/paths/~1request~1{id}/get/parameters/0"
       requestBody:
         content:
           application/xml; charset=utf-8:
             schema:
-              $ref: "#/paths/~1request/post/requestBody/content/application~1xml%3B%20charset\
-                %3Dutf-8/schema"
+              $ref: "#/paths/~1request/post/requestBody/content/application~1xml;
+                charset=utf-8/schema"
         description: >
           Request XML
 
@@ -5019,8 +4995,8 @@ paths:
                 code: request_save_error
                 summary: Auto accept time is in the past
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -5031,8 +5007,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '10'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -5044,7 +5020,7 @@ paths:
       description: |
         Get the diff for all packages affected by the request.
       parameters:
-        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+        - $ref: "#/paths/~1request~1{id}/get/parameters/0"
         - description: >
             Diff relative to a given superseded request. State the id of the
             corresponding superseded request.
@@ -5119,11 +5095,11 @@ paths:
                                         \ No newline at end of file
                                       type: string
                                     new:
-                                      $ref: "#/paths/~1request~1%7Bid%7D%3Fcmd%3Ddiff/post/responses/200/content/appl\
-                                        ication~1xml%3B%20charset%3Dutf-8/schem\
-                                        a/properties/action/properties/sourcedi\
-                                        ff/properties/files/items/properties/fi\
-                                        le/properties/old"
+                                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                                        1xml;
+                                        charset=utf-8/schema/properties/action/\
+                                        properties/sourcediff/properties/files/\
+                                        items/properties/file/properties/old"
                                     old:
                                       properties:
                                         md5:
@@ -5189,9 +5165,10 @@ paths:
                             xml:
                               attribute: true
                           new:
-                            $ref: "#/paths/~1request~1%7Bid%7D%3Fcmd%3Ddiff/post/responses/200/content/appl\
-                              ication~1xml%3B%20charset%3Dutf-8/schema/properti\
-                              es/action/properties/sourcediff/properties/old"
+                            $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                              1xml;
+                              charset=utf-8/schema/properties/action/properties\
+                              /sourcediff/properties/old"
                           old:
                             properties:
                               package:
@@ -5249,14 +5226,16 @@ paths:
                 x-components:
                   schemas:
                     NewOldDestination:
-                      $ref: "#/paths/~1request~1%7Bid%7D%3Fcmd%3Ddiff/post/responses/200/content/appl\
-                        ication~1xml%3B%20charset%3Dutf-8/schema/properties/act\
-                        ion/properties/sourcediff/properties/old"
+                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                        1xml;
+                        charset=utf-8/schema/properties/action/properties/sourc\
+                        ediff/properties/old"
                     OldNewFile:
-                      $ref: "#/paths/~1request~1%7Bid%7D%3Fcmd%3Ddiff/post/responses/200/content/appl\
-                        ication~1xml%3B%20charset%3Dutf-8/schema/properties/act\
-                        ion/properties/sourcediff/properties/files/items/proper\
-                        ties/file/properties/old"
+                      $ref: "#/paths/~1request~1{id}?cmd=diff/post/responses/200/content/application~\
+                        1xml;
+                        charset=utf-8/schema/properties/action/properties/sourc\
+                        ediff/properties/files/items/properties/file/properties\
+                        /old"
                 xml:
                   name: diff
             text/plain; charset=utf-8:
@@ -5280,8 +5259,8 @@ paths:
                 code: not_found
                 summary: Couldn't find request with id '355'
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -5387,8 +5366,8 @@ paths:
                       attribute: true
                   request:
                     items:
-                      $ref: "#/paths/~1request/post/requestBody/content/application~1xml%3B%20charset\
-                        %3Dutf-8/schema"
+                      $ref: "#/paths/~1request/post/requestBody/content/application~1xml;
+                        charset=utf-8/schema"
                     type: array
                 type: object
                 xml:
@@ -5410,8 +5389,8 @@ paths:
                     summary: This call requires at least one filter, either by user, project or
                       package or states or types or reviewstates
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found
       security:
         - basic_authentication: []
@@ -5697,7 +5676,7 @@ paths:
 
         This operation is the same as `GET /worker/capability/{architecture_name}:{worker_id}`.
       parameters:
-        - $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/parameters/0"
+        - $ref: "#/paths/~1architectures~1{architecture_name}/get/parameters/0"
         - description: Worker id.
           example: 1a1f67b948b6:1
           in: path
@@ -5784,8 +5763,8 @@ paths:
                 summary: "remote error: unknown worker
                   (http://backend:5252/worker/x86_64:1a1f67b948bf:1)"
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []
@@ -5929,8 +5908,8 @@ paths:
                       - name: x86_64:1a1f67b948b6:1
                       - name: x86_64:1a1f67b948b6:2
               schema:
-                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml;
+                  charset=utf-8/schema"
           description: OK
         "400":
           content:
@@ -5939,8 +5918,8 @@ paths:
                 code: missing_parameter
                 summary: Required Parameter arch missing
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Bad Request.
         "401":
           $ref: "#/paths/~1architectures/get/responses/401"
@@ -5958,8 +5937,8 @@ paths:
 
                   &lt;/status&gt;
               schema:
-                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml%3B%20\
-                  charset%3Dutf-8/schema"
+                $ref: "#/paths/~1architectures/get/responses/401/content/application~1xml;
+                  charset=utf-8/schema"
           description: Not Found.
       security:
         - basic_authentication: []

@@ -590,6 +590,7 @@ paths:
                 mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                 mrz3: null
                 nameCheck: true
+                nameCheckMethod: 0
                 nfcCheck: true
                 nfcFacialUrl: https://
                 nfcReadStatus: 0
@@ -621,6 +622,7 @@ paths:
                 mrz2: null
                 mrz3: null
                 nameCheck: true
+                nameCheckMethod: 0
                 nfcCheck: false
                 nfcFacialUrl: null
                 nfcReadStatus: 0
@@ -652,6 +654,7 @@ paths:
                 mrz2: null
                 mrz3: null
                 nameCheck: false
+                nameCheckMethod: 0
                 nfcCheck: false
                 nfcFacialUrl: null
                 nfcReadStatus: 8
@@ -1121,7 +1124,7 @@ paths:
               regCode: QX92TAG7
               webJourneyUrl:
                 url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                validUntil: 2021-06-30T10:18:06.9515094Z
+                validUntil: 2021-07-05T15:28:23.4914003Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.Registrations.AddRegistrationResponse"
         "400":
@@ -1402,6 +1405,7 @@ paths:
                     mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                     mrz3: null
                     nameCheck: true
+                    nameCheckMethod: 0
                     nfcCheck: true
                     nfcReadStatus: 1
                     primaryScanId: null
@@ -1430,6 +1434,7 @@ paths:
                     mrz2: null
                     mrz3: null
                     nameCheck: true
+                    nameCheckMethod: 0
                     nfcCheck: false
                     nfcReadStatus: 8
                     primaryScanId: null
@@ -1458,6 +1463,7 @@ paths:
                     mrz2: null
                     mrz3: null
                     nameCheck: false
+                    nameCheckMethod: 0
                     nfcCheck: false
                     nfcReadStatus: 8
                     primaryScanId: fedcba89-dead-1278-bead-8901234abcde
@@ -1720,6 +1726,7 @@ paths:
                   mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                   mrz3: null
                   nameCheck: true
+                  nameCheckMethod: 0
                   nfcCheck: true
                   nfcReadStatus: 1
                   primaryScanId: null
@@ -1748,6 +1755,7 @@ paths:
                   mrz2: null
                   mrz3: null
                   nameCheck: true
+                  nameCheckMethod: 0
                   nfcCheck: false
                   nfcReadStatus: 8
                   primaryScanId: null
@@ -1776,6 +1784,7 @@ paths:
                   mrz2: null
                   mrz3: null
                   nameCheck: false
+                  nameCheckMethod: 0
                   nfcCheck: false
                   nfcReadStatus: 8
                   primaryScanId: fedcba89-dead-1278-bead-8901234abcde
@@ -2549,6 +2558,7 @@ paths:
                   mrz2: 1234567897GBR6811233M2504214<<<<<<<<<<<<<<06
                   mrz3: null
                   nameCheck: true
+                  nameCheckMethod: 0
                   nfcCheck: true
                   nfcReadStatus: 1
                   primaryScanId: null
@@ -2577,6 +2587,7 @@ paths:
                   mrz2: null
                   mrz3: null
                   nameCheck: true
+                  nameCheckMethod: 0
                   nfcCheck: false
                   nfcReadStatus: 8
                   primaryScanId: null
@@ -2605,6 +2616,7 @@ paths:
                   mrz2: null
                   mrz3: null
                   nameCheck: false
+                  nameCheckMethod: 0
                   nfcCheck: false
                   nfcReadStatus: 8
                   primaryScanId: fedcba89-dead-1278-bead-8901234abcde
@@ -2773,7 +2785,7 @@ paths:
                 - forename: Edward
                   surname: Roberts
                   url: https://report.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                  validUntil: 2021-06-30T10:18:06.9679101Z
+                  validUntil: 2021-07-05T15:28:23.5074646Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2835,7 +2847,7 @@ paths:
                 - forename: Mike
                   surname: Jones
                   url: https://report.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                  validUntil: 2021-06-30T10:18:06.9687376Z
+                  validUntil: 2021-07-05T15:28:23.5083123Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2895,7 +2907,7 @@ paths:
               results:
                 - journeyUrl:
                     url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                    validUntil: 2021-06-30T10:18:06.9699034Z
+                    validUntil: 2021-07-05T15:28:23.5091736Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResp\
               onse"
@@ -2956,7 +2968,7 @@ paths:
               results:
                 - journeyUrl:
                     url: https://verify.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                    validUntil: 2021-06-30T10:18:06.9707741Z
+                    validUntil: 2021-07-05T15:28:23.5099493Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResp\
               onse"
@@ -3381,7 +3393,7 @@ definitions:
       documentType:
         description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard =
           4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7,
-          ResidencePermit = 9
+          ResidencePermit = 9, UtilityBill = 11
         enum:
           - 0
           - 1
@@ -3393,6 +3405,7 @@ definitions:
           - 7
           - 9
           - 10
+          - 11
         format: int32
         type: integer
       imageData:
@@ -3628,6 +3641,14 @@ definitions:
         type: string
       nameCheck:
         type: boolean
+      nameCheckMethod:
+        description: Unknown = 0, Automatic = 1, Manual = 2
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
       nfcCheck:
         type: boolean
       nfcFacialUrl:
@@ -3674,6 +3695,7 @@ definitions:
       - status
       - facialMatch
       - nameCheck
+      - nameCheckMethod
       - nfcCheck
       - nfcReadStatus
     type: object
@@ -3839,7 +3861,7 @@ definitions:
       documentType:
         description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard =
           4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7,
-          ResidencePermit = 9
+          ResidencePermit = 9, UtilityBill = 11
         enum:
           - 0
           - 1
@@ -3851,6 +3873,7 @@ definitions:
           - 7
           - 9
           - 10
+          - 11
         format: int32
         type: integer
       forename:
@@ -4233,6 +4256,14 @@ definitions:
         type: string
       nameCheck:
         type: boolean
+      nameCheckMethod:
+        description: Unknown = 0, Automatic = 1, Manual = 2
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
       nfcCheck:
         type: boolean
       nfcReadStatus:
@@ -4273,6 +4304,7 @@ definitions:
       - status
       - facialMatch
       - nameCheck
+      - nameCheckMethod
       - nfcCheck
       - nfcReadStatus
     type: object

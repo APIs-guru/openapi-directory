@@ -1470,9 +1470,11 @@ paths:
 
         ```json
 
-        {"message":"Cannot find from_points: 1","hints":[{...}]}
+        {"message":"Cannot find from_points: 1"}
 
         ```
+
+        And the optional `hints` array.
       operationId: calculateMatrix
       requestBody:
         content:
@@ -2763,7 +2765,7 @@ components:
     BadRequest:
       properties:
         hints:
-          description: More detailed information about the error.
+          description: Optional error information.
           items:
             $ref: "#/components/schemas/ErrorMessage"
           type: array
@@ -3068,6 +3070,7 @@ components:
     GHError:
       properties:
         hints:
+          description: Optional error information.
           items:
             properties:
               message:
@@ -3730,7 +3733,7 @@ components:
             type: array
           type: array
         hints:
-          description: Optional. Additional response data
+          description: Optional. Additional response data.
           items:
             properties:
               details:
