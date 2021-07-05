@@ -2324,6 +2324,34 @@ components:
             - DATA_READ
           type: string
       type: object
+    BiEngineReason:
+      properties:
+        code:
+          default: $(reason.code)
+          description: "[Output-only] High-level BI Engine reason for partial or disabled
+            acceleration."
+          type: string
+        message:
+          default: $(reason.message)
+          description: "[Output-only] Free form human-readable reason for partial or
+            disabled acceleration."
+          type: string
+      type: object
+    BiEngineStatistics:
+      properties:
+        biEngineMode:
+          default: $(stats.bi_engine_mode)
+          description: "[Output-only] Specifies which mode of BI Engine acceleration was
+            performed (if any)."
+          type: string
+        biEngineReasons:
+          description: In case of DISABLED or PARTIAL bi_engine_mode, these contain the
+            explanatory reasons as to why BI Engine could not accelerate. In
+            case the full query was accelerated, this field is not populated.
+          items:
+            $ref: "#/components/schemas/BiEngineReason"
+          type: array
+      type: object
     BigQueryModelTraining:
       properties:
         currentIteration:
@@ -3089,6 +3117,23 @@ components:
             job will fail."
           type: object
       type: object
+    DmlStatistics:
+      properties:
+        deletedRowCount:
+          description: Number of deleted Rows. populated by DML DELETE, MERGE and TRUNCATE
+            statements.
+          format: int64
+          type: string
+        insertedRowCount:
+          description: Number of inserted Rows. Populated by DML INSERT and MERGE
+            statements.
+          format: int64
+          type: string
+        updatedRowCount:
+          description: Number of updated Rows. Populated by DML UPDATE and MERGE statements.
+          format: int64
+          type: string
+      type: object
     EncryptionConfiguration:
       properties:
         kmsKeyName:
@@ -3289,19 +3334,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    Explanation:
-      description: Explanation for a single feature.
-      properties:
-        attribution:
-          description: Attribution of feature.
-          format: double
-          type: number
-        featureName:
-          description: Full name of the feature. For non-numerical features, will be
-            formatted like .. Overall size of feature name will always be
-            truncated to first 120 characters.
-          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language
@@ -3552,22 +3584,6 @@ components:
           default: bigquery#getServiceAccountResponse
           description: The resource type of the response.
           type: string
-      type: object
-    GlobalExplanation:
-      description: Global explanations containing the top most important features
-        after training.
-      properties:
-        classLabel:
-          description: Class label for this set of global explanations. Will be empty/null
-            for binary logistic and linear regression models. Sorted
-            alphabetically in descending order.
-          type: string
-        explanations:
-          description: A list of the top global explanations. Sorted by absolute value of
-            attribution in descending order.
-          items:
-            $ref: "#/components/schemas/Explanation"
-          type: array
       type: object
     GoogleSheetsOptions:
       properties:
@@ -4350,7 +4366,7 @@ components:
         scriptStatistics:
           $ref: "#/components/schemas/ScriptStatistics"
           description: "[Output-only] Statistics for a child job of a script."
-        sessionInfoTemplate:
+        sessionInfo:
           $ref: "#/components/schemas/SessionInfo"
           description: "[Output-only] [Preview] Information of the session if this job is
             part of one."
@@ -4376,6 +4392,10 @@ components:
       type: object
     JobStatistics2:
       properties:
+        biEngineStatistics:
+          $ref: "#/components/schemas/BiEngineStatistics"
+          description: BI Engine specific Statistics. [Output-only] BI Engine specific
+            Statistics.
         billingTier:
           description: "[Output-only] Billing tier for the job."
           format: int32
@@ -4423,6 +4443,7 @@ components:
           description: "[Output-only] The DDL target table. Present only for CREATE/DROP
             TABLE/VIEW and DROP ALL ROW ACCESS POLICIES queries."
         dmlStats:
+          $ref: "#/components/schemas/DmlStatistics"
           description: "[Output-only] Detailed statistics for DML statements Present only
             for DML statements INSERT, UPDATE, DELETE or TRUNCATE."
         estimatedBytesProcessed:
@@ -5164,6 +5185,7 @@ components:
           description: Whether the query result was fetched from the query cache.
           type: boolean
         dmlStats:
+          $ref: "#/components/schemas/DmlStatistics"
           description: "[Output-only] Detailed statistics for DML statements Present only
             for DML statements INSERT, UPDATE, DELETE or TRUNCATE."
         errors:
@@ -6466,13 +6488,6 @@ components:
           $ref: "#/components/schemas/EvaluationMetrics"
           description: The evaluation metrics over training/eval data that were computed
             at the end of training.
-        globalExplanations:
-          description: Global explanations for important features of the model. For
-            multi-class models, there is one entry for each label class. For
-            other models, there is only one entry in the list.
-          items:
-            $ref: "#/components/schemas/GlobalExplanation"
-          type: array
         results:
           description: Output of each iteration run, results.size() <= max_iterations.
           items:

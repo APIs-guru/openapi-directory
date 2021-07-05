@@ -257,6 +257,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta2/{parent}/aptArtifacts:import":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports Apt artifacts. The returned Operation will complete once the resources are imported. Package, Version, and File resources are created based on the imported artifacts. Imported artifacts that conflict with existing resources are ignored.
+      operationId: artifactregistry.projects.locations.repositories.aptArtifacts.import
+      parameters:
+        - description: The name of the parent resource where the artifacts will be imported.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportAptArtifactsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta2/{parent}/files":
     get:
       description: Lists files.
@@ -604,6 +646,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta2/{parent}/yumArtifacts:import":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports Yum (RPM) artifacts. The returned Operation will complete once the resources are imported. Package, Version, and File resources are created based on the imported artifacts. Imported artifacts that conflict with existing resources are ignored.
+      operationId: artifactregistry.projects.locations.repositories.yumArtifacts.import
+      parameters:
+        - description: The name of the parent resource where the artifacts will be imported.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportYumArtifactsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta2/{resource}:getIamPolicy":
     get:
       description: Gets the IAM policy for a given resource.
@@ -814,6 +898,39 @@ components:
       schema:
         type: string
   schemas:
+    AptArtifact:
+      description: A detailed representation of an Apt artifact. Information in the record is derived from the archive's control file. See https://www.debian.org/doc/debian-policy/ch-controlfields.html
+      properties:
+        architecture:
+          description: Output only. Operating system architecture of the artifact.
+          readOnly: true
+          type: string
+        component:
+          description: Output only. Repository component of the artifact.
+          readOnly: true
+          type: string
+        controlFile:
+          description: Output only. Contents of the artifact's control metadata file.
+          format: byte
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The Artifact Registry resource name of the artifact.
+          readOnly: true
+          type: string
+        packageName:
+          description: Output only. The Apt package name of the artifact.
+          readOnly: true
+          type: string
+        packageType:
+          description: Output only. An artifact is a binary or source package.
+          enum:
+            - PACKAGE_TYPE_UNSPECIFIED
+            - BINARY
+            - SOURCE
+          readOnly: true
+          type: string
+      type: object
     Binding:
       description: Associates `members` with a `role`.
       properties:
@@ -889,6 +1006,92 @@ components:
           description: The hash value.
           format: byte
           type: string
+      type: object
+    ImportAptArtifactsErrorInfo:
+      description: Error information explaining why a package was not imported.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The detailed error status.
+        gcsSource:
+          $ref: "#/components/schemas/ImportAptArtifactsGcsSource"
+          description: Google Cloud Storage location requested.
+      type: object
+    ImportAptArtifactsGcsSource:
+      description: Google Cloud Storage location where the artifacts currently reside.
+      properties:
+        uris:
+          description: Cloud Storage paths URI (e.g., gs://my_bucket//my_object).
+          items:
+            type: string
+          type: array
+        useWildcards:
+          description: Supports URI wildcards for matching multiple objects from a single URI.
+          type: boolean
+      type: object
+    ImportAptArtifactsRequest:
+      description: The request to import new apt artifacts.
+      properties:
+        gcsSource:
+          $ref: "#/components/schemas/ImportAptArtifactsGcsSource"
+          description: Google Cloud Storage location where input content is located.
+      type: object
+    ImportAptArtifactsResponse:
+      description: The response message from importing artifacts.
+      properties:
+        aptArtifacts:
+          description: The Apt artifacts updated.
+          items:
+            $ref: "#/components/schemas/AptArtifact"
+          type: array
+        errors:
+          description: Detailed error info for packages that were not imported.
+          items:
+            $ref: "#/components/schemas/ImportAptArtifactsErrorInfo"
+          type: array
+      type: object
+    ImportYumArtifactsErrorInfo:
+      description: Error information explaining why a package was not imported.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The detailed error status.
+        gcsSource:
+          $ref: "#/components/schemas/ImportYumArtifactsGcsSource"
+          description: Google Cloud Storage location requested.
+      type: object
+    ImportYumArtifactsGcsSource:
+      description: Google Cloud Storage location where the artifacts currently reside.
+      properties:
+        uris:
+          description: Cloud Storage paths URI (e.g., gs://my_bucket//my_object).
+          items:
+            type: string
+          type: array
+        useWildcards:
+          description: Supports URI wildcards for matching multiple objects from a single URI.
+          type: boolean
+      type: object
+    ImportYumArtifactsRequest:
+      description: The request to import new yum artifacts.
+      properties:
+        gcsSource:
+          $ref: "#/components/schemas/ImportYumArtifactsGcsSource"
+          description: Google Cloud Storage location where input content is located.
+      type: object
+    ImportYumArtifactsResponse:
+      description: The response message from importing artifacts.
+      properties:
+        errors:
+          description: Detailed error info for packages that were not imported.
+          items:
+            $ref: "#/components/schemas/ImportYumArtifactsErrorInfo"
+          type: array
+        yumArtifacts:
+          description: The yum artifacts updated.
+          items:
+            $ref: "#/components/schemas/YumArtifact"
+          type: array
       type: object
     ListFilesResponse:
       description: The response from listing files.
@@ -1144,6 +1347,38 @@ components:
             type: string
           type: array
       type: object
+    UploadAptArtifactMediaResponse:
+      description: The response to upload an artifact.
+      properties:
+        operation:
+          $ref: "#/components/schemas/Operation"
+          description: Operation to be returned to the user.
+      type: object
+    UploadAptArtifactResponse:
+      description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
+      properties:
+        aptArtifacts:
+          description: The Apt artifacts updated.
+          items:
+            $ref: "#/components/schemas/AptArtifact"
+          type: array
+      type: object
+    UploadYumArtifactMediaResponse:
+      description: The response to upload an artifact.
+      properties:
+        operation:
+          $ref: "#/components/schemas/Operation"
+          description: Operation to be returned to the user.
+      type: object
+    UploadYumArtifactResponse:
+      description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
+      properties:
+        yumArtifacts:
+          description: The Apt artifacts updated.
+          items:
+            $ref: "#/components/schemas/YumArtifact"
+          type: array
+      type: object
     Version:
       description: The body of a version resource. A version resource represents a collection of components, such as files and other data. This may correspond to a version in many package management schemes.
       properties:
@@ -1171,6 +1406,30 @@ components:
         updateTime:
           description: The time when the version was last updated.
           format: google-datetime
+          type: string
+      type: object
+    YumArtifact:
+      description: A detailed representation of a Yum artifact.
+      properties:
+        architecture:
+          description: Output only. Operating system architecture of the artifact.
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The Artifact Registry resource name of the artifact.
+          readOnly: true
+          type: string
+        packageName:
+          description: Output only. The yum package name of the artifact.
+          readOnly: true
+          type: string
+        packageType:
+          description: Output only. An artifact is a binary or source package.
+          enum:
+            - PACKAGE_TYPE_UNSPECIFIED
+            - BINARY
+            - SOURCE
+          readOnly: true
           type: string
       type: object
   securitySchemes:

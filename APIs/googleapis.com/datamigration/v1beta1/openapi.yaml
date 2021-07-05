@@ -1596,7 +1596,7 @@ components:
             $ref: "#/components/schemas/SqlAclEntry"
           type: array
         enableIpv4:
-          description: Whether the instance should be assigned an IPv4 address or not.
+          description: Whether the instance is assigned a public IP address or not.
           type: boolean
         privateNetwork:
           description: The resource link for the VPC network from which the Cloud SQL instance is accessible for private IP. For example, `/projects/myProject/global/networks/default`. This setting can be updated, but it cannot be removed after it is set.

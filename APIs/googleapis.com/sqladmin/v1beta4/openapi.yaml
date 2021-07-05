@@ -27,9 +27,9 @@ info:
       format: google
       url: https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: sqladmin
-  x-preferred: false
 externalDocs:
   url: https://developers.google.com/cloud-sql/
 tags:
@@ -48,9 +48,7 @@ paths:
       description: List all available database flags for Cloud SQL instances.
       operationId: sql.flags.list
       parameters:
-        - description: Database type and version you want to retrieve flags for. By
-            default, this method returns flags for all database types and
-            versions.
+        - description: Database type and version you want to retrieve flags for. By default, this method returns flags for all database types and versions.
           in: query
           name: databaseVersion
           schema:
@@ -96,15 +94,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A filter expression that filters resources listed in the response.
-            The expression is in the form of field:value. For example,
-            'instanceType:CLOUD_SQL_INSTANCE'. Fields can be nested as needed as
-            per their JSON representation, such as
-            'settings.userLabels.auto_start:true'. Multiple filter queries are
-            space-separated. For example. 'state:RUNNABLE
-            instanceType:CLOUD_SQL_INSTANCE'. By default, each expression is an
-            AND expression. However, you can include AND and OR expressions
-            explicitly.
+        - description: A filter expression that filters resources listed in the response. The expression is in the form of field:value. For example, 'instanceType:CLOUD_SQL_INSTANCE'. Fields can be nested as needed as per their JSON representation, such as 'settings.userLabels.auto_start:true'. Multiple filter queries are space-separated. For example. 'state:RUNNABLE instanceType:CLOUD_SQL_INSTANCE'. By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly.
           in: query
           name: filter
           schema:
@@ -114,8 +104,7 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: A previously-returned page token representing part of the larger
-            set of results to view.
+        - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
           schema:
@@ -154,8 +143,7 @@ paths:
       description: Creates a new Cloud SQL instance.
       operationId: sql.instances.insert
       parameters:
-        - description: Project ID of the project to which the newly created Cloud SQL
-            instances should belong.
+        - description: Project ID of the project to which the newly created Cloud SQL instances should belong.
           in: path
           name: project
           required: true
@@ -266,8 +254,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates settings of a Cloud SQL instance. This method supports
-        patch semantics.
+      description: Updates settings of a Cloud SQL instance. This method supports patch semantics.
       operationId: sql.instances.patch
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -306,8 +293,7 @@ paths:
       tags:
         - instances
     put:
-      description: Updates settings of a Cloud SQL instance. Using this operation
-        might cause your instance to restart.
+      description: Updates settings of a Cloud SQL instance. Using this operation might cause your instance to restart.
       operationId: sql.instances.update
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -359,11 +345,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Add a new trusted Certificate Authority (CA) version for the
-        specified instance. Required to prepare for a certificate rotation. If a
-        CA version was previously added but never used in a certificate
-        rotation, this operation replaces that version. There cannot be more
-        than one CA version waiting to be rotated in.
+      description: Add a new trusted Certificate Authority (CA) version for the specified instance. Required to prepare for a certificate rotation. If a CA version was previously added but never used in a certificate rotation, this operation replaces that version. There cannot be more than one CA version waiting to be rotated in.
       operationId: sql.instances.addServerCa
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -398,9 +380,7 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns":
     get:
-      description: Lists all backup runs associated with a given instance and
-        configuration in the reverse chronological order of the backup
-        initiation time.
+      description: Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the backup initiation time.
       operationId: sql.backupRuns.list
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -420,8 +400,7 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: A previously-returned page token representing part of the larger
-            set of results to view.
+        - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
           schema:
@@ -457,8 +436,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new backup run on demand. This method is applicable only
-        to Second Generation instances.
+      description: Creates a new backup run on demand. This method is applicable only to Second Generation instances.
       operationId: sql.backupRuns.insert
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -513,8 +491,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the Backup Run to delete. To find a Backup Run ID, use
-            the list method.
+        - description: The ID of the Backup Run to delete. To find a Backup Run ID, use the list method.
           in: path
           name: id
           required: true
@@ -604,8 +581,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Cloud SQL instance as a clone of the source instance.
-        Using this operation might cause your instance to restart.
+      description: Creates a Cloud SQL instance as a clone of the source instance. Using this operation might cause your instance to restart.
       operationId: sql.instances.clone
       parameters:
         - description: Project ID of the source as well as the clone Cloud SQL instance.
@@ -614,8 +590,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID of the Cloud SQL instance to be cloned (source). This does
-            not include the project ID.
+        - description: The ID of the Cloud SQL instance to be cloned (source). This does not include the project ID.
           in: path
           name: instance
           required: true
@@ -658,10 +633,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates a short-lived X509 certificate containing the provided
-        public key and signed by a private key specific to the target instance.
-        Users may use the certificate to authenticate as themselves when
-        connecting to the database.
+      description: Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.
       operationId: sql.sslCerts.createEphemeral
       parameters:
         - description: Project ID of the Cloud SQL project.
@@ -747,8 +719,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Inserts a resource containing information about a database inside a
-        Cloud SQL instance.
+      description: Inserts a resource containing information about a database inside a Cloud SQL instance.
       operationId: sql.databases.insert
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -828,8 +799,7 @@ paths:
       tags:
         - databases
     get:
-      description: Retrieves a resource containing information about a database inside
-        a Cloud SQL instance.
+      description: Retrieves a resource containing information about a database inside a Cloud SQL instance.
       operationId: sql.databases.get
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -881,9 +851,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Partially updates a resource containing information about a
-        database inside a Cloud SQL instance. This method supports patch
-        semantics.
+      description: Partially updates a resource containing information about a database inside a Cloud SQL instance. This method supports patch semantics.
       operationId: sql.databases.patch
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -928,8 +896,7 @@ paths:
       tags:
         - databases
     put:
-      description: Updates a resource containing information about a database inside a
-        Cloud SQL instance.
+      description: Updates a resource containing information about a database inside a Cloud SQL instance.
       operationId: sql.databases.update
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -987,8 +954,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Demotes the stand-alone instance to be a Cloud SQL read replica for
-        an external database server.
+      description: Demotes the stand-alone instance to be a Cloud SQL read replica for an external database server.
       operationId: sql.instances.demoteMaster
       parameters:
         - description: ID of the project that contains the instance.
@@ -1040,8 +1006,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Exports data from a Cloud SQL instance to a Cloud Storage bucket as
-        a SQL dump or CSV file.
+      description: Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL dump or CSV file.
       operationId: sql.instances.export
       parameters:
         - description: Project ID of the project that contains the instance to be exported.
@@ -1089,8 +1054,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Failover the instance to its failover replica instance. Using this
-        operation might cause your instance to restart.
+      description: Failover the instance to its failover replica instance. Using this operation might cause your instance to restart.
       operationId: sql.instances.failover
       parameters:
         - description: ID of the project that contains the read replica.
@@ -1142,8 +1106,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Imports data into a Cloud SQL instance from a SQL dump or CSV file
-        in Cloud Storage.
+      description: Imports data into a Cloud SQL instance from a SQL dump or CSV file in Cloud Storage.
       operationId: sql.instances.import
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1179,11 +1142,7 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/listServerCas":
     get:
-      description: "Lists all of the trusted Certificate Authorities (CAs) for the
-        specified instance. There can be up to three CAs listed: the CA that was
-        used to sign the certificate that is currently in use, a CA that has
-        been added but not yet used to sign a certificate, and a CA used to sign
-        a certificate that has previously rotated out."
+      description: "Lists all of the trusted Certificate Authorities (CAs) for the specified instance. There can be up to three CAs listed: the CA that was used to sign the certificate that is currently in use, a CA that has been added but not yet used to sign a certificate, and a CA used to sign a certificate that has previously rotated out."
       operationId: sql.instances.listServerCas
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1242,8 +1201,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Promotes the read replica instance to be a stand-alone Cloud SQL
-        instance. Using this operation might cause your instance to restart.
+      description: Promotes the read replica instance to be a stand-alone Cloud SQL instance. Using this operation might cause your instance to restart.
       operationId: sql.instances.promoteReplica
       parameters:
         - description: ID of the project that contains the read replica.
@@ -1342,8 +1300,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Deletes all client certificates and generates a new server SSL
-        certificate for the instance.
+      description: Deletes all client certificates and generates a new server SSL certificate for the instance.
       operationId: sql.instances.resetSslConfig
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1437,8 +1394,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Restores a backup of a Cloud SQL instance. Using this operation
-        might cause your instance to restart.
+      description: Restores a backup of a Cloud SQL instance. Using this operation might cause your instance to restart.
       operationId: sql.instances.restoreBackup
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1490,8 +1446,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Rotates the server certificate to one signed by the Certificate
-        Authority (CA) version previously added with the addServerCA method.
+      description: Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method.
       operationId: sql.instances.rotateServerCa
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1577,9 +1532,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an SSL certificate and returns it along with the private
-        key and server certificate authority. The new certificate will not be
-        usable until the instance is restarted.
+      description: Creates an SSL certificate and returns it along with the private key and server certificate authority. The new certificate will not be usable until the instance is restarted.
       operationId: sql.sslCerts.insert
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1619,8 +1572,7 @@ paths:
         - sslCerts
   "/sql/v1beta4/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}":
     delete:
-      description: Deletes the SSL certificate. For First Generation instances, the
-        certificate remains valid until the instance is restarted.
+      description: Deletes the SSL certificate. For First Generation instances, the certificate remains valid until the instance is restarted.
       operationId: sql.sslCerts.delete
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1660,9 +1612,7 @@ paths:
       tags:
         - sslCerts
     get:
-      description: Retrieves a particular SSL certificate. Does not include the
-        private key (required for usage). The private key must be saved from the
-        response to initial creation.
+      description: Retrieves a particular SSL certificate. Does not include the private key (required for usage). The private key must be saved from the response to initial creation.
       operationId: sql.sslCerts.get
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -2162,8 +2112,7 @@ paths:
         - projects
   "/sql/v1beta4/projects/{project}/operations":
     get:
-      description: Lists all instance operations that have been performed on the given
-        Cloud SQL instance in the reverse chronological order of the start time.
+      description: Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.
       operationId: sql.operations.list
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -2182,8 +2131,7 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: A previously-returned page token representing part of the larger
-            set of results to view.
+        - description: A previously-returned page token representing part of the larger set of results to view.
           in: query
           name: pageToken
           schema:
@@ -2267,8 +2215,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/sql/v1beta4/projects/{project}/tiers":
     get:
-      description: Lists all available machine types (tiers) for Cloud SQL, for
-        example, db-custom-1-3840. For related information, see Pricing.
+      description: Lists all available machine types (tiers) for Cloud SQL, for example, db-custom-1-3840. For related information, see Pricing.
       operationId: sql.tiers.list
       parameters:
         - description: Project ID of the project for which to list tiers.
@@ -2347,9 +2294,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -2367,9 +2312,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -2391,8 +2334,7 @@ components:
       description: An entry for an Access Control list.
       properties:
         expirationTime:
-          description: The time when this access control entry expires in RFC 3339 format,
-            for example *2012-11-15T16:19:00.094Z*.
+          description: The time when this access control entry expires in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         kind:
@@ -2428,8 +2370,7 @@ components:
           $ref: "#/components/schemas/BackupRetentionSettings"
           description: Backup retention settings.
         binaryLogEnabled:
-          description: (MySQL only) Whether binary log is enabled. If backup configuration
-            is disabled, binarylog must be disabled as well.
+          description: (MySQL only) Whether binary log is enabled. If backup configuration is disabled, binarylog must be disabled as well.
           type: boolean
         enabled:
           description: Whether this configuration is enabled.
@@ -2447,12 +2388,10 @@ components:
           description: Reserved for future use.
           type: boolean
         startTime:
-          description: Start time for the daily backup configuration in UTC timezone in
-            the 24 hour format - *HH:MM*.
+          description: Start time for the daily backup configuration in UTC timezone in the 24 hour format - *HH:MM*.
           type: string
         transactionLogRetentionDays:
-          description: The number of days of transaction logs we retain for point in time
-            restore, from 1-7.
+          description: The number of days of transaction logs we retain for point in time restore, from 1-7.
           format: int32
           type: integer
       type: object
@@ -2468,13 +2407,10 @@ components:
           type: string
       type: object
     BackupRetentionSettings:
-      description: We currently only support backup retention by specifying the number
-        of backups we will retain.
+      description: We currently only support backup retention by specifying the number of backups we will retain.
       properties:
         retainedBackups:
-          description: Depending on the value of retention_unit, this is used to determine
-            if a backup needs to be deleted. If retention_unit is 'COUNT', we
-            will retain this many backups.
+          description: Depending on the value of retention_unit, this is used to determine if a backup needs to be deleted. If retention_unit is 'COUNT', we will retain this many backups.
           format: int32
           type: integer
         retentionUnit:
@@ -2499,29 +2435,23 @@ components:
           type: string
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
-          description: Encryption configuration specific to a backup. Applies only to
-            Second Generation instances.
+          description: Encryption configuration specific to a backup. Applies only to Second Generation instances.
         diskEncryptionStatus:
           $ref: "#/components/schemas/DiskEncryptionStatus"
-          description: Encryption status specific to a backup. Applies only to Second
-            Generation instances.
+          description: Encryption status specific to a backup. Applies only to Second Generation instances.
         endTime:
-          description: The time the backup operation completed in UTC timezone in RFC 3339
-            format, for example *2012-11-15T16:19:00.094Z*.
+          description: The time the backup operation completed in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         enqueuedTime:
-          description: The time the run was enqueued in UTC timezone in RFC 3339 format,
-            for example *2012-11-15T16:19:00.094Z*.
+          description: The time the run was enqueued in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         error:
           $ref: "#/components/schemas/OperationError"
-          description: Information about why the backup operation failed. This is only
-            present if the run has the FAILED status.
+          description: Information about why the backup operation failed. This is only present if the run has the FAILED status.
         id:
-          description: The identifier for this backup run. Unique only for a specific
-            Cloud SQL instance.
+          description: The identifier for this backup run. Unique only for a specific Cloud SQL instance.
           format: int64
           type: string
         instance:
@@ -2537,8 +2467,7 @@ components:
           description: The URI of this resource.
           type: string
         startTime:
-          description: The time the backup operation actually started in UTC timezone in
-            RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
+          description: The time the backup operation actually started in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         status:
@@ -2556,18 +2485,14 @@ components:
             - DELETED
           type: string
         type:
-          description: The type of this run; can be either "AUTOMATED" or "ON_DEMAND".
-            This field defaults to "ON_DEMAND" and is ignored, when specified
-            for insert requests.
+          description: The type of this run; can be either "AUTOMATED" or "ON_DEMAND". This field defaults to "ON_DEMAND" and is ignored, when specified for insert requests.
           enum:
             - SQL_BACKUP_RUN_TYPE_UNSPECIFIED
             - AUTOMATED
             - ON_DEMAND
           type: string
         windowStartTime:
-          description: The start time of the backup window during which this the backup
-            was attempted in RFC 3339 format, for example
-            *2012-11-15T16:19:00.094Z*.
+          description: The start time of the backup window during which this the backup was attempted in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
       type: object
@@ -2575,8 +2500,7 @@ components:
       description: Backup run list results.
       properties:
         items:
-          description: A list of backup runs in reverse chronological order of the
-            enqueued time.
+          description: A list of backup runs in reverse chronological order of the enqueued time.
           items:
             $ref: "#/components/schemas/BackupRun"
           type: array
@@ -2584,9 +2508,7 @@ components:
           description: This is always *sql#backupRunsList*.
           type: string
         nextPageToken:
-          description: The continuation token, used to page through large result sets.
-            Provide this value in a subsequent request to return the next page
-            of results.
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
       type: object
     BinLogCoordinates:
@@ -2608,9 +2530,7 @@ components:
       properties:
         binLogCoordinates:
           $ref: "#/components/schemas/BinLogCoordinates"
-          description: Binary log coordinates, if specified, identify the position up to
-            which the source instance is cloned. If not specified, the source
-            instance is cloned up to the most recent binary log coordinates.
+          description: Binary log coordinates, if specified, identify the position up to which the source instance is cloned. If not specified, the source instance is cloned up to the most recent binary log coordinates.
         destinationInstanceName:
           description: Name of the Cloud SQL instance to be created as a clone.
           type: string
@@ -2636,23 +2556,19 @@ components:
           description: The Cloud SQL collation value.
           type: string
         etag:
-          description: This field is deprecated and will be removed from a future version
-            of the API.
+          description: This field is deprecated and will be removed from a future version of the API.
           type: string
         instance:
-          description: The name of the Cloud SQL instance. This does not include the
-            project ID.
+          description: The name of the Cloud SQL instance. This does not include the project ID.
           type: string
         kind:
           description: This is always *sql#database*.
           type: string
         name:
-          description: The name of the database in the Cloud SQL instance. This does not
-            include the project ID or instance name.
+          description: The name of the database in the Cloud SQL instance. This does not include the project ID or instance name.
           type: string
         project:
-          description: The project ID of the project containing the Cloud SQL database.
-            The Google apps domain is prefixed if applicable.
+          description: The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable.
           type: string
         selfLink:
           description: The URI of this resource.
@@ -2664,25 +2580,17 @@ components:
       description: Database flags for Cloud SQL instances.
       properties:
         name:
-          description: The name of the flag. These flags are passed at instance startup,
-            so include both server options and system variables for MySQL. Flags
-            are specified with underscores, not hyphens. For more information,
-            see Configuring Database Flags in the Cloud SQL documentation.
+          description: The name of the flag. These flags are passed at instance startup, so include both server options and system variables for MySQL. Flags are specified with underscores, not hyphens. For more information, see Configuring Database Flags in the Cloud SQL documentation.
           type: string
         value:
-          description: The value of the flag. Booleans are set to *on* for true and *off*
-            for false. This field must be omitted if the flag doesn't take a
-            value.
+          description: The value of the flag. Booleans are set to *on* for true and *off* for false. This field must be omitted if the flag doesn't take a value.
           type: string
       type: object
     DatabaseInstance:
       description: A Cloud SQL instance resource.
       properties:
         backendType:
-          description: " *SECOND_GEN*: Cloud SQL database instance. *EXTERNAL*: A database
-            server that is not managed by Google. This property is read-only;
-            use the *tier* property in the *settings* object to determine the
-            database type."
+          description: " *SECOND_GEN*: Cloud SQL database instance. *EXTERNAL*: A database server that is not managed by Google. This property is read-only; use the *tier* property in the *settings* object to determine the database type."
           enum:
             - SQL_BACKEND_TYPE_UNSPECIFIED
             - FIRST_GEN
@@ -2693,20 +2601,11 @@ components:
           description: Connection name of the Cloud SQL instance used in connection strings.
           type: string
         currentDiskSize:
-          description: The current disk usage of the instance in bytes. This property has
-            been deprecated. Use the
-            "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud
-            Monitoring API instead. Please see this announcement for details.
+          description: The current disk usage of the instance in bytes. This property has been deprecated. Use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see this announcement for details.
           format: int64
           type: string
         databaseVersion:
-          description: "The database engine type and version. The *databaseVersion* field
-            cannot be changed after instance creation. MySQL instances:
-            *MYSQL_8_0*, *MYSQL_5_7* (default), or *MYSQL_5_6*. PostgreSQL
-            instances: *POSTGRES_9_6*, *POSTGRES_10*, *POSTGRES_11*,
-            *POSTGRES_12*, or *POSTGRES_13* (default). SQL Server instances:
-            *SQLSERVER_2017_STANDARD* (default), *SQLSERVER_2017_ENTERPRISE*,
-            *SQLSERVER_2017_EXPRESS*, or *SQLSERVER_2017_WEB*."
+          description: "The database engine type and version. The *databaseVersion* field cannot be changed after instance creation. MySQL instances: *MYSQL_8_0*, *MYSQL_5_7* (default), or *MYSQL_5_6*. PostgreSQL instances: *POSTGRES_9_6*, *POSTGRES_10*, *POSTGRES_11*, *POSTGRES_12*, or *POSTGRES_13* (default). SQL Server instances: *SQLSERVER_2017_STANDARD* (default), *SQLSERVER_2017_ENTERPRISE*, *SQLSERVER_2017_EXPRESS*, or *SQLSERVER_2017_WEB*."
           enum:
             - SQL_DATABASE_VERSION_UNSPECIFIED
             - MYSQL_5_1
@@ -2730,45 +2629,28 @@ components:
           type: string
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
-          description: Disk encryption configuration specific to an instance. Applies only
-            to Second Generation instances.
+          description: Disk encryption configuration specific to an instance. Applies only to Second Generation instances.
         diskEncryptionStatus:
           $ref: "#/components/schemas/DiskEncryptionStatus"
-          description: Disk encryption status specific to an instance. Applies only to
-            Second Generation instances.
+          description: Disk encryption status specific to an instance. Applies only to Second Generation instances.
         etag:
-          description: This field is deprecated and will be removed from a future version
-            of the API. Use the *settings.settingsVersion* field instead.
+          description: This field is deprecated and will be removed from a future version of the API. Use the *settings.settingsVersion* field instead.
           type: string
         failoverReplica:
-          description: The name and status of the failover replica. This property is
-            applicable only to Second Generation instances.
+          description: The name and status of the failover replica. This property is applicable only to Second Generation instances.
           properties:
             available:
-              description: The availability status of the failover replica. A false status
-                indicates that the failover replica is out of sync. The primary
-                instance can only failover to the failover replica when the
-                status is true.
+              description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only failover to the failover replica when the status is true.
               type: boolean
             name:
-              description: The name of the failover replica. If specified at instance
-                creation, a failover replica is created for the instance. The
-                name doesn't include the project ID. This property is applicable
-                only to Second Generation instances.
+              description: The name of the failover replica. If specified at instance creation, a failover replica is created for the instance. The name doesn't include the project ID. This property is applicable only to Second Generation instances.
               type: string
           type: object
         gceZone:
-          description: The Compute Engine zone that the instance is currently serving
-            from. This value could be different from the zone that was specified
-            when the instance was created if the instance has failed over to its
-            secondary zone.
+          description: The Compute Engine zone that the instance is currently serving from. This value could be different from the zone that was specified when the instance was created if the instance has failed over to its secondary zone.
           type: string
         instanceType:
-          description: "The instance type. This can be one of the following.
-            *CLOUD_SQL_INSTANCE*: A Cloud SQL instance that is not replicating
-            from a primary instance. *ON_PREMISES_INSTANCE*: An instance running
-            on the customer's premises. *READ_REPLICA_INSTANCE*: A Cloud SQL
-            instance configured as a read-replica."
+          description: "The instance type. This can be one of the following. *CLOUD_SQL_INSTANCE*: A Cloud SQL instance that is not replicating from a primary instance. *ON_PREMISES_INSTANCE*: An instance running on the customer's premises. *READ_REPLICA_INSTANCE*: A Cloud SQL instance configured as a read-replica."
           enum:
             - SQL_INSTANCE_TYPE_UNSPECIFIED
             - CLOUD_SQL_INSTANCE
@@ -2781,15 +2663,13 @@ components:
             $ref: "#/components/schemas/IpMapping"
           type: array
         ipv6Address:
-          description: The IPv6 address assigned to the instance. (Deprecated) This
-            property was applicable only to First Generation instances.
+          description: The IPv6 address assigned to the instance. (Deprecated) This property was applicable only to First Generation instances.
           type: string
         kind:
           description: This is always *sql#instance*.
           type: string
         masterInstanceName:
-          description: The name of the instance which will act as primary in the
-            replication setup.
+          description: The name of the instance which will act as primary in the replication setup.
           type: string
         maxDiskSize:
           description: The maximum disk size of the instance in bytes.
@@ -2803,20 +2683,12 @@ components:
           description: Configuration specific to on-premises instances.
         outOfDiskReport:
           $ref: "#/components/schemas/SqlOutOfDiskReport"
-          description: "This field represents the report generated by the proactive
-            database wellness job for OutOfDisk issues. Writers: -- the
-            proactive database wellness job for OOD. Readers: -- the proactive
-            database wellness job"
+          description: "This field represents the report generated by the proactive database wellness job for OutOfDisk issues. Writers: -- the proactive database wellness job for OOD. Readers: -- the proactive database wellness job"
         project:
-          description: The project ID of the project containing the Cloud SQL instance.
-            The Google apps domain is prefixed if applicable.
+          description: The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
           type: string
         region:
-          description: The geographical region. Can be *us-central* (*FIRST_GEN* instances
-            only) *us-central1* (*SECOND_GEN* instances only) *asia-east1* or
-            *europe-west1*. Defaults to *us-central* or *us-central1* depending
-            on the instance type. The region cannot be changed after instance
-            creation.
+          description: The geographical region. Can be *us-central* (*FIRST_GEN* instances only) *us-central1* (*SECOND_GEN* instances only) *asia-east1* or *europe-west1*. Defaults to *us-central* or *us-central1* depending on the instance type. The region cannot be changed after instance creation.
           type: string
         replicaConfiguration:
           $ref: "#/components/schemas/ReplicaConfiguration"
@@ -2830,19 +2702,13 @@ components:
           description: Initial root password. Use only on creation.
           type: string
         satisfiesPzs:
-          description: The status indicating if instance satisfiesPzs. Reserved for future
-            use.
+          description: The status indicating if instance satisfiesPzs. Reserved for future use.
           type: boolean
         scheduledMaintenance:
           $ref: "#/components/schemas/SqlScheduledMaintenance"
-          description: The start time of any upcoming scheduled maintenance for this
-            instance.
+          description: The start time of any upcoming scheduled maintenance for this instance.
         secondaryGceZone:
-          description: The Compute Engine zone that the failover instance is currently
-            serving from for a regional instance. This value could be different
-            from the zone that was specified when the instance was created if
-            the instance has failed over to its secondary/failover zone.
-            Reserved for future use.
+          description: The Compute Engine zone that the failover instance is currently serving from for a regional instance. This value could be different from the zone that was specified when the instance was created if the instance has failed over to its secondary/failover zone. Reserved for future use.
           type: string
         selfLink:
           description: The URI of this resource.
@@ -2851,21 +2717,13 @@ components:
           $ref: "#/components/schemas/SslCert"
           description: SSL configuration.
         serviceAccountEmailAddress:
-          description: The service account email address assigned to the instance. This
-            property is read-only.
+          description: The service account email address assigned to the instance. This property is read-only.
           type: string
         settings:
           $ref: "#/components/schemas/Settings"
           description: The user settings.
         state:
-          description: "The current serving state of the Cloud SQL instance. This can be
-            one of the following. *SQL_INSTANCE_STATE_UNSPECIFIED*: The state of
-            the instance is unknown. *RUNNABLE*: The instance is running, or has
-            been stopped by owner. *SUSPENDED*: The instance is not available,
-            for example due to problems with billing. *PENDING_DELETE*: The
-            instance is being deleted. *PENDING_CREATE*: The instance is being
-            created. *MAINTENANCE*: The instance is down for maintenance.
-            *FAILED*: The instance creation failed."
+          description: "The current serving state of the Cloud SQL instance. This can be one of the following. *SQL_INSTANCE_STATE_UNSPECIFIED*: The state of the instance is unknown. *RUNNABLE*: The instance is running, or has been stopped by owner. *SUSPENDED*: The instance is not available, for example due to problems with billing. *PENDING_DELETE*: The instance is being deleted. *PENDING_CREATE*: The instance is being created. *MAINTENANCE*: The instance is down for maintenance. *FAILED*: The instance creation failed."
           enum:
             - SQL_INSTANCE_STATE_UNSPECIFIED
             - RUNNABLE
@@ -2900,20 +2758,14 @@ components:
           type: string
       type: object
     DemoteMasterConfiguration:
-      description: Read-replica configuration for connecting to the on-premises
-        primary instance.
+      description: Read-replica configuration for connecting to the on-premises primary instance.
       properties:
         kind:
           description: This is always *sql#demoteMasterConfiguration*.
           type: string
         mysqlReplicaConfiguration:
           $ref: "#/components/schemas/DemoteMasterMySqlReplicaConfiguration"
-          description: MySQL specific configuration when replicating from a MySQL
-            on-premises primary instance. Replication configuration information
-            such as the username, password, certificates, and keys are not
-            stored in the instance metadata. The configuration information is
-            used only to set up the replication connection and is stored by
-            MySQL in a file named *master.info* in the data directory.
+          description: MySQL specific configuration when replicating from a MySQL on-premises primary instance. Replication configuration information such as the username, password, certificates, and keys are not stored in the instance metadata. The configuration information is used only to set up the replication connection and is stored by MySQL in a file named *master.info* in the data directory.
       type: object
     DemoteMasterContext:
       description: Database instance demote primary instance context.
@@ -2922,22 +2774,13 @@ components:
           description: This is always *sql#demoteMasterContext*.
           type: string
         masterInstanceName:
-          description: The name of the instance which will act as on-premises primary
-            instance in the replication setup.
+          description: The name of the instance which will act as on-premises primary instance in the replication setup.
           type: string
         replicaConfiguration:
           $ref: "#/components/schemas/DemoteMasterConfiguration"
-          description: Configuration specific to read-replicas replicating from the
-            on-premises primary instance.
+          description: Configuration specific to read-replicas replicating from the on-premises primary instance.
         verifyGtidConsistency:
-          description: "Verify GTID consistency for demote operation. Default value:
-            *True*. Second Generation instances only. Setting this flag to false
-            enables you to bypass GTID consistency check between on-premises
-            primary instance and Cloud SQL instance during the demotion
-            operation but also exposes you to the risk of future replication
-            failures. Change the value only if you know the reason for the GTID
-            divergence and are confident that doing so will not cause any
-            replication issues."
+          description: "Verify GTID consistency for demote operation. Default value: *True*. Second Generation instances only. Setting this flag to false enables you to bypass GTID consistency check between on-premises primary instance and Cloud SQL instance during the demotion operation but also exposes you to the risk of future replication failures. Change the value only if you know the reason for the GTID divergence and are confident that doing so will not cause any replication issues."
           type: boolean
       type: object
     DemoteMasterMySqlReplicaConfiguration:
@@ -2950,9 +2793,7 @@ components:
           description: PEM representation of the replica's x509 certificate.
           type: string
         clientKey:
-          description: "PEM representation of the replica's private key. The corresponsing
-            public key is encoded in the client's certificate. The format of the
-            replica's private key can be either PKCS #1 or PKCS #8."
+          description: "PEM representation of the replica's private key. The corresponsing public key is encoded in the client's certificate. The format of the replica's private key can be either PKCS #1 or PKCS #8."
           type: string
         kind:
           description: This is always *sql#demoteMasterMysqlReplicaConfiguration*.
@@ -2965,26 +2806,16 @@ components:
           type: string
       type: object
     DenyMaintenancePeriod:
-      description: Deny Maintenance Periods. This specifies a date range during when
-        all CSA rollout will be denied.
+      description: Deny Maintenance Periods. This specifies a date range during when all CSA rollout will be denied.
       properties:
         endDate:
-          description: '"deny maintenance period" end date. If the year of the end date is
-            empty, the year of the start date also must be empty. In this case,
-            it means the deny maintenance period recurs every year. The date is
-            in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
+          description: '"deny maintenance period" end date. If the year of the end date is empty, the year of the start date also must be empty. In this case, it means the deny maintenance period recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
           type: string
         startDate:
-          description: '"deny maintenance period" start date. If the year of the start
-            date is empty, the year of the end date also must be empty. In this
-            case, it means the deny maintenance period recurs every year. The
-            date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e.,
-            11-01'
+          description: '"deny maintenance period" start date. If the year of the start date is empty, the year of the end date also must be empty. In this case, it means the deny maintenance period recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
           type: string
         time:
-          description: 'Time in UTC when the "deny maintenance period" starts on
-            start_date and ends on end_date. The time is in format: HH:mm:SS,
-            i.e., 00:00:00'
+          description: 'Time in UTC when the "deny maintenance period" starts on start_date and ends on end_date. The time is in format: HH:mm:SS, i.e., 00:00:00'
           type: string
       type: object
     DiskEncryptionConfiguration:
@@ -3011,31 +2842,19 @@ components:
       description: Database instance export context.
       properties:
         csvExportOptions:
-          description: Options for exporting data as CSV. *MySQL* and *PostgreSQL*
-            instances only.
+          description: Options for exporting data as CSV. *MySQL* and *PostgreSQL* instances only.
           properties:
             selectQuery:
               description: The select query used to extract the data.
               type: string
           type: object
         databases:
-          description: Databases to be exported. *MySQL instances:* If *fileType* is *SQL*
-            and no database is specified, all databases are exported, except for
-            the *mysql* system database. If *fileType* is *CSV*, you can specify
-            one database, either by using this property or by using the
-            *csvExportOptions.selectQuery* property, which takes precedence over
-            this property. *PostgreSQL instances:* You must specify one database
-            to be exported. If *fileType* is *CSV*, this database must match the
-            one specified in the *csvExportOptions.selectQuery* property. *SQL
-            Server instances:* You must specify one database to be exported, and
-            the *fileType* must be *BAK*.
+          description: Databases to be exported. *MySQL instances:* If *fileType* is *SQL* and no database is specified, all databases are exported, except for the *mysql* system database. If *fileType* is *CSV*, you can specify one database, either by using this property or by using the *csvExportOptions.selectQuery* property, which takes precedence over this property. *PostgreSQL instances:* You must specify one database to be exported. If *fileType* is *CSV*, this database must match the one specified in the *csvExportOptions.selectQuery* property. *SQL Server instances:* You must specify one database to be exported, and the *fileType* must be *BAK*.
           items:
             type: string
           type: array
         fileType:
-          description: "The file type for the specified uri. *SQL*: The file contains SQL
-            statements. *CSV*: The file contains CSV data. *BAK*: The file
-            contains backup data for a SQL Server instance."
+          description: "The file type for the specified uri. *SQL*: The file contains SQL statements. *CSV*: The file contains CSV data. *BAK*: The file contains backup data for a SQL Server instance."
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -3055,13 +2874,7 @@ components:
               description: Options for exporting from MySQL.
               properties:
                 masterData:
-                  description: Option to include SQL statement required to set up replication. If
-                    set to *1*, the dump file includes a CHANGE MASTER TO
-                    statement with the binary log coordinates, and
-                    --set-gtid-purged is set to ON. If set to *2*, the CHANGE
-                    MASTER TO statement is written as a SQL comment and has no
-                    effect. If set to any value other than *1*,
-                    --set-gtid-purged is set to OFF.
+                  description: Option to include SQL statement required to set up replication. If set to *1*, the dump file includes a CHANGE MASTER TO statement with the binary log coordinates, and --set-gtid-purged is set to ON. If set to *2*, the CHANGE MASTER TO statement is written as a SQL comment and has no effect. If set to any value other than *1*, --set-gtid-purged is set to OFF.
                   format: int32
                   type: integer
               type: object
@@ -3069,20 +2882,13 @@ components:
               description: Export only schemas.
               type: boolean
             tables:
-              description: Tables to export, or that were exported, from the specified
-                database. If you specify tables, specify one and only one
-                database. For PostgreSQL instances, you can specify only one
-                table.
+              description: Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database. For PostgreSQL instances, you can specify only one table.
               items:
                 type: string
               type: array
           type: object
         uri:
-          description: The path to the file in Google Cloud Storage where the export will
-            be stored. The URI is in the form *gs://bucketName/fileName*. If the
-            file already exists, the request succeeds, but the operation fails.
-            If *fileType* is *SQL* and the filename ends with .gz, the contents
-            are compressed.
+          description: The path to the file in Google Cloud Storage where the export will be stored. The URI is in the form *gs://bucketName/fileName*. If the file already exists, the request succeeds, but the operation fails. If *fileType* is *SQL* and the filename ends with .gz, the contents are compressed.
           type: string
       type: object
     FailoverContext:
@@ -3092,8 +2898,7 @@ components:
           description: This is always *sql#failoverContext*.
           type: string
         settingsVersion:
-          description: The current settings version of this instance. Request will be
-            rejected if this version doesn't match the current settings version.
+          description: The current settings version of this instance. Request will be rejected if this version doesn't match the current settings version.
           format: int64
           type: string
       type: object
@@ -3101,8 +2906,7 @@ components:
       description: A flag resource.
       properties:
         allowedIntValues:
-          description: Use this field if only certain integers are accepted. Can be
-            combined with min_value and max_value to add additional values.
+          description: Use this field if only certain integers are accepted. Can be combined with min_value and max_value to add additional values.
           items:
             format: int64
             type: string
@@ -3113,8 +2917,7 @@ components:
             type: string
           type: array
         appliesTo:
-          description: The database version this flag applies to. Can be *MYSQL_8_0*,
-            *MYSQL_5_6*, or *MYSQL_5_7*.
+          description: The database version this flag applies to. Can be *MYSQL_8_0*, *MYSQL_5_6*, or *MYSQL_5_7*.
           items:
             enum:
               - SQL_DATABASE_VERSION_UNSPECIFIED
@@ -3153,17 +2956,13 @@ components:
           format: int64
           type: string
         name:
-          description: "This is the name of the flag. Flag names always use underscores,
-            not hyphens, for example: *max_allowed_packet*"
+          description: "This is the name of the flag. Flag names always use underscores, not hyphens, for example: *max_allowed_packet*"
           type: string
         requiresRestart:
-          description: Indicates whether changing this flag will trigger a database
-            restart. Only applicable to Second Generation instances.
+          description: Indicates whether changing this flag will trigger a database restart. Only applicable to Second Generation instances.
           type: boolean
         type:
-          description: The type of the flag. Flags are typed to being *BOOLEAN*, *STRING*,
-            *INTEGER* or *NONE*. *NONE* is used for flags which do not take a
-            value, such as *skip_grant_tables*.
+          description: The type of the flag. Flags are typed to being *BOOLEAN*, *STRING*, *INTEGER* or *NONE*. *NONE* is used for flags which do not take a value, such as *skip_grant_tables*.
           enum:
             - SQL_FLAG_TYPE_UNSPECIFIED
             - BOOLEAN
@@ -3196,17 +2995,13 @@ components:
             encryptionOptions:
               properties:
                 certPath:
-                  description: Path to the Certificate (.cer) in Cloud Storage, in the form
-                    *gs://bucketName/fileName*. The instance must have write
-                    permissions to the bucket and read access to the file.
+                  description: Path to the Certificate (.cer) in Cloud Storage, in the form *gs://bucketName/fileName*. The instance must have write permissions to the bucket and read access to the file.
                   type: string
                 pvkPassword:
                   description: Password that encrypts the private key
                   type: string
                 pvkPath:
-                  description: Path to the Certificate Private Key (.pvk) in Cloud Storage, in the
-                    form *gs://bucketName/fileName*. The instance must have
-                    write permissions to the bucket and read access to the file.
+                  description: Path to the Certificate Private Key (.pvk) in Cloud Storage, in the form *gs://bucketName/fileName*. The instance must have write permissions to the bucket and read access to the file.
                   type: string
               type: object
           type: object
@@ -3214,8 +3009,7 @@ components:
           description: Options for importing data as CSV.
           properties:
             columns:
-              description: The columns to which CSV data is imported. If not specified, all
-                columns of the database table are loaded with CSV data.
+              description: The columns to which CSV data is imported. If not specified, all columns of the database table are loaded with CSV data.
               items:
                 type: string
               type: array
@@ -3224,14 +3018,10 @@ components:
               type: string
           type: object
         database:
-          description: The target database for the import. If *fileType* is *SQL*, this
-            field is required only if the import file does not specify a
-            database, and is overridden by any database specification in the
-            import file. If *fileType* is *CSV*, one database must be specified.
+          description: The target database for the import. If *fileType* is *SQL*, this field is required only if the import file does not specify a database, and is overridden by any database specification in the import file. If *fileType* is *CSV*, one database must be specified.
           type: string
         fileType:
-          description: "The file type for the specified uri. *SQL*: The file contains SQL
-            statements. *CSV*: The file contains CSV data."
+          description: "The file type for the specified uri. *SQL*: The file contains SQL statements. *CSV*: The file contains CSV data."
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -3239,41 +3029,31 @@ components:
             - BAK
           type: string
         importUser:
-          description: The PostgreSQL user for this import operation. PostgreSQL instances
-            only.
+          description: The PostgreSQL user for this import operation. PostgreSQL instances only.
           type: string
         kind:
           description: This is always *sql#importContext*.
           type: string
         uri:
-          description: Path to the import file in Cloud Storage, in the form
-            *gs://bucketName/fileName*. Compressed gzip files (.gz) are
-            supported when *fileType* is *SQL*. The instance must have write
-            permissions to the bucket and read access to the file.
+          description: Path to the import file in Cloud Storage, in the form *gs://bucketName/fileName*. Compressed gzip files (.gz) are supported when *fileType* is *SQL*. The instance must have write permissions to the bucket and read access to the file.
           type: string
       type: object
     InsightsConfig:
-      description: Insights configuration. This specifies when Cloud SQL Insights
-        feature is enabled and optional configuration.
+      description: Insights configuration. This specifies when Cloud SQL Insights feature is enabled and optional configuration.
       properties:
         queryInsightsEnabled:
           description: Whether Query Insights feature is enabled.
           type: boolean
         queryPlansPerMinute:
-          description: Number of query plans generated by Insights per minute. Default is
-            5. Changing this will restart the database.
+          description: Number of query plans generated by Insights per minute. Default is 5. Changing this will restart the database.
           format: int32
           type: integer
         queryStringLength:
-          description: "Maximum query length stored in bytes. Default value: 1024 bytes.
-            Range: 256-4500 bytes. Query length more than this field value will
-            be truncated to this value. When unset, query length will be the
-            default value. Changing query length will restart the database."
+          description: "Maximum query length stored in bytes. Default value: 1024 bytes. Range: 256-4500 bytes. Query length more than this field value will be truncated to this value. When unset, query length will be the default value. Changing query length will restart the database."
           format: int32
           type: integer
         recordApplicationTags:
-          description: Whether Query Insights will record application tags from query when
-            enabled.
+          description: Whether Query Insights will record application tags from query when enabled.
           type: boolean
         recordClientAddress:
           description: Whether Query Insights will record client address when enabled.
@@ -3326,9 +3106,7 @@ components:
           description: This is always *sql#instancesList*.
           type: string
         nextPageToken:
-          description: The continuation token, used to page through large result sets.
-            Provide this value in a subsequent request to return the next page
-            of results.
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
         warnings:
           description: List of warnings that occurred while handling the request.
@@ -3375,9 +3153,7 @@ components:
       description: IP Management configuration.
       properties:
         authorizedNetworks:
-          description: "The list of external networks that are allowed to connect to the
-            instance using the IP. In 'CIDR' notation, also known as 'slash'
-            notation (for example: *192.168.100.0/24*)."
+          description: "The list of external networks that are allowed to connect to the instance using the IP. In 'CIDR' notation, also known as 'slash' notation (for example: *192.168.100.0/24*)."
           items:
             $ref: "#/components/schemas/AclEntry"
           type: array
@@ -3385,10 +3161,7 @@ components:
           description: Whether the instance is assigned a public IP address or not.
           type: boolean
         privateNetwork:
-          description: The resource link for the VPC network from which the Cloud SQL
-            instance is accessible for private IP. For example,
-            */projects/myProject/global/networks/default*. This setting can be
-            updated, but it cannot be removed after it is set.
+          description: The resource link for the VPC network from which the Cloud SQL instance is accessible for private IP. For example, */projects/myProject/global/networks/default*. This setting can be updated, but it cannot be removed after it is set.
           type: string
         requireSsl:
           description: Whether SSL connections over IP are enforced or not.
@@ -3401,17 +3174,11 @@ components:
           description: The IP address assigned.
           type: string
         timeToRetire:
-          description: The due time for this IP to be retired in RFC 3339 format, for
-            example *2012-11-15T16:19:00.094Z*. This field is only available
-            when the IP is scheduled to be retired.
+          description: The due time for this IP to be retired in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*. This field is only available when the IP is scheduled to be retired.
           format: google-datetime
           type: string
         type:
-          description: The type of this IP address. A *PRIMARY* address is a public
-            address that can accept incoming connections. A *PRIVATE* address is
-            a private address that can accept incoming connections. An
-            *OUTGOING* address is the source address of connections originating
-            from the instance, if supported.
+          description: The type of this IP address. A *PRIMARY* address is a public address that can accept incoming connections. A *PRIVATE* address is a private address that can accept incoming connections. An *OUTGOING* address is the source address of connections originating from the instance, if supported.
           enum:
             - SQL_IP_ADDRESS_TYPE_UNSPECIFIED
             - PRIMARY
@@ -3421,32 +3188,23 @@ components:
           type: string
       type: object
     LocationPreference:
-      description: Preferred location. This specifies where a Cloud SQL instance is
-        located, either in a specific Compute Engine zone, or co-located with an
-        App Engine application. Note that if the preferred location is not
-        available, the instance will be located as close as possible within the
-        region. Only one location may be specified.
+      description: Preferred location. This specifies where a Cloud SQL instance is located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.
       properties:
         followGaeApplication:
-          description: The App Engine application to follow, it must be in the same region
-            as the Cloud SQL instance.
+          description: The App Engine application to follow, it must be in the same region as the Cloud SQL instance.
           type: string
         kind:
           description: This is always *sql#locationPreference*.
           type: string
         secondaryZone:
-          description: "The preferred Compute Engine zone for the secondary/failover (for
-            example: us-central1-a, us-central1-b, etc.). Reserved for future
-            use."
+          description: "The preferred Compute Engine zone for the secondary/failover (for example: us-central1-a, us-central1-b, etc.). Reserved for future use."
           type: string
         zone:
-          description: "The preferred Compute Engine zone (for example: us-central1-a,
-            us-central1-b, etc.)."
+          description: "The preferred Compute Engine zone (for example: us-central1-a, us-central1-b, etc.)."
           type: string
       type: object
     MaintenanceWindow:
-      description: Maintenance window. This specifies when a Cloud SQL instance is
-        restarted for system maintenance purposes.
+      description: Maintenance window. This specifies when a Cloud SQL instance is restarted for system maintenance purposes.
       properties:
         day:
           description: day of week (1-7), starting on Monday.
@@ -3460,8 +3218,7 @@ components:
           description: This is always *sql#maintenanceWindow*.
           type: string
         updateTrack:
-          description: "Maintenance timing setting: *canary* (Earlier) or *stable*
-            (Later). Learn more."
+          description: "Maintenance timing setting: *canary* (Earlier) or *stable* (Later). Learn more."
           enum:
             - SQL_UPDATE_TRACK_UNSPECIFIED
             - canary
@@ -3478,21 +3235,14 @@ components:
           description: PEM representation of the replica's x509 certificate.
           type: string
         clientKey:
-          description: PEM representation of the replica's private key. The corresponsing
-            public key is encoded in the client's certificate.
+          description: PEM representation of the replica's private key. The corresponsing public key is encoded in the client's certificate.
           type: string
         connectRetryInterval:
-          description: Seconds to wait between connect retries. MySQL's default is 60
-            seconds.
+          description: Seconds to wait between connect retries. MySQL's default is 60 seconds.
           format: int32
           type: integer
         dumpFilePath:
-          description: Path to a SQL dump file in Google Cloud Storage from which the
-            replica instance is to be created. The URI is in the form
-            gs://bucketName/fileName. Compressed gzip files (.gz) are also
-            supported. Dumps have the binlog co-ordinates from which replication
-            begins. This can be accomplished by setting --master-data to 1 when
-            using mysqldump.
+          description: Path to a SQL dump file in Google Cloud Storage from which the replica instance is to be created. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are also supported. Dumps have the binlog co-ordinates from which replication begins. This can be accomplished by setting --master-data to 1 when using mysqldump.
           type: string
         kind:
           description: This is always *sql#mysqlReplicaConfiguration*.
@@ -3511,8 +3261,7 @@ components:
           description: The username for the replication connection.
           type: string
         verifyServerCertificate:
-          description: Whether or not to check the primary instance's Common Name value in
-            the certificate that it sends during the SSL handshake.
+          description: Whether or not to check the primary instance's Common Name value in the certificate that it sends during the SSL handshake.
           type: boolean
       type: object
     OnPremisesConfiguration:
@@ -3525,8 +3274,7 @@ components:
           description: PEM representation of the replica's x509 certificate.
           type: string
         clientKey:
-          description: PEM representation of the replica's private key. The corresponsing
-            public key is encoded in the client's certificate.
+          description: PEM representation of the replica's private key. The corresponsing public key is encoded in the client's certificate.
           type: string
         dumpFilePath:
           description: The dump file to create the Cloud SQL replica.
@@ -3545,22 +3293,18 @@ components:
           type: string
       type: object
     Operation:
-      description: An Operation resource. For successful operations that return an
-        Operation resource, only the fields relevant to the operation are
-        populated in the resource.
+      description: An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
       properties:
         backupContext:
           $ref: "#/components/schemas/BackupContext"
           description: The context for backup operation, if applicable.
         endTime:
-          description: The time this operation finished in UTC timezone in RFC 3339
-            format, for example *2012-11-15T16:19:00.094Z*.
+          description: The time this operation finished in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         error:
           $ref: "#/components/schemas/OperationErrors"
-          description: If errors occurred during processing of this operation, this field
-            will be populated.
+          description: If errors occurred during processing of this operation, this field will be populated.
         exportContext:
           $ref: "#/components/schemas/ExportContext"
           description: The context for export operation, if applicable.
@@ -3568,23 +3312,17 @@ components:
           $ref: "#/components/schemas/ImportContext"
           description: The context for import operation, if applicable.
         insertTime:
-          description: The time this operation was enqueued in UTC timezone in RFC 3339
-            format, for example *2012-11-15T16:19:00.094Z*.
+          description: The time this operation was enqueued in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         kind:
           description: This is always *sql#operation*.
           type: string
         name:
-          description: An identifier that uniquely identifies the operation. You can use
-            this identifier to retrieve the Operations resource that has
-            information about the operation.
+          description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
           type: string
         operationType:
-          description: "The type of the operation. Valid values are: *CREATE* *DELETE*
-            *UPDATE* *RESTART* *IMPORT* *EXPORT* *BACKUP_VOLUME*
-            *RESTORE_VOLUME* *CREATE_USER* *DELETE_USER* *CREATE_DATABASE*
-            *DELETE_DATABASE*"
+          description: "The type of the operation. Valid values are: *CREATE* *DELETE* *UPDATE* *RESTART* *IMPORT* *EXPORT* *BACKUP_VOLUME* *RESTORE_VOLUME* *CREATE_USER* *DELETE_USER* *CREATE_DATABASE* *DELETE_DATABASE*"
           enum:
             - SQL_OPERATION_TYPE_UNSPECIFIED
             - IMPORT
@@ -3626,13 +3364,11 @@ components:
           description: The URI of this resource.
           type: string
         startTime:
-          description: The time this operation actually started in UTC timezone in RFC
-            3339 format, for example *2012-11-15T16:19:00.094Z*.
+          description: The time this operation actually started in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         status:
-          description: "The status of an operation. Valid values are: *PENDING* *RUNNING*
-            *DONE* *SQL_OPERATION_STATUS_UNSPECIFIED*"
+          description: "The status of an operation. Valid values are: *PENDING* *RUNNING* *DONE* *SQL_OPERATION_STATUS_UNSPECIFIED*"
           enum:
             - SQL_OPERATION_STATUS_UNSPECIFIED
             - PENDING
@@ -3688,33 +3424,21 @@ components:
           description: This is always *sql#operationsList*.
           type: string
         nextPageToken:
-          description: The continuation token, used to page through large result sets.
-            Provide this value in a subsequent request to return the next page
-            of results.
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
       type: object
     ReplicaConfiguration:
       description: Read-replica configuration for connecting to the primary instance.
       properties:
         failoverTarget:
-          description: Specifies if the replica is the failover target. If the field is
-            set to *true* the replica will be designated as a failover replica.
-            In case the primary instance fails, the replica instance will be
-            promoted as the new primary instance. Only one replica can be
-            specified as failover target, and the replica has to be in different
-            zone with the primary instance.
+          description: Specifies if the replica is the failover target. If the field is set to *true* the replica will be designated as a failover replica. In case the primary instance fails, the replica instance will be promoted as the new primary instance. Only one replica can be specified as failover target, and the replica has to be in different zone with the primary instance.
           type: boolean
         kind:
           description: This is always *sql#replicaConfiguration*.
           type: string
         mysqlReplicaConfiguration:
           $ref: "#/components/schemas/MySqlReplicaConfiguration"
-          description: MySQL specific configuration when replicating from a MySQL
-            on-premises primary instance. Replication configuration information
-            such as the username, password, certificates, and keys are not
-            stored in the instance metadata. The configuration information is
-            used only to set up the replication connection and is stored by
-            MySQL in a file named *master.info* in the data directory.
+          description: MySQL specific configuration when replicating from a MySQL on-premises primary instance. Replication configuration information such as the username, password, certificates, and keys are not stored in the instance metadata. The configuration information is used only to set up the replication connection and is stored by MySQL in a file named *master.info* in the data directory.
       type: object
     Reschedule:
       properties:
@@ -3727,15 +3451,12 @@ components:
             - SPECIFIC_TIME
           type: string
         scheduleTime:
-          description: Optional. Timestamp when the maintenance shall be rescheduled to if
-            reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for example
-            *2012-11-15T16:19:00.094Z*.
+          description: Optional. Timestamp when the maintenance shall be rescheduled to if reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
       type: object
     RestoreBackupContext:
-      description: Database instance restore from backup context. Backup context
-        contains source instance id and project id.
+      description: Database instance restore from backup context. Backup context contains source instance id and project id.
       properties:
         backupRunId:
           description: The ID of the backup run to restore from.
@@ -3758,20 +3479,14 @@ components:
           description: This is always *sql#rotateServerCaContext*.
           type: string
         nextVersion:
-          description: The fingerprint of the next version to be rotated to. If left
-            unspecified, will be rotated to the most recently added server CA
-            version.
+          description: The fingerprint of the next version to be rotated to. If left unspecified, will be rotated to the most recently added server CA version.
           type: string
       type: object
     Settings:
       description: Database instance settings.
       properties:
         activationPolicy:
-          description: "The activation policy specifies when the instance is activated; it
-            is applicable only when the instance state is RUNNABLE. Valid
-            values: *ALWAYS*: The instance is on, and remains so even in the
-            absence of connection requests. *NEVER*: The instance is off; it is
-            not activated, even if a connection request arrives."
+          description: "The activation policy specifies when the instance is activated; it is applicable only when the instance state is RUNNABLE. Valid values: *ALWAYS*: The instance is on, and remains so even in the absence of connection requests. *NEVER*: The instance is off; it is not activated, even if a connection request arrives."
           enum:
             - SQL_ACTIVATION_POLICY_UNSPECIFIED
             - ALWAYS
@@ -3780,20 +3495,14 @@ components:
           type: string
         activeDirectoryConfig:
           $ref: "#/components/schemas/SqlActiveDirectoryConfig"
-          description: Active Directory configuration, relevant only for Cloud SQL for SQL
-            Server.
+          description: Active Directory configuration, relevant only for Cloud SQL for SQL Server.
         authorizedGaeApplications:
-          description: The App Engine app IDs that can access this instance. (Deprecated)
-            Applied to First Generation instances only.
+          description: The App Engine app IDs that can access this instance. (Deprecated) Applied to First Generation instances only.
           items:
             type: string
           type: array
         availabilityType:
-          description: "Availability type. Potential values: *ZONAL*: The instance serves
-            data from only one zone. Outages in that zone affect data
-            accessibility. *REGIONAL*: The instance can serve data from more
-            than one zone in a region (it is highly available). For more
-            information, see Overview of the High Availability Configuration."
+          description: "Availability type. Potential values: *ZONAL*: The instance serves data from only one zone. Outages in that zone affect data accessibility. *REGIONAL*: The instance can serve data from more than one zone in a region (it is highly available). For more information, see Overview of the High Availability Configuration."
           enum:
             - SQL_AVAILABILITY_TYPE_UNSPECIFIED
             - ZONAL
@@ -3806,17 +3515,14 @@ components:
           description: The name of server Instance collation.
           type: string
         crashSafeReplicationEnabled:
-          description: Configuration specific to read replica instances. Indicates whether
-            database flags for crash-safe replication are enabled. This property
-            was only applicable to First Generation instances.
+          description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property was only applicable to First Generation instances.
           type: boolean
         dataDiskSizeGb:
           description: The size of data disk, in GB. The data disk size minimum is 10GB.
           format: int64
           type: string
         dataDiskType:
-          description: "The type of data disk: PD_SSD (default) or PD_HDD. Not used for
-            First Generation instances."
+          description: "The type of data disk: PD_SSD (default) or PD_HDD. Not used for First Generation instances."
           enum:
             - SQL_DATA_DISK_TYPE_UNSPECIFIED
             - PD_SSD
@@ -3829,8 +3535,7 @@ components:
             $ref: "#/components/schemas/DatabaseFlags"
           type: array
         databaseReplicationEnabled:
-          description: Configuration specific to read replica instances. Indicates whether
-            replication is enabled or not.
+          description: Configuration specific to read replica instances. Indicates whether replication is enabled or not.
           type: boolean
         denyMaintenancePeriods:
           description: Deny maintenance periods
@@ -3842,72 +3547,52 @@ components:
           description: Insights configuration, for now relevant only for Postgres.
         ipConfiguration:
           $ref: "#/components/schemas/IpConfiguration"
-          description: The settings for IP Management. This allows to enable or disable
-            the instance IP and manage which external networks can connect to
-            the instance. The IPv4 address cannot be disabled for Second
-            Generation instances.
+          description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances.
         kind:
           description: This is always *sql#settings*.
           type: string
         locationPreference:
           $ref: "#/components/schemas/LocationPreference"
-          description: The location preference settings. This allows the instance to be
-            located as near as possible to either an App Engine app or Compute
-            Engine zone for better performance. App Engine co-location was only
-            applicable to First Generation instances.
+          description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or Compute Engine zone for better performance. App Engine co-location was only applicable to First Generation instances.
         maintenanceWindow:
           $ref: "#/components/schemas/MaintenanceWindow"
-          description: The maintenance window for this instance. This specifies when the
-            instance can be restarted for maintenance purposes.
+          description: The maintenance window for this instance. This specifies when the instance can be restarted for maintenance purposes.
         pricingPlan:
-          description: The pricing plan for this instance. This can be either *PER_USE* or
-            *PACKAGE*. Only *PER_USE* is supported for Second Generation
-            instances.
+          description: The pricing plan for this instance. This can be either *PER_USE* or *PACKAGE*. Only *PER_USE* is supported for Second Generation instances.
           enum:
             - SQL_PRICING_PLAN_UNSPECIFIED
             - PACKAGE
             - PER_USE
           type: string
         replicationType:
-          description: The type of replication this instance uses. This can be either
-            *ASYNCHRONOUS* or *SYNCHRONOUS*. (Deprecated_ This property was only
-            applicable to First Generation instances.
+          description: The type of replication this instance uses. This can be either *ASYNCHRONOUS* or *SYNCHRONOUS*. (Deprecated_ This property was only applicable to First Generation instances.
           enum:
             - SQL_REPLICATION_TYPE_UNSPECIFIED
             - SYNCHRONOUS
             - ASYNCHRONOUS
           type: string
         settingsVersion:
-          description: The version of instance settings. This is a required field for
-            update method to make sure concurrent updates are handled properly.
-            During update, use the most recent settingsVersion value for this
-            instance and do not try to update this value.
+          description: The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.
           format: int64
           type: string
         storageAutoResize:
-          description: Configuration to increase storage size automatically. The default
-            value is true.
+          description: Configuration to increase storage size automatically. The default value is true.
           type: boolean
         storageAutoResizeLimit:
-          description: The maximum size to which storage capacity can be automatically
-            increased. The default value is 0, which specifies that there is no
-            limit.
+          description: The maximum size to which storage capacity can be automatically increased. The default value is 0, which specifies that there is no limit.
           format: int64
           type: string
         tier:
-          description: The tier (or machine type) for this instance, for example
-            *db-custom-1-3840* .
+          description: The tier (or machine type) for this instance, for example *db-custom-1-3840* .
           type: string
         userLabels:
           additionalProperties:
             type: string
-          description: User-provided labels, represented as a dictionary where each label
-            is a single key value pair.
+          description: User-provided labels, represented as a dictionary where each label is a single key value pair.
           type: object
       type: object
     SqlActiveDirectoryConfig:
-      description: Active Directory configuration, relevant only for Cloud SQL for SQL
-        Server.
+      description: Active Directory configuration, relevant only for Cloud SQL for SQL Server.
       properties:
         domain:
           description: The name of the domain (e.g., mydomain.com).
@@ -3923,8 +3608,7 @@ components:
           description: Additional information about the error encountered.
           type: string
         kind:
-          description: Can be *sql#externalSyncSettingError* or
-            *sql#externalSyncSettingWarning*.
+          description: Can be *sql#externalSyncSettingError* or *sql#externalSyncSettingWarning*.
           type: string
         type:
           description: Identifies the specific error that occurred.
@@ -3980,20 +3664,14 @@ components:
           type: array
       type: object
     SqlOutOfDiskReport:
-      description: This message wraps up the information written by out-of-disk
-        detection job.
+      description: This message wraps up the information written by out-of-disk detection job.
       properties:
         sqlMinRecommendedIncreaseSizeGb:
-          description: "The minimum recommended increase size in GigaBytes This field is
-            consumed by the frontend Writers: -- the proactive database wellness
-            job for OOD."
+          description: "The minimum recommended increase size in GigaBytes This field is consumed by the frontend Writers: -- the proactive database wellness job for OOD."
           format: int32
           type: integer
         sqlOutOfDiskState:
-          description: "This field represents the state generated by the proactive
-            database wellness job for OutOfDisk issues. Writers: -- the
-            proactive database wellness job for OOD. Readers: -- the proactive
-            database wellness job"
+          description: "This field represents the state generated by the proactive database wellness job for OutOfDisk issues. Writers: -- the proactive database wellness job for OOD. Readers: -- the proactive database wellness job"
           enum:
             - SQL_OUT_OF_DISK_STATE_UNSPECIFIED
             - NORMAL
@@ -4009,8 +3687,7 @@ components:
           description: If the scheduled maintenance can be rescheduled.
           type: boolean
         startTime:
-          description: The start time of any upcoming scheduled maintenance for this
-            instance.
+          description: The start time of any upcoming scheduled maintenance for this instance.
           format: google-datetime
           type: string
       type: object
@@ -4018,8 +3695,7 @@ components:
       description: Represents a Sql Server database on the Cloud SQL instance.
       properties:
         compatibilityLevel:
-          description: The version of SQL Server with which the database is to be made
-            compatible
+          description: The version of SQL Server with which the database is to be made compatible
           format: int32
           type: integer
         recoveryModel:
@@ -4051,13 +3727,11 @@ components:
           description: User supplied name. Constrained to [a-zA-Z.-_ ]+.
           type: string
         createTime:
-          description: The time when the certificate was created in RFC 3339 format, for
-            example *2012-11-15T16:19:00.094Z*
+          description: The time when the certificate was created in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*
           format: google-datetime
           type: string
         expirationTime:
-          description: The time when the certificate expires in RFC 3339 format, for
-            example *2012-11-15T16:19:00.094Z*.
+          description: The time when the certificate expires in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
           type: string
         instance:
@@ -4080,8 +3754,7 @@ components:
           $ref: "#/components/schemas/SslCert"
           description: The public information about the cert.
         certPrivateKey:
-          description: The private key for the client cert, in pem format. Keep private in
-            order to protect your security.
+          description: The private key for the client cert, in pem format. Keep private in order to protect your security.
           type: string
       type: object
     SslCertsCreateEphemeralRequest:
@@ -4098,8 +3771,7 @@ components:
       description: SslCerts insert request.
       properties:
         commonName:
-          description: User supplied name. Must be a distinct name from the other
-            certificates for this instance.
+          description: User supplied name. Must be a distinct name from the other certificates for this instance.
           type: string
       type: object
     SslCertsInsertResponse:
@@ -4116,9 +3788,7 @@ components:
           description: The operation to track the ssl certs insert request.
         serverCaCert:
           $ref: "#/components/schemas/SslCert"
-          description: The server Certificate Authority's certificate. If this is missing
-            you can force a new one to be generated by calling resetSslConfig
-            method on instances resource.
+          description: The server Certificate Authority's certificate. If this is missing you can force a new one to be generated by calling resetSslConfig method on instances resource.
       type: object
     SslCertsListResponse:
       description: SslCerts list response.
@@ -4152,8 +3822,7 @@ components:
             type: string
           type: array
         tier:
-          description: An identifier for the machine type, for example, db-custom-1-3840.
-            For related information, see Pricing.
+          description: An identifier for the machine type, for example, db-custom-1-3840. For related information, see Pricing.
           type: string
       type: object
     TiersListResponse:
@@ -4175,48 +3844,37 @@ components:
           description: This is always *sql#truncateLogContext*.
           type: string
         logType:
-          description: The type of log to truncate. Valid values are *MYSQL_GENERAL_TABLE*
-            and *MYSQL_SLOW_TABLE*.
+          description: The type of log to truncate. Valid values are *MYSQL_GENERAL_TABLE* and *MYSQL_SLOW_TABLE*.
           type: string
       type: object
     User:
       description: A Cloud SQL user resource.
       properties:
         etag:
-          description: This field is deprecated and will be removed from a future version
-            of the API.
+          description: This field is deprecated and will be removed from a future version of the API.
           type: string
         host:
-          description: The host name from which the user can connect. For *insert*
-            operations, host defaults to an empty string. For *update*
-            operations, host is specified as part of the request URL. The host
-            name cannot be updated after insertion.
+          description: The host name from which the user can connect. For *insert* operations, host defaults to an empty string. For *update* operations, host is specified as part of the request URL. The host name cannot be updated after insertion.
           type: string
         instance:
-          description: The name of the Cloud SQL instance. This does not include the
-            project ID. Can be omitted for *update* since it is already
-            specified on the URL.
+          description: The name of the Cloud SQL instance. This does not include the project ID. Can be omitted for *update* since it is already specified on the URL.
           type: string
         kind:
           description: This is always *sql#user*.
           type: string
         name:
-          description: The name of the user in the Cloud SQL instance. Can be omitted for
-            *update* since it is already specified in the URL.
+          description: The name of the user in the Cloud SQL instance. Can be omitted for *update* since it is already specified in the URL.
           type: string
         password:
           description: The password for the user.
           type: string
         project:
-          description: The project ID of the project containing the Cloud SQL database.
-            The Google apps domain is prefixed if applicable. Can be omitted for
-            *update* since it is already specified on the URL.
+          description: The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable. Can be omitted for *update* since it is already specified on the URL.
           type: string
         sqlserverUserDetails:
           $ref: "#/components/schemas/SqlServerUserDetails"
         type:
-          description: The user type. It determines the method to authenticate the user
-            during login. The default is the database's built-in user type.
+          description: The user type. It determines the method to authenticate the user during login. The default is the database's built-in user type.
           enum:
             - BUILT_IN
             - CLOUD_IAM_USER
@@ -4235,9 +3893,7 @@ components:
           description: This is always *sql#usersList*.
           type: string
         nextPageToken:
-          description: An identifier that uniquely identifies the operation. You can use
-            this identifier to retrieve the Operations resource that has
-            information about the operation.
+          description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
           type: string
       type: object
   securitySchemes:
