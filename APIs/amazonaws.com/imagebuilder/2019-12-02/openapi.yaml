@@ -3,7 +3,7 @@ info:
   version: '2019-12-02'
   x-release: v4
   title: EC2 Image Builder
-  description: 'EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date "golden" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.'
+  description: 'EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date "golden" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -330,7 +330,7 @@ paths:
                   minLength: 1
                   maxLength: 16000
                 uri:
-                  description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
+                  description: 'The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
                   type: string
                 kmsKeyId:
                   description: The ID of the KMS key that should be used to encrypt this component.
@@ -493,7 +493,7 @@ paths:
                   minLength: 1
                   maxLength: 16000
                 dockerfileTemplateUri:
-                  description: The S3 URI for the Dockerfile that will be used to build your container image.
+                  description: The Amazon S3 URI for the Dockerfile that will be used to build your container image.
                   type: string
                 platformOverride:
                   description: Specifies the operating system platform when you use a custom source image.
@@ -1096,10 +1096,22 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 workingDirectory:
-                  description: The working directory to be used during build and test workflows.
+                  description: The working directory used during build and test workflows.
                   type: string
                   minLength: 1
                   maxLength: 1024
+                additionalInstanceConfiguration:
+                  description: 'In addition to your infrastruction configuration, these settings provide an extra layer of control over your build instances. For instances where Image Builder installs the SSM agent, you can choose whether to keep it for the AMI that you create. You can also specify commands to run on launch for all of your build instances.'
+                  type: object
+                  properties:
+                    systemsManagerAgent:
+                      allOf:
+                        - $ref: '#/components/schemas/SystemsManagerAgent'
+                        - description: Contains settings for the SSM agent on your build instance.
+                    userDataOverride:
+                      allOf:
+                        - $ref: '#/components/schemas/UserDataOverride'
+                        - description: '<p>Use this property to provide commands or a command script to run when you launch your build instance.</p> <note> <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure that SSM is installed on your Linux build instance. If you override the user data, make sure that you add commands to install SSM, if it is not pre-installed on your source image.</p> </note>'
                 clientToken:
                   description: The idempotency token used to make this request idempotent.
                   type: string
@@ -1211,18 +1223,18 @@ paths:
                   items:
                     $ref: '#/components/schemas/InstanceType'
                 instanceProfileName:
-                  description: The instance profile to associate with the instance used to customize your EC2 AMI.
+                  description: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
                   type: string
                   pattern: '^[\w+=,.@-]+$'
                   minLength: 1
                   maxLength: 256
                 securityGroupIds:
-                  description: The security group IDs to associate with the instance used to customize your EC2 AMI.
+                  description: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
                 subnetId:
-                  description: The subnet ID in which to place the instance used to customize your EC2 AMI.
+                  description: The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -2576,7 +2588,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 uri:
-                  description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
+                  description: 'The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
                   type: string
                 kmsKeyId:
                   description: The ID of the KMS key that should be used to encrypt this component.
@@ -3118,7 +3130,7 @@ paths:
   /ListImagePackages:
     post:
       operationId: ListImagePackages
-      description: 'List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.'
+      description: 'List the Packages that are associated with an Image Build Version, as determined by Amazon EC2 Systems Manager Inventory at build time.'
       responses:
         '200':
           description: Success
@@ -4669,18 +4681,18 @@ paths:
                   items:
                     $ref: '#/components/schemas/InstanceType'
                 instanceProfileName:
-                  description: The instance profile to associate with the instance used to customize your EC2 AMI.
+                  description: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
                   type: string
                   pattern: '^[\w+=,.@-]+$'
                   minLength: 1
                   maxLength: 256
                 securityGroupIds:
-                  description: The security group IDs to associate with the instance used to customize your EC2 AMI.
+                  description: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
                 subnetId:
-                  description: The subnet ID to place the instance used to customize your EC2 AMI in.
+                  description: The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -4847,6 +4859,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentVersionArnOrBuildVersionArn'
             - description: The Amazon Resource Name (ARN) of the component.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterList'
+            - description: A group of parameter settings that are used to configure the component for a specific recipe.
       description: ' Configuration details of the component.'
     NonEmptyString:
       type: string
@@ -4983,6 +4999,19 @@ components:
             - $ref: '#/components/schemas/EmptyString'
             - description: Use to remove a mapping from the parent image.
       description: Defines block device mappings for the instance used to configure your image.
+    SystemsManagerAgent:
+      type: object
+      properties:
+        uninstallAfterBuild:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'This property defaults to true. If Image Builder installs the SSM agent on a build instance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.'
+      description: Contains settings for the SSM agent on your build instance.
+    UserDataOverride:
+      type: string
+      pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+      minLength: 1
+      maxLength: 21847
     CreateInfrastructureConfigurationResponse:
       type: object
       properties:
@@ -5539,6 +5568,18 @@ components:
         $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 1536
+    AdditionalInstanceConfiguration:
+      type: object
+      properties:
+        systemsManagerAgent:
+          allOf:
+            - $ref: '#/components/schemas/SystemsManagerAgent'
+            - description: Contains settings for the SSM agent on your build instance.
+        userDataOverride:
+          allOf:
+            - $ref: '#/components/schemas/UserDataOverride'
+            - description: '<p>Use this property to provide commands or a command script to run when you launch your build instance.</p> <note> <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure that SSM is installed on your Linux build instance. If you override the user data, make sure that you add commands to install SSM, if it is not pre-installed on your source image.</p> </note>'
+      description: 'In addition to your infrastruction configuration, these settings provide an extra layer of control over your build instances. For instances where Image Builder installs the SSM agent, you can choose whether to keep it for the AMI that you create. You can also specify commands to run on launch for all of your build instances.'
     ImageState:
       type: object
       properties:
@@ -5557,26 +5598,26 @@ components:
         region:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS Region of the EC2 AMI.
+            - description: The Region of the Amazon EC2 AMI.
         image:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AMI ID of the EC2 AMI.
+            - description: The AMI ID of the Amazon EC2 AMI.
         name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the EC2 AMI.
+            - description: The name of the Amazon EC2 AMI.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The description of the EC2 AMI. Minimum and maximum length are in characters.
+            - description: The description of the Amazon EC2 AMI. Minimum and maximum length are in characters.
         state:
           $ref: '#/components/schemas/ImageState'
         accountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The account ID of the owner of the AMI.
-      description: ' Details of an EC2 AMI.'
+      description: ' Details of an Amazon EC2 AMI.'
     AmiNameString:
       type: string
       pattern: '^[-_A-Za-z0-9{][-_A-Za-z0-9\s:{}\.]+[-_A-Za-z0-9}]$'
@@ -5594,12 +5635,12 @@ components:
         userIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: The AWS account ID.
+            - description: The account ID.
         userGroups:
           allOf:
             - $ref: '#/components/schemas/StringList'
             - description: The name of the group.
-      description: 'Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a>.'
+      description: 'Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">Amazon EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">Amazon EC2 ModifyImageAttribute</a>.'
     AmiDistributionConfiguration:
       type: object
       properties:
@@ -5626,7 +5667,7 @@ components:
         launchPermission:
           allOf:
             - $ref: '#/components/schemas/LaunchPermissionConfiguration'
-            - description: ' Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.'
+            - description: ' Launch permissions can be used to configure which accounts can use the AMI to launch instances.'
       description: ' Define and configure the output AMIs of the pipeline.'
     AmiList:
       type: array
@@ -5683,6 +5724,10 @@ components:
         $ref: '#/components/schemas/OsVersion'
       minItems: 1
       maxItems: 25
+    ComponentParameterDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComponentParameterDetail'
     ComponentData:
       type: string
     DateTime:
@@ -5722,6 +5767,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OsVersionList'
             - description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.'
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterDetailList'
+            - description: Contains parameter details for each of the parameters that are defined for the component.
         owner:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5753,6 +5802,11 @@ components:
     ComponentVersionArnOrBuildVersionArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
+    ComponentParameterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComponentParameter'
+      minItems: 1
     ComponentConfigurationList:
       type: array
       items:
@@ -5762,6 +5816,67 @@ components:
       type: string
       enum:
         - SHELL
+    ComponentParameterName:
+      type: string
+      pattern: '[^\x00]+'
+      minLength: 1
+      maxLength: 256
+    ComponentParameterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComponentParameterValue'
+    ComponentParameter:
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterName'
+            - description: The name of the component parameter to set.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterValueList'
+            - description: Sets the value for the named component parameter.
+      description: Contains a key/value pair that sets the named component parameter.
+    ComponentParameterDescription:
+      type: string
+      pattern: '[^\x00]+'
+      minLength: 1
+      maxLength: 1024
+    ComponentParameterType:
+      type: string
+      pattern: ^String|Integer|Boolean|StringList$
+      minLength: 1
+      maxLength: 20
+    ComponentParameterDetail:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterName'
+            - description: The name of this input parameter.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterType'
+            - description: The type of input this parameter provides. The currently supported value is "string".
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterValueList'
+            - description: The default value of this parameter if no input is provided.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ComponentParameterDescription'
+            - description: Describes this parameter.
+      description: Defines a parameter that is used to provide configuration details for the component.
+    ComponentParameterValue:
+      type: string
+      pattern: '[^\x00]+'
+      minLength: 1
     ComponentSummary:
       type: object
       properties:
@@ -6094,7 +6209,7 @@ components:
         uri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
+            - description: 'The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
         kmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6155,7 +6270,7 @@ components:
         dockerfileTemplateUri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: The S3 URI for the Dockerfile that will be used to build your container image.
+            - description: The Amazon S3 URI for the Dockerfile that will be used to build your container image.
         platformOverride:
           allOf:
             - $ref: '#/components/schemas/Platform'
@@ -6362,7 +6477,11 @@ components:
         workingDirectory:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The working directory to be used during build and test workflows.
+            - description: The working directory used during build and test workflows.
+        additionalInstanceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalInstanceConfiguration'
+            - description: Specify additional settings and launch scripts for your build instances.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -6459,15 +6578,15 @@ components:
         instanceProfileName:
           allOf:
             - $ref: '#/components/schemas/InstanceProfileNameType'
-            - description: The instance profile to associate with the instance used to customize your EC2 AMI.
+            - description: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
         securityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: The security group IDs to associate with the instance used to customize your EC2 AMI.
+            - description: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
         subnetId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The subnet ID in which to place the instance used to customize your EC2 AMI.
+            - description: The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.
         logging:
           allOf:
             - $ref: '#/components/schemas/Logging'
@@ -6857,6 +6976,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The working directory to be used during build and test workflows.
+        additionalInstanceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalInstanceConfiguration'
+            - description: 'Before you create a new AMI, Image Builder launches temporary Amazon EC2 instances to build and test your image configuration. Instance configuration adds a layer of control over those instances. You can define settings and add scripts to run when an instance is launched from your AMI.'
       description: An image recipe.
     ImageVersionArnOrBuildVersionArn:
       type: string
@@ -6984,7 +7107,7 @@ components:
         keyPair:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The EC2 key pair of the infrastructure configuration.
+            - description: The Amazon EC2 key pair of the infrastructure configuration.
         terminateInstanceOnFailure:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
@@ -7021,7 +7144,7 @@ components:
         amis:
           allOf:
             - $ref: '#/components/schemas/AmiList'
-            - description: The EC2 AMIs created by this image.
+            - description: The Amazon EC2 AMIs created by this image.
         containers:
           allOf:
             - $ref: '#/components/schemas/ContainerList'
@@ -7238,7 +7361,7 @@ components:
         uri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
+            - description: 'The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
         kmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7290,7 +7413,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceProfileNameType'
             - description: The instance profile of the infrastructure configuration.
-      description: The infrastructure used when building EC2 AMIs.
+      description: The infrastructure used when building Amazon EC2 AMIs.
     InfrastructureConfigurationSummaryList:
       type: array
       items:
@@ -7306,7 +7429,7 @@ components:
         launchTemplateId:
           allOf:
             - $ref: '#/components/schemas/LaunchTemplateId'
-            - description: Identifies the EC2 launch template to use.
+            - description: Identifies the Amazon EC2 launch template to use.
         accountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
@@ -7314,8 +7437,8 @@ components:
         setDefaultVersion:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Set the specified EC2 launch template as the default launch template for the specified account.
-      description: Identifies an EC2 launch template to use for a specific account.
+            - description: Set the specified Amazon EC2 launch template as the default launch template for the specified account.
+      description: Identifies an Amazon EC2 launch template to use for a specific account.
     LicenseConfigurationArn:
       type: string
       pattern: '^arn:aws[^:]*:license-manager:[^:]+:[0-9]{12}:license-configuration:lic-[a-z0-9-_]{32}$'
@@ -7751,15 +7874,15 @@ components:
         instanceProfileName:
           allOf:
             - $ref: '#/components/schemas/InstanceProfileNameType'
-            - description: The instance profile to associate with the instance used to customize your EC2 AMI.
+            - description: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
         securityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: The security group IDs to associate with the instance used to customize your EC2 AMI.
+            - description: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
         subnetId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The subnet ID to place the instance used to customize your EC2 AMI in.
+            - description: The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
         logging:
           allOf:
             - $ref: '#/components/schemas/Logging'

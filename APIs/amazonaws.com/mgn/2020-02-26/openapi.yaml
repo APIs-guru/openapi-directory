@@ -206,6 +206,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       parameters: []
       requestBody:
         required: true
@@ -252,7 +258,6 @@ paths:
                   description: Request to configure EBS enryption during Replication Settings template creation.
                   type: string
                   enum:
-                    - NONE
                     - DEFAULT
                     - CUSTOM
                 ebsEncryptionKeyArn:
@@ -1573,6 +1578,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
           description: ConflictException
           content:
             application/json:
@@ -1614,7 +1625,6 @@ paths:
                   description: Update replication configuration EBS encryption request.
                   type: string
                   enum:
-                    - NONE
                     - DEFAULT
                     - CUSTOM
                 ebsEncryptionKeyArn:
@@ -1703,6 +1713,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       parameters: []
       requestBody:
         required: true
@@ -1744,7 +1760,6 @@ paths:
                   description: Update replication configuration template EBS encryption request.
                   type: string
                   enum:
-                    - NONE
                     - DEFAULT
                     - CUSTOM
                 ebsEncryptionKeyArn:
@@ -1963,6 +1978,7 @@ components:
       type: string
       minLength: 0
       maxLength: 256
+    AccessDeniedException: {}
     DeleteJobResponse:
       type: object
       properties: {}
@@ -2141,7 +2157,6 @@ components:
     InitializeServiceResponse:
       type: object
       properties: {}
-    AccessDeniedException: {}
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2268,7 +2283,6 @@ components:
     ReplicationConfigurationEbsEncryption:
       type: string
       enum:
-        - NONE
         - DEFAULT
         - CUSTOM
     EC2InstanceType:

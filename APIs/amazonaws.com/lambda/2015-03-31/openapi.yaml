@@ -3,7 +3,7 @@ info:
   version: '2015-03-31'
   x-release: v4
   title: AWS Lambda
-  description: '<fullname>AWS Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional information. For the service overview, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What is AWS Lambda</a>, and for information about how the service works, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a> in the <b>AWS Lambda Developer Guide</b>.</p>'
+  description: '<fullname>Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>Lambda API Reference</i>. The Lambda Developer Guide provides additional information. For the service overview, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What is Lambda</a>, and for information about how the service works, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">Lambda: How it Works</a> in the <b>Lambda Developer Guide</b>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy':
     post:
       operationId: AddLayerVersionPermission
-      description: '<p>Adds permissions to the resource-based policy of a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. Use this action to grant layer usage permission to other accounts. You can grant permission to a single account, all AWS accounts, or all accounts in an organization.</p> <p>To revoke permission, call <a>RemoveLayerVersionPermission</a> with the statement ID that you specified when you added it.</p>'
+      description: '<p>Adds permissions to the resource-based policy of a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. Use this action to grant layer usage permission to other accounts. You can grant permission to a single account, all accounts in an organization, or all Amazon Web Services accounts. </p> <p>To revoke permission, call <a>RemoveLayerVersionPermission</a> with the statement ID that you specified when you added it.</p>'
       responses:
         '201':
           description: Success
@@ -210,14 +210,16 @@ paths:
                   description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
                   type: string
                   pattern: 'lambda:GetLayerVersion'
+                  maxLength: 22
                 Principal:
-                  description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
+                  description: 'An account ID, or <code>*</code> to grant layer usage permission to all accounts in an organization, or all Amazon Web Services accounts (if <code>organizationId</code> is not specified). For the last case, make sure that you really do want all Amazon Web Services accounts to have usage permission to this layer. '
                   type: string
                   pattern: '\d{12}|\*|arn:(aws[a-zA-Z-]*):iam::\d{12}:root'
                 OrganizationId:
                   description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
                   type: string
                   pattern: 'o-[a-z0-9]{10,32}'
+                  maxLength: 34
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -228,7 +230,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetLayerVersionPolicy
-      description: 'Returns the permission policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. For more information, see <a>AddLayerVersionPermission</a>.'
+      description: 'Returns the permission policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. For more information, see <a>AddLayerVersionPermission</a>.'
       responses:
         '200':
           description: Success
@@ -279,7 +281,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/policy':
     post:
       operationId: AddPermission
-      description: '<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN of the associated resource as the <code>SourceArn</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>'
+      description: '<p>Grants an Amazon Web Services service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For Amazon Web Services services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For Amazon Web Services services, you can also specify the ARN of the associated resource as the <code>SourceArn</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>'
       responses:
         '201':
           description: Success
@@ -370,17 +372,18 @@ paths:
                   type: string
                   pattern: '(lambda:[*]|lambda:[a-zA-Z]+|[*])'
                 Principal:
-                  description: 'The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
+                  description: 'The Amazon Web Services service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
                   type: string
-                  pattern: .*
+                  pattern: '[^\s]+'
                 SourceArn:
-                  description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
+                  description: 'For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
                   type: string
                   pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
                 SourceAccount:
                   description: 'For Amazon S3, the ID of the account that owns the resource. Use this together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.'
                   type: string
                   pattern: '\d{12}'
+                  maxLength: 12
                 EventSourceToken:
                   description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
                   type: string
@@ -659,7 +662,7 @@ paths:
                         - $ref: '#/components/schemas/SigningProfileVersionArns'
                         - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
                 CodeSigningPolicies:
-                  description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
+                  description: 'Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.'
                   type: object
                   properties:
                     UntrustedArtifactOnDeployment:
@@ -714,7 +717,7 @@ paths:
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
-      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html">Using AWS Lambda with Amazon MQ</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html">Using AWS Lambda with Self-Managed Apache Kafka</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics. In particular, each of the topics describes the required and optional parameters for the specific event source. </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping"> Configuring a Dynamo DB stream as an event source</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping"> Configuring a Kinesis stream as an event source</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource"> Configuring an SQS queue as an event source</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping"> Configuring an MQ broker as an event source</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html"> Configuring MSK as an event source</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html"> Configuring Self-Managed Apache Kafka as an event source</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -786,7 +789,7 @@ paths:
                   minimum: 0
                   maximum: 300
                 ParallelizationFactor:
-                  description: (Streams) The number of batches to process from each shard concurrently.
+                  description: (Streams only) The number of batches to process from each shard concurrently.
                   type: integer
                   minimum: 1
                   maximum: 10
@@ -814,20 +817,20 @@ paths:
                         - $ref: '#/components/schemas/OnFailure'
                         - description: The destination configuration for failed invocations.
                 MaximumRecordAgeInSeconds:
-                  description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
+                  description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
                   type: integer
                   minimum: -1
                   maximum: 604800
                 BisectBatchOnFunctionError:
-                  description: '(Streams) If the function returns an error, split the batch in two and retry.'
+                  description: '(Streams only) If the function returns an error, split the batch in two and retry.'
                   type: boolean
                 MaximumRetryAttempts:
-                  description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+                  description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
                   type: integer
                   minimum: -1
                   maximum: 10000
                 TumblingWindowInSeconds:
-                  description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+                  description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
                   type: integer
                   minimum: 0
                   maximum: 900
@@ -861,7 +864,7 @@ paths:
                         - $ref: '#/components/schemas/Endpoints'
                         - description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
                 FunctionResponseTypes:
-                  description: (Streams) A list of current response type enums applied to the event source mapping.
+                  description: (Streams only) A list of current response type enums applied to the event source mapping.
                   type: array
                   items:
                     $ref: '#/components/schemas/FunctionResponseType'
@@ -943,7 +946,7 @@ paths:
   /2015-03-31/functions:
     post:
       operationId: CreateFunction
-      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package is a .zip file archive or container image that contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>You can use code signing if your deployment package is a .zip file archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
+      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package is a .zip file archive or container image that contains your function code. The execution role grants the function permission to use Amazon Web Services services, such as Amazon CloudWatch Logs for log streaming and X-Ray for request tracing.</p> <p>You set the package type to <code>Image</code> if the deployment package is a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a>. For a container image, the code property must include the URI of a container image in the Amazon ECR registry. You do not need to specify the handler and runtime properties. </p> <p>You set the package type to <code>Zip</code> if the deployment package is a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip">.zip file archive</a>. For a .zip file archive, the code property specifies the location of the .zip file. You must also specify the handler and runtime properties.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>You can use code signing if your deployment package is a .zip file archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an Amazon Web Services service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other Amazon Web Services services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
       responses:
         '201':
           description: Success
@@ -1067,11 +1070,11 @@ paths:
                     ZipFile:
                       allOf:
                         - $ref: '#/components/schemas/Blob'
-                        - description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+                        - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
                     S3Bucket:
                       allOf:
                         - $ref: '#/components/schemas/S3Bucket'
-                        - description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+                        - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
                     S3Key:
                       allOf:
                         - $ref: '#/components/schemas/S3Key'
@@ -1083,18 +1086,18 @@ paths:
                     ImageUri:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: URI of a container image in the Amazon ECR registry.
+                        - description: 'URI of a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a> in the Amazon ECR registry.'
                 Description:
                   description: A description of the function.
                   type: string
                   minLength: 0
                   maxLength: 256
                 Timeout:
-                  description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+                  description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
                   type: integer
                   minimum: 1
                 MemorySize:
-                  description: The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
+                  description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
                   type: integer
                   minimum: 128
                   maximum: 10240
@@ -1128,19 +1131,19 @@ paths:
                         - $ref: '#/components/schemas/ResourceArn'
                         - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
                 Environment:
-                  description: A function's environment variable settings.
+                  description: 'A function''s environment variable settings. You can use environment variables to adjust your function''s behavior without updating code. An environment variable is a pair of strings that are stored in a function''s version-specific configuration. '
                   type: object
                   properties:
                     Variables:
                       allOf:
                         - $ref: '#/components/schemas/EnvironmentVariables'
-                        - description: Environment variable key-value pairs.
+                        - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
                 KMSKeyArn:
-                  description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+                  description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
                   type: string
                   pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
                 TracingConfig:
-                  description: 'The function''s AWS X-Ray tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
+                  description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
                   type: object
                   properties:
                     Mode:
@@ -1544,7 +1547,7 @@ paths:
                         - $ref: '#/components/schemas/SigningProfileVersionArns'
                         - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
                 CodeSigningPolicies:
-                  description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
+                  description: 'Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.'
                   type: object
                   properties:
                     UntrustedArtifactOnDeployment:
@@ -1650,7 +1653,7 @@ paths:
             type: string
     put:
       operationId: UpdateEventSourceMapping
-      description: '<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -1740,20 +1743,20 @@ paths:
                         - $ref: '#/components/schemas/OnFailure'
                         - description: The destination configuration for failed invocations.
                 MaximumRecordAgeInSeconds:
-                  description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
+                  description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
                   type: integer
                   minimum: -1
                   maximum: 604800
                 BisectBatchOnFunctionError:
-                  description: '(Streams) If the function returns an error, split the batch in two and retry.'
+                  description: '(Streams only) If the function returns an error, split the batch in two and retry.'
                   type: boolean
                 MaximumRetryAttempts:
-                  description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+                  description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
                   type: integer
                   minimum: -1
                   maximum: 10000
                 ParallelizationFactor:
-                  description: (Streams) The number of batches to process from each shard concurrently.
+                  description: (Streams only) The number of batches to process from each shard concurrently.
                   type: integer
                   minimum: 1
                   maximum: 10
@@ -1765,12 +1768,12 @@ paths:
                   minItems: 0
                   maxItems: 22
                 TumblingWindowInSeconds:
-                  description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+                  description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
                   type: integer
                   minimum: 0
                   maximum: 900
                 FunctionResponseTypes:
-                  description: (Streams) A list of current response type enums applied to the event source mapping.
+                  description: (Streams only) A list of current response type enums applied to the event source mapping.
                   type: array
                   items:
                     $ref: '#/components/schemas/FunctionResponseType'
@@ -1779,7 +1782,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
-      description: '<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter. Otherwise, all versions and aliases are deleted.</p> <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.</p>'
+      description: '<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter. Otherwise, all versions and aliases are deleted.</p> <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Services services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.</p>'
       responses:
         '204':
           description: Success
@@ -2464,7 +2467,7 @@ paths:
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}':
     delete:
       operationId: DeleteLayerVersion
-      description: 'Deletes a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. Deleted versions can no longer be viewed or added to functions. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it.'
+      description: 'Deletes a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. Deleted versions can no longer be viewed or added to functions. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it.'
       responses:
         '204':
           description: Success
@@ -2506,7 +2509,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetLayerVersion
-      description: 'Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>, with a link to download the layer archive that''s valid for 10 minutes.'
+      description: 'Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>, with a link to download the layer archive that''s valid for 10 minutes.'
       responses:
         '200':
           description: Success
@@ -2752,7 +2755,7 @@ paths:
   /2016-08-19/account-settings/:
     get:
       operationId: GetAccountSettings
-      description: 'Retrieves details about your account''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limits</a> and usage in an AWS Region.'
+      description: 'Retrieves details about your account''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limits</a> and usage in an Amazon Web Services Region.'
       responses:
         '200':
           description: Success
@@ -2898,7 +2901,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateFunctionConfiguration
-      description: '<p>Modify the version-specific settings of a Lambda function.</p> <p>When you update a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute. During this time, you can''t modify the function, but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>, and <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the update is complete and the function is processing events with the new configuration. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can''t modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or AWS service, use <a>AddPermission</a>.</p>'
+      description: '<p>Modify the version-specific settings of a Lambda function.</p> <p>When you update a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute. During this time, you can''t modify the function, but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>, and <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the update is complete and the function is processing events with the new configuration. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>These settings can vary between versions of a function and are locked when you publish a version. You can''t modify the configuration of a published version, only the unpublished version.</p> <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions to an account or Amazon Web Services service, use <a>AddPermission</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2992,11 +2995,11 @@ paths:
                   minLength: 0
                   maxLength: 256
                 Timeout:
-                  description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+                  description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
                   type: integer
                   minimum: 1
                 MemorySize:
-                  description: The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
+                  description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
                   type: integer
                   minimum: 128
                   maximum: 10240
@@ -3013,13 +3016,13 @@ paths:
                         - $ref: '#/components/schemas/SecurityGroupIds'
                         - description: A list of VPC security groups IDs.
                 Environment:
-                  description: A function's environment variable settings.
+                  description: 'A function''s environment variable settings. You can use environment variables to adjust your function''s behavior without updating code. An environment variable is a pair of strings that are stored in a function''s version-specific configuration. '
                   type: object
                   properties:
                     Variables:
                       allOf:
                         - $ref: '#/components/schemas/EnvironmentVariables'
-                        - description: Environment variable key-value pairs.
+                        - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
                 Runtime:
                   description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.'
                   type: string
@@ -3057,11 +3060,11 @@ paths:
                         - $ref: '#/components/schemas/ResourceArn'
                         - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
                 KMSKeyArn:
-                  description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+                  description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
                   type: string
                   pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
                 TracingConfig:
-                  description: 'The function''s AWS X-Ray tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
+                  description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
                   type: object
                   properties:
                     Mode:
@@ -3101,7 +3104,7 @@ paths:
   /2018-10-31/layers#find=LayerVersion&Arn:
     get:
       operationId: GetLayerVersionByArn
-      description: 'Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>, with a link to download the layer archive that''s valid for 10 minutes.'
+      description: 'Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>, with a link to download the layer archive that''s valid for 10 minutes.'
       responses:
         '200':
           description: Success
@@ -3560,7 +3563,7 @@ paths:
         - name: MasterRegion
           in: query
           required: false
-          description: 'For Lambda@Edge functions, the AWS Region of the master function. For example, <code>us-east-1</code> filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N. Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.'
+          description: 'For Lambda@Edge functions, the Region of the master function. For example, <code>us-east-1</code> filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N. Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.'
           schema:
             type: string
             pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
@@ -3657,7 +3660,7 @@ paths:
   '/2018-10-31/layers/{LayerName}/versions':
     get:
       operationId: ListLayerVersions
-      description: 'Lists the versions of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. Versions that have been deleted aren''t listed. Specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only versions that indicate that they''re compatible with that runtime.'
+      description: 'Lists the versions of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. Versions that have been deleted aren''t listed. Specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only versions that indicate that they''re compatible with that runtime.'
       responses:
         '200':
           description: Success
@@ -3754,7 +3757,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: PublishLayerVersion
-      description: '<p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same layer name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>'
+      description: '<p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same layer name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>'
       responses:
         '201':
           description: Success
@@ -3817,7 +3820,7 @@ paths:
                   minLength: 0
                   maxLength: 256
                 Content:
-                  description: 'A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.'
+                  description: 'A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.'
                   type: object
                   properties:
                     S3Bucket:
@@ -3835,7 +3838,7 @@ paths:
                     ZipFile:
                       allOf:
                         - $ref: '#/components/schemas/Blob'
-                        - description: The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for you.
+                        - description: The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
                 CompatibleRuntimes:
                   description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
                   type: array
@@ -3849,7 +3852,7 @@ paths:
   /2018-10-31/layers:
     get:
       operationId: ListLayers
-      description: 'Lists <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layers</a> and shows information about the latest version of each. Specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only layers that indicate that they''re compatible with that runtime.'
+      description: 'Lists <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layers</a> and shows information about the latest version of each. Specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only layers that indicate that they''re compatible with that runtime.'
       responses:
         '200':
           description: Success
@@ -4166,7 +4169,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: The maximum number of versions to return.
+          description: 'The maximum number of versions to return. Note that <code>ListVersionsByFunction</code> returns a maximum of 50 items in each response, even if you set the number higher.'
           schema:
             type: integer
             minimum: 1
@@ -4181,7 +4184,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: PublishVersion
-      description: '<p>Creates a <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">version</a> from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn''t change.</p> <p>AWS Lambda doesn''t publish a version if the function''s configuration and code haven''t changed since the last version. Use <a>UpdateFunctionCode</a> or <a>UpdateFunctionConfiguration</a> to update the function before publishing a version.</p> <p>Clients can invoke versions directly or with an alias. To create an alias, use <a>CreateAlias</a>.</p>'
+      description: '<p>Creates a <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">version</a> from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn''t change.</p> <p>Lambda doesn''t publish a version if the function''s configuration and code haven''t changed since the last version. Use <a>UpdateFunctionCode</a> or <a>UpdateFunctionConfiguration</a> to update the function before publishing a version.</p> <p>Clients can invoke versions directly or with an alias. To create an alias, use <a>CreateAlias</a>.</p>'
       responses:
         '201':
           description: Success
@@ -4262,7 +4265,7 @@ paths:
   '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}':
     delete:
       operationId: RemoveLayerVersionPermission
-      description: 'Removes a statement from the permissions policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. For more information, see <a>AddLayerVersionPermission</a>.'
+      description: 'Removes a statement from the permissions policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. For more information, see <a>AddLayerVersionPermission</a>.'
       responses:
         '204':
           description: Success
@@ -4338,7 +4341,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/policy/{StatementId}':
     delete:
       operationId: RemovePermission
-      description: Revokes function-use permission from an AWS service or another account. You can get the ID of the statement from the output of <a>GetPolicy</a>.
+      description: Revokes function-use permission from an Amazon Web Services service or another account. You can get the ID of the statement from the output of <a>GetPolicy</a>.
       responses:
         '204':
           description: Success
@@ -4564,11 +4567,11 @@ paths:
               type: object
               properties:
                 ZipFile:
-                  description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+                  description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
                   type: string
                   format: password
                 S3Bucket:
-                  description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+                  description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
                   type: string
                   pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
                   minLength: 3
@@ -4657,9 +4660,6 @@ components:
   schemas:
     AddLayerVersionPermissionResponse:
       type: object
-      example:
-        RevisionId: 35d87451-f796-4a3f-a618-95a3671b0a0c
-        Statement: '{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::223456789012:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1"}'
       properties:
         Statement:
           allOf:
@@ -4678,8 +4678,6 @@ components:
     PreconditionFailedException: {}
     AddPermissionResponse:
       type: object
-      example:
-        Statement: '{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::223456789012:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}'
       properties:
         Statement:
           allOf:
@@ -4687,15 +4685,6 @@ components:
             - description: The permission statement that's added to the function policy.
     AliasConfiguration:
       type: object
-      example:
-        AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE'
-        Description: Production environment BLUE.
-        FunctionVersion: '2'
-        Name: BLUE
-        RevisionId: 594f41fb-xmpl-4c20-95c7-6ca5f2a92c93
-        RoutingConfig:
-          AdditionalVersionWeights:
-            '1': 0.7
       properties:
         AliasArn:
           allOf:
@@ -4748,15 +4737,6 @@ components:
         - Enforce
     EventSourceMappingConfiguration:
       type: object
-      example:
-        BatchSize: 123
-        EventSourceArn: 'arn:aws:s3:::examplebucket/*'
-        FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:myFunction'
-        LastModified: '2016-11-21T19:49:20.006+0000'
-        LastProcessingResult: ''
-        State: ''
-        StateTransitionReason: ''
-        UUID: 1234xCy789012
       properties:
         UUID:
           allOf:
@@ -4781,7 +4761,7 @@ components:
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams) The number of batches to process from each shard concurrently. The default value is 1.
+            - description: (Streams only) The number of batches to process from each shard concurrently. The default value is 1.
         EventSourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4797,7 +4777,7 @@ components:
         LastProcessingResult:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The result of the last AWS Lambda invocation of your Lambda function.
+            - description: The result of the last Lambda invocation of your Lambda function.
         State:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4809,7 +4789,7 @@ components:
         DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/DestinationConfig'
-            - description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+            - description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         Topics:
           allOf:
             - $ref: '#/components/schemas/Topics'
@@ -4829,24 +4809,24 @@ components:
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: '(Streams) Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.'
+            - description: '(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. '
         BisectBatchOnFunctionError:
           allOf:
             - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams) If the function returns an error, split the batch in two and retry. The default value is false.'
+            - description: '(Streams only) If the function returns an error, split the batch in two and retry. The default value is false.'
         MaximumRetryAttempts:
           allOf:
             - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.'
+            - description: '(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.'
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+            - description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         FunctionResponseTypes:
           allOf:
             - $ref: '#/components/schemas/FunctionResponseTypeList'
-            - description: (Streams) A list of current response type enums applied to the event source mapping.
-      description: A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.
+            - description: (Streams only) A list of current response type enums applied to the event source mapping.
+      description: A mapping between an Amazon Web Services resource and an Lambda function. See <a>CreateEventSourceMapping</a> for details.
     OnSuccess:
       type: object
       properties:
@@ -4879,7 +4859,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/SourceAccessType'
-            - description: '<p>The type of authentication protocol or the VPC components for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p> </li> </ul>'
+            - description: '<p>The type of authentication protocol or the VPC components for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>VIRTUAL_HOST</code> - The name of the virtual host in your RabbitMQ broker. Lambda will use this host as the event source.</p> </li> </ul>'
         URI:
           allOf:
             - $ref: '#/components/schemas/URI'
@@ -4897,22 +4877,6 @@ components:
         - ReportBatchItemFailures
     FunctionConfiguration:
       type: object
-      example:
-        CodeSha256: PFn4S+er27qk+UuZSTKEQfNKG/XNn7QJs90mJgq6oH8=
-        CodeSize: 308
-        Description: ''
-        FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function'
-        FunctionName: my-function
-        Handler: index.handler
-        LastModified: '2019-08-14T22:26:11.234+0000'
-        MemorySize: 256
-        RevisionId: 873282ed-xmpl-4dc8-a069-d0c647e470c6
-        Role: 'arn:aws:iam::123456789012:role/lambda-role'
-        Runtime: nodejs12.x
-        Timeout: 3
-        TracingConfig:
-          Mode: PassThrough
-        Version: $LATEST
       properties:
         FunctionName:
           allOf:
@@ -4973,7 +4937,7 @@ components:
         Environment:
           allOf:
             - $ref: '#/components/schemas/EnvironmentResponse'
-            - description: The function's environment variables.
+            - description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">environment variables</a>.'
         KMSKeyArn:
           allOf:
             - $ref: '#/components/schemas/KMSKeyArn'
@@ -4981,7 +4945,7 @@ components:
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/TracingConfigResponse'
-            - description: The function's AWS X-Ray tracing configuration.
+            - description: The function's X-Ray tracing configuration.
         MasterArn:
           allOf:
             - $ref: '#/components/schemas/FunctionArn'
@@ -5021,7 +4985,7 @@ components:
         FileSystemConfigs:
           allOf:
             - $ref: '#/components/schemas/FileSystemConfigList'
-            - description: Connection settings for an Amazon EFS file system.
+            - description: 'Connection settings for an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.'
         PackageType:
           allOf:
             - $ref: '#/components/schemas/PackageType'
@@ -5100,7 +5064,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LocalMountPath'
             - description: 'The path where the function can access the file system, starting with <code>/mnt/</code>.'
-      description: Details about the connection between a Lambda function and an Amazon EFS file system.
+      description: 'Details about the connection between a Lambda function and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.'
     StringList:
       type: array
       items:
@@ -5119,16 +5083,6 @@ components:
     ResourceInUseException: {}
     GetAccountSettingsResponse:
       type: object
-      example:
-        AccountLimit:
-          CodeSizeUnzipped: 262144000
-          CodeSizeZipped: 52428800
-          ConcurrentExecutions: 1000
-          TotalCodeSize: 80530636800
-          UnreservedConcurrentExecutions: 1000
-        AccountUsage:
-          FunctionCount: 4
-          TotalCodeSize: 9426
       properties:
         AccountLimit:
           allOf:
@@ -5149,35 +5103,6 @@ components:
             - description: The code signing configuration
     GetFunctionResponse:
       type: object
-      example:
-        Code:
-          Location: 'https://awslambda-us-west-2-tasks.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-function-e7d9d1ed-xmpl-4f79-904a-4b87f2681f30?versionId=sH3TQwBOaUy...'
-          RepositoryType: S3
-        Configuration:
-          CodeSha256: YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=
-          CodeSize: 5797206
-          Description: Process image objects from Amazon S3.
-          Environment:
-            Variables:
-              BUCKET: my-bucket-1xpuxmplzrlbh
-              PREFIX: inbound
-          FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
-          FunctionName: my-function
-          Handler: index.handler
-          KMSKeyArn: 'arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966'
-          LastModified: '2020-04-10T19:06:32.563+0000'
-          LastUpdateStatus: Successful
-          MemorySize: 256
-          RevisionId: b75dcd81-xmpl-48a8-a75a-93ba8b5b9727
-          Role: 'arn:aws:iam::123456789012:role/lambda-role'
-          Runtime: nodejs12.x
-          State: Active
-          Timeout: 15
-          TracingConfig:
-            Mode: Active
-          Version: $LATEST
-        Tags:
-          DEPARTMENT: Assets
       properties:
         Configuration:
           allOf:
@@ -5211,8 +5136,6 @@ components:
             - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
     GetFunctionConcurrencyResponse:
       type: object
-      example:
-        ReservedConcurrentExecutions: 250
       properties:
         ReservedConcurrentExecutions:
           allOf:
@@ -5220,15 +5143,6 @@ components:
             - description: The number of simultaneous executions that are reserved for the function.
     FunctionEventInvokeConfig:
       type: object
-      example:
-        DestinationConfig:
-          OnFailure:
-            Destination: 'arn:aws:sqs:us-east-2:123456789012:destination'
-          OnSuccess: {}
-        FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST'
-        LastModified: 1573687896.493
-        MaximumEventAgeInSeconds: 3600
-        MaximumRetryAttempts: 0
       properties:
         LastModified:
           allOf:
@@ -5252,18 +5166,6 @@ components:
             - description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
     GetLayerVersionResponse:
       type: object
-      example:
-        CompatibleRuntimes:
-          - python3.8
-        Content:
-          CodeSha256: 6x+xmpl/M3BnQUk7gS9sGmfeFsR/npojXoA3fZUv4eU=
-          CodeSize: 9529009
-          Location: 'https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/blank-python-lib-e5212378-xmpl-44ee-8398-9d8ec5113949?versionId=WbZnvf...'
-        CreatedDate: '2020-03-31T00:35:18.949+0000'
-        Description: Dependencies for the blank-python sample app.
-        LayerArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib'
-        LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib:3'
-        Version: 3
       properties:
         Content:
           allOf:
@@ -5310,9 +5212,6 @@ components:
             - description: A unique identifier for the current revision of the policy.
     GetPolicyResponse:
       type: object
-      example:
-        Policy: '{"Version":"2012-10-17","Id":"default","Statement":[{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::123456789012:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function:1"}]}'
-        RevisionId: 4843f2f6-7c59-4fda-b484-afd0bc0e22b8
       properties:
         Policy:
           allOf:
@@ -5324,12 +5223,6 @@ components:
             - description: A unique identifier for the current revision of the policy.
     GetProvisionedConcurrencyConfigResponse:
       type: object
-      example:
-        AllocatedProvisionedConcurrentExecutions: 100
-        AvailableProvisionedConcurrentExecutions: 100
-        LastModified: '2019-12-31T20:28:49+0000'
-        RequestedProvisionedConcurrentExecutions: 100
-        Status: READY
       properties:
         RequestedProvisionedConcurrentExecutions:
           allOf:
@@ -5358,9 +5251,6 @@ components:
     ProvisionedConcurrencyConfigNotFoundException: {}
     InvocationResponse:
       type: object
-      example:
-        Payload: ''
-        StatusCode: 202
       properties:
         StatusCode:
           allOf:
@@ -5394,8 +5284,6 @@ components:
     InvokeAsyncResponse:
       type: object
       deprecated: true
-      example:
-        Status: 202
       properties:
         Status:
           allOf:
@@ -5404,21 +5292,6 @@ components:
       description: 'A success response (<code>202 Accepted</code>) indicates that the request is queued for invocation. '
     ListAliasesResponse:
       type: object
-      example:
-        Aliases:
-          - AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function:BETA'
-            Description: Production environment BLUE.
-            FunctionVersion: '2'
-            Name: BLUE
-            RevisionId: a410117f-xmpl-494e-8035-7e204bb7933b
-            RoutingConfig:
-              AdditionalVersionWeights:
-                '1': 0.7
-          - AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function:LIVE'
-            Description: Production environment GREEN.
-            FunctionVersion: '1'
-            Name: GREEN
-            RevisionId: 21d40116-xmpl-40ba-9360-3ea284da1bb5
       properties:
         NextMarker:
           allOf:
@@ -5441,15 +5314,6 @@ components:
             - description: The code signing configurations
     ListEventSourceMappingsResponse:
       type: object
-      example:
-        EventSourceMappings:
-          - BatchSize: 5
-            EventSourceArn: 'arn:aws:sqs:us-west-2:123456789012:mySQSqueue'
-            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
-            LastModified: 1569284520.333
-            State: Enabled
-            StateTransitionReason: USER_INITIATED
-            UUID: a1b2c3d4-5678-90ab-cdef-11111EXAMPLE
       properties:
         NextMarker:
           allOf:
@@ -5461,16 +5325,6 @@ components:
             - description: A list of event source mappings.
     ListFunctionEventInvokeConfigsResponse:
       type: object
-      example:
-        FunctionEventInvokeConfigs:
-          - FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN'
-            LastModified: 1577824406.719
-            MaximumEventAgeInSeconds: 1800
-            MaximumRetryAttempts: 2
-          - FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE'
-            LastModified: 1577824396.653
-            MaximumEventAgeInSeconds: 3600
-            MaximumRetryAttempts: 0
       properties:
         FunctionEventInvokeConfigs:
           allOf:
@@ -5482,43 +5336,6 @@ components:
             - description: The pagination token that's included if more results are available.
     ListFunctionsResponse:
       type: object
-      example:
-        Functions:
-          - CodeSha256: dBG9m8SGdmlEjw/JYXlhhvCrAv5TxvXsbL/RMr0fT/I=
-            CodeSize: 294
-            Description: ''
-            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:helloworld'
-            FunctionName: helloworld
-            Handler: helloworld.handler
-            LastModified: '2019-09-23T18:32:33.857+0000'
-            MemorySize: 128
-            RevisionId: 1718e831-badf-4253-9518-d0644210af7b
-            Role: 'arn:aws:iam::123456789012:role/service-role/MyTestFunction-role-zgur6bf4'
-            Runtime: nodejs10.x
-            Timeout: 3
-            TracingConfig:
-              Mode: PassThrough
-            Version: $LATEST
-          - CodeSha256: sU0cJ2/hOZevwV/lTxCuQqK3gDZP3i8gUoqUUVRmY6E=
-            CodeSize: 266
-            Description: ''
-            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
-            FunctionName: my-function
-            Handler: index.handler
-            LastModified: '2019-10-01T16:47:28.490+0000'
-            MemorySize: 256
-            RevisionId: 93017fc9-59cb-41dc-901b-4845ce4bf668
-            Role: 'arn:aws:iam::123456789012:role/service-role/helloWorldPython-role-uy3l9qyq'
-            Runtime: nodejs10.x
-            Timeout: 3
-            TracingConfig:
-              Mode: PassThrough
-            Version: $LATEST
-            VpcConfig:
-              SecurityGroupIds: []
-              SubnetIds: []
-              VpcId: ''
-        NextMarker: ''
       properties:
         NextMarker:
           allOf:
@@ -5542,20 +5359,6 @@ components:
             - description: 'The function ARNs. '
     ListLayerVersionsResponse:
       type: object
-      example:
-        LayerVersions:
-          - CompatibleRuntimes:
-              - java8
-            CreatedDate: '2020-03-18T23:38:42.284+0000'
-            Description: Dependencies for the blank-java sample app.
-            LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:7'
-            Version: 7
-          - CompatibleRuntimes:
-              - java8
-            CreatedDate: '2020-03-17T07:24:21.960+0000'
-            Description: Dependencies for the blank-java sample app.
-            LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:6'
-            Version: 6
       properties:
         NextMarker:
           allOf:
@@ -5567,18 +5370,6 @@ components:
             - description: A list of versions.
     ListLayersResponse:
       type: object
-      example:
-        Layers:
-          - LatestMatchingVersion:
-              CompatibleRuntimes:
-                - python3.6
-                - python3.7
-              CreatedDate: '2018-11-15T00:37:46.592+0000'
-              Description: My layer
-              LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2'
-              Version: 2
-            LayerArn: 'arn:aws:lambda:us-east-2:123456789012:layer:my-layer'
-            LayerName: my-layer
       properties:
         NextMarker:
           allOf:
@@ -5590,20 +5381,6 @@ components:
             - description: A list of function layers.
     ListProvisionedConcurrencyConfigsResponse:
       type: object
-      example:
-        ProvisionedConcurrencyConfigs:
-          - AllocatedProvisionedConcurrentExecutions: 100
-            AvailableProvisionedConcurrentExecutions: 100
-            FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN'
-            LastModified: '2019-12-31T20:29:00+0000'
-            RequestedProvisionedConcurrentExecutions: 100
-            Status: READY
-          - AllocatedProvisionedConcurrentExecutions: 100
-            AvailableProvisionedConcurrentExecutions: 100
-            FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE'
-            LastModified: '2019-12-31T20:28:49+0000'
-            RequestedProvisionedConcurrentExecutions: 100
-            Status: READY
       properties:
         ProvisionedConcurrencyConfigs:
           allOf:
@@ -5615,10 +5392,6 @@ components:
             - description: The pagination token that's included if more results are available.
     ListTagsResponse:
       type: object
-      example:
-        Tags:
-          Category: Web Tools
-          Department: Sales
       properties:
         Tags:
           allOf:
@@ -5626,48 +5399,6 @@ components:
             - description: The function's tags.
     ListVersionsByFunctionResponse:
       type: object
-      example:
-        Versions:
-          - CodeSha256: YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=
-            CodeSize: 5797206
-            Description: Process image objects from Amazon S3.
-            Environment:
-              Variables:
-                BUCKET: my-bucket-1xpuxmplzrlbh
-                PREFIX: inbound
-            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
-            FunctionName: my-function
-            Handler: index.handler
-            KMSKeyArn: 'arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966'
-            LastModified: '2020-04-10T19:06:32.563+0000'
-            MemorySize: 256
-            RevisionId: 850ca006-2d98-4ff4-86db-8766e9d32fe9
-            Role: 'arn:aws:iam::123456789012:role/lambda-role'
-            Runtime: nodejs12.x
-            Timeout: 15
-            TracingConfig:
-              Mode: Active
-            Version: $LATEST
-          - CodeSha256: YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=
-            CodeSize: 5797206
-            Description: Process image objects from Amazon S3.
-            Environment:
-              Variables:
-                BUCKET: my-bucket-1xpuxmplzrlbh
-                PREFIX: inbound
-            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
-            FunctionName: my-function
-            Handler: index.handler
-            KMSKeyArn: 'arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966'
-            LastModified: '2020-04-10T19:06:32.563+0000'
-            MemorySize: 256
-            RevisionId: b75dcd81-xmpl-48a8-a75a-93ba8b5b9727
-            Role: 'arn:aws:iam::123456789012:role/lambda-role'
-            Runtime: nodejs12.x
-            Timeout: 5
-            TracingConfig:
-              Mode: Active
-            Version: '1'
       properties:
         NextMarker:
           allOf:
@@ -5679,20 +5410,6 @@ components:
             - description: A list of Lambda function versions.
     PublishLayerVersionResponse:
       type: object
-      example:
-        CompatibleRuntimes:
-          - python3.6
-          - python3.7
-        Content:
-          CodeSha256: tv9jJO+rPbXUUXuRKi7CwHzKtLDkDRJLB3cC3Z/ouXo=
-          CodeSize: 169
-          Location: 'https://awslambda-us-west-2-layers.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...'
-        CreatedDate: '2018-11-14T23:03:52.894+0000'
-        Description: My Python layer
-        LayerArn: 'arn:aws:lambda:us-west-2:123456789012:layer:my-layer'
-        LayerVersionArn: 'arn:aws:lambda:us-west-2:123456789012:layer:my-layer:1'
-        LicenseInfo: MIT
-        Version: 1
       properties:
         Content:
           allOf:
@@ -5769,8 +5486,6 @@ components:
             - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
     Concurrency:
       type: object
-      example:
-        ReservedConcurrentExecutions: 100
       properties:
         ReservedConcurrentExecutions:
           allOf:
@@ -5778,11 +5493,6 @@ components:
             - description: 'The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
     PutProvisionedConcurrencyConfigResponse:
       type: object
-      example:
-        AllocatedProvisionedConcurrentExecutions: 0
-        LastModified: '2019-11-21T19:32:12+0000'
-        RequestedProvisionedConcurrentExecutions: 100
-        Status: IN_PROGRESS
       properties:
         RequestedProvisionedConcurrentExecutions:
           allOf:
@@ -5840,7 +5550,7 @@ components:
         CodeSizeZipped:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The maximum size of a deployment package when it's uploaded directly to AWS Lambda. Use Amazon S3 for larger files.
+            - description: The maximum size of a deployment package when it's uploaded directly to Lambda. Use Amazon S3 for larger files.
         ConcurrentExecutions:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -5880,12 +5590,14 @@ components:
     LayerPermissionAllowedAction:
       type: string
       pattern: 'lambda:GetLayerVersion'
+      maxLength: 22
     LayerPermissionAllowedPrincipal:
       type: string
       pattern: '\d{12}|\*|arn:(aws[a-zA-Z-]*):iam::\d{12}:root'
     OrganizationId:
       type: string
       pattern: 'o-[a-z0-9]{10,32}'
+      maxLength: 34
     AddLayerVersionPermissionRequest:
       type: object
       required:
@@ -5905,7 +5617,7 @@ components:
         Principal:
           allOf:
             - $ref: '#/components/schemas/LayerPermissionAllowedPrincipal'
-            - description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
+            - description: 'An account ID, or <code>*</code> to grant layer usage permission to all accounts in an organization, or all Amazon Web Services accounts (if <code>organizationId</code> is not specified). For the last case, make sure that you really do want all Amazon Web Services accounts to have usage permission to this layer. '
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
@@ -5917,13 +5629,14 @@ components:
       maxLength: 140
     Principal:
       type: string
-      pattern: .*
+      pattern: '[^\s]+'
     Arn:
       type: string
       pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
     SourceOwner:
       type: string
       pattern: '\d{12}'
+      maxLength: 12
     EventSourceToken:
       type: string
       pattern: '[a-zA-Z0-9._\-]+'
@@ -5953,11 +5666,11 @@ components:
         Principal:
           allOf:
             - $ref: '#/components/schemas/Principal'
-            - description: 'The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
+            - description: 'The Amazon Web Services service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
         SourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
+            - description: 'For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
         SourceAccount:
           allOf:
             - $ref: '#/components/schemas/SourceOwner'
@@ -6043,7 +5756,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CodeSigningPolicy'
             - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
-      description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
+      description: 'Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.'
     Timestamp:
       type: string
     CodeSigningConfig:
@@ -6079,7 +5792,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). '
-      description: 'Details about a Code signing configuration. '
+      description: 'Details about a <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">Code signing configuration</a>. '
     CodeSigningConfigList:
       type: array
       items:
@@ -6237,7 +5950,7 @@ components:
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams) The number of batches to process from each shard concurrently.
+            - description: (Streams only) The number of batches to process from each shard concurrently.
         StartingPosition:
           allOf:
             - $ref: '#/components/schemas/EventSourcePosition'
@@ -6249,23 +5962,23 @@ components:
         DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/DestinationConfig'
-            - description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+            - description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
+            - description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
         BisectBatchOnFunctionError:
           allOf:
             - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams) If the function returns an error, split the batch in two and retry.'
+            - description: '(Streams only) If the function returns an error, split the batch in two and retry.'
         MaximumRetryAttempts:
           allOf:
             - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+            - description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+            - description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         Topics:
           allOf:
             - $ref: '#/components/schemas/Topics'
@@ -6285,7 +5998,7 @@ components:
         FunctionResponseTypes:
           allOf:
             - $ref: '#/components/schemas/FunctionResponseTypeList'
-            - description: (Streams) A list of current response type enums applied to the event source mapping.
+            - description: (Streams only) A list of current response type enums applied to the event source mapping.
     RoleArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -6299,11 +6012,11 @@ components:
         ZipFile:
           allOf:
             - $ref: '#/components/schemas/Blob'
-            - description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+            - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
         S3Bucket:
           allOf:
             - $ref: '#/components/schemas/S3Bucket'
-            - description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+            - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
         S3Key:
           allOf:
             - $ref: '#/components/schemas/S3Key'
@@ -6315,7 +6028,7 @@ components:
         ImageUri:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: URI of a container image in the Amazon ECR registry.
+            - description: 'URI of a <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a> in the Amazon ECR registry.'
       description: 'The code for the Lambda function. You can specify either an object in Amazon S3, upload a .zip file archive deployment package directly, or specify the URI of a container image.'
     Timeout:
       type: integer
@@ -6355,8 +6068,8 @@ components:
         Variables:
           allOf:
             - $ref: '#/components/schemas/EnvironmentVariables'
-            - description: Environment variable key-value pairs.
-      description: A function's environment variable settings.
+            - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
+      description: 'A function''s environment variable settings. You can use environment variables to adjust your function''s behavior without updating code. An environment variable is a pair of strings that are stored in a function''s version-specific configuration. '
     KMSKeyArn:
       type: string
       pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
@@ -6367,7 +6080,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TracingMode'
             - description: The tracing mode.
-      description: 'The function''s AWS X-Ray tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
+      description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.'
     Tags:
       type: object
       additionalProperties:
@@ -6432,11 +6145,11 @@ components:
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
-            - description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+            - description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
         MemorySize:
           allOf:
             - $ref: '#/components/schemas/MemorySize'
-            - description: The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
+            - description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
         Publish:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6444,7 +6157,7 @@ components:
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
-            - description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
+            - description: 'For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
         PackageType:
           allOf:
             - $ref: '#/components/schemas/PackageType'
@@ -6460,11 +6173,11 @@ components:
         KMSKeyArn:
           allOf:
             - $ref: '#/components/schemas/KMSKeyArn'
-            - description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+            - description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/TracingConfig'
-            - description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
+            - description: 'Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -6480,7 +6193,7 @@ components:
         ImageConfig:
           allOf:
             - $ref: '#/components/schemas/ImageConfig'
-            - description: ' <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container image configuration values</a> that override the values in the container image Dockerfile.'
+            - description: 'Container image <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings">configuration values</a> that override the values in the container image Dockerfile.'
         CodeSigningConfigArn:
           allOf:
             - $ref: '#/components/schemas/CodeSigningConfigArn'
@@ -6642,7 +6355,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TracingMode'
             - description: The tracing mode.
-      description: The function's AWS X-Ray tracing configuration.
+      description: The function's X-Ray tracing configuration.
     LayersReferenceList:
       type: array
       items:
@@ -6796,7 +6509,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of a signing job.
-      description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>.'
+      description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayerArn:
       type: string
       pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+'
@@ -6888,7 +6601,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of a signing job.
-      description: 'An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>.'
+      description: 'An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayerVersionContentInput:
       type: object
       properties:
@@ -6907,8 +6620,8 @@ components:
         ZipFile:
           allOf:
             - $ref: '#/components/schemas/Blob'
-            - description: The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for you.
-      description: 'A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.'
+            - description: The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+      description: 'A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.'
     LayerVersionsListItem:
       type: object
       properties:
@@ -6936,7 +6649,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LicenseInfo'
             - description: The layer's open-source license.
-      description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>.'
+      description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayerVersionsList:
       type: array
       items:
@@ -6956,7 +6669,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LayerVersionsListItem'
             - description: The newest version of the layer.
-      description: 'Details about an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>.'
+      description: 'Details about an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.'
     LayersList:
       type: array
       items:
@@ -7167,6 +6880,7 @@ components:
         - VPC_SECURITY_GROUP
         - SASL_SCRAM_512_AUTH
         - SASL_SCRAM_256_AUTH
+        - VIRTUAL_HOST
     URI:
       type: string
       pattern: '[a-zA-Z0-9-\/*:_+=.@-]*'
@@ -7251,23 +6965,23 @@ components:
         DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/DestinationConfig'
-            - description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+            - description: (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: (Streams) Discard records older than the specified age. The default value is infinite (-1).
+            - description: (Streams only) Discard records older than the specified age. The default value is infinite (-1).
         BisectBatchOnFunctionError:
           allOf:
             - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams) If the function returns an error, split the batch in two and retry.'
+            - description: '(Streams only) If the function returns an error, split the batch in two and retry.'
         MaximumRetryAttempts:
           allOf:
             - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+            - description: '(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams) The number of batches to process from each shard concurrently.
+            - description: (Streams only) The number of batches to process from each shard concurrently.
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
@@ -7275,11 +6989,11 @@ components:
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+            - description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         FunctionResponseTypes:
           allOf:
             - $ref: '#/components/schemas/FunctionResponseTypeList'
-            - description: (Streams) A list of current response type enums applied to the event source mapping.
+            - description: (Streams only) A list of current response type enums applied to the event source mapping.
     UpdateFunctionCodeRequest:
       type: object
       title: UpdateFunctionCodeRequest
@@ -7287,11 +7001,11 @@ components:
         ZipFile:
           allOf:
             - $ref: '#/components/schemas/Blob'
-            - description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+            - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
         S3Bucket:
           allOf:
             - $ref: '#/components/schemas/S3Bucket'
-            - description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+            - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
         S3Key:
           allOf:
             - $ref: '#/components/schemas/S3Key'
@@ -7335,15 +7049,15 @@ components:
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
-            - description: The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+            - description: 'The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.'
         MemorySize:
           allOf:
             - $ref: '#/components/schemas/MemorySize'
-            - description: The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
+            - description: 'The amount of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.'
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
-            - description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
+            - description: 'For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
         Environment:
           allOf:
             - $ref: '#/components/schemas/Environment'
@@ -7359,11 +7073,11 @@ components:
         KMSKeyArn:
           allOf:
             - $ref: '#/components/schemas/KMSKeyArn'
-            - description: 'The ARN of the AWS Key Management Service (AWS KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, AWS Lambda uses a default service key.'
+            - description: 'The ARN of the Amazon Web Services Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/TracingConfig'
-            - description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
+            - description: 'Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.'
         RevisionId:
           allOf:
             - $ref: '#/components/schemas/String'
