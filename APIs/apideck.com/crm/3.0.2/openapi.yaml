@@ -412,7 +412,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 3.0.0
+  version: 3.0.2
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -1479,6 +1479,7 @@ paths:
       summary: Create pipeline
       tags:
         - Pipelines
+      x-apideck-upcoming: true
   "/crm/pipelines/{id}":
     delete:
       description: Delete pipeline
@@ -1509,6 +1510,7 @@ paths:
       summary: Delete pipeline
       tags:
         - Pipelines
+      x-apideck-upcoming: true
     get:
       description: Get pipeline
       operationId: pipelinesOne
@@ -1538,6 +1540,7 @@ paths:
       summary: Get pipeline
       tags:
         - Pipelines
+      x-apideck-upcoming: true
     patch:
       description: Update pipeline
       operationId: pipelinesUpdate
@@ -1573,6 +1576,7 @@ paths:
       summary: Update pipeline
       tags:
         - Pipelines
+      x-apideck-upcoming: true
   /crm/users:
     get:
       description: List users
@@ -2116,11 +2120,15 @@ components:
     Activity:
       additionalProperties: false
       properties:
+        account_id:
+          example: "12345"
+          type: string
         activity_date:
           example: 2021-05-01
           type: string
         activity_datetime:
           example: 2021-05-01T12:00:00.000Z
+          minLength: 1
           type: string
         all_day_event:
           example: false
@@ -2171,8 +2179,12 @@ components:
         description:
           example: More info about the meeting
           type: string
+        duration_minutes:
+          example: 30
+          type: integer
         duration_seconds:
           example: 1800
+          minimum: 0
           type: integer
         end_date:
           example: 2021-05-01
@@ -2463,6 +2475,7 @@ components:
           type: integer
         name:
           example: Copper
+          minLength: 1
           type: string
         owner_id:
           example: "12345"
@@ -2590,6 +2603,7 @@ components:
           type: string
         name:
           example: Elon Musk
+          minLength: 1
           type: string
         owner_id:
           example: "54321"
@@ -3230,6 +3244,7 @@ components:
         email:
           example: elon@musk.com
           format: email
+          minLength: 1
           type: string
         id:
           example: "123"
@@ -3870,8 +3885,17 @@ components:
           example: "12345"
           readOnly: true
           type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
         last_name:
           example: Musk
+          nullable: true
+          type: string
+        lead_source:
+          example: Cold Call
           nullable: true
           type: string
         monetary_amount:
@@ -3880,6 +3904,7 @@ components:
           type: number
         name:
           example: Elon Musk
+          minLength: 1
           type: string
         owner_id:
           example: "54321"
@@ -4236,6 +4261,7 @@ components:
           $ref: "#/components/schemas/Tags"
         title:
           example: New Rocket
+          minLength: 1
           type: string
         updated_at:
           example: 2020-09-30T07:43:32.000Z
@@ -4299,6 +4325,7 @@ components:
           type: string
         number:
           example: 111-111-1111
+          minLength: 1
           type: string
         type:
           enum:
@@ -4337,6 +4364,7 @@ components:
           type: string
         name:
           example: Sales Pipeline
+          minLength: 1
           type: string
         stages:
           items:
@@ -4350,6 +4378,9 @@ components:
                 type: string
               name:
                 example: Contract Sent
+                type: string
+              value:
+                example: CONTRACT_SENT
                 type: string
             type: object
           type: array
@@ -4372,6 +4403,7 @@ components:
           type: string
         url:
           example: https://www.twitter.com/apideck-io
+          minLength: 1
           type: string
       required:
         - url
@@ -4744,6 +4776,7 @@ components:
         email:
           example: elon@musk.com
           format: email
+          minLength: 1
           type: string
         first_name:
           example: Elon
@@ -4810,6 +4843,7 @@ components:
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
+          minLength: 1
           type: string
       required:
         - url

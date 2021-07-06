@@ -412,7 +412,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 3.0.0
+  version: 3.0.2
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -1015,6 +1015,7 @@ components:
         email:
           example: elon@musk.com
           format: email
+          minLength: 1
           type: string
         id:
           example: "123"
@@ -1084,8 +1085,17 @@ components:
           example: "12345"
           readOnly: true
           type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
         last_name:
           example: Musk
+          nullable: true
+          type: string
+        lead_source:
+          example: Cold Call
           nullable: true
           type: string
         monetary_amount:
@@ -1094,6 +1104,7 @@ components:
           type: number
         name:
           example: Elon Musk
+          minLength: 1
           type: string
         owner_id:
           example: "54321"
@@ -1276,6 +1287,7 @@ components:
           type: string
         number:
           example: 111-111-1111
+          minLength: 1
           type: string
         type:
           enum:
@@ -1305,6 +1317,7 @@ components:
           type: string
         url:
           example: https://www.twitter.com/apideck-io
+          minLength: 1
           type: string
       required:
         - url
@@ -1430,6 +1443,7 @@ components:
           x-graphql-type-name: WebsiteType
         url:
           example: http://example.com
+          minLength: 1
           type: string
       required:
         - url

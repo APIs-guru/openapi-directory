@@ -247,7 +247,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 3.0.0
+  version: 3.0.2
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -297,7 +297,7 @@ paths:
         - $ref: "#/components/parameters/redirect_uri"
         - $ref: "#/components/parameters/scope"
       responses:
-        "302":
+        "301":
           description: redirect
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -349,48 +349,6 @@ paths:
       security:
         - apiKey: []
       summary: Get all connections
-      tags:
-        - Connections
-    post:
-      description: Create a connection
-      operationId: connectionsCreate
-      parameters:
-        - $ref: "#/components/parameters/x-apideck-consumer-id"
-        - $ref: "#/components/parameters/x-apideck-app-id"
-        - description: Service ID of the resource to return
-          example: pipedrive
-          in: query
-          name: service_id
-          required: true
-          schema:
-            type: string
-        - description: Unified API
-          example: crm
-          in: query
-          name: unified_api
-          required: true
-          schema:
-            type: string
-      requestBody:
-        $ref: "#/components/requestBodies/CreateConnectionRequestBody"
-      responses:
-        "200":
-          $ref: "#/components/responses/UpdateConnection"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "402":
-          $ref: "#/components/responses/PaymentRequired"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "422":
-          $ref: "#/components/responses/Unprocessable"
-        default:
-          $ref: "#/components/responses/UnexpectedError"
-      security:
-        - apiKey: []
-      summary: Create connection
       tags:
         - Connections
   "/vault/connections/{unified_api}/{service_id}":
@@ -718,7 +676,7 @@ paths:
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/redirect_uri"
       responses:
-        "302":
+        "301":
           description: redirect
         "400":
           $ref: "#/components/responses/BadRequest"
