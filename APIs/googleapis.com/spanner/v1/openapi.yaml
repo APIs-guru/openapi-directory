@@ -3077,6 +3077,11 @@ components:
           description: The index of the start key in indexed_keys.
           format: int32
           type: integer
+        timeOffset:
+          description: The time offset. This is the time since the start of the time
+            interval.
+          format: google-duration
+          type: string
         unit:
           $ref: "#/components/schemas/LocalizedString"
           description: The unit of the metric. This is an unstructured field and will be
