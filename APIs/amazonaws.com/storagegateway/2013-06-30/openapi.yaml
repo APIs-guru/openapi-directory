@@ -3,7 +3,7 @@ info:
   version: '2013-06-30'
   x-release: v4
   title: AWS Storage Gateway
-  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and the AWS storage infrastructure. The service enables you to securely upload data to the AWS Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway required request headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/general/latest/gr/sg.html">AWS Storage Gateway endpoints and quotas</a>: Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway.</p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="http://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS resource IDs</a>.</p> <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="http://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
+  description: '<fullname>Storage Gateway Service</fullname> <p>Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and the Amazon Web Services storage infrastructure. The service enables you to securely upload data to the Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">Storage Gateway required request headers</a>: Describes the required headers that you must send with every POST request to Storage Gateway.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing requests</a>: Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error responses</a>: Provides reference information about Storage Gateway errors.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/general/latest/gr/sg.html">Storage Gateway endpoints and quotas</a>: Provides a list of each Region and the endpoints available for use with Storage Gateway.</p> </li> </ul> <note> <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="http://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS resource IDs</a>.</p> <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="http://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.ActivateGateway:
     post:
       operationId: ActivateGateway
-      description: '<p>Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the AWS Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>'
+      description: '<p>Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>'
       responses:
         '200':
           description: Success
@@ -162,7 +162,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.AddCache:
     post:
       operationId: AddCache
-      description: '<p>Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape, and file gateway type (see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html">How AWS Storage Gateway works (architecture)</a>.</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.</p>'
+      description: '<p>Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape, and file gateway type (see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html">How Storage Gateway works (architecture)</a>.</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.</p>'
       responses:
         '200':
           description: Success
@@ -207,7 +207,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.AddTagsToResource:
     post:
       operationId: AddTagsToResource
-      description: '<p>Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:</p> <ul> <li> <p>Storage gateways of all types</p> </li> <li> <p>Storage volumes</p> </li> <li> <p>Virtual tapes</p> </li> <li> <p>NFS and SMB file shares</p> </li> </ul> <p>You can create a maximum of 50 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.</p>'
+      description: '<p>Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following Storage Gateway resources:</p> <ul> <li> <p>Storage gateways of all types</p> </li> <li> <p>Storage volumes</p> </li> <li> <p>Virtual tapes</p> </li> <li> <p>NFS and SMB file shares</p> </li> <li> <p>File System associations</p> </li> </ul> <p>You can create a maximum of 50 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.</p>'
       responses:
         '200':
           description: Success
@@ -387,7 +387,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.AssociateFileSystem:
     post:
       operationId: AssociateFileSystem
-      description: 'Associate an Amazon FSx file system with the Amazon FSx file gateway. After the association process is complete, the file shares on the Amazon FSx file system are available for access through the gateway. This operation only supports the Amazon FSx file gateway type.'
+      description: 'Associate an Amazon FSx file system with the FSx File Gateway. After the association process is complete, the file shares on the Amazon FSx file system are available for access through the gateway. This operation only supports the FSx File Gateway type.'
       responses:
         '200':
           description: Success
@@ -612,7 +612,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.CreateNFSFileShare:
     post:
       operationId: CreateNFSFileShare
-      description: '<p>Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for file gateways.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in the AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.</p> <important> <p>S3 File gateway requires Security Token Service (STS) to be activated to enable you to create a file share. Make sure STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in the Region, activate it. For information about how to activate STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating STS in an Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>S3 File Gateways do not support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -657,7 +657,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.CreateSMBFileShare:
     post:
       operationId: CreateSMBFileShare
-      description: '<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.</p> <important> <p>S3 File Gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating STS in an Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -702,7 +702,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.CreateSnapshot:
     post:
       operationId: CreateSnapshot
-      description: '<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html">Welcome</a> page.</p> </important>'
+      description: '<p>Initiates a snapshot of a volume.</p> <p>Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the Storage Gateway console. In response, Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html">Welcome</a> page.</p> </important>'
       responses:
         '200':
           description: Success
@@ -753,7 +753,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.CreateSnapshotFromVolumeRecoveryPoint:
     post:
       operationId: CreateSnapshotFromVolumeRecoveryPoint
-      description: '<p>Initiates a snapshot of a gateway from a volume recovery point. This operation is only supported in the cached volume gateway type.</p> <p>A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for cached volume gateway, use <a>ListVolumeRecoveryPoints</a>.</p> <p>In the <code>CreateSnapshotFromVolumeRecoveryPoint</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and its description appear in the AWS Storage Gateway console. In response, the gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>'
+      description: '<p>Initiates a snapshot of a gateway from a volume recovery point. This operation is only supported in the cached volume gateway type.</p> <p>A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for cached volume gateway, use <a>ListVolumeRecoveryPoints</a>.</p> <p>In the <code>CreateSnapshotFromVolumeRecoveryPoint</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and its description appear in the Storage Gateway console. In response, the gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1119,7 +1119,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DeleteFileShare:
     post:
       operationId: DeleteFileShare
-      description: Deletes a file share from a file gateway. This operation is only supported for file gateways.
+      description: Deletes a file share from an S3 File Gateway. This operation is only supported for S3 File Gateways.
       responses:
         '200':
           description: Success
@@ -1164,7 +1164,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DeleteGateway:
     post:
       operationId: DeleteGateway
-      description: "<p>Deletes a gateway. To specify which gateway to delete, use the Amazon Resource Name (ARN) of the gateway in your request. The operation deletes the gateway; however, it does not delete the gateway virtual machine (VM) from your host computer.</p> <p>After you delete a gateway, you cannot reactivate it. Completed snapshots of the gateway volumes are not deleted upon deleting the gateway, however, pending snapshots will not complete. After you delete a gateway, your next step is to remove it from your environment.</p> <important> <p>You no longer pay software charges after the gateway is deleted; however, your existing Amazon EBS snapshots persist and you will continue to be billed for these snapshots.\_You can choose to remove all remaining Amazon EBS snapshots by canceling your Amazon EC2 subscription.\_ If you prefer not to cancel your Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2 console. For more information, see the <a href=\"http://aws.amazon.com/storagegateway\">AWS Storage Gateway detail page</a>.</p> </important>"
+      description: "<p>Deletes a gateway. To specify which gateway to delete, use the Amazon Resource Name (ARN) of the gateway in your request. The operation deletes the gateway; however, it does not delete the gateway virtual machine (VM) from your host computer.</p> <p>After you delete a gateway, you cannot reactivate it. Completed snapshots of the gateway volumes are not deleted upon deleting the gateway, however, pending snapshots will not complete. After you delete a gateway, your next step is to remove it from your environment.</p> <important> <p>You no longer pay software charges after the gateway is deleted; however, your existing Amazon EBS snapshots persist and you will continue to be billed for these snapshots.\_You can choose to remove all remaining Amazon EBS snapshots by canceling your Amazon EC2 subscription.\_ If you prefer not to cancel your Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2 console. For more information, see the <a href=\"http://aws.amazon.com/storagegateway\">Storage Gateway detail page</a>.</p> </important>"
       responses:
         '200':
           description: Success
@@ -1614,7 +1614,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeCachediSCSIVolumes:
     post:
       operationId: DescribeCachediSCSIVolumes
-      description: '<p>Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types.</p> <p>The list of gateway volumes in the request must be from one gateway. In the response, AWS Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).</p>'
+      description: '<p>Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types.</p> <p>The list of gateway volumes in the request must be from one gateway. In the response, Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).</p>'
       responses:
         '200':
           description: Success
@@ -1704,7 +1704,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeFileSystemAssociations:
     post:
       operationId: DescribeFileSystemAssociations
-      description: Gets the file system association information. This operation is only supported for Amazon FSx file gateways.
+      description: Gets the file system association information. This operation is only supported for FSx File Gateways.
       responses:
         '200':
           description: Success
@@ -1839,7 +1839,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeNFSFileShares:
     post:
       operationId: DescribeNFSFileShares
-      description: Gets a description for one or more Network File System (NFS) file shares from a file gateway. This operation is only supported for file gateways.
+      description: Gets a description for one or more Network File System (NFS) file shares from an S3 File Gateway. This operation is only supported for S3 File Gateways.
       responses:
         '200':
           description: Success
@@ -1884,7 +1884,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeSMBFileShares:
     post:
       operationId: DescribeSMBFileShares
-      description: Gets a description for one or more Server Message Block (SMB) file shares from a file gateway. This operation is only supported for file gateways.
+      description: Gets a description for one or more Server Message Block (SMB) file shares from a S3 File Gateway. This operation is only supported for S3 File Gateways.
       responses:
         '200':
           description: Success
@@ -2019,7 +2019,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeStorediSCSIVolumes:
     post:
       operationId: DescribeStorediSCSIVolumes
-      description: 'Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response, AWS Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway type.'
+      description: 'Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response, Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway type.'
       responses:
         '200':
           description: Success
@@ -2064,7 +2064,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeTapeArchives:
     post:
       operationId: DescribeTapeArchives
-      description: '<p>Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This operation is only supported in the tape gateway type.</p> <p>If a specific <code>TapeARN</code> is not specified, AWS Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.</p>'
+      description: '<p>Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This operation is only supported in the tape gateway type.</p> <p>If a specific <code>TapeARN</code> is not specified, Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.</p>'
       responses:
         '200':
           description: Success
@@ -2280,7 +2280,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DescribeVTLDevices:
     post:
       operationId: DescribeVTLDevices
-      description: '<p>Returns a description of virtual tape library (VTL) devices for the specified tape gateway. In the response, AWS Storage Gateway returns VTL device information.</p> <p>This operation is only supported in the tape gateway type.</p>'
+      description: '<p>Returns a description of virtual tape library (VTL) devices for the specified tape gateway. In the response, Storage Gateway returns VTL device information.</p> <p>This operation is only supported in the tape gateway type.</p>'
       responses:
         '200':
           description: Success
@@ -2472,7 +2472,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.DisassociateFileSystem:
     post:
       operationId: DisassociateFileSystem
-      description: 'Disassociates an Amazon FSx file system from the specified gateway. After the disassociation process finishes, the gateway can no longer access the Amazon FSx file system. This operation is only supported in the Amazon FSx file gateway type.'
+      description: 'Disassociates an Amazon FSx file system from the specified gateway. After the disassociation process finishes, the gateway can no longer access the Amazon FSx file system. This operation is only supported in the FSx File Gateway type.'
       responses:
         '200':
           description: Success
@@ -2607,7 +2607,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.ListFileShares:
     post:
       operationId: ListFileShares
-      description: 'Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported for file gateways.'
+      description: 'Gets a list of the file shares for a specific S3 File Gateway, or the list of file shares that belong to the calling user account. This operation is only supported for S3 File Gateways.'
       responses:
         '200':
           description: Success
@@ -2664,7 +2664,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.ListFileSystemAssociations:
     post:
       operationId: ListFileSystemAssociations
-      description: Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a summary of a file system association. This operation is only supported for Amazon FSx file gateways.
+      description: Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a summary of a file system association. This operation is only supported for FSx File Gateways.
       responses:
         '200':
           description: Success
@@ -2721,7 +2721,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.ListGateways:
     post:
       operationId: ListGateways
-      description: '<p>Lists gateways owned by an AWS account in an AWS Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).</p> <p>By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response.</p> <p>If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.</p>'
+      description: '<p>Lists gateways owned by an account in an Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).</p> <p>By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response.</p> <p>If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.</p>'
       responses:
         '200':
           description: Success
@@ -3141,7 +3141,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.NotifyWhenUploaded:
     post:
       operationId: NotifyWhenUploaded
-      description: '<p>Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to Amazon S3.</p> <p>AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification">Getting file upload notification</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+      description: '<p>Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to Amazon S3.</p> <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification">Getting file upload notification</a> in the <i>Storage Gateway User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3186,7 +3186,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.RefreshCache:
     post:
       operationId: RefreshCache
-      description: '<p>Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket''s contents and cached the results. This operation does not import files into the file gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your <code>RefreshCache</code> operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+      description: '<p>Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket''s contents and cached the results. This operation does not import files into the S3 File Gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the S3 File Gateway types.</p> <p>You can subscribe to be notified through an Amazon CloudWatch event when your <code>RefreshCache</code> operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>Storage Gateway User Guide</i>. This operation is Only supported for S3 File Gateways.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>Storage Gateway User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3456,7 +3456,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.SetSMBGuestPassword:
     post:
       operationId: SetSMBGuestPassword
-      description: Sets the password for the guest user <code>smbguest</code>. The <code>smbguest</code> user is the user when the authentication method for the file share is set to <code>GuestAccess</code>.
+      description: Sets the password for the guest user <code>smbguest</code>. The <code>smbguest</code> user is the user when the authentication method for the file share is set to <code>GuestAccess</code>. This operation only supported for S3 File Gateways
       responses:
         '200':
           description: Success
@@ -3816,7 +3816,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.UpdateFileSystemAssociation:
     post:
       operationId: UpdateFileSystemAssociation
-      description: Updates a file system association. This operation is only supported in the Amazon FSx file gateway type.
+      description: Updates a file system association. This operation is only supported in the FSx File Gateways.
       responses:
         '200':
           description: Success
@@ -3996,7 +3996,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.UpdateNFSFileShare:
     post:
       operationId: UpdateNFSFileShare
-      description: '<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share settings:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul>'
+      description: '<p>Updates a Network File System (NFS) file share. This operation is only supported in S3 File Gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share settings:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -4041,7 +4041,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.UpdateSMBFileShare:
     post:
       operationId: UpdateSMBFileShare
-      description: '<p>Updates a Server Message Block (SMB) file share. This operation is only supported for file gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <important> <p>File gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your file gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating STS in an Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -4086,7 +4086,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.UpdateSMBFileShareVisibility:
     post:
       operationId: UpdateSMBFileShareVisibility
-      description: Controls whether the shares on a gateway are visible in a net view or browse list.
+      description: Controls whether the shares on an S3 File Gateway are visible in a net view or browse list. The operation is only supported for S3 File Gateways.
       responses:
         '200':
           description: Success
@@ -4322,7 +4322,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: '<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and AWS Region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note> <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID. Changing the name of the gateway has no effect on the gateway ARN.</p> </note>'
+      description: '<p>Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and Region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note> <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID. Changing the name of the gateway has no effect on the gateway ARN.</p> </note>'
     ActivateGatewayInput:
       type: object
       required:
@@ -4335,7 +4335,7 @@ components:
         ActivationKey:
           allOf:
             - $ref: '#/components/schemas/ActivationKey'
-            - description: '<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html">Getting activation key</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+            - description: '<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter <code>activationKey</code>. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the <code>ActivateGateway</code> API call determine the actual configuration of your gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html">Getting activation key</a> in the <i>Storage Gateway User Guide</i>.</p>'
         GatewayName:
           allOf:
             - $ref: '#/components/schemas/GatewayName'
@@ -4347,11 +4347,11 @@ components:
         GatewayRegion:
           allOf:
             - $ref: '#/components/schemas/RegionId'
-            - description: '<p>A value that indicates the AWS Region where you want to store your data. The gateway AWS Region specified must be the same AWS Region as the AWS Region in your <code>Host</code> header in the request. For more information about available AWS Regions and endpoints for AWS Storage Gateway, see <a href="https://docs.aws.amazon.com/general/latest/gr/sg.html">AWS Storage Gateway endpoints and quotas</a> in the <i>AWS General Reference</i>.</p> <p>Valid Values: See <a href="https://docs.aws.amazon.com/general/latest/gr/sg.html">AWS Storage Gateway endpoints and quotas</a> in the <i>AWS General Reference</i>. </p>'
+            - description: '<p>A value that indicates the Region where you want to store your data. The gateway Region specified must be the same Region as the Region in your <code>Host</code> header in the request. For more information about available Regions and endpoints for Storage Gateway, see <a href="https://docs.aws.amazon.com/general/latest/gr/sg.html"> Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>Valid Values: See <a href="https://docs.aws.amazon.com/general/latest/gr/sg.html"> Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>. </p>'
         GatewayType:
           allOf:
             - $ref: '#/components/schemas/GatewayType'
-            - description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>CACHED</code>.</p> <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code> | <code>FILE_S3</code> </p>'
+            - description: '<p>A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is <code>CACHED</code>.</p> <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code> | <code>FILE_S3</code> | <code>FILE_FSX_SMB|</code> </p>'
         TapeDriveType:
           allOf:
             - $ref: '#/components/schemas/TapeDriveType'
@@ -4509,13 +4509,13 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A unique string value that you supply that is used by the file gateway to ensure idempotent file system association creation.
+            - description: A unique string value that you supply that is used by the FSx File Gateway to ensure idempotent file system association creation.
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
         LocationARN:
           allOf:
             - $ref: '#/components/schemas/FileSystemLocationARN'
-            - description: The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the Amazon FSx file gateway.
+            - description: The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the FSx File Gateway.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -4526,6 +4526,10 @@ components:
             - description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
         CacheAttributes:
           $ref: '#/components/schemas/CacheAttributes'
+        EndpointNetworkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EndpointNetworkConfiguration'
+            - description: '<p>Specifies the network configuration information for the gateway associated with the Amazon FSx file system.</p> <note> <p>If multiple file systems are associated with this gateway, this parameter''s <code>IpAddresses</code> field is required.</p> </note>'
     AttachVolumeOutput:
       type: object
       properties:
@@ -4668,7 +4672,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -4697,7 +4701,7 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A unique string value that you supply that is used by file gateway to ensure idempotent file share creation.
+            - description: A unique string value that you supply that is used by S3 File Gateway to ensure idempotent file share creation.
         NFSFileShareDefaults:
           allOf:
             - $ref: '#/components/schemas/NFSFileShareDefaults'
@@ -4705,11 +4709,11 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
+            - description: The Amazon Resource Name (ARN) of the S3 File Gateway on which you want to create a file share.
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -4717,23 +4721,23 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage.
+            - description: The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it accesses the underlying storage.
         LocationARN:
           allOf:
             - $ref: '#/components/schemas/LocationARN'
-            - description: The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
+            - description: '<p>The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".</p> <note> <p>You can specify a bucket attached to an access point using a complete ARN that includes the bucket region as shown:</p> <p> <code>arn:aws:s3:<i>region</i>:<i>account-id</i>:accesspoint/<i>access-point-name</i> </code> </p> <p>If you specify a bucket attached to an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> </note>'
         DefaultStorageClass:
           allOf:
             - $ref: '#/components/schemas/StorageClass'
-            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
+            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
         ObjectACL:
           allOf:
             - $ref: '#/components/schemas/ObjectACL'
-            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a S3 File Gateway puts objects into. The default value is <code>private</code>.
         ClientList:
           allOf:
             - $ref: '#/components/schemas/FileShareClientList'
-            - description: The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
+            - description: The list of clients that are allowed to access the S3 File Gateway. The list must contain either valid IP addresses or valid CIDR blocks.
         Squash:
           allOf:
             - $ref: '#/components/schemas/Squash'
@@ -4766,6 +4770,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
             - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
+        VPCEndpointDNSName:
+          allOf:
+            - $ref: '#/components/schemas/DNSHostName'
+            - description: '<p>Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to Amazon S3.</p> <note> <p>This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+        BucketRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionId'
+            - description: '<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p> <note> <p>This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
       description: CreateNFSFileShareInput
     CreateSMBFileShareOutput:
       type: object
@@ -4787,15 +4799,15 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A unique string value that you supply that is used by file gateway to ensure idempotent file share creation.
+            - description: A unique string value that you supply that is used by S3 File Gateway to ensure idempotent file share creation.
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The ARN of the file gateway on which you want to create a file share.
+            - description: The ARN of the S3 File Gateway on which you want to create a file share.
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -4803,19 +4815,19 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage.
+            - description: The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it accesses the underlying storage.
         LocationARN:
           allOf:
             - $ref: '#/components/schemas/LocationARN'
-            - description: The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
+            - description: '<p>The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".</p> <note> <p>You can specify a bucket attached to an access point using a complete ARN that includes the bucket region as shown:</p> <p> <code>arn:aws:s3:<i>region</i>:<i>account-id</i>:accesspoint/<i>access-point-name</i> </code> </p> <p>If you specify a bucket attached to an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> </note>'
         DefaultStorageClass:
           allOf:
             - $ref: '#/components/schemas/StorageClass'
-            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
+            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
         ObjectACL:
           allOf:
             - $ref: '#/components/schemas/ObjectACL'
-            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a S3 File Gateway puts objects into. The default value is <code>private</code>.
         ReadOnly:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4831,7 +4843,7 @@ components:
         SMBACLEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         AccessBasedEnumeration:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4876,6 +4888,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
             - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
+        VPCEndpointDNSName:
+          allOf:
+            - $ref: '#/components/schemas/DNSHostName'
+            - description: '<p>Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to Amazon S3.</p> <note> <p>This parameter is required for SMB file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+        BucketRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionId'
+            - description: '<p>Specifies the Region of the S3 bucket where the SMB file share stores files.</p> <note> <p>This parameter is required for SMB file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+        OplocksEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p> <note> <p>Enabling opportunistic locking on case-sensitive shares is not recommended for workloads that involve access to files with the same name in different case.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
       description: CreateSMBFileShareInput
     CreateSnapshotOutput:
       type: object
@@ -4906,7 +4930,7 @@ components:
         SnapshotDescription:
           allOf:
             - $ref: '#/components/schemas/SnapshotDescription'
-            - description: 'Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field.'
+            - description: 'Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -4946,7 +4970,7 @@ components:
         SnapshotDescription:
           allOf:
             - $ref: '#/components/schemas/SnapshotDescription'
-            - description: 'Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field.'
+            - description: 'Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -5006,7 +5030,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -5022,7 +5046,7 @@ components:
         PoolARN:
           allOf:
             - $ref: '#/components/schemas/PoolARN'
-            - description: The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of tape pools for your account and AWS Region.
+            - description: The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of tape pools for your account and Region.
     CreateTapePoolInput:
       type: object
       required:
@@ -5041,7 +5065,7 @@ components:
         RetentionLockType:
           allOf:
             - $ref: '#/components/schemas/RetentionLockType'
-            - description: 'Tape retention lock can be configured in two modes. When configured in governance mode, AWS accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root AWS account.'
+            - description: 'Tape retention lock can be configured in two modes. When configured in governance mode, accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root account.'
         RetentionLockTimeInDays:
           allOf:
             - $ref: '#/components/schemas/RetentionLockTimeInDays'
@@ -5071,7 +5095,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
+            - description: The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.
         TapeSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/TapeSize'
@@ -5083,7 +5107,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -5127,7 +5151,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
+            - description: The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.
         TapeSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/TapeSize'
@@ -5147,7 +5171,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -5252,7 +5276,7 @@ components:
         ForceDelete:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: '<p>If this value is set to <code>true</code>, the operation deletes a file share immediately and aborts all data uploads to AWS. Otherwise, the file share is not deleted until all data is uploaded to AWS. This process aborts the data upload process, and the file share enters the <code>FORCE_DELETING</code> status.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>If this value is set to <code>true</code>, the operation deletes a file share immediately and aborts all data uploads to Amazon Web Services. Otherwise, the file share is not deleted until all data is uploaded to Amazon Web Services. This process aborts the data upload process, and the file share enters the <code>FORCE_DELETING</code> status.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
       description: DeleteFileShareInput
     DeleteGatewayOutput:
       type: object
@@ -5310,7 +5334,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
+            - description: The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.
         TapeARN:
           allOf:
             - $ref: '#/components/schemas/TapeARN'
@@ -5478,7 +5502,7 @@ components:
         CacheDirtyPercentage:
           allOf:
             - $ref: '#/components/schemas/double'
-            - description: The file share's contribution to the overall percentage of the gateway's cache that has not been persisted to AWS. The sample is taken at the end of the reporting period.
+            - description: The file share's contribution to the overall percentage of the gateway's cache that has not been persisted to Amazon Web Services. The sample is taken at the end of the reporting period.
         CacheHitPercentage:
           allOf:
             - $ref: '#/components/schemas/double'
@@ -5623,7 +5647,7 @@ components:
         Ec2InstanceRegion:
           allOf:
             - $ref: '#/components/schemas/Ec2InstanceRegion'
-            - description: The AWS Region where the Amazon EC2 instance is located.
+            - description: The Region where the Amazon EC2 instance is located.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -5652,6 +5676,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeprecationDate'
             - description: Date after which this gateway will not receive software updates for new features and bug fixes.
+        GatewayCapacity:
+          allOf:
+            - $ref: '#/components/schemas/GatewayCapacity'
+            - description: Specifies the size of the gateway's metadata cache.
+        SupportedGatewayCapacities:
+          allOf:
+            - $ref: '#/components/schemas/SupportedGatewayCapacities'
+            - description: A list of the metadata cache sizes that the gateway can support based on its current hardware specifications.
       description: 'A JSON object containing the following fields:'
     DescribeGatewayInformationInput:
       type: object
@@ -5757,15 +5789,15 @@ components:
         SMBGuestPasswordSet:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>This value is <code>true</code> if a password for the guest user <code>smbguest</code> is set, otherwise <code>false</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>This value is <code>true</code> if a password for the guest user <code>smbguest</code> is set, otherwise <code>false</code>. Only supported for S3 File Gateways.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         SMBSecurityStrategy:
           allOf:
             - $ref: '#/components/schemas/SMBSecurityStrategy'
-            - description: '<p>The type of security strategy that was specified for file gateway.</p> <ul> <li> <p> <code>ClientSpecified</code>: If you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment.</p> </li> <li> <p> <code>MandatorySigning</code>: If you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p> </li> <li> <p> <code>MandatoryEncryption</code>: If you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.</p> </li> </ul>'
+            - description: '<p>The type of security strategy that was specified for file gateway.</p> <ul> <li> <p> <code>ClientSpecified</code>: If you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment. Only supported for S3 File Gateways.</p> </li> <li> <p> <code>MandatorySigning</code>: If you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p> </li> <li> <p> <code>MandatoryEncryption</code>: If you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.</p> </li> </ul>'
         FileSharesVisible:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: The shares on this gateway appear when listing shares.
+            - description: 'The shares on this gateway appear when listing shares. Only supported for S3 File Gateways. '
     DescribeSMBSettingsInput:
       type: object
       required:
@@ -6194,7 +6226,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and AWS Region.
+            - description: The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Region.
         DomainName:
           allOf:
             - $ref: '#/components/schemas/DomainName'
@@ -6247,7 +6279,7 @@ components:
         FileShareInfoList:
           allOf:
             - $ref: '#/components/schemas/FileShareInfoList'
-            - description: An array of information about the file gateway's file shares.
+            - description: An array of information about the S3 File Gateway's file shares.
       description: ListFileShareOutput
     ListFileSharesInput:
       type: object
@@ -6645,7 +6677,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: <p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.</p> <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.</p>
+            - description: <p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p> <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.</p>
       description: RetrieveTapeArchiveInput
     RetrieveTapeRecoveryPointOutput:
       type: object
@@ -6707,7 +6739,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The Amazon Resource Name (ARN) of the file gateway the SMB file share is associated with.
+            - description: The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file share is associated with.
         Password:
           allOf:
             - $ref: '#/components/schemas/SMBGuestPassword'
@@ -6923,6 +6955,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CloudWatchLogGroupARN'
             - description: '<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html">What is Amazon CloudWatch Logs?</a> </p>'
+        GatewayCapacity:
+          allOf:
+            - $ref: '#/components/schemas/GatewayCapacity'
+            - description: Specifies the size of the gateway's metadata cache.
     UpdateGatewaySoftwareNowOutput:
       type: object
       example:
@@ -6996,7 +7032,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -7008,15 +7044,15 @@ components:
         DefaultStorageClass:
           allOf:
             - $ref: '#/components/schemas/StorageClass'
-            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
+            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
         ObjectACL:
           allOf:
             - $ref: '#/components/schemas/ObjectACL'
-            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a S3 File Gateway puts objects into. The default value is <code>private</code>.
         ClientList:
           allOf:
             - $ref: '#/components/schemas/FileShareClientList'
-            - description: The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
+            - description: The list of clients that are allowed to access the S3 File Gateway. The list must contain either valid IP addresses or valid CIDR blocks.
         Squash:
           allOf:
             - $ref: '#/components/schemas/Squash'
@@ -7067,7 +7103,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -7075,11 +7111,11 @@ components:
         DefaultStorageClass:
           allOf:
             - $ref: '#/components/schemas/StorageClass'
-            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
+            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
         ObjectACL:
           allOf:
             - $ref: '#/components/schemas/ObjectACL'
-            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+            - description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a S3 File Gateway puts objects into. The default value is <code>private</code>.
         ReadOnly:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7095,7 +7131,7 @@ components:
         SMBACLEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         AccessBasedEnumeration:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7132,6 +7168,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
             - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
+        OplocksEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p> <note> <p>Enabling opportunistic locking on case-sensitive shares is not recommended for workloads that involve access to files with the same name in different case.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
       description: UpdateSMBFileShareInput
     UpdateSMBFileShareVisibilityOutput:
       type: object
@@ -7168,7 +7208,7 @@ components:
         SMBSecurityStrategy:
           allOf:
             - $ref: '#/components/schemas/SMBSecurityStrategy'
-            - description: '<p>Specifies the type of security strategy.</p> <p>ClientSpecified: if you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment.</p> <p>MandatorySigning: if you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p> <p>MandatoryEncryption: if you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.</p>'
+            - description: '<p>Specifies the type of security strategy.</p> <p>ClientSpecified: if you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment. Supported only in S3 File Gateway.</p> <p>MandatorySigning: if you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p> <p>MandatoryEncryption: if you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.</p>'
     UpdateSnapshotScheduleOutput:
       type: object
       example:
@@ -7269,7 +7309,7 @@ components:
         $ref: '#/components/schemas/Tag'
     GatewayARN:
       type: string
-      description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
+      description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.
       minLength: 50
       maxLength: 500
     ActiveDirectoryStatus:
@@ -7329,8 +7369,16 @@ components:
         CacheStaleTimeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/CacheStaleTimeoutInSeconds'
-            - description: '<p>Refreshes a file share''s cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory''s contents from the Amazon S3 bucket or Amazon FSx file system. The TTL duration is in seconds.</p> <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>'
-      description: The refresh cache information for the file share.
+            - description: '<p>Refreshes a file share''s cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory''s contents from the Amazon S3 bucket or Amazon FSx file system. The TTL duration is in seconds.</p> <p>Valid Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)</p>'
+      description: The refresh cache information for the file share or FSx file systems.
+    EndpointNetworkConfiguration:
+      type: object
+      properties:
+        IpAddresses:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressList'
+            - description: '<p>A list of gateway IP addresses on which the associated Amazon FSx file system is available.</p> <note> <p>If multiple file systems are associated with this gateway, this field is required.</p> </note>'
+      description: Specifies network configuration information for the gateway associated with the Amazon FSx file system.
     FileSystemAssociationARN:
       type: string
       minLength: 50
@@ -7676,11 +7724,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/PermissionId'
             - description: The default owner ID for files in the file share (unless the files have another owner ID specified). The default value is <code>nfsnobody</code>.
-      description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for file gateways.'
+      description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for S3 File Gateways.'
     Role:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov):iam::([0-9]+):role/(\S+)$'
-      description: The ARN of the IAM role that file gateway assumes when it accesses the underlying storage.
+      description: The ARN of the IAM role that an S3 File Gateway assumes when it accesses the underlying storage.
       minLength: 20
       maxLength: 2048
     LocationARN:
@@ -7703,10 +7751,10 @@ components:
         - bucket-owner-read
         - bucket-owner-full-control
         - aws-exec-read
-      description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
+      description: A value that sets the access control list (ACL) permission for objects in the S3 bucket that an S3 File Gateway puts objects into. The default value is <code>private</code>.
     FileShareClientList:
       type: array
-      description: The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
+      description: The list of clients that are allowed to access the S3 File Gateway. The list must contain either valid IP addresses or valid CIDR blocks.
       items:
         $ref: '#/components/schemas/IPV4AddressCIDR'
       minItems: 1
@@ -7725,6 +7773,11 @@ components:
       pattern: '^\{[\w\s:\{\}\[\]"]*}$'
       minLength: 2
       maxLength: 100
+    DNSHostName:
+      type: string
+      pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$'
+      minLength: 1
+      maxLength: 255
     FileShareARN:
       type: string
       description: The Amazon Resource Name (ARN) of the file share.
@@ -7852,6 +7905,16 @@ components:
       type: string
       minLength: 1
       maxLength: 25
+    GatewayCapacity:
+      type: string
+      enum:
+        - Small
+        - Medium
+        - Large
+    SupportedGatewayCapacities:
+      type: array
+      items:
+        $ref: '#/components/schemas/GatewayCapacity'
     FileShareARNList:
       type: array
       items:
@@ -7994,6 +8057,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Disk'
+    IpAddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IPV4Address'
+      minItems: 0
+      maxItems: 1
     IPV4AddressCIDR:
       type: string
       pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
@@ -8026,7 +8095,7 @@ components:
           $ref: '#/components/schemas/FileShareStatus'
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: Describes a file share.
+      description: Describes a file share. Only supported S3 File Gateway.
     FileShareInfoList:
       type: array
       items:
@@ -8053,7 +8122,7 @@ components:
         FileSystemAssociationStatus:
           allOf:
             - $ref: '#/components/schemas/FileSystemAssociationStatus'
-            - description: 'The status of the file system association. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code> '
+            - description: 'The status of the file system association. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>UPDATING</code> | <code>ERROR</code> '
         AuditDestinationARN:
           allOf:
             - $ref: '#/components/schemas/AuditDestinationARN'
@@ -8066,6 +8135,10 @@ components:
             - description: 'A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair.'
         CacheAttributes:
           $ref: '#/components/schemas/CacheAttributes'
+        EndpointNetworkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EndpointNetworkConfiguration'
+            - description: '<p>Specifies network configuration information for the gateway associated with the Amazon FSx file system.</p> <note> <p>If multiple file systems are associated with this gateway, this parameter''s <code>IpAddresses</code> field is required.</p> </note>'
       description: Describes the object returned by <code>DescribeFileSystemAssociations</code> that describes a created file system association.
     FileSystemAssociationSummary:
       type: object
@@ -8081,7 +8154,7 @@ components:
         FileSystemAssociationStatus:
           allOf:
             - $ref: '#/components/schemas/FileSystemAssociationStatus'
-            - description: 'The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code> '
+            - description: 'The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>UPDATING</code> | <code>ERROR</code> '
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
       description: 'Gets the summary returned by <code>ListFileSystemAssociation</code>, which is a summary of a created file system association.'
@@ -8113,7 +8186,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
+            - description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.
         GatewayType:
           allOf:
             - $ref: '#/components/schemas/GatewayType'
@@ -8133,7 +8206,7 @@ components:
         Ec2InstanceRegion:
           allOf:
             - $ref: '#/components/schemas/Ec2InstanceRegion'
-            - description: The AWS Region where the Amazon EC2 instance is located.
+            - description: The Region where the Amazon EC2 instance is located.
       description: Describes a gateway object.
     NetworkInterface:
       type: object
@@ -8164,6 +8237,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Host'
+    IPV4Address:
+      type: string
+      pattern: '^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}'
+      minLength: 7
+      maxLength: 15
     Initiator:
       type: string
       minLength: 1
@@ -8235,7 +8313,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
         Path:
@@ -8247,7 +8325,7 @@ components:
         DefaultStorageClass:
           allOf:
             - $ref: '#/components/schemas/StorageClass'
-            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
+            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
         ObjectACL:
           $ref: '#/components/schemas/ObjectACL'
         ClientList:
@@ -8282,7 +8360,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
             - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
-      description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
+        VPCEndpointDNSName:
+          allOf:
+            - $ref: '#/components/schemas/DNSHostName'
+            - description: '<p>Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to Amazon S3.</p> <note> <p>This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+        BucketRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionId'
+            - description: '<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p> <note> <p>This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+      description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when an S3 File Gateway discovers them in S3 buckets. This operation is only supported in S3 File Gateways.'
     NotificationId:
       type: string
       description: The randomly generated ID of the notification that was sent. This ID is in UUID format.
@@ -8299,7 +8385,7 @@ components:
         PoolARN:
           allOf:
             - $ref: '#/components/schemas/PoolARN'
-            - description: The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your account and AWS Region.
+            - description: The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your account and Region.
         PoolName:
           allOf:
             - $ref: '#/components/schemas/PoolName'
@@ -8311,7 +8397,7 @@ components:
         RetentionLockType:
           allOf:
             - $ref: '#/components/schemas/RetentionLockType'
-            - description: 'Tape retention lock type, which can be configured in two modes. When configured in governance mode, AWS accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root AWS account.'
+            - description: 'Tape retention lock type, which can be configured in two modes. When configured in governance mode, accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root account.'
         RetentionLockTimeInDays:
           allOf:
             - $ref: '#/components/schemas/RetentionLockTimeInDays'
@@ -8339,7 +8425,7 @@ components:
         KMSEncrypted:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+            - description: '<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
         Path:
@@ -8353,7 +8439,7 @@ components:
         DefaultStorageClass:
           allOf:
             - $ref: '#/components/schemas/StorageClass'
-            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
+            - description: '<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
         ObjectACL:
           $ref: '#/components/schemas/ObjectACL'
         ReadOnly:
@@ -8371,7 +8457,7 @@ components:
         SMBACLEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>If this value is set to <code>true</code>, it indicates that access control list (ACL) is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that file and directory permissions are mapped to the POSIX permission.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+            - description: '<p>If this value is set to <code>true</code>, it indicates that access control list (ACL) is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that file and directory permissions are mapped to the POSIX permission.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>Storage Gateway User Guide</i>.</p>'
         AccessBasedEnumeration:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -8414,7 +8500,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationPolicy'
             - description: '<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it''s best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\"Upload\": {\"SettlingTimeInSeconds\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>'
-      description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.'
+        VPCEndpointDNSName:
+          allOf:
+            - $ref: '#/components/schemas/DNSHostName'
+            - description: '<p>Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to Amazon S3.</p> <note> <p>This parameter is required for SMB file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+        BucketRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionId'
+            - description: '<p>Specifies the Region of the S3 bucket where the SMB file share stores files.</p> <note> <p>This parameter is required for SMB file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>'
+        OplocksEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p> <note> <p>Enabling opportunistic locking on case-sensitive shares is not recommended for workloads that involve access to files with the same name in different case.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+      description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when S3 File Gateway discovers them in S3 buckets. This operation is only supported for S3 File Gateways.'
     SMBGuestPassword:
       type: string
       pattern: '^[ -~]+$'
@@ -8646,7 +8744,7 @@ components:
         GatewayARN:
           allOf:
             - $ref: '#/components/schemas/GatewayARN'
-            - description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
+            - description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.
         PoolId:
           allOf:
             - $ref: '#/components/schemas/PoolId'

@@ -3036,6 +3036,184 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /media-capture-pipelines:
+    post:
+      operationId: CreateMediaCapturePipeline
+      description: Creates a media capture pipeline.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMediaCapturePipelineResponse'
+        '480':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SourceType
+                - SourceArn
+                - SinkType
+                - SinkArn
+              properties:
+                SourceType:
+                  description: Source type from which the media artifacts will be captured. A Chime SDK Meeting is the only supported source.
+                  type: string
+                  enum:
+                    - ChimeSdkMeeting
+                SourceArn:
+                  description: ARN of the source from which the media artifacts are captured.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                SinkType:
+                  description: 'Destination type to which the media artifacts are saved. You must use an S3 bucket. '
+                  type: string
+                  enum:
+                    - S3Bucket
+                SinkArn:
+                  description: The ARN of the sink type.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The token assigned to the client making the pipeline request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMediaCapturePipelines
+      description: Returns a list of media capture pipelines.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMediaCapturePipelinesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token used to retrieve the next page of results.
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: 'The maximum number of results to return in a single call. Valid Range: 1 - 99.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 99
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /meetings:
     post:
       operationId: CreateMeeting
@@ -7403,6 +7581,131 @@ paths:
                   description: Lambda function ARN that allows the bot to receive outgoing events.
                   type: string
                   format: password
+  '/media-capture-pipelines/{mediaPipelineId}':
+    delete:
+      operationId: DeleteMediaCapturePipeline
+      description: Deletes the media capture pipeline.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: mediaPipelineId
+          in: path
+          required: true
+          description: 'The ID of the media capture pipeline being deleted. '
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMediaCapturePipeline
+      description: Gets an existing media capture pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaCapturePipelineResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: mediaPipelineId
+          in: path
+          required: true
+          description: The ID of the pipeline that you want to get.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
   '/meetings/{meetingId}':
     delete:
       operationId: DeleteMeeting
@@ -15697,6 +16000,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identity'
             - description: The ARNs of the channel and the moderator.
+    CreateMediaCapturePipelineResponse:
+      type: object
+      properties:
+        MediaCapturePipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipeline'
+            - description: 'A media capture pipeline object, the ID, source type, source ARN, sink type, and sink ARN of a media capture pipeline object.'
     CreateMeetingResponse:
       type: object
       properties:
@@ -16009,6 +16319,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorSettings'
             - description: The Amazon Chime Voice Connector settings.
+    GetMediaCapturePipelineResponse:
+      type: object
+      properties:
+        MediaCapturePipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipeline'
+            - description: The media capture pipeline object.
     GetMeetingResponse:
       type: object
       properties:
@@ -16356,6 +16673,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token returned from previous API requests until the number of channels moderated by the user is reached.
+    ListMediaCapturePipelinesResponse:
+      type: object
+      properties:
+        MediaCapturePipelines:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipelineList'
+            - description: The media capture pipeline objects in the list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token used to retrieve the next page of results. '
     ListMeetingTagsResponse:
       type: object
       properties:
@@ -18074,6 +18402,79 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags for the creation request.
+    MediaPipelineSourceType:
+      type: string
+      enum:
+        - ChimeSdkMeeting
+    MediaPipelineSinkType:
+      type: string
+      enum:
+        - S3Bucket
+    CreateMediaCapturePipelineRequest:
+      type: object
+      required:
+        - SourceType
+        - SourceArn
+        - SinkType
+        - SinkArn
+      title: CreateMediaCapturePipelineRequest
+      properties:
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSourceType'
+            - description: Source type from which the media artifacts will be captured. A Chime SDK Meeting is the only supported source.
+        SourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the source from which the media artifacts are captured.
+        SinkType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSinkType'
+            - description: 'Destination type to which the media artifacts are saved. You must use an S3 bucket. '
+        SinkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the sink type.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The token assigned to the client making the pipeline request.
+    MediaCapturePipeline:
+      type: object
+      properties:
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of a media capture pipeline.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSourceType'
+            - description: Source type from which media artifacts are saved. You must use <code>ChimeMeeting</code>.
+        SourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the source from which the media artifacts will be saved.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineStatus'
+            - description: The status of the media capture pipeline.
+        SinkType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSinkType'
+            - description: Destination type to which the media artifacts are saved. You must use an S3 Bucket.
+        SinkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the destination to which the media artifacts are saved.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The time at which the capture pipeline was created, in ISO 8601 format.'
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The time at which the capture pipeline was updated, in ISO 8601 format.'
+      description: 'A media capture pipeline object. A string consisting of an ID, source type, a source ARN, a sink type, and a sink ARN.'
     CreateMeetingDialOutRequest:
       type: object
       required:
@@ -18888,6 +19289,10 @@ components:
       type: object
       title: DeleteEventsConfigurationRequest
       properties: {}
+    DeleteMediaCapturePipelineRequest:
+      type: object
+      title: DeleteMediaCapturePipelineRequest
+      properties: {}
     DeleteMeetingRequest:
       type: object
       title: DeleteMeetingRequest
@@ -19103,6 +19508,10 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon S3 bucket designated for call detail record storage.
       description: The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.
+    GetMediaCapturePipelineRequest:
+      type: object
+      title: GetMediaCapturePipelineRequest
+      properties: {}
     GetMeetingRequest:
       type: object
       title: GetMeetingRequest
@@ -19511,6 +19920,14 @@ components:
       type: object
       title: ListChannelsRequest
       properties: {}
+    ListMediaCapturePipelinesRequest:
+      type: object
+      title: ListMediaCapturePipelinesRequest
+      properties: {}
+    MediaCapturePipelineList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaCapturePipeline'
     ListMeetingTagsRequest:
       type: object
       title: ListMeetingTagsRequest
@@ -19651,6 +20068,14 @@ components:
       type: object
       title: LogoutUserRequest
       properties: {}
+    MediaPipelineStatus:
+      type: string
+      enum:
+        - Initializing
+        - InProgress
+        - Failed
+        - Stopping
+        - Stopped
     UriType:
       type: string
       maxLength: 4096

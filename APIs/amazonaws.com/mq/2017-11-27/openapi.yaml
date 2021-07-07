@@ -118,7 +118,7 @@ paths:
   /v1/brokers:
     post:
       operationId: CreateBroker
-      description: 'Creates a broker. Note: This API is asynchronous.'
+      description: '<p>Creates a broker. Note: This API is asynchronous.</p> <p>To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy.</p> <ul><li><p>ec2:CreateNetworkInterface</p> <p>This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account.</p></li> <li><p>ec2:CreateNetworkInterfacePermission</p> <p>This permission is required to attach the ENI to the broker instance.</p></li> <li><p>ec2:DeleteNetworkInterface</p></li> <li><p>ec2:DeleteNetworkInterfacePermission</p></li> <li><p>ec2:DetachNetworkInterface</p></li> <li><p>ec2:DescribeInternetGateways</p></li> <li><p>ec2:DescribeNetworkInterfaces</p></li> <li><p>ec2:DescribeNetworkInterfacePermissions</p></li> <li><p>ec2:DescribeRouteTables</p></li> <li><p>ec2:DescribeSecurityGroups</p></li> <li><p>ec2:DescribeSubnets</p></li> <li><p>ec2:DescribeVpcs</p></li></ul> <p>For more information, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user">Create an IAM User and Get Your AWS Credentials</a> and <a href="https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface">Never Modify or Delete the Amazon MQ Elastic Network Interface</a> in the <i>Amazon MQ Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -163,21 +163,30 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - autoMinorVersionUpgrade
+                - brokerName
+                - deploymentMode
+                - engineType
+                - engineVersion
+                - hostInstanceType
+                - publiclyAccessible
+                - users
               properties:
                 authenticationStrategy:
-                  description: The authentication strategy used to secure the broker.
+                  description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
                   type: string
                   enum:
                     - SIMPLE
                     - LDAP
                 autoMinorVersionUpgrade:
-                  description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+                  description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.'
                   type: boolean
                 brokerName:
-                  description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+                  description: 'Required. The broker''s name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
                   type: string
                 configuration:
-                  description: A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>
+                  description: <p>A list of information about the configuration.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
                   type: object
                   properties:
                     Id:
@@ -196,14 +205,14 @@ paths:
                   description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
                   type: string
                 deploymentMode:
-                  description: The deployment mode of the broker.
+                  description: The broker's deployment mode.
                   type: string
                   enum:
                     - SINGLE_INSTANCE
                     - ACTIVE_STANDBY_MULTI_AZ
                     - CLUSTER_MULTI_AZ
                 encryptionOptions:
-                  description: Encryption options for the broker.
+                  description: <important><p>Does not apply to RabbitMQ brokers.</p></important> <p>Encryption options for the broker.</p>
                   type: object
                   properties:
                     KmsKeyId:
@@ -211,27 +220,27 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: kmsKeyId
-                          description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+                          description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
                     UseAwsOwnedKey:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: useAwsOwnedKey
-                          description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+                          description: 'Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.'
                 engineType:
-                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.'
+                  description: The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
                   type: string
                   enum:
                     - ACTIVEMQ
                     - RABBITMQ
                 engineVersion:
-                  description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                  description: 'Required. The broker engine''s version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
                   type: string
                 hostInstanceType:
                   description: Required. The broker's instance type.
                   type: string
                 ldapServerMetadata:
-                  description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+                  description: <p>Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
                   type: object
                   properties:
                     Hosts:
@@ -239,13 +248,15 @@ paths:
                         - $ref: '#/components/schemas/__listOf__string'
                         - xml:
                             name: hosts
-                          description: Fully qualified domain name of the LDAP server. Optional failover server.
+                          description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
                     RoleBase:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: roleBase
-                          description: Fully qualified name of the directory to search for a user’s groups.
+                          description: |-
+                            The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp,
+                                              dc=example, dc=com.
                     RoleName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -257,31 +268,37 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: roleSearchMatching
-                          description: The search criteria for groups.
+                          description: 'The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client''s username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.'
                     RoleSearchSubtree:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: roleSearchSubtree
-                          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+                          description: 'The directory search scope for the role. If set to true, scope is to search the entire subtree.'
                     ServiceAccountPassword:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: serviceAccountPassword
-                          description: Service account password.
+                          description: |-
+                            Service account password. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                              dc=com.
                     ServiceAccountUsername:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: serviceAccountUsername
-                          description: Service account username.
+                          description: |-
+                            Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                              dc=com.
                     UserBase:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: userBase
-                          description: Fully qualified name of the directory where you want to search for users.
+                          description: |-
+                            Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp,
+                                              dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
                     UserRoleName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -293,13 +310,15 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: userSearchMatching
-                          description: The search criteria for users.
+                          description: |-
+                            The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+                                              dc=com.
                     UserSearchSubtree:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: userSearchSubtree
-                          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+                          description: 'The directory search scope for the user. If set to true, scope is to search the entire subtree.'
                 logs:
                   description: The list of information about logs to be enabled for the specified broker.
                   type: object
@@ -339,21 +358,21 @@ paths:
                             name: timeZone
                           description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
                 publiclyAccessible:
-                  description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+                  description: 'Enables connections from applications outside of the VPC that hosts the broker''s subnets. Set to false by default, if no value is provided.'
                   type: boolean
                 securityGroups:
-                  description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+                  description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 storageType:
-                  description: The broker's storage type. <important>EFS is currently not Supported for RabbitMQ engine type.</important>
+                  description: <p>The broker's storage type.</p> <important><p>EFS is not supported for RabbitMQ engine type.</p></important>
                   type: string
                   enum:
                     - EBS
                     - EFS
                 subnetIds:
-                  description: 'The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.'
+                  description: '<p>The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.</p> <important><p>If you specify subnets in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html">shared VPC</a> for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.</p></important>'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -363,7 +382,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
                 users:
-                  description: 'Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                  description: '<p>Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p> <important><title>Amazon MQ for RabbitMQ</title> <p>When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p></important>'
                   type: array
                   items:
                     $ref: '#/components/schemas/User'
@@ -472,21 +491,25 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - engineType
+                - engineVersion
+                - name
               properties:
                 authenticationStrategy:
-                  description: The authentication strategy used to secure the broker.
+                  description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
                   type: string
                   enum:
                     - SIMPLE
                     - LDAP
                 engineType:
-                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.'
+                  description: The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
                   type: string
                   enum:
                     - ACTIVEMQ
                     - RABBITMQ
                 engineVersion:
-                  description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                  description: 'Required. The broker engine''s version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
                   type: string
                 name:
                   description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
@@ -536,7 +559,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
           schema:
             type: integer
             minimum: 1
@@ -706,9 +729,11 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - password
               properties:
                 consoleAccess:
-                  description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+                  description: Enables access to the ActiveMQ Web Console for the ActiveMQ user.
                   type: boolean
                 groups:
                   description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
@@ -716,7 +741,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/__string'
                 password:
-                  description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+                  description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -870,7 +895,7 @@ paths:
         - name: username
           in: path
           required: true
-          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          description: 'The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
           schema:
             type: string
       requestBody:
@@ -889,7 +914,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/__string'
                 password:
-                  description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+                  description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
                   type: string
   '/v1/brokers/{broker-id}':
     delete:
@@ -979,7 +1004,7 @@ paths:
         - name: broker-id
           in: path
           required: true
-          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          description: The unique ID that Amazon MQ generates for the broker.
           schema:
             type: string
     put:
@@ -1037,16 +1062,16 @@ paths:
               type: object
               properties:
                 authenticationStrategy:
-                  description: The authentication strategy used to secure the broker.
+                  description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
                   type: string
                   enum:
                     - SIMPLE
                     - LDAP
                 autoMinorVersionUpgrade:
-                  description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+                  description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.'
                   type: boolean
                 configuration:
-                  description: A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>
+                  description: <p>A list of information about the configuration.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
                   type: object
                   properties:
                     Id:
@@ -1062,13 +1087,13 @@ paths:
                             name: revision
                           description: The revision number of the configuration.
                 engineVersion:
-                  description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+                  description: 'The broker engine version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
                   type: string
                 hostInstanceType:
-                  description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+                  description: 'The broker''s host instance type to upgrade to. For a list of supported instance types, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types">Broker instance types</a>.'
                   type: string
                 ldapServerMetadata:
-                  description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+                  description: <p>Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
                   type: object
                   properties:
                     Hosts:
@@ -1076,13 +1101,15 @@ paths:
                         - $ref: '#/components/schemas/__listOf__string'
                         - xml:
                             name: hosts
-                          description: Fully qualified domain name of the LDAP server. Optional failover server.
+                          description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
                     RoleBase:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: roleBase
-                          description: Fully qualified name of the directory to search for a user’s groups.
+                          description: |-
+                            The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp,
+                                              dc=example, dc=com.
                     RoleName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -1094,31 +1121,37 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: roleSearchMatching
-                          description: The search criteria for groups.
+                          description: 'The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client''s username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.'
                     RoleSearchSubtree:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: roleSearchSubtree
-                          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+                          description: 'The directory search scope for the role. If set to true, scope is to search the entire subtree.'
                     ServiceAccountPassword:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: serviceAccountPassword
-                          description: Service account password.
+                          description: |-
+                            Service account password. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                              dc=com.
                     ServiceAccountUsername:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: serviceAccountUsername
-                          description: Service account username.
+                          description: |-
+                            Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                              dc=com.
                     UserBase:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: userBase
-                          description: Fully qualified name of the directory where you want to search for users.
+                          description: |-
+                            Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp,
+                                              dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
                     UserRoleName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -1130,13 +1163,15 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: userSearchMatching
-                          description: The search criteria for users.
+                          description: |-
+                            The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+                                              dc=com.
                     UserSearchSubtree:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: userSearchSubtree
-                          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+                          description: 'The directory search scope for the user. If set to true, scope is to search the entire subtree.'
                 logs:
                   description: The list of information about logs to be enabled for the specified broker.
                   type: object
@@ -1153,6 +1188,28 @@ paths:
                         - xml:
                             name: general
                           description: Enables general logging.
+                maintenanceWindowStartTime:
+                  description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
+                  type: object
+                  properties:
+                    DayOfWeek:
+                      allOf:
+                        - $ref: '#/components/schemas/DayOfWeek'
+                        - xml:
+                            name: dayOfWeek
+                          description: Required. The day of the week.
+                    TimeOfDay:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: timeOfDay
+                          description: 'Required. The time, in 24-hour format.'
+                    TimeZone:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: timeZone
+                          description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
                 securityGroups:
                   description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
                   type: array
@@ -1251,7 +1308,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
           schema:
             type: integer
             minimum: 1
@@ -1315,7 +1372,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
           schema:
             type: integer
             minimum: 1
@@ -1443,6 +1500,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - data
               properties:
                 data:
                   description: Required. The base64-encoded XML configuration.
@@ -1551,7 +1610,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
           schema:
             type: integer
             minimum: 1
@@ -1615,7 +1674,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          description: The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
           schema:
             type: integer
             minimum: 1
@@ -1744,7 +1803,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerArn
-              description: The Amazon Resource Name (ARN) of the broker.
+              description: The broker's Amazon Resource Name (ARN).
         BrokerId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1773,32 +1832,35 @@ components:
         - SUNDAY
     User:
       type: object
+      required:
+        - Username
+        - Password
       properties:
         ConsoleAccess:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: consoleAccess
-              description: Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply to RabbitMQ brokers).
+              description: Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not apply to RabbitMQ brokers.
         Groups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: groups
-              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long. Does not apply to RabbitMQ brokers.'
         Password:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: password
-              description: 'Required. The password of the broker user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+              description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
         Username:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: username
-              description: 'Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      description: A user associated with the broker.
+              description: '<p>important><title>Amazon MQ for ActiveMQ</title> <para>For ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p>/important> <important><title>Amazon MQ for RabbitMQ</title> <p>For RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long.</p></important></para>'
+      description: 'A user associated with the broker. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.'
     BadRequestException: {}
     UnauthorizedException: {}
     InternalServerErrorException: {}
@@ -1818,7 +1880,7 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy associated with the configuration.
+              description: Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
         Created:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -1867,19 +1929,19 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy used to secure the broker.
+              description: The authentication strategy used to secure the broker. The default is SIMPLE.
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: autoMinorVersionUpgrade
-              description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+              description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.'
         BrokerArn:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerArn
-              description: The Amazon Resource Name (ARN) of the broker.
+              description: The broker's Amazon Resource Name (ARN).
         BrokerId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1897,13 +1959,13 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerName
-              description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+              description: 'The broker''s name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
         BrokerState:
           allOf:
             - $ref: '#/components/schemas/BrokerState'
             - xml:
                 name: brokerState
-              description: The status of the broker.
+              description: The broker's status.
         Configurations:
           allOf:
             - $ref: '#/components/schemas/Configurations'
@@ -1921,25 +1983,25 @@ components:
             - $ref: '#/components/schemas/DeploymentMode'
             - xml:
                 name: deploymentMode
-              description: Required. The deployment mode of the broker.
+              description: The broker's deployment mode.
         EncryptionOptions:
           allOf:
             - $ref: '#/components/schemas/EncryptionOptions'
             - xml:
                 name: encryptionOptions
-              description: Encryption options for the broker.
+              description: Encryption options for the broker. Does not apply to RabbitMQ brokers.
         EngineType:
           allOf:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
+              description: 'The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'The broker engine''s version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1969,25 +2031,25 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: pendingAuthenticationStrategy
-              description: The authentication strategy that will be applied when the broker is rebooted.
+              description: The authentication strategy that will be applied when the broker is rebooted. The default is SIMPLE.
         PendingEngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: pendingEngineVersion
-              description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'The broker engine version to upgrade to. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         PendingHostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: pendingHostInstanceType
-              description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+              description: 'The broker''s host instance type to upgrade to. For a list of supported instance types, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types">Broker instance types</a>.'
         PendingLdapServerMetadata:
           allOf:
             - $ref: '#/components/schemas/LdapServerMetadataOutput'
             - xml:
                 name: pendingLdapServerMetadata
-              description: The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.
+              description: The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker after it is rebooted.
         PendingSecurityGroups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -1999,13 +2061,13 @@ components:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: publiclyAccessible
-              description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+              description: Enables connections from applications outside of the VPC that hosts the broker's subnets.
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: securityGroups
-              description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+              description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
         StorageType:
           allOf:
             - $ref: '#/components/schemas/BrokerStorageType'
@@ -2017,7 +2079,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: subnetIds
-              description: 'The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.'
+              description: The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones.
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2086,7 +2148,7 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy associated with the configuration.
+              description: Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
         Created:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -2104,13 +2166,13 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
+              description: 'Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'Required. The broker engine''s version. For a list of supported engine versions, see, <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2293,7 +2355,7 @@ components:
             - $ref: '#/components/schemas/__listOfUserSummary'
             - xml:
                 name: users
-              description: Required. The list of all ActiveMQ usernames for the specified broker.
+              description: Required. The list of all ActiveMQ usernames for the specified broker. Does not apply to RabbitMQ brokers.
     RebootBrokerResponse:
       type: object
       properties: {}
@@ -2305,13 +2367,13 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy used to secure the broker.
+              description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: autoMinorVersionUpgrade
-              description: The new value of automatic upgrades to new minor version for brokers.
+              description: The new boolean value that specifies whether broker engines automatically upgrade to new minor versions as new versions are released and supported by Amazon MQ.
         BrokerId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2329,25 +2391,31 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'The broker engine version to upgrade to. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: hostInstanceType
-              description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+              description: 'The broker''s host instance type to upgrade to. For a list of supported instance types, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types">Broker instance types</a>.'
         LdapServerMetadata:
           allOf:
             - $ref: '#/components/schemas/LdapServerMetadataOutput'
             - xml:
                 name: ldapServerMetadata
-              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+              description: Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
         Logs:
           allOf:
             - $ref: '#/components/schemas/Logs'
             - xml:
                 name: logs
               description: The list of information about logs to be enabled for the specified broker.
+        MaintenanceWindowStartTime:
+          allOf:
+            - $ref: '#/components/schemas/WeeklyStartTime'
+            - xml:
+                name: maintenanceWindowStartTime
+              description: The parameters that determine the WeeklyStartTime.
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -2401,7 +2469,7 @@ components:
       enum:
         - SIMPLE
         - LDAP
-      description: The authentication strategy used to secure the broker.
+      description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
     AvailabilityZone:
       type: object
       properties:
@@ -2417,7 +2485,7 @@ components:
       enum:
         - ACTIVEMQ
         - RABBITMQ
-      description: 'The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.'
+      description: The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     __listOfEngineVersion:
       type: array
       items:
@@ -2430,7 +2498,7 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: The type of broker engine.
+              description: The broker's engine type.
         EngineVersions:
           allOf:
             - $ref: '#/components/schemas/__listOfEngineVersion'
@@ -2446,7 +2514,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: consoleURL
-              description: The URL of the broker's Web Console.
+              description: The brokers web console URL.
         Endpoints:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -2458,7 +2526,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: ipAddress
-              description: The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers
+              description: The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers.
       description: Returns information about all brokers.
     __listOfAvailabilityZone:
       type: array
@@ -2469,7 +2537,7 @@ components:
       enum:
         - EBS
         - EFS
-      description: The broker's storage type. <important>EFS is currently not Supported for RabbitMQ engine type.</important>
+      description: <p>The broker's storage type.</p> <important><p>EFS is not supported for RabbitMQ engine type.</p></important>
     __listOfDeploymentMode:
       type: array
       items:
@@ -2488,13 +2556,13 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: The type of broker engine.
+              description: The broker's engine type.
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: hostInstanceType
-              description: The type of broker instance.
+              description: The broker's instance type.
         StorageType:
           allOf:
             - $ref: '#/components/schemas/BrokerStorageType'
@@ -2522,7 +2590,7 @@ components:
         - DELETION_IN_PROGRESS
         - RUNNING
         - REBOOT_IN_PROGRESS
-      description: The status of the broker.
+      description: The broker's status.
     __timestampIso8601:
       type: string
       format: date-time
@@ -2532,16 +2600,19 @@ components:
         - SINGLE_INSTANCE
         - ACTIVE_STANDBY_MULTI_AZ
         - CLUSTER_MULTI_AZ
-      description: The deployment mode of the broker.
+      description: The broker's deployment mode.
     BrokerSummary:
       type: object
+      required:
+        - DeploymentMode
+        - EngineType
       properties:
         BrokerArn:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerArn
-              description: The Amazon Resource Name (ARN) of the broker.
+              description: The broker's Amazon Resource Name (ARN).
         BrokerId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2553,13 +2624,13 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerName
-              description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+              description: 'The broker''s name. This value is unique in your AWS account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
         BrokerState:
           allOf:
             - $ref: '#/components/schemas/BrokerState'
             - xml:
                 name: brokerState
-              description: The status of the broker.
+              description: The broker's status.
         Created:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -2571,20 +2642,20 @@ components:
             - $ref: '#/components/schemas/DeploymentMode'
             - xml:
                 name: deploymentMode
-              description: Required. The deployment mode of the broker.
+              description: The broker's deployment mode.
         EngineType:
           allOf:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: Required. The type of broker engine.
+              description: The type of broker engine.
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: hostInstanceType
               description: The broker's instance type.
-      description: The Amazon Resource Name (ARN) of the broker.
+      description: Returns information about all brokers.
     ChangeType:
       type: string
       enum:
@@ -2594,6 +2665,9 @@ components:
       description: The type of change pending for the ActiveMQ user.
     ConfigurationRevision:
       type: object
+      required:
+        - Revision
+        - Created
       properties:
         Created:
           allOf:
@@ -2620,6 +2694,16 @@ components:
         $ref: '#/components/schemas/__string'
     Configuration:
       type: object
+      required:
+        - Description
+        - EngineVersion
+        - LatestRevision
+        - AuthenticationStrategy
+        - EngineType
+        - Id
+        - Arn
+        - Name
+        - Created
       properties:
         Arn:
           allOf:
@@ -2632,7 +2716,7 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy associated with the configuration.
+              description: Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
         Created:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -2650,13 +2734,13 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
+              description: 'Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'Required. The broker engine''s version. For a list of supported engine versions, see, <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2684,6 +2768,8 @@ components:
       description: Returns information about all configurations.
     ConfigurationId:
       type: object
+      required:
+        - Id
       properties:
         Id:
           allOf:
@@ -2697,7 +2783,7 @@ components:
             - xml:
                 name: revision
               description: The revision number of the configuration.
-      description: A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>
+      description: <p>A list of information about the configuration.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
     __listOfConfigurationId:
       type: array
       items:
@@ -2710,7 +2796,7 @@ components:
             - $ref: '#/components/schemas/ConfigurationId'
             - xml:
                 name: current
-              description: The current configuration of the broker.
+              description: The broker's current configuration.
         History:
           allOf:
             - $ref: '#/components/schemas/__listOfConfigurationId'
@@ -2722,7 +2808,7 @@ components:
             - $ref: '#/components/schemas/ConfigurationId'
             - xml:
                 name: pending
-              description: The pending configuration of the broker.
+              description: The broker's pending configuration.
       description: Broker configuration information
     EncryptionOptions:
       type: object
@@ -2734,29 +2820,39 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: kmsKeyId
-              description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+              description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
         UseAwsOwnedKey:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: useAwsOwnedKey
-              description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
-      description: Encryption options for the broker.
+              description: 'Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.'
+      description: <important><p>Does not apply to RabbitMQ brokers.</p></important> <p>Encryption options for the broker.</p>
     LdapServerMetadataInput:
       type: object
+      required:
+        - Hosts
+        - UserSearchMatching
+        - UserBase
+        - RoleSearchMatching
+        - ServiceAccountUsername
+        - RoleBase
+        - ServiceAccountPassword
       properties:
         Hosts:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: hosts
-              description: Fully qualified domain name of the LDAP server. Optional failover server.
+              description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
         RoleBase:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: roleBase
-              description: Fully qualified name of the directory to search for a user’s groups.
+              description: |-
+                The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp,
+                                  dc=example, dc=com.
         RoleName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2768,31 +2864,37 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: roleSearchMatching
-              description: The search criteria for groups.
+              description: 'The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client''s username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.'
         RoleSearchSubtree:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: roleSearchSubtree
-              description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+              description: 'The directory search scope for the role. If set to true, scope is to search the entire subtree.'
         ServiceAccountPassword:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: serviceAccountPassword
-              description: Service account password.
+              description: |-
+                Service account password. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                  dc=com.
         ServiceAccountUsername:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: serviceAccountUsername
-              description: Service account username.
+              description: |-
+                Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                  dc=com.
         UserBase:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: userBase
-              description: Fully qualified name of the directory where you want to search for users.
+              description: |-
+                Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp,
+                                  dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
         UserRoleName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2804,14 +2906,16 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: userSearchMatching
-              description: The search criteria for users.
+              description: |-
+                The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+                                  dc=com.
         UserSearchSubtree:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: userSearchSubtree
-              description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
-      description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+              description: 'The directory search scope for the user. If set to true, scope is to search the entire subtree.'
+      description: <p>Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
     Logs:
       type: object
       properties:
@@ -2830,6 +2934,9 @@ components:
       description: The list of information about logs to be enabled for the specified broker.
     WeeklyStartTime:
       type: object
+      required:
+        - TimeOfDay
+        - DayOfWeek
       properties:
         DayOfWeek:
           allOf:
@@ -2856,6 +2963,15 @@ components:
         $ref: '#/components/schemas/User'
     CreateBrokerRequest:
       type: object
+      required:
+        - EngineVersion
+        - HostInstanceType
+        - AutoMinorVersionUpgrade
+        - Users
+        - BrokerName
+        - DeploymentMode
+        - EngineType
+        - PubliclyAccessible
       title: CreateBrokerRequest
       properties:
         AuthenticationStrategy:
@@ -2863,19 +2979,19 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy used to secure the broker.
+              description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: autoMinorVersionUpgrade
-              description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+              description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.'
         BrokerName:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerName
-              description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+              description: 'Required. The broker''s name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
         Configuration:
           allOf:
             - $ref: '#/components/schemas/ConfigurationId'
@@ -2893,25 +3009,25 @@ components:
             - $ref: '#/components/schemas/DeploymentMode'
             - xml:
                 name: deploymentMode
-              description: Required. The deployment mode of the broker.
+              description: Required. The broker's deployment mode.
         EncryptionOptions:
           allOf:
             - $ref: '#/components/schemas/EncryptionOptions'
             - xml:
                 name: encryptionOptions
-              description: Encryption options for the broker.
+              description: Encryption options for the broker. Does not apply to RabbitMQ brokers.
         EngineType:
           allOf:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
+              description: 'Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'Required. The broker engine''s version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2923,7 +3039,7 @@ components:
             - $ref: '#/components/schemas/LdapServerMetadataInput'
             - xml:
                 name: ldapServerMetadata
-              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+              description: Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
         Logs:
           allOf:
             - $ref: '#/components/schemas/Logs'
@@ -2941,13 +3057,13 @@ components:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: publiclyAccessible
-              description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+              description: 'Enables connections from applications outside of the VPC that hosts the broker''s subnets. Set to false by default, if no value is provided.'
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: securityGroups
-              description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+              description: 'The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.'
         StorageType:
           allOf:
             - $ref: '#/components/schemas/BrokerStorageType'
@@ -2959,7 +3075,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: subnetIds
-              description: 'The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.'
+              description: '<p>The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.</p> <important><p>If you specify subnets in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html">shared VPC</a> for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.</p></important>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2971,10 +3087,14 @@ components:
             - $ref: '#/components/schemas/__listOfUser'
             - xml:
                 name: users
-              description: 'Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+              description: '<p>Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p> <important><title>Amazon MQ for RabbitMQ</title> <p>When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p></important>'
       description: Creates a broker using the specified properties.
     CreateConfigurationRequest:
       type: object
+      required:
+        - EngineVersion
+        - EngineType
+        - Name
       title: CreateConfigurationRequest
       properties:
         AuthenticationStrategy:
@@ -2982,19 +3102,19 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy associated with the configuration.
+              description: Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
         EngineType:
           allOf:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
+              description: 'Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'Required. The broker engine''s version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3021,6 +3141,8 @@ components:
       description: A map of the key-value pairs for the resource tag.
     CreateUserRequest:
       type: object
+      required:
+        - Password
       title: CreateUserRequest
       properties:
         ConsoleAccess:
@@ -3028,7 +3150,7 @@ components:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: consoleAccess
-              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+              description: Enables access to the ActiveMQ Web Console for the ActiveMQ user.
         Groups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -3040,7 +3162,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: password
-              description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+              description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
       description: Creates a new ActiveMQ user.
     DeleteBrokerRequest:
       type: object
@@ -3088,19 +3210,28 @@ components:
         $ref: '#/components/schemas/BrokerInstance'
     LdapServerMetadataOutput:
       type: object
+      required:
+        - Hosts
+        - UserSearchMatching
+        - UserBase
+        - RoleSearchMatching
+        - ServiceAccountUsername
+        - RoleBase
       properties:
         Hosts:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: hosts
-              description: Fully qualified domain name of the LDAP server. Optional failover server.
+              description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
         RoleBase:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: roleBase
-              description: Fully qualified name of the directory to search for a user’s groups.
+              description: |-
+                The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp,
+                                  dc=example, dc=com.
         RoleName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3112,25 +3243,29 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: roleSearchMatching
-              description: The search criteria for groups.
+              description: 'The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client''s username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.'
         RoleSearchSubtree:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: roleSearchSubtree
-              description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+              description: 'The directory search scope for the role. If set to true, scope is to search the entire subtree.'
         ServiceAccountUsername:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: serviceAccountUsername
-              description: Service account username.
+              description: |-
+                Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                                  dc=com.
         UserBase:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: userBase
-              description: Fully qualified name of the directory where you want to search for users.
+              description: |-
+                Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp,
+                                  dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
         UserRoleName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3142,16 +3277,21 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: userSearchMatching
-              description: The search criteria for users.
+              description: |-
+                The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+                               dc=com.
         UserSearchSubtree:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: userSearchSubtree
-              description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
-      description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+              description: 'The directory search scope for the user. If set to true, scope is to search the entire subtree.'
+      description: Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker.
     LogsSummary:
       type: object
+      required:
+        - GeneralLogGroup
+        - General
       properties:
         Audit:
           allOf:
@@ -3202,6 +3342,8 @@ components:
       properties: {}
     UserPendingChanges:
       type: object
+      required:
+        - PendingChange
       properties:
         ConsoleAccess:
           allOf:
@@ -3293,6 +3435,8 @@ components:
       description: The reason for which the XML elements or attributes were sanitized.
     SanitizationWarning:
       type: object
+      required:
+        - Reason
       properties:
         AttributeName:
           allOf:
@@ -3322,13 +3466,13 @@ components:
             - $ref: '#/components/schemas/AuthenticationStrategy'
             - xml:
                 name: authenticationStrategy
-              description: The authentication strategy used to secure the broker.
+              description: Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: autoMinorVersionUpgrade
-              description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+              description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.'
         Configuration:
           allOf:
             - $ref: '#/components/schemas/ConfigurationId'
@@ -3340,25 +3484,31 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: engineVersion
-              description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+              description: 'The broker engine version. For a list of supported engine versions, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html">Supported engines</a>.'
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: hostInstanceType
-              description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+              description: 'The broker''s host instance type to upgrade to. For a list of supported instance types, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types">Broker instance types</a>.'
         LdapServerMetadata:
           allOf:
             - $ref: '#/components/schemas/LdapServerMetadataInput'
             - xml:
                 name: ldapServerMetadata
-              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+              description: Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
         Logs:
           allOf:
             - $ref: '#/components/schemas/Logs'
             - xml:
                 name: logs
               description: Enables Amazon CloudWatch logging for brokers.
+        MaintenanceWindowStartTime:
+          allOf:
+            - $ref: '#/components/schemas/WeeklyStartTime'
+            - xml:
+                name: maintenanceWindowStartTime
+              description: The parameters that determine the WeeklyStartTime.
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -3368,6 +3518,8 @@ components:
       description: Updates the broker using the specified properties.
     UpdateConfigurationRequest:
       type: object
+      required:
+        - Data
       title: UpdateConfigurationRequest
       properties:
         Data:
@@ -3408,10 +3560,12 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: password
-              description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+              description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
       description: Updates the information for an ActiveMQ user.
     UserSummary:
       type: object
+      required:
+        - Username
       properties:
         PendingChange:
           allOf:
@@ -3425,6 +3579,6 @@ components:
             - xml:
                 name: username
               description: 'Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      description: Returns a list of all broker users.
+      description: Returns a list of all broker users. Does not apply to RabbitMQ brokers.
 security:
   - hmac: []
