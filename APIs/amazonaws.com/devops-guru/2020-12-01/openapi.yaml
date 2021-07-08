@@ -2078,6 +2078,20 @@ components:
     AnomalyLimit:
       type: number
       format: double
+    AnomalyReportedTimeRange:
+      type: object
+      required:
+        - OpenTime
+      properties:
+        OpenTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when an anomaly is opened. '
+        CloseTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when an anomaly is closed. '
+      description: ' A time range that specifies when DevOps Guru opens and then closes an anomaly. This is different from <code>AnomalyTimeRange</code>, which specifies the time range when DevOps Guru actually observes the anomalous behavior. '
     AnomalySeverity:
       type: string
       enum:
@@ -2114,7 +2128,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' The time when the anomalous behavior ended. '
-      description: ' A time range that specifies when the observed unusual behavior in an anomaly started and ended. '
+      description: ' A time range that specifies when the observed unusual behavior in an anomaly started and ended. This is different from <code>AnomalyReportedTimeRange</code>, which specifies the time range when DevOps Guru opens and then closes an anomaly. '
     NotificationChannel:
       type: object
       properties:
@@ -2358,6 +2372,10 @@ components:
             - description: ' The time of the anomaly''s most recent update. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
+        AnomalyReportedTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
+            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
         SourceDetails:
@@ -2392,6 +2410,10 @@ components:
             - description: ' The status of the anomaly. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
+        AnomalyReportedTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
+            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         SourceDetails:
           allOf:
             - $ref: '#/components/schemas/AnomalySourceDetails'
@@ -2890,6 +2912,10 @@ components:
             - description: ' The time of the anomaly''s most recent update. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
+        AnomalyReportedTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
+            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
         SourceDetails:
@@ -2967,6 +2993,10 @@ components:
             - description: ' The status of the reactive anomaly. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
+        AnomalyReportedTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyReportedTimeRange'
+            - description: ' A <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed. '
         SourceDetails:
           allOf:
             - $ref: '#/components/schemas/AnomalySourceDetails'

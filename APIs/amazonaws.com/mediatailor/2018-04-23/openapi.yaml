@@ -802,6 +802,58 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /alerts#resourceArn:
+    get:
+      operationId: ListAlerts
+      description: Returns a list of alerts for the given resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAlertsResponse'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return. The maximum number of results is 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: Pagination token from the GET list request. Use the token to fetch the next page of results.
+          schema:
+            type: string
+        - name: resourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /channels:
     get:
       operationId: ListChannels
@@ -1803,6 +1855,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The URL prefix for the parent manifest for the stream, minus the asset ID. The maximum length is 512 characters.'
+    ListAlertsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAlert'
+            - description: An array of alerts that are associated with this resource.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Pagination token from the list request. Use the token to fetch the next page of results.
     ListChannelsResponse:
       type: object
       properties:
@@ -2126,6 +2189,43 @@ components:
       description: Splice insert message configuration.
     __boolean:
       type: boolean
+    __timestampUnix:
+      type: string
+      format: date-time
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
+    Alert:
+      required:
+        - ResourceArn
+        - AlertCode
+        - LastModifiedTime
+        - RelatedResourceArns
+        - AlertMessage
+      type: object
+      properties:
+        AlertCode:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The code for the alert. For example, NOT_PROCESSED.'
+        AlertMessage:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'If an alert is generated for a resource, an explanation of the reason for the alert.'
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampUnix'
+            - description: The timestamp when the alert was last modified.
+        RelatedResourceArns:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - description: The Amazon Resource Names (ARNs) related to this alert.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The Amazon Resource Name (ARN) of the resource.
+      description: Alert configuration parameters.
     AvailSuppression:
       type: object
       properties:
@@ -2162,9 +2262,6 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
       description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management.'
-    __timestampUnix:
-      type: string
-      format: date-time
     ResponseOutputs:
       type: array
       items:
@@ -2511,6 +2608,14 @@ components:
         - DASH
         - HLS
       type: string
+    ListAlertsRequest:
+      type: object
+      title: ListAlertsRequest
+      properties: {}
+    __listOfAlert:
+      type: array
+      items:
+        $ref: '#/components/schemas/Alert'
     ListChannelsRequest:
       type: object
       title: ListChannelsRequest
@@ -2858,10 +2963,6 @@ components:
             - xml:
                 name: tags
               description: 'A comma-separated list of tag key:value pairs.'
-    __listOf__string:
-      type: array
-      items:
-        $ref: '#/components/schemas/__string'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

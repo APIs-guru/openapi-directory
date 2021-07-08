@@ -118,7 +118,7 @@ paths:
   /outposts:
     post:
       operationId: CreateOutpost
-      description: Creates an Outpost.
+      description: <p>Creates an Outpost.</p> <p>You can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
       responses:
         '200':
           description: Success
@@ -192,13 +192,13 @@ paths:
                   minLength: 1
                   maxLength: 255
                 AvailabilityZone:
-                  description: <p>The Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
+                  description: The Availability Zone.
                   type: string
                   pattern: '^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\d+[a-zA-Z]?)?$'
                   minLength: 1
                   maxLength: 1000
                 AvailabilityZoneId:
-                  description: <p>The ID of the Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
+                  description: The ID of the Availability Zone.
                   type: string
                   pattern: '^[a-zA-Z]+\d-[a-zA-Z]+\d$'
                   minLength: 1
@@ -220,7 +220,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListOutposts
-      description: List the Outposts for your AWS account.
+      description: '<p>Create a list of the Outposts for your AWS account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availibility Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p> <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only results that match all of the specified filters.</p>'
       responses:
         '200':
           description: Success
@@ -266,6 +266,36 @@ paths:
             description: The maximum page size.
             minimum: 1
             maximum: 1000
+        - name: LifeCycleStatusFilter
+          in: query
+          required: false
+          description: '<p> A filter for the lifecycle status of the Outpost. </p> <p> Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values. </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LifeCycleStatus'
+            minItems: 1
+            maxItems: 5
+        - name: AvailabilityZoneFilter
+          in: query
+          required: false
+          description: '<p> A filter for the Availibility Zone (<code>us-east-1a</code>) of the Outpost. </p> <p> Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values. </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AvailabilityZone'
+            minItems: 1
+            maxItems: 5
+        - name: AvailabilityZoneIdFilter
+          in: query
+          required: false
+          description: '<p> A filter for the AZ IDs (<code>use1-az1</code>) of the Outpost. </p> <p> Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values. </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AvailabilityZoneId'
+            minItems: 1
+            maxItems: 5
   '/outposts/{OutpostId}':
     delete:
       operationId: DeleteOutpost
@@ -812,6 +842,24 @@ components:
           $ref: '#/components/schemas/outpostListDefinition'
         NextToken:
           $ref: '#/components/schemas/Token'
+    LifeCycleStatus:
+      type: string
+      pattern: '^[ A-Za-z]+$'
+      description: The life cycle status.
+      minLength: 1
+      maxLength: 20
+    AvailabilityZone:
+      type: string
+      pattern: '^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\d+[a-zA-Z]?)?$'
+      description: The Availability Zone.
+      minLength: 1
+      maxLength: 1000
+    AvailabilityZoneId:
+      type: string
+      pattern: '^[a-zA-Z]+\d-[a-zA-Z]+\d$'
+      description: The ID of the Availability Zone.
+      minLength: 1
+      maxLength: 255
     ListSitesOutput:
       type: object
       properties:
@@ -847,18 +895,18 @@ components:
       type: string
       pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$'
       maxLength: 1011
-    AvailabilityZone:
-      type: string
-      pattern: '^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\d+[a-zA-Z]?)?$'
-      description: <p>The Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
-      minLength: 1
-      maxLength: 1000
-    AvailabilityZoneId:
-      type: string
-      pattern: '^[a-zA-Z]+\d-[a-zA-Z]+\d$'
-      description: <p>The ID of the Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
-      minLength: 1
-      maxLength: 255
+    AvailabilityZoneIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZoneId'
+      minItems: 1
+      maxItems: 5
+    AvailabilityZoneList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+      minItems: 1
+      maxItems: 5
     OutpostName:
       type: string
       pattern: '^[\S ]+$'
@@ -985,9 +1033,12 @@ components:
         InstanceType:
           $ref: '#/components/schemas/InstanceType'
       description: Information about an instance type.
-    LifeCycleStatus:
-      type: string
-      description: The life cycle status.
+    LifeCycleStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LifeCycleStatus'
+      minItems: 1
+      maxItems: 5
     ListOutpostsInput:
       type: object
       title: ListOutpostsInput
