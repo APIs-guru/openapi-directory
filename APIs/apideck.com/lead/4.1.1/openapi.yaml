@@ -412,7 +412,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 3.0.2
+  version: 4.1.1
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -948,13 +948,14 @@ components:
       properties:
         detail:
           anyOf:
-            - type: string
-            - type: object
+            - example: Missing property foobar
+              type: string
+            - example:
+                missing:
+                  - foobar: required
+              type: object
           description: Contains parameter or domain specific information related to the
             error and why it occured.
-          example:
-            missing:
-              - - foobar: required
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1
             standard (RFC 7231)
@@ -1195,10 +1196,16 @@ components:
     NotFoundResponse:
       properties:
         detail:
+          anyOf:
+            - example: "Could not find widget with id: '123'"
+              type: string
+            - example:
+                not_found:
+                  entity: widget
+                  id: "123"
+              type: object
           description: Contains parameter or domain specific information related to the
             error and why it occured.
-          example: "Could not find widget with id: '123'"
-          type: string
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1
             standard (RFC 7231)
@@ -1224,12 +1231,12 @@ components:
       properties:
         detail:
           anyOf:
-            - type: string
+            - example: Failed to retrieve Widget tokenUrl from
+                'components.securitySchemes.oauth2.flows'
+              type: string
             - type: object
           description: Contains parameter or domain specific information related to the
             error and why it occured.
-          example: Failed to retrieve Widget tokenUrl from
-            'components.securitySchemes.oauth2.flows'
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1
             standard (RFC 7231)
@@ -1331,12 +1338,10 @@ components:
     Unauthorized:
       properties:
         detail:
-          anyOf:
-            - type: string
-            - type: object
           description: Contains parameter or domain specific information related to the
             error and why it occured.
           example: Failed to generate valid JWT Session. Verify applicationId is correct
+          type: string
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1
             standard (RFC 7231)
@@ -1362,11 +1367,14 @@ components:
       properties:
         detail:
           anyOf:
-            - type: string
-            - type: object
+            - example: "Missing Header: x-apideck-consumer-id"
+              type: string
+            - example:
+                missing:
+                  - x-apideck-consumer-id: required
+              type: object
           description: Contains parameter or domain specific information related to the
             error and why it occured.
-          example: "Missing Header: x-apideck-consumer-id"
         error:
           description: Contains an explanation of the status_code as defined in HTTP/1.1
             standard (RFC 7231)

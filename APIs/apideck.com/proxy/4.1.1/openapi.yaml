@@ -342,7 +342,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Proxy API
-  version: 3.0.2
+  version: 4.1.1
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -679,12 +679,10 @@ components:
           schema:
             properties:
               detail:
-                anyOf:
-                  - type: string
-                  - type: object
                 description: Contains parameter or domain specific information related to the
                   error and why it occured.
                 example: Failed to generate valid JWT Session. Verify applicationId is correct
+                type: string
               error:
                 description: Contains an explanation of the status_code as defined in HTTP/1.1
                   standard (RFC 7231)
