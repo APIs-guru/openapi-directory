@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://cal-test.adyen.com/cal/services/Fund/v3
 info:
@@ -42,7 +42,7 @@ info:
         version: 7.0.4
       format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/FundService-v3.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
@@ -97,6 +97,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Retrieve the balance(s) of an account holder.
       x-groupName: General
       x-sortIndex: 1
@@ -151,6 +154,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Retrieve a list of transactions.
       x-groupName: General
       x-sortIndex: 2
@@ -209,6 +215,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Disburse a specified amount from an account to the account holder.
       x-groupName: General
       x-sortIndex: 3
@@ -267,6 +276,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Make a refund of the existing transfer funds transfer.
       x-groupName: General
       x-sortIndex: 5
@@ -325,6 +337,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Refund all transactions of an account since the most recent payout.
       x-groupName: General
       x-sortIndex: 7
@@ -383,6 +398,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Designate an account to be the beneficiary of a separate account and transfer the benefactor's current balance to the beneficiary.
       x-groupName: General
       x-sortIndex: 6
@@ -441,6 +459,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Transfer funds from one platform account to another.
       x-groupName: General
       x-sortIndex: 4

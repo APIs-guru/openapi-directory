@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://cal-test.adyen.com/cal/services/Notification/v2
 info:
@@ -39,7 +39,7 @@ info:
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v2.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
@@ -97,6 +97,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Subscribe to notifications.
       x-groupName: General
       x-sortIndex: 1
@@ -146,6 +149,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Delete an existing notification subscription configuration.
       x-groupName: General
       x-sortIndex: 6
@@ -195,6 +201,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Retrieve an existing notification subscription configuration.
       x-groupName: General
       x-sortIndex: 2
@@ -244,6 +253,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Retrieve a list of existing notification subscription configurations.
       x-groupName: General
       x-sortIndex: 3
@@ -293,6 +305,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Test an existing notification configuration.
       x-groupName: General
       x-sortIndex: 4
@@ -348,6 +363,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Update an existing notification subscription configuration.
       x-groupName: General
       x-sortIndex: 5

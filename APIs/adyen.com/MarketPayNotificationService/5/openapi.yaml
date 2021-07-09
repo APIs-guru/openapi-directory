@@ -1395,6 +1395,7 @@ components:
             - legalArrangementEntityCode
             - legalArrangementLegalForm
             - legalArrangementMember
+            - legalArrangementMembers
             - legalArrangementName
             - legalArrangementReference
             - legalArrangementRegistrationNumber
@@ -1457,6 +1458,17 @@ components:
             - tier
             - tierNumber
             - transferCode
+            - ultimateParentCompany
+            - ultimateParentCompanyAddressDetails
+            - ultimateParentCompanyAddressDetailsCountry
+            - ultimateParentCompanyBusinessDetails
+            - ultimateParentCompanyBusinessDetailsLegalBusinessName
+            - ultimateParentCompanyBusinessDetailsRegistrationNumber
+            - ultimateParentCompanyCode
+            - ultimateParentCompanyStockExchange
+            - ultimateParentCompanyStockNumber
+            - ultimateParentCompanyStockNumberOrStockTicker
+            - ultimateParentCompanyStockTicker
             - unknown
             - value
             - verificationType
@@ -2600,6 +2612,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the closure of an account.
       x-groupName: Accounts
       x-sortIndex: 3
@@ -2619,6 +2634,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the creation of an account.
       x-groupName: Accounts
       x-sortIndex: 1
@@ -2638,6 +2656,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when a liable account current funds are below configured threshold.
       x-groupName: Fund management
       x-sortIndex: 7
@@ -2657,6 +2678,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the creation of an account holder.
       x-groupName: Account holders
       x-sortIndex: 1
@@ -2676,6 +2700,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon a payout to an account holder.
       x-groupName: Fund management
       x-sortIndex: 1
@@ -2695,6 +2722,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the status change of an account holder.
       x-groupName: Account holders
       x-sortIndex: 4
@@ -2714,6 +2744,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the status change of a store tied to an account holder.
       x-groupName: Account holders
       x-sortIndex: 4
@@ -2733,6 +2766,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon an upcoming deadline.
       x-groupName: Account holders
       x-sortIndex: 1
@@ -2752,6 +2788,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the update of an account holder.
       x-groupName: Account holders
       x-sortIndex: 2
@@ -2771,6 +2810,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the receipt of KYC Verification results.
       x-groupName: Account holders
       x-sortIndex: 3
@@ -2790,6 +2832,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the update of an account.
       x-groupName: Accounts
       x-sortIndex: 2
@@ -2809,6 +2854,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the setup of a beneficiary.
       x-groupName: Fund management
       x-sortIndex: 3
@@ -2828,6 +2876,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the compensation of negative account balances.
       x-groupName: Fund management
       x-sortIndex: 5
@@ -2847,6 +2898,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when an automated direct debit is initiated.
       x-groupName: Fund management
       x-sortIndex: 7
@@ -2866,6 +2920,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when a booking for a capture or refund fails.
       x-groupName: Other
       x-sortIndex: 1
@@ -2885,6 +2942,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the transfer refund of funds between accounts.
       x-groupName: Fund management
       x-sortIndex: 6
@@ -2904,6 +2964,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when a report is made available.
       x-groupName: Other
       x-sortIndex: 2
@@ -2923,6 +2986,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
       x-groupName: Fund management
       x-sortIndex: 4
@@ -2942,6 +3008,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the transfer of funds between accounts.
       x-groupName: Fund management
       x-sortIndex: 2

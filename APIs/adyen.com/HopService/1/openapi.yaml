@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://cal-test.adyen.com/cal/services/Hop/v1
 info:
@@ -38,7 +38,7 @@ info:
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/HopService-v1.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
@@ -90,6 +90,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Get a link to a Adyen-hosted onboarding page.
       x-groupName: Hosted Onboarding Page
       x-sortIndex: 1
@@ -141,6 +144,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Get a link to a PCI compliance questionnaire.
       x-groupName: PCI Compliance Questionnaire Page
       x-sortIndex: 1
@@ -248,6 +254,7 @@ components:
             - legalArrangementEntityCode
             - legalArrangementLegalForm
             - legalArrangementMember
+            - legalArrangementMembers
             - legalArrangementName
             - legalArrangementReference
             - legalArrangementRegistrationNumber
@@ -310,6 +317,17 @@ components:
             - tier
             - tierNumber
             - transferCode
+            - ultimateParentCompany
+            - ultimateParentCompanyAddressDetails
+            - ultimateParentCompanyAddressDetailsCountry
+            - ultimateParentCompanyBusinessDetails
+            - ultimateParentCompanyBusinessDetailsLegalBusinessName
+            - ultimateParentCompanyBusinessDetailsRegistrationNumber
+            - ultimateParentCompanyCode
+            - ultimateParentCompanyStockExchange
+            - ultimateParentCompanyStockNumber
+            - ultimateParentCompanyStockNumberOrStockTicker
+            - ultimateParentCompanyStockTicker
             - unknown
             - value
             - verificationType

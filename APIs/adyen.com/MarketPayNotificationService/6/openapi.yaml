@@ -1056,6 +1056,12 @@ components:
         legalBusinessName:
           description: The legal name of the company.
           type: string
+        listedUltimateParentCompany:
+          description: Information about the parent public company. Required if the account holder is 100% owned by a publicly listed company.
+          items:
+            $ref: "#/components/schemas/UltimateParentCompany"
+          type: array
+          x-addedInVersion: 6
         registrationNumber:
           description: The registration number of the company.
           type: string
@@ -1445,6 +1451,7 @@ components:
             - legalArrangementEntityCode
             - legalArrangementLegalForm
             - legalArrangementMember
+            - legalArrangementMembers
             - legalArrangementName
             - legalArrangementReference
             - legalArrangementRegistrationNumber
@@ -1507,6 +1514,17 @@ components:
             - tier
             - tierNumber
             - transferCode
+            - ultimateParentCompany
+            - ultimateParentCompanyAddressDetails
+            - ultimateParentCompanyAddressDetailsCountry
+            - ultimateParentCompanyBusinessDetails
+            - ultimateParentCompanyBusinessDetailsLegalBusinessName
+            - ultimateParentCompanyBusinessDetailsRegistrationNumber
+            - ultimateParentCompanyCode
+            - ultimateParentCompanyStockExchange
+            - ultimateParentCompanyStockNumber
+            - ultimateParentCompanyStockNumberOrStockTicker
+            - ultimateParentCompanyStockTicker
             - unknown
             - value
             - verificationType
@@ -1670,6 +1688,17 @@ components:
         signatoryCode:
           description: The code of the signatory to which the check applies.
           type: string
+    KYCUltimateParentCompanyCheckResult:
+      properties:
+        checks:
+          description: A list of the checks and their statuses.
+          items:
+            $ref: "#/components/schemas/KYCCheckStatusData"
+          type: array
+        ultimateParentCompanyCode:
+          description: The code of the Ultimate Parent Company to which the check applies.
+          type: string
+          x-addedInVersion: 6
     KYCVerificationResult2:
       properties:
         accountHolder:
@@ -1703,6 +1732,12 @@ components:
           items:
             $ref: "#/components/schemas/KYCSignatoryCheckResult"
           type: array
+        ultimateParentCompany:
+          description: The result of the check on the Ultimate Parent Company.
+          items:
+            $ref: "#/components/schemas/KYCUltimateParentCompanyCheckResult"
+          type: array
+          x-addedInVersion: 6
     LegalArrangementDetail:
       properties:
         address:
@@ -1790,27 +1825,29 @@ components:
         legalArrangementEntityReference:
           description: Your reference for the legal arrangement entity.
           type: string
-        legalArrangementMember:
+        legalArrangementMembers:
           description: |-
-            The role of the entity in the legal arrangement. The values depend on the `legalArragementType`.
+            The roles of the entity in the legal arrangement. The values depend on the `legalArragementType`.
 
             Possible values:
 
             - For `legalArragementType` **Trust**, you can use **Trustee**, **Settlor**, **Protector**, **Beneficiary**, or **Shareholder**.
 
             - For `legalArragementType` **Partnership**, you can use **Partner** or **Shareholder**. 
-          enum:
-            - Associate
-            - Beneficiary
-            - Chairman
-            - Partner
-            - Protector
-            - Secretary
-            - Settlor
-            - Shareholder
-            - Treasurer
-            - Trustee
-          type: string
+          items:
+            enum:
+              - Associate
+              - Beneficiary
+              - Chairman
+              - Partner
+              - Protector
+              - Secretary
+              - Settlor
+              - Shareholder
+              - Treasurer
+              - Trustee
+            type: string
+          type: array
         legalEntityType:
           description: |-
             The legal entity type.
@@ -2574,6 +2611,41 @@ components:
         - destinationAccountCode
         - amount
         - transferCode
+    UltimateParentCompany:
+      properties:
+        address:
+          $ref: "#/components/schemas/ViasAddress"
+          description: Address of the ultimate parent company.
+          x-addedInVersion: 6
+        businessDetails:
+          $ref: "#/components/schemas/UltimateParentCompanyBusinessDetails"
+          description: Details about the ultimate parent company's business.
+          x-addedInVersion: 6
+        ultimateParentCompanyCode:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the entry, returned in the response when you create an ultimate parent company. Required when updating an existing entry in an `/updateAccountHolder` request.
+          type: string
+          x-addedInVersion: 6
+    UltimateParentCompanyBusinessDetails:
+      properties:
+        legalBusinessName:
+          description: The legal name of the company.
+          type: string
+        registrationNumber:
+          description: The registration number of the company.
+          type: string
+          x-addedInVersion: 4
+        stockExchange:
+          description: Market Identifier Code (MIC).
+          type: string
+          x-addedInVersion: 6
+        stockNumber:
+          description: International Securities Identification Number (ISIN).
+          type: string
+          x-addedInVersion: 6
+        stockTicker:
+          description: Stock Ticker symbol.
+          type: string
+          x-addedInVersion: 6
     UpdateAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2810,6 +2882,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the closure of an account.
       x-groupName: Accounts
       x-sortIndex: 3
@@ -2829,6 +2904,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the creation of an account.
       x-groupName: Accounts
       x-sortIndex: 1
@@ -2848,6 +2926,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when a liable account current funds are below configured threshold.
       x-groupName: Fund management
       x-sortIndex: 7
@@ -2867,6 +2948,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the creation of an account holder.
       x-groupName: Account holders
       x-sortIndex: 1
@@ -2886,6 +2970,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon a payout to an account holder.
       x-groupName: Fund management
       x-sortIndex: 1
@@ -2905,6 +2992,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the status change of an account holder.
       x-groupName: Account holders
       x-sortIndex: 4
@@ -2924,6 +3014,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the status change of a store tied to an account holder.
       x-groupName: Account holders
       x-sortIndex: 4
@@ -2943,6 +3036,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon an upcoming deadline.
       x-groupName: Account holders
       x-sortIndex: 1
@@ -2962,6 +3058,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the update of an account holder.
       x-groupName: Account holders
       x-sortIndex: 2
@@ -2981,6 +3080,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the receipt of KYC Verification results.
       x-groupName: Account holders
       x-sortIndex: 3
@@ -3000,6 +3102,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the update of an account.
       x-groupName: Accounts
       x-sortIndex: 2
@@ -3019,6 +3124,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the setup of a beneficiary.
       x-groupName: Fund management
       x-sortIndex: 3
@@ -3038,6 +3146,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the compensation of negative account balances.
       x-groupName: Fund management
       x-sortIndex: 5
@@ -3057,6 +3168,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when an automated direct debit is initiated.
       x-groupName: Fund management
       x-sortIndex: 7
@@ -3076,6 +3190,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when a booking for a capture or refund fails.
       x-groupName: Other
       x-sortIndex: 1
@@ -3095,6 +3212,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the transfer refund of funds between accounts.
       x-groupName: Fund management
       x-sortIndex: 6
@@ -3114,6 +3234,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered when a report is made available.
       x-groupName: Other
       x-sortIndex: 2
@@ -3133,6 +3256,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
       x-groupName: Fund management
       x-sortIndex: 4
@@ -3152,6 +3278,9 @@ webhooks:
               schema:
                 $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Triggered upon the transfer of funds between accounts.
       x-groupName: Fund management
       x-sortIndex: 2
