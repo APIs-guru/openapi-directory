@@ -3462,6 +3462,9 @@ components:
         desiredResourceUsageExportConfig:
           $ref: "#/components/schemas/ResourceUsageExportConfig"
           description: The desired configuration for exporting resource usage.
+        desiredServiceExternalIpsConfig:
+          $ref: "#/components/schemas/ServiceExternalIPsConfig"
+          description: ServiceExternalIPsConfig specifies the config for the use of Services with ExternalIPs field.
         desiredShieldedNodes:
           $ref: "#/components/schemas/ShieldedNodes"
           description: Configuration for Shielded Nodes.

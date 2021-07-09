@@ -936,7 +936,7 @@ components:
           description: Specifies the service root url if the default one (the service name from the yaml file) is not suitable. This can be seen in any fully specified service urls as well as sections that show a base that other urls are relative to.
           type: string
         summary:
-          description: A short summary of what the service does. Can only be provided by plain text.
+          description: "A short description of what the service does. The summary must be plain text. It becomes the overview of the service displayed in Google Cloud Console. NOTE: This field is equivalent to the standard field `description`."
           type: string
       type: object
     DocumentationRule:
@@ -946,10 +946,10 @@ components:
           description: Deprecation description of the selected element(s). It can be provided if an element is marked as `deprecated`.
           type: string
         description:
-          description: Description of the selected API(s).
+          description: The description is the comment in front of the selected proto element, such as a message, a method, a 'service' definition, or a field.
           type: string
         selector:
-          description: The selector is a comma-separated list of patterns. Each pattern is a qualified name of the element which may end in "*", indicating a wildcard. Wildcards are only allowed at the end and for a whole component of the qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A wildcard will match one or more components. To specify a default for all applicable elements, the whole pattern "*" is used.
+          description: The selector is a comma-separated list of patterns for any element such as a method, a field, an enum value. Each pattern is a qualified name of the element which may end in "*", indicating a wildcard. Wildcards are only allowed at the end and for a whole component of the qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A wildcard will match one or more components. To specify a default for all applicable elements, the whole pattern "*" is used.
           type: string
       type: object
     Empty:
@@ -1465,7 +1465,7 @@ components:
       description: Represents a documentation page. A page can contain subpages to represent nested documentation set structure.
       properties:
         content:
-          description: The Markdown content of the page. You can use (== include {path} ==) to include content from a Markdown file.
+          description: The Markdown content of the page. You can use (== include {path} ==) to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
           type: string
         name:
           description: "The name of the page. It will be used as an identity of the page to generate URI of the page, text of the link to this page in navigation, etc. The full page name (start from the root page name to this page concatenated with `.`) can be used as reference to the page in your documentation. For example: pages: - name: Tutorial content: (== include tutorial.md ==) subpages: - name: Java content: (== include tutorial_java.md ==) You can reference `Java` page using Markdown reference link syntax: `Java`."
@@ -1600,7 +1600,7 @@ components:
             $ref: "#/components/schemas/Endpoint"
           type: array
         enums:
-          description: "A list of all enum types included in this API service. Enums referenced directly or indirectly by the `apis` are automatically included. Enums which are not referenced but shall be included should be listed here by name. Example: enums: - name: google.someapi.v1.SomeEnum"
+          description: "A list of all enum types included in this API service. Enums referenced directly or indirectly by the `apis` are automatically included. Enums which are not referenced but shall be included should be listed here by name by the configuration author. Example: enums: - name: google.someapi.v1.SomeEnum"
           items:
             $ref: "#/components/schemas/Enum"
           type: array
@@ -1652,10 +1652,10 @@ components:
             $ref: "#/components/schemas/Type"
           type: array
         title:
-          description: The product title for this service.
+          description: The product title for this service, it is the name displayed in Google Cloud Console.
           type: string
         types:
-          description: "A list of all proto message types included in this API service. Types referenced directly or indirectly by the `apis` are automatically included. Messages which are not referenced but shall be included, such as types used by the `google.protobuf.Any` type, should be listed here by name. Example: types: - name: google.protobuf.Int32"
+          description: "A list of all proto message types included in this API service. Types referenced directly or indirectly by the `apis` are automatically included. Messages which are not referenced but shall be included, such as types used by the `google.protobuf.Any` type, should be listed here by name by the configuration author. Example: types: - name: google.protobuf.Int32"
           items:
             $ref: "#/components/schemas/Type"
           type: array

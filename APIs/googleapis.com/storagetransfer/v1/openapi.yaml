@@ -601,11 +601,14 @@ components:
             prefix. As such, it should generally not begin with a '/'.
           type: string
         roleArn:
-          description: Input only. Role arn to support temporary credentials via
-            AssumeRoleWithWebIdentity. When role arn is provided, transfer
-            service will fetch temporary credentials for the session using
-            AssumeRoleWithWebIdentity call for the provided role using the
-            [GoogleServiceAccount] for this project.
+          description: Input only. The Amazon Resource Name (ARN) of the role to support
+            temporary credentials via `AssumeRoleWithWebIdentity`. For more
+            information about ARNs, see [IAM
+            ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+            When a role ARN is provided, Transfer Service fetches temporary
+            credentials for the session using a `AssumeRoleWithWebIdentity` call
+            for the provided role using the GoogleServiceAccount for this
+            project.
           type: string
       type: object
     AzureBlobStorageData:
@@ -734,8 +737,8 @@ components:
           format: int64
           type: string
         errorLogEntries:
-          description: Error samples. At most 5 error log entries will be recorded for a
-            given error code for a single transfer operation.
+          description: Error samples. At most 5 error log entries are recorded for a given
+            error code for a single transfer operation.
           items:
             $ref: "#/components/schemas/ErrorLogEntry"
           type: array
@@ -784,12 +787,12 @@ components:
         * When an object located at `http(s)://hostname:port/` is transferred to
         a data sink, the name of the object at the data sink is `/`. * If the
         specified size of an object does not match the actual size of the object
-        fetched, the object will not be transferred. * If the specified MD5 does
-        not match the MD5 computed from the transferred bytes, the object
-        transfer will fail. * Ensure that each URL you specify is publicly
-        accessible. For example, in Cloud Storage you can [share an object
-        publicly] (/storage/docs/cloud-console#_sharingdata) and get a link to
-        it. * Storage Transfer Service obeys `robots.txt` rules and requires the
+        fetched, the object is not transferred. * If the specified MD5 does not
+        match the MD5 computed from the transferred bytes, the object transfer
+        fails. * Ensure that each URL you specify is publicly accessible. For
+        example, in Cloud Storage you can [share an object publicly]
+        (/storage/docs/cloud-console#_sharingdata) and get a link to it. *
+        Storage Transfer Service obeys `robots.txt` rules and requires the
         source HTTP server to support `Range` requests and to return a
         `Content-Length` header in each response. * ObjectConditions have no
         effect when filtering objects to transfer.'
@@ -826,14 +829,14 @@ components:
           type: array
       type: object
     NotificationConfig:
-      description: 'Specification to configure notifications published to Cloud
-        Pub/Sub. Notifications will be published to the customer-provided topic
-        using the following `PubsubMessage.attributes`: * `"eventType"`: one of
-        the EventType values * `"payloadFormat"`: one of the PayloadFormat
-        values * `"projectId"`: the project_id of the `TransferOperation` *
+      description: 'Specification to configure notifications published to Pub/Sub.
+        Notifications are published to the customer-provided topic using the
+        following `PubsubMessage.attributes`: * `"eventType"`: one of the
+        EventType values * `"payloadFormat"`: one of the PayloadFormat values *
+        `"projectId"`: the project_id of the `TransferOperation` *
         `"transferJobName"`: the transfer_job_name of the `TransferOperation` *
         `"transferOperationName"`: the name of the `TransferOperation` The
-        `PubsubMessage.data` will contain a TransferOperation resource formatted
+        `PubsubMessage.data` contains a TransferOperation resource formatted
         according to the specified `PayloadFormat`.'
       properties:
         eventTypes:
@@ -855,17 +858,17 @@ components:
             - JSON
           type: string
         pubsubTopic:
-          description: "Required. The `Topic.name` of the Cloud Pub/Sub topic to which to
+          description: "Required. The `Topic.name` of the Pub/Sub topic to which to
             publish notifications. Must be of the format:
-            `projects/{project}/topics/{topic}`. Not matching this format will
-            result in an INVALID_ARGUMENT error."
+            `projects/{project}/topics/{topic}`. Not matching this format
+            results in an INVALID_ARGUMENT error."
           type: string
       type: object
     ObjectConditions:
-      description: Conditions that determine which objects will be transferred.
-        Applies only to Cloud Data Sources such as S3, Azure, and Cloud Storage.
-        The "last modification time" refers to the time of the last change to
-        the object's content or metadata — specifically, this is the `updated`
+      description: Conditions that determine which objects are transferred. Applies
+        only to Cloud Data Sources such as S3, Azure, and Cloud Storage. The
+        "last modification time" refers to the time of the last change to the
+        object's content or metadata — specifically, this is the `updated`
         property of Cloud Storage objects, the `LastModified` field of S3
         objects, and the `Last-Modified` header of Azure blobs.
       properties:
@@ -922,7 +925,7 @@ components:
         lastModifiedBefore:
           description: If specified, only objects with a "last modification time" before
             this timestamp and objects that don't have a "last modification
-            time" will be transferred.
+            time" are transferred.
           format: google-datetime
           type: string
         lastModifiedSince:
@@ -1027,13 +1030,13 @@ components:
         scheduleEndDate:
           $ref: "#/components/schemas/Date"
           description: "The last day a transfer runs. Date boundaries are determined
-            relative to UTC time. A job will run once per 24 hours within the
+            relative to UTC time. A job runs once per 24 hours within the
             following guidelines: * If `schedule_end_date` and
             schedule_start_date are the same and in the future relative to UTC,
             the transfer is executed only one time. * If `schedule_end_date` is
             later than `schedule_start_date` and `schedule_end_date` is in the
-            future relative to UTC, the job will run each day at
-            start_time_of_day through `schedule_end_date`."
+            future relative to UTC, the job runs each day at start_time_of_day
+            through `schedule_end_date`."
         scheduleStartDate:
           $ref: "#/components/schemas/Date"
           description: Required. The start date of a transfer. Date boundaries are
@@ -1041,13 +1044,12 @@ components:
             start_time_of_day are in the past relative to the job's creation
             time, the transfer starts the day after you schedule the transfer
             request. **Note:** When starting jobs at or near midnight UTC it is
-            possible that a job will start later than expected. For example, if
-            you send an outbound request on June 1 one millisecond prior to
-            midnight UTC and the Storage Transfer Service server receives the
-            request on June 2, then it will create a TransferJob with
-            `schedule_start_date` set to June 2 and a `start_time_of_day` set to
-            midnight UTC. The first scheduled TransferOperation will take place
-            on June 3 at midnight UTC.
+            possible that a job starts later than expected. For example, if you
+            send an outbound request on June 1 one millisecond prior to midnight
+            UTC and the Storage Transfer Service server receives the request on
+            June 2, then it creates a TransferJob with `schedule_start_date` set
+            to June 2 and a `start_time_of_day` set to midnight UTC. The first
+            scheduled TransferOperation takes place on June 3 at midnight UTC.
         startTimeOfDay:
           $ref: "#/components/schemas/TimeOfDay"
           description: "The time in UTC that a transfer job is scheduled to run. Transfers
@@ -1219,7 +1221,7 @@ components:
         name:
           description: "A unique name (within the transfer project) assigned when the job
             is created. If this field is empty in a CreateTransferJobRequest,
-            Storage Transfer Service will assign a unique name. Otherwise, the
+            Storage Transfer Service assigns a unique name. Otherwise, the
             specified name is used as the unique name for this job. If the
             specified name is in use by a job, the creation request fails with
             an ALREADY_EXISTS error. This name must start with
@@ -1227,7 +1229,7 @@ components:
             should be no more than 128 characters. This name must not start with
             'transferJobs/OPI'. 'transferJobs/OPI' is a reserved prefix.
             Example: `\"transferJobs/^(?!OPI)[A-Za-z0-9-._~]*[A-Za-z0-9]$\"`
-            Invalid job names will fail with an INVALID_ARGUMENT error."
+            Invalid job names fail with an INVALID_ARGUMENT error."
           type: string
         notificationConfig:
           $ref: "#/components/schemas/NotificationConfig"
@@ -1238,9 +1240,9 @@ components:
         schedule:
           $ref: "#/components/schemas/Schedule"
           description: Specifies schedule for the transfer job. This is an optional field.
-            When the field is not set, the job will never execute a transfer,
-            unless you invoke RunTransferJob or update the job to have a
-            non-empty schedule.
+            When the field is not set, the job never executes a transfer, unless
+            you invoke RunTransferJob or update the job to have a non-empty
+            schedule.
         status:
           description: Status of the job. This value MUST be specified for
             `CreateTransferJobRequests`. **Note:** The effect of the new job
@@ -1322,7 +1324,7 @@ components:
           description: When to overwrite objects that already exist in the sink. The
             default is that only objects that are different from the source are
             ovewritten. If true, all objects in the sink whose name matches an
-            object in the source will be overwritten with the source object.
+            object in the source are overwritten with the source object.
           type: boolean
       type: object
     TransferSpec:

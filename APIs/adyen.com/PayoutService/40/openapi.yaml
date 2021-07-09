@@ -1985,7 +1985,7 @@ components:
     Address:
       properties:
         city:
-          description: The name of the city.
+          description: "The name of the city. Maximum length: 3000 characters."
           type: string
         country:
           description: |-
@@ -1993,7 +1993,7 @@ components:
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
-          description: The number or name of the house.
+          description: "The number or name of the house. Maximum length: 3000 characters."
           type: string
         postalCode:
           description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
@@ -2005,7 +2005,7 @@ components:
           type: string
         street:
           description: |-
-            The name of the street.
+            The name of the street. Maximum length: 3000 characters.
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
           type: string
       required:
@@ -2546,11 +2546,6 @@ components:
       properties:
         firstName:
           description: The first name.
-          type: string
-        infix:
-          description: |-
-            The name's infix, if applicable.
-            >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
           description: The last name.

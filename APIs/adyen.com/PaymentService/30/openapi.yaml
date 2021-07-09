@@ -52,9 +52,12 @@ paths:
   /adjustAuthorisation:
     post:
       description: |-
-        Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables tipping, improving the chances your authorisation will be valid, charging the shopper when they have already left the merchant premises, etc.
+        Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables for example tipping, improving the chances your authorisation will be valid, or charging the shopper when they have already left the merchant premises.
 
-        For more information, refer to [Adjust Authorisation](https://docs.adyen.com/online-payments/adjust-authorisation).
+        > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce).
+        > If you have a [newer integration](https://docs.adyen.com/online-payments), and are doing:
+        > * [Asynchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use the [`/payments/{paymentPspReference}/amountUpdates`](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/amountUpdates) endpoint on Checkout API.
+        > * [Synchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use this endpoint.
       operationId: post-adjustAuthorisation
       requestBody:
         content:
@@ -259,7 +262,9 @@ paths:
       description: |-
         Cancels the authorisation hold on a payment, returning a unique reference for this request. You can cancel payments after authorisation only for payment methods that support distinct authorisations and captures.
 
-        For more information, refer to [Cancel](https://docs.adyen.com/online-payments/cancel).
+        For more information, refer to [Cancel](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel).
+
+        > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/{paymentPspReference}/cancels) endpoint under Checkout API instead.
       operationId: post-cancel
       requestBody:
         content:
@@ -323,13 +328,15 @@ paths:
       description: |-
         Cancels a payment if it has not been captured yet, or refunds it if it has already been captured. This is useful when it is not certain if the payment has been captured or not (for example, when using auto-capture).
 
-        > Do not use this endpoint for payments that involve:
-        > * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
-        > * [Split data](https://docs.adyen.com/platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
-        >
-        > Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
+        Do not use this endpoint for payments that involve:
+         * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
+         * [Split data](https://docs.adyen.com/platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
 
-        For more information, refer to [Cancel or refund](https://docs.adyen.com/online-payments/cancel-or-refund).
+         Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
+
+        For more information, refer to [Cancel or refund](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel-or-refund).
+
+        > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/{paymentPspReference}/reversals`](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/{paymentPspReference}/reversals) endpoint under Checkout API instead.
       operationId: post-cancelOrRefund
       requestBody:
         content:
@@ -393,12 +400,15 @@ paths:
       x-sortIndex: 4
   /capture:
     post:
-      description: |-
+      description: |+
         Captures the authorisation hold on a payment, returning a unique reference for this request. Usually the full authorisation amount is captured, however it's also possible to capture a smaller amount, which results in cancelling the remaining authorisation balance.
 
-        Payment methods, which automatically capture as part of authorisation, don't need to be captured, but submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.
+        Payment methods that are captured automatically after authorisation don't need to be captured. However, submitting a capture request on these transactions will not result in double charges. If immediate or delayed auto-capture is enabled, calling the capture method is not neccessary.
 
-        For more information, refer to [Capture](https://docs.adyen.com/online-payments/capture).
+        For more information refer to [Capture](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/capture).
+
+        > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/{paymentPspReference}/captures`](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/captures) endpoint on Checkout API instead.
+
       operationId: post-capture
       requestBody:
         content:
@@ -465,10 +475,12 @@ paths:
       description: |-
         Refunds a payment that has previously been captured, returning a unique reference for this request. Refunding can be done on the full captured amount or a partial amount. Multiple (partial) refunds will be accepted as long as their sum doesn't exceed the captured amount. Payments which have been authorised, but not captured, cannot be refunded, use the /cancel method instead.
 
-        > Some payment methods/gateways do not support partial/multiple refunds.
-        > A margin above the captured limit can be configured to cover shipping/handling costs.
+        Some payment methods/gateways do not support partial/multiple refunds.
+        A margin above the captured limit can be configured to cover shipping/handling costs.
 
-        For more information, refer to [Refund](https://docs.adyen.com/online-payments/refund).
+        For more information, refer to [Refund](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/refund).
+
+        > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/payments/{paymentPspReference}/refunds`](https://docs.adyen.com/api-explorer/#/CheckoutService/payments/{paymentPspReference}/refunds) endpoint under Checkout API instead.
       operationId: post-refund
       requestBody:
         content:
@@ -537,7 +549,9 @@ paths:
 
         In your call, refer to the original payment by using the `reference` that you specified in your payment request.
 
-        For more information, see [Technical cancel](https://docs.adyen.com/online-payments/cancel#technical-cancel).
+        For more information, see [Technical cancel](https://docs.adyen.com/online-payments/classic-integrations/modify-payments/cancel#technical-cancel). 
+
+        > This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/cancels`](https://docs.adyen.com/api-explorer/#/CheckoutService/cancels) endpoint under Checkout API instead.
       operationId: post-technicalCancel
       requestBody:
         content:
@@ -2090,7 +2104,7 @@ components:
     Address:
       properties:
         city:
-          description: The name of the city.
+          description: "The name of the city. Maximum length: 3000 characters."
           type: string
         country:
           description: |-
@@ -2098,7 +2112,7 @@ components:
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
-          description: The number or name of the house.
+          description: "The number or name of the house. Maximum length: 3000 characters."
           type: string
         postalCode:
           description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
@@ -2110,7 +2124,7 @@ components:
           type: string
         street:
           description: |-
-            The name of the street.
+            The name of the street. Maximum length: 3000 characters.
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
           type: string
       required:
@@ -2676,11 +2690,6 @@ components:
       properties:
         firstName:
           description: The first name.
-          type: string
-        infix:
-          description: |-
-            The name's infix, if applicable.
-            >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
           description: The last name.

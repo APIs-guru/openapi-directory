@@ -923,6 +923,10 @@ components:
           type: string
         spreadsheetId:
           description: The ID of the Google Sheets spreadsheet that contains the chart.
+            You might need to add a resource key to the HTTP header for a subset
+            of old files. For more information, see [Access link-shared files
+            using resource
+            keys](https://developers.google.com/drive/api/v3/resource-keys).
           type: string
       type: object
     CreateSheetsChartResponse:
@@ -1029,7 +1033,11 @@ components:
             YouTube video https://www.youtube.com/watch?v=7U3axjORYZ0, the ID is
             7U3axjORYZ0. For a Google Drive video
             https://drive.google.com/file/d/1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q
-            the ID is 1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q.
+            the ID is 1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q. To access a Google
+            Drive video file, you might need to add a resource key to the HTTP
+            header for a subset of old files. For more information, see [Access
+            link-shared files using resource
+            keys](https://developers.google.com/drive/api/v3/resource-keys).
           type: string
         objectId:
           description: A user-supplied object ID. If you specify an ID, it must be unique
@@ -1109,7 +1117,7 @@ components:
           description: The object ID of the page or page element to delete. If after a
             delete operation a group contains only 1 or no page elements, the
             group is also deleted. If a placeholder is deleted on a layout, any
-            empty inheriting shapes are also deleted.
+            empty inheriting placeholders are also deleted.
           type: string
       type: object
     DeleteParagraphBulletsRequest:
@@ -1252,7 +1260,7 @@ components:
           description: The object IDs of the objects to group. Only page elements can be
             grouped. There should be at least two page elements on the same page
             that are not already in another group. Some page elements, such as
-            videos, tables and placeholder shapes cannot be grouped.
+            videos, tables and placeholders cannot be grouped.
           items:
             type: string
           type: array
@@ -2594,7 +2602,7 @@ components:
       properties:
         placeholder:
           $ref: "#/components/schemas/Placeholder"
-          description: Placeholders are shapes that are inherit from corresponding
+          description: Placeholders are page elements that inherit from corresponding
             placeholders on layouts and masters. If set, the shape is a
             placeholder shape and any inherited properties can be resolved by
             looking at the parent placeholder identified by the
@@ -3879,10 +3887,10 @@ components:
             https://www.googleapis.com/auth/drive.file: See, edit, create, and delete only
               the specific Google Drive files you use with this app
             https://www.googleapis.com/auth/drive.readonly: See and download all your Google Drive files
-            https://www.googleapis.com/auth/presentations: View and manage your Google Slides presentations
-            https://www.googleapis.com/auth/presentations.readonly: View your Google Slides presentations
-            https://www.googleapis.com/auth/spreadsheets: See, edit, create, and delete your spreadsheets in Google Drive
-            https://www.googleapis.com/auth/spreadsheets.readonly: View your Google Spreadsheets
+            https://www.googleapis.com/auth/presentations: See, edit, create, and delete all your Google Slides presentations
+            https://www.googleapis.com/auth/presentations.readonly: See all your Google Slides presentations
+            https://www.googleapis.com/auth/spreadsheets: See, edit, create, and delete all your Google Sheets spreadsheets
+            https://www.googleapis.com/auth/spreadsheets.readonly: See all your Google Sheets spreadsheets
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -3894,9 +3902,9 @@ components:
             https://www.googleapis.com/auth/drive.file: See, edit, create, and delete only
               the specific Google Drive files you use with this app
             https://www.googleapis.com/auth/drive.readonly: See and download all your Google Drive files
-            https://www.googleapis.com/auth/presentations: View and manage your Google Slides presentations
-            https://www.googleapis.com/auth/presentations.readonly: View your Google Slides presentations
-            https://www.googleapis.com/auth/spreadsheets: See, edit, create, and delete your spreadsheets in Google Drive
-            https://www.googleapis.com/auth/spreadsheets.readonly: View your Google Spreadsheets
+            https://www.googleapis.com/auth/presentations: See, edit, create, and delete all your Google Slides presentations
+            https://www.googleapis.com/auth/presentations.readonly: See all your Google Slides presentations
+            https://www.googleapis.com/auth/spreadsheets: See, edit, create, and delete all your Google Sheets spreadsheets
+            https://www.googleapis.com/auth/spreadsheets.readonly: See all your Google Sheets spreadsheets
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

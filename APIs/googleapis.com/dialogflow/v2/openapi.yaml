@@ -1491,7 +1491,7 @@ paths:
         - projects
   "/v2/{parent}/environments":
     get:
-      description: Returns the list of all non-draft environments of the specified agent.
+      description: Returns the list of all non-default environments of the specified agent.
       operationId: dialogflow.projects.locations.agent.environments.list
       parameters:
         - description: "Required. The agent to list all environments from. Format: - `projects//agent` - `projects//locations//agent`"
@@ -1583,7 +1583,7 @@ paths:
       description: Gets the history of the specified environment.
       operationId: dialogflow.projects.locations.agent.environments.getHistory
       parameters:
-        - description: "Required. The name of the environment to retrieve history for. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/`"
+        - description: "Required. The name of the environment to retrieve history for. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/` The environment ID for the default environment is `-`."
           in: path
           name: parent
           required: true
@@ -5146,7 +5146,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2Fulfillment"
           description: Optional. The fulfillment settings to use for this environment.
         name:
-          description: "Output only. The unique identifier of this agent environment. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/`"
+          description: "Output only. The unique identifier of this agent environment. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/` The environment ID for the default environment is `-`."
           readOnly: true
           type: string
         state:
@@ -5181,7 +5181,7 @@ components:
           readOnly: true
           type: string
         parent:
-          description: "Output only. The name of the environment this history is for. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/`"
+          description: "Output only. The name of the environment this history is for. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/` The environment ID for the default environment is `-`."
           readOnly: true
           type: string
       type: object
