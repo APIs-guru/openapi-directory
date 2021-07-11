@@ -9,42 +9,25 @@ info:
     email: support@surevoip.co.uk
     name: SureVoIP API Support
     url: https://www.surevoip.co.uk/contact-surevoip
-  description: >
+  description: |
     # Introduction
-
     Welcome to the SureVoIP RESTful hypermedia API (sometimes known as a VoIP REST API, Telecom REST API, SIP API, Hypermedia API or just VoIP API.)
 
-
     The SureVoIP API is a way for you to automate your interaction with the SureVoIP platforms. With the API, you can create your own scripts, applications or mashups which can:
-
     * List calls
-
     * create customers
-
     * search numbers
-
     * provision numbers
-
     * send SMS texts
-
     * create outbound calls
-
     * schedule announcements
-
     * schedule call hangups with an announcement
-
     * subscribe to events/alerts
-
     * track calls
-
     * retrieve invoices
-
     * grab your SIP details
-
     * check your IP address
-
     * be 100% self-sufficient
-
     * and much more!
   license:
     name: Proprietry
@@ -177,8 +160,7 @@ paths:
                   format: audio/x-wav
                   type: string
               type: object
-        description: Upload a wav file to be used in other parts of the API - 10Mb
-          limit, ending in .wav
+        description: Upload a wav file to be used in other parts of the API - 10Mb limit, ending in .wav
         required: true
       responses:
         "201":
@@ -245,14 +227,12 @@ paths:
                   message:
                     type: string
                 type: object
-          description: Sorry, you have reached your max quota of 10 announcement files.
-            Please delete some.
+          description: Sorry, you have reached your max quota of 10 announcement files. Please delete some.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/schema"
           description: Problem saving file
       summary: Add a new announcement audio file
       tags:
@@ -276,8 +256,7 @@ paths:
   /calls:
     get:
       parameters:
-        - description: Validate a phone number by calling it for one ring. Note; not 100%
-            proof the number is in service.
+        - description: Validate a phone number by calling it for one ring. Note; not 100% proof the number is in service.
           example: 441224900123
           in: query
           name: validate
@@ -294,15 +273,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/400/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/400/content/application~1json/schema"
           description: Bad query data
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/schema"
           description: Only partners or admins can list all live calls.
       summary: Validate a phone number by calling it once
       tags:
@@ -314,20 +291,13 @@ paths:
             schema:
               properties:
                 announcement_at:
-                  description: >
-                    is in seconds. Just take 120 secs away from the hangup_at time for
-                    a announcement to be played 2 mins before the end of the
-                    call. If provided announcement_id is required
+                  description: |
+                    is in seconds. Just take 120 secs away from the hangup_at time for a announcement to be played 2 mins before the end of the call. If provided announcement_id is required
                   example: 180
                   type: string
                 announcement_id:
-                  description: >
-                    is the announcement id (from
-                    https://api.surevoip.co.uk/customers/{customer}/announcements/{announcement_id})
-                    to play for example “your call is about to end in 2 mins”.
-                    We only allow a wav file, but we may allow "words", which
-                    will use SureVoIP provided text to speech. If provided
-                    announcement_at is required
+                  description: |
+                    is the announcement id (from https://api.surevoip.co.uk/customers/{customer}/announcements/{announcement_id}) to play for example “your call is about to end in 2 mins”. We only allow a wav file, but we may allow "words", which will use SureVoIP provided text to speech. If provided announcement_at is required
                   example: hgCRVfWB4hGRSEAkICyA
                   type: string
                 caller_id:
@@ -335,25 +305,17 @@ paths:
                   example: 1224900123
                   type: string
                 from:
-                  description: The person making the call, i.e the a leg. This person must answer
-                    in order for the b leg to be rung
+                  description: The person making the call, i.e the a leg. This person must answer in order for the b leg to be rung
                   example: 442035159999
                   type: string
                 hangup_announcement_id:
-                  description: >
-                    the id of a thank you announcement or similar. You can manage these
-                    as you would with any RESTful resource at
-                    https://api.surevoip.co.uk/announcements and
-                    https://api.surevoip.co.uk/customers/{customer}/announcements/{announcement_id}.
-                    It will be played at the end of the call at hangup. If
-                    provided hangup_at is required.
+                  description: |
+                    the id of a thank you announcement or similar. You can manage these as you would with any RESTful resource at https://api.surevoip.co.uk/announcements and https://api.surevoip.co.uk/customers/{customer}/announcements/{announcement_id}. It will be played at the end of the call at hangup. If provided hangup_at is required.
                   example: RVfWB4hGRSEAkIXYCyA
                   type: string
                 hangup_at:
-                  description: >
-                    length in seconds from when the call is *answered* to when the
-                    system hangs up. If "hangup_announcement_id" is present,
-                    this will be played at hangup
+                  description: |
+                    length in seconds from when the call is *answered* to when the system hangs up. If "hangup_announcement_id" is present, this will be played at hangup
                   example: 300
                   type: string
                 options:
@@ -367,30 +329,19 @@ paths:
                       example: 1
                       type: integer
                     cancel_key:
-                      description: The phone keypad number to press to hangup the call and not place
-                        the second leg of the call. Default 2
+                      description: The phone keypad number to press to hangup the call and not place the second leg of the call. Default 2
                       example: 2
                       type: integer
                     connect_key:
-                      description: The phone keypad number to press in order to place the call to the
-                        b leg, i.e. press to confirm. Default 1
+                      description: The phone keypad number to press in order to place the call to the b leg, i.e. press to confirm. Default 1
                       example: 1
                       type: integer
                     play_audio:
                       items:
                         properties:
                           announcement_id:
-                            description: >
-                              Id of announcement audio file which will play to the a leg of the
-                              call, i.e. the person that must answer the call
-                              first. This plays one or more audio files you have
-                              uploaded. The use case being you want to play
-                              audio to let the a leg of the call know what the
-                              call is about. Imagine a call center agent needs
-                              to know that they are calling a customer. These
-                              audio files may play a customer account number to
-                              the agent for example. 
-
+                            description: |
+                              Id of announcement audio file which will play to the a leg of the call, i.e. the person that must answer the call first. This plays one or more audio files you have uploaded. The use case being you want to play audio to let the a leg of the call know what the call is about. Imagine a call center agent needs to know that they are calling a customer. These audio files may play a customer account number to the agent for example. 
                               Have lots of audio files in this array to build up a message
                             example: zgL4QmsB6hGmv5YnsW_4lQ
                             type: string
@@ -406,8 +357,7 @@ paths:
                 - from
                 - caller_id
               type: object
-        description: Create a phone call and play announcement audio to the "from" party
-          (a leg)
+        description: Create a phone call and play announcement audio to the "from" party (a leg)
         required: true
       responses:
         "202":
@@ -430,15 +380,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/400/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/400/content/application~1json/schema"
           description: Bad data
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/schema"
           description: Only customer accounts can create calls.
         "500":
           description: Issue with API interface to core platform.
@@ -563,8 +511,7 @@ paths:
                 properties:
                   list:
                     items:
-                      $ref: "#/paths/~1announcements/post/responses/201/content/application~1json/sch\
-                        ema"
+                      $ref: "#/paths/~1announcements/post/responses/201/content/application~1json/schema"
                     type: array
                 type: object
           description: OK
@@ -572,8 +519,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/schema"
           description: Not found
       summary: List of announcement audio files
       tags:
@@ -581,30 +527,27 @@ paths:
   "/customers/{account}/announcements/{announcement_id}":
     delete:
       parameters:
-        - $ref: "#/paths/~1customers~1{account}~1announcements/get/parameters/0"
-        - $ref: "#/paths/~1customers~1{account}~1announcements~1{announcement_id}/get/par\
-            ameters/1"
+        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements/get/parameters/0"
+        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements~1%7Bannouncement_id%7D/get/parameters/1"
       responses:
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/schema"
           description: Not found
         "410":
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/403/content/application~1json/schema"
           description: Gone
       summary: Delete an announcement audio file
       tags:
         - announcements
     get:
       parameters:
-        - $ref: "#/paths/~1customers~1{account}~1announcements/get/parameters/0"
+        - $ref: "#/paths/~1customers~1%7Baccount%7D~1announcements/get/parameters/0"
         - description: Announcement ID of audio file
           in: path
           name: announcement_id
@@ -616,8 +559,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/paths/~1announcements/post/responses/201/content/application~1json/sch\
-                  ema"
+                $ref: "#/paths/~1announcements/post/responses/201/content/application~1json/schema"
           description: OK
         "404":
           content:
